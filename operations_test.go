@@ -17,6 +17,7 @@ package ondatra
 import (
 	"bytes"
 	"golang.org/x/net/context"
+	"errors"
 	"io"
 	"io/ioutil"
 	"os"
@@ -25,10 +26,10 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
 
 	ospb "github.com/openconfig/gnoi/os"
@@ -47,8 +48,10 @@ func initOperationFakes(t *testing.T) {
 	t.Helper()
 	initFakeBinding(t)
 	reserveFakeTestbed(t)
-	fakeBind.GNOIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
-		return fakeGNOI, nil
+	for _, dut := range fakeRes.DUTs {
+		dut.(*fakebind.DUT).DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
+			return fakeGNOI, nil
+		}
 	}
 }
 
@@ -124,7 +127,7 @@ func (*fakeInstallClient) CloseSend() error {
 func TestInstall(t *testing.T) {
 	initOperationFakes(t)
 	const version = "1.2.3"
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_arista")
 
 	// Make a temp file to test specifying a file by file path.
 	file, err := ioutil.TempFile("", "package")
@@ -221,7 +224,7 @@ func TestInstall(t *testing.T) {
 func TestInstallErrors(t *testing.T) {
 	initOperationFakes(t)
 	const version = "1.2.3"
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_cisco")
 
 	tests := []struct {
 		op      *InstallOp
@@ -312,7 +315,7 @@ func TestPing(t *testing.T) {
 				return &fakePingClient{resp: &spb.PingResponse{Sent: tt.count, Received: tt.count}}, nil
 			}
 			want := tt.dest
-			DUT(t, "dut").Operations().NewPing().WithDestination(tt.dest).WithCount(tt.count).Operate(t)
+			DUT(t, "dut_juniper").Operations().NewPing().WithDestination(tt.dest).WithCount(tt.count).Operate(t)
 			if got != want {
 				t.Errorf("Operate(t) got %s, want %s", got, want)
 			}
@@ -357,7 +360,7 @@ func TestPingErrors(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.wantErr, func(t *testing.T) {
 			fakeGNOI.Pinger = tt.pinger
-			op := DUT(t, "dut").Operations().NewPing().WithDestination(tt.dest)
+			op := DUT(t, "dut_cisco").Operations().NewPing().WithDestination(tt.dest)
 			gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 				op.Operate(t)
 			})
@@ -371,11 +374,14 @@ func TestPingErrors(t *testing.T) {
 func TestSetInterfaceState(t *testing.T) {
 	initOperationFakes(t)
 	var gotConfig string
-	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, _ bool) error {
-		gotConfig = config
-		return nil
+	for _, dut := range fakeRes.DUTs {
+		dut.(*fakebind.DUT).PushConfigFn = func(_ context.Context, config string, _ bool) error {
+			gotConfig = config
+			return nil
+		}
 	}
-	dutArista := DUT(t, "dut")
+
+	dutArista := DUT(t, "dut_arista")
 	dutCisco := DUT(t, "dut_cisco")
 	dutJuniper := DUT(t, "dut_juniper")
 	portArista := dutArista.Port(t, "port1")
@@ -479,7 +485,7 @@ func TestSetInterfaceState(t *testing.T) {
 
 func TestSetInterfaceStateErrors(t *testing.T) {
 	initOperationFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_juniper")
 	port := dut.Port(t, "port1")
 
 	tests := []struct {
@@ -511,7 +517,7 @@ func TestSetInterfaceStateErrors(t *testing.T) {
 
 func TestReboot(t *testing.T) {
 	initOperationFakes(t)
-	reboot := DUT(t, "dut").Operations().NewReboot()
+	reboot := DUT(t, "dut_arista").Operations().NewReboot()
 
 	tests := []struct {
 		desc       string
@@ -558,17 +564,17 @@ func TestRebootErrors(t *testing.T) {
 		wantErr              string
 	}{{
 		desc:    "non-positive duration",
-		dut:     DUT(t, "dut"),
+		dut:     DUT(t, "dut_arista"),
 		timeout: -1,
 		wantErr: "positive duration",
 	}, {
 		desc:      "reboot error",
-		dut:       DUT(t, "dut"),
+		dut:       DUT(t, "dut_cisco"),
 		rebootErr: errors.New("reboot error"),
 		wantErr:   "gnoi reboot",
 	}, {
 		desc:      "timeout error",
-		dut:       DUT(t, "dut"),
+		dut:       DUT(t, "dut_juniper"),
 		timeout:   1,
 		statusErr: errors.New("status error"),
 		wantErr:   "timed out",
@@ -622,7 +628,7 @@ func TestKillProcessErrors(t *testing.T) {
 		desc: "bad DUT",
 		dut: &DUTDevice{&Device{
 			id:  "not in the tb",
-			res: &binding.DUT{&binding.Dims{Vendor: opb.Device_JUNIPER}},
+			res: &binding.AbstractDUT{&binding.Dims{Vendor: opb.Device_JUNIPER}},
 		}},
 	}, {
 		desc: "kill fails on good dut",
@@ -676,7 +682,7 @@ func TestSwitchControlProcessor(t *testing.T) {
 
 func TestSwitchControlProcessorErrors(t *testing.T) {
 	initOperationFakes(t)
-	sw := DUT(t, "dut").Operations().NewSwitchControlProcessor()
+	sw := DUT(t, "dut_arista").Operations().NewSwitchControlProcessor()
 	fakeGNOI.SwitchController = func(context.Context, *spb.SwitchControlProcessorRequest, ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
 		return nil, errors.New("invalid route controller")
 	}

@@ -16,11 +16,11 @@
 package flags
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
 	"flag"
-	"github.com/openconfig/ondatra/binding/usererr"
 )
 
 var (
@@ -52,13 +52,13 @@ func Parse() (*Values, error) {
 		flag.Parse()
 	}
 	if *testbed == "" {
-		return nil, usererr.New("testbed path not specified")
+		return nil, fmt.Errorf("testbed path not specified")
 	}
 	if *runTime < 0 {
-		return nil, usererr.New("run timeout is negative: %d", *runTime)
+		return nil, fmt.Errorf("run timeout is negative: %d", *runTime)
 	}
 	if *waitTime < 0 {
-		return nil, usererr.New("wait timeout is negative: %d", *waitTime)
+		return nil, fmt.Errorf("wait timeout is negative: %d", *waitTime)
 	}
 	resvID, resvPartial, err := parseReserve(*reserve)
 	if err != nil {
@@ -92,12 +92,12 @@ func parseReserve(res string) (string, map[string]string, error) {
 		}
 		mapPair := strings.Split(mapStr, "=")
 		if len(mapPair) != 2 {
-			return "", nil, usererr.New("cannot parse assignment %q from --reserve %s", mapStr, res)
+			return "", nil, fmt.Errorf("cannot parse assignment %q from --reserve %s", mapStr, res)
 		}
 		// It may not be a link, but tolerate the syntax of a link here.
 		rID := strings.TrimSpace(mapPair[0])
 		if _, ok := partial[rID]; ok {
-			return "", nil, usererr.New("duplicate ID %q in --reserve %s", strings.TrimSpace(mapPair[0]), res)
+			return "", nil, fmt.Errorf("duplicate ID %q in --reserve %s", strings.TrimSpace(mapPair[0]), res)
 		}
 		partial[rID] = strings.TrimSpace(mapPair[1])
 	}

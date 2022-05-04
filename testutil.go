@@ -16,84 +16,86 @@ package ondatra
 
 import (
 	"path/filepath"
-	"sync"
 	"testing"
 
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/fakebind"
+	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/ondatra/internal/flags"
-	"github.com/openconfig/ondatra/internal/testbed"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 var (
-	mu       sync.Mutex
 	fakeBind *fakebind.Binding
 
 	fakeTBPath = filepath.Join("testdata", "testbed.pb.txt")
 
+	fakeArista = &fakebind.DUT{
+		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+			Name:            "pf01.xxx01",
+			Vendor:          opb.Device_ARISTA,
+			HardwareModel:   "aristaModel",
+			SoftwareVersion: "aristaVersion",
+			Ports: map[string]*binding.Port{
+				"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+				"port2": &binding.Port{Name: "Et4/5/6", Speed: opb.Port_S_100GB},
+			},
+		}},
+	}
+	fakeCisco = &fakebind.DUT{
+		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+			Name:            "pf02.xxx01",
+			Vendor:          opb.Device_CISCO,
+			HardwareModel:   "ciscoModel",
+			SoftwareVersion: "ciscoVersion",
+			Ports: map[string]*binding.Port{
+				"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+			},
+		}},
+	}
+	fakeJuniper = &fakebind.DUT{
+		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+			Name:            "pf03.xxx01",
+			Vendor:          opb.Device_JUNIPER,
+			HardwareModel:   "juniperModel",
+			SoftwareVersion: "juniperVersion",
+			Ports: map[string]*binding.Port{
+				"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
+			},
+		}},
+	}
+	fakeIxia = &fakebind.ATE{
+		AbstractATE: &binding.AbstractATE{&binding.Dims{
+			Name:            "ix1",
+			Vendor:          opb.Device_IXIA,
+			HardwareModel:   "ixiaModel",
+			SoftwareVersion: "ixiaVersion",
+			Ports: map[string]*binding.Port{
+				"port1": &binding.Port{Name: "1/1", Speed: opb.Port_S_10GB},
+				"port2": &binding.Port{Name: "1/2", Speed: opb.Port_S_100GB},
+			},
+		}},
+	}
 	fakeRes = &binding.Reservation{
-		DUTs: map[string]*binding.DUT{
-			"dut": &binding.DUT{&binding.Dims{
-				Name:            "pf01.xxx01",
-				Vendor:          opb.Device_ARISTA,
-				HardwareModel:   "aristaModel",
-				SoftwareVersion: "aristaVersion",
-				Ports: map[string]*binding.Port{
-					"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
-					"port2": &binding.Port{Name: "Et4/5/6", Speed: opb.Port_S_100GB},
-				},
-			}},
-			"dut_cisco": &binding.DUT{&binding.Dims{
-				Name:            "pf02.xxx01",
-				Vendor:          opb.Device_CISCO,
-				HardwareModel:   "ciscoModel",
-				SoftwareVersion: "ciscoVersion",
-				Ports: map[string]*binding.Port{
-					"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
-				},
-			}},
-			"dut_juniper": &binding.DUT{&binding.Dims{
-				Name:            "pf03.xxx01",
-				Vendor:          opb.Device_JUNIPER,
-				HardwareModel:   "juniperModel",
-				SoftwareVersion: "juniperVersion",
-				Ports: map[string]*binding.Port{
-					"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB},
-				},
-			}},
+		DUTs: map[string]binding.DUT{
+			"dut_arista":  fakeArista,
+			"dut_cisco":   fakeCisco,
+			"dut_juniper": fakeJuniper,
 		},
-		ATEs: map[string]*binding.ATE{
-			"ate": &binding.ATE{&binding.Dims{
-				Name:            "ix1",
-				Vendor:          opb.Device_IXIA,
-				HardwareModel:   "ixiaModel",
-				SoftwareVersion: "ixiaVersion",
-				Ports: map[string]*binding.Port{
-					"port1": &binding.Port{Name: "1/1", Speed: opb.Port_S_10GB},
-					"port2": &binding.Port{Name: "1/2", Speed: opb.Port_S_100GB},
-				},
-			}},
+		ATEs: map[string]binding.ATE{
+			"ate_ixia": fakeIxia,
 		},
 	}
 )
 
 // Initializes Ondatra with a fake binding implementation.
 func initFakeBinding(t *testing.T) {
-	t.Helper()
-	mu.Lock()
-	defer mu.Unlock()
-	if fakeBind == nil {
-		fakeBind = &fakebind.Binding{}
-		testbed.InitBind(fakeBind)
-	} else {
-		fakeBind.Reset()
+	if fakeBind != nil {
+		if err := release(); err != nil {
+			t.Fatalf("Failed to release prior testbed: %v", err)
+		}
 	}
-	fakeBind.Reservation = fakeRes
-	if err := release(); err != nil {
-		t.Fatalf("Failed to release prior testbed: %v", err)
-	}
+	fakeBind = fakebind.Setup().StubReservation(fakeRes)
 }
 
 // Reserves the fake testbed.

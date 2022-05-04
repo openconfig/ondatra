@@ -12,6 +12,201 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE is a E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) Val(t testing.TB) E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE sample.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) SetVal(v E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE samples.
+type CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE struct {
+	W    *E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher
+	Data []*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) Await(t testing.TB) []*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher observes a stream of E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE samples.
+type E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE is a E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE) Val(t testing.TB) E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE sample.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE) SetVal(v E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE) *QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE samples.
+type CollectionE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE struct {
+	W    *E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPEWatcher
+	Data []*QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE) Await(t testing.TB) []*QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPEWatcher observes a stream of E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE samples.
+type E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Types_ADDRESS_FAMILY is a E_Types_ADDRESS_FAMILY with a corresponding timestamp.
+type QualifiedE_Types_ADDRESS_FAMILY struct {
+	*genutil.Metadata
+	val     E_Types_ADDRESS_FAMILY // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Types_ADDRESS_FAMILY) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Types_ADDRESS_FAMILY sample, erroring out if not present.
+func (q *QualifiedE_Types_ADDRESS_FAMILY) Val(t testing.TB) E_Types_ADDRESS_FAMILY {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Types_ADDRESS_FAMILY sample.
+func (q *QualifiedE_Types_ADDRESS_FAMILY) SetVal(v E_Types_ADDRESS_FAMILY) *QualifiedE_Types_ADDRESS_FAMILY {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Types_ADDRESS_FAMILY) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Types_ADDRESS_FAMILY is a telemetry Collection whose Await method returns a slice of E_Types_ADDRESS_FAMILY samples.
+type CollectionE_Types_ADDRESS_FAMILY struct {
+	W    *E_Types_ADDRESS_FAMILYWatcher
+	Data []*QualifiedE_Types_ADDRESS_FAMILY
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Types_ADDRESS_FAMILY) Await(t testing.TB) []*QualifiedE_Types_ADDRESS_FAMILY {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Types_ADDRESS_FAMILYWatcher observes a stream of E_Types_ADDRESS_FAMILY samples.
+type E_Types_ADDRESS_FAMILYWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Types_ADDRESS_FAMILY
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Types_ADDRESS_FAMILYWatcher) Await(t testing.TB) (*QualifiedE_Types_ADDRESS_FAMILY, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_VlanTypes_TPID_TYPES is a E_VlanTypes_TPID_TYPES with a corresponding timestamp.
 type QualifiedE_VlanTypes_TPID_TYPES struct {
 	*genutil.Metadata
@@ -983,6 +1178,71 @@ type NetworkInstance_Afts_PolicyForwardingEntry_MplsLabel_UnionWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Afts_PolicyForwardingEntry_MplsLabel_UnionWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Afts_PolicyForwardingEntry_MplsLabel_Union, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union is a NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union with a corresponding timestamp.
+type QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union struct {
+	*genutil.Metadata
+	val     NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) Val(t testing.TB) NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union sample.
+func (q *QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) SetVal(v NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) *QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union is a telemetry Collection whose Await method returns a slice of NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union samples.
+type CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union struct {
+	W    *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher
+	Data []*QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) Await(t testing.TB) []*QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher observes a stream of NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union samples.
+type NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

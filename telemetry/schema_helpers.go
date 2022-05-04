@@ -149,7 +149,7 @@ func (b *Batch) Lookup(t testing.TB) *QualifiedDevice {
 		t.Fatalf("error resolving root path: %v", err)
 	}
 
-	md, ok, err := genutil.Unmarshal(datapoints, GetSchema(), fakeRootName, gs, path, false, true)
+	md, ok, err := genutil.Unmarshal(datapoints, GetSchema(), fakeRootName, gs, path, false, false)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -856,6 +856,7 @@ func TestISISReachability(t *testing.T) {
 					Prefix:    "3.3.3.0/25",
 					NumRoutes: 4,
 					Reachability: &opb.IPReachability{
+						Active:              true,
 						RouteOrigin:         opb.IPReachability_INTERNAL,
 						EnableSidIndexLabel: true,
 						SidIndexLabel:       65555,
@@ -959,6 +960,7 @@ func TestISISReachability(t *testing.T) {
 					Prefix:    "cafe:beef::/120",
 					NumRoutes: 4,
 					Reachability: &opb.IPReachability{
+						Active:      true,
 						RouteOrigin: opb.IPReachability_INTERNAL,
 					},
 				},

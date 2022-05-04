@@ -15,11 +15,10 @@ require (
 	github.com/openconfig/gribi v0.1.1-0.20220126144445-1634932f9fd8
 	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
-	github.com/openconfig/ygot v0.16.3
+	github.com/openconfig/ygot v0.18.0
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.1
-	github.com/pkg/errors v0.9.1
 	go.opencensus.io v0.23.0
 	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
 	golang.org/x/net v0.0.0-20220403103023-749bd193bc2b
@@ -37,6 +36,7 @@ require (
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/openconfig/grpctunnel v0.0.0-20210610163803-fde4a9dc048d // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect

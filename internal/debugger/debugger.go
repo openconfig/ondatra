@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
@@ -29,7 +30,7 @@ import (
 
 var (
 	writer       = bufio.NewWriter(os.Stdout)
-	reader       *bufio.Reader
+	reader       *stdinReader
 	reservePause bool
 
 	// To be stubbed out by tests.
@@ -41,7 +42,8 @@ var (
 // mode should be enabled.
 func TestStarted(debugMode bool) {
 	if debugMode {
-		reader = bufio.NewReader(os.Stdin)
+		reader = new(stdinReader)
+		reader.start()
 		showMenu("Welcome to Ondatra Debug Mode!")
 	}
 	logMain(actionMsg("Reserving the testbed"))
@@ -61,7 +63,7 @@ func showMenu(msg string) {
 }
 
 func readMenuOption() {
-	option := strings.TrimSpace(readLine())
+	option := strings.TrimSpace(reader.readLine())
 	switch option {
 	case "1":
 	case "2":
@@ -74,16 +76,20 @@ func readMenuOption() {
 // TestCasesDone notifies the debugger that the test cases are completed, and
 // the testbed is about to be released.
 func TestCasesDone() {
+	if reader != nil {
+		reader.stop()
+	}
 	logMain(actionMsg("Releasing the testbed"))
 }
 
-// ReservationComplete notifes the debugger that the reservation is complete.
-func ReservationComplete() {
+// ReservationDone notifes the debugger that the reservation is complete.
+func ReservationDone() {
 	res, err := reservationFn()
 	if err != nil {
 		log.Fatalf("failed to fetch the testbed reservation: %v", err)
 		return
 	}
+
 	lines := []string{
 		"Testbed Reservation Complete",
 		fmt.Sprintf("ID: %s\n", res.ID),
@@ -95,14 +101,14 @@ func ReservationComplete() {
 		addLine("  %-17s %s", id+":", name)
 	}
 	for id, d := range res.DUTs {
-		addAssign(id, d.Name)
-		for pid, p := range d.Ports {
+		addAssign(id, d.Name())
+		for pid, p := range d.Ports() {
 			addAssign(pid, p.Name)
 		}
 	}
 	for id, a := range res.ATEs {
-		addAssign(id, a.Name)
-		for pid, p := range a.Ports {
+		addAssign(id, a.Name())
+		for pid, p := range a.Ports() {
 			addAssign(pid, p.Name)
 		}
 	}
@@ -119,7 +125,7 @@ func ReservationComplete() {
 
 	logMain(bannerMsg(lines...))
 	if reservePause {
-		readLine()
+		reader.readLine()
 	}
 }
 
@@ -132,7 +138,7 @@ type LoggerT interface {
 // ActionStarted notifies the debugger that the specific action has started.
 func ActionStarted(t LoggerT, format string, dev binding.Device) {
 	t.Helper()
-	t.Log(actionMsg(fmt.Sprintf(format, dev.Dimensions().Name)))
+	t.Log(actionMsg(fmt.Sprintf(format, dev.Name())))
 }
 
 // Breakpoint suspends the execution until the user presses enter.
@@ -142,7 +148,7 @@ func Breakpoint(t LoggerT) error {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
 	t.Log(bannerMsg("Breakpoint: Press ENTER to continue."))
-	readLine()
+	reader.readLine()
 	return nil
 }
 
@@ -173,12 +179,49 @@ func actionMsg(action string) string {
 	return fmt.Sprintf("\n*** %s...\n\n", action)
 }
 
-func readLine() string {
-	ln, err := readStringFn(reader, '\n')
-	if err != nil {
-		// An error when reading from stdin is limited in practice to a user
-		// pressing CTRL-C at a prompt. Logging this error would just be noise.
-		return ""
-	}
-	return ln
+// stdinReader continuously reads lines from stdin. It ensures that user input
+// that is entered prior to a user prompt is _not_ interpreted as a response to
+// that prompt. As there is no easy way to clear prior user input, it instead
+// reads stdin asynchrously and is signalled when a prompt has been displayed.
+type stdinReader struct {
+	mu   sync.Mutex
+	keep bool
+	done bool
+	ch   chan string
+}
+
+func (r *stdinReader) start() {
+	buf := bufio.NewReader(os.Stdin)
+	r.ch = make(chan string)
+	go func() {
+		for done := false; !done; {
+			line, _ := readStringFn(buf, '\n')
+			r.mu.Lock()
+			if r.keep {
+				r.mu.Unlock()
+				r.ch <- line
+				r.mu.Lock()
+			}
+			done = r.done
+			r.mu.Unlock()
+		}
+	}()
+}
+
+func (r *stdinReader) readLine() string {
+	r.mu.Lock()
+	r.keep = true
+	r.mu.Unlock()
+	line := <-r.ch
+	r.mu.Lock()
+	r.keep = false
+	r.mu.Unlock()
+	return line
+}
+
+func (r *stdinReader) stop() {
+	r.mu.Lock()
+	r.done = true
+	r.mu.Unlock()
+	os.Stdin.Close()
 }

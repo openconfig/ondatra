@@ -52,7 +52,7 @@ func (d *Device) ID() string {
 
 // Name returns the device name.
 func (d *Device) Name() string {
-	return d.res.Dimensions().Name
+	return d.res.Name()
 }
 
 // Vendor is a DUT vendor.
@@ -90,17 +90,17 @@ func (d *Device) Telemetry() *device.DevicePath {
 
 // Vendor returns the device vendor.
 func (d *Device) Vendor() Vendor {
-	return Vendor(d.res.Dimensions().Vendor)
+	return Vendor(d.res.Vendor())
 }
 
 // Model returns the device hardware model.
 func (d *Device) Model() string {
-	return d.res.Dimensions().HardwareModel
+	return d.res.HardwareModel()
 }
 
 // Version returns the device software version.
 func (d *Device) Version() string {
-	return d.res.Dimensions().SoftwareVersion
+	return d.res.SoftwareVersion()
 }
 
 // Port returns a port with a given id.
@@ -116,14 +116,14 @@ func (d *Device) Port(t testing.TB, ID string) *Port {
 // Ports returns a slice of all ports configured on the device.
 func (d *Device) Ports() []*Port {
 	var ports []*Port
-	for id, p := range d.res.Dimensions().Ports {
+	for id, p := range d.res.Ports() {
 		ports = append(ports, d.newPort(id, p))
 	}
 	return ports
 }
 
 func (d *Device) port(id string) (*Port, error) {
-	rp, err := testbed.Port(d.res.Dimensions(), id)
+	rp, err := testbed.Port(d.res, id)
 	if err != nil {
 		return nil, err
 	}
@@ -190,11 +190,11 @@ var (
 // newGNMI creates a new gNMI client for the specified Device.
 func newGNMI(ctx context.Context, dev binding.Device) (gpb.GNMIClient, error) {
 	dialGNMI := func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-		return testbed.Bind().DialGNMI(ctx, dev.(*binding.DUT), opts...)
+		return dev.(binding.DUT).DialGNMI(ctx, opts...)
 	}
-	if rATE, ok := dev.(*binding.ATE); ok {
+	if ba, ok := dev.(binding.ATE); ok {
 		dialGNMI = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-			return ate.DialGNMI(ctx, rATE, opts...)
+			return ate.DialGNMI(ctx, ba, opts...)
 		}
 	}
 	return dialGNMI(ctx,

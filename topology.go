@@ -28,7 +28,7 @@ import (
 
 // Topology is an ATE topology API.
 type Topology struct {
-	ate *binding.ATE
+	ate binding.ATE
 }
 
 func (tp *Topology) String() string {
@@ -42,7 +42,7 @@ func (tp *Topology) New() *ATETopology {
 
 // ATETopology is an ATE topology.
 type ATETopology struct {
-	ate *binding.ATE
+	ate binding.ATE
 	top *ate.Topology
 }
 
@@ -120,6 +120,14 @@ func (at *ATETopology) UpdateBGPPeerStates(t testing.TB) {
 	t.Helper()
 	if err := ate.UpdateTopology(context.Background(), at.ate, at.top, true); err != nil {
 		t.Fatalf("UpdateBGPPeerState(t) on %s: %v", at, err)
+	}
+}
+
+// UpdateNetworks is equivalent to Update() but only updates the Network config on the fly.
+func (at *ATETopology) UpdateNetworks(t testing.TB) {
+	t.Helper()
+	if err := ate.UpdateNetworks(context.Background(), at.ate, at.top); err != nil {
+		t.Fatalf("UpdateNetworks(t) on %s: %v", at, err)
 	}
 }
 

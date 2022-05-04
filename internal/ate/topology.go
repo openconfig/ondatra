@@ -19,7 +19,6 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -31,7 +30,7 @@ func (ix *ixATE) addPorts(top *Topology) error {
 	for _, ol := range top.LAGs {
 		for _, p := range ol.GetPorts() {
 			if ol2 := portToLag[p]; ol2 != nil {
-				return usererr.New("port %s belongs to two lags: %v and %v", p, ol, ol2)
+				return fmt.Errorf("port %s belongs to two lags: %v and %v", p, ol, ol2)
 			}
 			portToLag[p] = ol
 			ports[p] = true
@@ -40,7 +39,7 @@ func (ix *ixATE) addPorts(top *Topology) error {
 	for _, intf := range top.Interfaces {
 		if lp, ok := intf.GetLink().(*opb.InterfaceConfig_Port); ok {
 			if ol := portToLag[lp.Port]; ol != nil {
-				return usererr.New("interface %v on port %s which already belongs to lag %v", intf, lp.Port, ol)
+				return fmt.Errorf("interface %v on port %s which already belongs to lag %v", intf, lp.Port, ol)
 			}
 			ports[lp.Port] = true
 		}

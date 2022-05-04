@@ -63,7 +63,7 @@ func DUTs(t testing.TB) map[string]*DUTDevice {
 	return m
 }
 
-func newDUT(id string, res *binding.DUT) *DUTDevice {
+func newDUT(id string, res binding.DUT) *DUTDevice {
 	return &DUTDevice{&Device{
 		id:       id,
 		res:      res,
@@ -92,7 +92,7 @@ func ATEs(t testing.TB) map[string]*ATEDevice {
 	return m
 }
 
-func newATE(id string, res *binding.ATE) *ATEDevice {
+func newATE(id string, res binding.ATE) *ATEDevice {
 	return &ATEDevice{Device: &Device{
 		id:       id,
 		res:      res,

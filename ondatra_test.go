@@ -15,12 +15,12 @@
 package ondatra
 
 import (
+	"errors"
 	"os"
 	"sync"
 	"testing"
 	"time"
 
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/flags"
 )
@@ -79,7 +79,7 @@ func TestReserveOnRun(t *testing.T) {
 				}
 			}
 			var initBindCalled bool
-			initBindFn = func(b binding.Binding) {
+			setBindingFn = func(b binding.Binding) {
 				initBindCalled = true
 			}
 			fakeBinder := func() (binding.Binding, error) { return nil, nil }

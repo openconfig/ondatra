@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"hash/fnv"
 
-	"github.com/pkg/errors"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/telemetry"
 )
@@ -37,11 +36,11 @@ func lsps(ingressLSPsBySessionPrefix map[string][]*ingressLSP, rsvpTE *telemetry
 	for pfx := range ingressLSPsBySessionPrefix {
 		_, err := hashImpl.Write([]byte(pfx))
 		if err != nil {
-			return errors.Wrapf(err, "failed to hash session prefix %q", pfx)
+			return fmt.Errorf("failed to hash session prefix %q: %w", pfx, err)
 		}
 		h := hashImpl.Sum32()
 		if hPfx, exists := hashToPfx[h]; exists {
-			return errors.Errorf("hash collision for session prefixes %q, %q", pfx, hPfx)
+			return fmt.Errorf("hash collision for session prefixes %q, %q", pfx, hPfx)
 		}
 		hashToPfx[h] = pfx
 		pfxToHash[pfx] = h

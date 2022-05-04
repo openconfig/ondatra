@@ -16,13 +16,14 @@ package knebind
 
 import (
 	"golang.org/x/net/context"
+	"errors"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
 	"golang.org/x/crypto/ssh"
+	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
@@ -146,45 +147,75 @@ func TestReserve(t *testing.T) {
 	kneCmdFn = func(cfg *Config, args ...string) ([]byte, error) {
 		return []byte(topo), nil
 	}
-	wantDUT1 := &binding.DUT{&binding.Dims{
-		Name:            "node1",
-		Vendor:          opb.Device_ARISTA,
-		HardwareModel:   "ARISTA_CEOS",
-		SoftwareVersion: "ARISTA_CEOS",
-		Ports: map[string]*binding.Port{
-			"port1": {Name: "Ethernet1"},
-			"port2": {Name: "Ethernet2"},
-		},
-	}}
-	wantDUT2 := &binding.DUT{&binding.Dims{
-		Name:            "node2",
-		Vendor:          opb.Device_CISCO,
-		HardwareModel:   "CISCO_CXR",
-		SoftwareVersion: "CISCO_CXR",
-		Ports: map[string]*binding.Port{
-			"port1": {Name: "eth1"},
-			"port2": {Name: "eth2"},
-		},
-	}}
-	wantDUT3 := &binding.DUT{&binding.Dims{
-		Name:            "node3",
-		Vendor:          opb.Device_JUNIPER,
-		HardwareModel:   "JUNIPER_CEVO",
-		SoftwareVersion: "JUNIPER_CEVO",
-		Ports: map[string]*binding.Port{
-			"port1": {Name: "eth1"},
-		},
-	}}
-	wantATE := &binding.ATE{&binding.Dims{
-		Name:            "node4",
-		Vendor:          opb.Device_IXIA,
-		HardwareModel:   "IXIA_TG",
-		SoftwareVersion: "IXIA_TG",
-		Ports: map[string]*binding.Port{
-			"port1": {Name: "eth1"},
-		},
-	}}
 	bind := &Bind{cfg: &Config{}}
+	wantDUT1 := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+				Name:            "node1",
+				Vendor:          opb.Device_ARISTA,
+				HardwareModel:   "ARISTA_CEOS",
+				SoftwareVersion: "ARISTA_CEOS",
+				Ports: map[string]*binding.Port{
+					"port1": {Name: "Ethernet1"},
+					"port2": {Name: "Ethernet2"},
+				},
+			}},
+			Services: map[string]*tpb.Service{
+				"gnmi": &tpb.Service{Name: "gnmi"},
+			},
+		},
+		cfg: bind.cfg,
+	}
+	wantDUT2 := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+				Name:            "node2",
+				Vendor:          opb.Device_CISCO,
+				HardwareModel:   "CISCO_CXR",
+				SoftwareVersion: "CISCO_CXR",
+				Ports: map[string]*binding.Port{
+					"port1": {Name: "eth1"},
+					"port2": {Name: "eth2"},
+				},
+			}},
+			Services: map[string]*tpb.Service{
+				"gnmi": &tpb.Service{Name: "gnmi"},
+			},
+		},
+		cfg: bind.cfg,
+	}
+	wantDUT3 := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+				Name:            "node3",
+				Vendor:          opb.Device_JUNIPER,
+				HardwareModel:   "JUNIPER_CEVO",
+				SoftwareVersion: "JUNIPER_CEVO",
+				Ports: map[string]*binding.Port{
+					"port1": {Name: "eth1"},
+				},
+			}},
+			Services: map[string]*tpb.Service{
+				"gnmi": &tpb.Service{Name: "gnmi"},
+			},
+		},
+		cfg: bind.cfg,
+	}
+	wantATE := &kneATE{
+		ServiceATE: &solver.ServiceATE{
+			AbstractATE: &binding.AbstractATE{&binding.Dims{
+				Name:            "node4",
+				Vendor:          opb.Device_IXIA,
+				HardwareModel:   "IXIA_TG",
+				SoftwareVersion: "IXIA_TG",
+				Ports: map[string]*binding.Port{
+					"port1": {Name: "eth1"},
+				},
+			}},
+			Services: make(map[string]*tpb.Service),
+		},
+		cfg: bind.cfg,
+	}
 
 	tests := []struct {
 		desc    string
@@ -196,10 +227,10 @@ func TestReserve(t *testing.T) {
 			Duts: []*opb.Device{dut3},
 		},
 		wantRes: &binding.Reservation{
-			DUTs: map[string]*binding.DUT{
+			DUTs: map[string]binding.DUT{
 				"dut3": wantDUT3,
 			},
-			ATEs: map[string]*binding.ATE{},
+			ATEs: map[string]binding.ATE{},
 		},
 	}, {
 		desc: "one ate",
@@ -207,8 +238,8 @@ func TestReserve(t *testing.T) {
 			Ates: []*opb.Device{ate},
 		},
 		wantRes: &binding.Reservation{
-			DUTs: map[string]*binding.DUT{},
-			ATEs: map[string]*binding.ATE{
+			DUTs: map[string]binding.DUT{},
+			ATEs: map[string]binding.ATE{
 				"ate": wantATE,
 			},
 		},
@@ -219,11 +250,11 @@ func TestReserve(t *testing.T) {
 			Links: []*opb.Link{link12},
 		},
 		wantRes: &binding.Reservation{
-			DUTs: map[string]*binding.DUT{
+			DUTs: map[string]binding.DUT{
 				"dut1": wantDUT1,
 				"dut2": wantDUT2,
 			},
-			ATEs: map[string]*binding.ATE{},
+			ATEs: map[string]binding.ATE{},
 		},
 	}, {
 		desc: "dut and ate",
@@ -233,10 +264,10 @@ func TestReserve(t *testing.T) {
 			Links: []*opb.Link{link14},
 		},
 		wantRes: &binding.Reservation{
-			DUTs: map[string]*binding.DUT{
+			DUTs: map[string]binding.DUT{
 				"dut1": wantDUT1,
 			},
-			ATEs: map[string]*binding.ATE{
+			ATEs: map[string]binding.ATE{
 				"ate": wantATE,
 			},
 		},
@@ -247,12 +278,12 @@ func TestReserve(t *testing.T) {
 			Links: []*opb.Link{link12, link23},
 		},
 		wantRes: &binding.Reservation{
-			DUTs: map[string]*binding.DUT{
+			DUTs: map[string]binding.DUT{
 				"dut1": wantDUT1,
 				"dut2": wantDUT2,
 				"dut3": wantDUT3,
 			},
-			ATEs: map[string]*binding.ATE{},
+			ATEs: map[string]binding.ATE{},
 		},
 	}}
 	for _, tt := range tests {
@@ -265,7 +296,7 @@ func TestReserve(t *testing.T) {
 				t.Errorf("Reserve() got reservation missing ID: %v", gotRes)
 			}
 			gotRes.ID = ""
-			if diff := cmp.Diff(tt.wantRes, gotRes); diff != "" {
+			if diff := cmp.Diff(tt.wantRes, gotRes, protocmp.Transform(), cmp.AllowUnexported(kneDUT{}, kneATE{})); diff != "" {
 				t.Errorf("Reserve() got unexpected diff in reservation (-want,+got): %s", diff)
 			}
 		})
@@ -284,11 +315,11 @@ func TestReserveErrors(t *testing.T) {
 	}{{
 		desc:    "too few nodes",
 		tb:      &opb.Testbed{Duts: []*opb.Device{{Id: "dut1"}}},
-		wantErr: "Not enough nodes",
+		wantErr: "not enough nodes",
 	}, {
 		desc:    "too few links",
 		tb:      &opb.Testbed{Links: []*opb.Link{{A: "dut1:port1", B: "dut2:port1"}}},
-		wantErr: "Not enough links",
+		wantErr: "not enough links",
 	}, {
 		desc: "missing gnmi",
 		tb: &opb.Testbed{
@@ -315,7 +346,7 @@ func TestReserveErrors(t *testing.T) {
         type: CISCO_CXR
 		  }
 		`,
-		wantErr: "No node in KNE topology to match testbed",
+		wantErr: "no node in KNE topology to match testbed",
 	}, {
 		desc: "no match for ATE",
 		tb: &opb.Testbed{
@@ -329,7 +360,7 @@ func TestReserveErrors(t *testing.T) {
         type: CISCO_CXR
 		  }
 		`,
-		wantErr: "No node in KNE topology to match testbed",
+		wantErr: "no node in KNE topology to match testbed",
 	}, {
 		desc: "no node combination",
 		tb: &opb.Testbed{
@@ -351,7 +382,7 @@ func TestReserveErrors(t *testing.T) {
         type: CISCO_CXR
 		  }
 		`,
-		wantErr: "No combination of nodes",
+		wantErr: "no combination of nodes",
 	}, {
 		desc: "no link combination",
 		tb: &opb.Testbed{
@@ -407,7 +438,7 @@ func TestReserveErrors(t *testing.T) {
 		    z_int: "eth1"
 		  }
 		`,
-		wantErr: "No KNE topology",
+		wantErr: "no KNE topology",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
@@ -425,7 +456,7 @@ func TestReserveErrors(t *testing.T) {
 			if !ok {
 				t.Fatalf("Node %q not found in topology", "node1")
 			}
-			_, gnmiErr := bind.DialGNMI(context.Background(), d)
+			_, gnmiErr := d.DialGNMI(context.Background())
 			if diff := errdiff.Substring(gnmiErr, tt.wantGNMIErr); diff != "" {
 				t.Errorf("DialGNMI() got unexpected error diff: %s", diff)
 			}
@@ -440,7 +471,7 @@ func TestServices(t *testing.T) {
 		desc         string
 		tb           *opb.Testbed
 		topo         string
-		serviceCheck func(t *testing.T, b binding.Binding, d *binding.DUT)
+		serviceCheck func(t *testing.T, b binding.Binding, d binding.DUT)
 	}{{
 		desc: "missing gnmi",
 		tb: &opb.Testbed{
@@ -452,9 +483,9 @@ func TestServices(t *testing.T) {
         type: ARISTA_CEOS
 		  }
 		`,
-		serviceCheck: func(t *testing.T, b binding.Binding, d *binding.DUT) {
+		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
 			t.Helper()
-			if _, err := b.DialGNMI(context.Background(), d); err == nil {
+			if _, err := d.DialGNMI(context.Background()); err == nil {
 				t.Fatalf("DialGNMI() got unexpected error: %v", err)
 			}
 		},
@@ -469,9 +500,9 @@ func TestServices(t *testing.T) {
         type: ARISTA_CEOS
 		  }
 		`,
-		serviceCheck: func(t *testing.T, b binding.Binding, d *binding.DUT) {
+		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
 			t.Helper()
-			if _, err := b.DialGRIBI(context.Background(), d); err == nil {
+			if _, err := d.DialGRIBI(context.Background()); err == nil {
 				t.Fatalf("DialGRIBI() got unexpected error: %v", err)
 			}
 		},
@@ -496,9 +527,9 @@ func TestServices(t *testing.T) {
 				}
 		  }
 		`,
-		serviceCheck: func(t *testing.T, b binding.Binding, d *binding.DUT) {
+		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
 			t.Helper()
-			if _, err := b.DialP4RT(context.Background(), d); err == nil {
+			if _, err := d.DialP4RT(context.Background()); err == nil {
 				t.Fatalf("DialP4RT() got unexpected error: %v", err)
 			}
 		},
@@ -539,15 +570,15 @@ func TestServices(t *testing.T) {
 				}
 		  }
 		`,
-		serviceCheck: func(t *testing.T, b binding.Binding, d *binding.DUT) {
+		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
 			t.Helper()
-			if _, err := b.DialGNMI(context.Background(), d); err != nil {
+			if _, err := d.DialGNMI(context.Background()); err != nil {
 				t.Fatalf("DialGNMI() got unexpected error: %v", err)
 			}
-			if _, err := b.DialGRIBI(context.Background(), d); err != nil {
+			if _, err := d.DialGRIBI(context.Background()); err != nil {
 				t.Fatalf("DialGRIBI() got unexpected error: %v", err)
 			}
-			if _, err := b.DialP4RT(context.Background(), d); err != nil {
+			if _, err := d.DialP4RT(context.Background()); err != nil {
 				t.Fatalf("DialP4RT() got unexpected error: %v", err)
 			}
 		},
@@ -572,12 +603,6 @@ func TestServices(t *testing.T) {
 
 func TestPushConfig(t *testing.T) {
 	const dutName = "dut"
-	bind := &Bind{
-		cfg: &Config{},
-		services: solver.ServiceMap{dutName: map[string]*tpb.Service{
-			"ssh": &tpb.Service{OutsideIp: "1.2.3.4", Outside: 1234},
-		}},
-	}
 	var sshErr error
 	sshExecFn = func(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr error) {
 		return "", sshErr
@@ -594,34 +619,51 @@ func TestPushConfig(t *testing.T) {
 
 	tests := []struct {
 		desc      string
-		dut       *binding.DUT
+		vendor    opb.Device_Vendor
 		reset     bool
 		sshErr    error
+		noSSH     bool
 		wantReset bool
 		wantErr   string
 	}{{
-		desc: "success",
-		dut:  &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		desc:   "success",
+		vendor: opb.Device_ARISTA,
 	}, {
 		desc:      "reset success",
-		dut:       &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		vendor:    opb.Device_ARISTA,
 		reset:     true,
 		wantReset: true,
 	}, {
 		desc:    "only arista support",
-		dut:     &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_CISCO}},
+		vendor:  opb.Device_CISCO,
 		wantErr: "supports Arista",
 	}, {
 		desc:    "ssh error",
-		dut:     &binding.DUT{&binding.Dims{Name: dutName, Vendor: opb.Device_ARISTA}},
+		vendor:  opb.Device_ARISTA,
 		sshErr:  errors.New("ssh error"),
 		wantErr: "ssh error",
+	}, {
+		desc:    "no ssh",
+		vendor:  opb.Device_ARISTA,
+		noSSH:   true,
+		wantErr: "\"ssh\" not found",
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			sshErr = tt.sshErr
 			gotReset = false
-			err := bind.PushConfig(context.Background(), tt.dut, "my config", tt.reset)
+			dut := &kneDUT{
+				ServiceDUT: &solver.ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{&binding.Dims{Name: dutName, Vendor: tt.vendor}},
+				},
+				cfg: &Config{},
+			}
+			if !tt.noSSH {
+				dut.Services = map[string]*tpb.Service{
+					"ssh": &tpb.Service{OutsideIp: "1.2.3.4", Outside: 1234},
+				}
+			}
+			err := dut.PushConfig(context.Background(), "my config", tt.reset)
 			if (err == nil) != (tt.wantErr == "") || (err != nil && !strings.Contains(err.Error(), tt.wantErr)) {
 				t.Errorf("PushConfig got error %v, want %v", err, tt.wantErr)
 			}

@@ -19,7 +19,6 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/telemetry"
 )
@@ -67,7 +66,7 @@ func learnedInfoToRIB(learnedInfo []bgpLearnedInfo, neighbor string, v4 bool, ri
 		attrIndex := uint64(i + attrLen)
 		commIndex := uint64(i + commLen)
 		if err := appendDetails(info, rib, attrIndex, commIndex, v4); err != nil {
-			return errors.Wrapf(err, "failed to append details for elem %d", i)
+			return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 		}
 
 		var err error
@@ -87,7 +86,7 @@ func learnedInfoToRIB(learnedInfo []bgpLearnedInfo, neighbor string, v4 bool, ri
 			})
 		}
 		if err != nil {
-			return errors.Wrapf(err, "failed to append route for elem %d", i)
+			return fmt.Errorf("failed to append route for elem %d: %w", i, err)
 		}
 	}
 

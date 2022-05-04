@@ -30,7 +30,7 @@ import (
 	"github.com/openconfig/ygot/util"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
-	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/ondatra/internal/fakegnmi"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/telemetry/device"
@@ -53,8 +53,10 @@ func initTelemetryFakes(t *testing.T) {
 	t.Helper()
 	initFakeBinding(t)
 	reserveFakeTestbed(t)
-	fakeBind.GNMIDialer = func(ctx context.Context, _ *binding.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-		return fakeGNMI.Dial(ctx, opts...)
+	for _, dut := range fakeRes.DUTs {
+		dut.(*fakebind.DUT).DialGNMIFn = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+			return fakeGNMI.Dial(ctx, opts...)
+		}
 	}
 }
 
@@ -153,7 +155,7 @@ func verifyTelemetryErrSubstr(t *testing.T, complianceErrs *genutil.ComplianceEr
 
 func TestMetadata(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_arista")
 	connPath := gnmiPath(t, "meta/connected")
 	syncPath := gnmiPath(t, "meta/sync")
 	leavesAddedPath := gnmiPath(t, "meta/targetLeavesAdded")
@@ -321,7 +323,7 @@ func TestMetadata(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_cisco")
 	port := dut.Port(t, "port1")
 
 	getStrPath := func(iname string) string {
@@ -639,7 +641,7 @@ func TestGet(t *testing.T) {
 
 func TestGetDefault(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/enabled", iname)
@@ -698,7 +700,8 @@ func TestGetDefault(t *testing.T) {
 		wantSubscriptionPath: enabledConfigPath,
 		wantQualified: (&telemetry.QualifiedBool{
 			Metadata: &genutil.Metadata{
-				Path: enabledConfigPath,
+				Config: true,
+				Path:   enabledConfigPath,
 			}}).SetVal(true),
 	}}
 
@@ -726,7 +729,7 @@ func TestGetDefault(t *testing.T) {
 
 func TestGetConfig(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_arista")
 	port := dut.Port(t, "port1")
 
 	getStrPath := func(iname string) string {
@@ -763,6 +766,7 @@ func TestGetConfig(t *testing.T) {
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 				Path:      descPath,
 			}}).SetVal("foo"),
@@ -783,6 +787,7 @@ func TestGetConfig(t *testing.T) {
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedString{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 
 				Path: resolvedPath,
@@ -805,6 +810,7 @@ func TestGetConfig(t *testing.T) {
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 				Path:      descPath,
 			}}).SetVal("bar"),
@@ -826,6 +832,7 @@ func TestGetConfig(t *testing.T) {
 		wantSubscriptionPath: resolvedPath,
 		wantQualified: (&telemetry.QualifiedString{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 				Path:      resolvedPath,
 			}}).SetVal("bar"),
@@ -846,6 +853,7 @@ func TestGetConfig(t *testing.T) {
 		wantSubscriptionPath: descPath,
 		wantQualified: (&telemetry.QualifiedString{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 101),
 				Path:      descPath,
 			}}).SetVal("foo"),
@@ -964,7 +972,7 @@ func TestGetConfig(t *testing.T) {
 
 func TestGetNonleaf(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_cisco")
 	port := dut.Port(t, "port1")
 
 	getStrPath := func(iname string) string {
@@ -1074,6 +1082,7 @@ func TestGetNonleaf(t *testing.T) {
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
@@ -1099,6 +1108,7 @@ func TestGetNonleaf(t *testing.T) {
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{
@@ -1121,6 +1131,7 @@ func TestGetNonleaf(t *testing.T) {
 		wantSubscriptionPath: staticIntfPath,
 		wantQualified: (&telemetry.QualifiedInterface{
 			Metadata: &genutil.Metadata{
+				Config:    true,
 				Timestamp: time.Unix(0, 100),
 				Path:      staticIntfPath,
 			}}).SetVal(&telemetry.Interface{}),
@@ -1411,7 +1422,7 @@ func TestGetNonleaf(t *testing.T) {
 
 func TestWildcardGet(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/in-octets", iname)
@@ -1593,7 +1604,7 @@ func TestWildcardGet(t *testing.T) {
 
 func TestWildcardNonleafGet(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/oper-status", iname)
@@ -1790,7 +1801,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 
 func TestCollect(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_cisco")
 	port := dut.Port(t, "port1")
 
 	getStrPath := func(iname string) string {
@@ -2111,7 +2122,7 @@ func TestCollect(t *testing.T) {
 
 func TestWatch(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
@@ -2287,7 +2298,7 @@ func TestWatch(t *testing.T) {
 
 func TestWildcardWatch(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
@@ -2426,7 +2437,7 @@ func TestWildcardWatch(t *testing.T) {
 
 func TestNonleafWildcardWatch(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_cisco")
 
 	getStrPath := func(iname, counter string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/%s", iname, counter)
@@ -2536,10 +2547,13 @@ func TestNonleafWildcardWatch(t *testing.T) {
 
 func TestBatchGet(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
+	}
+	getStrConfigPath := func(iname string) string {
+		return fmt.Sprintf("interfaces/interface[name=%s]/config/enabled", iname)
 	}
 
 	port1Name := "Ethernet3/1/1"
@@ -2547,6 +2561,7 @@ func TestBatchGet(t *testing.T) {
 	port1Path := gnmiPath(t, getStrPath(port1Name))
 	port2Path := gnmiPath(t, getStrPath(port2Name))
 	wildcardPath := gnmiPath(t, getStrPath("*"))
+	enabledConfigPath := gnmiPath(t, getStrConfigPath(port1Name))
 
 	tests := []struct {
 		desc                 string
@@ -2566,6 +2581,9 @@ func TestBatchGet(t *testing.T) {
 					}, {
 						Path: port2Path,
 						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_UintVal{UintVal: 12}},
+					}, {
+						Path: enabledConfigPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_BoolVal{BoolVal: true}},
 					}}}).
 				Sync()
 		},
@@ -2752,7 +2770,7 @@ func TestBatchGet(t *testing.T) {
 
 func TestBatchWatch(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
@@ -3198,7 +3216,7 @@ func TestBatchWatch(t *testing.T) {
 
 func TestBatchCollect(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_cisco")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters/out-octets", iname)
@@ -3586,7 +3604,7 @@ func TestBatchCollect(t *testing.T) {
 
 func TestNonleafWatch(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut")
+	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/counters", iname)

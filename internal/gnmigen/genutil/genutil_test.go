@@ -15,13 +15,13 @@
 package genutil
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ygot/ygot"
@@ -101,20 +101,22 @@ type Device struct {
 	SuperContainer *SuperContainer `path:"super-container" module:"yang-module"`
 }
 
-func (*Device) IsYANGGoStruct() {}
-
+func (*Device) IsYANGGoStruct()                              {}
 func (*Device) Validate(opts ...ygot.ValidationOption) error { return nil }
+func (*Device) ΛEnumTypeMap() map[string][]reflect.Type      { return nil }
+func (*Device) ΛBelongingModule() string                     { return "" }
 
-func (*Device) ΛEnumTypeMap() map[string][]reflect.Type { return nil }
-
-func unmarshalFunc([]byte, ygot.GoStruct, ...ytypes.UnmarshalOpt) error { return nil }
+func unmarshalFunc([]byte, ygot.ValidatedGoStruct, ...ytypes.UnmarshalOpt) error { return nil }
 
 type SuperContainer struct {
 	LeafContainerStruct *LeafContainerStruct `path:"leaf-container-struct"`
 	Model               *Model               `path:"model"`
 }
 
-func (*SuperContainer) IsYANGGoStruct() {}
+func (*SuperContainer) IsYANGGoStruct()                         {}
+func (*SuperContainer) Validate(...ygot.ValidationOption) error { return nil }
+func (*SuperContainer) ΛEnumTypeMap() map[string][]reflect.Type { return nil }
+func (*SuperContainer) ΛBelongingModule() string                { return "" }
 
 type LeafContainerStruct struct {
 	Uint64Leaf          *uint64       `path:"uint64-leaf"`
@@ -124,20 +126,28 @@ type LeafContainerStruct struct {
 	UnionLeafSingleType []string      `path:"union-stleaflist"`
 }
 
-func (*LeafContainerStruct) IsYANGGoStruct() {}
+func (*LeafContainerStruct) IsYANGGoStruct()                         {}
+func (*LeafContainerStruct) Validate(...ygot.ValidationOption) error { return nil }
+func (*LeafContainerStruct) ΛBelongingModule() string                { return "" }
 
 type Model struct {
 	SingleKey map[int32]*Model_SingleKey `path:"a/single-key"`
 }
 
-func (*Model) IsYANGGoStruct() {}
+func (*Model) IsYANGGoStruct()                         {}
+func (*Model) Validate(...ygot.ValidationOption) error { return nil }
+func (*Model) ΛEnumTypeMap() map[string][]reflect.Type { return nil }
+func (*Model) ΛBelongingModule() string                { return "" }
 
 type Model_SingleKey struct {
 	Key   *int32 `path:"config/key|key" shadow-path:"state/key"`
 	Value *int64 `path:"config/value" shadow-path:"state/value"`
 }
 
-func (*Model_SingleKey) IsYANGGoStruct() {}
+func (*Model_SingleKey) IsYANGGoStruct()                         {}
+func (*Model_SingleKey) Validate(...ygot.ValidationOption) error { return nil }
+func (*Model_SingleKey) ΛEnumTypeMap() map[string][]reflect.Type { return nil }
+func (*Model_SingleKey) ΛBelongingModule() string                { return "" }
 
 // NewSingleKey is a *generated* method for Model which may be used by an
 // unmarshal function in ytype's reflect library, and is kept here in case.
@@ -215,7 +225,7 @@ func (*LeafContainerStruct) To_UnionLeafType(i interface{}) (UnionLeafType, erro
 	case EnumType2:
 		return &UnionLeafType_EnumType2{v}, nil
 	default:
-		return nil, errors.Errorf("cannot convert %v to To_UnionLeafType, unknown union type, got: %T, want any of [string, uint32]", i, i)
+		return nil, fmt.Errorf("cannot convert %v to To_UnionLeafType, unknown union type, got: %T, want any of [string, uint32]", i, i)
 	}
 }
 

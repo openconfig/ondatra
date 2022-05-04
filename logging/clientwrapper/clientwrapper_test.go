@@ -16,10 +16,11 @@ package clientwrapper
 import (
 	"bytes"
 	"golang.org/x/net/context"
+	"strings"
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/fakes/fakestreamclient"
+	"github.com/openconfig/ondatra/fakebind"
 )
 
 type action struct {
@@ -30,7 +31,7 @@ type action struct {
 }
 
 func TestClientWrapper(t *testing.T) {
-	overBuffer := fakestreamclient.RandSeq(8000)
+	overBuffer := strings.Repeat("a", 8000)
 	tests := []struct {
 		desc    string
 		actions []action
@@ -85,7 +86,7 @@ func TestClientWrapper(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			b := bytes.NewBuffer([]byte{})
-			sc := fakestreamclient.New()
+			sc := fakebind.NewStreamClient()
 			ctx := context.Background()
 			l := Start(ctx, sc, b)
 			bLen := 0

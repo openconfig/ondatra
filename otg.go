@@ -26,7 +26,7 @@ import (
 
 // OTG provides the Open Traffic Generator API to an ATE.
 type OTG struct {
-	ate *binding.ATE
+	ate binding.ATE
 	api gosnappi.GosnappiApi
 }
 

@@ -17,20 +17,18 @@ package operations
 
 import (
 	"golang.org/x/net/context"
+	"errors"
 	"fmt"
 	"io"
 	"sync"
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/testbed"
 
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
@@ -45,16 +43,16 @@ const (
 
 var (
 	mu    sync.Mutex
-	gnois = make(map[*binding.DUT]binding.GNOIClients)
+	gnois = make(map[binding.DUT]binding.GNOIClients)
 )
 
 // NewGNOI creates a gNOI client for the specified DUT.
-func NewGNOI(ctx context.Context, dut *binding.DUT) (binding.GNOIClients, error) {
-	return testbed.Bind().DialGNOI(ctx, dut, grpc.WithBlock())
+func NewGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
+	return dut.DialGNOI(ctx, grpc.WithBlock())
 }
 
 // FetchGNOI fetches a cached gNOI client for the given DUT.
-func FetchGNOI(ctx context.Context, dut *binding.DUT) (binding.GNOIClients, error) {
+func FetchGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	gnoi, ok := gnois[dut]
@@ -78,7 +76,7 @@ func Install(ctx context.Context, dev binding.Device, version string, standby bo
 		return err
 	}
 	if version == "" {
-		return usererr.New("version not set in install operation on device: %v", dev)
+		return fmt.Errorf("version not set in install operation on device: %v", dev)
 	}
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
@@ -86,14 +84,14 @@ func Install(ctx context.Context, dev binding.Device, version string, standby bo
 	}
 	ic, err := gnoi.OS().Install(ctx)
 	if err != nil {
-		return errors.Wrap(err, "error creating gnoi install client")
+		return fmt.Errorf("error creating gnoi install client: %w", err)
 	}
 	sreq := &ospb.InstallRequest{Request: &ospb.InstallRequest_TransferRequest{&ospb.TransferRequest{
 		Version:           version,
 		StandbySupervisor: standby,
 	}}}
 	if err := ic.Send(sreq); err != nil {
-		return errors.Wrap(err, "error sending gnoi install request")
+		return fmt.Errorf("error sending gnoi install request: %w", err)
 	}
 	validated, err := awaitPackageInstall(ic)
 	if err != nil {
@@ -101,7 +99,7 @@ func Install(ctx context.Context, dev binding.Device, version string, standby bo
 	}
 	if validated == nil { // if content is needed
 		if reader == nil {
-			return errors.Errorf("device %v does not have package and no package specified in install operation", dev)
+			return fmt.Errorf("device %v does not have package and no package specified in install operation", dev)
 		}
 		awaitChan := make(chan error)
 		go func() {
@@ -116,7 +114,7 @@ func Install(ctx context.Context, dev binding.Device, version string, standby bo
 		}
 	}
 	if gotVersion := validated.GetVersion(); gotVersion != version {
-		return errors.Errorf("installed version %q does not match requested version %q", gotVersion, version)
+		return fmt.Errorf("installed version %q does not match requested version %q", gotVersion, version)
 	}
 	return nil
 }
@@ -159,13 +157,13 @@ func awaitPackageInstall(ic ospb.OS_InstallClient) (*ospb.Validated, error) {
 			return nil, nil
 		case *ospb.InstallResponse_InstallError:
 			errName := ospb.InstallError_Type_name[int32(v.InstallError.Type)]
-			return nil, usererr.New("installation error %q: %s", errName, v.InstallError.GetDetail())
+			return nil, fmt.Errorf("installation error %q: %s", errName, v.InstallError.GetDetail())
 		case *ospb.InstallResponse_TransferProgress:
 			log.Infof("installation progress: %v bytes received from client", v.TransferProgress.GetBytesReceived())
 		case *ospb.InstallResponse_SyncProgress:
 			log.Infof("installation progress: %v%% synced from supervisor", v.SyncProgress.GetPercentageTransferred())
 		default:
-			return nil, errors.Errorf("unexpected client install response: %v (%T)", v, v)
+			return nil, fmt.Errorf("unexpected client install response: %v (%T)", v, v)
 		}
 	}
 }
@@ -177,7 +175,7 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 		return err
 	}
 	if dest == "" {
-		return errors.Errorf("no destination for ping operation: %v", dest)
+		return fmt.Errorf("no destination for ping operation: %v", dest)
 	}
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
@@ -188,7 +186,7 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 		Count:       count,
 	})
 	if err != nil {
-		return errors.Wrapf(err, "error on gnoi ping of %s from %v", dest, dev)
+		return fmt.Errorf("error on gnoi ping of %s from %v: %w", dest, dev, err)
 	}
 
 	// Ping result is included in the last message of the stream.
@@ -199,7 +197,7 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 			break
 		}
 		if err != nil {
-			return errors.Wrap(err, "error receiving ping response")
+			return fmt.Errorf("error receiving ping response: %w", err)
 		}
 		lastPingResp = resp
 	}
@@ -213,15 +211,15 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 // SetInterfaceState sets the state of a specified interface on a device.
 func SetInterfaceState(ctx context.Context, dev binding.Device, intf string, enabled *bool) error {
 	if intf == "" {
-		return errors.Errorf("no interface provided in set interface state operation on device %v", dev)
+		return fmt.Errorf("no interface provided in set interface state operation on device %v", dev)
 	}
 	if enabled == nil {
-		return errors.Errorf("no enabled state provided in set interface state operation on device %v", dev)
+		return fmt.Errorf("no enabled state provided in set interface state operation on device %v", dev)
 	}
-	if dut, ok := dev.(*binding.DUT); ok {
+	if dut, ok := dev.(binding.DUT); ok {
 		return setDUTInterfaceState(ctx, dut, intf, *enabled)
 	}
-	return ate.SetInterfaceState(ctx, dev.(*binding.ATE), intf, *enabled)
+	return ate.SetInterfaceState(ctx, dev.(binding.ATE), intf, *enabled)
 }
 
 var (
@@ -259,18 +257,18 @@ var (
 	}
 )
 
-func setDUTInterfaceState(ctx context.Context, dut *binding.DUT, intf string, enabled bool) error {
+func setDUTInterfaceState(ctx context.Context, dut binding.DUT, intf string, enabled bool) error {
 	configs := disableConfigs
 	if enabled {
 		configs = enableConfigs
 	}
-	cfgFormat, ok := configs[dut.Vendor]
+	cfgFormat, ok := configs[dut.Vendor()]
 	if !ok {
-		return fmt.Errorf("SetInterfaceState not yet supported for vendor %v", dut.Vendor)
+		return fmt.Errorf("SetInterfaceState not yet supported for vendor %v", dut.Vendor())
 	}
 	cfg := fmt.Sprintf(cfgFormat, intf)
-	if err := testbed.Bind().PushConfig(ctx, dut, cfg, false); err != nil {
-		return errors.Wrap(err, "failed to set interface state")
+	if err := dut.PushConfig(ctx, cfg, false); err != nil {
+		return fmt.Errorf("failed to set interface state: %w", err)
 	}
 	return nil
 }
@@ -286,7 +284,7 @@ func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) erro
 		return err
 	}
 	if _, err := gnoi.System().Reboot(ctx, &spb.RebootRequest{Method: spb.RebootMethod_COLD}); err != nil {
-		return errors.Wrap(err, "error on gnoi reboot")
+		return fmt.Errorf("error on gnoi reboot: %w", err)
 	}
 	rebootTimeout := timeout
 	switch {
@@ -321,7 +319,7 @@ func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) erro
 		}
 		time.Sleep(statusWait)
 	}
-	return errors.Errorf("reboot of %s timed out after %s", dev, rebootTimeout)
+	return fmt.Errorf("reboot of %s timed out after %s", dev, rebootTimeout)
 }
 
 // KillProcess kills a process on a device, and optionally restarts it.
@@ -338,11 +336,11 @@ func KillProcess(ctx context.Context, dev binding.Device, req *spb.KillProcessRe
 	return err
 }
 
-func checkDUT(dev binding.Device, op string) (*binding.DUT, error) {
-	if _, ok := dev.(*binding.ATE); ok {
-		return nil, errors.Errorf("%s operation not supported on ATEs: %v", op, dev)
+func checkDUT(dev binding.Device, op string) (binding.DUT, error) {
+	if _, ok := dev.(binding.ATE); ok {
+		return nil, fmt.Errorf("%s operation not supported on ATEs: %v", op, dev)
 	}
-	return dev.(*binding.DUT), nil
+	return dev.(binding.DUT), nil
 }
 
 // SwitchControlProcessor switches to a provided destination route processor.

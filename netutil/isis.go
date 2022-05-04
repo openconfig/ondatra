@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package rangegen
+package netutil
 
 import (
 	"encoding/hex"
+	"errors"
+	"fmt"
 	"math/big"
 	"strings"
-
-	"github.com/pkg/errors"
 )
 
 const sysIDLen = 6
@@ -32,10 +32,10 @@ func SystemIDs(startID string, count uint32) (<-chan string, error) {
 
 	b, err := hex.DecodeString(strings.NewReplacer(":", "", ".", "", " ", "").Replace(startID))
 	if err != nil {
-		return nil, errors.Wrapf(err, "could not decode system ID %q as hex", startID)
+		return nil, fmt.Errorf("could not decode system ID %q as hex: %v", startID, err)
 	}
 	if len(b) > sysIDLen {
-		return nil, errors.Errorf("system ID %q is too large (max size is 6 bytes)", startID)
+		return nil, fmt.Errorf("system ID %q is too large (max size is 6 bytes)", startID)
 	}
 
 	id := new(big.Int).SetBytes(b)

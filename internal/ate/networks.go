@@ -19,7 +19,6 @@ import (
 	"net"
 	"strings"
 
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -59,7 +58,7 @@ func (ix *ixATE) addNetworks(ifc *opb.InterfaceConfig) error {
 	hasBgpCfg := false
 	for _, netCfg := range ifc.GetNetworks() {
 		if netCfg.GetIsis() != nil && isisL3 == nil {
-			return usererr.New("cannot add IS-IS attributes for network group %q without IS-IS configured", netCfg.GetName())
+			return fmt.Errorf("cannot add IS-IS attributes for network group %q without IS-IS configured", netCfg.GetName())
 		}
 		if netCfg.GetBgpAttributes() != nil {
 			hasBgpCfg = true
@@ -118,7 +117,7 @@ func (ix *ixATE) addNetworks(ifc *opb.InterfaceConfig) error {
 func routeOriginStr(origin opb.IPReachability_RouteOrigin) (string, error) {
 	switch origin {
 	case opb.IPReachability_ROUTE_ORIGIN_UNSPECIFIED:
-		return "", usererr.New("route origin not specified")
+		return "", fmt.Errorf("route origin not specified")
 	case opb.IPReachability_INTERNAL:
 		return "internal", nil
 	case opb.IPReachability_EXTERNAL:
@@ -182,7 +181,7 @@ func bgpComms(communities *opb.BgpCommunities) ([]*ixconfig.TopologyBgpCommuniti
 	for _, comm := range communities.GetPrivateCommunities() {
 		commSplit := strings.SplitN(comm, ":", 2)
 		if len(commSplit) != 2 {
-			return nil, usererr.New("invalid format for BGP community %q", comm)
+			return nil, fmt.Errorf("invalid format for BGP community %q", comm)
 		}
 		comms = append(comms, &ixconfig.TopologyBgpCommunitiesList{
 			AsNumber:      ixconfig.MultivalueStr(commSplit[0]),
@@ -202,7 +201,7 @@ func bgpExtComms(extCommPBs []*opb.BgpAttributes_ExtendedCommunity) ([]*ixconfig
 			color := commPB.GetColor()
 			coBits, ok := coBitsToStr[color.GetCoBits()]
 			if !ok {
-				return nil, usererr.New("invalid extended communited color bits value %s", color.GetCoBits())
+				return nil, fmt.Errorf("invalid extended communited color bits value %s", color.GetCoBits())
 			}
 			extComm.Type_ = ixconfig.MultivalueStr("opaque")
 			extComm.SubType = ixconfig.MultivalueStr("color")
@@ -222,7 +221,7 @@ func bgpASPathSegments(asPathSegPBs []*opb.BgpAttributes_AsPathSegment) ([]*ixco
 	for _, asPathSegPB := range asPathSegPBs {
 		asPathSegType, ok := asPathSegTypeToStr[asPathSegPB.GetType()]
 		if !ok {
-			return nil, usererr.New("invalid AS path segment type %s", asPathSegPB.GetType())
+			return nil, fmt.Errorf("invalid AS path segment type %s", asPathSegPB.GetType())
 		}
 		asPathSeg := &ixconfig.TopologyBgpAsPathSegmentList{
 			EnableASPathSegment: ixconfig.MultivalueTrue(),
@@ -278,7 +277,7 @@ func bgpV4RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpIpRoutePropert
 
 	origin, ok := originToStr[bgp.GetOrigin()]
 	if !ok {
-		return nil, usererr.New("invalid BGP route origin %s", bgp.GetOrigin())
+		return nil, fmt.Errorf("invalid BGP route origin %s", bgp.GetOrigin())
 	}
 	brp.Origin = ixconfig.MultivalueStr(origin)
 
@@ -300,7 +299,7 @@ func bgpV4RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpIpRoutePropert
 
 	asnSetMode, ok := asnSetModeToStr[bgp.GetAsnSetMode()]
 	if !ok {
-		return nil, usererr.New("invalid BGP ASN set mode %s", bgp.GetAsnSetMode())
+		return nil, fmt.Errorf("invalid BGP ASN set mode %s", bgp.GetAsnSetMode())
 	}
 	brp.AsSetMode = ixconfig.MultivalueStr(asnSetMode)
 
@@ -362,7 +361,7 @@ func bgpV6RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpV6IpRoutePrope
 
 	origin, ok := originToStr[bgp.GetOrigin()]
 	if !ok {
-		return nil, usererr.New("invalid BGP route origin %s", bgp.GetOrigin())
+		return nil, fmt.Errorf("invalid BGP route origin %s", bgp.GetOrigin())
 	}
 	brp.Origin = ixconfig.MultivalueStr(origin)
 
@@ -384,7 +383,7 @@ func bgpV6RouteProp(bgp *opb.BgpAttributes) (*ixconfig.TopologyBgpV6IpRoutePrope
 
 	asnSetMode, ok := asnSetModeToStr[bgp.GetAsnSetMode()]
 	if !ok {
-		return nil, usererr.New("invalid BGP ASN set mode %s", bgp.GetAsnSetMode())
+		return nil, fmt.Errorf("invalid BGP ASN set mode %s", bgp.GetAsnSetMode())
 	}
 	brp.AsSetMode = ixconfig.MultivalueStr(asnSetMode)
 
@@ -423,7 +422,7 @@ func routeProps(bgp *opb.BgpAttributes, v6Routes bool) ([]*ixconfig.TopologyBgpI
 	var exportV4, exportV6 bool
 	switch bgp.GetAdvertisementProtocol() {
 	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_UNSPECIFIED:
-		return nil, nil, usererr.New("BGP advertisement protocol not set for routes")
+		return nil, nil, fmt.Errorf("BGP advertisement protocol not set for routes")
 	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V4:
 		exportV4 = true
 	case opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_V6:
@@ -464,16 +463,16 @@ func ipv4Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 		return nil, nil
 	}
 	if ipv4.GetAddressCidr() == "" {
-		return nil, usererr.New("need address defined for IP V4 network group %q", netCfg.GetName())
+		return nil, fmt.Errorf("need address defined for IP V4 network group %q", netCfg.GetName())
 	}
 	ip, netw, err := net.ParseCIDR(ipv4.GetAddressCidr())
 	if err != nil {
-		return nil, usererr.Wrapf(err, "could not parse %q as an IP address", ipv4.GetAddressCidr())
+		return nil, fmt.Errorf("could not parse %q as an IP address: %w", ipv4.GetAddressCidr(), err)
 	}
 	mask, _ := netw.Mask.Size()
 
 	if isis != nil && bgp != nil {
-		return nil, usererr.New("cannot set both IS-IS and BGP attributes for IPv4 network group %q (use multiple network groups if needed)", netCfg.GetName())
+		return nil, fmt.Errorf("cannot set both IS-IS and BGP attributes for IPv4 network group %q (use multiple network groups if needed)", netCfg.GetName())
 	}
 
 	var connector *ixconfig.TopologyConnector
@@ -530,16 +529,16 @@ func ipv6Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 		return nil, nil
 	}
 	if ipv6.GetAddressCidr() == "" {
-		return nil, usererr.New("need address defined for IP V6 network group %q", netCfg.GetName())
+		return nil, fmt.Errorf("need address defined for IP V6 network group %q", netCfg.GetName())
 	}
 	ip, netw, err := net.ParseCIDR(ipv6.GetAddressCidr())
 	if err != nil {
-		return nil, usererr.Wrapf(err, "could not parse %q as an IP address", ipv6.GetAddressCidr())
+		return nil, fmt.Errorf("could not parse %q as an IP address: %w", ipv6.GetAddressCidr(), err)
 	}
 	mask, _ := netw.Mask.Size()
 
 	if isis != nil && bgp != nil {
-		return nil, usererr.New("cannot set both IS-IS and BGP attributes for IPv6 network group %q (use multiple network groups if needed)", netCfg.GetName())
+		return nil, fmt.Errorf("cannot set both IS-IS and BGP attributes for IPv6 network group %q (use multiple network groups if needed)", netCfg.GetName())
 	}
 
 	var connector *ixconfig.TopologyConnector
@@ -591,11 +590,11 @@ func ipv6Pools(netCfg *opb.Network, isisL3 *ixconfig.TopologyIsisL3, hasBgpCfg b
 func importedBGPRoutePools(netToRouteTables map[string]*routeTables, netCfg *opb.Network, hasBGPv4Peer, hasBGPv6Peer bool) ([]*ixconfig.TopologyIpv4PrefixPools, []*ixconfig.TopologyIpv6PrefixPools, error) {
 	imported := netCfg.GetImportedBgpRoutes()
 	if netCfg.GetIsis() != nil || netCfg.GetBgpAttributes() != nil || netCfg.GetIpv4() != nil || netCfg.GetIpv6() != nil {
-		return nil, nil, usererr.New("cannot import routes for network group %q with any other routes/attributes configured", netCfg.GetName())
+		return nil, nil, fmt.Errorf("cannot import routes for network group %q with any other routes/attributes configured", netCfg.GetName())
 	}
 
 	if !hasBGPv4Peer && !hasBGPv6Peer {
-		return nil, nil, usererr.New("cannot import routes for network group %q without associated BGP peer", netCfg.GetName())
+		return nil, nil, fmt.Errorf("cannot import routes for network group %q without associated BGP peer", netCfg.GetName())
 	}
 
 	rts := &routeTables{
@@ -605,7 +604,7 @@ func importedBGPRoutePools(netToRouteTables map[string]*routeTables, netCfg *opb
 
 	switch imported.GetRouteTableFormat() {
 	case opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_UNSPECIFIED:
-		return nil, nil, usererr.New("route table format not specified")
+		return nil, nil, fmt.Errorf("route table format not specified")
 	case opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CISCO:
 		rts.format = routeTableFormatCisco
 	case opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_JUNIPER:

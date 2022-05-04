@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 )
 
@@ -39,20 +38,20 @@ func (c *Config) String() string {
 func ParseConfigFile(configFile string) (*Config, error) {
 	data, err := ioutil.ReadFile(configFile)
 	if err != nil {
-		return nil, errors.Wrapf(err, "Error reading config file")
+		return nil, fmt.Errorf("error reading config file: %w", err)
 	}
 	c := &Config{}
 	if err := yaml.Unmarshal(data, c); err != nil {
-		return nil, errors.Wrapf(err, "Error unmarshalling config YAML")
+		return nil, fmt.Errorf("error unmarshalling config YAML: %w", err)
 	}
 	if c.Username == "" {
-		return nil, errors.Errorf("No username specified in config: %v", c)
+		return nil, fmt.Errorf("no username specified in config: %v", c)
 	}
 	if c.Password == "" {
-		return nil, errors.Errorf("No password specified in config: %v", c)
+		return nil, fmt.Errorf("No password specified in config: %v", c)
 	}
 	if c.TopoPath == "" {
-		return nil, errors.Errorf("No topology path specified in config: %v", c)
+		return nil, fmt.Errorf("no topology path specified in config: %v", c)
 	}
 	if c.CLIPath == "" {
 		// If no CLI path specified, use kne_cli available in PATH.

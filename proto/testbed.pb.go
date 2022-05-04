@@ -243,7 +243,11 @@ type Device struct {
 	// further restrict matching devices. The set of dimension keys that are
 	// supported is specific to the binding implementation. For example, if the
 	// binding supports filtering devices by a dimension named "label," the
-	// testbed could specify an extra dimensions map of {"label": "foo"}.
+	// testbed could specify an extra dimensions map of
+	// extra_dimensions {
+	//   key: "label",
+	//   value: "foo",
+	// }
 	ExtraDimensions map[string]string `protobuf:"bytes,6,rep,name=extra_dimensions,json=extraDimensions,proto3" json:"extra_dimensions,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 

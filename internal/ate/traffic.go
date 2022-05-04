@@ -17,8 +17,6 @@ package ate
 import (
 	"fmt"
 
-	"github.com/pkg/errors"
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -64,28 +62,28 @@ func (ix *ixATE) addTraffic(flows []*opb.Flow) error {
 func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	hdrs, err := resolveHeaders(f.GetHeaders())
 	if err != nil {
-		return usererr.Wrapf(err, "bad header spec for flow %q", f.GetName())
+		return fmt.Errorf("bad header spec for flow %q: %w", f.GetName(), err)
 	}
 	srcEPs := f.GetSrcEndpoints()
 	dstEPs := f.GetDstEndpoints()
 	if len(srcEPs) == 0 || len(dstEPs) == 0 {
-		return usererr.New("flow %q needs both source and destination endpoints defined", f.GetName())
+		return fmt.Errorf("flow %q needs both source and destination endpoints defined", f.GetName())
 	}
 	// Check that reference interfaces exist. All subsequent functions assume that they do.
 	for _, ep := range srcEPs {
 		if _, ok := ix.intfs[ep.GetInterfaceName()]; !ok {
-			return usererr.New("no interface configured for source endpoint %v", ep)
+			return fmt.Errorf("no interface configured for source endpoint %v", ep)
 		}
 	}
 	for _, ep := range dstEPs {
 		if _, ok := ix.intfs[ep.GetInterfaceName()]; !ok {
-			return usererr.New("no interface configured for dest endpoint %v", ep)
+			return fmt.Errorf("no interface configured for dest endpoint %v", ep)
 		}
 	}
 
 	trafType, err := resolveTrafficType(hdrs, srcEPs, dstEPs)
 	if err != nil {
-		return errors.Wrapf(err, "could not determine traffic type for flow %q", f.GetName())
+		return fmt.Errorf("could not determine traffic type for flow %q: %w", f.GetName(), err)
 	}
 
 	epFn := devOrGeneratedEPs
@@ -95,25 +93,25 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	}
 	srcs, err := epFn(srcEPs, ix.intfs, true)
 	if err != nil {
-		return errors.Wrapf(err, "could not find source endpoint paths for flow %q", f.GetName())
+		return fmt.Errorf("could not find source endpoint paths for flow %q: %w", f.GetName(), err)
 	}
 	dsts, err := epFn(dstEPs, ix.intfs, false)
 	if err != nil {
-		return errors.Wrapf(err, "could not find dest endpoint paths for flow %q", f.GetName())
+		return fmt.Errorf("could not find dest endpoint paths for flow %q: %w", f.GetName(), err)
 	}
 
 	fr, _, err := frameRate(f.GetFrameRate())
 	if err != nil {
-		return errors.Wrapf(err, "could not compute frame rate for flow %q", f.GetName())
+		return fmt.Errorf("could not compute frame rate for flow %q: %w", f.GetName(), err)
 	}
 	fs, _, err := frameSize(f.GetFrameSize())
 	if err != nil {
-		return errors.Wrapf(err, "could not compute frame size for flow %q", f.GetName())
+		return fmt.Errorf("could not compute frame size for flow %q: %w", f.GetName(), err)
 	}
 
 	tc, err := transmissionControl(f.GetTransmission())
 	if err != nil {
-		return errors.Wrapf(err, "could not compute transmission control for flow %q", f.GetName())
+		return fmt.Errorf("could not compute transmission control for flow %q: %w", f.GetName(), err)
 	}
 	var crc *string
 	if hdrs.eth.GetBadCrc() {
@@ -145,7 +143,7 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 
 	ingressTracking, trackFlow, err := ingressTrackingCfg(f, trafType)
 	if err != nil {
-		return errors.Wrapf(err, "could not configure ingress tracking for flow %q", f.GetName())
+		return fmt.Errorf("could not configure ingress tracking for flow %q: %w", f.GetName(), err)
 	}
 	if trackFlow {
 		ix.ingressTrackingFlows = append(ix.ingressTrackingFlows, f.GetName())
@@ -170,7 +168,7 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	for _, hdr := range f.GetHeaders() {
 		s, err := headerStacks(hdr, len(stacks), hasSrcVLAN)
 		if err != nil {
-			return errors.Wrapf(err, "could not add header for flow %q", f.GetName())
+			return fmt.Errorf("could not add header for flow %q: %w", f.GetName(), err)
 		}
 		stacks = append(stacks, s...)
 	}
@@ -183,11 +181,11 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 
 func resolveHeaders(flowHdrs []*opb.Header) (*headers, error) {
 	if len(flowHdrs) == 0 {
-		return nil, usererr.New("must specify at least one header")
+		return nil, fmt.Errorf("must specify at least one header")
 	}
 	hdrs := &headers{eth: flowHdrs[0].GetEth()}
 	if hdrs.eth == nil {
-		return nil, usererr.New("first header must be an ethernet header, got: %v", flowHdrs)
+		return nil, fmt.Errorf("first header must be an ethernet header, got: %v", flowHdrs)
 	}
 	if len(flowHdrs) > 1 {
 		h := flowHdrs[1]
@@ -214,13 +212,13 @@ func resolveTrafficType(hdrs *headers, srcEPs, dstEPs []*opb.Flow_Endpoint) (tra
 	}
 
 	if hasRSVPEP(srcEPs) || hasRSVPEP(dstEPs) {
-		return "", usererr.New("cannot use RSVP endpoint for non-IP traffic")
+		return "", fmt.Errorf("cannot use RSVP endpoint for non-IP traffic")
 	}
 
 	// Traffic with a Network endpoint cannot not have any addresses set.
 	if hasNetworkEP(srcEPs) || hasNetworkEP(dstEPs) {
 		if ethAddrsSet {
-			return "", usererr.New("addresses of the initial Ethernet header should not be set when using generated endpoints")
+			return "", fmt.Errorf("addresses of the initial Ethernet header should not be set when using generated endpoints")
 		}
 		// IP traffic types would have already been detected above, so must be Ethernet here.
 		return ethTraffic, nil
@@ -321,7 +319,7 @@ func portOrLagEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, _ bool) ([]i
 			case *ixconfig.Lag:
 				n = v
 			default:
-				return nil, errors.Errorf("configured link on interface %q is not a Vport or Lag", ep.GetInterfaceName())
+				return nil, fmt.Errorf("configured link on interface %q is not a Vport or Lag", ep.GetInterfaceName())
 			}
 			nodes = append(nodes, n)
 			visited[vl] = true
@@ -342,13 +340,13 @@ func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP
 		case *opb.Flow_Endpoint_NetworkName:
 			netg, ok := intf.netToNetworkGroup[ep.GetNetworkName()]
 			if !ok {
-				return nil, usererr.New("no network group associated with endpoint %v", ep)
+				return nil, fmt.Errorf("no network group associated with endpoint %v", ep)
 			}
 			n = netg
 		case *opb.Flow_Endpoint_RsvpName:
 			rsvp, ok := intf.rsvpLSPs[ep.GetRsvpName()]
 			if !ok {
-				return nil, usererr.New("no RSVP config associated with endpoint %v", ep)
+				return nil, fmt.Errorf("no RSVP config associated with endpoint %v", ep)
 			}
 			// LSPs are unidirectional, so need to distinguish between src/dest endpoints.
 			n = rsvp.RsvpP2PEgressLsps
@@ -356,7 +354,7 @@ func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP
 				n = rsvp.RsvpP2PIngressLsps
 			}
 		default:
-			return nil, usererr.New("unrecognized endpoint type %T", ept)
+			return nil, fmt.Errorf("unrecognized endpoint type %T", ept)
 		}
 		if !visited[n] {
 			nodes = append(nodes, n)
@@ -412,7 +410,7 @@ func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficTrafficItemConfigElementFram
 	case *opb.FrameSize_ImixPreset_:
 		preset, ok := imixPreset[fs.GetImixPreset()]
 		if !ok {
-			return nil, nil, usererr.New("invalid preset %v specified for frame size", fs.GetImixPreset())
+			return nil, nil, fmt.Errorf("invalid preset %v specified for frame size", fs.GetImixPreset())
 		}
 		tfs.Type_ = ixconfig.String("presetDistribution")
 		tfs.PresetDistribution = ixconfig.String(preset)
@@ -446,10 +444,10 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTrafficItemConf
 	switch tcp := tc.GetPattern(); tcp {
 	case opb.Transmission_CONTINUOUS:
 		if tc.GetPacketsPerBurst() != 0 {
-			return nil, usererr.New("burst packet count should not be set for continuous transmissions")
+			return nil, fmt.Errorf("burst packet count should not be set for continuous transmissions")
 		}
 		if tc.GetInterburstGap() != nil {
-			return nil, usererr.New("burst gap should not be set for continuous transmissions")
+			return nil, fmt.Errorf("burst gap should not be set for continuous transmissions")
 		}
 		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("continuous"),
@@ -457,10 +455,10 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTrafficItemConf
 		}, nil
 	case opb.Transmission_BURST:
 		if tc.GetPacketsPerBurst() == 0 {
-			return nil, usererr.New("burst packet count must be a positive value for burst transmissions")
+			return nil, fmt.Errorf("burst packet count must be a positive value for burst transmissions")
 		}
 		if tc.GetInterburstGap() == nil {
-			return nil, usererr.New("burst gap must be set for burst transmissions")
+			return nil, fmt.Errorf("burst gap must be set for burst transmissions")
 		}
 		var burstGap uint32
 		var burstGapUnits string
@@ -484,10 +482,10 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTrafficItemConf
 		}, nil
 	case opb.Transmission_FIXED_FRAME_COUNT:
 		if tc.GetPacketsPerBurst() != 0 {
-			return nil, usererr.New("burst packet count should not be set for fixed packet count transmissions")
+			return nil, fmt.Errorf("burst packet count should not be set for fixed packet count transmissions")
 		}
 		if tc.GetInterburstGap() != nil {
-			return nil, usererr.New("burst gap should not be set for fixed packet count transmissions")
+			return nil, fmt.Errorf("burst gap should not be set for fixed packet count transmissions")
 		}
 		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("fixedFrameCount"),
@@ -496,10 +494,10 @@ func transmissionControl(tc *opb.Transmission) (*ixconfig.TrafficTrafficItemConf
 		}, nil
 	case opb.Transmission_FIXED_DURATION:
 		if tc.GetPacketsPerBurst() != 0 {
-			return nil, usererr.New("burst packet count should not be set for fixed duration transmissions")
+			return nil, fmt.Errorf("burst packet count should not be set for fixed duration transmissions")
 		}
 		if tc.GetInterburstGap() != nil {
-			return nil, usererr.New("burst gap should not be set for fixed duration transmissions")
+			return nil, fmt.Errorf("burst gap should not be set for fixed duration transmissions")
 		}
 		return &ixconfig.TrafficTrafficItemConfigElementTransmissionControl{
 			Type_:       ixconfig.String("fixedDuration"),
@@ -519,11 +517,23 @@ func ingressTrackingCfg(f *opb.Flow, trafType trafficType) (*ixconfig.TrafficTra
 	}
 
 	filter := f.GetIngressTrackingFilters()
+
+	if f.GetConvergenceTracking() {
+		if filter != nil {
+			return nil, false, fmt.Errorf("Ixia does not support both ingress and convergence tracking tracking for the same flow")
+		}
+		if trafType == rawTraffic {
+			return nil, false, fmt.Errorf("Ixia does not support convergence tracking for raw traffic flows")
+		}
+		tracking.TrackBy = append(tracking.TrackBy, "destEndpoint0", "destSessionDescription0")
+	}
+
 	if filter == nil {
 		return tracking, false, nil
 	}
+
 	if trafType == rawTraffic && (filter.GetDstEndpoint() || filter.GetSrcEndpoint()) {
-		return nil, false, usererr.New("Ixia does not support ingress tracking by src/dst endpoint for raw traffic flows")
+		return nil, false, fmt.Errorf("Ixia does not support ingress tracking by src/dst endpoint for raw traffic flows")
 	}
 
 	if filter.GetMplsLabel() {

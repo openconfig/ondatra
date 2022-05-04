@@ -17,8 +17,8 @@ package fakegnmi
 
 import (
 	"golang.org/x/net/context"
+	"fmt"
 
-	"github.com/pkg/errors"
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc"
 	"github.com/openconfig/gnmi/testing/fake/gnmi"
@@ -57,7 +57,7 @@ func (g *FakeGNMI) Dial(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIC
 	opts = append(opts, grpc.WithTransportCredentials(local.NewCredentials()))
 	conn, err := grpc.DialContext(ctx, g.agent.Address(), opts...)
 	if err != nil {
-		return nil, errors.Wrapf(err, "DialContext(%s, %v)", g.agent.Address(), opts)
+		return nil, fmt.Errorf("DialContext(%s, %v): %w", g.agent.Address(), opts, err)
 	}
 	return gpb.NewGNMIClient(conn), nil
 }

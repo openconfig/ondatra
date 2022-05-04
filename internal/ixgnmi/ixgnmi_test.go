@@ -17,12 +17,12 @@ package ixgnmi
 import (
 	"golang.org/x/net/context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
 	"github.com/patrickmn/go-cache"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ygot/uexampleoc"

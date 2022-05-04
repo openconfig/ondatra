@@ -18,29 +18,39 @@ import (
 	"bufio"
 	"fmt"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/openconfig/ondatra/binding"
 )
 
-var stubLine string
+var (
+	stubMu   sync.Mutex
+	stubLine string
+)
+
+func writeLine(line string) {
+	stubMu.Lock()
+	defer stubMu.Unlock()
+	stubLine = line
+}
 
 func init() {
 	readStringFn = func(_ *bufio.Reader, b byte) (string, error) {
+		stubMu.Lock()
+		defer stubMu.Unlock()
 		if i := strings.IndexByte(stubLine, b); i < 0 {
 			return "", fmt.Errorf("cannot read line %q", stubLine)
 		}
-		line := stubLine
-		stubLine = ""
-		return line, nil
+		return stubLine, nil
 	}
 	reservationFn = func() (*binding.Reservation, error) {
 		return &binding.Reservation{}, nil
 	}
 }
-
 func TestNoDebugMode(t *testing.T) {
 	TestStarted(false)
+	defer TestCasesDone()
 
 	if err := Breakpoint(t); err == nil {
 		t.Fatal("Breakpoint unexpectedly succeeded")
@@ -48,23 +58,25 @@ func TestNoDebugMode(t *testing.T) {
 }
 
 func TestDebugModeRunTests(t *testing.T) {
-	stubLine = "1\n"
+	writeLine("1\n")
 	TestStarted(true)
+	defer TestCasesDone()
 
-	stubLine = "\n"
+	writeLine("\n")
 	if err := Breakpoint(t); err != nil {
 		t.Fatalf("Breakpoint got error %v", err)
 	}
 }
 
 func TestDebugModeJustReserve(t *testing.T) {
-	stubLine = "2\n"
+	writeLine("2\n")
 	TestStarted(true)
+	defer TestCasesDone()
 
-	stubLine = "\n"
-	ReservationComplete()
+	writeLine("\n")
+	ReservationDone()
 
-	stubLine = "\n"
+	writeLine("\n")
 	if err := Breakpoint(t); err != nil {
 		t.Fatalf("Breakpoint got error %v", err)
 	}

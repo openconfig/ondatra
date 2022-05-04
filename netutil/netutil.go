@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package rangegen provides common helper functions for working with ranges of values.
-package rangegen
+// Package netutil provides network-related helper functions for testing.
+package netutil
 
 import (
 	"math/big"

@@ -42,24 +42,24 @@ func TestReserveErrors(t *testing.T) {
 	}, {
 		name:    "Nonexistent device ID",
 		tbProto: `duts{id:"gaga"}`,
-		res:     &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{&binding.Dims{}}}},
+		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
 		wantErr: "gaga",
 	}, {
 		name:    "Nonexistent port ID",
 		tbProto: `duts{id:"dut" ports{id:"gaga"}}`,
-		res: &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{
+		res: &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{
 			&binding.Dims{Name: "d1", Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
 		}}},
 		wantErr: "gaga",
 	}, {
 		name:    "Disallowed device ID",
 		tbProto: `duts{id:"$^&#(#"}`,
-		res:     &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{&binding.Dims{}}}},
+		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
 		wantErr: "invalid testbed ID",
 	}, {
 		name:    "Disallowed port ID",
 		tbProto: `duts{id:"dut" ports{id:"$^&#(#"}}`,
-		res:     &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{&binding.Dims{}}}},
+		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
 		wantErr: "invalid testbed ID",
 	}, {
 		name:    "Duplicate port ID",
@@ -100,14 +100,14 @@ func TestReserveErrors(t *testing.T) {
 	}, {
 		name:    "No device name",
 		tbProto: `duts{id:"dut"}`,
-		res: &binding.Reservation{DUTs: map[string]*binding.DUT{"dut": &binding.DUT{
+		res: &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{
 			&binding.Dims{Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
 		}}},
 		wantErr: "no name",
 	}}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			fakeBind.Reservation = test.res
+			fakeBind.StubReservation(test.res)
 			err := reserve(&flags.Values{TestbedPath: writeTemp(t, test.tbProto)})
 			if err == nil {
 				release()
@@ -142,7 +142,7 @@ func TestReserve(t *testing.T) {
 	}
 
 	t.Run("Get DUT", func(t *testing.T) {
-		id := "dut"
+		id := "dut_arista"
 		d := DUT(t, id)
 		if got, want := d.ID(), id; got != want {
 			t.Errorf("DUT id = %q, want %q", got, want)
@@ -162,7 +162,7 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("Get DUTs", func(t *testing.T) {
-		id := "dut"
+		id := "dut_cisco"
 		duts := DUTs(t)
 		d, ok := duts[id]
 		if !ok {
@@ -184,7 +184,7 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("Get ATE", func(t *testing.T) {
-		id := "ate"
+		id := "ate_ixia"
 		a := ATE(t, id)
 		if got, want := a.ID(), id; got != want {
 			t.Errorf("ATE id = %q, want %q", got, want)
@@ -195,7 +195,7 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("Get ATEs", func(t *testing.T) {
-		id := "ate"
+		id := "ate_ixia"
 		ates := ATEs(t)
 		a, ok := ates[id]
 		if !ok {
@@ -217,7 +217,7 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("Get Port", func(t *testing.T) {
-		did, pid := "dut", "port1"
+		did, pid := "dut_juniper", "port1"
 		p := DUT(t, did).Port(t, pid)
 		if got, want := p.ID(), pid; got != want {
 			t.Errorf("port id = %q, want %q", got, want)
@@ -231,7 +231,7 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("Get Port failure", func(t *testing.T) {
-		d := DUT(t, "dut")
+		d := DUT(t, "dut_arista")
 		pid := "gaga"
 		got := testt.ExpectFatal(t, func(t testing.TB) {
 			d.Port(t, pid)
@@ -244,7 +244,7 @@ func TestReserve(t *testing.T) {
 
 func TestFetch(t *testing.T) {
 	initFakeBinding(t)
-	fakeBind.ResvFetcher = func(context.Context, string) (*binding.Reservation, error) {
+	fakeBind.FetchReservationFn = func(context.Context, string) (*binding.Reservation, error) {
 		return fakeRes, nil
 	}
 	if err := reserve(&flags.Values{TestbedPath: fakeTBPath, ResvID: "1234"}); err != nil {

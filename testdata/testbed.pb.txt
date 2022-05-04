@@ -2,7 +2,7 @@
 # proto-message: ondatra.Testbed
 
 duts {
-  id: "dut"
+  id: "dut_arista"
   vendor: ARISTA
   ports {
     id: "port1"
@@ -21,7 +21,7 @@ duts {
   vendor: JUNIPER
 }
 ates {
-  id: "ate"
+  id: "ate_ixia"
   vendor: IXIA
   ports {
     id: "port1"

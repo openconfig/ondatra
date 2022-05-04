@@ -48,14 +48,14 @@ func (d *DUTDevice) Config() *Config {
 	// TODO: Add field to root node in ygot instead of using custom data.
 	dev.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
 	return &Config{
-		dut:        d.res.(*binding.DUT),
+		dut:        d.res.(binding.DUT),
 		DevicePath: dev,
 	}
 }
 
 // Config is the DUT configuration API.
 type Config struct {
-	dut *binding.DUT
+	dut binding.DUT
 	*device.DevicePath
 }
 
@@ -72,7 +72,7 @@ func (a *Config) New() *DUTConfig {
 
 // DUTConfig is a configuration of a device under test.
 type DUTConfig struct {
-	dut *binding.DUT
+	dut binding.DUT
 	cfg *dut.Config
 }
 
@@ -165,12 +165,12 @@ func (c *DUTConfig) Append(t testing.TB) {
 
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
 func (d *DUTDevice) RawAPIs() *RawAPIs {
-	return &RawAPIs{dut: d.res.(*binding.DUT)}
+	return &RawAPIs{dut: d.res.(binding.DUT)}
 }
 
 // RawAPIs provides access to raw DUT protocols APIs.
 type RawAPIs struct {
-	dut *binding.DUT
+	dut binding.DUT
 }
 
 // GNMI provides access to either a new or default gNMI client.
@@ -190,17 +190,17 @@ func (r *RawAPIs) GRIBI() *GRIBIAPI {
 
 // GNMIAPI provides access for creating a default or new gNMI client on the DUT.
 type GNMIAPI struct {
-	dut *binding.DUT
+	dut binding.DUT
 }
 
 // GNOIAPI provides access for creating a default or new gNOI client on the DUT.
 type GNOIAPI struct {
-	dut *binding.DUT
+	dut binding.DUT
 }
 
 // GRIBIAPI provides access for creating a default or new GRIBI client on the DUT.
 type GRIBIAPI struct {
-	dut *binding.DUT
+	dut binding.DUT
 }
 
 // New returns a new gNMI client on the DUT. This client will not be cached.

@@ -61,7 +61,11 @@ message Device {
   // further restrict matching devices. The set of dimension keys that are
   // supported is specific to the binding implementation. For example, if the
   // binding supports filtering devices by a dimension named "label," the
-  // testbed could specify an extra dimensions map of {"label": "foo"}.
+  // testbed could specify an extra dimensions map of
+  // extra_dimensions {
+  //   key: "label",
+  //   value: "foo",
+  // }
   map<string, string> extra_dimensions = 6;
 }
 

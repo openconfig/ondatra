@@ -26,12 +26,12 @@
 package gnmigen
 
 import (
+	"fmt"
 	"regexp"
 	"sort"
 	"strings"
 	"text/template"
 
-	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/genutil"
 	"github.com/openconfig/ygot/util"
@@ -913,7 +913,7 @@ func generatePerNodeSnippet(pathStructName string, nodeData *ypathgen.NodeData, 
 			specialConversionFn = "binarySliceToFloat32"
 		default:
 			return GoPerNodeCodeSnippet{}, goTypeData{}, util.NewErrs(
-				errors.Errorf("ieeefloat32 is expected to be a binary, got %q", nodeData.LocalGoTypeName))
+				fmt.Errorf("ieeefloat32 is expected to be a binary, got %q", nodeData.LocalGoTypeName))
 		}
 	}
 

@@ -42,6 +42,7 @@ func TestOpArgs(t *testing.T) {
 }
 
 func TestDeleteSession(t *testing.T) {
+	alreadyStoppedBody := `{"error": "Stopping a session is not permitted in state 'Stopped'"}`
 	tests := []struct {
 		desc    string
 		doResps []*http.Response
@@ -53,8 +54,11 @@ func TestDeleteSession(t *testing.T) {
 		desc:    "success - 404 on stop",
 		doResps: []*http.Response{fakeResponse(404, ""), fakeResponse(200, "")},
 	}, {
-		desc:    "success - 500 on stop",
-		doResps: []*http.Response{fakeResponse(500, ""), fakeResponse(200, "")},
+		desc:    "success - session already stopped",
+		doResps: []*http.Response{fakeResponse(200, alreadyStoppedBody), fakeResponse(200, "")},
+	}, {
+		desc:    "error - 500 on stop",
+		doResps: []*http.Response{fakeResponse(500, "")},
 		wantErr: "500",
 	}}
 	for _, test := range tests {

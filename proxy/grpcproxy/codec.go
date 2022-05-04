@@ -20,9 +20,9 @@ import (
 	"google.golang.org/grpc/encoding"
 )
 
-// proto defines the data structure interpretation of each message proxied by this server. Since
+// rawProto defines the data structure interpretation of each message proxied by this server. Since
 // this is a method-agnostic proxy, treat data as raw bytes.
-type proto struct {
+type rawProto struct {
 	data []byte
 }
 
@@ -30,7 +30,7 @@ type proto struct {
 type rawCodec struct{}
 
 func (rawCodec) Marshal(msg interface{}) ([]byte, error) {
-	out, ok := msg.(*proto)
+	out, ok := msg.(*rawProto)
 	if !ok {
 		return nil, fmt.Errorf("failed to marshal, message is %T, want bytes", msg)
 	}
@@ -38,7 +38,7 @@ func (rawCodec) Marshal(msg interface{}) ([]byte, error) {
 }
 
 func (rawCodec) Unmarshal(data []byte, msg interface{}) error {
-	set, ok := msg.(*proto)
+	set, ok := msg.(*rawProto)
 	if !ok {
 		return fmt.Errorf("failed to unmarshal, message is %T, want bytes", msg)
 	}

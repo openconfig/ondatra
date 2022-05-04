@@ -19,6 +19,7 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"net"
+	"sync"
 
 	log "github.com/golang/glog"
 	"google.golang.org/grpc"
@@ -32,7 +33,6 @@ import (
 // to the base ondatra.Binding interface. Binding implementors are only expected
 // to implement a proxy Dialer if they want to use the proxy as an extension to
 // ondatra.Binding interface.
-//
 type Dialer interface {
 	// DialGRPC creates a client connection to the specified service endpoint
 	// on the target. The service will be represented as a gRPC service name.
@@ -50,15 +50,17 @@ type Dialer interface {
 // allowing custom dial functions.
 type Proxy struct {
 	proxies map[string]*proxy
-	dialer      Dialer
+	dialer  Dialer
 	resv    *rpb.Reservation
 }
 
 type proxy struct {
-	srv        *grpc.Server
+	srv        grpcproxy.GRPCServer
 	targetAddr string
 	localAddr  string
-	err        error
+
+	errMu sync.Mutex
+	err   error
 }
 
 // New will create a new set of proxies for the provided Dialer.
@@ -112,9 +114,11 @@ func (p *Proxy) Stop() error {
 	var errs errlist.List
 	for _, s := range p.proxies {
 		s.srv.Stop()
-		if s.err != nil {
+		func() {
+			s.errMu.Lock()
+			defer s.errMu.Unlock()
 			errs.Add(s.err)
-		}
+		}()
 	}
 	return errs.Err()
 }
@@ -128,7 +132,7 @@ func (p *Proxy) add(key string, d *rpb.ResolvedDevice) error {
 	for _, s = range d.GetServices() {
 		break
 	}
-	// target has no services exported nothing to do.
+	// Target has no services exported, nothing to do.
 	if s == nil || s.GetProxiedGrpc().GetAddress() == "" {
 		return nil
 	}
@@ -137,15 +141,21 @@ func (p *Proxy) add(key string, d *rpb.ResolvedDevice) error {
 		return fmt.Errorf("failed to create listen port for %q: %w", key, err)
 	}
 	targetAddr := s.GetProxiedGrpc().GetAddress()
-	srv := grpcproxy.NewWithGRPCDialer(func(md metadata.MD, _ string) (string, metadata.MD, error) {
+	destProvider := func(md metadata.MD, _ string) (string, metadata.MD, error) {
 		return targetAddr, md, nil
-	}, p.dialer, nil)
+	}
+	srv, err := grpcproxy.NewServer(destProvider, grpcproxy.WithDialer(p.dialer))
+	if err != nil {
+		return fmt.Errorf("failed to create new gRPC proxy server: %v", err)
+	}
 	grpcProxy := &proxy{
 		srv:        srv,
 		localAddr:  lis.Addr().String(),
 		targetAddr: s.GetProxiedGrpc().GetAddress(),
 	}
 	go func() {
+		grpcProxy.errMu.Lock()
+		defer grpcProxy.errMu.Unlock()
 		grpcProxy.err = srv.Serve(lis)
 	}()
 	p.proxies[key] = grpcProxy

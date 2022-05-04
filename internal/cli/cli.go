@@ -20,10 +20,9 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/testbed"
 )
 
 // NewCLI creates a CLI client for the specified DUT.
-func NewCLI(ctx context.Context, dut *binding.DUT) (binding.StreamClient, error) {
-	return testbed.Bind().DialCLI(ctx, dut, grpc.WithBlock())
+func NewCLI(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
+	return dut.DialCLI(ctx, grpc.WithBlock())
 }

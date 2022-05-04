@@ -21,7 +21,6 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/testbed"
 
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 )
@@ -32,23 +31,23 @@ var (
 )
 
 // NewGRIBI creates a new gRIBI client for the specified Device.
-func NewGRIBI(ctx context.Context, dev *binding.DUT) (grpb.GRIBIClient, error) {
-	return testbed.Bind().DialGRIBI(ctx, dev, grpc.WithBlock())
+func NewGRIBI(ctx context.Context, dut binding.DUT) (grpb.GRIBIClient, error) {
+	return dut.DialGRIBI(ctx, grpc.WithBlock())
 }
 
 // FetchGRIBI fetches the gRIBI client for the specified Device.
-func FetchGRIBI(ctx context.Context, dev *binding.DUT) (grpb.GRIBIClient, error) {
+func FetchGRIBI(ctx context.Context, dut binding.DUT) (grpb.GRIBIClient, error) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	c, ok := gribis[dev]
+	c, ok := gribis[dut]
 	if !ok {
 		var err error
-		c, err = NewGRIBI(ctx, dev)
+		c, err = NewGRIBI(ctx, dut)
 		if err != nil {
 			return nil, err
 		}
-		gribis[dev] = c
+		gribis[dut] = c
 	}
 	return c, nil
 }

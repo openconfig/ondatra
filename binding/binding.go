@@ -49,12 +49,6 @@ import (
 // The framework enforces that at most testbed is reserved at a time, so
 // implementations can assume that these methods are never called out of order,
 // e.g. Release() is never be called without a prior Reserve().
-//
-// By default, errors returned by binding methods will be reported as
-// "infrastructure failures," meaning the binding implementation itself is
-// responsible for the error, not the user. To generate a user error instead,
-// the binding should create or wrap an error using the "usererr" package.
-// All infrastructure failure errors are passed to ReportInfraFail.
 type Binding interface {
 
 	// Reserve reserves resources matching the criteria in the specified testbed.
@@ -83,61 +77,22 @@ type Binding interface {
 	// FetchReservation looks up and returns the pre-existing reservation with
 	// the specified ID.
 	FetchReservation(ctx context.Context, id string) (*Reservation, error)
-
-	// PushConfig adds config to the specified device. If reset is true, the
-	// device is reset to its base config before the specified config is added.
-	// The following Go template functions are allowed in config:
-	// - {{ port "<portID>" }}: replaced with the physical port name
-	// - {{ secrets "<arg1>" "<arg2>" }}: left untouched, returned as-is
-	PushConfig(ctx context.Context, dut *DUT, config string, reset bool) error
-
-	// DialGNMI creates a client connection to the specified DUT's gNMI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialGNMI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error)
-
-	// DialGNOI creates a client connection to the specified DUT's gNOI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialGNOI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (GNOIClients, error)
-
-	// DialGRIBI creates a client connection to the specified DUT's gRIBI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialGRIBI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (grpb.GRIBIClient, error)
-
-	// DialP4RT creates a client connection to the specified DUT's P4RT endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialP4RT(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
-
-	// DialConsole creates a client connection to the specified DUT's Console endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialConsole(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (StreamClient, error)
-
-	// DialCLI creates a client connection to the specified DUT's CLI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialCLI(ctx context.Context, dut *DUT, opts ...grpc.DialOption) (StreamClient, error)
-
-	// DialIxNetwork creates a client connection to the specified ATE's IxNetwork endpoint.
-	DialIxNetwork(ctx context.Context, ate *ATE) (*IxNetwork, error)
-
-	// HandleInfraFail handles the given error as an infrastructure failure.
-	// If an error is a failure of the Ondatra server or binding implementation
-	// rather than user error, it will be passed to HandleInfraFail, which can
-	// classify the error as such to distinguish it from a genuine test failure.
-	HandleInfraFail(err error) error
-
-	// SetTestMetadata sets the metadata for the currently running test.
-	SetTestMetadata(md *TestMetadata) error
 }
 
 // Reservation holds the reserved DUTs and ATEs as an id map.
 type Reservation struct {
 	ID   string
-	DUTs map[string]*DUT
-	ATEs map[string]*ATE
+	DUTs map[string]DUT
+	ATEs map[string]ATE
 }
 
 // Device is a reserved DUT or ATE.
 type Device interface {
-	Dimensions() *Dims
+	Name() string
+	Vendor() opb.Device_Vendor
+	HardwareModel() string
+	SoftwareVersion() string
+	Ports() map[string]*Port
 }
 
 // Dims contains the dimensions of reserved DUT or ATE.
@@ -153,32 +108,54 @@ func (d *Dims) String() string {
 	return fmt.Sprintf("Dims%+v", *d)
 }
 
-// DUT is a reserved DUT
-type DUT struct {
-	*Dims
-}
+// DUT is a reserved DUT.
+// All implementations of this interface must embed AbstractDUT.
+type DUT interface {
+	Device
 
-// Dimensions returns the dimensions of the device.
-func (d *DUT) Dimensions() *Dims {
-	return d.Dims
-}
+	// PushConfig adds config to the device. If reset is true, the device
+	// is reset to its base config before the specified config is added.
+	// The following Go template functions are allowed in config:
+	// - {{ port "<portID>" }}: replaced with the physical port name
+	// - {{ secrets "<arg1>" "<arg2>" }}: left untouched, returned as-is
+	PushConfig(ctx context.Context, config string, reset bool) error
 
-func (d *DUT) String() string {
-	return fmt.Sprintf("DUT%+v", *d)
+	// DialCLI creates a client connection to the DUT's CLI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialCLI(context.Context, ...grpc.DialOption) (StreamClient, error)
+
+	// DialConsole creates a client connection to the DUT's Console endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialConsole(context.Context, ...grpc.DialOption) (StreamClient, error)
+
+	// DialGNMI creates a client connection to the DUT's gNMI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
+
+	// DialGNOI creates a client connection to the DUT's gNOI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error)
+
+	// DialGRIBI creates a client connection to the DUT's gRIBI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
+
+	// DialP4RT creates a client connection to the DUT's P4RT endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+
+	isDUT()
 }
 
 // ATE is a reserved ATE.
-type ATE struct {
-	*Dims
-}
+// All implementations of this interface must embed AbstractATE.
+type ATE interface {
+	Device
 
-// Dimensions returns the dimensions of the device.
-func (a *ATE) Dimensions() *Dims {
-	return a.Dims
-}
+	// DialIxNetwork creates a client connection to the ATE's IxNetwork endpoint.
+	DialIxNetwork(context.Context) (*IxNetwork, error)
 
-func (a *ATE) String() string {
-	return fmt.Sprintf("ATE%+v", *a)
+	isATE()
 }
 
 // Port is a reserved Port.
@@ -218,11 +195,6 @@ type GNOIClients interface {
 	OTDR() otpb.OTDRClient
 	System() spb.SystemClient
 	WavelengthRouter() wpb.WavelengthRouterClient
-}
-
-// TestMetadata is metadata about a test.
-type TestMetadata struct {
-	TestName string
 }
 
 // StreamClient provides the interface for streaming IO to DUT.

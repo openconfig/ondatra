@@ -22,6 +22,7 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"io"
+	"net"
 	"strings"
 
 	log "github.com/golang/glog"
@@ -43,19 +44,12 @@ var (
 
 // DestProviderFn computes a target address for this reverse proxy for every new proxy request.
 // Implementations can compute an address based on input of incoming request method and headers.
+// Return values should be the next target address and the metadata to pass to the target.
 type DestProviderFn func(metadata.MD, string) (string, metadata.MD, error)
 
 // GRPCDialer is interface to dial a gRPC connection.
 type GRPCDialer interface {
 	DialGRPC(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
-}
-
-type proxy struct {
-	destProvider DestProviderFn
-	grpcDialer   GRPCDialer
-	targetOpts   []grpc.DialOption
-	keyMethod    tag.Key
-	targetConn   *grpc.ClientConn
 }
 
 type defaultGRPCDialer struct{}
@@ -64,18 +58,58 @@ func (d defaultGRPCDialer) DialGRPC(ctx context.Context, target string, opts ...
 	return grpc.DialContext(ctx, target, opts...)
 }
 
-// NewWithGRPCDialer is similar to NewServer, but user can provide a custom gRPC dialer.
-func NewWithGRPCDialer(dp DestProviderFn, dialer GRPCDialer, tOpts []grpc.DialOption, sOpts ...grpc.ServerOption) *grpc.Server {
-	p := &proxy{
-		destProvider: dp,
-		grpcDialer:   dialer,
-		targetOpts:   tOpts,
+// GRPCServer is an interface to server gRPC.
+type GRPCServer interface {
+	Serve(net.Listener) error
+	Stop()
+}
+
+// ServerProviderFn creates a GRPCServer from server options.
+type ServerProviderFn func(...grpc.ServerOption) (GRPCServer, error)
+
+func defaultServerProviderFn(opts ...grpc.ServerOption) (GRPCServer, error) {
+	return grpc.NewServer(opts...), nil
+}
+
+type proxy struct {
+	destProvider   DestProviderFn
+	serverProvider ServerProviderFn
+	grpcDialer     GRPCDialer
+}
+
+// Option configures the proxy server.
+type Option func(p *proxy)
+
+// WithDialer sets the proxy server GRPCDialer implementation.
+func WithDialer(d GRPCDialer) Option {
+	return func(p *proxy) {
+		p.grpcDialer = d
 	}
-	opts := append(
-		sOpts,
+}
+
+// WithServerProvider sets the proxy server GRPCServer provider implementation.
+func WithServerProvider(sp ServerProviderFn) Option {
+	return func(p *proxy) {
+		p.serverProvider = sp
+	}
+}
+
+// NewServer returns a GRPCServer proxy that handles unknown services.
+func NewServer(dp DestProviderFn, opts ...Option) (GRPCServer, error) {
+	p := &proxy{destProvider: dp}
+	for _, opt := range opts {
+		opt(p)
+	}
+	if p.grpcDialer == nil {
+		p.grpcDialer = defaultGRPCDialer{}
+	}
+	if p.serverProvider == nil {
+		p.serverProvider = defaultServerProviderFn
+	}
+	return p.serverProvider(
 		grpc.ForceServerCodec(codec()),
-		grpc.UnknownServiceHandler(p.instrumentedStreamHandler))
-	return grpc.NewServer(opts...)
+		grpc.UnknownServiceHandler(p.instrumentedStreamHandler),
+	)
 }
 
 func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context, *grpc.ClientConn, error) {
@@ -84,17 +118,12 @@ func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context,
 	if !ok {
 		return nil, nil, status.Errorf(codes.InvalidArgument, "proxy_error: missing metadata")
 	}
-	if p.targetConn != nil {
-		destCtx := metadata.NewOutgoingContext(ctx, hd)
-		return destCtx, p.targetConn, nil
-	}
 	dest, destHd, err := p.destProvider(hd, method)
 	if err != nil {
 		return nil, nil, err
 	}
 	destCtx := metadata.NewOutgoingContext(ctx, destHd)
-	opts := append(p.targetOpts, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
-	c, err := p.grpcDialer.DialGRPC(ctx, dest, opts...)
+	c, err := p.grpcDialer.DialGRPC(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
 	if err != nil {
 		return nil, nil, status.Errorf(codes.Unavailable, fmt.Sprintf("proxy_error: cannot connect to target backend: %v", err))
 	}
@@ -139,9 +168,7 @@ func (p *proxy) streamHandler(ctx context.Context, method string, stream grpc.Se
 	if err != nil {
 		return err
 	}
-	if p.targetConn == nil {
-		defer destConn.Close()
-	}
+	defer destConn.Close()
 
 	// Establish a stream to target server.
 	destCtx, clientCancel := context.WithCancel(destCtx)
@@ -176,7 +203,7 @@ func (p *proxy) bidiStream(cs grpc.ClientStream, ss grpc.ServerStream) error {
 }
 
 func forwardServerToClient(dst grpc.ClientStream, src grpc.ServerStream) error {
-	p := &proto{}
+	p := &rawProto{}
 	// Headers already transferred as part of grpc client connection context.
 	// Only body transfer needed.
 	for i := 0; ; i++ {
@@ -196,8 +223,7 @@ func forwardServerToClient(dst grpc.ClientStream, src grpc.ServerStream) error {
 }
 
 func forwardClientToServer(dst grpc.ServerStream, src grpc.ClientStream) error {
-	p := &proto{}
-
+	p := &rawProto{}
 	// Transfer Headers.
 	md, err := src.Header()
 	if err != nil {

@@ -17,14 +17,13 @@ package dut
 
 import (
 	"golang.org/x/net/context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"strings"
 	"text/template"
 
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -74,27 +73,27 @@ func (f ConfigFile) Get() (string, error) {
 }
 
 // PushConfig pushes config to a DUT.
-func PushConfig(ctx context.Context, dut *binding.DUT, cfg *Config, reset bool) error {
+func PushConfig(ctx context.Context, dut binding.DUT, cfg *Config, reset bool) error {
 	if cfg.AllVendor != nil && len(cfg.PerVendor) > 0 {
 		return errors.New("cannot specify both all-vendor and per-vendor config")
 	}
 	var prov ConfigProvider
 	if cfg.AllVendor != nil {
 		prov = cfg.AllVendor
-	} else if c, ok := cfg.PerVendor[dut.Vendor]; ok {
+	} else if c, ok := cfg.PerVendor[dut.Vendor()]; ok {
 		prov = c
 	} else {
-		return errors.Errorf("no config specified for device %v", dut)
+		return fmt.Errorf("no config specified for device %v", dut)
 	}
 	text, err := prov.Get()
 	if err != nil {
-		return errors.Wrapf(err, "error getting config from provider %v", prov)
+		return fmt.Errorf("error getting config from provider %v: %w", prov, err)
 	}
 	config, err := interpolateConfig(dut, text, cfg.Vars)
 	if err != nil {
 		return err
 	}
-	return testbed.Bind().PushConfig(ctx, dut, config, reset)
+	return dut.PushConfig(ctx, config, reset)
 }
 
 // interpolateConfig substitutes templated variables in device config text.
@@ -102,12 +101,12 @@ func PushConfig(ctx context.Context, dut *binding.DUT, cfg *Config, reset bool) 
 // - {{ port "<portID>" }}: replaced with the physical port name
 // - {{ secrets "<arg1>" "<arg2>" }}: left untouched, returned as-is
 // - {{ var "<key>" }}: returns the value for the key in the vars map
-func interpolateConfig(dut *binding.DUT, config string, vars map[string]string) (string, error) {
+func interpolateConfig(dut binding.DUT, config string, vars map[string]string) (string, error) {
 	funcMap := map[string]interface{}{
 		"port": func(portID string) (string, error) {
-			port, err := testbed.Port(dut.Dims, portID)
+			port, err := testbed.Port(dut, portID)
 			if err != nil {
-				return "", usererr.Wrap(err)
+				return "", err
 			}
 			return port.Name, nil
 		},
@@ -122,18 +121,18 @@ func interpolateConfig(dut *binding.DUT, config string, vars map[string]string) 
 		"var": func(key string) (string, error) {
 			v, ok := vars[key]
 			if !ok {
-				return "", usererr.New("No value for key %q in vars map", key)
+				return "", fmt.Errorf("no value for key %q in vars map", key)
 			}
 			return v, nil
 		},
 	}
-	template, err := template.New(dut.Name).Funcs(funcMap).Parse(config)
+	template, err := template.New(dut.Name()).Funcs(funcMap).Parse(config)
 	if err != nil {
-		return "", usererr.Wrapf(err, "Invalid template in config: %q", config)
+		return "", fmt.Errorf("invalid template in config %q: %w", config, err)
 	}
 	var b strings.Builder
 	if err = template.Execute(&b, nil); err != nil {
-		return "", usererr.Wrapf(err, "Invalid template in config: %q", config)
+		return "", fmt.Errorf("invalid template in config %q: %w", config, err)
 	}
 	return b.String(), nil
 }

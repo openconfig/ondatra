@@ -12158,6 +12158,368 @@ func convertNetworkInstance_Afts_NextHop_PushedMplsLabelStackPath(t testing.TB, 
 	return qv
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_NextHop{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_NextHop", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_NextHop{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_NextHop", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a ONCE subscription.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_Afts_NextHop{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_NextHop", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address to the batch object.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_NextHop{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_NextHop{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_NextHop", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/tunnel-src-ip-address to the batch object.
+func (n *NetworkInstance_Afts_NextHop_TunnelSrcIpAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath extracts the value of the leaf TunnelSrcIpAddress from its parent oc.NetworkInstance_Afts_NextHop
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Afts_NextHop_TunnelSrcIpAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_NextHop) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.TunnelSrcIpAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_NextHop{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_NextHop", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_NextHop_VniLabelPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_NextHop{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_NextHop", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_NextHop_VniLabelPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a ONCE subscription.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_VniLabelPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_Afts_NextHop{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_NextHop", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_NextHop_VniLabelPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_VniLabelPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label to the batch object.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_VniLabelPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_NextHop{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_NextHop{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_NextHop", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_NextHop_VniLabelPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_VniLabelPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label to the batch object.
+func (n *NetworkInstance_Afts_NextHop_VniLabelPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_NextHop_VniLabelPath extracts the value of the leaf VniLabel from its parent oc.NetworkInstance_Afts_NextHop
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Afts_NextHop_VniLabelPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_NextHop) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.VniLabel
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Afts_PolicyForwardingEntryPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry {
@@ -18495,6 +18857,2723 @@ func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EnabledPath(t testing
 	val := parent.Enabled
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath) Get(t testing.TB) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny) Get(t testing.TB) []*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeerPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/control-plane-vnis to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath extracts the value of the leaf ControlPlaneVnis from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_ControlPlaneVnisPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.ControlPlaneVnis
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-address to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath extracts the value of the leaf PeerAddress from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.PeerAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath) Lookup(t testing.TB) *oc.QualifiedE_EndpointPeer_PeerState {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath) Get(t testing.TB) oc.E_EndpointPeer_PeerState {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny) Lookup(t testing.TB) []*oc.QualifiedE_EndpointPeer_PeerState {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_EndpointPeer_PeerState
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny) Get(t testing.TB) []oc.E_EndpointPeer_PeerState {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_EndpointPeer_PeerState
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointPeer_PeerState {
+	t.Helper()
+	c := &oc.CollectionE_EndpointPeer_PeerState{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointPeer_PeerState) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointPeer_PeerState) bool) *oc.E_EndpointPeer_PeerStateWatcher {
+	t.Helper()
+	w := &oc.E_EndpointPeer_PeerStateWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointPeer_PeerState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointPeer_PeerState) bool) *oc.E_EndpointPeer_PeerStateWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath) Await(t testing.TB, timeout time.Duration, val oc.E_EndpointPeer_PeerState) *oc.QualifiedE_EndpointPeer_PeerState {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_EndpointPeer_PeerState) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointPeer_PeerState {
+	t.Helper()
+	c := &oc.CollectionE_EndpointPeer_PeerState{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointPeer_PeerState) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointPeer_PeerState) bool) *oc.E_EndpointPeer_PeerStateWatcher {
+	t.Helper()
+	w := &oc.E_EndpointPeer_PeerStateWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointPeer_PeerState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointPeer_PeerState) bool) *oc.E_EndpointPeer_PeerStateWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath extracts the value of the leaf PeerState from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_EndpointPeer_PeerState.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_PeerStatePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) *oc.QualifiedE_EndpointPeer_PeerState {
+	t.Helper()
+	qv := &oc.QualifiedE_EndpointPeer_PeerState{
+		Metadata: md,
+	}
+	val := parent.PeerState
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/router-mac to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath extracts the value of the leaf RouterMac from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_RouterMacPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.RouterMac
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/uptime to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath extracts the value of the leaf Uptime from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer_UptimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointPeer) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.Uptime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath) Get(t testing.TB) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny) Get(t testing.TB) []*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVniPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/bridge-domain to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath extracts the value of the leaf BridgeDomain from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_BridgeDomainPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.BridgeDomain
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
+	t.Helper()
+	c := &oc.CollectionString{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/l3-vrf-name to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath extracts the value of the leaf L3VrfName from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_L3VrfNamePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.L3VrfName
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath) Lookup(t testing.TB) *oc.QualifiedE_EvpnTypes_LearningMode {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath) Get(t testing.TB) oc.E_EvpnTypes_LearningMode {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny) Lookup(t testing.TB) []*oc.QualifiedE_EvpnTypes_LearningMode {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_EvpnTypes_LearningMode
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny) Get(t testing.TB) []oc.E_EvpnTypes_LearningMode {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_EvpnTypes_LearningMode
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EvpnTypes_LearningMode {
+	t.Helper()
+	c := &oc.CollectionE_EvpnTypes_LearningMode{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EvpnTypes_LearningMode) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EvpnTypes_LearningMode) bool) *oc.E_EvpnTypes_LearningModeWatcher {
+	t.Helper()
+	w := &oc.E_EvpnTypes_LearningModeWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EvpnTypes_LearningMode)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EvpnTypes_LearningMode) bool) *oc.E_EvpnTypes_LearningModeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath) Await(t testing.TB, timeout time.Duration, val oc.E_EvpnTypes_LearningMode) *oc.QualifiedE_EvpnTypes_LearningMode {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_EvpnTypes_LearningMode) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EvpnTypes_LearningMode {
+	t.Helper()
+	c := &oc.CollectionE_EvpnTypes_LearningMode{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EvpnTypes_LearningMode) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EvpnTypes_LearningMode) bool) *oc.E_EvpnTypes_LearningModeWatcher {
+	t.Helper()
+	w := &oc.E_EvpnTypes_LearningModeWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EvpnTypes_LearningMode)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EvpnTypes_LearningMode) bool) *oc.E_EvpnTypes_LearningModeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/learning-mode to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath extracts the value of the leaf LearningMode from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_EvpnTypes_LearningMode.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_LearningModePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedE_EvpnTypes_LearningMode {
+	t.Helper()
+	qv := &oc.QualifiedE_EvpnTypes_LearningMode{
+		Metadata: md,
+	}
+	val := parent.LearningMode
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath) Get(t testing.TB) oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny) Get(t testing.TB) []oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath) Await(t testing.TB, timeout time.Duration, val oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union) bool) *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_UnionWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/multidestination-traffic to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath extracts the value of the leaf MultidestinationTraffic from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTrafficPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union {
+	t.Helper()
+	qv := &oc.QualifiedNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union{
+		Metadata: md,
+	}
+	val := parent.MultidestinationTraffic
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath) Lookup(t testing.TB) *oc.QualifiedE_EndpointVni_SviState {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath) Get(t testing.TB) oc.E_EndpointVni_SviState {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny) Lookup(t testing.TB) []*oc.QualifiedE_EndpointVni_SviState {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_EndpointVni_SviState
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny) Get(t testing.TB) []oc.E_EndpointVni_SviState {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_EndpointVni_SviState
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointVni_SviState {
+	t.Helper()
+	c := &oc.CollectionE_EndpointVni_SviState{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointVni_SviState) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_SviState) bool) *oc.E_EndpointVni_SviStateWatcher {
+	t.Helper()
+	w := &oc.E_EndpointVni_SviStateWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointVni_SviState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_SviState) bool) *oc.E_EndpointVni_SviStateWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath) Await(t testing.TB, timeout time.Duration, val oc.E_EndpointVni_SviState) *oc.QualifiedE_EndpointVni_SviState {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_EndpointVni_SviState) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointVni_SviState {
+	t.Helper()
+	c := &oc.CollectionE_EndpointVni_SviState{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointVni_SviState) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_SviState) bool) *oc.E_EndpointVni_SviStateWatcher {
+	t.Helper()
+	w := &oc.E_EndpointVni_SviStateWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointVni_SviState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_SviState) bool) *oc.E_EndpointVni_SviStateWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/svi-state to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath extracts the value of the leaf SviState from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_EndpointVni_SviState.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_SviStatePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedE_EndpointVni_SviState {
+	t.Helper()
+	qv := &oc.QualifiedE_EndpointVni_SviState{
+		Metadata: md,
+	}
+	val := parent.SviState
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath) Await(t testing.TB, timeout time.Duration, val uint32) *oc.QualifiedUint32 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint32) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint32 {
+	t.Helper()
+	c := &oc.CollectionUint32{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint32) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	w := &oc.Uint32Watcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint32)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint32) bool) *oc.Uint32Watcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath extracts the value of the leaf Vni from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Vni
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath) Lookup(t testing.TB) *oc.QualifiedE_EndpointVni_VniState {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath) Get(t testing.TB) oc.E_EndpointVni_VniState {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny) Lookup(t testing.TB) []*oc.QualifiedE_EndpointVni_VniState {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_EndpointVni_VniState
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny) Get(t testing.TB) []oc.E_EndpointVni_VniState {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_EndpointVni_VniState
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointVni_VniState {
+	t.Helper()
+	c := &oc.CollectionE_EndpointVni_VniState{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointVni_VniState) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniState) bool) *oc.E_EndpointVni_VniStateWatcher {
+	t.Helper()
+	w := &oc.E_EndpointVni_VniStateWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointVni_VniState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniState) bool) *oc.E_EndpointVni_VniStateWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath) Await(t testing.TB, timeout time.Duration, val oc.E_EndpointVni_VniState) *oc.QualifiedE_EndpointVni_VniState {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_EndpointVni_VniState) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointVni_VniState {
+	t.Helper()
+	c := &oc.CollectionE_EndpointVni_VniState{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointVni_VniState) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniState) bool) *oc.E_EndpointVni_VniStateWatcher {
+	t.Helper()
+	w := &oc.E_EndpointVni_VniStateWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointVni_VniState)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniState) bool) *oc.E_EndpointVni_VniStateWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-state to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath extracts the value of the leaf VniState from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_EndpointVni_VniState.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniStatePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedE_EndpointVni_VniState {
+	t.Helper()
+	qv := &oc.QualifiedE_EndpointVni_VniState{
+		Metadata: md,
+	}
+	val := parent.VniState
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath) Lookup(t testing.TB) *oc.QualifiedE_EndpointVni_VniType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath) Get(t testing.TB) oc.E_EndpointVni_VniType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_EndpointVni_VniType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_EndpointVni_VniType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a ONCE subscription.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny) Get(t testing.TB) []oc.E_EndpointVni_VniType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_EndpointVni_VniType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointVni_VniType {
+	t.Helper()
+	c := &oc.CollectionE_EndpointVni_VniType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointVni_VniType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniType) bool) *oc.E_EndpointVni_VniTypeWatcher {
+	t.Helper()
+	w := &oc.E_EndpointVni_VniTypeWatcher{}
+	gs := &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointVni_VniType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniType) bool) *oc.E_EndpointVni_VniTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_EndpointVni_VniType) *oc.QualifiedE_EndpointVni_VniType {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_EndpointVni_VniType) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_EndpointVni_VniType {
+	t.Helper()
+	c := &oc.CollectionE_EndpointVni_VniType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_EndpointVni_VniType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniType) bool) *oc.E_EndpointVni_VniTypeWatcher {
+	t.Helper()
+	w := &oc.E_EndpointVni_VniTypeWatcher{}
+	structs := map[string]*oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_EndpointVni_VniType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_EndpointVni_VniType) bool) *oc.E_EndpointVni_VniTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type to the batch object.
+func (n *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath extracts the value of the leaf VniType from its parent oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_EndpointVni_VniType.
+func convertNetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_VniTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) *oc.QualifiedE_EndpointVni_VniType {
+	t.Helper()
+	qv := &oc.QualifiedE_EndpointVni_VniType{
+		Metadata: md,
+	}
+	val := parent.VniType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
 	}
 	return qv
 }
@@ -55158,6 +58237,187 @@ func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes
 		Metadata: md,
 	}
 	val := parent.ExcludeGroup
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Get(t testing.TB) []string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedStringSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a ONCE subscription.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny) Get(t testing.TB) [][]string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
+	t.Helper()
+	c := &oc.CollectionStringSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Await(t testing.TB, timeout time.Duration, val []string) *oc.QualifiedStringSlice {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedStringSlice) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group to the batch object.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionStringSlice {
+	t.Helper()
+	c := &oc.CollectionStringSlice{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedStringSlice) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	w := &oc.StringSliceWatcher{}
+	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedStringSlice)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedStringSlice) bool) *oc.StringSliceWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups/state/include-all-group to the batch object.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath extracts the value of the leaf IncludeAllGroup from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups
+// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
+func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups_IncludeAllGroupPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroups) *oc.QualifiedStringSlice {
+	t.Helper()
+	qv := &oc.QualifiedStringSlice{
+		Metadata: md,
+	}
+	val := parent.IncludeAllGroup
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
 	}

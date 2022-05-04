@@ -533,6 +533,7 @@ message Flow {
   FrameSize frame_size = 51;
   // If transmission is not set, it's assumed to be a Continuous transmission.
   Transmission transmission = 52;
+  bool convergence_tracking = 53;
 }
 
 message FrameRate {

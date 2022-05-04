@@ -11,17 +11,19 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package fakestreamclient
+
+package fakebind
 
 import (
+	"math/rand"
 	"sync"
 	"testing"
 )
 
 func TestFake(t *testing.T) {
-	f := New()
+	f := NewStreamClient()
 
-	inW := RandSeq(1000)
+	inW := randSeq(1000)
 	inR := make([]byte, 4096)
 	wg := &sync.WaitGroup{}
 	wg.Add(1)
@@ -53,4 +55,14 @@ func TestFake(t *testing.T) {
 	if gotErr != inW {
 		t.Errorf("Stderr loop failed: got %v, want %v", gotErr, inW)
 	}
+}
+
+var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func randSeq(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
 }

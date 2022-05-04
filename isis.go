@@ -562,11 +562,12 @@ func (routes *ISISRoutes) WithNumRoutes(numRoutes uint64) *ISISRoutes {
 
 // IPReachability creates an IP reachability configuration for the network or
 // returns the existing config. The default config params are:
+//   Active: True
 //   Route Origin: Internal
 //   Metric: 10
 func (routes *ISISRoutes) IPReachability() *IPReachabilityConfig {
 	if routes.pb.Reachability == nil {
-		routes.pb.Reachability = &opb.IPReachability{Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
+		routes.pb.Reachability = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
 	return &IPReachabilityConfig{pb: routes.pb.Reachability}
 }
