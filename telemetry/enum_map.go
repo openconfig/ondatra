@@ -1441,6 +1441,15 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "ABSOLUTE"},
 		2: {Name: "INDEX"},
 	},
+	"E_Producer_MobilityState": {
+		1: {Name: "FROZEN"},
+		2: {Name: "DUPLICATE"},
+	},
+	"E_Producer_Producer": {
+		1: {Name: "LOCAL"},
+		2: {Name: "STATIC"},
+		3: {Name: "BGP"},
+	},
 	"E_ProxyArp_Mode": {
 		1: {Name: "DISABLE"},
 		2: {Name: "REMOTE_ONLY"},
@@ -2048,6 +2057,18 @@ var ΛEnumTypes = map[string][]reflect.Type{
 	},
 	"/network-instances/network-instance/evpn/evpn-instances/evpn-instance/state/service-type": {
 		reflect.TypeOf((E_EvpnTypes_EVPN_TYPE)(0)),
+	},
+	"/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/mobility-state": {
+		reflect.TypeOf((E_Producer_MobilityState)(0)),
+	},
+	"/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/producer": {
+		reflect.TypeOf((E_Producer_Producer)(0)),
+	},
+	"/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/mobility-state": {
+		reflect.TypeOf((E_Producer_MobilityState)(0)),
+	},
+	"/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/producer": {
+		reflect.TypeOf((E_Producer_Producer)(0)),
 	},
 	"/network-instances/network-instance/fdb/mac-table/entries/entry/state/entry-type": {
 		reflect.TypeOf((E_Entry_EntryType)(0)),

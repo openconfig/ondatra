@@ -12,71 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedLldp_Interface_Neighbor_Capability is a *Lldp_Interface_Neighbor_Capability with a corresponding timestamp.
-type QualifiedLldp_Interface_Neighbor_Capability struct {
-	*genutil.Metadata
-	val     *Lldp_Interface_Neighbor_Capability // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface_Neighbor_Capability) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface_Neighbor_Capability sample, erroring out if not present.
-func (q *QualifiedLldp_Interface_Neighbor_Capability) Val(t testing.TB) *Lldp_Interface_Neighbor_Capability {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface_Neighbor_Capability sample.
-func (q *QualifiedLldp_Interface_Neighbor_Capability) SetVal(v *Lldp_Interface_Neighbor_Capability) *QualifiedLldp_Interface_Neighbor_Capability {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface_Neighbor_Capability) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface_Neighbor_Capability is a telemetry Collection whose Await method returns a slice of *Lldp_Interface_Neighbor_Capability samples.
-type CollectionLldp_Interface_Neighbor_Capability struct {
-	W    *Lldp_Interface_Neighbor_CapabilityWatcher
-	Data []*QualifiedLldp_Interface_Neighbor_Capability
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface_Neighbor_Capability) Await(t testing.TB) []*QualifiedLldp_Interface_Neighbor_Capability {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_Interface_Neighbor_CapabilityWatcher observes a stream of *Lldp_Interface_Neighbor_Capability samples.
-type Lldp_Interface_Neighbor_CapabilityWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface_Neighbor_Capability
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_Interface_Neighbor_CapabilityWatcher) Await(t testing.TB) (*QualifiedLldp_Interface_Neighbor_Capability, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedLldp_Interface_Neighbor_Tlv is a *Lldp_Interface_Neighbor_Tlv with a corresponding timestamp.
 type QualifiedLldp_Interface_Neighbor_Tlv struct {
 	*genutil.Metadata
@@ -2803,6 +2738,591 @@ type NetworkInstance_Fdb_ArpProxyWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Fdb_ArpProxyWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_ArpProxy, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib is a *NetworkInstance_Fdb_L2Rib with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib) SetVal(v *NetworkInstance_Fdb_L2Rib) *QualifiedNetworkInstance_Fdb_L2Rib {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib samples.
+type CollectionNetworkInstance_Fdb_L2Rib struct {
+	W    *NetworkInstance_Fdb_L2RibWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2RibWatcher observes a stream of *NetworkInstance_Fdb_L2Rib samples.
+type NetworkInstance_Fdb_L2RibWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2RibWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable is a *NetworkInstance_Fdb_L2Rib_MacIpTable with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacIpTable // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacIpTable {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable) SetVal(v *NetworkInstance_Fdb_L2Rib_MacIpTable) *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacIpTable is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacIpTable samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacIpTable struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacIpTableWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacIpTable) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTableWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacIpTable samples.
+type NetworkInstance_Fdb_L2Rib_MacIpTableWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacIpTableWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry is a *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry) SetVal(v *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry) *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_Entry is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_Entry struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_Entry) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_EntryWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry samples.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_EntryWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer is a *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer) SetVal(v *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer) *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer samples.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop is a *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop) SetVal(v *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop) *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop samples.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacIpTable_NextHop, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacTable is a *NetworkInstance_Fdb_L2Rib_MacTable with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacTable struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacTable // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacTable sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacTable {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacTable sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable) SetVal(v *NetworkInstance_Fdb_L2Rib_MacTable) *QualifiedNetworkInstance_Fdb_L2Rib_MacTable {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacTable is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacTable samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacTable struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacTableWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacTable) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTableWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacTable samples.
+type NetworkInstance_Fdb_L2Rib_MacTableWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacTable
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacTableWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacTable, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry is a *NetworkInstance_Fdb_L2Rib_MacTable_Entry with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacTable_Entry // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacTable_Entry sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacTable_Entry {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacTable_Entry sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry) SetVal(v *NetworkInstance_Fdb_L2Rib_MacTable_Entry) *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacTable_Entry is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacTable_Entry samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacTable_Entry struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacTable_EntryWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacTable_Entry) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_EntryWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacTable_Entry samples.
+type NetworkInstance_Fdb_L2Rib_MacTable_EntryWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacTable_EntryWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer is a *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer) SetVal(v *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer) *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer samples.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop is a *NetworkInstance_Fdb_L2Rib_MacTable_NextHop with a corresponding timestamp.
+type QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Fdb_L2Rib_MacTable_NextHop // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Fdb_L2Rib_MacTable_NextHop sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop) Val(t testing.TB) *NetworkInstance_Fdb_L2Rib_MacTable_NextHop {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Fdb_L2Rib_MacTable_NextHop sample.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop) SetVal(v *NetworkInstance_Fdb_L2Rib_MacTable_NextHop) *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Fdb_L2Rib_MacTable_NextHop is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Fdb_L2Rib_MacTable_NextHop samples.
+type CollectionNetworkInstance_Fdb_L2Rib_MacTable_NextHop struct {
+	W    *NetworkInstance_Fdb_L2Rib_MacTable_NextHopWatcher
+	Data []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Fdb_L2Rib_MacTable_NextHop) Await(t testing.TB) []*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHopWatcher observes a stream of *NetworkInstance_Fdb_L2Rib_MacTable_NextHop samples.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHopWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Fdb_L2Rib_MacTable_NextHopWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Fdb_L2Rib_MacTable_NextHop, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -8588,461 +9108,6 @@ type NetworkInstance_Mpls_TeGlobalAttributesWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Mpls_TeGlobalAttributesWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup is a *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroup samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_AdminGroupWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_AdminGroup, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg is a *NetworkInstance_Mpls_TeGlobalAttributes_Srlg with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_Srlg // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_Srlg {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_Srlg) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_SrlgWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList is a *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersListWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_Srlg_MembersList, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers is a *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers with a corresponding timestamp.
-type QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) Val(t testing.TB) *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers sample.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) SetVal(v *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers samples.
-type CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers struct {
-	W    *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher
-	Data []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher observes a stream of *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers samples.
-type NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Mpls_TeGlobalAttributes_TeLspTimersWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_TeGlobalAttributes_TeLspTimers, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_PolicyForwarding is a *NetworkInstance_PolicyForwarding with a corresponding timestamp.
-type QualifiedNetworkInstance_PolicyForwarding struct {
-	*genutil.Metadata
-	val     *NetworkInstance_PolicyForwarding // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_PolicyForwarding) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_PolicyForwarding sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_PolicyForwarding) Val(t testing.TB) *NetworkInstance_PolicyForwarding {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_PolicyForwarding sample.
-func (q *QualifiedNetworkInstance_PolicyForwarding) SetVal(v *NetworkInstance_PolicyForwarding) *QualifiedNetworkInstance_PolicyForwarding {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_PolicyForwarding) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_PolicyForwarding is a telemetry Collection whose Await method returns a slice of *NetworkInstance_PolicyForwarding samples.
-type CollectionNetworkInstance_PolicyForwarding struct {
-	W    *NetworkInstance_PolicyForwardingWatcher
-	Data []*QualifiedNetworkInstance_PolicyForwarding
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_PolicyForwarding) Await(t testing.TB) []*QualifiedNetworkInstance_PolicyForwarding {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_PolicyForwardingWatcher observes a stream of *NetworkInstance_PolicyForwarding samples.
-type NetworkInstance_PolicyForwardingWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_PolicyForwarding
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_PolicyForwardingWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_PolicyForwarding, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_PolicyForwarding_Interface is a *NetworkInstance_PolicyForwarding_Interface with a corresponding timestamp.
-type QualifiedNetworkInstance_PolicyForwarding_Interface struct {
-	*genutil.Metadata
-	val     *NetworkInstance_PolicyForwarding_Interface // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_PolicyForwarding_Interface sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface) Val(t testing.TB) *NetworkInstance_PolicyForwarding_Interface {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_PolicyForwarding_Interface sample.
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface) SetVal(v *NetworkInstance_PolicyForwarding_Interface) *QualifiedNetworkInstance_PolicyForwarding_Interface {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_PolicyForwarding_Interface is a telemetry Collection whose Await method returns a slice of *NetworkInstance_PolicyForwarding_Interface samples.
-type CollectionNetworkInstance_PolicyForwarding_Interface struct {
-	W    *NetworkInstance_PolicyForwarding_InterfaceWatcher
-	Data []*QualifiedNetworkInstance_PolicyForwarding_Interface
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_PolicyForwarding_Interface) Await(t testing.TB) []*QualifiedNetworkInstance_PolicyForwarding_Interface {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_PolicyForwarding_InterfaceWatcher observes a stream of *NetworkInstance_PolicyForwarding_Interface samples.
-type NetworkInstance_PolicyForwarding_InterfaceWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_PolicyForwarding_Interface
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_PolicyForwarding_InterfaceWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_PolicyForwarding_Interface, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef is a *NetworkInstance_PolicyForwarding_Interface_InterfaceRef with a corresponding timestamp.
-type QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef struct {
-	*genutil.Metadata
-	val     *NetworkInstance_PolicyForwarding_Interface_InterfaceRef // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_PolicyForwarding_Interface_InterfaceRef sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) Val(t testing.TB) *NetworkInstance_PolicyForwarding_Interface_InterfaceRef {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_PolicyForwarding_Interface_InterfaceRef sample.
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) SetVal(v *NetworkInstance_PolicyForwarding_Interface_InterfaceRef) *QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef is a telemetry Collection whose Await method returns a slice of *NetworkInstance_PolicyForwarding_Interface_InterfaceRef samples.
-type CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef struct {
-	W    *NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher
-	Data []*QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_PolicyForwarding_Interface_InterfaceRef) Await(t testing.TB) []*QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher observes a stream of *NetworkInstance_PolicyForwarding_Interface_InterfaceRef samples.
-type NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_PolicyForwarding_Interface_InterfaceRefWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_PolicyForwarding_Interface_InterfaceRef, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

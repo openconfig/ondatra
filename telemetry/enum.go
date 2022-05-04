@@ -6832,6 +6832,66 @@ const (
 	PrefixSid_SidValueType_INDEX E_PrefixSid_SidValueType = 2
 )
 
+// E_Producer_MobilityState is a derived int64 type which is used to represent
+// the enumerated node Producer_MobilityState. An additional value named
+// Producer_MobilityState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Producer_MobilityState int64
+
+// IsYANGGoEnum ensures that Producer_MobilityState implements the yang.GoEnum
+// interface. This ensures that Producer_MobilityState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Producer_MobilityState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Producer_MobilityState.
+func (E_Producer_MobilityState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Producer_MobilityState.
+func (e E_Producer_MobilityState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Producer_MobilityState")
+}
+
+const (
+	// Producer_MobilityState_UNSET corresponds to the value UNSET of Producer_MobilityState
+	Producer_MobilityState_UNSET E_Producer_MobilityState = 0
+	// Producer_MobilityState_FROZEN corresponds to the value FROZEN of Producer_MobilityState
+	Producer_MobilityState_FROZEN E_Producer_MobilityState = 1
+	// Producer_MobilityState_DUPLICATE corresponds to the value DUPLICATE of Producer_MobilityState
+	Producer_MobilityState_DUPLICATE E_Producer_MobilityState = 2
+)
+
+// E_Producer_Producer is a derived int64 type which is used to represent
+// the enumerated node Producer_Producer. An additional value named
+// Producer_Producer_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Producer_Producer int64
+
+// IsYANGGoEnum ensures that Producer_Producer implements the yang.GoEnum
+// interface. This ensures that Producer_Producer can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Producer_Producer) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Producer_Producer.
+func (E_Producer_Producer) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Producer_Producer.
+func (e E_Producer_Producer) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Producer_Producer")
+}
+
+const (
+	// Producer_Producer_UNSET corresponds to the value UNSET of Producer_Producer
+	Producer_Producer_UNSET E_Producer_Producer = 0
+	// Producer_Producer_LOCAL corresponds to the value LOCAL of Producer_Producer
+	Producer_Producer_LOCAL E_Producer_Producer = 1
+	// Producer_Producer_STATIC corresponds to the value STATIC of Producer_Producer
+	Producer_Producer_STATIC E_Producer_Producer = 2
+	// Producer_Producer_BGP corresponds to the value BGP of Producer_Producer
+	Producer_Producer_BGP E_Producer_Producer = 3
+)
+
 // E_ProxyArp_Mode is a derived int64 type which is used to represent
 // the enumerated node ProxyArp_Mode. An additional value named
 // ProxyArp_Mode_UNSET is added to the enumeration which is used as

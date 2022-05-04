@@ -63,6 +63,1440 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4UnicastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6MulticastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-multicast/prefix-limit-received/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Multicast_PrefixLimitReceived_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimit (container): Configure the maximum number of prefixes that will be
+// accepted from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
+// received from a peer
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "prefix-limit-received"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6UnicastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefix-limit-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
+type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny struct {
+	*ygot.NodePath
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
+// from the neighbor
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/max-prefixes"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/max-prefixes"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "max-prefixes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
+// prefix-limit has been exceeded, the value of true must be retained
+// until the restart-time has expired.  Prior to session re-establishment,
+// the value must be reset to false
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prefix-limit-exceeded"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PrefixLimitExceededPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-limit-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
+// prefix limit is exceeded, but rather only log a
+// warning. The default of this leaf is false, such
+// that when it is not specified, the session is torn
+// down.
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/prevent-teardown"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prevent-teardown"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_PreventTeardownPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prevent-teardown"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
+// from a neighbor before generation of warning messages
+// or log entries. Expressed as a percentage of
+// max-prefixes
+// ----------------------------------------
+// Defining module: "openconfig-bgp-common-multiprotocol"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/warning-threshold-pct"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/warning-threshold-pct"
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny {
+	return &NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_WarningThresholdPctPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "warning-threshold-pct"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received YANG schema element.
 type NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimitReceivedPath struct {
 	*ygot.NodePath
@@ -18617,1440 +20051,6 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitRec
 // Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-evpn/prefix-limit-received/state/warning-threshold-pct"
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny {
 	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnEvpn_PrefixLimitReceived_WarningThresholdPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny struct {
-	*ygot.NodePath
-}
-
-// PrefixLimit (container): Configure the maximum number of prefixes that will be
-// accepted from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimit (container): Configure the maximum number of prefixes that will be
-// accepted from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
-// received from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit-received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit-received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
-// received from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit-received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVplsPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit-received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny struct {
-	*ygot.NodePath
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_MaxPrefixesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PrefixLimitExceededPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_PreventTeardownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimit_WarningThresholdPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny struct {
-	*ygot.NodePath
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_MaxPrefixesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PrefixLimitExceededPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_PreventTeardownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l2vpn-vpls/prefix-limit-received/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L2VpnVpls_PrefixLimitReceived_WarningThresholdPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny struct {
-	*ygot.NodePath
-}
-
-// PrefixLimit (container): Configure the maximum number of prefixes that will be
-// accepted from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimit (container): Configure the maximum number of prefixes that will be
-// accepted from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
-// received from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit-received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit-received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
-// received from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit-received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4MulticastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit-received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny struct {
-	*ygot.NodePath
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_MaxPrefixesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PrefixLimitExceededPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_PreventTeardownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimit_WarningThresholdPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
-	*ygot.NodePath
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_MaxPrefixesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_PreventTeardownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-multicast/prefix-limit-received/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Multicast_PrefixLimitReceived_WarningThresholdPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny struct {
-	*ygot.NodePath
-}
-
-// PrefixLimit (container): Configure the maximum number of prefixes that will be
-// accepted from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimit (container): Configure the maximum number of prefixes that will be
-// accepted from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny) PrefixLimit() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
-// received from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit-received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPath) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit-received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitReceived (container): Configure the maximum number of prefixes that will be
-// received from a peer
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-limit-received"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4UnicastPathAny) PrefixLimitReceived() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-limit-received"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny struct {
-	*ygot.NodePath
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_MaxPrefixesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PrefixLimitExceededPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_PreventTeardownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimit_WarningThresholdPctPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct YANG schema element.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny struct {
-	*ygot.NodePath
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MaxPrefixes (leaf): Maximum number of prefixes that will be accepted
-// from the neighbor
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/max-prefixes"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/max-prefixes"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) MaxPrefixes() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_MaxPrefixesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "max-prefixes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLimitExceeded (leaf): If set to true, the prefix-limit has been exceeded.  When the
-// prefix-limit has been exceeded, the value of true must be retained
-// until the restart-time has expired.  Prior to session re-establishment,
-// the value must be reset to false
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix-limit-exceeded"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) PrefixLimitExceeded() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PrefixLimitExceededPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-limit-exceeded"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PreventTeardown (leaf): Do not tear down the BGP session when the maximum
-// prefix limit is exceeded, but rather only log a
-// warning. The default of this leaf is false, such
-// that when it is not specified, the session is torn
-// down.
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prevent-teardown"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prevent-teardown"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) PreventTeardown() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_PreventTeardownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prevent-teardown"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPath) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "warning-threshold-pct"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// WarningThresholdPct (leaf): Threshold on number of prefixes that can be received
-// from a neighbor before generation of warning messages
-// or log entries. Expressed as a percentage of
-// max-prefixes
-// ----------------------------------------
-// Defining module: "openconfig-bgp-common-multiprotocol"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/warning-threshold-pct"
-// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/warning-threshold-pct"
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceivedPathAny) WarningThresholdPct() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny {
-	return &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_L3VpnIpv4Unicast_PrefixLimitReceived_WarningThresholdPctPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "warning-threshold-pct"},
 			map[string]interface{}{},

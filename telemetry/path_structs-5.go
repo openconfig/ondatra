@@ -63,6 +63,4379 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPathAny struct {
+	*ygot.NodePath
+}
+
+// RouteDistinguisherAny (list): List of route distinguishers
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "routes/route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher"
+// RouteDistinguisher (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPath) RouteDistinguisherAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"routes", "route-distinguisher"},
+			map[string]interface{}{"route-distinguisher": "*"},
+			n,
+		),
+	}
+}
+
+// RouteDistinguisherAny (list): List of route distinguishers
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "routes/route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher"
+// RouteDistinguisher (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPathAny) RouteDistinguisherAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"routes", "route-distinguisher"},
+			map[string]interface{}{"route-distinguisher": "*"},
+			n,
+		),
+	}
+}
+
+// RouteDistinguisher (list): List of route distinguishers
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "routes/route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher"
+// RouteDistinguisher: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPath) RouteDistinguisher(RouteDistinguisher string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"routes", "route-distinguisher"},
+			map[string]interface{}{"route-distinguisher": RouteDistinguisher},
+			n,
+		),
+	}
+}
+
+// RouteDistinguisher (list): List of route distinguishers
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "routes/route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher"
+// RouteDistinguisher: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibPathAny) RouteDistinguisher(RouteDistinguisher string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"routes", "route-distinguisher"},
+			map[string]interface{}{"route-distinguisher": RouteDistinguisher},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/state/route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/state/route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPathAny struct {
+	*ygot.NodePath
+}
+
+// RouteDistinguisher (leaf): Route Distinguisher for all supported EVPN route types
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/state/route-distinguisher"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) RouteDistinguisher() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "route-distinguisher"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RouteDistinguisher (leaf): Route Distinguisher for all supported EVPN route types
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/state/route-distinguisher"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) RouteDistinguisher() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_RouteDistinguisherPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "route-distinguisher"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAny (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": "*", "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAny (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": "*", "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyIpPrefixLengthAnyIpPrefix (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAnyIpPrefixLengthAnyIpPrefix(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": "*", "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyIpPrefixLengthAnyIpPrefix (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAnyIpPrefixLengthAnyIpPrefix(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": "*", "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyEthernetTagAnyIpPrefix (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength: string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAnyEthernetTagAnyIpPrefix(IpPrefixLength string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": IpPrefixLength, "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyEthernetTagAnyIpPrefix (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength: string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAnyEthernetTagAnyIpPrefix(IpPrefixLength string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": IpPrefixLength, "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyIpPrefix (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength: string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAnyIpPrefix(EthernetTag uint32, IpPrefixLength string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": IpPrefixLength, "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyIpPrefix (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength: string
+// IpPrefix (wildcarded): string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAnyIpPrefix(EthernetTag uint32, IpPrefixLength string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": IpPrefixLength, "ip-prefix": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyEthernetTagAnyIpPrefixLength (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAnyEthernetTagAnyIpPrefixLength(IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": "*", "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyEthernetTagAnyIpPrefixLength (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAnyEthernetTagAnyIpPrefixLength(IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": "*", "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyIpPrefixLength (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAnyIpPrefixLength(EthernetTag uint32, IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": "*", "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyIpPrefixLength (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength (wildcarded): string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAnyIpPrefixLength(EthernetTag uint32, IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": "*", "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyEthernetTag (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength: string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRouteAnyEthernetTag(IpPrefixLength string, IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": IpPrefixLength, "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRouteAnyEthernetTag (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag (wildcarded): uint32
+// IpPrefixLength: string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRouteAnyEthernetTag(IpPrefixLength string, IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": "*", "ip-prefix-length": IpPrefixLength, "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRoute (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength: string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFiveRoute(EthernetTag uint32, IpPrefixLength string, IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": IpPrefixLength, "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFiveRoute (list): List of IP Prefix Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only The RD, Ethernet Tag ID,
+// IP prefix length, and IP prefix are part of the route key used by BGP to
+// compare routes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-five-ip-prefix/type-five-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route"
+// EthernetTag: uint32
+// IpPrefixLength: string
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFiveRoute(EthernetTag uint32, IpPrefixLength string, IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-five-ip-prefix", "type-five-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "ip-prefix-length": IpPrefixLength, "ip-prefix": IpPrefix},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAny (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAny (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyOriginatingRouterIpAnyOriginatorIpLength (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAnyOriginatingRouterIpAnyOriginatorIpLength(Esi string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyOriginatingRouterIpAnyOriginatorIpLength (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAnyOriginatingRouterIpAnyOriginatorIpLength(Esi string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyEsiAnyOriginatorIpLength (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAnyEsiAnyOriginatorIpLength(OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyEsiAnyOriginatorIpLength (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAnyEsiAnyOriginatorIpLength(OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyOriginatorIpLength (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAnyOriginatorIpLength(Esi string, OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyOriginatorIpLength (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAnyOriginatorIpLength(Esi string, OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyEsiAnyOriginatingRouterIp (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAnyEsiAnyOriginatingRouterIp(OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyEsiAnyOriginatingRouterIp (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAnyEsiAnyOriginatingRouterIp(OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyOriginatingRouterIp (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAnyOriginatingRouterIp(Esi string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyOriginatingRouterIp (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAnyOriginatingRouterIp(Esi string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyEsi (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRouteAnyEsi(OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRouteAnyEsi (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi (wildcarded): string
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRouteAnyEsi(OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRoute (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeFourRoute(Esi string, OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeFourRoute (list): List of Ethernet Segment L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-four-ethernet-segment/type-four-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route"
+// Esi: string
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeFourRoute(Esi string, OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-four-ethernet-segment", "type-four-route"},
+			map[string]interface{}{"esi": Esi, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeOneRouteAny (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi (wildcarded): string
+// EthernetTag (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeOneRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": "*", "ethernet-tag": "*"},
+			n,
+		),
+	}
+}
+
+// TypeOneRouteAny (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi (wildcarded): string
+// EthernetTag (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeOneRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": "*", "ethernet-tag": "*"},
+			n,
+		),
+	}
+}
+
+// TypeOneRouteAnyEthernetTag (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi: string
+// EthernetTag (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeOneRouteAnyEthernetTag(Esi string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": Esi, "ethernet-tag": "*"},
+			n,
+		),
+	}
+}
+
+// TypeOneRouteAnyEthernetTag (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi: string
+// EthernetTag (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeOneRouteAnyEthernetTag(Esi string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": Esi, "ethernet-tag": "*"},
+			n,
+		),
+	}
+}
+
+// TypeOneRouteAnyEsi (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi (wildcarded): string
+// EthernetTag: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeOneRouteAnyEsi(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": "*", "ethernet-tag": EthernetTag},
+			n,
+		),
+	}
+}
+
+// TypeOneRouteAnyEsi (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi (wildcarded): string
+// EthernetTag: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeOneRouteAnyEsi(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": "*", "ethernet-tag": EthernetTag},
+			n,
+		),
+	}
+}
+
+// TypeOneRoute (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi: string
+// EthernetTag: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeOneRoute(Esi string, EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": Esi, "ethernet-tag": EthernetTag},
+			n,
+		),
+	}
+}
+
+// TypeOneRoute (list): List of BGP EVPN Ethernet Auto-discovery routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Segment
+// Identifier and Ethernet Tag ID are considered to be part of the prefix in
+// the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-one-ethernet-auto-discovery/type-one-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route"
+// Esi: string
+// EthernetTag: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeOneRoute(Esi string, EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-one-ethernet-auto-discovery", "type-one-route"},
+			map[string]interface{}{"esi": Esi, "ethernet-tag": EthernetTag},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAny (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAny (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyOriginatingRouterIpAnyOriginatorIpLength (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAnyOriginatingRouterIpAnyOriginatorIpLength(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyOriginatingRouterIpAnyOriginatorIpLength (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAnyOriginatingRouterIpAnyOriginatorIpLength(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": "*", "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyEthernetTagAnyOriginatorIpLength (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAnyEthernetTagAnyOriginatorIpLength(OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyEthernetTagAnyOriginatorIpLength (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAnyEthernetTagAnyOriginatorIpLength(OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyOriginatorIpLength (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAnyOriginatorIpLength(EthernetTag uint32, OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyOriginatorIpLength (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength (wildcarded): uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAnyOriginatorIpLength(EthernetTag uint32, OriginatingRouterIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyEthernetTagAnyOriginatingRouterIp (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAnyEthernetTagAnyOriginatingRouterIp(OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyEthernetTagAnyOriginatingRouterIp (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAnyEthernetTagAnyOriginatingRouterIp(OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyOriginatingRouterIp (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAnyOriginatingRouterIp(EthernetTag uint32, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyOriginatingRouterIp (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp (wildcarded): string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAnyOriginatingRouterIp(EthernetTag uint32, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": "*", "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyEthernetTag (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRouteAnyEthernetTag(OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRouteAnyEthernetTag (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag (wildcarded): uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRouteAnyEthernetTag(OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": "*", "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRoute (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeThreeRoute(EthernetTag uint32, OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeThreeRoute (list): List of Inclusive Multicast Ethernet Tag L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// IP Address Length, and Originating Router's IP Address fields are
+// considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-three-inclusive-multicast-ethernet-tag/type-three-route"
+// EthernetTag: uint32
+// OriginatingRouterIp: string
+// OriginatorIpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeThreeRoute(EthernetTag uint32, OriginatingRouterIp string, OriginatorIpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-three-inclusive-multicast-ethernet-tag", "type-three-route"},
+			map[string]interface{}{"ethernet-tag": EthernetTag, "originating-router-ip": OriginatingRouterIp, "originator-ip-length": OriginatorIpLength},
+			n,
+		),
+	}
+}
+
+// TypeTwoRouteAny (list): List of MAC_IP Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// MAC Address Length, MAC Address, IP Address Length, and IP Address fields
+// are considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-two-mac-ip-advertisement/type-two-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-two-mac-ip-advertisement/type-two-route"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPath) TypeTwoRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-two-mac-ip-advertisement", "type-two-route"},
+			map[string]interface{}{"ethernet-tag": "*", "mac-address": "*", "mac-length": "*", "ip-prefix": "*", "ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// TypeTwoRouteAny (list): List of MAC_IP Advertisement L2VPN EVPN routes
+//
+// For the purpose of BGP route key processing, only the Ethernet Tag ID,
+// MAC Address Length, MAC Address, IP Address Length, and IP Address fields
+// are considered to be part of the prefix in the NLRI
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "type-two-mac-ip-advertisement/type-two-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-two-mac-ip-advertisement/type-two-route"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherPathAny) TypeTwoRouteAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"type-two-mac-ip-advertisement", "type-two-route"},
+			map[string]interface{}{"ethernet-tag": "*", "mac-address": "*", "mac-length": "*", "ip-prefix": "*", "ip-length": "*"},
+			n,
+		),
+	}
+}
+
+// WithEthernetTag sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny's key "ethernet-tag" to the specified value.
+// EthernetTag: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny) WithEthernetTag(EthernetTag uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	ygot.ModifyKey(n.NodePath, "ethernet-tag", EthernetTag)
+	return n
+}
+
+// WithMacAddress sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny's key "mac-address" to the specified value.
+// MacAddress: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny) WithMacAddress(MacAddress string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	ygot.ModifyKey(n.NodePath, "mac-address", MacAddress)
+	return n
+}
+
+// WithMacLength sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny's key "mac-length" to the specified value.
+// MacLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny) WithMacLength(MacLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	ygot.ModifyKey(n.NodePath, "mac-length", MacLength)
+	return n
+}
+
+// WithIpPrefix sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny's key "ip-prefix" to the specified value.
+// IpPrefix: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny) WithIpPrefix(IpPrefix string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	ygot.ModifyKey(n.NodePath, "ip-prefix", IpPrefix)
+	return n
+}
+
+// WithIpLength sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny's key "ip-length" to the specified value.
+// IpLength: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny) WithIpLength(IpLength uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoutePathAny {
+	ygot.ModifyKey(n.NodePath, "ip-length", IpLength)
+	return n
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ethernet-tag YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ethernet-tag YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix-length YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix-length YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// EthernetTag (leaf): The Ethernet tag identifying the broadcast domain for this
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ethernet-tag"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ethernet-tag"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath) EthernetTag() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ethernet-tag"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EthernetTag (leaf): The Ethernet tag identifying the broadcast domain for this
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ethernet-tag"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ethernet-tag"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny) EthernetTag() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_EthernetTagPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ethernet-tag"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IpPrefix (leaf): The ip-prefix for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ip-prefix"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath) IpPrefix() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ip-prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IpPrefix (leaf): The ip-prefix for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ip-prefix"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny) IpPrefix() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ip-prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IpPrefixLength (leaf): The ip-prefix length for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ip-prefix-length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix-length"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath) IpPrefixLength() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ip-prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IpPrefixLength (leaf): The ip-prefix length for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ip-prefix-length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/state/ip-prefix-length"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny) IpPrefixLength() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_IpPrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ip-prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathAny (list): List of paths
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "paths/path"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePath) PathAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"paths", "path"},
+			map[string]interface{}{"peer-ip": "*", "peer-path-id": "*", "source-route-distinguisher": "*", "source-address-family": "*"},
+			n,
+		),
+	}
+}
+
+// PathAny (list): List of paths
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "paths/path"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoutePathAny) PathAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"paths", "path"},
+			map[string]interface{}{"peer-ip": "*", "peer-path-id": "*", "source-route-distinguisher": "*", "source-address-family": "*"},
+			n,
+		),
+	}
+}
+
+// WithPeerIp sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny's key "peer-ip" to the specified value.
+// PeerIp: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) WithPeerIp(PeerIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "peer-ip", PeerIp)
+	return n
+}
+
+// WithPeerPathId sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny's key "peer-path-id" to the specified value.
+// PeerPathId: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) WithPeerPathId(PeerPathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "peer-path-id", PeerPathId)
+	return n
+}
+
+// WithSourceRouteDistinguisher sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny's key "source-route-distinguisher" to the specified value.
+// SourceRouteDistinguisher: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) WithSourceRouteDistinguisher(SourceRouteDistinguisher string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "source-route-distinguisher", SourceRouteDistinguisher)
+	return n
+}
+
+// WithSourceAddressFamily sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny's key "source-address-family" to the specified value.
+// SourceAddressFamily: E_BgpTypes_AFI_SAFI_TYPE
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) WithSourceAddressFamily(SourceAddressFamily E_BgpTypes_AFI_SAFI_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "source-address-family", SourceAddressFamily)
+	return n
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/advertised-to-peer YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/advertised-to-peer YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/attr-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/attr-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/backup YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/backup YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/bestpath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/bestpath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/esi YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/esi YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/ext-community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/ext-community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/gateway-ip-address YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/gateway-ip-address YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/invalid-reason YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/invalid-reason YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label2 YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label2 YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2PathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/last-modified YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/last-modified YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/multipath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/multipath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-ip YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-ip YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-path-id YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-path-id YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-address-family YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-address-family YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/valid-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/valid-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePathAny struct {
+	*ygot.NodePath
+}
+
+// AdvertisedToPeer (leaf): List of peers to which this path is advertised
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/advertised-to-peer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/advertised-to-peer"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) AdvertisedToPeer() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "advertised-to-peer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AdvertisedToPeer (leaf): List of peers to which this path is advertised
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/advertised-to-peer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/advertised-to-peer"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) AdvertisedToPeer() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AdvertisedToPeerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "advertised-to-peer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrIndex (leaf): Reference to the common attribute group for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/attr-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) AttrIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrIndex (leaf): Reference to the common attribute group for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/attr-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) AttrIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_AttrIndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Backup (leaf): BGP path marked as a backup path
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/backup"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/backup"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) Backup() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "backup"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Backup (leaf): BGP path marked as a backup path
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/backup"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/backup"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) Backup() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BackupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "backup"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Bestpath (leaf): BGP can receive multiple paths to the same destination. This
+// parameter indicates that this path is the bestpath to install
+// in the IP routing table and use for traffic forwarding
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/bestpath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/bestpath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) Bestpath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "bestpath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Bestpath (leaf): BGP can receive multiple paths to the same destination. This
+// parameter indicates that this path is the bestpath to install
+// in the IP routing table and use for traffic forwarding
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/bestpath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/bestpath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) Bestpath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_BestpathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "bestpath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CommunityIndex (leaf): Reference to the community attribute for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) CommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CommunityIndex (leaf): Reference to the community attribute for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) CommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_CommunityIndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): The Ethernet Segment Identifier (ESI) identifying the ethernet
+// segment for this route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/esi"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) Esi() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): The Ethernet Segment Identifier (ESI) identifying the ethernet
+// segment for this route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/esi"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) Esi() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_EsiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtCommunityIndex (leaf): Reference to the extended community attribute for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ext-community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/ext-community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) ExtCommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ext-community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtCommunityIndex (leaf): Reference to the extended community attribute for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ext-community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/ext-community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) ExtCommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ExtCommunityIndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ext-community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// GatewayIpAddress (leaf): The gateway-ip-address for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/gateway-ip-address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/gateway-ip-address"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) GatewayIpAddress() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "gateway-ip-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// GatewayIpAddress (leaf): The gateway-ip-address for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/gateway-ip-address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/gateway-ip-address"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) GatewayIpAddress() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_GatewayIpAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "gateway-ip-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InvalidReason (leaf): If the route is rejected as invalid, this indicates the
+// reason.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/invalid-reason"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/invalid-reason"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) InvalidReason() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "invalid-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InvalidReason (leaf): If the route is rejected as invalid, this indicates the
+// reason.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/invalid-reason"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/invalid-reason"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) InvalidReason() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_InvalidReasonPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "invalid-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): MPLS Label field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) Label() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): MPLS Label field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) Label() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LabelPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label2 (leaf): MPLS Label2 field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label2"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label2"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) Label2() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2Path {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label2 (leaf): MPLS Label2 field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label2"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/label2"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) Label2() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2PathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_Label2PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastModified (leaf): Timestamp when this path was last modified.
+//
+// The value is the timestamp relative to
+// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/last-modified"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/last-modified"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) LastModified() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-modified"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastModified (leaf): Timestamp when this path was last modified.
+//
+// The value is the timestamp relative to
+// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/last-modified"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/last-modified"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) LastModified() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_LastModifiedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-modified"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Multipath (leaf): BGP can use multiple paths to reach a destination allowing
+// BGP to load-balance traffic. This parameter indicates that this
+// path is marked as multipath
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/multipath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/multipath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) Multipath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "multipath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Multipath (leaf): BGP can use multiple paths to reach a destination allowing
+// BGP to load-balance traffic. This parameter indicates that this
+// path is marked as multipath
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/multipath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/multipath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) Multipath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_MultipathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "multipath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): The source peer ip address of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-ip"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) PeerIp() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): The source peer ip address of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-ip"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) PeerIp() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerPathId (leaf): The source peer path id of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-path-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-path-id"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) PeerPathId() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerPathId (leaf): The source peer path id of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-path-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/peer-path-id"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) PeerPathId() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_PeerPathIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceAddressFamily (leaf): The source address-family of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-address-family"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-address-family"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) SourceAddressFamily() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-address-family"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceAddressFamily (leaf): The source address-family of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-address-family"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-address-family"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) SourceAddressFamily() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceAddressFamilyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-address-family"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceRouteDistinguisher (leaf): The source route distinguisher is the remote RD source of the
+// imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-route-distinguisher"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) SourceRouteDistinguisher() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-route-distinguisher"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceRouteDistinguisher (leaf): The source route distinguisher is the remote RD source of the
+// imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/source-route-distinguisher"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) SourceRouteDistinguisher() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_SourceRouteDistinguisherPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-route-distinguisher"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnknownAttributeAny (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType (wildcarded): uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) UnknownAttributeAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": "*"},
+			n,
+		),
+	}
+}
+
+// UnknownAttributeAny (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType (wildcarded): uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) UnknownAttributeAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": "*"},
+			n,
+		),
+	}
+}
+
+// UnknownAttribute (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType: uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) UnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": AttrType},
+			n,
+		),
+	}
+}
+
+// UnknownAttribute (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType: uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) UnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": AttrType},
+			n,
+		),
+	}
+}
+
+// ValidRoute (leaf): Indicates that the route is considered valid by the
+// local router
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/valid-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/valid-route"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPath) ValidRoute() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "valid-route"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ValidRoute (leaf): Indicates that the route is considered valid by the
+// local router
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/valid-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/state/valid-route"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathPathAny) ValidRoute() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_ValidRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "valid-route"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/extended YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/extended YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/optional YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/optional YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/partial YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/partial YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/transitive YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/transitive YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePathAny struct {
+	*ygot.NodePath
+}
+
+// AttrLen (leaf): One or two octet attribute length field indicating the
+// length of the attribute data in octets.  If the Extended
+// Length attribute flag is set, the length field is 2 octets,
+// otherwise it is 1 octet
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-len"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) AttrLen() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-len"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrLen (leaf): One or two octet attribute length field indicating the
+// length of the attribute data in octets.  If the Extended
+// Length attribute flag is set, the length field is 2 octets,
+// otherwise it is 1 octet
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-len"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) AttrLen() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrLenPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-len"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrType (leaf): 1-octet value encoding the attribute type code
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) AttrType() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrType (leaf): 1-octet value encoding the attribute type code
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) AttrType() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrValue (leaf): Raw attribute value, not including the attribute
+// flags, type, or length.  The maximum length
+// of the attribute value data is 2^16-1 per the max value
+// of the attr-len field (2 octets).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) AttrValue() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrValue (leaf): Raw attribute value, not including the attribute
+// flags, type, or length.  The maximum length
+// of the attribute value data is 2^16-1 per the max value
+// of the attr-len field (2 octets).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) AttrValue() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_AttrValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Extended (leaf): Defines whether the attribute length is one octet
+// (if set to false) or two octets (if set to true).  Set in
+// the fourth high-order bit of the BGP attribute flags
+// octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/extended"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/extended"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) Extended() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "extended"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Extended (leaf): Defines whether the attribute length is one octet
+// (if set to false) or two octets (if set to true).  Set in
+// the fourth high-order bit of the BGP attribute flags
+// octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/extended"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/extended"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) Extended() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_ExtendedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "extended"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Optional (leaf): Defines whether the attribute is optional (if
+// set to true) or well-known (if set to false).
+// Set in the high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/optional"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/optional"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) Optional() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "optional"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Optional (leaf): Defines whether the attribute is optional (if
+// set to true) or well-known (if set to false).
+// Set in the high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/optional"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/optional"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) Optional() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_OptionalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "optional"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Partial (leaf): Defines whether the information contained in the optional
+// transitive attribute is partial (if set to true) or complete
+// (if set to false).  For well-known attributes and for
+// optional non-transitive attributes, the partial flag
+// must be set to false.  Set in the third high-order bit of
+// the BGP attribute flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/partial"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/partial"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) Partial() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "partial"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Partial (leaf): Defines whether the information contained in the optional
+// transitive attribute is partial (if set to true) or complete
+// (if set to false).  For well-known attributes and for
+// optional non-transitive attributes, the partial flag
+// must be set to false.  Set in the third high-order bit of
+// the BGP attribute flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/partial"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/partial"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) Partial() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_PartialPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "partial"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Transitive (leaf): Defines whether an optional attribute is transitive
+// (if set to true) or non-transitive (if set to false).  For
+// well-known attributes, the transitive flag MUST be set to
+// true.  Set in the second high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/transitive"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/transitive"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePath) Transitive() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transitive"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Transitive (leaf): Defines whether an optional attribute is transitive
+// (if set to true) or non-transitive (if set to false).  For
+// well-known attributes, the transitive flag MUST be set to
+// true.  Set in the second high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/transitive"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-five-ip-prefix/type-five-route/paths/path/unknown-attributes/unknown-attribute/state/transitive"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributePathAny) Transitive() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute_TransitivePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transitive"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/esi YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/esi YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originating-router-ip YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originating-router-ip YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originator-ip-length YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originator-ip-length YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// Esi (leaf): The Ethernet Segment Identifier (ESI) identifying the ethernet
+// segment for this route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/esi"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath) Esi() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): The Ethernet Segment Identifier (ESI) identifying the ethernet
+// segment for this route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/esi"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny) Esi() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_EsiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginatingRouterIp (leaf): The originating router ip
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/originating-router-ip"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originating-router-ip"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath) OriginatingRouterIp() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "originating-router-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginatingRouterIp (leaf): The originating router ip
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/originating-router-ip"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originating-router-ip"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny) OriginatingRouterIp() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatingRouterIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "originating-router-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginatorIpLength (leaf): The originating router ip length
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/originator-ip-length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originator-ip-length"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath) OriginatorIpLength() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "originator-ip-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginatorIpLength (leaf): The originating router ip length
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/originator-ip-length"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/state/originator-ip-length"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny) OriginatorIpLength() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_OriginatorIpLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "originator-ip-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathAny (list): List of paths
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "paths/path"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePath) PathAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"paths", "path"},
+			map[string]interface{}{"peer-ip": "*", "peer-path-id": "*", "source-route-distinguisher": "*", "source-address-family": "*"},
+			n,
+		),
+	}
+}
+
+// PathAny (list): List of paths
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "paths/path"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoutePathAny) PathAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"paths", "path"},
+			map[string]interface{}{"peer-ip": "*", "peer-path-id": "*", "source-route-distinguisher": "*", "source-address-family": "*"},
+			n,
+		),
+	}
+}
+
+// WithPeerIp sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny's key "peer-ip" to the specified value.
+// PeerIp: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) WithPeerIp(PeerIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "peer-ip", PeerIp)
+	return n
+}
+
+// WithPeerPathId sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny's key "peer-path-id" to the specified value.
+// PeerPathId: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) WithPeerPathId(PeerPathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "peer-path-id", PeerPathId)
+	return n
+}
+
+// WithSourceRouteDistinguisher sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny's key "source-route-distinguisher" to the specified value.
+// SourceRouteDistinguisher: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) WithSourceRouteDistinguisher(SourceRouteDistinguisher string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "source-route-distinguisher", SourceRouteDistinguisher)
+	return n
+}
+
+// WithSourceAddressFamily sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny's key "source-address-family" to the specified value.
+// SourceAddressFamily: E_BgpTypes_AFI_SAFI_TYPE
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) WithSourceAddressFamily(SourceAddressFamily E_BgpTypes_AFI_SAFI_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "source-address-family", SourceAddressFamily)
+	return n
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/advertised-to-peer YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/advertised-to-peer YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/attr-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/attr-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/backup YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/backup YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/bestpath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/bestpath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/ext-community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/ext-community-index YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/invalid-reason YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/invalid-reason YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label2 YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2Path struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label2 YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2PathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/last-modified YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/last-modified YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/multipath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/multipath YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-ip YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-ip YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-path-id YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-path-id YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-address-family YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-address-family YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-route-distinguisher YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/valid-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/valid-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePathAny struct {
+	*ygot.NodePath
+}
+
+// AdvertisedToPeer (leaf): List of peers to which this path is advertised
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/advertised-to-peer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/advertised-to-peer"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) AdvertisedToPeer() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "advertised-to-peer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AdvertisedToPeer (leaf): List of peers to which this path is advertised
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/advertised-to-peer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/advertised-to-peer"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) AdvertisedToPeer() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AdvertisedToPeerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "advertised-to-peer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrIndex (leaf): Reference to the common attribute group for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/attr-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) AttrIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrIndex (leaf): Reference to the common attribute group for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/attr-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) AttrIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_AttrIndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Backup (leaf): BGP path marked as a backup path
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/backup"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/backup"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) Backup() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "backup"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Backup (leaf): BGP path marked as a backup path
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/backup"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/backup"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) Backup() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BackupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "backup"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Bestpath (leaf): BGP can receive multiple paths to the same destination. This
+// parameter indicates that this path is the bestpath to install
+// in the IP routing table and use for traffic forwarding
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/bestpath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/bestpath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) Bestpath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "bestpath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Bestpath (leaf): BGP can receive multiple paths to the same destination. This
+// parameter indicates that this path is the bestpath to install
+// in the IP routing table and use for traffic forwarding
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/bestpath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/bestpath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) Bestpath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_BestpathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "bestpath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CommunityIndex (leaf): Reference to the community attribute for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) CommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CommunityIndex (leaf): Reference to the community attribute for the route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) CommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_CommunityIndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtCommunityIndex (leaf): Reference to the extended community attribute for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ext-community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/ext-community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) ExtCommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ext-community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtCommunityIndex (leaf): Reference to the extended community attribute for the
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ext-community-index"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/ext-community-index"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) ExtCommunityIndex() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ExtCommunityIndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ext-community-index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InvalidReason (leaf): If the route is rejected as invalid, this indicates the
+// reason.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/invalid-reason"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/invalid-reason"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) InvalidReason() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "invalid-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InvalidReason (leaf): If the route is rejected as invalid, this indicates the
+// reason.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/invalid-reason"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/invalid-reason"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) InvalidReason() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_InvalidReasonPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "invalid-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): MPLS Label field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) Label() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): MPLS Label field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) Label() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LabelPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label2 (leaf): MPLS Label2 field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label2"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label2"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) Label2() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2Path {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2Path{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label2 (leaf): MPLS Label2 field used for route attributes
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label2"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/label2"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) Label2() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2PathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_Label2PathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastModified (leaf): Timestamp when this path was last modified.
+//
+// The value is the timestamp relative to
+// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/last-modified"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/last-modified"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) LastModified() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-modified"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LastModified (leaf): Timestamp when this path was last modified.
+//
+// The value is the timestamp relative to
+// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/last-modified"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/last-modified"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) LastModified() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_LastModifiedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "last-modified"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Multipath (leaf): BGP can use multiple paths to reach a destination allowing
+// BGP to load-balance traffic. This parameter indicates that this
+// path is marked as multipath
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/multipath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/multipath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) Multipath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "multipath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Multipath (leaf): BGP can use multiple paths to reach a destination allowing
+// BGP to load-balance traffic. This parameter indicates that this
+// path is marked as multipath
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/multipath"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/multipath"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) Multipath() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_MultipathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "multipath"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): The source peer ip address of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-ip"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) PeerIp() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): The source peer ip address of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-ip"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) PeerIp() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerPathId (leaf): The source peer path id of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-path-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-path-id"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) PeerPathId() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerPathId (leaf): The source peer path id of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-path-id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/peer-path-id"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) PeerPathId() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_PeerPathIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceAddressFamily (leaf): The source address-family of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-address-family"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-address-family"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) SourceAddressFamily() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-address-family"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceAddressFamily (leaf): The source address-family of the imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-address-family"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-address-family"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) SourceAddressFamily() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceAddressFamilyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-address-family"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceRouteDistinguisher (leaf): The source route distinguisher is the remote RD source of the
+// imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-route-distinguisher"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) SourceRouteDistinguisher() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-route-distinguisher"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceRouteDistinguisher (leaf): The source route distinguisher is the remote RD source of the
+// imported route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/source-route-distinguisher"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/source-route-distinguisher"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) SourceRouteDistinguisher() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_SourceRouteDistinguisherPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "source-route-distinguisher"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnknownAttributeAny (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType (wildcarded): uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) UnknownAttributeAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": "*"},
+			n,
+		),
+	}
+}
+
+// UnknownAttributeAny (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType (wildcarded): uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) UnknownAttributeAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": "*"},
+			n,
+		),
+	}
+}
+
+// UnknownAttribute (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType: uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) UnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": AttrType},
+			n,
+		),
+	}
+}
+
+// UnknownAttribute (list): This list contains received attributes that are unrecognized
+// or unsupported by the local router.  The list may be empty.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "unknown-attributes/unknown-attribute"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute"
+// AttrType: uint8
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) UnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unknown-attributes", "unknown-attribute"},
+			map[string]interface{}{"attr-type": AttrType},
+			n,
+		),
+	}
+}
+
+// ValidRoute (leaf): Indicates that the route is considered valid by the
+// local router
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/valid-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/valid-route"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPath) ValidRoute() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "valid-route"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ValidRoute (leaf): Indicates that the route is considered valid by the
+// local router
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-table-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/valid-route"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/state/valid-route"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathPathAny) ValidRoute() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_ValidRoutePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "valid-route"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/extended YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/extended YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/optional YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/optional YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/partial YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/partial YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/transitive YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/transitive YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePathAny struct {
+	*ygot.NodePath
+}
+
+// AttrLen (leaf): One or two octet attribute length field indicating the
+// length of the attribute data in octets.  If the Extended
+// Length attribute flag is set, the length field is 2 octets,
+// otherwise it is 1 octet
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-len"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) AttrLen() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-len"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrLen (leaf): One or two octet attribute length field indicating the
+// length of the attribute data in octets.  If the Extended
+// Length attribute flag is set, the length field is 2 octets,
+// otherwise it is 1 octet
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-len"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-len"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) AttrLen() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrLenPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-len"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrType (leaf): 1-octet value encoding the attribute type code
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) AttrType() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrType (leaf): 1-octet value encoding the attribute type code
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-type"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) AttrType() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrValue (leaf): Raw attribute value, not including the attribute
+// flags, type, or length.  The maximum length
+// of the attribute value data is 2^16-1 per the max value
+// of the attr-len field (2 octets).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) AttrValue() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AttrValue (leaf): Raw attribute value, not including the attribute
+// flags, type, or length.  The maximum length
+// of the attribute value data is 2^16-1 per the max value
+// of the attr-len field (2 octets).
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/attr-value"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/attr-value"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) AttrValue() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_AttrValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "attr-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Extended (leaf): Defines whether the attribute length is one octet
+// (if set to false) or two octets (if set to true).  Set in
+// the fourth high-order bit of the BGP attribute flags
+// octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/extended"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/extended"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) Extended() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "extended"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Extended (leaf): Defines whether the attribute length is one octet
+// (if set to false) or two octets (if set to true).  Set in
+// the fourth high-order bit of the BGP attribute flags
+// octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/extended"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/extended"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) Extended() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_ExtendedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "extended"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Optional (leaf): Defines whether the attribute is optional (if
+// set to true) or well-known (if set to false).
+// Set in the high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/optional"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/optional"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) Optional() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "optional"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Optional (leaf): Defines whether the attribute is optional (if
+// set to true) or well-known (if set to false).
+// Set in the high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/optional"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/optional"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) Optional() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_OptionalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "optional"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Partial (leaf): Defines whether the information contained in the optional
+// transitive attribute is partial (if set to true) or complete
+// (if set to false).  For well-known attributes and for
+// optional non-transitive attributes, the partial flag
+// must be set to false.  Set in the third high-order bit of
+// the BGP attribute flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/partial"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/partial"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) Partial() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "partial"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Partial (leaf): Defines whether the information contained in the optional
+// transitive attribute is partial (if set to true) or complete
+// (if set to false).  For well-known attributes and for
+// optional non-transitive attributes, the partial flag
+// must be set to false.  Set in the third high-order bit of
+// the BGP attribute flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/partial"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/partial"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) Partial() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_PartialPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "partial"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Transitive (leaf): Defines whether an optional attribute is transitive
+// (if set to true) or non-transitive (if set to false).  For
+// well-known attributes, the transitive flag MUST be set to
+// true.  Set in the second high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/transitive"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/transitive"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePath) Transitive() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transitive"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Transitive (leaf): Defines whether an optional attribute is transitive
+// (if set to true) or non-transitive (if set to false).  For
+// well-known attributes, the transitive flag MUST be set to
+// true.  Set in the second high-order bit of the BGP attribute
+// flags octet.
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-attributes"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/transitive"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute/state/transitive"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributePathAny) Transitive() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute_TransitivePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transitive"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/esi YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/esi YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/ethernet-tag YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/ethernet-tag YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPathAny struct {
+	*ygot.NodePath
+}
+
+// Esi (leaf): The Ethernet Segment Identifier (ESI) identifying the ethernet
+// segment for this route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/esi"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath) Esi() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): The Ethernet Segment Identifier (ESI) identifying the ethernet
+// segment for this route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/esi"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny) Esi() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EsiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EthernetTag (leaf): The Ethernet tag identifying the broadcast domain for this
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ethernet-tag"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/ethernet-tag"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath) EthernetTag() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPath {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ethernet-tag"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EthernetTag (leaf): The Ethernet tag identifying the broadcast domain for this
+// route
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/ethernet-tag"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/state/ethernet-tag"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny) EthernetTag() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_EthernetTagPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ethernet-tag"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathAny (list): List of paths
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "paths/path"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/paths/path"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePath) PathAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"paths", "path"},
+			map[string]interface{}{"peer-ip": "*", "peer-path-id": "*", "source-route-distinguisher": "*", "source-address-family": "*"},
+			n,
+		),
+	}
+}
+
+// PathAny (list): List of paths
+// ----------------------------------------
+// Defining module: "openconfig-rib-bgp-tables"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "paths/path"
+// Path from root: "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/paths/path"
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoutePathAny) PathAny() *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny {
+	return &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"paths", "path"},
+			map[string]interface{}{"peer-ip": "*", "peer-path-id": "*", "source-route-distinguisher": "*", "source-address-family": "*"},
+			n,
+		),
+	}
+}
+
+// WithPeerIp sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny's key "peer-ip" to the specified value.
+// PeerIp: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny) WithPeerIp(PeerIp string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "peer-ip", PeerIp)
+	return n
+}
+
+// WithPeerPathId sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny's key "peer-path-id" to the specified value.
+// PeerPathId: uint32
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny) WithPeerPathId(PeerPathId uint32) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "peer-path-id", PeerPathId)
+	return n
+}
+
+// WithSourceRouteDistinguisher sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny's key "source-route-distinguisher" to the specified value.
+// SourceRouteDistinguisher: string
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny) WithSourceRouteDistinguisher(SourceRouteDistinguisher string) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "source-route-distinguisher", SourceRouteDistinguisher)
+	return n
+}
+
+// WithSourceAddressFamily sets NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny's key "source-address-family" to the specified value.
+// SourceAddressFamily: E_BgpTypes_AFI_SAFI_TYPE
+func (n *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny) WithSourceAddressFamily(SourceAddressFamily E_BgpTypes_AFI_SAFI_TYPE) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPathAny {
+	ygot.ModifyKey(n.NodePath, "source-address-family", SourceAddressFamily)
+	return n
+}
+
 // NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route/paths/path YANG schema element.
 type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathPath struct {
 	*ygot.NodePath
@@ -21496,1354 +25869,6 @@ func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4ReachabilityPat
 		NodePath: ygot.NewNodePath(
 			[]string{"prefixes", "prefix"},
 			map[string]interface{}{"prefix": Prefix},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/metric YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/metric YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/prefix YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/prefix YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/s-bit YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/s-bit YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/up-down YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/up-down YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPathAny struct {
-	*ygot.NodePath
-}
-
-// Metric (leaf): ISIS metric value.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/metric"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/metric"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) Metric() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Metric (leaf): ISIS metric value.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/metric"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/metric"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) Metric() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_MetricPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Prefix (leaf): IPv4 prefix contained within extended reachability TLVs.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/prefix"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) Prefix() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Prefix (leaf): IPv4 prefix contained within extended reachability TLVs.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/prefix"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/prefix"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) Prefix() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SBit (leaf): The Sub-TLV present bit. If UNSET, the octets of Sub-TLVs
-// are not present. Otherwise, the bit is set and the octet
-// following the prefix will contain the length of the Sub-TLV
-// portion of the structure.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/s-bit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/s-bit"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) SBit() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "s-bit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SBit (leaf): The Sub-TLV present bit. If UNSET, the octets of Sub-TLVs
-// are not present. Otherwise, the bit is set and the octet
-// following the prefix will contain the length of the Sub-TLV
-// portion of the structure.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/s-bit"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/s-bit"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) SBit() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SBitPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "s-bit"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SubtlvAny (list): List of subTLV types in the LSDB for the specified TLV.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv"
-// Type (wildcarded): E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) SubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// SubtlvAny (list): List of subTLV types in the LSDB for the specified TLV.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv"
-// Type (wildcarded): E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) SubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// Subtlv (list): List of subTLV types in the LSDB for the specified TLV.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv"
-// Type: E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) Subtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// Subtlv (list): List of subTLV types in the LSDB for the specified TLV.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "subtlvs/subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv"
-// Type: E_IsisLsdbTypes_ISIS_SUBTLV_TYPE
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) Subtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"subtlvs", "subtlv"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// UndefinedSubtlvAny (list): Sub-TLVs that are not defined in the model or not
-// recognised by system.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "undefined-subtlvs/undefined-subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv"
-// Type (wildcarded): uint8
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) UndefinedSubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"undefined-subtlvs", "undefined-subtlv"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// UndefinedSubtlvAny (list): Sub-TLVs that are not defined in the model or not
-// recognised by system.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "undefined-subtlvs/undefined-subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv"
-// Type (wildcarded): uint8
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) UndefinedSubtlvAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"undefined-subtlvs", "undefined-subtlv"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// UndefinedSubtlv (list): Sub-TLVs that are not defined in the model or not
-// recognised by system.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "undefined-subtlvs/undefined-subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv"
-// Type: uint8
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) UndefinedSubtlv(Type uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"undefined-subtlvs", "undefined-subtlv"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// UndefinedSubtlv (list): Sub-TLVs that are not defined in the model or not
-// recognised by system.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "undefined-subtlvs/undefined-subtlv"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv"
-// Type: uint8
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) UndefinedSubtlv(Type uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"undefined-subtlvs", "undefined-subtlv"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// UpDown (leaf): The up/down bit. Set if a prefix is advertised from a
-// higher level to a lower level (e.g., level 2 to level 1),
-// indicating that the prefix has traveled down the hierarchy.
-// Prefixes that have the up/down bit set may only be
-// advertised down the hierarchy, i.e., to lower levels. When a
-// prefix is first injected into IS-IS, the bit is UNSET.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/up-down"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/up-down"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPath) UpDown() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "up-down"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UpDown (leaf): The up/down bit. Set if a prefix is advertised from a
-// higher level to a lower level (e.g., level 2 to level 1),
-// indicating that the prefix has traveled down the hierarchy.
-// Prefixes that have the up/down bit set may only be
-// advertised down the hierarchy, i.e., to lower levels. When a
-// prefix is first injected into IS-IS, the bit is UNSET.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/up-down"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/state/up-down"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_PrefixPathAny) UpDown() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UpDownPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "up-down"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// Flags (container): This container defines sub-TLV 4.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "flags"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"flags"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Flags (container): This container defines sub-TLV 4.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "flags"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"flags"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv4SourceRouterId (container): This container defines sub-TLV 11.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ipv4-source-router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) Ipv4SourceRouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-source-router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv4SourceRouterId (container): This container defines sub-TLV 11.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ipv4-source-router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) Ipv4SourceRouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv4-source-router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv6SourceRouterId (container): This container defines sub-TLV 12.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ipv6-source-router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) Ipv6SourceRouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv6-source-router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv6SourceRouterId (container): This container defines sub-TLV 12.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "ipv6-source-router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) Ipv6SourceRouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"ipv6-source-router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixSidAny (list): Prefix Segment-ID list. IGP-Prefix Segment is an IGP segment
-// attached to an IGP prefix. An IGP-Prefix Segment is global
-// (unless explicitly advertised otherwise) within the SR/IGP
-// domain.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-sids/prefix-sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid"
-// Value (wildcarded): uint32
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) PrefixSidAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-sids", "prefix-sid"},
-			map[string]interface{}{"value": "*"},
-			n,
-		),
-	}
-}
-
-// PrefixSidAny (list): Prefix Segment-ID list. IGP-Prefix Segment is an IGP segment
-// attached to an IGP prefix. An IGP-Prefix Segment is global
-// (unless explicitly advertised otherwise) within the SR/IGP
-// domain.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-sids/prefix-sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid"
-// Value (wildcarded): uint32
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) PrefixSidAny() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-sids", "prefix-sid"},
-			map[string]interface{}{"value": "*"},
-			n,
-		),
-	}
-}
-
-// PrefixSid (list): Prefix Segment-ID list. IGP-Prefix Segment is an IGP segment
-// attached to an IGP prefix. An IGP-Prefix Segment is global
-// (unless explicitly advertised otherwise) within the SR/IGP
-// domain.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-sids/prefix-sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid"
-// Value: uint32
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) PrefixSid(Value uint32) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-sids", "prefix-sid"},
-			map[string]interface{}{"value": Value},
-			n,
-		),
-	}
-}
-
-// PrefixSid (list): Prefix Segment-ID list. IGP-Prefix Segment is an IGP segment
-// attached to an IGP prefix. An IGP-Prefix Segment is global
-// (unless explicitly advertised otherwise) within the SR/IGP
-// domain.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "prefix-sids/prefix-sid"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid"
-// Value: uint32
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) PrefixSid(Value uint32) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"prefix-sids", "prefix-sid"},
-			map[string]interface{}{"value": Value},
-			n,
-		),
-	}
-}
-
-// Tag (container): This container defines sub-TLV 1.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tag"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) Tag() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"tag"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Tag (container): This container defines sub-TLV 1.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tag"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) Tag() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"tag"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Tag64 (container): This container defines sub-TLV 2.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tag64"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) Tag64() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"tag64"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Tag64 (container): This container defines sub-TLV 2.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "tag64"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) Tag64() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"tag64"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_SubtlvPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/flags YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/flags YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// Flags (leaf): Additional prefix reachability flags.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/flags"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/flags"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPath) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "flags"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Flags (leaf): Additional prefix reachability flags.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/flags"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/flags"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPathAny) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_FlagsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "flags"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/flags/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_FlagsPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Flags_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// RouterId (leaf): IPv4 Source router ID address. In cases where the
-// advertisement is an identifier for the advertising
-// router (e.g., with the N-flag set in the Prefix
-// Attribute Flags sub-TLV), it may be useful for other
-// routers to know the source of the advertisement. When
-// reachability advertisement is leaked from one level to
-// another, Router ID advertised is always the Router ID
-// of the IS-IS instance that originated the
-// advertisement. This would be true even if the prefix
-// had been learned from another protocol.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RouterId (leaf): IPv4 Source router ID address. In cases where the
-// advertisement is an identifier for the advertising
-// router (e.g., with the N-flag set in the Prefix
-// Attribute Flags sub-TLV), it may be useful for other
-// routers to know the source of the advertisement. When
-// reachability advertisement is leaked from one level to
-// another, Router ID advertised is always the Router ID
-// of the IS-IS instance that originated the
-// advertisement. This would be true even if the prefix
-// had been learned from another protocol.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_RouterIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv4-source-router-id/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterIdPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv4SourceRouterId_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// RouterId (leaf): IPv6 Source router ID address. In cases where the
-// advertisement is an identifier for the advertising
-// router (e.g., with the N-flag set in the Prefix
-// Attribute Flags sub-TLV), it may be useful for other
-// routers to know the source of the advertisement. When
-// reachability advertisement is leaked from one level to
-// another, Router ID advertised is always the Router ID
-// of the IS-IS instance that originated the
-// advertisement. This would be true even if the prefix
-// had been learned from another protocol.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RouterId (leaf): IPv6 Source router ID address. In cases where the
-// advertisement is an identifier for the advertising
-// router (e.g., with the N-flag set in the Prefix
-// Attribute Flags sub-TLV), it may be useful for other
-// routers to know the source of the advertisement. When
-// reachability advertisement is leaked from one level to
-// another, Router ID advertised is always the Router ID
-// of the IS-IS instance that originated the
-// advertisement. This would be true even if the prefix
-// had been learned from another protocol.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/router-id"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/router-id"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny) RouterId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_RouterIdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "router-id"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): The type of subTLV being described. The type of subTLV is
-// expressed as a canonical name.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/ipv6-source-router-id/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterIdPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Ipv6SourceRouterId_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny struct {
-	*ygot.NodePath
-}
-
-// Algorithm (leaf): Prefix-SID algorithm to be used for path computation.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/algorithm"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath) Algorithm() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "algorithm"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Algorithm (leaf): Prefix-SID algorithm to be used for path computation.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/algorithm"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/algorithm"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny) Algorithm() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_AlgorithmPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "algorithm"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Flags (leaf): Flags associated with Prefix Segment-ID.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/flags"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "flags"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Flags (leaf): Flags associated with Prefix Segment-ID.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/flags"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/flags"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny) Flags() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_FlagsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "flags"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Value (leaf): IGP Prefix-SID value.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPath) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Value (leaf): IGP Prefix-SID value.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/prefix-sids/prefix-sid/state/value"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSidPathAny) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_PrefixSid_ValuePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32 YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32 YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32PathAny struct {
-	*ygot.NodePath
-}
-
-// Tag32 (leaf): List of 32-bit tags associated with the prefix. Example
-// uses of these tags include carrying BGP standard (or
-// extended) communities and controlling redistribution
-// between levels and areas, different routing protocols,
-// or multiple instances of IS-IS running on the same
-// router.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/tag32"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPath) Tag32() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32Path {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "tag32"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Tag32 (leaf): List of 32-bit tags associated with the prefix. Example
-// uses of these tags include carrying BGP standard (or
-// extended) communities and controlling redistribution
-// between levels and areas, different routing protocols,
-// or multiple instances of IS-IS running on the same
-// router.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/tag32"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag/state/tag32"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_TagPathAny) Tag32() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32PathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag_Tag32PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "tag32"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64 YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64Path struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64PathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64 YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64PathAny struct {
-	*ygot.NodePath
-}
-
-// Tag64 (leaf): List of 64-bit tags associated with the prefix. Example
-// uses of these tags include carrying BGP standard (or
-// extended) communities and controlling redistribution
-// between levels and areas, different routing protocols,
-// or multiple instances of IS-IS running on the same
-// router.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/tag64"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Tag64() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64Path {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64Path{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "tag64"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Tag64 (leaf): List of 64-bit tags associated with the prefix. Example
-// uses of these tags include carrying BGP standard (or
-// extended) communities and controlling redistribution
-// between levels and areas, different routing protocols,
-// or multiple instances of IS-IS running on the same
-// router.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/tag64"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64/state/tag64"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny) Tag64() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64PathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64_Tag64PathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "tag64"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value YANG schema element.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePathAny struct {
-	*ygot.NodePath
-}
-
-// Length (leaf): TLV length.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/length"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath) Length() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "length"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Length (leaf): TLV length.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/length"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/length"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny) Length() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_LengthPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "length"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): TLV Type.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): TLV Type.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/type"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny) Type() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Value (leaf): TLV value.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPath) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePath {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "value"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Value (leaf): TLV value.
-// ----------------------------------------
-// Defining module: "openconfig-isis-lsp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/value"
-// Path from root: "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/undefined-subtlvs/undefined-subtlv/state/value"
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlvPathAny) Value() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePathAny {
-	return &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_UndefinedSubtlv_ValuePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "value"},
-			map[string]interface{}{},
 			n,
 		),
 	}

@@ -19649,6 +19649,42 @@ func (n *NetworkInstance_FdbPathAny) FloodUnknownUnicastSupression() *NetworkIns
 	}
 }
 
+// L2Rib (container): Operational state container for MAC address and MAC-IP address
+// information that is learned and installed into the MAC VRF Layer 2
+// Routing Information Base (L2RIB)
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "l2rib"
+// Path from root: "/network-instances/network-instance/fdb/l2rib"
+func (n *NetworkInstance_FdbPath) L2Rib() *NetworkInstance_Fdb_L2RibPath {
+	return &NetworkInstance_Fdb_L2RibPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"l2rib"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L2Rib (container): Operational state container for MAC address and MAC-IP address
+// information that is learned and installed into the MAC VRF Layer 2
+// Routing Information Base (L2RIB)
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "l2rib"
+// Path from root: "/network-instances/network-instance/fdb/l2rib"
+func (n *NetworkInstance_FdbPathAny) L2Rib() *NetworkInstance_Fdb_L2RibPathAny {
+	return &NetworkInstance_Fdb_L2RibPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"l2rib"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // MacAgingTime (leaf): The number of seconds of inactivity after which the entry
 // in the local FDB is timed out.
 // ----------------------------------------
@@ -20059,6 +20095,2114 @@ func (n *NetworkInstance_Fdb_ArpProxyPathAny) IpMobilityThreshold() *NetworkInst
 	return &NetworkInstance_Fdb_ArpProxy_IpMobilityThresholdPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "ip-mobility-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2RibPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib YANG schema element.
+type NetworkInstance_Fdb_L2RibPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2RibPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib YANG schema element.
+type NetworkInstance_Fdb_L2RibPathAny struct {
+	*ygot.NodePath
+}
+
+// MacIpTable (container): Operational state container for MAC-IP address information installed
+// into the MAC VRF of the L2RIB
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "mac-ip-table"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table"
+func (n *NetworkInstance_Fdb_L2RibPath) MacIpTable() *NetworkInstance_Fdb_L2Rib_MacIpTablePath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTablePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"mac-ip-table"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacIpTable (container): Operational state container for MAC-IP address information installed
+// into the MAC VRF of the L2RIB
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "mac-ip-table"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table"
+func (n *NetworkInstance_Fdb_L2RibPathAny) MacIpTable() *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTablePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"mac-ip-table"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacTable (container): Operational state container for MAC address information installed
+// into the MAC VRF of the L2RIB
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "mac-table"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table"
+func (n *NetworkInstance_Fdb_L2RibPath) MacTable() *NetworkInstance_Fdb_L2Rib_MacTablePath {
+	return &NetworkInstance_Fdb_L2Rib_MacTablePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"mac-table"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacTable (container): Operational state container for MAC address information installed
+// into the MAC VRF of the L2RIB
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "mac-table"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table"
+func (n *NetworkInstance_Fdb_L2RibPathAny) MacTable() *NetworkInstance_Fdb_L2Rib_MacTablePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTablePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"mac-table"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTablePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTablePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTablePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTablePathAny struct {
+	*ygot.NodePath
+}
+
+// EntryAny (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress (wildcarded): string
+// HostIp (wildcarded): string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePath) EntryAny() *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": "*", "host-ip": "*"},
+			n,
+		),
+	}
+}
+
+// EntryAny (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress (wildcarded): string
+// HostIp (wildcarded): string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny) EntryAny() *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": "*", "host-ip": "*"},
+			n,
+		),
+	}
+}
+
+// EntryAnyHostIp (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress: string
+// HostIp (wildcarded): string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePath) EntryAnyHostIp(MacAddress string) *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": MacAddress, "host-ip": "*"},
+			n,
+		),
+	}
+}
+
+// EntryAnyHostIp (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress: string
+// HostIp (wildcarded): string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny) EntryAnyHostIp(MacAddress string) *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": MacAddress, "host-ip": "*"},
+			n,
+		),
+	}
+}
+
+// EntryAnyMacAddress (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress (wildcarded): string
+// HostIp: string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePath) EntryAnyMacAddress(HostIp string) *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": "*", "host-ip": HostIp},
+			n,
+		),
+	}
+}
+
+// EntryAnyMacAddress (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress (wildcarded): string
+// HostIp: string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny) EntryAnyMacAddress(HostIp string) *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": "*", "host-ip": HostIp},
+			n,
+		),
+	}
+}
+
+// Entry (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress: string
+// HostIp: string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePath) Entry(MacAddress string, HostIp string) *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": MacAddress, "host-ip": HostIp},
+			n,
+		),
+	}
+}
+
+// Entry (list): List of learned MAC-IP addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry"
+// MacAddress: string
+// HostIp: string
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny) Entry(MacAddress string, HostIp string) *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": MacAddress, "host-ip": HostIp},
+			n,
+		),
+	}
+}
+
+// NextHopAny (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop"
+// Index (wildcarded): uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePath) NextHopAny() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+}
+
+// NextHopAny (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop"
+// Index (wildcarded): uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny) NextHopAny() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+}
+
+// NextHop (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop"
+// Index: uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePath) NextHop(Index uint64) *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+}
+
+// NextHop (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop"
+// Index: uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTablePathAny) NextHop(Index uint64) *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/evi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/evi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/host-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/host-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l2-vni YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l2-vni YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l3-vni YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l3-vni YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/mac-address YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/mac-address YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/vlan YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/vlan YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPathAny struct {
+	*ygot.NodePath
+}
+
+// Evi (leaf): EVPN Instance Identifier for the MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/evi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/evi"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) Evi() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "evi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Evi (leaf): EVPN Instance Identifier for the MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/evi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/evi"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) Evi() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_EviPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "evi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HostIp (leaf): Host IP address of the CE device for the L2RIB MAC-IP entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/host-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/host-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) HostIp() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "host-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HostIp (leaf): Host IP address of the CE device for the L2RIB MAC-IP entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/host-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/host-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) HostIp() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_HostIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "host-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L2Vni (leaf): Layer2 VNI segment mapped to given vlan-id
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/l2-vni"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l2-vni"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) L2Vni() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "l2-vni"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L2Vni (leaf): Layer2 VNI segment mapped to given vlan-id
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/l2-vni"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l2-vni"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) L2Vni() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L2VniPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "l2-vni"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L3Vni (leaf): Symmetric IRB uses the same forwarding semantics when routing
+// between IP subnets with VRF Lite or MPLS L3VPNs. With symmetric IRB,
+// all traffic egressing and returning from a VTEP uses the same VNI.
+// Specifically, the same Layer 3 VNI (L3VNI) associated with the VRF
+// is used for all routed traffic. Layer3 VNI used for inter-subnet
+// routing
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/l3-vni"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l3-vni"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) L3Vni() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "l3-vni"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L3Vni (leaf): Symmetric IRB uses the same forwarding semantics when routing
+// between IP subnets with VRF Lite or MPLS L3VPNs. With symmetric IRB,
+// all traffic egressing and returning from a VTEP uses the same VNI.
+// Specifically, the same Layer 3 VNI (L3VNI) associated with the VRF
+// is used for all routed traffic. Layer3 VNI used for inter-subnet
+// routing
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/l3-vni"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/l3-vni"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) L3Vni() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_L3VniPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "l3-vni"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacAddress (leaf): MAC address of the L2RIB MAC or MAC-IP entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mac-address"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/mac-address"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) MacAddress() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacAddress (leaf): MAC address of the L2RIB MAC or MAC-IP entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mac-address"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/mac-address"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) MacAddress() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_MacAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ProducerAny (list): List of producers for each MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer"
+// Producer (wildcarded): E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) ProducerAny() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": "*"},
+			n,
+		),
+	}
+}
+
+// ProducerAny (list): List of producers for each MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer"
+// Producer (wildcarded): E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) ProducerAny() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": "*"},
+			n,
+		),
+	}
+}
+
+// Producer (list): List of producers for each MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer"
+// Producer: E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) Producer(Producer E_Producer_Producer) *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": Producer},
+			n,
+		),
+	}
+}
+
+// Producer (list): List of producers for each MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer"
+// Producer: E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) Producer(Producer E_Producer_Producer) *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": Producer},
+			n,
+		),
+	}
+}
+
+// Vlan (leaf): VLAN on which the MAC or MAC-IP address is present.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/vlan"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/vlan"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPath) Vlan() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Vlan (leaf): VLAN on which the MAC or MAC-IP address is present.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/vlan"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/state/vlan"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_EntryPathAny) Vlan() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_VlanPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/esi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/esi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/mobility-state YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/mobility-state YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/seq-number YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/seq-number YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/sticky YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/sticky YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPathAny struct {
+	*ygot.NodePath
+}
+
+// Esi (leaf): Ethernet Segment Identifier for local and remote routes
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/esi"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath) Esi() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): Ethernet Segment Identifier for local and remote routes
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/esi"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny) Esi() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_EsiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MobilityState (leaf): Indicates if learned MAC address is duplicate or frozen
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mobility-state"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/mobility-state"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath) MobilityState() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mobility-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MobilityState (leaf): Indicates if learned MAC address is duplicate or frozen
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mobility-state"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/mobility-state"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny) MobilityState() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_MobilityStatePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mobility-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHop (leaf): Leafref next-hop for the MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/next-hop"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath) NextHop() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHop (leaf): Leafref next-hop for the MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/next-hop"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny) NextHop() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Producer (leaf): Source of the learned L2RIB route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/producer"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath) Producer() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "producer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Producer (leaf): Source of the learned L2RIB route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/producer"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny) Producer() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "producer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SeqNumber (leaf): The sequence number is used to ensure that PEs retain the correct
+// MAC/IP Advertisement route when multiple updates occur for the same
+// MAC address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/seq-number"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/seq-number"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath) SeqNumber() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "seq-number"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SeqNumber (leaf): The sequence number is used to ensure that PEs retain the correct
+// MAC/IP Advertisement route when multiple updates occur for the same
+// MAC address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/seq-number"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/seq-number"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny) SeqNumber() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_SeqNumberPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "seq-number"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sticky (leaf): MAC address is sticky and not subjected to MAC moves
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sticky"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/sticky"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPath) Sticky() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sticky"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sticky (leaf): MAC address is sticky and not subjected to MAC moves
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sticky"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/entries/entry/producers/producer/state/sticky"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_ProducerPathAny) Sticky() *NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_Entry_Producer_StickyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sticky"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/index YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/index YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/interface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/interface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/label YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/label YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/peer-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/peer-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/subinterface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/subinterface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// Index (leaf): A unique entry for the next-hop.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/index"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/index"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath) Index() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Index (leaf): A unique entry for the next-hop.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/index"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/index"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny) Index() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_IndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/interface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/interface"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath) Interface() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/interface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/interface"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny) Interface() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_InterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): Next hop label representing the l2vni for the route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/label"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath) Label() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): Next hop label representing the l2vni for the route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/label"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny) Label() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_LabelPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): Next hop peer address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/peer-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath) PeerIp() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): Next hop peer address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/peer-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny) PeerIp() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_PeerIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/subinterface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/subinterface"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPath) Subinterface() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePath {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/subinterface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-ip-table/next-hops/next-hop/state/subinterface"
+func (n *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHopPathAny) Subinterface() *NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacIpTable_NextHop_SubinterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTablePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTablePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTablePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTablePathAny struct {
+	*ygot.NodePath
+}
+
+// EntryAny (list): List of learned MAC addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry"
+// MacAddress (wildcarded): string
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePath) EntryAny() *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": "*"},
+			n,
+		),
+	}
+}
+
+// EntryAny (list): List of learned MAC addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry"
+// MacAddress (wildcarded): string
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePathAny) EntryAny() *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": "*"},
+			n,
+		),
+	}
+}
+
+// Entry (list): List of learned MAC addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry"
+// MacAddress: string
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePath) Entry(MacAddress string) *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_EntryPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": MacAddress},
+			n,
+		),
+	}
+}
+
+// Entry (list): List of learned MAC addresses
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "entries/entry"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry"
+// MacAddress: string
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePathAny) Entry(MacAddress string) *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"entries", "entry"},
+			map[string]interface{}{"mac-address": MacAddress},
+			n,
+		),
+	}
+}
+
+// NextHopAny (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop"
+// Index (wildcarded): uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePath) NextHopAny() *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+}
+
+// NextHopAny (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop"
+// Index (wildcarded): uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePathAny) NextHopAny() *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+}
+
+// NextHop (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop"
+// Index: uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePath) NextHop(Index uint64) *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+}
+
+// NextHop (list): List of next hop attributes for each MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "next-hops/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop"
+// Index: uint64
+func (n *NetworkInstance_Fdb_L2Rib_MacTablePathAny) NextHop(Index uint64) *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"next-hops", "next-hop"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_EntryPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_EntryPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/evi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/evi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/l2-vni YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/l2-vni YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/mac-address YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/mac-address YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/vlan YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/vlan YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPathAny struct {
+	*ygot.NodePath
+}
+
+// Evi (leaf): EVPN Instance Identifier for the MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/evi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/evi"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath) Evi() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "evi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Evi (leaf): EVPN Instance Identifier for the MAC or MAC-IP
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/evi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/evi"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny) Evi() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_EviPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "evi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L2Vni (leaf): Layer2 VNI segment mapped to given vlan-id
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/l2-vni"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/l2-vni"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath) L2Vni() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "l2-vni"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// L2Vni (leaf): Layer2 VNI segment mapped to given vlan-id
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/l2-vni"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/l2-vni"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny) L2Vni() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_L2VniPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "l2-vni"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacAddress (leaf): MAC address of the L2RIB MAC or MAC-IP entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mac-address"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/mac-address"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath) MacAddress() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacAddress (leaf): MAC address of the L2RIB MAC or MAC-IP entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mac-address"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/mac-address"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny) MacAddress() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_MacAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ProducerAny (list): List of producers for each MAC table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer"
+// Producer (wildcarded): E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath) ProducerAny() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": "*"},
+			n,
+		),
+	}
+}
+
+// ProducerAny (list): List of producers for each MAC table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer"
+// Producer (wildcarded): E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny) ProducerAny() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": "*"},
+			n,
+		),
+	}
+}
+
+// Producer (list): List of producers for each MAC table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer"
+// Producer: E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath) Producer(Producer E_Producer_Producer) *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": Producer},
+			n,
+		),
+	}
+}
+
+// Producer (list): List of producers for each MAC table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "producers/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer"
+// Producer: E_Producer_Producer
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny) Producer(Producer E_Producer_Producer) *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"producers", "producer"},
+			map[string]interface{}{"producer": Producer},
+			n,
+		),
+	}
+}
+
+// Vlan (leaf): VLAN on which the MAC or MAC-IP address is present.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/vlan"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/vlan"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPath) Vlan() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Vlan (leaf): VLAN on which the MAC or MAC-IP address is present.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/vlan"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/state/vlan"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_EntryPathAny) Vlan() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_VlanPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "vlan"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/derived-from-mac-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/derived-from-mac-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/directly-received YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/directly-received YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/esi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/esi YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/mobility-state YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/mobility-state YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/producer YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/seq-number YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/seq-number YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/sticky YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/sticky YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPathAny struct {
+	*ygot.NodePath
+}
+
+// DerivedFromMacIp (leaf): Derived from BGP MAC-IP route-type 2
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/derived-from-mac-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/derived-from-mac-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) DerivedFromMacIp() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "derived-from-mac-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DerivedFromMacIp (leaf): Derived from BGP MAC-IP route-type 2
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/derived-from-mac-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/derived-from-mac-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) DerivedFromMacIp() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DerivedFromMacIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "derived-from-mac-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DirectlyReceived (leaf): BGP learned MAC route-type 2
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/directly-received"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/directly-received"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) DirectlyReceived() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "directly-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DirectlyReceived (leaf): BGP learned MAC route-type 2
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/directly-received"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/directly-received"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) DirectlyReceived() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_DirectlyReceivedPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "directly-received"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): Ethernet Segment Identifier for local and remote routes
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/esi"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) Esi() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esi (leaf): Ethernet Segment Identifier for local and remote routes
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/esi"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/esi"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) Esi() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_EsiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MobilityState (leaf): Indicates if learned MAC address is duplicate or frozen
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mobility-state"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/mobility-state"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) MobilityState() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mobility-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MobilityState (leaf): Indicates if learned MAC address is duplicate or frozen
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/mobility-state"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/mobility-state"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) MobilityState() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_MobilityStatePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "mobility-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHop (leaf): Leafref next-hop for the MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/next-hop"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) NextHop() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHop (leaf): Leafref next-hop for the MAC-IP table entry
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/next-hop"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/next-hop"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) NextHop() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_NextHopPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Producer (leaf): Source of the learned L2RIB route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/producer"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) Producer() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "producer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Producer (leaf): Source of the learned L2RIB route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/producer"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/producer"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) Producer() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_ProducerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "producer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SeqNumber (leaf): The sequence number is used to ensure that PEs retain the correct
+// MAC/IP Advertisement route when multiple updates occur for the same
+// MAC address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/seq-number"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/seq-number"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) SeqNumber() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "seq-number"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SeqNumber (leaf): The sequence number is used to ensure that PEs retain the correct
+// MAC/IP Advertisement route when multiple updates occur for the same
+// MAC address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/seq-number"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/seq-number"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) SeqNumber() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_SeqNumberPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "seq-number"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sticky (leaf): MAC address is sticky and not subjected to MAC moves
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sticky"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/sticky"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPath) Sticky() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sticky"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sticky (leaf): MAC address is sticky and not subjected to MAC moves
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/sticky"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/entries/entry/producers/producer/state/sticky"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_Entry_ProducerPathAny) Sticky() *NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_Entry_Producer_StickyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sticky"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/index YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/index YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/interface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/interface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/label YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/label YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/peer-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/peer-ip YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePath represents the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/subinterface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/subinterface YANG schema element.
+type NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePathAny struct {
+	*ygot.NodePath
+}
+
+// Index (leaf): A unique entry for the next-hop.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/index"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/index"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath) Index() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Index (leaf): A unique entry for the next-hop.
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/index"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/index"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny) Index() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_IndexPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "index"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/interface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/interface"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath) Interface() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface (leaf): Reference to a base interface.  If a reference to a
+// subinterface is required, this leaf must be specified
+// to indicate the base interface.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/interface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/interface"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny) Interface() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_InterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "interface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): Next hop label representing the l2vni for the route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/label"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath) Label() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Label (leaf): Next hop label representing the l2vni for the route
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/label"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/label"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny) Label() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_LabelPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "label"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): Next hop peer address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/peer-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath) PeerIp() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PeerIp (leaf): Next hop peer address
+// ----------------------------------------
+// Defining module: "openconfig-network-instance-l2"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/peer-ip"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/peer-ip"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny) PeerIp() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_PeerIpPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "peer-ip"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/subinterface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/subinterface"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPath) Subinterface() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePath {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Subinterface (leaf): Reference to a subinterface -- this requires the base
+// interface to be specified using the interface leaf in
+// this container.  If only a reference to a base interface
+// is requuired, this leaf should not be set.
+// ----------------------------------------
+// Defining module: "openconfig-interfaces"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "state/subinterface"
+// Path from root: "/network-instances/network-instance/fdb/l2rib/mac-table/next-hops/next-hop/state/subinterface"
+func (n *NetworkInstance_Fdb_L2Rib_MacTable_NextHopPathAny) Subinterface() *NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePathAny {
+	return &NetworkInstance_Fdb_L2Rib_MacTable_NextHop_SubinterfacePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "subinterface"},
 			map[string]interface{}{},
 			n,
 		),
@@ -25379,2708 +27523,6 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidt
 	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"underflow"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/enabled YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/enabled YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/overflow-threshold YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/overflow-threshold YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/trigger-event-count YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/trigger-event-count YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPathAny struct {
-	*ygot.NodePath
-}
-
-// Enabled (leaf): enables mpls lsp bandwidth overflow
-// adjustment on the lsp
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/enabled"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/enabled"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPath) Enabled() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "enabled"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Enabled (leaf): enables mpls lsp bandwidth overflow
-// adjustment on the lsp
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/enabled"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/enabled"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPathAny) Enabled() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_EnabledPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "enabled"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OverflowThreshold (leaf): bandwidth percentage change to trigger
-// an overflow event
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/overflow-threshold"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/overflow-threshold"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPath) OverflowThreshold() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "overflow-threshold"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OverflowThreshold (leaf): bandwidth percentage change to trigger
-// an overflow event
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/overflow-threshold"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/overflow-threshold"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPathAny) OverflowThreshold() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_OverflowThresholdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "overflow-threshold"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// TriggerEventCount (leaf): number of consecutive overflow sample
-// events needed to trigger an overflow adjustment
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/trigger-event-count"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/trigger-event-count"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPath) TriggerEventCount() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "trigger-event-count"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// TriggerEventCount (leaf): number of consecutive overflow sample
-// events needed to trigger an overflow adjustment
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/trigger-event-count"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/overflow/state/trigger-event-count"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_OverflowPathAny) TriggerEventCount() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Overflow_TriggerEventCountPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "trigger-event-count"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/enabled YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/enabled YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/trigger-event-count YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/trigger-event-count YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/underflow-threshold YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/underflow-threshold YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPathAny struct {
-	*ygot.NodePath
-}
-
-// Enabled (leaf): enables bandwidth underflow
-// adjustment on the lsp
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/enabled"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/enabled"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPath) Enabled() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "enabled"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Enabled (leaf): enables bandwidth underflow
-// adjustment on the lsp
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/enabled"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/enabled"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPathAny) Enabled() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_EnabledPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "enabled"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// TriggerEventCount (leaf): number of consecutive underflow sample
-// events needed to trigger an underflow adjustment
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/trigger-event-count"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/trigger-event-count"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPath) TriggerEventCount() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "trigger-event-count"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// TriggerEventCount (leaf): number of consecutive underflow sample
-// events needed to trigger an underflow adjustment
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/trigger-event-count"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/trigger-event-count"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPathAny) TriggerEventCount() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_TriggerEventCountPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "trigger-event-count"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UnderflowThreshold (leaf): bandwidth percentage change to trigger
-// and underflow event
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/underflow-threshold"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/underflow-threshold"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPath) UnderflowThreshold() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "underflow-threshold"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UnderflowThreshold (leaf): bandwidth percentage change to trigger
-// and underflow event
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/underflow-threshold"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/auto-bandwidth/underflow/state/underflow-threshold"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_UnderflowPathAny) UnderflowThreshold() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_AutoBandwidth_Underflow_UnderflowThresholdPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "underflow-threshold"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny struct {
-	*ygot.NodePath
-}
-
-// Bytes (leaf): Number of bytes that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "bytes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Bytes() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"bytes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Bytes (leaf): Number of bytes that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "bytes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Bytes() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"bytes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CurrentPathTime (leaf): Indicates the time the LSP switched onto its
-// current path. The value is reset upon a LSP path
-// change.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "current-path-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) CurrentPathTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"current-path-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CurrentPathTime (leaf): Indicates the time the LSP switched onto its
-// current path. The value is reset upon a LSP path
-// change.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "current-path-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) CurrentPathTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"current-path-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NextReoptimizationTime (leaf): Indicates the next scheduled time the LSP
-// will be reoptimized.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "next-reoptimization-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) NextReoptimizationTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"next-reoptimization-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NextReoptimizationTime (leaf): Indicates the next scheduled time the LSP
-// will be reoptimized.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "next-reoptimization-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) NextReoptimizationTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"next-reoptimization-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OnlineTime (leaf): Indication of the time the label switched path
-// transitioned to an Oper Up or in-service state.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "online-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) OnlineTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"online-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// OnlineTime (leaf): Indication of the time the label switched path
-// transitioned to an Oper Up or in-service state.
-//
-// The value is the timestamp in nanoseconds relative to
-// the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "online-time"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) OnlineTime() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"online-time"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Packets (leaf): Number of pacets that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "packets"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Packets() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"packets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Packets (leaf): Number of pacets that have been forwarded over the
-// label switched path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "packets"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Packets() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"packets"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathChanges (leaf): Number of path changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) PathChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathChanges (leaf): Number of path changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/path-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) PathChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PathChangesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// StateChanges (leaf): Number of state changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) StateChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// StateChanges (leaf): Number of state changes for the label switched path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state-changes"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/state-changes"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) StateChanges() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_StateChangesPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state-changes"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny struct {
-	*ygot.NodePath
-}
-
-// Destination (leaf): P2P tunnel destination address
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/destination"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) Destination() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "destination"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Destination (leaf): P2P tunnel destination address
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/destination"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/state/destination"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) Destination() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_DestinationPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "destination"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PPrimaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PPrimaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PPrimaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// P2PPrimaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-primary-path/p2p-primary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PPrimaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-primary-path", "p2p-primary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PSecondaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPathAny (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PSecondaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": "*"},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPath) P2PSecondaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// P2PSecondaryPath (list): List of p2p primary paths for a tunnel
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "p2p-secondary-paths/p2p-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path"
-// Name: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributesPathAny) P2PSecondaryPath(Name string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"p2p-secondary-paths", "p2p-secondary-path"},
-			map[string]interface{}{"name": Name},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/associated-rsvp-sessions YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/associated-rsvp-sessions YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny struct {
-	*ygot.NodePath
-}
-
-// AdminGroups (container): Top-level container for include/exclude constraints for
-// link affinities
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "admin-groups"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) AdminGroups() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"admin-groups"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AdminGroups (container): Top-level container for include/exclude constraints for
-// link affinities
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "admin-groups"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) AdminGroups() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"admin-groups"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AssociatedRsvpSessions (leaf): If the signalling protocol specified for this path is
-// RSVP-TE, this leaf-list provides a reference to the associated
-// sessions within the RSVP-TE protocol sessions list, such
-// that details of the signaling can be retrieved. More than
-// one session may exist during re-signalling such as
-// make-before-break.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/associated-rsvp-sessions"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/associated-rsvp-sessions"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) AssociatedRsvpSessions() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "associated-rsvp-sessions"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AssociatedRsvpSessions (leaf): If the signalling protocol specified for this path is
-// RSVP-TE, this leaf-list provides a reference to the associated
-// sessions within the RSVP-TE protocol sessions list, such
-// that details of the signaling can be retrieved. More than
-// one session may exist during re-signalling such as
-// make-before-break.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/associated-rsvp-sessions"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/associated-rsvp-sessions"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) AssociatedRsvpSessions() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AssociatedRsvpSessionsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "associated-rsvp-sessions"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CandidateSecondaryPathAny (list): List of secondary paths which may be utilised when the
-// current primary path is in use
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "candidate-secondary-paths/candidate-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path"
-// SecondaryPath (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) CandidateSecondaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"candidate-secondary-paths", "candidate-secondary-path"},
-			map[string]interface{}{"secondary-path": "*"},
-			n,
-		),
-	}
-}
-
-// CandidateSecondaryPathAny (list): List of secondary paths which may be utilised when the
-// current primary path is in use
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "candidate-secondary-paths/candidate-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path"
-// SecondaryPath (wildcarded): string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) CandidateSecondaryPathAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"candidate-secondary-paths", "candidate-secondary-path"},
-			map[string]interface{}{"secondary-path": "*"},
-			n,
-		),
-	}
-}
-
-// CandidateSecondaryPath (list): List of secondary paths which may be utilised when the
-// current primary path is in use
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "candidate-secondary-paths/candidate-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path"
-// SecondaryPath: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) CandidateSecondaryPath(SecondaryPath string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"candidate-secondary-paths", "candidate-secondary-path"},
-			map[string]interface{}{"secondary-path": SecondaryPath},
-			n,
-		),
-	}
-}
-
-// CandidateSecondaryPath (list): List of secondary paths which may be utilised when the
-// current primary path is in use
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "candidate-secondary-paths/candidate-secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path"
-// SecondaryPath: string
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) CandidateSecondaryPath(SecondaryPath string) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"candidate-secondary-paths", "candidate-secondary-path"},
-			map[string]interface{}{"secondary-path": SecondaryPath},
-			n,
-		),
-	}
-}
-
-// CspfMetric (leaf): The IGP metric of the path currently used by the LSP.
-// This value is used to represent the metric of the path
-// used by the LSP following the execution of the CSPF
-// algorithm and signalling of the LSP.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) CspfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfMetric (leaf): The IGP metric of the path currently used by the LSP.
-// This value is used to represent the metric of the path
-// used by the LSP following the execution of the CSPF
-// algorithm and signalling of the LSP.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) CspfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfMetricPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfTiebreaker (leaf): Determine the tie-breaking method to choose between
-// equally desirable paths during CSFP computation
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-tiebreaker"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) CspfTiebreaker() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-tiebreaker"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfTiebreaker (leaf): Determine the tie-breaking method to choose between
-// equally desirable paths during CSFP computation
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-tiebreaker"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/cspf-tiebreaker"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) CspfTiebreaker() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CspfTiebreakerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-tiebreaker"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExplicitPathName (leaf): reference to a defined path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/explicit-path-name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) ExplicitPathName() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "explicit-path-name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExplicitPathName (leaf): reference to a defined path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/explicit-path-name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/explicit-path-name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) ExplicitPathName() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_ExplicitPathNamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "explicit-path-name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// HoldPriority (leaf): preemption priority once the LSP is established,
-// lower is higher priority; default 0 indicates other LSPs
-// will not preempt the LSPs once established
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/hold-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) HoldPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "hold-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// HoldPriority (leaf): preemption priority once the LSP is established,
-// lower is higher priority; default 0 indicates other LSPs
-// will not preempt the LSPs once established
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/hold-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/hold-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) HoldPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_HoldPriorityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "hold-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): Path name
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) Name() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): Path name
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) Name() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_NamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationMethod (leaf): The method used for computing the path, either
-// locally computed, queried from a server or not
-// computed at all (explicitly configured).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-method"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) PathComputationMethod() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-method"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationMethod (leaf): The method used for computing the path, either
-// locally computed, queried from a server or not
-// computed at all (explicitly configured).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-method"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) PathComputationMethod() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationMethodPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-method"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationServer (leaf): Address of the external path computation
-// server
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-server"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) PathComputationServer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-server"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationServer (leaf): Address of the external path computation
-// server
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-server"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-server"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) PathComputationServer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-server"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraintAny (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type (wildcarded): E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) PathMetricBoundConstraintAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraintAny (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type (wildcarded): E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) PathMetricBoundConstraintAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraint (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type: E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) PathMetricBoundConstraint(Type E_MplsTypes_PATH_METRIC_TYPE) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraint (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type: E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) PathMetricBoundConstraint(Type E_MplsTypes_PATH_METRIC_TYPE) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// Preference (leaf): Specifies a preference for this path. The lower the
-// number higher the preference
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/preference"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) Preference() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "preference"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Preference (leaf): Specifies a preference for this path. The lower the
-// number higher the preference
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/preference"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/preference"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) Preference() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "preference"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RetryTimer (leaf): sets the time between attempts to establish the
-// LSP
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/retry-timer"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) RetryTimer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "retry-timer"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RetryTimer (leaf): sets the time between attempts to establish the
-// LSP
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/retry-timer"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/retry-timer"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) RetryTimer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_RetryTimerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "retry-timer"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SetupPriority (leaf): RSVP-TE preemption priority during LSP setup, lower is
-// higher priority; default 7 indicates that LSP will not
-// preempt established LSPs during setup
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/setup-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) SetupPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "setup-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SetupPriority (leaf): RSVP-TE preemption priority during LSP setup, lower is
-// higher priority; default 7 indicates that LSP will not
-// preempt established LSPs during setup
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/setup-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/setup-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) SetupPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SetupPriorityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "setup-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SpfMetric (leaf): The IGP metric of the shortest path to the LSP destination.
-// This value is used to compare the current metric of the
-// constrained path to the shortest path that is available in
-// the network topology.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/spf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) SpfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "spf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SpfMetric (leaf): The IGP metric of the shortest path to the LSP destination.
-// This value is used to compare the current metric of the
-// constrained path to the shortest path that is available in
-// the network topology.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/spf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/spf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) SpfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_SpfMetricPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "spf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UseCspf (leaf): Flag to enable CSPF for locally computed LSPs
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/use-cspf"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) UseCspf() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "use-cspf"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UseCspf (leaf): Flag to enable CSPF for locally computed LSPs
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/use-cspf"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/use-cspf"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) UseCspf() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_UseCspfPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "use-cspf"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/exclude-group YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/exclude-group YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-all-group YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-all-group YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-any-group YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-any-group YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPathAny struct {
-	*ygot.NodePath
-}
-
-// ExcludeGroup (leaf): list of references to named admin-groups to exclude in
-// path calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/exclude-group"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/exclude-group"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath) ExcludeGroup() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "exclude-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExcludeGroup (leaf): list of references to named admin-groups to exclude in
-// path calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/exclude-group"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/exclude-group"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny) ExcludeGroup() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_ExcludeGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "exclude-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// IncludeAllGroup (leaf): list of references to named admin-groups of which all must
-// be included
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/include-all-group"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-all-group"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath) IncludeAllGroup() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "include-all-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// IncludeAllGroup (leaf): list of references to named admin-groups of which all must
-// be included
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/include-all-group"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-all-group"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny) IncludeAllGroup() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAllGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "include-all-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// IncludeAnyGroup (leaf): list of references to named admin-groups of which one must
-// be included
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/include-any-group"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-any-group"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPath) IncludeAnyGroup() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "include-any-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// IncludeAnyGroup (leaf): list of references to named admin-groups of which one must
-// be included
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/include-any-group"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/admin-groups/state/include-any-group"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroupsPathAny) IncludeAnyGroup() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_AdminGroups_IncludeAnyGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "include-any-group"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/active YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/active YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny struct {
-	*ygot.NodePath
-}
-
-// Active (leaf): Indicates the current active path option that has
-// been selected of the candidate secondary paths
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/active"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/active"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath) Active() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "active"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Active (leaf): Indicates the current active path option that has
-// been selected of the candidate secondary paths
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/active"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/active"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny) Active() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_ActivePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "active"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Priority (leaf): The priority of the specified secondary path option. Higher
-// priority options are less preferable - such that a secondary
-// path reference with a priority of 0 is the most preferred
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath) Priority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Priority (leaf): The priority of the specified secondary path option. Higher
-// priority options are less preferable - such that a secondary
-// path reference with a priority of 0 is the most preferred
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny) Priority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_PriorityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SecondaryPath (leaf): A reference to the secondary path that should be utilised
-// when the containing primary path option is in use
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPath) SecondaryPath() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "secondary-path"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SecondaryPath (leaf): A reference to the secondary path that should be utilised
-// when the containing primary path option is in use
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/secondary-path"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/candidate-secondary-paths/candidate-secondary-path/state/secondary-path"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPathPathAny) SecondaryPath() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_CandidateSecondaryPath_SecondaryPathPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "secondary-path"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny struct {
-	*ygot.NodePath
-}
-
-// MetricUpperBound (leaf): Upper bound on end-to-end path metric. A zero indicate
-// an unbounded upper limit for the specific metric-type.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/metric-upper-bound"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) MetricUpperBound() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric-upper-bound"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// MetricUpperBound (leaf): Upper bound on end-to-end path metric. A zero indicate
-// an unbounded upper limit for the specific metric-type.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/metric-upper-bound"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/metric-upper-bound"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) MetricUpperBound() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_MetricUpperBoundPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "metric-upper-bound"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): Identifies an entry in the list of metric-types
-// bound for the TE path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPath) Type() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Type (leaf): Identifies an entry in the list of metric-types
-// bound for the TE path.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/type"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraintPathAny) Type() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint_TypePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "type"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/associated-rsvp-sessions YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/associated-rsvp-sessions YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-tiebreaker YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-tiebreaker YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/explicit-path-name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/explicit-path-name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/hold-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/hold-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/name YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-method YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-method YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-server YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-server YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/preference YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/preference YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/retry-timer YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/retry-timer YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/setup-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/setup-priority YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/spf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/spf-metric YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPathAny struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/use-cspf YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPath struct {
-	*ygot.NodePath
-}
-
-// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/use-cspf YANG schema element.
-type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPathAny struct {
-	*ygot.NodePath
-}
-
-// AdminGroups (container): Top-level container for include/exclude constraints for
-// link affinities
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "admin-groups"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) AdminGroups() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"admin-groups"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AdminGroups (container): Top-level container for include/exclude constraints for
-// link affinities
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "admin-groups"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/admin-groups"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) AdminGroups() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AdminGroupsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"admin-groups"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AssociatedRsvpSessions (leaf): If the signalling protocol specified for this path is
-// RSVP-TE, this leaf-list provides a reference to the associated
-// sessions within the RSVP-TE protocol sessions list, such
-// that details of the signaling can be retrieved. More than
-// one session may exist during re-signalling such as
-// make-before-break.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/associated-rsvp-sessions"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/associated-rsvp-sessions"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) AssociatedRsvpSessions() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "associated-rsvp-sessions"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// AssociatedRsvpSessions (leaf): If the signalling protocol specified for this path is
-// RSVP-TE, this leaf-list provides a reference to the associated
-// sessions within the RSVP-TE protocol sessions list, such
-// that details of the signaling can be retrieved. More than
-// one session may exist during re-signalling such as
-// make-before-break.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/associated-rsvp-sessions"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/associated-rsvp-sessions"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) AssociatedRsvpSessions() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_AssociatedRsvpSessionsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "associated-rsvp-sessions"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfMetric (leaf): The IGP metric of the path currently used by the LSP.
-// This value is used to represent the metric of the path
-// used by the LSP following the execution of the CSPF
-// algorithm and signalling of the LSP.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) CspfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfMetric (leaf): The IGP metric of the path currently used by the LSP.
-// This value is used to represent the metric of the path
-// used by the LSP following the execution of the CSPF
-// algorithm and signalling of the LSP.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) CspfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfMetricPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfTiebreaker (leaf): Determine the tie-breaking method to choose between
-// equally desirable paths during CSFP computation
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-tiebreaker"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-tiebreaker"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) CspfTiebreaker() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-tiebreaker"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// CspfTiebreaker (leaf): Determine the tie-breaking method to choose between
-// equally desirable paths during CSFP computation
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/cspf-tiebreaker"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/cspf-tiebreaker"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) CspfTiebreaker() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_CspfTiebreakerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "cspf-tiebreaker"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExplicitPathName (leaf): reference to a defined path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/explicit-path-name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/explicit-path-name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) ExplicitPathName() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "explicit-path-name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// ExplicitPathName (leaf): reference to a defined path
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/explicit-path-name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/explicit-path-name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) ExplicitPathName() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_ExplicitPathNamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "explicit-path-name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// HoldPriority (leaf): preemption priority once the LSP is established,
-// lower is higher priority; default 0 indicates other LSPs
-// will not preempt the LSPs once established
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/hold-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/hold-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) HoldPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "hold-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// HoldPriority (leaf): preemption priority once the LSP is established,
-// lower is higher priority; default 0 indicates other LSPs
-// will not preempt the LSPs once established
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/hold-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/hold-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) HoldPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_HoldPriorityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "hold-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): Path name
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Name() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Name (leaf): Path name
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/name"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/name"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Name() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_NamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "name"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationMethod (leaf): The method used for computing the path, either
-// locally computed, queried from a server or not
-// computed at all (explicitly configured).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-method"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-method"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) PathComputationMethod() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-method"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationMethod (leaf): The method used for computing the path, either
-// locally computed, queried from a server or not
-// computed at all (explicitly configured).
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-method"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-method"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) PathComputationMethod() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationMethodPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-method"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationServer (leaf): Address of the external path computation
-// server
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-server"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-server"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) PathComputationServer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-server"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathComputationServer (leaf): Address of the external path computation
-// server
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/path-computation-server"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-server"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) PathComputationServer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "path-computation-server"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraintAny (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type (wildcarded): E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) PathMetricBoundConstraintAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraintAny (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type (wildcarded): E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) PathMetricBoundConstraintAny() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": "*"},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraint (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type: E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) PathMetricBoundConstraint(Type E_MplsTypes_PATH_METRIC_TYPE) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// PathMetricBoundConstraint (list): A list of metric bounds that are applied as constraints to the LSP.
-// It act as a logical AND, hence all of them must be satisfied.
-// If not, it will return an error.
-// Constraints within this list may be applicable to either
-// the local CSPF process (where data is available to the local device)
-// or be communicated to a PCE for calculation.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "path-metric-bound-constraints/path-metric-bound-constraint"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/path-metric-bound-constraints/path-metric-bound-constraint"
-// Type: E_MplsTypes_PATH_METRIC_TYPE
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) PathMetricBoundConstraint(Type E_MplsTypes_PATH_METRIC_TYPE) *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraintPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"path-metric-bound-constraints", "path-metric-bound-constraint"},
-			map[string]interface{}{"type": Type},
-			n,
-		),
-	}
-}
-
-// Preference (leaf): Specifies a preference for this path. The lower the
-// number higher the preference
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/preference"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/preference"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) Preference() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "preference"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Preference (leaf): Specifies a preference for this path. The lower the
-// number higher the preference
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/preference"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/preference"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) Preference() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "preference"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RetryTimer (leaf): sets the time between attempts to establish the
-// LSP
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/retry-timer"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/retry-timer"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) RetryTimer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "retry-timer"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// RetryTimer (leaf): sets the time between attempts to establish the
-// LSP
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/retry-timer"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/retry-timer"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) RetryTimer() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_RetryTimerPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "retry-timer"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SetupPriority (leaf): RSVP-TE preemption priority during LSP setup, lower is
-// higher priority; default 7 indicates that LSP will not
-// preempt established LSPs during setup
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/setup-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/setup-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) SetupPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "setup-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SetupPriority (leaf): RSVP-TE preemption priority during LSP setup, lower is
-// higher priority; default 7 indicates that LSP will not
-// preempt established LSPs during setup
-// ----------------------------------------
-// Defining module: "openconfig-mpls-rsvp"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/setup-priority"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/setup-priority"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) SetupPriority() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SetupPriorityPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "setup-priority"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SpfMetric (leaf): The IGP metric of the shortest path to the LSP destination.
-// This value is used to compare the current metric of the
-// constrained path to the shortest path that is available in
-// the network topology.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/spf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/spf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) SpfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "spf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// SpfMetric (leaf): The IGP metric of the shortest path to the LSP destination.
-// This value is used to compare the current metric of the
-// constrained path to the shortest path that is available in
-// the network topology.
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/spf-metric"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/spf-metric"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) SpfMetric() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_SpfMetricPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "spf-metric"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UseCspf (leaf): Flag to enable CSPF for locally computed LSPs
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/use-cspf"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/use-cspf"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) UseCspf() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPath {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "use-cspf"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// UseCspf (leaf): Flag to enable CSPF for locally computed LSPs
-// ----------------------------------------
-// Defining module: "openconfig-mpls-te"
-// Instantiating module: "openconfig-network-instance"
-// Path from parent: "state/use-cspf"
-// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/use-cspf"
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) UseCspf() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPathAny {
-	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_UseCspfPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "use-cspf"},
 			map[string]interface{}{},
 			n,
 		),

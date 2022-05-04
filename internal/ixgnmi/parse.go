@@ -334,7 +334,7 @@ func rowString(row interface{}) string {
 		fieldName := val.Type().Field(i).Name
 		var valStr string
 		if fieldVal := val.Field(i); !fieldVal.IsZero() {
-			if fieldVal.Type().Kind() == reflect.Pointer {
+			if fieldVal.Type().Kind() == reflect.Ptr {
 				fieldVal = fieldVal.Elem()
 			}
 			valStr = fmt.Sprintf("%v", fieldVal.Interface())
