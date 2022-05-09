@@ -14680,7 +14680,7 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_RestartTimePa
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart", goStruct, true, true)
@@ -14693,19 +14693,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart", goStruct, queryPath, true, true)
@@ -14719,10 +14719,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -14742,34 +14742,34 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Replace(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Update(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Update(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/config/stale-routes-time in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath extracts the value of the leaf StaleRoutesTime from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.StaleRoutesTime
@@ -16072,14 +16072,14 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_TimersPath) BatchUpdate(t testin
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, true)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetConnectRetry())
 }
@@ -16087,19 +16087,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Lookup(
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, true)
@@ -16113,10 +16113,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Look
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -16136,34 +16136,34 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) BatchDe
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Update(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/connect-retry in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath extracts the value of the leaf ConnectRetry from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.ConnectRetry
@@ -16175,14 +16175,14 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t tes
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, true)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetHoldTime())
 }
@@ -16190,19 +16190,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Lookup(t te
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, true)
@@ -16216,10 +16216,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Lookup(t
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -16239,34 +16239,34 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) BatchDelete
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Replace(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Update(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Update(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/hold-time in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath extracts the value of the leaf HoldTime from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.HoldTime
@@ -16278,14 +16278,14 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, true)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetKeepaliveInterval())
 }
@@ -16293,19 +16293,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Lo
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, true)
@@ -16319,10 +16319,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny)
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -16342,34 +16342,34 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Ba
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Update(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/keepalive-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath extracts the value of the leaf KeepaliveInterval from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.KeepaliveInterval
@@ -16381,14 +16381,14 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, true)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetMinimumAdvertisementInterval())
 }
@@ -16396,19 +16396,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, true)
@@ -16422,10 +16422,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -16445,34 +16445,34 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Update(t testing.TB, val float64) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/config/minimum-advertisement-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath extracts the value of the leaf MinimumAdvertisementInterval from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.MinimumAdvertisementInterval

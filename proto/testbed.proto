@@ -81,6 +81,9 @@ message Port {
     S_400GB = 400;
   }
   Speed speed = 2;
+
+  // The model of the card which contains the physical port.
+  string card_model = 3;
 }
 
 // A physical link between ports on DUTs or ATEs.

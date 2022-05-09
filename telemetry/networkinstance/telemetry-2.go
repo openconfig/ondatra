@@ -43613,7 +43613,7 @@ func convertNetworkInstance_Protocol_Bgp_Global_GracefulRestart_RestartTimePath(
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/state/stale-routes-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_GracefulRestart", goStruct, true, false)
@@ -43626,19 +43626,19 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/state/stale-routes-time with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/state/stale-routes-time with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_GracefulRestart", goStruct, queryPath, true, false)
@@ -43652,10 +43652,10 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/state/stale-routes-time with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -43664,26 +43664,26 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/state/stale-routes-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_GracefulRestart", gs, queryPath, true, false)
 		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -43695,7 +43695,7 @@ func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePa
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath(t, n, timeout, predicate)
 }
@@ -43705,9 +43705,9 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
@@ -43724,19 +43724,19 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/state/stale-routes-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
@@ -43755,7 +43755,7 @@ func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePa
 		}
 		return currStructs, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -43767,7 +43767,7 @@ func watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePa
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePathAny(t, n, timeout, predicate)
 }
@@ -43779,10 +43779,10 @@ func (n *NetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath
 }
 
 // convertNetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath extracts the value of the leaf StaleRoutesTime from its parent oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_Global_GracefulRestart_StaleRoutesTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_GracefulRestart) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.StaleRoutesTime

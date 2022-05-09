@@ -5662,7 +5662,7 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_RestartTimePa
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/state/stale-routes-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart", goStruct, true, false)
@@ -5675,19 +5675,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/state/stale-routes-time with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/state/stale-routes-time with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart", goStruct, queryPath, true, false)
@@ -5701,10 +5701,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/state/stale-routes-time with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -5713,26 +5713,26 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/state/stale-routes-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart", gs, queryPath, true, false)
 		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -5744,7 +5744,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTim
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t, n, timeout, predicate)
 }
@@ -5754,9 +5754,9 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
@@ -5773,19 +5773,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/graceful-restart/state/stale-routes-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
@@ -5804,7 +5804,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTim
 		}
 		return currStructs, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -5816,7 +5816,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTim
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePathAny(t, n, timeout, predicate)
 }
@@ -5828,10 +5828,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimeP
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath extracts the value of the leaf StaleRoutesTime from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart_StaleRoutesTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.StaleRoutesTime
@@ -8207,14 +8207,14 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_TimersPathAny) Batch(t testing.T
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/connect-retry with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, false)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetConnectRetry())
 }
@@ -8222,19 +8222,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Lookup(
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/connect-retry with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/connect-retry with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, false)
@@ -8248,10 +8248,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Look
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/connect-retry with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -8260,26 +8260,26 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Get(
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/connect-retry with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", gs, queryPath, true, false)
 		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8291,7 +8291,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t test
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t, n, timeout, predicate)
 }
@@ -8301,9 +8301,9 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Watch(t
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
@@ -8320,19 +8320,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath) Batch(t
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/connect-retry with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
@@ -8351,7 +8351,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny(t t
 		}
 		return currStructs, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8363,7 +8363,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny(t t
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny(t, n, timeout, predicate)
 }
@@ -8375,10 +8375,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPathAny) Batc
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath extracts the value of the leaf ConnectRetry from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.ConnectRetry
@@ -8390,14 +8390,14 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_ConnectRetryPath(t tes
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/hold-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, false)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetHoldTime())
 }
@@ -8405,19 +8405,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Lookup(t te
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/hold-time with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/hold-time with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, false)
@@ -8431,10 +8431,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Lookup(t
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/hold-time with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -8443,26 +8443,26 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Get(t te
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/hold-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", gs, queryPath, true, false)
 		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8474,7 +8474,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t, n, timeout, predicate)
 }
@@ -8484,9 +8484,9 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Watch(t tes
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
@@ -8503,19 +8503,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath) Batch(t tes
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/hold-time with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
@@ -8534,7 +8534,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny(t testi
 		}
 		return currStructs, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8546,7 +8546,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny(t testi
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny(t, n, timeout, predicate)
 }
@@ -8558,10 +8558,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePathAny) Batch(t 
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath extracts the value of the leaf HoldTime from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.HoldTime
@@ -8573,14 +8573,14 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_HoldTimePath(t testing
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/keepalive-interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, false)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetKeepaliveInterval())
 }
@@ -8588,19 +8588,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Lo
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/keepalive-interval with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/keepalive-interval with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, false)
@@ -8614,10 +8614,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny)
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/keepalive-interval with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -8626,26 +8626,26 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny)
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/keepalive-interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", gs, queryPath, true, false)
 		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8657,7 +8657,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t, n, timeout, predicate)
 }
@@ -8667,9 +8667,9 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Wa
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
@@ -8686,19 +8686,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath) Ba
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/keepalive-interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
@@ -8717,7 +8717,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAn
 		}
 		return currStructs, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8729,7 +8729,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAn
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny(t, n, timeout, predicate)
 }
@@ -8741,10 +8741,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPathAny)
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath extracts the value of the leaf KeepaliveInterval from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.KeepaliveInterval
@@ -8756,14 +8756,14 @@ func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_KeepaliveIntervalPath(
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/minimum-advertisement-interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, true, false)
 	if ok {
 		return convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t, md, goStruct)
 	}
-	return (&oc.QualifiedFloat64{
+	return (&oc.QualifiedUint16{
 		Metadata: md,
 	}).SetVal(goStruct.GetMinimumAdvertisementInterval())
 }
@@ -8771,19 +8771,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/minimum-advertisement-interval with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Get(t testing.TB) float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Get(t testing.TB) uint16 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/minimum-advertisement-interval with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedFloat64
+	var data []*oc.QualifiedUint16
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", goStruct, queryPath, true, false)
@@ -8797,10 +8797,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/minimum-advertisement-interval with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Get(t testing.TB) []float64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Get(t testing.TB) []uint16 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []float64
+	var data []uint16
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -8809,26 +8809,26 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/minimum-advertisement-interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	gs := &oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_PeerGroup_Timers", gs, queryPath, true, false)
 		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8840,7 +8840,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInt
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t, n, timeout, predicate)
 }
@@ -8850,9 +8850,9 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 // or failing fatally if the value is not received by the specified timeout.
 // To avoid a fatal failure, to wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath) Await(t testing.TB, timeout time.Duration, val uint16) *oc.QualifiedUint16 {
 	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint16) bool {
 		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
 	}).Await(t)
 	if !success {
@@ -8869,19 +8869,19 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 
 // Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/timers/state/minimum-advertisement-interval with a STREAM subscription.
 // Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint16 {
 	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+	c := &oc.CollectionUint16{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint16) bool {
 		c.Data = append(c.Data, v)
 		return false
 	})
 	return c
 }
 
-func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
-	w := &oc.Float64Watcher{}
+	w := &oc.Uint16Watcher{}
 	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers{}
 	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
@@ -8900,7 +8900,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInt
 		}
 		return currStructs, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
+		val, ok := qualVal.(*oc.QualifiedUint16)
 		w.LastVal = val
 		return ok && predicate(val)
 	})
@@ -8912,7 +8912,7 @@ func watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInt
 // The subscription completes when either the predicate is true or the specified duration elapses.
 // Calling Await on the returned Watcher waits for the subscription to complete.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint16) bool) *oc.Uint16Watcher {
 	t.Helper()
 	return watch_NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPathAny(t, n, timeout, predicate)
 }
@@ -8924,10 +8924,10 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementInter
 }
 
 // convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath extracts the value of the leaf MinimumAdvertisementInterval from its parent oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedFloat64 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Bgp_PeerGroup_Timers_MinimumAdvertisementIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_PeerGroup_Timers) *oc.QualifiedUint16 {
 	t.Helper()
-	qv := &oc.QualifiedFloat64{
+	qv := &oc.QualifiedUint16{
 		Metadata: md,
 	}
 	val := parent.MinimumAdvertisementInterval

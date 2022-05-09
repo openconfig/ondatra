@@ -68,6 +68,12 @@ type Binding interface {
 	//
 	// The 'partial' map gives a partial mapping of device and port IDs in the
 	// testbed to concrete names to constrain the topology that is reserved.
+	//
+	// Devices in the returned reservation should be initialiazed with a fixed
+	// base configuration. Implementations are encouraged to make this base
+	// configuration "minimal," meaning a configuration that ensures the device
+	// is reachable and capable of being configured further, but little else,
+	// so that tests make as few assumptions about the devices as possible.
 	Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitTime time.Duration, partial map[string]string) (*Reservation, error)
 
 	// Release releases the reserved testbed.
@@ -160,8 +166,9 @@ type ATE interface {
 
 // Port is a reserved Port.
 type Port struct {
-	Name  string
-	Speed opb.Port_Speed
+	Name      string
+	Speed     opb.Port_Speed
+	CardModel string
 }
 
 func (p *Port) String() string {

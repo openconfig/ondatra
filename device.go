@@ -182,6 +182,11 @@ func (p *Port) Speed() Speed {
 	return Speed(p.res.Speed)
 }
 
+// CardModel returns the card model.
+func (p *Port) CardModel() string {
+	return p.res.CardModel
+}
+
 var (
 	gnmisMu sync.Mutex
 	gnmis   = make(map[binding.Device]gpb.GNMIClient)

@@ -228,6 +228,9 @@ func TestReserve(t *testing.T) {
 		if got, want := p.Speed(), Speed10Gb; got != want {
 			t.Errorf("port speed = %d, want %d", got, want)
 		}
+		if got, want := p.CardModel(), "EX9200-40T"; got != want {
+			t.Errorf("card model = %q, want %q", got, want)
+		}
 	})
 
 	t.Run("Get Port failure", func(t *testing.T) {
@@ -238,6 +241,23 @@ func TestReserve(t *testing.T) {
 		})
 		if !strings.Contains(got, pid) {
 			t.Errorf("Port(%q) failed with message %q, want %q", pid, got, pid)
+		}
+	})
+
+	t.Run("Get Ixia Port", func(t *testing.T) {
+		iid, pid := "ate_ixia", "port2"
+		p := ATE(t, iid).Port(t, pid)
+		if got, want := p.ID(), pid; got != want {
+			t.Errorf("port id = %q, want %q", got, want)
+		}
+		if got, want := p.Device().ID(), iid; got != want {
+			t.Errorf("port device id = %q, want %q", got, want)
+		}
+		if got, want := p.Speed(), Speed100Gb; got != want {
+			t.Errorf("port speed = %d, want %d", got, want)
+		}
+		if got, want := p.CardModel(), "NOVUS"; got != want {
+			t.Errorf("card model = %q, want %q", got, want)
 		}
 	})
 }

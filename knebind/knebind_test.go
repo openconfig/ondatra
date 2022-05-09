@@ -17,6 +17,7 @@ package knebind
 import (
 	"golang.org/x/net/context"
 	"errors"
+	"fmt"
 	"strings"
 	"testing"
 	"time"
@@ -144,9 +145,20 @@ func TestReserve(t *testing.T) {
 		A: "dut1:port2",
 		B: "ate:port1",
 	}
+
+	var gotResets int
 	kneCmdFn = func(cfg *Config, args ...string) ([]byte, error) {
-		return []byte(topo), nil
+		switch args[1] {
+		case "reset":
+			gotResets++
+			return nil, nil
+		case "service":
+			return []byte(topo), nil
+		default:
+			return nil, fmt.Errorf("unexpected args: %s", args)
+		}
 	}
+
 	bind := &Bind{cfg: &Config{}}
 	wantDUT1 := &kneDUT{
 		ServiceDUT: &solver.ServiceDUT{
@@ -288,6 +300,7 @@ func TestReserve(t *testing.T) {
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
+			gotResets = 0
 			gotRes, err := bind.Reserve(context.Background(), tt.tb, time.Minute, time.Minute, nil)
 			if err != nil {
 				t.Fatalf("Reserve() got error: %v", err)
@@ -298,6 +311,9 @@ func TestReserve(t *testing.T) {
 			gotRes.ID = ""
 			if diff := cmp.Diff(tt.wantRes, gotRes, protocmp.Transform(), cmp.AllowUnexported(kneDUT{}, kneATE{})); diff != "" {
 				t.Errorf("Reserve() got unexpected diff in reservation (-want,+got): %s", diff)
+			}
+			if wantResets := len(tt.wantRes.DUTs); wantResets != gotResets {
+				t.Errorf("Reserve() got unexpected DUT resets: want %v, got %v", wantResets, gotResets)
 			}
 		})
 	}

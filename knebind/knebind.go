@@ -80,10 +80,14 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 		return nil, err
 	}
 	for i, dut := range res.DUTs {
-		res.DUTs[i] = &kneDUT{
+		kdut := &kneDUT{
 			ServiceDUT: dut.(*solver.ServiceDUT),
 			cfg:        b.cfg,
 		}
+		if err := kdut.resetConfig(); err != nil {
+			return nil, err
+		}
+		res.DUTs[i] = kdut
 	}
 	for i, ate := range res.ATEs {
 		res.ATEs[i] = &kneATE{
@@ -102,6 +106,11 @@ func (b *Bind) Release(context.Context) error {
 type kneDUT struct {
 	*solver.ServiceDUT
 	cfg *Config
+}
+
+func (d *kneDUT) resetConfig() error {
+	_, err := kneCmdFn(d.cfg, "topology", "reset", d.cfg.TopoPath, d.Name(), "--push")
+	return err
 }
 
 func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
@@ -174,7 +183,7 @@ func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) erro
 		return errors.New("KNEBind PushConfig only supports Arista devices")
 	}
 	if reset {
-		if _, err := kneCmdFn(d.cfg, "topology", "reset", d.cfg.TopoPath, d.Name(), "--push"); err != nil {
+		if err := d.resetConfig(); err != nil {
 			return err
 		}
 	}
