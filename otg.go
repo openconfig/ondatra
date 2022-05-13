@@ -16,18 +16,17 @@ package ondatra
 
 import (
 	"fmt"
-	"strconv"
 	"testing"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/otg"
 )
 
 // OTG provides the Open Traffic Generator API to an ATE.
 type OTG struct {
 	ate binding.ATE
-	api gosnappi.GosnappiApi
 }
 
 func (o *OTG) String() string {
@@ -35,28 +34,26 @@ func (o *OTG) String() string {
 }
 
 // NewConfig creates a new OTG config.
-func (o *OTG) NewConfig() gosnappi.Config {
-	return o.api.NewConfig()
+func (o *OTG) NewConfig(t testing.TB) gosnappi.Config {
+	t.Helper()
+	debugger.ActionStarted(t, "Creating new config for %s", o.ate)
+	cfg, err := otg.NewConfig(o.ate)
+	if err != nil {
+		t.Fatalf("NewConfig(t) on %s: %v", o.ate, err)
+	}
+	return cfg
 }
 
 // PushConfig pushes config to the ATE.
 func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 	t.Helper()
-	const locFormat = "service-ate%d.ceos-simple.svc.cluster.local:5555+service-ate%d.ceos-simple.svc.cluster.local:50071"
-	for _, p := range cfg.Ports().Items() {
-		portNum, err := strconv.Atoi(p.Name()[1:])
-		if err != nil {
-			t.Fatal(err)
-		}
-		p.SetLocation(fmt.Sprintf(locFormat, portNum, portNum))
-	}
 	debugger.ActionStarted(t, "Pushing config to %s", o.ate)
-	resp, err := o.api.SetConfig(cfg)
+	warns, err := otg.PushConfig(o.ate, cfg)
 	if err != nil {
-		t.Fatalf("PushConfig(t) on %s: %v", o, err)
+		t.Fatalf("PushConfig(t) on %s: %v", o.ate, err)
 	}
-	if warns := resp.Warnings(); len(warns) > 0 {
-		t.Logf("PushConfig(t) on %s non-fatal warnings: %v", o, warns)
+	if len(warns) > 0 {
+		t.Logf("PushConfig(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
 }
 
@@ -64,61 +61,61 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 func (o *OTG) FetchConfig(t testing.TB) gosnappi.Config {
 	t.Helper()
 	debugger.ActionStarted(t, "Fetching config from %s", o.ate)
-	cfg, err := o.api.GetConfig()
+	cfg, err := otg.FetchConfig(o.ate)
 	if err != nil {
-		t.Fatalf("FetchConfig(t) from %s: %v", o, err)
+		t.Fatalf("FetchConfig(t) on %s: %v", o.ate, err)
 	}
 	return cfg
 }
 
 // StartProtocols starts protocols on the ATE.
 func (o *OTG) StartProtocols(t testing.TB) {
+	t.Helper()
 	debugger.ActionStarted(t, "Starting protocols on %s", o.ate)
-	started := o.api.NewProtocolState().SetState(gosnappi.ProtocolStateState.START)
-	resp, err := o.api.SetProtocolState(started)
+	warns, err := otg.StartProtocols(o.ate)
 	if err != nil {
-		t.Fatalf("StartProtocols(t) from %s: %v", o, err)
+		t.Fatalf("StartProtocols(t) on %s: %v", o.ate, err)
 	}
-	if warns := resp.Warnings(); len(warns) > 0 {
-		t.Logf("StartProtocols(t) on %s non-fatal warnings: %v", o, warns)
+	if len(warns) > 0 {
+		t.Logf("StartProtocols(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
 }
 
 // StopProtocols stops protocols on the ATE.
 func (o *OTG) StopProtocols(t testing.TB) {
-	debugger.ActionStarted(t, "Stopping rotocols on %s", o.ate)
-	stopped := o.api.NewProtocolState().SetState(gosnappi.ProtocolStateState.STOP)
-	resp, err := o.api.SetProtocolState(stopped)
+	t.Helper()
+	debugger.ActionStarted(t, "Stopping protocols on %s", o.ate)
+	warns, err := otg.StopProtocols(o.ate)
 	if err != nil {
-		t.Fatalf("StopProtocols(t) from %s: %v", o, err)
+		t.Fatalf("StopProtocols(t) on %s: %v", o.ate, err)
 	}
-	if warns := resp.Warnings(); len(warns) > 0 {
-		t.Logf("StopProtocols(t) on %s non-fatal warnings: %v", o, warns)
+	if len(warns) > 0 {
+		t.Logf("StopProtocols(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
 }
 
 // StartTraffic starts traffic on the ATE.
 func (o *OTG) StartTraffic(t testing.TB) {
+	t.Helper()
 	debugger.ActionStarted(t, "Starting traffic on %s", o.ate)
-	started := o.api.NewTransmitState().SetState(gosnappi.TransmitStateState.START)
-	resp, err := o.api.SetTransmitState(started)
+	warns, err := otg.StartTraffic(o.ate)
 	if err != nil {
-		t.Fatalf("StartTraffic(t) from %s: %v", o, err)
+		t.Fatalf("StartTraffic(t) on %s: %v", o.ate, err)
 	}
-	if warns := resp.Warnings(); len(warns) > 0 {
-		t.Logf("StartTraffic(t) on %s non-fatal warnings: %v", o, warns)
+	if len(warns) > 0 {
+		t.Logf("StartTraffic(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
 }
 
 // StopTraffic stops traffic on the ATE.
 func (o *OTG) StopTraffic(t testing.TB) {
+	t.Helper()
 	debugger.ActionStarted(t, "Stopping traffic on %s", o.ate)
-	stopped := o.api.NewTransmitState().SetState(gosnappi.TransmitStateState.STOP)
-	resp, err := o.api.SetTransmitState(stopped)
+	warns, err := otg.StopTraffic(o.ate)
 	if err != nil {
-		t.Fatalf("StopTraffic(t) from %s: %v", o, err)
+		t.Fatalf("StopTraffic(t) on %s: %v", o.ate, err)
 	}
-	if warns := resp.Warnings(); len(warns) > 0 {
-		t.Logf("StopTraffic(t) on %s non-fatal warnings: %v", o, warns)
+	if len(warns) > 0 {
+		t.Logf("StopTraffic(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
 }

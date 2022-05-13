@@ -15,7 +15,6 @@
 package ondatra
 
 import (
-	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 )
 
@@ -28,9 +27,7 @@ type ATEDevice struct {
 // OTG returns a handle to the OTG API.
 func (a *ATEDevice) OTG() *OTG {
 	if a.otg == nil {
-		// TODO: Replace with a Binding.DialOTG method.
-		api := gosnappi.NewApi()
-		a.otg = &OTG{ate: a.res.(binding.ATE), api: api}
+		a.otg = &OTG{ate: a.res.(binding.ATE)}
 	}
 	return a.otg
 }

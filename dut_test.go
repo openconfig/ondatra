@@ -62,7 +62,7 @@ func initDUTFakes(t *testing.T) {
 	}
 }
 
-func TestPushConfig(t *testing.T) {
+func TestConfigPush(t *testing.T) {
 	initDUTFakes(t)
 	dutArista := DUT(t, "dut_arista")
 	testsPass := []struct {
@@ -130,7 +130,7 @@ func TestPushConfig(t *testing.T) {
 	}
 }
 
-func TestPushConfigErrors(t *testing.T) {
+func TestConfigPushErrors(t *testing.T) {
 	initDUTFakes(t)
 	dutArista := DUT(t, "dut_arista")
 	testsFail := []struct {
@@ -177,7 +177,7 @@ func TestPushConfigErrors(t *testing.T) {
 	}
 }
 
-func TestAppendConfig(t *testing.T) {
+func TestConfigAppend(t *testing.T) {
 	initDUTFakes(t)
 	gotConfig = ""
 	gotReset = false
