@@ -12,6 +12,136 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPostWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPostWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPostWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPostWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPost, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPreWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPreWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPreWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPreWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibInPre, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibOutPost is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibOutPost with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor_AdjRibOutPost struct {
 	*genutil.Metadata
@@ -9043,71 +9173,6 @@ type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DefaultMetricWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DefaultMetric, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric is a *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric sample.
-func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) SetVal(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric samples.
-type CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric struct {
-	W    *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric samples.
-type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

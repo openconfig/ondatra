@@ -18,6 +18,7 @@ package fakegnmi
 import (
 	"golang.org/x/net/context"
 	"fmt"
+	"io"
 
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc"
@@ -29,8 +30,9 @@ import (
 
 // FakeGNMI is a running fake GNMI server.
 type FakeGNMI struct {
-	agent *gnmi.Agent
-	stub  *Stubber
+	agent      *gnmi.Agent
+	stub       *Stubber
+	getWrapper *getWrapper
 }
 
 // Start launches a new fake GNMI server on the given port
@@ -46,9 +48,11 @@ func Start(port int) (*FakeGNMI, error) {
 	if err != nil {
 		return nil, err
 	}
+	stub := &Stubber{gen: gen}
 	return &FakeGNMI{
-		agent: agent,
-		stub:  &Stubber{gen: gen},
+		agent:      agent,
+		stub:       stub,
+		getWrapper: &getWrapper{stub: stub},
 	}, nil
 }
 
@@ -59,12 +63,14 @@ func (g *FakeGNMI) Dial(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIC
 	if err != nil {
 		return nil, fmt.Errorf("DialContext(%s, %v): %w", g.agent.Address(), opts, err)
 	}
-	return gpb.NewGNMIClient(conn), nil
+	g.getWrapper.GNMIClient = gpb.NewGNMIClient(conn)
+	return g.getWrapper, nil
 }
 
 // Stub reset the stubbed responses to empty and returns a handle to add new ones.
 func (g *FakeGNMI) Stub() *Stubber {
 	g.stub.gen.Reset()
+	g.stub.getResponses = nil
 	return g.stub
 }
 
@@ -73,9 +79,33 @@ func (g *FakeGNMI) Requests() []*gpb.SubscribeRequest {
 	return g.agent.Requests()
 }
 
+// GetRequests returns the set of GetRequests sent to the gNMI server.
+func (g *FakeGNMI) GetRequests() []*gpb.GetRequest {
+	return g.getWrapper.getRequests
+}
+
+// getWrapper adds gNMI Get functionality to a GNMI client.
+type getWrapper struct {
+	gpb.GNMIClient
+	stub        *Stubber
+	getRequests []*gpb.GetRequest
+}
+
+// Get is fake implement of gnmi Get.
+func (g *getWrapper) Get(ctx context.Context, req *gpb.GetRequest, opts ...grpc.CallOption) (*gpb.GetResponse, error) {
+	g.getRequests = append(g.getRequests, req)
+	if len(g.stub.getResponses) == 0 {
+		return nil, io.EOF
+	}
+	resp := g.stub.getResponses[0]
+	g.stub.getResponses = g.stub.getResponses[1:]
+	return resp, nil
+}
+
 // Stubber is a handle to add stubbed responses.
 type Stubber struct {
-	gen *fpb.FixedGenerator
+	gen          *fpb.FixedGenerator
+	getResponses []*gpb.GetResponse
 }
 
 // Notification appends the given notification as a stub response.
@@ -83,6 +113,12 @@ func (s *Stubber) Notification(n *gpb.Notification) *Stubber {
 	s.gen.Responses = append(s.gen.Responses, &gpb.SubscribeResponse{
 		Response: &gpb.SubscribeResponse_Update{Update: n},
 	})
+	return s
+}
+
+// GetResponse appends the given GetResponse as a stub response.
+func (s *Stubber) GetResponse(gr *gpb.GetResponse) *Stubber {
+	s.getResponses = append(s.getResponses, gr)
 	return s
 }
 

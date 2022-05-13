@@ -21,6 +21,7 @@ import (
 	"io"
 	"time"
 
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding/ixweb"
 
@@ -161,6 +162,9 @@ type ATE interface {
 	// DialIxNetwork creates a client connection to the ATE's IxNetwork endpoint.
 	DialIxNetwork(context.Context) (*IxNetwork, error)
 
+	// DialOTG creates a client connection to the ATE's OTG endpoint.
+	DialOTG() (gosnappi.GosnappiApi, error)
+
 	isATE()
 }
 
@@ -169,6 +173,7 @@ type Port struct {
 	Name      string
 	Speed     opb.Port_Speed
 	CardModel string
+	PMD       string
 }
 
 func (p *Port) String() string {

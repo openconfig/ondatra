@@ -88,6 +88,10 @@ func WithDialer(d GRPCDialer) Option {
 }
 
 // WithServerProvider sets the proxy server GRPCServer provider implementation.
+// REMINDER: if you are providing this option make sure you properly handle the
+// appending of opts from the caller in your implementation as the server will
+// append additional opts as part of it startup.
+// Specifically grpc.ForceServerCodec and grpc.UnknownServiceHandler.
 func WithServerProvider(sp ServerProviderFn) Option {
 	return func(p *proxy) {
 		p.serverProvider = sp

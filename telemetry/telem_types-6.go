@@ -9111,3 +9111,68 @@ func (w *Qos_Interface_Output_InterfaceRefWatcher) Await(t testing.TB) (*Qualifi
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
+
+// QualifiedQos_Interface_Output_Queue is a *Qos_Interface_Output_Queue with a corresponding timestamp.
+type QualifiedQos_Interface_Output_Queue struct {
+	*genutil.Metadata
+	val     *Qos_Interface_Output_Queue // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedQos_Interface_Output_Queue) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Qos_Interface_Output_Queue sample, erroring out if not present.
+func (q *QualifiedQos_Interface_Output_Queue) Val(t testing.TB) *Qos_Interface_Output_Queue {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Qos_Interface_Output_Queue sample.
+func (q *QualifiedQos_Interface_Output_Queue) SetVal(v *Qos_Interface_Output_Queue) *QualifiedQos_Interface_Output_Queue {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedQos_Interface_Output_Queue) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionQos_Interface_Output_Queue is a telemetry Collection whose Await method returns a slice of *Qos_Interface_Output_Queue samples.
+type CollectionQos_Interface_Output_Queue struct {
+	W    *Qos_Interface_Output_QueueWatcher
+	Data []*QualifiedQos_Interface_Output_Queue
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionQos_Interface_Output_Queue) Await(t testing.TB) []*QualifiedQos_Interface_Output_Queue {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Qos_Interface_Output_QueueWatcher observes a stream of *Qos_Interface_Output_Queue samples.
+type Qos_Interface_Output_QueueWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedQos_Interface_Output_Queue
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Qos_Interface_Output_QueueWatcher) Await(t testing.TB) (*QualifiedQos_Interface_Output_Queue, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}

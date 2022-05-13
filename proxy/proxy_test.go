@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/proto"
 	gnmipb "github.com/openconfig/gnmi/proto/gnmi"
@@ -41,7 +42,8 @@ func (fb *fakeBinding) Resolve() (*rpb.Reservation, error) {
 	return fb.resolve()
 }
 
-func TestProxy(t *testing.T) {
+func setupFake(t *testing.T) (*lemming.Device, *fakeBinding) {
+	t.Helper()
 	lis, err := net.Listen("tcp", ":0")
 	if err != nil {
 		t.Fatalf("failed to start device listener: %v", err)
@@ -51,7 +53,6 @@ func TestProxy(t *testing.T) {
 		lis.Close()
 		t.Fatalf("failed to start device: %v", err)
 	}
-	defer fake.Stop()
 	fAddr := fake.Addr()
 	b := &fakeBinding{}
 	b.dialGRPC = grpc.DialContext
@@ -75,16 +76,6 @@ func TestProxy(t *testing.T) {
 				},
 			},
 		}, nil
-	}
-	m, err := New(b)
-	if err != nil {
-		t.Fatalf("New() failed: %v", err)
-	}
-	defer m.Stop()
-	proxies := m.Endpoints()
-	conn, err := grpc.DialContext(context.Background(), proxies["dut1"].Addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		t.Fatalf("failed to dial proxy: %v", err)
 	}
 	fake.GNMI().GetResponses = []interface{}{
 		&gnmipb.GetResponse{
@@ -128,24 +119,56 @@ func TestProxy(t *testing.T) {
 			SyncResponse: true,
 		},
 	}}}
-	c := gnmipb.NewGNMIClient(conn)
-	_, err = c.Get(context.Background(), &gnmipb.GetRequest{})
-	if err != nil {
-		t.Fatalf("Get error: %v", err)
-	}
-	stream, err := c.Subscribe(context.Background())
-	stream.Send(&gnmipb.SubscribeRequest{})
-	if err != nil {
-		t.Fatalf("Send failed error: %v", err)
-	}
-	for i := 0; i < len(fake.GNMI().Responses[0]); i++ {
-		v, err := stream.Recv()
-		if err != nil {
-			t.Fatalf("Subscribe failed: %v", err)
-		}
-		if !proto.Equal(v, fake.GNMI().Responses[0][i]) {
-			t.Fatalf("invalid message: got %s, want %s", v, fake.GNMI().Responses[0][i])
-		}
+	return fake, b
+}
+func TestAuthProxy(t *testing.T) {
+	tests := []struct {
+		desc       string
+		dialOpts   []grpc.DialOption
+		serverOpts []grpc.ServerOption
+	}{{
+		desc:     "insecure auth",
+		dialOpts: []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())},
+	}, {
+		desc:       "local auth",
+		dialOpts:   []grpc.DialOption{grpc.WithTransportCredentials(local.NewCredentials())},
+		serverOpts: []grpc.ServerOption{grpc.Creds(local.NewCredentials())},
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			f, b := setupFake(t)
+			defer f.Stop()
+
+			m, err := New(b, tt.serverOpts...)
+			if err != nil {
+				t.Fatalf("New() failed: %v", err)
+			}
+			defer m.Stop()
+			proxies := m.Endpoints()
+			conn, err := grpc.DialContext(context.Background(), proxies["dut1"].Addr, tt.dialOpts...)
+			if err != nil {
+				t.Fatalf("failed to dial proxy: %v", err)
+			}
+			c := gnmipb.NewGNMIClient(conn)
+			_, err = c.Get(context.Background(), &gnmipb.GetRequest{})
+			if err != nil {
+				t.Fatalf("Get error: %v", err)
+			}
+			stream, err := c.Subscribe(context.Background())
+			stream.Send(&gnmipb.SubscribeRequest{})
+			if err != nil {
+				t.Fatalf("Send failed error: %v", err)
+			}
+			for i := 0; i < len(f.GNMI().Responses[0]); i++ {
+				v, err := stream.Recv()
+				if err != nil {
+					t.Fatalf("Subscribe failed: %v", err)
+				}
+				if !proto.Equal(v, f.GNMI().Responses[0][i]) {
+					t.Fatalf("invalid message: got %s, want %s", v, f.GNMI().Responses[0][i])
+				}
+			}
+		})
 	}
 }
 

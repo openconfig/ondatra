@@ -45,7 +45,9 @@ type DUTDevice struct {
 // Config returns a handle to the DUT configuration API.
 func (d *DUTDevice) Config() *Config {
 	dev := device.DeviceRoot(d.ID())
-	// TODO: Add field to root node in ygot instead of using custom data.
+	if d.Vendor() == CISCO || d.Vendor() == JUNIPER {
+		dev.PutCustomData(genutil.UseGetForConfigKey, true)
+	}
 	dev.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
 	return &Config{
 		dut:        d.res.(binding.DUT),

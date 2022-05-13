@@ -35,9 +35,9 @@ import (
 )
 
 func TestSubscribe(t *testing.T) {
-	var stubStats []map[string]ygot.ValidatedGoStruct
+	var stubStats []map[string]ygot.GoStruct
 	readStatsFn = func(_ context.Context, _ *Client, _ string, captions []string) (ygot.GoStruct, error) {
-		var data ygot.ValidatedGoStruct = &uexampleoc.Device{}
+		var data ygot.GoStruct = &uexampleoc.Device{}
 		if len(stubStats) == 0 {
 			return data, nil
 		}
@@ -72,7 +72,7 @@ func TestSubscribe(t *testing.T) {
 		name        string
 		mode        gpb.SubscriptionList_Mode
 		path        *gpb.Path
-		stats       []map[string]ygot.ValidatedGoStruct
+		stats       []map[string]ygot.GoStruct
 		learnedInfo []*telemetry.Device
 		want        []*gpb.SubscribeResponse
 	}{{
@@ -89,8 +89,8 @@ func TestSubscribe(t *testing.T) {
 			Origin: "openconfig",
 			Elem:   []*gpb.PathElem{{Name: "components"}},
 		},
-		stats: []map[string]ygot.ValidatedGoStruct{{
-			portCPUStatsCaption: func() ygot.ValidatedGoStruct {
+		stats: []map[string]ygot.GoStruct{{
+			portCPUStatsCaption: func() ygot.GoStruct {
 				root := &uexampleoc.Device{}
 				root.GetOrCreateComponents().GetOrCreateComponent("fakeComp")
 				return root
@@ -117,14 +117,14 @@ func TestSubscribe(t *testing.T) {
 			Origin: "openconfig",
 			Elem:   []*gpb.PathElem{{Name: "components"}},
 		},
-		stats: []map[string]ygot.ValidatedGoStruct{{
-			portCPUStatsCaption: func() ygot.ValidatedGoStruct {
+		stats: []map[string]ygot.GoStruct{{
+			portCPUStatsCaption: func() ygot.GoStruct {
 				root := &uexampleoc.Device{}
 				root.GetOrCreateComponents().GetOrCreateComponent("fakeComp")
 				return root
 			}(),
 		}, {
-			portCPUStatsCaption: func() ygot.ValidatedGoStruct {
+			portCPUStatsCaption: func() ygot.GoStruct {
 				root := &uexampleoc.Device{}
 				root.GetOrCreateComponents().GetOrCreateComponent("fakeComp2")
 				return root
@@ -162,8 +162,8 @@ func TestSubscribe(t *testing.T) {
 			Origin: "openconfig",
 			Elem:   []*gpb.PathElem{{Name: "interfaces"}},
 		},
-		stats: []map[string]ygot.ValidatedGoStruct{{
-			portStatsCaption: func() ygot.ValidatedGoStruct {
+		stats: []map[string]ygot.GoStruct{{
+			portStatsCaption: func() ygot.GoStruct {
 				root := &uexampleoc.Device{}
 				root.GetOrCreateInterfaces().GetOrCreateInterface("fakeIntf")
 				return root
@@ -190,14 +190,14 @@ func TestSubscribe(t *testing.T) {
 			Origin: "openconfig",
 			Elem:   []*gpb.PathElem{{Name: "interfaces"}},
 		},
-		stats: []map[string]ygot.ValidatedGoStruct{{
-			portStatsCaption: func() ygot.ValidatedGoStruct {
+		stats: []map[string]ygot.GoStruct{{
+			portStatsCaption: func() ygot.GoStruct {
 				root := &uexampleoc.Device{}
 				root.GetOrCreateInterfaces().GetOrCreateInterface("fakeIntf")
 				return root
 			}(),
 		}, {
-			portStatsCaption: func() ygot.ValidatedGoStruct {
+			portStatsCaption: func() ygot.GoStruct {
 				root := &uexampleoc.Device{}
 				root.GetOrCreateInterfaces().GetOrCreateInterface("fakeIntf2")
 				return root

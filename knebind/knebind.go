@@ -27,6 +27,7 @@ import (
 
 	log "github.com/golang/glog"
 	"golang.org/x/crypto/ssh"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
@@ -237,6 +238,18 @@ func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr err
 type kneATE struct {
 	*solver.ServiceATE
 	cfg *Config
+}
+
+func (a *kneATE) DialOTG() (gosnappi.GosnappiApi, error) {
+	s, err := a.Service("grpc")
+	if err != nil {
+		return nil, err
+	}
+	api := gosnappi.NewApi()
+	api.NewGrpcTransport().
+		SetLocation(serviceAddr(s)).
+		SetRequestTimeout(30 * time.Second)
+	return api, nil
 }
 
 func kneCmd(cfg *Config, args ...string) ([]byte, error) {

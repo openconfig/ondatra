@@ -20,6 +20,7 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/testbed"
@@ -158,6 +159,7 @@ func (d *DUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4Run
 type ATE struct {
 	*binding.AbstractATE
 	DialIxNetworkFn func(context.Context) (*binding.IxNetwork, error)
+	DialOTGFn       func() (gosnappi.GosnappiApi, error)
 }
 
 // DialIxNetwork delegates to a.DialIxNetworkFn.
@@ -166,4 +168,12 @@ func (a *ATE) DialIxNetwork(ctx context.Context) (*binding.IxNetwork, error) {
 		log.Fatal("fakebind DialIxNetwork called but DialIxNetworkFn not set")
 	}
 	return a.DialIxNetworkFn(ctx)
+}
+
+// DialOTG delegates to a.DialOTGFn.
+func (a *ATE) DialOTG() (gosnappi.GosnappiApi, error) {
+	if a.DialOTGFn == nil {
+		log.Fatal("fakebind DialOTG called but DialOTGFn not set")
+	}
+	return a.DialOTGFn()
 }

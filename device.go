@@ -187,6 +187,11 @@ func (p *Port) CardModel() string {
 	return p.res.CardModel
 }
 
+// PMD returns the Physical Medium Dependent.
+func (p *Port) PMD() string {
+	return p.res.PMD
+}
+
 var (
 	gnmisMu sync.Mutex
 	gnmis   = make(map[binding.Device]gpb.GNMIClient)

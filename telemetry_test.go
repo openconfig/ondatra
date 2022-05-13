@@ -641,7 +641,7 @@ func TestGet(t *testing.T) {
 
 func TestGetDefault(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut_juniper")
+	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
 		return fmt.Sprintf("interfaces/interface[name=%s]/state/enabled", iname)
@@ -968,11 +968,91 @@ func TestGetConfig(t *testing.T) {
 			}
 		})
 	}
+
+	gnmiGetTest := []struct {
+		desc           string
+		stub           func(s *fakegnmi.Stubber)
+		inDutName      string
+		wantGetRequest *gpb.GetRequest
+		wantQualified  *telemetry.QualifiedString
+	}{{
+		desc:      "cisco",
+		inDutName: "dut_cisco",
+		stub: func(s *fakegnmi.Stubber) {
+			s.GetResponse(&gpb.GetResponse{
+				Notification: []*gpb.Notification{{
+					Timestamp: 100,
+					Update: []*gpb.Update{{
+						Path: descPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_JsonIetfVal{JsonIetfVal: []byte(`"foo"`)}},
+					}},
+				}},
+			})
+		},
+		wantGetRequest: &gpb.GetRequest{
+			Path:     []*gpb.Path{descPath},
+			Type:     gpb.GetRequest_CONFIG,
+			Encoding: gpb.Encoding_JSON_IETF,
+		},
+		wantQualified: (&telemetry.QualifiedString{
+			Metadata: &genutil.Metadata{
+				Config:    true,
+				Timestamp: time.Unix(0, 100),
+				Path:      descPath,
+			}}).SetVal("foo"),
+	}, {
+		desc:      "juniper",
+		inDutName: "dut_juniper",
+		stub: func(s *fakegnmi.Stubber) {
+			s.GetResponse(&gpb.GetResponse{
+				Notification: []*gpb.Notification{{
+					Timestamp: 100,
+					Update: []*gpb.Update{{
+						Path: descPath,
+						Val:  &gpb.TypedValue{Value: &gpb.TypedValue_JsonIetfVal{JsonIetfVal: []byte(`"foo"`)}},
+					}},
+				}},
+			})
+		},
+		wantGetRequest: &gpb.GetRequest{
+			Path:     []*gpb.Path{descPath},
+			Type:     gpb.GetRequest_CONFIG,
+			Encoding: gpb.Encoding_JSON_IETF,
+		},
+		wantQualified: (&telemetry.QualifiedString{
+			Metadata: &genutil.Metadata{
+				Config:    true,
+				Timestamp: time.Unix(0, 100),
+				Path:      descPath,
+			}}).SetVal("foo"),
+	}}
+	for _, tt := range gnmiGetTest {
+		t.Run(tt.desc, func(t *testing.T) {
+			dut := DUT(t, tt.inDutName)
+			tt.stub(fakeGNMI.Stub())
+
+			got := dut.Config().Interface(staticPortName).Description().Lookup(t)
+			checkJustReceived(t, got.RecvTimestamp)
+			tt.wantQualified.RecvTimestamp = got.RecvTimestamp
+
+			if diff := cmp.Diff(tt.wantQualified, got, cmp.AllowUnexported(telemetry.QualifiedString{}), protocmp.Transform()); diff != "" {
+				t.Errorf("Got desc Qualified type different from expected (-want,+got):\n %s", diff)
+			}
+			if diff := cmp.Diff(tt.wantGetRequest, fakeGNMI.GetRequests()[len(fakeGNMI.GetRequests())-1], protocmp.IgnoreFields(&gpb.GetRequest{}, "prefix"), protocmp.Transform()); diff != "" {
+				t.Errorf("Got GetRequest different from expected (-want,+got):\n %s", diff)
+			}
+			if tt.wantQualified.IsPresent() {
+				if diff := cmp.Diff(tt.wantQualified.Val(t), got.Val(t)); diff != "" {
+					t.Errorf("Got desc val different from expected (-want,+got):\n %s", diff)
+				}
+			}
+		})
+	}
 }
 
 func TestGetNonleaf(t *testing.T) {
 	initTelemetryFakes(t)
-	dut := DUT(t, "dut_cisco")
+	dut := DUT(t, "dut_arista")
 	port := dut.Port(t, "port1")
 
 	getStrPath := func(iname string) string {

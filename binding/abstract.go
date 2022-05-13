@@ -19,6 +19,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -64,30 +65,37 @@ func (d *AbstractDUT) String() string {
 	return fmt.Sprintf("DUT%+v", *d)
 }
 
+// PushConfig returns an unimplemented error.
 func (d *AbstractDUT) PushConfig(ctx context.Context, config string, reset bool) error {
 	return errors.New("PushConfig unimplemented")
 }
 
+// DialCLI returns an unimplemented error.
 func (d *AbstractDUT) DialCLI(context.Context, ...grpc.DialOption) (StreamClient, error) {
 	return nil, errors.New("DialCLI unimplemented")
 }
 
+// DialConsole returns an unimplemented error.
 func (d *AbstractDUT) DialConsole(context.Context, ...grpc.DialOption) (StreamClient, error) {
 	return nil, errors.New("DialConsole unimplemented")
 }
 
+// DialGNMI returns an unimplemented error.
 func (d *AbstractDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 	return nil, errors.New("DialGNMI unimplemented")
 }
 
+// DialGNOI returns an unimplemented error.
 func (d *AbstractDUT) DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error) {
 	return nil, errors.New("DialGNOI unimplemented")
 }
 
+// DialGRIBI returns an unimplemented error.
 func (d *AbstractDUT) DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 	return nil, errors.New("DialGRIBI unimplemented")
 }
 
+// DialP4RT returns an unimplemented error.
 func (d *AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 	return nil, errors.New("DialP4RT unimplemented")
 }
@@ -131,9 +139,14 @@ func (a *AbstractATE) String() string {
 	return fmt.Sprintf("ATE%+v", *a)
 }
 
-// DialIxNetwork creates a client connection to the specified ATE's IxNetwork endpoint.
+// DialIxNetwork returns an unimplemented error.
 func (a *AbstractATE) DialIxNetwork(context.Context) (*IxNetwork, error) {
 	return nil, errors.New("DialIxNetwork unimplemented")
+}
+
+// DialOTG returns an unimplemented error.
+func (a *AbstractATE) DialOTG() (gosnappi.GosnappiApi, error) {
+	return nil, errors.New("DialOTG unimplemented")
 }
 
 func (a *AbstractATE) isATE() {}

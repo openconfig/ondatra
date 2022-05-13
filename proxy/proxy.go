@@ -52,6 +52,7 @@ type Proxy struct {
 	proxies map[string]*proxy
 	dialer  Dialer
 	resv    *rpb.Reservation
+	sOpts   []grpc.ServerOption
 }
 
 type proxy struct {
@@ -64,7 +65,7 @@ type proxy struct {
 }
 
 // New will create a new set of proxies for the provided Dialer.
-func New(d Dialer) (*Proxy, error) {
+func New(d Dialer, sOpts ...grpc.ServerOption) (*Proxy, error) {
 	if d == nil {
 		return nil, fmt.Errorf("dialer cannot be nil")
 	}
@@ -76,6 +77,7 @@ func New(d Dialer) (*Proxy, error) {
 		proxies: map[string]*proxy{},
 		dialer:  d,
 		resv:    resv,
+		sOpts:   sOpts,
 	}
 	for k, d := range resv.GetDevices() {
 		if err := p.add(k, d); err != nil {
@@ -144,7 +146,11 @@ func (p *Proxy) add(key string, d *rpb.ResolvedDevice) error {
 	destProvider := func(md metadata.MD, _ string) (string, metadata.MD, error) {
 		return targetAddr, md, nil
 	}
-	srv, err := grpcproxy.NewServer(destProvider, grpcproxy.WithDialer(p.dialer))
+	srv, err := grpcproxy.NewServer(destProvider, grpcproxy.WithDialer(p.dialer), grpcproxy.WithServerProvider(
+		func(opts ...grpc.ServerOption) (grpcproxy.GRPCServer, error) {
+			opts = append(opts, p.sOpts...)
+			return grpc.NewServer(opts...), nil
+		}))
 	if err != nil {
 		return fmt.Errorf("failed to create new gRPC proxy server: %v", err)
 	}

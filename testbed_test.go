@@ -231,6 +231,9 @@ func TestReserve(t *testing.T) {
 		if got, want := p.CardModel(), "EX9200-40T"; got != want {
 			t.Errorf("card model = %q, want %q", got, want)
 		}
+		if got, want := p.PMD(), "PMD_100G_FR"; got != want {
+			t.Errorf("pmd = %q, want %q", got, want)
+		}
 	})
 
 	t.Run("Get Port failure", func(t *testing.T) {
@@ -258,6 +261,9 @@ func TestReserve(t *testing.T) {
 		}
 		if got, want := p.CardModel(), "NOVUS"; got != want {
 			t.Errorf("card model = %q, want %q", got, want)
+		}
+		if got, want := p.PMD(), "PMD_100G_FR"; got != want {
+			t.Errorf("pmd = %q, want %q", got, want)
 		}
 	})
 }

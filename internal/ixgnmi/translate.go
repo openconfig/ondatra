@@ -62,7 +62,7 @@ var (
 //
 // The itFlows and etFlows parameters indicates which flows have ingress
 // tracking and egress tracking enabled, respectively.
-func translate(st *Stats) (ygot.ValidatedGoStruct, error) {
+func translate(st *Stats) (ygot.GoStruct, error) {
 	root := &telemetry.Device{}
 	for caption, table := range st.Tables {
 		if fn, ok := translateFunctions[caption]; ok {

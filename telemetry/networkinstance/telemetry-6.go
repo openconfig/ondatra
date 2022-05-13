@@ -16,6 +16,368 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	gs := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath) Await(t testing.TB, timeout time.Duration, val bool) *oc.QualifiedBool {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedBool) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionBool {
+	t.Helper()
+	c := &oc.CollectionBool{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedBool) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	w := &oc.BoolWatcher{}
+	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedBool)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedBool) bool) *oc.BoolWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-bos to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath extracts the value of the leaf MplsBos from its parent oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsBosPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.MplsBos
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	gs := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
+	t.Helper()
+	c := &oc.CollectionUint8{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-tc to the batch object.
+func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath extracts the value of the leaf MplsTc from its parent oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTcPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.MplsTc
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/attr-sets/attr-set/tunnel-encapsulation/tunnels/tunnel/subtlvs/subtlv/segment-lists/segment-list/segments/segment/state/mpls-ttl with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment_MplsTtlPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
@@ -58997,186 +59359,4 @@ func convertNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability
 		qv.SetVal(*val)
 	}
 	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Watcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Watcher{}
-	gs := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64", gs, queryPath, false, false)
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{
-			Metadata: md,
-		}).SetVal(gs)
-		return []genutil.QualifiedValue{qv}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Path) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64 {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Watcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64", structs[pre], queryPath, false, false)
-			qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64{
-				Metadata: md,
-			}).SetVal(structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64) bool) *oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-ipv4-reachability/prefixes/prefix/subtlvs/subtlv/tag64 to the batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix_Subtlv_Tag64PathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
 }

@@ -562,6 +562,550 @@ func (n *NetworkInstance_Afts_Ipv4EntryPathAny) Batch(t testing.TB, b *oc.Batch)
 	oc.MustAddToBatch(t, b, n)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv4Entry_Counters", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a ONCE subscription.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Afts_Ipv4Entry_Counters
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_Ipv4Entry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Afts_Ipv4Entry_Counters)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv4Entry_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv4Entry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_Ipv4Entry_CountersWatcher{}
+	gs := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv4Entry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv4Entry_CountersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Afts_Ipv4Entry_Counters) *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_Ipv4Entry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_Ipv4Entry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv4Entry_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv4Entry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_Ipv4Entry_CountersWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv4Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv4Entry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv4Entry_CountersPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_Ipv4Entry_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv4Entry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_Ipv4Entry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_Ipv4Entry_Counters_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv4Entry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OctetsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv4Entry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_Ipv4Entry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_Ipv4Entry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_Ipv4Entry_Counters_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv4Entry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.PacketsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/decapsulate-header with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Afts_Ipv4Entry_DecapsulateHeaderPath) Lookup(t testing.TB) *oc.QualifiedE_AftTypes_EncapsulationHeaderType {
@@ -1286,187 +1830,6 @@ func convertNetworkInstance_Afts_Ipv4Entry_NextHopGroupPath(t testing.TB, md *ge
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_Ipv4Entry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv4Entry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_Ipv4Entry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_Ipv4Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_Ipv4Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_Ipv4Entry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv4Entry_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_Ipv4Entry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_Ipv4Entry_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv4Entry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OctetsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/origin-protocol with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Afts_Ipv4Entry_OriginProtocolPath) Lookup(t testing.TB) *oc.QualifiedE_PolicyTypes_INSTALL_PROTOCOL_TYPE {
@@ -1644,187 +2007,6 @@ func convertNetworkInstance_Afts_Ipv4Entry_OriginProtocolPath(t testing.TB, md *
 	val := parent.OriginProtocol
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_Ipv4Entry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv4Entry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_Ipv4Entry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_Ipv4Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_Ipv4Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_Ipv4Entry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv4Entry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv4Entry_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_Ipv4Entry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_Ipv4Entry_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv4Entry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.PacketsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
 	}
 	return qv
 }
@@ -2190,6 +2372,550 @@ func (n *NetworkInstance_Afts_Ipv6EntryPathAny) Watch(t testing.TB, timeout time
 func (n *NetworkInstance_Afts_Ipv6EntryPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv6Entry_Counters", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a ONCE subscription.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Afts_Ipv6Entry_Counters
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_Ipv6Entry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Afts_Ipv6Entry_Counters)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv6Entry_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv6Entry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_Ipv6Entry_CountersWatcher{}
+	gs := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv6Entry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv6Entry_CountersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Afts_Ipv6Entry_Counters) *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_Ipv6Entry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_Ipv6Entry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv6Entry_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv6Entry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_Ipv6Entry_CountersWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_Ipv6Entry_Counters) bool) *oc.NetworkInstance_Afts_Ipv6Entry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv6Entry_CountersPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_Ipv6Entry_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv6Entry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_Ipv6Entry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_Ipv6Entry_Counters_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv6Entry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OctetsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv6Entry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_Ipv6Entry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_Ipv6Entry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_Ipv6Entry_Counters_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv6Entry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.PacketsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/decapsulate-header with a ONCE subscription.
@@ -2916,187 +3642,6 @@ func convertNetworkInstance_Afts_Ipv6Entry_NextHopGroupPath(t testing.TB, md *ge
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_Ipv6Entry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv6Entry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_Ipv6Entry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_Ipv6Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_Ipv6Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_Ipv6Entry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv6Entry_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_Ipv6Entry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_Ipv6Entry_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv6Entry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OctetsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/origin-protocol with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Afts_Ipv6Entry_OriginProtocolPath) Lookup(t testing.TB) *oc.QualifiedE_PolicyTypes_INSTALL_PROTOCOL_TYPE {
@@ -3274,187 +3819,6 @@ func convertNetworkInstance_Afts_Ipv6Entry_OriginProtocolPath(t testing.TB, md *
 	val := parent.OriginProtocol
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_Ipv6Entry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_Ipv6Entry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_Ipv6Entry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_Ipv6Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_Ipv6Entry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_Ipv6Entry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_Ipv6Entry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_Ipv6Entry_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_Ipv6Entry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_Ipv6Entry_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_Ipv6Entry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.PacketsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
 	}
 	return qv
 }
@@ -3820,6 +4184,550 @@ func (n *NetworkInstance_Afts_LabelEntryPathAny) Watch(t testing.TB, timeout tim
 func (n *NetworkInstance_Afts_LabelEntryPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_LabelEntry_Counters", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a ONCE subscription.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Afts_LabelEntry_Counters
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_LabelEntry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Afts_LabelEntry_Counters)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_LabelEntry_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool) *oc.NetworkInstance_Afts_LabelEntry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_LabelEntry_CountersWatcher{}
+	gs := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool) *oc.NetworkInstance_Afts_LabelEntry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_LabelEntry_CountersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Afts_LabelEntry_Counters) *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_LabelEntry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_LabelEntry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_LabelEntry_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool) *oc.NetworkInstance_Afts_LabelEntry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_LabelEntry_CountersWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_LabelEntry_Counters) bool) *oc.NetworkInstance_Afts_LabelEntry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_LabelEntry_CountersPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_LabelEntry_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_LabelEntry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_LabelEntry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_LabelEntry_Counters_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_LabelEntry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OctetsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_LabelEntry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_LabelEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_LabelEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_LabelEntry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_LabelEntry_Counters_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_LabelEntry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.PacketsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/entry-metadata with a ONCE subscription.
@@ -4546,368 +5454,6 @@ func convertNetworkInstance_Afts_LabelEntry_NextHopGroupPath(t testing.TB, md *g
 	return qv
 }
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_LabelEntry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_LabelEntry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_LabelEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_LabelEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_LabelEntry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_LabelEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_LabelEntry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_LabelEntry_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_LabelEntry_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_LabelEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_LabelEntry_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_LabelEntry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OctetsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_LabelEntry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_LabelEntry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_LabelEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_LabelEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_LabelEntry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_LabelEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_LabelEntry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_LabelEntry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_LabelEntry_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_LabelEntry_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_LabelEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_LabelEntry_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_LabelEntry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.PacketsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/popped-mpls-label-stack with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStackPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_UnionSlice {
@@ -5269,6 +5815,550 @@ func (n *NetworkInstance_Afts_MacEntryPathAny) Watch(t testing.TB, timeout time.
 func (n *NetworkInstance_Afts_MacEntryPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_MacEntry_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_MacEntry_Counters", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Afts_MacEntry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_MacEntry_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_MacEntry_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Afts_MacEntry_Counters
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Afts_MacEntry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a ONCE subscription.
+func (n *NetworkInstance_Afts_MacEntry_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Afts_MacEntry_Counters
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_MacEntry_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_MacEntry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Afts_MacEntry_Counters{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Afts_MacEntry_Counters)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_MacEntry_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool) *oc.NetworkInstance_Afts_MacEntry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_MacEntry_CountersWatcher{}
+	gs := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_Afts_MacEntry_Counters{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_MacEntry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_MacEntry_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool) *oc.NetworkInstance_Afts_MacEntry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_MacEntry_CountersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_MacEntry_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Afts_MacEntry_Counters) *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_MacEntry_CountersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_MacEntry_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_MacEntry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_MacEntry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_MacEntry_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool) *oc.NetworkInstance_Afts_MacEntry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_MacEntry_CountersWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_MacEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_MacEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_Afts_MacEntry_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_MacEntry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_MacEntry_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_MacEntry_Counters) bool) *oc.NetworkInstance_Afts_MacEntry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_MacEntry_CountersPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_MacEntry_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_MacEntry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_MacEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_MacEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_MacEntry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_MacEntry_Counters_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_MacEntry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OctetsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_MacEntry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_MacEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_MacEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_MacEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_MacEntry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_MacEntry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_MacEntry_Counters_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_MacEntry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.PacketsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/entry-metadata with a ONCE subscription.
@@ -5989,368 +7079,6 @@ func convertNetworkInstance_Afts_MacEntry_NextHopGroupPath(t testing.TB, md *gen
 		Metadata: md,
 	}
 	val := parent.NextHopGroup
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_MacEntry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_MacEntry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_MacEntry_OctetsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_MacEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_MacEntry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_MacEntry_OctetsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_MacEntry_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_MacEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_MacEntry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_MacEntry_OctetsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_MacEntry_OctetsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_MacEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_MacEntry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_MacEntry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_MacEntry_OctetsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_MacEntry_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_MacEntry_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_MacEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_MacEntry_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_MacEntry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OctetsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_MacEntry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_MacEntry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_MacEntry_PacketsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_MacEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_MacEntry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_MacEntry_PacketsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_MacEntry_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_MacEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_MacEntry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_MacEntry_PacketsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_MacEntry_PacketsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_MacEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_MacEntry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_MacEntry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_MacEntry_PacketsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_MacEntry_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_MacEntry_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_MacEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_MacEntry_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_MacEntry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.PacketsForwarded
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -9437,6 +10165,550 @@ func (n *NetworkInstance_Afts_NextHopPathAny) Watch(t testing.TB, timeout time.D
 func (n *NetworkInstance_Afts_NextHopPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_NextHop_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_NextHop_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_NextHop_Counters", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Afts_NextHop_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_NextHop_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_NextHop_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Afts_NextHop_Counters
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_NextHop_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Afts_NextHop_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a ONCE subscription.
+func (n *NetworkInstance_Afts_NextHop_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Afts_NextHop_Counters
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_NextHop_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Afts_NextHop_Counters{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Afts_NextHop_Counters)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool) *oc.NetworkInstance_Afts_NextHop_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_NextHop_CountersWatcher{}
+	gs := &oc.NetworkInstance_Afts_NextHop_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_Afts_NextHop_Counters{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_NextHop_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool) *oc.NetworkInstance_Afts_NextHop_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_CountersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_NextHop_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Afts_NextHop_Counters) *oc.QualifiedNetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters to the batch object.
+func (n *NetworkInstance_Afts_NextHop_CountersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_NextHop_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_NextHop_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool) *oc.NetworkInstance_Afts_NextHop_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_NextHop_CountersWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_NextHop_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_NextHop_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_Afts_NextHop_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_NextHop_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_NextHop_Counters) bool) *oc.NetworkInstance_Afts_NextHop_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_CountersPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters to the batch object.
+func (n *NetworkInstance_Afts_NextHop_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_NextHop_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_NextHop_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_NextHop_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_NextHop_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_NextHop_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_NextHop_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_NextHop_Counters_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_NextHop_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_NextHop_Counters_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_NextHop_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OctetsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_NextHop_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_NextHop_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_NextHop_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_NextHop_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_NextHop_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_NextHop_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_NextHop_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_NextHop_Counters_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_NextHop_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_NextHop_Counters_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_NextHop_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.PacketsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/state/encapsulate-header with a ONCE subscription.
@@ -12702,6 +13974,550 @@ func (n *NetworkInstance_Afts_PolicyForwardingEntryPathAny) Batch(t testing.TB, 
 	oc.MustAddToBatch(t, b, n)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_PolicyForwardingEntry_Counters", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a ONCE subscription.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters)))
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_PolicyForwardingEntry_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool) *oc.NetworkInstance_Afts_PolicyForwardingEntry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_PolicyForwardingEntry_CountersWatcher{}
+	gs := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", gs, queryPath, false, false)
+		qv := (&oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool) *oc.NetworkInstance_Afts_PolicyForwardingEntry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_PolicyForwardingEntry_CountersPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters) *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Afts_PolicyForwardingEntry_Counters {
+	t.Helper()
+	c := &oc.CollectionNetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool) *oc.NetworkInstance_Afts_PolicyForwardingEntry_CountersWatcher {
+	t.Helper()
+	w := &oc.NetworkInstance_Afts_PolicyForwardingEntry_CountersWatcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Afts_PolicyForwardingEntry_Counters) bool) *oc.NetworkInstance_Afts_PolicyForwardingEntry_CountersWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters to the batch object.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_PolicyForwardingEntry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/octets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OctetsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_PolicyForwardingEntry_Counters", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a ONCE subscription.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry_Counters", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/counters/packets-forwarded to the batch object.
+func (n *NetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertNetworkInstance_Afts_PolicyForwardingEntry_Counters_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_PolicyForwardingEntry_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.PacketsForwarded
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/entry-metadata with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Afts_PolicyForwardingEntry_EntryMetadataPath) Lookup(t testing.TB) *oc.QualifiedBinary {
@@ -14868,368 +16684,6 @@ func convertNetworkInstance_Afts_PolicyForwardingEntry_NextHopGroupPath(t testin
 		Metadata: md,
 	}
 	val := parent.NextHopGroup
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_PolicyForwardingEntry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/octets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath extracts the value of the leaf OctetsForwarded from its parent oc.NetworkInstance_Afts_PolicyForwardingEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_PolicyForwardingEntry_OctetsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_PolicyForwardingEntry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OctetsForwarded
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Afts_PolicyForwardingEntry", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a ONCE subscription.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Afts_PolicyForwardingEntry{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Afts_PolicyForwardingEntry", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/packets-forwarded to the batch object.
-func (n *NetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath extracts the value of the leaf PacketsForwarded from its parent oc.NetworkInstance_Afts_PolicyForwardingEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Afts_PolicyForwardingEntry_PacketsForwardedPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Afts_PolicyForwardingEntry) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.PacketsForwarded
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
@@ -57860,1276 +59314,6 @@ func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SignaledB
 		Metadata: md,
 	}
 	val := parent.SignaledBandwidth
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Lookup(t testing.TB) *oc.QualifiedE_Mpls_TeBandwidthType {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, goStruct)
-	}
-	return (&oc.QualifiedE_Mpls_TeBandwidthType{
-		Metadata: md,
-	}).SetVal(goStruct.GetSpecificationType())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Get(t testing.TB) oc.E_Mpls_TeBandwidthType {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Mpls_TeBandwidthType {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_Mpls_TeBandwidthType
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Get(t testing.TB) []oc.E_Mpls_TeBandwidthType {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_Mpls_TeBandwidthType
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_TeBandwidthType {
-	t.Helper()
-	c := &oc.CollectionE_Mpls_TeBandwidthType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_TeBandwidthType) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
-	t.Helper()
-	w := &oc.E_Mpls_TeBandwidthTypeWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Mpls_TeBandwidthType)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_Mpls_TeBandwidthType) *oc.QualifiedE_Mpls_TeBandwidthType {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Mpls_TeBandwidthType) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_TeBandwidthType {
-	t.Helper()
-	c := &oc.CollectionE_Mpls_TeBandwidthType{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_TeBandwidthType) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
-	t.Helper()
-	w := &oc.E_Mpls_TeBandwidthTypeWatcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_Mpls_TeBandwidthType)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath extracts the value of the leaf SpecificationType from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_Mpls_TeBandwidthType.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth) *oc.QualifiedE_Mpls_TeBandwidthType {
-	t.Helper()
-	qv := &oc.QualifiedE_Mpls_TeBandwidthType{
-		Metadata: md,
-	}
-	val := parent.SpecificationType
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Get(t testing.TB) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters)))
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersWatcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", gs, queryPath, false, false)
-		qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{
-			Metadata: md,
-		}).SetVal(gs)
-		return []genutil.QualifiedValue{qv}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Await(t testing.TB, timeout time.Duration, val *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters {
-	t.Helper()
-	c := &oc.CollectionNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersWatcher {
-	t.Helper()
-	w := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersWatcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", structs[pre], queryPath, false, false)
-			qv := (&oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{
-				Metadata: md,
-			}).SetVal(structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) bool) *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersWatcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_CountersPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/bytes to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath extracts the value of the leaf Bytes from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_BytesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.Bytes
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/current-path-time to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath extracts the value of the leaf CurrentPathTime from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_CurrentPathTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.CurrentPathTime
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/next-reoptimization-time to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath extracts the value of the leaf NextReoptimizationTime from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_NextReoptimizationTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.NextReoptimizationTime
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/online-time to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath extracts the value of the leaf OnlineTime from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_OnlineTimePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.OnlineTime
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, true, false)
-	if ok {
-		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a ONCE subscription.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters", structs[pre], queryPath, true, false)
-			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/counters/packets to the batch object.
-func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath extracts the value of the leaf Packets from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters_PacketsPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Counters) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.Packets
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

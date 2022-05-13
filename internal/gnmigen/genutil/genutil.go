@@ -64,15 +64,20 @@ RecvTimestamp: %v
 Path: %s`, prototext.Format(d.Value), d.Timestamp, d.RecvTimestamp, prototext.Format(d.Path))
 }
 
-// DefaultClientKey is the key for the default client in the customData map.
-const DefaultClientKey = "defaultclient"
+const (
+	// DefaultClientKey is the key for the default client in the customData map.
+	DefaultClientKey = "defaultclient"
+	// UseGetForConfigKey is the key controlling if Get/Lookup should use gnmi.Get for config paths in the customData map.
+	// If this key is set, the query path must be a config path.
+	UseGetForConfigKey = "getusesget"
+)
 
 // QualifiedTypeString renders a Qualified* telemetry value to a format that's
 // easier to read when debugging.
 func QualifiedTypeString(value interface{}, md *Metadata) string {
 	// Get string for value
 	var valStr string
-	if v, ok := value.(ygot.ValidatedGoStruct); ok && !reflect.ValueOf(v).IsNil() {
+	if v, ok := value.(ygot.GoStruct); ok && !reflect.ValueOf(v).IsNil() {
 		// Display JSON for GoStructs.
 		var err error
 		valStr, err = ygot.EmitJSON(v, &ygot.EmitJSONConfig{
@@ -224,7 +229,7 @@ func MustUnmarshal(t testing.TB, data []*DataPoint, schema *ytypes.Schema, goStr
 	return md, ok
 }
 
-// Unmarshal is a wrapper to ytypes.SetNode() and ygot.Validate() that
+// Unmarshal is a wrapper to ytypes.SetNode() and ygot.ΛValidate() that
 // unmarshals a given *DataPoint to its field given the parent and parent
 // schema and verifies that all data conform to the schema. Any errors due to
 // the unmarshal operations above are returned in a *ComplianceErrors for the
@@ -787,6 +792,50 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint) (map[string][]*Da
 	return groups, prefixes, nil
 }
 
+// getSubscriber is an implementation of gpb.GNMI_SubscribeClient that uses gpb.Get.
+// Send() does the Get call and Recv returns the Get response.
+type getSubscriber struct {
+	gpb.GNMI_SubscribeClient
+	client gpb.GNMIClient
+	ctx    context.Context
+	notifs []*gpb.Notification
+}
+
+func (gs *getSubscriber) Send(req *gpb.SubscribeRequest) error {
+	getReq := &gpb.GetRequest{
+		Prefix:   req.GetSubscribe().GetPrefix(),
+		Encoding: gpb.Encoding_JSON_IETF,
+		Type:     gpb.GetRequest_CONFIG,
+	}
+	for _, sub := range req.GetSubscribe().GetSubscription() {
+		getReq.Path = append(getReq.Path, sub.GetPath())
+	}
+
+	resp, err := gs.client.Get(gs.ctx, getReq)
+	if err != nil {
+		return err
+	}
+	gs.notifs = resp.GetNotification()
+	return nil
+}
+
+func (gs *getSubscriber) Recv() (*gpb.SubscribeResponse, error) {
+	if len(gs.notifs) == 0 {
+		return nil, io.EOF
+	}
+	resp := &gpb.SubscribeResponse{
+		Response: &gpb.SubscribeResponse_Update{
+			Update: gs.notifs[0],
+		},
+	}
+	gs.notifs = gs.notifs[1:]
+	return resp, nil
+}
+
+func (gs *getSubscriber) CloseSend() error {
+	return nil
+}
+
 // subscribe create a gNMI SubscribeClient. Specifying subPaths is optional, if unset will subscribe to the path at n.
 func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mode gpb.SubscriptionList_Mode) (_ gpb.GNMI_SubscribeClient, _ *gpb.Path, rerr error) {
 	path, dev, opts, err := resolve(ctx, n)
@@ -797,9 +846,23 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 		subPaths = []*gpb.Path{path}
 	}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
-	sub, err := opts.client.Subscribe(ctx)
+
+	_, custom, err := ResolvePath(n)
 	if err != nil {
-		return nil, nil, fmt.Errorf("gNMI failed to Subscribe: %w", err)
+		return nil, path, err
+	}
+
+	var sub gpb.GNMI_SubscribeClient
+	if _, ok := custom[UseGetForConfigKey]; ok && mode == gpb.SubscriptionList_ONCE {
+		sub = &getSubscriber{
+			client: opts.client,
+			ctx:    ctx,
+		}
+	} else {
+		sub, err = opts.client.Subscribe(ctx)
+		if err != nil {
+			return nil, nil, fmt.Errorf("gNMI failed to Subscribe: %w", err)
+		}
 	}
 	defer closer.Close(&rerr, sub.CloseSend, "error closing gNMI send stream")
 
