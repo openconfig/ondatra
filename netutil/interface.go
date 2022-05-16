@@ -23,6 +23,11 @@ import (
 )
 
 var (
+	loopbackPrefixes = map[ondatra.Vendor]string{
+		ondatra.ARISTA:  "Loopback",
+		ondatra.CISCO:   "Loopback",
+		ondatra.JUNIPER: "lo",
+	}
 	bundlePrefixes = map[ondatra.Vendor]string{
 		ondatra.ARISTA:  "Port-Channel",
 		ondatra.CISCO:   "Bundle-Ether",
@@ -34,6 +39,17 @@ var (
 		ondatra.JUNIPER: "irb.",
 	}
 )
+
+// LoopbackInterface returns the vendor-specific name of the loopback interface with
+// the specified integer id.
+func LoopbackInterface(t *testing.T, dut *ondatra.DUTDevice, id int) string {
+	t.Helper()
+	name, err := loopbackInterface(dut.Vendor(), id)
+	if err != nil {
+		t.Fatalf("LoopbackInterface(t, %s, %d): %v", dut.Name(), id, err)
+	}
+	return name
+}
 
 // BundleInterface returns the vendor-specific name of the bundle interface with
 // the specified integer id.
@@ -83,6 +99,17 @@ func NextVLANInterface(t *testing.T, dut *ondatra.DUTDevice) string {
 		t.Fatalf("NextVLANInterface(t, %s): %v", dut.Name(), err)
 	}
 	return name
+}
+
+func loopbackInterface(vendor ondatra.Vendor, id int) (string, error) {
+	if id < 0 {
+		return "", fmt.Errorf("loopback interface cannot have negative number: %d", id)
+	}
+	prefix, ok := loopbackPrefixes[vendor]
+	if !ok {
+		return "", fmt.Errorf("no loopback interface prefix for DUT vendor %v", vendor)
+	}
+	return intfName(prefix, id), nil
 }
 
 func bundleInterface(vendor ondatra.Vendor, id int) (string, error) {

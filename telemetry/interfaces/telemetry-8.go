@@ -16,6 +16,187 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Interface_Subinterface_Ipv6_Counters{}
+	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Ipv6_Counters", goStruct, true, false)
+	if ok {
+		return convertInterface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface_Subinterface_Ipv6_Counters{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertInterface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a ONCE subscription.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Interface_Subinterface_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertInterface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets to the batch object.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Interface_Subinterface_Ipv6_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Ipv6_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Ipv6_Counters", structs[pre], queryPath, true, false)
+			qv := convertInterface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-octets to the batch object.
+func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedOctetsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertInterface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath extracts the value of the leaf OutForwardedOctets from its parent oc.Interface_Subinterface_Ipv6_Counters
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertInterface_Subinterface_Ipv6_Counters_OutForwardedOctetsPath(t testing.TB, md *genutil.Metadata, parent *oc.Interface_Subinterface_Ipv6_Counters) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.OutForwardedOctets
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-forwarded-pkts with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
@@ -6364,187 +6545,6 @@ func convertInterface_Subinterface_Vlan_IngressMapping_VlanIdPath(t testing.TB, 
 	val := parent.VlanId
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Lookup(t testing.TB) *oc.QualifiedE_VlanTypes_VlanStackAction {
-	t.Helper()
-	goStruct := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Vlan_IngressMapping", goStruct, true, false)
-	if ok {
-		return convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Get(t testing.TB) oc.E_VlanTypes_VlanStackAction {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Lookup(t testing.TB) []*oc.QualifiedE_VlanTypes_VlanStackAction {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedE_VlanTypes_VlanStackAction
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a ONCE subscription.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Get(t testing.TB) []oc.E_VlanTypes_VlanStackAction {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.E_VlanTypes_VlanStackAction
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_VlanTypes_VlanStackAction {
-	t.Helper()
-	c := &oc.CollectionE_VlanTypes_VlanStackAction{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_VlanTypes_VlanStackAction) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
-	t.Helper()
-	w := &oc.E_VlanTypes_VlanStackActionWatcher{}
-	gs := &oc.Interface_Subinterface_Vlan_IngressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanStackAction)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
-	t.Helper()
-	return watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Await(t testing.TB, timeout time.Duration, val oc.E_VlanTypes_VlanStackAction) *oc.QualifiedE_VlanTypes_VlanStackAction {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_VlanTypes_VlanStackAction) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action to the batch object.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_VlanTypes_VlanStackAction {
-	t.Helper()
-	c := &oc.CollectionE_VlanTypes_VlanStackAction{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_VlanTypes_VlanStackAction) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
-	t.Helper()
-	w := &oc.E_VlanTypes_VlanStackActionWatcher{}
-	structs := map[string]*oc.Interface_Subinterface_Vlan_IngressMapping{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.Interface_Subinterface_Vlan_IngressMapping{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_IngressMapping", structs[pre], queryPath, true, false)
-			qv := convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedE_VlanTypes_VlanStackAction)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_VlanTypes_VlanStackAction) bool) *oc.E_VlanTypes_VlanStackActionWatcher {
-	t.Helper()
-	return watch_Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/state/vlan-stack-action to the batch object.
-func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath extracts the value of the leaf VlanStackAction from its parent oc.Interface_Subinterface_Vlan_IngressMapping
-// and combines the update with an existing Metadata to return a *oc.QualifiedE_VlanTypes_VlanStackAction.
-func convertInterface_Subinterface_Vlan_IngressMapping_VlanStackActionPath(t testing.TB, md *genutil.Metadata, parent *oc.Interface_Subinterface_Vlan_IngressMapping) *oc.QualifiedE_VlanTypes_VlanStackAction {
-	t.Helper()
-	qv := &oc.QualifiedE_VlanTypes_VlanStackAction{
-		Metadata: md,
-	}
-	val := parent.VlanStackAction
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
 	}
 	return qv
 }

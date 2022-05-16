@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -412,6 +413,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "HELPER_ONLY"},
 		2: {Name: "BILATERAL"},
 		3: {Name: "REMOTE_HELPER"},
+	},
+	"E_GrpcServer_ListenAddresses_Enum": {
+		1: {Name: "ANY"},
 	},
 	"E_IETFInterfaces_InterfaceType": {
 		1:   {Name: "a12MppSwitch", DefiningModule: "iana-if-type"},
@@ -1573,6 +1577,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "POINT_TO_POINT"},
 		2: {Name: "MULTI_ACCESS"},
 		3: {Name: "UNKNOWN"},
+	},
+	"E_SystemGrpc_GRPC_SERVICE": {
+		1: {Name: "GNMI", DefiningModule: "openconfig-system-grpc"},
+		2: {Name: "P4RT", DefiningModule: "openconfig-p4rt"},
 	},
 	"E_SystemLogging_SYSLOG_FACILITY": {
 		1:  {Name: "ALL", DefiningModule: "openconfig-system-logging"},
@@ -3146,6 +3154,12 @@ func initΛEnumTypes() {
 		},
 		"/system/cpus/cpu/state/index": {
 			reflect.TypeOf((E_Cpu_Index_Enum)(0)),
+		},
+		"/system/grpc-servers/grpc-server/state/listen-addresses": {
+			reflect.TypeOf((E_GrpcServer_ListenAddresses_Enum)(0)),
+		},
+		"/system/grpc-servers/grpc-server/state/services": {
+			reflect.TypeOf((E_SystemGrpc_GRPC_SERVICE)(0)),
 		},
 		"/system/logging/console/selectors/selector/state/facility": {
 			reflect.TypeOf((E_SystemLogging_SYSLOG_FACILITY)(0)),

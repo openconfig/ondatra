@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -3261,6 +3262,37 @@ func (t *System_Cpu) To_System_Cpu_Index_Union(i interface{}) (System_Cpu_Index_
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to System_Cpu_Index_Union, unknown union type, got: %T, want any of [E_Cpu_Index_Enum, uint32]", i, i)
+}
+
+// System_GrpcServer_ListenAddresses_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-system/system/grpc-servers/grpc-server/state/listen-addresses within the YANG schema.
+// Union type can be one of [E_GrpcServer_ListenAddresses_Enum, UnionString].
+type System_GrpcServer_ListenAddresses_Union interface {
+	// Union type can be one of [E_GrpcServer_ListenAddresses_Enum, UnionString]
+	Documentation_for_System_GrpcServer_ListenAddresses_Union()
+}
+
+// Documentation_for_System_GrpcServer_ListenAddresses_Union ensures that E_GrpcServer_ListenAddresses_Enum
+// implements the System_GrpcServer_ListenAddresses_Union interface.
+func (E_GrpcServer_ListenAddresses_Enum) Documentation_for_System_GrpcServer_ListenAddresses_Union() {
+}
+
+// Documentation_for_System_GrpcServer_ListenAddresses_Union ensures that UnionString
+// implements the System_GrpcServer_ListenAddresses_Union interface.
+func (UnionString) Documentation_for_System_GrpcServer_ListenAddresses_Union() {}
+
+// To_System_GrpcServer_ListenAddresses_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the System_GrpcServer_ListenAddresses_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *System_GrpcServer) To_System_GrpcServer_ListenAddresses_Union(i interface{}) (System_GrpcServer_ListenAddresses_Union, error) {
+	if v, ok := i.(System_GrpcServer_ListenAddresses_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to System_GrpcServer_ListenAddresses_Union, unknown union type, got: %T, want any of [E_GrpcServer_ListenAddresses_Enum, string]", i, i)
 }
 
 // System_License_License_LicenseData_Union is an interface that is implemented by valid types for the union

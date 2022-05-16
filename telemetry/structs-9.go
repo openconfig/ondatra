@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -7955,6 +7956,7 @@ type System struct {
 	CurrentDatetime *string                                `path:"state/current-datetime" module:"openconfig-system/openconfig-system"`
 	Dns             *System_Dns                            `path:"dns" module:"openconfig-system"`
 	DomainName      *string                                `path:"state/domain-name" module:"openconfig-system/openconfig-system" shadow-path:"config/domain-name" shadow-module:"openconfig-system/openconfig-system"`
+	GrpcServer      map[string]*System_GrpcServer          `path:"grpc-servers/grpc-server" module:"openconfig-system-grpc/openconfig-system-grpc"`
 	Hostname        *string                                `path:"state/hostname" module:"openconfig-system/openconfig-system" shadow-path:"config/hostname" shadow-module:"openconfig-system/openconfig-system"`
 	License         *System_License                        `path:"license" module:"openconfig-system"`
 	Logging         *System_Logging                        `path:"logging" module:"openconfig-system"`
@@ -8201,6 +8203,123 @@ func (t *System) AppendCpu(v *System_Cpu) error {
 	}
 
 	t.Cpu[key] = v
+	return nil
+}
+
+// NewGrpcServer creates a new entry in the GrpcServer list of the
+// System struct. The keys of the list are populated from the input
+// arguments.
+func (t *System) NewGrpcServer(Name string) (*System_GrpcServer, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.GrpcServer == nil {
+		t.GrpcServer = make(map[string]*System_GrpcServer)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.GrpcServer[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list GrpcServer", key)
+	}
+
+	t.GrpcServer[key] = &System_GrpcServer{
+		Name: &Name,
+	}
+
+	return t.GrpcServer[key], nil
+}
+
+// RenameGrpcServer renames an entry in the list GrpcServer within
+// the System struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *System) RenameGrpcServer(oldK, newK string) error {
+	if _, ok := t.GrpcServer[newK]; ok {
+		return fmt.Errorf("key %v already exists in GrpcServer", newK)
+	}
+
+	e, ok := t.GrpcServer[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in GrpcServer", oldK)
+	}
+	e.Name = &newK
+
+	t.GrpcServer[newK] = e
+	delete(t.GrpcServer, oldK)
+	return nil
+}
+
+// GetOrCreateGrpcServer retrieves the value with the specified keys from
+// the receiver System. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *System) GetOrCreateGrpcServer(Name string) *System_GrpcServer {
+
+	key := Name
+
+	if v, ok := t.GrpcServer[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewGrpcServer(Name)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateGrpcServer got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetGrpcServer retrieves the value with the specified key from
+// the GrpcServer map field of System. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *System) GetGrpcServer(Name string) *System_GrpcServer {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Name
+
+	if lm, ok := t.GrpcServer[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteGrpcServer deletes the value with the specified keys from
+// the receiver System. If there is no such element, the function
+// is a no-op.
+func (t *System) DeleteGrpcServer(Name string) {
+	key := Name
+
+	delete(t.GrpcServer, key)
+}
+
+// AppendGrpcServer appends the supplied System_GrpcServer struct to the
+// list GrpcServer of System. If the key value(s) specified in
+// the supplied System_GrpcServer already exist in the list, an error is
+// returned.
+func (t *System) AppendGrpcServer(v *System_GrpcServer) error {
+	if v.Name == nil {
+		return fmt.Errorf("invalid nil key received for Name")
+	}
+
+	key := *v.Name
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.GrpcServer == nil {
+		t.GrpcServer = make(map[string]*System_GrpcServer)
+	}
+
+	if _, ok := t.GrpcServer[key]; ok {
+		return fmt.Errorf("duplicate key for list GrpcServer %v", key)
+	}
+
+	t.GrpcServer[key] = v
 	return nil
 }
 
@@ -8756,6 +8875,9 @@ func (t *System) PopulateDefaults() {
 		e.PopulateDefaults()
 	}
 	for _, e := range t.Cpu {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.GrpcServer {
 		e.PopulateDefaults()
 	}
 	for _, e := range t.MountPoint {
@@ -13112,6 +13234,220 @@ func (t *System_Dns_Server) ΛEnumTypeMap() map[string][]reflect.Type { return �
 // of System_Dns_Server.
 func (*System_Dns_Server) ΛBelongingModule() string {
 	return "openconfig-system"
+}
+
+// System_GrpcServer represents the /openconfig-system/system/grpc-servers/grpc-server YANG schema element.
+type System_GrpcServer struct {
+	CertificateId          *string                                   `path:"state/certificate-id" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/certificate-id" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	Enable                 *bool                                     `path:"state/enable" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/enable" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	ListenAddresses        []System_GrpcServer_ListenAddresses_Union `path:"state/listen-addresses" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/listen-addresses" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	MetadataAuthentication *bool                                     `path:"state/metadata-authentication" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/metadata-authentication" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	Name                   *string                                   `path:"state/name|name" module:"openconfig-system-grpc/openconfig-system-grpc|openconfig-system-grpc" shadow-path:"config/name|name" shadow-module:"openconfig-system-grpc/openconfig-system-grpc|openconfig-system-grpc"`
+	NetworkInstance        *string                                   `path:"state/network-instance" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/network-instance" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	Port                   *uint16                                   `path:"state/port" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/port" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	Services               []E_SystemGrpc_GRPC_SERVICE               `path:"state/services" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/services" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+	TransportSecurity      *bool                                     `path:"state/transport-security" module:"openconfig-system-grpc/openconfig-system-grpc" shadow-path:"config/transport-security" shadow-module:"openconfig-system-grpc/openconfig-system-grpc"`
+}
+
+// IsYANGGoStruct ensures that System_GrpcServer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_GrpcServer) IsYANGGoStruct() {}
+
+// GetCertificateId retrieves the value of the leaf CertificateId from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CertificateId is set, it can
+// safely use t.GetCertificateId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CertificateId == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetCertificateId() string {
+	if t == nil || t.CertificateId == nil {
+		return ""
+	}
+	return *t.CertificateId
+}
+
+// GetEnable retrieves the value of the leaf Enable from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enable is set, it can
+// safely use t.GetEnable() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enable == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetEnable() bool {
+	if t == nil || t.Enable == nil {
+		return false
+	}
+	return *t.Enable
+}
+
+// GetListenAddresses retrieves the value of the leaf ListenAddresses from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ListenAddresses is set, it can
+// safely use t.GetListenAddresses() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ListenAddresses == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetListenAddresses() []System_GrpcServer_ListenAddresses_Union {
+	if t == nil || t.ListenAddresses == nil {
+		return nil
+	}
+	return t.ListenAddresses
+}
+
+// GetMetadataAuthentication retrieves the value of the leaf MetadataAuthentication from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MetadataAuthentication is set, it can
+// safely use t.GetMetadataAuthentication() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MetadataAuthentication == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetMetadataAuthentication() bool {
+	if t == nil || t.MetadataAuthentication == nil {
+		return false
+	}
+	return *t.MetadataAuthentication
+}
+
+// GetName retrieves the value of the leaf Name from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetName() string {
+	if t == nil || t.Name == nil {
+		return "DEFAULT"
+	}
+	return *t.Name
+}
+
+// GetNetworkInstance retrieves the value of the leaf NetworkInstance from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NetworkInstance is set, it can
+// safely use t.GetNetworkInstance() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NetworkInstance == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetNetworkInstance() string {
+	if t == nil || t.NetworkInstance == nil {
+		return ""
+	}
+	return *t.NetworkInstance
+}
+
+// GetPort retrieves the value of the leaf Port from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Port is set, it can
+// safely use t.GetPort() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Port == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetPort() uint16 {
+	if t == nil || t.Port == nil {
+		return 0
+	}
+	return *t.Port
+}
+
+// GetServices retrieves the value of the leaf Services from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Services is set, it can
+// safely use t.GetServices() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Services == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetServices() []E_SystemGrpc_GRPC_SERVICE {
+	if t == nil || t.Services == nil {
+		return nil
+	}
+	return t.Services
+}
+
+// GetTransportSecurity retrieves the value of the leaf TransportSecurity from the System_GrpcServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TransportSecurity is set, it can
+// safely use t.GetTransportSecurity() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TransportSecurity == nil' before retrieving the leaf's value.
+func (t *System_GrpcServer) GetTransportSecurity() bool {
+	if t == nil || t.TransportSecurity == nil {
+		return true
+	}
+	return *t.TransportSecurity
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_GrpcServer
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_GrpcServer) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	if t.Name == nil {
+		var v string = "DEFAULT"
+		t.Name = &v
+	}
+	if t.TransportSecurity == nil {
+		var v bool = true
+		t.TransportSecurity = &v
+	}
+}
+
+// ΛListKeyMap returns the keys of the System_GrpcServer struct, which is a YANG list entry.
+func (t *System_GrpcServer) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_GrpcServer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_GrpcServer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_GrpcServer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_GrpcServer) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_GrpcServer.
+func (*System_GrpcServer) ΛBelongingModule() string {
+	return "openconfig-system-grpc"
 }
 
 // System_License represents the /openconfig-system/system/license YANG schema element.

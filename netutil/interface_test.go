@@ -22,6 +22,52 @@ import (
 	"github.com/openconfig/ondatra/telemetry"
 )
 
+func TestLoopbackInterface(t *testing.T) {
+	tests := []struct {
+		desc    string
+		vendor  ondatra.Vendor
+		num     int
+		want    string
+		wantErr string
+	}{{
+		desc:   "arista",
+		vendor: ondatra.ARISTA,
+		num:    1,
+		want:   "Loopback1",
+	}, {
+		desc:   "cisco",
+		vendor: ondatra.CISCO,
+		num:    2,
+		want:   "Loopback2",
+	}, {
+		desc:   "juniper",
+		vendor: ondatra.JUNIPER,
+		num:    3,
+		want:   "lo3",
+	}, {
+		desc:    "no prefix",
+		vendor:  ondatra.IXIA,
+		wantErr: "no loopback interface prefix",
+	}, {
+		desc:    "negative num",
+		vendor:  ondatra.ARISTA,
+		num:     -3,
+		wantErr: "negative number",
+	}}
+
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			got, err := loopbackInterface(test.vendor, test.num)
+			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
+				t.Errorf("loopbackInterface got err %v, want %s", err, test.wantErr)
+			}
+			if got != test.want {
+				t.Errorf("loopbackInterface got %s, want %s", got, test.want)
+			}
+		})
+	}
+}
+
 func TestBundleInterface(t *testing.T) {
 	tests := []struct {
 		desc    string

@@ -30,6 +30,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -90,6 +91,16 @@ type Interface_EnabledPath struct {
 
 // Interface_EnabledPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/config/enabled YANG schema element.
 type Interface_EnabledPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_IdPath represents the /openconfig-interfaces/interfaces/interface/config/id YANG schema element.
+type Interface_IdPath struct {
+	*ygot.NodePath
+}
+
+// Interface_IdPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/config/id YANG schema element.
+type Interface_IdPathAny struct {
 	*ygot.NodePath
 }
 
@@ -373,6 +384,54 @@ func (n *InterfacePathAny) HoldTime() *Interface_HoldTimePathAny {
 	return &Interface_HoldTimePathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"hold-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Id (leaf): The numeric identifier used by the controller to address the interface.
+// This ID is assigned by an external-to-the-device entity (e.g., an SDN
+// management system) to establish an externally deterministic numeric
+// reference for the interface. The programming entity must ensure that
+// the ID is unique within the required context.
+//
+// Note that this identifier is used only when a numeric reference to the
+// interface is required, it does not replace the unique name assigned to
+// the interface.
+// ----------------------------------------
+// Defining module: "openconfig-p4rt"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "config/id"
+// Path from root: "/interfaces/interface/config/id"
+func (n *InterfacePath) Id() *Interface_IdPath {
+	return &Interface_IdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Id (leaf): The numeric identifier used by the controller to address the interface.
+// This ID is assigned by an external-to-the-device entity (e.g., an SDN
+// management system) to establish an externally deterministic numeric
+// reference for the interface. The programming entity must ensure that
+// the ID is unique within the required context.
+//
+// Note that this identifier is used only when a numeric reference to the
+// interface is required, it does not replace the unique name assigned to
+// the interface.
+// ----------------------------------------
+// Defining module: "openconfig-p4rt"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "config/id"
+// Path from root: "/interfaces/interface/config/id"
+func (n *InterfacePathAny) Id() *Interface_IdPathAny {
+	return &Interface_IdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "id"},
 			map[string]interface{}{},
 			n,
 		),

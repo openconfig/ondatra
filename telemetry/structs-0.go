@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -4422,6 +4423,7 @@ func (*Component_Fan) ΛBelongingModule() string {
 type Component_IntegratedCircuit struct {
 	BackplaneFacingCapacity *Component_IntegratedCircuit_BackplaneFacingCapacity `path:"backplane-facing-capacity" module:"openconfig-platform-integrated-circuit"`
 	Memory                  *Component_IntegratedCircuit_Memory                  `path:"memory" module:"openconfig-platform-integrated-circuit"`
+	NodeId                  *uint64                                              `path:"state/node-id" module:"openconfig-platform/openconfig-p4rt" shadow-path:"config/node-id" shadow-module:"openconfig-platform/openconfig-p4rt"`
 }
 
 // IsYANGGoStruct ensures that Component_IntegratedCircuit implements the yang.GoStruct
@@ -4467,6 +4469,22 @@ func (t *Component_IntegratedCircuit) GetMemory() *Component_IntegratedCircuit_M
 		return t.Memory
 	}
 	return nil
+}
+
+// GetNodeId retrieves the value of the leaf NodeId from the Component_IntegratedCircuit
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NodeId is set, it can
+// safely use t.GetNodeId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NodeId == nil' before retrieving the leaf's value.
+func (t *Component_IntegratedCircuit) GetNodeId() uint64 {
+	if t == nil || t.NodeId == nil {
+		return 0
+	}
+	return *t.NodeId
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Component_IntegratedCircuit
@@ -12591,6 +12609,7 @@ type Interface struct {
 	Ethernet        *Interface_Ethernet                `path:"ethernet" module:"openconfig-if-ethernet"`
 	HardwarePort    *string                            `path:"state/hardware-port" module:"openconfig-interfaces/openconfig-platform-port"`
 	HoldTime        *Interface_HoldTime                `path:"hold-time" module:"openconfig-interfaces"`
+	Id              *uint32                            `path:"state/id" module:"openconfig-interfaces/openconfig-p4rt" shadow-path:"config/id" shadow-module:"openconfig-interfaces/openconfig-p4rt"`
 	Ifindex         *uint32                            `path:"state/ifindex" module:"openconfig-interfaces/openconfig-interfaces"`
 	InRate          Binary                             `path:"state/in-rate" module:"openconfig-interfaces/openconfig-ate-intf"`
 	LastChange      *uint64                            `path:"state/last-change" module:"openconfig-interfaces/openconfig-interfaces"`
@@ -12909,6 +12928,22 @@ func (t *Interface) GetHardwarePort() string {
 		return ""
 	}
 	return *t.HardwarePort
+}
+
+// GetId retrieves the value of the leaf Id from the Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Id is set, it can
+// safely use t.GetId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Id == nil' before retrieving the leaf's value.
+func (t *Interface) GetId() uint32 {
+	if t == nil || t.Id == nil {
+		return 0
+	}
+	return *t.Id
 }
 
 // GetIfindex retrieves the value of the leaf Ifindex from the Interface

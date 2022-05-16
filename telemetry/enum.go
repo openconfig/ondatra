@@ -31,6 +31,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -2034,6 +2035,35 @@ const (
 	GracefulRestart_Mode_BILATERAL E_GracefulRestart_Mode = 2
 	// GracefulRestart_Mode_REMOTE_HELPER corresponds to the value REMOTE_HELPER of GracefulRestart_Mode
 	GracefulRestart_Mode_REMOTE_HELPER E_GracefulRestart_Mode = 3
+)
+
+// E_GrpcServer_ListenAddresses_Enum is a derived int64 type which is used to represent
+// the enumerated node GrpcServer_ListenAddresses_Enum. An additional value named
+// GrpcServer_ListenAddresses_Enum_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_GrpcServer_ListenAddresses_Enum int64
+
+// IsYANGGoEnum ensures that GrpcServer_ListenAddresses_Enum implements the yang.GoEnum
+// interface. This ensures that GrpcServer_ListenAddresses_Enum can be identified as a
+// mapped type for a YANG enumeration.
+func (E_GrpcServer_ListenAddresses_Enum) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  GrpcServer_ListenAddresses_Enum.
+func (E_GrpcServer_ListenAddresses_Enum) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_GrpcServer_ListenAddresses_Enum.
+func (e E_GrpcServer_ListenAddresses_Enum) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_GrpcServer_ListenAddresses_Enum")
+}
+
+const (
+	// GrpcServer_ListenAddresses_Enum_UNSET corresponds to the value UNSET of GrpcServer_ListenAddresses_Enum
+	GrpcServer_ListenAddresses_Enum_UNSET E_GrpcServer_ListenAddresses_Enum = 0
+	// GrpcServer_ListenAddresses_Enum_ANY corresponds to the value ANY of GrpcServer_ListenAddresses_Enum
+	GrpcServer_ListenAddresses_Enum_ANY E_GrpcServer_ListenAddresses_Enum = 1
 )
 
 // E_IETFInterfaces_InterfaceType is a derived int64 type which is used to represent
@@ -7708,6 +7738,35 @@ const (
 	SubTlv_LinkType_MULTI_ACCESS E_SubTlv_LinkType = 2
 	// SubTlv_LinkType_UNKNOWN corresponds to the value UNKNOWN of SubTlv_LinkType
 	SubTlv_LinkType_UNKNOWN E_SubTlv_LinkType = 3
+)
+
+// E_SystemGrpc_GRPC_SERVICE is a derived int64 type which is used to represent
+// the enumerated node SystemGrpc_GRPC_SERVICE. An additional value named
+// SystemGrpc_GRPC_SERVICE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_SystemGrpc_GRPC_SERVICE int64
+
+// IsYANGGoEnum ensures that SystemGrpc_GRPC_SERVICE implements the yang.GoEnum
+// interface. This ensures that SystemGrpc_GRPC_SERVICE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_SystemGrpc_GRPC_SERVICE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  SystemGrpc_GRPC_SERVICE.
+func (E_SystemGrpc_GRPC_SERVICE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_SystemGrpc_GRPC_SERVICE.
+func (e E_SystemGrpc_GRPC_SERVICE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_SystemGrpc_GRPC_SERVICE")
+}
+
+const (
+	// SystemGrpc_GRPC_SERVICE_UNSET corresponds to the value UNSET of SystemGrpc_GRPC_SERVICE
+	SystemGrpc_GRPC_SERVICE_UNSET E_SystemGrpc_GRPC_SERVICE = 0
+	// SystemGrpc_GRPC_SERVICE_GNMI corresponds to the value GNMI of SystemGrpc_GRPC_SERVICE
+	SystemGrpc_GRPC_SERVICE_GNMI E_SystemGrpc_GRPC_SERVICE = 1
+	// SystemGrpc_GRPC_SERVICE_P4RT corresponds to the value P4RT of SystemGrpc_GRPC_SERVICE
+	SystemGrpc_GRPC_SERVICE_P4RT E_SystemGrpc_GRPC_SERVICE = 2
 )
 
 // E_SystemLogging_SYSLOG_FACILITY is a derived int64 type which is used to represent

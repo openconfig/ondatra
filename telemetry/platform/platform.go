@@ -30,6 +30,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -2245,6 +2246,16 @@ type Component_IntegratedCircuitPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_IntegratedCircuit_NodeIdPath represents the /openconfig-platform/components/component/integrated-circuit/state/node-id YANG schema element.
+type Component_IntegratedCircuit_NodeIdPath struct {
+	*ygot.NodePath
+}
+
+// Component_IntegratedCircuit_NodeIdPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/state/node-id YANG schema element.
+type Component_IntegratedCircuit_NodeIdPathAny struct {
+	*ygot.NodePath
+}
+
 // BackplaneFacingCapacity (container): This container allows a particular INTEGRATED_CIRCUIT to report its
 // available backplane-facing bandwidth. Where an integrated circuit is connected
 // by one or more links to the system's backplane, the capacity is the total cross-
@@ -2313,6 +2324,54 @@ func (n *Component_IntegratedCircuitPathAny) Memory() *Component_IntegratedCircu
 	return &Component_IntegratedCircuit_MemoryPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"memory"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NodeId (leaf): The numeric ID used by the controller to address the integrated circuit,
+// which may be referred to as a 'device', 'node' or 'target' by the P4RT
+// specification.
+//
+// Each switching ASIC (i.e., node) is addressed by the external entity
+// based on its numeric identifier.
+//
+// The node ID is specified in addition to the string identifier assigned to
+// the integrated circuit within the /components/component list.
+// ----------------------------------------
+// Defining module: "openconfig-p4rt"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/node-id"
+// Path from root: "/components/component/integrated-circuit/state/node-id"
+func (n *Component_IntegratedCircuitPath) NodeId() *Component_IntegratedCircuit_NodeIdPath {
+	return &Component_IntegratedCircuit_NodeIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "node-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NodeId (leaf): The numeric ID used by the controller to address the integrated circuit,
+// which may be referred to as a 'device', 'node' or 'target' by the P4RT
+// specification.
+//
+// Each switching ASIC (i.e., node) is addressed by the external entity
+// based on its numeric identifier.
+//
+// The node ID is specified in addition to the string identifier assigned to
+// the integrated circuit within the /components/component list.
+// ----------------------------------------
+// Defining module: "openconfig-p4rt"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/node-id"
+// Path from root: "/components/component/integrated-circuit/state/node-id"
+func (n *Component_IntegratedCircuitPathAny) NodeId() *Component_IntegratedCircuit_NodeIdPathAny {
+	return &Component_IntegratedCircuit_NodeIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "node-id"},
 			map[string]interface{}{},
 			n,
 		),

@@ -65,7 +65,7 @@ var (
 
 	// TODO: Lower timeouts after chassis hardware upgrades.
 	peersImportTimeout   = time.Minute
-	trafficImportTimeout = 3 * time.Minute
+	trafficImportTimeout = 4 * time.Minute
 	topoImportTimeout    = 3 * time.Minute
 
 	sleepFn                        = time.Sleep

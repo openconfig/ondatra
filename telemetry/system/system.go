@@ -30,6 +30,7 @@ using the following YANG input files:
 	- public/release/models/openconfig-extensions.yang
 	- public/release/models/optical-transport/openconfig-transport-types.yang
 	- public/release/models/ospf/openconfig-ospfv2.yang
+	- public/release/models/p4rt/openconfig-p4rt.yang
 	- public/release/models/platform/openconfig-platform-cpu.yang
 	- public/release/models/platform/openconfig-platform-fan.yang
 	- public/release/models/platform/openconfig-platform-integrated-circuit.yang
@@ -475,6 +476,94 @@ func (n *SystemPathAny) DomainName() *System_DomainNamePathAny {
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "domain-name"},
 			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// GrpcServerAny (list): The list of gRPC servers that are running on the device. Each
+// instance within this list corresponds to an individual gRPC listener
+// that listens on a single TCP port on the specified addresses.
+// Where there are multiple services that run on a single port, these
+// are enabled through the service leaf-list which uses the GRPC_SERVICE
+// identity to list the supported service types.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "grpc-servers/grpc-server"
+// Path from root: "/system/grpc-servers/grpc-server"
+// Name (wildcarded): string
+func (n *SystemPath) GrpcServerAny() *System_GrpcServerPathAny {
+	return &System_GrpcServerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"grpc-servers", "grpc-server"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// GrpcServerAny (list): The list of gRPC servers that are running on the device. Each
+// instance within this list corresponds to an individual gRPC listener
+// that listens on a single TCP port on the specified addresses.
+// Where there are multiple services that run on a single port, these
+// are enabled through the service leaf-list which uses the GRPC_SERVICE
+// identity to list the supported service types.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "grpc-servers/grpc-server"
+// Path from root: "/system/grpc-servers/grpc-server"
+// Name (wildcarded): string
+func (n *SystemPathAny) GrpcServerAny() *System_GrpcServerPathAny {
+	return &System_GrpcServerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"grpc-servers", "grpc-server"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// GrpcServer (list): The list of gRPC servers that are running on the device. Each
+// instance within this list corresponds to an individual gRPC listener
+// that listens on a single TCP port on the specified addresses.
+// Where there are multiple services that run on a single port, these
+// are enabled through the service leaf-list which uses the GRPC_SERVICE
+// identity to list the supported service types.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "grpc-servers/grpc-server"
+// Path from root: "/system/grpc-servers/grpc-server"
+// Name: string
+func (n *SystemPath) GrpcServer(Name string) *System_GrpcServerPath {
+	return &System_GrpcServerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"grpc-servers", "grpc-server"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// GrpcServer (list): The list of gRPC servers that are running on the device. Each
+// instance within this list corresponds to an individual gRPC listener
+// that listens on a single TCP port on the specified addresses.
+// Where there are multiple services that run on a single port, these
+// are enabled through the service leaf-list which uses the GRPC_SERVICE
+// identity to list the supported service types.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "grpc-servers/grpc-server"
+// Path from root: "/system/grpc-servers/grpc-server"
+// Name: string
+func (n *SystemPathAny) GrpcServer(Name string) *System_GrpcServerPathAny {
+	return &System_GrpcServerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"grpc-servers", "grpc-server"},
+			map[string]interface{}{"name": Name},
 			n,
 		),
 	}
@@ -7206,6 +7295,446 @@ func (n *System_Dns_ServerPathAny) Port() *System_Dns_Server_PortPathAny {
 	return &System_Dns_Server_PortPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// System_GrpcServerPath represents the /openconfig-system/system/grpc-servers/grpc-server YANG schema element.
+type System_GrpcServerPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServerPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server YANG schema element.
+type System_GrpcServerPathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_CertificateIdPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/certificate-id YANG schema element.
+type System_GrpcServer_CertificateIdPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_CertificateIdPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/certificate-id YANG schema element.
+type System_GrpcServer_CertificateIdPathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_EnablePath represents the /openconfig-system/system/grpc-servers/grpc-server/state/enable YANG schema element.
+type System_GrpcServer_EnablePath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_EnablePathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/enable YANG schema element.
+type System_GrpcServer_EnablePathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_ListenAddressesPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/listen-addresses YANG schema element.
+type System_GrpcServer_ListenAddressesPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_ListenAddressesPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/listen-addresses YANG schema element.
+type System_GrpcServer_ListenAddressesPathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_MetadataAuthenticationPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/metadata-authentication YANG schema element.
+type System_GrpcServer_MetadataAuthenticationPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_MetadataAuthenticationPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/metadata-authentication YANG schema element.
+type System_GrpcServer_MetadataAuthenticationPathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_NamePath represents the /openconfig-system/system/grpc-servers/grpc-server/state/name YANG schema element.
+type System_GrpcServer_NamePath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_NamePathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/name YANG schema element.
+type System_GrpcServer_NamePathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_NetworkInstancePath represents the /openconfig-system/system/grpc-servers/grpc-server/state/network-instance YANG schema element.
+type System_GrpcServer_NetworkInstancePath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_NetworkInstancePathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/network-instance YANG schema element.
+type System_GrpcServer_NetworkInstancePathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_PortPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/port YANG schema element.
+type System_GrpcServer_PortPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_PortPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/port YANG schema element.
+type System_GrpcServer_PortPathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_ServicesPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/services YANG schema element.
+type System_GrpcServer_ServicesPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_ServicesPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/services YANG schema element.
+type System_GrpcServer_ServicesPathAny struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_TransportSecurityPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/transport-security YANG schema element.
+type System_GrpcServer_TransportSecurityPath struct {
+	*ygot.NodePath
+}
+
+// System_GrpcServer_TransportSecurityPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/transport-security YANG schema element.
+type System_GrpcServer_TransportSecurityPathAny struct {
+	*ygot.NodePath
+}
+
+// CertificateId (leaf): Name of the certificate that is associated with the gRPC service. The
+// certificate ID is provisioned through other interfaces to the device, such
+// as the gNOI certificate management service.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/certificate-id"
+// Path from root: "/system/grpc-servers/grpc-server/state/certificate-id"
+func (n *System_GrpcServerPath) CertificateId() *System_GrpcServer_CertificateIdPath {
+	return &System_GrpcServer_CertificateIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "certificate-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CertificateId (leaf): Name of the certificate that is associated with the gRPC service. The
+// certificate ID is provisioned through other interfaces to the device, such
+// as the gNOI certificate management service.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/certificate-id"
+// Path from root: "/system/grpc-servers/grpc-server/state/certificate-id"
+func (n *System_GrpcServerPathAny) CertificateId() *System_GrpcServer_CertificateIdPathAny {
+	return &System_GrpcServer_CertificateIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "certificate-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Enable (leaf): When set to true, the gRPC server is enabled and runs on the
+// local device.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/enable"
+// Path from root: "/system/grpc-servers/grpc-server/state/enable"
+func (n *System_GrpcServerPath) Enable() *System_GrpcServer_EnablePath {
+	return &System_GrpcServer_EnablePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Enable (leaf): When set to true, the gRPC server is enabled and runs on the
+// local device.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/enable"
+// Path from root: "/system/grpc-servers/grpc-server/state/enable"
+func (n *System_GrpcServerPathAny) Enable() *System_GrpcServer_EnablePathAny {
+	return &System_GrpcServer_EnablePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ListenAddresses (leaf): The IP addresses that the gRPC server should listen on. This may be
+// an IPv4 or an IPv6 address (or both).
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/listen-addresses"
+// Path from root: "/system/grpc-servers/grpc-server/state/listen-addresses"
+func (n *System_GrpcServerPath) ListenAddresses() *System_GrpcServer_ListenAddressesPath {
+	return &System_GrpcServer_ListenAddressesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "listen-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ListenAddresses (leaf): The IP addresses that the gRPC server should listen on. This may be
+// an IPv4 or an IPv6 address (or both).
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/listen-addresses"
+// Path from root: "/system/grpc-servers/grpc-server/state/listen-addresses"
+func (n *System_GrpcServerPathAny) ListenAddresses() *System_GrpcServer_ListenAddressesPathAny {
+	return &System_GrpcServer_ListenAddressesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "listen-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MetadataAuthentication (leaf): When set to true, metadata authentication is enabled for the gRPC server.
+// In this mode of operation, gRPC metadata is used to carry authentication
+// credentials as per the specification in
+// https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-authentication.md#credentials-and-authentication.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/metadata-authentication"
+// Path from root: "/system/grpc-servers/grpc-server/state/metadata-authentication"
+func (n *System_GrpcServerPath) MetadataAuthentication() *System_GrpcServer_MetadataAuthenticationPath {
+	return &System_GrpcServer_MetadataAuthenticationPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metadata-authentication"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MetadataAuthentication (leaf): When set to true, metadata authentication is enabled for the gRPC server.
+// In this mode of operation, gRPC metadata is used to carry authentication
+// credentials as per the specification in
+// https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-authentication.md#credentials-and-authentication.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/metadata-authentication"
+// Path from root: "/system/grpc-servers/grpc-server/state/metadata-authentication"
+func (n *System_GrpcServerPathAny) MetadataAuthentication() *System_GrpcServer_MetadataAuthenticationPathAny {
+	return &System_GrpcServer_MetadataAuthenticationPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metadata-authentication"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Name (leaf): The name of the gRPC server instance that is running on
+// the local system.
+//
+// If the operator does not designate a name for the protocol
+// instance (e.g. config), the implementation should use the
+// name of 'DEFAULT' (e.g. state).  In addition, for
+// implementations that support a single gRPC server instance,
+// the default value is recommended for consistency.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/name"
+// Path from root: "/system/grpc-servers/grpc-server/state/name"
+func (n *System_GrpcServerPath) Name() *System_GrpcServer_NamePath {
+	return &System_GrpcServer_NamePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "name"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Name (leaf): The name of the gRPC server instance that is running on
+// the local system.
+//
+// If the operator does not designate a name for the protocol
+// instance (e.g. config), the implementation should use the
+// name of 'DEFAULT' (e.g. state).  In addition, for
+// implementations that support a single gRPC server instance,
+// the default value is recommended for consistency.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/name"
+// Path from root: "/system/grpc-servers/grpc-server/state/name"
+func (n *System_GrpcServerPathAny) Name() *System_GrpcServer_NamePathAny {
+	return &System_GrpcServer_NamePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "name"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance (leaf): The network instance within which the gRPC server is listening.
+// When unspecified, the DEFAULT_INSTANCE should be used.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/network-instance"
+// Path from root: "/system/grpc-servers/grpc-server/state/network-instance"
+func (n *System_GrpcServerPath) NetworkInstance() *System_GrpcServer_NetworkInstancePath {
+	return &System_GrpcServer_NetworkInstancePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "network-instance"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance (leaf): The network instance within which the gRPC server is listening.
+// When unspecified, the DEFAULT_INSTANCE should be used.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/network-instance"
+// Path from root: "/system/grpc-servers/grpc-server/state/network-instance"
+func (n *System_GrpcServerPathAny) NetworkInstance() *System_GrpcServer_NetworkInstancePathAny {
+	return &System_GrpcServer_NetworkInstancePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "network-instance"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Port (leaf): TCP port on which the gRPC server should listen.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/port"
+// Path from root: "/system/grpc-servers/grpc-server/state/port"
+func (n *System_GrpcServerPath) Port() *System_GrpcServer_PortPath {
+	return &System_GrpcServer_PortPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Port (leaf): TCP port on which the gRPC server should listen.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/port"
+// Path from root: "/system/grpc-servers/grpc-server/state/port"
+func (n *System_GrpcServerPathAny) Port() *System_GrpcServer_PortPathAny {
+	return &System_GrpcServer_PortPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Services (leaf): The gRPC service definitions that should be enabled for the
+// specified server. A target may support only specific
+// sets of services being enabled on the same server (e.g.,
+// it may be possible to run gNMI and gNOI services on the same
+// port, but not to run gRIBI and gNMI on the same port).
+//
+// The set of gRPC services that are available to be configured is
+// defined through the GRPC_SERVICE identity, which can be extended
+// for each protocol that is based on gRPC that is available on the
+// device.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/services"
+// Path from root: "/system/grpc-servers/grpc-server/state/services"
+func (n *System_GrpcServerPath) Services() *System_GrpcServer_ServicesPath {
+	return &System_GrpcServer_ServicesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "services"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Services (leaf): The gRPC service definitions that should be enabled for the
+// specified server. A target may support only specific
+// sets of services being enabled on the same server (e.g.,
+// it may be possible to run gNMI and gNOI services on the same
+// port, but not to run gRIBI and gNMI on the same port).
+//
+// The set of gRPC services that are available to be configured is
+// defined through the GRPC_SERVICE identity, which can be extended
+// for each protocol that is based on gRPC that is available on the
+// device.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/services"
+// Path from root: "/system/grpc-servers/grpc-server/state/services"
+func (n *System_GrpcServerPathAny) Services() *System_GrpcServer_ServicesPathAny {
+	return &System_GrpcServer_ServicesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "services"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TransportSecurity (leaf): Use gRPC transport security (e.g., SSL or TLS). Enabled by default.
+// This leaf allows transport security to be disabled for use cases that
+// are not supported, such as lab testing.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/transport-security"
+// Path from root: "/system/grpc-servers/grpc-server/state/transport-security"
+func (n *System_GrpcServerPath) TransportSecurity() *System_GrpcServer_TransportSecurityPath {
+	return &System_GrpcServer_TransportSecurityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transport-security"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TransportSecurity (leaf): Use gRPC transport security (e.g., SSL or TLS). Enabled by default.
+// This leaf allows transport security to be disabled for use cases that
+// are not supported, such as lab testing.
+// ----------------------------------------
+// Defining module: "openconfig-system-grpc"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/transport-security"
+// Path from root: "/system/grpc-servers/grpc-server/state/transport-security"
+func (n *System_GrpcServerPathAny) TransportSecurity() *System_GrpcServer_TransportSecurityPathAny {
+	return &System_GrpcServer_TransportSecurityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "transport-security"},
 			map[string]interface{}{},
 			n,
 		),

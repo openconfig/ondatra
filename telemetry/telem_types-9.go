@@ -12,6 +12,71 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE is a E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) Val(t testing.TB) E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE sample.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) SetVal(v E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE samples.
+type CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE struct {
+	W    *E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher
+	Data []*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) Await(t testing.TB) []*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher observes a stream of E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE samples.
+type E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE is a E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE with a corresponding timestamp.
 type QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE struct {
 	*genutil.Metadata
@@ -6512,6 +6577,71 @@ func (w *E_SegmentRoutingCapability_FlagsSliceWatcher) Await(t testing.TB) (*Qua
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedE_SystemGrpc_GRPC_SERVICESlice is a []E_SystemGrpc_GRPC_SERVICE with a corresponding timestamp.
+type QualifiedE_SystemGrpc_GRPC_SERVICESlice struct {
+	*genutil.Metadata
+	val     []E_SystemGrpc_GRPC_SERVICE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_SystemGrpc_GRPC_SERVICESlice) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the []E_SystemGrpc_GRPC_SERVICE sample, erroring out if not present.
+func (q *QualifiedE_SystemGrpc_GRPC_SERVICESlice) Val(t testing.TB) []E_SystemGrpc_GRPC_SERVICE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the []E_SystemGrpc_GRPC_SERVICE sample.
+func (q *QualifiedE_SystemGrpc_GRPC_SERVICESlice) SetVal(v []E_SystemGrpc_GRPC_SERVICE) *QualifiedE_SystemGrpc_GRPC_SERVICESlice {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_SystemGrpc_GRPC_SERVICESlice) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_SystemGrpc_GRPC_SERVICESlice is a telemetry Collection whose Await method returns a slice of []E_SystemGrpc_GRPC_SERVICE samples.
+type CollectionE_SystemGrpc_GRPC_SERVICESlice struct {
+	W    *E_SystemGrpc_GRPC_SERVICESliceWatcher
+	Data []*QualifiedE_SystemGrpc_GRPC_SERVICESlice
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_SystemGrpc_GRPC_SERVICESlice) Await(t testing.TB) []*QualifiedE_SystemGrpc_GRPC_SERVICESlice {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_SystemGrpc_GRPC_SERVICESliceWatcher observes a stream of []E_SystemGrpc_GRPC_SERVICE samples.
+type E_SystemGrpc_GRPC_SERVICESliceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_SystemGrpc_GRPC_SERVICESlice
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_SystemGrpc_GRPC_SERVICESliceWatcher) Await(t testing.TB) (*QualifiedE_SystemGrpc_GRPC_SERVICESlice, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_Types_ADDRESS_FAMILYSlice is a []E_Types_ADDRESS_FAMILY with a corresponding timestamp.
 type QualifiedE_Types_ADDRESS_FAMILYSlice struct {
 	*genutil.Metadata
@@ -7808,6 +7938,71 @@ type System_Aaa_Authorization_AuthorizationMethod_UnionSliceWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *System_Aaa_Authorization_AuthorizationMethod_UnionSliceWatcher) Await(t testing.TB) (*QualifiedSystem_Aaa_Authorization_AuthorizationMethod_UnionSlice, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice is a []System_GrpcServer_ListenAddresses_Union with a corresponding timestamp.
+type QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice struct {
+	*genutil.Metadata
+	val     []System_GrpcServer_ListenAddresses_Union // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the []System_GrpcServer_ListenAddresses_Union sample, erroring out if not present.
+func (q *QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice) Val(t testing.TB) []System_GrpcServer_ListenAddresses_Union {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the []System_GrpcServer_ListenAddresses_Union sample.
+func (q *QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice) SetVal(v []System_GrpcServer_ListenAddresses_Union) *QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionSystem_GrpcServer_ListenAddresses_UnionSlice is a telemetry Collection whose Await method returns a slice of []System_GrpcServer_ListenAddresses_Union samples.
+type CollectionSystem_GrpcServer_ListenAddresses_UnionSlice struct {
+	W    *System_GrpcServer_ListenAddresses_UnionSliceWatcher
+	Data []*QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionSystem_GrpcServer_ListenAddresses_UnionSlice) Await(t testing.TB) []*QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// System_GrpcServer_ListenAddresses_UnionSliceWatcher observes a stream of []System_GrpcServer_ListenAddresses_Union samples.
+type System_GrpcServer_ListenAddresses_UnionSliceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *System_GrpcServer_ListenAddresses_UnionSliceWatcher) Await(t testing.TB) (*QualifiedSystem_GrpcServer_ListenAddresses_UnionSlice, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
