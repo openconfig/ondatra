@@ -28,7 +28,7 @@ import (
 
 // Topology is an ATE topology API.
 type Topology struct {
-	ate *binding.ATE
+	ate binding.ATE
 }
 
 func (tp *Topology) String() string {
@@ -37,13 +37,13 @@ func (tp *Topology) String() string {
 
 // New returns a new ATE topology.
 func (tp *Topology) New() *ATETopology {
-	return &ATETopology{ate: tp.ate, top: &opb.Topology{}}
+	return &ATETopology{ate: tp.ate, top: &ate.Topology{}}
 }
 
 // ATETopology is an ATE topology.
 type ATETopology struct {
-	ate *binding.ATE
-	top *opb.Topology
+	ate binding.ATE
+	top *ate.Topology
 }
 
 func (at *ATETopology) String() string {
@@ -88,7 +88,7 @@ func (at *ATETopology) AddLAG(name string) *LAG {
 		Name: name,
 		Lacp: &opb.Lag_Lacp{Enabled: true},
 	}
-	at.top.Lags = append(at.top.Lags, lpb)
+	at.top.LAGs = append(at.top.LAGs, lpb)
 	return &LAG{pb: lpb}
 }
 
@@ -120,6 +120,14 @@ func (at *ATETopology) UpdateBGPPeerStates(t testing.TB) {
 	t.Helper()
 	if err := ate.UpdateTopology(context.Background(), at.ate, at.top, true); err != nil {
 		t.Fatalf("UpdateBGPPeerState(t) on %s: %v", at, err)
+	}
+}
+
+// UpdateNetworks is equivalent to Update() but only updates the Network config on the fly.
+func (at *ATETopology) UpdateNetworks(t testing.TB) {
+	t.Helper()
+	if err := ate.UpdateNetworks(context.Background(), at.ate, at.top); err != nil {
+		t.Fatalf("UpdateNetworks(t) on %s: %v", at, err)
 	}
 }
 

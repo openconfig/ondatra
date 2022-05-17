@@ -22,7 +22,6 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/telemetry"
@@ -30,11 +29,11 @@ import (
 
 var (
 	translateFunctions = map[string]func(ixweb.StatTable, []string, []string) (*telemetry.Device, error){
-		portStatsCaption:         translatePortStats,
-		portCPUStatsCaption:      translatePortCPUStats,
-		trafficItemStatsCaption:  translateTrafficItemStats,
-		flowStatsCaption:         translateFlowStats,
-		ixweb.EgressStatsCaption: translateEgressStats,
+		portStatsCaption:              translatePortStats,
+		portCPUStatsCaption:           translatePortCPUStats,
+		ixweb.TrafficItemStatsCaption: translateTrafficItemStats,
+		flowStatsCaption:              translateFlowStats,
+		ixweb.EgressStatsCaption:      translateEgressStats,
 	}
 )
 
@@ -63,7 +62,7 @@ var (
 //
 // The itFlows and etFlows parameters indicates which flows have ingress
 // tracking and egress tracking enabled, respectively.
-func translate(st *Stats) (ygot.ValidatedGoStruct, error) {
+func translate(st *Stats) (ygot.GoStruct, error) {
 	root := &telemetry.Device{}
 	for caption, table := range st.Tables {
 		if fn, ok := translateFunctions[caption]; ok {
@@ -157,7 +156,7 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 		case "Link Down", "No PCS Lock":
 			i.OperStatus = telemetry.Interface_OperStatus_DOWN
 		default:
-			return nil, errors.Errorf("statistics row %q has an unmappable port link state %q", row.PortName, row.LinkState)
+			return nil, fmt.Errorf("statistics row %q has an unmappable port link state %q", row.PortName, row.LinkState)
 		}
 
 		// TODO: Map different speed interfaces - need to determine what the possible Ixia values are.
@@ -171,7 +170,7 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 		case "400GE":
 			i.GetOrCreateEthernet().PortSpeed = telemetry.IfEthernet_ETHERNET_SPEED_SPEED_400GB
 		default:
-			return nil, errors.Errorf("statistics row %q has an unmappable port link speed %q", row.PortName, row.LineSpeed)
+			return nil, fmt.Errorf("statistics row %q has an unmappable port link speed %q", row.PortName, row.LineSpeed)
 		}
 	}
 
@@ -198,6 +197,8 @@ func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*telemetry.De
 		f.InFrameRate = pfloat32Bytes(row.RxFrameRate)
 		f.OutRate = pfloat32Bytes(row.TxRate)
 		f.OutFrameRate = pfloat32Bytes(row.TxFrameRate)
+		f.ConvergenceTime = row.ConvergenceTime
+		f.FirstPacketLatency = row.FirstPacketTime
 	}
 	return d, nil
 }
@@ -344,7 +345,7 @@ func vlanIDFromUint(id *uint64) uint16 {
 func shortPortName(fullPortName string) (string, error) {
 	parts := strings.SplitAfterN(fullPortName, "/", 2)
 	if len(parts) < 2 || len(parts[1]) == 0 {
-		return "", errors.Errorf("invalid port name: got %q, want [ixia_name]/[port_name]", fullPortName)
+		return "", fmt.Errorf("invalid port name: got %q, want [ixia_name]/[port_name]", fullPortName)
 	}
 	return parts[1], nil
 }

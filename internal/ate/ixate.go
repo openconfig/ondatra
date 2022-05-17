@@ -17,6 +17,7 @@ package ate
 import (
 	"golang.org/x/net/context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"hash/crc32"
 	"io/ioutil"
@@ -30,11 +31,9 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/ixweb"
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/internal/ixgnmi"
 
@@ -66,7 +65,7 @@ var (
 
 	// TODO: Lower timeouts after chassis hardware upgrades.
 	peersImportTimeout   = time.Minute
-	trafficImportTimeout = 3 * time.Minute
+	trafficImportTimeout = 4 * time.Minute
 	topoImportTimeout    = 3 * time.Minute
 
 	sleepFn                        = time.Sleep
@@ -75,6 +74,8 @@ var (
 	resetIxiaTrafficCfgFn          = resetIxiaTrafficCfg
 	genTrafficFn                   = genTraffic
 	updateFlowsFn                  = updateFlows
+	configureTrafficFn             = configureTraffic
+	applyTrafficFn                 = applyTraffic
 	startTrafficFn                 = startTraffic
 )
 
@@ -109,7 +110,7 @@ type stats interface {
 }
 
 type view interface {
-	FetchTable(context.Context) (ixweb.StatTable, error)
+	FetchTable(context.Context, ...string) (ixweb.StatTable, error)
 }
 
 type clientWrapper struct {
@@ -156,8 +157,8 @@ type viewWrapper struct {
 	*ixweb.StatView
 }
 
-func (vw *viewWrapper) FetchTable(ctx context.Context) (ixweb.StatTable, error) {
-	return vw.StatView.FetchTable(ctx)
+func (vw *viewWrapper) FetchTable(ctx context.Context, drilldowns ...string) (ixweb.StatTable, error) {
+	return vw.StatView.FetchTable(ctx, drilldowns...)
 }
 
 // IPv4/6 route tables specified by local path.
@@ -222,6 +223,7 @@ type ixATE struct {
 	flowToTrafficItem    map[string]*ixconfig.TrafficTrafficItem
 	ingressTrackingFlows []string
 	egressTrackingFlows  []string
+	convergenceTracking  bool
 	// Operational state is updated as needed on successful API calls.
 	operState operState
 
@@ -235,6 +237,7 @@ func (ix *ixATE) resetClientTrafficCfg() {
 	ix.flowToTrafficItem = make(map[string]*ixconfig.TrafficTrafficItem)
 	ix.ingressTrackingFlows = nil
 	ix.egressTrackingFlows = nil
+	ix.convergenceTracking = false
 }
 
 // Removes traffic configuration on the Ixia.
@@ -243,10 +246,10 @@ func resetIxiaTrafficCfg(ctx context.Context, ix *ixATE) error {
 		return err
 	}
 	if err := ix.c.Session().Post(ctx, "operations/clearstats", ixweb.OpArgs{}, nil); err != nil {
-		return errors.Wrap(err, "could not clear stats")
+		return fmt.Errorf("could not clear stats: %w", err)
 	}
 	if err := ix.c.Session().Delete(ctx, "traffic/trafficItem"); err != nil {
-		return errors.Wrap(err, "could not delete IxNetwork traffic items")
+		return fmt.Errorf("could not delete IxNetwork traffic items: %w", err)
 	}
 	return nil
 }
@@ -426,29 +429,29 @@ func syncRouteTableFilesAndImport(ctx context.Context, ix *ixATE) error {
 	for f := range toSync {
 		b, err := ioutil.ReadFile(f)
 		if err != nil {
-			return errors.Wrapf(err, "could not read route table file at %s for hashing", f)
+			return fmt.Errorf("could not read route table file at %s for hashing: %w", f, err)
 		}
 		hashToFile[fmt.Sprintf("%d", crc32.ChecksumIEEE(b))] = f
 	}
 
 	rtFiles, err := ix.c.Session().Files().List(ctx, rtFilePrefix+"*")
 	if err != nil {
-		return errors.Wrap(err, "could not query for files on Ixia chassis")
+		return fmt.Errorf("could not query for files on Ixia chassis: %w", err)
 	}
 
 	now := time.Now()
 	for _, f := range rtFiles {
 		fdata := strings.Split(strings.TrimPrefix(f, rtFilePrefix), "_")
 		if len(fdata) != 2 {
-			return errors.Errorf("unexpected format for Ixia route table file %s", f)
+			return fmt.Errorf("unexpected format for Ixia route table file %s", f)
 		}
 		ftime, err := strconv.Atoi(fdata[0])
 		if err != nil {
-			return errors.Errorf("unexpected timestamp format for Ixia route table file %s", f)
+			return fmt.Errorf("unexpected timestamp format for Ixia route table file %s", f)
 		}
 		if time.Unix(int64(ftime), 0).Before(now.Add(-24 * 7 * time.Hour)) {
 			if err := ix.c.Session().Files().Delete(ctx, f); err != nil {
-				return errors.Wrapf(err, "could not delete out-of-date route table file %s", f)
+				return fmt.Errorf("could not delete out-of-date route table file %s: %w", f, err)
 			}
 			continue
 		}
@@ -461,29 +464,29 @@ func syncRouteTableFilesAndImport(ctx context.Context, ix *ixATE) error {
 	for h, f := range hashToFile {
 		b, err := ioutil.ReadFile(f)
 		if err != nil {
-			return errors.Wrapf(err, "could not read route table file at %s for upload", f)
+			return fmt.Errorf("could not read route table file at %s for upload: %w", f, err)
 		}
 		fn := fmt.Sprintf("%s%d_%s", rtFilePrefix, now.Unix(), h)
 		if err := ix.c.Session().Files().Upload(ctx, fn, b); err != nil {
-			return errors.Wrapf(err, "could not upload route table file at %s to %s", f, fn)
+			return fmt.Errorf("could not upload route table file at %s to %s: %w", f, fn, err)
 		}
 		ix.routeTableToIxFile[f] = fn
 	}
 
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, brps...); err != nil {
-		return errors.Wrap(err, "could not update IDs for importing routes")
+		return fmt.Errorf("could not update IDs for importing routes: %w", err)
 	}
 	for _, intf := range ix.intfs {
 		for net, rt := range intf.netToRouteTables {
 			ng := intf.netToNetworkGroup[net]
 			if rt.ipv4 != "" {
 				if err := importBgpRoutes(ctx, ix, ng.Ipv4PrefixPools[0].BgpIPRouteProperty[0], rt, false); err != nil {
-					return errors.Wrapf(err, "errors importing BGP IPv4 routes for network %s", net)
+					return fmt.Errorf("errors importing BGP IPv4 routes for network %s: %w", net, err)
 				}
 			}
 			if rt.ipv6 != "" {
 				if err := importBgpRoutes(ctx, ix, ng.Ipv6PrefixPools[0].BgpV6IPRouteProperty[0], rt, true); err != nil {
-					return errors.Wrapf(err, "errors importing BGP IPv6 routes for network %s", net)
+					return fmt.Errorf("errors importing BGP IPv6 routes for network %s: %w", net, err)
 				}
 			}
 		}
@@ -503,8 +506,8 @@ func (ix *ixATE) updateTopology(ctx context.Context, ics []*opb.InterfaceConfig)
 }
 
 // PushTopology configures the IxNetwork session with the specified topology.
-func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
-	if err := validateInterfaces(top.GetInterfaces()); err != nil {
+func (ix *ixATE) PushTopology(ctx context.Context, top *Topology) error {
+	if err := validateInterfaces(top.Interfaces); err != nil {
 		return err
 	}
 	ix.resetClientCfg()
@@ -514,7 +517,7 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	if err := ix.importConfig(ctx, ix.cfg, true, topoImportTimeout); err != nil {
 		return err
 	}
-	if lags := top.GetLags(); len(lags) > 0 {
+	if lags := top.LAGs; len(lags) > 0 {
 		if err := ix.addLAGs(lags); err != nil {
 			return err
 		}
@@ -524,7 +527,7 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 	}
 	// Avoid a possible race condition with repeated config imports (b/191984474).
 	sleepFn(45 * time.Second)
-	if err := ix.updateTopology(ctx, top.GetInterfaces()); err != nil {
+	if err := ix.updateTopology(ctx, top.Interfaces); err != nil {
 		return err
 	}
 	ix.operState = operStateOff
@@ -532,11 +535,11 @@ func (ix *ixATE) PushTopology(ctx context.Context, top *opb.Topology) error {
 }
 
 // UpdateTopology updates IxNetwork session to the specified topology.
-func (ix *ixATE) UpdateTopology(ctx context.Context, top *opb.Topology) error {
-	if err := validateInterfaces(top.GetInterfaces()); err != nil {
+func (ix *ixATE) UpdateTopology(ctx context.Context, top *Topology) error {
+	if err := validateInterfaces(top.Interfaces); err != nil {
 		return err
 	}
-	if err := ix.updateTopology(ctx, top.GetInterfaces()); err != nil {
+	if err := ix.updateTopology(ctx, top.Interfaces); err != nil {
 		return err
 	}
 	// Protocols/traffic are stopped after updating topology, restart as needed.
@@ -594,7 +597,7 @@ func checkUp(ctx context.Context, ix *ixATE, nodes []ixconfig.IxiaCfgNode, r sta
 				return nil, err
 			}
 			if err := ix.c.Session().Get(ctx, nodeID, r); err != nil {
-				return nil, errors.Wrapf(err, "could not fetch element at %q to check session status", nodeID)
+				return nil, fmt.Errorf("could not fetch element at %q to check session status: %w", nodeID, err)
 			}
 			if !r.Up() {
 				notUp = append(notUp, n)
@@ -627,7 +630,7 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 	}{}
 	started := func() (bool, error, bool) {
 		if err := ix.c.Session().Get(ctx, "globals/topology", &topo); err != nil {
-			return false, errors.Wrap(err, "could not fetch global topology to check protocol status"), false
+			return false, fmt.Errorf("could not fetch global topology to check protocol status: %w", err), false
 		}
 		if topo.Status == "started" && len(topo.ProtocolActionsInProgress) == 0 {
 			return true, nil, false
@@ -640,7 +643,7 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 			if strings.Contains(intf.link.XPath().String(), "lag") && len(intf.isrToNetworkGroup) > 0 {
 				var appErrs []struct{ Name string }
 				if err := ix.c.Session().Get(ctx, "globals/appErrors/error", &appErrs); err != nil {
-					return false, errors.Wrapf(err, "could not fetch global errors"), false
+					return false, fmt.Errorf("could not fetch global errors: %w", err), false
 				}
 				for _, e := range appErrs {
 					if strings.Contains(e.Name, "Index was outside the bounds of the array") {
@@ -685,7 +688,7 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 	cfgNodes = append(cfgNodes, protocolNodes...)
 	cfgNodes = append(cfgNodes, ingressLSPNodes...)
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, cfgNodes...); err != nil {
-		return errors.Wrap(err, "could not update IDs for checking protocol sessions")
+		return fmt.Errorf("could not update IDs for checking protocol sessions: %w", err)
 	}
 
 	protocolNodes, err = checkUp(ctx, ix, protocolNodes, &protocolRsp{}, maxRetriesProtocols)
@@ -762,7 +765,7 @@ func (ix *ixATE) startProtocols(ctx context.Context) error {
 	// behavior for a topology with RSVP protocols configured after updating to
 	// IxNetwork 9.10update2 everywhere.
 	if err := validateProtocolStartFn(ctx, ix); err != nil {
-		return errors.Wrap(err, "failed to start protocols, also check the log for errors/warnings for the 'startallprotocols' op")
+		return fmt.Errorf("failed to start protocols, also check the log for errors/warnings for the 'startallprotocols' op: %w", err)
 	}
 	return nil
 }
@@ -787,7 +790,7 @@ func (ix *ixATE) StopProtocols(ctx context.Context) error {
 		return nil
 	}
 	if err := ix.c.Session().Post(ctx, "operations/stopallprotocols", syncedOpArgs, nil); err != nil {
-		return errors.Wrap(err, "could not stop protocols")
+		return fmt.Errorf("could not stop protocols: %w", err)
 	}
 	ix.operState = operStateOff
 	return nil
@@ -797,10 +800,10 @@ func (ix *ixATE) StopProtocols(ctx context.Context) error {
 func (ix *ixATE) SetPortState(ctx context.Context, port string, enabled bool) error {
 	vport, ok := ix.ports[port]
 	if !ok {
-		return usererr.New("port %q does not exist in current configuration", port)
+		return fmt.Errorf("port %q does not exist in current configuration", port)
 	}
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, vport); err != nil {
-		return errors.Wrapf(err, "could not fetch ID for vport for %q", port)
+		return fmt.Errorf("could not fetch ID for vport for %q: %w", port, err)
 	}
 
 	state := "down"
@@ -812,7 +815,7 @@ func (ix *ixATE) SetPortState(ctx context.Context, port string, enabled bool) er
 		return err
 	}
 	if err := ix.c.Session().Post(ctx, "vport/operations/linkupdn", ixweb.OpArgs{[]string{vportID}, state}, nil); err != nil {
-		return errors.Wrapf(err, "error setting port state for %q", port)
+		return fmt.Errorf("error setting port state for %q: %w", port, err)
 	}
 	return nil
 }
@@ -829,7 +832,7 @@ func resolveMacs(ctx context.Context, ix *ixATE) error {
 		}
 	}
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, nodes...); err != nil {
-		return errors.Wrap(err, "could not fetch IDs for resolving MACs")
+		return fmt.Errorf("could not fetch IDs for resolving MACs: %w", err)
 	}
 
 	firstValidMac := func(macs []string) string {
@@ -851,7 +854,7 @@ func resolveMacs(ctx context.Context, ix *ixATE) error {
 		var macs []string
 		err = ix.c.Session().Post(ctx, "multivalue/operations/getvalues", ixweb.OpArgs{macID, 0, 1}, &macs)
 		if err != nil {
-			return errors.Wrapf(err, "could not fetch value for MAC multivalue %q", macID)
+			return fmt.Errorf("could not fetch value for MAC multivalue %q: %w", macID, err)
 		}
 		intf.ethMac = firstValidMac(macs)
 
@@ -861,7 +864,7 @@ func resolveMacs(ctx context.Context, ix *ixATE) error {
 				return err
 			}
 			if err := ix.c.Session().Get(ctx, ipv4ID, &ipData); err != nil {
-				return errors.Wrapf(err, "could not fetch IPv4 object at %q", ipv4ID)
+				return fmt.Errorf("could not fetch IPv4 object at %q: %w", ipv4ID, err)
 			}
 			if mac := firstValidMac(ipData.ResolvedGatewayMAC); mac != "" {
 				intf.resolvedIpv4Mac = mac
@@ -874,7 +877,7 @@ func resolveMacs(ctx context.Context, ix *ixATE) error {
 				return err
 			}
 			if err := ix.c.Session().Get(ctx, ipv6ID, &ipData); err != nil {
-				return errors.Wrapf(err, "could not fetch IPv6 object at %q", ipv6ID)
+				return fmt.Errorf("could not fetch IPv6 object at %q: %w", ipv6ID, err)
 			}
 			if mac := firstValidMac(ipData.ResolvedGatewayMAC); mac != "" {
 				intf.resolvedIpv6Mac = mac
@@ -898,7 +901,7 @@ func genTraffic(ctx context.Context, ix *ixATE) error {
 		tiIDs = append(tiIDs, tiID)
 	}
 	if err := ix.c.Session().Post(ctx, "traffic/trafficItem/operations/generate", ixweb.OpArgs{tiIDs}, nil); err != nil {
-		return errors.Wrap(err, "could not generate traffic flows")
+		return fmt.Errorf("could not generate traffic flows: %w", err)
 	}
 	return nil
 }
@@ -911,7 +914,7 @@ func updateFlows(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 	for _, f := range flows {
 		ti := ix.flowToTrafficItem[f.GetName()]
 		if ti == nil {
-			return usererr.New("flow %q does not exist", f.GetName())
+			return fmt.Errorf("flow %q does not exist", f.GetName())
 		}
 		tiID, err := ix.c.NodeID(ti)
 		if err != nil {
@@ -921,80 +924,74 @@ func updateFlows(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 
 		fs, fsMap, err := frameSize(f.GetFrameSize())
 		if err != nil {
-			return errors.Wrapf(err, "could not compute new frame size for flow %q", f.GetName())
+			return fmt.Errorf("could not compute new frame size for flow %q: %w", f.GetName(), err)
 		}
 		if fs != nil {
 			if ce == nil {
-				return usererr.New("cannot update frame size for flow %q since it was not originally specified explicitly", f.GetName())
+				return fmt.Errorf("cannot update frame size for flow %q since it was not originally specified explicitly", f.GetName())
 			}
 			if *(fs.Type_) != *(ce.FrameSize.Type_) {
-				return usererr.New("cannot switch to frame size type %T for flow %q", f.GetFrameSize().GetType(), f.GetName())
+				return fmt.Errorf("cannot switch to frame size type %T for flow %q", f.GetFrameSize().GetType(), f.GetName())
 			}
 			if err := ix.c.Session().Patch(ctx, path.Join(tiID, hlsSuffix, "frameSize"), fsMap); err != nil {
-				return errors.Wrapf(err, "could not patch frame size for flow %q", f.GetName())
+				return fmt.Errorf("could not patch frame size for flow %q: %w", f.GetName(), err)
 			}
 		}
 
 		_, frMap, err := frameRate(f.GetFrameRate())
 		if err != nil {
-			return errors.Wrapf(err, "could not compute new frame rate for flow %q", f.GetName())
+			return fmt.Errorf("could not compute new frame rate for flow %q: %w", f.GetName(), err)
 		}
 
 		if frMap != nil {
 			if err := ix.c.Session().Patch(ctx, path.Join(tiID, hlsSuffix, "frameRate"), frMap); err != nil {
-				return errors.Wrapf(err, "could not patch frame rate for flow %q", f.GetName())
+				return fmt.Errorf("could not patch frame rate for flow %q: %w", f.GetName(), err)
 			}
 		}
 	}
 	return nil
 }
 
-func startTraffic(ctx context.Context, ix *ixATE) error {
-	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
-	if err := ix.c.Session().Post(ctx, "traffic/operations/apply", trafficArgs, nil); err != nil {
-		return errors.Wrap(err, "could not apply traffic config")
-	}
-	if err := ix.c.Session().Post(ctx, "traffic/operations/start", trafficArgs, nil); err != nil {
-		return errors.Wrap(err, "could not start traffic")
-	}
-
-	// TODO: Investigate using JSON-based config instead of the REST API.
-	if len(ix.egressTrackingFlows) > 0 {
-		if _, err := ix.c.Session().Stats().ConfigEgressView(ctx, ix.egressTrackingFlows); err != nil {
-			return errors.Wrap(err, "could not set egress stat tracking")
-		}
-	}
-	return nil
-}
-
-// StartTraffic starts traffic for the IxNetwork session based on the given flows.
-func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
+func configureTraffic(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 	if err := validateFlows(flows); err != nil {
 		return err
 	}
-	if ix.operState == operStateOff {
-		return usererr.New("cannot start traffic before starting protocols")
-	}
-	if ix.operState == operStateTrafficOn {
-		log.Infof("Traffic already running, not running operation on Ixia.")
-		return nil
-	}
 	ix.resetClientTrafficCfg()
 	if err := resetIxiaTrafficCfgFn(ctx, ix); err != nil {
-		return errors.Wrap(err, "could not reset traffic config on Ixia")
+		return fmt.Errorf("could not reset traffic config on Ixia: %w", err)
 	}
 	// There is a race condition in configuring traffic after clearing traffic, sleep for 30 seconds to avoid.
 	sleepFn(30 * time.Second)
 	if err := resolveMacsFn(ctx, ix); err != nil {
-		return errors.Wrap(err, "could not resolve MAC addresses in config")
+		return fmt.Errorf("could not resolve MAC addresses in config: %w", err)
+	}
+
+	for _, f := range flows {
+		if f.GetConvergenceTracking() {
+			ix.convergenceTracking = true
+			// Update latency/convergence tracking configuration. This can't be done via config push
+			// because convergence tracking will be automatically unset if latency tracking is not
+			// separately disabled first.
+			if err := ix.c.Session().Patch(ctx, "/traffic/statistics/latency", map[string]interface{}{"enabled": false}); err != nil {
+				return fmt.Errorf("could not disable latency statistics: %w", err)
+			}
+			if err := ix.c.Session().Patch(ctx, "/traffic/statistics/cpdpConvergence", map[string]interface{}{
+				"enabled":                          true,
+				"enableControlPlaneEvents":         true,
+				"enableDataPlaneEventsRateMonitor": true,
+			}); err != nil {
+				return fmt.Errorf("could not configure convergence measurements: %w", err)
+			}
+			break
+		}
 	}
 
 	if err := ix.addTraffic(flows); err != nil {
-		return errors.Wrap(err, "could not compute traffic configuration")
+		return fmt.Errorf("could not compute traffic configuration: %w", err)
 	}
 
 	if err := ix.importConfig(ctx, ix.cfg.Traffic, false, trafficImportTimeout); err != nil {
-		return errors.Wrap(err, "could not push traffic configuration")
+		return fmt.Errorf("could not push traffic configuration: %w", err)
 	}
 
 	var items []ixconfig.IxiaCfgNode
@@ -1002,21 +999,66 @@ func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
 		items = append(items, ti)
 	}
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, items...); err != nil {
-		return errors.Wrap(err, "could not update IDs for traffic items")
+		return fmt.Errorf("could not update IDs for traffic items: %w", err)
 	}
 
 	if err := genTrafficFn(ctx, ix); err != nil {
-		return errors.Wrap(err, "could not generate traffic flow")
+		return fmt.Errorf("could not generate traffic flow: %w", err)
 	}
 
 	// IxNetwork does not necessarily configure frame rate correctly when generating
 	// traffic streams (b/204318369).
 	if err := updateFlowsFn(ctx, ix, flows); err != nil {
-		return errors.Wrap(err, "could not update generated flows")
+		return fmt.Errorf("could not update generated flows: %w", err)
+	}
+	return nil
+}
+
+func applyTraffic(ctx context.Context, ix *ixATE) error {
+	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
+	if err := ix.c.Session().Post(ctx, "traffic/operations/apply", trafficArgs, nil); err != nil {
+		return fmt.Errorf("could not apply traffic config: %w", err)
+	}
+	return nil
+}
+
+func startTraffic(ctx context.Context, ix *ixATE) error {
+	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
+	if err := ix.c.Session().Post(ctx, "traffic/operations/start", trafficArgs, nil); err != nil {
+		return fmt.Errorf("could not start traffic: %w", err)
+	}
+
+	// TODO: Investigate using JSON-based config instead of the REST API.
+	if len(ix.egressTrackingFlows) > 0 {
+		if _, err := ix.c.Session().Stats().ConfigEgressView(ctx, ix.egressTrackingFlows); err != nil {
+			return fmt.Errorf("could not set egress stat tracking: %w", err)
+		}
+	}
+	return nil
+}
+
+// StartTraffic starts traffic for the IxNetwork session based on the given flows.
+func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
+	if ix.operState == operStateOff {
+		return fmt.Errorf("cannot start traffic before starting protocols")
+	}
+	if ix.operState == operStateTrafficOn {
+		log.Infof("Traffic already running, not running operation on Ixia.")
+		return nil
+	}
+
+	// Configure and apply traffic only when flows are provided.
+	if len(flows) > 0 {
+		if err := configureTrafficFn(ctx, ix, flows); err != nil {
+			return fmt.Errorf("could not configure traffic: %w", err)
+		}
+		if err := applyTrafficFn(ctx, ix); err != nil {
+			return fmt.Errorf("could not apply traffic: %w", err)
+		}
 	}
 
 	if err := startTrafficFn(ctx, ix); err != nil {
-		return errors.Wrap(err, "could not start traffic")
+		return fmt.Errorf("could not start traffic: %w", err)
 	}
 
 	ix.operState = operStateTrafficOn
@@ -1029,10 +1071,10 @@ func (ix *ixATE) UpdateTraffic(ctx context.Context, flows []*opb.Flow) error {
 		return err
 	}
 	if ix.operState != operStateTrafficOn {
-		return usererr.New("cannot update traffic before it has been started")
+		return fmt.Errorf("cannot update traffic before it has been started")
 	}
 	if err := updateFlowsFn(ctx, ix, flows); err != nil {
-		return errors.Wrap(err, "could not update running traffic flows")
+		return fmt.Errorf("could not update running traffic flows: %w", err)
 	}
 	return nil
 }
@@ -1040,7 +1082,7 @@ func (ix *ixATE) UpdateTraffic(ctx context.Context, flows []*opb.Flow) error {
 func (ix *ixATE) stopAllTraffic(ctx context.Context) error {
 	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
 	if err := ix.c.Session().Post(ctx, "traffic/operations/stop", trafficArgs, nil); err != nil {
-		return errors.Wrap(err, "could not stop traffic")
+		return fmt.Errorf("could not stop traffic: %w", err)
 	}
 	// Wait a sufficient amount of time to ensure that traffic is stopped.
 	sleepFn(15 * time.Second)
@@ -1065,7 +1107,7 @@ func (ix *ixATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNM
 	ix.mu.Lock()
 	defer ix.mu.Unlock()
 	if ix.gclient != nil {
-		return nil, errors.Errorf("GNMI client for Ixia %s already dialed", ix.name)
+		return nil, fmt.Errorf("GNMI client for Ixia %s already dialed", ix.name)
 	}
 	gclient, err := ixgnmi.NewClient(ctx, ix.name, ix.readStats, unwrapClient(ix.c), opts...)
 	if err != nil {
@@ -1094,7 +1136,11 @@ func (ix *ixATE) readStats(ctx context.Context, captions []string) (*ixgnmi.Stat
 		view, ok := views[cap]
 		var table ixweb.StatTable
 		if ok {
-			table, err = view.FetchTable(ctx)
+			var drilldowns []string
+			if cap == ixweb.TrafficItemStatsCaption && ix.convergenceTracking {
+				drilldowns = []string{"Drill down per Dest Endpoint", "Drill Down per Rx Port"}
+			}
+			table, err = view.FetchTable(ctx, drilldowns...)
 			if err != nil {
 				return nil, err
 			}
@@ -1104,7 +1150,7 @@ func (ix *ixATE) readStats(ctx context.Context, captions []string) (*ixgnmi.Stat
 		tables[cap] = table
 	}
 	if err != nil {
-		return nil, errors.Wrapf(err, "Error retrieving statistics for views: %v", captions)
+		return nil, fmt.Errorf("error retrieving statistics for views %v: %w", captions, err)
 	}
 	return &ixgnmi.Stats{
 		Tables:            tables,
@@ -1138,50 +1184,74 @@ func (ix *ixATE) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceCo
 		if v4 := intf.ipv4; v4 != nil {
 			for _, peer := range v4.BgpIpv4Peer {
 				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
-					return errors.Wrap(err, "could not update BGP v4 peer")
+					return fmt.Errorf("could not update BGP v4 peer: %w", err)
 				}
 			}
 		}
 		if v6 := intf.ipv6; v6 != nil {
 			for _, peer := range v6.BgpIpv6Peer {
 				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
-					return errors.Wrap(err, "could not update BGP v6 peer")
+					return fmt.Errorf("could not update BGP v6 peer: %w", err)
 				}
 			}
 		}
 		if v4lb := intf.ipv4Loopback; v4lb != nil {
 			for _, peer := range v4lb.BgpIpv4Peer {
 				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
-					return errors.Wrap(err, "could not update BGP v4 loopback peer")
+					return fmt.Errorf("could not update BGP v4 loopback peer: %w", err)
 				}
 			}
 		}
 		if v6lb := intf.ipv6Loopback; v6lb != nil {
 			for _, peer := range v6lb.BgpIpv6Peer {
 				if err := ix.importConfig(ctx, peer, false, peersImportTimeout); err != nil {
-					return errors.Wrap(err, "could not update BGP v6 loopback peer")
+					return fmt.Errorf("could not update BGP v6 loopback peer: %w", err)
 				}
 			}
 		}
 	}
+	return ix.applyOnTheFly(ctx)
+}
+
+func (ix *ixATE) applyOnTheFly(ctx context.Context) error {
 	const (
 		applyOnTheFlyArg = "globals/topology"
 		applyOnTheFlyOp  = "globals/topology/operations/applyonthefly"
 	)
 	applyOnTheFlyArgs := ixweb.OpArgs{ix.c.Session().AbsPath(applyOnTheFlyArg)}
 	if err := ix.c.Session().Post(ctx, applyOnTheFlyOp, applyOnTheFlyArgs, nil); err != nil {
-		return errors.Wrap(err, "could not apply topology changes")
+		return fmt.Errorf("could not apply topology changes: %w", err)
 	}
 	return nil
+}
+
+func (ix *ixATE) UpdateNetworkGroups(ctx context.Context, ifs []*opb.InterfaceConfig) error {
+	if err := validateInterfaces(ifs); err != nil {
+		return err
+	}
+	if err := ix.configureTopology(ifs); err != nil {
+		return err
+	}
+	for _, intf := range ix.intfs {
+		for _, ng := range intf.netToNetworkGroup {
+			if ng == nil {
+				continue
+			}
+			if err := ix.importConfig(ctx, ng, false, peersImportTimeout); err != nil {
+				return fmt.Errorf("could not update network groups: %w", err)
+			}
+		}
+	}
+	return ix.applyOnTheFly(ctx)
 }
 
 func validateFlows(fs []*opb.Flow) error {
 	for _, f := range fs {
 		if len(f.GetSrcEndpoints()) == 0 {
-			return usererr.New("flow has no src endpointd")
+			return fmt.Errorf("flow has no src endpointd")
 		}
 		if len(f.GetDstEndpoints()) == 0 {
-			return usererr.New("flow has no dst endpoints")
+			return fmt.Errorf("flow has no dst endpoints")
 		}
 	}
 	return nil
@@ -1189,28 +1259,28 @@ func validateFlows(fs []*opb.Flow) error {
 
 func validateInterfaces(ifs []*opb.InterfaceConfig) error {
 	if len(ifs) == 0 {
-		return usererr.New("zero interfaces to configure, need at least one")
+		return fmt.Errorf("zero interfaces to configure, need at least one")
 	}
 	if len(ifs) > maxIntfs {
-		return usererr.New("%v interfaces to configure, must be at most %v", len(ifs), maxIntfs)
+		return fmt.Errorf("%v interfaces to configure, must be at most %v", len(ifs), maxIntfs)
 	}
 	intfs := make(map[string]bool)
 
 	for _, i := range ifs {
 		if i.GetPort() == "" && i.GetLag() == "" {
-			return usererr.New("interface has no port or lag specified: %v", i)
+			return fmt.Errorf("interface has no port or lag specified: %v", i)
 		}
 		if i.GetLag() != "" && i.GetEnableLacp() {
-			return usererr.New("interface should not specify both a LAG and that LACP is enabled: %v", i)
+			return fmt.Errorf("interface should not specify both a LAG and that LACP is enabled: %v", i)
 		}
 		if intfs[i.GetName()] {
-			return usererr.New("duplicate interface name: %s", i.GetName())
+			return fmt.Errorf("duplicate interface name: %s", i.GetName())
 		}
 		intfs[i.GetName()] = true
 		nets := make(map[string]bool)
 		for _, n := range i.GetNetworks() {
 			if nets[n.GetName()] {
-				return usererr.New("duplicate network name: %s", n.GetName())
+				return fmt.Errorf("duplicate network name: %s", n.GetName())
 			}
 			nets[n.GetName()] = true
 		}
@@ -1232,14 +1302,14 @@ func validateIP(ipc *opb.IpConfig, desc string) error {
 	gway := ipc.GetDefaultGateway()
 	_, an, err := net.ParseCIDR(addr)
 	if err != nil {
-		return usererr.New("%s address is not valid CIDR notation: %s", desc, addr)
+		return fmt.Errorf("%s address is not valid CIDR notation: %s", desc, addr)
 	}
 	gi := net.ParseIP(gway)
 	if gi == nil {
-		return usererr.New("%s default gateway is not valid IP notation: %s", desc, gway)
+		return fmt.Errorf("%s default gateway is not valid IP notation: %s", desc, gway)
 	}
 	if !an.Contains(gi) {
-		return usererr.New("%s default gateway is not in CIDR range %s: %s", desc, addr, gway)
+		return fmt.Errorf("%s default gateway is not in CIDR range %s: %s", desc, addr, gway)
 	}
 	return nil
 }

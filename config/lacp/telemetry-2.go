@@ -28,7 +28,7 @@ func (n *Lacp_Interface_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Lacp_Interface_SystemIdMacPath) Lookup(t testing.TB) *oc.QualifiedStrin
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/config/system-id-mac with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_SystemIdMacPath) Get(t testing.TB) string {
 	t.Helper()

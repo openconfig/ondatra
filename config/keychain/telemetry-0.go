@@ -30,7 +30,7 @@ func (n *KeychainPath) Lookup(t testing.TB) *oc.QualifiedKeychain {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *KeychainPath) Get(t testing.TB) *oc.Keychain {
 	t.Helper()
@@ -121,7 +121,7 @@ func (n *Keychain_KeyPath) Lookup(t testing.TB) *oc.QualifiedKeychain_Key {
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_KeyPath) Get(t testing.TB) *oc.Keychain_Key {
 	t.Helper()
@@ -210,7 +210,7 @@ func (n *Keychain_Key_CryptoAlgorithmPath) Lookup(t testing.TB) *oc.QualifiedE_K
 }
 
 // Get fetches the value at /openconfig-keychain/keychains/keychain/keys/key/config/crypto-algorithm with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Keychain_Key_CryptoAlgorithmPath) Get(t testing.TB) oc.E_KeychainTypes_CRYPTO_TYPE {
 	t.Helper()

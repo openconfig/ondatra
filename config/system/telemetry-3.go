@@ -15,6 +15,390 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-system/system/logging/console/selectors/selector with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Logging_Console_SelectorPath) Lookup(t testing.TB) *oc.QualifiedSystem_Logging_Console_Selector {
+	t.Helper()
+	goStruct := &oc.System_Logging_Console_Selector{}
+	md, ok := oc.Lookup(t, n, "System_Logging_Console_Selector", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedSystem_Logging_Console_Selector{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/logging/console/selectors/selector with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Logging_Console_SelectorPath) Get(t testing.TB) *oc.System_Logging_Console_Selector {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/logging/console/selectors/selector with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Logging_Console_SelectorPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Logging_Console_Selector {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Logging_Console_Selector
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Logging_Console_Selector{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Logging_Console_Selector", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Logging_Console_Selector{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/logging/console/selectors/selector with a ONCE subscription.
+func (n *System_Logging_Console_SelectorPathAny) Get(t testing.TB) []*oc.System_Logging_Console_Selector {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Logging_Console_Selector
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/logging/console/selectors/selector.
+func (n *System_Logging_Console_SelectorPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/logging/console/selectors/selector in the given batch object.
+func (n *System_Logging_Console_SelectorPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/logging/console/selectors/selector.
+func (n *System_Logging_Console_SelectorPath) Replace(t testing.TB, val *oc.System_Logging_Console_Selector) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/logging/console/selectors/selector in the given batch object.
+func (n *System_Logging_Console_SelectorPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Logging_Console_Selector) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/logging/console/selectors/selector.
+func (n *System_Logging_Console_SelectorPath) Update(t testing.TB, val *oc.System_Logging_Console_Selector) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/logging/console/selectors/selector in the given batch object.
+func (n *System_Logging_Console_SelectorPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Logging_Console_Selector) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-system/system/logging/console/selectors/selector/config/facility with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Logging_Console_Selector_FacilityPath) Lookup(t testing.TB) *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY {
+	t.Helper()
+	goStruct := &oc.System_Logging_Console_Selector{}
+	md, ok := oc.Lookup(t, n, "System_Logging_Console_Selector", goStruct, true, true)
+	if ok {
+		return convertSystem_Logging_Console_Selector_FacilityPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/logging/console/selectors/selector/config/facility with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Logging_Console_Selector_FacilityPath) Get(t testing.TB) oc.E_SystemLogging_SYSLOG_FACILITY {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/logging/console/selectors/selector/config/facility with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Logging_Console_Selector_FacilityPathAny) Lookup(t testing.TB) []*oc.QualifiedE_SystemLogging_SYSLOG_FACILITY {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_SystemLogging_SYSLOG_FACILITY
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Logging_Console_Selector{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Logging_Console_Selector", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Logging_Console_Selector_FacilityPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/logging/console/selectors/selector/config/facility with a ONCE subscription.
+func (n *System_Logging_Console_Selector_FacilityPathAny) Get(t testing.TB) []oc.E_SystemLogging_SYSLOG_FACILITY {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_SystemLogging_SYSLOG_FACILITY
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/logging/console/selectors/selector/config/facility.
+func (n *System_Logging_Console_Selector_FacilityPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/logging/console/selectors/selector/config/facility in the given batch object.
+func (n *System_Logging_Console_Selector_FacilityPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/logging/console/selectors/selector/config/facility.
+func (n *System_Logging_Console_Selector_FacilityPath) Replace(t testing.TB, val oc.E_SystemLogging_SYSLOG_FACILITY) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/logging/console/selectors/selector/config/facility in the given batch object.
+func (n *System_Logging_Console_Selector_FacilityPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_SystemLogging_SYSLOG_FACILITY) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/logging/console/selectors/selector/config/facility.
+func (n *System_Logging_Console_Selector_FacilityPath) Update(t testing.TB, val oc.E_SystemLogging_SYSLOG_FACILITY) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/logging/console/selectors/selector/config/facility in the given batch object.
+func (n *System_Logging_Console_Selector_FacilityPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_SystemLogging_SYSLOG_FACILITY) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertSystem_Logging_Console_Selector_FacilityPath extracts the value of the leaf Facility from its parent oc.System_Logging_Console_Selector
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY.
+func convertSystem_Logging_Console_Selector_FacilityPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Logging_Console_Selector) *oc.QualifiedE_SystemLogging_SYSLOG_FACILITY {
+	t.Helper()
+	qv := &oc.QualifiedE_SystemLogging_SYSLOG_FACILITY{
+		Metadata: md,
+	}
+	val := parent.Facility
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/logging/console/selectors/selector/config/severity with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Logging_Console_Selector_SeverityPath) Lookup(t testing.TB) *oc.QualifiedE_SystemLogging_SyslogSeverity {
+	t.Helper()
+	goStruct := &oc.System_Logging_Console_Selector{}
+	md, ok := oc.Lookup(t, n, "System_Logging_Console_Selector", goStruct, true, true)
+	if ok {
+		return convertSystem_Logging_Console_Selector_SeverityPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/logging/console/selectors/selector/config/severity with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Logging_Console_Selector_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/logging/console/selectors/selector/config/severity with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Logging_Console_Selector_SeverityPathAny) Lookup(t testing.TB) []*oc.QualifiedE_SystemLogging_SyslogSeverity {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_SystemLogging_SyslogSeverity
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Logging_Console_Selector{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Logging_Console_Selector", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Logging_Console_Selector_SeverityPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/logging/console/selectors/selector/config/severity with a ONCE subscription.
+func (n *System_Logging_Console_Selector_SeverityPathAny) Get(t testing.TB) []oc.E_SystemLogging_SyslogSeverity {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_SystemLogging_SyslogSeverity
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/logging/console/selectors/selector/config/severity.
+func (n *System_Logging_Console_Selector_SeverityPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/logging/console/selectors/selector/config/severity in the given batch object.
+func (n *System_Logging_Console_Selector_SeverityPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/logging/console/selectors/selector/config/severity.
+func (n *System_Logging_Console_Selector_SeverityPath) Replace(t testing.TB, val oc.E_SystemLogging_SyslogSeverity) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/logging/console/selectors/selector/config/severity in the given batch object.
+func (n *System_Logging_Console_Selector_SeverityPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_SystemLogging_SyslogSeverity) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/logging/console/selectors/selector/config/severity.
+func (n *System_Logging_Console_Selector_SeverityPath) Update(t testing.TB, val oc.E_SystemLogging_SyslogSeverity) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/logging/console/selectors/selector/config/severity in the given batch object.
+func (n *System_Logging_Console_Selector_SeverityPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_SystemLogging_SyslogSeverity) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertSystem_Logging_Console_Selector_SeverityPath extracts the value of the leaf Severity from its parent oc.System_Logging_Console_Selector
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_SystemLogging_SyslogSeverity.
+func convertSystem_Logging_Console_Selector_SeverityPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Logging_Console_Selector) *oc.QualifiedE_SystemLogging_SyslogSeverity {
+	t.Helper()
+	qv := &oc.QualifiedE_SystemLogging_SyslogSeverity{
+		Metadata: md,
+	}
+	val := parent.Severity
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/logging/remote-servers/remote-server with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Logging_RemoteServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Logging_RemoteServer {
+	t.Helper()
+	goStruct := &oc.System_Logging_RemoteServer{}
+	md, ok := oc.Lookup(t, n, "System_Logging_RemoteServer", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedSystem_Logging_RemoteServer{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Logging_RemoteServerPath) Get(t testing.TB) *oc.System_Logging_RemoteServer {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/logging/remote-servers/remote-server with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Logging_RemoteServerPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Logging_RemoteServer {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Logging_RemoteServer
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Logging_RemoteServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Logging_RemoteServer", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Logging_RemoteServer{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/logging/remote-servers/remote-server with a ONCE subscription.
+func (n *System_Logging_RemoteServerPathAny) Get(t testing.TB) []*oc.System_Logging_RemoteServer {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Logging_RemoteServer
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/logging/remote-servers/remote-server.
+func (n *System_Logging_RemoteServerPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/logging/remote-servers/remote-server in the given batch object.
+func (n *System_Logging_RemoteServerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/logging/remote-servers/remote-server.
+func (n *System_Logging_RemoteServerPath) Replace(t testing.TB, val *oc.System_Logging_RemoteServer) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/logging/remote-servers/remote-server in the given batch object.
+func (n *System_Logging_RemoteServerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Logging_RemoteServer) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/logging/remote-servers/remote-server.
+func (n *System_Logging_RemoteServerPath) Update(t testing.TB, val *oc.System_Logging_RemoteServer) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/logging/remote-servers/remote-server in the given batch object.
+func (n *System_Logging_RemoteServerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Logging_RemoteServer) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
 // Lookup fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/host with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_Logging_RemoteServer_HostPath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -28,7 +412,7 @@ func (n *System_Logging_RemoteServer_HostPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/host with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_HostPath) Get(t testing.TB) string {
 	t.Helper()
@@ -131,7 +515,7 @@ func (n *System_Logging_RemoteServer_RemotePortPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/remote-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_RemotePortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -234,7 +618,7 @@ func (n *System_Logging_RemoteServer_SelectorPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_SelectorPath) Get(t testing.TB) *oc.System_Logging_RemoteServer_Selector {
 	t.Helper()
@@ -323,7 +707,7 @@ func (n *System_Logging_RemoteServer_Selector_FacilityPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/config/facility with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_Selector_FacilityPath) Get(t testing.TB) oc.E_SystemLogging_SYSLOG_FACILITY {
 	t.Helper()
@@ -424,7 +808,7 @@ func (n *System_Logging_RemoteServer_Selector_SeverityPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/selectors/selector/config/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_Selector_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -525,7 +909,7 @@ func (n *System_Logging_RemoteServer_SourceAddressPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-system/system/logging/remote-servers/remote-server/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Logging_RemoteServer_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -626,7 +1010,7 @@ func (n *System_LoginBannerPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/config/login-banner with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_LoginBannerPath) Get(t testing.TB) string {
 	t.Helper()
@@ -729,7 +1113,7 @@ func (n *System_MemoryPath) Lookup(t testing.TB) *oc.QualifiedSystem_Memory {
 }
 
 // Get fetches the value at /openconfig-system/system/memory with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MemoryPath) Get(t testing.TB) *oc.System_Memory {
 	t.Helper()
@@ -820,7 +1204,7 @@ func (n *System_MessagesPath) Lookup(t testing.TB) *oc.QualifiedSystem_Messages 
 }
 
 // Get fetches the value at /openconfig-system/system/messages with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MessagesPath) Get(t testing.TB) *oc.System_Messages {
 	t.Helper()
@@ -911,7 +1295,7 @@ func (n *System_Messages_DebugServicePath) Lookup(t testing.TB) *oc.QualifiedSys
 }
 
 // Get fetches the value at /openconfig-system/system/messages/debug-entries/debug-service with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_DebugServicePath) Get(t testing.TB) *oc.System_Messages_DebugService {
 	t.Helper()
@@ -1002,7 +1386,7 @@ func (n *System_Messages_DebugService_EnabledPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/messages/debug-entries/debug-service/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_DebugService_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1103,7 +1487,7 @@ func (n *System_Messages_DebugService_ServicePath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/messages/debug-entries/debug-service/config/service with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_DebugService_ServicePath) Get(t testing.TB) oc.E_Messages_DEBUG_SERVICE {
 	t.Helper()
@@ -1204,7 +1588,7 @@ func (n *System_Messages_SeverityPath) Lookup(t testing.TB) *oc.QualifiedE_Syste
 }
 
 // Get fetches the value at /openconfig-system/system/messages/config/severity with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Messages_SeverityPath) Get(t testing.TB) oc.E_SystemLogging_SyslogSeverity {
 	t.Helper()
@@ -1305,7 +1689,7 @@ func (n *System_MotdBannerPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-system/system/config/motd-banner with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_MotdBannerPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1408,7 +1792,7 @@ func (n *System_NtpPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_NtpPath) Get(t testing.TB) *oc.System_Ntp {
 	t.Helper()
@@ -1499,7 +1883,7 @@ func (n *System_Ntp_EnableNtpAuthPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/config/enable-ntp-auth with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_EnableNtpAuthPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1602,7 +1986,7 @@ func (n *System_Ntp_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/config/enabled with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_EnabledPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -1705,7 +2089,7 @@ func (n *System_Ntp_NtpKeyPath) Lookup(t testing.TB) *oc.QualifiedSystem_Ntp_Ntp
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKeyPath) Get(t testing.TB) *oc.System_Ntp_NtpKey {
 	t.Helper()
@@ -1794,7 +2178,7 @@ func (n *System_Ntp_NtpKey_KeyIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1895,7 +2279,7 @@ func (n *System_Ntp_NtpKey_KeyTypePath) Lookup(t testing.TB) *oc.QualifiedE_Syst
 }
 
 // Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Ntp_NtpKey_KeyTypePath) Get(t testing.TB) oc.E_System_NTP_AUTH_TYPE {
 	t.Helper()
@@ -1979,208 +2363,6 @@ func convertSystem_Ntp_NtpKey_KeyTypePath(t testing.TB, md *genutil.Metadata, pa
 	val := parent.KeyType
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Ntp_NtpKey_KeyValuePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.System_Ntp_NtpKey{}
-	md, ok := oc.Lookup(t, n, "System_Ntp_NtpKey", goStruct, true, true)
-	if ok {
-		return convertSystem_Ntp_NtpKey_KeyValuePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Ntp_NtpKey_KeyValuePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Ntp_NtpKey_KeyValuePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Ntp_NtpKey{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Ntp_NtpKey", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Ntp_NtpKey_KeyValuePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value with a ONCE subscription.
-func (n *System_Ntp_NtpKey_KeyValuePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value.
-func (n *System_Ntp_NtpKey_KeyValuePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value in the given batch object.
-func (n *System_Ntp_NtpKey_KeyValuePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value.
-func (n *System_Ntp_NtpKey_KeyValuePath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value in the given batch object.
-func (n *System_Ntp_NtpKey_KeyValuePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value.
-func (n *System_Ntp_NtpKey_KeyValuePath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value in the given batch object.
-func (n *System_Ntp_NtpKey_KeyValuePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertSystem_Ntp_NtpKey_KeyValuePath extracts the value of the leaf KeyValue from its parent oc.System_Ntp_NtpKey
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Ntp_NtpKey_KeyValuePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Ntp_NtpKey) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.KeyValue
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-system/system/ntp/config/ntp-source-address with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Ntp_NtpSourceAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.System_Ntp{}
-	md, ok := oc.Lookup(t, n, "System_Ntp", goStruct, true, true)
-	if ok {
-		return convertSystem_Ntp_NtpSourceAddressPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/ntp/config/ntp-source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Ntp_NtpSourceAddressPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/ntp/config/ntp-source-address with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Ntp_NtpSourceAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Ntp{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Ntp", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Ntp_NtpSourceAddressPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/ntp/config/ntp-source-address with a ONCE subscription.
-func (n *System_Ntp_NtpSourceAddressPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/ntp/config/ntp-source-address.
-func (n *System_Ntp_NtpSourceAddressPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/ntp/config/ntp-source-address in the given batch object.
-func (n *System_Ntp_NtpSourceAddressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/ntp/config/ntp-source-address.
-func (n *System_Ntp_NtpSourceAddressPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/ntp/config/ntp-source-address in the given batch object.
-func (n *System_Ntp_NtpSourceAddressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-system/system/ntp/config/ntp-source-address.
-func (n *System_Ntp_NtpSourceAddressPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/ntp/config/ntp-source-address in the given batch object.
-func (n *System_Ntp_NtpSourceAddressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertSystem_Ntp_NtpSourceAddressPath extracts the value of the leaf NtpSourceAddress from its parent oc.System_Ntp
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Ntp_NtpSourceAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Ntp) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.NtpSourceAddress
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
 	}
 	return qv
 }

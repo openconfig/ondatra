@@ -16,6 +16,8 @@ package ixweb
 
 import (
 	"golang.org/x/net/context"
+	"errors"
+	"fmt"
 	"net/http"
 	"strings"
 	"testing"
@@ -170,5 +172,137 @@ func TestFetchTableNotReady(t *testing.T) {
 	}
 	if wantSubstr := "timeout"; !strings.Contains(err.Error(), wantSubstr) {
 		t.Fatalf("FetchTable unexpected error, got %v, want substring %q", err, wantSubstr)
+	}
+}
+
+func TestFetchTableWithDrilldowns(t *testing.T) {
+	origDrilldownFn := drilldownFn
+	defer func() { drilldownFn = origDrilldownFn }()
+	tests := []struct {
+		desc      string
+		resps     []*http.Response
+		ddErr     error
+		ddView    *StatView
+		wantErr   string
+		wantTable StatTable
+	}{{
+		desc: "drilldown error",
+		resps: []*http.Response{
+			fakeResponse(200, "enabled CSV logging"),
+			fakeResponse(200, `{"isReady": true}`),
+			fakeResponse(200, "ran takeviewcsvsnapshot"),
+			fakeResponse(200, "col1,col2,col3\na1,a2,a3"),
+		},
+		ddErr:   errors.New("drilldown error"),
+		wantErr: "could not perform drilldown",
+	}, {
+		desc: "no further views",
+		resps: []*http.Response{
+			fakeResponse(200, "enabled CSV logging"),
+			fakeResponse(200, `{"isReady": true}`),
+			fakeResponse(200, "ran takeviewcsvsnapshot"),
+			fakeResponse(200, "col1,col2,col3\na1,a2,a3"),
+		},
+		wantTable: StatTable{
+			StatRow{"col1": "a1", "col2": "a2", "col3": "a3"},
+		},
+	}, {
+		desc: "too many rows in drilldown",
+		resps: []*http.Response{
+			fakeResponse(200, "enabled CSV logging"),
+			fakeResponse(200, `{"isReady": true}`),
+			fakeResponse(200, "ran takeviewcsvsnapshot"),
+			fakeResponse(200, "col1,col2,col3\na1,a2,a3"),
+		},
+		ddView: &StatView{sess: &Session{ixweb: &IxWeb{client: &fakeHTTPClient{doResps: []*http.Response{
+			fakeResponse(200, "enabled CSV logging"),
+			fakeResponse(200, `{"isReady": true}`),
+			fakeResponse(200, "ran takeviewcsvsnapshot"),
+			fakeResponse(200, "ddCol\nddVal0\nddVal1"),
+		}}}}},
+		wantErr: "expected exactly 1",
+	}, {
+		desc: "update from drilldown",
+		resps: []*http.Response{
+			fakeResponse(200, "enabled CSV logging"),
+			fakeResponse(200, `{"isReady": true}`),
+			fakeResponse(200, "ran takeviewcsvsnapshot"),
+			fakeResponse(200, "col1,col2,col3\na1,a2,a3"),
+		},
+		ddView: &StatView{sess: &Session{ixweb: &IxWeb{client: &fakeHTTPClient{doResps: []*http.Response{
+			fakeResponse(200, "enabled CSV logging"),
+			fakeResponse(200, `{"isReady": true}`),
+			fakeResponse(200, "ran takeviewcsvsnapshot"),
+			fakeResponse(200, "ddCol\nddVal0"),
+		}}}}},
+		wantTable: StatTable{
+			StatRow{"col1": "a1", "col2": "a2", "col3": "a3", "ddCol": "ddVal0"},
+		},
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			drilldownFn = func(*StatView, context.Context, int, string) (*StatView, map[string]*StatView, error) {
+				var svMap map[string]*StatView
+				if test.ddView != nil {
+					svMap = map[string]*StatView{test.ddView.caption: test.ddView}
+				}
+				return test.ddView, svMap, test.ddErr
+			}
+			view := &StatView{sess: &Session{ixweb: &IxWeb{client: &fakeHTTPClient{doResps: test.resps}}}}
+			gotTable, gotErr := view.FetchTable(context.Background(), "some drilldown caption")
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Fatalf("FetchTable: unexpected error, got err %v, want err %q", gotErr, test.wantErr)
+			}
+			if diff := cmp.Diff(test.wantTable, gotTable); diff != "" {
+				t.Fatalf("FetchTable got unexpected diff (-want +got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestDrilldown(t *testing.T) {
+	const dd = "some drilldown"
+	tests := []struct {
+		desc            string
+		resps           []*http.Response
+		respErrs        []error
+		wantNextCaption string
+		wantViews       map[string]*StatView
+		wantErr         string
+	}{{
+		desc:     "error fetching drill down options",
+		respErrs: []error{errors.New("some error")},
+		wantErr:  "could not retrieve drilldown options",
+	}, {
+		desc:  "no valid drilldown option",
+		resps: []*http.Response{fakeResponse(200, "[]")},
+	}, {
+		desc:     "error on drilldown",
+		resps:    []*http.Response{fakeResponse(200, fmt.Sprintf("[\"%s\"]", dd))},
+		respErrs: []error{nil, errors.New("some error")},
+		wantErr:  "could not perform stats drilldown",
+	}, {
+		desc: "successful drilldown",
+		resps: []*http.Response{
+			fakeResponse(200, fmt.Sprintf(`["%s"]`, dd)),
+			fakeResponse(200, `"some view"`),
+			fakeResponse(200, `[{"id": 20, "caption": "some view"}]`),
+		},
+		wantNextCaption: "some view",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			view := &StatView{sess: &Session{ixweb: &IxWeb{client: &fakeHTTPClient{
+				doResps: test.resps,
+				doErrs:  test.respErrs,
+			}}}}
+			gotView, _, gotErr := view.drilldown(context.Background(), 1, dd)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Fatalf("drilldown: unexpected error, got err %v, want err %q", gotErr, test.wantErr)
+			}
+			if test.wantNextCaption != "" && (gotView == nil || test.wantNextCaption != gotView.caption) {
+				t.Fatalf("drilldown: did not return view with expected caption %q", test.wantNextCaption)
+			}
+		})
 	}
 }

@@ -26,7 +26,6 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"github.com/openconfig/ygot/genutil"
 	"github.com/openconfig/ondatra/internal/gnmigen"
@@ -208,7 +207,7 @@ func writeFiles(dir string, out map[string]string) error {
 		}
 		fh := genutil.OpenFile(path)
 		if fh == nil {
-			return errors.Errorf("could not open file %q", filename)
+			return fmt.Errorf("could not open file %q", filename)
 		}
 		if _, err := fh.WriteString(contents); err != nil {
 			return err

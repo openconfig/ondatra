@@ -37,12 +37,12 @@ import (
 )
 
 var (
-	sigc        = make(chan os.Signal, 1)
-	reserveFn   = reserve
-	releaseFn   = release
-	runTestsFn  = (*fixture).runTests
-	flagParseFn = flags.Parse
-	initBindFn  = testbed.InitBind
+	sigc         = make(chan os.Signal, 1)
+	reserveFn    = reserve
+	releaseFn    = release
+	runTestsFn   = (*fixture).runTests
+	flagParseFn  = flags.Parse
+	setBindingFn = testbed.SetBinding
 )
 
 // Binder creates the binding for the test.
@@ -66,7 +66,7 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 	if err != nil {
 		return fmt.Errorf("failed to create binding: %w", err)
 	}
-	initBindFn(b)
+	setBindingFn(b)
 	debugger.TestStarted(fv.Debug)
 	if err := reserveFn(fv); err != nil {
 		return err
@@ -76,7 +76,7 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 		debugger.TestCasesDone()
 		return releaseFn()
 	}, "error releasing testbed")
-	debugger.ReservationComplete()
+	debugger.ReservationDone()
 	runTestsFn(new(fixture), m, fv.RunTime)
 	return nil
 }
@@ -106,7 +106,6 @@ func (f *fixture) runTests(m *testing.M, timeout time.Duration) {
 		fn := *fnPtr
 		*fnPtr = func(t *testing.T) {
 			f.testStarted(t, timeout)
-			testbed.Bind().SetTestMetadata(&binding.TestMetadata{TestName: t.Name()})
 			defer func() {
 				if r := recover(); r != nil {
 					f.failEarly(fmt.Sprintf("Ondatra test panicked: %v, stack :%s", r, debug.Stack()))

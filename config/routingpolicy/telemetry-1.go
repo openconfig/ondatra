@@ -28,7 +28,7 @@ func (n *RoutingPolicy_DefinedSets_PrefixSet_NamePath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/prefix-sets/prefix-set/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_PrefixSet_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -131,7 +131,7 @@ func (n *RoutingPolicy_DefinedSets_PrefixSet_PrefixPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/prefix-sets/prefix-set/prefixes/prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_PrefixSet_PrefixPath) Get(t testing.TB) *oc.RoutingPolicy_DefinedSets_PrefixSet_Prefix {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *RoutingPolicy_DefinedSets_PrefixSet_Prefix_IpPrefixPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/prefix-sets/prefix-set/prefixes/prefix/config/ip-prefix with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_PrefixSet_Prefix_IpPrefixPath) Get(t testing.TB) string {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *RoutingPolicy_DefinedSets_PrefixSet_Prefix_MasklengthRangePath) Lookup(
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/prefix-sets/prefix-set/prefixes/prefix/config/masklength-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_PrefixSet_Prefix_MasklengthRangePath) Get(t testing.TB) string {
 	t.Helper()
@@ -424,7 +424,7 @@ func (n *RoutingPolicy_DefinedSets_TagSetPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/tag-sets/tag-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_TagSetPath) Get(t testing.TB) *oc.RoutingPolicy_DefinedSets_TagSet {
 	t.Helper()
@@ -513,7 +513,7 @@ func (n *RoutingPolicy_DefinedSets_TagSet_NamePath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/tag-sets/tag-set/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_TagSet_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -614,7 +614,7 @@ func (n *RoutingPolicy_DefinedSets_TagSet_TagValuePath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/defined-sets/tag-sets/tag-set/config/tag-value with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_DefinedSets_TagSet_TagValuePath) Get(t testing.TB) []oc.RoutingPolicy_DefinedSets_TagSet_TagValue_Union {
 	t.Helper()
@@ -717,7 +717,7 @@ func (n *RoutingPolicy_PolicyDefinitionPath) Lookup(t testing.TB) *oc.QualifiedR
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinitionPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition {
 	t.Helper()
@@ -806,7 +806,7 @@ func (n *RoutingPolicy_PolicyDefinition_NamePath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -909,7 +909,7 @@ func (n *RoutingPolicy_PolicyDefinition_StatementPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_StatementPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement {
 	t.Helper()
@@ -1000,7 +1000,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_ActionsPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_ActionsPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions {
 	t.Helper()
@@ -1091,7 +1091,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) Lookup
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions {
 	t.Helper()
@@ -1182,7 +1182,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPr
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrependPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend {
 	t.Helper()
@@ -1271,7 +1271,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPr
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/config/asn with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_AsnPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -1372,7 +1372,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPr
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/config/repeat-n with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_RepeatNPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1475,7 +1475,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunityPath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity {
 	t.Helper()
@@ -1566,7 +1566,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/inline with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_InlinePath) Get(t testing.TB) *oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Inline {
 	t.Helper()
@@ -1655,7 +1655,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/inline/config/communities with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Inline_CommunitiesPath) Get(t testing.TB) []oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Inline_Communities_Union {
 	t.Helper()
@@ -1756,7 +1756,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 }
 
 // Get fetches the value at /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/config/method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_MethodPath) Get(t testing.TB) oc.E_SetCommunity_Method {
 	t.Helper()

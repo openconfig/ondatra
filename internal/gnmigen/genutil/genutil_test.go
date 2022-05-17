@@ -15,13 +15,13 @@
 package genutil
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ygot/ygot"
@@ -101,11 +101,10 @@ type Device struct {
 	SuperContainer *SuperContainer `path:"super-container" module:"yang-module"`
 }
 
-func (*Device) IsYANGGoStruct() {}
-
-func (*Device) Validate(opts ...ygot.ValidationOption) error { return nil }
-
-func (*Device) ΛEnumTypeMap() map[string][]reflect.Type { return nil }
+func (*Device) IsYANGGoStruct()                               {}
+func (*Device) ΛValidate(opts ...ygot.ValidationOption) error { return nil }
+func (*Device) ΛEnumTypeMap() map[string][]reflect.Type       { return nil }
+func (*Device) ΛBelongingModule() string                      { return "" }
 
 func unmarshalFunc([]byte, ygot.GoStruct, ...ytypes.UnmarshalOpt) error { return nil }
 
@@ -114,7 +113,10 @@ type SuperContainer struct {
 	Model               *Model               `path:"model"`
 }
 
-func (*SuperContainer) IsYANGGoStruct() {}
+func (*SuperContainer) IsYANGGoStruct()                          {}
+func (*SuperContainer) ΛValidate(...ygot.ValidationOption) error { return nil }
+func (*SuperContainer) ΛEnumTypeMap() map[string][]reflect.Type  { return nil }
+func (*SuperContainer) ΛBelongingModule() string                 { return "" }
 
 type LeafContainerStruct struct {
 	Uint64Leaf          *uint64       `path:"uint64-leaf"`
@@ -124,20 +126,28 @@ type LeafContainerStruct struct {
 	UnionLeafSingleType []string      `path:"union-stleaflist"`
 }
 
-func (*LeafContainerStruct) IsYANGGoStruct() {}
+func (*LeafContainerStruct) IsYANGGoStruct()                          {}
+func (*LeafContainerStruct) ΛValidate(...ygot.ValidationOption) error { return nil }
+func (*LeafContainerStruct) ΛBelongingModule() string                 { return "" }
 
 type Model struct {
 	SingleKey map[int32]*Model_SingleKey `path:"a/single-key"`
 }
 
-func (*Model) IsYANGGoStruct() {}
+func (*Model) IsYANGGoStruct()                          {}
+func (*Model) ΛValidate(...ygot.ValidationOption) error { return nil }
+func (*Model) ΛEnumTypeMap() map[string][]reflect.Type  { return nil }
+func (*Model) ΛBelongingModule() string                 { return "" }
 
 type Model_SingleKey struct {
 	Key   *int32 `path:"config/key|key" shadow-path:"state/key"`
 	Value *int64 `path:"config/value" shadow-path:"state/value"`
 }
 
-func (*Model_SingleKey) IsYANGGoStruct() {}
+func (*Model_SingleKey) IsYANGGoStruct()                          {}
+func (*Model_SingleKey) ΛValidate(...ygot.ValidationOption) error { return nil }
+func (*Model_SingleKey) ΛEnumTypeMap() map[string][]reflect.Type  { return nil }
+func (*Model_SingleKey) ΛBelongingModule() string                 { return "" }
 
 // NewSingleKey is a *generated* method for Model which may be used by an
 // unmarshal function in ytype's reflect library, and is kept here in case.
@@ -215,7 +225,7 @@ func (*LeafContainerStruct) To_UnionLeafType(i interface{}) (UnionLeafType, erro
 	case EnumType2:
 		return &UnionLeafType_EnumType2{v}, nil
 	default:
-		return nil, errors.Errorf("cannot convert %v to To_UnionLeafType, unknown union type, got: %T, want any of [string, uint32]", i, i)
+		return nil, fmt.Errorf("cannot convert %v to To_UnionLeafType, unknown union type, got: %T, want any of [string, uint32]", i, i)
 	}
 }
 
@@ -887,7 +897,7 @@ func TestUnmarshal(t *testing.T) {
 				// implemented, then need to add tests for adds
 				// and deletes to same and different children,
 				// whether leaf or non-leaf, under a non-leaf.
-				UnionLeafSingleType: []string{"aa", "bb", "a", "bbb"},
+				UnionLeafSingleType: []string{"a", "bbb"},
 			},
 		},
 	}, {
@@ -1626,7 +1636,7 @@ func TestQualifiedTypeString(t *testing.T) {
 			}}},
 		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
 	}, {
-		desc:  "typed nil and ValidatedGoStruct",
+		desc:  "typed nil and GoStruct",
 		value: (*Device)(nil),
 		time:  time.Time{},
 		path: &gpb.Path{

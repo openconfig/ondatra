@@ -60,7 +60,7 @@ func (n *ParentPath) Lookup(t testing.TB) *QualifiedParent {
 }
 
 // Get fetches the value at /openconfig-simple/parent with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *ParentPath) Get(t testing.TB) *Parent {
 	t.Helper()
@@ -151,7 +151,7 @@ func (n *Parent_ChildPath) Lookup(t testing.TB) *QualifiedParent_Child {
 }
 
 // Get fetches the value at /openconfig-simple/parent/child with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_ChildPath) Get(t testing.TB) *Parent_Child {
 	t.Helper()
@@ -240,7 +240,7 @@ func (n *Parent_Child_FivePath) Lookup(t testing.TB) *QualifiedBinary {
 }
 
 // Get fetches the value at /openconfig-simple/parent/child/config/five with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_FivePath) Get(t testing.TB) Binary {
 	t.Helper()
@@ -341,7 +341,7 @@ func (n *Parent_Child_FourPath) Lookup(t testing.TB) *QualifiedBinary {
 }
 
 // Get fetches the value at /openconfig-simple/parent/child/config/four with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_FourPath) Get(t testing.TB) Binary {
 	t.Helper()
@@ -442,7 +442,7 @@ func (n *Parent_Child_OnePath) Lookup(t testing.TB) *QualifiedString {
 }
 
 // Get fetches the value at /openconfig-simple/parent/child/config/one with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_OnePath) Get(t testing.TB) string {
 	t.Helper()
@@ -543,7 +543,7 @@ func (n *Parent_Child_ThreePath) Lookup(t testing.TB) *QualifiedE_Child_Three {
 }
 
 // Get fetches the value at /openconfig-simple/parent/child/config/three with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_ThreePath) Get(t testing.TB) E_Child_Three {
 	t.Helper()
@@ -644,7 +644,7 @@ func (n *Parent_Child_TwoPath) Lookup(t testing.TB) *QualifiedString {
 }
 
 // Get fetches the value at /openconfig-simple/parent/child/state/two with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Parent_Child_TwoPath) Get(t testing.TB) string {
 	t.Helper()
@@ -747,7 +747,7 @@ func (n *RemoteContainerPath) Lookup(t testing.TB) *QualifiedRemoteContainer {
 }
 
 // Get fetches the value at /openconfig-simple/remote-container with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RemoteContainerPath) Get(t testing.TB) *RemoteContainer {
 	t.Helper()
@@ -836,7 +836,7 @@ func (n *RemoteContainer_ALeafPath) Lookup(t testing.TB) *QualifiedString {
 }
 
 // Get fetches the value at /openconfig-simple/remote-container/config/a-leaf with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RemoteContainer_ALeafPath) Get(t testing.TB) string {
 	t.Helper()
@@ -939,7 +939,7 @@ func (n *RootPath) Lookup(t testing.TB) *QualifiedRoot {
 }
 
 // Get fetches the value at / with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RootPath) Get(t testing.TB) *Root {
 	t.Helper()

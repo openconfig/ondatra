@@ -28,7 +28,7 @@ func (n *Lacp_Interface_SystemPriorityPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/config/system-priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_SystemPriorityPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Lacp_SystemPriorityPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/config/system-priority with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_SystemPriorityPath) Get(t testing.TB) uint16 {
 	t.Helper()

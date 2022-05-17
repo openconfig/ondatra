@@ -149,7 +149,7 @@ func (b *Batch) Lookup(t testing.TB) *QualifiedDevice {
 		t.Fatalf("error resolving root path: %v", err)
 	}
 
-	md, ok, err := genutil.Unmarshal(datapoints, GetSchema(), fakeRootName, gs, path, false, true)
+	md, ok, err := genutil.Unmarshal(datapoints, GetSchema(), fakeRootName, gs, path, false, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -169,13 +169,13 @@ func (b *Batch) Watch(t testing.TB, duration time.Duration, predicate func(*Qual
 	t.Helper()
 	dev := &Device{}
 	w := &BatchWatcher{}
-	w.W = genutil.MustWatch(t, b.root, b.paths, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, b.root, b.paths, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, GetSchema(), fakeRootName, dev, queryPath, false, false)
 		qd := (&QualifiedDevice{
 			Metadata: md,
 		}).SetVal(dev)
-		return qd, nil
+		return []genutil.QualifiedValue{qd}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*QualifiedDevice)
 		w.lastVal = val
@@ -191,7 +191,7 @@ func (b *Batch) Collect(t testing.TB, duration time.Duration) *BatchCollection {
 	t.Helper()
 	dev := &Device{}
 	bc := &BatchCollection{}
-	bc.W = genutil.MustWatch(t, b.root, b.paths, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	bc.W = genutil.MustWatch(t, b.root, b.paths, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		copy, err := ygot.DeepCopy(dev)
 		if err != nil {
@@ -205,7 +205,7 @@ func (b *Batch) Collect(t testing.TB, duration time.Duration) *BatchCollection {
 		qd := (&QualifiedDevice{
 			Metadata: md,
 		}).SetVal(dev)
-		return qd, nil
+		return []genutil.QualifiedValue{qd}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		bc.vals = append(bc.vals, qualVal.(*QualifiedDevice))
 		return false

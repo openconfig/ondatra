@@ -31,7 +31,7 @@ func (n *LacpPath) Lookup(t testing.TB) *oc.QualifiedLacp {
 }
 
 // Get fetches the value at /openconfig-lacp/lacp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *LacpPath) Get(t testing.TB) *oc.Lacp {
 	t.Helper()
@@ -93,12 +93,13 @@ func watch_LacpPath(t testing.TB, n ygot.PathStruct, duration time.Duration, pre
 	t.Helper()
 	w := &oc.LacpWatcher{}
 	gs := &oc.Lacp{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp", gs, queryPath, false, false)
-		return (&oc.QualifiedLacp{
+		qv := (&oc.QualifiedLacp{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLacp)
 		w.LastVal = val
@@ -151,6 +152,36 @@ func (n *LacpPathAny) Collect(t testing.TB, duration time.Duration) *oc.Collecti
 	return c
 }
 
+func watch_LacpPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLacp) bool) *oc.LacpWatcher {
+	t.Helper()
+	w := &oc.LacpWatcher{}
+	structs := map[string]*oc.Lacp{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLacp{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLacp)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +189,7 @@ func (n *LacpPathAny) Collect(t testing.TB, duration time.Duration) *oc.Collecti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *LacpPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLacp) bool) *oc.LacpWatcher {
 	t.Helper()
-	return watch_LacpPath(t, n, timeout, predicate)
+	return watch_LacpPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp to the batch object.
@@ -182,7 +213,7 @@ func (n *Lacp_InterfacePath) Lookup(t testing.TB) *oc.QualifiedLacp_Interface {
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_InterfacePath) Get(t testing.TB) *oc.Lacp_Interface {
 	t.Helper()
@@ -244,12 +275,13 @@ func watch_Lacp_InterfacePath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.Lacp_InterfaceWatcher{}
 	gs := &oc.Lacp_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface", gs, queryPath, false, false)
-		return (&oc.QualifiedLacp_Interface{
+		qv := (&oc.QualifiedLacp_Interface{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedLacp_Interface)
 		w.LastVal = val
@@ -302,6 +334,36 @@ func (n *Lacp_InterfacePathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Lacp_InterfacePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedLacp_Interface) bool) *oc.Lacp_InterfaceWatcher {
+	t.Helper()
+	w := &oc.Lacp_InterfaceWatcher{}
+	structs := map[string]*oc.Lacp_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedLacp_Interface{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedLacp_Interface)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -309,7 +371,7 @@ func (n *Lacp_InterfacePathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_InterfacePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedLacp_Interface) bool) *oc.Lacp_InterfaceWatcher {
 	t.Helper()
-	return watch_Lacp_InterfacePath(t, n, timeout, predicate)
+	return watch_Lacp_InterfacePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface to the batch object.
@@ -333,7 +395,7 @@ func (n *Lacp_Interface_IntervalPath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_L
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/state/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_IntervalPath) Get(t testing.TB) oc.E_Lacp_LacpPeriodType {
 	t.Helper()
@@ -387,10 +449,10 @@ func watch_Lacp_Interface_IntervalPath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.E_Lacp_LacpPeriodTypeWatcher{}
 	gs := &oc.Lacp_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface", gs, queryPath, true, false)
-		return convertLacp_Interface_IntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLacp_Interface_IntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Lacp_LacpPeriodType)
 		w.LastVal = val
@@ -443,6 +505,34 @@ func (n *Lacp_Interface_IntervalPathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_Lacp_Interface_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpPeriodType) bool) *oc.E_Lacp_LacpPeriodTypeWatcher {
+	t.Helper()
+	w := &oc.E_Lacp_LacpPeriodTypeWatcher{}
+	structs := map[string]*oc.Lacp_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface", structs[pre], queryPath, true, false)
+			qv := convertLacp_Interface_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Lacp_LacpPeriodType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/state/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +540,7 @@ func (n *Lacp_Interface_IntervalPathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_Interface_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpPeriodType) bool) *oc.E_Lacp_LacpPeriodTypeWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_IntervalPath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_IntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface/state/interval to the batch object.
@@ -488,7 +578,7 @@ func (n *Lacp_Interface_LacpModePath) Lookup(t testing.TB) *oc.QualifiedE_Lacp_L
 }
 
 // Get fetches the value at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Lacp_Interface_LacpModePath) Get(t testing.TB) oc.E_Lacp_LacpActivityType {
 	t.Helper()
@@ -542,10 +632,10 @@ func watch_Lacp_Interface_LacpModePath(t testing.TB, n ygot.PathStruct, duration
 	t.Helper()
 	w := &oc.E_Lacp_LacpActivityTypeWatcher{}
 	gs := &oc.Lacp_Interface{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Lacp_Interface", gs, queryPath, true, false)
-		return convertLacp_Interface_LacpModePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertLacp_Interface_LacpModePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_Lacp_LacpActivityType)
 		w.LastVal = val
@@ -598,6 +688,34 @@ func (n *Lacp_Interface_LacpModePathAny) Collect(t testing.TB, duration time.Dur
 	return c
 }
 
+func watch_Lacp_Interface_LacpModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
+	t.Helper()
+	w := &oc.E_Lacp_LacpActivityTypeWatcher{}
+	structs := map[string]*oc.Lacp_Interface{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Lacp_Interface{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Lacp_Interface", structs[pre], queryPath, true, false)
+			qv := convertLacp_Interface_LacpModePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Lacp_LacpActivityType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +723,7 @@ func (n *Lacp_Interface_LacpModePathAny) Collect(t testing.TB, duration time.Dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Lacp_Interface_LacpModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Lacp_LacpActivityType) bool) *oc.E_Lacp_LacpActivityTypeWatcher {
 	t.Helper()
-	return watch_Lacp_Interface_LacpModePath(t, n, timeout, predicate)
+	return watch_Lacp_Interface_LacpModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-lacp/lacp/interfaces/interface/state/lacp-mode to the batch object.

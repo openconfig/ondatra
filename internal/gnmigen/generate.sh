@@ -26,7 +26,6 @@ EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 COMMON_ARGS=(
   -path=public/release/models,public/third_party/ietf
-  -generate_path_structs
   -compress_paths
   -exclude_modules="${EXCLUDE_MODULES}"
   -generate_fakeroot
@@ -73,7 +72,9 @@ YANG_FILES=(
   public/release/models/openconfig-extensions.yang
   public/release/models/optical-transport/openconfig-transport-types.yang
   public/release/models/ospf/openconfig-ospfv2.yang
+  public/release/models/p4rt/openconfig-p4rt.yang
   public/release/models/platform/openconfig-platform-cpu.yang
+  public/release/models/platform/openconfig-platform-fan.yang
   public/release/models/platform/openconfig-platform-integrated-circuit.yang
   public/release/models/platform/openconfig-platform-software.yang
   public/release/models/platform/openconfig-platform-transceiver.yang
@@ -97,7 +98,7 @@ YANG_FILES=(
   public/third_party/ietf/ietf-yang-types.yang
 )
 
-# Generate Structs
+# Generate Schema Structs
 generator \
   -generate_structs \
   -generate_path_structs=false \
@@ -105,7 +106,6 @@ generator \
   -list_builder_key_threshold=4 \
   -output_dir=telemetry \
   -package_name=telemetry \
-  -path_structs_split_files_count=10 \
   "${COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
 
@@ -122,6 +122,7 @@ go run internal/gnmigen/main/main.go \
 # Generate Config API.
 mkdir -p config/device
 generator \
+  -generate_path_structs \
   -generate_structs=false \
   -exclude_state \
   -schema_struct_path=github.com/openconfig/ondatra/telemetry \
@@ -155,6 +156,7 @@ go run internal/gnmigen/main/main.go \
 # Generate Telemetry API.
 mkdir -p telemetry/device
 generator \
+  -generate_path_structs \
   -generate_structs=false \
   -prefer_operational_state \
   -list_builder_key_threshold=4 \

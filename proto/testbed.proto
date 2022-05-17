@@ -61,7 +61,11 @@ message Device {
   // further restrict matching devices. The set of dimension keys that are
   // supported is specific to the binding implementation. For example, if the
   // binding supports filtering devices by a dimension named "label," the
-  // testbed could specify an extra dimensions map of {"label": "foo"}.
+  // testbed could specify an extra dimensions map of
+  // extra_dimensions {
+  //   key: "label",
+  //   value: "foo",
+  // }
   map<string, string> extra_dimensions = 6;
 }
 
@@ -77,6 +81,20 @@ message Port {
     S_400GB = 400;
   }
   Speed speed = 2;
+
+  // The model of the card which contains the physical port.
+  string card_model = 3;
+
+  // Pmd enum values are PMD of the port.
+  enum Pmd {
+    PMD_UNSPECIFIED = 0;
+    PMD_100G_FR = 1;
+    PMD_100G_LR4 = 2;
+  }
+  oneof pmd_value {
+    Pmd pmd = 4;
+    string pmd_regex = 5;
+  }
 }
 
 // A physical link between ports on DUTs or ATEs.

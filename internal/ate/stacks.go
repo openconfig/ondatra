@@ -15,10 +15,10 @@
 package ate
 
 import (
+	"errors"
 	"fmt"
 	"net"
 
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -119,17 +119,17 @@ func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.Traffi
 
 func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	if eth.GetBadCrc() && idx != 0 {
-		return nil, errors.Errorf("can only set a bad CRC on the initial ethernet header: %v", eth)
+		return nil, fmt.Errorf("can only set a bad CRC on the initial ethernet header: %v", eth)
 	}
 	stack := ixconfig.NewEthernetStack(idx)
 	if eth.GetSrcAddr() != nil {
 		if err := setAddrRangeField(stack.SourceAddress(), mac48AddrType, eth.GetSrcAddr()); err != nil {
-			return nil, errors.Wrap(err, "could not set source MAC address")
+			return nil, fmt.Errorf("could not set source MAC address: %w", err)
 		}
 	}
 	if eth.GetDstAddr() != nil {
 		if err := setAddrRangeField(stack.DestinationAddress(), mac48AddrType, eth.GetDstAddr()); err != nil {
-			return nil, errors.Wrap(err, "could not set destination MAC address")
+			return nil, fmt.Errorf("could not set destination MAC address: %w", err)
 		}
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
@@ -167,12 +167,12 @@ func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	}
 	if ipv4.GetSrcAddr() != nil {
 		if err := setAddrRangeField(stack.SrcIp(), ipv4AddrType, ipv4.GetSrcAddr()); err != nil {
-			return nil, errors.Wrap(err, "could not set IPv4 source address")
+			return nil, fmt.Errorf("could not set IPv4 source address: %w", err)
 		}
 	}
 	if ipv4.GetDstAddr() != nil {
 		if err := setAddrRangeField(stack.DstIp(), ipv4AddrType, ipv4.GetDstAddr()); err != nil {
-			return nil, errors.Wrap(err, "could not set IPv4 destination address")
+			return nil, fmt.Errorf("could not set IPv4 destination address: %w", err)
 		}
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
@@ -185,7 +185,7 @@ func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	setSingleValue(tc, uintToStr(ds))
 	if ipv6.GetFlowLabel() != nil {
 		if err := setUintRangeField(stack.VersionTrafficClassFlowLabelFlowLabel(), ipv6.GetFlowLabel()); err != nil {
-			return nil, errors.Wrap(err, "could not set IPv6 flow label")
+			return nil, fmt.Errorf("could not set IPv6 flow label: %w", err)
 		}
 	}
 	if ipv6.GetHopLimit() != 0 {
@@ -193,12 +193,12 @@ func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	}
 	if ipv6.GetSrcAddr() != nil {
 		if err := setAddrRangeField(stack.SrcIP(), ipv6AddrType, ipv6.GetSrcAddr()); err != nil {
-			return nil, errors.Wrap(err, "could not set IPv6 source address")
+			return nil, fmt.Errorf("could not set IPv6 source address: %w", err)
 		}
 	}
 	if ipv6.GetDstAddr() != nil {
 		if err := setAddrRangeField(stack.DstIP(), ipv6AddrType, ipv6.GetDstAddr()); err != nil {
-			return nil, errors.Wrap(err, "could not set IPv6 destination address")
+			return nil, fmt.Errorf("could not set IPv6 destination address: %w", err)
 		}
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
@@ -207,7 +207,7 @@ func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 func mplsStack(mpls *opb.MplsHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewMplsStack(idx)
 	if err := setUintRangeField(stack.Value(), mpls.GetLabel()); err != nil {
-		return nil, errors.Wrap(err, "could not set MPLS label")
+		return nil, fmt.Errorf("could not set MPLS label: %w", err)
 	}
 	setSingleValue(stack.Experimental(), uintToStr(mpls.GetExp()))
 	setSingleValue(stack.Ttl(), uintToStr(mpls.GetTtl()))
@@ -218,12 +218,12 @@ func tcpStack(tcp *opb.TcpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 	stack := ixconfig.NewTcpStack(idx)
 	if tcp.GetSrcPort() != nil {
 		if err := setUintRangeField(stack.SrcPort(), tcp.GetSrcPort()); err != nil {
-			return nil, errors.Wrap(err, "could not set TCP source port")
+			return nil, fmt.Errorf("could not set TCP source port: %w", err)
 		}
 	}
 	if tcp.GetDstPort() != nil {
 		if err := setUintRangeField(stack.DstPort(), tcp.GetDstPort()); err != nil {
-			return nil, errors.Wrap(err, "could not set TCP destination port")
+			return nil, fmt.Errorf("could not set TCP destination port: %w", err)
 		}
 	}
 	setSingleValue(stack.SequenceNumber(), uintToStr(tcp.GetSeq()))
@@ -234,12 +234,12 @@ func udpStack(udp *opb.UdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 	stack := ixconfig.NewUdpStack(idx)
 	if udp.GetSrcPort() != nil {
 		if err := setUintRangeField(stack.SrcPort(), udp.GetSrcPort()); err != nil {
-			return nil, errors.Wrap(err, "could not set UDP source port")
+			return nil, fmt.Errorf("could not set UDP source port: %w", err)
 		}
 	}
 	if udp.GetDstPort() != nil {
 		if err := setUintRangeField(stack.DstPort(), udp.GetDstPort()); err != nil {
-			return nil, errors.Wrap(err, "could not set UDP destination port")
+			return nil, fmt.Errorf("could not set UDP destination port: %w", err)
 		}
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil

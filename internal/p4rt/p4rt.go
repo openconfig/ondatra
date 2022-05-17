@@ -20,12 +20,11 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/testbed"
 
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
 // NewP4RT creates a P4RT client for the specified DUT.
-func NewP4RT(ctx context.Context, dut *binding.DUT) (p4pb.P4RuntimeClient, error) {
-	return testbed.Bind().DialP4RT(ctx, dut, grpc.WithBlock())
+func NewP4RT(ctx context.Context, dut binding.DUT) (p4pb.P4RuntimeClient, error) {
+	return dut.DialP4RT(ctx, grpc.WithBlock())
 }

@@ -29,7 +29,7 @@ func (n *DevicePath) Lookup(t testing.TB) *oc.QualifiedDevice {
 }
 
 // Get fetches the value at / with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *DevicePath) Get(t testing.TB) *oc.Device {
 	t.Helper()

@@ -29,7 +29,7 @@ import (
 
 // Traffic is ATE Traffic API.
 type Traffic struct {
-	ate *binding.ATE
+	ate binding.ATE
 }
 
 func (tr *Traffic) String() string {
@@ -44,7 +44,8 @@ func (tr *Traffic) NewFlow(name string) *Flow {
 	return &Flow{pb: &opb.Flow{Name: name}}
 }
 
-// Start starts one or more traffic flows on the ATE.
+// Start pushes and starts provided traffic flows on the ATE.
+// If no flows are provided, starts the previously pushed flows.
 func (tr *Traffic) Start(t testing.TB, flows ...*Flow) {
 	t.Helper()
 	debugger.ActionStarted(t, "Starting traffic on %s", tr.ate)
@@ -481,4 +482,10 @@ func (ic *IMIXCustom) AddEntry(size, weight uint32) *IMIXCustom {
 		Weight: weight,
 	})
 	return ic
+}
+
+// WithConvergenceTracking enables convergence tracking for the flow.
+func (f *Flow) WithConvergenceTracking(enable bool) *Flow {
+	f.pb.ConvergenceTracking = true
+	return f
 }

@@ -16,6 +16,368 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_Transceiver_Channel_LaserTemperature{}
+	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_LaserTemperature", goStruct, true, false)
+	if ok {
+		return convertComponent_Transceiver_Channel_LaserTemperature_IntervalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Transceiver_Channel_LaserTemperature{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Transceiver_Channel_LaserTemperature_IntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a ONCE subscription.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_Channel_LaserTemperature_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_LaserTemperature_IntervalPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_Transceiver_Channel_LaserTemperature_IntervalPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval to the batch object.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_Channel_LaserTemperature_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_LaserTemperature{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_LaserTemperature_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_Transceiver_Channel_LaserTemperature_IntervalPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/interval to the batch object.
+func (n *Component_Transceiver_Channel_LaserTemperature_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Transceiver_Channel_LaserTemperature_IntervalPath extracts the value of the leaf Interval from its parent oc.Component_Transceiver_Channel_LaserTemperature
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_Transceiver_Channel_LaserTemperature_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel_LaserTemperature) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.Interval
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
+	t.Helper()
+	goStruct := &oc.Component_Transceiver_Channel_LaserTemperature{}
+	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_LaserTemperature", goStruct, true, false)
+	if ok {
+		return convertComponent_Transceiver_Channel_LaserTemperature_MaxPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPath) Get(t testing.TB) float64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedFloat64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Transceiver_Channel_LaserTemperature{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Transceiver_Channel_LaserTemperature_MaxPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a ONCE subscription.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPathAny) Get(t testing.TB) []float64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []float64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+	t.Helper()
+	c := &oc.CollectionFloat64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_Channel_LaserTemperature_MaxPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	gs := &oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_LaserTemperature_MaxPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	return watch_Component_Transceiver_Channel_LaserTemperature_MaxPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max to the batch object.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
+	t.Helper()
+	c := &oc.CollectionFloat64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_Channel_LaserTemperature_MaxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_LaserTemperature{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_LaserTemperature_MaxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	return watch_Component_Transceiver_Channel_LaserTemperature_MaxPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max to the batch object.
+func (n *Component_Transceiver_Channel_LaserTemperature_MaxPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Transceiver_Channel_LaserTemperature_MaxPath extracts the value of the leaf Max from its parent oc.Component_Transceiver_Channel_LaserTemperature
+// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
+func convertComponent_Transceiver_Channel_LaserTemperature_MaxPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel_LaserTemperature) *oc.QualifiedFloat64 {
+	t.Helper()
+	qv := &oc.QualifiedFloat64{
+		Metadata: md,
+	}
+	val := parent.Max
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_Transceiver_Channel_LaserTemperature_MaxTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
@@ -29,7 +391,7 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MaxTimePath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_LaserTemperature_MaxTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -83,10 +445,10 @@ func watch_Component_Transceiver_Channel_LaserTemperature_MaxTimePath(t testing.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_LaserTemperature{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_LaserTemperature_MaxTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_LaserTemperature_MaxTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -139,6 +501,34 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MaxTimePathAny) Collect(
 	return c
 }
 
+func watch_Component_Transceiver_Channel_LaserTemperature_MaxTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_LaserTemperature{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_LaserTemperature_MaxTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +536,7 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MaxTimePathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_LaserTemperature_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_LaserTemperature_MaxTimePath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_LaserTemperature_MaxTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/max-time to the batch object.
@@ -182,7 +572,7 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MinPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/min with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_LaserTemperature_MinPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -236,10 +626,10 @@ func watch_Component_Transceiver_Channel_LaserTemperature_MinPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_LaserTemperature{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_LaserTemperature_MinPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_LaserTemperature_MinPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -292,6 +682,34 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MinPathAny) Collect(t te
 	return c
 }
 
+func watch_Component_Transceiver_Channel_LaserTemperature_MinPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_LaserTemperature{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_LaserTemperature_MinPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/min with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +717,7 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MinPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_LaserTemperature_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_LaserTemperature_MinPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_LaserTemperature_MinPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/min to the batch object.
@@ -335,7 +753,7 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MinTimePath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/min-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_LaserTemperature_MinTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -389,10 +807,10 @@ func watch_Component_Transceiver_Channel_LaserTemperature_MinTimePath(t testing.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_LaserTemperature{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_LaserTemperature_MinTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_LaserTemperature_MinTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -445,6 +863,34 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MinTimePathAny) Collect(
 	return c
 }
 
+func watch_Component_Transceiver_Channel_LaserTemperature_MinTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_LaserTemperature{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_LaserTemperature{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_LaserTemperature", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_LaserTemperature_MinTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/min-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -452,7 +898,7 @@ func (n *Component_Transceiver_Channel_LaserTemperature_MinTimePathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_LaserTemperature_MinTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_LaserTemperature_MinTimePath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_LaserTemperature_MinTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/laser-temperature/min-time to the batch object.
@@ -488,7 +934,7 @@ func (n *Component_Transceiver_Channel_OutputFrequencyPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-frequency with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputFrequencyPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -542,10 +988,10 @@ func watch_Component_Transceiver_Channel_OutputFrequencyPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputFrequencyPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputFrequencyPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -598,6 +1044,34 @@ func (n *Component_Transceiver_Channel_OutputFrequencyPathAny) Collect(t testing
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputFrequencyPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputFrequencyPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-frequency with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -605,7 +1079,7 @@ func (n *Component_Transceiver_Channel_OutputFrequencyPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputFrequencyPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputFrequencyPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputFrequencyPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-frequency to the batch object.
@@ -643,7 +1117,7 @@ func (n *Component_Transceiver_Channel_OutputPowerPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPowerPath) Get(t testing.TB) *oc.Component_Transceiver_Channel_OutputPower {
 	t.Helper()
@@ -705,12 +1179,13 @@ func watch_Component_Transceiver_Channel_OutputPowerPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Component_Transceiver_Channel_OutputPowerWatcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Transceiver_Channel_OutputPower{
+		qv := (&oc.QualifiedComponent_Transceiver_Channel_OutputPower{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_OutputPower)
 		w.LastVal = val
@@ -763,6 +1238,36 @@ func (n *Component_Transceiver_Channel_OutputPowerPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPowerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_OutputPower) bool) *oc.Component_Transceiver_Channel_OutputPowerWatcher {
+	t.Helper()
+	w := &oc.Component_Transceiver_Channel_OutputPowerWatcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Transceiver_Channel_OutputPower{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_OutputPower)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -770,7 +1275,7 @@ func (n *Component_Transceiver_Channel_OutputPowerPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPowerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_OutputPower) bool) *oc.Component_Transceiver_Channel_OutputPowerWatcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPowerPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPowerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power to the batch object.
@@ -792,7 +1297,7 @@ func (n *Component_Transceiver_Channel_OutputPower_AvgPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_AvgPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -846,10 +1351,10 @@ func watch_Component_Transceiver_Channel_OutputPower_AvgPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_AvgPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_AvgPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -902,6 +1407,34 @@ func (n *Component_Transceiver_Channel_OutputPower_AvgPathAny) Collect(t testing
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_AvgPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_AvgPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -909,7 +1442,7 @@ func (n *Component_Transceiver_Channel_OutputPower_AvgPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_AvgPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_AvgPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/avg to the batch object.
@@ -945,7 +1478,7 @@ func (n *Component_Transceiver_Channel_OutputPower_InstantPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/instant with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_InstantPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -999,10 +1532,10 @@ func watch_Component_Transceiver_Channel_OutputPower_InstantPath(t testing.TB, n
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_InstantPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_InstantPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -1055,6 +1588,34 @@ func (n *Component_Transceiver_Channel_OutputPower_InstantPathAny) Collect(t tes
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_InstantPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_InstantPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1623,7 @@ func (n *Component_Transceiver_Channel_OutputPower_InstantPathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_InstantPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_InstantPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/instant to the batch object.
@@ -1098,7 +1659,7 @@ func (n *Component_Transceiver_Channel_OutputPower_IntervalPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_IntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1152,10 +1713,10 @@ func watch_Component_Transceiver_Channel_OutputPower_IntervalPath(t testing.TB, 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_IntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_IntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1208,6 +1769,34 @@ func (n *Component_Transceiver_Channel_OutputPower_IntervalPathAny) Collect(t te
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1215,7 +1804,7 @@ func (n *Component_Transceiver_Channel_OutputPower_IntervalPathAny) Collect(t te
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_IntervalPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_IntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/interval to the batch object.
@@ -1251,7 +1840,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MaxPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_MaxPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -1305,10 +1894,10 @@ func watch_Component_Transceiver_Channel_OutputPower_MaxPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_MaxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_MaxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -1361,6 +1950,34 @@ func (n *Component_Transceiver_Channel_OutputPower_MaxPathAny) Collect(t testing
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_MaxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_MaxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1985,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MaxPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_MaxPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_MaxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/max to the batch object.
@@ -1404,7 +2021,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MaxTimePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/max-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_MaxTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1458,10 +2075,10 @@ func watch_Component_Transceiver_Channel_OutputPower_MaxTimePath(t testing.TB, n
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_MaxTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_MaxTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1514,6 +2131,34 @@ func (n *Component_Transceiver_Channel_OutputPower_MaxTimePathAny) Collect(t tes
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_MaxTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_MaxTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/max-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +2166,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MaxTimePathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_MaxTimePath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_MaxTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/max-time to the batch object.
@@ -1557,7 +2202,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MinPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/min with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_MinPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -1611,10 +2256,10 @@ func watch_Component_Transceiver_Channel_OutputPower_MinPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_MinPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_MinPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -1667,6 +2312,34 @@ func (n *Component_Transceiver_Channel_OutputPower_MinPathAny) Collect(t testing
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_MinPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_MinPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/min with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1674,7 +2347,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MinPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_MinPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_MinPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/min to the batch object.
@@ -1710,7 +2383,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MinTimePath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/min-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_OutputPower_MinTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1764,10 +2437,10 @@ func watch_Component_Transceiver_Channel_OutputPower_MinTimePath(t testing.TB, n
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_OutputPower{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_OutputPower_MinTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_OutputPower_MinTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1820,6 +2493,34 @@ func (n *Component_Transceiver_Channel_OutputPower_MinTimePathAny) Collect(t tes
 	return c
 }
 
+func watch_Component_Transceiver_Channel_OutputPower_MinTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_OutputPower{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_OutputPower{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_OutputPower", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_OutputPower_MinTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/min-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1827,7 +2528,7 @@ func (n *Component_Transceiver_Channel_OutputPower_MinTimePathAny) Collect(t tes
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_OutputPower_MinTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_OutputPower_MinTimePath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_OutputPower_MinTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/output-power/min-time to the batch object.
@@ -1865,7 +2566,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviationPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviationPath) Get(t testing.TB) *oc.Component_Transceiver_Channel_TargetFrequencyDeviation {
 	t.Helper()
@@ -1927,12 +2628,13 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviationPath(t testing.
 	t.Helper()
 	w := &oc.Component_Transceiver_Channel_TargetFrequencyDeviationWatcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation{
+		qv := (&oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation)
 		w.LastVal = val
@@ -1985,6 +2687,36 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviationPathAny) Collect(
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviationPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation) bool) *oc.Component_Transceiver_Channel_TargetFrequencyDeviationWatcher {
+	t.Helper()
+	w := &oc.Component_Transceiver_Channel_TargetFrequencyDeviationWatcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1992,7 +2724,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviationPathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviationPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_TargetFrequencyDeviation) bool) *oc.Component_Transceiver_Channel_TargetFrequencyDeviationWatcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviationPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviationPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation to the batch object.
@@ -2014,7 +2746,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -2068,10 +2800,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPath(t test
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_AvgPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_AvgPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -2124,6 +2856,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPathAny) Coll
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_AvgPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2131,7 +2891,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_AvgPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/avg to the batch object.
@@ -2167,7 +2927,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPath) Loo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/instant with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -2221,10 +2981,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPath(t 
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_InstantPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_InstantPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -2277,6 +3037,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPathAny) 
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_InstantPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2284,7 +3072,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPathAny) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_InstantPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/instant to the batch object.
@@ -2320,7 +3108,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath) Lo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2374,10 +3162,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath(t
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2430,6 +3218,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPathAny)
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/interval with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2437,7 +3253,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPathAny)
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_IntervalPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/interval to the batch object.
@@ -2473,7 +3289,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -2527,10 +3343,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPath(t test
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MaxPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MaxPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -2583,6 +3399,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPathAny) Coll
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MaxPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/max with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2590,7 +3434,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/max to the batch object.
@@ -2626,7 +3470,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath) Loo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/max-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2680,10 +3524,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath(t 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2736,6 +3580,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePathAny) 
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/max-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2743,7 +3615,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePathAny) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MaxTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/max-time to the batch object.
@@ -2779,7 +3651,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/min with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -2833,10 +3705,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinPath(t test
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MinPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MinPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -2889,6 +3761,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinPathAny) Coll
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MinPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/min with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2896,7 +3796,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinPathAny) Coll
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/min to the batch object.
@@ -2932,7 +3832,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath) Loo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/min-time with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2986,10 +3886,10 @@ func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath(t 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -3042,6 +3942,34 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePathAny) 
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TargetFrequencyDeviation{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TargetFrequencyDeviation", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/min-time with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3049,7 +3977,7 @@ func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePathAny) 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetFrequencyDeviation_MinTimePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-frequency-deviation/min-time to the batch object.
@@ -3085,7 +4013,7 @@ func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-output-power with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -3139,10 +4067,10 @@ func watch_Component_Transceiver_Channel_TargetOutputPowerPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TargetOutputPowerPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TargetOutputPowerPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -3195,6 +4123,34 @@ func (n *Component_Transceiver_Channel_TargetOutputPowerPathAny) Collect(t testi
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TargetOutputPowerPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TargetOutputPowerPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-output-power with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3202,7 +4158,7 @@ func (n *Component_Transceiver_Channel_TargetOutputPowerPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TargetOutputPowerPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TargetOutputPowerPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TargetOutputPowerPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-output-power to the batch object.
@@ -3240,7 +4196,7 @@ func (n *Component_Transceiver_Channel_TecCurrentPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TecCurrentPath) Get(t testing.TB) *oc.Component_Transceiver_Channel_TecCurrent {
 	t.Helper()
@@ -3302,12 +4258,13 @@ func watch_Component_Transceiver_Channel_TecCurrentPath(t testing.TB, n ygot.Pat
 	t.Helper()
 	w := &oc.Component_Transceiver_Channel_TecCurrentWatcher{}
 	gs := &oc.Component_Transceiver_Channel_TecCurrent{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Transceiver_Channel_TecCurrent{
+		qv := (&oc.QualifiedComponent_Transceiver_Channel_TecCurrent{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_TecCurrent)
 		w.LastVal = val
@@ -3360,6 +4317,36 @@ func (n *Component_Transceiver_Channel_TecCurrentPathAny) Collect(t testing.TB, 
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TecCurrentPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_TecCurrent) bool) *oc.Component_Transceiver_Channel_TecCurrentWatcher {
+	t.Helper()
+	w := &oc.Component_Transceiver_Channel_TecCurrentWatcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TecCurrent{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TecCurrent{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Transceiver_Channel_TecCurrent{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_Channel_TecCurrent)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3367,7 +4354,7 @@ func (n *Component_Transceiver_Channel_TecCurrentPathAny) Collect(t testing.TB, 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TecCurrentPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_Channel_TecCurrent) bool) *oc.Component_Transceiver_Channel_TecCurrentWatcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrentPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TecCurrentPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current to the batch object.
@@ -3389,7 +4376,7 @@ func (n *Component_Transceiver_Channel_TecCurrent_AvgPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/avg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TecCurrent_AvgPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -3443,10 +4430,10 @@ func watch_Component_Transceiver_Channel_TecCurrent_AvgPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TecCurrent{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TecCurrent_AvgPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TecCurrent_AvgPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -3499,6 +4486,34 @@ func (n *Component_Transceiver_Channel_TecCurrent_AvgPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TecCurrent_AvgPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TecCurrent{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TecCurrent{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TecCurrent_AvgPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/avg with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3506,7 +4521,7 @@ func (n *Component_Transceiver_Channel_TecCurrent_AvgPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TecCurrent_AvgPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrent_AvgPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TecCurrent_AvgPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/avg to the batch object.
@@ -3542,7 +4557,7 @@ func (n *Component_Transceiver_Channel_TecCurrent_InstantPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/instant with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_TecCurrent_InstantPath) Get(t testing.TB) float64 {
 	t.Helper()
@@ -3596,10 +4611,10 @@ func watch_Component_Transceiver_Channel_TecCurrent_InstantPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Float64Watcher{}
 	gs := &oc.Component_Transceiver_Channel_TecCurrent{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TecCurrent_InstantPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Transceiver_Channel_TecCurrent_InstantPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFloat64)
 		w.LastVal = val
@@ -3652,6 +4667,34 @@ func (n *Component_Transceiver_Channel_TecCurrent_InstantPathAny) Collect(t test
 	return c
 }
 
+func watch_Component_Transceiver_Channel_TecCurrent_InstantPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
+	t.Helper()
+	w := &oc.Float64Watcher{}
+	structs := map[string]*oc.Component_Transceiver_Channel_TecCurrent{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_Channel_TecCurrent{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", structs[pre], queryPath, true, false)
+			qv := convertComponent_Transceiver_Channel_TecCurrent_InstantPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFloat64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/instant with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3659,7 +4702,7 @@ func (n *Component_Transceiver_Channel_TecCurrent_InstantPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Transceiver_Channel_TecCurrent_InstantPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
 	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrent_InstantPath(t, n, timeout, predicate)
+	return watch_Component_Transceiver_Channel_TecCurrent_InstantPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/instant to the batch object.
@@ -3676,312 +4719,6 @@ func convertComponent_Transceiver_Channel_TecCurrent_InstantPath(t testing.TB, m
 		Metadata: md,
 	}
 	val := parent.Instant
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel_TecCurrent{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_TecCurrent", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_TecCurrent_IntervalPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel_TecCurrent{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_TecCurrent_IntervalPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a ONCE subscription.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_TecCurrent_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Transceiver_Channel_TecCurrent{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TecCurrent_IntervalPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrent_IntervalPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval to the batch object.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrent_IntervalPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/interval to the batch object.
-func (n *Component_Transceiver_Channel_TecCurrent_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_TecCurrent_IntervalPath extracts the value of the leaf Interval from its parent oc.Component_Transceiver_Channel_TecCurrent
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Transceiver_Channel_TecCurrent_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel_TecCurrent) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.Interval
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel_TecCurrent{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel_TecCurrent", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_Channel_TecCurrent_MaxPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel_TecCurrent{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_TecCurrent_MaxPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a ONCE subscription.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
-	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_Channel_TecCurrent_MaxPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	w := &oc.Float64Watcher{}
-	gs := &oc.Component_Transceiver_Channel_TecCurrent{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_Channel_TecCurrent", gs, queryPath, true, false)
-		return convertComponent_Transceiver_Channel_TecCurrent_MaxPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedFloat64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrent_MaxPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPath) Await(t testing.TB, timeout time.Duration, val float64) *oc.QualifiedFloat64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedFloat64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max to the batch object.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionFloat64 {
-	t.Helper()
-	c := &oc.CollectionFloat64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedFloat64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFloat64) bool) *oc.Float64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_Channel_TecCurrent_MaxPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tec-current/max to the batch object.
-func (n *Component_Transceiver_Channel_TecCurrent_MaxPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_Channel_TecCurrent_MaxPath extracts the value of the leaf Max from its parent oc.Component_Transceiver_Channel_TecCurrent
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertComponent_Transceiver_Channel_TecCurrent_MaxPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel_TecCurrent) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.Max
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

@@ -17,12 +17,12 @@ package ondatra
 import (
 	"bufio"
 	"golang.org/x/net/context"
+	"errors"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"github.com/openconfig/gnmi/errdiff"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -41,7 +41,7 @@ import (
 	wpb "github.com/openconfig/gnoi/wavelength_router"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/fakes/fakestreamclient"
+	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
 
 )
@@ -55,16 +55,16 @@ func initDUTFakes(t *testing.T) {
 	t.Helper()
 	initFakeBinding(t)
 	reserveFakeTestbed(t)
-	fakeBind.ConfigPusher = func(_ context.Context, _ *binding.DUT, config string, reset bool) error {
+	fakeArista.PushConfigFn = func(_ context.Context, config string, reset bool) error {
 		gotConfig = config
 		gotReset = reset
 		return nil
 	}
 }
 
-func TestPushConfig(t *testing.T) {
+func TestConfigPush(t *testing.T) {
 	initDUTFakes(t)
-	dutArista := DUT(t, "dut")
+	dutArista := DUT(t, "dut_arista")
 	testsPass := []struct {
 		desc       string
 		config     *DUTConfig
@@ -130,9 +130,9 @@ func TestPushConfig(t *testing.T) {
 	}
 }
 
-func TestPushConfigErrors(t *testing.T) {
+func TestConfigPushErrors(t *testing.T) {
 	initDUTFakes(t)
-	dutArista := DUT(t, "dut")
+	dutArista := DUT(t, "dut_arista")
 	testsFail := []struct {
 		desc         string
 		config       *DUTConfig
@@ -154,7 +154,7 @@ func TestPushConfigErrors(t *testing.T) {
 	}, {
 		desc:         "port name does not exist",
 		config:       dutArista.Config().New().WithAristaText(`{{ port "port10" }}`),
-		wantFatalMsg: "port10 not found",
+		wantFatalMsg: "not found",
 	}, {
 		desc:         "template malformed",
 		config:       dutArista.Config().New().WithAristaText(`{{ port"port10" }}`),
@@ -162,7 +162,7 @@ func TestPushConfigErrors(t *testing.T) {
 	}, {
 		desc:         "var has no value",
 		config:       dutArista.Config().New().WithAristaText(`{{ var "key1" }}`),
-		wantFatalMsg: "No value for key",
+		wantFatalMsg: "no value for key",
 	}}
 
 	for _, tt := range testsFail {
@@ -177,12 +177,12 @@ func TestPushConfigErrors(t *testing.T) {
 	}
 }
 
-func TestAppendConfig(t *testing.T) {
+func TestConfigAppend(t *testing.T) {
 	initDUTFakes(t)
 	gotConfig = ""
 	gotReset = false
 	wantConfig := "arista config"
-	DUT(t, "dut").Config().New().WithAristaText(wantConfig).Append(t)
+	DUT(t, "dut_arista").Config().New().WithAristaText(wantConfig).Append(t)
 	if gotConfig != wantConfig {
 		t.Errorf("Append(t) got pushed config %v, want %v", gotConfig, wantConfig)
 	}
@@ -194,10 +194,10 @@ func TestAppendConfig(t *testing.T) {
 func TestGNMI(t *testing.T) {
 	initDUTFakes(t)
 	want := struct{ gpb.GNMIClient }{}
-	fakeBind.GNMIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
+	fakeCisco.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return want, nil
 	}
-	if got := DUT(t, "dut").RawAPIs().GNMI().New(t); got != want {
+	if got := DUT(t, "dut_cisco").RawAPIs().GNMI().New(t); got != want {
 		t.Errorf("GNMI().New(t) got %v, want %v", got, want)
 	}
 }
@@ -205,10 +205,10 @@ func TestGNMI(t *testing.T) {
 func TestGNMIError(t *testing.T) {
 	initDUTFakes(t)
 	wantErr := "bad gnmi"
-	fakeBind.GNMIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (gpb.GNMIClient, error) {
+	fakeJuniper.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return nil, errors.New(wantErr)
 	}
-	raw := DUT(t, "dut_cisco").RawAPIs()
+	raw := DUT(t, "dut_juniper").RawAPIs()
 	gotErr := testt.ExpectFatal(t, func(t testing.TB) {
 		raw.GNMI().New(t)
 	})
@@ -307,10 +307,10 @@ func TestGNOI(t *testing.T) {
 		waveRtr:      struct{ wpb.WavelengthRouterClient }{},
 		custom:       struct{}{},
 	}
-	fakeBind.GNOIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
+	fakeJuniper.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return bgnoi, nil
 	}
-	gnoi := DUT(t, "dut").RawAPIs().GNOI().New(t)
+	gnoi := DUT(t, "dut_juniper").RawAPIs().GNOI().New(t)
 	if got, want := gnoi.BGP(), bgnoi.BGP(); got != want {
 		t.Errorf("GNOI(t) got BGP client %v, want %v", got, want)
 	}
@@ -358,7 +358,7 @@ func TestGNOI(t *testing.T) {
 func TestGNOIError(t *testing.T) {
 	initDUTFakes(t)
 	wantErr := "bad gnoi"
-	fakeBind.GNOIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.GNOIClients, error) {
+	fakeCisco.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return nil, errors.New(wantErr)
 	}
 	raw := DUT(t, "dut_cisco").RawAPIs()
@@ -388,7 +388,7 @@ func TestGRIBI(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			fakeBind.GRIBIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (grpb.GRIBIClient, error) {
+			fakeCisco.DialGRIBIFn = func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 				return test.want, nil
 			}
 
@@ -408,16 +408,16 @@ func TestGRIBIError(t *testing.T) {
 	}{{
 		desc:    "New GRIBI Client",
 		wantErr: "bad gribi",
-		f:       DUT(t, "dut").RawAPIs().GRIBI().New,
+		f:       DUT(t, "dut_arista").RawAPIs().GRIBI().New,
 	}, {
 		desc:    "Default GRIBI Client",
 		wantErr: "bad gribi",
-		f:       DUT(t, "dut").RawAPIs().GRIBI().Default,
+		f:       DUT(t, "dut_arista").RawAPIs().GRIBI().Default,
 	}}
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			fakeBind.GRIBIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (grpb.GRIBIClient, error) {
+			fakeArista.DialGRIBIFn = func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 				return nil, errors.New(test.wantErr)
 			}
 
@@ -434,20 +434,20 @@ func TestGRIBIError(t *testing.T) {
 
 func TestStreamingClient(t *testing.T) {
 	initDUTFakes(t)
-	fCLI := fakestreamclient.New()
-	fConsole := fakestreamclient.New()
-	fakeBind.CLIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fCLI := fakebind.NewStreamClient()
+	fConsole := fakebind.NewStreamClient()
+	fakeJuniper.DialCLIFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
-	fakeBind.ConsoleDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeJuniper.DialConsoleFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fConsole, nil
 	}
-	cliClient := DUT(t, "dut").RawAPIs().CLI(t)
-	consoleClient := DUT(t, "dut").RawAPIs().Console(t)
+	cliClient := DUT(t, "dut_juniper").RawAPIs().CLI(t)
+	consoleClient := DUT(t, "dut_juniper").RawAPIs().Console(t)
 	tests := []struct {
 		desc string
 		c    StreamClient
-		f    *fakestreamclient.FakeStreamClient
+		f    *fakebind.StreamClient
 	}{{
 		desc: "Console",
 		c:    consoleClient,
@@ -492,20 +492,20 @@ func TestStreamingClient(t *testing.T) {
 
 func TestSendCommand(t *testing.T) {
 	initDUTFakes(t)
-	fCLI := &fakestreamclient.FakeStreamClient{}
-	fConsole := &fakestreamclient.FakeStreamClient{}
-	fakeBind.CLIDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fCLI := &fakebind.StreamClient{}
+	fConsole := &fakebind.StreamClient{}
+	fakeArista.DialCLIFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
-	fakeBind.ConsoleDialer = func(context.Context, *binding.DUT, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeArista.DialConsoleFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
 		return fConsole, nil
 	}
-	cliClient := DUT(t, "dut").RawAPIs().CLI(t)
-	consoleClient := DUT(t, "dut").RawAPIs().Console(t)
+	cliClient := DUT(t, "dut_arista").RawAPIs().CLI(t)
+	consoleClient := DUT(t, "dut_arista").RawAPIs().Console(t)
 	tests := []struct {
 		desc    string
 		c       StreamClient
-		f       *fakestreamclient.FakeStreamClient
+		f       *fakebind.StreamClient
 		cmd     string
 		wantErr string
 	}{{

@@ -30,7 +30,7 @@ func (n *SystemPath) Lookup(t testing.TB) *oc.QualifiedSystem {
 }
 
 // Get fetches the value at /openconfig-system/system with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *SystemPath) Get(t testing.TB) *oc.System {
 	t.Helper()
@@ -121,7 +121,7 @@ func (n *System_AaaPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa {
 }
 
 // Get fetches the value at /openconfig-system/system/aaa with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_AaaPath) Get(t testing.TB) *oc.System_Aaa {
 	t.Helper()
@@ -212,7 +212,7 @@ func (n *System_Aaa_AccountingPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_AccountingPath) Get(t testing.TB) *oc.System_Aaa_Accounting {
 	t.Helper()
@@ -301,7 +301,7 @@ func (n *System_Aaa_Accounting_AccountingMethodPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/config/accounting-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_AccountingMethodPath) Get(t testing.TB) []oc.System_Aaa_Accounting_AccountingMethod_Union {
 	t.Helper()
@@ -404,7 +404,7 @@ func (n *System_Aaa_Accounting_EventPath) Lookup(t testing.TB) *oc.QualifiedSyst
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/events/event with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_EventPath) Get(t testing.TB) *oc.System_Aaa_Accounting_Event {
 	t.Helper()
@@ -493,7 +493,7 @@ func (n *System_Aaa_Accounting_Event_EventTypePath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/events/event/config/event-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_Event_EventTypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_ACCOUNTING_EVENT_TYPE {
 	t.Helper()
@@ -594,7 +594,7 @@ func (n *System_Aaa_Accounting_Event_RecordPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/accounting/events/event/config/record with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Accounting_Event_RecordPath) Get(t testing.TB) oc.E_Event_Record {
 	t.Helper()
@@ -697,7 +697,7 @@ func (n *System_Aaa_AuthenticationPath) Lookup(t testing.TB) *oc.QualifiedSystem
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_AuthenticationPath) Get(t testing.TB) *oc.System_Aaa_Authentication {
 	t.Helper()
@@ -788,7 +788,7 @@ func (n *System_Aaa_Authentication_AdminUserPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/admin-user with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AdminUserPath) Get(t testing.TB) *oc.System_Aaa_Authentication_AdminUser {
 	t.Helper()
@@ -877,7 +877,7 @@ func (n *System_Aaa_Authentication_AdminUser_AdminPasswordHashedPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/admin-user/config/admin-password-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AdminUser_AdminPasswordHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -978,7 +978,7 @@ func (n *System_Aaa_Authentication_AdminUser_AdminPasswordPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/admin-user/config/admin-password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AdminUser_AdminPasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1079,7 +1079,7 @@ func (n *System_Aaa_Authentication_AuthenticationMethodPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/config/authentication-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_AuthenticationMethodPath) Get(t testing.TB) []oc.System_Aaa_Authentication_AuthenticationMethod_Union {
 	t.Helper()
@@ -1182,7 +1182,7 @@ func (n *System_Aaa_Authentication_UserPath) Lookup(t testing.TB) *oc.QualifiedS
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_UserPath) Get(t testing.TB) *oc.System_Aaa_Authentication_User {
 	t.Helper()
@@ -1271,7 +1271,7 @@ func (n *System_Aaa_Authentication_User_PasswordHashedPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_PasswordHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1372,7 +1372,7 @@ func (n *System_Aaa_Authentication_User_PasswordPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_PasswordPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1473,7 +1473,7 @@ func (n *System_Aaa_Authentication_User_RolePath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/role with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_RolePath) Get(t testing.TB) oc.System_Aaa_Authentication_User_Role_Union {
 	t.Helper()
@@ -1574,7 +1574,7 @@ func (n *System_Aaa_Authentication_User_SshKeyPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_SshKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1675,7 +1675,7 @@ func (n *System_Aaa_Authentication_User_UsernamePath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/username with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authentication_User_UsernamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -1778,7 +1778,7 @@ func (n *System_Aaa_AuthorizationPath) Lookup(t testing.TB) *oc.QualifiedSystem_
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_AuthorizationPath) Get(t testing.TB) *oc.System_Aaa_Authorization {
 	t.Helper()
@@ -1867,7 +1867,7 @@ func (n *System_Aaa_Authorization_AuthorizationMethodPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization/config/authorization-method with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authorization_AuthorizationMethodPath) Get(t testing.TB) []oc.System_Aaa_Authorization_AuthorizationMethod_Union {
 	t.Helper()
@@ -1970,7 +1970,7 @@ func (n *System_Aaa_Authorization_EventPath) Lookup(t testing.TB) *oc.QualifiedS
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization/events/event with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authorization_EventPath) Get(t testing.TB) *oc.System_Aaa_Authorization_Event {
 	t.Helper()
@@ -2059,7 +2059,7 @@ func (n *System_Aaa_Authorization_Event_EventTypePath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/authorization/events/event/config/event-type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_Authorization_Event_EventTypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_AUTHORIZATION_EVENT_TYPE {
 	t.Helper()
@@ -2143,6 +2143,198 @@ func convertSystem_Aaa_Authorization_Event_EventTypePath(t testing.TB, md *genut
 	val := parent.EventType
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_ServerGroupPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_ServerGroup {
+	t.Helper()
+	goStruct := &oc.System_Aaa_ServerGroup{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedSystem_Aaa_ServerGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_ServerGroupPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_ServerGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_ServerGroup {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_ServerGroup
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_ServerGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
+func (n *System_Aaa_ServerGroupPathAny) Get(t testing.TB) []*oc.System_Aaa_ServerGroup {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Aaa_ServerGroup
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group.
+func (n *System_Aaa_ServerGroupPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group in the given batch object.
+func (n *System_Aaa_ServerGroupPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group.
+func (n *System_Aaa_ServerGroupPath) Replace(t testing.TB, val *oc.System_Aaa_ServerGroup) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group in the given batch object.
+func (n *System_Aaa_ServerGroupPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Aaa_ServerGroup) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group.
+func (n *System_Aaa_ServerGroupPath) Update(t testing.TB, val *oc.System_Aaa_ServerGroup) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group in the given batch object.
+func (n *System_Aaa_ServerGroupPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Aaa_ServerGroup) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_ServerGroup_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_ServerGroup{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup", goStruct, true, true)
+	if ok {
+		return convertSystem_Aaa_ServerGroup_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_ServerGroup_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_ServerGroup_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_ServerGroup{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_ServerGroup_NamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription.
+func (n *System_Aaa_ServerGroup_NamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group/config/name.
+func (n *System_Aaa_ServerGroup_NamePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group/config/name in the given batch object.
+func (n *System_Aaa_ServerGroup_NamePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group/config/name.
+func (n *System_Aaa_ServerGroup_NamePath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group/config/name in the given batch object.
+func (n *System_Aaa_ServerGroup_NamePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group/config/name.
+func (n *System_Aaa_ServerGroup_NamePath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group/config/name in the given batch object.
+func (n *System_Aaa_ServerGroup_NamePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_Aaa_ServerGroup_NamePath extracts the value of the leaf Name from its parent oc.System_Aaa_ServerGroup
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_ServerGroup_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
 	}
 	return qv
 }

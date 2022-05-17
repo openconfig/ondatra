@@ -15,6 +15,97 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/storage with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_StoragePath) Lookup(t testing.TB) *oc.QualifiedComponent_Storage {
+	t.Helper()
+	goStruct := &oc.Component_Storage{}
+	md, ok := oc.Lookup(t, n, "Component_Storage", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedComponent_Storage{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/storage with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_StoragePath) Get(t testing.TB) *oc.Component_Storage {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/storage with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_StoragePathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Storage {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_Storage
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Storage{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Storage", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_Storage{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/storage with a ONCE subscription.
+func (n *Component_StoragePathAny) Get(t testing.TB) []*oc.Component_Storage {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_Storage
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/storage.
+func (n *Component_StoragePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/storage in the given batch object.
+func (n *Component_StoragePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/storage.
+func (n *Component_StoragePath) Replace(t testing.TB, val *oc.Component_Storage) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/storage in the given batch object.
+func (n *Component_StoragePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Storage) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/storage.
+func (n *Component_StoragePath) Update(t testing.TB, val *oc.Component_Storage) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/storage in the given batch object.
+func (n *Component_StoragePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Storage) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_SubcomponentPath) Lookup(t testing.TB) *oc.QualifiedComponent_Subcomponent {
@@ -30,7 +121,7 @@ func (n *Component_SubcomponentPath) Lookup(t testing.TB) *oc.QualifiedComponent
 }
 
 // Get fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_SubcomponentPath) Get(t testing.TB) *oc.Component_Subcomponent {
 	t.Helper()
@@ -119,7 +210,7 @@ func (n *Component_Subcomponent_NamePath) Lookup(t testing.TB) *oc.QualifiedStri
 }
 
 // Get fetches the value at /openconfig-platform/components/component/subcomponents/subcomponent/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Subcomponent_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -222,7 +313,7 @@ func (n *Component_TransceiverPath) Lookup(t testing.TB) *oc.QualifiedComponent_
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_TransceiverPath) Get(t testing.TB) *oc.Component_Transceiver {
 	t.Helper()
@@ -313,7 +404,7 @@ func (n *Component_Transceiver_ChannelPath) Lookup(t testing.TB) *oc.QualifiedCo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_ChannelPath) Get(t testing.TB) *oc.Component_Transceiver_Channel {
 	t.Helper()
@@ -402,7 +493,7 @@ func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/associated-optical-channel with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_AssociatedOpticalChannelPath) Get(t testing.TB) string {
 	t.Helper()
@@ -503,7 +594,7 @@ func (n *Component_Transceiver_Channel_DescriptionPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/description with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_DescriptionPath) Get(t testing.TB) string {
 	t.Helper()
@@ -604,7 +695,7 @@ func (n *Component_Transceiver_Channel_IndexPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Transceiver_Channel_IndexPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -686,107 +777,6 @@ func convertComponent_Transceiver_Channel_IndexPath(t testing.TB, md *genutil.Me
 		Metadata: md,
 	}
 	val := parent.Index
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_Channel{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_Channel", goStruct, true, true)
-	if ok {
-		return convertComponent_Transceiver_Channel_TargetOutputPowerPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Get(t testing.TB) float64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPathAny) Lookup(t testing.TB) []*oc.QualifiedFloat64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedFloat64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_Channel{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_Channel", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_Channel_TargetOutputPowerPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power with a ONCE subscription.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPathAny) Get(t testing.TB) []float64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []float64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power in the given batch object.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Replace(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power in the given batch object.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) Update(t testing.TB, val float64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/transceiver/physical-channels/channel/config/target-output-power in the given batch object.
-func (n *Component_Transceiver_Channel_TargetOutputPowerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val float64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertComponent_Transceiver_Channel_TargetOutputPowerPath extracts the value of the leaf TargetOutputPower from its parent oc.Component_Transceiver_Channel
-// and combines the update with an existing Metadata to return a *oc.QualifiedFloat64.
-func convertComponent_Transceiver_Channel_TargetOutputPowerPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_Channel) *oc.QualifiedFloat64 {
-	t.Helper()
-	qv := &oc.QualifiedFloat64{
-		Metadata: md,
-	}
-	val := parent.TargetOutputPower
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

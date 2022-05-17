@@ -15,15 +15,14 @@
 package ate
 
 import (
+	"fmt"
 	"math/big"
 	"math/rand"
 	"net"
 	"strconv"
 	"strings"
 
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/binding/usererr"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -93,10 +92,10 @@ func setUintRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField
 		return nil
 	}
 	if r.GetCount() == 0 {
-		return usererr.New("count in range is not set or zero")
+		return fmt.Errorf("count in range is not set or zero")
 	}
 	if r.GetMin() > r.GetMax() {
-		return usererr.New("min %d in range is greater than max %d", r.GetMin(), r.GetMax())
+		return fmt.Errorf("min %d in range is greater than max %d", r.GetMin(), r.GetMax())
 	}
 
 	width := r.GetMax() - r.GetMin()
@@ -104,7 +103,7 @@ func setUintRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField
 		r.Step = 1
 		maxStep := (width + 1) / r.GetCount()
 		if maxStep == 0 {
-			return usererr.New(
+			return fmt.Errorf(
 				"count %d in range cannot fit in [%d, %d]",
 				r.GetCount(), r.GetMin(), r.GetMax())
 		}
@@ -114,7 +113,7 @@ func setUintRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField
 	} else {
 		maxCount := (width / r.GetStep()) + 1
 		if r.GetCount() > maxCount {
-			return usererr.New(
+			return fmt.Errorf(
 				"count %d with step %d cannot fit in [%d, %d]",
 				r.GetCount(), r.GetStep(), r.GetMin(), r.GetMax())
 		}
@@ -137,7 +136,7 @@ func setAddrRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField
 	}
 	stepAddr, err := toAddr(step, t)
 	if err != nil {
-		return errors.Wrapf(err, "could not convert step value %q to address of type %q", step, t)
+		return fmt.Errorf("could not convert step value %q to address of type %q: %w", step, t, err)
 	}
 
 	if r.GetRandom() {
@@ -152,18 +151,18 @@ func setAddrRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField
 
 func addrRangeToStep(r *opb.AddressRange, t addrType) (*big.Int, error) {
 	if r.GetCount() == 0 {
-		return nil, usererr.New("count in range is not set or zero")
+		return nil, fmt.Errorf("count in range is not set or zero")
 	}
 	min, err := parseAddr(r.GetMin(), t)
 	if err != nil {
-		return nil, errors.Wrapf(err, "min %q in range is invalid", r.GetMin())
+		return nil, fmt.Errorf("min %q in range is invalid: %w", r.GetMin(), err)
 	}
 	max, err := parseAddr(r.GetMax(), t)
 	if err != nil {
-		return nil, errors.Wrapf(err, "max %q in range is invalid", r.GetMax())
+		return nil, fmt.Errorf("max %q in range is invalid: %w", r.GetMax(), err)
 	}
 	if min.Cmp(max) > 0 {
-		return nil, usererr.New("min %q in range is greater than max %q", r.GetMin(), r.GetMax())
+		return nil, fmt.Errorf("min %q in range is greater than max %q", r.GetMin(), r.GetMax())
 	}
 
 	count := big.NewInt(int64(r.GetCount()))
@@ -173,7 +172,7 @@ func addrRangeToStep(r *opb.AddressRange, t addrType) (*big.Int, error) {
 	if r.GetStep() == "" {
 		maxStep := width.Add(width, one).Div(width, count)
 		if maxStep.Sign() == 0 {
-			return nil, usererr.New(
+			return nil, fmt.Errorf(
 				"count %d in range cannot fit in [%q, %q]",
 				r.GetCount(), r.GetMin(), r.GetMax())
 		}
@@ -185,14 +184,14 @@ func addrRangeToStep(r *opb.AddressRange, t addrType) (*big.Int, error) {
 
 	step, err := parseAddr(r.GetStep(), t)
 	if err != nil {
-		return nil, errors.Wrapf(err, "step %q in range is invalid", r.GetStep())
+		return nil, fmt.Errorf("step %q in range is invalid: %w", r.GetStep(), err)
 	}
 	if step.Sign() == 0 {
-		return nil, usererr.New("step %q in range is zero", r.GetStep())
+		return nil, fmt.Errorf("step %q in range is zero", r.GetStep())
 	}
 	maxCount := width.Div(width, step).Add(width, one)
 	if count.Cmp(maxCount) > 0 {
-		return nil, usererr.New(
+		return nil, fmt.Errorf(
 			"count %d with step %q in range cannot fit in [%q, %q]",
 			r.GetCount(), r.GetStep(), r.GetMin(), r.GetMax())
 	}
@@ -207,25 +206,25 @@ func parseAddr(s string, t addrType) (*big.Int, error) {
 	case mac48AddrType:
 		b, err = net.ParseMAC(s)
 		if err != nil {
-			return nil, usererr.New("not a MAC address: %q", s)
+			return nil, fmt.Errorf("not a MAC address: %q", s)
 		}
 		if len(b) != mac48len {
-			return nil, usererr.New("MAC address not in MAC-48 format: %q", s)
+			return nil, fmt.Errorf("MAC address not in MAC-48 format: %q", s)
 		}
 	case ipv4AddrType:
 		i, isV6 := parseIP(s)
 		if i == nil || isV6 {
-			return nil, usererr.New("not an IPv4 address: %q", s)
+			return nil, fmt.Errorf("not an IPv4 address: %q", s)
 		}
 		b = i.To4()
 	case ipv6AddrType:
 		i, isV6 := parseIP(s)
 		if i == nil || !isV6 {
-			return nil, usererr.New("not an IPv6 address: %q", s)
+			return nil, fmt.Errorf("not an IPv6 address: %q", s)
 		}
 		b = i
 	default:
-		return nil, errors.Errorf("unknown address type: %q", t)
+		return nil, fmt.Errorf("unknown address type: %q", t)
 	}
 
 	return new(big.Int).SetBytes(b), nil
@@ -258,14 +257,14 @@ func toAddr(i *big.Int, t addrType) (string, error) {
 		}
 		return net.IP(b).String(), nil
 	default:
-		return "", errors.Errorf("unknown address type: %q", t)
+		return "", fmt.Errorf("unknown address type: %q", t)
 	}
 }
 
 func padToLen(b []byte, toLen int) ([]byte, error) {
 	padLen := toLen - len(b)
 	if padLen < 0 {
-		return nil, errors.Errorf("slice %v already longer than %d", b, toLen)
+		return nil, fmt.Errorf("slice %v already longer than %d", b, toLen)
 	}
 	if padLen > 0 {
 		b = append(make([]byte, padLen), b...)

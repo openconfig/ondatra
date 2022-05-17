@@ -60,7 +60,7 @@ func (n *ModelPath) Lookup(t testing.TB) *QualifiedModel {
 }
 
 // Get fetches the value at /openconfig-withlist/model with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *ModelPath) Get(t testing.TB) *Model {
 	t.Helper()
@@ -151,7 +151,7 @@ func (n *Model_MultiKeyPath) Lookup(t testing.TB) *QualifiedModel_MultiKey {
 }
 
 // Get fetches the value at /openconfig-withlist/model/b/multi-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKeyPath) Get(t testing.TB) *Model_MultiKey {
 	t.Helper()
@@ -240,7 +240,7 @@ func (n *Model_MultiKey_Key1Path) Lookup(t testing.TB) *QualifiedUint32 {
 }
 
 // Get fetches the value at /openconfig-withlist/model/b/multi-key/config/key1 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key1Path) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -341,7 +341,7 @@ func (n *Model_MultiKey_Key2Path) Lookup(t testing.TB) *QualifiedUint64 {
 }
 
 // Get fetches the value at /openconfig-withlist/model/b/multi-key/config/key2 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_MultiKey_Key2Path) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -444,7 +444,7 @@ func (n *Model_SingleKeyPath) Lookup(t testing.TB) *QualifiedModel_SingleKey {
 }
 
 // Get fetches the value at /openconfig-withlist/model/a/single-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKeyPath) Get(t testing.TB) *Model_SingleKey {
 	t.Helper()
@@ -533,7 +533,7 @@ func (n *Model_SingleKey_KeyPath) Lookup(t testing.TB) *QualifiedUint32 {
 }
 
 // Get fetches the value at /openconfig-withlist/model/a/single-key/config/key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Model_SingleKey_KeyPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -636,7 +636,7 @@ func (n *RootPath) Lookup(t testing.TB) *QualifiedRoot {
 }
 
 // Get fetches the value at / with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *RootPath) Get(t testing.TB) *Root {
 	t.Helper()

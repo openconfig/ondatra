@@ -1,78 +1,174 @@
 {
-   "active": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "xpath": "/topology[1]/deviceGroup[1]/bgpv4Peer[1]",
-         "value": "false"
+   "xpath": "/topology[1]/deviceGroup[1]/networkGroup[1]",
+   "name": "net1",
+   "bgpIPRouteProperty": null,
+   "bgpL3VpnRouteProperty": null,
+   "bgpMVpnReceiverSitesIpv4": null,
+   "bgpMVpnReceiverSitesIpv6": null,
+   "bgpMVpnSenderSitesIpv4": null,
+   "bgpMVpnSenderSitesIpv6": null,
+   "bgpV6IPRouteProperty": null,
+   "bgpV6L3VpnRouteProperty": null,
+   "cMacProperties": null,
+   "deviceGroup": null,
+   "dslPools": null,
+   "eCpriReRadioChannelsOrUsers": null,
+   "eCpriRecRadioChannelsOrUsers": null,
+   "evpnIPv4PrefixRange": null,
+   "evpnIPv6PrefixRange": null,
+   "gRIBIIpv4Entry": null,
+   "ipv4PrefixPools": [
+      {
+         "networkAddress": {
+            "nest": null,
+            "overlay": null,
+            "singleValue": {
+               "value": "30.0.0.0"
+            }
+         },
+         "numberOfAddressesAsy": {
+            "nest": null,
+            "overlay": null,
+            "singleValue": {
+               "value": "15000"
+            }
+         },
+         "prefixLength": {
+            "nest": null,
+            "overlay": null,
+            "singleValue": {
+               "value": "30"
+            }
+         },
+         "bgpIPRouteProperty": null,
+         "bgpL3VpnRouteProperty": null,
+         "bgpMVpnReceiverSitesIpv4": null,
+         "bgpMVpnReceiverSitesIpv6": null,
+         "bgpMVpnSenderSitesIpv4": null,
+         "bgpMVpnSenderSitesIpv6": null,
+         "bgpV6IPRouteProperty": null,
+         "bgpV6L3VpnRouteProperty": null,
+         "cMacProperties": null,
+         "connector": {},
+         "eCpriReRadioChannelsOrUsers": null,
+         "eCpriRecRadioChannelsOrUsers": null,
+         "evpnIPv4PrefixRange": null,
+         "evpnIPv6PrefixRange": null,
+         "gRIBIIpv4Entry": null,
+         "isisL3RouteProperty": [
+            {
+               "active": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "algorithm": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "0"
+                  }
+               },
+               "configureSIDIndexLabel": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "eFlag": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "lFlag": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "metric": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "10"
+                  }
+               },
+               "nFlag": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "pFlag": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "rFlag": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "routeOrigin": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "internal"
+                  }
+               },
+               "sIDIndexLabel": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "0"
+                  }
+               },
+               "vFlag": {
+                  "nest": null,
+                  "overlay": null,
+                  "singleValue": {
+                     "value": "false"
+                  }
+               },
+               "cMacProperties": null,
+               "evpnIPv4PrefixRange": null,
+               "evpnIPv6PrefixRange": null,
+               "isisL3PrefixesSrSid": {
+                  "active": {
+                     "nest": null,
+                     "overlay": null,
+                     "singleValue": {
+                        "value": "false"
+                     }
+                  }
+               }
+            }
+         ],
+         "ldpFECProperty": null,
+         "ospfRouteProperty": null,
+         "tag": null
       }
-   },
-   "connectedVia": null,
-   "dutIp": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "1.1.1.1"
-      }
-   },
-   "enable4ByteAs": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "false"
-      }
-   },
-   "filterIpV4Unicast": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "true"
-      }
-   },
-   "holdTimer": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "0"
-      }
-   },
-   "keepaliveTimer": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "0"
-      }
-   },
-   "localAs2Bytes": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "0"
-      }
-   },
-   "numberSRTEPolicies": 0,
-   "stackedLayers": null,
-   "type": {
-      "nest": null,
-      "overlay": null,
-      "singleValue": {
-         "value": "external"
-      }
-   },
-   "bgpIPv4EvpnEvi": null,
-   "bgpIPv4EvpnPbb": null,
-   "bgpIPv4EvpnVXLAN": null,
-   "bgpIPv4EvpnVXLANVpws": null,
-   "bgpIPv4EvpnVpws": null,
-   "bgpIpv4AdL2Vpn": null,
-   "bgpIpv4L2Site": null,
-   "bgpIpv4MVrf": null,
-   "bgpLsAsPathSegmentList": null,
-   "bgpLsClusterIdList": null,
-   "bgpLsCommunitiesList": null,
-   "bgpLsExtendedCommunitiesList": null,
-   "bgpSRGBRangeSubObjectsList": null,
-   "bgpVrf": null,
-   "learnedInfo": null,
-   "tlvProfile": null
+   ],
+   "ipv6PrefixPools": null,
+   "isisL3RouteProperty": null,
+   "isisSpbMacCloudConfig": null,
+   "isisTrillUCastMacConfig": null,
+   "ldpFECProperty": null,
+   "ldpIpv6FECProperty": null,
+   "macPools": null,
+   "networkGroup": null,
+   "networkRangeInfo": null,
+   "ospfRouteProperty": null,
+   "ospfv3RouteProperty": null
 }

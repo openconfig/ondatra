@@ -396,6 +396,47 @@ func TestAddTraffic(t *testing.T) {
 		wantIngressTracking: true,
 		wantStackCount:      1,
 	}, {
+		desc: "attempted convergence measurements for raw traffic",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: intfEPs,
+			DstEndpoints: intfEPs,
+			Headers: []*opb.Header{{Type: &opb.Header_Eth{
+				&opb.EthernetHeader{
+					SrcAddr: singleAddr("01:02:03:04:05:06"),
+				},
+			}}},
+			ConvergenceTracking: true,
+		},
+		wantErr: true,
+	}, {
+		desc: "attempted configuration of both ingress tracking and convergence measurements",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: intfEPs,
+			DstEndpoints: intfEPs,
+			Headers:      []*opb.Header{{Type: &opb.Header_Eth{&opb.EthernetHeader{}}}},
+			IngressTrackingFilters: &opb.Flow_IngressTrackingFilters{
+				MplsLabel: true,
+			},
+			ConvergenceTracking: true,
+		},
+		wantErr: true,
+	}, {
+		desc: "ingress tracking for convergence measurements",
+		flow: &opb.Flow{
+			Name:                flowName,
+			SrcEndpoints:        netwEPs,
+			DstEndpoints:        netwEPs,
+			Headers:             []*opb.Header{{Type: &opb.Header_Eth{&opb.EthernetHeader{}}}},
+			ConvergenceTracking: true,
+		},
+		wantTrafficType:     ethTraffic,
+		wantSrcEPs:          netGrpEPs,
+		wantDstEPs:          netGrpEPs,
+		wantIngressTracking: true,
+		wantStackCount:      1,
+	}, {
 		desc: "egress tracking",
 		flow: &opb.Flow{
 			Name:         flowName,

@@ -17,6 +17,7 @@ package ixgnmi
 
 import (
 	"golang.org/x/net/context"
+	"errors"
 	"fmt"
 	"net"
 	"path"
@@ -25,7 +26,6 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc"
 	"github.com/patrickmn/go-cache"
@@ -45,16 +45,15 @@ const (
 	ribOCPath  = "/network-instances/network-instance/protocols/protocol/bgp/rib"
 	lspsOCPath = "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te"
 
-	portStatsCaption        = "Port Statistics"
-	portCPUStatsCaption     = "Port CPU Statistics"
-	trafficItemStatsCaption = "Traffic Item Statistics"
-	flowStatsCaption        = "Flow Statistics"
+	portStatsCaption    = "Port Statistics"
+	portCPUStatsCaption = "Port CPU Statistics"
+	flowStatsCaption    = "Flow Statistics"
 )
 
 var (
 	prefixToReader = map[string]*prefixReader{
 		"/components": statViewReader(portCPUStatsCaption),
-		"/flows":      statViewReader(trafficItemStatsCaption, flowStatsCaption, ixweb.EgressStatsCaption),
+		"/flows":      statViewReader(ixweb.TrafficItemStatsCaption, flowStatsCaption, ixweb.EgressStatsCaption),
 		"/interfaces": statViewReader(portStatsCaption),
 		ribOCPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
 			n, err := c.pathToOCRIB(ctx, p)
@@ -130,7 +129,7 @@ func statViewReader(captions ...string) *prefixReader {
 			ygot.GNMINotificationsConfig{UsePathElem: true},
 		)
 		if err != nil {
-			return nil, errors.Wrap(err, "cannot render telemetry Notifications")
+			return nil, fmt.Errorf("cannot render telemetry Notifications: %w", err)
 		}
 		return ns, nil
 	}}
@@ -143,13 +142,13 @@ func NewClient(ctx context.Context, name string, reader StatReader, client *ixco
 	srv := grpc.NewServer()
 	subSrv, err := subscribe.NewServer(gc)
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot create new subscribe server")
+		return nil, fmt.Errorf("cannot create new subscribe server: %w", err)
 	}
 	gc.SetClient(subSrv.Update)
 	gpb.RegisterGNMIServer(srv, subSrv)
 	lis, err := net.Listen("tcp", ":0")
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot listen on an available port")
+		return nil, fmt.Errorf("cannot listen on an available port: %w", err)
 	}
 	defer closer.CloseOnErr(&rerr, lis.Close, "error closing listener")
 	go srv.Serve(lis)
@@ -157,7 +156,7 @@ func NewClient(ctx context.Context, name string, reader StatReader, client *ixco
 	opts = append(opts, grpc.WithTransportCredentials(local.NewCredentials()))
 	conn, err := grpc.DialContext(ctx, addr, opts...)
 	if err != nil {
-		return nil, errors.Wrapf(err, "DialContext(%s, nil, %v)", addr, opts)
+		return nil, fmt.Errorf("DialContext(%s, nil, %v): %w", addr, opts, err)
 	}
 	defer closer.CloseOnErr(&rerr, conn.Close, "error closing gRPC connection")
 	return &Client{
@@ -236,7 +235,7 @@ func (c *Client) publishRoot(ctx context.Context, root string, path *gpb.Path) (
 		}
 		log.V(2).Infof("Pushing notif to cache: %+v", n)
 		if err := c.target.GnmiUpdate(n); err != nil {
-			return false, errors.Wrapf(err, "failed to update gNMI cache for target %s", c.target.Name())
+			return false, fmt.Errorf("failed to update gNMI cache for target %s: %w", c.target.Name(), err)
 		}
 	}
 	return hasData, nil
@@ -248,11 +247,11 @@ func (c *Client) readStats(ctx context.Context, cacheKey string, captions []stri
 	}
 	s, err := c.reader(ctx, captions)
 	if err != nil {
-		return nil, errors.Wrapf(err, "error retrieving statistics for views: %v", captions)
+		return nil, fmt.Errorf("error retrieving statistics for views %v: %w", captions, err)
 	}
 	rs, err := translate(s)
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot translate statistics")
+		return nil, fmt.Errorf("cannot translate statistics: %w", err)
 	}
 	c.fresh.SetDefault(cacheKey, true)
 	return rs, nil
@@ -310,7 +309,7 @@ func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 	)
 	peerCache, err := c.fetchPeerCache(ctx)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to update cache")
+		return nil, fmt.Errorf("failed to update cache: %w", err)
 	}
 	node, ok := peerCache[pi.intf][pi.neighbor]
 	if !ok {
@@ -326,11 +325,11 @@ func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 		return nil, err
 	}
 	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
-		return nil, errors.Wrap(err, "failed to run op")
+		return nil, fmt.Errorf("failed to run op: %w", err)
 	}
 	table := &table{}
 	if err := c.client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
-		return nil, errors.Wrap(err, "failed to get learned info")
+		return nil, fmt.Errorf("failed to get learned info: %w", err)
 	}
 	return table, nil
 }
@@ -357,7 +356,7 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 
 	schemaPath, err := ygot.PathToSchemaPath(p)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get schema path")
+		return nil, fmt.Errorf("failed to get schema path: %w", err)
 	}
 
 	var cachePI peerInfo
@@ -398,12 +397,12 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 
 	table, err := ribFromIxiaFn(c, ctx, pi)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to read Ixia table")
+		return nil, fmt.Errorf("failed to read Ixia table: %w", err)
 	}
 
 	var info []bgpLearnedInfo
 	if err := unmarshalTable(table, &info); err != nil {
-		return nil, errors.Wrap(err, "failed to unmarshal Ixia table")
+		return nil, fmt.Errorf("failed to unmarshal Ixia table: %w", err)
 	}
 
 	dev := &telemetry.Device{}
@@ -419,7 +418,7 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 
 	notif, err := ygot.Diff(oldRIB, dev)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to render notifications")
+		return nil, fmt.Errorf("failed to render notifications: %w", err)
 	}
 	notif.Timestamp = time.Now().UnixNano()
 
@@ -468,7 +467,7 @@ func (c *Client) lspsFromIxia(ctx context.Context) (map[string][]*ingressLSP, er
 	}
 
 	if err := c.client.UpdateIDs(ctx, cfg, ingressLSPNodes...); err != nil {
-		return nil, errors.Wrapf(err, "failed to update IDs for ingress LSPs")
+		return nil, fmt.Errorf("failed to update IDs for ingress LSPs: %w", err)
 	}
 
 	ingressLSPsByPrefix := map[string][]*ingressLSP{}
@@ -483,14 +482,14 @@ func (c *Client) lspsFromIxia(ctx context.Context) (map[string][]*ingressLSP, er
 			RemoteIP string
 		})
 		if err := c.client.Session().Get(ctx, nodeID, ixLSPs); err != nil {
-			return nil, errors.Wrapf(err, "failed to fetch ingress LSPs config")
+			return nil, fmt.Errorf("failed to fetch ingress LSPs config: %w", err)
 		}
 		var srcIPs, dstIPs []string
 		if err := c.client.Session().Post(ctx, mvEP, ixweb.OpArgs{ixLSPs.SourceIP, 0, len(ixLSPs.State)}, &srcIPs); err != nil {
-			return nil, errors.Wrapf(err, "failed to fetch source IPs for LSP")
+			return nil, fmt.Errorf("failed to fetch source IPs for LSP: %w", err)
 		}
 		if err := c.client.Session().Post(ctx, mvEP, ixweb.OpArgs{ixLSPs.RemoteIP, 0, len(ixLSPs.State)}, &dstIPs); err != nil {
-			return nil, errors.Wrapf(err, "failed to fetch destination IPs for LSP")
+			return nil, fmt.Errorf("failed to fetch destination IPs for LSP: %w", err)
 		}
 		var lsps []*ingressLSP
 		for i, state := range ixLSPs.State {
@@ -515,7 +514,7 @@ func (c *Client) pathToOCLSPs(ctx context.Context) (*gpb.Notification, error) {
 
 	ingressLSPs, err := lspsFromIxiaFn(c, ctx)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to read LSPs from Ixia")
+		return nil, fmt.Errorf("failed to read LSPs from Ixia: %w", err)
 	}
 
 	dev := &telemetry.Device{}
@@ -531,7 +530,7 @@ func (c *Client) pathToOCLSPs(ctx context.Context) (*gpb.Notification, error) {
 
 	notif, err := ygot.Diff(oldLSPs, dev)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to render notifications")
+		return nil, fmt.Errorf("failed to render notifications: %w", err)
 	}
 	notif.Timestamp = time.Now().UnixNano()
 

@@ -20,7 +20,6 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/binding"
 
@@ -50,14 +49,14 @@ var (
 )
 
 // Solve creates a new Reservation from a desired testbed and an available topology.
-func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
+func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
 	if numDevs, numNodes := len(devs), len(topo.GetNodes()); numDevs > numNodes {
-		return nil, errors.Errorf("Not enough nodes in KNE topology for specified testbed: "+
+		return nil, fmt.Errorf("not enough nodes in KNE topology for specified testbed: "+
 			" testbed has %d devices and topology only has %d nodes", numDevs, numNodes)
 	}
 	if numTBLinks, numTopoLinks := len(tb.GetLinks()), len(topo.GetLinks()); numTBLinks > numTopoLinks {
-		return nil, errors.Errorf("Not enough links in KNE topology for specified testbed "+
+		return nil, fmt.Errorf("not enough links in KNE topology for specified testbed "+
 			" testbed has %d links and topology only has %d links", numTBLinks, numTopoLinks)
 	}
 	s := &solver{
@@ -110,10 +109,9 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 
 	res := &binding.Reservation{
 		ID:   uuid.New(),
-		DUTs: make(map[string]*binding.DUT),
-		ATEs: make(map[string]*binding.ATE),
+		DUTs: make(map[string]binding.DUT),
+		ATEs: make(map[string]binding.ATE),
 	}
-	sm := ServiceMap{}
 
 	for _, dut := range tb.GetDuts() {
 		resDUT, err := a.resolveDUT(dut)
@@ -121,11 +119,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 			return nil, err
 		}
 		res.DUTs[dut.GetId()] = resDUT
-		services, err := a.resolveServices(dut)
-		if err != nil {
-			return nil, err
-		}
-		sm.Update(resDUT.Name, services)
 	}
 	for _, ate := range tb.GetAtes() {
 		resATE, err := a.resolveATE(ate)
@@ -133,41 +126,38 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*Solution, error) {
 			return nil, err
 		}
 		res.ATEs[ate.GetId()] = resATE
-		services, err := a.resolveServices(ate)
-		if err != nil {
-			return nil, err
-		}
-		sm.Update(resATE.Name, services)
 	}
-
-	return &Solution{Reservation: res, Services: sm}, nil
+	return res, nil
 }
 
-// Solution is the result of a Solve that provides a Reservation and a ServiceMap.
-type Solution struct {
-	Reservation *binding.Reservation
-	Services    ServiceMap
+// ServiceDUT is a DUT that contains a service map.
+type ServiceDUT struct {
+	*binding.AbstractDUT
+	Services map[string]*tpb.Service
 }
 
-// ServiceMap is a map of maps that relates device names to service names to KNE service details.
-type ServiceMap map[string]map[string]*tpb.Service
-
-// Lookup returns the KNE service details for a given device and service name.
-func (s ServiceMap) Lookup(device, service string) (*tpb.Service, error) {
-	n, ok := s[device]
+// Service returns the KNE service details for a given service name.
+func (d *ServiceDUT) Service(service string) (*tpb.Service, error) {
+	srv, ok := d.Services[service]
 	if !ok {
-		return nil, fmt.Errorf("device %q not found in topology", device)
-	}
-	srv, ok := n[service]
-	if !ok {
-		return nil, fmt.Errorf("service %q not found on node %q", service, device)
+		return nil, fmt.Errorf("service %q not found on DUT %q", service, d.Name())
 	}
 	return srv, nil
 }
 
-// Update updates the service mapping for a device.
-func (s ServiceMap) Update(device string, services map[string]*tpb.Service) {
-	s[device] = services
+// ServiceATE is an ATE that contains a service map.
+type ServiceATE struct {
+	*binding.AbstractATE
+	Services map[string]*tpb.Service
+}
+
+// Service returns the KNE service details for a given service name.
+func (a *ServiceATE) Service(service string) (*tpb.Service, error) {
+	srv, ok := a.Services[service]
+	if !ok {
+		return nil, fmt.Errorf("service %q not found on ATE %q", service, a.Name())
+	}
+	return srv, nil
 }
 
 type assign struct {
@@ -191,30 +181,36 @@ func (a *assign) String() string {
 	return sb.String()
 }
 
-func (a *assign) resolveDUT(dev *opb.Device) (*binding.DUT, error) {
-	dims, err := a.resolveDims(dev)
+func (a *assign) resolveDUT(dev *opb.Device) (*ServiceDUT, error) {
+	dims, srvs, err := a.resolveDevice(dev)
 	if err != nil {
 		return nil, err
 	}
-	return &binding.DUT{dims}, nil
+	return &ServiceDUT{
+		AbstractDUT: &binding.AbstractDUT{dims},
+		Services:    srvs,
+	}, nil
 }
 
-func (a *assign) resolveATE(dev *opb.Device) (*binding.ATE, error) {
-	dims, err := a.resolveDims(dev)
+func (a *assign) resolveATE(dev *opb.Device) (*ServiceATE, error) {
+	dims, srvs, err := a.resolveDevice(dev)
 	if err != nil {
 		return nil, err
 	}
-	return &binding.ATE{dims}, nil
+	return &ServiceATE{
+		AbstractATE: &binding.AbstractATE{dims},
+		Services:    srvs,
+	}, nil
 }
 
-func (a *assign) resolveDims(dev *opb.Device) (*binding.Dims, error) {
+func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.Service, error) {
 	node, ok := a.dev2Node[dev]
 	if !ok {
-		return nil, fmt.Errorf("node %q not resolved", dev.GetId())
+		return nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
 	vendor, ok := type2VendorMap[node.GetType()]
 	if !ok {
-		return nil, errors.Errorf("no known device vendor for node type: %v", node.GetType())
+		return nil, nil, fmt.Errorf("no known device vendor for node type: %v", node.GetType())
 	}
 	typeName := tpb.Node_Type_name[int32(node.GetType())]
 	dims := &binding.Dims{
@@ -228,19 +224,11 @@ func (a *assign) resolveDims(dev *opb.Device) (*binding.Dims, error) {
 	for _, p := range dev.GetPorts() {
 		dims.Ports[p.GetId()] = &binding.Port{Name: a.port2Intf[p].vendorName}
 	}
-	return dims, nil
-}
-
-func (a *assign) resolveServices(dev *opb.Device) (map[string]*tpb.Service, error) {
-	node, ok := a.dev2Node[dev]
-	if !ok {
-		return nil, fmt.Errorf("node %q not resolved", dev.GetId())
-	}
 	sm := map[string]*tpb.Service{}
 	for _, s := range node.GetServices() {
 		sm[s.GetName()] = s
 	}
-	return sm, nil
+	return dims, sm, nil
 }
 
 type solver struct {
@@ -303,9 +291,9 @@ func (s *solver) solve() (*assign, error) {
 	// Give a more specific error message for the case when we didn't need to even
 	// consider the links to determine that there were no matching topologies.
 	if !hasNodeCombo {
-		return nil, errors.Errorf("No combination of nodes in the KNE topology matches the testbed, irrespective of links")
+		return nil, fmt.Errorf("no combination of nodes in the KNE topology matches the testbed, irrespective of links")
 	}
-	return nil, errors.Errorf("No KNE topology matches the testbed")
+	return nil, fmt.Errorf("no KNE topology matches the testbed")
 }
 
 func (s *solver) nodeMatches(dev *opb.Device, isATE bool) (map[*tpb.Node]map[*opb.Port][]*intf, error) {
@@ -321,7 +309,7 @@ func (s *solver) nodeMatches(dev *opb.Device, isATE bool) (map[*tpb.Node]map[*op
 		}
 	}
 	if len(node2Port2Intfs) == 0 {
-		return nil, errors.Errorf("No node in KNE topology to match testbed device %q", dev.GetId())
+		return nil, fmt.Errorf("no node in KNE topology to match testbed device %q", dev.GetId())
 	}
 	return node2Port2Intfs, nil
 }

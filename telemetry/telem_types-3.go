@@ -12,6 +12,136 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast samples.
+type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast struct {
+	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicastWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicastWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast samples.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicastWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicastWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit samples.
+type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit struct {
+	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit samples.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimit, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixLimitReceived struct {
 	*genutil.Metadata
@@ -7812,19 +7942,19 @@ func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibOut
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -7839,57 +7969,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) Val(t testing.TB) *N
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpnWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpnWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpnWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpnWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -7904,57 +8034,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) Val(t tes
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRibWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -7969,57 +8099,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) Val(t tes
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisherWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8034,57 +8164,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) Val(t test
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRouteWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRouteWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRouteWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegmentWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRouteWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8099,57 +8229,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) 
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulationWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_PathWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8164,57 +8294,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_T
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributeWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributeWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributeWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_TunnelWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttributeWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFiveRoute_Path_UnknownAttribute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8229,57 +8359,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_T
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRouteWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRouteWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRouteWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_SubtlvWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRouteWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8294,57 +8424,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_T
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpointWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_RemoteEndpoint, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_PathWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8359,57 +8489,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_T
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributeWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributeWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributeWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentListWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttributeWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8424,57 +8554,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_T
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRouteWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRouteWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRouteWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_SegmentWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_TunnelEncapsulation_Tunnel_Subtlv_SegmentList_Segment, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRouteWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_Community is a *NetworkInstance_Protocol_Bgp_Rib_Community with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_Community struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_Community // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_Community sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_Community {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8489,57 +8619,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community) Val(t testing.TB) 
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_Community sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_Community) *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_Community is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_Community samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_Community struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_CommunityWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_Community
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_Community) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_Community {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_CommunityWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_Community samples.
-type NetworkInstance_Protocol_Bgp_Rib_CommunityWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_Community
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_CommunityWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_Community, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_PathWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity is a *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8554,57 +8684,57 @@ func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity) Val(t testing.T
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity) *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Bgp_Rib_ExtCommunity is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_ExtCommunity struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_ExtCommunityWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttributeWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_ExtCommunity) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Bgp_Rib_ExtCommunityWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_ExtCommunity samples.
-type NetworkInstance_Protocol_Bgp_Rib_ExtCommunityWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttributeWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttributeWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_ExtCommunityWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_ExtCommunity, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttributeWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute_Path_UnknownAttribute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Igmp is a *NetworkInstance_Protocol_Igmp with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Igmp struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Igmp // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Igmp) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Igmp sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Igmp) Val(t testing.TB) *NetworkInstance_Protocol_Igmp {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8619,57 +8749,57 @@ func (q *QualifiedNetworkInstance_Protocol_Igmp) Val(t testing.TB) *NetworkInsta
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Igmp sample.
-func (q *QualifiedNetworkInstance_Protocol_Igmp) SetVal(v *NetworkInstance_Protocol_Igmp) *QualifiedNetworkInstance_Protocol_Igmp {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Igmp) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Igmp is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Igmp samples.
-type CollectionNetworkInstance_Protocol_Igmp struct {
-	W    *NetworkInstance_Protocol_IgmpWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Igmp
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRouteWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Igmp) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Igmp {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_IgmpWatcher observes a stream of *NetworkInstance_Protocol_Igmp samples.
-type NetworkInstance_Protocol_IgmpWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRouteWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRouteWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Igmp
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_IgmpWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Igmp, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRouteWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Igmp_Global is a *NetworkInstance_Protocol_Igmp_Global with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Igmp_Global struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Igmp_Global // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Igmp_Global sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global) Val(t testing.TB) *NetworkInstance_Protocol_Igmp_Global {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8684,57 +8814,57 @@ func (q *QualifiedNetworkInstance_Protocol_Igmp_Global) Val(t testing.TB) *Netwo
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Igmp_Global sample.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global) SetVal(v *NetworkInstance_Protocol_Igmp_Global) *QualifiedNetworkInstance_Protocol_Igmp_Global {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Igmp_Global is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Igmp_Global samples.
-type CollectionNetworkInstance_Protocol_Igmp_Global struct {
-	W    *NetworkInstance_Protocol_Igmp_GlobalWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Igmp_Global
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_PathWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Igmp_Global) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Igmp_Global {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Igmp_GlobalWatcher observes a stream of *NetworkInstance_Protocol_Igmp_Global samples.
-type NetworkInstance_Protocol_Igmp_GlobalWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_PathWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_PathWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Igmp_Global
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Igmp_GlobalWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Igmp_Global, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_PathWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm is a *NetworkInstance_Protocol_Igmp_Global_Ssm with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Igmp_Global_Ssm // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Igmp_Global_Ssm sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm) Val(t testing.TB) *NetworkInstance_Protocol_Igmp_Global_Ssm {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8749,57 +8879,57 @@ func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm) Val(t testing.TB) *N
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Igmp_Global_Ssm sample.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm) SetVal(v *NetworkInstance_Protocol_Igmp_Global_Ssm) *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Igmp_Global_Ssm is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Igmp_Global_Ssm samples.
-type CollectionNetworkInstance_Protocol_Igmp_Global_Ssm struct {
-	W    *NetworkInstance_Protocol_Igmp_Global_SsmWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttributeWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Igmp_Global_Ssm) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Igmp_Global_SsmWatcher observes a stream of *NetworkInstance_Protocol_Igmp_Global_Ssm samples.
-type NetworkInstance_Protocol_Igmp_Global_SsmWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttributeWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttributeWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Igmp_Global_SsmWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttributeWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeThreeRoute_Path_UnknownAttribute, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping is a *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping struct {
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute struct {
 	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping // val is the sample value.
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) String() string {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) Val(t testing.TB) *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping {
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -8814,40 +8944,235 @@ func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) Val(t testin
 	return q.val
 }
 
-// SetVal sets the value of the *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping sample.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) SetVal(v *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping {
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) IsPresent() bool {
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping samples.
-type CollectionNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping struct {
-	W    *NetworkInstance_Protocol_Igmp_Global_Ssm_MappingWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRouteWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping {
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// NetworkInstance_Protocol_Igmp_Global_Ssm_MappingWatcher observes a stream of *NetworkInstance_Protocol_Igmp_Global_Ssm_Mapping samples.
-type NetworkInstance_Protocol_Igmp_Global_Ssm_MappingWatcher struct {
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRouteWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRouteWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Igmp_Global_Ssm_MappingWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Igmp_Global_Ssm_Mapping, bool) {
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRouteWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_PathWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_PathWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_PathWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_PathWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttributeWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttributeWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttributeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttributeWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeTwoRoute_Path_UnknownAttribute, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor is a *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor samples.
+type CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor struct {
+	W    *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_NeighborWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_NeighborWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor samples.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_NeighborWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_NeighborWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_Neighbor, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

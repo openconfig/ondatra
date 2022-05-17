@@ -302,6 +302,7 @@ func TestAddNetworks(t *testing.T) {
 					Count:       1,
 				},
 				Isis: &opb.IPReachability{
+					Active:      true,
 					RouteOrigin: opb.IPReachability_INTERNAL,
 				},
 			}, {
@@ -339,6 +340,7 @@ func TestAddNetworks(t *testing.T) {
 					Metric:                 ixconfig.MultivalueUint32(0),
 					Algorithm:              ixconfig.MultivalueUint32(0),
 					RouteOrigin:            ixconfig.MultivalueStr("internal"),
+					Active:                 ixconfig.MultivalueTrue(),
 					ConfigureSIDIndexLabel: ixconfig.MultivalueFalse(),
 					SIDIndexLabel:          ixconfig.MultivalueUint32(0),
 					RFlag:                  ixconfig.MultivalueFalse(),
@@ -347,6 +349,9 @@ func TestAddNetworks(t *testing.T) {
 					EFlag:                  ixconfig.MultivalueFalse(),
 					VFlag:                  ixconfig.MultivalueFalse(),
 					LFlag:                  ixconfig.MultivalueFalse(),
+					IsisL3PrefixesSrSid: &ixconfig.TopologyIsisL3PrefixesSrSid{
+						Active: ixconfig.MultivalueFalse(),
+					},
 				}},
 			}},
 			Ipv6PrefixPools: []*ixconfig.TopologyIpv6PrefixPools{{
@@ -362,6 +367,7 @@ func TestAddNetworks(t *testing.T) {
 					Metric:                 ixconfig.MultivalueUint32(0),
 					Algorithm:              ixconfig.MultivalueUint32(0),
 					RouteOrigin:            ixconfig.MultivalueStr("internal"),
+					Active:                 ixconfig.MultivalueTrue(),
 					ConfigureSIDIndexLabel: ixconfig.MultivalueFalse(),
 					SIDIndexLabel:          ixconfig.MultivalueUint32(0),
 					RFlag:                  ixconfig.MultivalueFalse(),
@@ -370,6 +376,9 @@ func TestAddNetworks(t *testing.T) {
 					EFlag:                  ixconfig.MultivalueFalse(),
 					VFlag:                  ixconfig.MultivalueFalse(),
 					LFlag:                  ixconfig.MultivalueFalse(),
+					IsisL3PrefixesSrSid: &ixconfig.TopologyIsisL3PrefixesSrSid{
+						Active: ixconfig.MultivalueFalse(),
+					},
 				}},
 			}},
 		}, {

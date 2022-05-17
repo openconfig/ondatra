@@ -19,15 +19,15 @@ import (
 	"bytes"
 	"golang.org/x/net/context"
 	"crypto/tls"
+	"errors"
 	"fmt"
 	"io"
 	"os/exec"
-	"sync"
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"golang.org/x/crypto/ssh"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
@@ -48,22 +48,18 @@ var (
 	sshExecFn = sshExec
 )
 
-// Bind implements the ondatra Binding interface for KNE
-type Bind struct {
-	binding.Binding
-	services solver.ServiceMap
-	mu       sync.Mutex
-	cfg      *Config
-}
-
 // New returns a new KNE bind instance.
 func New(cfg *Config) (*Bind, error) {
 	if cfg == nil {
 		return nil, fmt.Errorf("config cannot be nil")
 	}
-	return &Bind{
-		cfg: cfg,
-	}, nil
+	return &Bind{cfg: cfg}, nil
+}
+
+// Bind implements the ondatra Binding interface for KNE
+type Bind struct {
+	binding.Binding
+	cfg *Config
 }
 
 // Reserve implements the binding Reserve method by finding nodes and links in
@@ -78,66 +74,86 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	}
 	topo := new(tpb.Topology)
 	if err := prototext.Unmarshal(out, topo); err != nil {
-		return nil, errors.Wrap(err, "error unmarshalling KNE topology proto")
+		return nil, fmt.Errorf("error unmarshalling KNE topology proto: %w", err)
 	}
-	sol, err := solver.Solve(tb, topo)
+	res, err := solver.Solve(tb, topo)
 	if err != nil {
 		return nil, err
 	}
-	b.services = sol.Services
-	return sol.Reservation, nil
+	for i, dut := range res.DUTs {
+		kdut := &kneDUT{
+			ServiceDUT: dut.(*solver.ServiceDUT),
+			cfg:        b.cfg,
+		}
+		if err := kdut.resetConfig(); err != nil {
+			return nil, err
+		}
+		res.DUTs[i] = kdut
+	}
+	for i, ate := range res.ATEs {
+		res.ATEs[i] = &kneATE{
+			ServiceATE: ate.(*solver.ServiceATE),
+			cfg:        b.cfg,
+		}
+	}
+	return res, nil
 }
 
 // Release is a no-op because there's need to reserve local VMs.
-func (b *Bind) Release(_ context.Context) error {
+func (b *Bind) Release(context.Context) error {
 	return nil
 }
 
-// SetTestMetadata is unused for KNE.
-func (b *Bind) SetTestMetadata(_ *binding.TestMetadata) error {
-	return nil
+type kneDUT struct {
+	*solver.ServiceDUT
+	cfg *Config
 }
 
-func (b *Bind) DialGNMI(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-	conn, err := b.dialGRPC(ctx, dut, "gnmi", opts...)
+func (d *kneDUT) resetConfig() error {
+	_, err := kneCmdFn(d.cfg, "topology", "reset", d.cfg.TopoPath, d.Name(), "--push")
+	return err
+}
+
+func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	conn, err := d.dialGRPC(ctx, "gnmi", opts...)
 	if err != nil {
 		return nil, err
 	}
 	return gpb.NewGNMIClient(conn), nil
 }
 
-func (b *Bind) DialGRIBI(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
-	conn, err := b.dialGRPC(ctx, dut, "gribi", opts...)
+func (d *kneDUT) DialGRIBI(ctx context.Context, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
+	conn, err := d.dialGRPC(ctx, "gribi", opts...)
 	if err != nil {
 		return nil, err
 	}
 	return grpb.NewGRIBIClient(conn), nil
 }
 
-func (b *Bind) DialP4RT(ctx context.Context, dut *binding.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
-	conn, err := b.dialGRPC(ctx, dut, "p4rt", opts...)
+func (d *kneDUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
+	conn, err := d.dialGRPC(ctx, "p4rt", opts...)
 	if err != nil {
 		return nil, err
 	}
 	return p4pb.NewP4RuntimeClient(conn), nil
 }
 
-func (b *Bind) dialGRPC(ctx context.Context, dut *binding.DUT, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
-	s, err := b.services.Lookup(dut.Name, serviceName)
+func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	s, err := d.Service(serviceName)
 	if err != nil {
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	log.Infof("Dialing service %q on dut %s@%s", serviceName, dut.Name, addr)
+	log.Infof("Dialing service %q on dut %s@%s", serviceName, d.Name(), addr)
 	opts = append(opts,
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),
 		grpc.WithPerRPCCredentials(&passCred{
-			username: b.cfg.Username,
-			password: b.cfg.Password,
+			username: d.cfg.Username,
+			password: d.cfg.Password,
 		}))
 	conn, err := grpc.DialContext(ctx, addr, opts...)
 	if err != nil {
-		return nil, errors.Wrapf(err, "DialContext(ctx, %s, %v)", addr, opts)
+		return nil, fmt.Errorf("DialContext(ctx, %s, %v): %w", addr, opts, err)
 	}
 	return conn, nil
 }
@@ -163,30 +179,30 @@ func (c *passCred) RequireTransportSecurity() bool {
 	return true
 }
 
-func (b *Bind) PushConfig(ctx context.Context, dut *binding.DUT, config string, reset bool) error {
-	if dut.Vendor != opb.Device_ARISTA {
+func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) error {
+	if d.Vendor() != opb.Device_ARISTA {
 		return errors.New("KNEBind PushConfig only supports Arista devices")
 	}
 	if reset {
-		if _, err := kneCmdFn(b.cfg, "topology", "reset", b.cfg.TopoPath, dut.Name, "--push"); err != nil {
+		if err := d.resetConfig(); err != nil {
 			return err
 		}
 	}
-	_, err := b.dutExec(dut, "enable\nconfig terminal\n"+config)
+	_, err := d.exec("enable\nconfig terminal\n" + config)
 	return err
 }
 
-func (b *Bind) dutExec(dut *binding.DUT, cmd string) (_ string, rerr error) {
-	s, err := b.services.Lookup(dut.Name, "ssh")
+func (d *kneDUT) exec(cmd string) (string, error) {
+	s, err := d.Service("ssh")
 	if err != nil {
 		return "", err
 	}
 	addr := serviceAddr(s)
 	config := &ssh.ClientConfig{
-		User: b.cfg.Username,
+		User: d.cfg.Username,
 		Auth: []ssh.AuthMethod{ssh.KeyboardInteractive(func(user, instruction string, questions []string, echos []bool) ([]string, error) {
 			if len(questions) > 0 {
-				return []string{b.cfg.Password}, nil
+				return []string{d.cfg.Password}, nil
 			}
 			return nil, nil
 		})},
@@ -198,12 +214,12 @@ func (b *Bind) dutExec(dut *binding.DUT, cmd string) (_ string, rerr error) {
 func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr error) {
 	client, err := ssh.Dial("tcp", addr, cfg)
 	if err != nil {
-		return "", errors.Wrapf(err, "could not dial SSH server %s", addr)
+		return "", fmt.Errorf("could not dial SSH server %s: %w", addr, err)
 	}
 	defer closer.Close(&rerr, client.Close, "error closing SSH client")
 	session, err := client.NewSession()
 	if err != nil {
-		return "", errors.Wrap(err, "could not create ssh session")
+		return "", fmt.Errorf("could not create ssh session: %w", err)
 	}
 	defer closer.Close(&rerr, func() error {
 		if err := session.Close(); err != io.EOF {
@@ -214,9 +230,26 @@ func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr err
 	var buf bytes.Buffer
 	session.Stdout = &buf
 	if err := session.Run(cmd); err != nil {
-		return "", errors.Wrapf(err, "could not execute %q\noutput: %q", cmd, buf.String())
+		return "", fmt.Errorf("could not execute %q\noutput: %q: %w", cmd, buf.String(), err)
 	}
 	return buf.String(), nil
+}
+
+type kneATE struct {
+	*solver.ServiceATE
+	cfg *Config
+}
+
+func (a *kneATE) DialOTG() (gosnappi.GosnappiApi, error) {
+	s, err := a.Service("grpc")
+	if err != nil {
+		return nil, err
+	}
+	api := gosnappi.NewApi()
+	api.NewGrpcTransport().
+		SetLocation(serviceAddr(s)).
+		SetRequestTimeout(30 * time.Second)
+	return api, nil
 }
 
 func kneCmd(cfg *Config, args ...string) ([]byte, error) {
@@ -227,9 +260,9 @@ func kneCmd(cfg *Config, args ...string) ([]byte, error) {
 	out, err := cmd.Output()
 	if err != nil {
 		if execErr, ok := err.(*exec.ExitError); ok {
-			return nil, errors.Wrapf(err, "error executing command %v: %s", cmd, execErr.Stderr)
+			return nil, fmt.Errorf("error executing command %v: %s: %w", cmd, execErr.Stderr, err)
 		}
-		return nil, errors.Wrapf(err, "error executing command %v", cmd)
+		return nil, fmt.Errorf("error executing command %v: %w", cmd, err)
 	}
 	return out, nil
 }

@@ -30,7 +30,7 @@ func (n *MetaPath) Lookup(t testing.TB) *oc.QualifiedMeta {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *MetaPath) Get(t testing.TB) *oc.Meta {
 	t.Helper()
@@ -119,7 +119,7 @@ func (n *Meta_ConnectErrorPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/connectError with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_ConnectErrorPath) Get(t testing.TB) string {
 	t.Helper()
@@ -220,7 +220,7 @@ func (n *Meta_ConnectedAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/connectedAddress with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_ConnectedAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -321,7 +321,7 @@ func (n *Meta_ConnectedPath) Lookup(t testing.TB) *oc.QualifiedBool {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/connected with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_ConnectedPath) Get(t testing.TB) bool {
 	t.Helper()
@@ -422,7 +422,7 @@ func (n *Meta_LatencyAvgPath) Lookup(t testing.TB) *oc.QualifiedInt64 {
 }
 
 // Get fetches the value at /gnmi-collector-metadata/meta/latencyAvg with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Meta_LatencyAvgPath) Get(t testing.TB) int64 {
 	t.Helper()

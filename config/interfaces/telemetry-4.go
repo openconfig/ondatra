@@ -15,6 +15,97 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Lookup(t testing.TB) *oc.QualifiedInterface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Vlan_EgressMapping", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Lookup(t testing.TB) []*oc.QualifiedInterface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedInterface_Subinterface_Vlan_EgressMapping
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription.
+func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Get(t testing.TB) []*oc.Interface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Interface_Subinterface_Vlan_EgressMapping
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Replace(t testing.TB, val *oc.Interface_Subinterface_Vlan_EgressMapping) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Vlan_EgressMapping) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Update(t testing.TB, val *oc.Interface_Subinterface_Vlan_EgressMapping) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Vlan_EgressMapping) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
 // Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Lookup(t testing.TB) *oc.QualifiedE_VlanTypes_TPID_TYPES {
@@ -28,7 +119,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
 	t.Helper()
@@ -129,7 +220,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -230,7 +321,7 @@ func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPath) Lookup(t
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-stack-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_EgressMapping_VlanStackActionPath) Get(t testing.TB) oc.E_VlanTypes_VlanStackAction {
 	t.Helper()
@@ -333,7 +424,7 @@ func (n *Interface_Subinterface_Vlan_IngressMappingPath) Lookup(t testing.TB) *o
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMappingPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_IngressMapping {
 	t.Helper()
@@ -422,7 +513,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/config/tpid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMapping_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
 	t.Helper()
@@ -523,7 +614,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPath) Lookup(t testing
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/config/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMapping_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -624,7 +715,7 @@ func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/ingress-mapping/config/vlan-stack-action with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_IngressMapping_VlanStackActionPath) Get(t testing.TB) oc.E_VlanTypes_VlanStackAction {
 	t.Helper()
@@ -727,7 +818,7 @@ func (n *Interface_Subinterface_Vlan_MatchPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_MatchPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match {
 	t.Helper()
@@ -818,7 +909,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList {
 	t.Helper()
@@ -907,7 +998,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/config/inner-vlan-ids with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_InnerVlanIdsPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -1008,7 +1099,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list/config/outer-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerList_OuterVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1111,7 +1202,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePath) Look
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange {
 	t.Helper()
@@ -1200,7 +1291,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHigh
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/config/inner-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1301,7 +1392,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowV
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/config/inner-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_InnerLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1402,7 +1493,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHigh
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/config/outer-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1503,7 +1594,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowV
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-outer-range/config/outer-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange_OuterLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1606,7 +1697,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange {
 	t.Helper()
@@ -1695,7 +1786,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanI
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/config/inner-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1796,7 +1887,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanId
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/config/inner-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_InnerLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1897,7 +1988,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-range/config/outer-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange_OuterVlanIdPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -2000,7 +2091,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList {
 	t.Helper()
@@ -2089,7 +2180,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/config/inner-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_InnerVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2190,7 +2281,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-list/config/outer-vlan-ids with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList_OuterVlanIdsPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -2293,7 +2384,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange {
 	t.Helper()
@@ -2382,7 +2473,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPat
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/config/inner-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_InnerVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2483,7 +2574,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanI
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/config/outer-high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterHighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2584,7 +2675,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanId
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-outer-range/config/outer-low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange_OuterLowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2687,7 +2778,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_DoubleTagged {
 	t.Helper()
@@ -2776,7 +2867,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/config/inner-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_InnerVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2877,7 +2968,7 @@ func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged/config/outer-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTagged_OuterVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -2980,7 +3071,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedListPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedList {
 	t.Helper()
@@ -3069,7 +3160,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath) Lookup(
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-list/config/vlan-ids with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedList_VlanIdsPath) Get(t testing.TB) []uint16 {
 	t.Helper()
@@ -3172,7 +3263,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_SingleTagged {
 	t.Helper()
@@ -3263,7 +3354,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRangePath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match_SingleTaggedRange {
 	t.Helper()
@@ -3352,7 +3443,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath) Loo
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/config/high-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_HighVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3453,7 +3544,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath) Look
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged-range/config/low-vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTaggedRange_LowVlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3554,7 +3645,7 @@ func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/single-tagged/config/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_Match_SingleTagged_VlanIdPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -3655,7 +3746,7 @@ func (n *Interface_Subinterface_Vlan_VlanIdPath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/config/vlan-id with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_Subinterface_Vlan_VlanIdPath) Get(t testing.TB) oc.Interface_Subinterface_Vlan_VlanId_Union {
 	t.Helper()
@@ -3758,7 +3849,7 @@ func (n *Interface_TpidPath) Lookup(t testing.TB) *oc.QualifiedE_VlanTypes_TPID_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/config/tpid with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
 	t.Helper()
@@ -3859,7 +3950,7 @@ func (n *Interface_TypePath) Lookup(t testing.TB) *oc.QualifiedE_IETFInterfaces_
 }
 
 // Get fetches the value at /openconfig-interfaces/interfaces/interface/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Interface_TypePath) Get(t testing.TB) oc.E_IETFInterfaces_InterfaceType {
 	t.Helper()

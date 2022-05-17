@@ -15,198 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroupPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_ServerGroup {
-	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedSystem_Aaa_ServerGroup{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroupPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroupPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_ServerGroup {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedSystem_Aaa_ServerGroup
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedSystem_Aaa_ServerGroup{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group with a ONCE subscription.
-func (n *System_Aaa_ServerGroupPathAny) Get(t testing.TB) []*oc.System_Aaa_ServerGroup {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.System_Aaa_ServerGroup
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group.
-func (n *System_Aaa_ServerGroupPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group in the given batch object.
-func (n *System_Aaa_ServerGroupPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group.
-func (n *System_Aaa_ServerGroupPath) Replace(t testing.TB, val *oc.System_Aaa_ServerGroup) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group in the given batch object.
-func (n *System_Aaa_ServerGroupPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Aaa_ServerGroup) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group.
-func (n *System_Aaa_ServerGroupPath) Update(t testing.TB, val *oc.System_Aaa_ServerGroup) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group in the given batch object.
-func (n *System_Aaa_ServerGroupPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Aaa_ServerGroup) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Aaa_ServerGroup_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.System_Aaa_ServerGroup{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup", goStruct, true, true)
-	if ok {
-		return convertSystem_Aaa_ServerGroup_NamePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_ServerGroup_NamePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Aaa_ServerGroup_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_ServerGroup{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Aaa_ServerGroup_NamePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/config/name with a ONCE subscription.
-func (n *System_Aaa_ServerGroup_NamePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group/config/name.
-func (n *System_Aaa_ServerGroup_NamePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group/config/name in the given batch object.
-func (n *System_Aaa_ServerGroup_NamePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group/config/name.
-func (n *System_Aaa_ServerGroup_NamePath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group/config/name in the given batch object.
-func (n *System_Aaa_ServerGroup_NamePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group/config/name.
-func (n *System_Aaa_ServerGroup_NamePath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group/config/name in the given batch object.
-func (n *System_Aaa_ServerGroup_NamePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertSystem_Aaa_ServerGroup_NamePath extracts the value of the leaf Name from its parent oc.System_Aaa_ServerGroup
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_ServerGroup_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Name
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_Aaa_ServerGroup_ServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_ServerGroup_Server {
@@ -222,7 +30,7 @@ func (n *System_Aaa_ServerGroup_ServerPath) Lookup(t testing.TB) *oc.QualifiedSy
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_ServerPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server {
 	t.Helper()
@@ -311,7 +119,7 @@ func (n *System_Aaa_ServerGroup_Server_AddressPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_AddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -412,7 +220,7 @@ func (n *System_Aaa_ServerGroup_Server_NamePath) Lookup(t testing.TB) *oc.Qualif
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_NamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -515,7 +323,7 @@ func (n *System_Aaa_ServerGroup_Server_RadiusPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_RadiusPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Radius {
 	t.Helper()
@@ -606,7 +414,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/acct-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_AcctPortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -709,7 +517,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/auth-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_AuthPortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -810,7 +618,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/retransmit-attempts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_RetransmitAttemptsPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -911,7 +719,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/secret-key-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1012,7 +820,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/secret-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SecretKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1113,7 +921,7 @@ func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/radius/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Radius_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1216,7 +1024,7 @@ func (n *System_Aaa_ServerGroup_Server_TacacsPath) Lookup(t testing.TB) *oc.Qual
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_TacacsPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server_Tacacs {
 	t.Helper()
@@ -1307,7 +1115,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_PortPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1408,7 +1216,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/secret-key-hashed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyHashedPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1509,7 +1317,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/secret-key with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SecretKeyPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1610,7 +1418,7 @@ func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Lookup(t testin
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/tacacs/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_Tacacs_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -1711,7 +1519,7 @@ func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/timeout with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_Server_TimeoutPath) Get(t testing.TB) uint16 {
 	t.Helper()
@@ -1812,7 +1620,7 @@ func (n *System_Aaa_ServerGroup_TypePath) Lookup(t testing.TB) *oc.QualifiedE_Aa
 }
 
 // Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/config/type with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Aaa_ServerGroup_TypePath) Get(t testing.TB) oc.E_AaaTypes_AAA_SERVER_TYPE {
 	t.Helper()
@@ -1915,7 +1723,7 @@ func (n *System_ClockPath) Lookup(t testing.TB) *oc.QualifiedSystem_Clock {
 }
 
 // Get fetches the value at /openconfig-system/system/clock with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_ClockPath) Get(t testing.TB) *oc.System_Clock {
 	t.Helper()
@@ -2004,7 +1812,7 @@ func (n *System_Clock_TimezoneNamePath) Lookup(t testing.TB) *oc.QualifiedString
 }
 
 // Get fetches the value at /openconfig-system/system/clock/config/timezone-name with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_Clock_TimezoneNamePath) Get(t testing.TB) string {
 	t.Helper()
@@ -2107,7 +1915,7 @@ func (n *System_DnsPath) Lookup(t testing.TB) *oc.QualifiedSystem_Dns {
 }
 
 // Get fetches the value at /openconfig-system/system/dns with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *System_DnsPath) Get(t testing.TB) *oc.System_Dns {
 	t.Helper()
@@ -2181,4 +1989,398 @@ func (n *System_DnsPath) Update(t testing.TB, val *oc.System_Dns) *gpb.SetRespon
 func (n *System_DnsPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Dns) {
 	t.Helper()
 	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-system/system/dns/host-entries/host-entry with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Dns_HostEntryPath) Lookup(t testing.TB) *oc.QualifiedSystem_Dns_HostEntry {
+	t.Helper()
+	goStruct := &oc.System_Dns_HostEntry{}
+	md, ok := oc.Lookup(t, n, "System_Dns_HostEntry", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedSystem_Dns_HostEntry{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Dns_HostEntryPath) Get(t testing.TB) *oc.System_Dns_HostEntry {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/dns/host-entries/host-entry with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Dns_HostEntryPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Dns_HostEntry {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Dns_HostEntry
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Dns_HostEntry{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns_HostEntry", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Dns_HostEntry{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/dns/host-entries/host-entry with a ONCE subscription.
+func (n *System_Dns_HostEntryPathAny) Get(t testing.TB) []*oc.System_Dns_HostEntry {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Dns_HostEntry
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/dns/host-entries/host-entry.
+func (n *System_Dns_HostEntryPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/host-entries/host-entry in the given batch object.
+func (n *System_Dns_HostEntryPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/dns/host-entries/host-entry.
+func (n *System_Dns_HostEntryPath) Replace(t testing.TB, val *oc.System_Dns_HostEntry) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/host-entries/host-entry in the given batch object.
+func (n *System_Dns_HostEntryPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Dns_HostEntry) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/dns/host-entries/host-entry.
+func (n *System_Dns_HostEntryPath) Update(t testing.TB, val *oc.System_Dns_HostEntry) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/host-entries/host-entry in the given batch object.
+func (n *System_Dns_HostEntryPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Dns_HostEntry) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/alias with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Dns_HostEntry_AliasPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
+	t.Helper()
+	goStruct := &oc.System_Dns_HostEntry{}
+	md, ok := oc.Lookup(t, n, "System_Dns_HostEntry", goStruct, true, true)
+	if ok {
+		return convertSystem_Dns_HostEntry_AliasPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/alias with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Dns_HostEntry_AliasPath) Get(t testing.TB) []string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/alias with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Dns_HostEntry_AliasPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedStringSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Dns_HostEntry{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns_HostEntry", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Dns_HostEntry_AliasPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/alias with a ONCE subscription.
+func (n *System_Dns_HostEntry_AliasPathAny) Get(t testing.TB) [][]string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/alias.
+func (n *System_Dns_HostEntry_AliasPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/host-entries/host-entry/config/alias in the given batch object.
+func (n *System_Dns_HostEntry_AliasPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/alias.
+func (n *System_Dns_HostEntry_AliasPath) Replace(t testing.TB, val []string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/host-entries/host-entry/config/alias in the given batch object.
+func (n *System_Dns_HostEntry_AliasPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []string) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/alias.
+func (n *System_Dns_HostEntry_AliasPath) Update(t testing.TB, val []string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/host-entries/host-entry/config/alias in the given batch object.
+func (n *System_Dns_HostEntry_AliasPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []string) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertSystem_Dns_HostEntry_AliasPath extracts the value of the leaf Alias from its parent oc.System_Dns_HostEntry
+// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
+func convertSystem_Dns_HostEntry_AliasPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Dns_HostEntry) *oc.QualifiedStringSlice {
+	t.Helper()
+	qv := &oc.QualifiedStringSlice{
+		Metadata: md,
+	}
+	val := parent.Alias
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/hostname with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Dns_HostEntry_HostnamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Dns_HostEntry{}
+	md, ok := oc.Lookup(t, n, "System_Dns_HostEntry", goStruct, true, true)
+	if ok {
+		return convertSystem_Dns_HostEntry_HostnamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/hostname with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Dns_HostEntry_HostnamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/hostname with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Dns_HostEntry_HostnamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Dns_HostEntry{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns_HostEntry", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Dns_HostEntry_HostnamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/hostname with a ONCE subscription.
+func (n *System_Dns_HostEntry_HostnamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/hostname.
+func (n *System_Dns_HostEntry_HostnamePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/host-entries/host-entry/config/hostname in the given batch object.
+func (n *System_Dns_HostEntry_HostnamePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/hostname.
+func (n *System_Dns_HostEntry_HostnamePath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/host-entries/host-entry/config/hostname in the given batch object.
+func (n *System_Dns_HostEntry_HostnamePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/hostname.
+func (n *System_Dns_HostEntry_HostnamePath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/host-entries/host-entry/config/hostname in the given batch object.
+func (n *System_Dns_HostEntry_HostnamePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_Dns_HostEntry_HostnamePath extracts the value of the leaf Hostname from its parent oc.System_Dns_HostEntry
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Dns_HostEntry_HostnamePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Dns_HostEntry) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Hostname
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
+	t.Helper()
+	goStruct := &oc.System_Dns_HostEntry{}
+	md, ok := oc.Lookup(t, n, "System_Dns_HostEntry", goStruct, true, true)
+	if ok {
+		return convertSystem_Dns_HostEntry_Ipv4AddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) Get(t testing.TB) []string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Dns_HostEntry_Ipv4AddressPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedStringSlice
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Dns_HostEntry{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns_HostEntry", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Dns_HostEntry_Ipv4AddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address with a ONCE subscription.
+func (n *System_Dns_HostEntry_Ipv4AddressPathAny) Get(t testing.TB) [][]string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data [][]string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address in the given batch object.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) Replace(t testing.TB, val []string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address in the given batch object.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []string) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) Update(t testing.TB, val []string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/host-entries/host-entry/config/ipv4-address in the given batch object.
+func (n *System_Dns_HostEntry_Ipv4AddressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []string) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertSystem_Dns_HostEntry_Ipv4AddressPath extracts the value of the leaf Ipv4Address from its parent oc.System_Dns_HostEntry
+// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
+func convertSystem_Dns_HostEntry_Ipv4AddressPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Dns_HostEntry) *oc.QualifiedStringSlice {
+	t.Helper()
+	qv := &oc.QualifiedStringSlice{
+		Metadata: md,
+	}
+	val := parent.Ipv4Address
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
 }

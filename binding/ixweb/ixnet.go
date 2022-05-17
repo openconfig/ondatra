@@ -100,7 +100,10 @@ func (n *IxNetwork) DeleteSession(ctx context.Context, id int) error {
 		if strings.Contains(err.Error(), "404") {
 			return nil
 		}
-		return fmt.Errorf("Error stopping session: %w", err)
+		// Do not raise an error if already stopped, fallthrough to deleting it instead.
+		if !strings.Contains(err.Error(), "Stopping a session is not permitted in state 'Stopped'") {
+			return fmt.Errorf("Error stopping session: %w", err)
+		}
 	}
 	if err := n.ixweb.jsonReq(ctx, delete, spath, nil, nil); err != nil {
 		return fmt.Errorf("Error deleting session: %w", err)

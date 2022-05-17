@@ -15,10 +15,10 @@
 package genutil
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/pkg/errors"
 	"google.golang.org/grpc/metadata"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -57,17 +57,17 @@ func extractRequestOpts(customData map[string]interface{}) (*requestOpts, error)
 	if v, ok := customData[subscriptionModeKey]; ok {
 		m, ok := v.(gpb.SubscriptionMode)
 		if !ok {
-			return nil, errors.Errorf("customData key %q but value is not SubscriptionMode type (%T, %v)", subscriptionModeKey, v, v)
+			return nil, fmt.Errorf("customData key %q but value is not SubscriptionMode type (%T, %v)", subscriptionModeKey, v, v)
 		}
 		opts.subMode = m
 	}
 	if v, ok := customData[clientKey]; ok {
 		if v == nil {
-			return nil, errors.Errorf("customData key %q but value is nil", clientKey)
+			return nil, fmt.Errorf("customData key %q but value is nil", clientKey)
 		}
 		m, ok := v.(gpb.GNMIClient)
 		if !ok {
-			return nil, errors.Errorf("customData key %q but value is not GNMIClient type (%T, %v)", clientKey, v, v)
+			return nil, fmt.Errorf("customData key %q but value is not GNMIClient type (%T, %v)", clientKey, v, v)
 		}
 		opts.client = m
 	}
@@ -78,7 +78,7 @@ func extractRequestOpts(customData map[string]interface{}) (*requestOpts, error)
 		}
 		sv, ok := v.(string)
 		if !ok {
-			return nil, errors.Errorf("customData metadata key %q but value is not string type (%T, %v)", k, v, v)
+			return nil, fmt.Errorf("customData metadata key %q but value is not string type (%T, %v)", k, v, v)
 		}
 		md[strings.TrimPrefix(k, metadataKeyPrefix)] = sv
 	}

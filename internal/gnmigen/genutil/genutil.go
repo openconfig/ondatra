@@ -17,6 +17,7 @@ package genutil
 
 import (
 	"golang.org/x/net/context"
+	"errors"
 	"fmt"
 	"io"
 	"reflect"
@@ -26,7 +27,6 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/goyang/pkg/yang"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -64,15 +64,20 @@ RecvTimestamp: %v
 Path: %s`, prototext.Format(d.Value), d.Timestamp, d.RecvTimestamp, prototext.Format(d.Path))
 }
 
-// DefaultClientKey is the key for the default client in the customData map.
-const DefaultClientKey = "defaultclient"
+const (
+	// DefaultClientKey is the key for the default client in the customData map.
+	DefaultClientKey = "defaultclient"
+	// UseGetForConfigKey is the key controlling if Get/Lookup should use gnmi.Get for config paths in the customData map.
+	// If this key is set, the query path must be a config path.
+	UseGetForConfigKey = "getusesget"
+)
 
 // QualifiedTypeString renders a Qualified* telemetry value to a format that's
 // easier to read when debugging.
 func QualifiedTypeString(value interface{}, md *Metadata) string {
 	// Get string for value
 	var valStr string
-	if v, ok := value.(ygot.ValidatedGoStruct); ok && !reflect.ValueOf(v).IsNil() {
+	if v, ok := value.(ygot.GoStruct); ok && !reflect.ValueOf(v).IsNil() {
 		// Display JSON for GoStructs.
 		var err error
 		valStr, err = ygot.EmitJSON(v, &ygot.EmitJSONConfig{
@@ -224,7 +229,7 @@ func MustUnmarshal(t testing.TB, data []*DataPoint, schema *ytypes.Schema, goStr
 	return md, ok
 }
 
-// Unmarshal is a wrapper to ytypes.SetNode() and ygot.Validate() that
+// Unmarshal is a wrapper to ytypes.SetNode() and ygot.ΛValidate() that
 // unmarshals a given *DataPoint to its field given the parent and parent
 // schema and verifies that all data conform to the schema. Any errors due to
 // the unmarshal operations above are returned in a *ComplianceErrors for the
@@ -241,6 +246,10 @@ func Unmarshal(data []*DataPoint, schema *ytypes.Schema, goStructName string, st
 
 	ret := &Metadata{
 		Path: queryPath,
+		// XXX: Since we generate state-preferred GoStructs,
+		// reverseShadowPaths always means we have a config value. This
+		// implementation should be deprecated once we move to ygnmi.
+		Config: reverseShadowPaths,
 	}
 	if len(data) == 0 {
 		return ret, false, nil
@@ -320,7 +329,7 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 
 	errs := &errlist.List{}
 	if !schema.IsValid() {
-		errs.Add(errors.Errorf("input schema for generated code is invalid"))
+		errs.Add(fmt.Errorf("input schema for generated code is invalid"))
 		return nil, nil, errs.Err()
 	}
 	// TODO: Add fatal check for duplicate paths, as they're not allowed by GET semantics.
@@ -341,9 +350,9 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 			dpPathStr := pathToString(dp.Path)
 			switch {
 			case len(dp.Path.Elem) == 0 && len(dp.Path.Element) > 0:
-				pathErr = errors.Errorf("datapoint path uses deprecated and unsupported Element field: %s", prototext.Format(dp.Path))
+				pathErr = fmt.Errorf("datapoint path uses deprecated and unsupported Element field: %s", prototext.Format(dp.Path))
 			default:
-				pathErr = errors.Errorf("datapoint path %q (value %v) does not match the query path %q", dpPathStr, dp.Value, queryPathStr)
+				pathErr = fmt.Errorf("datapoint path %q (value %v) does not match the query path %q", dpPathStr, dp.Value, queryPathStr)
 			}
 			pathUnmarshalErrs = append(pathUnmarshalErrs, &TelemetryError{
 				Path:  dp.Path,
@@ -410,7 +419,7 @@ func MustGet(t testing.TB, n ygot.PathStruct, subPaths ...*gpb.Path) ([]*DataPoi
 func Get(ctx context.Context, n ygot.PathStruct, subPaths ...*gpb.Path) ([]*DataPoint, *gpb.Path, error) {
 	sub, path, err := subscribe(ctx, n, subPaths, gpb.SubscriptionList_ONCE)
 	if err != nil {
-		return nil, path, errors.Wrap(err, "cannot subscribe to gNMI client")
+		return nil, path, fmt.Errorf("cannot subscribe to gNMI client: %w", err)
 	}
 	data, err := receiveAll(sub, false, gpb.SubscriptionList_ONCE)
 	if err != nil {
@@ -422,6 +431,7 @@ func Get(ctx context.Context, n ygot.PathStruct, subPaths ...*gpb.Path) ([]*Data
 // Metadata contains to common fields and method for the generated Qualified structs.
 type Metadata struct {
 	Path             *gpb.Path         // Path is the sample's YANG path.
+	Config           bool              // Config determines whether the query path was a config query (as opposed to a state query).
 	Timestamp        time.Time         // Timestamp is the sample time.
 	RecvTimestamp    time.Time         // Timestamp is the time the test received the sample.
 	ComplianceErrors *ComplianceErrors // ComplianceErrors contains the compliance errors encountered from an Unmarshal operation.
@@ -430,6 +440,11 @@ type Metadata struct {
 // GetPath returns the YANG query path for this value.
 func (q *Metadata) GetPath() *gpb.Path {
 	return q.Path
+}
+
+// IsConfig returns whether the query path was a config query (as opposed to a state query).
+func (q *Metadata) IsConfig() bool {
+	return q.Config
 }
 
 // GetTimestamp returns the latest notification timestamp.
@@ -450,6 +465,7 @@ func (q *Metadata) GetComplianceErrors() *ComplianceErrors {
 // QualifiedValue is an interface for generated telemetry types.
 type QualifiedValue interface {
 	GetPath() *gpb.Path
+	IsConfig() bool
 	GetRecvTimestamp() time.Time
 	GetTimestamp() time.Time
 	GetComplianceErrors() *ComplianceErrors
@@ -460,7 +476,7 @@ type Predicate func(QualifiedValue) bool
 
 // ConvertFunc converts a datapoint queried from a path to the corresponding
 // Metadata.
-type ConvertFunc func([]*DataPoint, *gpb.Path) (QualifiedValue, error)
+type ConvertFunc func([]*DataPoint, *gpb.Path) ([]QualifiedValue, error)
 
 // MustWatch retrieves a Collection sample for a PathStruct and evaluates data against the predicate.
 func MustWatch(t testing.TB, n ygot.PathStruct, paths []*gpb.Path, duration time.Duration, isLeaf bool, converter ConvertFunc, pred Predicate) *Watcher {
@@ -488,7 +504,7 @@ func watch(ctx context.Context, n ygot.PathStruct, paths []*gpb.Path, duration t
 	}
 	sub, path, err := subscribe(ctx, n, paths, mode)
 	if err != nil {
-		return nil, path, errors.Wrap(err, "cannot subscribe to gNMI client")
+		return nil, path, fmt.Errorf("cannot subscribe to gNMI client: %w", err)
 	}
 
 	c := &Watcher{
@@ -518,7 +534,7 @@ func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, 
 	for {
 		recvData, sync, err = receive(sub, recvData, true)
 		if err != nil {
-			return errors.Wrap(err, "error receiving gNMI response")
+			return fmt.Errorf("error receiving gNMI response: %w", err)
 		}
 		if mode == gpb.SubscriptionList_ONCE && sync {
 			return nil
@@ -541,16 +557,18 @@ func receiveUntil(sub gpb.GNMI_SubscribeClient, mode gpb.SubscriptionList_Mode, 
 			datas = [][]*DataPoint{recvData}
 		}
 		for _, data := range datas {
-			val, err := converter(data, path)
+			vals, err := converter(data, path)
 			if err != nil {
 				return err
 			}
-			if complianceErrs := val.GetComplianceErrors(); complianceErrs != nil {
-				log.V(0).Infof("noncompliant data encountered during receiveUntil, ignoring value: %v", complianceErrs)
-				continue
-			}
-			if pred(val) {
-				return nil
+			for _, val := range vals {
+				if complianceErrs := val.GetComplianceErrors(); complianceErrs != nil {
+					log.V(0).Infof("noncompliant data encountered during receiveUntil, ignoring value: %v", complianceErrs)
+					continue
+				}
+				if pred(val) {
+					return nil
+				}
 			}
 		}
 		recvData = nil
@@ -570,7 +588,7 @@ func (c *Watcher) Await(t testing.TB) bool {
 	isTimeout := false
 	if err != nil {
 		// if the err is gRPC timeout, then the predicate was never true
-		st, ok := status.FromError(errors.Cause(err))
+		st, ok := status.FromError(errors.Unwrap(err))
 		if ok && st.Code() == codes.DeadlineExceeded {
 			isTimeout = true
 		} else {
@@ -599,7 +617,7 @@ func resolveBatch(ctx context.Context, target string, customData map[string]inte
 	}
 	opts, err := extractRequestOpts(customData)
 	if err != nil {
-		return dev, nil, errors.Wrapf(err, "Error extracting request options from %v", customData)
+		return dev, nil, fmt.Errorf("error extracting request options from %v: %w", customData, err)
 	}
 	if opts.client != nil {
 		return dev, opts, nil
@@ -687,7 +705,7 @@ func setVals(ctx context.Context, dev binding.Device, opts *requestOpts, origin,
 func ResolvePath(n ygot.PathStruct) (*gpb.Path, map[string]interface{}, error) {
 	path, customData, errs := ygot.ResolvePath(n)
 	if len(errs) > 0 {
-		return nil, nil, errors.Errorf("Errors resolving path struct %v: %v", n, errs)
+		return nil, nil, fmt.Errorf("errors resolving path struct %v: %v", n, errs)
 	}
 	// All paths that don't start with "meta" must be OC paths.
 	if len(path.GetElem()) == 0 || path.GetElem()[0].GetName() != "meta" {
@@ -750,6 +768,9 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint) (map[string][]*Da
 	groups := map[string][]*DataPoint{}
 
 	for _, dp := range datapoints {
+		if dp.Sync { // Sync datapoints don't have a path, so ignore them.
+			continue
+		}
 		elems := dp.Path.GetElem()
 		if uint(len(elems)) < prefixLen {
 			groups["/"] = append(groups["/"], dp)
@@ -771,6 +792,50 @@ func bundleDatapoints(datapoints []*DataPoint, prefixLen uint) (map[string][]*Da
 	return groups, prefixes, nil
 }
 
+// getSubscriber is an implementation of gpb.GNMI_SubscribeClient that uses gpb.Get.
+// Send() does the Get call and Recv returns the Get response.
+type getSubscriber struct {
+	gpb.GNMI_SubscribeClient
+	client gpb.GNMIClient
+	ctx    context.Context
+	notifs []*gpb.Notification
+}
+
+func (gs *getSubscriber) Send(req *gpb.SubscribeRequest) error {
+	getReq := &gpb.GetRequest{
+		Prefix:   req.GetSubscribe().GetPrefix(),
+		Encoding: gpb.Encoding_JSON_IETF,
+		Type:     gpb.GetRequest_CONFIG,
+	}
+	for _, sub := range req.GetSubscribe().GetSubscription() {
+		getReq.Path = append(getReq.Path, sub.GetPath())
+	}
+
+	resp, err := gs.client.Get(gs.ctx, getReq)
+	if err != nil {
+		return err
+	}
+	gs.notifs = resp.GetNotification()
+	return nil
+}
+
+func (gs *getSubscriber) Recv() (*gpb.SubscribeResponse, error) {
+	if len(gs.notifs) == 0 {
+		return nil, io.EOF
+	}
+	resp := &gpb.SubscribeResponse{
+		Response: &gpb.SubscribeResponse_Update{
+			Update: gs.notifs[0],
+		},
+	}
+	gs.notifs = gs.notifs[1:]
+	return resp, nil
+}
+
+func (gs *getSubscriber) CloseSend() error {
+	return nil
+}
+
 // subscribe create a gNMI SubscribeClient. Specifying subPaths is optional, if unset will subscribe to the path at n.
 func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mode gpb.SubscriptionList_Mode) (_ gpb.GNMI_SubscribeClient, _ *gpb.Path, rerr error) {
 	path, dev, opts, err := resolve(ctx, n)
@@ -781,9 +846,23 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 		subPaths = []*gpb.Path{path}
 	}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
-	sub, err := opts.client.Subscribe(ctx)
+
+	_, custom, err := ResolvePath(n)
 	if err != nil {
-		return nil, nil, errors.Wrap(err, "gNMI failed to Subscribe")
+		return nil, path, err
+	}
+
+	var sub gpb.GNMI_SubscribeClient
+	if _, ok := custom[UseGetForConfigKey]; ok && mode == gpb.SubscriptionList_ONCE {
+		sub = &getSubscriber{
+			client: opts.client,
+			ctx:    ctx,
+		}
+	} else {
+		sub, err = opts.client.Subscribe(ctx)
+		if err != nil {
+			return nil, nil, fmt.Errorf("gNMI failed to Subscribe: %w", err)
+		}
 	}
 	defer closer.Close(&rerr, sub.CloseSend, "error closing gNMI send stream")
 
@@ -801,9 +880,7 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 	sr := &gpb.SubscribeRequest{
 		Request: &gpb.SubscribeRequest_Subscribe{
 			Subscribe: &gpb.SubscriptionList{
-				Prefix: &gpb.Path{
-					Target: dev.Dimensions().Name,
-				},
+				Prefix:       &gpb.Path{Target: dev.Name()},
 				Subscription: subs,
 				Mode:         mode,
 				Encoding:     gpb.Encoding_PROTO,
@@ -812,7 +889,7 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 	}
 	log.V(1).Info(prototext.Format(sr))
 	if err := sub.Send(sr); err != nil {
-		return nil, nil, errors.Wrapf(err, "gNMI failed to Send(%+v)", sr)
+		return nil, nil, fmt.Errorf("gNMI failed to Send(%+v): %w", sr, err)
 	}
 	// Use the target only for the subscription but exclude from the datapoint construction.
 	path.Target = ""
@@ -850,7 +927,7 @@ func receiveAll(sub gpb.GNMI_SubscribeClient, deletesExpected bool, mode gpb.Sub
 			if st, ok := status.FromError(err); ok && st.Code() == codes.DeadlineExceeded {
 				break
 			}
-			return nil, errors.Wrapf(err, "error receiving gNMI response")
+			return nil, fmt.Errorf("error receiving gNMI response: %w", err)
 		}
 		if mode == gpb.SubscriptionList_ONCE && sync {
 			break
@@ -876,7 +953,7 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 	case *gpb.SubscribeResponse_Update:
 		n := v.Update
 		if !deletesExpected && len(n.Delete) != 0 {
-			return data, false, errors.Errorf("unexpected delete updates: %v", n.Delete)
+			return data, false, fmt.Errorf("unexpected delete updates: %v", n.Delete)
 		}
 		ts := time.Unix(0, n.GetTimestamp())
 		newDataPoint := func(p *gpb.Path, val *gpb.TypedValue) (*DataPoint, error) {
@@ -907,10 +984,10 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 		}
 		for _, u := range n.GetUpdate() {
 			if u.Path == nil {
-				return data, false, errors.Errorf("invalid nil path in update: %v", u)
+				return data, false, fmt.Errorf("invalid nil path in update: %v", u)
 			}
 			if u.Val == nil {
-				return data, false, errors.Errorf("invalid nil Val in update: %v", u)
+				return data, false, fmt.Errorf("invalid nil Val in update: %v", u)
 			}
 			log.V(2).Infof("Received gNMI Update value %s at path: %s", prototext.Format(u.Val), prototext.Format(u.Path))
 			dp, err := newDataPoint(u.Path, u.Val)
@@ -929,6 +1006,6 @@ func receive(sub gpb.GNMI_SubscribeClient, data []*DataPoint, deletesExpected bo
 		})
 		return data, true, nil
 	default:
-		return data, false, errors.Errorf("unexpected response: %v (%T)", v, v)
+		return data, false, fmt.Errorf("unexpected response: %v (%T)", v, v)
 	}
 }

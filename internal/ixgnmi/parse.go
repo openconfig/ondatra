@@ -19,16 +19,24 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"time"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/binding/ixweb"
 )
 
-func parseRow(r ixweb.StatRow, nameKey string, strKeys []string, intKeys []string, floatKeys []string) (map[string]*uint64, map[string]*float32, error) {
-	name := r[nameKey]
+// rowParser encapsulates per-key parsing metadata, including custom parsing
+// for some int-valued keys.
+type rowParser struct {
+	nameKey                     string
+	strKeys, intKeys, floatKeys []string
+	customIntKeys               map[string]func(string) (uint64, error)
+}
+
+func (p *rowParser) parseRow(r ixweb.StatRow) (map[string]*uint64, map[string]*float32, error) {
+	name := r[p.nameKey]
 	if name == "" {
-		return nil, nil, errors.Errorf("row %v did not include value for required key %q", r, nameKey)
+		return nil, nil, fmt.Errorf("row %v did not include value for required key %q", r, p.nameKey)
 	}
 	lookup := func(key string) string {
 		v, ok := r[key]
@@ -39,30 +47,41 @@ func parseRow(r ixweb.StatRow, nameKey string, strKeys []string, intKeys []strin
 		return v
 	}
 
-	for _, k := range strKeys {
+	for _, k := range p.strKeys {
 		lookup(k) // log only
 	}
 	ints := make(map[string]*uint64)
-	for _, k := range intKeys {
+	for _, k := range p.intKeys {
 		v := lookup(k)
 		if v == "" {
 			continue
 		}
 		i, err := strconv.ParseUint(v, 10, 64)
 		if err != nil {
-			return nil, nil, errors.Wrapf(err, "invalid value %q for int stat %q for key %q", v, k, name)
+			return nil, nil, fmt.Errorf("invalid value %q for int stat %q for key %q: %w", v, k, name, err)
+		}
+		ints[k] = &i
+	}
+	for k, parseFn := range p.customIntKeys {
+		v := lookup(k)
+		if v == "" {
+			continue
+		}
+		i, err := parseFn(v)
+		if err != nil {
+			return nil, nil, fmt.Errorf("invalid value %q for int stat %q for key %q: %w", v, k, name, err)
 		}
 		ints[k] = &i
 	}
 	floats := make(map[string]*float32)
-	for _, k := range floatKeys {
+	for _, k := range p.floatKeys {
 		v := lookup(k)
 		if v == "" {
 			continue
 		}
 		f, err := strconv.ParseFloat(v, 32)
 		if err != nil {
-			return nil, nil, errors.Wrapf(err, "invalid value %q for float stat %s for key %s", v, k, name)
+			return nil, nil, fmt.Errorf("invalid value %q for float stat %s for key %s: %w", v, k, name, err)
 		}
 		f32 := float32(f)
 		floats[k] = &f32
@@ -93,13 +112,16 @@ func parsePortStats(t ixweb.StatTable) ([]*portRow, error) {
 		rxRateKey    = "Rx. Rate (bps)"
 		crcErrsKey   = "CRC Errors"
 	)
-	strKeys := []string{lineSpeedKey, linkStateKey}
-	intKeys := []string{framesTxKey, framesRxKey, bytesTxKey, bytesRxKey, crcErrsKey}
-	floatKeys := []string{txRateKey, rxRateKey}
+	rp := &rowParser{
+		nameKey:   nameKey,
+		strKeys:   []string{lineSpeedKey, linkStateKey},
+		intKeys:   []string{framesTxKey, framesRxKey, bytesTxKey, bytesRxKey, crcErrsKey},
+		floatKeys: []string{txRateKey, rxRateKey},
+	}
 
 	var portRows []*portRow
 	for _, row := range t {
-		intVals, floatVals, err := parseRow(row, nameKey, strKeys, intKeys, floatKeys)
+		intVals, floatVals, err := rp.parseRow(row)
 		if err != nil {
 			return nil, err
 		}
@@ -135,13 +157,14 @@ func parsePortCPUStats(t ixweb.StatTable) ([]*portCPURow, error) {
 		freeMemKey  = "Free Memory(KB)"
 		cpuLoadKey  = "%CPU Load"
 	)
-	var strKeys []string
-	intKeys := []string{totalMemKey, freeMemKey, cpuLoadKey}
-	var floatKeys []string
+	rp := &rowParser{
+		nameKey: portNameKey,
+		intKeys: []string{totalMemKey, freeMemKey, cpuLoadKey},
+	}
 
 	var portCPURows []*portCPURow
 	for _, row := range t {
-		intVals, _, err := parseRow(row, portNameKey, strKeys, intKeys, floatKeys)
+		intVals, _, err := rp.parseRow(row)
 		if err != nil {
 			return nil, err
 		}
@@ -161,6 +184,8 @@ type flowRow struct {
 	LossPct, TxRate, RxRate, TxFrameRate, RxFrameRate *float32
 	// Optional ingress-tracking fields.
 	RxPort, TxPort, SrcIPv4, DstIPv4, SrcIPv6, DstIPv6 string
+	// Optional convergence stats fields.
+	FirstPacketTime, ConvergenceTime *uint64
 }
 
 func (r *flowRow) String() string {
@@ -191,19 +216,62 @@ func parseFlowStatsHelp(t ixweb.StatTable, overrideNameKey string) ([]*flowRow, 
 		srcIPv6Key   = "IPv6 :Source Address"
 		dstIPv6Key   = "IPv6 :Destination Address"
 		vlanIDKey    = "VLAN:VLAN-ID"
+		// Optional convergence tracking fields
+		firstTimestampKey = "First TimeStamp"
+		rampUpTimeUsKey   = "Ramp-up Convergence Time (us)"
 	)
-	strKeys := []string{rxPortKey, txPortKey, srcIPv4Key, dstIPv4Key, srcIPv6Key, dstIPv6Key}
-	intKeys := []string{rxBytesKey, txFramesKey, rxFramesKey, mplsLabelKey, vlanIDKey}
-	floatKeys := []string{lossPctKey, txRateKey, rxRateKey, txFrameRateKey, rxFrameRateKey}
-
 	nameKey := trafficItemKey
 	if overrideNameKey != "" {
 		nameKey = overrideNameKey
 	}
+	rp := &rowParser{
+		nameKey:   nameKey,
+		strKeys:   []string{rxPortKey, txPortKey, srcIPv4Key, dstIPv4Key, srcIPv6Key, dstIPv6Key},
+		intKeys:   []string{rxBytesKey, txFramesKey, rxFramesKey, mplsLabelKey, vlanIDKey},
+		floatKeys: []string{lossPctKey, txRateKey, rxRateKey, txFrameRateKey, rxFrameRateKey},
+		customIntKeys: map[string]func(string) (uint64, error){
+			firstTimestampKey: func(ts string) (uint64, error) {
+				fmtErr := func(ts string) error { return fmt.Errorf("bad format for timestamp %q (expected HH:MM:SS.NNN)", ts) }
+				// Expected format: HH:MM:SS.NNN
+				hms := strings.Split(ts, ":")
+				if len(hms) != 3 {
+					return 0, fmtErr(ts)
+				}
+				sms := strings.Split(hms[2], ".")
+				if len(sms) != 2 {
+					return 0, fmtErr(ts)
+				}
+				hrs, err := strconv.ParseUint(hms[0], 10, 64)
+				if err != nil {
+					return 0, err
+				}
+				min, err := strconv.ParseUint(hms[1], 10, 64)
+				if err != nil {
+					return 0, err
+				}
+				s, err := strconv.ParseUint(sms[0], 10, 64)
+				if err != nil {
+					return 0, err
+				}
+				ms, err := strconv.ParseUint(sms[1], 10, 64)
+				if err != nil {
+					return 0, err
+				}
+				return uint64(time.Hour)*hrs + uint64(time.Minute)*min + uint64(time.Second)*s + uint64(time.Millisecond)*ms, nil
+			},
+			rampUpTimeUsKey: func(ts string) (uint64, error) {
+				tsUs, err := strconv.ParseUint(strings.ReplaceAll(ts, ",", ""), 10, 64)
+				if err != nil {
+					return 0, err
+				}
+				return uint64(time.Microsecond) * tsUs, nil
+			},
+		},
+	}
 
 	var flowRows []*flowRow
 	for _, row := range t {
-		intVals, floatVals, err := parseRow(row, nameKey, strKeys, intKeys, floatKeys)
+		intVals, floatVals, err := rp.parseRow(row)
 		if err != nil {
 			return nil, err
 		}
@@ -226,6 +294,9 @@ func parseFlowStatsHelp(t ixweb.StatTable, overrideNameKey string) ([]*flowRow, 
 			SrcIPv6:   row[srcIPv6Key],
 			DstIPv6:   row[dstIPv6Key],
 			VLANID:    intVals[vlanIDKey],
+			// Optional convergence stats.
+			FirstPacketTime: intVals[firstTimestampKey],
+			ConvergenceTime: intVals[rampUpTimeUsKey],
 		})
 	}
 	return flowRows, nil
@@ -263,7 +334,7 @@ func rowString(row interface{}) string {
 		fieldName := val.Type().Field(i).Name
 		var valStr string
 		if fieldVal := val.Field(i); !fieldVal.IsZero() {
-			if fieldVal.Type().Kind() == reflect.Pointer {
+			if fieldVal.Type().Kind() == reflect.Ptr {
 				fieldVal = fieldVal.Elem()
 			}
 			valStr = fmt.Sprintf("%v", fieldVal.Interface())

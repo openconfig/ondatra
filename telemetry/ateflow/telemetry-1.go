@@ -29,7 +29,7 @@ func (n *Flow_DstIpv6Path) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/state/dst-ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_DstIpv6Path) Get(t testing.TB) string {
 	t.Helper()
@@ -83,10 +83,10 @@ func watch_Flow_DstIpv6Path(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_DstIpv6Path(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_DstIpv6Path(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -139,6 +139,34 @@ func (n *Flow_DstIpv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_Flow_DstIpv6PathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_DstIpv6Path(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/state/dst-ipv6 with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -146,7 +174,7 @@ func (n *Flow_DstIpv6PathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_DstIpv6PathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_DstIpv6Path(t, n, timeout, predicate)
+	return watch_Flow_DstIpv6PathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/state/dst-ipv6 to the batch object.
@@ -182,7 +210,7 @@ func (n *Flow_DstPortPath) Lookup(t testing.TB) *oc.QualifiedString {
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/state/dst-port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_DstPortPath) Get(t testing.TB) string {
 	t.Helper()
@@ -236,10 +264,10 @@ func watch_Flow_DstPortPath(t testing.TB, n ygot.PathStruct, duration time.Durat
 	t.Helper()
 	w := &oc.StringWatcher{}
 	gs := &oc.Flow{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow", gs, queryPath, true, false)
-		return convertFlow_DstPortPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_DstPortPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedString)
 		w.LastVal = val
@@ -292,6 +320,34 @@ func (n *Flow_DstPortPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 	return c
 }
 
+func watch_Flow_DstPortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
+	t.Helper()
+	w := &oc.StringWatcher{}
+	structs := map[string]*oc.Flow{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow", structs[pre], queryPath, true, false)
+			qv := convertFlow_DstPortPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedString)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/state/dst-port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -299,7 +355,7 @@ func (n *Flow_DstPortPathAny) Collect(t testing.TB, duration time.Duration) *oc.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_DstPortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
 	t.Helper()
-	return watch_Flow_DstPortPath(t, n, timeout, predicate)
+	return watch_Flow_DstPortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/state/dst-port to the batch object.
@@ -337,7 +393,7 @@ func (n *Flow_EgressTrackingPath) Lookup(t testing.TB) *oc.QualifiedFlow_EgressT
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_EgressTrackingPath) Get(t testing.TB) *oc.Flow_EgressTracking {
 	t.Helper()
@@ -399,12 +455,13 @@ func watch_Flow_EgressTrackingPath(t testing.TB, n ygot.PathStruct, duration tim
 	t.Helper()
 	w := &oc.Flow_EgressTrackingWatcher{}
 	gs := &oc.Flow_EgressTracking{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_EgressTracking", gs, queryPath, false, false)
-		return (&oc.QualifiedFlow_EgressTracking{
+		qv := (&oc.QualifiedFlow_EgressTracking{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFlow_EgressTracking)
 		w.LastVal = val
@@ -457,6 +514,36 @@ func (n *Flow_EgressTrackingPathAny) Collect(t testing.TB, duration time.Duratio
 	return c
 }
 
+func watch_Flow_EgressTrackingPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFlow_EgressTracking) bool) *oc.Flow_EgressTrackingWatcher {
+	t.Helper()
+	w := &oc.Flow_EgressTrackingWatcher{}
+	structs := map[string]*oc.Flow_EgressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_EgressTracking{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_EgressTracking", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedFlow_EgressTracking{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFlow_EgressTracking)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -464,13 +551,194 @@ func (n *Flow_EgressTrackingPathAny) Collect(t testing.TB, duration time.Duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_EgressTrackingPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFlow_EgressTracking) bool) *oc.Flow_EgressTrackingWatcher {
 	t.Helper()
-	return watch_Flow_EgressTrackingPath(t, n, timeout, predicate)
+	return watch_Flow_EgressTrackingPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking to the batch object.
 func (n *Flow_EgressTrackingPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
+}
+
+// Lookup fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Flow_EgressTracking_ConvergenceTimePath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Flow_EgressTracking{}
+	md, ok := oc.Lookup(t, n, "Flow_EgressTracking", goStruct, true, false)
+	if ok {
+		return convertFlow_EgressTracking_ConvergenceTimePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Flow_EgressTracking_ConvergenceTimePath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Flow_EgressTracking_ConvergenceTimePathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Flow_EgressTracking{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Flow_EgressTracking", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertFlow_EgressTracking_ConvergenceTimePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a ONCE subscription.
+func (n *Flow_EgressTracking_ConvergenceTimePathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_EgressTracking_ConvergenceTimePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_EgressTracking_ConvergenceTimePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Flow_EgressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_EgressTracking", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertFlow_EgressTracking_ConvergenceTimePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_EgressTracking_ConvergenceTimePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Flow_EgressTracking_ConvergenceTimePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Flow_EgressTracking_ConvergenceTimePath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time to the batch object.
+func (n *Flow_EgressTracking_ConvergenceTimePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Flow_EgressTracking_ConvergenceTimePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Flow_EgressTracking_ConvergenceTimePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Flow_EgressTracking{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_EgressTracking{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_EgressTracking", structs[pre], queryPath, true, false)
+			qv := convertFlow_EgressTracking_ConvergenceTimePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Flow_EgressTracking_ConvergenceTimePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Flow_EgressTracking_ConvergenceTimePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/convergence-time to the batch object.
+func (n *Flow_EgressTracking_ConvergenceTimePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertFlow_EgressTracking_ConvergenceTimePath extracts the value of the leaf ConvergenceTime from its parent oc.Flow_EgressTracking
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertFlow_EgressTracking_ConvergenceTimePath(t testing.TB, md *genutil.Metadata, parent *oc.Flow_EgressTracking) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.ConvergenceTime
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }
 
 // Lookup fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters with a ONCE subscription.
@@ -488,7 +756,7 @@ func (n *Flow_EgressTracking_CountersPath) Lookup(t testing.TB) *oc.QualifiedFlo
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_EgressTracking_CountersPath) Get(t testing.TB) *oc.Flow_EgressTracking_Counters {
 	t.Helper()
@@ -550,12 +818,13 @@ func watch_Flow_EgressTracking_CountersPath(t testing.TB, n ygot.PathStruct, dur
 	t.Helper()
 	w := &oc.Flow_EgressTracking_CountersWatcher{}
 	gs := &oc.Flow_EgressTracking_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_EgressTracking_Counters", gs, queryPath, false, false)
-		return (&oc.QualifiedFlow_EgressTracking_Counters{
+		qv := (&oc.QualifiedFlow_EgressTracking_Counters{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedFlow_EgressTracking_Counters)
 		w.LastVal = val
@@ -608,6 +877,36 @@ func (n *Flow_EgressTracking_CountersPathAny) Collect(t testing.TB, duration tim
 	return c
 }
 
+func watch_Flow_EgressTracking_CountersPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedFlow_EgressTracking_Counters) bool) *oc.Flow_EgressTracking_CountersWatcher {
+	t.Helper()
+	w := &oc.Flow_EgressTracking_CountersWatcher{}
+	structs := map[string]*oc.Flow_EgressTracking_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_EgressTracking_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_EgressTracking_Counters", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedFlow_EgressTracking_Counters{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedFlow_EgressTracking_Counters)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -615,7 +914,7 @@ func (n *Flow_EgressTracking_CountersPathAny) Collect(t testing.TB, duration tim
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_EgressTracking_CountersPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedFlow_EgressTracking_Counters) bool) *oc.Flow_EgressTracking_CountersWatcher {
 	t.Helper()
-	return watch_Flow_EgressTracking_CountersPath(t, n, timeout, predicate)
+	return watch_Flow_EgressTracking_CountersPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters to the batch object.
@@ -637,7 +936,7 @@ func (n *Flow_EgressTracking_Counters_InOctetsPath) Lookup(t testing.TB) *oc.Qua
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/in-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_EgressTracking_Counters_InOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -691,10 +990,10 @@ func watch_Flow_EgressTracking_Counters_InOctetsPath(t testing.TB, n ygot.PathSt
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Flow_EgressTracking_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_EgressTracking_Counters", gs, queryPath, true, false)
-		return convertFlow_EgressTracking_Counters_InOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_EgressTracking_Counters_InOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -747,6 +1046,34 @@ func (n *Flow_EgressTracking_Counters_InOctetsPathAny) Collect(t testing.TB, dur
 	return c
 }
 
+func watch_Flow_EgressTracking_Counters_InOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Flow_EgressTracking_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_EgressTracking_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_EgressTracking_Counters", structs[pre], queryPath, true, false)
+			qv := convertFlow_EgressTracking_Counters_InOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/in-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -754,7 +1081,7 @@ func (n *Flow_EgressTracking_Counters_InOctetsPathAny) Collect(t testing.TB, dur
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_EgressTracking_Counters_InOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Flow_EgressTracking_Counters_InOctetsPath(t, n, timeout, predicate)
+	return watch_Flow_EgressTracking_Counters_InOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/in-octets to the batch object.
@@ -790,7 +1117,7 @@ func (n *Flow_EgressTracking_Counters_InPktsPath) Lookup(t testing.TB) *oc.Quali
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/in-pkts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_EgressTracking_Counters_InPktsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -844,10 +1171,10 @@ func watch_Flow_EgressTracking_Counters_InPktsPath(t testing.TB, n ygot.PathStru
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Flow_EgressTracking_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_EgressTracking_Counters", gs, queryPath, true, false)
-		return convertFlow_EgressTracking_Counters_InPktsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_EgressTracking_Counters_InPktsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -900,6 +1227,34 @@ func (n *Flow_EgressTracking_Counters_InPktsPathAny) Collect(t testing.TB, durat
 	return c
 }
 
+func watch_Flow_EgressTracking_Counters_InPktsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Flow_EgressTracking_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_EgressTracking_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_EgressTracking_Counters", structs[pre], queryPath, true, false)
+			qv := convertFlow_EgressTracking_Counters_InPktsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/in-pkts with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -907,7 +1262,7 @@ func (n *Flow_EgressTracking_Counters_InPktsPathAny) Collect(t testing.TB, durat
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_EgressTracking_Counters_InPktsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Flow_EgressTracking_Counters_InPktsPath(t, n, timeout, predicate)
+	return watch_Flow_EgressTracking_Counters_InPktsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/in-pkts to the batch object.
@@ -943,7 +1298,7 @@ func (n *Flow_EgressTracking_Counters_OutOctetsPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/out-octets with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Flow_EgressTracking_Counters_OutOctetsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -997,10 +1352,10 @@ func watch_Flow_EgressTracking_Counters_OutOctetsPath(t testing.TB, n ygot.PathS
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Flow_EgressTracking_Counters{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Flow_EgressTracking_Counters", gs, queryPath, true, false)
-		return convertFlow_EgressTracking_Counters_OutOctetsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertFlow_EgressTracking_Counters_OutOctetsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1053,6 +1408,34 @@ func (n *Flow_EgressTracking_Counters_OutOctetsPathAny) Collect(t testing.TB, du
 	return c
 }
 
+func watch_Flow_EgressTracking_Counters_OutOctetsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Flow_EgressTracking_Counters{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Flow_EgressTracking_Counters{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Flow_EgressTracking_Counters", structs[pre], queryPath, true, false)
+			qv := convertFlow_EgressTracking_Counters_OutOctetsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/out-octets with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1060,7 +1443,7 @@ func (n *Flow_EgressTracking_Counters_OutOctetsPathAny) Collect(t testing.TB, du
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Flow_EgressTracking_Counters_OutOctetsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Flow_EgressTracking_Counters_OutOctetsPath(t, n, timeout, predicate)
+	return watch_Flow_EgressTracking_Counters_OutOctetsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-ate-flow/flows/flow/egress-tracking/egress-tracking/state/counters/out-octets to the batch object.

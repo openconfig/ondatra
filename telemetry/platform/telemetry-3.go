@@ -16,6 +16,368 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_Pcie_FatalErrors{}
+	md, ok := oc.Lookup(t, n, "Component_Pcie_FatalErrors", goStruct, true, false)
+	if ok {
+		return convertComponent_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Pcie_FatalErrors{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_FatalErrors", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a ONCE subscription.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_Pcie_FatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_FatalErrors", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertComponent_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors to the batch object.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_FatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_FatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_FatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors to the batch object.
+func (n *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Pcie_FatalErrors_UnexpectedCompletionErrorsPath extracts the value of the leaf UnexpectedCompletionErrors from its parent oc.Component_Pcie_FatalErrors
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_Pcie_FatalErrors_UnexpectedCompletionErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_FatalErrors) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.UnexpectedCompletionErrors
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_Pcie_FatalErrors{}
+	md, ok := oc.Lookup(t, n, "Component_Pcie_FatalErrors", goStruct, true, false)
+	if ok {
+		return convertComponent_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Pcie_FatalErrors{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Pcie_FatalErrors", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a ONCE subscription.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	gs := &oc.Component_Pcie_FatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_FatalErrors", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertComponent_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors to the batch object.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
+	t.Helper()
+	c := &oc.CollectionUint64{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_FatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_FatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_FatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	return watch_Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors to the batch object.
+func (n *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertComponent_Pcie_FatalErrors_UnsupportedRequestErrorsPath extracts the value of the leaf UnsupportedRequestErrors from its parent oc.Component_Pcie_FatalErrors
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_Pcie_FatalErrors_UnsupportedRequestErrorsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Pcie_FatalErrors) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.UnsupportedRequestErrors
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_Pcie_NonFatalErrorsPath) Lookup(t testing.TB) *oc.QualifiedComponent_Pcie_NonFatalErrors {
@@ -31,7 +393,7 @@ func (n *Component_Pcie_NonFatalErrorsPath) Lookup(t testing.TB) *oc.QualifiedCo
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrorsPath) Get(t testing.TB) *oc.Component_Pcie_NonFatalErrors {
 	t.Helper()
@@ -93,12 +455,13 @@ func watch_Component_Pcie_NonFatalErrorsPath(t testing.TB, n ygot.PathStruct, du
 	t.Helper()
 	w := &oc.Component_Pcie_NonFatalErrorsWatcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Pcie_NonFatalErrors{
+		qv := (&oc.QualifiedComponent_Pcie_NonFatalErrors{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Pcie_NonFatalErrors)
 		w.LastVal = val
@@ -151,6 +514,36 @@ func (n *Component_Pcie_NonFatalErrorsPathAny) Collect(t testing.TB, duration ti
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Pcie_NonFatalErrors) bool) *oc.Component_Pcie_NonFatalErrorsWatcher {
+	t.Helper()
+	w := &oc.Component_Pcie_NonFatalErrorsWatcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Pcie_NonFatalErrors{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Pcie_NonFatalErrors)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -158,7 +551,7 @@ func (n *Component_Pcie_NonFatalErrorsPathAny) Collect(t testing.TB, duration ti
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Pcie_NonFatalErrors) bool) *oc.Component_Pcie_NonFatalErrorsWatcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors to the batch object.
@@ -180,7 +573,7 @@ func (n *Component_Pcie_NonFatalErrors_AcsViolationErrorsPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_AcsViolationErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -234,10 +627,10 @@ func watch_Component_Pcie_NonFatalErrors_AcsViolationErrorsPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_AcsViolationErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_AcsViolationErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -290,6 +683,34 @@ func (n *Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny) Collect(t test
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_AcsViolationErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -297,7 +718,7 @@ func (n *Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_AcsViolationErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors to the batch object.
@@ -333,7 +754,7 @@ func (n *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -387,10 +808,10 @@ func watch_Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath(t testing.TB,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -443,6 +864,34 @@ func (n *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny) Collect(t t
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -450,7 +899,7 @@ func (n *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors to the batch object.
@@ -486,7 +935,7 @@ func (n *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath) Lookup(t testing.TB
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -540,10 +989,10 @@ func watch_Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath(t testing.TB, n yg
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_BlockedTlpErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_BlockedTlpErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -596,6 +1045,34 @@ func (n *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny) Collect(t testin
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_BlockedTlpErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -603,7 +1080,7 @@ func (n *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny) Collect(t testin
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors to the batch object.
@@ -639,7 +1116,7 @@ func (n *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath) Lookup(t testi
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -693,10 +1170,10 @@ func watch_Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath(t testing.TB,
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_CompletionAbortErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_CompletionAbortErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -749,6 +1226,34 @@ func (n *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny) Collect(t t
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_CompletionAbortErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -756,7 +1261,7 @@ func (n *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny) Collect(t t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors to the batch object.
@@ -792,7 +1297,7 @@ func (n *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath) Lookup(t tes
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -846,10 +1351,10 @@ func watch_Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath(t testing.T
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -902,6 +1407,34 @@ func (n *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny) Collect(t
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -909,7 +1442,7 @@ func (n *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny) Collect(t
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors to the batch object.
@@ -945,7 +1478,7 @@ func (n *Component_Pcie_NonFatalErrors_DataLinkErrorsPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_DataLinkErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -999,10 +1532,10 @@ func watch_Component_Pcie_NonFatalErrors_DataLinkErrorsPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_DataLinkErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_DataLinkErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1055,6 +1588,34 @@ func (n *Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_DataLinkErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1062,7 +1623,7 @@ func (n *Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_DataLinkErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors to the batch object.
@@ -1098,7 +1659,7 @@ func (n *Component_Pcie_NonFatalErrors_EcrcErrorsPath) Lookup(t testing.TB) *oc.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_EcrcErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1152,10 +1713,10 @@ func watch_Component_Pcie_NonFatalErrors_EcrcErrorsPath(t testing.TB, n ygot.Pat
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_EcrcErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_EcrcErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1208,6 +1769,34 @@ func (n *Component_Pcie_NonFatalErrors_EcrcErrorsPathAny) Collect(t testing.TB, 
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_EcrcErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_EcrcErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1215,7 +1804,7 @@ func (n *Component_Pcie_NonFatalErrors_EcrcErrorsPathAny) Collect(t testing.TB, 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_EcrcErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_EcrcErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_EcrcErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors to the batch object.
@@ -1251,7 +1840,7 @@ func (n *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath) Lookup(t t
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1305,10 +1894,10 @@ func watch_Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath(t testing
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1361,6 +1950,34 @@ func (n *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny) Collect
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1368,7 +1985,7 @@ func (n *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny) Collect
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors to the batch object.
@@ -1404,7 +2021,7 @@ func (n *Component_Pcie_NonFatalErrors_InternalErrorsPath) Lookup(t testing.TB) 
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_InternalErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1458,10 +2075,10 @@ func watch_Component_Pcie_NonFatalErrors_InternalErrorsPath(t testing.TB, n ygot
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_InternalErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_InternalErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1514,6 +2131,34 @@ func (n *Component_Pcie_NonFatalErrors_InternalErrorsPathAny) Collect(t testing.
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_InternalErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_InternalErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1521,7 +2166,7 @@ func (n *Component_Pcie_NonFatalErrors_InternalErrorsPathAny) Collect(t testing.
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_InternalErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_InternalErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_InternalErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors to the batch object.
@@ -1557,7 +2202,7 @@ func (n *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1611,10 +2256,10 @@ func watch_Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_MalformedTlpErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_MalformedTlpErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1667,6 +2312,34 @@ func (n *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny) Collect(t test
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_MalformedTlpErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1674,7 +2347,7 @@ func (n *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors to the batch object.
@@ -1710,7 +2383,7 @@ func (n *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1764,10 +2437,10 @@ func watch_Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_PoisonedTlpErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_PoisonedTlpErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1820,6 +2493,34 @@ func (n *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny) Collect(t testi
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_PoisonedTlpErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1827,7 +2528,7 @@ func (n *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors to the batch object.
@@ -1863,7 +2564,7 @@ func (n *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -1917,10 +2618,10 @@ func watch_Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -1973,6 +2674,34 @@ func (n *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny) Collect(t 
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -1980,7 +2709,7 @@ func (n *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors to the batch object.
@@ -2016,7 +2745,7 @@ func (n *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath) Lookup(t testing.
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2070,10 +2799,10 @@ func watch_Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath(t testing.TB, n 
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_SurpriseDownErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_SurpriseDownErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2126,6 +2855,34 @@ func (n *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny) Collect(t test
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_SurpriseDownErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2133,7 +2890,7 @@ func (n *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny) Collect(t test
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors to the batch object.
@@ -2169,7 +2926,7 @@ func (n *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath) Lookup(t test
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2223,10 +2980,10 @@ func watch_Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath(t testing.TB
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2279,6 +3036,34 @@ func (n *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny) Collect(t 
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2286,7 +3071,7 @@ func (n *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny) Collect(t 
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors to the batch object.
@@ -2322,7 +3107,7 @@ func (n *Component_Pcie_NonFatalErrors_TotalErrorsPath) Lookup(t testing.TB) *oc
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_TotalErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2376,10 +3161,10 @@ func watch_Component_Pcie_NonFatalErrors_TotalErrorsPath(t testing.TB, n ygot.Pa
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_TotalErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_TotalErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2432,6 +3217,34 @@ func (n *Component_Pcie_NonFatalErrors_TotalErrorsPathAny) Collect(t testing.TB,
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_TotalErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_TotalErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2439,7 +3252,7 @@ func (n *Component_Pcie_NonFatalErrors_TotalErrorsPathAny) Collect(t testing.TB,
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_TotalErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_TotalErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_TotalErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors to the batch object.
@@ -2475,7 +3288,7 @@ func (n *Component_Pcie_NonFatalErrors_UndefinedErrorsPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_UndefinedErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2529,10 +3342,10 @@ func watch_Component_Pcie_NonFatalErrors_UndefinedErrorsPath(t testing.TB, n ygo
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_UndefinedErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_UndefinedErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2585,6 +3398,34 @@ func (n *Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny) Collect(t testing
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_UndefinedErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2592,7 +3433,7 @@ func (n *Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny) Collect(t testing
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_UndefinedErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors to the batch object.
@@ -2628,7 +3469,7 @@ func (n *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath) Lookup(t 
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2682,10 +3523,10 @@ func watch_Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath(t testin
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2738,6 +3579,34 @@ func (n *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny) Collec
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2745,7 +3614,7 @@ func (n *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny) Collec
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors to the batch object.
@@ -2781,7 +3650,7 @@ func (n *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath) Lookup(t te
 }
 
 // Get fetches the value at /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath) Get(t testing.TB) uint64 {
 	t.Helper()
@@ -2835,10 +3704,10 @@ func watch_Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath(t testing.
 	t.Helper()
 	w := &oc.Uint64Watcher{}
 	gs := &oc.Component_Pcie_NonFatalErrors{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Pcie_NonFatalErrors", gs, queryPath, true, false)
-		return convertComponent_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint64)
 		w.LastVal = val
@@ -2891,6 +3760,34 @@ func (n *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny) Collect(
 	return c
 }
 
+func watch_Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
+	t.Helper()
+	w := &oc.Uint64Watcher{}
+	structs := map[string]*oc.Component_Pcie_NonFatalErrors{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Pcie_NonFatalErrors{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Pcie_NonFatalErrors", structs[pre], queryPath, true, false)
+			qv := convertComponent_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint64)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -2898,7 +3795,7 @@ func (n *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny) Collect(
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
 	t.Helper()
-	return watch_Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath(t, n, timeout, predicate)
+	return watch_Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors to the batch object.
@@ -2936,7 +3833,7 @@ func (n *Component_PortPath) Lookup(t testing.TB) *oc.QualifiedComponent_Port {
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_PortPath) Get(t testing.TB) *oc.Component_Port {
 	t.Helper()
@@ -2998,12 +3895,13 @@ func watch_Component_PortPath(t testing.TB, n ygot.PathStruct, duration time.Dur
 	t.Helper()
 	w := &oc.Component_PortWatcher{}
 	gs := &oc.Component_Port{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Port{
+		qv := (&oc.QualifiedComponent_Port{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Port)
 		w.LastVal = val
@@ -3056,6 +3954,36 @@ func (n *Component_PortPathAny) Collect(t testing.TB, duration time.Duration) *o
 	return c
 }
 
+func watch_Component_PortPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Port) bool) *oc.Component_PortWatcher {
+	t.Helper()
+	w := &oc.Component_PortWatcher{}
+	structs := map[string]*oc.Component_Port{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Port{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Port", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Port{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Port)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3063,7 +3991,7 @@ func (n *Component_PortPathAny) Collect(t testing.TB, duration time.Duration) *o
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_PortPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Port) bool) *oc.Component_PortWatcher {
 	t.Helper()
-	return watch_Component_PortPath(t, n, timeout, predicate)
+	return watch_Component_PortPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/port to the batch object.
@@ -3087,7 +4015,7 @@ func (n *Component_Port_BreakoutModePath) Lookup(t testing.TB) *oc.QualifiedComp
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutModePath) Get(t testing.TB) *oc.Component_Port_BreakoutMode {
 	t.Helper()
@@ -3149,12 +4077,13 @@ func watch_Component_Port_BreakoutModePath(t testing.TB, n ygot.PathStruct, dura
 	t.Helper()
 	w := &oc.Component_Port_BreakoutModeWatcher{}
 	gs := &oc.Component_Port_BreakoutMode{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port_BreakoutMode", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Port_BreakoutMode{
+		qv := (&oc.QualifiedComponent_Port_BreakoutMode{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Port_BreakoutMode)
 		w.LastVal = val
@@ -3207,6 +4136,36 @@ func (n *Component_Port_BreakoutModePathAny) Collect(t testing.TB, duration time
 	return c
 }
 
+func watch_Component_Port_BreakoutModePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Port_BreakoutMode) bool) *oc.Component_Port_BreakoutModeWatcher {
+	t.Helper()
+	w := &oc.Component_Port_BreakoutModeWatcher{}
+	structs := map[string]*oc.Component_Port_BreakoutMode{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Port_BreakoutMode{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Port_BreakoutMode", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Port_BreakoutMode{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Port_BreakoutMode)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3214,7 +4173,7 @@ func (n *Component_Port_BreakoutModePathAny) Collect(t testing.TB, duration time
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Port_BreakoutModePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Port_BreakoutMode) bool) *oc.Component_Port_BreakoutModeWatcher {
 	t.Helper()
-	return watch_Component_Port_BreakoutModePath(t, n, timeout, predicate)
+	return watch_Component_Port_BreakoutModePathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/port/breakout-mode to the batch object.
@@ -3238,7 +4197,7 @@ func (n *Component_Port_BreakoutMode_GroupPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_GroupPath) Get(t testing.TB) *oc.Component_Port_BreakoutMode_Group {
 	t.Helper()
@@ -3300,12 +4259,13 @@ func watch_Component_Port_BreakoutMode_GroupPath(t testing.TB, n ygot.PathStruct
 	t.Helper()
 	w := &oc.Component_Port_BreakoutMode_GroupWatcher{}
 	gs := &oc.Component_Port_BreakoutMode_Group{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port_BreakoutMode_Group", gs, queryPath, false, false)
-		return (&oc.QualifiedComponent_Port_BreakoutMode_Group{
+		qv := (&oc.QualifiedComponent_Port_BreakoutMode_Group{
 			Metadata: md,
-		}).SetVal(gs), nil
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedComponent_Port_BreakoutMode_Group)
 		w.LastVal = val
@@ -3358,6 +4318,36 @@ func (n *Component_Port_BreakoutMode_GroupPathAny) Collect(t testing.TB, duratio
 	return c
 }
 
+func watch_Component_Port_BreakoutMode_GroupPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Port_BreakoutMode_Group) bool) *oc.Component_Port_BreakoutMode_GroupWatcher {
+	t.Helper()
+	w := &oc.Component_Port_BreakoutMode_GroupWatcher{}
+	structs := map[string]*oc.Component_Port_BreakoutMode_Group{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Port_BreakoutMode_Group{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Port_BreakoutMode_Group", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Port_BreakoutMode_Group{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Port_BreakoutMode_Group)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3365,7 +4355,7 @@ func (n *Component_Port_BreakoutMode_GroupPathAny) Collect(t testing.TB, duratio
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Port_BreakoutMode_GroupPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Port_BreakoutMode_Group) bool) *oc.Component_Port_BreakoutMode_GroupWatcher {
 	t.Helper()
-	return watch_Component_Port_BreakoutMode_GroupPath(t, n, timeout, predicate)
+	return watch_Component_Port_BreakoutMode_GroupPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group to the batch object.
@@ -3387,7 +4377,7 @@ func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPath) Lookup(t testing.T
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/breakout-speed with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPath) Get(t testing.TB) oc.E_IfEthernet_ETHERNET_SPEED {
 	t.Helper()
@@ -3441,10 +4431,10 @@ func watch_Component_Port_BreakoutMode_Group_BreakoutSpeedPath(t testing.TB, n y
 	t.Helper()
 	w := &oc.E_IfEthernet_ETHERNET_SPEEDWatcher{}
 	gs := &oc.Component_Port_BreakoutMode_Group{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port_BreakoutMode_Group", gs, queryPath, true, false)
-		return convertComponent_Port_BreakoutMode_Group_BreakoutSpeedPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Port_BreakoutMode_Group_BreakoutSpeedPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_ETHERNET_SPEED)
 		w.LastVal = val
@@ -3497,6 +4487,34 @@ func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPathAny) Collect(t testi
 	return c
 }
 
+func watch_Component_Port_BreakoutMode_Group_BreakoutSpeedPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_ETHERNET_SPEED) bool) *oc.E_IfEthernet_ETHERNET_SPEEDWatcher {
+	t.Helper()
+	w := &oc.E_IfEthernet_ETHERNET_SPEEDWatcher{}
+	structs := map[string]*oc.Component_Port_BreakoutMode_Group{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Port_BreakoutMode_Group{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Port_BreakoutMode_Group", structs[pre], queryPath, true, false)
+			qv := convertComponent_Port_BreakoutMode_Group_BreakoutSpeedPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_IfEthernet_ETHERNET_SPEED)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/breakout-speed with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3504,7 +4522,7 @@ func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPathAny) Collect(t testi
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Port_BreakoutMode_Group_BreakoutSpeedPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_IfEthernet_ETHERNET_SPEED) bool) *oc.E_IfEthernet_ETHERNET_SPEEDWatcher {
 	t.Helper()
-	return watch_Component_Port_BreakoutMode_Group_BreakoutSpeedPath(t, n, timeout, predicate)
+	return watch_Component_Port_BreakoutMode_Group_BreakoutSpeedPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group/state/breakout-speed to the batch object.
@@ -3540,7 +4558,7 @@ func (n *Component_Port_BreakoutMode_Group_IndexPath) Lookup(t testing.TB) *oc.Q
 }
 
 // Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/index with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Component_Port_BreakoutMode_Group_IndexPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -3594,10 +4612,10 @@ func watch_Component_Port_BreakoutMode_Group_IndexPath(t testing.TB, n ygot.Path
 	t.Helper()
 	w := &oc.Uint8Watcher{}
 	gs := &oc.Component_Port_BreakoutMode_Group{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
 		t.Helper()
 		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port_BreakoutMode_Group", gs, queryPath, true, false)
-		return convertComponent_Port_BreakoutMode_Group_IndexPath(t, md, gs), nil
+		return []genutil.QualifiedValue{convertComponent_Port_BreakoutMode_Group_IndexPath(t, md, gs)}, nil
 	}, func(qualVal genutil.QualifiedValue) bool {
 		val, ok := qualVal.(*oc.QualifiedUint8)
 		w.LastVal = val
@@ -3650,6 +4668,34 @@ func (n *Component_Port_BreakoutMode_Group_IndexPathAny) Collect(t testing.TB, d
 	return c
 }
 
+func watch_Component_Port_BreakoutMode_Group_IndexPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
+	t.Helper()
+	w := &oc.Uint8Watcher{}
+	structs := map[string]*oc.Component_Port_BreakoutMode_Group{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Port_BreakoutMode_Group{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Port_BreakoutMode_Group", structs[pre], queryPath, true, false)
+			qv := convertComponent_Port_BreakoutMode_Group_IndexPath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedUint8)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
 // Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/index with a STREAM subscription,
 // evaluating each observed value with the specified predicate.
 // The subscription completes when either the predicate is true or the specified duration elapses.
@@ -3657,7 +4703,7 @@ func (n *Component_Port_BreakoutMode_Group_IndexPathAny) Collect(t testing.TB, d
 // It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
 func (n *Component_Port_BreakoutMode_Group_IndexPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
 	t.Helper()
-	return watch_Component_Port_BreakoutMode_Group_IndexPath(t, n, timeout, predicate)
+	return watch_Component_Port_BreakoutMode_Group_IndexPathAny(t, n, timeout, predicate)
 }
 
 // Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group/state/index to the batch object.
@@ -3674,312 +4720,6 @@ func convertComponent_Port_BreakoutMode_Group_IndexPath(t testing.TB, md *genuti
 		Metadata: md,
 	}
 	val := parent.Index
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Component_Port_BreakoutMode_Group{}
-	md, ok := oc.Lookup(t, n, "Component_Port_BreakoutMode_Group", goStruct, true, false)
-	if ok {
-		return convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Port_BreakoutMode_Group{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port_BreakoutMode_Group", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a ONCE subscription.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Port_BreakoutMode_Group_NumBreakoutsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Component_Port_BreakoutMode_Group{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port_BreakoutMode_Group", gs, queryPath, true, false)
-		return convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Component_Port_BreakoutMode_Group_NumBreakoutsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts to the batch object.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Component_Port_BreakoutMode_Group_NumBreakoutsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-breakouts to the batch object.
-func (n *Component_Port_BreakoutMode_Group_NumBreakoutsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath extracts the value of the leaf NumBreakouts from its parent oc.Component_Port_BreakoutMode_Group
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertComponent_Port_BreakoutMode_Group_NumBreakoutsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Port_BreakoutMode_Group) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.NumBreakouts
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
-	t.Helper()
-	goStruct := &oc.Component_Port_BreakoutMode_Group{}
-	md, ok := oc.Lookup(t, n, "Component_Port_BreakoutMode_Group", goStruct, true, false)
-	if ok {
-		return convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Get(t testing.TB) uint8 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint8
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Port_BreakoutMode_Group{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port_BreakoutMode_Group", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a ONCE subscription.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Get(t testing.TB) []uint8 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint8
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	w := &oc.Uint8Watcher{}
-	gs := &oc.Component_Port_BreakoutMode_Group{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) (genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Port_BreakoutMode_Group", gs, queryPath, true, false)
-		return convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, md, gs), nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint8)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Await(t testing.TB, timeout time.Duration, val uint8) *oc.QualifiedUint8 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint8) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels to the batch object.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint8 {
-	t.Helper()
-	c := &oc.CollectionUint8{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint8) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint8) bool) *oc.Uint8Watcher {
-	t.Helper()
-	return watch_Component_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/port/breakout-mode/groups/group/state/num-physical-channels to the batch object.
-func (n *Component_Port_BreakoutMode_Group_NumPhysicalChannelsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath extracts the value of the leaf NumPhysicalChannels from its parent oc.Component_Port_BreakoutMode_Group
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertComponent_Port_BreakoutMode_Group_NumPhysicalChannelsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Port_BreakoutMode_Group) *oc.QualifiedUint8 {
-	t.Helper()
-	qv := &oc.QualifiedUint8{
-		Metadata: md,
-	}
-	val := parent.NumPhysicalChannels
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

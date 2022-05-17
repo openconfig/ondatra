@@ -28,7 +28,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/destination-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -129,7 +129,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DscpPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_DscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -230,7 +230,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/dscp-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_DscpSetPath) Get(t testing.TB) []uint8 {
 	t.Helper()
@@ -331,7 +331,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/hop-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -432,7 +432,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/protocol with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPath) Get(t testing.TB) oc.Acl_AclSet_AclEntry_Ipv4_Protocol_Union {
 	t.Helper()
@@ -533,7 +533,7 @@ func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPath) Lookup(t testing.TB) *oc.Qu
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/source-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -636,7 +636,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6Path) Lookup(t testing.TB) *oc.QualifiedAcl_Acl
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6 with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6Path) Get(t testing.TB) *oc.Acl_AclSet_AclEntry_Ipv6 {
 	t.Helper()
@@ -725,7 +725,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPath) Lookup(t testing.TB) *
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/destination-address with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPath) Get(t testing.TB) string {
 	t.Helper()
@@ -826,7 +826,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath) Lookup(t testing.TB)
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/destination-flow-label with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath) Get(t testing.TB) uint32 {
 	t.Helper()
@@ -927,7 +927,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DscpPath) Lookup(t testing.TB) *oc.QualifiedUi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/dscp with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_DscpPath) Get(t testing.TB) uint8 {
 	t.Helper()
@@ -1028,7 +1028,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DscpSetPath) Lookup(t testing.TB) *oc.Qualifie
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/dscp-set with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_DscpSetPath) Get(t testing.TB) []uint8 {
 	t.Helper()
@@ -1129,7 +1129,7 @@ func (n *Acl_AclSet_AclEntry_Ipv6_HopLimitPath) Lookup(t testing.TB) *oc.Qualifi
 }
 
 // Get fetches the value at /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/hop-limit with a ONCE subscription,
-// failing the test fatally is no value is present at the path.
+// failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
 func (n *Acl_AclSet_AclEntry_Ipv6_HopLimitPath) Get(t testing.TB) uint8 {
 	t.Helper()

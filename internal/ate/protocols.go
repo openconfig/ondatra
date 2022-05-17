@@ -22,7 +22,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/openconfig/ondatra/binding/usererr"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -43,7 +42,7 @@ var (
 func cipherSuiteStrAndLen(cpb opb.MacSec_CipherSuite) (string, uint32, error) {
 	switch cpb {
 	case opb.MacSec_CIPHER_SUITE_UNSPECIFIED:
-		return "", 0, usererr.New("cipher suite not specified")
+		return "", 0, fmt.Errorf("cipher suite not specified")
 	case opb.MacSec_AES_128:
 		return "aes128", 128, nil
 	case opb.MacSec_AES_256:
@@ -60,7 +59,7 @@ func cipherSuiteStrAndLen(cpb opb.MacSec_CipherSuite) (string, uint32, error) {
 func confOffsetVal(cpb opb.MacSec_MKA_ConfidentialityOffset) (string, error) {
 	switch cpb {
 	case opb.MacSec_MKA_OFFSET_UNSPECIFIED:
-		return "", usererr.New("confidentiality offset not specified")
+		return "", fmt.Errorf("confidentiality offset not specified")
 	case opb.MacSec_MKA_OFFSET_NO_CONFIDENTIALITY:
 		return "noconfidentiality", nil
 	case opb.MacSec_MKA_OFFSET_0:
@@ -88,7 +87,7 @@ func mka(mkapb *opb.MacSec_MKA) (*ixconfig.TopologyMka, error) {
 	var capability string
 	switch mkapb.GetCapability() {
 	case opb.MacSec_MKA_CAPABILITY_UNSPECIFIED:
-		return nil, usererr.New("capability not specified")
+		return nil, fmt.Errorf("capability not specified")
 	case opb.MacSec_MKA_NOT_IMPLEMENTED:
 		capability = "macsecnotimplemented"
 	case opb.MacSec_MKA_INTEGRITY_WITHOUT_CONFIDENTIALITY:
@@ -105,10 +104,10 @@ func mka(mkapb *opb.MacSec_MKA) (*ixconfig.TopologyMka, error) {
 	if capb := mkapb.GetConnectivityAssociation(); capb != nil {
 		checkHex := func(s string, maxLen uint32) error {
 			if _, err := hex.DecodeString(s); err != nil {
-				return usererr.Wrapf(err, "could not parse %q as hex string", s)
+				return fmt.Errorf("could not parse %q as hex string: %w", s, err)
 			}
 			if len(s) > int(maxLen) {
-				return usererr.New("hex string %q exceeds limit of %d characters", s, maxLen)
+				return fmt.Errorf("hex string %q exceeds limit of %d characters", s, maxLen)
 			}
 			return nil
 		}
@@ -182,7 +181,7 @@ func (ix *ixATE) addIPProtocols(ifc *opb.InterfaceConfig) error {
 	hasMacSec := len(eth.Macsec) > 0
 	if ipv4 := ifc.GetIpv4(); ipv4 != nil {
 		if ipv4.GetAddressCidr() == "" || ipv4.GetDefaultGateway() == "" {
-			return usererr.New("need both address and default gateway defined for IP V4 layer")
+			return fmt.Errorf("need both address and default gateway defined for IP V4 layer")
 		}
 		ip, netw, err := net.ParseCIDR(ipv4.GetAddressCidr())
 		if err != nil {
@@ -205,7 +204,7 @@ func (ix *ixATE) addIPProtocols(ifc *opb.InterfaceConfig) error {
 
 	if ipv6 := ifc.GetIpv6(); ipv6 != nil {
 		if ipv6.GetAddressCidr() == "" || ipv6.GetDefaultGateway() == "" {
-			return usererr.New("need both address and default gateway defined for IP V6 layer")
+			return fmt.Errorf("need both address and default gateway defined for IP V6 layer")
 		}
 		ip, netw, err := net.ParseCIDR(ipv6.GetAddressCidr())
 		if err != nil {
@@ -237,7 +236,7 @@ func (ix *ixATE) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error {
 	if ipv4 := ifc.GetIpv4LoopbackCidr(); ipv4 != "" {
 		ip, mask, isV6, err := parseCIDR(ipv4)
 		if err != nil || isV6 {
-			return usererr.New("invalid IPv4 CIDR address: %q", ipv4)
+			return fmt.Errorf("invalid IPv4 CIDR address: %q", ipv4)
 		}
 		dg.Ipv4Loopback = append(dg.Ipv4Loopback, &ixconfig.TopologyIpv4Loopback{
 			Name:    ixconfig.String(fmt.Sprintf("IPv4 loopback on %s", ifc.GetName())),
@@ -249,7 +248,7 @@ func (ix *ixATE) addIPLoopbackProtocols(ifc *opb.InterfaceConfig) error {
 	if ipv6 := ifc.GetIpv6LoopbackCidr(); ipv6 != "" {
 		ip, mask, isV6, err := parseCIDR(ipv6)
 		if err != nil || !isV6 {
-			return usererr.New("invalid IPv6 CIDR address: %q", ipv6)
+			return fmt.Errorf("invalid IPv6 CIDR address: %q", ipv6)
 		}
 		dg.Ipv6Loopback = append(dg.Ipv6Loopback, &ixconfig.TopologyIpv6Loopback{
 			Name:    ixconfig.String(fmt.Sprintf("IPv6 loopback on %s", ifc.GetName())),
@@ -274,7 +273,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 	var enable3WayHandshake bool
 	switch isis.GetLevel() {
 	case opb.ISISConfig_LEVEL_UNSPECIFIED:
-		return usererr.New("level not specified")
+		return fmt.Errorf("level not specified")
 	case opb.ISISConfig_L1:
 		level = "level1"
 	case opb.ISISConfig_L2:
@@ -285,7 +284,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 
 	switch isis.GetNetworkType() {
 	case opb.ISISConfig_NETWORK_TYPE_UNSPECIFIED:
-		return usererr.New("network type not specified")
+		return fmt.Errorf("network type not specified")
 	case opb.ISISConfig_BROADCAST:
 		networkType = "broadcast"
 	case opb.ISISConfig_POINT_TO_POINT:
@@ -333,7 +332,9 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		RtrcapId:           ixconfig.MultivalueStr(isis.GetCapabilityRouterId()),
 	}
 
-	isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting())
+	if err = isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting()); err != nil {
+		return err
+	}
 	isisNetwGrps, err := isisReachability(ifc.GetName(), isis.GetIsReachabilities())
 	if err != nil {
 		return err
@@ -357,11 +358,11 @@ func max(a, b int) int {
 }
 
 // isisSegmentRouting updates isisIntf/isisRtr based on the given segment routing config.
-func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.TopologyIsisL3Router, sr *opb.ISISSegmentRouting) {
+func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.TopologyIsisL3Router, sr *opb.ISISSegmentRouting) error {
 	if sr == nil || sr.GetEnable() == false {
 		isisRtr.EnableSR = ixconfig.Bool(false)
 		isisIntf.EnableAdjSID = ixconfig.MultivalueFalse()
-		return
+		return nil
 	}
 
 	// Configure IS-IS router
@@ -378,6 +379,15 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 		isisRtr.IsisSRAlgorithmList = append(isisRtr.IsisSRAlgorithmList, &ixconfig.TopologyIsisSrAlgorithmList{
 			IsisSrAlgorithm: ixconfig.MultivalueUint32(alg),
 		})
+	}
+
+	if sr.GetPrefixSid() != "" {
+		nodePrefix, nodeMask, isV6, err := parseCIDR(sr.GetPrefixSid())
+		if err != nil || isV6 {
+			return fmt.Errorf("invalid prefix SID: %q, want an IPv4 address in CIDR format", sr.GetPrefixSid())
+		}
+		isisRtr.NodePrefix = ixconfig.MultivalueStr(nodePrefix)
+		isisRtr.Mask = ixconfig.MultivalueUint32(nodeMask)
 	}
 
 	var lbCounts, lbLabels []uint32
@@ -411,7 +421,7 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	as := sr.GetAdjacencySid()
 	if as == nil {
 		isisIntf.EnableAdjSID = ixconfig.MultivalueFalse()
-		return
+		return nil
 	}
 	isisIntf.EnableAdjSID = ixconfig.MultivalueTrue()
 	isisIntf.AdjSID = ixconfig.MultivalueStr(as.GetSid())
@@ -422,12 +432,13 @@ func isisSegmentRouting(isisIntf *ixconfig.TopologyIsisL3, isisRtr *ixconfig.Top
 	isisIntf.LFlag = ixconfig.MultivalueBool(as.GetFlagLocal())
 	isisIntf.SFlag = ixconfig.MultivalueBool(as.GetFlagSet())
 	isisIntf.PFlag = ixconfig.MultivalueBool(as.GetFlagPersistent())
+	return nil
 }
 
 func parseCIDR(cidr string) (string, uint32, bool, error) {
 	_, netw, err := net.ParseCIDR(cidr)
 	if err != nil {
-		return "", 0, false, usererr.Wrapf(err, "could not parse %q as CIDR", cidr)
+		return "", 0, false, fmt.Errorf("could not parse %q as CIDR: %w", cidr, err)
 	}
 	maskLen, _ := netw.Mask.Size()
 	return strings.SplitN(cidr, "/", 2)[0], uint32(maskLen), strings.Contains(cidr, ":"), nil
@@ -436,10 +447,10 @@ func parseCIDR(cidr string) (string, uint32, bool, error) {
 func toIxHex(s string, lenBytes int) (string, error) {
 	b, err := hex.DecodeString(strings.NewReplacer(":", "", ".", "", " ", "").Replace(s))
 	if err != nil {
-		return "", usererr.Wrapf(err, "could not decode %q as hex", s)
+		return "", fmt.Errorf("could not decode %q as hex: %w", s, err)
 	}
 	if len(b) > lenBytes {
-		return "", usererr.New("%q is too large (max size is %d bytes)", s, lenBytes)
+		return "", fmt.Errorf("%q is too large (max size is %d bytes)", s, lenBytes)
 	}
 
 	words := make([]string, lenBytes)
@@ -463,7 +474,7 @@ func sysIDToIxHex(id string) (string, error) {
 
 func parseLink(toCIDR, fromCIDR string, asV6 bool) (string, string, uint32, error) {
 	if (toCIDR == "") != (fromCIDR == "") {
-		return "", "", 0, usererr.New("either both or neither IS-IS node link to/from addresses must be set (to: %q, from: %q)", toCIDR, fromCIDR)
+		return "", "", 0, fmt.Errorf("either both or neither IS-IS node link to/from addresses must be set (to: %q, from: %q)", toCIDR, fromCIDR)
 	}
 
 	vers := "IPv4"
@@ -473,16 +484,16 @@ func parseLink(toCIDR, fromCIDR string, asV6 bool) (string, string, uint32, erro
 
 	toIP, toIPMask, isV6, err := parseCIDR(toCIDR)
 	if err != nil || isV6 != asV6 {
-		return "", "", 0, usererr.Wrapf(err, "error parsing IS-IS node link 'to' address %q as %s", toCIDR, vers)
+		return "", "", 0, fmt.Errorf("error parsing IS-IS node link 'to' address %q as %s: %w", toCIDR, vers, err)
 	}
 
 	fromIP, fromIPMask, isV6, err := parseCIDR(fromCIDR)
 	if err != nil || isV6 != asV6 {
-		return "", "", 0, usererr.Wrapf(err, "error parsing IS-IS node link 'from' address %q as %s", fromCIDR, vers)
+		return "", "", 0, fmt.Errorf("error parsing IS-IS node link 'from' address %q as %s: %w", fromCIDR, vers, err)
 	}
 
 	if toIPMask != fromIPMask {
-		return "", "", 0, usererr.New("unequal masks for 'to' address %q and 'from' address %q for IS-IS node link", toCIDR, fromCIDR)
+		return "", "", 0, fmt.Errorf("unequal masks for 'to' address %q and 'from' address %q for IS-IS node link", toCIDR, fromCIDR)
 	}
 	return toIP, fromIP, toIPMask, nil
 }
@@ -504,14 +515,14 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 					numSRGBRanges = len(sr.GetSrgbRanges())
 					numSRLBRanges = len(sr.GetSrlbRanges())
 				} else if numSRGBRanges != len(sr.GetSrgbRanges()) {
-					return nil, usererr.New("all IS-IS nodes in reachability config need the same number of SRGB ranges")
+					return nil, fmt.Errorf("all IS-IS nodes in reachability config need the same number of SRGB ranges")
 				} else if numSRLBRanges != len(sr.GetSrlbRanges()) {
-					return nil, usererr.New("all IS-IS nodes in reachability config need the same number of SRLB ranges")
+					return nil, fmt.Errorf("all IS-IS nodes in reachability config need the same number of SRLB ranges")
 				}
 			} else if numSRGBRanges != 0 {
-				return nil, usererr.New("all IS-IS nodes in reachability config need the same number of SRGB ranges")
+				return nil, fmt.Errorf("all IS-IS nodes in reachability config need the same number of SRGB ranges")
 			} else if numSRLBRanges != 0 {
-				return nil, usererr.New("all IS-IS nodes in reachability config need the same number of SRLB ranges")
+				return nil, fmt.Errorf("all IS-IS nodes in reachability config need the same number of SRLB ranges")
 			}
 		}
 		var algoLists []*ixconfig.TopologyIsisSrAlgorithmList
@@ -527,6 +538,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			srlbDescriptorLists = append(srlbDescriptorLists, &ixconfig.TopologyIsisSrlbDescriptorList{})
 		}
 		ipv4Routes := &ixconfig.TopologyIPv4PseudoNodeRoutes{}
+		ipv6Routes := &ixconfig.TopologyIPv6PseudoNodeRoutes{}
 		isisRtr := &ixconfig.TopologyIsisL3PseudoRouter{
 			// Even if we're not configuring anything, IxNetwork requires the counts to be at least 1.
 			SRAlgorithmCount:            ixconfig.NumberInt(max(maxAlgos, 1)),
@@ -536,6 +548,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			SrlbDescriptorCount:         ixconfig.NumberInt(max(numSRLBRanges, 1)),
 			IsisSRLBDescriptorList:      srlbDescriptorLists,
 			IPv4PseudoNodeRoutes:        []*ixconfig.TopologyIPv4PseudoNodeRoutes{ipv4Routes},
+			IPv6PseudoNodeRoutes:        []*ixconfig.TopologyIPv6PseudoNodeRoutes{ipv6Routes},
 		}
 		simRtr := &ixconfig.TopologySimRouter{IsisL3PseudoRouter: []*ixconfig.TopologyIsisL3PseudoRouter{isisRtr}}
 		simIntfIPv4 := &ixconfig.TopologySimInterfaceIPv4Config{}
@@ -562,7 +575,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			if id := node.GetCapabilityRouterId(); id != "" {
 				ip, isV6 := parseIP(id)
 				if ip == nil || isV6 {
-					return nil, usererr.New("invalid capability router ID: %q", id)
+					return nil, fmt.Errorf("invalid capability router ID: %q", id)
 				}
 				capRtrID = ip.String()
 			}
@@ -571,7 +584,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			if id := node.GetTeRouterId(); id != "" {
 				ip, isV6 := parseIP(id)
 				if ip == nil || isV6 {
-					return nil, usererr.New("invalid TE router ID: %q", id)
+					return nil, fmt.Errorf("invalid TE router ID: %q", id)
 				}
 				teRtrID = ip.String()
 			}
@@ -612,62 +625,27 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 
 				inMetric := node.GetIngressMetric()
 				if inMetric < 1 || inMetric > 63 {
-					return nil, usererr.New("invalid value %d for node ingress metric", inMetric)
+					return nil, fmt.Errorf("invalid value %d for node ingress metric", inMetric)
 				}
 				egMetric := node.GetEgressMetric()
 				if egMetric < 1 || egMetric > 63 {
-					return nil, usererr.New("invalid value %d for node egress metric", egMetric)
+					return nil, fmt.Errorf("invalid value %d for node egress metric", egMetric)
 				}
 				attPoint1.LinkMetric = appendUintToMultivalueList(attPoint1.LinkMetric, inMetric)
 				attPoint2.LinkMetric = appendUintToMultivalueList(attPoint2.LinkMetric, egMetric)
 			}
 
 			// Route export
-			var exportRoutes, routeConfigureSID, routeRFlag, routeNFlag, routePFlag, routeEFlag, routeVFlag, routeLFlag bool
-			var routeMetric, routeAlgo, routeSIDIndexLabel uint32
-			routeCount := uint64(1)
-			routeAddr, routeOrigin := "0.0.0.0", "internal"
-			routeMask := uint32(1)
 			if routes := node.GetRoutesIpv4(); routes != nil {
-				exportRoutes = true
-				var isV6 bool
-				routeAddr, routeMask, isV6, err = parseCIDR(routes.GetPrefix())
-				if err != nil || isV6 {
-					return nil, usererr.New("invalid value %q for IPv4 route prefix", routes.GetPrefix())
-				}
-				routeCount = routes.GetNumRoutes()
-				if ipr := routes.GetReachability(); ipr != nil {
-					routeOrigin, err = routeOriginStr(ipr.GetRouteOrigin())
-					if err != nil {
-						return nil, err
-					}
-					routeMetric = ipr.GetMetric()
-					routeAlgo = ipr.GetAlgorithm()
-					routeConfigureSID = ipr.GetEnableSidIndexLabel()
-					routeSIDIndexLabel = ipr.GetSidIndexLabel()
-					routeRFlag = ipr.GetFlagReadvertise()
-					routeNFlag = ipr.GetFlagNodeSid()
-					routePFlag = ipr.GetFlagNoPhp()
-					routeEFlag = ipr.GetFlagExplicitNull()
-					routeVFlag = ipr.GetFlagValue()
-					routeLFlag = ipr.GetFlagLocal()
+				if err = isisIPv4RouteExport(routes, ipv4Routes); err != nil {
+					return nil, err
 				}
 			}
-			ipv4Routes.Active = appendBoolToMultivalueList(ipv4Routes.Active, exportRoutes)
-			ipv4Routes.NetworkAddress = appendStrToMultivalueList(ipv4Routes.NetworkAddress, routeAddr)
-			ipv4Routes.PrefixLength = appendUintToMultivalueList(ipv4Routes.PrefixLength, routeMask)
-			ipv4Routes.RangeSize = appendUint64ToMultivalueList(ipv4Routes.RangeSize, routeCount)
-			ipv4Routes.Ipv4Metric = appendUintToMultivalueList(ipv4Routes.Ipv4Metric, routeMetric)
-			ipv4Routes.Algorithm = appendUintToMultivalueList(ipv4Routes.Algorithm, routeAlgo)
-			ipv4Routes.Ipv4RouteOrigin = appendStrToMultivalueList(ipv4Routes.Ipv4RouteOrigin, routeOrigin)
-			ipv4Routes.ConfigureSIDIndexLabel = appendBoolToMultivalueList(ipv4Routes.ConfigureSIDIndexLabel, routeConfigureSID)
-			ipv4Routes.SIDIndexLabel = appendUintToMultivalueList(ipv4Routes.SIDIndexLabel, routeSIDIndexLabel)
-			ipv4Routes.Ipv4RFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4RFlag, routeRFlag)
-			ipv4Routes.Ipv4NFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4NFlag, routeNFlag)
-			ipv4Routes.Ipv4PFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4PFlag, routePFlag)
-			ipv4Routes.Ipv4EFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4EFlag, routeEFlag)
-			ipv4Routes.Ipv4VFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4VFlag, routeVFlag)
-			ipv4Routes.Ipv4LFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4LFlag, routeLFlag)
+			if routes := node.GetRoutesIpv6(); routes != nil {
+				if err = isisIPv6RouteExport(routes, ipv6Routes); err != nil {
+					return nil, err
+				}
+			}
 
 			// Segment routing.
 			var enableSR, srRFlag, srNFlag, srPFlag, srEFlag, srVFlag, srLFlag bool
@@ -693,7 +671,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 					var isV6 bool
 					nodePrefix, nodeMask, isV6, err = parseCIDR(sr.GetPrefixSid())
 					if err != nil || isV6 {
-						return nil, usererr.New("invalid prefix SID: %q", sr.GetPrefixSid())
+						return nil, fmt.Errorf("invalid prefix SID: %q", sr.GetPrefixSid())
 					}
 				}
 			}
@@ -736,7 +714,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 				enableAdjSID = true
 				adjSIDNum, err := strconv.ParseUint(adj.GetSid(), 10, 32)
 				if err != nil {
-					return nil, usererr.New("adjacency SID value %q is not a number", adj.GetSid())
+					return nil, fmt.Errorf("adjacency SID value %q is not a number", adj.GetSid())
 				}
 				adjSID = uint32(adjSIDNum)
 				adjOverrideFFlag = adj.GetOverrideFlagAddressFamily()
@@ -765,7 +743,7 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 			name = fmt.Sprintf("IS-IS Topology %d for %s", i, ifcName)
 		}
 		if isisNetwGrps[name] != nil {
-			return nil, usererr.New("name %q reused for multiple IS-IS reachability groups on interface %q", name, ifcName)
+			return nil, fmt.Errorf("name %q reused for multiple IS-IS reachability groups on interface %q", name, ifcName)
 		}
 		isisNetwGrps[name] = &ixconfig.TopologyNetworkGroup{
 			Name: ixconfig.String(name),
@@ -786,13 +764,103 @@ func isisReachability(ifcName string, isrs []*opb.ISReachability) (map[string]*i
 	return isisNetwGrps, nil
 }
 
+func isisIPv4RouteExport(routes *opb.ISReachability_Node_Routes, ipv4Routes *ixconfig.TopologyIPv4PseudoNodeRoutes) error {
+	var exportRoutes, routeConfigureSID, routeRFlag, routeNFlag, routePFlag, routeEFlag, routeVFlag, routeLFlag bool
+	var routeMetric, routeAlgo, routeSIDIndexLabel uint32
+	routeOrigin := "internal"
+	exportRoutes = true
+	routeAddr, routeMask, isV6, err := parseCIDR(routes.GetPrefix())
+	if err != nil || isV6 {
+		return fmt.Errorf("invalid value %q for IPv4 route prefix", routes.GetPrefix())
+	}
+	routeCount := routes.GetNumRoutes()
+	if ipr := routes.GetReachability(); ipr != nil {
+		routeOrigin, err = routeOriginStr(ipr.GetRouteOrigin())
+		if err != nil {
+			return err
+		}
+		exportRoutes = ipr.GetActive()
+		routeMetric = ipr.GetMetric()
+		routeAlgo = ipr.GetAlgorithm()
+		routeConfigureSID = ipr.GetEnableSidIndexLabel()
+		routeSIDIndexLabel = ipr.GetSidIndexLabel()
+		routeRFlag = ipr.GetFlagReadvertise()
+		routeNFlag = ipr.GetFlagNodeSid()
+		routePFlag = ipr.GetFlagNoPhp()
+		routeEFlag = ipr.GetFlagExplicitNull()
+		routeVFlag = ipr.GetFlagValue()
+		routeLFlag = ipr.GetFlagLocal()
+	}
+	ipv4Routes.Active = appendBoolToMultivalueList(ipv4Routes.Active, exportRoutes)
+	ipv4Routes.NetworkAddress = appendStrToMultivalueList(ipv4Routes.NetworkAddress, routeAddr)
+	ipv4Routes.PrefixLength = appendUintToMultivalueList(ipv4Routes.PrefixLength, routeMask)
+	ipv4Routes.RangeSize = appendUint64ToMultivalueList(ipv4Routes.RangeSize, routeCount)
+	ipv4Routes.Ipv4Metric = appendUintToMultivalueList(ipv4Routes.Ipv4Metric, routeMetric)
+	ipv4Routes.Algorithm = appendUintToMultivalueList(ipv4Routes.Algorithm, routeAlgo)
+	ipv4Routes.Ipv4RouteOrigin = appendStrToMultivalueList(ipv4Routes.Ipv4RouteOrigin, routeOrigin)
+	ipv4Routes.ConfigureSIDIndexLabel = appendBoolToMultivalueList(ipv4Routes.ConfigureSIDIndexLabel, routeConfigureSID)
+	ipv4Routes.SIDIndexLabel = appendUintToMultivalueList(ipv4Routes.SIDIndexLabel, routeSIDIndexLabel)
+	ipv4Routes.Ipv4RFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4RFlag, routeRFlag)
+	ipv4Routes.Ipv4NFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4NFlag, routeNFlag)
+	ipv4Routes.Ipv4PFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4PFlag, routePFlag)
+	ipv4Routes.Ipv4EFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4EFlag, routeEFlag)
+	ipv4Routes.Ipv4VFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4VFlag, routeVFlag)
+	ipv4Routes.Ipv4LFlag = appendBoolToMultivalueList(ipv4Routes.Ipv4LFlag, routeLFlag)
+	return nil
+}
+
+func isisIPv6RouteExport(routes *opb.ISReachability_Node_Routes, ipv6Routes *ixconfig.TopologyIPv6PseudoNodeRoutes) error {
+	var exportRoutes, routeConfigureSID, routeRFlag, routeNFlag, routePFlag, routeEFlag, routeVFlag, routeLFlag bool
+	var routeMetric, routeAlgo, routeSIDIndexLabel uint32
+	routeOrigin := "internal"
+	exportRoutes = true
+	routeAddr, routeMask, isV6, err := parseCIDR(routes.GetPrefix())
+	if err != nil || !isV6 {
+		return fmt.Errorf("invalid value %q for IPv6 route prefix", routes.GetPrefix())
+	}
+	routeCount := routes.GetNumRoutes()
+	if ipr := routes.GetReachability(); ipr != nil {
+		routeOrigin, err = routeOriginStr(ipr.GetRouteOrigin())
+		if err != nil {
+			return err
+		}
+		exportRoutes = ipr.GetActive()
+		routeMetric = ipr.GetMetric()
+		routeAlgo = ipr.GetAlgorithm()
+		routeConfigureSID = ipr.GetEnableSidIndexLabel()
+		routeSIDIndexLabel = ipr.GetSidIndexLabel()
+		routeRFlag = ipr.GetFlagReadvertise()
+		routeNFlag = ipr.GetFlagNodeSid()
+		routePFlag = ipr.GetFlagNoPhp()
+		routeEFlag = ipr.GetFlagExplicitNull()
+		routeVFlag = ipr.GetFlagValue()
+		routeLFlag = ipr.GetFlagLocal()
+	}
+	ipv6Routes.Active = appendBoolToMultivalueList(ipv6Routes.Active, exportRoutes)
+	ipv6Routes.NetworkAddress = appendStrToMultivalueList(ipv6Routes.NetworkAddress, routeAddr)
+	ipv6Routes.Prefix = appendUintToMultivalueList(ipv6Routes.Prefix, routeMask)
+	ipv6Routes.RangeSize = appendUint64ToMultivalueList(ipv6Routes.RangeSize, routeCount)
+	ipv6Routes.Ipv6Metric = appendUintToMultivalueList(ipv6Routes.Ipv6Metric, routeMetric)
+	ipv6Routes.Algorithm = appendUintToMultivalueList(ipv6Routes.Algorithm, routeAlgo)
+	ipv6Routes.Ipv6RouteOrigin = appendStrToMultivalueList(ipv6Routes.Ipv6RouteOrigin, routeOrigin)
+	ipv6Routes.ConfigureSIDIndexLabel = appendBoolToMultivalueList(ipv6Routes.ConfigureSIDIndexLabel, routeConfigureSID)
+	ipv6Routes.SIDIndexLabel = appendUintToMultivalueList(ipv6Routes.SIDIndexLabel, routeSIDIndexLabel)
+	ipv6Routes.Ipv6RFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6RFlag, routeRFlag)
+	ipv6Routes.Ipv6NFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6NFlag, routeNFlag)
+	ipv6Routes.Ipv6PFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6PFlag, routePFlag)
+	ipv6Routes.Ipv6EFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6EFlag, routeEFlag)
+	ipv6Routes.Ipv6VFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6VFlag, routeVFlag)
+	ipv6Routes.Ipv6LFlag = appendBoolToMultivalueList(ipv6Routes.Ipv6LFlag, routeLFlag)
+	return nil
+}
+
 func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	const maxNumPeersIxNetwork = 2
 	if ifc.GetBgp() == nil {
 		return nil
 	}
 	if peerCount := len(ifc.GetBgp().GetBgpPeers()); peerCount > maxNumPeersIxNetwork {
-		return usererr.New("specified number of peers %d exceeds maximum of %d for IxNetwork device group", peerCount, maxNumPeersIxNetwork)
+		return fmt.Errorf("specified number of peers %d exceeds maximum of %d for IxNetwork device group", peerCount, maxNumPeersIxNetwork)
 	}
 	v4Peers, v6Peers, v4LoopbackPeers, v6LoopbackPeers, err := splitBGPPeers(ifc.GetBgp().GetBgpPeers())
 	if err != nil {
@@ -801,7 +869,7 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	intf := ix.intfs[ifc.GetName()]
 	if len(v4Peers) > 0 {
 		if intf.ipv4 == nil {
-			return usererr.New("specified V4 peers without IPv4 configured on interface %q", ifc.GetName())
+			return fmt.Errorf("specified V4 peers without IPv4 configured on interface %q", ifc.GetName())
 		}
 		peers, err := bgpV4Peers(v4Peers)
 		if err != nil {
@@ -811,7 +879,7 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	}
 	if len(v6Peers) > 0 {
 		if intf.ipv6 == nil {
-			return usererr.New("specified V6 peers without IPv6 configured on interface %q", ifc.GetName())
+			return fmt.Errorf("specified V6 peers without IPv6 configured on interface %q", ifc.GetName())
 		}
 		peers, err := bgpV6Peers(v6Peers)
 		if err != nil {
@@ -821,7 +889,7 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	}
 	if len(v4LoopbackPeers) > 0 {
 		if intf.ipv4Loopback == nil {
-			return usererr.New("specified V4 loopback peers without IPv4 loopback configured on interface %q", ifc.GetName())
+			return fmt.Errorf("specified V4 loopback peers without IPv4 loopback configured on interface %q", ifc.GetName())
 		}
 		peers, err := bgpV4Peers(v4LoopbackPeers)
 		if err != nil {
@@ -831,7 +899,7 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 	}
 	if len(v6LoopbackPeers) > 0 {
 		if intf.ipv6Loopback == nil {
-			return usererr.New("specified V6 loopback peers without IPv6 loopback configured on interface %q", ifc.GetName())
+			return fmt.Errorf("specified V6 loopback peers without IPv6 loopback configured on interface %q", ifc.GetName())
 		}
 		peers, err := bgpV6Peers(v6LoopbackPeers)
 		if err != nil {
@@ -847,7 +915,7 @@ func splitBGPPeers(peers []*opb.BgpPeer) ([]*opb.BgpPeer, []*opb.BgpPeer, []*opb
 	for _, peer := range peers {
 		ip, isV6 := parseIP(peer.GetPeerAddress())
 		if ip == nil {
-			return nil, nil, nil, nil, usererr.New("invalid peer address %q", peer.GetPeerAddress())
+			return nil, nil, nil, nil, fmt.Errorf("invalid peer address %q", peer.GetPeerAddress())
 		}
 		if peer.GetOnLoopback() {
 			if isV6 {
@@ -888,20 +956,20 @@ func srtePolicyCounts(grps []*opb.BgpPeer_SrtePolicyGroup) (*policyCounts, error
 
 		numCommsForGrp := uint32(numBGPSRTEComms(grp.GetCommunities()))
 		if i > 0 && numCommunities != numCommsForGrp {
-			return nil, usererr.New("all policy groups for a BGP peer must have the same number of communities")
+			return nil, fmt.Errorf("all policy groups for a BGP peer must have the same number of communities")
 		} else if numCommsForGrp > maxNumCommunitiesIxNetwork {
-			return nil, usererr.New("only up to %d communities are supported per policy", maxNumCommunitiesIxNetwork)
+			return nil, fmt.Errorf("only up to %d communities are supported per policy", maxNumCommunitiesIxNetwork)
 		}
 		numCommunities = numCommsForGrp
 
 		if n := uint32(len(grp.GetSegmentLists())); n > maxNumSegmentListsIxNetwork {
-			return nil, usererr.New("only up to %d segment lists are supported per policy", maxNumSegmentListsIxNetwork)
+			return nil, fmt.Errorf("only up to %d segment lists are supported per policy", maxNumSegmentListsIxNetwork)
 		} else if n > maxSegListCount {
 			maxSegListCount = n
 		}
 		for _, sl := range grp.GetSegmentLists() {
 			if n := uint32(len(sl.GetSegments())); n > maxNumSegmentsIxNetwork {
-				return nil, usererr.New("only up to %d segments lists are supported per segment list", maxNumSegmentsIxNetwork)
+				return nil, fmt.Errorf("only up to %d segments lists are supported per segment list", maxNumSegmentsIxNetwork)
 			} else if n > maxSegCount {
 				maxSegCount = n
 			}
@@ -942,7 +1010,7 @@ type policyGroup struct {
 func (pg *policyGroup) setTypeAndEPs(ep string) error {
 	parsedEP, isV6 := parseIP(ep)
 	if parsedEP == nil {
-		return usererr.New("invalid policy group endpoint %q", ep)
+		return fmt.Errorf("invalid policy group endpoint %q", ep)
 	}
 	pg.policyType = "ipv4"
 	pg.v4EP, pg.v6EP = ep, "::"
@@ -959,7 +1027,7 @@ func (pg *policyGroup) setNHTypesAndAddrs(nh string) error {
 	if nh != "" {
 		parsedNH, isV6 := parseIP(nh)
 		if parsedNH == nil {
-			return usererr.New("invalid policy group next hop address %q", nh)
+			return fmt.Errorf("invalid policy group next hop address %q", nh)
 		}
 		pg.nhType = "manually"
 		if isV6 {
@@ -979,7 +1047,7 @@ func (pg *policyGroup) setASNSetModeAndOverride(asnSetMode opb.BgpAsnSetMode) er
 	}
 	mode, ok := asnSetModeToStr[asnSetMode]
 	if !ok {
-		return usererr.New("invalid policy group ASN set mode %s", asnSetMode)
+		return fmt.Errorf("invalid policy group ASN set mode %s", asnSetMode)
 	}
 	pg.asm = mode
 	pg.asmOverride = true
@@ -1132,7 +1200,7 @@ func bgpSRTEComms(communities *opb.BgpCommunities, commLists []*ixconfig.Topolog
 	for _, comm := range communities.GetPrivateCommunities() {
 		commSplit := strings.SplitN(comm, ":", 2)
 		if len(commSplit) != 2 {
-			return usererr.New("invalid format for BGP community %q", comm)
+			return fmt.Errorf("invalid format for BGP community %q", comm)
 		}
 		setComm("manual", commSplit[0], commSplit[1])
 	}
@@ -1542,7 +1610,7 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 	intf.rsvpLSPs = make(map[string]*ixconfig.TopologyRsvpteLsps, len(ifc.GetRsvps()))
 	for rsvpIdx, rsvp := range ifc.GetRsvps() {
 		if intf.ipv4 == nil {
-			return usererr.New("could not find IPv4 config to configure RSVP interface for %q", ifc.GetName())
+			return fmt.Errorf("could not find IPv4 config to configure RSVP interface for %q", ifc.GetName())
 		}
 		if len(intf.ipv4.RsvpteIf) == 0 {
 			intf.ipv4.RsvpteIf = []*ixconfig.TopologyRsvpteIf{{
@@ -1555,14 +1623,14 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 
 		ng := intf.isrToNetworkGroup[rsvp.GetIsReachabilityName()]
 		if ng == nil {
-			return usererr.New("could not find IS-IS reachability config %q specified for RSVP config", rsvp.GetIsReachabilityName())
+			return fmt.Errorf("could not find IS-IS reachability config %q specified for RSVP config", rsvp.GetIsReachabilityName())
 		}
 
 		numLoopbacks := len(rsvp.GetLoopbacks())
 		ntl := ng.NetworkTopology.NetTopologyLinear
 		// TODO: Will need a different check after enabling custom IS-IS topologies.
 		if ntl == nil || ntl.Nodes == nil || *(ntl.Nodes) < float32(numLoopbacks) {
-			return usererr.New("cannot add more loopbacks than configured IS-IS nodes on reachability config %q", rsvp.GetIsReachabilityName())
+			return fmt.Errorf("cannot add more loopbacks than configured IS-IS nodes on reachability config %q", rsvp.GetIsReachabilityName())
 		}
 
 		// Compute/validate LSP and route object counts.
@@ -1572,19 +1640,19 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 			if lspCnt := len(lsps); i == 0 {
 				numIngressLSPs = lspCnt
 			} else if numIngressLSPs != lspCnt {
-				return usererr.New("ingress LSP count must match on all loopbacks for an RSVP configuration (checks RSVP configs for IS-IS reachability config %q)", rsvp.GetIsReachabilityName())
+				return fmt.Errorf("ingress LSP count must match on all loopbacks for an RSVP configuration (checks RSVP configs for IS-IS reachability config %q)", rsvp.GetIsReachabilityName())
 			}
 
 			for _, lsp := range lsps {
 				if erosCnt := len(lsp.GetEros()); erosCnt != 0 && numEROs == 0 {
 					numEROs = erosCnt
 				} else if erosCnt != 0 && numEROs != erosCnt {
-					return usererr.New("ERO count must match on all configured EROs for an RSVP configuration (check RSVP configs for IS-IS reachability config %q)", rsvp.GetIsReachabilityName())
+					return fmt.Errorf("ERO count must match on all configured EROs for an RSVP configuration (check RSVP configs for IS-IS reachability config %q)", rsvp.GetIsReachabilityName())
 				}
 				if rrosCnt := len(lsp.GetRros()); rrosCnt != 0 && numRROs == 0 {
 					numRROs = rrosCnt
 				} else if rrosCnt != 0 && numRROs != rrosCnt {
-					return usererr.New("RRO count must match on all configured RROs for an RSVP configuration (checks RSVP configs for IS-IS reachability config %q)", rsvp.GetIsReachabilityName())
+					return fmt.Errorf("RRO count must match on all configured RROs for an RSVP configuration (checks RSVP configs for IS-IS reachability config %q)", rsvp.GetIsReachabilityName())
 				}
 			}
 		}
@@ -1632,7 +1700,7 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 		for _, lb := range rsvp.GetLoopbacks() {
 			ip, mask, isV6, err := parseCIDR(lb.GetLocalIpCidr())
 			if err != nil || isV6 {
-				return usererr.New("could not parse %q as IPv4 address for RSVP loopback: is V6? %t error? %v", lb.GetLocalIpCidr(), isV6, err)
+				return fmt.Errorf("could not parse %q as IPv4 address for RSVP loopback: is V6? %t error? %v", lb.GetLocalIpCidr(), isV6, err)
 			}
 			lpCfg.Address = appendStrToMultivalueList(lpCfg.Address, ip)
 			lpCfg.Prefix = appendUintToMultivalueList(lpCfg.Prefix, mask)
@@ -1640,7 +1708,7 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 			for _, lsp := range lb.GetIngressLsps() {
 				ip, mask, isV6, err := parseCIDR(lsp.GetRemoteIpCidr())
 				if err != nil || isV6 {
-					return usererr.New("could not parse %q as IPv4 address for RSVP ingress LSP: is V6? %t error? %v", lsp.GetRemoteIpCidr(), isV6, err)
+					return fmt.Errorf("could not parse %q as IPv4 address for RSVP ingress LSP: is V6? %t error? %v", lsp.GetRemoteIpCidr(), isV6, err)
 				}
 				ingressLSPs.RemoteIp = appendStrToMultivalueList(ingressLSPs.RemoteIp, ip)
 				ingressLSPs.PrefixLength = appendUintToMultivalueList(ingressLSPs.PrefixLength, mask)
@@ -1664,7 +1732,7 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 						cidr := lsp.GetEros()[i].GetIpv4Cidr()
 						ip, mask, isV6, err = parseCIDR(cidr)
 						if err != nil || isV6 {
-							return usererr.New("could not parse %q as IPv4 address for RSVP ERO object: is V6? %t error? %v", cidr, isV6, err)
+							return fmt.Errorf("could not parse %q as IPv4 address for RSVP ERO object: is V6? %t error? %v", cidr, isV6, err)
 						}
 					}
 					eros[i].Ip = appendStrToMultivalueList(eros[i].Ip, ip)
@@ -1681,7 +1749,7 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 					if ip != "" {
 						ipAddr, isV6 := parseIP(ip)
 						if ipAddr == nil || isV6 {
-							return usererr.New("invalid IP address %q for RSVP RRO object", ip)
+							return fmt.Errorf("invalid IP address %q for RSVP RRO object", ip)
 						}
 						addr = ipAddr.String()
 					}
