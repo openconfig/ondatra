@@ -12,6 +12,136 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter with a corresponding timestamp.
+type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter) Val(t testing.TB) *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter sample.
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter) SetVal(v *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter) *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter samples.
+type CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter struct {
+	W    *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounterWatcher
+	Data []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounterWatcher observes a stream of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter samples.
+type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounterWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounterWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_AggregateSidCounter, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface with a corresponding timestamp.
+type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface) Val(t testing.TB) *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface sample.
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface) SetVal(v *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface) *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface samples.
+type CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface struct {
+	W    *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_InterfaceWatcher
+	Data []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface) Await(t testing.TB) []*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_InterfaceWatcher observes a stream of *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface samples.
+type NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_InterfaceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_InterfaceWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef is a *NetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef with a corresponding timestamp.
 type QualifiedNetworkInstance_Mpls_SignalingProtocols_SegmentRouting_Interface_InterfaceRef struct {
 	*genutil.Metadata
@@ -9108,71 +9238,6 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicyWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_ApplyPolicy, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart samples.
-type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart struct {
-	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart samples.
-type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

@@ -27,7 +27,7 @@ type ATEDevice struct {
 // OTG returns a handle to the OTG API.
 func (a *ATEDevice) OTG() *OTG {
 	if a.otg == nil {
-		a.otg = &OTG{ate: a.res.(binding.ATE)}
+		a.otg = &OTG{devID: a.ID(), ate: a.res.(binding.ATE)}
 	}
 	return a.otg
 }

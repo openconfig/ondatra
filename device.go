@@ -169,6 +169,10 @@ func (p *Port) Device() *Device {
 type Speed int
 
 const (
+	// Speed1Gb is a port speed of 1Gbps.
+	Speed1Gb = Speed(opb.Port_S_1GB)
+	// Speed5Gb is a port speed of 5Gbps.
+	Speed5Gb = Speed(opb.Port_S_5GB)
 	// Speed10Gb is a port speed of 10Gbps.
 	Speed10Gb = Speed(opb.Port_S_10GB)
 	// Speed100Gb is a port speed of 100Gbps.

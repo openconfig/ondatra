@@ -15,6 +15,7 @@
 package ondatra
 
 import (
+	"golang.org/x/net/context"
 	"strings"
 	"testing"
 
@@ -29,7 +30,7 @@ var (
 
 func initOTGFakes(t *testing.T) {
 	t.Helper()
-	fakeIxia.DialOTGFn = func() (gosnappi.GosnappiApi, error) {
+	fakeIxia.DialOTGFn = func(context.Context) (gosnappi.GosnappiApi, error) {
 		return fakeSnappi, nil
 	}
 	initFakeBinding(t)

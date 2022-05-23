@@ -27,10 +27,10 @@ import (
 
 	log "github.com/golang/glog"
 	"golang.org/x/crypto/ssh"
-	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gocloser"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
@@ -240,7 +240,7 @@ type kneATE struct {
 	cfg *Config
 }
 
-func (a *kneATE) DialOTG() (gosnappi.GosnappiApi, error) {
+func (a *kneATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
 	s, err := a.Service("grpc")
 	if err != nil {
 		return nil, err

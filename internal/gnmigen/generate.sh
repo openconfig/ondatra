@@ -21,11 +21,11 @@ set -e
 go install github.com/openconfig/ygot/generator@latest
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
+git clone https://github.com/open-traffic-generator/models-yang.git
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
-COMMON_ARGS=(
-  -path=public/release/models,public/third_party/ietf
+YGOT_COMMON_ARGS=(
   -compress_paths
   -exclude_modules="${EXCLUDE_MODULES}"
   -generate_fakeroot
@@ -42,8 +42,8 @@ COMMON_ARGS=(
   -generate_rename
   -generate_delete
   -generate_leaf_getters
-  -structs_split_files_count=10
   -generate_populate_defaults
+  -list_builder_key_threshold=4
 )
 
 YANG_FILES=(
@@ -100,13 +100,14 @@ YANG_FILES=(
 
 # Generate Schema Structs
 generator \
+  -path=public/release/models,public/third_party/ietf \
   -generate_structs \
   -generate_path_structs=false \
   -prefer_operational_state \
-  -list_builder_key_threshold=4 \
   -output_dir=telemetry \
   -package_name=telemetry \
-  "${COMMON_ARGS[@]}" \
+  -structs_split_files_count=10 \
+  "${YGOT_COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
 
 go run internal/gnmigen/main/main.go \
@@ -122,6 +123,7 @@ go run internal/gnmigen/main/main.go \
 # Generate Config API.
 mkdir -p config/device
 generator \
+  -path=public/release/models,public/third_party/ietf \
   -generate_path_structs \
   -generate_structs=false \
   -exclude_state \
@@ -134,7 +136,7 @@ generator \
   -base_import_path=github.com/openconfig/ondatra/config \
   -trim_path_package_oc_prefix=true \
   -path_struct_package_suffix="" \
-  "${COMMON_ARGS[@]}" \
+  "${YGOT_COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
 
 go run internal/gnmigen/main/main.go \
@@ -156,10 +158,10 @@ go run internal/gnmigen/main/main.go \
 # Generate Telemetry API.
 mkdir -p telemetry/device
 generator \
+  -path=public/release/models,public/third_party/ietf \
   -generate_path_structs \
   -generate_structs=false \
   -prefer_operational_state \
-  -list_builder_key_threshold=4 \
   -output_dir=telemetry \
   -package_name=device \
   -path_structs_output_file=telemetry/device/device.go \
@@ -169,7 +171,7 @@ generator \
   -path_struct_package_suffix="" \
   -base_import_path=github.com/openconfig/ondatra/telemetry \
   -path_structs_split_files_count=10 \
-  "${COMMON_ARGS[@]}" \
+  "${YGOT_COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
 
 go run internal/gnmigen/main/main.go \
@@ -185,6 +187,66 @@ go run internal/gnmigen/main/main.go \
   -telemetry_types_file_split=10 \
   "${YANG_FILES[@]}"
 
+OTG_YANG_FILES=(
+  models-yang/models/isis/open-traffic-generator-isis.yang
+  models-yang/models/types/open-traffic-generator-types.yang
+  models-yang/models/flow/open-traffic-generator-flow.yang
+  models-yang/models/discovery/open-traffic-generator-discovery.yang
+  models-yang/models/interface/open-traffic-generator-port.yang
+  models-yang/models/bgp/open-traffic-generator-bgp.yang
+)
+
+# Generate OTG Schema Structs
+mkdir -p telemetry/otg
+generator \
+    -path=models-yang/models \
+    -generate_structs \
+    -generate_path_structs=false \
+    -prefer_operational_state \
+    -output_dir=telemetry/otg \
+    -package_name=otg \
+    -structs_split_files_count=3 \
+    "${YGOT_COMMON_ARGS[@]}" \
+    "${OTG_YANG_FILES[@]}"
+
+go run internal/gnmigen/main/main.go \
+  -path=models-yang/models \
+  -output_dir=telemetry/otg \
+  -package_name=otg \
+  -gen_path_struct_api=false \
+  -split_pathstructs_by_module=true \
+  -telemetry_types_file_split=3 \
+  "${OTG_YANG_FILES[@]}"
+
+# Generate OTG Telemetry API
+mkdir -p telemetry/otg/device
+generator \
+    -path=models-yang/models \
+    -generate_structs=false \
+    -generate_path_structs \
+    -prefer_operational_state \
+    -output_dir=telemetry/otg \
+    -package_name=device \
+    -path_structs_output_file=telemetry/otg/device/device.go \
+    -split_pathstructs_by_module=true \
+    -schema_struct_path=github.com/openconfig/ondatra/telemetry/otg \
+    -path_struct_package_suffix="" \
+    -base_import_path=github.com/openconfig/ondatra/telemetry/otg \
+    -path_structs_split_files_count=3 \
+    "${YGOT_COMMON_ARGS[@]}" \
+    "${OTG_YANG_FILES[@]}"
+
+go run internal/gnmigen/main/main.go \
+  -path=models-yang/models \
+  -output_dir=telemetry/otg \
+  -package_name=device \
+  -schema_struct_path=github.com/openconfig/ondatra/telemetry/otg \
+  -split_pathstructs_by_module=true \
+  -fake_root_helper_filename=device/root_helper.go \
+  -fake_root_gnmi_filename=device/device_telem.go \
+  -telemetry_funcs_file_split=3 \
+  "${OTG_YANG_FILES[@]}"
+
 find config telemetry -name "*.go" -exec goimports -w {} +
 find config telemetry -name "*.go" -exec gofmt -w -s {} +
-rm -rf public gnmi-collector-metadata.yang
+rm -rf public gnmi-collector-metadata.yang models-yang

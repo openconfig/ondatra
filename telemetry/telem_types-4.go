@@ -9176,3 +9176,68 @@ func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Pr
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
+
+// QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric is a *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric sample.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) SetVal(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric samples.
+type CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric struct {
+	W    *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric samples.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetricWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4InternalReachability_Prefix_DelayMetric, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}

@@ -12,6 +12,71 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart sample.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) SetVal(v *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart samples.
+type CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart struct {
+	W    *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher observes a stream of *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart samples.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestartWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_GracefulRestart, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast is a *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast struct {
 	*genutil.Metadata

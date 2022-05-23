@@ -21,8 +21,8 @@ import (
 	"io"
 	"time"
 
-	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding/ixweb"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -163,7 +163,7 @@ type ATE interface {
 	DialIxNetwork(context.Context) (*IxNetwork, error)
 
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
-	DialOTG() (gosnappi.GosnappiApi, error)
+	DialOTG(context.Context) (gosnappi.GosnappiApi, error)
 
 	isATE()
 }

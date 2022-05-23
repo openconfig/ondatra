@@ -17018,6 +17018,109 @@ func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4UnicastPath) BatchUpdat
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetExtendedNextHopEncoding())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/config/extended-next-hop-encoding in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath extracts the value of the leaf ExtendedNextHopEncoding from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.ExtendedNextHopEncoding
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast/prefix-limit with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimitPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Bgp_Global_AfiSafi_Ipv4Unicast_PrefixLimit {
@@ -24769,107 +24872,6 @@ func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixL
 		Metadata: md,
 	}
 	val := parent.WarningThresholdPct
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Get(t testing.TB) uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPathAny) Get(t testing.TB) []uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/config/max-prefixes in the given batch object.
-func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath extracts the value of the leaf MaxPrefixes from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit_MaxPrefixesPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_L3VpnIpv6Unicast_PrefixLimit) *oc.QualifiedUint32 {
-	t.Helper()
-	qv := &oc.QualifiedUint32{
-		Metadata: md,
-	}
-	val := parent.MaxPrefixes
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
