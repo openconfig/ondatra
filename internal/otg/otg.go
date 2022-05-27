@@ -20,13 +20,17 @@ import (
 	"fmt"
 	"sync"
 
+	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
 var (
-	mu   sync.Mutex
-	apis = make(map[binding.ATE]gosnappi.GosnappiApi)
+	mu    sync.Mutex
+	apis  = make(map[binding.ATE]gosnappi.GosnappiApi)
+	gnmis = make(map[binding.ATE]gpb.GNMIClient)
 )
 
 func fetchAPI(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error) {
@@ -133,4 +137,20 @@ func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.Trans
 		return nil, err
 	}
 	return resp.Warnings(), nil
+}
+
+// FetchGNMI returns a gNMI client for the specified ATE.
+func FetchGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) {
+	mu.Lock()
+	defer mu.Unlock()
+	gnmi, ok := gnmis[ate]
+	if !ok {
+		var err error
+		gnmi, err = ate.DialGNMI(ctx, grpc.WithBlock())
+		if err != nil {
+			return nil, err
+		}
+		gnmis[ate] = gnmi
+	}
+	return gnmi, nil
 }

@@ -82,6 +82,7 @@ func TestAddPorts(t *testing.T) {
 		name:        ixiaName,
 		chassisHost: chassisHost,
 		cfg:         &ixconfig.Ixnetwork{},
+		vportToPort: make(map[*ixconfig.Vport]string),
 		ports:       make(map[string]*ixconfig.Vport),
 	}
 

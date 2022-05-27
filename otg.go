@@ -22,8 +22,11 @@ import (
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/otg"
 	"github.com/openconfig/ondatra/telemetry/otg/device"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
 // OTG provides the Open Traffic Generator API to an ATE.
@@ -125,5 +128,9 @@ func (o *OTG) StopTraffic(t testing.TB) {
 
 // Telemetry returns a telemetry path root for the device.
 func (o *OTG) Telemetry() *device.DevicePath {
-	return device.DeviceRoot(o.devID)
+	root := device.DeviceRoot(o.devID)
+	root.PutCustomData(genutil.DefaultClientKey, func(ctx context.Context) (gpb.GNMIClient, error) {
+		return otg.FetchGNMI(ctx, o.ate)
+	})
+	return root
 }

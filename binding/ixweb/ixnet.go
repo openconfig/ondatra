@@ -182,6 +182,39 @@ func (s *Session) Stats() *Stats {
 	return &Stats{sess: s}
 }
 
+// Error represents an error reported by an IxNetwork session.
+type Error struct {
+	ID                  int      `json:"id"`
+	Level               string   `json:"errorLevel"`
+	Code                int      `json:"errorCode"`
+	Description         string   `json:"description"`
+	Name                string   `json:"name"`
+	LastModified        string   `json:"lastModified"`
+	InstanceDataColumns []string `json:"sourceColumnsDisplayName"`
+	Provider            string   `json:"provider"`
+	Instances           []*ErrorInstance
+}
+
+// ErrorInstance represents an error instance reported by an IxNetwork session.
+type ErrorInstance struct {
+	DataRow []string `json:"sourceValues"`
+}
+
+// Errors returns the current errors/warnings for this session.
+func (s *Session) Errors(ctx context.Context) ([]*Error, error) {
+	const errEP = "/globals/appErrors/error"
+	var errors []*Error
+	if err := s.Get(ctx, errEP, &errors); err != nil {
+		return nil, fmt.Errorf("error fetching session errors: %w", err)
+	}
+	for _, e := range errors {
+		if err := s.Get(ctx, path.Join(errEP, strconv.Itoa(e.ID), "instance"), &(e.Instances)); err != nil {
+			return nil, fmt.Errorf("error fetching instances of error with ID %d: %w", e.ID, err)
+		}
+	}
+	return errors, nil
+}
+
 func (s *Session) jsonReq(ctx context.Context, method httpMethod, path string, in, out interface{}) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()

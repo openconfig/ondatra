@@ -12,6 +12,201 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_Types_ADDRESS_FAMILY is a E_Types_ADDRESS_FAMILY with a corresponding timestamp.
+type QualifiedE_Types_ADDRESS_FAMILY struct {
+	*genutil.Metadata
+	val     E_Types_ADDRESS_FAMILY // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Types_ADDRESS_FAMILY) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Types_ADDRESS_FAMILY sample, erroring out if not present.
+func (q *QualifiedE_Types_ADDRESS_FAMILY) Val(t testing.TB) E_Types_ADDRESS_FAMILY {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Types_ADDRESS_FAMILY sample.
+func (q *QualifiedE_Types_ADDRESS_FAMILY) SetVal(v E_Types_ADDRESS_FAMILY) *QualifiedE_Types_ADDRESS_FAMILY {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Types_ADDRESS_FAMILY) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Types_ADDRESS_FAMILY is a telemetry Collection whose Await method returns a slice of E_Types_ADDRESS_FAMILY samples.
+type CollectionE_Types_ADDRESS_FAMILY struct {
+	W    *E_Types_ADDRESS_FAMILYWatcher
+	Data []*QualifiedE_Types_ADDRESS_FAMILY
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Types_ADDRESS_FAMILY) Await(t testing.TB) []*QualifiedE_Types_ADDRESS_FAMILY {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Types_ADDRESS_FAMILYWatcher observes a stream of E_Types_ADDRESS_FAMILY samples.
+type E_Types_ADDRESS_FAMILYWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Types_ADDRESS_FAMILY
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Types_ADDRESS_FAMILYWatcher) Await(t testing.TB) (*QualifiedE_Types_ADDRESS_FAMILY, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_VlanTypes_TPID_TYPES is a E_VlanTypes_TPID_TYPES with a corresponding timestamp.
+type QualifiedE_VlanTypes_TPID_TYPES struct {
+	*genutil.Metadata
+	val     E_VlanTypes_TPID_TYPES // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_VlanTypes_TPID_TYPES) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_VlanTypes_TPID_TYPES sample, erroring out if not present.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) Val(t testing.TB) E_VlanTypes_TPID_TYPES {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_VlanTypes_TPID_TYPES sample.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) SetVal(v E_VlanTypes_TPID_TYPES) *QualifiedE_VlanTypes_TPID_TYPES {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_VlanTypes_TPID_TYPES) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_VlanTypes_TPID_TYPES is a telemetry Collection whose Await method returns a slice of E_VlanTypes_TPID_TYPES samples.
+type CollectionE_VlanTypes_TPID_TYPES struct {
+	W    *E_VlanTypes_TPID_TYPESWatcher
+	Data []*QualifiedE_VlanTypes_TPID_TYPES
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_VlanTypes_TPID_TYPES) Await(t testing.TB) []*QualifiedE_VlanTypes_TPID_TYPES {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_VlanTypes_TPID_TYPESWatcher observes a stream of E_VlanTypes_TPID_TYPES samples.
+type E_VlanTypes_TPID_TYPESWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_VlanTypes_TPID_TYPES
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_VlanTypes_TPID_TYPESWatcher) Await(t testing.TB) (*QualifiedE_VlanTypes_TPID_TYPES, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_VlanTypes_VlanModeType is a E_VlanTypes_VlanModeType with a corresponding timestamp.
+type QualifiedE_VlanTypes_VlanModeType struct {
+	*genutil.Metadata
+	val     E_VlanTypes_VlanModeType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_VlanTypes_VlanModeType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_VlanTypes_VlanModeType sample, erroring out if not present.
+func (q *QualifiedE_VlanTypes_VlanModeType) Val(t testing.TB) E_VlanTypes_VlanModeType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_VlanTypes_VlanModeType sample.
+func (q *QualifiedE_VlanTypes_VlanModeType) SetVal(v E_VlanTypes_VlanModeType) *QualifiedE_VlanTypes_VlanModeType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_VlanTypes_VlanModeType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_VlanTypes_VlanModeType is a telemetry Collection whose Await method returns a slice of E_VlanTypes_VlanModeType samples.
+type CollectionE_VlanTypes_VlanModeType struct {
+	W    *E_VlanTypes_VlanModeTypeWatcher
+	Data []*QualifiedE_VlanTypes_VlanModeType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_VlanTypes_VlanModeType) Await(t testing.TB) []*QualifiedE_VlanTypes_VlanModeType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_VlanTypes_VlanModeTypeWatcher observes a stream of E_VlanTypes_VlanModeType samples.
+type E_VlanTypes_VlanModeTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_VlanTypes_VlanModeType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_VlanTypes_VlanModeTypeWatcher) Await(t testing.TB) (*QualifiedE_VlanTypes_VlanModeType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_VlanTypes_VlanStackAction is a E_VlanTypes_VlanStackAction with a corresponding timestamp.
 type QualifiedE_VlanTypes_VlanStackAction struct {
 	*genutil.Metadata
@@ -463,201 +658,6 @@ type Keychain_Tolerance_UnionWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Keychain_Tolerance_UnionWatcher) Await(t testing.TB) (*QualifiedKeychain_Tolerance_Union, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLocalRoutes_Aggregate_SetTag_Union is a LocalRoutes_Aggregate_SetTag_Union with a corresponding timestamp.
-type QualifiedLocalRoutes_Aggregate_SetTag_Union struct {
-	*genutil.Metadata
-	val     LocalRoutes_Aggregate_SetTag_Union // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLocalRoutes_Aggregate_SetTag_Union) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the LocalRoutes_Aggregate_SetTag_Union sample, erroring out if not present.
-func (q *QualifiedLocalRoutes_Aggregate_SetTag_Union) Val(t testing.TB) LocalRoutes_Aggregate_SetTag_Union {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the LocalRoutes_Aggregate_SetTag_Union sample.
-func (q *QualifiedLocalRoutes_Aggregate_SetTag_Union) SetVal(v LocalRoutes_Aggregate_SetTag_Union) *QualifiedLocalRoutes_Aggregate_SetTag_Union {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLocalRoutes_Aggregate_SetTag_Union) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLocalRoutes_Aggregate_SetTag_Union is a telemetry Collection whose Await method returns a slice of LocalRoutes_Aggregate_SetTag_Union samples.
-type CollectionLocalRoutes_Aggregate_SetTag_Union struct {
-	W    *LocalRoutes_Aggregate_SetTag_UnionWatcher
-	Data []*QualifiedLocalRoutes_Aggregate_SetTag_Union
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLocalRoutes_Aggregate_SetTag_Union) Await(t testing.TB) []*QualifiedLocalRoutes_Aggregate_SetTag_Union {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// LocalRoutes_Aggregate_SetTag_UnionWatcher observes a stream of LocalRoutes_Aggregate_SetTag_Union samples.
-type LocalRoutes_Aggregate_SetTag_UnionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLocalRoutes_Aggregate_SetTag_Union
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *LocalRoutes_Aggregate_SetTag_UnionWatcher) Await(t testing.TB) (*QualifiedLocalRoutes_Aggregate_SetTag_Union, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLocalRoutes_Static_NextHop_NextHop_Union is a LocalRoutes_Static_NextHop_NextHop_Union with a corresponding timestamp.
-type QualifiedLocalRoutes_Static_NextHop_NextHop_Union struct {
-	*genutil.Metadata
-	val     LocalRoutes_Static_NextHop_NextHop_Union // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLocalRoutes_Static_NextHop_NextHop_Union) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the LocalRoutes_Static_NextHop_NextHop_Union sample, erroring out if not present.
-func (q *QualifiedLocalRoutes_Static_NextHop_NextHop_Union) Val(t testing.TB) LocalRoutes_Static_NextHop_NextHop_Union {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the LocalRoutes_Static_NextHop_NextHop_Union sample.
-func (q *QualifiedLocalRoutes_Static_NextHop_NextHop_Union) SetVal(v LocalRoutes_Static_NextHop_NextHop_Union) *QualifiedLocalRoutes_Static_NextHop_NextHop_Union {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLocalRoutes_Static_NextHop_NextHop_Union) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLocalRoutes_Static_NextHop_NextHop_Union is a telemetry Collection whose Await method returns a slice of LocalRoutes_Static_NextHop_NextHop_Union samples.
-type CollectionLocalRoutes_Static_NextHop_NextHop_Union struct {
-	W    *LocalRoutes_Static_NextHop_NextHop_UnionWatcher
-	Data []*QualifiedLocalRoutes_Static_NextHop_NextHop_Union
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLocalRoutes_Static_NextHop_NextHop_Union) Await(t testing.TB) []*QualifiedLocalRoutes_Static_NextHop_NextHop_Union {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// LocalRoutes_Static_NextHop_NextHop_UnionWatcher observes a stream of LocalRoutes_Static_NextHop_NextHop_Union samples.
-type LocalRoutes_Static_NextHop_NextHop_UnionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLocalRoutes_Static_NextHop_NextHop_Union
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *LocalRoutes_Static_NextHop_NextHop_UnionWatcher) Await(t testing.TB) (*QualifiedLocalRoutes_Static_NextHop_NextHop_Union, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLocalRoutes_Static_SetTag_Union is a LocalRoutes_Static_SetTag_Union with a corresponding timestamp.
-type QualifiedLocalRoutes_Static_SetTag_Union struct {
-	*genutil.Metadata
-	val     LocalRoutes_Static_SetTag_Union // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLocalRoutes_Static_SetTag_Union) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the LocalRoutes_Static_SetTag_Union sample, erroring out if not present.
-func (q *QualifiedLocalRoutes_Static_SetTag_Union) Val(t testing.TB) LocalRoutes_Static_SetTag_Union {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the LocalRoutes_Static_SetTag_Union sample.
-func (q *QualifiedLocalRoutes_Static_SetTag_Union) SetVal(v LocalRoutes_Static_SetTag_Union) *QualifiedLocalRoutes_Static_SetTag_Union {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLocalRoutes_Static_SetTag_Union) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLocalRoutes_Static_SetTag_Union is a telemetry Collection whose Await method returns a slice of LocalRoutes_Static_SetTag_Union samples.
-type CollectionLocalRoutes_Static_SetTag_Union struct {
-	W    *LocalRoutes_Static_SetTag_UnionWatcher
-	Data []*QualifiedLocalRoutes_Static_SetTag_Union
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLocalRoutes_Static_SetTag_Union) Await(t testing.TB) []*QualifiedLocalRoutes_Static_SetTag_Union {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// LocalRoutes_Static_SetTag_UnionWatcher observes a stream of LocalRoutes_Static_SetTag_Union samples.
-type LocalRoutes_Static_SetTag_UnionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLocalRoutes_Static_SetTag_Union
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *LocalRoutes_Static_SetTag_UnionWatcher) Await(t testing.TB) (*QualifiedLocalRoutes_Static_SetTag_Union, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

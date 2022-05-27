@@ -15,210 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetEnabled())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath extracts the value of the leaf Enabled from its parent oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_EnabledPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.Enabled
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Get(t testing.TB) uint16 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint16
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPathAny) Get(t testing.TB) []uint16 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint16
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/mpls/igp-ldp-sync/config/post-session-up-delay in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath extracts the value of the leaf PostSessionUpDelay from its parent oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
-func convertNetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync_PostSessionUpDelayPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Mpls_IgpLdpSync) *oc.QualifiedUint16 {
-	t.Helper()
-	qv := &oc.QualifiedUint16{
-		Metadata: md,
-	}
-	val := parent.PostSessionUpDelay
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
@@ -10617,7 +10413,7 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreferencePath) BatchUpdate(t 
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_RoutePreference{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_RoutePreference", goStruct, true, true)
@@ -10630,19 +10426,19 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePrefer
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Get(t testing.TB) uint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Get(t testing.TB) uint32 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint8
+	var data []*oc.QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_RoutePreference{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_RoutePreference", goStruct, queryPath, true, true)
@@ -10656,10 +10452,10 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePrefer
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePathAny) Get(t testing.TB) []uint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint8
+	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -10679,34 +10475,34 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePrefer
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) Update(t testing.TB, val uint32) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/external-route-preference in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath extracts the value of the leaf ExternalRoutePreference from its parent oc.NetworkInstance_Protocol_Isis_Level_RoutePreference
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_RoutePreference) *oc.QualifiedUint8 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_RoutePreference) *oc.QualifiedUint32 {
 	t.Helper()
-	qv := &oc.QualifiedUint8{
+	qv := &oc.QualifiedUint32{
 		Metadata: md,
 	}
 	val := parent.ExternalRoutePreference
@@ -10718,7 +10514,7 @@ func convertNetworkInstance_Protocol_Isis_Level_RoutePreference_ExternalRoutePre
 
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference with a ONCE subscription.
 // It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
 	t.Helper()
 	goStruct := &oc.NetworkInstance_Protocol_Isis_Level_RoutePreference{}
 	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Level_RoutePreference", goStruct, true, true)
@@ -10731,19 +10527,19 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePrefer
 // Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Get(t testing.TB) uint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Get(t testing.TB) uint32 {
 	t.Helper()
 	return n.Lookup(t).Val(t)
 }
 
 // Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
 	t.Helper()
 	datapoints, queryPath := genutil.MustGet(t, n)
 	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
 
-	var data []*oc.QualifiedUint8
+	var data []*oc.QualifiedUint32
 	for _, prefix := range sortedPrefixes {
 		goStruct := &oc.NetworkInstance_Protocol_Isis_Level_RoutePreference{}
 		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Level_RoutePreference", goStruct, queryPath, true, true)
@@ -10757,10 +10553,10 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePrefer
 }
 
 // Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePathAny) Get(t testing.TB) []uint8 {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePathAny) Get(t testing.TB) []uint32 {
 	t.Helper()
 	fulldata := n.Lookup(t)
-	var data []uint8
+	var data []uint32
 	for _, full := range fulldata {
 		data = append(data, full.Val(t))
 	}
@@ -10780,34 +10576,34 @@ func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePrefer
 }
 
 // Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Replace(t, n, &val)
 }
 
 // BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
 	t.Helper()
 	b.BatchReplace(t, n, &val)
 }
 
 // Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) Update(t testing.TB, val uint32) *gpb.SetResponse {
 	t.Helper()
 	return genutil.Update(t, n, &val)
 }
 
 // BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/route-preference/config/internal-route-preference in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+func (n *NetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
 	t.Helper()
 	b.BatchUpdate(t, n, &val)
 }
 
 // convertNetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath extracts the value of the leaf InternalRoutePreference from its parent oc.NetworkInstance_Protocol_Isis_Level_RoutePreference
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
-func convertNetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_RoutePreference) *oc.QualifiedUint8 {
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Isis_Level_RoutePreference_InternalRoutePreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Level_RoutePreference) *oc.QualifiedUint32 {
 	t.Helper()
-	qv := &oc.QualifiedUint8{
+	qv := &oc.QualifiedUint32{
 		Metadata: md,
 	}
 	val := parent.InternalRoutePreference
@@ -21296,6 +21092,107 @@ func convertNetworkInstance_Protocol_Static_NextHop_NextHopPath(t testing.TB, md
 	val := parent.NextHop
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Static_NextHop{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Static_NextHop", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Static_NextHop_PreferencePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Static_NextHop{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Static_NextHop", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Static_NextHop_PreferencePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference in the given batch object.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference in the given batch object.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/config/preference in the given batch object.
+func (n *NetworkInstance_Protocol_Static_NextHop_PreferencePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Static_NextHop_PreferencePath extracts the value of the leaf Preference from its parent oc.NetworkInstance_Protocol_Static_NextHop
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertNetworkInstance_Protocol_Static_NextHop_PreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Static_NextHop) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Preference
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
 	}
 	return qv
 }

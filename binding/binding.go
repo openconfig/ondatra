@@ -162,6 +162,12 @@ type ATE interface {
 	// DialIxNetwork creates a client connection to the ATE's IxNetwork endpoint.
 	DialIxNetwork(context.Context) (*IxNetwork, error)
 
+	// DialGNMI creates a client connection to the ATE's gNMI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	// This method must be implemented to receive gNMI from OTG but not from IxNetwork;
+	// Implementing DialIxNetwork is sufficient for gNMI support for IxNetwork.
+	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
+
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
 	DialOTG(context.Context) (gosnappi.GosnappiApi, error)
 

@@ -71,6 +71,7 @@ func (ix *ixATE) addPorts(top *Topology) error {
 		novusHundredGigLan(vport.L1Config).AutoInstrumentation = ixconfig.String(portInstrumentation)
 		novusTenGigLan(vport.L1Config).AutoInstrumentation = ixconfig.String(portInstrumentation)
 		ix.cfg.Vport = append(ix.cfg.Vport, vport)
+		ix.vportToPort[vport] = port
 		ix.ports[port] = vport
 	}
 	return nil

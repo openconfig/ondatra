@@ -15,8 +15,10 @@
 package integration_test
 
 import (
+	"sort"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	kinit "github.com/openconfig/ondatra/knebind/init"
 	"github.com/openconfig/ondatra"
 )
@@ -26,35 +28,37 @@ func TestMain(m *testing.M) {
 }
 
 func TestConfig(t *testing.T) {
-	dut := ondatra.DUT(t, "dut1")
+	dut := ondatra.DUT(t, "dut")
 	const config = `
-	  interface Ethernet1
+	  interface {{ port "port1" }}
 	    no switchport
-	    ip address 1.1.1.1/24
-	  !
-	  interface Ethernet2
+    !
+	  interface {{ port "port2" }}
 	    no switchport
-	    ip address 2.2.2.1/24
-	  !
+    !
 	  ip routing
-	  !
-	  router bgp 1111
-	    no bgp enforce-first-as
-	    neighbor 1.1.1.2 remote-as 2222
-	    neighbor 2.2.2.2 remote-as 3333
 	  !`
 	dut.Config().New().WithAristaText(config).Push(t)
 }
 
 func TestGNMI(t *testing.T) {
-	dut1 := ondatra.DUT(t, "dut1")
-	dut2 := ondatra.DUT(t, "dut2")
-	sys1 := dut1.Telemetry().System().Lookup(t)
-	if !sys1.IsPresent() {
-		t.Fatalf("No System telemetry for %v", dut1)
+	dut := ondatra.DUT(t, "dut")
+	sys := dut.Telemetry().System().Lookup(t)
+	if !sys.IsPresent() {
+		t.Fatalf("No System telemetry for %v", dut)
 	}
-	sys2 := dut2.Telemetry().System().Lookup(t)
-	if !sys2.IsPresent() {
-		t.Fatalf("No System telemetry for %v", dut2)
+}
+
+func TestOTG(t *testing.T) {
+	ate := ondatra.ATE(t, "ate")
+	cfg := ate.OTG().NewConfig(t)
+	cfg.Ports().Add().SetName("port1")
+	cfg.Ports().Add().SetName("port2")
+	ate.OTG().PushConfig(t, cfg)
+
+	portNames := ate.OTG().Telemetry().PortAny().Name().Get(t)
+	sort.Strings(portNames)
+	if want := []string{"port1", "port2"}; !cmp.Equal(portNames, want) {
+		t.Errorf("Telemetry got port names %v, want %v", portNames, want)
 	}
 }

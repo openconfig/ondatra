@@ -216,6 +216,7 @@ type ixATE struct {
 	cfgPushCount         int
 	cfg                  *ixconfig.Ixnetwork
 	routeTableToIxFile   map[string]string // Mapping of route tables (by local path) to IxNetwork file name.
+	vportToPort          map[*ixconfig.Vport]string
 	ports                map[string]*ixconfig.Vport
 	lags                 map[string]*ixconfig.Lag
 	lagPorts             map[*ixconfig.Lag][]*ixconfig.Vport
@@ -266,6 +267,7 @@ func (ix *ixATE) resetClientCfg() {
 		}
 	}
 	ix.routeTableToIxFile = make(map[string]string)
+	ix.vportToPort = make(map[*ixconfig.Vport]string)
 	ix.ports = make(map[string]*ixconfig.Vport)
 	ix.lags = make(map[string]*ixconfig.Lag)
 	ix.lagPorts = make(map[*ixconfig.Lag][]*ixconfig.Vport)
@@ -613,8 +615,46 @@ func checkUp(ctx context.Context, ix *ixATE, nodes []ixconfig.IxiaCfgNode, r sta
 	return nodes, err
 }
 
+func failedNodesWithPorts(ix *ixATE, msg string, nodes []ixconfig.IxiaCfgNode, nodeToLink map[ixconfig.IxiaCfgNode]ixconfig.IxiaCfgNode) ([]string, error) {
+	if len(nodes) == 0 {
+		return nil, nil
+	}
+	var idsAndPorts []string
+	failedPorts := map[string]bool{}
+	for _, n := range nodes {
+		nodeID, err := ix.c.NodeID(n)
+		if err != nil {
+			return nil, err
+		}
+
+		var ports []string
+		switch l := nodeToLink[n].(type) {
+		case *ixconfig.Vport:
+			p := ix.vportToPort[l]
+			failedPorts[p] = true
+			ports = []string{p}
+		case *ixconfig.Lag:
+			vports := ix.lagPorts[l]
+			for _, vp := range vports {
+				p := ix.vportToPort[vp]
+				failedPorts[p] = true
+				ports = append(ports, p)
+			}
+		default:
+			return nil, fmt.Errorf("configured link on interface for node %q is not a Vport or Lag", nodeID)
+		}
+		idsAndPorts = append(idsAndPorts, fmt.Sprintf("%s (on %v)", nodeID, ports))
+	}
+	var failedPortsList []string
+	for p := range failedPorts {
+		failedPortsList = append(failedPortsList, p)
+	}
+	return failedPortsList, fmt.Errorf("%s: %v", msg, idsAndPorts)
+}
+
 // Waits for protocols to start, restarting any that initially fail and rechecking as necessary.
-func validateProtocolStart(ctx context.Context, ix *ixATE) error {
+// Returns a list of ports where protocols did not start (if there are no other errors).
+func validateProtocolStart(ctx context.Context, ix *ixATE) ([]string, error) {
 	const (
 		retryWait      = 10 * time.Second
 		maxRetriesLSPs = 60
@@ -662,24 +702,29 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 		start, err, isrAndLagErr = started()
 	}
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if !start && !isrAndLagErr {
-		return errors.New("protocols did not start in time")
+		return nil, errors.New("protocols did not start in time")
 	}
 
 	var protocolNodes []ixconfig.IxiaCfgNode
 	var ingressLSPNodes []ixconfig.IxiaCfgNode
+	nodeToLink := map[ixconfig.IxiaCfgNode]ixconfig.IxiaCfgNode{}
 	for _, intf := range ix.intfs {
+		nodeToLink[intf.deviceGroup.Ethernet[0]] = intf.link
 		protocolNodes = append(protocolNodes, intf.deviceGroup.Ethernet[0])
 		if intf.ipv4 != nil {
+			nodeToLink[intf.ipv4] = intf.link
 			protocolNodes = append(protocolNodes, intf.ipv4)
 		}
 		if intf.ipv6 != nil {
+			nodeToLink[intf.ipv6] = intf.link
 			protocolNodes = append(protocolNodes, intf.ipv6)
 		}
 		for _, lsps := range intf.rsvpLSPs {
 			if *(lsps.RsvpP2PIngressLsps.Active.SingleValue.Value) == "true" {
+				nodeToLink[lsps.RsvpP2PIngressLsps] = intf.link
 				ingressLSPNodes = append(ingressLSPNodes, lsps.RsvpP2PIngressLsps)
 			}
 		}
@@ -688,12 +733,12 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 	cfgNodes = append(cfgNodes, protocolNodes...)
 	cfgNodes = append(cfgNodes, ingressLSPNodes...)
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, cfgNodes...); err != nil {
-		return fmt.Errorf("could not update IDs for checking protocol sessions: %w", err)
+		return nil, fmt.Errorf("could not update IDs for checking protocol sessions: %w", err)
 	}
 
 	protocolNodes, err = checkUp(ctx, ix, protocolNodes, &protocolRsp{}, maxRetriesProtocols)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	for _, n := range protocolNodes {
 		// Restart any still down protocols individually.
@@ -706,56 +751,38 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) error {
 		case *ixconfig.TopologyIpv6:
 			op = "topology/deviceGroup/ethernet/ipv6/operations/restartdown"
 		default:
-			return fmt.Errorf("tried to restart invalid config node type %T", cn)
+			return nil, fmt.Errorf("tried to restart invalid config node type %T", cn)
 		}
 		nodeID, err := ix.c.NodeID(n)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if err := ix.c.Session().Post(ctx, op, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
-			return fmt.Errorf("could not restart down protocol at %q", nodeID)
+			return nil, fmt.Errorf("could not restart down protocol at %q", nodeID)
 		}
 	}
 	protocolNodes, err = checkUp(ctx, ix, protocolNodes, &protocolRsp{}, maxRetriesProtocols)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	if len(protocolNodes) > 0 {
-		var ids []string
-		for _, n := range protocolNodes {
-			nodeID, err := ix.c.NodeID(n)
-			if err != nil {
-				return err
-			}
-			ids = append(ids, nodeID)
-		}
-		return fmt.Errorf("some protocol instances did not start: %v", ids)
+	if ports, err := failedNodesWithPorts(ix, "some protocol instances did not start", protocolNodes, nodeToLink); err != nil {
+		return ports, err
 	}
 
 	// Validate ingress LSP state
 	ingressLSPNodes, err = checkUp(ctx, ix, ingressLSPNodes, &lspRsp{}, maxRetriesLSPs)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	if len(ingressLSPNodes) > 0 {
-		var ids []string
-		for _, n := range ingressLSPNodes {
-			nodeID, err := ix.c.NodeID(n)
-			if err != nil {
-				return err
-			}
-			ids = append(ids, nodeID)
-		}
-		return fmt.Errorf("some ingress LSP instances did not start: %v", ids)
-	}
-	return nil
+	return failedNodesWithPorts(ix, "some ingress LSP instances did not start", ingressLSPNodes, nodeToLink)
 }
 
 func (ix *ixATE) startProtocols(ctx context.Context) error {
-	if err := ix.c.Session().Post(ctx, "operations/startallprotocols", syncedOpArgs, nil); err != nil {
-		log.Warningf("First attempted startallprotocols op failed: %v", err)
-		if err := ix.c.Session().Post(ctx, "operations/startallprotocols", syncedOpArgs, nil); err != nil {
-			log.Warningf("Second attempted startallprotocols op failed: %v", err)
+	errStart := ix.c.Session().Post(ctx, "operations/startallprotocols", syncedOpArgs, nil)
+	if errStart != nil {
+		log.Warningf("First attempted startallprotocols op failed: %v", errStart)
+		if errStart = ix.c.Session().Post(ctx, "operations/startallprotocols", syncedOpArgs, nil); errStart != nil {
+			log.Warningf("Second attempted startallprotocols op failed: %v", errStart)
 		}
 	}
 	// Protocols may have started even if 'startallprotocols' reported a failure,
@@ -764,8 +791,11 @@ func (ix *ixATE) startProtocols(ctx context.Context) error {
 	// to failing tests on a single 'startallprotocols' error and check the
 	// behavior for a topology with RSVP protocols configured after updating to
 	// IxNetwork 9.10update2 everywhere.
-	if err := validateProtocolStartFn(ctx, ix); err != nil {
-		return fmt.Errorf("failed to start protocols, also check the log for errors/warnings for the 'startallprotocols' op: %w", err)
+	if _, err := validateProtocolStartFn(ctx, ix); err != nil {
+		if errStart == nil {
+			return fmt.Errorf("failed to validate protocols: %w", err)
+		}
+		return fmt.Errorf("failed to validate protocols after error on start: %v, %w", err, errStart)
 	}
 	return nil
 }

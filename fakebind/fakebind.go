@@ -159,6 +159,7 @@ func (d *DUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4Run
 type ATE struct {
 	*binding.AbstractATE
 	DialIxNetworkFn func(context.Context) (*binding.IxNetwork, error)
+	DialGNMIFn      func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 	DialOTGFn       func(context.Context) (gosnappi.GosnappiApi, error)
 }
 
@@ -168,6 +169,14 @@ func (a *ATE) DialIxNetwork(ctx context.Context) (*binding.IxNetwork, error) {
 		log.Fatal("fakebind DialIxNetwork called but DialIxNetworkFn not set")
 	}
 	return a.DialIxNetworkFn(ctx)
+}
+
+// DialGNMI delegates to a.DialGNMIFn.
+func (a *ATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	if a.DialGNMIFn == nil {
+		log.Fatal("fakebind DialGNMI called but DialGNMIFn not set")
+	}
+	return a.DialGNMIFn(ctx, opts...)
 }
 
 // DialOTG delegates to a.DialOTGFn.
