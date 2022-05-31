@@ -31,8 +31,7 @@ import (
 
 // OTG provides the Open Traffic Generator API to an ATE.
 type OTG struct {
-	devID string
-	ate   binding.ATE
+	ate binding.ATE
 }
 
 func (o *OTG) String() string {
@@ -128,7 +127,7 @@ func (o *OTG) StopTraffic(t testing.TB) {
 
 // Telemetry returns a telemetry path root for the device.
 func (o *OTG) Telemetry() *device.DevicePath {
-	root := device.DeviceRoot(o.devID)
+	root := device.DeviceRoot(o.ate.Name())
 	root.PutCustomData(genutil.DefaultClientKey, func(ctx context.Context) (gpb.GNMIClient, error) {
 		return otg.FetchGNMI(ctx, o.ate)
 	})

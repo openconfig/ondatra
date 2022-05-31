@@ -66,7 +66,7 @@ func (b *SetRequestBatch) WithSubscriptionMode(mode gpb.SubscriptionMode) *SetRe
 // Set creates and makes a single gNMI SetRequest call for the batched set requests.
 func (b *SetRequestBatch) Set(t testing.TB) *gpb.SetResponse {
 	t.Helper()
-	resp, err := batchSet(context.Background(), "openconfig", b.deviceRoot.Id(), b.deviceRoot.CustomData(), b.req)
+	resp, err := batchSet(context.Background(), "openconfig", b.deviceRoot.CustomData(), b.req)
 	if err != nil {
 		t.Fatalf("SetRequestBatch.Set: %v", err)
 	}
@@ -114,11 +114,7 @@ func (b *SetRequestBatch) batchSet(n ygot.PathStruct, val interface{}, op setOpe
 	if _, ok := customData[DefaultClientKey]; ok && len(customData) > 1 || !ok && len(customData) > 0 {
 		return fmt.Errorf("batch cannot accept a path that has custom request options; please set request options solely via the batch object")
 	}
-
-	if err := populateSetRequest(b.req, path, val, op); err != nil {
-		return err
-	}
-	return nil
+	return populateSetRequest(b.req, path, val, op)
 }
 
 // setOperation is an enum representing the different kinds of SetRequest

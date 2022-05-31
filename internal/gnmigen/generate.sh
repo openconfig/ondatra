@@ -134,7 +134,7 @@ generator \
   -split_pathstructs_by_module=true \
   -path_structs_output_file=config/device/device.go \
   -base_import_path=github.com/openconfig/ondatra/config \
-  -trim_path_package_oc_prefix=true \
+  -trim_path_package_prefix="openconfig-" \
   -path_struct_package_suffix="" \
   "${YGOT_COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
@@ -153,6 +153,7 @@ go run internal/gnmigen/main/main.go \
   -config_import_path=github.com/openconfig/ondatra/config \
   -telemetry_funcs_file_split=5 \
   -telemetry_types_file_split=0 \
+  -trim_path_package_prefix="openconfig-" \
   "${YANG_FILES[@]}"
 
 # Generate Telemetry API.
@@ -167,7 +168,7 @@ generator \
   -path_structs_output_file=telemetry/device/device.go \
   -split_pathstructs_by_module=true \
   -schema_struct_path=github.com/openconfig/ondatra/telemetry \
-  -trim_path_package_oc_prefix=true \
+  -trim_path_package_prefix="openconfig-" \
   -path_struct_package_suffix="" \
   -base_import_path=github.com/openconfig/ondatra/telemetry \
   -path_structs_split_files_count=10 \
@@ -185,6 +186,7 @@ go run internal/gnmigen/main/main.go \
   -fake_root_gnmi_filename=device/device_telem.go \
   -telemetry_funcs_file_split=10 \
   -telemetry_types_file_split=10 \
+  -trim_path_package_prefix="openconfig-" \
   "${YANG_FILES[@]}"
 
 OTG_YANG_FILES=(
@@ -206,6 +208,7 @@ generator \
     -output_dir=telemetry/otg \
     -package_name=otg \
     -structs_split_files_count=3 \
+    -trim_path_package_prefix="open-traffic-generator-" \
     "${YGOT_COMMON_ARGS[@]}" \
     "${OTG_YANG_FILES[@]}"
 
@@ -216,6 +219,7 @@ go run internal/gnmigen/main/main.go \
   -gen_path_struct_api=false \
   -split_pathstructs_by_module=true \
   -telemetry_types_file_split=3 \
+  -trim_path_package_prefix="open-traffic-generator-" \
   "${OTG_YANG_FILES[@]}"
 
 # Generate OTG Telemetry API
@@ -233,6 +237,7 @@ generator \
     -path_struct_package_suffix="" \
     -base_import_path=github.com/openconfig/ondatra/telemetry/otg \
     -path_structs_split_files_count=3 \
+    -trim_path_package_prefix="open-traffic-generator-" \
     "${YGOT_COMMON_ARGS[@]}" \
     "${OTG_YANG_FILES[@]}"
 
@@ -245,6 +250,7 @@ go run internal/gnmigen/main/main.go \
   -fake_root_helper_filename=device/root_helper.go \
   -fake_root_gnmi_filename=device/device_telem.go \
   -telemetry_funcs_file_split=3 \
+  -trim_path_package_prefix="open-traffic-generator-" \
   "${OTG_YANG_FILES[@]}"
 
 find config telemetry -name "*.go" -exec goimports -w {} +

@@ -46,6 +46,7 @@ var (
 	generatePathAPI         = flag.Bool("gen_path_struct_api", true, "Whether to generate the per path struct gNMI funcs (Get, Collect, etc.). To generate only per type code, (QualifiedString, CollectionString etc), set this to false.")
 	fakeRootHelperFileName  = flag.String("fake_root_helper_filename", fakeRootMethodsFileName, "Filename for the fake root helpers file.")
 	fakeRootGNMIFileName    = flag.String("fake_root_gnmi_filename", defaultFakeRootGNMIFileName, "Filename for the fake root gNMI file.")
+	trimPathPackagePrefix   = flag.String("trim_path_package_prefix", "", "Module prefix to trim from generated path struct package names (e.g. 'openconfig-'), when split_pathstructs_by_module=true.")
 
 	// The number of files into which to split the telemetry functions.
 	telemFuncsFileN int
@@ -279,6 +280,7 @@ func main() {
 		ListBuilderKeyThreshold: *listBuilderKeyThreshold,
 		PreferShadowPath:        *preferShadowPath,
 		SplitByModule:           *splitByModule,
+		TrimPackagePrefix:       *trimPathPackagePrefix,
 	}
 
 	genCode, errs := cg.GenerateCode(generateModules, includePaths, *generateConfigFunc)

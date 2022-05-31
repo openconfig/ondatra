@@ -94,6 +94,7 @@ type session interface {
 	Get(context.Context, string, interface{}) error
 	Patch(context.Context, string, interface{}) error
 	Post(context.Context, string, interface{}, interface{}) error
+	Errors(context.Context) ([]*ixweb.Error, error)
 	Files() files
 	Stats() stats
 }
@@ -275,6 +276,32 @@ func (ix *ixATE) resetClientCfg() {
 	ix.resetClientTrafficCfg()
 }
 
+// sessionErrors returns a string representing errors reported by the session.
+func (ix *ixATE) sessionErrors(ctx context.Context) string {
+	errors, err := ix.c.Session().Errors(ctx)
+	if err != nil {
+		log.Errorf("Could not fetch errors for IxNetwork session: %v", err)
+		return ""
+	}
+	var errBuilder strings.Builder
+	for i, e := range errors {
+		if e.Level != "kError" {
+			continue
+		}
+		errBuilder.WriteString(fmt.Sprintf("name: %q, description: %q, instances: ", e.Name, e.Description))
+		for j, row := range e.InstanceRowValues {
+			errBuilder.WriteString(fmt.Sprintf("%v", row))
+			if j != len(e.InstanceRowValues)-1 {
+				errBuilder.WriteString(", ")
+			}
+		}
+		if i != len(errors)-1 {
+			errBuilder.WriteRune('\n')
+		}
+	}
+	return errBuilder.String()
+}
+
 // importConfig is a wrapper around the config client ImportConfig method.
 // It writes configs as test artifacts before pushing.
 func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, overwrite bool, timeout time.Duration) error {
@@ -294,6 +321,11 @@ func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, ov
 			log.Errorf("could not log IxNetwork config to file: %v", err)
 		}
 		log.Infof("IxNetwork config logged to file %s", filePath)
+	}()
+	defer func() {
+		if sErr := ix.sessionErrors(ctx); sErr != "" {
+			log.Warningf("Errors reported in session after import: %s", sErr)
+		}
 	}()
 
 	const importDelay = 15 * time.Second
@@ -792,10 +824,14 @@ func (ix *ixATE) startProtocols(ctx context.Context) error {
 	// behavior for a topology with RSVP protocols configured after updating to
 	// IxNetwork 9.10update2 everywhere.
 	if _, err := validateProtocolStartFn(ctx, ix); err != nil {
-		if errStart == nil {
-			return fmt.Errorf("failed to validate protocols: %w", err)
+		sErr := ix.sessionErrors(ctx)
+		if sErr != "" {
+			sErr = fmt.Sprintf("\n%s", sErr)
 		}
-		return fmt.Errorf("failed to validate protocols after error on start: %v, %w", err, errStart)
+		if errStart == nil {
+			return fmt.Errorf("failed to validate protocols: %w%s", err, sErr)
+		}
+		return fmt.Errorf("failed to validate protocols after error on start: %v, %w%s", err, errStart, sErr)
 	}
 	return nil
 }

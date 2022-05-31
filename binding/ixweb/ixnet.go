@@ -190,14 +190,9 @@ type Error struct {
 	Description         string   `json:"description"`
 	Name                string   `json:"name"`
 	LastModified        string   `json:"lastModified"`
-	InstanceDataColumns []string `json:"sourceColumnsDisplayName"`
 	Provider            string   `json:"provider"`
-	Instances           []*ErrorInstance
-}
-
-// ErrorInstance represents an error instance reported by an IxNetwork session.
-type ErrorInstance struct {
-	DataRow []string `json:"sourceValues"`
+	InstanceColumnNames []string `json:"sourceColumnsDisplayName"`
+	InstanceRowValues   []map[string]string
 }
 
 // Errors returns the current errors/warnings for this session.
@@ -208,8 +203,21 @@ func (s *Session) Errors(ctx context.Context) ([]*Error, error) {
 		return nil, fmt.Errorf("error fetching session errors: %w", err)
 	}
 	for _, e := range errors {
-		if err := s.Get(ctx, path.Join(errEP, strconv.Itoa(e.ID), "instance"), &(e.Instances)); err != nil {
+		var instances []*struct {
+			DataRow []string `json:"sourceValues"`
+		}
+		if err := s.Get(ctx, path.Join(errEP, strconv.Itoa(e.ID), "instance"), &instances); err != nil {
 			return nil, fmt.Errorf("error fetching instances of error with ID %d: %w", e.ID, err)
+		}
+		for i, r := range instances {
+			if len(r.DataRow) != len(e.InstanceColumnNames) {
+				return nil, fmt.Errorf("incorrect number of data values for error instance %d of error %d", i, e.ID)
+			}
+			row := map[string]string{}
+			for j, col := range e.InstanceColumnNames {
+				row[col] = r.DataRow[j]
+			}
+			e.InstanceRowValues = append(e.InstanceRowValues, row)
 		}
 	}
 	return errors, nil

@@ -158,6 +158,10 @@ func (c *fakeDelayImportClient) ImportConfig(ctx context.Context, _ *ixconfig.Ix
 	return ctx.Err()
 }
 
+func (c *fakeDelayImportClient) Session() session {
+	return &fakeSession{}
+}
+
 func (c *fakeCfgClient) UpdateIDs(_ context.Context, cfg *ixconfig.Ixnetwork, cns ...ixconfig.IxiaCfgNode) error {
 	if err := updateXPaths(cfg); err != nil {
 		return err
@@ -203,6 +207,10 @@ func (s *fakeSession) Post(_ context.Context, p string, _, out interface{}) erro
 		}
 	}
 	return s.postErrs[p]
+}
+
+func (s *fakeSession) Errors(_ context.Context) ([]*ixweb.Error, error) {
+	return nil, nil
 }
 
 func (s *fakeSession) Files() files {

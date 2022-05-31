@@ -15,7 +15,7 @@ require (
 	github.com/openconfig/gribi v0.1.1-0.20220126144445-1634932f9fd8
 	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
-	github.com/openconfig/ygot v0.20.0
+	github.com/openconfig/ygot v0.22.1
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.1

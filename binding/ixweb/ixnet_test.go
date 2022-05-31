@@ -102,6 +102,11 @@ func TestErrors(t *testing.T) {
 			"05/11/2022 11:01:31"
 		]
 	}]`
+	invalidValueCountInstancesBody := `[{
+		"sourceValues": [
+			"invalid IP address"
+		]
+	}]`
 	tests := []struct {
 		desc       string
 		doResps    []*http.Response
@@ -117,6 +122,10 @@ func TestErrors(t *testing.T) {
 		wantErr: "500",
 	}, {
 		desc:    "success",
+		doResps: []*http.Response{fakeResponse(200, errorsBody), fakeResponse(200, invalidValueCountInstancesBody)},
+		wantErr: "incorrect number of data values",
+	}, {
+		desc:    "success",
 		doResps: []*http.Response{fakeResponse(200, errorsBody), fakeResponse(200, errorInstancesBody)},
 		wantErrors: []*Error{{
 			ID:                  3,
@@ -125,10 +134,11 @@ func TestErrors(t *testing.T) {
 			Code:                0,
 			Description:         "some description",
 			Name:                "JSON Import Issues",
-			InstanceDataColumns: []string{"Description", "Time"},
+			InstanceColumnNames: []string{"Description", "Time"},
 			Provider:            "ResourceManagerMiddleware",
-			Instances: []*ErrorInstance{{
-				DataRow: []string{"invalid IP address", "05/11/2022 11:01:31"},
+			InstanceRowValues: []map[string]string{{
+				"Description": "invalid IP address",
+				"Time":        "05/11/2022 11:01:31",
 			}},
 		}},
 	}}

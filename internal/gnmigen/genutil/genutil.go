@@ -38,8 +38,6 @@ import (
 	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/gnmi/errlist"
 	"github.com/openconfig/gocloser"
-	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -67,9 +65,6 @@ Path: %s`, prototext.Format(d.Value), d.Timestamp, d.RecvTimestamp, prototext.Fo
 const (
 	// DefaultClientKey is the key for the default client in the customData map.
 	DefaultClientKey = "defaultclient"
-	// UseGetForConfigKey is the key controlling if Get/Lookup should use gnmi.Get for config paths in the customData map.
-	// If this key is set, the query path must be a config path.
-	UseGetForConfigKey = "getusesget"
 )
 
 // QualifiedTypeString renders a Qualified* telemetry value to a format that's
@@ -598,44 +593,36 @@ func (c *Watcher) Await(t testing.TB) bool {
 	return !isTimeout
 }
 
-func batchSet(ctx context.Context, origin string, target string, customData map[string]interface{}, req *gpb.SetRequest) (*gpb.SetResponse, error) {
-	dev, opts, err := resolveBatch(ctx, target, customData)
+func batchSet(ctx context.Context, origin string, customData map[string]interface{}, req *gpb.SetRequest) (*gpb.SetResponse, error) {
+	opts, err := resolveBatch(ctx, customData)
 	if err != nil {
 		return nil, err
 	}
-	return setVals(ctx, dev, opts, origin, target, req)
+	return setVals(ctx, opts, origin, req)
 }
 
-func resolveBatch(ctx context.Context, target string, customData map[string]interface{}) (binding.Device, *requestOpts, error) {
-	res, err := testbed.Reservation()
-	if err != nil {
-		return nil, nil, err
-	}
-	dev, err := testbed.Device(res, target)
-	if err != nil {
-		return nil, nil, err
-	}
+func resolveBatch(ctx context.Context, customData map[string]interface{}) (*requestOpts, error) {
 	opts, err := extractRequestOpts(customData)
 	if err != nil {
-		return dev, nil, fmt.Errorf("error extracting request options from %v: %w", customData, err)
+		return nil, fmt.Errorf("error extracting request options from %v: %w", customData, err)
 	}
 	if opts.client != nil {
-		return dev, opts, nil
+		return opts, nil
 	}
 
 	dc, ok := customData[DefaultClientKey]
 	if !ok {
-		return dev, opts, fmt.Errorf("gnmi client getter not set on root object")
+		return opts, fmt.Errorf("gnmi client getter not set on root object")
 	}
 	client, ok := dc.(func(context.Context) (gpb.GNMIClient, error))
 	if !ok {
-		return dev, opts, fmt.Errorf("unexpected gnmi client getter type")
+		return opts, fmt.Errorf("unexpected gnmi client getter type")
 	}
 	opts.client, err = client(ctx)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
-	return dev, opts, nil
+	return opts, nil
 }
 
 // Delete creates and makes a gNMI SetRequest delete call for the given value
@@ -675,7 +662,7 @@ func Update(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
 // specified in the req.Prefix.Target field of the SetRequest; this field will
 // be erased before the request is forwarded to the target in the gNMI call.
 func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperation) (*gpb.SetResponse, *gpb.Path, error) {
-	path, dev, opts, err := resolve(ctx, n)
+	path, opts, err := resolve(ctx, n)
 	if err != nil {
 		return nil, path, err
 	}
@@ -683,12 +670,11 @@ func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperatio
 	if err := populateSetRequest(req, path, val, op); err != nil {
 		return nil, nil, err
 	}
-	response, err := setVals(ctx, dev, opts, path.GetOrigin(), path.GetTarget(), req)
+	response, err := setVals(ctx, opts, path.GetOrigin(), req)
 	return response, path, err
 }
 
-func setVals(ctx context.Context, dev binding.Device, opts *requestOpts, origin, target string, req *gpb.SetRequest) (*gpb.SetResponse, error) {
-	// TODO: Is there any value in setting the target here?
+func setVals(ctx context.Context, opts *requestOpts, origin string, req *gpb.SetRequest) (*gpb.SetResponse, error) {
 	req.Prefix = &gpb.Path{Origin: origin}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
 
@@ -716,13 +702,13 @@ func ResolvePath(n ygot.PathStruct) (*gpb.Path, map[string]interface{}, error) {
 
 // resolve resolves a path struct to a path, device, and request options.
 // The returned requestOpts contains the gnmi Client to use.
-func resolve(ctx context.Context, n ygot.PathStruct) (*gpb.Path, binding.Device, *requestOpts, error) {
+func resolve(ctx context.Context, n ygot.PathStruct) (*gpb.Path, *requestOpts, error) {
 	path, customData, err := ResolvePath(n)
 	if err != nil {
-		return path, nil, nil, err
+		return nil, nil, err
 	}
-	dev, opts, err := resolveBatch(ctx, path.GetTarget(), customData)
-	return path, dev, opts, err
+	opts, err := resolveBatch(ctx, customData)
+	return path, opts, err
 }
 
 // LatestTimestamp returns the latest timestamp of the input datapoints.
@@ -838,7 +824,7 @@ func (gs *getSubscriber) CloseSend() error {
 
 // subscribe create a gNMI SubscribeClient. Specifying subPaths is optional, if unset will subscribe to the path at n.
 func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mode gpb.SubscriptionList_Mode) (_ gpb.GNMI_SubscribeClient, _ *gpb.Path, rerr error) {
-	path, dev, opts, err := resolve(ctx, n)
+	path, opts, err := resolve(ctx, n)
 	if err != nil {
 		return nil, path, err
 	}
@@ -847,13 +833,8 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 	}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
 
-	_, custom, err := ResolvePath(n)
-	if err != nil {
-		return nil, path, err
-	}
-
 	var sub gpb.GNMI_SubscribeClient
-	if _, ok := custom[UseGetForConfigKey]; ok && mode == gpb.SubscriptionList_ONCE {
+	if opts.useGetForConfig && mode == gpb.SubscriptionList_ONCE {
 		sub = &getSubscriber{
 			client: opts.client,
 			ctx:    ctx,
@@ -880,7 +861,7 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 	sr := &gpb.SubscribeRequest{
 		Request: &gpb.SubscribeRequest_Subscribe{
 			Subscribe: &gpb.SubscriptionList{
-				Prefix:       &gpb.Path{Target: dev.Name()},
+				Prefix:       &gpb.Path{Target: path.GetTarget()},
 				Subscription: subs,
 				Mode:         mode,
 				Encoding:     gpb.Encoding_PROTO,
