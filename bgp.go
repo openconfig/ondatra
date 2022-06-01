@@ -70,6 +70,17 @@ func (b *BGP) ClearPeers() *BGP {
 	return b
 }
 
+// WithName sets name for the peer.
+func (b *BGPPeer) WithName(name string) *BGPPeer {
+	b.pb.Name = name
+	return b
+}
+
+//FetchName gets the name of the peer
+func (b *BGPPeer) FetchName() string {
+	return b.pb.GetName()
+}
+
 // WithActive sets whether the peering is active.
 func (b *BGPPeer) WithActive(active bool) *BGPPeer {
 	b.pb.Active = active

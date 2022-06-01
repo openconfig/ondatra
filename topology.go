@@ -123,6 +123,18 @@ func (at *ATETopology) UpdateBGPPeerStates(t testing.TB) {
 	}
 }
 
+// SendBgpPeerNotification is used for sending notification messages/error codes from bgp peers to DUT
+func (at *ATETopology) SendBgpPeerNotification(t testing.TB, notificationCode int, notificationSubCode int, bgpPeers ...*BGPPeer) {
+	t.Helper()
+	var bgpPeerNames []string
+	for _, bgpPeer := range bgpPeers {
+		bgpPeerNames = append(bgpPeerNames, bgpPeer.FetchName())
+	}
+	if err := ate.SendBGPPeerNotification(context.Background(), at.ate, notificationCode, notificationSubCode, bgpPeerNames); err != nil {
+		t.Fatalf("SendBgpPeerNotification(t, %d, %d, %v) on %s: %v", notificationCode, notificationSubCode, bgpPeers, at, err)
+	}
+}
+
 // UpdateNetworks is equivalent to Update() but only updates the Network config on the fly.
 func (at *ATETopology) UpdateNetworks(t testing.TB) {
 	t.Helper()

@@ -374,7 +374,8 @@ message BgpPeer {
     Enlp enlp = 13;
   }
   repeated SrtePolicyGroup srte_policy_groups = 9;
-  // NEXT ID: 11
+  string name = 11;
+  // NEXT ID: 12
 }
 
 // BGP attributes for advertised prefixes.

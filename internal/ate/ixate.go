@@ -183,6 +183,8 @@ type intf struct {
 	resolvedIpv4Mac   string
 	resolvedIpv6Mac   string
 	hasVLAN           bool
+	bgpToBgpIpv4Peer  map[string]*ixconfig.TopologyBgpIpv4Peer
+	bgpToBgpIpv6Peer  map[string]*ixconfig.TopologyBgpIpv6Peer
 }
 
 func (i *intf) String() string {
@@ -1376,6 +1378,49 @@ func validateIP(ipc *opb.IpConfig, desc string) error {
 	}
 	if !an.Contains(gi) {
 		return fmt.Errorf("%s default gateway is not in CIDR range %s: %s", desc, addr, gway)
+	}
+	return nil
+}
+
+// sends notification/error messages from bgp peers on ATE
+func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, notificationCode int, notificationSubCode int, bgp []string) error {
+	var cfgNodes []ixconfig.IxiaCfgNode
+	for _, intf := range ix.intfs {
+		for _, bgpName := range bgp {
+			if val, ok := intf.bgpToBgpIpv4Peer[bgpName]; ok {
+				cfgNodes = append(cfgNodes, val)
+			}
+			if val, ok := intf.bgpToBgpIpv6Peer[bgpName]; ok {
+				cfgNodes = append(cfgNodes, val)
+			}
+		}
+	}
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, cfgNodes...); err != nil {
+		return fmt.Errorf("could not update IDs for bgp peer %w", err)
+	}
+	for _, node := range cfgNodes {
+		nodeHerf, err := ix.c.NodeID(node)
+		if err != nil {
+			return fmt.Errorf("could not get hrefs for bgp peer %w", err)
+		}
+		var breakTcpSessionOp string
+		switch cn := node.(type) {
+		case *ixconfig.TopologyBgpIpv4Peer:
+			breakTcpSessionOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
+		case *ixconfig.TopologyBgpIpv6Peer:
+			breakTcpSessionOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
+		default:
+			return fmt.Errorf("tried to send bgp notification invalid config node type %T", cn)
+		}
+		breakTcpSessionArgs := ixweb.OpArgs{
+			nodeHerf,
+			[]int{1},
+			notificationCode,
+			notificationSubCode,
+		}
+		if err := ix.c.Session().Post(ctx, breakTcpSessionOp, breakTcpSessionArgs, nil); err != nil {
+			return fmt.Errorf("could not send bgp notification %w", err)
+		}
 	}
 	return nil
 }
