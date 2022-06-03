@@ -1,0 +1,69 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        go: ['1.17', '1.18', '1.x']
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+        id: go
+
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          path: go/src/github.com/openconfig/ondatra
+
+      - name: Build packages
+        run: go build -v ./...
+        working-directory: go/src/github.com/openconfig/ondatra
+
+      - name: Run Tests
+        run: go test -v $(go list ./... | grep -v knebind/integration)
+        working-directory: go/src/github.com/openconfig/ondatra
+
+  static_analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.x'
+        id: go
+
+      - name: Install required static analysis tools
+        run: |
+          go install github.com/go-playground/overalls@latest
+          go install github.com/mattn/goveralls@latest
+
+      - name: Check out ondatra code
+        uses: actions/checkout@v2
+
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+
+      - name: Run coverage
+        run: |
+          overalls -project ${GITHUB_WORKSPACE} -covermode=count -ignore=".git,vendor,telemetry"
+
+      - name: Submit coverage
+        uses: shogo82148/actions-goveralls@v1
+        with:
+          path-to-profile: overalls.coverprofile
