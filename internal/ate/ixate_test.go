@@ -2043,3 +2043,138 @@ func parseXPath(t *testing.T, str string) *ixconfig.XPath {
 	}
 	return xp
 }
+
+func TestSendBGPPeerNotification(t *testing.T) {
+	const (
+		intfName         = "someIntf"
+		port             = "1/1"
+		v4NotificationOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
+		v6NotificationOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
+	)
+	tests := []struct {
+		desc              string
+		ifc               *opb.InterfaceConfig
+		v4NotificationErr error
+		v6NotificationErr error
+		wantErr           string
+	}{{
+		desc: "BGP v4 send notification failure",
+		ifc: &opb.InterfaceConfig{
+			Name:     intfName,
+			Link:     &opb.InterfaceConfig_Port{port},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+			Ipv4: &opb.IpConfig{
+				AddressCidr:    "192.168.1.1/30",
+				DefaultGateway: "192.168.1.2",
+			},
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1", Name: "bgp1"}},
+			},
+		},
+		v4NotificationErr: errors.New("error in sending bgp v4 notification"),
+		wantErr:           "could not send bgp notification error in sending bgp v4 notification",
+	}, {
+		desc: "BGP v6 send notification failure",
+		ifc: &opb.InterfaceConfig{
+			Name:     intfName,
+			Link:     &opb.InterfaceConfig_Port{port},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+			Ipv6: &opb.IpConfig{
+				AddressCidr:    "::1/64",
+				DefaultGateway: "::2",
+			},
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "::a", Name: "bgp1"}},
+			},
+		},
+		v6NotificationErr: errors.New("error in sending bgp v6 notification"),
+		wantErr:           "could not send bgp notification error in sending bgp v6 notification",
+	}, {
+		desc: "succes sending notification for bgp v6 peer",
+		ifc: &opb.InterfaceConfig{
+			Name:     intfName,
+			Link:     &opb.InterfaceConfig_Port{port},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+			Ipv6: &opb.IpConfig{
+				AddressCidr:    "::1/64",
+				DefaultGateway: "::2",
+			},
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "::a", Name: "bgp1"}},
+			},
+		},
+	}, {
+		desc: "success sending notification for bgp v4 peer",
+		ifc: &opb.InterfaceConfig{
+			Name:     intfName,
+			Link:     &opb.InterfaceConfig_Port{port},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+			Ipv4: &opb.IpConfig{
+				AddressCidr:    "192.168.1.1/30",
+				DefaultGateway: "192.168.1.2",
+			},
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1", Name: "bgp1"}},
+			},
+		},
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			bgp4XP := parseXPath(t, "/fake/xpath/bgp4")
+			bgp6XP := parseXPath(t, "/fake/xpath/bgp6")
+			bgpv4 := &ixconfig.TopologyBgpIpv4Peer{Xpath: bgp4XP, Name: ixconfig.String("bgp1"), Active: ixconfig.MultivalueBool(true)}
+			bgpv6 := &ixconfig.TopologyBgpIpv6Peer{Xpath: bgp6XP, Name: ixconfig.String("bgp1"), Active: ixconfig.MultivalueBool(true)}
+			var cfg *ixconfig.Ixnetwork
+			var bgpInterface *intf
+			if strings.Contains(test.desc, "v4") {
+				cfg = &ixconfig.Ixnetwork{
+					Topology: []*ixconfig.Topology{{
+						DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+							Ethernet: []*ixconfig.TopologyEthernet{{
+								Ipv4: []*ixconfig.TopologyIpv4{{
+									BgpIpv4Peer: []*ixconfig.TopologyBgpIpv4Peer{bgpv4},
+								}},
+							}},
+						}},
+					}},
+				}
+				bgpInterface = &intf{
+					bgpToBgpIpv4Peer: map[string]*ixconfig.TopologyBgpIpv4Peer{"bgp1": bgpv4},
+				}
+			} else {
+				cfg = &ixconfig.Ixnetwork{
+					Topology: []*ixconfig.Topology{{
+						DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+							Ethernet: []*ixconfig.TopologyEthernet{{
+								Ipv6: []*ixconfig.TopologyIpv6{{
+									BgpIpv6Peer: []*ixconfig.TopologyBgpIpv6Peer{bgpv6},
+								}},
+							}},
+						}},
+					}},
+				}
+				bgpInterface = &intf{
+					bgpToBgpIpv6Peer: map[string]*ixconfig.TopologyBgpIpv6Peer{"bgp1": bgpv6},
+				}
+			}
+			c := &ixATE{
+				cfg:   cfg,
+				intfs: map[string]*intf{"myInt": bgpInterface},
+				c: &fakeCfgClient{
+					xPathToID: map[string]string{
+						bgp4XP.String(): "/id/to/bgpv4",
+						bgp6XP.String(): "/id/to/bgpv6",
+					},
+					session: &fakeSession{postErrs: map[string]error{
+						v4NotificationOp: test.v4NotificationErr,
+						v6NotificationOp: test.v6NotificationErr,
+					}},
+				},
+			}
+			gotErr := c.SendBGPPeerNotification(context.Background(), 6, 1, []string{"bgp1"})
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("SendBGPPeerNotification: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+		})
+	}
+}
