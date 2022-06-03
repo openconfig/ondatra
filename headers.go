@@ -189,6 +189,50 @@ func (h *IPv4Header) WithHeaderChecksum(checksum uint16) *IPv4Header {
 	return h
 }
 
+// WithHeaderLength set IP header length
+func (h *IPv4Header) WithHeaderLength(headerLength uint8) *IPv4Header {
+	h.pb.HeaderLength = uint32(headerLength)
+	return h
+}
+
+// WithProtocol set Name of the protocol to which the data is to be passed
+func (h *IPv4Header) WithProtocol(protocol uint8) *IPv4Header {
+	h.pb.Protocol = intRangeSingle(uint32(protocol))
+	return h
+}
+
+// WithTotalLength set size of the entire datagram. 
+// The minimum size of an IP datagram is 20 bytes, and at the maximum, it can be 65,535 bytes.
+func (h *IPv4Header) WithTotalLength(totalLength uint16) *IPv4Header {
+	h.pb.TotalLength = uint32(totalLength)
+	return h
+}
+
+// WithIdentification set identification or ID field of IPv4 Header
+func (h *IPv4Header) WithIdentification(identification bool) *IPv4Header {
+	h.pb.Identification = identification
+	return h
+}
+
+// WithReserved set flag 0 bit of IPv4 Header
+func (h *IPv4Header) WithReserved(reserved bool) *IPv4Header {
+	h.pb.Reserved = reserved
+	return h
+}
+
+// WithMoreFragments set flag 2 bit for more fragments of IPv4 Header
+func (h *IPv4Header) WithMoreFragments(moreFragments bool) *IPv4Header {
+	h.pb.MoreFragments = moreFragments
+	return h
+}
+
+// WithFragmentOffset set number of Data Bytes in Datagram. 
+// It ranges from 8 bytes to 65,528 bytes
+func (h *IPv4Header) WithFragmentOffset(fragmentOffset uint16) *IPv4Header {
+	h.pb.FragmentOffset = intRangeSingle(uint32(fragmentOffset))
+	return h
+}
+
 func (h *IPv4Header) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Ipv4{h.pb}}
 }

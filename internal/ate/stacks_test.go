@@ -43,6 +43,10 @@ func TestHeaderStacks(t *testing.T) {
 		dstIpv4Addr = "4.3.2.1"
 		ttl         = 64
 		checksum    = 65376
+		headerLength = 6
+		protocol = 6
+		totalLength = 200
+		fragmentOffset = 8
 		srcIpv6Addr = "1:2:3:4:5:6:7:8"
 		dstIpv6Addr = "8:7:6:5:4:3:2:1"
 		hopLimit    = 64
@@ -192,6 +196,13 @@ func TestHeaderStacks(t *testing.T) {
 					DontFragment: true,
 					Ttl:          ttl,
 					Checksum:     checksum,
+					HeaderLength: headerLength,
+					Protocol: &opb.UIntRange{Min: protocol, Max: protocol, Count: 1},
+					TotalLength: totalLength,
+					Identification: true,
+					Reserved: true,
+					MoreFragments: true,
+					FragmentOffset: &opb.UIntRange{Min: fragmentOffset, Max: fragmentOffset, Count: 1},
 				},
 			},
 		},
@@ -238,6 +249,55 @@ func TestHeaderStacks(t *testing.T) {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).DstIp()
 				},
+			}, {
+				name:    "header length",
+				wantVal: ixconfig.String(strconv.Itoa(headerLength)),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).HeaderLength()
+				},	
+			}, {
+				name:    "protocol",
+				wantVal: ixconfig.String(strconv.Itoa(protocol)),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).Protocol()
+				},	
+			}, {
+				name:    "total length",
+				wantVal: ixconfig.String(strconv.Itoa(totalLength)),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).TotalLength()
+				},	
+			}, {
+				name:    "identification",
+				wantVal: ixconfig.String("1"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).Identification()
+				},
+			}, {
+				name:    "flag reserved",
+				wantVal: ixconfig.String("1"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).FlagsReserved()
+				},
+			}, {
+				name:    "flag reserved",
+				wantVal: ixconfig.String("1"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).FlagsLastFragment()
+				},
+			}, {
+				name:    "fragment offset",
+				wantVal: ixconfig.String(strconv.Itoa(fragmentOffset)),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).FragmentOffset()
+				},	
 			}},
 		},
 	}, {
