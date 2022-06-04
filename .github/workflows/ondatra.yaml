@@ -61,7 +61,7 @@ jobs:
 
       - name: Run coverage
         run: |
-          overalls -project ${GITHUB_WORKSPACE} -covermode=count -ignore=".git,vendor,telemetry,config"
+          overalls -project ${GITHUB_WORKSPACE} -covermode=count -ignore=".git,vendor,telemetry...,config..."
 
       - name: Submit coverage
         uses: shogo82148/actions-goveralls@v1
