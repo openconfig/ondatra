@@ -796,7 +796,7 @@ func (gs *getSubscriber) Send(req *gpb.SubscribeRequest) error {
 	for _, sub := range req.GetSubscribe().GetSubscription() {
 		getReq.Path = append(getReq.Path, sub.GetPath())
 	}
-
+	log.V(1).Info(prototext.Format(getReq))
 	resp, err := gs.client.Get(gs.ctx, getReq)
 	if err != nil {
 		return err
@@ -833,8 +833,9 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 	}
 	ctx = metadata.NewOutgoingContext(ctx, opts.md)
 
+	usesGet := opts.useGetForConfig && mode == gpb.SubscriptionList_ONCE
 	var sub gpb.GNMI_SubscribeClient
-	if opts.useGetForConfig && mode == gpb.SubscriptionList_ONCE {
+	if usesGet {
 		sub = &getSubscriber{
 			client: opts.client,
 			ctx:    ctx,
@@ -868,7 +869,9 @@ func subscribe(ctx context.Context, n ygot.PathStruct, subPaths []*gpb.Path, mod
 			},
 		},
 	}
-	log.V(1).Info(prototext.Format(sr))
+	if !usesGet {
+		log.V(1).Info(prototext.Format(sr))
+	}
 	if err := sub.Send(sr); err != nil {
 		return nil, nil, fmt.Errorf("gNMI failed to Send(%+v): %w", sr, err)
 	}

@@ -63,6 +63,8 @@ const (
 	ARISTA = Vendor(opb.Device_ARISTA)
 	// CISCO vendor.
 	CISCO = Vendor(opb.Device_CISCO)
+	// DELL vendor.
+	DELL = Vendor(opb.Device_DELL)
 	// JUNIPER vendor.
 	JUNIPER = Vendor(opb.Device_JUNIPER)
 	// IXIA vendor.

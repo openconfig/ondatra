@@ -39,6 +39,7 @@ message Device {
     PALOALTO = 6;
     NOKIA = 7;
     ZPE = 8;
+    DELL = 9;
   }
   Vendor vendor = 2;
   // Hardware model of the device. Optional.

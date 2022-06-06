@@ -50,6 +50,7 @@ const (
 	operStateTrafficOn
 	routeTableFormatCisco   routeTableFormat = "cisco"
 	routeTableFormatJuniper routeTableFormat = "juniper"
+	routeTableFormatCSV     routeTableFormat = "csv"
 
 	importRetries = 5
 
@@ -1026,8 +1027,6 @@ func configureTraffic(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 	if err := resetIxiaTrafficCfgFn(ctx, ix); err != nil {
 		return fmt.Errorf("could not reset traffic config on Ixia: %w", err)
 	}
-	// There is a race condition in configuring traffic after clearing traffic, sleep for 30 seconds to avoid.
-	sleepFn(30 * time.Second)
 	if err := resolveMacsFn(ctx, ix); err != nil {
 		return fmt.Errorf("could not resolve MAC addresses in config: %w", err)
 	}
@@ -1056,6 +1055,8 @@ func configureTraffic(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 		return fmt.Errorf("could not compute traffic configuration: %w", err)
 	}
 
+	// There is a race condition in configuring traffic after clearing traffic, sleep for 30 seconds to avoid.
+	sleepFn(30 * time.Second)
 	if err := ix.importConfig(ctx, ix.cfg.Traffic, false, trafficImportTimeout); err != nil {
 		return fmt.Errorf("could not push traffic configuration: %w", err)
 	}

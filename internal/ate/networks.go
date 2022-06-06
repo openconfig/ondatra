@@ -609,6 +609,8 @@ func importedBGPRoutePools(netToRouteTables map[string]*routeTables, netCfg *opb
 		rts.format = routeTableFormatCisco
 	case opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_JUNIPER:
 		rts.format = routeTableFormatJuniper
+	case opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CSV:
+		rts.format = routeTableFormatCSV
 	default:
 		return nil, nil, fmt.Errorf("unrecognized route table format %s", imported.GetRouteTableFormat())
 	}
