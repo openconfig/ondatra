@@ -115,6 +115,8 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		return nil, err
 	}
 
+	fmt.Println(a)
+
 	res := &binding.Reservation{
 		ID:   uuid.New(),
 		DUTs: make(map[string]binding.DUT),
