@@ -108,14 +108,14 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		s.intf2Intf[intfZ] = intfA
 	}
 
-	fmt.Printf("%+v", s)
-
 	a, err := s.solve()
 	if err != nil {
 		return nil, err
 	}
 
+	fmt.Println("Hiii")
 	fmt.Println(a)
+	fmt.Println("Byee")
 
 	res := &binding.Reservation{
 		ID:   uuid.New(),
