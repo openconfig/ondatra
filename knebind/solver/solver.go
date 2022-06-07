@@ -291,9 +291,11 @@ func (s *solver) solve() (*assign, error) {
 		for dut, node := range dev2Node {
 			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
 				fmt.Println(port)
+
 				for _, i := range intfs {
-					fmt.Println(i)
-					port2Intfs[port] = append(port2Intfs[port], i)
+					if i.groupName == port.GetGroup() {
+						port2Intfs[port] = append(port2Intfs[port], i)
+					}
 				}
 			}
 		}
