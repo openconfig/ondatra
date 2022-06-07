@@ -299,6 +299,7 @@ func (s *solver) solve() (*assign, error) {
 		}
 		port2IntfChan := genCombos(port2Intfs)
 		for port2Intf := range port2IntfChan {
+			fmt.Println(port2Intf)
 			if a := newAssign(dev2Node, port2Intf); s.linksMatch(a) {
 				// TODO: When solver is rewritten, signal the gorouting
 				// channel to exit early here and avoid leaving the goroutine hanging.
@@ -446,10 +447,13 @@ func newAssign(dev2Node, port2Intf map[interface{}]interface{}) *assign {
 		port2Intf: make(map[*opb.Port]*intf),
 	}
 	for d, n := range dev2Node {
+		fmt.Println(n.(*tpb.Node))
 		a.dev2Node[d.(*opb.Device)] = n.(*tpb.Node)
 	}
 	for p, i := range port2Intf {
+		fmt.Println(i.(*intf))
 		a.port2Intf[p.(*opb.Port)] = i.(*intf)
 	}
+	fmt.Println(a)
 	return a
 }
