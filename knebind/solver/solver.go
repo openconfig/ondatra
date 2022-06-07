@@ -20,8 +20,8 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/pborman/uuid"
 
 	tpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -59,6 +59,9 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		return nil, fmt.Errorf("not enough links in KNE topology for specified testbed "+
 			" testbed has %d links and topology only has %d links", numTBLinks, numTopoLinks)
 	}
+
+	fmt.Println(tb)
+	fmt.Println(topo)
 	s := &solver{
 		testbed:    tb,
 		topology:   topo,
