@@ -264,6 +264,7 @@ func (s *solver) solve() (*assign, error) {
 		if err != nil {
 			return nil, err
 		}
+		fmt.Println(node2Port2Intfs)
 		dev2Node2Port2Intfs[dut] = node2Port2Intfs
 	}
 	for _, ate := range s.testbed.GetAtes() {
@@ -271,6 +272,7 @@ func (s *solver) solve() (*assign, error) {
 		if err != nil {
 			return nil, err
 		}
+		fmt.Println(node2Port2Intfs)
 		dev2Node2Port2Intfs[ate] = node2Port2Intfs
 	}
 
@@ -281,6 +283,7 @@ func (s *solver) solve() (*assign, error) {
 			dev2Nodes[dev] = append(dev2Nodes[dev], node)
 		}
 	}
+	fmt.Println(dev2Nodes)
 	dev2NodeChan := genCombos(dev2Nodes)
 	var hasNodeCombo bool
 	for dev2Node := range dev2NodeChan {
