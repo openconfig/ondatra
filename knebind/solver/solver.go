@@ -284,14 +284,15 @@ func (s *solver) solve() (*assign, error) {
 		}
 	}
 	dev2NodeChan := genCombos(dev2Nodes)
-	fmt.Println(dev2NodeChan)
 	var hasNodeCombo bool
 	for dev2Node := range dev2NodeChan {
 		hasNodeCombo = true
 		port2Intfs := make(map[interface{}][]interface{})
 		for dut, node := range dev2Node {
 			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
+				fmt.Println(port)
 				for _, i := range intfs {
+					fmt.Println(i)
 					port2Intfs[port] = append(port2Intfs[port], i)
 				}
 			}
