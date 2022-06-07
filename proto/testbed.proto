@@ -88,6 +88,7 @@ message Port {
   // The model of the card which contains the physical port.
   string card_model = 3;
 
+
   // Pmd enum values are PMD of the port.
   enum Pmd {
     PMD_UNSPECIFIED = 0;
@@ -98,6 +99,9 @@ message Port {
     Pmd pmd = 4;
     string pmd_regex = 5;
   }
+
+  // Group name
+  string group = 6;
 }
 
 // A physical link between ports on DUTs or ATEs.
