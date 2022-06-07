@@ -41,3 +41,8 @@ func (a *ATEDevice) Topology() *Topology {
 func (a *ATEDevice) Traffic() *Traffic {
 	return &Traffic{a.res.(binding.ATE)}
 }
+
+// Actions returns a handle to the various Action APIs
+func (a *ATEDevice) Actions() *Actions {
+	return &Actions{a.res.(binding.ATE)}
+}
