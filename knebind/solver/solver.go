@@ -105,6 +105,8 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		s.intf2Intf[intfZ] = intfA
 	}
 
+	fmt.Println(&s)
+
 	a, err := s.solve()
 	if err != nil {
 		return nil, err
