@@ -76,6 +76,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		s.id2Dev[dev.GetId()] = dev
 		ports := make(map[string]*opb.Port)
 		for _, port := range dev.GetPorts() {
+			fmt.Println(port)
 			ports[port.GetId()] = port
 		}
 		s.dev2Ports[dev] = ports
@@ -93,9 +94,11 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 			s.node2Intfs[node][intfName] = i
 		}
 		i.vendorName = node.Interfaces[intfName].GetName()
+		i.groupName = node.Interfaces[intfName].GetGroup()
 		if i.vendorName == "" {
 			i.vendorName = intfName
 		}
+		fmt.Println(i)
 		return i
 	}
 	for _, link := range s.topology.GetLinks() {
@@ -175,6 +178,7 @@ type assign struct {
 type intf struct {
 	name       string
 	vendorName string
+	groupName  string
 }
 
 func (a *assign) String() string {
