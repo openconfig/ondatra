@@ -283,8 +283,8 @@ func (s *solver) solve() (*assign, error) {
 			dev2Nodes[dev] = append(dev2Nodes[dev], node)
 		}
 	}
-	fmt.Println(dev2Nodes)
 	dev2NodeChan := genCombos(dev2Nodes)
+	fmt.Println(dev2NodeChan)
 	var hasNodeCombo bool
 	for dev2Node := range dev2NodeChan {
 		hasNodeCombo = true
