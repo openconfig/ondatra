@@ -60,8 +60,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 			" testbed has %d links and topology only has %d links", numTBLinks, numTopoLinks)
 	}
 
-	fmt.Println(tb)
-	fmt.Println(topo)
 	s := &solver{
 		testbed:    tb,
 		topology:   topo,
@@ -76,7 +74,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		s.id2Dev[dev.GetId()] = dev
 		ports := make(map[string]*opb.Port)
 		for _, port := range dev.GetPorts() {
-			fmt.Println(port)
 			ports[port.GetId()] = port
 		}
 		s.dev2Ports[dev] = ports
@@ -98,7 +95,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		if i.vendorName == "" {
 			i.vendorName = intfName
 		}
-		fmt.Println(i)
 		return i
 	}
 	for _, link := range s.topology.GetLinks() {
@@ -112,10 +108,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println("Hiii")
-	fmt.Println(a)
-	fmt.Println("Byee")
 
 	res := &binding.Reservation{
 		ID:   uuid.New(),
@@ -264,7 +256,6 @@ func (s *solver) solve() (*assign, error) {
 		if err != nil {
 			return nil, err
 		}
-		fmt.Println(node2Port2Intfs)
 		dev2Node2Port2Intfs[dut] = node2Port2Intfs
 	}
 	for _, ate := range s.testbed.GetAtes() {
@@ -272,7 +263,6 @@ func (s *solver) solve() (*assign, error) {
 		if err != nil {
 			return nil, err
 		}
-		fmt.Println(node2Port2Intfs)
 		dev2Node2Port2Intfs[ate] = node2Port2Intfs
 	}
 
@@ -290,7 +280,6 @@ func (s *solver) solve() (*assign, error) {
 		port2Intfs := make(map[interface{}][]interface{})
 		for dut, node := range dev2Node {
 			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
-				fmt.Println(port)
 
 				for _, i := range intfs {
 					if i.groupName == port.GetGroup() {
@@ -301,7 +290,6 @@ func (s *solver) solve() (*assign, error) {
 		}
 		port2IntfChan := genCombos(port2Intfs)
 		for port2Intf := range port2IntfChan {
-			fmt.Println(port2Intf)
 			if a := newAssign(dev2Node, port2Intf); s.linksMatch(a) {
 				// TODO: When solver is rewritten, signal the gorouting
 				// channel to exit early here and avoid leaving the goroutine hanging.
@@ -449,13 +437,10 @@ func newAssign(dev2Node, port2Intf map[interface{}]interface{}) *assign {
 		port2Intf: make(map[*opb.Port]*intf),
 	}
 	for d, n := range dev2Node {
-		fmt.Println(n.(*tpb.Node))
 		a.dev2Node[d.(*opb.Device)] = n.(*tpb.Node)
 	}
 	for p, i := range port2Intf {
-		fmt.Println(i.(*intf))
 		a.port2Intf[p.(*opb.Port)] = i.(*intf)
 	}
-	fmt.Println(a)
 	return a
 }
