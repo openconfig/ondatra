@@ -643,13 +643,11 @@ message Ipv4Header {
   uint32 dscp = 4;
   uint32 ecn = 5;
   uint32 checksum = 7;
-  uint32 header_length = 8;
-  UIntRange protocol = 9;
-  uint32 total_length = 10;
-  bool identification = 11;
-  bool reserved = 12;
-  bool more_fragments = 13;
-  UIntRange fragment_offset = 14;
+  UIntRange protocol = 8;
+  uint32 identification = 9;
+  bool reserved = 10;
+  bool more_fragments = 11;
+  uint32 fragment_offset = 12;
 }
 
 message Ipv6Header {

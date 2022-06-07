@@ -160,10 +160,6 @@ func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	if ipv4.GetDontFragment() {
 		dontFragment = 1
 	}
-	var identification uint32
-	if ipv4.GetIdentification() {
-		identification = 1
-	}
 	var reserved uint32
 	if ipv4.GetReserved() {
 		reserved = 1
@@ -172,27 +168,17 @@ func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	if ipv4.GetMoreFragments() {
 		moreFragments = 1
 	}
-	setSingleValue(stack.Identification(), uintToStr(identification))
+	setSingleValue(stack.Identification(), uintToStr(ipv4.GetIdentification()))
 	setSingleValue(stack.FlagsReserved(), uintToStr(reserved))
 	setSingleValue(stack.FlagsFragment(), uintToStr(dontFragment))
 	setSingleValue(stack.FlagsLastFragment(), uintToStr(moreFragments))
 	setSingleValue(stack.Ttl(), uintToStr(ipv4.GetTtl()))
-	if ipv4.GetHeaderLength() > 0 {
-		setSingleValue(stack.HeaderLength(), uintToStr(ipv4.GetHeaderLength()))
-	}
 	if ipv4.GetProtocol() != nil {
 		if err := setUintRangeField(stack.Protocol(), ipv4.GetProtocol()); err != nil {
 			return nil, fmt.Errorf("could not set Ipv4 Protocol: %w", err)
 		}
 	}
-	if ipv4.GetTotalLength() > 0 {
-		setSingleValue(stack.TotalLength(), uintToStr(ipv4.GetTotalLength()))
-	}
-	if ipv4.GetFragmentOffset() != nil {
-		if err := setUintRangeField(stack.FragmentOffset(), ipv4.GetFragmentOffset()); err != nil {
-			return nil, fmt.Errorf("could not set Ipv4 FragmentOffset: %w", err)
-		}
-	}
+	setSingleValue(stack.FragmentOffset(), uintToStr(ipv4.GetFragmentOffset()))
 	if ipv4.GetChecksum() > 0 {
 		setSingleValue(stack.Checksum(), uintToHexStr(ipv4.GetChecksum()))
 	}
