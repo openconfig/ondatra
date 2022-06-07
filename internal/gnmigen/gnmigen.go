@@ -117,6 +117,8 @@ type GenConfig struct {
 	// SplitByModule controls whether path struct helpers should be split
 	// into different Go packages.
 	SplitByModule bool
+	// TrimPackagePrefix is the prefix to trim from generated go package names.
+	TrimPackagePrefix string
 }
 
 // GoImports contains package import paths needed by telemgen.
@@ -280,7 +282,7 @@ func (cg *GenConfig) GenerateCode(yangFiles, includePaths []string, config bool)
 		YANGParseOptions:                     cg.YANGParseOptions,
 		GeneratingBinary:                     cg.GeneratingBinary,
 		ListBuilderKeyThreshold:              cg.ListBuilderKeyThreshold,
-		TrimOCPackage:                        true,
+		TrimPackagePrefix:                    cg.TrimPackagePrefix,
 		SplitByModule:                        cg.SplitByModule,
 	}
 	if config {

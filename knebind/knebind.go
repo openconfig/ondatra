@@ -27,10 +27,10 @@ import (
 
 	log "github.com/golang/glog"
 	"golang.org/x/crypto/ssh"
-	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gocloser"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
@@ -240,7 +240,7 @@ type kneATE struct {
 	cfg *Config
 }
 
-func (a *kneATE) DialOTG() (gosnappi.GosnappiApi, error) {
+func (a *kneATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
 	s, err := a.Service("grpc")
 	if err != nil {
 		return nil, err
@@ -250,6 +250,21 @@ func (a *kneATE) DialOTG() (gosnappi.GosnappiApi, error) {
 		SetLocation(serviceAddr(s)).
 		SetRequestTimeout(30 * time.Second)
 	return api, nil
+}
+
+func (a *kneATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	s, err := a.Service("gnmi")
+	if err != nil {
+		return nil, err
+	}
+	addr := serviceAddr(s)
+	log.Infof("Dialing service %q on ate %s@%s", addr, a.Name(), addr)
+	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	conn, err := grpc.DialContext(ctx, addr, opts...)
+	if err != nil {
+		return nil, fmt.Errorf("DialContext(ctx, %s, %v): %w", addr, opts, err)
+	}
+	return gpb.NewGNMIClient(conn), nil
 }
 
 func kneCmd(cfg *Config, args ...string) ([]byte, error) {

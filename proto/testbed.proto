@@ -39,6 +39,7 @@ message Device {
     PALOALTO = 6;
     NOKIA = 7;
     ZPE = 8;
+    DELL = 9;
   }
   Vendor vendor = 2;
   // Hardware model of the device. Optional.
@@ -76,6 +77,8 @@ message Port {
   // Speed enum values are the port speed in Gbps.
   enum Speed {
     SPEED_UNSPECIFIED = 0;
+    S_1GB = 1;
+    S_5GB = 5;
     S_10GB = 10;
     S_100GB = 100;
     S_400GB = 400;

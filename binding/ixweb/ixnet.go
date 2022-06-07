@@ -23,6 +23,8 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+
+	log "github.com/golang/glog"
 )
 
 const (
@@ -53,17 +55,17 @@ func (n *IxNetwork) NewSession(ctx context.Context, name string) (*Session, erro
 		ID int `json:"id"`
 	}{}
 	if err := n.ixweb.jsonReq(ctx, post, sessionsPath, in, &out); err != nil {
-		return nil, fmt.Errorf("Error creating session: %w", err)
+		return nil, fmt.Errorf("error creating session: %w", err)
 	}
 	data := sessionData{
 		Name: encodeSessionName(name),
 	}
 	spath := sessionPath(out.ID)
 	if err := n.ixweb.jsonReq(ctx, patch, spath, data, nil); err != nil {
-		return nil, fmt.Errorf("Error naming session: %w", err)
+		return nil, fmt.Errorf("error naming session: %w", err)
 	}
 	if err := n.ixweb.jsonReq(ctx, post, path.Join(spath, "operations/start"), nil, nil); err != nil {
-		return nil, fmt.Errorf("Error starting session: %w", err)
+		return nil, fmt.Errorf("error starting session: %w", err)
 	}
 	return &Session{ixweb: n.ixweb, id: out.ID, name: name}, nil
 }
@@ -86,7 +88,7 @@ func encodeSessionName(s string) string {
 func (n *IxNetwork) FetchSession(ctx context.Context, id int) (*Session, error) {
 	data := sessionData{}
 	if err := n.ixweb.jsonReq(ctx, get, sessionPath(id), nil, &data); err != nil {
-		return nil, fmt.Errorf("Error deleting session: %w", err)
+		return nil, fmt.Errorf("error deleting session: %w", err)
 	}
 	return &Session{ixweb: n.ixweb, id: id, name: data.Name}, nil
 }
@@ -95,18 +97,20 @@ func (n *IxNetwork) FetchSession(ctx context.Context, id int) (*Session, error) 
 // This is a noop if the session is already deleted.
 func (n *IxNetwork) DeleteSession(ctx context.Context, id int) error {
 	spath := sessionPath(id)
-	if err := n.ixweb.jsonReq(ctx, post, path.Join(spath, "operations/stop"), nil, nil); err != nil {
-		// A 404 error on stop indicates the session was already deleted.
-		if strings.Contains(err.Error(), "404") {
+	stopErr := n.ixweb.jsonReq(ctx, post, path.Join(spath, "operations/stop"), nil, nil)
+	// A 404 error on stop indicates the session was already deleted.
+	if stopErr != nil {
+		if strings.Contains(stopErr.Error(), "404") {
 			return nil
 		}
-		// Do not raise an error if already stopped, fallthrough to deleting it instead.
-		if !strings.Contains(err.Error(), "Stopping a session is not permitted in state 'Stopped'") {
-			return fmt.Errorf("Error stopping session: %w", err)
-		}
+		log.Warningf("Error stopping session, which may be due to another stop in progress: %v"+
+			"\nWill still attempt to delete the session.", stopErr)
 	}
 	if err := n.ixweb.jsonReq(ctx, delete, spath, nil, nil); err != nil {
-		return fmt.Errorf("Error deleting session: %w", err)
+		if stopErr != nil {
+			return fmt.Errorf("error deleting session after error stopping session: %w, %v", err, stopErr)
+		}
+		return fmt.Errorf("error deleting session: %w", err)
 	}
 	return nil
 }
@@ -180,6 +184,47 @@ func (s *Session) Files() *Files {
 // Stats returns the statistics API for this session.
 func (s *Session) Stats() *Stats {
 	return &Stats{sess: s}
+}
+
+// Error represents an error reported by an IxNetwork session.
+type Error struct {
+	ID                  int      `json:"id"`
+	Level               string   `json:"errorLevel"`
+	Code                int      `json:"errorCode"`
+	Description         string   `json:"description"`
+	Name                string   `json:"name"`
+	LastModified        string   `json:"lastModified"`
+	Provider            string   `json:"provider"`
+	InstanceColumnNames []string `json:"sourceColumnsDisplayName"`
+	InstanceRowValues   []map[string]string
+}
+
+// Errors returns the current errors/warnings for this session.
+func (s *Session) Errors(ctx context.Context) ([]*Error, error) {
+	const errEP = "/globals/appErrors/error"
+	var errors []*Error
+	if err := s.Get(ctx, errEP, &errors); err != nil {
+		return nil, fmt.Errorf("error fetching session errors: %w", err)
+	}
+	for _, e := range errors {
+		var instances []*struct {
+			DataRow []string `json:"sourceValues"`
+		}
+		if err := s.Get(ctx, path.Join(errEP, strconv.Itoa(e.ID), "instance"), &instances); err != nil {
+			return nil, fmt.Errorf("error fetching instances of error with ID %d: %w", e.ID, err)
+		}
+		for i, r := range instances {
+			if len(r.DataRow) != len(e.InstanceColumnNames) {
+				return nil, fmt.Errorf("incorrect number of data values for error instance %d of error %d", i, e.ID)
+			}
+			row := map[string]string{}
+			for j, col := range e.InstanceColumnNames {
+				row[col] = r.DataRow[j]
+			}
+			e.InstanceRowValues = append(e.InstanceRowValues, row)
+		}
+	}
+	return errors, nil
 }
 
 func (s *Session) jsonReq(ctx context.Context, method httpMethod, path string, in, out interface{}) error {

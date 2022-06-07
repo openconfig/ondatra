@@ -21,11 +21,8 @@ import (
 	"os/signal"
 	"reflect"
 	"runtime"
-	"runtime/debug"
-	"sync"
 	"testing"
 	"time"
-	"unsafe"
 
 	log "github.com/golang/glog"
 	"golang.org/x/sys/unix"
@@ -40,7 +37,7 @@ var (
 	sigc         = make(chan os.Signal, 1)
 	reserveFn    = reserve
 	releaseFn    = release
-	runTestsFn   = (*fixture).runTests
+	runFn        = (*testing.M).Run
 	flagParseFn  = flags.Parse
 	setBindingFn = testbed.SetBinding
 )
@@ -77,7 +74,13 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 		return releaseFn()
 	}, "error releasing testbed")
 	debugger.ReservationDone()
-	runTestsFn(new(fixture), m, fv.RunTime)
+	if fv.RunTime > 0 {
+		go func() {
+			time.Sleep(fv.RunTime)
+			log.Exitf("Ondatra test timed out after %v", fv.RunTime)
+		}()
+	}
+	runFn(m)
 	return nil
 }
 
@@ -90,52 +93,4 @@ func fnAfterSignal(fn func() error, signals ...os.Signal) {
 	if err := fn(); err != nil {
 		log.Errorf("error calling %s: %v", fnName, err)
 	}
-}
-
-type fixture struct {
-	mu        sync.Mutex
-	earlyFail bool
-	fatalFn   func(args ...interface{})
-}
-
-func (f *fixture) runTests(m *testing.M, timeout time.Duration) {
-	tests := reflect.ValueOf(m).Elem().FieldByName("tests")
-	for i := 0; i < tests.Len(); i++ {
-		fnVal := tests.Index(i).FieldByName("F")
-		fnPtr := (*func(*testing.T))(unsafe.Pointer(fnVal.UnsafeAddr()))
-		fn := *fnPtr
-		*fnPtr = func(t *testing.T) {
-			f.testStarted(t, timeout)
-			defer func() {
-				if r := recover(); r != nil {
-					f.failEarly(fmt.Sprintf("Ondatra test panicked: %v, stack :%s", r, debug.Stack()))
-				}
-			}()
-			fn(t)
-		}
-	}
-	m.Run()
-}
-
-func (f *fixture) testStarted(t *testing.T, timeout time.Duration) {
-	f.mu.Lock()
-	defer f.mu.Unlock()
-	if f.earlyFail {
-		t.SkipNow()
-	}
-	// Wait until the first testcase to start the timer, so fatalFn is definitely set.
-	if timeout > 0 && f.fatalFn == nil {
-		go func() {
-			time.Sleep(timeout)
-			f.failEarly(fmt.Sprintf("Ondatra test timed out after %v", timeout))
-		}()
-	}
-	f.fatalFn = t.Fatal
-}
-
-func (f *fixture) failEarly(msg string) {
-	f.mu.Lock()
-	defer f.mu.Unlock()
-	f.earlyFail = true
-	f.fatalFn(msg)
 }

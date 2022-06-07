@@ -28,6 +28,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/internal/ixconfig"
@@ -157,6 +158,10 @@ func (c *fakeDelayImportClient) ImportConfig(ctx context.Context, _ *ixconfig.Ix
 	return ctx.Err()
 }
 
+func (c *fakeDelayImportClient) Session() session {
+	return &fakeSession{}
+}
+
 func (c *fakeCfgClient) UpdateIDs(_ context.Context, cfg *ixconfig.Ixnetwork, cns ...ixconfig.IxiaCfgNode) error {
 	if err := updateXPaths(cfg); err != nil {
 		return err
@@ -202,6 +207,10 @@ func (s *fakeSession) Post(_ context.Context, p string, _, out interface{}) erro
 		}
 	}
 	return s.postErrs[p]
+}
+
+func (s *fakeSession) Errors(_ context.Context) ([]*ixweb.Error, error) {
+	return nil, nil
 }
 
 func (s *fakeSession) Files() files {
@@ -614,8 +623,8 @@ func TestUpdateTopology(t *testing.T) {
 			syncRouteTableFilesAndImportFn = func(context.Context, *ixATE) error {
 				return test.routeTableImportErr
 			}
-			validateProtocolStartFn = func(context.Context, *ixATE) error {
-				return test.validateProtocolsErr
+			validateProtocolStartFn = func(context.Context, *ixATE) ([]string, error) {
+				return nil, test.validateProtocolsErr
 			}
 			genTrafficFn = func(context.Context, *ixATE) error {
 				return test.genErr
@@ -810,7 +819,7 @@ func TestValidateProtocolStart(t *testing.T) {
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{dg},
 			}},
 			Lag:   []*ixconfig.Lag{{}},
-			Vport: []*ixconfig.Vport{{}},
+			Vport: []*ixconfig.Vport{{}, {}},
 		}
 		updateXPaths(cfg) // Only needed for IS-IS/LAG test case
 
@@ -832,6 +841,13 @@ func TestValidateProtocolStart(t *testing.T) {
 					isrToNetworkGroup: isr,
 				},
 			},
+			vportToPort: map[*ixconfig.Vport]string{
+				cfg.Vport[0]: "1/1",
+				cfg.Vport[1]: "2/2",
+			},
+			lagPorts: map[*ixconfig.Lag][]*ixconfig.Vport{
+				cfg.Lag[0]: []*ixconfig.Vport{cfg.Vport[0], cfg.Vport[1]},
+			},
 		}
 	}
 	tests := []struct {
@@ -847,6 +863,7 @@ func TestValidateProtocolStart(t *testing.T) {
 		lspErr         error
 		ethRestartErr  error
 		wantErr        string
+		wantPorts      []string
 	}{{
 		desc:    "error fetching protocol status",
 		topoErr: errors.New("error on querying global protocol status"),
@@ -870,6 +887,14 @@ func TestValidateProtocolStart(t *testing.T) {
 		topoStatus:     "started",
 		protocolStatus: "down",
 		wantErr:        "some protocol instances did not start",
+		wantPorts:      []string{"1/1"},
+	}, {
+		desc:           "individual protocols never start on LAG interface",
+		withIsisAndLAG: true,
+		topoStatus:     "started",
+		protocolStatus: "down",
+		wantErr:        "some protocol instances did not start",
+		wantPorts:      []string{"1/1", "2/2"},
 	}, {
 		desc:           "error restarting eth protocol",
 		topoStatus:     "started",
@@ -888,6 +913,7 @@ func TestValidateProtocolStart(t *testing.T) {
 		protocolStatus: "up",
 		lspStatus:      "down",
 		wantErr:        "some ingress LSP instances did not start",
+		wantPorts:      []string{"1/1"},
 	}, {
 		desc:           "all up",
 		topoStatus:     "started",
@@ -936,9 +962,12 @@ func TestValidateProtocolStart(t *testing.T) {
 					},
 				},
 			}
-			gotErr := validateProtocolStart(context.Background(), c)
+			gotPorts, gotErr := validateProtocolStart(context.Background(), c)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("validateProtocolStart: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+			if diff := cmp.Diff(test.wantPorts, gotPorts, cmpopts.SortSlices(func(a, b string) bool { return a < b })); diff != "" {
+				t.Errorf("validateProtocolStart: unexpected difference in failed port set (-want, +got): %v", diff)
 			}
 		})
 	}
@@ -949,16 +978,22 @@ func TestStartProtocols(t *testing.T) {
 	tests := []struct {
 		desc                string
 		opErr, protocolsErr error
-		wantErr             bool
+		wantErr             string
 	}{{
 		// Currently a failure is only reported if protocols are not up, even if the operation failed.
-		// TODO; Revert to checking that an error is produced(see comment in 'startProtocols' section.)
+		// TODO: Revert to checking that an error is produced(see comment in 'startProtocols' section.)
 		desc:  "Error from op",
 		opErr: errors.New("someError"),
 	}, {
-		desc:         "Error waiting for protocols",
+		desc:         "Error waiting for protocol status validation",
 		protocolsErr: errors.New("protocols not up"),
-		wantErr:      true,
+		wantErr:      "not up",
+	}, {
+		// Errors from 'startallprotcols' op should be reported if protocols fail to come up.
+		desc:         "Error on op and error on validation",
+		opErr:        errors.New("someError"),
+		protocolsErr: errors.New("protocols not up"),
+		wantErr:      "someError",
 	}, {
 		desc: "No error",
 	}}
@@ -968,13 +1003,13 @@ func TestStartProtocols(t *testing.T) {
 			c := &ixATE{c: &fakeCfgClient{session: &fakeSession{
 				postErrs: map[string]error{op: test.opErr},
 			}}}
-			validateProtocolStartFn = func(context.Context, *ixATE) error {
-				return test.protocolsErr
+			validateProtocolStartFn = func(context.Context, *ixATE) ([]string, error) {
+				return nil, test.protocolsErr
 			}
 
 			gotErr := c.StartProtocols(context.Background())
-			if (gotErr != nil) != test.wantErr {
-				t.Errorf("StartProtocols: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("StartProtocols: got err: %v, want err %q", gotErr, test.wantErr)
 			}
 		})
 	}

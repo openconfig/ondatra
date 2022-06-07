@@ -134,6 +134,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 type ServiceDUT struct {
 	*binding.AbstractDUT
 	Services map[string]*tpb.Service
+	Cert     *tpb.CertificateCfg
 }
 
 // Service returns the KNE service details for a given service name.
@@ -149,6 +150,7 @@ func (d *ServiceDUT) Service(service string) (*tpb.Service, error) {
 type ServiceATE struct {
 	*binding.AbstractATE
 	Services map[string]*tpb.Service
+	Cert     *tpb.CertificateCfg
 }
 
 // Service returns the KNE service details for a given service name.
@@ -182,35 +184,37 @@ func (a *assign) String() string {
 }
 
 func (a *assign) resolveDUT(dev *opb.Device) (*ServiceDUT, error) {
-	dims, srvs, err := a.resolveDevice(dev)
+	dims, srvs, cert, err := a.resolveDevice(dev)
 	if err != nil {
 		return nil, err
 	}
 	return &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{dims},
 		Services:    srvs,
+		Cert:        cert,
 	}, nil
 }
 
 func (a *assign) resolveATE(dev *opb.Device) (*ServiceATE, error) {
-	dims, srvs, err := a.resolveDevice(dev)
+	dims, srvs, cert, err := a.resolveDevice(dev)
 	if err != nil {
 		return nil, err
 	}
 	return &ServiceATE{
 		AbstractATE: &binding.AbstractATE{dims},
 		Services:    srvs,
+		Cert:        cert,
 	}, nil
 }
 
-func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.Service, error) {
+func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.Service, *tpb.CertificateCfg, error) {
 	node, ok := a.dev2Node[dev]
 	if !ok {
-		return nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
+		return nil, nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
 	vendor, ok := type2VendorMap[node.GetType()]
 	if !ok {
-		return nil, nil, fmt.Errorf("no known device vendor for node type: %v", node.GetType())
+		return nil, nil, nil, fmt.Errorf("no known device vendor for node type: %v", node.GetType())
 	}
 	typeName := tpb.Node_Type_name[int32(node.GetType())]
 	dims := &binding.Dims{
@@ -228,7 +232,7 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 	for _, s := range node.GetServices() {
 		sm[s.GetName()] = s
 	}
-	return dims, sm, nil
+	return dims, sm, node.GetConfig().GetCert(), nil
 }
 
 type solver struct {

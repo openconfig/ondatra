@@ -59319,3 +59319,186 @@ func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SignaledB
 	}
 	return qv
 }
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Lookup(t testing.TB) *oc.QualifiedE_Mpls_TeBandwidthType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", goStruct, true, false)
+	if ok {
+		return convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedE_Mpls_TeBandwidthType{
+		Metadata: md,
+	}).SetVal(goStruct.GetSpecificationType())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Get(t testing.TB) oc.E_Mpls_TeBandwidthType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Mpls_TeBandwidthType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_Mpls_TeBandwidthType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", goStruct, queryPath, true, false)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a ONCE subscription.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Get(t testing.TB) []oc.E_Mpls_TeBandwidthType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_Mpls_TeBandwidthType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_TeBandwidthType {
+	t.Helper()
+	c := &oc.CollectionE_Mpls_TeBandwidthType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_TeBandwidthType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
+	t.Helper()
+	w := &oc.E_Mpls_TeBandwidthTypeWatcher{}
+	gs := &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", gs, queryPath, true, false)
+		return []genutil.QualifiedValue{convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, gs)}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Mpls_TeBandwidthType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Await(t testing.TB, timeout time.Duration, val oc.E_Mpls_TeBandwidthType) *oc.QualifiedE_Mpls_TeBandwidthType {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedE_Mpls_TeBandwidthType) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type to the batch object.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionE_Mpls_TeBandwidthType {
+	t.Helper()
+	c := &oc.CollectionE_Mpls_TeBandwidthType{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedE_Mpls_TeBandwidthType) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
+	t.Helper()
+	w := &oc.E_Mpls_TeBandwidthTypeWatcher{}
+	structs := map[string]*oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
+	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth", structs[pre], queryPath, true, false)
+			qv := convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t, md, structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedE_Mpls_TeBandwidthType)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedE_Mpls_TeBandwidthType) bool) *oc.E_Mpls_TeBandwidthTypeWatcher {
+	t.Helper()
+	return watch_NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/bandwidth/state/specification-type to the batch object.
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath extracts the value of the leaf SpecificationType from its parent oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_Mpls_TeBandwidthType.
+func convertNetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth_SpecificationTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_Bandwidth) *oc.QualifiedE_Mpls_TeBandwidthType {
+	t.Helper()
+	qv := &oc.QualifiedE_Mpls_TeBandwidthType{
+		Metadata: md,
+	}
+	val := parent.SpecificationType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}

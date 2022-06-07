@@ -16,25 +16,30 @@
 package otg
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
 	"sync"
 
+	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
 var (
-	mu   sync.Mutex
-	apis = make(map[binding.ATE]gosnappi.GosnappiApi)
+	mu    sync.Mutex
+	apis  = make(map[binding.ATE]gosnappi.GosnappiApi)
+	gnmis = make(map[binding.ATE]gpb.GNMIClient)
 )
 
-func fetchAPI(ate binding.ATE) (gosnappi.GosnappiApi, error) {
+func fetchAPI(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error) {
 	mu.Lock()
 	defer mu.Unlock()
 	api, ok := apis[ate]
 	if !ok {
 		var err error
-		api, err = ate.DialOTG()
+		api, err = ate.DialOTG(ctx)
 		if err != nil {
 			return nil, err
 		}
@@ -44,8 +49,8 @@ func fetchAPI(ate binding.ATE) (gosnappi.GosnappiApi, error) {
 }
 
 // NewConfig constructs a new config for the specified ATE.
-func NewConfig(ate binding.ATE) (gosnappi.Config, error) {
-	api, err := fetchAPI(ate)
+func NewConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) {
+	api, err := fetchAPI(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +58,8 @@ func NewConfig(ate binding.ATE) (gosnappi.Config, error) {
 }
 
 // FetchConfig fetches and returns the config on the specified ATE.
-func FetchConfig(ate binding.ATE) (gosnappi.Config, error) {
-	api, err := fetchAPI(ate)
+func FetchConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) {
+	api, err := fetchAPI(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -63,8 +68,8 @@ func FetchConfig(ate binding.ATE) (gosnappi.Config, error) {
 
 // PushConfig pushes a config to the specified ATE.
 // The first return value are any non-fatal warnings encountered.
-func PushConfig(ate binding.ATE, cfg gosnappi.Config) ([]string, error) {
-	api, err := fetchAPI(ate)
+func PushConfig(ctx context.Context, ate binding.ATE, cfg gosnappi.Config) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -88,18 +93,18 @@ func PushConfig(ate binding.ATE, cfg gosnappi.Config) ([]string, error) {
 
 // StartProtocols starts protocol on the specified ATE.
 // The first return value are any non-fatal warnings encountered.
-func StartProtocols(ate binding.ATE) ([]string, error) {
-	return setProtocolState(ate, gosnappi.ProtocolStateState.START)
+func StartProtocols(ctx context.Context, ate binding.ATE) ([]string, error) {
+	return setProtocolState(ctx, ate, gosnappi.ProtocolStateState.START)
 }
 
 // StopProtocols stops protocol on the specified ATE.
 // The first return value are any non-fatal warnings encountered.
-func StopProtocols(ate binding.ATE) ([]string, error) {
-	return setProtocolState(ate, gosnappi.ProtocolStateState.STOP)
+func StopProtocols(ctx context.Context, ate binding.ATE) ([]string, error) {
+	return setProtocolState(ctx, ate, gosnappi.ProtocolStateState.STOP)
 }
 
-func setProtocolState(ate binding.ATE, state gosnappi.ProtocolStateStateEnum) ([]string, error) {
-	api, err := fetchAPI(ate)
+func setProtocolState(ctx context.Context, ate binding.ATE, state gosnappi.ProtocolStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -112,18 +117,18 @@ func setProtocolState(ate binding.ATE, state gosnappi.ProtocolStateStateEnum) ([
 
 // StartTraffic starts traffic on the specified ATE.
 // The first return value are any non-fatal warnings encountered.
-func StartTraffic(ate binding.ATE) ([]string, error) {
-	return setTransmitState(ate, gosnappi.TransmitStateState.START)
+func StartTraffic(ctx context.Context, ate binding.ATE) ([]string, error) {
+	return setTransmitState(ctx, ate, gosnappi.TransmitStateState.START)
 }
 
 // StopTraffic stops traffic on the specified ATE.
 // The first return value are any non-fatal warnings encountered.
-func StopTraffic(ate binding.ATE) ([]string, error) {
-	return setTransmitState(ate, gosnappi.TransmitStateState.STOP)
+func StopTraffic(ctx context.Context, ate binding.ATE) ([]string, error) {
+	return setTransmitState(ctx, ate, gosnappi.TransmitStateState.STOP)
 }
 
-func setTransmitState(ate binding.ATE, state gosnappi.TransmitStateStateEnum) ([]string, error) {
-	api, err := fetchAPI(ate)
+func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.TransmitStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -132,4 +137,20 @@ func setTransmitState(ate binding.ATE, state gosnappi.TransmitStateStateEnum) ([
 		return nil, err
 	}
 	return resp.Warnings(), nil
+}
+
+// FetchGNMI returns a gNMI client for the specified ATE.
+func FetchGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) {
+	mu.Lock()
+	defer mu.Unlock()
+	gnmi, ok := gnmis[ate]
+	if !ok {
+		var err error
+		gnmi, err = ate.DialGNMI(ctx, grpc.WithBlock())
+		if err != nil {
+			return nil, err
+		}
+		gnmis[ate] = gnmi
+	}
+	return gnmi, nil
 }

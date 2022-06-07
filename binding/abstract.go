@@ -19,8 +19,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
@@ -144,8 +144,13 @@ func (a *AbstractATE) DialIxNetwork(context.Context) (*IxNetwork, error) {
 	return nil, errors.New("DialIxNetwork unimplemented")
 }
 
+// DialGNMI returns an unimplemented error.
+func (a *AbstractATE) DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
+	return nil, errors.New("DialGNMI unimplemented")
+}
+
 // DialOTG returns an unimplemented error.
-func (a *AbstractATE) DialOTG() (gosnappi.GosnappiApi, error) {
+func (a *AbstractATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
 	return nil, errors.New("DialOTG unimplemented")
 }
 

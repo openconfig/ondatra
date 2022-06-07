@@ -15,13 +15,18 @@
 package ondatra
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
 	"testing"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/otg"
+	"github.com/openconfig/ondatra/telemetry/otg/device"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
 // OTG provides the Open Traffic Generator API to an ATE.
@@ -37,7 +42,7 @@ func (o *OTG) String() string {
 func (o *OTG) NewConfig(t testing.TB) gosnappi.Config {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating new config for %s", o.ate)
-	cfg, err := otg.NewConfig(o.ate)
+	cfg, err := otg.NewConfig(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("NewConfig(t) on %s: %v", o.ate, err)
 	}
@@ -48,7 +53,7 @@ func (o *OTG) NewConfig(t testing.TB) gosnappi.Config {
 func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 	t.Helper()
 	debugger.ActionStarted(t, "Pushing config to %s", o.ate)
-	warns, err := otg.PushConfig(o.ate, cfg)
+	warns, err := otg.PushConfig(context.Background(), o.ate, cfg)
 	if err != nil {
 		t.Fatalf("PushConfig(t) on %s: %v", o.ate, err)
 	}
@@ -61,7 +66,7 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 func (o *OTG) FetchConfig(t testing.TB) gosnappi.Config {
 	t.Helper()
 	debugger.ActionStarted(t, "Fetching config from %s", o.ate)
-	cfg, err := otg.FetchConfig(o.ate)
+	cfg, err := otg.FetchConfig(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("FetchConfig(t) on %s: %v", o.ate, err)
 	}
@@ -72,7 +77,7 @@ func (o *OTG) FetchConfig(t testing.TB) gosnappi.Config {
 func (o *OTG) StartProtocols(t testing.TB) {
 	t.Helper()
 	debugger.ActionStarted(t, "Starting protocols on %s", o.ate)
-	warns, err := otg.StartProtocols(o.ate)
+	warns, err := otg.StartProtocols(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("StartProtocols(t) on %s: %v", o.ate, err)
 	}
@@ -85,7 +90,7 @@ func (o *OTG) StartProtocols(t testing.TB) {
 func (o *OTG) StopProtocols(t testing.TB) {
 	t.Helper()
 	debugger.ActionStarted(t, "Stopping protocols on %s", o.ate)
-	warns, err := otg.StopProtocols(o.ate)
+	warns, err := otg.StopProtocols(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("StopProtocols(t) on %s: %v", o.ate, err)
 	}
@@ -98,7 +103,7 @@ func (o *OTG) StopProtocols(t testing.TB) {
 func (o *OTG) StartTraffic(t testing.TB) {
 	t.Helper()
 	debugger.ActionStarted(t, "Starting traffic on %s", o.ate)
-	warns, err := otg.StartTraffic(o.ate)
+	warns, err := otg.StartTraffic(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("StartTraffic(t) on %s: %v", o.ate, err)
 	}
@@ -111,11 +116,20 @@ func (o *OTG) StartTraffic(t testing.TB) {
 func (o *OTG) StopTraffic(t testing.TB) {
 	t.Helper()
 	debugger.ActionStarted(t, "Stopping traffic on %s", o.ate)
-	warns, err := otg.StopTraffic(o.ate)
+	warns, err := otg.StopTraffic(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("StopTraffic(t) on %s: %v", o.ate, err)
 	}
 	if len(warns) > 0 {
 		t.Logf("StopTraffic(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
+}
+
+// Telemetry returns a telemetry path root for the device.
+func (o *OTG) Telemetry() *device.DevicePath {
+	root := device.DeviceRoot(o.ate.Name())
+	root.PutCustomData(genutil.DefaultClientKey, func(ctx context.Context) (gpb.GNMIClient, error) {
+		return otg.FetchGNMI(ctx, o.ate)
+	})
+	return root
 }

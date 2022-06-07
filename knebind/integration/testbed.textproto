@@ -15,19 +15,32 @@
 # proto-file: proto/testbed.proto
 # proto-message: ondatra.Testbed
 
+# An example KNE topology that can be used with this testbed:
+# https://github.com/google/kne/blob/main/examples/2node-ixia-ceos.yaml
+
 duts {
-  id: "dut1"
+  id: "dut"
   ports {
     id: "port1"
   }
+  ports {
+    id: "port2"
+  }
 }
-duts {
-  id: "dut2"
+ates {
+  id: "ate"
   ports {
     id: "port1"
+  }
+  ports {
+    id: "port2"
   }
 }
 links {
-  a: "dut1:port1"
-  b: "dut2:port1"
+  a: "dut:port1"
+  b: "ate:port1"
+}
+links {
+  a: "dut:port2"
+  b: "ate:port2"
 }

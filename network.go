@@ -159,6 +159,13 @@ func (i *ImportedBGPRoutes) WithRouteTableFormatJuniper() *ImportedBGPRoutes {
 	return i
 }
 
+// WithRouteTableFormatCSV sets CSV(IXIA) as the expected route table format of
+// the specified routes.
+func (i *ImportedBGPRoutes) WithRouteTableFormatCSV() *ImportedBGPRoutes {
+	i.pb.RouteTableFormat = opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CSV
+	return i
+}
+
 // WithIPv4RoutesPath sets the path for a file containing a BGP IPv4 route
 // table.
 func (i *ImportedBGPRoutes) WithIPv4RoutesPath(path string) *ImportedBGPRoutes {

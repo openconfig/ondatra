@@ -44,14 +44,14 @@ type DUTDevice struct {
 
 // Config returns a handle to the DUT configuration API.
 func (d *DUTDevice) Config() *Config {
-	dev := device.DeviceRoot(d.ID())
+	root := device.DeviceRoot(d.ID())
 	if d.Vendor() == CISCO || d.Vendor() == JUNIPER {
-		dev.PutCustomData(genutil.UseGetForConfigKey, true)
+		genutil.PutUseGetForConfig(root, true)
 	}
-	dev.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
+	root.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
 	return &Config{
 		dut:        d.res.(binding.DUT),
-		DevicePath: dev,
+		DevicePath: root,
 	}
 }
 

@@ -512,7 +512,7 @@ func TestAddNetworks(t *testing.T) {
 				Name:          net1Name,
 				InterfaceName: ifName,
 				ImportedBgpRoutes: &opb.Network_ImportedBgpRoutes{
-					RouteTableFormat: opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CISCO,
+					RouteTableFormat: opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CSV,
 					Ipv6RoutesPath:   "ipv6",
 				},
 			}},
@@ -528,7 +528,7 @@ func TestAddNetworks(t *testing.T) {
 		}},
 		wantRouteTables: map[string]*routeTables{
 			net1Name: &routeTables{
-				format: routeTableFormatCisco,
+				format: routeTableFormatCSV,
 				ipv6:   "ipv6",
 			},
 		},

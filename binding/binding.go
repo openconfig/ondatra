@@ -21,8 +21,8 @@ import (
 	"io"
 	"time"
 
-	"github.com/open-traffic-generator/snappi/gosnappi"
 	"google.golang.org/grpc"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding/ixweb"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -162,8 +162,14 @@ type ATE interface {
 	// DialIxNetwork creates a client connection to the ATE's IxNetwork endpoint.
 	DialIxNetwork(context.Context) (*IxNetwork, error)
 
+	// DialGNMI creates a client connection to the ATE's gNMI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	// This method must be implemented to receive gNMI from OTG but not from IxNetwork;
+	// Implementing DialIxNetwork is sufficient for gNMI support for IxNetwork.
+	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
+
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
-	DialOTG() (gosnappi.GosnappiApi, error)
+	DialOTG(context.Context) (gosnappi.GosnappiApi, error)
 
 	isATE()
 }

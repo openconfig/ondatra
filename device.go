@@ -63,6 +63,8 @@ const (
 	ARISTA = Vendor(opb.Device_ARISTA)
 	// CISCO vendor.
 	CISCO = Vendor(opb.Device_CISCO)
+	// DELL vendor.
+	DELL = Vendor(opb.Device_DELL)
 	// JUNIPER vendor.
 	JUNIPER = Vendor(opb.Device_JUNIPER)
 	// IXIA vendor.
@@ -82,7 +84,7 @@ func (v Vendor) String() string {
 
 // Telemetry returns a telemetry path root for the device.
 func (d *Device) Telemetry() *device.DevicePath {
-	root := device.DeviceRoot(d.ID())
+	root := device.DeviceRoot(d.Name())
 	// TODO: Add field to root node in ygot instead of using custom data.
 	root.PutCustomData(genutil.DefaultClientKey, d.clientFn)
 	return root
@@ -169,6 +171,10 @@ func (p *Port) Device() *Device {
 type Speed int
 
 const (
+	// Speed1Gb is a port speed of 1Gbps.
+	Speed1Gb = Speed(opb.Port_S_1GB)
+	// Speed5Gb is a port speed of 5Gbps.
+	Speed5Gb = Speed(opb.Port_S_5GB)
 	// Speed10Gb is a port speed of 10Gbps.
 	Speed10Gb = Speed(opb.Port_S_10GB)
 	// Speed100Gb is a port speed of 100Gbps.

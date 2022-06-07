@@ -20,6 +20,8 @@ import (
 	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestOpArgs(t *testing.T) {
@@ -75,6 +77,91 @@ func TestDeleteSession(t *testing.T) {
 					t.Errorf("DeleteSession() got err %v, want contains %q", err, test.wantErr)
 				}
 				return
+			}
+		})
+	}
+}
+
+func TestErrors(t *testing.T) {
+	errorsBody := `[{
+		"id": 3,
+		"lastModified": "05/11/2022 11:01:31",
+		"errorLevel": "kError",
+		"sourceColumnsDisplayName": [
+			"Description",
+			"Time"
+		],
+		"description": "some description",
+		"provider": "ResourceManagerMiddleware",
+		"errorCode": 0,
+		"name": "JSON Import Issues"
+	}]`
+	errorInstancesBody := `[{
+		"sourceValues": [
+			"invalid IP address",
+			"05/11/2022 11:01:31"
+		]
+	}]`
+	invalidValueCountInstancesBody := `[{
+		"sourceValues": [
+			"invalid IP address"
+		]
+	}]`
+	tests := []struct {
+		desc       string
+		doResps    []*http.Response
+		wantErr    string
+		wantErrors []*Error
+	}{{
+		desc:    "error fetching errors",
+		doResps: []*http.Response{fakeResponse(400, "")},
+		wantErr: "400",
+	}, {
+		desc:    "error fetching error instances",
+		doResps: []*http.Response{fakeResponse(200, errorsBody), fakeResponse(500, "")},
+		wantErr: "500",
+	}, {
+		desc:    "success",
+		doResps: []*http.Response{fakeResponse(200, errorsBody), fakeResponse(200, invalidValueCountInstancesBody)},
+		wantErr: "incorrect number of data values",
+	}, {
+		desc:    "success",
+		doResps: []*http.Response{fakeResponse(200, errorsBody), fakeResponse(200, errorInstancesBody)},
+		wantErrors: []*Error{{
+			ID:                  3,
+			LastModified:        "05/11/2022 11:01:31",
+			Level:               "kError",
+			Code:                0,
+			Description:         "some description",
+			Name:                "JSON Import Issues",
+			InstanceColumnNames: []string{"Description", "Time"},
+			Provider:            "ResourceManagerMiddleware",
+			InstanceRowValues: []map[string]string{{
+				"Description": "invalid IP address",
+				"Time":        "05/11/2022 11:01:31",
+			}},
+		}},
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			sess := &Session{ixweb: &IxWeb{
+				hostname: "fakeHost",
+				client: &fakeHTTPClient{
+					doResps: test.doResps,
+				},
+			}}
+			gotErrors, err := sess.Errors(context.Background())
+			if got, want := err != nil, test.wantErr != ""; got != want {
+				t.Fatalf("Errors() got err %v, want err %v", err, want)
+			}
+			if err != nil {
+				if !strings.Contains(err.Error(), test.wantErr) {
+					t.Errorf("Errors() got err %v, want contains %q", err, test.wantErr)
+				}
+				return
+			}
+			if diff := cmp.Diff(test.wantErrors, gotErrors); diff != "" {
+				t.Errorf("Errors() got unexpected diff (-want + got): %s", diff)
 			}
 		})
 	}

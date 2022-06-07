@@ -19,7 +19,6 @@ import (
 	"os"
 	"sync"
 	"testing"
-	"time"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/flags"
@@ -29,11 +28,11 @@ func TestReserveOnRun(t *testing.T) {
 	flagParseFn = func() (*flags.Values, error) {
 		return &flags.Values{}, nil
 	}
-	origRunTests := runTestsFn
+	origRun := runFn
 	defer func() {
 		reserveFn = reserve
 		releaseFn = release
-		runTestsFn = origRunTests
+		runFn = origRun
 	}()
 	tests := []struct {
 		desc                  string
@@ -73,10 +72,11 @@ func TestReserveOnRun(t *testing.T) {
 				}
 				return releaseErr
 			}
-			runTestsFn = func(*fixture, *testing.M, time.Duration) {
+			runFn = func(*testing.M) int {
 				if test.sig != nil {
 					sigc <- test.sig
 				}
+				return 0
 			}
 			var initBindCalled bool
 			setBindingFn = func(b binding.Binding) {

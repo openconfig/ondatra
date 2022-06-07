@@ -29,6 +29,10 @@ var (
 	stubLine string
 )
 
+func resetStdinReader() {
+	reader = nil
+}
+
 func writeLine(line string) {
 	stubMu.Lock()
 	defer stubMu.Unlock()
@@ -49,6 +53,7 @@ func init() {
 	}
 }
 func TestNoDebugMode(t *testing.T) {
+	resetStdinReader()
 	TestStarted(false)
 	defer TestCasesDone()
 
@@ -58,6 +63,7 @@ func TestNoDebugMode(t *testing.T) {
 }
 
 func TestDebugModeRunTests(t *testing.T) {
+	resetStdinReader()
 	writeLine("1\n")
 	TestStarted(true)
 	defer TestCasesDone()
@@ -69,6 +75,7 @@ func TestDebugModeRunTests(t *testing.T) {
 }
 
 func TestDebugModeJustReserve(t *testing.T) {
+	resetStdinReader()
 	writeLine("2\n")
 	TestStarted(true)
 	defer TestCasesDone()

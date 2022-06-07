@@ -480,6 +480,7 @@ message Network {
       ROUTE_TABLE_FORMAT_UNSPECIFIED = 0;
       ROUTE_TABLE_FORMAT_CISCO = 1;
       ROUTE_TABLE_FORMAT_JUNIPER = 2;
+      ROUTE_TABLE_FORMAT_CSV = 3;
     }
     RouteTableFormat route_table_format = 1;
     string ipv4_routes_path = 2;

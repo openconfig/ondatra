@@ -28,6 +28,7 @@ const (
 	metadataKeyPrefix   = "metadata-"
 	subscriptionModeKey = "subscriptionMode"
 	clientKey           = "client"
+	useGetForConfigKey  = "useGetForConfig"
 )
 
 // PutClient sets the client as metadata request option.
@@ -45,10 +46,16 @@ func PutSubscriptionMode(n FakeRootPathStruct, subMode gpb.SubscriptionMode) {
 	n.PutCustomData(subscriptionModeKey, subMode)
 }
 
+// PutUseGetForConfig sets whether to use GET for config as a request option.
+func PutUseGetForConfig(n FakeRootPathStruct, useGetForConfig bool) {
+	n.PutCustomData(useGetForConfigKey, useGetForConfig)
+}
+
 type requestOpts struct {
-	subMode gpb.SubscriptionMode
-	client  gpb.GNMIClient
-	md      metadata.MD
+	subMode         gpb.SubscriptionMode
+	client          gpb.GNMIClient
+	useGetForConfig bool
+	md              metadata.MD
 }
 
 // extractRequestOpts translates the root path's custom data to request options.
@@ -70,6 +77,13 @@ func extractRequestOpts(customData map[string]interface{}) (*requestOpts, error)
 			return nil, fmt.Errorf("customData key %q but value is not GNMIClient type (%T, %v)", clientKey, v, v)
 		}
 		opts.client = m
+	}
+	if v, ok := customData[useGetForConfigKey]; ok {
+		m, ok := v.(bool)
+		if !ok {
+			return nil, fmt.Errorf("customData key %q but value is not bool type (%T, %v)", useGetForConfigKey, v, v)
+		}
+		opts.useGetForConfig = m
 	}
 	md := make(map[string]string)
 	for k, v := range customData {
