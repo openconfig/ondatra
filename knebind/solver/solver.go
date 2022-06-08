@@ -282,7 +282,11 @@ func (s *solver) solve() (*assign, error) {
 			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
 
 				for _, i := range intfs {
-					if i.groupName == port.GetGroup() {
+					if port.GetGroup() != "" {
+						if i.groupName == port.GetGroup() {
+							port2Intfs[port] = append(port2Intfs[port], i)
+						}
+					} else {
 						port2Intfs[port] = append(port2Intfs[port], i)
 					}
 				}
