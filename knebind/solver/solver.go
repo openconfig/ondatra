@@ -287,7 +287,14 @@ func (s *solver) solve() (*assign, error) {
 							port2Intfs[port] = append(port2Intfs[port], i)
 						}
 					} else {
-						port2Intfs[port] = append(port2Intfs[port], i)
+						if i.groupName == "" {
+							// ports with no group get high preference
+							port2Intfs[port] = append([]interface{}{
+								i,
+							}, port2Intfs[port]...)
+						} else {
+							port2Intfs[port] = append(port2Intfs[port], i)
+						}
 					}
 				}
 			}
