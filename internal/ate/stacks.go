@@ -160,16 +160,11 @@ func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	if ipv4.GetDontFragment() {
 		dontFragment = 1
 	}
-	var reserved uint32
-	if ipv4.GetReserved() {
-		reserved = 1
-	}
 	var moreFragments uint32
 	if ipv4.GetMoreFragments() {
 		moreFragments = 1
 	}
 	setSingleValue(stack.Identification(), uintToStr(ipv4.GetIdentification()))
-	setSingleValue(stack.FlagsReserved(), uintToStr(reserved))
 	setSingleValue(stack.FlagsFragment(), uintToStr(dontFragment))
 	setSingleValue(stack.FlagsLastFragment(), uintToStr(moreFragments))
 	setSingleValue(stack.Ttl(), uintToStr(ipv4.GetTtl()))

@@ -197,7 +197,6 @@ func TestHeaderStacks(t *testing.T) {
 					Checksum:     checksum,
 					Protocol: &opb.UIntRange{Min: protocol, Max: protocol, Count: 1},
 					Identification: identification,
-					Reserved: true,
 					MoreFragments: true,
 					FragmentOffset: fragmentOffset,
 				},
@@ -259,13 +258,6 @@ func TestHeaderStacks(t *testing.T) {
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).Identification()
-				},
-			}, {
-				name:    "flag reserved",
-				wantVal: ixconfig.String("1"),
-				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
-					ip := ixconfig.Ipv4Stack(*s)
-					return (&ip).FlagsReserved()
 				},
 			}, {
 				name:    "flag last fragment",

@@ -201,12 +201,6 @@ func (h *IPv4Header) WithIdentification(identification uint16) *IPv4Header {
 	return h
 }
 
-// WithReserved set flag 0 bit of IPv4 Header
-func (h *IPv4Header) WithReserved(reserved bool) *IPv4Header {
-	h.pb.Reserved = reserved
-	return h
-}
-
 // WithMoreFragments set flag 2 bit for more fragments of IPv4 Header
 func (h *IPv4Header) WithMoreFragments(moreFragments bool) *IPv4Header {
 	h.pb.MoreFragments = moreFragments

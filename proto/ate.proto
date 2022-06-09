@@ -645,9 +645,8 @@ message Ipv4Header {
   uint32 checksum = 7;
   UIntRange protocol = 8;
   uint32 identification = 9;
-  bool reserved = 10;
-  bool more_fragments = 11;
-  uint32 fragment_offset = 12;
+  bool more_fragments = 10;
+  uint32 fragment_offset = 11;
 }
 
 message Ipv6Header {
