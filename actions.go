@@ -46,39 +46,35 @@ func (n *BGPPeerNotification) String() string {
 }
 
 // NewBGPPeerNotification returns an instance of API for sending BGP notification/error codes.
+// The returned API instance has a configuration with the following defaults:
+// code: 1
+// subCode: 1
 func (a *Actions) NewBGPPeerNotification() *BGPPeerNotification {
-	// setting the default values for the respective parameters
 	return &BGPPeerNotification{
-		ate:       a.ate,
-		code:      1,
-		subCode:   1,
-		peerNames: []string{},
+		ate:     a.ate,
+		code:    1,
+		subCode: 1,
 	}
 }
 
-// WithCode sets the notification code that needs to be sent from BGP peer.
+// WithCode sets the notification code to be sent from BGP peer.
 func (n *BGPPeerNotification) WithCode(code int) *BGPPeerNotification {
 	n.code = code
 	return n
 }
 
-// WithSubCode sets the notification sub code that needs to be sent from BGP peer.
+// WithSubCode sets the notification sub code to be sent from BGP peer.
 func (n *BGPPeerNotification) WithSubCode(subCode int) *BGPPeerNotification {
 	n.subCode = subCode
 	return n
 }
 
-// WithBGPPeers adds the BGP peers from which the notification/error codes is to be sent.
-func (n *BGPPeerNotification) WithBGPPeers(bgpPeers ...*BGPPeer) *BGPPeerNotification {
+// WithPeers adds the BGP peers from which the notification/error codes is to be sent.
+func (n *BGPPeerNotification) WithPeers(bgpPeers ...*BGPPeer) *BGPPeerNotification {
+	n.peerNames = make([]string, 0)
 	for _, bgpPeer := range bgpPeers {
-		n.peerNames = append(n.peerNames, bgpPeer.Name())
+		n.peerNames = append(n.peerNames, bgpPeer.pb.GetName())
 	}
-	return n
-}
-
-// ClearBGPPeers clears the bgp peers currently assigned.
-func (n *BGPPeerNotification) ClearBGPPeers() *BGPPeerNotification {
-	n.peerNames = n.peerNames[:0]
 	return n
 }
 

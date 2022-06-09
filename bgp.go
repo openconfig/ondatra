@@ -76,11 +76,6 @@ func (b *BGPPeer) WithName(name string) *BGPPeer {
 	return b
 }
 
-// Name returns the name of the peer.
-func (b *BGPPeer) Name() string {
-	return b.pb.GetName()
-}
-
 // WithActive sets whether the peering is active.
 func (b *BGPPeer) WithActive(active bool) *BGPPeer {
 	b.pb.Active = active

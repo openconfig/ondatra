@@ -1385,46 +1385,46 @@ func validateIP(ipc *opb.IpConfig, desc string) error {
 // sends notification/error messages from bgp peers on ATE.
 func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, code int, subCode int, peerNames []string) error {
 
-	if len(peerNames) == 0 {
+	if peerNames == nil {
 		return fmt.Errorf("no bgp peer provided")
 	}
 
 	var cfgNodes []ixconfig.IxiaCfgNode
 	for _, intf := range ix.intfs {
-		for _, bgpName := range peerNames {
-			if val, ok := intf.bgpToBgpIpv4Peer[bgpName]; ok {
+		for _, name := range peerNames {
+			if val, ok := intf.bgpToBgpIpv4Peer[name]; ok {
 				cfgNodes = append(cfgNodes, val)
 			}
-			if val, ok := intf.bgpToBgpIpv6Peer[bgpName]; ok {
+			if val, ok := intf.bgpToBgpIpv6Peer[name]; ok {
 				cfgNodes = append(cfgNodes, val)
 			}
 		}
 	}
 	if err := ix.c.UpdateIDs(ctx, ix.cfg, cfgNodes...); err != nil {
-		return fmt.Errorf("could not update IDs for bgp peer %w", err)
+		return fmt.Errorf("could not update IDs for bgp peer: %w", err)
 	}
 	for _, node := range cfgNodes {
-		nodeHerf, err := ix.c.NodeID(node)
+		nodeID, err := ix.c.NodeID(node)
 		if err != nil {
-			return fmt.Errorf("could not get hrefs for bgp peer %w", err)
+			return fmt.Errorf("could not get IDs for bgp peer: %w", err)
 		}
-		var breakTcpSessionOp string
+		var op string
 		switch cn := node.(type) {
 		case *ixconfig.TopologyBgpIpv4Peer:
-			breakTcpSessionOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
+			op = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
 		case *ixconfig.TopologyBgpIpv6Peer:
-			breakTcpSessionOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
+			op = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
 		default:
 			return fmt.Errorf("tried to send bgp notification invalid config node type %T", cn)
 		}
-		breakTcpSessionArgs := ixweb.OpArgs{
-			nodeHerf,
+		args := ixweb.OpArgs{
+			nodeID,
 			[]int{1},
 			code,
 			subCode,
 		}
-		if err := ix.c.Session().Post(ctx, breakTcpSessionOp, breakTcpSessionArgs, nil); err != nil {
-			return fmt.Errorf("could not send bgp notification %w", err)
+		if err := ix.c.Session().Post(ctx, op, args, nil); err != nil {
+			return fmt.Errorf("could not send bgp notification: %w", err)
 		}
 	}
 	return nil
