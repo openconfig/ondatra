@@ -88,13 +88,13 @@ func UpdateTopology(ctx context.Context, ate binding.ATE, top *Topology, bgpPeer
 	return nil
 }
 
-// SendNotification sends a notification/error message on an ATE.
-func SendBGPPeerNotification(ctx context.Context, ate binding.ATE, notificationCode int, notificationSubCode int, bgpPeers []string) error {
+// SendBGPPeerNotification sends a notification/error message on an ATE.
+func SendBGPPeerNotification(ctx context.Context, ate binding.ATE, code int, subCode int, peerNames []string) error {
 	ix, err := ixiaForATE(ctx, ate)
 	if err != nil {
 		return err
 	}
-	if err := ix.SendBGPPeerNotification(ctx, notificationCode, notificationSubCode, bgpPeers); err != nil {
+	if err := ix.SendBGPPeerNotification(ctx, code, subCode, peerNames); err != nil {
 		return fmt.Errorf("failed to send notification: %w", err)
 	}
 	return nil

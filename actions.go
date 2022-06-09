@@ -29,68 +29,63 @@ type Actions struct {
 	ate binding.ATE
 }
 
-func (action *Actions) String() string {
-	return fmt.Sprintf("{ate: %s}", action.ate)
+func (a *Actions) String() string {
+	return fmt.Sprintf("Actions%+v", *a)
 }
 
-// BGPPeerNotification is an actions API to send BGP notification/error codes
+// BGPPeerNotification is an actions API to send BGP notification/error codes.
 type BGPPeerNotification struct {
-	ate                 binding.ATE
-	notificationCode    int
-	notificationSubCode int
-	bgpPeerNames        []string
+	ate       binding.ATE
+	code      int
+	subCode   int
+	peerNames []string
 }
 
-func (notification *BGPPeerNotification) String() string {
-	return fmt.Sprintf("{notificationCode: %d, notificationSubCode: %d, bgpPeerNames: %s}", notification.notificationCode, notification.notificationSubCode, notification.bgpPeerNames)
+func (n *BGPPeerNotification) String() string {
+	return fmt.Sprintf("BGPPeerNotification%+v", *n)
 }
 
-// NewBGPPeerNotification returns an instance of API for sending BGP notification/error codes
-func (action *Actions) NewBGPPeerNotification() *BGPPeerNotification {
+// NewBGPPeerNotification returns an instance of API for sending BGP notification/error codes.
+func (a *Actions) NewBGPPeerNotification() *BGPPeerNotification {
 	// setting the default values for the respective parameters
 	return &BGPPeerNotification{
-		ate:                 action.ate,
-		notificationCode:    1,
-		notificationSubCode: 1,
-		bgpPeerNames:        []string{},
+		ate:       a.ate,
+		code:      1,
+		subCode:   1,
+		peerNames: []string{},
 	}
 }
 
-// WithNotificationCode Sets the notification code that needs to be sent from BGP peer
-func (notification *BGPPeerNotification) WithNotificationCode(code int) *BGPPeerNotification {
-	notification.notificationCode = code
-	return notification
+// WithCode sets the notification code that needs to be sent from BGP peer.
+func (n *BGPPeerNotification) WithCode(code int) *BGPPeerNotification {
+	n.code = code
+	return n
 }
 
-// WithNotificationSubCode Sets the notification sub code that needs to be sent from BGP peer
-func (notification *BGPPeerNotification) WithNotificationSubCode(subCode int) *BGPPeerNotification {
-	notification.notificationSubCode = subCode
-	return notification
+// WithSubCode sets the notification sub code that needs to be sent from BGP peer.
+func (n *BGPPeerNotification) WithSubCode(subCode int) *BGPPeerNotification {
+	n.subCode = subCode
+	return n
 }
 
-// WithBGPPeers adds the BGP peers from which the notification/error codes is to be sent
-func (notification *BGPPeerNotification) WithBGPPeers(bgpPeers ...*BGPPeer) *BGPPeerNotification {
+// WithBGPPeers adds the BGP peers from which the notification/error codes is to be sent.
+func (n *BGPPeerNotification) WithBGPPeers(bgpPeers ...*BGPPeer) *BGPPeerNotification {
 	for _, bgpPeer := range bgpPeers {
-		notification.bgpPeerNames = append(notification.bgpPeerNames, bgpPeer.FetchName())
+		n.peerNames = append(n.peerNames, bgpPeer.Name())
 	}
-	return notification
+	return n
 }
 
-// ClearBGPPeers clears the bgp peers currently assigned
-func (notification *BGPPeerNotification) ClearBGPPeers() *BGPPeerNotification {
-	notification.bgpPeerNames = notification.bgpPeerNames[:0]
-	return notification
+// ClearBGPPeers clears the bgp peers currently assigned.
+func (n *BGPPeerNotification) ClearBGPPeers() *BGPPeerNotification {
+	n.peerNames = n.peerNames[:0]
+	return n
 }
 
-// Send executes the operation to send notification/error codes
-func (notification *BGPPeerNotification) Send(t testing.TB) {
+// Send executes the operation to send notification/error codes.
+func (n *BGPPeerNotification) Send(t testing.TB) {
 	t.Helper()
-
-	if len(notification.bgpPeerNames) == 0 {
-		t.Fatalf("Send(t) on %s: no bgp peer provided", notification)
-	}
-
-	if err := ate.SendBGPPeerNotification(context.Background(), notification.ate, notification.notificationCode, notification.notificationSubCode, notification.bgpPeerNames); err != nil {
-		t.Fatalf("Send(t) failed with parameters %d, %d, %s on %s: %v", notification.notificationCode, notification.notificationSubCode, notification.bgpPeerNames, notification, err)
+	if err := ate.SendBGPPeerNotification(context.Background(), n.ate, n.code, n.subCode, n.peerNames); err != nil {
+		t.Fatalf("Send(t) failed on %s: %v", n, err)
 	}
 }

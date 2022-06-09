@@ -76,8 +76,8 @@ func (b *BGPPeer) WithName(name string) *BGPPeer {
 	return b
 }
 
-//FetchName gets the name of the peer
-func (b *BGPPeer) FetchName() string {
+// Name returns the name of the peer.
+func (b *BGPPeer) Name() string {
 	return b.pb.GetName()
 }
 

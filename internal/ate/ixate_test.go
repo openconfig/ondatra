@@ -2050,6 +2050,8 @@ func TestSendBGPPeerNotification(t *testing.T) {
 		port             = "1/1"
 		v4NotificationOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
 		v6NotificationOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
+		code             = 6
+		subCode          = 1
 	)
 	tests := []struct {
 		desc              string
@@ -2057,7 +2059,24 @@ func TestSendBGPPeerNotification(t *testing.T) {
 		v4NotificationErr error
 		v6NotificationErr error
 		wantErr           string
+		bgpPeerName       string
 	}{{
+		desc: "no bgp peers provided failure",
+		ifc: &opb.InterfaceConfig{
+			Name:     intfName,
+			Link:     &opb.InterfaceConfig_Port{port},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+			Ipv4: &opb.IpConfig{
+				AddressCidr:    "192.168.1.1/30",
+				DefaultGateway: "192.168.1.2",
+			},
+			Bgp: &opb.BgpConfig{
+				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1", Name: "bgp1"}},
+			},
+		},
+		wantErr:     "no bgp peer provided",
+		bgpPeerName: "",
+	}, {
 		desc: "BGP v4 send notification failure",
 		ifc: &opb.InterfaceConfig{
 			Name:     intfName,
@@ -2073,6 +2092,7 @@ func TestSendBGPPeerNotification(t *testing.T) {
 		},
 		v4NotificationErr: errors.New("error in sending bgp v4 notification"),
 		wantErr:           "could not send bgp notification error in sending bgp v4 notification",
+		bgpPeerName:       "bgp1",
 	}, {
 		desc: "BGP v6 send notification failure",
 		ifc: &opb.InterfaceConfig{
@@ -2089,8 +2109,9 @@ func TestSendBGPPeerNotification(t *testing.T) {
 		},
 		v6NotificationErr: errors.New("error in sending bgp v6 notification"),
 		wantErr:           "could not send bgp notification error in sending bgp v6 notification",
+		bgpPeerName:       "bgp1",
 	}, {
-		desc: "succes sending notification for bgp v6 peer",
+		desc: "success sending notification for bgp v6 peer",
 		ifc: &opb.InterfaceConfig{
 			Name:     intfName,
 			Link:     &opb.InterfaceConfig_Port{port},
@@ -2103,6 +2124,7 @@ func TestSendBGPPeerNotification(t *testing.T) {
 				BgpPeers: []*opb.BgpPeer{{PeerAddress: "::a", Name: "bgp1"}},
 			},
 		},
+		bgpPeerName: "bgp1",
 	}, {
 		desc: "success sending notification for bgp v4 peer",
 		ifc: &opb.InterfaceConfig{
@@ -2117,6 +2139,7 @@ func TestSendBGPPeerNotification(t *testing.T) {
 				BgpPeers: []*opb.BgpPeer{{PeerAddress: "1.1.1.1", Name: "bgp1"}},
 			},
 		},
+		bgpPeerName: "bgp1",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -2171,7 +2194,11 @@ func TestSendBGPPeerNotification(t *testing.T) {
 					}},
 				},
 			}
-			gotErr := c.SendBGPPeerNotification(context.Background(), 6, 1, []string{"bgp1"})
+			var peerNames []string = []string{}
+			if test.bgpPeerName != "" {
+				peerNames = append(peerNames, test.bgpPeerName)
+			}
+			gotErr := c.SendBGPPeerNotification(context.Background(), code, subCode, peerNames)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("SendBGPPeerNotification: got err: %v, want err %q", gotErr, test.wantErr)
 			}

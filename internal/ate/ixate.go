@@ -1382,11 +1382,16 @@ func validateIP(ipc *opb.IpConfig, desc string) error {
 	return nil
 }
 
-// sends notification/error messages from bgp peers on ATE
-func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, notificationCode int, notificationSubCode int, bgp []string) error {
+// sends notification/error messages from bgp peers on ATE.
+func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, code int, subCode int, peerNames []string) error {
+
+	if len(peerNames) == 0 {
+		return fmt.Errorf("no bgp peer provided")
+	}
+
 	var cfgNodes []ixconfig.IxiaCfgNode
 	for _, intf := range ix.intfs {
-		for _, bgpName := range bgp {
+		for _, bgpName := range peerNames {
 			if val, ok := intf.bgpToBgpIpv4Peer[bgpName]; ok {
 				cfgNodes = append(cfgNodes, val)
 			}
@@ -1415,8 +1420,8 @@ func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, notificationCode i
 		breakTcpSessionArgs := ixweb.OpArgs{
 			nodeHerf,
 			[]int{1},
-			notificationCode,
-			notificationSubCode,
+			code,
+			subCode,
 		}
 		if err := ix.c.Session().Post(ctx, breakTcpSessionOp, breakTcpSessionArgs, nil); err != nil {
 			return fmt.Errorf("could not send bgp notification %w", err)
