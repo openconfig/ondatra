@@ -113,7 +113,7 @@ func (n *DevicePath) Flow(Name string) *flow.FlowPath {
 
 // InterfaceAny (list): An individual interface defined by an OTG.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "interfaces/interface"
 // Path from root: "/interfaces/interface"
@@ -130,7 +130,7 @@ func (n *DevicePath) InterfaceAny() *discovery.InterfacePathAny {
 
 // Interface (list): An individual interface defined by an OTG.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "interfaces/interface"
 // Path from root: "/interfaces/interface"

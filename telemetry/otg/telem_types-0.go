@@ -142,6 +142,136 @@ func (w *BgpPeer_CountersWatcher) Await(t testing.TB) (*QualifiedBgpPeer_Counter
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedBgpPeer_UnicastIpv4Prefix is a *BgpPeer_UnicastIpv4Prefix with a corresponding timestamp.
+type QualifiedBgpPeer_UnicastIpv4Prefix struct {
+	*genutil.Metadata
+	val     *BgpPeer_UnicastIpv4Prefix // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedBgpPeer_UnicastIpv4Prefix) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *BgpPeer_UnicastIpv4Prefix sample, erroring out if not present.
+func (q *QualifiedBgpPeer_UnicastIpv4Prefix) Val(t testing.TB) *BgpPeer_UnicastIpv4Prefix {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *BgpPeer_UnicastIpv4Prefix sample.
+func (q *QualifiedBgpPeer_UnicastIpv4Prefix) SetVal(v *BgpPeer_UnicastIpv4Prefix) *QualifiedBgpPeer_UnicastIpv4Prefix {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedBgpPeer_UnicastIpv4Prefix) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionBgpPeer_UnicastIpv4Prefix is a telemetry Collection whose Await method returns a slice of *BgpPeer_UnicastIpv4Prefix samples.
+type CollectionBgpPeer_UnicastIpv4Prefix struct {
+	W    *BgpPeer_UnicastIpv4PrefixWatcher
+	Data []*QualifiedBgpPeer_UnicastIpv4Prefix
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionBgpPeer_UnicastIpv4Prefix) Await(t testing.TB) []*QualifiedBgpPeer_UnicastIpv4Prefix {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// BgpPeer_UnicastIpv4PrefixWatcher observes a stream of *BgpPeer_UnicastIpv4Prefix samples.
+type BgpPeer_UnicastIpv4PrefixWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedBgpPeer_UnicastIpv4Prefix
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *BgpPeer_UnicastIpv4PrefixWatcher) Await(t testing.TB) (*QualifiedBgpPeer_UnicastIpv4Prefix, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedBgpPeer_UnicastIpv6Prefix is a *BgpPeer_UnicastIpv6Prefix with a corresponding timestamp.
+type QualifiedBgpPeer_UnicastIpv6Prefix struct {
+	*genutil.Metadata
+	val     *BgpPeer_UnicastIpv6Prefix // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedBgpPeer_UnicastIpv6Prefix) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *BgpPeer_UnicastIpv6Prefix sample, erroring out if not present.
+func (q *QualifiedBgpPeer_UnicastIpv6Prefix) Val(t testing.TB) *BgpPeer_UnicastIpv6Prefix {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *BgpPeer_UnicastIpv6Prefix sample.
+func (q *QualifiedBgpPeer_UnicastIpv6Prefix) SetVal(v *BgpPeer_UnicastIpv6Prefix) *QualifiedBgpPeer_UnicastIpv6Prefix {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedBgpPeer_UnicastIpv6Prefix) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionBgpPeer_UnicastIpv6Prefix is a telemetry Collection whose Await method returns a slice of *BgpPeer_UnicastIpv6Prefix samples.
+type CollectionBgpPeer_UnicastIpv6Prefix struct {
+	W    *BgpPeer_UnicastIpv6PrefixWatcher
+	Data []*QualifiedBgpPeer_UnicastIpv6Prefix
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionBgpPeer_UnicastIpv6Prefix) Await(t testing.TB) []*QualifiedBgpPeer_UnicastIpv6Prefix {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// BgpPeer_UnicastIpv6PrefixWatcher observes a stream of *BgpPeer_UnicastIpv6Prefix samples.
+type BgpPeer_UnicastIpv6PrefixWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedBgpPeer_UnicastIpv6Prefix
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *BgpPeer_UnicastIpv6PrefixWatcher) Await(t testing.TB) (*QualifiedBgpPeer_UnicastIpv6Prefix, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedDevice is a *Device with a corresponding timestamp.
 type QualifiedDevice struct {
 	*genutil.Metadata

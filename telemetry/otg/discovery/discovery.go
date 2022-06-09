@@ -42,7 +42,7 @@ type Interface_NamePathAny struct {
 
 // Ipv4NeighborAny (list): The interface neighbor state or ARP cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv4-neighbors/ipv4-neighbor"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
@@ -59,7 +59,7 @@ func (n *InterfacePath) Ipv4NeighborAny() *Interface_Ipv4NeighborPathAny {
 
 // Ipv4NeighborAny (list): The interface neighbor state or ARP cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv4-neighbors/ipv4-neighbor"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
@@ -76,7 +76,7 @@ func (n *InterfacePathAny) Ipv4NeighborAny() *Interface_Ipv4NeighborPathAny {
 
 // Ipv4Neighbor (list): The interface neighbor state or ARP cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv4-neighbors/ipv4-neighbor"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
@@ -93,7 +93,7 @@ func (n *InterfacePath) Ipv4Neighbor(Ipv4Address string) *Interface_Ipv4Neighbor
 
 // Ipv4Neighbor (list): The interface neighbor state or ARP cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv4-neighbors/ipv4-neighbor"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor"
@@ -110,7 +110,7 @@ func (n *InterfacePathAny) Ipv4Neighbor(Ipv4Address string) *Interface_Ipv4Neigh
 
 // Ipv6NeighborAny (list): The interface neighbor state or NDISC cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv6-neighbors/ipv6-neighbor"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
@@ -127,7 +127,7 @@ func (n *InterfacePath) Ipv6NeighborAny() *Interface_Ipv6NeighborPathAny {
 
 // Ipv6NeighborAny (list): The interface neighbor state or NDISC cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv6-neighbors/ipv6-neighbor"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
@@ -144,7 +144,7 @@ func (n *InterfacePathAny) Ipv6NeighborAny() *Interface_Ipv6NeighborPathAny {
 
 // Ipv6Neighbor (list): The interface neighbor state or NDISC cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv6-neighbors/ipv6-neighbor"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
@@ -161,7 +161,7 @@ func (n *InterfacePath) Ipv6Neighbor(Ipv6Address string) *Interface_Ipv6Neighbor
 
 // Ipv6Neighbor (list): The interface neighbor state or NDISC cache entry.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "ipv6-neighbors/ipv6-neighbor"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor"
@@ -179,7 +179,7 @@ func (n *InterfacePathAny) Ipv6Neighbor(Ipv6Address string) *Interface_Ipv6Neigh
 // Name (leaf): An arbitary name of an OTG interface determined by the OTG
 // configuration.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/name"
 // Path from root: "/interfaces/interface/state/name"
@@ -196,7 +196,7 @@ func (n *InterfacePath) Name() *Interface_NamePath {
 // Name (leaf): An arbitary name of an OTG interface determined by the OTG
 // configuration.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/name"
 // Path from root: "/interfaces/interface/state/name"
@@ -242,7 +242,7 @@ type Interface_Ipv4Neighbor_LinkLayerAddressPathAny struct {
 
 // Ipv4Address (leaf): The IPv4 address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/ipv4-address"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/ipv4-address"
@@ -258,7 +258,7 @@ func (n *Interface_Ipv4NeighborPath) Ipv4Address() *Interface_Ipv4Neighbor_Ipv4A
 
 // Ipv4Address (leaf): The IPv4 address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/ipv4-address"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/ipv4-address"
@@ -274,7 +274,7 @@ func (n *Interface_Ipv4NeighborPathAny) Ipv4Address() *Interface_Ipv4Neighbor_Ip
 
 // LinkLayerAddress (leaf): The link layer address or MAC address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/link-layer-address"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/link-layer-address"
@@ -290,7 +290,7 @@ func (n *Interface_Ipv4NeighborPath) LinkLayerAddress() *Interface_Ipv4Neighbor_
 
 // LinkLayerAddress (leaf): The link layer address or MAC address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/link-layer-address"
 // Path from root: "/interfaces/interface/ipv4-neighbors/ipv4-neighbor/state/link-layer-address"
@@ -336,7 +336,7 @@ type Interface_Ipv6Neighbor_LinkLayerAddressPathAny struct {
 
 // Ipv6Address (leaf): The IPv6 address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/ipv6-address"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/ipv6-address"
@@ -352,7 +352,7 @@ func (n *Interface_Ipv6NeighborPath) Ipv6Address() *Interface_Ipv6Neighbor_Ipv6A
 
 // Ipv6Address (leaf): The IPv6 address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/ipv6-address"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/ipv6-address"
@@ -368,7 +368,7 @@ func (n *Interface_Ipv6NeighborPathAny) Ipv6Address() *Interface_Ipv6Neighbor_Ip
 
 // LinkLayerAddress (leaf): The link layer address or MAC address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/link-layer-address"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/link-layer-address"
@@ -384,7 +384,7 @@ func (n *Interface_Ipv6NeighborPath) LinkLayerAddress() *Interface_Ipv6Neighbor_
 
 // LinkLayerAddress (leaf): The link layer address or MAC address of the neighbor.
 // ----------------------------------------
-// Defining module: "open-traffic-generator-discovery"
+// Defining module: "open-traffic-generator-discovery-interfaces"
 // Instantiating module: "open-traffic-generator-discovery"
 // Path from parent: "state/link-layer-address"
 // Path from root: "/interfaces/interface/ipv6-neighbors/ipv6-neighbor/state/link-layer-address"

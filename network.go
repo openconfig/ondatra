@@ -131,10 +131,12 @@ func (n *Network) BGP() *BGPAttributes {
 }
 
 // ImportedBGPRoutes creates a BGP route import configuration for the network or
-// returns the existing config.
+// returns the existing config. The nexthop is overwritten by default.
 func (n *Network) ImportedBGPRoutes() *ImportedBGPRoutes {
 	if n.pb.ImportedBgpRoutes == nil {
-		n.pb.ImportedBgpRoutes = &opb.Network_ImportedBgpRoutes{}
+		n.pb.ImportedBgpRoutes = &opb.Network_ImportedBgpRoutes{
+			OverwriteNexthop: true,
+		}
 	}
 	return &ImportedBGPRoutes{pb: n.pb.ImportedBgpRoutes}
 }
@@ -163,6 +165,12 @@ func (i *ImportedBGPRoutes) WithRouteTableFormatJuniper() *ImportedBGPRoutes {
 // the specified routes.
 func (i *ImportedBGPRoutes) WithRouteTableFormatCSV() *ImportedBGPRoutes {
 	i.pb.RouteTableFormat = opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CSV
+	return i
+}
+
+// WithNexthopOverwrite specifies whether nexthops will be overwritten.
+func (i *ImportedBGPRoutes) WithNexthopOverwrite(enabled bool) *ImportedBGPRoutes {
+	i.pb.OverwriteNexthop = enabled
 	return i
 }
 

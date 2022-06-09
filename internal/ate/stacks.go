@@ -152,18 +152,31 @@ func greStack(gre *opb.GreHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 
 func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewIpv4Stack(idx)
-	ds := (ipv4.GetDscp() << 2) | ipv4.GetEcn()
-	tc := stack.PriorityRaw()
-	setSingleValue(tc, uintToHexStr(ds))
-	tc.ActiveFieldChoice = ixconfig.Bool(true)
-	var dontFragment uint32
-	if ipv4.GetDontFragment() {
-		dontFragment = 1
+	if ds := (ipv4.GetDscp() << 2) | ipv4.GetEcn(); ds > 0 {
+		tc := stack.PriorityRaw()
+		setSingleValue(tc, uintToHexStr(ds))
+		tc.ActiveFieldChoice = ixconfig.Bool(true)
 	}
-	setSingleValue(stack.FlagsFragment(), uintToStr(dontFragment))
-	setSingleValue(stack.Ttl(), uintToStr(ipv4.GetTtl()))
-	if ipv4.GetChecksum() > 0 {
-		setSingleValue(stack.Checksum(), uintToHexStr(ipv4.GetChecksum()))
+	if id := ipv4.GetIdentification(); id > 0 {
+		setSingleValue(stack.Identification(), uintToStr(id))
+	}
+	if ipv4.GetDontFragment() {
+		setSingleValue(stack.FlagsFragment(), ixconfig.String("1"))
+	}
+	if ipv4.GetMoreFragments() {
+		setSingleValue(stack.FlagsLastFragment(), ixconfig.String("1"))
+	}
+	if offset := ipv4.GetFragmentOffset(); offset > 0 {
+		setSingleValue(stack.FragmentOffset(), uintToStr(offset))
+	}
+	if ttl := ipv4.GetTtl(); ttl > 0 {
+		setSingleValue(stack.Ttl(), uintToStr(ttl))
+	}
+	if protocol := ipv4.Protocol; protocol != nil {
+		setSingleValue(stack.Protocol(), uintToStr(*protocol))
+	}
+	if checksum := ipv4.GetChecksum(); checksum > 0 {
+		setSingleValue(stack.Checksum(), uintToHexStr(checksum))
 	}
 	if ipv4.GetSrcAddr() != nil {
 		if err := setAddrRangeField(stack.SrcIp(), ipv4AddrType, ipv4.GetSrcAddr()); err != nil {

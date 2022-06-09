@@ -598,8 +598,9 @@ func importedBGPRoutePools(netToRouteTables map[string]*routeTables, netCfg *opb
 	}
 
 	rts := &routeTables{
-		ipv4: imported.GetIpv4RoutesPath(),
-		ipv6: imported.GetIpv6RoutesPath(),
+		ipv4:             imported.GetIpv4RoutesPath(),
+		ipv6:             imported.GetIpv6RoutesPath(),
+		overwriteNexthop: imported.GetOverwriteNexthop(),
 	}
 
 	switch imported.GetRouteTableFormat() {

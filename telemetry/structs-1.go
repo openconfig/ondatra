@@ -8327,13 +8327,11 @@ func (*NetworkInstance_Afts) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_Ipv4Entry represents the /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry YANG schema element.
 type NetworkInstance_Afts_Ipv4Entry struct {
-	Counters                    *NetworkInstance_Afts_Ipv4Entry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	DecapsulateHeader           E_AftTypes_EncapsulationHeaderType       `path:"state/decapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
-	EntryMetadata               Binary                                   `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroup                *uint64                                  `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroupNetworkInstance *string                                  `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-network-instance"`
-	OriginProtocol              E_PolicyTypes_INSTALL_PROTOCOL_TYPE      `path:"state/origin-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
-	Prefix                      *string                                  `path:"state/prefix|prefix" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"prefix" shadow-module:"openconfig-network-instance"`
+	Counters          *NetworkInstance_Afts_Ipv4Entry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	DecapsulateHeader E_AftTypes_EncapsulationHeaderType       `path:"state/decapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
+	EntryMetadata     Binary                                   `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
+	OriginProtocol    E_PolicyTypes_INSTALL_PROTOCOL_TYPE      `path:"state/origin-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
+	Prefix            *string                                  `path:"state/prefix|prefix" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"prefix" shadow-module:"openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_Ipv4Entry implements the yang.GoStruct
@@ -8391,38 +8389,6 @@ func (t *NetworkInstance_Afts_Ipv4Entry) GetEntryMetadata() Binary {
 		return nil
 	}
 	return t.EntryMetadata
-}
-
-// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_Afts_Ipv4Entry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroup is set, it can
-// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_Ipv4Entry) GetNextHopGroup() uint64 {
-	if t == nil || t.NextHopGroup == nil {
-		return 0
-	}
-	return *t.NextHopGroup
-}
-
-// GetNextHopGroupNetworkInstance retrieves the value of the leaf NextHopGroupNetworkInstance from the NetworkInstance_Afts_Ipv4Entry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroupNetworkInstance is set, it can
-// safely use t.GetNextHopGroupNetworkInstance() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroupNetworkInstance == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_Ipv4Entry) GetNextHopGroupNetworkInstance() string {
-	if t == nil || t.NextHopGroupNetworkInstance == nil {
-		return ""
-	}
-	return *t.NextHopGroupNetworkInstance
 }
 
 // GetOriginProtocol retrieves the value of the leaf OriginProtocol from the NetworkInstance_Afts_Ipv4Entry
@@ -8584,13 +8550,11 @@ func (*NetworkInstance_Afts_Ipv4Entry_Counters) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_Ipv6Entry represents the /openconfig-network-instance/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry YANG schema element.
 type NetworkInstance_Afts_Ipv6Entry struct {
-	Counters                    *NetworkInstance_Afts_Ipv6Entry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	DecapsulateHeader           E_AftTypes_EncapsulationHeaderType       `path:"state/decapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
-	EntryMetadata               Binary                                   `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroup                *uint64                                  `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroupNetworkInstance *string                                  `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-network-instance"`
-	OriginProtocol              E_PolicyTypes_INSTALL_PROTOCOL_TYPE      `path:"state/origin-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
-	Prefix                      *string                                  `path:"state/prefix|prefix" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"prefix" shadow-module:"openconfig-network-instance"`
+	Counters          *NetworkInstance_Afts_Ipv6Entry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	DecapsulateHeader E_AftTypes_EncapsulationHeaderType       `path:"state/decapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
+	EntryMetadata     Binary                                   `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
+	OriginProtocol    E_PolicyTypes_INSTALL_PROTOCOL_TYPE      `path:"state/origin-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
+	Prefix            *string                                  `path:"state/prefix|prefix" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"prefix" shadow-module:"openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_Ipv6Entry implements the yang.GoStruct
@@ -8648,38 +8612,6 @@ func (t *NetworkInstance_Afts_Ipv6Entry) GetEntryMetadata() Binary {
 		return nil
 	}
 	return t.EntryMetadata
-}
-
-// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_Afts_Ipv6Entry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroup is set, it can
-// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_Ipv6Entry) GetNextHopGroup() uint64 {
-	if t == nil || t.NextHopGroup == nil {
-		return 0
-	}
-	return *t.NextHopGroup
-}
-
-// GetNextHopGroupNetworkInstance retrieves the value of the leaf NextHopGroupNetworkInstance from the NetworkInstance_Afts_Ipv6Entry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroupNetworkInstance is set, it can
-// safely use t.GetNextHopGroupNetworkInstance() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroupNetworkInstance == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_Ipv6Entry) GetNextHopGroupNetworkInstance() string {
-	if t == nil || t.NextHopGroupNetworkInstance == nil {
-		return ""
-	}
-	return *t.NextHopGroupNetworkInstance
 }
 
 // GetOriginProtocol retrieves the value of the leaf OriginProtocol from the NetworkInstance_Afts_Ipv6Entry
@@ -8841,12 +8773,10 @@ func (*NetworkInstance_Afts_Ipv6Entry_Counters) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_LabelEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry YANG schema element.
 type NetworkInstance_Afts_LabelEntry struct {
-	Counters                    *NetworkInstance_Afts_LabelEntry_Counters                    `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	EntryMetadata               Binary                                                       `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
-	Label                       NetworkInstance_Afts_LabelEntry_Label_Union                  `path:"state/label|label" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"label" shadow-module:"openconfig-network-instance"`
-	NextHopGroup                *uint64                                                      `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroupNetworkInstance *string                                                      `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-network-instance"`
-	PoppedMplsLabelStack        []NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_Union `path:"state/popped-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	Counters             *NetworkInstance_Afts_LabelEntry_Counters                    `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	EntryMetadata        Binary                                                       `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
+	Label                NetworkInstance_Afts_LabelEntry_Label_Union                  `path:"state/label|label" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"label" shadow-module:"openconfig-network-instance"`
+	PoppedMplsLabelStack []NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_Union `path:"state/popped-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_LabelEntry implements the yang.GoStruct
@@ -8904,38 +8834,6 @@ func (t *NetworkInstance_Afts_LabelEntry) GetLabel() NetworkInstance_Afts_LabelE
 		return nil
 	}
 	return t.Label
-}
-
-// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_Afts_LabelEntry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroup is set, it can
-// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_LabelEntry) GetNextHopGroup() uint64 {
-	if t == nil || t.NextHopGroup == nil {
-		return 0
-	}
-	return *t.NextHopGroup
-}
-
-// GetNextHopGroupNetworkInstance retrieves the value of the leaf NextHopGroupNetworkInstance from the NetworkInstance_Afts_LabelEntry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroupNetworkInstance is set, it can
-// safely use t.GetNextHopGroupNetworkInstance() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroupNetworkInstance == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_LabelEntry) GetNextHopGroupNetworkInstance() string {
-	if t == nil || t.NextHopGroupNetworkInstance == nil {
-		return ""
-	}
-	return *t.NextHopGroupNetworkInstance
 }
 
 // GetPoppedMplsLabelStack retrieves the value of the leaf PoppedMplsLabelStack from the NetworkInstance_Afts_LabelEntry
@@ -9078,11 +8976,9 @@ func (*NetworkInstance_Afts_LabelEntry_Counters) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_MacEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/ethernet/mac-entry YANG schema element.
 type NetworkInstance_Afts_MacEntry struct {
-	Counters                    *NetworkInstance_Afts_MacEntry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	EntryMetadata               Binary                                  `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
-	MacAddress                  *string                                 `path:"state/mac-address|mac-address" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"mac-address" shadow-module:"openconfig-network-instance"`
-	NextHopGroup                *uint64                                 `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroupNetworkInstance *string                                 `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-network-instance"`
+	Counters      *NetworkInstance_Afts_MacEntry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	EntryMetadata Binary                                  `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
+	MacAddress    *string                                 `path:"state/mac-address|mac-address" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"mac-address" shadow-module:"openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_MacEntry implements the yang.GoStruct
@@ -9140,38 +9036,6 @@ func (t *NetworkInstance_Afts_MacEntry) GetMacAddress() string {
 		return ""
 	}
 	return *t.MacAddress
-}
-
-// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_Afts_MacEntry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroup is set, it can
-// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_MacEntry) GetNextHopGroup() uint64 {
-	if t == nil || t.NextHopGroup == nil {
-		return 0
-	}
-	return *t.NextHopGroup
-}
-
-// GetNextHopGroupNetworkInstance retrieves the value of the leaf NextHopGroupNetworkInstance from the NetworkInstance_Afts_MacEntry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroupNetworkInstance is set, it can
-// safely use t.GetNextHopGroupNetworkInstance() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroupNetworkInstance == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_MacEntry) GetNextHopGroupNetworkInstance() string {
-	if t == nil || t.NextHopGroupNetworkInstance == nil {
-		return ""
-	}
-	return *t.NextHopGroupNetworkInstance
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_MacEntry
@@ -10630,19 +10494,17 @@ func (*NetworkInstance_Afts_NextHop_IpInIp) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_PolicyForwardingEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry YANG schema element.
 type NetworkInstance_Afts_PolicyForwardingEntry struct {
-	Counters                    *NetworkInstance_Afts_PolicyForwardingEntry_Counters        `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	EntryMetadata               Binary                                                      `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
-	Index                       *uint64                                                     `path:"state/index|index" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"index" shadow-module:"openconfig-network-instance"`
-	IpDscp                      *uint8                                                      `path:"state/ip-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
-	IpPrefix                    *string                                                     `path:"state/ip-prefix" module:"openconfig-network-instance/openconfig-network-instance"`
-	IpProtocol                  NetworkInstance_Afts_PolicyForwardingEntry_IpProtocol_Union `path:"state/ip-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
-	L4DstPort                   *uint16                                                     `path:"state/l4-dst-port" module:"openconfig-network-instance/openconfig-network-instance"`
-	L4SrcPort                   *uint16                                                     `path:"state/l4-src-port" module:"openconfig-network-instance/openconfig-network-instance"`
-	MacAddress                  *string                                                     `path:"state/mac-address" module:"openconfig-network-instance/openconfig-network-instance"`
-	MplsLabel                   NetworkInstance_Afts_PolicyForwardingEntry_MplsLabel_Union  `path:"state/mpls-label" module:"openconfig-network-instance/openconfig-network-instance"`
-	MplsTc                      *uint8                                                      `path:"state/mpls-tc" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroup                *uint64                                                     `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance"`
-	NextHopGroupNetworkInstance *string                                                     `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-network-instance"`
+	Counters      *NetworkInstance_Afts_PolicyForwardingEntry_Counters        `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	EntryMetadata Binary                                                      `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
+	Index         *uint64                                                     `path:"state/index|index" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"index" shadow-module:"openconfig-network-instance"`
+	IpDscp        *uint8                                                      `path:"state/ip-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	IpPrefix      *string                                                     `path:"state/ip-prefix" module:"openconfig-network-instance/openconfig-network-instance"`
+	IpProtocol    NetworkInstance_Afts_PolicyForwardingEntry_IpProtocol_Union `path:"state/ip-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
+	L4DstPort     *uint16                                                     `path:"state/l4-dst-port" module:"openconfig-network-instance/openconfig-network-instance"`
+	L4SrcPort     *uint16                                                     `path:"state/l4-src-port" module:"openconfig-network-instance/openconfig-network-instance"`
+	MacAddress    *string                                                     `path:"state/mac-address" module:"openconfig-network-instance/openconfig-network-instance"`
+	MplsLabel     NetworkInstance_Afts_PolicyForwardingEntry_MplsLabel_Union  `path:"state/mpls-label" module:"openconfig-network-instance/openconfig-network-instance"`
+	MplsTc        *uint8                                                      `path:"state/mpls-tc" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_PolicyForwardingEntry implements the yang.GoStruct
@@ -10828,38 +10690,6 @@ func (t *NetworkInstance_Afts_PolicyForwardingEntry) GetMplsTc() uint8 {
 		return 0
 	}
 	return *t.MplsTc
-}
-
-// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_Afts_PolicyForwardingEntry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroup is set, it can
-// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_PolicyForwardingEntry) GetNextHopGroup() uint64 {
-	if t == nil || t.NextHopGroup == nil {
-		return 0
-	}
-	return *t.NextHopGroup
-}
-
-// GetNextHopGroupNetworkInstance retrieves the value of the leaf NextHopGroupNetworkInstance from the NetworkInstance_Afts_PolicyForwardingEntry
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NextHopGroupNetworkInstance is set, it can
-// safely use t.GetNextHopGroupNetworkInstance() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NextHopGroupNetworkInstance == nil' before retrieving the leaf's value.
-func (t *NetworkInstance_Afts_PolicyForwardingEntry) GetNextHopGroupNetworkInstance() string {
-	if t == nil || t.NextHopGroupNetworkInstance == nil {
-		return ""
-	}
-	return *t.NextHopGroupNetworkInstance
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_PolicyForwardingEntry

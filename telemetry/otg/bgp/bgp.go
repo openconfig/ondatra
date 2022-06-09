@@ -17,6 +17,7 @@ Imported modules were sourced from:
 package bgp
 
 import (
+	oc "github.com/openconfig/ondatra/telemetry/otg"
 	"github.com/openconfig/ygot/ygot"
 )
 
@@ -146,6 +147,126 @@ func (n *BgpPeerPathAny) SessionState() *BgpPeer_SessionStatePathAny {
 			n,
 		),
 	}
+}
+
+// UnicastIpv4PrefixAny (list): A list of BGP unicast IPv4 prefixes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
+func (n *BgpPeerPath) UnicastIpv4PrefixAny() *BgpPeer_UnicastIpv4PrefixPathAny {
+	return &BgpPeer_UnicastIpv4PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+}
+
+// UnicastIpv4PrefixAny (list): A list of BGP unicast IPv4 prefixes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
+func (n *BgpPeerPathAny) UnicastIpv4PrefixAny() *BgpPeer_UnicastIpv4PrefixPathAny {
+	return &BgpPeer_UnicastIpv4PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+}
+
+// WithAddress sets BgpPeer_UnicastIpv4PrefixPathAny's key "address" to the specified value.
+// Address: string
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithAddress(Address string) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "address", Address)
+	return n
+}
+
+// WithPrefixLength sets BgpPeer_UnicastIpv4PrefixPathAny's key "prefix-length" to the specified value.
+// PrefixLength: uint32
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPrefixLength(PrefixLength uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "prefix-length", PrefixLength)
+	return n
+}
+
+// WithOrigin sets BgpPeer_UnicastIpv4PrefixPathAny's key "origin" to the specified value.
+// Origin: oc.E_UnicastIpv4Prefix_Origin
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "origin", Origin)
+	return n
+}
+
+// WithPathId sets BgpPeer_UnicastIpv4PrefixPathAny's key "path-id" to the specified value.
+// PathId: uint32
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "path-id", PathId)
+	return n
+}
+
+// UnicastIpv6PrefixAny (list): A list of BGP unicast IPv6 prefixes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
+func (n *BgpPeerPath) UnicastIpv6PrefixAny() *BgpPeer_UnicastIpv6PrefixPathAny {
+	return &BgpPeer_UnicastIpv6PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+}
+
+// UnicastIpv6PrefixAny (list): A list of BGP unicast IPv6 prefixes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
+func (n *BgpPeerPathAny) UnicastIpv6PrefixAny() *BgpPeer_UnicastIpv6PrefixPathAny {
+	return &BgpPeer_UnicastIpv6PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+}
+
+// WithAddress sets BgpPeer_UnicastIpv6PrefixPathAny's key "address" to the specified value.
+// Address: string
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithAddress(Address string) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "address", Address)
+	return n
+}
+
+// WithPrefixLength sets BgpPeer_UnicastIpv6PrefixPathAny's key "prefix-length" to the specified value.
+// PrefixLength: uint32
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPrefixLength(PrefixLength uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "prefix-length", PrefixLength)
+	return n
+}
+
+// WithOrigin sets BgpPeer_UnicastIpv6PrefixPathAny's key "origin" to the specified value.
+// Origin: oc.E_UnicastIpv6Prefix_Origin
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "origin", Origin)
+	return n
+}
+
+// WithPathId sets BgpPeer_UnicastIpv6PrefixPathAny's key "path-id" to the specified value.
+// PathId: uint32
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "path-id", PathId)
+	return n
 }
 
 // BgpPeer_CountersPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters YANG schema element.
@@ -700,6 +821,530 @@ func (n *BgpPeer_CountersPathAny) OutUpdates() *BgpPeer_Counters_OutUpdatesPathA
 	return &BgpPeer_Counters_OutUpdatesPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"out-updates"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BgpPeer_UnicastIpv4PrefixPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix YANG schema element.
+type BgpPeer_UnicastIpv4PrefixPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4PrefixPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix YANG schema element.
+type BgpPeer_UnicastIpv4PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/address YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_AddressPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/address YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_OriginPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_OriginPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_OriginPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_OriginPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_PathIdPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/path-id YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_PathIdPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_PathIdPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/path-id YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_PathIdPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_PrefixLengthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/prefix-length YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv4Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/prefix-length YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// Address (leaf): The IPv4 address.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/address"
+func (n *BgpPeer_UnicastIpv4PrefixPath) Address() *BgpPeer_UnicastIpv4Prefix_AddressPath {
+	return &BgpPeer_UnicastIpv4Prefix_AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Address (leaf): The IPv4 address.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/address"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) Address() *BgpPeer_UnicastIpv4Prefix_AddressPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv4-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_UnicastIpv4PrefixPath) NextHopIpv4Address() *BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPath {
+	return &BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv4-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) NextHopIpv4Address() *BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_NextHopIpv4AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv6-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_UnicastIpv4PrefixPath) NextHopIpv6Address() *BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPath {
+	return &BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv6-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) NextHopIpv6Address() *BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_NextHopIpv6AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Origin (leaf): The origin of the prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/origin"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin"
+func (n *BgpPeer_UnicastIpv4PrefixPath) Origin() *BgpPeer_UnicastIpv4Prefix_OriginPath {
+	return &BgpPeer_UnicastIpv4Prefix_OriginPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Origin (leaf): The origin of the prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/origin"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) Origin() *BgpPeer_UnicastIpv4Prefix_OriginPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_OriginPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathId (leaf): The path id.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/path-id"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/path-id"
+func (n *BgpPeer_UnicastIpv4PrefixPath) PathId() *BgpPeer_UnicastIpv4Prefix_PathIdPath {
+	return &BgpPeer_UnicastIpv4Prefix_PathIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathId (leaf): The path id.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/path-id"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/path-id"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) PathId() *BgpPeer_UnicastIpv4Prefix_PathIdPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_PathIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The prefix length.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/prefix-length"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/prefix-length"
+func (n *BgpPeer_UnicastIpv4PrefixPath) PrefixLength() *BgpPeer_UnicastIpv4Prefix_PrefixLengthPath {
+	return &BgpPeer_UnicastIpv4Prefix_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The prefix length.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/prefix-length"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/prefix-length"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) PrefixLength() *BgpPeer_UnicastIpv4Prefix_PrefixLengthPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BgpPeer_UnicastIpv6PrefixPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix YANG schema element.
+type BgpPeer_UnicastIpv6PrefixPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6PrefixPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix YANG schema element.
+type BgpPeer_UnicastIpv6PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/address YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_AddressPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/address YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_OriginPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_OriginPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_OriginPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_OriginPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_PathIdPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/path-id YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_PathIdPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_PathIdPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/path-id YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_PathIdPathAny struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_PrefixLengthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/prefix-length YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// BgpPeer_UnicastIpv6Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/prefix-length YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// Address (leaf): The IPv6 address.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/address"
+func (n *BgpPeer_UnicastIpv6PrefixPath) Address() *BgpPeer_UnicastIpv6Prefix_AddressPath {
+	return &BgpPeer_UnicastIpv6Prefix_AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Address (leaf): The IPv6 address.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/address"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) Address() *BgpPeer_UnicastIpv6Prefix_AddressPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv4-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_UnicastIpv6PrefixPath) NextHopIpv4Address() *BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPath {
+	return &BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv4-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) NextHopIpv4Address() *BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_NextHopIpv4AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv6-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_UnicastIpv6PrefixPath) NextHopIpv6Address() *BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPath {
+	return &BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/next-hop-ipv6-address"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) NextHopIpv6Address() *BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_NextHopIpv6AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Origin (leaf): The origin of the prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/origin"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin"
+func (n *BgpPeer_UnicastIpv6PrefixPath) Origin() *BgpPeer_UnicastIpv6Prefix_OriginPath {
+	return &BgpPeer_UnicastIpv6Prefix_OriginPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Origin (leaf): The origin of the prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/origin"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) Origin() *BgpPeer_UnicastIpv6Prefix_OriginPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_OriginPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathId (leaf): The path id.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/path-id"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/path-id"
+func (n *BgpPeer_UnicastIpv6PrefixPath) PathId() *BgpPeer_UnicastIpv6Prefix_PathIdPath {
+	return &BgpPeer_UnicastIpv6Prefix_PathIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathId (leaf): The path id.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/path-id"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/path-id"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) PathId() *BgpPeer_UnicastIpv6Prefix_PathIdPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_PathIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The prefix length.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/prefix-length"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/prefix-length"
+func (n *BgpPeer_UnicastIpv6PrefixPath) PrefixLength() *BgpPeer_UnicastIpv6Prefix_PrefixLengthPath {
+	return &BgpPeer_UnicastIpv6Prefix_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The prefix length.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-bgp"
+// Instantiating module: "open-traffic-generator-bgp"
+// Path from parent: "state/prefix-length"
+// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/prefix-length"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) PrefixLength() *BgpPeer_UnicastIpv6Prefix_PrefixLengthPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
 			map[string]interface{}{},
 			n,
 		),

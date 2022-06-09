@@ -1661,7 +1661,13 @@ func TestStartTraffic(t *testing.T) {
 				t.Errorf("StartTraffic: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)
 			}
 
-			if !test.wantErr && test.wantCfgFile != "" {
+			if !test.wantErr {
+				if test.wantCfgFile == "" {
+					if fc.lastImportCfg != nil {
+						t.Fatalf("StartTraffic: Did not want traffic config pushed, got\n%v", fc.lastImportCfg)
+					}
+					return
+				}
 				wantCfg := toTrafficCfg(t, test.wantCfgFile)
 				if diff := jsonCfgDiff(t, wantCfg, fc.lastImportCfg); diff != "" {
 					t.Fatalf("StartTraffic: Unexpected traffic config pushed, diff (-want, +got)\n%s", diff)

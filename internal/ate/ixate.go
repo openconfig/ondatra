@@ -165,8 +165,9 @@ func (vw *viewWrapper) FetchTable(ctx context.Context, drilldowns ...string) (ix
 
 // IPv4/6 route tables specified by local path.
 type routeTables struct {
-	format     routeTableFormat
-	ipv4, ipv6 string
+	format           routeTableFormat
+	ipv4, ipv6       string
+	overwriteNexthop bool
 }
 
 type intf struct {
@@ -418,6 +419,10 @@ func importBgpRoutes(ctx context.Context, ix *ixATE, node ixconfig.IxiaCfgNode, 
 		pools = "ipv6PrefixPools"
 		rp = "bgpV6IPRouteProperty"
 	}
+	nextHop := "preserveFromFile"
+	if rt.overwriteNexthop {
+		nextHop = "overwriteTestersAddress"
+	}
 
 	nodeID, err := ix.c.NodeID(node)
 	if err != nil {
@@ -426,9 +431,9 @@ func importBgpRoutes(ctx context.Context, ix *ixATE, node ixconfig.IxiaCfgNode, 
 	importPath := fmt.Sprintf("topology/deviceGroup/networkGroup/%s/%s/operations/importbgproutes", pools, rp)
 	return ix.c.Session().Post(ctx, importPath, ixweb.OpArgs{
 		nodeID,
-		"replicate",               // Replicate routes on each configured peer.
-		false,                     // Import all routes, not just the 'best' routes.
-		"overwriteTestersAddress", // Overwrite next hops in the file to use the device group's IPv4 address.
+		"replicate", // Replicate routes on each configured peer.
+		false,       // Import all routes, not just the 'best' routes.
+		nextHop,
 		rt.format,
 		ix.routeTableToIxFile[rtFile],
 	}, nil)

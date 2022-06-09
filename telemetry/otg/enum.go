@@ -86,3 +86,61 @@ const (
 	// Port_Link_DOWN corresponds to the value DOWN of Port_Link
 	Port_Link_DOWN E_Port_Link = 2
 )
+
+// E_UnicastIpv4Prefix_Origin is a derived int64 type which is used to represent
+// the enumerated node UnicastIpv4Prefix_Origin. An additional value named
+// UnicastIpv4Prefix_Origin_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_UnicastIpv4Prefix_Origin int64
+
+// IsYANGGoEnum ensures that UnicastIpv4Prefix_Origin implements the yang.GoEnum
+// interface. This ensures that UnicastIpv4Prefix_Origin can be identified as a
+// mapped type for a YANG enumeration.
+func (E_UnicastIpv4Prefix_Origin) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  UnicastIpv4Prefix_Origin.
+func (E_UnicastIpv4Prefix_Origin) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_UnicastIpv4Prefix_Origin.
+func (e E_UnicastIpv4Prefix_Origin) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_UnicastIpv4Prefix_Origin")
+}
+
+const (
+	// UnicastIpv4Prefix_Origin_UNSET corresponds to the value UNSET of UnicastIpv4Prefix_Origin
+	UnicastIpv4Prefix_Origin_UNSET E_UnicastIpv4Prefix_Origin = 0
+	// UnicastIpv4Prefix_Origin_IGP corresponds to the value IGP of UnicastIpv4Prefix_Origin
+	UnicastIpv4Prefix_Origin_IGP E_UnicastIpv4Prefix_Origin = 1
+	// UnicastIpv4Prefix_Origin_EGP corresponds to the value EGP of UnicastIpv4Prefix_Origin
+	UnicastIpv4Prefix_Origin_EGP E_UnicastIpv4Prefix_Origin = 2
+)
+
+// E_UnicastIpv6Prefix_Origin is a derived int64 type which is used to represent
+// the enumerated node UnicastIpv6Prefix_Origin. An additional value named
+// UnicastIpv6Prefix_Origin_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_UnicastIpv6Prefix_Origin int64
+
+// IsYANGGoEnum ensures that UnicastIpv6Prefix_Origin implements the yang.GoEnum
+// interface. This ensures that UnicastIpv6Prefix_Origin can be identified as a
+// mapped type for a YANG enumeration.
+func (E_UnicastIpv6Prefix_Origin) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  UnicastIpv6Prefix_Origin.
+func (E_UnicastIpv6Prefix_Origin) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_UnicastIpv6Prefix_Origin.
+func (e E_UnicastIpv6Prefix_Origin) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_UnicastIpv6Prefix_Origin")
+}
+
+const (
+	// UnicastIpv6Prefix_Origin_UNSET corresponds to the value UNSET of UnicastIpv6Prefix_Origin
+	UnicastIpv6Prefix_Origin_UNSET E_UnicastIpv6Prefix_Origin = 0
+	// UnicastIpv6Prefix_Origin_IGP corresponds to the value IGP of UnicastIpv6Prefix_Origin
+	UnicastIpv6Prefix_Origin_IGP E_UnicastIpv6Prefix_Origin = 1
+	// UnicastIpv6Prefix_Origin_EGP corresponds to the value EGP of UnicastIpv6Prefix_Origin
+	UnicastIpv6Prefix_Origin_EGP E_UnicastIpv6Prefix_Origin = 2
+)

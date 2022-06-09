@@ -186,22 +186,37 @@ func TestHeaderStacks(t *testing.T) {
 		hdr: &opb.Header{
 			Type: &opb.Header_Ipv4{
 				&opb.Ipv4Header{
-					SrcAddr:      &opb.AddressRange{Min: srcIpv4Addr, Max: srcIpv4Addr, Count: 1},
-					DstAddr:      &opb.AddressRange{Min: dstIpv4Addr, Max: dstIpv4Addr, Count: 1},
-					Dscp:         1,
-					DontFragment: true,
-					Ttl:          ttl,
-					Checksum:     checksum,
+					Dscp:           2,
+					Ecn:            1,
+					Identification: 3,
+					DontFragment:   true,
+					MoreFragments:  true,
+					FragmentOffset: 4,
+					Ttl:            ttl,
+					Protocol: func() *uint32 {
+						protocol := uint32(5)
+						return &protocol
+					}(),
+					Checksum: checksum,
+					SrcAddr:  &opb.AddressRange{Min: srcIpv4Addr, Max: srcIpv4Addr, Count: 1},
+					DstAddr:  &opb.AddressRange{Min: dstIpv4Addr, Max: dstIpv4Addr, Count: 1},
 				},
 			},
 		},
 		wantFields: [][]wantField{
 			[]wantField{{
 				name:    "traffic class",
-				wantVal: ixconfig.String("4"),
+				wantVal: ixconfig.String("9"),
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)
 					return (&ip).PriorityRaw()
+				},
+			}, {
+				name:    "identification",
+				wantVal: ixconfig.String("3"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).Identification()
 				},
 			}, {
 				name:    "don't fragment",
@@ -211,6 +226,20 @@ func TestHeaderStacks(t *testing.T) {
 					return (&ip).FlagsFragment()
 				},
 			}, {
+				name:    "more fragments",
+				wantVal: ixconfig.String("1"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).FlagsFragment()
+				},
+			}, {
+				name:    "fragment offset",
+				wantVal: ixconfig.String("4"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).FragmentOffset()
+				},
+			}, {
 				name:    "ttl",
 				wantVal: ixconfig.String(strconv.Itoa(ttl)),
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
@@ -218,7 +247,14 @@ func TestHeaderStacks(t *testing.T) {
 					return (&ip).Ttl()
 				},
 			}, {
-				name:    "header checksum",
+				name:    "protocol",
+				wantVal: ixconfig.String("5"),
+				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+					ip := ixconfig.Ipv4Stack(*s)
+					return (&ip).Protocol()
+				},
+			}, {
+				name:    "checksum",
 				wantVal: ixconfig.String("ff60"),
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					ip := ixconfig.Ipv4Stack(*s)

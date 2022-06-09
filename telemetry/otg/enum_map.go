@@ -41,6 +41,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
 	},
+	"E_UnicastIpv4Prefix_Origin": {
+		1: {Name: "IGP"},
+		2: {Name: "EGP"},
+	},
+	"E_UnicastIpv6Prefix_Origin": {
+		1: {Name: "IGP"},
+		2: {Name: "EGP"},
+	},
 }
 
 // ΛEnumTypes is a map, keyed by a YANG schema path, of the enumerated types that
@@ -50,6 +58,12 @@ func initΛEnumTypes() {
 	ΛEnumTypes = map[string][]reflect.Type{
 		"/bgp-peers/bgp-peer/state/session-state": {
 			reflect.TypeOf((E_BgpPeer_SessionState)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin": {
+			reflect.TypeOf((E_UnicastIpv4Prefix_Origin)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
+			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),
 		},
 		"/ports/port/state/link": {
 			reflect.TypeOf((E_Port_Link)(0)),

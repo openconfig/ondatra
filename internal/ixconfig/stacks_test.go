@@ -15,8 +15,11 @@
 package ixconfig
 
 import (
+	"encoding/json"
 	"strings"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestEthernetStack(t *testing.T) {
@@ -191,5 +194,41 @@ func TestUdpStack(t *testing.T) {
 		if !strings.Contains(xp, alias) {
 			t.Errorf("Unexpected xpath %q for UdpStack field (wanted alias text to contain %q)", xp, alias)
 		}
+	}
+}
+
+func TestTrafficStackMarshalJSON(t *testing.T) {
+	wantJSON := `{
+		"xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-2']",
+		"field": [{
+			"xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-2']/field[@alias = 'ethernet.header.destinationAddress-1']",
+			"auto": false,
+			"valueType": "singleValue",
+			"singleValue": "01:02:03:04:05:06",
+			"valueList": []
+		}]
+	}`
+
+	eth := NewEthernetStack(1)
+	da := eth.DestinationAddress()
+	da.Auto = Bool(false)
+	da.ValueType = String("singleValue")
+	da.SingleValue = String("01:02:03:04:05:06")
+	stack := eth.TrafficTrafficItemConfigElementStack()
+	stackJSONBytes, err := json.Marshal(stack)
+	if err != nil {
+		t.Fatalf("Could not marshal traffic stack config to JSON: %v", err)
+	}
+
+	var got, want map[string]interface{}
+	if err := json.Unmarshal(stackJSONBytes, &got); err != nil {
+		t.Fatalf("Could not unmarshal transformed JSON to a map: %v", err)
+	}
+	if err := json.Unmarshal([]byte(wantJSON), &want); err != nil {
+		t.Fatalf("Could not unmarshal expected JSON to a map: %v", err)
+	}
+
+	if diff := cmp.Diff(want, got); diff != "" {
+		t.Errorf("Unexpected JSON representation, diff: (-got +want)\n%s.", diff)
 	}
 }
