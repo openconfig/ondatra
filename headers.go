@@ -75,7 +75,7 @@ func (h *EthernetHeader) WithVLANID(vid uint16) *EthernetHeader {
 	return h
 }
 
-// WithEtherType sets string type Ethernet-Type of the Ethernet header to the specified value
+// WithEthernetType sets string type Ethernet-Type of the Ethernet header to the specified value
 func (h *EthernetHeader) WithEthernetType(ethernetType string) *EthernetHeader {
 	h.pb.EthernetType = ethernetType
 	return h
