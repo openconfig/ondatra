@@ -162,15 +162,6 @@ func StopTraffic(ctx context.Context, ate binding.ATE) error {
 	return nil
 }
 
-// SetInterfaceState sets the state of a specified interface on the ATE.
-func SetInterfaceState(ctx context.Context, ate binding.ATE, intf string, enabled bool) error {
-	ix, err := ixiaForATE(ctx, ate)
-	if err != nil {
-		return err
-	}
-	return ix.SetPortState(ctx, intf, enabled)
-}
-
 // DialGNMI constructs and returns a GNMI client for the Ixia.
 func DialGNMI(ctx context.Context, ate binding.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 	ix, err := ixiaForATE(ctx, ate)
@@ -178,4 +169,25 @@ func DialGNMI(ctx context.Context, ate binding.ATE, opts ...grpc.DialOption) (gp
 		return nil, err
 	}
 	return ix.DialGNMI(ctx, opts...)
+}
+
+// SetPortState sets the state of a specified interface on the ATE.
+func SetPortState(ctx context.Context, ate binding.ATE, port string, enabled *bool) error {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	return ix.SetPortState(ctx, port, enabled)
+}
+
+// SendBGPPeerNotification sends a notification from BGP peers.
+func SendBGPPeerNotification(ctx context.Context, ate binding.ATE, peerIDs []uint32, code int, subCode int) error {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.SendBGPPeerNotification(ctx, peerIDs, code, subCode); err != nil {
+		return fmt.Errorf("failed to send notification: %w", err)
+	}
+	return nil
 }

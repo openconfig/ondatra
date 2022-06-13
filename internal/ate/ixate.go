@@ -44,6 +44,9 @@ import (
 type operState uint
 type routeTableFormat string
 
+// OperStatus represents the status of a completed IxNetwork operation.
+type OperStatus string
+
 const (
 	operStateOff operState = iota
 	operStateProtocolsOn
@@ -52,10 +55,18 @@ const (
 	routeTableFormatJuniper routeTableFormat = "juniper"
 	routeTableFormatCSV     routeTableFormat = "csv"
 
+	// OperStatusSuccess indicates a successful operation.
+	OperStatusSuccess OperStatus = "success"
+	// OperStatusFailure indicates a failed operation.
+	OperStatusFailure OperStatus = "failure"
+
 	importRetries = 5
 
 	// IxNetwork has an undocumented maximum number of DeviceGroups.
 	maxIntfs = 256
+
+	bgpPeerV4NotifyOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
+	bgpPeerV6NotifyOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
 )
 
 var (
@@ -163,6 +174,33 @@ func (vw *viewWrapper) FetchTable(ctx context.Context, drilldowns ...string) (ix
 	return vw.StatView.FetchTable(ctx, drilldowns...)
 }
 
+// CfgComponents represents the physical ATE components in use for the session and
+// their association with configured interfaces/protocols.
+type CfgComponents struct {
+	Host                 string
+	Linecards            []int
+	Ports                []string
+	PortToInterfaces     map[string][]string
+	InterfaceToProtocols map[string][]string
+}
+
+func (c *CfgComponents) String() string {
+	b, err := json.MarshalIndent(c, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("<error marshaling JSON: %v>", err)
+	}
+	return string(b)
+}
+
+// OperResult represents the status of an operation and the configuration context in which it executed.
+type OperResult struct {
+	Path        string
+	Status      OperStatus
+	OpErr       string
+	SessionErrs []string
+	Components  *CfgComponents
+}
+
 // IPv4/6 route tables specified by local path.
 type routeTables struct {
 	format           routeTableFormat
@@ -185,6 +223,8 @@ type intf struct {
 	resolvedIpv4Mac   string
 	resolvedIpv6Mac   string
 	hasVLAN           bool
+	idToBGPv4Peer     map[uint32]*ixconfig.TopologyBgpIpv4Peer
+	idToBGPv6Peer     map[uint32]*ixconfig.TopologyBgpIpv6Peer
 }
 
 func (i *intf) String() string {
@@ -235,6 +275,88 @@ type ixATE struct {
 	gclient *ixgnmi.Client
 }
 
+func linkToPorts(ix *ixATE, link ixconfig.IxiaCfgNode) ([]string, error) {
+	var ports []string
+	switch l := link.(type) {
+	case *ixconfig.Vport:
+		p := ix.vportToPort[l]
+		ports = []string{p}
+	case *ixconfig.Lag:
+		vports := ix.lagPorts[l]
+		for _, vp := range vports {
+			p := ix.vportToPort[vp]
+			ports = append(ports, p)
+		}
+	default:
+		return nil, fmt.Errorf("link node is not a Vport or Lag link: %v(%T)", link, link)
+	}
+	return ports, nil
+}
+
+func (ix *ixATE) logOp(path string) {
+	components := &CfgComponents{
+		Host:                 ix.name,
+		PortToInterfaces:     map[string][]string{},
+		InterfaceToProtocols: map[string][]string{},
+	}
+	linecards := map[int]bool{}
+	for port := range ix.ports {
+		components.Ports = append(components.Ports, port)
+		lc, err := strconv.Atoi(strings.Split(port, "/")[0])
+		if err != nil {
+			log.Errorf("Could not parse linecard from port %q: %v", port, err)
+			continue
+		}
+		linecards[lc] = true
+	}
+	for lc := range linecards {
+		components.Linecards = append(components.Linecards, lc)
+	}
+	for name, intf := range ix.intfs {
+		ports, err := linkToPorts(ix, intf.link)
+		if err != nil {
+			log.Errorf("Could not compute ports for intf %q", name)
+			continue
+		}
+		for _, port := range ports {
+			components.PortToInterfaces[port] = append(components.PortToInterfaces[port], name)
+		}
+		var protocolsForIntf []string
+		if v4 := intf.ipv4; v4 != nil {
+			protocolsForIntf = append(protocolsForIntf, "IPv4")
+			if len(v4.BgpIpv4Peer) != 0 {
+				protocolsForIntf = append(protocolsForIntf, "BGPOnV4")
+			}
+		}
+		if v6 := intf.ipv6; v6 != nil {
+			protocolsForIntf = append(protocolsForIntf, "IPv6")
+			if len(v6.BgpIpv6Peer) != 0 {
+				protocolsForIntf = append(protocolsForIntf, "BGPOnV6")
+			}
+		}
+		if intf.ipv4Loopback != nil {
+			protocolsForIntf = append(protocolsForIntf, "IPv4Loopback")
+		}
+		if intf.ipv6Loopback != nil {
+			protocolsForIntf = append(protocolsForIntf, "IPv6Loopback")
+		}
+		if len(intf.deviceGroup.IsisL3Router) != 0 {
+			protocolsForIntf = append(protocolsForIntf, "IS-IS")
+		}
+		if len(intf.rsvpLSPs) != 0 {
+			protocolsForIntf = append(protocolsForIntf, "RSVP")
+		}
+		components.InterfaceToProtocols[name] = protocolsForIntf
+	}
+	log.Infof("Components recorded for operation %q: %v", path, components)
+}
+
+func (ix *ixATE) runOp(ctx context.Context, path string, in interface{}, out interface{}) error {
+	err := ix.c.Session().Post(ctx, path, in, out)
+	ix.logOp(path)
+	return err
+}
+
 // Resets traffic configuration on this client. Does not make any changes on the Ixia.
 func (ix *ixATE) resetClientTrafficCfg() {
 	ix.cfg.Traffic = nil
@@ -249,7 +371,7 @@ func resetIxiaTrafficCfg(ctx context.Context, ix *ixATE) error {
 	if err := ix.stopAllTraffic(ctx); err != nil {
 		return err
 	}
-	if err := ix.c.Session().Post(ctx, "operations/clearstats", ixweb.OpArgs{}, nil); err != nil {
+	if err := ix.runOp(ctx, "operations/clearstats", ixweb.OpArgs{}, nil); err != nil {
 		return fmt.Errorf("could not clear stats: %w", err)
 	}
 	if err := ix.c.Session().Delete(ctx, "traffic/trafficItem"); err != nil {
@@ -429,7 +551,7 @@ func importBgpRoutes(ctx context.Context, ix *ixATE, node ixconfig.IxiaCfgNode, 
 		return err
 	}
 	importPath := fmt.Sprintf("topology/deviceGroup/networkGroup/%s/%s/operations/importbgproutes", pools, rp)
-	return ix.c.Session().Post(ctx, importPath, ixweb.OpArgs{
+	return ix.runOp(ctx, importPath, ixweb.OpArgs{
 		nodeID,
 		"replicate", // Replicate routes on each configured peer.
 		false,       // Import all routes, not just the 'best' routes.
@@ -665,21 +787,12 @@ func failedNodesWithPorts(ix *ixATE, msg string, nodes []ixconfig.IxiaCfgNode, n
 			return nil, err
 		}
 
-		var ports []string
-		switch l := nodeToLink[n].(type) {
-		case *ixconfig.Vport:
-			p := ix.vportToPort[l]
+		ports, err := linkToPorts(ix, nodeToLink[n])
+		if err != nil {
+			return nil, fmt.Errorf("error finding ports for link on interface for node %q: %w", nodeID, err)
+		}
+		for _, p := range ports {
 			failedPorts[p] = true
-			ports = []string{p}
-		case *ixconfig.Lag:
-			vports := ix.lagPorts[l]
-			for _, vp := range vports {
-				p := ix.vportToPort[vp]
-				failedPorts[p] = true
-				ports = append(ports, p)
-			}
-		default:
-			return nil, fmt.Errorf("configured link on interface for node %q is not a Vport or Lag", nodeID)
 		}
 		idsAndPorts = append(idsAndPorts, fmt.Sprintf("%s (on %v)", nodeID, ports))
 	}
@@ -795,7 +908,7 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) ([]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		if err := ix.c.Session().Post(ctx, op, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
+		if err := ix.runOp(ctx, op, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
 			return nil, fmt.Errorf("could not restart down protocol at %q", nodeID)
 		}
 	}
@@ -816,10 +929,10 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) ([]string, error) {
 }
 
 func (ix *ixATE) startProtocols(ctx context.Context) error {
-	errStart := ix.c.Session().Post(ctx, "operations/startallprotocols", syncedOpArgs, nil)
+	errStart := ix.runOp(ctx, "operations/startallprotocols", syncedOpArgs, nil)
 	if errStart != nil {
 		log.Warningf("First attempted startallprotocols op failed: %v", errStart)
-		if errStart = ix.c.Session().Post(ctx, "operations/startallprotocols", syncedOpArgs, nil); errStart != nil {
+		if errStart = ix.runOp(ctx, "operations/startallprotocols", syncedOpArgs, nil); errStart != nil {
 			log.Warningf("Second attempted startallprotocols op failed: %v", errStart)
 		}
 	}
@@ -861,7 +974,7 @@ func (ix *ixATE) StopProtocols(ctx context.Context) error {
 		log.Infof("Protocols already stopped, not running operation on Ixia.")
 		return nil
 	}
-	if err := ix.c.Session().Post(ctx, "operations/stopallprotocols", syncedOpArgs, nil); err != nil {
+	if err := ix.runOp(ctx, "operations/stopallprotocols", syncedOpArgs, nil); err != nil {
 		return fmt.Errorf("could not stop protocols: %w", err)
 	}
 	ix.operState = operStateOff
@@ -869,7 +982,13 @@ func (ix *ixATE) StopProtocols(ctx context.Context) error {
 }
 
 // SetPortState enables/disables the given Ixia port.
-func (ix *ixATE) SetPortState(ctx context.Context, port string, enabled bool) error {
+func (ix *ixATE) SetPortState(ctx context.Context, port string, enabled *bool) error {
+	if port == "" {
+		return fmt.Errorf("no port provided in SetPortState action on ATE %q", ix.name)
+	}
+	if enabled == nil {
+		return fmt.Errorf("no enabled state provided in SetPortState action on ATE %q", ix.name)
+	}
 	vport, ok := ix.ports[port]
 	if !ok {
 		return fmt.Errorf("port %q does not exist in current configuration", port)
@@ -879,14 +998,14 @@ func (ix *ixATE) SetPortState(ctx context.Context, port string, enabled bool) er
 	}
 
 	state := "down"
-	if enabled {
+	if *enabled {
 		state = "up"
 	}
 	vportID, err := ix.c.NodeID(vport)
 	if err != nil {
 		return err
 	}
-	if err := ix.c.Session().Post(ctx, "vport/operations/linkupdn", ixweb.OpArgs{[]string{vportID}, state}, nil); err != nil {
+	if err := ix.runOp(ctx, "vport/operations/linkupdn", ixweb.OpArgs{[]string{vportID}, state}, nil); err != nil {
 		return fmt.Errorf("error setting port state for %q: %w", port, err)
 	}
 	return nil
@@ -924,7 +1043,7 @@ func resolveMacs(ctx context.Context, ix *ixATE) error {
 			return err
 		}
 		var macs []string
-		err = ix.c.Session().Post(ctx, "multivalue/operations/getvalues", ixweb.OpArgs{macID, 0, 1}, &macs)
+		err = ix.runOp(ctx, "multivalue/operations/getvalues", ixweb.OpArgs{macID, 0, 1}, &macs)
 		if err != nil {
 			return fmt.Errorf("could not fetch value for MAC multivalue %q: %w", macID, err)
 		}
@@ -972,7 +1091,7 @@ func genTraffic(ctx context.Context, ix *ixATE) error {
 		}
 		tiIDs = append(tiIDs, tiID)
 	}
-	if err := ix.c.Session().Post(ctx, "traffic/trafficItem/operations/generate", ixweb.OpArgs{tiIDs}, nil); err != nil {
+	if err := ix.runOp(ctx, "traffic/trafficItem/operations/generate", ixweb.OpArgs{tiIDs}, nil); err != nil {
 		return fmt.Errorf("could not generate traffic flows: %w", err)
 	}
 	return nil
@@ -1088,7 +1207,7 @@ func configureTraffic(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 
 func applyTraffic(ctx context.Context, ix *ixATE) error {
 	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
-	if err := ix.c.Session().Post(ctx, "traffic/operations/apply", trafficArgs, nil); err != nil {
+	if err := ix.runOp(ctx, "traffic/operations/apply", trafficArgs, nil); err != nil {
 		return fmt.Errorf("could not apply traffic config: %w", err)
 	}
 	return nil
@@ -1096,7 +1215,7 @@ func applyTraffic(ctx context.Context, ix *ixATE) error {
 
 func startTraffic(ctx context.Context, ix *ixATE) error {
 	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
-	if err := ix.c.Session().Post(ctx, "traffic/operations/start", trafficArgs, nil); err != nil {
+	if err := ix.runOp(ctx, "traffic/operations/start", trafficArgs, nil); err != nil {
 		return fmt.Errorf("could not start traffic: %w", err)
 	}
 
@@ -1153,7 +1272,7 @@ func (ix *ixATE) UpdateTraffic(ctx context.Context, flows []*opb.Flow) error {
 
 func (ix *ixATE) stopAllTraffic(ctx context.Context) error {
 	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
-	if err := ix.c.Session().Post(ctx, "traffic/operations/stop", trafficArgs, nil); err != nil {
+	if err := ix.runOp(ctx, "traffic/operations/stop", trafficArgs, nil); err != nil {
 		return fmt.Errorf("could not stop traffic: %w", err)
 	}
 	// Wait a sufficient amount of time to ensure that traffic is stopped.
@@ -1291,7 +1410,7 @@ func (ix *ixATE) applyOnTheFly(ctx context.Context) error {
 		applyOnTheFlyOp  = "globals/topology/operations/applyonthefly"
 	)
 	applyOnTheFlyArgs := ixweb.OpArgs{ix.c.Session().AbsPath(applyOnTheFlyArg)}
-	if err := ix.c.Session().Post(ctx, applyOnTheFlyOp, applyOnTheFlyArgs, nil); err != nil {
+	if err := ix.runOp(ctx, applyOnTheFlyOp, applyOnTheFlyArgs, nil); err != nil {
 		return fmt.Errorf("could not apply topology changes: %w", err)
 	}
 	return nil
@@ -1315,6 +1434,46 @@ func (ix *ixATE) UpdateNetworkGroups(ctx context.Context, ifs []*opb.InterfaceCo
 		}
 	}
 	return ix.applyOnTheFly(ctx)
+}
+
+func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, peerIDs []uint32, code int, subCode int) error {
+	if len(peerIDs) == 0 {
+		return fmt.Errorf("no bgp peers provided")
+	}
+	var peerNodes []ixconfig.IxiaCfgNode
+	for _, intf := range ix.intfs {
+		for _, id := range peerIDs {
+			if peer, ok := intf.idToBGPv4Peer[id]; ok {
+				peerNodes = append(peerNodes, peer)
+			}
+			if peer, ok := intf.idToBGPv6Peer[id]; ok {
+				peerNodes = append(peerNodes, peer)
+			}
+		}
+	}
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, peerNodes...); err != nil {
+		return fmt.Errorf("error updating IDs for bgp peers: %w", err)
+	}
+	for _, node := range peerNodes {
+		nodeID, err := ix.c.NodeID(node)
+		if err != nil {
+			return fmt.Errorf("error getting ID for bgp peer: %w", err)
+		}
+		var op string
+		switch n := node.(type) {
+		case *ixconfig.TopologyBgpIpv4Peer:
+			op = bgpPeerV4NotifyOp
+		case *ixconfig.TopologyBgpIpv6Peer:
+			op = bgpPeerV6NotifyOp
+		default:
+			return fmt.Errorf("invalid BGP peer node type: %v(%T)", n, node)
+		}
+		args := ixweb.OpArgs{nodeID, []int{1}, code, subCode}
+		if err := ix.c.Session().Post(ctx, op, args, nil); err != nil {
+			return fmt.Errorf("error sending BGP notification: %w", err)
+		}
+	}
+	return nil
 }
 
 func validateFlows(fs []*opb.Flow) error {

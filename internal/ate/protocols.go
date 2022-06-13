@@ -876,6 +876,10 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 			return err
 		}
 		intf.ipv4.BgpIpv4Peer = peers
+		intf.idToBGPv4Peer = make(map[uint32]*ixconfig.TopologyBgpIpv4Peer)
+		for i, peer := range peers {
+			intf.idToBGPv4Peer[v4Peers[i].GetId()] = peer
+		}
 	}
 	if len(v6Peers) > 0 {
 		if intf.ipv6 == nil {
@@ -886,6 +890,10 @@ func (ix *ixATE) addBGPProtocols(ifc *opb.InterfaceConfig) error {
 			return err
 		}
 		intf.ipv6.BgpIpv6Peer = peers
+		intf.idToBGPv6Peer = make(map[uint32]*ixconfig.TopologyBgpIpv6Peer)
+		for i, peer := range peers {
+			intf.idToBGPv6Peer[v6Peers[i].GetId()] = peer
+		}
 	}
 	if len(v4LoopbackPeers) > 0 {
 		if intf.ipv4Loopback == nil {

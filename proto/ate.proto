@@ -277,6 +277,7 @@ message BgpConfig {
 
 // BGP peer for the ATE.
 message BgpPeer {
+  uint32 id = 11;
   bool active = 1;
   bool on_loopback = 10;
   enum Type {
@@ -374,7 +375,7 @@ message BgpPeer {
     Enlp enlp = 13;
   }
   repeated SrtePolicyGroup srte_policy_groups = 9;
-  // NEXT ID: 11
+  // NEXT ID: 12
 }
 
 // BGP attributes for advertised prefixes.

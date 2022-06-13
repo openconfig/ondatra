@@ -210,16 +210,10 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 
 // SetInterfaceState sets the state of a specified interface on a device.
 func SetInterfaceState(ctx context.Context, dev binding.Device, intf string, enabled *bool) error {
-	if intf == "" {
-		return fmt.Errorf("no interface provided in set interface state operation on device %v", dev)
-	}
-	if enabled == nil {
-		return fmt.Errorf("no enabled state provided in set interface state operation on device %v", dev)
-	}
 	if dut, ok := dev.(binding.DUT); ok {
-		return setDUTInterfaceState(ctx, dut, intf, *enabled)
+		return setDUTInterfaceState(ctx, dut, intf, enabled)
 	}
-	return ate.SetInterfaceState(ctx, dev.(binding.ATE), intf, *enabled)
+	return ate.SetPortState(ctx, dev.(binding.ATE), intf, enabled)
 }
 
 var (
@@ -257,9 +251,15 @@ var (
 	}
 )
 
-func setDUTInterfaceState(ctx context.Context, dut binding.DUT, intf string, enabled bool) error {
+func setDUTInterfaceState(ctx context.Context, dut binding.DUT, intf string, enabled *bool) error {
+	if intf == "" {
+		return fmt.Errorf("no interface provided in set interface state operation on DUT %v", dut)
+	}
+	if enabled == nil {
+		return fmt.Errorf("no enabled state provided in set interface state operation on DUT %v", dut)
+	}
 	configs := disableConfigs
-	if enabled {
+	if *enabled {
 		configs = enableConfigs
 	}
 	cfgFormat, ok := configs[dut.Vendor()]

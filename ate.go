@@ -32,12 +32,17 @@ func (a *ATEDevice) OTG() *OTG {
 	return a.otg
 }
 
-// Topology returns a handle to the topology API.
+// Topology returns a handle to the Topology API.
 func (a *ATEDevice) Topology() *Topology {
 	return &Topology{a.res.(binding.ATE)}
 }
 
-// Traffic returns a handle to the traffic API.
+// Traffic returns a handle to the Traffic API.
 func (a *ATEDevice) Traffic() *Traffic {
 	return &Traffic{a.res.(binding.ATE)}
+}
+
+// Actions returns a handle to the Actions API.
+func (a *ATEDevice) Actions() *Actions {
+	return &Actions{a.res.(binding.ATE)}
 }

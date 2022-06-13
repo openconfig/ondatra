@@ -27,13 +27,13 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// Traffic is ATE Traffic API.
+// Traffic is the ATE Traffic API.
 type Traffic struct {
 	ate binding.ATE
 }
 
 func (tr *Traffic) String() string {
-	return fmt.Sprintf("{ate: %s}", tr.ate)
+	return fmt.Sprintf("Traffic%+v", *tr)
 }
 
 // NewFlow returns a new Traffic flow. By default the flow will have the following properties:
