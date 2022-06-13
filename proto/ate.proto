@@ -630,6 +630,7 @@ message EthernetHeader {
   AddressRange dst_addr = 2;
   uint32 vlan_id = 3;
   bool bad_crc = 4;
+  string ethernet_type = 5;
 }
 
 message GreHeader {
