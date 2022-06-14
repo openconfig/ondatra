@@ -132,8 +132,8 @@ func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemCon
 			return nil, fmt.Errorf("could not set destination MAC address: %w", err)
 		}
 	}
-	if len(eth.GetEthernetType()) > 0 {
-		setSingleValue(stack.EtherType(), ixconfig.String(eth.GetEthernetType()))
+	if eth.GetEtherType() > 0 {
+		setSingleValue(stack.EtherType(), uintToHexStr(eth.GetEtherType()))
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
 }

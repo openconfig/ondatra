@@ -34,23 +34,23 @@ type wantField struct {
 
 func TestHeaderStacks(t *testing.T) {
 	const (
-		srcMacAddr   = "01:02:03:04:05:06"
-		dstMacAddr   = "06:05:04:03:02:01"
-		vlanID       = 123
-		ethernetType = "0x6000"
-		key          = 1
-		seq          = 2
-		srcIpv4Addr  = "1.2.3.4"
-		dstIpv4Addr  = "4.3.2.1"
-		ttl          = 64
-		checksum     = 65376
-		srcIpv6Addr  = "1:2:3:4:5:6:7:8"
-		dstIpv6Addr  = "8:7:6:5:4:3:2:1"
-		hopLimit     = 64
-		label        = 100
-		exp          = 1
-		srcPort      = 443
-		dstPort      = 80
+		srcMacAddr  = "01:02:03:04:05:06"
+		dstMacAddr  = "06:05:04:03:02:01"
+		vlanID      = 123
+		etherType   = 24576
+		key         = 1
+		seq         = 2
+		srcIpv4Addr = "1.2.3.4"
+		dstIpv4Addr = "4.3.2.1"
+		ttl         = 64
+		checksum    = 65376
+		srcIpv6Addr = "1:2:3:4:5:6:7:8"
+		dstIpv6Addr = "8:7:6:5:4:3:2:1"
+		hopLimit    = 64
+		label       = 100
+		exp         = 1
+		srcPort     = 443
+		dstPort     = 80
 	)
 	tests := []struct {
 		desc       string
@@ -160,9 +160,9 @@ func TestHeaderStacks(t *testing.T) {
 		hdr: &opb.Header{
 			Type: &opb.Header_Eth{
 				&opb.EthernetHeader{
-					SrcAddr:      &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
-					DstAddr:      &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
-					EthernetType: ethernetType,
+					SrcAddr:   &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
+					DstAddr:   &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
+					EtherType: etherType,
 				},
 			},
 		},
@@ -182,8 +182,8 @@ func TestHeaderStacks(t *testing.T) {
 					return (&e).DestinationAddress()
 				},
 			}, {
-				name:    "ethernet type",
-				wantVal: ixconfig.String(ethernetType),
+				name:    "ether type",
+				wantVal: uintToHexStr(etherType),
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					v := ixconfig.EthernetStack(*s)
 					return (&v).EtherType()
