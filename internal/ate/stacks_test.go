@@ -37,7 +37,7 @@ func TestHeaderStacks(t *testing.T) {
 		srcMacAddr  = "01:02:03:04:05:06"
 		dstMacAddr  = "06:05:04:03:02:01"
 		vlanID      = 123
-		etherType   = 24576
+		etherType   = 33024
 		key         = 1
 		seq         = 2
 		srcIpv4Addr = "1.2.3.4"
@@ -62,8 +62,10 @@ func TestHeaderStacks(t *testing.T) {
 		hdr: &opb.Header{
 			Type: &opb.Header_Eth{
 				&opb.EthernetHeader{
-					SrcAddr: &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
-					DstAddr: &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
+					SrcAddr:   &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
+					DstAddr:   &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
+					EtherType: etherType,
+					VlanId:    vlanID,
 				},
 			},
 		},
@@ -82,33 +84,12 @@ func TestHeaderStacks(t *testing.T) {
 					e := ixconfig.EthernetStack(*s)
 					return (&e).DestinationAddress()
 				},
-			}},
-		},
-	}, {
-		desc: "ethernet header w/ vlan id",
-		hdr: &opb.Header{
-			Type: &opb.Header_Eth{
-				&opb.EthernetHeader{
-					SrcAddr: &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
-					DstAddr: &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
-					VlanId:  vlanID,
-				},
-			},
-		},
-		wantFields: [][]wantField{
-			[]wantField{{
-				name:    "src addr",
-				wantVal: ixconfig.String(srcMacAddr),
-				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
-					e := ixconfig.EthernetStack(*s)
-					return (&e).SourceAddress()
-				},
 			}, {
-				name:    "dst addr",
-				wantVal: ixconfig.String(dstMacAddr),
+				name:    "ether type",
+				wantVal: uintToHexStr(etherType),
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
-					e := ixconfig.EthernetStack(*s)
-					return (&e).DestinationAddress()
+					v := ixconfig.EthernetStack(*s)
+					return (&v).EtherType()
 				},
 			}},
 			[]wantField{{
@@ -152,41 +133,6 @@ func TestHeaderStacks(t *testing.T) {
 				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
 					v := ixconfig.VlanStack(*s)
 					return (&v).VlanTagVlanID()
-				},
-			}},
-		},
-	}, {
-		desc: "ethernet header w/ ethernet-type",
-		hdr: &opb.Header{
-			Type: &opb.Header_Eth{
-				&opb.EthernetHeader{
-					SrcAddr:   &opb.AddressRange{Min: srcMacAddr, Max: srcMacAddr, Count: 1},
-					DstAddr:   &opb.AddressRange{Min: dstMacAddr, Max: dstMacAddr, Count: 1},
-					EtherType: etherType,
-				},
-			},
-		},
-		wantFields: [][]wantField{
-			[]wantField{{
-				name:    "src addr",
-				wantVal: ixconfig.String(srcMacAddr),
-				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
-					e := ixconfig.EthernetStack(*s)
-					return (&e).SourceAddress()
-				},
-			}, {
-				name:    "dst addr",
-				wantVal: ixconfig.String(dstMacAddr),
-				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
-					e := ixconfig.EthernetStack(*s)
-					return (&e).DestinationAddress()
-				},
-			}, {
-				name:    "ether type",
-				wantVal: uintToHexStr(etherType),
-				toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
-					v := ixconfig.EthernetStack(*s)
-					return (&v).EtherType()
 				},
 			}},
 		},
