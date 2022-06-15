@@ -192,6 +192,19 @@ func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) erro
 	return err
 }
 
+func (d *kneDUT) DialCLI(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+	return &kneCLI{dut: d}, nil
+}
+
+type kneCLI struct {
+	*binding.AbstractStreamClient
+	dut *kneDUT
+}
+
+func (c *kneCLI) SendCommand(_ context.Context, cmd string) (string, error) {
+	return c.dut.exec(cmd)
+}
+
 func (d *kneDUT) exec(cmd string) (string, error) {
 	s, err := d.Service("ssh")
 	if err != nil {

@@ -10,6 +10,7 @@ using the following YANG input files:
 	- public/release/models/acl/openconfig-acl.yang
 	- public/release/models/acl/openconfig-packet-match.yang
 	- public/release/models/aft/openconfig-aft.yang
+	- public/release/models/aft/openconfig-aft-network-instance.yang
 	- public/release/models/ate/openconfig-ate-flow.yang
 	- public/release/models/ate/openconfig-ate-intf.yang
 	- public/release/models/bfd/openconfig-bfd.yang

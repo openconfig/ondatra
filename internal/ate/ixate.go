@@ -196,9 +196,19 @@ func (c *CfgComponents) String() string {
 type OperResult struct {
 	Path        string
 	Status      OperStatus
-	OpErr       string
-	SessionErrs []string
+	Start       time.Time
+	End         time.Time
+	OpErr       error
+	SessionErrs []*ixweb.Error
 	Components  *CfgComponents
+}
+
+func (o *OperResult) String() string {
+	b, err := json.MarshalIndent(o, "", "  ")
+	if err != nil {
+		return fmt.Sprintf("<error marshaling JSON: %v>", err)
+	}
+	return string(b)
 }
 
 // IPv4/6 route tables specified by local path.
@@ -293,7 +303,7 @@ func linkToPorts(ix *ixATE, link ixconfig.IxiaCfgNode) ([]string, error) {
 	return ports, nil
 }
 
-func (ix *ixATE) logOp(path string) {
+func (ix *ixATE) logOp(ctx context.Context, path string, opErr error, start, end time.Time) {
 	components := &CfgComponents{
 		Host:                 ix.name,
 		PortToInterfaces:     map[string][]string{},
@@ -348,12 +358,28 @@ func (ix *ixATE) logOp(path string) {
 		}
 		components.InterfaceToProtocols[name] = protocolsForIntf
 	}
-	log.Infof("Components recorded for operation %q: %v", path, components)
+
+	status := OperStatusSuccess
+	if opErr != nil {
+		status = OperStatusFailure
+	}
+	opResult := &OperResult{
+		Path:        path,
+		Status:      status,
+		Start:       start,
+		End:         end,
+		OpErr:       opErr,
+		SessionErrs: ix.sessionErrors(ctx),
+		Components:  components,
+	}
+	log.Infof(opResult.String())
 }
 
 func (ix *ixATE) runOp(ctx context.Context, path string, in interface{}, out interface{}) error {
+	start := time.Now()
 	err := ix.c.Session().Post(ctx, path, in, out)
-	ix.logOp(path)
+	end := time.Now()
+	ix.logOp(ctx, path, err, start, end)
 	return err
 }
 
@@ -400,30 +426,22 @@ func (ix *ixATE) resetClientCfg() {
 	ix.resetClientTrafficCfg()
 }
 
-// sessionErrors returns a string representing errors reported by the session.
-func (ix *ixATE) sessionErrors(ctx context.Context) string {
+// sessionErrors returns the errors reported by the IxNetwork session.
+// Does not fail if there was an error querying the session ('nil' is
+// returned both in this case and if there were no errors.)
+func (ix *ixATE) sessionErrors(ctx context.Context) []*ixweb.Error {
 	errors, err := ix.c.Session().Errors(ctx)
 	if err != nil {
 		log.Errorf("Could not fetch errors for IxNetwork session: %v", err)
-		return ""
+		return nil
 	}
-	var errBuilder strings.Builder
-	for i, e := range errors {
-		if e.Level != "kError" {
-			continue
-		}
-		errBuilder.WriteString(fmt.Sprintf("name: %q, description: %q, instances: ", e.Name, e.Description))
-		for j, row := range e.InstanceRowValues {
-			errBuilder.WriteString(fmt.Sprintf("%v", row))
-			if j != len(e.InstanceRowValues)-1 {
-				errBuilder.WriteString(", ")
-			}
-		}
-		if i != len(errors)-1 {
-			errBuilder.WriteRune('\n')
+	var sErrs []*ixweb.Error
+	for _, e := range errors {
+		if e.Level == "kError" {
+			sErrs = append(sErrs, e)
 		}
 	}
-	return errBuilder.String()
+	return sErrs
 }
 
 // importConfig is a wrapper around the config client ImportConfig method.
@@ -445,11 +463,6 @@ func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, ov
 			log.Errorf("could not log IxNetwork config to file: %v", err)
 		}
 		log.Infof("IxNetwork config logged to file %s", filePath)
-	}()
-	defer func() {
-		if sErr := ix.sessionErrors(ctx); sErr != "" {
-			log.Warningf("Errors reported in session after import: %s", sErr)
-		}
 	}()
 
 	const importDelay = 15 * time.Second
@@ -943,7 +956,21 @@ func (ix *ixATE) startProtocols(ctx context.Context) error {
 	// behavior for a topology with RSVP protocols configured after updating to
 	// IxNetwork 9.10update2 everywhere.
 	if _, err := validateProtocolStartFn(ctx, ix); err != nil {
-		sErr := ix.sessionErrors(ctx)
+		sessErrs := ix.sessionErrors(ctx)
+		var errBuilder strings.Builder
+		for i, e := range sessErrs {
+			errBuilder.WriteString(fmt.Sprintf("name: %q, description: %q, instances: ", e.Name, e.Description))
+			for j, row := range e.InstanceRowValues {
+				errBuilder.WriteString(fmt.Sprintf("%v", row))
+				if j != len(e.InstanceRowValues)-1 {
+					errBuilder.WriteString(", ")
+				}
+			}
+			if i != len(sessErrs)-1 {
+				errBuilder.WriteRune('\n')
+			}
+		}
+		sErr := errBuilder.String()
 		if sErr != "" {
 			sErr = fmt.Sprintf("\n%s", sErr)
 		}
