@@ -197,6 +197,22 @@ func TestUdpStack(t *testing.T) {
 	}
 }
 
+func TestMACsecStack(t *testing.T) {
+	stack := NewMACsecStack(2)
+	wantStackAlias := "macsec-3"
+	if !strings.Contains(stack.Xpath.String(), wantStackAlias) {
+		t.Errorf("Unexpected xpath %q for MACsecStack (wanted alias text to contain %q)", stack.Xpath.String(), wantStackAlias)
+	}
+}
+
+func TestPayloadProtocolTypeStack(t *testing.T) {
+	stack := NewPayloadProtocolTypeStack(3)
+	wantStackAlias := "payloadProtocolType-4"
+	if !strings.Contains(stack.Xpath.String(), wantStackAlias) {
+		t.Errorf("Unexpected xpath %q for PayloadProtocolTypeStack (wanted alias text to contain %q)", stack.Xpath.String(), wantStackAlias)
+	}
+}
+
 func TestTrafficStackMarshalJSON(t *testing.T) {
 	wantJSON := `{
 		"xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-2']",

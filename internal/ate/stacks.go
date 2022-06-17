@@ -112,6 +112,16 @@ func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.Traffi
 			return nil, err
 		}
 		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
+	case *opb.Header_Macsec:
+		s, err := macsecStack(v.Macsec, idx)
+		if err != nil {
+			return nil, err
+		}
+		ppts, err := payloadProtocolTypeStack(idx + 1)
+		if err != nil {
+			return nil, err
+		}
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s, ppts}, nil
 	default:
 		return nil, fmt.Errorf("unrecognized header type: %v", hdr)
 	}
@@ -131,6 +141,9 @@ func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemCon
 		if err := setAddrRangeField(stack.DestinationAddress(), mac48AddrType, eth.GetDstAddr()); err != nil {
 			return nil, fmt.Errorf("could not set destination MAC address: %w", err)
 		}
+	}
+	if eth.GetEtherType() > 0 {
+		setSingleValue(stack.EtherType(), uintToHexStr(eth.GetEtherType()))
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
@@ -655,4 +668,12 @@ func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 	setSingleValue(stack.LabelSpace(), uintToStr(ldp.GetLabelSpace()))
 	setSingleValue(stack.MessageID(), uintToStr(ldp.GetMessageId()))
 	return stack.TrafficTrafficItemConfigElementStack(), nil
+}
+
+func macsecStack(macsec *opb.MacsecHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	return ixconfig.NewMACsecStack(idx).TrafficTrafficItemConfigElementStack(), nil
+}
+
+func payloadProtocolTypeStack(idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	return ixconfig.NewPayloadProtocolTypeStack(idx).TrafficTrafficItemConfigElementStack(), nil
 }

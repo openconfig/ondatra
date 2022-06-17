@@ -35,6 +35,12 @@ type EthernetHeader struct {
 	pb *opb.EthernetHeader
 }
 
+// WithEtherType sets the EtherType of the Ethernet header to the specified value.
+func (h *EthernetHeader) WithEtherType(etherType uint32) *EthernetHeader {
+	h.pb.EtherType = etherType
+	return h
+}
+
 // WithSrcAddress sets the source MAC address of the Ethernet header to the specified value.
 // To generate a range of source addresses, use SrcAddressRange() instead.
 func (h *EthernetHeader) WithSrcAddress(addr string) *EthernetHeader {
@@ -1144,4 +1150,18 @@ func (h *LDPHello) WithTargeted(targeted bool) *LDPHello {
 func (h *LDPHello) WithRequestTargeted(targeted bool) *LDPHello {
 	h.pb.RequestTargeted = targeted
 	return h
+}
+
+// NewMACsecHeader returns a new MACsec header.
+func NewMACsecHeader() *MACsecHeader {
+	return &MACsecHeader{&opb.MacsecHeader{}}
+}
+
+// MACsecHeader is a MACsec packet header.
+type MACsecHeader struct {
+	pb *opb.MacsecHeader
+}
+
+func (h *MACsecHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Macsec{h.pb}}
 }

@@ -623,6 +623,7 @@ message Header {
     RsvpHeader rsvp = 11;
     PimHeader pim = 12;
     LdpHeader ldp = 13;
+    MacsecHeader macsec = 14;
   }
 }
 
@@ -631,6 +632,7 @@ message EthernetHeader {
   AddressRange dst_addr = 2;
   uint32 vlan_id = 3;
   bool bad_crc = 4;
+  uint32 ether_type = 5;
 }
 
 message GreHeader {
@@ -830,6 +832,8 @@ message LdpHeader {
     Hello hello = 4;
   }
 }
+
+message MacsecHeader {}
 
 message IpAddressGenerator {
   oneof type {
