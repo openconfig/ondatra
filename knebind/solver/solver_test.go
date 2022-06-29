@@ -20,7 +20,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/testing/protocmp"
-	tpb "github.com/openconfig/kne/proto/topo"
+	tpb "github.com/google/kne/proto/topo"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding"
 

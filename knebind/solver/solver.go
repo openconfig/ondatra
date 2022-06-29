@@ -23,7 +23,7 @@ import (
 	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/binding"
 
-	tpb "github.com/openconfig/kne/proto/topo"
+	tpb "github.com/google/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
 

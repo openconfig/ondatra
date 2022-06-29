@@ -15,6 +15,8 @@
 package ondatra
 
 import (
+	"github.com/openconfig/ondatra/ixnet"
+
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -110,19 +112,20 @@ func (i *NetworkIP) Count() uint32 {
 
 // ISIS creates an ISIS configuration for the network or returns the existing config.
 // The default config params are Active: true, Route Origin: Internal and Metric: 10
-func (n *Network) ISIS() *IPReachabilityConfig {
+func (n *Network) ISIS() *ixnet.IPReachabilityConfig {
 	if n.pb.Isis == nil {
 		n.pb.Isis = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
-	return &IPReachabilityConfig{pb: n.pb.Isis}
+	return ixnet.NewIPReachability(n.pb.Isis)
 }
 
 // BGP creates a BGP config for the network or returns the existing config.
 // By default, the network will advertise IPv4 routes over the BGP V4 peer and
 // advertise IPv6 routes over the V6 peer and have the following configuration:
-//   Active: true
-//   Origin: IGP
-//   ASN set mode: AS-SEQ
+//
+//	Active: true
+//	Origin: IGP
+//	ASN set mode: AS-SEQ
 func (n *Network) BGP() *BGPAttributes {
 	if n.pb.BgpAttributes == nil {
 		n.pb.BgpAttributes = &opb.BgpAttributes{

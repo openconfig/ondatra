@@ -36,7 +36,7 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
 
-	tpb "github.com/openconfig/kne/proto/topo"
+	tpb "github.com/google/kne/proto/topo"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"

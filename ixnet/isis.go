@@ -12,18 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+package ixnet
 
 import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+// NewISIS constructs a new ISIS configuration.
+// Tests should not call this directly; call Interface.ISIS() instead.
+func NewISIS(pb *opb.ISISConfig) *ISIS {
+	return &ISIS{pb: pb}
+}
+
 // ISIS is a representation of a IS-IS config on the ATE.
+// Must be constructed by calling NewISIS().
 type ISIS struct {
 	pb *opb.ISISConfig
 }
 
+// NewIPReachability constructs a new IP Reachability configuration.
+// Tests should not call this directly; call ISISRoutes.IPReachability()
+// or Network.ISIS() instead.
+func NewIPReachability(pb *opb.IPReachability) *IPReachabilityConfig {
+	return &IPReachabilityConfig{pb: pb}
+}
+
 // IPReachabilityConfig is the IS-IS config for a simulated network pool.
+// Must be constructed by calling NewIPReachability().
 type IPReachabilityConfig struct {
 	pb *opb.IPReachability
 }
@@ -562,12 +577,13 @@ func (routes *ISISRoutes) WithNumRoutes(numRoutes uint64) *ISISRoutes {
 
 // IPReachability creates an IP reachability configuration for the network or
 // returns the existing config. The default config params are:
-//   Active: True
-//   Route Origin: Internal
-//   Metric: 10
+//
+//	Active: True
+//	Route Origin: Internal
+//	Metric: 10
 func (routes *ISISRoutes) IPReachability() *IPReachabilityConfig {
 	if routes.pb.Reachability == nil {
 		routes.pb.Reachability = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
-	return &IPReachabilityConfig{pb: routes.pb.Reachability}
+	return NewIPReachability(routes.pb.Reachability)
 }

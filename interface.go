@@ -115,7 +115,7 @@ func (i *Interface) WithIPv6Loopback(ipv6LoopbackCIDR string) *Interface {
 // Router Id: 0.0.0.0
 // Hello Interval: 10 seconds
 // Dead Interval: 30 seconds
-func (i *Interface) ISIS() *ISIS {
+func (i *Interface) ISIS() *ixnet.ISIS {
 	if i.pb.Isis == nil {
 		i.pb.Isis = &opb.ISISConfig{
 			AreaId:           "490001",
@@ -124,7 +124,7 @@ func (i *Interface) ISIS() *ISIS {
 			DeadIntervalSec:  30,
 		}
 	}
-	return &ISIS{pb: i.pb.Isis}
+	return ixnet.NewISIS(i.pb.Isis)
 }
 
 // BGP creates a BGP config for the interface or returns the existing config.
