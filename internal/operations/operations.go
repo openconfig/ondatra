@@ -16,24 +16,25 @@
 package operations
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"io"
 	"sync"
 	"time"
 
-	log "github.com/golang/glog"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/status"
-	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/ate"
+	"golang.org/x/net/context"
 
+	log "github.com/golang/glog"
+	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
 	tpb "github.com/openconfig/gnoi/types"
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/ate"
 	opb "github.com/openconfig/ondatra/proto"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 const (
@@ -205,6 +206,55 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 	if sent, recv := lastPingResp.GetSent(), lastPingResp.GetReceived(); sent != recv {
 		return fmt.Errorf("ping sent %d packets, received %d", sent, recv)
 	}
+	return nil
+}
+
+// GetSystemTime returns the current time in nanoseconds From epoch
+func GetSystemTime(ctx context.Context, dev binding.Device) (uint64, error) {
+	dut, err := checkDUT(dev, "Time")
+	if err != nil {
+		return 0, err
+	}
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return 0, err
+	}
+	resp, err := gnoi.System().Time(ctx, &spb.TimeRequest{})
+
+	if err != nil {
+		return 0, err
+	}
+	return resp.GetTime(), nil
+
+}
+
+// FactoryReset executes the Factory Reset RPC
+func FactoryReset(ctx context.Context, dev binding.Device, factoryOs bool, zeroFill bool) error {
+
+	dut, err := checkDUT(dev, "FactoryReset")
+	if err != nil {
+		return err
+	}
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return err
+	}
+	resp, err := gnoi.FactoryReset().Start(ctx, &frpb.StartRequest{
+		FactoryOs: factoryOs,
+		ZeroFill:  zeroFill,
+	})
+	if err != nil {
+		return err
+	}
+	log.Infof("Factory Reset Response: %v", resp)
+	_err := resp.GetResetError()
+	if _err != nil {
+		return fmt.Errorf("Error Response From Factory Reset Operation, %v ", _err)
+	}
+	if resp.GetResetSuccess() == nil {
+		return fmt.Errorf("Error Response From Factory Reset Operation, Did not recieve a Reset success", _err)
+	}
+
 	return nil
 }
 

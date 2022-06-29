@@ -15,14 +15,15 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"os"
 	"testing"
 	"time"
 
-	"github.com/openconfig/gocloser"
+	"golang.org/x/net/context"
+
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/operations"
@@ -145,6 +146,52 @@ func (p *PingOp) Operate(t testing.TB) {
 	if err := operations.Ping(context.Background(), p.dev, p.dest, p.count); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", p, err)
 	}
+}
+
+// GetSystemTime returns system time
+func (o *Operations) GetSystemTime() (uint64, error) {
+	return operations.GetSystemTime(context.Background(), o.dev)
+}
+
+// NewFactoryReset creates a new Factory Reset.
+func (o *Operations) NewFactoryReset() *FactoryReset {
+	return &FactoryReset{
+		dev:       o.dev,
+		factoryOs: false,
+		zeroFill:  false,
+	}
+}
+
+// FactoryReset enables resetting the device to factory settings
+type FactoryReset struct {
+	dev       binding.Device
+	factoryOs bool
+	zeroFill  bool
+}
+
+// WithFactoryOS instructs the Target if it needs to rollback the OS to the same version as it shipped
+func (s *FactoryReset) WithFactoryOS(factoryOs bool) *FactoryReset {
+	s.factoryOs = factoryOs
+	return s
+}
+
+// WithZeroFill instructs the Target  if it has to zero fill persistent storage state data.
+func (s *FactoryReset) WithZeroFill(zeroFill bool) *FactoryReset {
+	s.zeroFill = zeroFill
+	return s
+}
+
+// String representation of the method
+func (s *FactoryReset) String() string {
+	return fmt.Sprintf("FactoryResetOp%+v", *s)
+}
+
+// Operate performs the FactoryReset operation.
+func (s *FactoryReset) Operate(t testing.TB) error {
+	t.Helper()
+	err := operations.FactoryReset(context.Background(), s.dev, s.factoryOs, s.zeroFill)
+	return err
+
 }
 
 // NewSetInterfaceState creates a new set interface state operation.
