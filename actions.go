@@ -70,6 +70,43 @@ func (s *SetPortState) Send(t *testing.T) {
 	}
 }
 
+// NewSetLACPState returns a new SetLACPState action.
+func (a *Actions) NewSetLACPState() *SetLACPState {
+	return &SetLACPState{ate: a.ate}
+}
+
+// SetLACPState is an action to set the state of LACP on an ATE.
+type SetLACPState struct {
+	ate      binding.ATE
+	portName string
+	enabled  *bool
+}
+
+func (s *SetLACPState) String() string {
+	return fmt.Sprintf("SetLACPState%+v", *s)
+}
+
+// WithPort sets the port whose LACP state will be changed.
+func (s *SetLACPState) WithPort(port *Port) *SetLACPState {
+	s.portName = port.Name()
+	return s
+}
+
+// WithEnabled sets the desired LACP state of the port.
+func (s *SetLACPState) WithEnabled(enabled bool) *SetLACPState {
+	s.enabled = &enabled
+	return s
+}
+
+// Send sends the SetLACPState action to the ATE.
+func (s *SetLACPState) Send(t *testing.T) {
+	t.Helper()
+	debugger.ActionStarted(t, "Setting LACP state on %s", s.ate)
+	if err := ate.SetLACPState(context.Background(), s.ate, s.portName, s.enabled); err != nil {
+		t.Fatalf("Send(t) of %v: %v", s, err)
+	}
+}
+
 // NewBGPPeerNotification returns a new BGPPeerNotification action.
 // The action is configured by default with a code and sub code of 1.
 func (a *Actions) NewBGPPeerNotification() *BGPPeerNotification {

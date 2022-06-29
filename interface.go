@@ -15,6 +15,8 @@
 package ondatra
 
 import (
+	"github.com/openconfig/ondatra/ixnet"
+
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -23,8 +25,10 @@ type Interface struct {
 	pb *opb.InterfaceConfig
 }
 
-// Implement the Endpoint marker interface.
-func (*Interface) isEndpoint() {}
+// EndpointPB returns the Interface config as an endpoint proto message.
+func (i *Interface) EndpointPB() *opb.Flow_Endpoint {
+	return &opb.Flow_Endpoint{InterfaceName: i.pb.GetName()}
+}
 
 // IsLACPEnabled returns whether the interface has LACP enabled.
 func (i *Interface) IsLACPEnabled() bool {
@@ -132,8 +136,8 @@ func (i *Interface) BGP() *BGP {
 }
 
 // AddRSVP adds an RSVP config to the interface.
-func (i *Interface) AddRSVP(name string) *RSVP {
+func (i *Interface) AddRSVP(name string) *ixnet.RSVP {
 	rpb := &opb.RsvpConfig{Name: name, InterfaceName: i.pb.Name}
 	i.pb.Rsvps = append(i.pb.Rsvps, rpb)
-	return &RSVP{pb: rpb}
+	return ixnet.NewRSVP(rpb)
 }

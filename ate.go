@@ -16,33 +16,31 @@ package ondatra
 
 import (
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/otg"
 )
 
 // ATEDevice is an automated test equipment.
 type ATEDevice struct {
 	*Device
-	otg *OTG
+	otg *otg.OTG
 }
 
 // OTG returns a handle to the OTG API.
-func (a *ATEDevice) OTG() *OTG {
-	if a.otg == nil {
-		a.otg = &OTG{ate: a.res.(binding.ATE)}
-	}
-	return a.otg
+func (a *ATEDevice) OTG() *otg.OTG {
+	return otg.New(a.res.(binding.ATE))
 }
 
-// Topology returns a handle to the Topology API.
+// Topology returns a handle to the IxNetwork Topology API.
 func (a *ATEDevice) Topology() *Topology {
 	return &Topology{a.res.(binding.ATE)}
 }
 
-// Traffic returns a handle to the Traffic API.
+// Traffic returns a handle to the IxNetwork Traffic API.
 func (a *ATEDevice) Traffic() *Traffic {
 	return &Traffic{a.res.(binding.ATE)}
 }
 
-// Actions returns a handle to the Actions API.
+// Actions returns a handle to the IxNetwork Actions API.
 func (a *ATEDevice) Actions() *Actions {
 	return &Actions{a.res.(binding.ATE)}
 }

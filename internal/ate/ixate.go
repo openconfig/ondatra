@@ -67,6 +67,9 @@ const (
 
 	bgpPeerV4NotifyOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
 	bgpPeerV6NotifyOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
+
+	startLACPOp = "lag/protocolStack/ethernet/lagportlacp/port/operations/start"
+	stopLACPOp  = "lag/protocolStack/ethernet/lagportlacp/port/operations/stop"
 )
 
 var (
@@ -89,6 +92,7 @@ var (
 	configureTrafficFn             = configureTraffic
 	applyTrafficFn                 = applyTraffic
 	startTrafficFn                 = startTraffic
+
 )
 
 type cfgClient interface {
@@ -178,7 +182,7 @@ func (vw *viewWrapper) FetchTable(ctx context.Context, drilldowns ...string) (ix
 // their association with configured interfaces/protocols.
 type CfgComponents struct {
 	Host                 string
-	Linecards            []int
+	Linecards            []uint64
 	Ports                []string
 	PortToInterfaces     map[string][]string
 	InterfaceToProtocols map[string][]string
@@ -309,10 +313,10 @@ func (ix *ixATE) logOp(ctx context.Context, path string, opErr error, start, end
 		PortToInterfaces:     map[string][]string{},
 		InterfaceToProtocols: map[string][]string{},
 	}
-	linecards := map[int]bool{}
+	linecards := map[uint64]bool{}
 	for port := range ix.ports {
 		components.Ports = append(components.Ports, port)
-		lc, err := strconv.Atoi(strings.Split(port, "/")[0])
+		lc, err := strconv.ParseUint(strings.Split(port, "/")[0], 10, 64)
 		if err != nil {
 			log.Errorf("Could not parse linecard from port %q: %v", port, err)
 			continue
@@ -1034,6 +1038,52 @@ func (ix *ixATE) SetPortState(ctx context.Context, port string, enabled *bool) e
 	}
 	if err := ix.runOp(ctx, "vport/operations/linkupdn", ixweb.OpArgs{[]string{vportID}, state}, nil); err != nil {
 		return fmt.Errorf("error setting port state for %q: %w", port, err)
+	}
+	return nil
+}
+
+// SetLACPState enables/disables LACP on the given Ixia port in a LAG.
+func (ix *ixATE) SetLACPState(ctx context.Context, port string, enabled *bool) error {
+	if port == "" {
+		return fmt.Errorf("no port provided in SetLACPState action on ATE %q", ix.name)
+	}
+	if enabled == nil {
+		return fmt.Errorf("no enabled state provided in SetLACPState action on ATE %q", ix.name)
+	}
+	op := stopLACPOp
+	if *enabled {
+		op = startLACPOp
+	}
+
+	vport, ok := ix.ports[port]
+	if !ok {
+		return fmt.Errorf("port %q does not exist in current configuration", port)
+	}
+	var ixLAG *ixconfig.Lag
+	var portIdx int
+	for l, vports := range ix.lagPorts {
+		for i, p := range vports {
+			if p == vport {
+				ixLAG = l
+				portIdx = i
+			}
+		}
+	}
+	if ixLAG == nil {
+		return fmt.Errorf("port %q is not a member of a LAG", port)
+	}
+
+	lacpNode := ixLAG.ProtocolStack.Ethernet[0].Lagportlacp[0]
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, lacpNode); err != nil {
+		return fmt.Errorf("could not fetch ID for vport for %q: %w", port, err)
+	}
+	lacpID, err := ix.c.NodeID(lacpNode)
+	if err != nil {
+		return err
+	}
+	portID := fmt.Sprintf("%s/port/%d", lacpID, portIdx+1)
+	if err := ix.runOp(ctx, op, ixweb.OpArgs{[]string{portID}}, nil); err != nil {
+		return fmt.Errorf("error setting LACP state for %q: %w", port, err)
 	}
 	return nil
 }

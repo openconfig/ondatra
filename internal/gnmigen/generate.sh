@@ -130,7 +130,7 @@ go run github.com/openconfig/ygot/generator \
   -schema_struct_path=github.com/openconfig/ondatra/telemetry \
   -output_dir=config \
   -package_name=device \
-  -path_structs_split_files_count=5 \
+  -path_structs_split_files_count=1 \
   -split_pathstructs_by_module=true \
   -path_structs_output_file=config/device/device.go \
   -base_import_path=github.com/openconfig/ondatra/config \
@@ -171,7 +171,7 @@ go run github.com/openconfig/ygot/generator \
   -trim_path_package_prefix="openconfig-" \
   -path_struct_package_suffix="" \
   -base_import_path=github.com/openconfig/ondatra/telemetry \
-  -path_structs_split_files_count=10 \
+  -path_structs_split_files_count=2 \
   "${YGOT_COMMON_ARGS[@]}" \
   "${YANG_FILES[@]}"
 
@@ -236,7 +236,7 @@ go run github.com/openconfig/ygot/generator \
     -schema_struct_path=github.com/openconfig/ondatra/telemetry/otg \
     -path_struct_package_suffix="" \
     -base_import_path=github.com/openconfig/ondatra/telemetry/otg \
-    -path_structs_split_files_count=3 \
+    -path_structs_split_files_count=1 \
     -trim_path_package_prefix="open-traffic-generator-" \
     "${YGOT_COMMON_ARGS[@]}" \
     "${OTG_YANG_FILES[@]}"

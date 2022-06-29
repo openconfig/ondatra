@@ -23,8 +23,13 @@ type Network struct {
 	pb *opb.Network
 }
 
-// Implement the Endpoint marker interface.
-func (*Network) isEndpoint() {}
+// EndpointPB returns the Network config as an endpoint proto message.
+func (n *Network) EndpointPB() *opb.Flow_Endpoint {
+	return &opb.Flow_Endpoint{
+		InterfaceName: n.pb.GetInterfaceName(),
+		Generated:     &opb.Flow_Endpoint_NetworkName{NetworkName: n.pb.GetName()},
+	}
+}
 
 // Ethernet creates an Ethernet config for the network or returns the existing config.
 // The default count of MAC addresses in the network is 1.
