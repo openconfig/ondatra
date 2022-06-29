@@ -620,6 +620,22 @@ func TestRebootErrors(t *testing.T) {
 	}
 }
 
+func TestKillProcess(t *testing.T) {
+	initOperationFakes(t)
+	var killed bool
+	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {
+		killed = true
+		return &spb.KillProcessResponse{}, nil
+	}
+
+	dut := DUT(t, "dut_juniper")
+	op := dut.Operations().NewKillProcess().WithPID(123)
+	op.Operate(t)
+	if !killed {
+		t.Fatalf("Operate() on op %v failed, want success", op)
+	}
+}
+
 func TestSystemTime(t *testing.T) {
 	initOperationFakes(t)
 	fakeGNOI.SystemTime = func(context.Context, *spb.TimeRequest, ...grpc.CallOption) (*spb.TimeResponse, error) {
