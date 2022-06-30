@@ -150,13 +150,13 @@ func (p *PingOp) Operate(t testing.TB) {
 
 // GetSystemTime returns system time
 func (o *Operations) GetSystemTime() (uint64, error) {
-	return operations.GetSystemTime(context.Background(), o.dev)
+	return operations.GetSystemTime(context.Background(), o.dut)
 }
 
 // NewFactoryReset creates a new Factory Reset.
 func (o *Operations) NewFactoryReset() *FactoryReset {
 	return &FactoryReset{
-		dev:       o.dev,
+		dut:       o.dut,
 		factoryOs: false,
 		zeroFill:  false,
 	}
@@ -164,7 +164,7 @@ func (o *Operations) NewFactoryReset() *FactoryReset {
 
 // FactoryReset enables resetting the device to factory settings
 type FactoryReset struct {
-	dev       binding.Device
+	dut       binding.DUT
 	factoryOs bool
 	zeroFill  bool
 }
@@ -189,7 +189,7 @@ func (s *FactoryReset) String() string {
 // Operate performs the FactoryReset operation.
 func (s *FactoryReset) Operate(t testing.TB) error {
 	t.Helper()
-	err := operations.FactoryReset(context.Background(), s.dev, s.factoryOs, s.zeroFill)
+	err := operations.FactoryReset(context.Background(), s.dut, s.factoryOs, s.zeroFill)
 	return err
 
 }
