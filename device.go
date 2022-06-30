@@ -136,11 +136,6 @@ func (d *Device) newPort(id string, res *binding.Port) *Port {
 	return &Port{dev: d, id: id, res: res}
 }
 
-// Operations returns a handle to the device operations API.
-func (d *Device) Operations() *Operations {
-	return &Operations{d.res}
-}
-
 // Port represents a port.
 type Port struct {
 	dev *Device

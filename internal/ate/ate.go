@@ -180,6 +180,15 @@ func SetPortState(ctx context.Context, ate binding.ATE, port string, enabled *bo
 	return ix.SetPortState(ctx, port, enabled)
 }
 
+// SetLACPState sets the LACP state of a specified interface on the ATE.
+func SetLACPState(ctx context.Context, ate binding.ATE, port string, enabled *bool) error {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	return ix.SetLACPState(ctx, port, enabled)
+}
+
 // SendBGPPeerNotification sends a notification from BGP peers.
 func SendBGPPeerNotification(ctx context.Context, ate binding.ATE, peerIDs []uint32, code int, subCode int) error {
 	ix, err := ixiaForATE(ctx, ate)

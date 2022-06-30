@@ -321,6 +321,10 @@ func toTrafficCfg(t *testing.T, filename string) *ixconfig.Traffic {
 	return cfg
 }
 
+func stubLogOperationResult() {
+	// TODO: Implement operation logging for open-source Ondatra.
+}
+
 func restoreStubs() {
 	resolveMacsFn = resolveMacs
 	sleepFn = time.Sleep
@@ -334,6 +338,7 @@ func restoreStubs() {
 
 func TestImportConfig(t *testing.T) {
 	defer restoreStubs()
+	stubLogOperationResult()
 	sleepFn = func(time.Duration) {}
 	tests := []struct {
 		desc      string
@@ -384,6 +389,7 @@ func TestPushTopology(t *testing.T) {
 		chassisHost = "192.168.1.1"
 	)
 	defer restoreStubs()
+	stubLogOperationResult()
 	sleepFn = func(time.Duration) {}
 	resetIxiaTrafficCfgFn = func(context.Context, *ixATE) error {
 		return nil
@@ -602,6 +608,7 @@ func TestUpdateTopology(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			fc := &fakeCfgClient{
 				importErrs: []error{test.importErr},
 				session: &fakeSession{
@@ -754,6 +761,7 @@ func TestSyncRouteTableFilesAndImport(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			sleepFn = func(time.Duration) {}
 
 			c := baseClient()
@@ -930,6 +938,7 @@ func TestValidateProtocolStart(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			sleepFn = func(time.Duration) {}
 
 			c := baseClient(test.withIsisAndLAG)
@@ -1000,6 +1009,7 @@ func TestStartProtocols(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{c: &fakeCfgClient{session: &fakeSession{
 				postErrs: map[string]error{op: test.opErr},
 			}}}
@@ -1035,6 +1045,7 @@ func TestStopProtocols(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
 					session: &fakeSession{postErrs: map[string]error{op: test.opErr}},
@@ -1086,6 +1097,7 @@ func TestSetPortState(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg:   cfg,
 				ports: map[string]*ixconfig.Vport{port: cfg.Vport[0]},
@@ -1101,6 +1113,92 @@ func TestSetPortState(t *testing.T) {
 			gotErr := c.SetPortState(context.Background(), test.port, &test.enabled)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("SetPortState: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+		})
+	}
+}
+
+func TestSetLACPState(t *testing.T) {
+	const (
+		port1 = "1/1"
+		port2 = "1/2"
+	)
+	lacpXP := parseXPath(t, "/fake/xpath/lacp")
+	lag := &ixconfig.Lag{
+		ProtocolStack: &ixconfig.LagProtocolStack{
+			Ethernet: []*ixconfig.LagEthernet{{
+				Lagportlacp: []*ixconfig.LagLagportlacp{{
+					Xpath: lacpXP,
+				}},
+			}},
+		}}
+	cfg := &ixconfig.Ixnetwork{
+		Vport: []*ixconfig.Vport{
+			{Name: ixconfig.String(port1)},
+			{Name: ixconfig.String(port2)},
+		},
+	}
+
+	tests := []struct {
+		desc         string
+		port         string
+		enabled      bool
+		idErr, opErr error
+		wantErr      string
+	}{{
+		desc:    "port not in config",
+		port:    "2/2",
+		wantErr: "does not exist in current config",
+	}, {
+		desc:    "port not in lag",
+		port:    port2,
+		wantErr: "not a member of a LAG",
+	}, {
+		desc:    "error updating ID",
+		port:    port1,
+		idErr:   errors.New("update ID error"),
+		wantErr: "could not fetch ID",
+	}, {
+		desc:    "error setting LACP state",
+		port:    port1,
+		opErr:   errors.New("lacp state error"),
+		wantErr: "lacp state error",
+	}, {
+		desc:    "successfully set lacp state on",
+		port:    port1,
+		enabled: true,
+	}, {
+		desc:    "successfully set lacp state off",
+		port:    port1,
+		enabled: false,
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
+			c := &ixATE{
+				cfg: cfg,
+				ports: map[string]*ixconfig.Vport{
+					port1: cfg.Vport[0],
+					port2: cfg.Vport[1],
+				},
+				lagPorts: map[*ixconfig.Lag][]*ixconfig.Vport{
+					lag: {cfg.Vport[0]},
+				},
+				c: &fakeCfgClient{
+					session: &fakeSession{
+						postErrs: map[string]error{
+							startLACPOp: test.opErr,
+							stopLACPOp:  test.opErr,
+						},
+					},
+					xPathToID:   map[string]string{lacpXP.String(): "/id/to/lacp"},
+					updateIDErr: test.idErr,
+				},
+			}
+
+			gotErr := c.SetLACPState(context.Background(), test.port, &test.enabled)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("SetLACPState: got err: %v, want err %q", gotErr, test.wantErr)
 			}
 		})
 	}
@@ -1173,6 +1271,7 @@ func TestResolveMacs(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg: cfg,
 				c: &fakeCfgClient{
@@ -1257,6 +1356,7 @@ func TestResetTrafficCfg(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
 					session: &fakeSession{
@@ -1304,6 +1404,7 @@ func TestGenTraffic(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg: cfg,
 				c: &fakeCfgClient{
@@ -1425,6 +1526,7 @@ func TestUpdateFlows(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := baseClient()
 			c.c = &fakeCfgClient{
 				session: &fakeSession{
@@ -1467,6 +1569,7 @@ func TestStart(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg: &ixconfig.Ixnetwork{
 					Traffic: &ixconfig.Traffic{
@@ -1598,6 +1701,7 @@ func TestStartTraffic(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			sleepFn = func(time.Duration) {}
 			resetIxiaTrafficCfgFn = func(_ context.Context, ix *ixATE) error {
 				ix.flowToTrafficItem = map[string]*ixconfig.TrafficTrafficItem{}
@@ -1701,6 +1805,7 @@ func TestUpdateTraffic(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{operState: test.operState}
 			updateFlowsFn = func(context.Context, *ixATE, []*opb.Flow) error {
 				return test.flowsErr
@@ -1735,6 +1840,7 @@ func TestStopAllTraffic(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
 					session: &fakeSession{postErrs: map[string]error{op: test.opErr}},
@@ -1786,6 +1892,7 @@ func TestReadStats(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				egressTrackingFlows: []string{"someFlow"},
 				c: &fakeCfgClient{
@@ -1912,6 +2019,8 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{{
 					Name:     ixconfig.String(port),
@@ -2022,6 +2131,8 @@ func TestUpdateNetworkGroups(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{{
 					Name:     ixconfig.String(port),
@@ -2112,6 +2223,8 @@ func TestSendBGPPeerNotification(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg:   cfg,
 				intfs: intfs,
