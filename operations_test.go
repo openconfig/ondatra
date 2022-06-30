@@ -16,7 +16,6 @@ package ondatra
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"errors"
 	"io"
 	"io/ioutil"
@@ -25,13 +24,16 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
+	"google.golang.org/grpc"
+	"google.golang.org/protobuf/testing/protocmp"
 
+	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
 	opb "github.com/openconfig/ondatra/proto"
@@ -64,11 +66,16 @@ type fakeGNOIClient struct {
 	RebootStatuser   func(context.Context, *spb.RebootStatusRequest, ...grpc.CallOption) (*spb.RebootStatusResponse, error)
 	KillProcessor    func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error)
 	Installer        func(context.Context, ...grpc.CallOption) (ospb.OS_InstallClient, error)
+	SystemTime       func(context.Context, *spb.TimeRequest, ...grpc.CallOption) (*spb.TimeResponse, error)
 	SwitchController func(ctx context.Context, in *spb.SwitchControlProcessorRequest, opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error)
 }
 
 func (fg *fakeGNOIClient) System() spb.SystemClient {
 	return fg
+}
+
+func (fg *fakeGNOIClient) FactoryReset() frpb.FactoryResetClient {
+	return fakeFactoryResetClient{}
 }
 
 func (fg *fakeGNOIClient) SwitchControlProcessor(ctx context.Context, in *spb.SwitchControlProcessorRequest, opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
@@ -97,6 +104,21 @@ func (fg *fakeGNOIClient) KillProcess(ctx context.Context, req *spb.KillProcessR
 
 func (fg *fakeGNOIClient) Install(ctx context.Context, opts ...grpc.CallOption) (ospb.OS_InstallClient, error) {
 	return fg.Installer(ctx, opts...)
+}
+
+func (fg *fakeGNOIClient) Time(ctx context.Context, req *spb.TimeRequest, opts ...grpc.CallOption) (*spb.TimeResponse, error) {
+	return fg.SystemTime(ctx, req, opts...)
+}
+
+type fakeFactoryResetClient struct {
+	frpb.FactoryResetClient
+}
+
+func (ic fakeFactoryResetClient) Start(ctx context.Context, req *frpb.StartRequest, opts ...grpc.CallOption) (*frpb.StartResponse, error) {
+	resp := &frpb.StartResponse{Response: &frpb.StartResponse_ResetSuccess{
+		ResetSuccess: &frpb.ResetSuccess{},
+	}}
+	return resp, nil
 }
 
 type fakeInstallClient struct {
@@ -614,6 +636,31 @@ func TestKillProcess(t *testing.T) {
 	}
 }
 
+func TestSystemTime(t *testing.T) {
+	initOperationFakes(t)
+	fakeGNOI.SystemTime = func(context.Context, *spb.TimeRequest, ...grpc.CallOption) (*spb.TimeResponse, error) {
+
+		return &spb.TimeResponse{}, nil
+	}
+
+	dut := DUT(t, "dut_cisco")
+	op, err := dut.Operations().GetSystemTime()
+	if err != nil {
+		t.Fatalf("Operatation failed, err %v", err)
+	}
+	if op != 0 {
+		t.Fatalf("Operation  failed, want 0 got %d", op)
+	}
+}
+
+func TestFactoryReset(t *testing.T) {
+	initOperationFakes(t)
+	dut := DUT(t, "dut_cisco")
+	err := dut.Operations().NewFactoryReset().Operate(t)
+	if err != nil {
+		t.Fatalf("Operatation failed, err %v", err)
+	}
+}
 func TestKillProcessErrors(t *testing.T) {
 	initOperationFakes(t)
 	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {
