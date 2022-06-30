@@ -247,12 +247,12 @@ func FactoryReset(ctx context.Context, dev binding.Device, factoryOs bool, zeroF
 		return err
 	}
 	log.Infof("Factory Reset Response: %v", resp)
-	_err := resp.GetResetError()
-	if _err != nil {
-		return fmt.Errorf("Error Response From Factory Reset Operation, %v ", _err)
+	rpcErr := resp.GetResetError()
+	if rpcErr != nil {
+		return fmt.Errorf("Error Response From Factory Reset Operation, %v ", rpcErr)
 	}
 	if resp.GetResetSuccess() == nil {
-		return fmt.Errorf("Error Response From Factory Reset Operation, Did not recieve a Reset success", _err)
+		return fmt.Errorf("Error Response From Factory Reset Operation, Did not recieve a Reset success", rpcErr)
 	}
 
 	return nil
