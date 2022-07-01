@@ -644,12 +644,9 @@ func TestSystemTime(t *testing.T) {
 		}, nil
 	}
 	dut := DUT(t, "dut_cisco")
-	op, err := dut.Operations().SystemTime()
-	if err != nil {
-		t.Fatalf("Operatation failed, err %v", err)
-	}
-	if op != time.Unix(0, 12345) {
-		t.Fatalf("Operation  failed, want %v got %v", time.Unix(0, 12345), op)
+	got := dut.Operations().SystemTime(t)
+	if want := time.Unix(0, 12345); want != got {
+		t.Fatalf("Operation failed, want %v got %v", want, got)
 	}
 }
 

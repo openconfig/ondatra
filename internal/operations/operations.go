@@ -217,7 +217,7 @@ func SystemTime(ctx context.Context, dut binding.DUT) (time.Time, error) {
 // factoryOS instructs the Target to rollback the OS to the same version as it shipped
 // The gNOI factory_reset scenarios are documented on the Start function here:
 // https://github.com/openconfig/gnoi/blob/master/factory_reset/factory_reset.proto
-func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS bool, zeroFill bool) error {
+func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS, zeroFill bool) error {
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
@@ -227,10 +227,10 @@ func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS bool, zeroFill
 		ZeroFill:  zeroFill,
 	})
 	if err != nil {
-		return fmt.Errorf("error performing factory reset: %v ", err)
+		return fmt.Errorf("error performing factory reset: %w ", err)
 	}
 	if rpcErr := resp.GetResetError(); rpcErr != nil {
-		return fmt.Errorf("error performing factory reset: %v ", rpcErr)
+		return fmt.Errorf("error performing factory reset: %w ", rpcErr)
 	}
 	return nil
 }

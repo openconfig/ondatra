@@ -149,21 +149,23 @@ func (p *PingOp) Operate(t testing.TB) {
 }
 
 // SystemTime returns system time
-func (o *Operations) SystemTime() (time.Time, error) {
-	return operations.SystemTime(context.Background(), o.dut)
+func (o *Operations) SystemTime(t testing.TB) time.Time {
+	t.Helper()
+	debugger.ActionStarted(t, "Requesting System Time from %s", o.dut)
+	time, err := operations.SystemTime(context.Background(), o.dut)
+	if err != nil {
+		t.Fatalf("SystemTime(t) on %s: %v", o.dut, err)
+	}
+	return time
 }
 
 // NewFactoryReset creates a new Factory Reset Operation.
 // By default the FactoryReset is performed without zero_fill and factory_os.
 func (o *Operations) NewFactoryReset() *FactoryResetOp {
-	return &FactoryResetOp{
-		dut:       o.dut,
-		factoryOS: false,
-		zeroFill:  false,
-	}
+	return &FactoryResetOp{dut: o.dut}
 }
 
-// FactoryResetOp performs a factory reset of the device.
+// FactoryResetOp is a factory reset operation.
 type FactoryResetOp struct {
 	dut       binding.DUT
 	factoryOS bool
