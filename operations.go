@@ -190,6 +190,7 @@ func (s *FactoryResetOp) String() string {
 // Operate performs the FactoryReset operation.
 func (s *FactoryResetOp) Operate(t testing.TB) {
 	t.Helper()
+	debugger.ActionStarted(t, "Performing Factory Reset on %s", s.dut)
 	if err := operations.FactoryReset(context.Background(), s.dut, s.factoryOS, s.zeroFill); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", s, err)
 	}
