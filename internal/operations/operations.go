@@ -199,44 +199,39 @@ func Ping(ctx context.Context, dut binding.DUT, dest string, count int32) error 
 	return nil
 }
 
-// GetSystemTime returns the current time in nanoseconds From epoch
-func GetSystemTime(ctx context.Context, dut binding.DUT) (uint64, error) {
+// SystemTime gives the current system time of the device.
+func SystemTime(ctx context.Context, dut binding.DUT) (time.Time, error) {
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
-		return 0, err
+		return time.Unix(0, 0), err
 	}
 	resp, err := gnoi.System().Time(ctx, &spb.TimeRequest{})
-
 	if err != nil {
-		return 0, err
+		return time.Unix(0, 0), fmt.Errorf("error fetching system time: %w", err)
 	}
-	return resp.GetTime(), nil
-
+	return time.Unix(0, int64(resp.GetTime())), nil
 }
 
-// FactoryReset executes the Factory Reset RPC
-func FactoryReset(ctx context.Context, dut binding.DUT, factoryOs bool, zeroFill bool) error {
-
+// FactoryReset performs a factory reset of the device.
+// zeroFill instructs the Target to zero fill persistent storage state data.
+// factoryOS instructs the Target to rollback the OS to the same version as it shipped
+// The gNOI factory_reset scenarios are documented on the Start function here:
+// https://github.com/openconfig/gnoi/blob/master/factory_reset/factory_reset.proto
+func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS bool, zeroFill bool) error {
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}
 	resp, err := gnoi.FactoryReset().Start(ctx, &frpb.StartRequest{
-		FactoryOs: factoryOs,
+		FactoryOs: factoryOS,
 		ZeroFill:  zeroFill,
 	})
 	if err != nil {
-		return err
+		return fmt.Errorf("error performing factory reset: %v ", err)
 	}
-	log.Infof("Factory Reset Response: %v", resp)
-	rpcErr := resp.GetResetError()
-	if rpcErr != nil {
-		return fmt.Errorf("Error Response From Factory Reset Operation, %v ", rpcErr)
+	if rpcErr := resp.GetResetError(); rpcErr != nil {
+		return fmt.Errorf("error performing factory reset: %v ", rpcErr)
 	}
-	if resp.GetResetSuccess() == nil {
-		return fmt.Errorf("Error Response From Factory Reset Operation, Did not recieve a Reset success", rpcErr)
-	}
-
 	return nil
 }
 

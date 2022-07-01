@@ -639,28 +639,26 @@ func TestKillProcess(t *testing.T) {
 func TestSystemTime(t *testing.T) {
 	initOperationFakes(t)
 	fakeGNOI.SystemTime = func(context.Context, *spb.TimeRequest, ...grpc.CallOption) (*spb.TimeResponse, error) {
-
-		return &spb.TimeResponse{}, nil
+		return &spb.TimeResponse{
+			Time: 12345,
+		}, nil
 	}
-
 	dut := DUT(t, "dut_cisco")
-	op, err := dut.Operations().GetSystemTime()
+	op, err := dut.Operations().SystemTime()
 	if err != nil {
 		t.Fatalf("Operatation failed, err %v", err)
 	}
-	if op != 0 {
-		t.Fatalf("Operation  failed, want 0 got %d", op)
+	if op != time.Unix(0, 12345) {
+		t.Fatalf("Operation  failed, want %v got %v", time.Unix(0, 12345), op)
 	}
 }
 
 func TestFactoryReset(t *testing.T) {
 	initOperationFakes(t)
 	dut := DUT(t, "dut_cisco")
-	err := dut.Operations().NewFactoryReset().Operate(t)
-	if err != nil {
-		t.Fatalf("Operatation failed, err %v", err)
-	}
+	dut.Operations().NewFactoryReset().WithZeroFill(true).WithFactoryOS(true).Operate(t)
 }
+
 func TestKillProcessErrors(t *testing.T) {
 	initOperationFakes(t)
 	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {

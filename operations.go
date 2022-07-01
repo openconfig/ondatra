@@ -148,50 +148,51 @@ func (p *PingOp) Operate(t testing.TB) {
 	}
 }
 
-// GetSystemTime returns system time
-func (o *Operations) GetSystemTime() (uint64, error) {
-	return operations.GetSystemTime(context.Background(), o.dut)
+// SystemTime returns system time
+func (o *Operations) SystemTime() (time.Time, error) {
+	return operations.SystemTime(context.Background(), o.dut)
 }
 
-// NewFactoryReset creates a new Factory Reset.
-func (o *Operations) NewFactoryReset() *FactoryReset {
-	return &FactoryReset{
+// NewFactoryReset creates a new Factory Reset Operation.
+// By default the FactoryReset is performed without zero_fill and factory_os.
+func (o *Operations) NewFactoryReset() *FactoryResetOp {
+	return &FactoryResetOp{
 		dut:       o.dut,
-		factoryOs: false,
+		factoryOS: false,
 		zeroFill:  false,
 	}
 }
 
-// FactoryReset enables resetting the device to factory settings
-type FactoryReset struct {
+// FactoryResetOp performs a factory reset of the device.
+type FactoryResetOp struct {
 	dut       binding.DUT
-	factoryOs bool
+	factoryOS bool
 	zeroFill  bool
 }
 
-// WithFactoryOS instructs the Target if it needs to rollback the OS to the same version as it shipped
-func (s *FactoryReset) WithFactoryOS(factoryOs bool) *FactoryReset {
-	s.factoryOs = factoryOs
+// WithFactoryOS instructs the device to rollback the OS to the same version as it shipped.
+func (s *FactoryResetOp) WithFactoryOS(factoryOS bool) *FactoryResetOp {
+	s.factoryOS = factoryOS
 	return s
 }
 
-// WithZeroFill instructs the Target  if it has to zero fill persistent storage state data.
-func (s *FactoryReset) WithZeroFill(zeroFill bool) *FactoryReset {
+// WithZeroFill instructs the device to zero fill persistent storage state data.
+func (s *FactoryResetOp) WithZeroFill(zeroFill bool) *FactoryResetOp {
 	s.zeroFill = zeroFill
 	return s
 }
 
-// String representation of the method
-func (s *FactoryReset) String() string {
+// String representation of the method.
+func (s *FactoryResetOp) String() string {
 	return fmt.Sprintf("FactoryResetOp%+v", *s)
 }
 
 // Operate performs the FactoryReset operation.
-func (s *FactoryReset) Operate(t testing.TB) error {
+func (s *FactoryResetOp) Operate(t testing.TB) {
 	t.Helper()
-	err := operations.FactoryReset(context.Background(), s.dut, s.factoryOs, s.zeroFill)
-	return err
-
+	if err := operations.FactoryReset(context.Background(), s.dut, s.factoryOS, s.zeroFill); err != nil {
+		t.Fatalf("Operate(t) on %s: %v", s, err)
+	}
 }
 
 // NewSetInterfaceState creates a new set interface state operation.
