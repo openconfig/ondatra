@@ -15,9 +15,13 @@
 package ondatra
 
 import (
+	"sync/atomic"
+
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	opb "github.com/openconfig/ondatra/proto"
 )
+
+var peerCount uint32
 
 // BGP is a representation of a BGP config on the ATE.
 type BGP struct {
@@ -45,7 +49,9 @@ type BGPPeer struct {
 //     VPLS
 //     Route refresh
 func (b *BGP) AddPeer() *BGPPeer {
+	atomic.AddUint32(&peerCount, 1)
 	ppb := &opb.BgpPeer{
+		Id:               peerCount,
 		Active:           true,
 		Type:             opb.BgpPeer_TYPE_EXTERNAL,
 		HoldTimeSec:      90, // go/rfc/4271#section-10

@@ -466,3 +466,133 @@ func (w *Port_CountersWatcher) Await(t testing.TB) (*QualifiedPort_Counters, boo
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
+
+// QualifiedE_BgpPeer_SessionState is a E_BgpPeer_SessionState with a corresponding timestamp.
+type QualifiedE_BgpPeer_SessionState struct {
+	*genutil.Metadata
+	val     E_BgpPeer_SessionState // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_BgpPeer_SessionState) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_BgpPeer_SessionState sample, erroring out if not present.
+func (q *QualifiedE_BgpPeer_SessionState) Val(t testing.TB) E_BgpPeer_SessionState {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_BgpPeer_SessionState sample.
+func (q *QualifiedE_BgpPeer_SessionState) SetVal(v E_BgpPeer_SessionState) *QualifiedE_BgpPeer_SessionState {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_BgpPeer_SessionState) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_BgpPeer_SessionState is a telemetry Collection whose Await method returns a slice of E_BgpPeer_SessionState samples.
+type CollectionE_BgpPeer_SessionState struct {
+	W    *E_BgpPeer_SessionStateWatcher
+	Data []*QualifiedE_BgpPeer_SessionState
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_BgpPeer_SessionState) Await(t testing.TB) []*QualifiedE_BgpPeer_SessionState {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_BgpPeer_SessionStateWatcher observes a stream of E_BgpPeer_SessionState samples.
+type E_BgpPeer_SessionStateWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_BgpPeer_SessionState
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_BgpPeer_SessionStateWatcher) Await(t testing.TB) (*QualifiedE_BgpPeer_SessionState, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Port_Link is a E_Port_Link with a corresponding timestamp.
+type QualifiedE_Port_Link struct {
+	*genutil.Metadata
+	val     E_Port_Link // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Port_Link) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Port_Link sample, erroring out if not present.
+func (q *QualifiedE_Port_Link) Val(t testing.TB) E_Port_Link {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Port_Link sample.
+func (q *QualifiedE_Port_Link) SetVal(v E_Port_Link) *QualifiedE_Port_Link {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Port_Link) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Port_Link is a telemetry Collection whose Await method returns a slice of E_Port_Link samples.
+type CollectionE_Port_Link struct {
+	W    *E_Port_LinkWatcher
+	Data []*QualifiedE_Port_Link
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Port_Link) Await(t testing.TB) []*QualifiedE_Port_Link {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Port_LinkWatcher observes a stream of E_Port_Link samples.
+type E_Port_LinkWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Port_Link
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Port_LinkWatcher) Await(t testing.TB) (*QualifiedE_Port_Link, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}

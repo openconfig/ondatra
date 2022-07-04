@@ -165,6 +165,11 @@ func (c *DUTConfig) Append(t testing.TB) {
 	}
 }
 
+// Operations returns a handle to the DUT operations API.
+func (d *DUTDevice) Operations() *Operations {
+	return &Operations{dut: d.res.(binding.DUT)}
+}
+
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
 func (d *DUTDevice) RawAPIs() *RawAPIs {
 	return &RawAPIs{dut: d.res.(binding.DUT)}

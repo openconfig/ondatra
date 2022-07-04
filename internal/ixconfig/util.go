@@ -87,3 +87,20 @@ func (cfg *Ixnetwork) ResolvedConfig(node IxiaCfgNode) (IxiaCfgNode, error) {
 	}
 	return nodeCpy, nil
 }
+
+// MarshalJSON implements the encoding/json.Marshaler interface.
+// We use this custom implementation rather than default handling for Ixnetwork
+// objects because we need to remove unconfigured traffic fields from the final
+// JSON output.
+func (stack *TrafficTrafficItemConfigElementStack) MarshalJSON() ([]byte, error) {
+	var cfgFields []*TrafficTrafficItemConfigElementStackField
+	for _, f := range stack.Field {
+		if f.Auto != nil && *(f.Auto) == false {
+			cfgFields = append(cfgFields, f)
+		}
+	}
+	return json.Marshal(map[string]interface{}{
+		"xpath": stack.Xpath,
+		"field": cfgFields,
+	})
+}

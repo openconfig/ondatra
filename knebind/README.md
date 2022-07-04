@@ -1,7 +1,7 @@
 # KNE Binding
 
 The KNE Binding is an implementation of the Ondatra binding interface that runs
-on a network topology created with [google/kne](https://github.com/google/kne).
+on a network topology created with [openconfig/kne](https://github.com/openconfig/kne).
 
 ## Config File
 

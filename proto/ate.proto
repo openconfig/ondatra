@@ -277,6 +277,7 @@ message BgpConfig {
 
 // BGP peer for the ATE.
 message BgpPeer {
+  uint32 id = 11;
   bool active = 1;
   bool on_loopback = 10;
   enum Type {
@@ -374,7 +375,7 @@ message BgpPeer {
     Enlp enlp = 13;
   }
   repeated SrtePolicyGroup srte_policy_groups = 9;
-  // NEXT ID: 11
+  // NEXT ID: 12
 }
 
 // BGP attributes for advertised prefixes.
@@ -485,6 +486,7 @@ message Network {
     RouteTableFormat route_table_format = 1;
     string ipv4_routes_path = 2;
     string ipv6_routes_path = 3;
+    bool overwrite_nexthop = 4;
   }
   ImportedBgpRoutes imported_bgp_routes = 8;
 }
@@ -621,6 +623,7 @@ message Header {
     RsvpHeader rsvp = 11;
     PimHeader pim = 12;
     LdpHeader ldp = 13;
+    MacsecHeader macsec = 14;
   }
 }
 
@@ -629,6 +632,7 @@ message EthernetHeader {
   AddressRange dst_addr = 2;
   uint32 vlan_id = 3;
   bool bad_crc = 4;
+  uint32 ether_type = 5;
 }
 
 message GreHeader {
@@ -637,13 +641,17 @@ message GreHeader {
 }
 
 message Ipv4Header {
-  AddressRange src_addr = 1;
-  AddressRange dst_addr = 2;
-  bool dont_fragment = 6;
-  uint32 ttl = 3;
-  uint32 dscp = 4;
-  uint32 ecn = 5;
-  uint32 checksum = 7;
+  uint32 dscp = 1;
+  uint32 ecn = 2;
+  uint32 identification = 3;
+  bool dont_fragment = 4;
+  bool more_fragments = 5;
+  uint32 fragment_offset = 6;
+  uint32 ttl = 7;
+  optional uint32 protocol = 8;
+  uint32 checksum = 9;
+  AddressRange src_addr = 10;
+  AddressRange dst_addr = 11;
 }
 
 message Ipv6Header {
@@ -824,6 +832,8 @@ message LdpHeader {
     Hello hello = 4;
   }
 }
+
+message MacsecHeader {}
 
 message IpAddressGenerator {
   oneof type {

@@ -49,6 +49,10 @@ type headers struct {
 	ipv6 *opb.Ipv6Header
 }
 
+func (h *headers) String() string {
+	return fmt.Sprintf("headers%+v", *h)
+}
+
 func (ix *ixATE) addTraffic(flows []*opb.Flow) error {
 	ix.cfg.Traffic = &ixconfig.Traffic{UseRfc5952: ixconfig.Bool(true)}
 	for _, f := range flows {
@@ -189,7 +193,7 @@ func resolveHeaders(flowHdrs []*opb.Header) (*headers, error) {
 	}
 	if len(flowHdrs) > 1 {
 		h := flowHdrs[1]
-		if h.GetMpls() != nil && len(flowHdrs) > 2 {
+		if (h.GetMpls() != nil || h.GetMacsec() != nil) && len(flowHdrs) > 2 {
 			h = flowHdrs[2]
 		}
 		hdrs.ipv4 = h.GetIpv4()

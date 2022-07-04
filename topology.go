@@ -26,13 +26,13 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// Topology is an ATE topology API.
+// Topology is the ATE Topology API.
 type Topology struct {
 	ate binding.ATE
 }
 
 func (tp *Topology) String() string {
-	return fmt.Sprintf("{ate: %s}", tp.ate)
+	return fmt.Sprintf("Topology%+v", *tp)
 }
 
 // New returns a new ATE topology.

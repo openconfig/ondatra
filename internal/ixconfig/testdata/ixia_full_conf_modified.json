@@ -5236,7 +5236,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.destinationAddress-1']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "00:00:00:00:00:00",
                     "maxValue": "00:00:00:00:00:00",
                     "minValue": "00:00:00:00:00:00",
@@ -5253,6 +5253,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.sourceAddress-2']",
+                    "auto": false,
                     "fixedBits": "00:00:00:00:00:00",
                     "maxValue": "00:00:00:00:00:00",
                     "minValue": "00:00:00:00:00:00",
@@ -5269,7 +5270,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.etherType-3']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0xFFFF",
                     "maxValue": "0xFFFF",
                     "minValue": "0xFFFF",
@@ -5286,6 +5287,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.pfcQueue-4']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -5307,6 +5309,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.version-1']",
+                    "auto": false,
                     "fixedBits": "6",
                     "maxValue": "6",
                     "minValue": "6",
@@ -5323,6 +5326,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.trafficClass-2']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -5339,6 +5343,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.flowLabel-3']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -5355,7 +5360,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.payloadLength-4']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -5372,7 +5377,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.nextHeader-5']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "59",
                     "maxValue": "59",
                     "minValue": "59",
@@ -5389,6 +5394,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.hopLimit-6']",
+                    "auto": false,
                     "fixedBits": "64",
                     "maxValue": "64",
                     "minValue": "64",
@@ -5405,6 +5411,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.srcIP-7']",
+                    "auto": false,
                     "fixedBits": "0::0",
                     "maxValue": "0::0",
                     "minValue": "0::0",
@@ -5421,6 +5428,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.dstIP-8']",
+                    "auto": false,
                     "fixedBits": "0::0",
                     "maxValue": "0::0",
                     "minValue": "0::0",
@@ -5442,7 +5450,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[1]/configElement[1]/stack[@alias = 'fcs-3']/field[@alias = 'ethernet.fcs-1']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6087,7 +6095,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.destinationAddress-1']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "00:00:00:00:00:00",
                     "maxValue": "00:00:00:00:00:00",
                     "minValue": "00:00:00:00:00:00",
@@ -6104,6 +6112,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.sourceAddress-2']",
+                    "auto": false,
                     "fixedBits": "00:00:00:00:00:00",
                     "maxValue": "00:00:00:00:00:00",
                     "minValue": "00:00:00:00:00:00",
@@ -6120,7 +6129,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.etherType-3']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0xFFFF",
                     "maxValue": "0xFFFF",
                     "minValue": "0xFFFF",
@@ -6137,6 +6146,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ethernet-1']/field[@alias = 'ethernet.header.pfcQueue-4']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6158,6 +6168,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.version-1']",
+                    "auto": false,
                     "fixedBits": "6",
                     "maxValue": "6",
                     "minValue": "6",
@@ -6174,6 +6185,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.trafficClass-2']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6190,6 +6202,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.flowLabel-3']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6206,7 +6219,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.payloadLength-4']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6223,7 +6236,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.nextHeader-5']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "59",
                     "maxValue": "59",
                     "minValue": "59",
@@ -6240,6 +6253,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.hopLimit-6']",
+                    "auto": false,
                     "fixedBits": "64",
                     "maxValue": "64",
                     "minValue": "64",
@@ -6256,6 +6270,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.srcIP-7']",
+                    "auto": false,
                     "fixedBits": "0::0",
                     "maxValue": "0::0",
                     "minValue": "0::0",
@@ -6272,6 +6287,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-2']/field[@alias = 'ipv6.header.dstIP-8']",
+                    "auto": false,
                     "fixedBits": "0::0",
                     "maxValue": "0::0",
                     "minValue": "0::0",
@@ -6293,6 +6309,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.checksumPresent-1']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6309,6 +6326,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.reserved1-2']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6325,6 +6343,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.keyPresent-3']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6341,6 +6360,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.sequencePresent-4']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6357,6 +6377,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.reserved2-5']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6373,6 +6394,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.version-6']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6389,7 +6411,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.protocol-7']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0x0",
                     "maxValue": "0x0",
                     "minValue": "0x0",
@@ -6406,7 +6428,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.checksumHolder.withChecksum.checksum-8']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6423,6 +6445,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.checksumHolder.withChecksum.reserved-9']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6439,6 +6462,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.checksumHolder.noChecksum-10']",
+                    "auto": false,
                     "activeFieldChoice": true,
                     "fixedBits": "0",
                     "maxValue": "0",
@@ -6456,6 +6480,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.keyHolder.key-11']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6472,6 +6497,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.keyHolder.noKey-12']",
+                    "auto": false,
                     "activeFieldChoice": true,
                     "fixedBits": "0",
                     "maxValue": "0",
@@ -6489,6 +6515,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.sequenceHolder.sequenceNum-13']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6505,6 +6532,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'gre-3']/field[@alias = 'gre.header.sequenceHolder.noSequenceNum-14']",
+                    "auto": false,
                     "activeFieldChoice": true,
                     "fixedBits": "0",
                     "maxValue": "0",
@@ -6527,6 +6555,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-4']/field[@alias = 'mpls.label.value-1']",
+                    "auto": false,
                     "fixedBits": "16",
                     "maxValue": "16",
                     "minValue": "16",
@@ -6543,6 +6572,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-4']/field[@alias = 'mpls.label.experimental-2']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6559,7 +6589,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-4']/field[@alias = 'mpls.label.bottomOfStack-3']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "1",
                     "maxValue": "1",
                     "minValue": "1",
@@ -6576,6 +6606,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-4']/field[@alias = 'mpls.label.ttl-4']",
+                    "auto": false,
                     "fixedBits": "64",
                     "maxValue": "64",
                     "minValue": "64",
@@ -6592,6 +6623,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-4']/field[@alias = 'mpls.label.tracker-5']",
+                    "auto": false,
                     "fixedBits": "0x0",
                     "maxValue": "0x0",
                     "minValue": "0x0",
@@ -6613,6 +6645,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-5']/field[@alias = 'mpls.label.value-1']",
+                    "auto": false,
                     "fixedBits": "16",
                     "maxValue": "16",
                     "minValue": "16",
@@ -6629,6 +6662,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-5']/field[@alias = 'mpls.label.experimental-2']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6645,7 +6679,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-5']/field[@alias = 'mpls.label.bottomOfStack-3']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "1",
                     "maxValue": "1",
                     "minValue": "1",
@@ -6662,6 +6696,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-5']/field[@alias = 'mpls.label.ttl-4']",
+                    "auto": false,
                     "fixedBits": "64",
                     "maxValue": "64",
                     "minValue": "64",
@@ -6678,6 +6713,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'mpls-5']/field[@alias = 'mpls.label.tracker-5']",
+                    "auto": false,
                     "fixedBits": "0x0",
                     "maxValue": "0x0",
                     "minValue": "0x0",
@@ -6699,6 +6735,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.version-1']",
+                    "auto": false,
                     "fixedBits": "6",
                     "maxValue": "6",
                     "minValue": "6",
@@ -6715,6 +6752,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.trafficClass-2']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6731,6 +6769,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.versionTrafficClassFlowLabel.flowLabel-3']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6747,7 +6786,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.payloadLength-4']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6764,7 +6803,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.nextHeader-5']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "59",
                     "maxValue": "59",
                     "minValue": "59",
@@ -6781,6 +6820,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.hopLimit-6']",
+                    "auto": false,
                     "fixedBits": "64",
                     "maxValue": "64",
                     "minValue": "64",
@@ -6797,6 +6837,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.srcIP-7']",
+                    "auto": false,
                     "countValue": "64",
                     "fixedBits": "0::0",
                     "maxValue": "1:0:0:0:0:0:0:ffff",
@@ -6815,6 +6856,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'ipv6-6']/field[@alias = 'ipv6.header.dstIP-8']",
+                    "auto": false,
                     "countValue": "100",
                     "fixedBits": "0::0",
                     "fullMesh": true,
@@ -6839,6 +6881,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.srcPort-1']",
+                    "auto": false,
                     "countValue": "10",
                     "fixedBits": "60",
                     "maxValue": "65535",
@@ -6857,6 +6900,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.dstPort-2']",
+                    "auto": false,
                     "countValue": "100",
                     "fixedBits": "60",
                     "fullMesh": true,
@@ -6876,6 +6920,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.sequenceNumber-3']",
+                    "auto": false,
                     "fixedBits": "0x00000000",
                     "maxValue": "0x00000000",
                     "minValue": "0x00000000",
@@ -6892,6 +6937,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.acknowledgementNumber-4']",
+                    "auto": false,
                     "fixedBits": "0x00000000",
                     "maxValue": "0x00000000",
                     "minValue": "0x00000000",
@@ -6908,7 +6954,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.dataOffset-5']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "5",
                     "maxValue": "5",
                     "minValue": "5",
@@ -6925,6 +6971,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.reserved-6']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6941,6 +6988,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.ecn.nsBit-7']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6957,6 +7005,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.ecn.cwrBit-8']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6973,6 +7022,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.ecn.ecnEchoBit-9']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -6989,6 +7039,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.controlBits.urgBit-10']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7005,6 +7056,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.controlBits.ackBit-11']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7021,6 +7073,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.controlBits.pshBit-12']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7037,6 +7090,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.controlBits.rstBit-13']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7053,6 +7107,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.controlBits.synBit-14']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7069,6 +7124,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.controlBits.finBit-15']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7085,6 +7141,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.window-16']",
+                    "auto": false,
                     "fixedBits": "0x0000",
                     "maxValue": "0x0000",
                     "minValue": "0x0000",
@@ -7101,7 +7158,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.checksum-17']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0x0000",
                     "maxValue": "0x0000",
                     "minValue": "0x0000",
@@ -7118,6 +7175,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.urgentPtr-18']",
+                    "auto": false,
                     "fixedBits": "0x0000",
                     "maxValue": "0x0000",
                     "minValue": "0x0000",
@@ -7134,6 +7192,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.userDefined.kind-19']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7149,6 +7208,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.userDefined.length-20']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7164,6 +7224,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.userDefined.data-21']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7179,6 +7240,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.endOfOptionList.kind-22']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7194,6 +7256,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.noOperation.kind-23']",
+                    "auto": false,
                     "activeFieldChoice": true,
                     "fixedBits": "1",
                     "maxValue": "1",
@@ -7210,6 +7273,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.maximumSegmentSize.kind-24']",
+                    "auto": false,
                     "fixedBits": "2",
                     "maxValue": "2",
                     "minValue": "2",
@@ -7225,6 +7289,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.maximumSegmentSize.length-25']",
+                    "auto": false,
                     "fixedBits": "4",
                     "maxValue": "4",
                     "minValue": "4",
@@ -7240,6 +7305,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.maximumSegmentSize.data-26']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7255,6 +7321,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.wsopt.kind-27']",
+                    "auto": false,
                     "fixedBits": "3",
                     "maxValue": "3",
                     "minValue": "3",
@@ -7270,6 +7337,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.wsopt.length-28']",
+                    "auto": false,
                     "fixedBits": "3",
                     "maxValue": "3",
                     "minValue": "3",
@@ -7285,6 +7353,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.wsopt.data-29']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7300,6 +7369,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.sackPermitted.kind-30']",
+                    "auto": false,
                     "fixedBits": "4",
                     "maxValue": "4",
                     "minValue": "4",
@@ -7315,6 +7385,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.sackPermitted.length-31']",
+                    "auto": false,
                     "fixedBits": "2",
                     "maxValue": "2",
                     "minValue": "2",
@@ -7330,6 +7401,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.sack.kind-32']",
+                    "auto": false,
                     "fixedBits": "5",
                     "maxValue": "5",
                     "minValue": "5",
@@ -7345,6 +7417,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.sack.length-33']",
+                    "auto": false,
                     "fixedBits": "10",
                     "maxValue": "10",
                     "minValue": "10",
@@ -7360,6 +7433,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.sack.data-34']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7375,6 +7449,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.echo.kind-35']",
+                    "auto": false,
                     "fixedBits": "6",
                     "maxValue": "6",
                     "minValue": "6",
@@ -7390,6 +7465,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.echo.length-36']",
+                    "auto": false,
                     "fixedBits": "6",
                     "maxValue": "6",
                     "minValue": "6",
@@ -7405,6 +7481,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.echo.data-37']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7420,6 +7497,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.echoReply.kind-38']",
+                    "auto": false,
                     "fixedBits": "7",
                     "maxValue": "7",
                     "minValue": "7",
@@ -7435,6 +7513,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.echoReply.length-39']",
+                    "auto": false,
                     "fixedBits": "6",
                     "maxValue": "6",
                     "minValue": "6",
@@ -7450,6 +7529,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.echoReply.data-40']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7465,6 +7545,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.tsopt.kind-41']",
+                    "auto": false,
                     "fixedBits": "8",
                     "maxValue": "8",
                     "minValue": "8",
@@ -7480,6 +7561,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.tsopt.length-42']",
+                    "auto": false,
                     "fixedBits": "10",
                     "maxValue": "10",
                     "minValue": "10",
@@ -7495,6 +7577,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.tsopt.data-43']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7510,6 +7593,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.partialOrderConnectionPermitted.kind-44']",
+                    "auto": false,
                     "fixedBits": "9",
                     "maxValue": "9",
                     "minValue": "9",
@@ -7525,6 +7609,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.partialOrderConnectionPermitted.length-45']",
+                    "auto": false,
                     "fixedBits": "2",
                     "maxValue": "2",
                     "minValue": "2",
@@ -7540,6 +7625,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.partialOrderServiceProfile.kind-46']",
+                    "auto": false,
                     "fixedBits": "10",
                     "maxValue": "10",
                     "minValue": "10",
@@ -7555,6 +7641,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.partialOrderServiceProfile.length-47']",
+                    "auto": false,
                     "fixedBits": "3",
                     "maxValue": "3",
                     "minValue": "3",
@@ -7570,6 +7657,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.partialOrderServiceProfile.data-48']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7585,6 +7673,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.cc.kind-49']",
+                    "auto": false,
                     "fixedBits": "11",
                     "maxValue": "11",
                     "minValue": "11",
@@ -7600,6 +7689,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.ccNew.kind-50']",
+                    "auto": false,
                     "fixedBits": "12",
                     "maxValue": "12",
                     "minValue": "12",
@@ -7615,6 +7705,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.ccEcho.kind-51']",
+                    "auto": false,
                     "fixedBits": "13",
                     "maxValue": "13",
                     "minValue": "13",
@@ -7630,6 +7721,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.alternateChecksumRequest.kind-52']",
+                    "auto": false,
                     "fixedBits": "14",
                     "maxValue": "14",
                     "minValue": "14",
@@ -7645,6 +7737,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.alternateChecksumRequest.length-53']",
+                    "auto": false,
                     "fixedBits": "3",
                     "maxValue": "3",
                     "minValue": "3",
@@ -7660,6 +7753,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.alternateChecksumRequest.data-54']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7675,6 +7769,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.alternateChecksumData.kind-55']",
+                    "auto": false,
                     "fixedBits": "15",
                     "maxValue": "15",
                     "minValue": "15",
@@ -7690,6 +7785,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.alternateChecksumData.length-56']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7705,6 +7801,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.alternateChecksumData.data-57']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7720,6 +7817,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.skeeter.kind-58']",
+                    "auto": false,
                     "fixedBits": "16",
                     "maxValue": "16",
                     "minValue": "16",
@@ -7735,6 +7833,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.bubba.kind-59']",
+                    "auto": false,
                     "fixedBits": "17",
                     "maxValue": "17",
                     "minValue": "17",
@@ -7750,6 +7849,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.trailerChecksum.kind-60']",
+                    "auto": false,
                     "fixedBits": "18",
                     "maxValue": "18",
                     "minValue": "18",
@@ -7765,6 +7865,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.trailerChecksum.length-61']",
+                    "auto": false,
                     "fixedBits": "3",
                     "maxValue": "3",
                     "minValue": "3",
@@ -7780,6 +7881,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.trailerChecksum.data-62']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7795,6 +7897,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.md5Signature.kind-63']",
+                    "auto": false,
                     "fixedBits": "19",
                     "maxValue": "19",
                     "minValue": "19",
@@ -7810,6 +7913,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.md5Signature.length-64']",
+                    "auto": false,
                     "fixedBits": "18",
                     "maxValue": "18",
                     "minValue": "18",
@@ -7825,6 +7929,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.md5Signature.data-65']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7840,6 +7945,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.scpsCapabilities.kind-66']",
+                    "auto": false,
                     "fixedBits": "20",
                     "maxValue": "20",
                     "minValue": "20",
@@ -7855,6 +7961,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.selectiveNegativeAck.kind-67']",
+                    "auto": false,
                     "fixedBits": "21",
                     "maxValue": "21",
                     "minValue": "21",
@@ -7870,6 +7977,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.recordBoundaries.kind-68']",
+                    "auto": false,
                     "fixedBits": "22",
                     "maxValue": "22",
                     "minValue": "22",
@@ -7885,6 +7993,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.corruptionExperienced.kind-69']",
+                    "auto": false,
                     "fixedBits": "23",
                     "maxValue": "23",
                     "minValue": "23",
@@ -7900,6 +8009,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.snap.kind-70']",
+                    "auto": false,
                     "fixedBits": "24",
                     "maxValue": "24",
                     "minValue": "24",
@@ -7915,6 +8025,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.unassigned1.kind-71']",
+                    "auto": false,
                     "fixedBits": "25",
                     "maxValue": "25",
                     "minValue": "25",
@@ -7930,6 +8041,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.compressionFilter.kind-72']",
+                    "auto": false,
                     "fixedBits": "26",
                     "maxValue": "26",
                     "minValue": "26",
@@ -7945,6 +8057,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.quickStartResponse.kind-73']",
+                    "auto": false,
                     "fixedBits": "27",
                     "maxValue": "27",
                     "minValue": "27",
@@ -7960,6 +8073,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.quickStartResponse.length-74']",
+                    "auto": false,
                     "fixedBits": "8",
                     "maxValue": "8",
                     "minValue": "8",
@@ -7975,6 +8089,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.quickStartResponse.data-75']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -7990,6 +8105,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.unassigned2.kind-76']",
+                    "auto": false,
                     "fixedBits": "28",
                     "maxValue": "28",
                     "minValue": "28",
@@ -8005,6 +8121,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.rfc3692StypeExperiment1.kind-77']",
+                    "auto": false,
                     "fixedBits": "253",
                     "maxValue": "253",
                     "minValue": "253",
@@ -8020,6 +8137,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.rfc3692StypeExperiment1.length-78']",
+                    "auto": false,
                     "fixedBits": "4",
                     "maxValue": "4",
                     "minValue": "4",
@@ -8035,6 +8153,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.rfc3692StypeExperiment1.data-79']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -8050,6 +8169,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.rfc3692StypeExperiment2.kind-80']",
+                    "auto": false,
                     "fixedBits": "254",
                     "maxValue": "254",
                     "minValue": "254",
@@ -8065,6 +8185,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.rfc3692StypeExperiment2.length-81']",
+                    "auto": false,
                     "fixedBits": "4",
                     "maxValue": "4",
                     "minValue": "4",
@@ -8080,6 +8201,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.option.type.rfc3692StypeExperiment2.data-82']",
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -8095,7 +8217,7 @@
                   },
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'tcp-7']/field[@alias = 'tcp.header.options.pad-83']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",
@@ -8116,7 +8238,7 @@
                 "field": [
                   {
                     "xpath": "/traffic/trafficItem[2]/configElement[1]/stack[@alias = 'fcs-8']/field[@alias = 'ethernet.fcs-1']",
-                    "auto": true,
+                    "auto": false,
                     "fixedBits": "0",
                     "maxValue": "0",
                     "minValue": "0",

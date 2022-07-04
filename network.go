@@ -15,6 +15,8 @@
 package ondatra
 
 import (
+	"github.com/openconfig/ondatra/ixnet"
+
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -23,8 +25,13 @@ type Network struct {
 	pb *opb.Network
 }
 
-// Implement the Endpoint marker interface.
-func (*Network) isEndpoint() {}
+// EndpointPB returns the Network config as an endpoint proto message.
+func (n *Network) EndpointPB() *opb.Flow_Endpoint {
+	return &opb.Flow_Endpoint{
+		InterfaceName: n.pb.GetInterfaceName(),
+		Generated:     &opb.Flow_Endpoint_NetworkName{NetworkName: n.pb.GetName()},
+	}
+}
 
 // Ethernet creates an Ethernet config for the network or returns the existing config.
 // The default count of MAC addresses in the network is 1.
@@ -105,19 +112,20 @@ func (i *NetworkIP) Count() uint32 {
 
 // ISIS creates an ISIS configuration for the network or returns the existing config.
 // The default config params are Active: true, Route Origin: Internal and Metric: 10
-func (n *Network) ISIS() *IPReachabilityConfig {
+func (n *Network) ISIS() *ixnet.IPReachabilityConfig {
 	if n.pb.Isis == nil {
 		n.pb.Isis = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
-	return &IPReachabilityConfig{pb: n.pb.Isis}
+	return ixnet.NewIPReachability(n.pb.Isis)
 }
 
 // BGP creates a BGP config for the network or returns the existing config.
 // By default, the network will advertise IPv4 routes over the BGP V4 peer and
 // advertise IPv6 routes over the V6 peer and have the following configuration:
-//   Active: true
-//   Origin: IGP
-//   ASN set mode: AS-SEQ
+//
+//	Active: true
+//	Origin: IGP
+//	ASN set mode: AS-SEQ
 func (n *Network) BGP() *BGPAttributes {
 	if n.pb.BgpAttributes == nil {
 		n.pb.BgpAttributes = &opb.BgpAttributes{
@@ -131,10 +139,12 @@ func (n *Network) BGP() *BGPAttributes {
 }
 
 // ImportedBGPRoutes creates a BGP route import configuration for the network or
-// returns the existing config.
+// returns the existing config. The nexthop is overwritten by default.
 func (n *Network) ImportedBGPRoutes() *ImportedBGPRoutes {
 	if n.pb.ImportedBgpRoutes == nil {
-		n.pb.ImportedBgpRoutes = &opb.Network_ImportedBgpRoutes{}
+		n.pb.ImportedBgpRoutes = &opb.Network_ImportedBgpRoutes{
+			OverwriteNexthop: true,
+		}
 	}
 	return &ImportedBGPRoutes{pb: n.pb.ImportedBgpRoutes}
 }
@@ -163,6 +173,12 @@ func (i *ImportedBGPRoutes) WithRouteTableFormatJuniper() *ImportedBGPRoutes {
 // the specified routes.
 func (i *ImportedBGPRoutes) WithRouteTableFormatCSV() *ImportedBGPRoutes {
 	i.pb.RouteTableFormat = opb.Network_ImportedBgpRoutes_ROUTE_TABLE_FORMAT_CSV
+	return i
+}
+
+// WithNexthopOverwrite specifies whether nexthops will be overwritten.
+func (i *ImportedBGPRoutes) WithNexthopOverwrite(enabled bool) *ImportedBGPRoutes {
+	i.pb.OverwriteNexthop = enabled
 	return i
 }
 

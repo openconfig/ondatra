@@ -12,6 +12,71 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters is a *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters sample.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters) SetVal(v *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters) *QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Isis_Level_SystemLevelCounters is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters samples.
+type CollectionNetworkInstance_Protocol_Isis_Level_SystemLevelCounters struct {
+	W    *NetworkInstance_Protocol_Isis_Level_SystemLevelCountersWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Isis_Level_SystemLevelCounters) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Isis_Level_SystemLevelCountersWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters samples.
+type NetworkInstance_Protocol_Isis_Level_SystemLevelCountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Isis_Level_SystemLevelCountersWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_SystemLevelCounters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedNetworkInstance_Protocol_Isis_Level_TrafficEngineering is a *NetworkInstance_Protocol_Isis_Level_TrafficEngineering with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Isis_Level_TrafficEngineering struct {
 	*genutil.Metadata
@@ -9108,71 +9173,6 @@ type Qos_Interface_Output_SchedulerPolicyWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Qos_Interface_Output_SchedulerPolicyWatcher) Await(t testing.TB) (*QualifiedQos_Interface_Output_SchedulerPolicy, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler is a *Qos_Interface_Output_SchedulerPolicy_Scheduler with a corresponding timestamp.
-type QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler struct {
-	*genutil.Metadata
-	val     *Qos_Interface_Output_SchedulerPolicy_Scheduler // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_Interface_Output_SchedulerPolicy_Scheduler sample, erroring out if not present.
-func (q *QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler) Val(t testing.TB) *Qos_Interface_Output_SchedulerPolicy_Scheduler {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_Interface_Output_SchedulerPolicy_Scheduler sample.
-func (q *QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler) SetVal(v *Qos_Interface_Output_SchedulerPolicy_Scheduler) *QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_Interface_Output_SchedulerPolicy_Scheduler is a telemetry Collection whose Await method returns a slice of *Qos_Interface_Output_SchedulerPolicy_Scheduler samples.
-type CollectionQos_Interface_Output_SchedulerPolicy_Scheduler struct {
-	W    *Qos_Interface_Output_SchedulerPolicy_SchedulerWatcher
-	Data []*QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_Interface_Output_SchedulerPolicy_Scheduler) Await(t testing.TB) []*QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_Interface_Output_SchedulerPolicy_SchedulerWatcher observes a stream of *Qos_Interface_Output_SchedulerPolicy_Scheduler samples.
-type Qos_Interface_Output_SchedulerPolicy_SchedulerWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_Interface_Output_SchedulerPolicy_SchedulerWatcher) Await(t testing.TB) (*QualifiedQos_Interface_Output_SchedulerPolicy_Scheduler, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

@@ -18,7 +18,9 @@ import (
 	"golang.org/x/net/context"
 	"errors"
 	"fmt"
+	"io"
 
+	log "github.com/golang/glog"
 	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 
@@ -155,3 +157,36 @@ func (a *AbstractATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
 }
 
 func (a *AbstractATE) isATE() {}
+
+var _ StreamClient = &AbstractStreamClient{}
+
+// AbstractStreamClient is implementation support for the StreamClient interface.
+type AbstractStreamClient struct{}
+
+// SendCommand returns an unimplemented error.
+func (s *AbstractStreamClient) SendCommand(ctx context.Context, cmd string) (string, error) {
+	return "", errors.New("SendCommand unimplemented")
+}
+
+// Stdin logs a fatal unimplemented error.
+func (s *AbstractStreamClient) Stdin() io.WriteCloser {
+	log.Fatal("Stdin unimplemented")
+	return nil
+}
+
+// Stdout logs a fatal unimplemented error.
+func (s *AbstractStreamClient) Stdout() io.ReadCloser {
+	log.Fatal("Stdout unimplemented")
+	return nil
+}
+
+// Stderr logs a fatal unimplemented error.
+func (s *AbstractStreamClient) Stderr() io.ReadCloser {
+	log.Fatal("Stderr unimplemented")
+	return nil
+}
+
+// Close returns an unimplemented error.
+func (s *AbstractStreamClient) Close() error {
+	return errors.New("Close unimplemented")
+}

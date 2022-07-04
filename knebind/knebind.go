@@ -36,7 +36,7 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
 
-	tpb "github.com/google/kne/proto/topo"
+	tpb "github.com/openconfig/kne/proto/topo"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
@@ -190,6 +190,19 @@ func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) erro
 	}
 	_, err := d.exec("enable\nconfig terminal\n" + config)
 	return err
+}
+
+func (d *kneDUT) DialCLI(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+	return &kneCLI{dut: d}, nil
+}
+
+type kneCLI struct {
+	*binding.AbstractStreamClient
+	dut *kneDUT
+}
+
+func (c *kneCLI) SendCommand(_ context.Context, cmd string) (string, error) {
+	return c.dut.exec(cmd)
 }
 
 func (d *kneDUT) exec(cmd string) (string, error) {

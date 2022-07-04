@@ -35,6 +35,12 @@ type EthernetHeader struct {
 	pb *opb.EthernetHeader
 }
 
+// WithEtherType sets the EtherType of the Ethernet header to the specified value.
+func (h *EthernetHeader) WithEtherType(etherType uint32) *EthernetHeader {
+	h.pb.EtherType = etherType
+	return h
+}
+
 // WithSrcAddress sets the source MAC address of the Ethernet header to the specified value.
 // To generate a range of source addresses, use SrcAddressRange() instead.
 func (h *EthernetHeader) WithSrcAddress(addr string) *EthernetHeader {
@@ -125,6 +131,62 @@ type IPv4Header struct {
 	pb *opb.Ipv4Header
 }
 
+// WithDSCP sets the DSCP field of the IPv4 header.
+func (h *IPv4Header) WithDSCP(dscp uint8) *IPv4Header {
+	h.pb.Dscp = uint32(dscp)
+	return h
+}
+
+// WithECN sets the ECN field of the IPv4 header.
+func (h *IPv4Header) WithECN(ecn uint8) *IPv4Header {
+	h.pb.Ecn = uint32(ecn)
+	return h
+}
+
+// WithIdentification set identification field of IPv4 Header
+func (h *IPv4Header) WithIdentification(identification int) *IPv4Header {
+	h.pb.Identification = uint32(identification)
+	return h
+}
+
+// WithDontFragment sets the "don't fragment" bit of the IPv4 header.
+func (h *IPv4Header) WithDontFragment(dontFragment bool) *IPv4Header {
+	h.pb.DontFragment = dontFragment
+	return h
+}
+
+// WithMoreFragments sets the "more fragments" bit of the IPv4 Header
+func (h *IPv4Header) WithMoreFragments(moreFragments bool) *IPv4Header {
+	h.pb.MoreFragments = moreFragments
+	return h
+}
+
+// WithFragmentOffset sets the fragment offset field of the IPv4 header.
+func (h *IPv4Header) WithFragmentOffset(fragmentOffset int) *IPv4Header {
+	h.pb.FragmentOffset = uint32(fragmentOffset)
+	return h
+}
+
+// WithTTL sets the TTL of the IPv4 header.
+func (h *IPv4Header) WithTTL(ttl uint8) *IPv4Header {
+	h.pb.Ttl = uint32(ttl)
+	return h
+}
+
+// WithProtocol sets the protocol field of the IPv4 header.
+// If left unspecified, it will be inferred from the next header in the flow.
+func (h *IPv4Header) WithProtocol(protocol int) *IPv4Header {
+	p := uint32(protocol)
+	h.pb.Protocol = &p
+	return h
+}
+
+// WithHeaderChecksum sets the header checksum field of the IPv4 header.
+func (h *IPv4Header) WithHeaderChecksum(checksum uint16) *IPv4Header {
+	h.pb.Checksum = uint32(checksum)
+	return h
+}
+
 // WithSrcAddress sets the source IP address of the IPv4 header to the specified value.
 // To generate a range of source addresses, use SrcAddressRange() instead.
 func (h *IPv4Header) WithSrcAddress(addr string) *IPv4Header {
@@ -157,36 +219,6 @@ func (h *IPv4Header) DstAddressRange() *AddressRange {
 		h.pb.DstAddr = newIPv4AddrRange()
 	}
 	return &AddressRange{AddressIncRange{pb: h.pb.DstAddr}}
-}
-
-// WithDontFragment sets the "don't fragment" bit of the IPv4 header.
-func (h *IPv4Header) WithDontFragment(dontFragment bool) *IPv4Header {
-	h.pb.DontFragment = dontFragment
-	return h
-}
-
-// WithTTL sets the TTL of the IPv4 header.
-func (h *IPv4Header) WithTTL(ttl uint8) *IPv4Header {
-	h.pb.Ttl = uint32(ttl)
-	return h
-}
-
-// WithDSCP sets the DSCP value of the IPv4 header.
-func (h *IPv4Header) WithDSCP(dscp uint8) *IPv4Header {
-	h.pb.Dscp = uint32(dscp)
-	return h
-}
-
-// WithECN sets the ECN value of the IPv4 header.
-func (h *IPv4Header) WithECN(ecn uint8) *IPv4Header {
-	h.pb.Ecn = uint32(ecn)
-	return h
-}
-
-// WithHeaderChecksum sets the header checksum value of the IPv4 header.
-func (h *IPv4Header) WithHeaderChecksum(checksum uint16) *IPv4Header {
-	h.pb.Checksum = uint32(checksum)
-	return h
 }
 
 func (h *IPv4Header) asPB() *opb.Header {
@@ -1118,4 +1150,18 @@ func (h *LDPHello) WithTargeted(targeted bool) *LDPHello {
 func (h *LDPHello) WithRequestTargeted(targeted bool) *LDPHello {
 	h.pb.RequestTargeted = targeted
 	return h
+}
+
+// NewMACsecHeader returns a new MACsec header.
+func NewMACsecHeader() *MACsecHeader {
+	return &MACsecHeader{&opb.MacsecHeader{}}
+}
+
+// MACsecHeader is a MACsec packet header.
+type MACsecHeader struct {
+	pb *opb.MacsecHeader
+}
+
+func (h *MACsecHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Macsec{h.pb}}
 }
