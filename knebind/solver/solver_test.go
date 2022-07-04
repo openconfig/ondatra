@@ -18,14 +18,72 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/openconfig/gnmi/errdiff"
+	tpb "github.com/openconfig/kne/proto/topo"
+	"github.com/openconfig/ondatra/binding"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/testing/protocmp"
-	tpb "github.com/openconfig/kne/proto/topo"
-	"github.com/openconfig/gnmi/errdiff"
-	"github.com/openconfig/ondatra/binding"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
+
+// func TestSolveOTG(t *testing.T) {
+// 	const topoText = `
+// 		nodes: {
+// 		  name: "dut"
+//       type: ARISTA_CEOS
+//       services: {
+//         key: 1234
+//         value: {
+//           name: "gnmi"
+// 				}
+// 			}
+// 			interfaces: {
+// 			  key: "eth1"
+// 				value: {
+// 				  name: "Ethernet1"
+// 				}
+// 			}
+// 			interfaces: {
+// 			  key: "eth2"
+// 				value: {
+// 				  name: "Ethernet2"
+// 				}
+// 			}
+//     }
+// 		nodes: {
+// 		  name: "otg"
+//       type: IXIA_TG
+// 			interfaces: {
+// 			  key: "eth1"
+// 				value: {}
+// 			}
+// 			interfaces: {
+// 			  key: "eth1"
+// 				value: {}
+// 			}
+//     }
+// 		links: {
+// 		  a_node: "node1"
+// 		  a_int: "eth1"
+// 		  z_node: "node2"
+// 		  z_int: "eth1"
+// 		}
+// 		links: {
+// 		  a_node: "node2"
+// 		  a_int: "eth2"
+// 		  z_node: "node3"
+// 		  z_int: "eth1"
+// 		}
+// 		links: {
+// 		  a_node: "node1"
+// 		  a_int: "eth2"
+// 		  z_node: "node4"
+// 		  z_int: "eth1"
+// 		}`
+// 	topo := unmarshalTopo(t, topoText)
+
+// }
 
 func TestSolve(t *testing.T) {
 	const topoText = `

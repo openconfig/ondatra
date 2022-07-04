@@ -20,8 +20,8 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/pborman/uuid"
 
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -59,6 +59,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		return nil, fmt.Errorf("not enough links in KNE topology for specified testbed "+
 			" testbed has %d links and topology only has %d links", numTBLinks, numTopoLinks)
 	}
+
 	s := &solver{
 		testbed:    tb,
 		topology:   topo,
@@ -90,6 +91,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 			s.node2Intfs[node][intfName] = i
 		}
 		i.vendorName = node.Interfaces[intfName].GetName()
+		i.groupName = node.Interfaces[intfName].GetGroup()
 		if i.vendorName == "" {
 			i.vendorName = intfName
 		}
@@ -170,6 +172,7 @@ type assign struct {
 type intf struct {
 	name       string
 	vendorName string
+	groupName  string
 }
 
 func (a *assign) String() string {
@@ -277,8 +280,22 @@ func (s *solver) solve() (*assign, error) {
 		port2Intfs := make(map[interface{}][]interface{})
 		for dut, node := range dev2Node {
 			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
+
 				for _, i := range intfs {
-					port2Intfs[port] = append(port2Intfs[port], i)
+					if port.GetGroup() != "" {
+						if i.groupName == port.GetGroup() {
+							port2Intfs[port] = append(port2Intfs[port], i)
+						}
+					} else {
+						if i.groupName == "" {
+							// ports with no group get high preference
+							port2Intfs[port] = append([]interface{}{
+								i,
+							}, port2Intfs[port]...)
+						} else {
+							port2Intfs[port] = append(port2Intfs[port], i)
+						}
+					}
 				}
 			}
 		}

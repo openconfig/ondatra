@@ -21,9 +21,9 @@
 package proto
 
 import (
-	empty "github.com/golang/protobuf/ptypes/empty"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -6419,7 +6419,7 @@ func (m *BgpPeer_SrtePolicyGroup_Binding) GetType() isBgpPeer_SrtePolicyGroup_Bi
 	return nil
 }
 
-func (x *BgpPeer_SrtePolicyGroup_Binding) GetNoBinding() *empty.Empty {
+func (x *BgpPeer_SrtePolicyGroup_Binding) GetNoBinding() *emptypb.Empty {
 	if x, ok := x.GetType().(*BgpPeer_SrtePolicyGroup_Binding_NoBinding); ok {
 		return x.NoBinding
 	}
@@ -6452,7 +6452,7 @@ type isBgpPeer_SrtePolicyGroup_Binding_Type interface {
 }
 
 type BgpPeer_SrtePolicyGroup_Binding_NoBinding struct {
-	NoBinding *empty.Empty `protobuf:"bytes,1,opt,name=no_binding,json=noBinding,proto3,oneof"`
+	NoBinding *emptypb.Empty `protobuf:"bytes,1,opt,name=no_binding,json=noBinding,proto3,oneof"`
 }
 
 type BgpPeer_SrtePolicyGroup_Binding_FourOctetSid struct {
@@ -10104,7 +10104,7 @@ var file_ate_proto_goTypes = []interface{}{
 	(*OspfHeader_LinkStateUpdate_Advertisement)(nil),            // 112: ondatra.OspfHeader.LinkStateUpdate.Advertisement
 	(*PimHeader_Hello)(nil),                                     // 113: ondatra.PimHeader.Hello
 	(*LdpHeader_Hello)(nil),                                     // 114: ondatra.LdpHeader.Hello
-	(*empty.Empty)(nil),                                         // 115: google.protobuf.Empty
+	(*emptypb.Empty)(nil),                                         // 115: google.protobuf.Empty
 }
 var file_ate_proto_depIdxs = []int32{
 	41,  // 0: ondatra.Traffic.flows:type_name -> ondatra.Flow
