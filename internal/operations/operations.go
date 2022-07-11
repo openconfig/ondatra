@@ -29,6 +29,7 @@ import (
 	"google.golang.org/grpc/status"
 	"github.com/openconfig/ondatra/binding"
 
+	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
 	tpb "github.com/openconfig/gnoi/types"
@@ -195,6 +196,41 @@ func Ping(ctx context.Context, dut binding.DUT, dest string, count int32) error 
 
 	if sent, recv := lastPingResp.GetSent(), lastPingResp.GetReceived(); sent != recv {
 		return fmt.Errorf("ping sent %d packets, received %d", sent, recv)
+	}
+	return nil
+}
+
+// SystemTime gives the current system time of the device.
+func SystemTime(ctx context.Context, dut binding.DUT) (time.Time, error) {
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return time.Time{}, err
+	}
+	resp, err := gnoi.System().Time(ctx, &spb.TimeRequest{})
+	if err != nil {
+		return time.Time{}, fmt.Errorf("error fetching system time: %w", err)
+	}
+	return time.Unix(0, int64(resp.GetTime())), nil
+}
+
+// FactoryReset performs a factory reset of the device.
+//
+//	factoryOS instructs the device to rollback the its original OS version
+//	zeroFill instructs the device to zero fill persistent storage state data
+func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS, zeroFill bool) error {
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return err
+	}
+	resp, err := gnoi.FactoryReset().Start(ctx, &frpb.StartRequest{
+		FactoryOs: factoryOS,
+		ZeroFill:  zeroFill,
+	})
+	if err != nil {
+		return fmt.Errorf("error performing factory reset: %w ", err)
+	}
+	if rpcErr := resp.GetResetError(); rpcErr != nil {
+		return fmt.Errorf("error performing factory reset: %v ", rpcErr)
 	}
 	return nil
 }

@@ -147,6 +147,56 @@ func (p *PingOp) Operate(t testing.TB) {
 	}
 }
 
+// SystemTime returns the current system time.
+func (o *Operations) SystemTime(t testing.TB) time.Time {
+	t.Helper()
+	debugger.ActionStarted(t, "Requesting System Time from %s", o.dut)
+	time, err := operations.SystemTime(context.Background(), o.dut)
+	if err != nil {
+		t.Fatalf("SystemTime(t) on %s: %v", o.dut, err)
+	}
+	return time
+}
+
+// NewFactoryReset creates a new Factory Reset Operation.
+// By default the FactoryReset is performed without zero_fill and factory_os.
+func (o *Operations) NewFactoryReset() *FactoryResetOp {
+	return &FactoryResetOp{dut: o.dut}
+}
+
+// FactoryResetOp is a factory reset operation.
+type FactoryResetOp struct {
+	dut       binding.DUT
+	factoryOS bool
+	zeroFill  bool
+}
+
+// WithFactoryOS instructs the device to rollback to its original OS version.
+func (s *FactoryResetOp) WithFactoryOS(factoryOS bool) *FactoryResetOp {
+	s.factoryOS = factoryOS
+	return s
+}
+
+// WithZeroFill instructs the device to zero fill persistent storage state data.
+func (s *FactoryResetOp) WithZeroFill(zeroFill bool) *FactoryResetOp {
+	s.zeroFill = zeroFill
+	return s
+}
+
+// String representation of the method.
+func (s *FactoryResetOp) String() string {
+	return fmt.Sprintf("FactoryResetOp%+v", *s)
+}
+
+// Operate performs the FactoryReset operation.
+func (s *FactoryResetOp) Operate(t testing.TB) {
+	t.Helper()
+	debugger.ActionStarted(t, "Performing Factory Reset on %s", s.dut)
+	if err := operations.FactoryReset(context.Background(), s.dut, s.factoryOS, s.zeroFill); err != nil {
+		t.Fatalf("Operate(t) on %s: %v", s, err)
+	}
+}
+
 // NewSetInterfaceState creates a new set interface state operation.
 func (o *Operations) NewSetInterfaceState() *SetInterfaceStateOp {
 	return &SetInterfaceStateOp{dut: o.dut}
