@@ -12,16 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+package ixnet
 
 import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-const (
-	maxFlowLabel uint32 = (1 << 20) - 1
-	maxPort      uint32 = (1 << 16) - 1
-)
+// NewUIntRange returns a new UIntRange.
+// Tests should not call this method directly.
+func NewUIntRange(pb *opb.UIntRange) *UIntRange {
+	return &UIntRange{pb}
+}
 
 // UIntRange is a range of unsigned integers.
 type UIntRange struct {
@@ -56,6 +57,12 @@ func (r *UIntRange) WithCount(count uint32) *UIntRange {
 func (r *UIntRange) WithRandom() *UIntRange {
 	r.pb.Random = true
 	return r
+}
+
+// NewAddressRange returns a new Address Range.
+// Tests should not call this method directly.
+func NewAddressRange(pb *opb.AddressRange) *AddressRange {
+	return &AddressRange{AddressIncRange{pb}}
 }
 
 // AddressRange is a range of addresses.
@@ -126,6 +133,12 @@ func (r *AddressIncRange) WithStep(step string) *AddressIncRange {
 	return r
 }
 
+// NewStringIncRange returns a new StringIncRange.
+// Tests should not call this method directly.
+func NewStringIncRange(pb *opb.StringIncRange) *StringIncRange {
+	return &StringIncRange{pb}
+}
+
 // StringIncRange is an range of strings that increments by a fixed step.
 type StringIncRange struct {
 	pb *opb.StringIncRange
@@ -141,6 +154,12 @@ func (r *StringIncRange) WithStart(start string) *StringIncRange {
 func (r *StringIncRange) WithStep(step string) *StringIncRange {
 	r.pb.Step = step
 	return r
+}
+
+// NewUInt32IncRange returns a new UInt32IncRange.
+// Tests should not call this method directly.
+func NewUInt32IncRange(pb *opb.UInt32IncRange) *UInt32IncRange {
+	return &UInt32IncRange{pb}
 }
 
 // UInt32IncRange is an range of 32-bit integers that increments by a fixed
@@ -159,32 +178,4 @@ func (r *UInt32IncRange) WithStart(start uint32) *UInt32IncRange {
 func (r *UInt32IncRange) WithStep(step uint32) *UInt32IncRange {
 	r.pb.Step = step
 	return r
-}
-
-func intRangeSingle(i uint32) *opb.UIntRange {
-	return &opb.UIntRange{Min: i, Max: i, Count: 1}
-}
-
-func addrRangeSingle(a string) *opb.AddressRange {
-	return &opb.AddressRange{Min: a, Max: a, Count: 1}
-}
-
-func newPortRange() *opb.UIntRange {
-	return &opb.UIntRange{Min: 1, Max: maxPort}
-}
-
-func newFlowLabelRange() *opb.UIntRange {
-	return &opb.UIntRange{Max: maxFlowLabel}
-}
-
-func newMACAddrRange() *opb.AddressRange {
-	return &opb.AddressRange{Min: "00:00:00:00:00:01", Max: "FF:FF:FF:FF:FF:FE"}
-}
-
-func newIPv4AddrRange() *opb.AddressRange {
-	return &opb.AddressRange{Min: "0.0.0.1", Max: "255.255.255.254"}
-}
-
-func newIPv6AddrRange() *opb.AddressRange {
-	return &opb.AddressRange{Min: "::1", Max: "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"}
 }

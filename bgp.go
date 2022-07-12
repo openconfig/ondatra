@@ -17,6 +17,8 @@ package ondatra
 import (
 	"sync/atomic"
 
+	"github.com/openconfig/ondatra/ixnet"
+
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -35,19 +37,20 @@ type BGPPeer struct {
 
 // AddPeer adds a new BGP peer to the interface.  By default, the peer will have
 // the following configuration:
-//   Active: true
-//   Peer type: external
-//   Hold time: 90 seconds (per RFC 4271)
-//   Keepalive time: 30 second (per RFC 4271)
-//   Capabilities:
-//     IPv4 unicast
-//     IPv4 multicast
-//     IPv4 MPLS VPN
-//     IPv6 unicast
-//     IPv6 multicast
-//     IPv6 MPLS VPN
-//     VPLS
-//     Route refresh
+//
+//	Active: true
+//	Peer type: external
+//	Hold time: 90 seconds (per RFC 4271)
+//	Keepalive time: 30 second (per RFC 4271)
+//	Capabilities:
+//	  IPv4 unicast
+//	  IPv4 multicast
+//	  IPv4 MPLS VPN
+//	  IPv6 unicast
+//	  IPv6 multicast
+//	  IPv6 MPLS VPN
+//	  VPLS
+//	  Route refresh
 func (b *BGP) AddPeer() *BGPPeer {
 	atomic.AddUint32(&peerCount, 1)
 	ppb := &opb.BgpPeer{
@@ -410,7 +413,8 @@ type BGPExtendedCommunityColor struct {
 // AddExtendedCommunityColor adds a color extended community to the advertised
 // prefixes and returns it for further configuration.  By default, the color
 // extended community will have the following configuration:
-//   CO bits: 00
+//
+//	CO bits: 00
 func (a *BGPAttributes) AddExtendedCommunityColor() *BGPExtendedCommunityColor {
 	eccpb := &opb.BgpAttributes_ExtendedCommunity_Color{
 		CoBits: opb.BgpAttributes_ExtendedCommunity_Color_CO_BITS_00,
@@ -516,7 +520,8 @@ type BGPASPathSegment struct {
 
 // AddASPathSegment adds an AS path segment with the given ASNs.  By default,
 // the AS path segment will have the following configuration:
-//   Segment type: AS-SEQ
+//
+//	Segment type: AS-SEQ
 func (a *BGPAttributes) AddASPathSegment(asns ...uint32) *BGPASPathSegment {
 	apspb := &opb.BgpAttributes_AsPathSegment{
 		Type: opb.BgpAttributes_AsPathSegment_TYPE_AS_SEQ,
@@ -570,16 +575,17 @@ func (a *BGPAttributes) WithOriginatorID(id string) *BGPAttributes {
 // OriginatorIDRange sets the originator ID of the routes to a range of values
 // and returns the range. By default, the range will have the following
 // configuration:
-//   Start: 0.0.0.1
-//   Step: 0.0.0.1
-func (a *BGPAttributes) OriginatorIDRange() *StringIncRange {
+//
+//	Start: 0.0.0.1
+//	Step: 0.0.0.1
+func (a *BGPAttributes) OriginatorIDRange() *ixnet.StringIncRange {
 	if a.pb.OriginatorId == nil {
 		a.pb.OriginatorId = &opb.StringIncRange{
 			Start: "0.0.0.1",
 			Step:  "0.0.0.1",
 		}
 	}
-	return &StringIncRange{pb: a.pb.OriginatorId}
+	return ixnet.NewStringIncRange(a.pb.OriginatorId)
 }
 
 // WithClusterIDs sets the given cluster IDs for the associated routes.
@@ -624,10 +630,11 @@ type BGPSRTEPolicyGroup struct {
 // AddSRTEPolicyGroup adds SR-TE policies to the peer.  Multiple policies that
 // share the same configuration can be added by using WithCount.  By default,
 // the SR-TE policies will have the following configuration:
-//   Count: 1
-//   Active: true
-//   Distinguisher: 1
-//   Policy color: 100
+//
+//	Count: 1
+//	Active: true
+//	Distinguisher: 1
+//	Policy color: 100
 func (b *BGPPeer) AddSRTEPolicyGroup() *BGPSRTEPolicyGroup {
 	spgpb := &opb.BgpPeer_SrtePolicyGroup{
 		Count:         1,
@@ -678,16 +685,17 @@ func (p *BGPSRTEPolicyGroup) WithPolicyColor(policyColor uint32) *BGPSRTEPolicyG
 // PolicyColorRange sets the policy color of the policies to a range of values
 // and returns the range.  By default, the range will have the following
 // configuration:
-//   Start: 100
-//   Step: 1
-func (p *BGPSRTEPolicyGroup) PolicyColorRange() *UInt32IncRange {
+//
+//	Start: 100
+//	Step: 1
+func (p *BGPSRTEPolicyGroup) PolicyColorRange() *ixnet.UInt32IncRange {
 	if p.pb.PolicyColor == nil {
 		p.pb.PolicyColor = &opb.UInt32IncRange{
 			Start: 100,
 			Step:  1,
 		}
 	}
-	return &UInt32IncRange{pb: p.pb.PolicyColor}
+	return ixnet.NewUInt32IncRange(p.pb.PolicyColor)
 }
 
 // WithEndpoint sets the endpoint of the policies.
@@ -714,16 +722,17 @@ func (p *BGPSRTEPolicyGroup) WithOriginatorID(id string) *BGPSRTEPolicyGroup {
 // OriginatorIDRange sets the originator ID of the policies to a range of values
 // and returns the range.  By default, the range will have the following
 // configuration:
-//   Start: 0.0.0.1
-//   Step: 0.0.0.1
-func (p *BGPSRTEPolicyGroup) OriginatorIDRange() *StringIncRange {
+//
+//	Start: 0.0.0.1
+//	Step: 0.0.0.1
+func (p *BGPSRTEPolicyGroup) OriginatorIDRange() *ixnet.StringIncRange {
 	if p.pb.OriginatorId == nil {
 		p.pb.OriginatorId = &opb.StringIncRange{
 			Start: "0.0.0.1",
 			Step:  "0.0.0.1",
 		}
 	}
-	return &StringIncRange{pb: p.pb.OriginatorId}
+	return ixnet.NewStringIncRange(p.pb.OriginatorId)
 }
 
 // Communities creates a BGP communities config for the advertised prefixes or
@@ -829,9 +838,10 @@ func (p *BGPSRTEPolicyGroup) WithBindingSID4OctetMPLS(bsid uint32) *BGPSRTEPolic
 // BindingSID4OctetRange sets the binding SID of the polices to a range of
 // values and returns the range.  By default, the range will have the following
 // configuration:
-//   Start: 0
-//   Step: 1
-func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *UInt32IncRange {
+//
+//	Start: 0
+//	Step: 1
+func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *ixnet.UInt32IncRange {
 	if p.pb.Binding == nil {
 		p.pb.Binding = &opb.BgpPeer_SrtePolicyGroup_Binding{}
 	}
@@ -848,15 +858,16 @@ func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *UInt32IncRange {
 			FourOctetSid: rpb,
 		}
 	}
-	return &UInt32IncRange{pb: rpb}
+	return ixnet.NewUInt32IncRange(rpb)
 }
 
 // BindingSID4OctetMPLSRange sets the binding SID of the polices to a range of
 // values as MPLS labels and returns the range.  By default, the range will have
 // the following configuration:
-//   Start: 0
-//   Step: 1
-func (p *BGPSRTEPolicyGroup) BindingSID4OctetMPLSRange() *UInt32IncRange {
+//
+//	Start: 0
+//	Step: 1
+func (p *BGPSRTEPolicyGroup) BindingSID4OctetMPLSRange() *ixnet.UInt32IncRange {
 	if p.pb.Binding == nil {
 		p.pb.Binding = &opb.BgpPeer_SrtePolicyGroup_Binding{}
 	}
@@ -873,7 +884,7 @@ func (p *BGPSRTEPolicyGroup) BindingSID4OctetMPLSRange() *UInt32IncRange {
 			FourOctetSidAsMplsLabel: rpb,
 		}
 	}
-	return &UInt32IncRange{pb: rpb}
+	return ixnet.NewUInt32IncRange(rpb)
 }
 
 // WithBindingSIDIPv6 sets the binding SID of the polices to the IPv6 value.
@@ -892,7 +903,8 @@ type BGPSegmentList struct {
 
 // AddSegmentList adds a segment list to the policies.  By default, the segment
 // list will have the following configuration:
-//   Active: true
+//
+//	Active: true
 func (p *BGPSRTEPolicyGroup) AddSegmentList() *BGPSegmentList {
 	slpb := &opb.BgpPeer_SrtePolicyGroup_SegmentList{
 		Active: true,
@@ -928,7 +940,8 @@ type BGPSegment struct {
 
 // AddSegment adds a segment to the segment list.  By default, the segment will
 // have the following configuration:
-//   Active: true
+//
+//	Active: true
 func (l *BGPSegmentList) AddSegment() *BGPSegment {
 	spb := &opb.BgpPeer_SrtePolicyGroup_SegmentList_Segment{
 		Active: true,
@@ -956,10 +969,11 @@ type BGPSegmentMPLSSID struct {
 
 // BGPSegmentMPLSSID sets the segment type to MPLS SID and returns the segment.
 // By default, the segment will have the following configuration:
-//   Label: 16
-//   TC: 0
-//   S: false
-//   TTL: 255
+//
+//	Label: 16
+//	TC: 0
+//	S: false
+//	TTL: 255
 func (s *BGPSegment) BGPSegmentMPLSSID() *BGPSegmentMPLSSID {
 	var mspb *opb.BgpPeer_SrtePolicyGroup_SegmentList_Segment_MplsSid
 	switch t := s.pb.Type.(type) {
