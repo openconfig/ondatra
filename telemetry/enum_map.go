@@ -1333,6 +1333,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		7: {Name: "TCP_SYN", DefiningModule: "openconfig-packet-match-types"},
 		8: {Name: "TCP_URG", DefiningModule: "openconfig-packet-match-types"},
 	},
+	"E_Pcep_LspControlType": {
+		1: {Name: "PCE_DELEGATED"},
+		2: {Name: "PCC_CONTROLLED"},
+		3: {Name: "PCC_REPORT_ONLY"},
+	},
+	"E_Pcep_PceModeType": {
+		1: {Name: "STATELESS"},
+		2: {Name: "STATEFUL_PASSIVE"},
+		3: {Name: "STATEFUL_ACTIVE"},
+	},
 	"E_PimTypes_PIM_MODE": {
 		1: {Name: "PIM_MODE_DENSE", DefiningModule: "openconfig-pim-types"},
 		2: {Name: "PIM_MODE_SPARSE", DefiningModule: "openconfig-pim-types"},
@@ -1406,8 +1416,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		6:  {Name: "LOCAL_AGGREGATE", DefiningModule: "openconfig-policy-types"},
 		7:  {Name: "OSPF", DefiningModule: "openconfig-policy-types"},
 		8:  {Name: "OSPF3", DefiningModule: "openconfig-policy-types"},
-		9:  {Name: "PIM", DefiningModule: "openconfig-policy-types"},
-		10: {Name: "STATIC", DefiningModule: "openconfig-policy-types"},
+		9:  {Name: "PCEP", DefiningModule: "openconfig-policy-types"},
+		10: {Name: "PIM", DefiningModule: "openconfig-policy-types"},
+		11: {Name: "STATIC", DefiningModule: "openconfig-policy-types"},
 	},
 	"E_PolicyTypes_MatchSetOptionsRestrictedType": {
 		1: {Name: "ANY"},
@@ -2132,6 +2143,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-computation-method": {
 			reflect.TypeOf((E_MplsTypes_PATH_COMPUTATION_METHOD)(0)),
 		},
+		"/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/state/path-control": {
+			reflect.TypeOf((E_Pcep_LspControlType)(0)),
+		},
 		"/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/path-metric-bound-constraints/path-metric-bound-constraint/state/type": {
 			reflect.TypeOf((E_MplsTypes_PATH_METRIC_TYPE)(0)),
 		},
@@ -2140,6 +2154,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-computation-method": {
 			reflect.TypeOf((E_MplsTypes_PATH_COMPUTATION_METHOD)(0)),
+		},
+		"/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/state/path-control": {
+			reflect.TypeOf((E_Pcep_LspControlType)(0)),
 		},
 		"/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/state/admin-status": {
 			reflect.TypeOf((E_MplsTypes_TUNNEL_ADMIN_STATUS)(0)),
@@ -2925,6 +2942,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/spf/state/timer-type": {
 			reflect.TypeOf((E_LsaGeneration_TimerType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/state/pce-type": {
+			reflect.TypeOf((E_Pcep_PceModeType)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/pim/interfaces/interface/neighbors/neighbor/state/mode": {
 			reflect.TypeOf((E_PimTypes_PIM_MODE)(0)),

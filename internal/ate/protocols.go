@@ -1636,7 +1636,7 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 
 		numLoopbacks := len(rsvp.GetLoopbacks())
 		ntl := ng.NetworkTopology.NetTopologyLinear
-		// TODO: Will need a different check after enabling custom IS-IS topologies.
+		// TODO(b/203123298): Will need a different check after enabling custom IS-IS topologies.
 		if ntl == nil || ntl.Nodes == nil || *(ntl.Nodes) < float32(numLoopbacks) {
 			return fmt.Errorf("cannot add more loopbacks than configured IS-IS nodes on reachability config %q", rsvp.GetIsReachabilityName())
 		}

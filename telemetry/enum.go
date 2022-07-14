@@ -6192,6 +6192,68 @@ const (
 	PacketMatchTypes_TCP_FLAGS_TCP_URG E_PacketMatchTypes_TCP_FLAGS = 8
 )
 
+// E_Pcep_LspControlType is a derived int64 type which is used to represent
+// the enumerated node Pcep_LspControlType. An additional value named
+// Pcep_LspControlType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Pcep_LspControlType int64
+
+// IsYANGGoEnum ensures that Pcep_LspControlType implements the yang.GoEnum
+// interface. This ensures that Pcep_LspControlType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Pcep_LspControlType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Pcep_LspControlType.
+func (E_Pcep_LspControlType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Pcep_LspControlType.
+func (e E_Pcep_LspControlType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Pcep_LspControlType")
+}
+
+const (
+	// Pcep_LspControlType_UNSET corresponds to the value UNSET of Pcep_LspControlType
+	Pcep_LspControlType_UNSET E_Pcep_LspControlType = 0
+	// Pcep_LspControlType_PCE_DELEGATED corresponds to the value PCE_DELEGATED of Pcep_LspControlType
+	Pcep_LspControlType_PCE_DELEGATED E_Pcep_LspControlType = 1
+	// Pcep_LspControlType_PCC_CONTROLLED corresponds to the value PCC_CONTROLLED of Pcep_LspControlType
+	Pcep_LspControlType_PCC_CONTROLLED E_Pcep_LspControlType = 2
+	// Pcep_LspControlType_PCC_REPORT_ONLY corresponds to the value PCC_REPORT_ONLY of Pcep_LspControlType
+	Pcep_LspControlType_PCC_REPORT_ONLY E_Pcep_LspControlType = 3
+)
+
+// E_Pcep_PceModeType is a derived int64 type which is used to represent
+// the enumerated node Pcep_PceModeType. An additional value named
+// Pcep_PceModeType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Pcep_PceModeType int64
+
+// IsYANGGoEnum ensures that Pcep_PceModeType implements the yang.GoEnum
+// interface. This ensures that Pcep_PceModeType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Pcep_PceModeType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Pcep_PceModeType.
+func (E_Pcep_PceModeType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Pcep_PceModeType.
+func (e E_Pcep_PceModeType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Pcep_PceModeType")
+}
+
+const (
+	// Pcep_PceModeType_UNSET corresponds to the value UNSET of Pcep_PceModeType
+	Pcep_PceModeType_UNSET E_Pcep_PceModeType = 0
+	// Pcep_PceModeType_STATELESS corresponds to the value STATELESS of Pcep_PceModeType
+	Pcep_PceModeType_STATELESS E_Pcep_PceModeType = 1
+	// Pcep_PceModeType_STATEFUL_PASSIVE corresponds to the value STATEFUL_PASSIVE of Pcep_PceModeType
+	Pcep_PceModeType_STATEFUL_PASSIVE E_Pcep_PceModeType = 2
+	// Pcep_PceModeType_STATEFUL_ACTIVE corresponds to the value STATEFUL_ACTIVE of Pcep_PceModeType
+	Pcep_PceModeType_STATEFUL_ACTIVE E_Pcep_PceModeType = 3
+)
+
 // E_PimTypes_PIM_MODE is a derived int64 type which is used to represent
 // the enumerated node PimTypes_PIM_MODE. An additional value named
 // PimTypes_PIM_MODE_UNSET is added to the enumeration which is used as
@@ -6610,10 +6672,12 @@ const (
 	PolicyTypes_INSTALL_PROTOCOL_TYPE_OSPF E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 7
 	// PolicyTypes_INSTALL_PROTOCOL_TYPE_OSPF3 corresponds to the value OSPF3 of PolicyTypes_INSTALL_PROTOCOL_TYPE
 	PolicyTypes_INSTALL_PROTOCOL_TYPE_OSPF3 E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 8
+	// PolicyTypes_INSTALL_PROTOCOL_TYPE_PCEP corresponds to the value PCEP of PolicyTypes_INSTALL_PROTOCOL_TYPE
+	PolicyTypes_INSTALL_PROTOCOL_TYPE_PCEP E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 9
 	// PolicyTypes_INSTALL_PROTOCOL_TYPE_PIM corresponds to the value PIM of PolicyTypes_INSTALL_PROTOCOL_TYPE
-	PolicyTypes_INSTALL_PROTOCOL_TYPE_PIM E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 9
+	PolicyTypes_INSTALL_PROTOCOL_TYPE_PIM E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 10
 	// PolicyTypes_INSTALL_PROTOCOL_TYPE_STATIC corresponds to the value STATIC of PolicyTypes_INSTALL_PROTOCOL_TYPE
-	PolicyTypes_INSTALL_PROTOCOL_TYPE_STATIC E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 10
+	PolicyTypes_INSTALL_PROTOCOL_TYPE_STATIC E_PolicyTypes_INSTALL_PROTOCOL_TYPE = 11
 )
 
 // E_PolicyTypes_MatchSetOptionsRestrictedType is a derived int64 type which is used to represent

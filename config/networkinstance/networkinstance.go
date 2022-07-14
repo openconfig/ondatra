@@ -10825,6 +10825,16 @@ type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPri
 	*ygot.NodePath
 }
 
+// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/config/path-control YANG schema element.
+type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/config/path-control YANG schema element.
+type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPathAny struct {
+	*ygot.NodePath
+}
+
 // NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/config/preference YANG schema element.
 type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PreferencePath struct {
 	*ygot.NodePath
@@ -11141,8 +11151,8 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 	}
 }
 
-// PathComputationServer (leaf): Address of the external path computation
-// server
+// PathComputationServer (leaf): Reference to the address of a previously configured
+// external path computation server.
 // ----------------------------------------
 // Defining module: "openconfig-mpls-te"
 // Instantiating module: "openconfig-network-instance"
@@ -11158,8 +11168,8 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 	}
 }
 
-// PathComputationServer (leaf): Address of the external path computation
-// server
+// PathComputationServer (leaf): Reference to the address of a previously configured
+// external path computation server.
 // ----------------------------------------
 // Defining module: "openconfig-mpls-te"
 // Instantiating module: "openconfig-network-instance"
@@ -11169,6 +11179,42 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathComputationServerPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"config", "path-computation-server"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathControl (leaf): Set the LSP path control mode as PCE_DELEGATED
+// PCC_CONTROLLED or PCC_REPORT_ONLY information
+// state to the PCE.
+// ----------------------------------------
+// Defining module: "openconfig-mpls-te"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/path-control"
+// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/config/path-control"
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPath) PathControl() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPath {
+	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "path-control"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathControl (leaf): Set the LSP path control mode as PCE_DELEGATED
+// PCC_CONTROLLED or PCC_REPORT_ONLY information
+// state to the PCE.
+// ----------------------------------------
+// Defining module: "openconfig-mpls-te"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/path-control"
+// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-primary-path/p2p-primary-path/config/path-control"
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPathPathAny) PathControl() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPathAny {
+	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathControlPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "path-control"},
 			map[string]interface{}{},
 			n,
 		),
@@ -11809,6 +11855,16 @@ type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSec
 	*ygot.NodePath
 }
 
+// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/config/path-control YANG schema element.
+type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/config/path-control YANG schema element.
+type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPathAny struct {
+	*ygot.NodePath
+}
+
 // NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePath represents the /openconfig-network-instance/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/config/preference YANG schema element.
 type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PreferencePath struct {
 	*ygot.NodePath
@@ -12053,8 +12109,8 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 	}
 }
 
-// PathComputationServer (leaf): Address of the external path computation
-// server
+// PathComputationServer (leaf): Reference to the address of a previously configured
+// external path computation server.
 // ----------------------------------------
 // Defining module: "openconfig-mpls-te"
 // Instantiating module: "openconfig-network-instance"
@@ -12070,8 +12126,8 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 	}
 }
 
-// PathComputationServer (leaf): Address of the external path computation
-// server
+// PathComputationServer (leaf): Reference to the address of a previously configured
+// external path computation server.
 // ----------------------------------------
 // Defining module: "openconfig-mpls-te"
 // Instantiating module: "openconfig-network-instance"
@@ -12081,6 +12137,42 @@ func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathComputationServerPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"config", "path-computation-server"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathControl (leaf): Set the LSP path control mode as PCE_DELEGATED
+// PCC_CONTROLLED or PCC_REPORT_ONLY information
+// state to the PCE.
+// ----------------------------------------
+// Defining module: "openconfig-mpls-te"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/path-control"
+// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/config/path-control"
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPath) PathControl() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPath {
+	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "path-control"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PathControl (leaf): Set the LSP path control mode as PCE_DELEGATED
+// PCC_CONTROLLED or PCC_REPORT_ONLY information
+// state to the PCE.
+// ----------------------------------------
+// Defining module: "openconfig-mpls-te"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/path-control"
+// Path from root: "/network-instances/network-instance/mpls/lsps/constrained-path/tunnels/tunnel/p2p-tunnel-attributes/p2p-secondary-paths/p2p-secondary-path/config/path-control"
+func (n *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPathPathAny) PathControl() *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPathAny {
+	return &NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathControlPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "path-control"},
 			map[string]interface{}{},
 			n,
 		),
@@ -20951,6 +21043,38 @@ func (n *NetworkInstance_ProtocolPathAny) Ospfv2() *NetworkInstance_Protocol_Osp
 	return &NetworkInstance_Protocol_Ospfv2PathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"ospfv2"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Pcep (container): Top-level PCEP configuration and operational state.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "pcep"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep"
+func (n *NetworkInstance_ProtocolPath) Pcep() *NetworkInstance_Protocol_PcepPath {
+	return &NetworkInstance_Protocol_PcepPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"pcep"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Pcep (container): Top-level PCEP configuration and operational state.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "pcep"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep"
+func (n *NetworkInstance_ProtocolPathAny) Pcep() *NetworkInstance_Protocol_PcepPathAny {
+	return &NetworkInstance_Protocol_PcepPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"pcep"},
 			map[string]interface{}{},
 			n,
 		),
@@ -57957,6 +58081,886 @@ func (n *NetworkInstance_Protocol_Ospfv2_Global_Timers_SpfPathAny) MaximumDelay(
 	return &NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf_MaximumDelayPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"config", "maximum-delay"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_PcepPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep YANG schema element.
+type NetworkInstance_Protocol_PcepPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_PcepPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep YANG schema element.
+type NetworkInstance_Protocol_PcepPathAny struct {
+	*ygot.NodePath
+}
+
+// PathComputationServerAny (list): Configuration and state information for communication with a PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "path-computation-servers/path-computation-server"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server"
+// PceServerAddress (wildcarded): string
+func (n *NetworkInstance_Protocol_PcepPath) PathComputationServerAny() *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"path-computation-servers", "path-computation-server"},
+			map[string]interface{}{"pce-server-address": "*"},
+			n,
+		),
+	}
+}
+
+// PathComputationServerAny (list): Configuration and state information for communication with a PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "path-computation-servers/path-computation-server"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server"
+// PceServerAddress (wildcarded): string
+func (n *NetworkInstance_Protocol_PcepPathAny) PathComputationServerAny() *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"path-computation-servers", "path-computation-server"},
+			map[string]interface{}{"pce-server-address": "*"},
+			n,
+		),
+	}
+}
+
+// PathComputationServer (list): Configuration and state information for communication with a PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "path-computation-servers/path-computation-server"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server"
+// PceServerAddress: string
+func (n *NetworkInstance_Protocol_PcepPath) PathComputationServer(PceServerAddress string) *NetworkInstance_Protocol_Pcep_PathComputationServerPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"path-computation-servers", "path-computation-server"},
+			map[string]interface{}{"pce-server-address": PceServerAddress},
+			n,
+		),
+	}
+}
+
+// PathComputationServer (list): Configuration and state information for communication with a PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "path-computation-servers/path-computation-server"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server"
+// PceServerAddress: string
+func (n *NetworkInstance_Protocol_PcepPathAny) PathComputationServer(PceServerAddress string) *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"path-computation-servers", "path-computation-server"},
+			map[string]interface{}{"pce-server-address": PceServerAddress},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServerPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_IdPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_IdPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PortPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PortPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPathAny struct {
+	*ygot.NodePath
+}
+
+// Authentication (container): Global PCEP authentication
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "authentication"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Authentication() *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"authentication"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Authentication (container): Global PCEP authentication
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "authentication"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Authentication() *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"authentication"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Id (leaf): A unique name for the PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Id() *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Id (leaf): A unique name for the PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/id"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Id() *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_IdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PceInitiatedCapability (leaf): Indicates to PCE that PCC (Router) supports PCE-initiated LSP paths instantiation.
+// A PCE can initiate LSPs only for PCCs that advertised this capability.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/pce-initiated-capability"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) PceInitiatedCapability() *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "pce-initiated-capability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PceInitiatedCapability (leaf): Indicates to PCE that PCC (Router) supports PCE-initiated LSP paths instantiation.
+// A PCE can initiate LSPs only for PCCs that advertised this capability.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/pce-initiated-capability"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) PceInitiatedCapability() *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "pce-initiated-capability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PceServerAddress (leaf): The destination IP address of the PCE server for PCEP service.
+// Specify multiple entries in the path-computation-server-list to provide redundancy.
+// When multiple candidate servers are specified for a single client,
+// they are prioritized according to preference.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/pce-server-address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) PceServerAddress() *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "pce-server-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PceServerAddress (leaf): The destination IP address of the PCE server for PCEP service.
+// Specify multiple entries in the path-computation-server-list to provide redundancy.
+// When multiple candidate servers are specified for a single client,
+// they are prioritized according to preference.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/pce-server-address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) PceServerAddress() *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "pce-server-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PceType (leaf): The type of PCEP capability supported which is advertised in the Open
+// message when a PCEP session is established.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/pce-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) PceType() *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "pce-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PceType (leaf): The type of PCEP capability supported which is advertised in the Open
+// message when a PCEP session is established.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/pce-type"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) PceType() *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "pce-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Port (leaf): The destination TCP port used for PCEP service in the PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/port"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Port() *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Port (leaf): The destination TCP port used for PCEP service in the PCE server.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/port"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Port() *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PortPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Preference (leaf): When multiple PCE servers are specified, the candidate PCE server
+// with the highest preference is selected to calculate paths.
+// The greater or lower the value, the higher the preference could
+// dependon vendor implementation. If no preference value is set, indicate
+// the lowest preference or no preference at all.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/preference"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Preference() *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "preference"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Preference (leaf): When multiple PCE servers are specified, the candidate PCE server
+// with the highest preference is selected to calculate paths.
+// The greater or lower the value, the higher the preference could
+// dependon vendor implementation. If no preference value is set, indicate
+// the lowest preference or no preference at all.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/preference"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Preference() *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "preference"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReportLocalLsp (leaf): Specifies whether the PCC (Router) will advertise LSP existence and state
+// for LSPs that are not controlled by any PCE (for example, LSPs that are
+// statically configured at the PCC) but without delegating them.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/report-local-lsp"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) ReportLocalLsp() *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "report-local-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReportLocalLsp (leaf): Specifies whether the PCC (Router) will advertise LSP existence and state
+// for LSPs that are not controlled by any PCE (for example, LSPs that are
+// statically configured at the PCC) but without delegating them.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/report-local-lsp"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) ReportLocalLsp() *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "report-local-lsp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceAddress (leaf): The source IP address used by PCC(Router) to establish PCEP session.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/source-address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) SourceAddress() *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SourceAddress (leaf): The source IP address used by PCC(Router) to establish PCEP session.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/source-address"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) SourceAddress() *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SrSupport (leaf): Indicates to PCE that PCC (Router) supports Segment-Routing
+// to set up LSP paths in addition to RSVP-TE.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/sr-support"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) SrSupport() *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "sr-support"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SrSupport (leaf): Indicates to PCE that PCC (Router) supports Segment-Routing
+// to set up LSP paths in addition to RSVP-TE.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/sr-support"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) SrSupport() *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "sr-support"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Timers (container): This container defines PCEP timers.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "timers"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Timers() *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"timers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Timers (container): This container defines PCEP timers.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "timers"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Timers() *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"timers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPathAny struct {
+	*ygot.NodePath
+}
+
+// AuthenticationKey (leaf): Password (key) used for securing a PCEP session using
+// TCP-MD5 authentication
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/authentication-key"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) AuthenticationKey() *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "authentication-key"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AuthenticationKey (leaf): Password (key) used for securing a PCEP session using
+// TCP-MD5 authentication
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/authentication-key"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny) AuthenticationKey() *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "authentication-key"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Enable (leaf): Enables PCEP authentication on the node.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/enable"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Enable() *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Enable (leaf): Enables PCEP authentication on the node.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/enable"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny) Enable() *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Keychain (leaf): Reference to a predefined keychain that should be used to secure
+// PCEP session
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/keychain"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Keychain() *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "keychain"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Keychain (leaf): Reference to a predefined keychain that should be used to secure
+// PCEP session
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/keychain"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny) Keychain() *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "keychain"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval YANG schema element.
+type NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// DeadTimer (leaf): Interval after which PCE session is declared dead.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/dead-timer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) DeadTimer() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "dead-timer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DeadTimer (leaf): Interval after which PCE session is declared dead.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/dead-timer"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny) DeadTimer() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "dead-timer"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Keepalive (leaf): Interval for sending keepalive messages over PCE session.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/keepalive"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) Keepalive() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "keepalive"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Keepalive (leaf): Interval for sending keepalive messages over PCE session.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/keepalive"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny) Keepalive() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "keepalive"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedelegationTimeoutInterval (leaf): When a PCEP session is terminated, the period of time a PCC waits
+// before revoking LSP delegation and attempting to redelegate LSPs
+// associated with the terminated PCEP session to an alternate PCE.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/redelegation-timeout-interval"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) RedelegationTimeoutInterval() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "redelegation-timeout-interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedelegationTimeoutInterval (leaf): When a PCEP session is terminated, the period of time a PCC waits
+// before revoking LSP delegation and attempting to redelegate LSPs
+// associated with the terminated PCEP session to an alternate PCE.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/redelegation-timeout-interval"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny) RedelegationTimeoutInterval() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "redelegation-timeout-interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// StateTimeoutInterval (leaf): When a PCEP session is terminated, the period of time a PCC waits
+// before before flushing LSP state associated with that PCEP session
+// and reverting to operator-defined default parameters or behaviors.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/state-timeout-interval"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) StateTimeoutInterval() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "state-timeout-interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// StateTimeoutInterval (leaf): When a PCEP session is terminated, the period of time a PCC waits
+// before before flushing LSP state associated with that PCEP session
+// and reverting to operator-defined default parameters or behaviors.
+// ----------------------------------------
+// Defining module: "openconfig-pcep"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/state-timeout-interval"
+// Path from root: "/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval"
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny) StateTimeoutInterval() *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPathAny {
+	return &NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "state-timeout-interval"},
 			map[string]interface{}{},
 			n,
 		),

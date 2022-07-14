@@ -15,1374 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_NetPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Get(t testing.TB) []string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedStringSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_NetPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPathAny) Get(t testing.TB) [][]string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Replace(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) Update(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/net in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NetPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_NetPath extracts the value of the leaf Net from its parent oc.NetworkInstance_Protocol_Isis_Global
-// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
-func convertNetworkInstance_Protocol_Isis_Global_NetPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global) *oc.QualifiedStringSlice {
-	t.Helper()
-	qv := &oc.QualifiedStringSlice{
-		Metadata: md,
-	}
-	val := parent.Net
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Nsr{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Nsr", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Nsr{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Nsr", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Nsr{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_Nsr {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Global_Nsr
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_NsrPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Nsr) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Nsr{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Nsr", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetEnabled())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Nsr{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Nsr", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/nsr/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath extracts the value of the leaf Enabled from its parent oc.NetworkInstance_Protocol_Isis_Global_Nsr
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Global_Nsr_EnabledPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Nsr) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.Enabled
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_PoiTlvPath(t, md, goStruct)
-	}
-	return (&oc.QualifiedBool{
-		Metadata: md,
-	}).SetVal(goStruct.GetPoiTlv())
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_PoiTlvPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/config/poi-tlv in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_PoiTlvPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_PoiTlvPath extracts the value of the leaf PoiTlv from its parent oc.NetworkInstance_Protocol_Isis_Global
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Global_PoiTlvPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.PoiTlv
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidthPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) Get(t testing.TB) uint32 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint32
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPathAny) Get(t testing.TB) []uint32 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint32
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/reference-bandwidth/config/reference-bandwidth in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath extracts the value of the leaf ReferenceBandwidth from its parent oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
-func convertNetworkInstance_Protocol_Isis_Global_ReferenceBandwidth_ReferenceBandwidthPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_ReferenceBandwidth) *oc.QualifiedUint32 {
-	t.Helper()
-	qv := &oc.QualifiedUint32{
-		Metadata: md,
-	}
-	val := parent.ReferenceBandwidth
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_SegmentRouting {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_SegmentRouting{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_SegmentRouting {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_SegmentRouting
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_SegmentRouting{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRoutingPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Lookup(t testing.TB) *oc.QualifiedBool {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Get(t testing.TB) bool {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedBool
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPathAny) Get(t testing.TB) []bool {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []bool
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) Update(t testing.TB, val bool) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/enabled in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath extracts the value of the leaf Enabled from its parent oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting
-// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
-func convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_EnabledPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) *oc.QualifiedBool {
-	t.Helper()
-	qv := &oc.QualifiedBool{
-		Metadata: md,
-	}
-	val := parent.Enabled
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srgb in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath extracts the value of the leaf Srgb from its parent oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrgbPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Srgb
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_SegmentRouting", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/config/srlb in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath extracts the value of the leaf Srlb from its parent oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertNetworkInstance_Protocol_Isis_Global_SegmentRouting_SrlbPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_SegmentRouting) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Srlb
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Timers {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_Timers {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Global_Timers
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Timers) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Timers) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Timers) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_TimersPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Timers) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGenerationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) Replace(t testing.TB, val uint64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) Update(t testing.TB, val uint64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-first-wait-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath extracts the value of the leaf LspFirstWaitInterval from its parent oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspFirstWaitIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.LspFirstWaitInterval
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{}
-	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration", goStruct, true, true)
-	if ok {
-		return convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval with a ONCE subscription.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) Replace(t testing.TB, val uint64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint64) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) Update(t testing.TB, val uint64) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-max-wait-interval in the given batch object.
-func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint64) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath extracts the value of the leaf LspMaxWaitInterval from its parent oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertNetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspMaxWaitIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.LspMaxWaitInterval
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/timers/lsp-generation/config/lsp-second-wait-interval with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *NetworkInstance_Protocol_Isis_Global_Timers_LspGeneration_LspSecondWaitIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
@@ -17659,6 +16291,2000 @@ func convertNetworkInstance_Protocol_Ospfv2_Global_Timers_Spf_MaximumDelayPath(t
 		Metadata: md,
 	}
 	val := parent.MaximumDelay
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_PcepPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Pcep {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Pcep{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_PcepPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pcep {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_PcepPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Pcep {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Pcep
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Pcep{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep with a ONCE subscription.
+func (n *NetworkInstance_Protocol_PcepPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Pcep {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Pcep
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep.
+func (n *NetworkInstance_Protocol_PcepPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep in the given batch object.
+func (n *NetworkInstance_Protocol_PcepPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep.
+func (n *NetworkInstance_Protocol_PcepPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep in the given batch object.
+func (n *NetworkInstance_Protocol_PcepPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep.
+func (n *NetworkInstance_Protocol_PcepPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep in the given batch object.
+func (n *NetworkInstance_Protocol_PcepPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pcep_PathComputationServer {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Pcep_PathComputationServer {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_AuthenticationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/authentication-key in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath extracts the value of the leaf AuthenticationKey from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_AuthenticationKeyPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.AuthenticationKey
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetEnable())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/enable in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath extracts the value of the leaf Enable from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_EnablePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.Enable
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/authentication/config/keychain in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath extracts the value of the leaf Keychain from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Authentication_KeychainPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Authentication) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Keychain
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_IdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_IdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/id in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_IdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_IdPath extracts the value of the leaf Id from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_IdPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Id
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetPceInitiatedCapability())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-initiated-capability in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath extracts the value of the leaf PceInitiatedCapability from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceInitiatedCapabilityPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.PceInitiatedCapability
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-server-address in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath extracts the value of the leaf PceServerAddress from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceServerAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.PceServerAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) Lookup(t testing.TB) *oc.QualifiedE_Pcep_PceModeType {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) Get(t testing.TB) oc.E_Pcep_PceModeType {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_Pcep_PceModeType {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_Pcep_PceModeType
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePathAny) Get(t testing.TB) []oc.E_Pcep_PceModeType {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_Pcep_PceModeType
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) Replace(t testing.TB, val oc.E_Pcep_PceModeType) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_Pcep_PceModeType) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) Update(t testing.TB, val oc.E_Pcep_PceModeType) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_Pcep_PceModeType) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath extracts the value of the leaf PceType from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_Pcep_PceModeType.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_PceTypePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedE_Pcep_PceModeType {
+	t.Helper()
+	qv := &oc.QualifiedE_Pcep_PceModeType{
+		Metadata: md,
+	}
+	val := parent.PceType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_PortPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedUint16{
+		Metadata: md,
+	}).SetVal(goStruct.GetPort())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_PortPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/port in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PortPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_PortPath extracts the value of the leaf Port from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_PortPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.Port
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/preference in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath extracts the value of the leaf Preference from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_PreferencePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Preference
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetReportLocalLsp())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/report-local-lsp in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath extracts the value of the leaf ReportLocalLsp from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_ReportLocalLspPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.ReportLocalLsp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/source-address in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath extracts the value of the leaf SourceAddress from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_SourceAddressPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.SourceAddress
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetSrSupport())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/sr-support in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath extracts the value of the leaf SrSupport from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_SrSupportPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.SrSupport
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) Lookup(t testing.TB) *oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Timers {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Timers{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) Get(t testing.TB) *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny) Lookup(t testing.TB) []*oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Timers {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Timers
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedNetworkInstance_Protocol_Pcep_PathComputationServer_Timers{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPathAny) Get(t testing.TB) []*oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) Replace(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) Update(t testing.TB, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_TimersPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedUint8{
+		Metadata: md,
+	}).SetVal(goStruct.GetDeadTimer())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/dead-timer in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath extracts the value of the leaf DeadTimer from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_DeadTimerPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.DeadTimer
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) Lookup(t testing.TB) *oc.QualifiedUint8 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedUint8{
+		Metadata: md,
+	}).SetVal(goStruct.GetKeepalive())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) Get(t testing.TB) uint8 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePathAny) Lookup(t testing.TB) []*oc.QualifiedUint8 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint8
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePathAny) Get(t testing.TB) []uint8 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint8
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) Replace(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) Update(t testing.TB, val uint8) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/keepalive in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint8) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath extracts the value of the leaf Keepalive from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint8.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_KeepalivePath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) *oc.QualifiedUint8 {
+	t.Helper()
+	qv := &oc.QualifiedUint8{
+		Metadata: md,
+	}
+	val := parent.Keepalive
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/redelegation-timeout-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath extracts the value of the leaf RedelegationTimeoutInterval from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_RedelegationTimeoutIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.RedelegationTimeoutInterval
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Pcep_PathComputationServer_Timers", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/timers/config/state-timeout-interval in the given batch object.
+func (n *NetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath extracts the value of the leaf StateTimeoutInterval from its parent oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertNetworkInstance_Protocol_Pcep_PathComputationServer_Timers_StateTimeoutIntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Pcep_PathComputationServer_Timers) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.StateTimeoutInterval
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

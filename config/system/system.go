@@ -4855,7 +4855,7 @@ func (n *System_NtpPathAny) EnableNtpAuth() *System_Ntp_EnableNtpAuthPathAny {
 	}
 }
 
-// Enabled (leaf): Enables the NTP protocol and indicates that the system should
+// Enabled (leaf): Enables and disables the NTP protocol and indicates that the system should
 // attempt to synchronize the system clock with an NTP server
 // from the servers defined in the 'ntp/server' list.
 // ----------------------------------------
@@ -4873,7 +4873,7 @@ func (n *System_NtpPath) Enabled() *System_Ntp_EnabledPath {
 	}
 }
 
-// Enabled (leaf): Enables the NTP protocol and indicates that the system should
+// Enabled (leaf): Enables and disables the NTP protocol and indicates that the system should
 // attempt to synchronize the system clock with an NTP server
 // from the servers defined in the 'ntp/server' list.
 // ----------------------------------------

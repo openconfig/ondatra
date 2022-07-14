@@ -322,7 +322,7 @@ func toTrafficCfg(t *testing.T, filename string) *ixconfig.Traffic {
 }
 
 func stubLogOperationResult() {
-	// TODO: Implement operation logging for open-source Ondatra.
+	// TODO(b/236700972): Implement operation logging for open-source Ondatra.
 }
 
 func restoreStubs() {
@@ -580,7 +580,7 @@ func TestUpdateTopology(t *testing.T) {
 		operState:            operStateProtocolsOn,
 		startProtocolsErr:    errors.New("could not start protocols"),
 		validateProtocolsErr: errors.New("protocols not up"),
-		// TODO; Revert to checking start protocols error (see comment in 'startProtocols' section.)
+		// TODO(b/194218629); Revert to checking start protocols error (see comment in 'startProtocols' section.)
 		wantErr: "protocols not up",
 	}, {
 		desc:                 "error waiting for protocols",
@@ -990,7 +990,7 @@ func TestStartProtocols(t *testing.T) {
 		wantErr             string
 	}{{
 		// Currently a failure is only reported if protocols are not up, even if the operation failed.
-		// TODO: Revert to checking that an error is produced(see comment in 'startProtocols' section.)
+		// TODO(b/194218629): Revert to checking that an error is produced(see comment in 'startProtocols' section.)
 		desc:  "Error from op",
 		opErr: errors.New("someError"),
 	}, {
@@ -1594,7 +1594,7 @@ func TestStart(t *testing.T) {
 	}
 }
 
-// TODO: Use a Traffic struct in place of a reqFile and expand the
+// TODO(b/227375157): Use a Traffic struct in place of a reqFile and expand the
 // tests to cover more behaviors of validateInterfaces.
 func TestStartTraffic(t *testing.T) {
 	tests := []struct {

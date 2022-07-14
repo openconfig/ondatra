@@ -1515,6 +1515,7 @@ type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPri
 	Name                      *string                                                                                                                                         `path:"state/name|name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/name|name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
 	PathComputationMethod     E_MplsTypes_PATH_COMPUTATION_METHOD                                                                                                             `path:"state/path-computation-method" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/path-computation-method" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PathComputationServer     *string                                                                                                                                         `path:"state/path-computation-server" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/path-computation-server" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	PathControl               E_Pcep_LspControlType                                                                                                                           `path:"state/path-control" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/path-control" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PathMetricBoundConstraint map[E_MplsTypes_PATH_METRIC_TYPE]*NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath_PathMetricBoundConstraint `path:"path-metric-bound-constraints/path-metric-bound-constraint" module:"openconfig-network-instance/openconfig-network-instance"`
 	Preference                *uint8                                                                                                                                          `path:"state/preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	RetryTimer                *uint16                                                                                                                                         `path:"state/retry-timer" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/retry-timer" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -1905,6 +1906,22 @@ func (t *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 		return ""
 	}
 	return *t.PathComputationServer
+}
+
+// GetPathControl retrieves the value of the leaf PathControl from the NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PathControl is set, it can
+// safely use t.GetPathControl() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PathControl == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath) GetPathControl() E_Pcep_LspControlType {
+	if t == nil || t.PathControl == 0 {
+		return 0
+	}
+	return t.PathControl
 }
 
 // GetPreference retrieves the value of the leaf Preference from the NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PPrimaryPath
@@ -2359,6 +2376,7 @@ type NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSec
 	Name                      *string                                                                                                                                           `path:"state/name|name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/name|name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
 	PathComputationMethod     E_MplsTypes_PATH_COMPUTATION_METHOD                                                                                                               `path:"state/path-computation-method" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/path-computation-method" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PathComputationServer     *string                                                                                                                                           `path:"state/path-computation-server" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/path-computation-server" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	PathControl               E_Pcep_LspControlType                                                                                                                             `path:"state/path-control" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/path-control" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PathMetricBoundConstraint map[E_MplsTypes_PATH_METRIC_TYPE]*NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath_PathMetricBoundConstraint `path:"path-metric-bound-constraints/path-metric-bound-constraint" module:"openconfig-network-instance/openconfig-network-instance"`
 	Preference                *uint8                                                                                                                                            `path:"state/preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	RetryTimer                *uint16                                                                                                                                           `path:"state/retry-timer" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/retry-timer" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -2632,6 +2650,22 @@ func (t *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2
 		return ""
 	}
 	return *t.PathComputationServer
+}
+
+// GetPathControl retrieves the value of the leaf PathControl from the NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PathControl is set, it can
+// safely use t.GetPathControl() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PathControl == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath) GetPathControl() E_Pcep_LspControlType {
+	if t == nil || t.PathControl == 0 {
+		return 0
+	}
+	return t.PathControl
 }
 
 // GetPreference retrieves the value of the leaf Preference from the NetworkInstance_Mpls_Lsps_ConstrainedPath_Tunnel_P2PTunnelAttributes_P2PSecondaryPath
@@ -14434,6 +14468,7 @@ type NetworkInstance_Protocol struct {
 	Isis          *NetworkInstance_Protocol_Isis                 `path:"isis" module:"openconfig-network-instance"`
 	Name          *string                                        `path:"state/name|name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/name|name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
 	Ospfv2        *NetworkInstance_Protocol_Ospfv2               `path:"ospfv2" module:"openconfig-network-instance"`
+	Pcep          *NetworkInstance_Protocol_Pcep                 `path:"pcep" module:"openconfig-network-instance"`
 	Pim           *NetworkInstance_Protocol_Pim                  `path:"pim" module:"openconfig-network-instance"`
 	Static        map[string]*NetworkInstance_Protocol_Static    `path:"static-routes/static" module:"openconfig-network-instance/openconfig-network-instance"`
 }
@@ -14717,6 +14752,16 @@ func (t *NetworkInstance_Protocol) GetOrCreateOspfv2() *NetworkInstance_Protocol
 	return t.Ospfv2
 }
 
+// GetOrCreatePcep retrieves the value of the Pcep field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol) GetOrCreatePcep() *NetworkInstance_Protocol_Pcep {
+	if t.Pcep != nil {
+		return t.Pcep
+	}
+	t.Pcep = &NetworkInstance_Protocol_Pcep{}
+	return t.Pcep
+}
+
 // GetOrCreatePim retrieves the value of the Pim field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_Protocol) GetOrCreatePim() *NetworkInstance_Protocol_Pim {
@@ -14763,6 +14808,16 @@ func (t *NetworkInstance_Protocol) GetIsis() *NetworkInstance_Protocol_Isis {
 func (t *NetworkInstance_Protocol) GetOspfv2() *NetworkInstance_Protocol_Ospfv2 {
 	if t != nil && t.Ospfv2 != nil {
 		return t.Ospfv2
+	}
+	return nil
+}
+
+// GetPcep returns the value of the Pcep struct pointer
+// from NetworkInstance_Protocol. If the receiver or the field Pcep is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol) GetPcep() *NetworkInstance_Protocol_Pcep {
+	if t != nil && t.Pcep != nil {
+		return t.Pcep
 	}
 	return nil
 }
@@ -14857,6 +14912,7 @@ func (t *NetworkInstance_Protocol) PopulateDefaults() {
 	t.Igmp.PopulateDefaults()
 	t.Isis.PopulateDefaults()
 	t.Ospfv2.PopulateDefaults()
+	t.Pcep.PopulateDefaults()
 	t.Pim.PopulateDefaults()
 	for _, e := range t.Aggregate {
 		e.PopulateDefaults()

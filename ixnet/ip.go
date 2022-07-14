@@ -12,11 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+package ixnet
 
 import (
 	opb "github.com/openconfig/ondatra/proto"
 )
+
+// NewIP returns a new IP configuration.
+// Tests must not call this method directly.
+func NewIP(pb *opb.IpConfig) *IP {
+	return &IP{pb}
+}
 
 // IP is an representation of IP config on the ATE.
 type IP struct {

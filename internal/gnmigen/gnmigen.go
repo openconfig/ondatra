@@ -262,7 +262,7 @@ var pkgReplaceExp = regexp.MustCompile("[._-]")
 //      3. A convert() helper for each path struct used for unmarshalling a
 //      leaf update to the desired ygen value.
 // If errors are encountered during code generation, they are returned.
-// TODO: Collect() for non-leaf nodes are currently unsupported (methods are not being generated).
+// TODO(wenovus): Collect() for non-leaf nodes are currently unsupported (methods are not being generated).
 func (cg *GenConfig) GenerateCode(yangFiles, includePaths []string, config bool) (*GeneratedTelemetryCode, util.Errors) {
 	// pcg is the configuration used to generate the path struct
 	// portion of the generated telemetry code.
@@ -985,7 +985,7 @@ func generatePerNodeSnippet(pathStructName string, nodeData *ypathgen.NodeData, 
 
 // generatePerNodeConfigSnippet generates the config code for a path node.
 func generatePerNodeConfigSnippet(pathStructName string, nodeData *ypathgen.NodeData, fakeRootTypeName, schemaStructPkgAccessor, configPkgAccessor string, preferShadowPath bool) (GoPerNodeCodeSnippet, goTypeData, util.Errors) {
-	// TODO: See if a float32 -> binary helper should be provided
+	// TODO(wenovus): See if a float32 -> binary helper should be provided
 	// for setting a float32 leaf.
 	var errs util.Errors
 	s := struct {
@@ -1073,7 +1073,7 @@ func generatePerTypeSnippet(goType goTypeData, fakeRootTypeName string, preferSh
 // name of a telemetry result into symbols acceptable as a unique Go
 // identifier. Further, it capitalizes the first letter so that it is exported.
 func transformGoTypeName(nodeData *ypathgen.NodeData) string {
-	// TODO: map[] is an output for a non-leaf wildcard
+	// TODO(wenovus): map[] is an output for a non-leaf wildcard
 	// Lookup()/Collect(), there hasn't been the need for non-leaves so
 	// we haven't decided how to deal with those yet.
 

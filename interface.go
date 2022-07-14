@@ -64,7 +64,7 @@ func (i *Interface) WithPort(p *Port) *Interface {
 }
 
 // WithLAG specifies that the interface will be configured on the given LAG.
-// TODO: Add Ondatra test for this feature.
+// TODO(b/193135106): Add Ondatra test for this feature.
 func (i *Interface) WithLAG(l *LAG) *Interface {
 	i.pb.Link = &opb.InterfaceConfig_Lag{l.pb.GetName()}
 	return i
@@ -82,19 +82,19 @@ func (i *Interface) Ethernet() *Ethernet {
 }
 
 // IPv4 creates an IPv4 config for the interface or returns the existing config.
-func (i *Interface) IPv4() *IP {
+func (i *Interface) IPv4() *ixnet.IP {
 	if i.pb.Ipv4 == nil {
 		i.pb.Ipv4 = &opb.IpConfig{}
 	}
-	return &IP{pb: i.pb.Ipv4}
+	return ixnet.NewIP(i.pb.Ipv4)
 }
 
 // IPv6 creates an IPv6 config for the interface or returns the existing config.
-func (i *Interface) IPv6() *IP {
+func (i *Interface) IPv6() *ixnet.IP {
 	if i.pb.Ipv6 == nil {
 		i.pb.Ipv6 = &opb.IpConfig{}
 	}
-	return &IP{pb: i.pb.Ipv6}
+	return ixnet.NewIP(i.pb.Ipv6)
 }
 
 // WithIPv4Loopback configures the IPv4 loopback address for the interface.
