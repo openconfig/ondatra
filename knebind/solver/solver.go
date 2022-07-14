@@ -67,7 +67,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		dev2Ports:  make(map[*opb.Device]map[string]*opb.Port),
 		node2Intfs: make(map[*tpb.Node]map[string]*intf),
 		intf2Intf:  make(map[*intf]*intf),
-		port2Port:  make(map[*opb.Port]*opb.Port),
 	}
 
 	// Cache various info in the solver about the testbed and topology.
@@ -103,17 +102,6 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		intfZ := getIntf(link.GetZNode(), link.GetZInt())
 		s.intf2Intf[intfA] = intfZ
 		s.intf2Intf[intfZ] = intfA
-	}
-	getPort := func(tbLink string) *opb.Port {
-		parts := strings.Split(tbLink, ":")
-		dut := s.id2Dev[parts[0]]
-		return s.dev2Ports[dut][parts[1]]
-	}
-	for _, link := range s.testbed.GetLinks() {
-		portA := getPort(link.GetA())
-		portB := getPort(link.GetB())
-		s.port2Port[portA] = portB
-		s.port2Port[portB] = portA
 	}
 
 	a, err := s.solve()
@@ -257,44 +245,6 @@ type solver struct {
 	dev2Ports  map[*opb.Device]map[string]*opb.Port
 	node2Intfs map[*tpb.Node]map[string]*intf
 	intf2Intf  map[*intf]*intf
-	port2Port  map[*opb.Port]*opb.Port
-}
-
-type check func(interface{}, interface{}, map[interface{}][]interface{}, *[]interface{}, map[interface{}]interface{}, map[interface{}]bool, bool) bool
-
-func (s *solver) checkPort(k interface{}, v interface{}, m map[interface{}][]interface{}, keys *[]interface{}, res map[interface{}]interface{}, used map[interface{}]bool, reserve bool) bool {
-	peerPort := s.port2Port[k.(*opb.Port)]
-	peerIntf := s.intf2Intf[v.(*intf)]
-	if reserve {
-		if _, ok := used[peerIntf]; ok {
-			return false
-		}
-		found := false
-		for _, v := range m[peerPort] {
-			if peerIntf == v {
-				found = true
-				break
-			}
-		}
-		if found {
-			found = false
-			for i, key := range *keys {
-				if peerPort == key.(*opb.Port) {
-					found = true
-					(*keys)[i] = (*keys)[len(*keys)-1]
-					*keys = (*keys)[:len(*keys)-1]
-					res[peerPort] = peerIntf
-					used[peerIntf] = true
-					break
-				}
-			}
-		}
-		return found
-	}
-
-	*keys = append(*keys, peerPort)
-	delete(used, peerIntf)
-	return true
 }
 
 func (s *solver) solve() (*assign, error) {
@@ -323,7 +273,7 @@ func (s *solver) solve() (*assign, error) {
 			dev2Nodes[dev] = append(dev2Nodes[dev], node)
 		}
 	}
-	dev2NodeChan := genCombos(dev2Nodes, nil)
+	dev2NodeChan := genCombos(dev2Nodes)
 	var hasNodeCombo bool
 	for dev2Node := range dev2NodeChan {
 		hasNodeCombo = true
@@ -349,7 +299,7 @@ func (s *solver) solve() (*assign, error) {
 				}
 			}
 		}
-		port2IntfChan := genCombos(port2Intfs, s.checkPort)
+		port2IntfChan := genCombos(port2Intfs)
 		for port2Intf := range port2IntfChan {
 			if a := newAssign(dev2Node, port2Intf); s.linksMatch(a) {
 				// TODO: When solver is rewritten, signal the gorouting
@@ -454,7 +404,7 @@ func softwareVersion(node *tpb.Node) string {
 
 // genCombos yields every key->value mapping, where no two keys map to the same
 // value, given a map of keys to their possible values.
-func genCombos(m map[interface{}][]interface{}, cFunc check) <-chan map[interface{}]interface{} {
+func genCombos(m map[interface{}][]interface{}) <-chan map[interface{}]interface{} {
 	var keys []interface{}
 	for k := range m {
 		keys = append(keys, k)
@@ -462,7 +412,7 @@ func genCombos(m map[interface{}][]interface{}, cFunc check) <-chan map[interfac
 	ch := make(chan map[interface{}]interface{})
 	go func() {
 		defer close(ch)
-		genRecurse(m, keys, cFunc, make(map[interface{}]interface{}), make(map[interface{}]bool), ch)
+		genRecurse(m, keys, make(map[interface{}]interface{}), make(map[interface{}]bool), ch)
 	}()
 	return ch
 }
@@ -470,7 +420,6 @@ func genCombos(m map[interface{}][]interface{}, cFunc check) <-chan map[interfac
 func genRecurse(
 	m map[interface{}][]interface{},
 	keys []interface{},
-	cFunc check,
 	res map[interface{}]interface{},
 	used map[interface{}]bool,
 	ch chan<- map[interface{}]interface{}) {
@@ -485,17 +434,10 @@ func genRecurse(
 	first := keys[0]
 	for _, i := range m[first] {
 		if !used[i] {
-			if cFunc != nil && !cFunc(first, i, m, &keys, res, used, true) {
-				// No valid combinations down this path (for defined r func)
-				continue
-			}
 			res[first] = i
 			used[i] = true
-			genRecurse(m, keys[1:], cFunc, res, used, ch)
+			genRecurse(m, keys[1:], res, used, ch)
 			delete(used, i)
-			if cFunc != nil {
-				cFunc(first, i, m, &keys, res, used, false)
-			}
 		}
 	}
 }
