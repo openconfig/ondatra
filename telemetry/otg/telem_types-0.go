@@ -726,3 +726,198 @@ func (w *Flow_CountersWatcher) Await(t testing.TB) (*QualifiedFlow_Counters, boo
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
+
+// QualifiedInterface is a *Interface with a corresponding timestamp.
+type QualifiedInterface struct {
+	*genutil.Metadata
+	val     *Interface // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedInterface) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Interface sample, erroring out if not present.
+func (q *QualifiedInterface) Val(t testing.TB) *Interface {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Interface sample.
+func (q *QualifiedInterface) SetVal(v *Interface) *QualifiedInterface {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedInterface) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionInterface is a telemetry Collection whose Await method returns a slice of *Interface samples.
+type CollectionInterface struct {
+	W    *InterfaceWatcher
+	Data []*QualifiedInterface
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionInterface) Await(t testing.TB) []*QualifiedInterface {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// InterfaceWatcher observes a stream of *Interface samples.
+type InterfaceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedInterface
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *InterfaceWatcher) Await(t testing.TB) (*QualifiedInterface, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedInterface_Ipv4Neighbor is a *Interface_Ipv4Neighbor with a corresponding timestamp.
+type QualifiedInterface_Ipv4Neighbor struct {
+	*genutil.Metadata
+	val     *Interface_Ipv4Neighbor // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedInterface_Ipv4Neighbor) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Interface_Ipv4Neighbor sample, erroring out if not present.
+func (q *QualifiedInterface_Ipv4Neighbor) Val(t testing.TB) *Interface_Ipv4Neighbor {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Interface_Ipv4Neighbor sample.
+func (q *QualifiedInterface_Ipv4Neighbor) SetVal(v *Interface_Ipv4Neighbor) *QualifiedInterface_Ipv4Neighbor {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedInterface_Ipv4Neighbor) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionInterface_Ipv4Neighbor is a telemetry Collection whose Await method returns a slice of *Interface_Ipv4Neighbor samples.
+type CollectionInterface_Ipv4Neighbor struct {
+	W    *Interface_Ipv4NeighborWatcher
+	Data []*QualifiedInterface_Ipv4Neighbor
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionInterface_Ipv4Neighbor) Await(t testing.TB) []*QualifiedInterface_Ipv4Neighbor {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Interface_Ipv4NeighborWatcher observes a stream of *Interface_Ipv4Neighbor samples.
+type Interface_Ipv4NeighborWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedInterface_Ipv4Neighbor
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Interface_Ipv4NeighborWatcher) Await(t testing.TB) (*QualifiedInterface_Ipv4Neighbor, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedInterface_Ipv6Neighbor is a *Interface_Ipv6Neighbor with a corresponding timestamp.
+type QualifiedInterface_Ipv6Neighbor struct {
+	*genutil.Metadata
+	val     *Interface_Ipv6Neighbor // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedInterface_Ipv6Neighbor) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Interface_Ipv6Neighbor sample, erroring out if not present.
+func (q *QualifiedInterface_Ipv6Neighbor) Val(t testing.TB) *Interface_Ipv6Neighbor {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Interface_Ipv6Neighbor sample.
+func (q *QualifiedInterface_Ipv6Neighbor) SetVal(v *Interface_Ipv6Neighbor) *QualifiedInterface_Ipv6Neighbor {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedInterface_Ipv6Neighbor) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionInterface_Ipv6Neighbor is a telemetry Collection whose Await method returns a slice of *Interface_Ipv6Neighbor samples.
+type CollectionInterface_Ipv6Neighbor struct {
+	W    *Interface_Ipv6NeighborWatcher
+	Data []*QualifiedInterface_Ipv6Neighbor
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionInterface_Ipv6Neighbor) Await(t testing.TB) []*QualifiedInterface_Ipv6Neighbor {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Interface_Ipv6NeighborWatcher observes a stream of *Interface_Ipv6Neighbor samples.
+type Interface_Ipv6NeighborWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedInterface_Ipv6Neighbor
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Interface_Ipv6NeighborWatcher) Await(t testing.TB) (*QualifiedInterface_Ipv6Neighbor, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}

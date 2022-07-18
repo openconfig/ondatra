@@ -12,201 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedInterface is a *Interface with a corresponding timestamp.
-type QualifiedInterface struct {
-	*genutil.Metadata
-	val     *Interface // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface sample, erroring out if not present.
-func (q *QualifiedInterface) Val(t testing.TB) *Interface {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface sample.
-func (q *QualifiedInterface) SetVal(v *Interface) *QualifiedInterface {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface is a telemetry Collection whose Await method returns a slice of *Interface samples.
-type CollectionInterface struct {
-	W    *InterfaceWatcher
-	Data []*QualifiedInterface
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface) Await(t testing.TB) []*QualifiedInterface {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// InterfaceWatcher observes a stream of *Interface samples.
-type InterfaceWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *InterfaceWatcher) Await(t testing.TB) (*QualifiedInterface, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Ipv4Neighbor is a *Interface_Ipv4Neighbor with a corresponding timestamp.
-type QualifiedInterface_Ipv4Neighbor struct {
-	*genutil.Metadata
-	val     *Interface_Ipv4Neighbor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Ipv4Neighbor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Ipv4Neighbor sample, erroring out if not present.
-func (q *QualifiedInterface_Ipv4Neighbor) Val(t testing.TB) *Interface_Ipv4Neighbor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Ipv4Neighbor sample.
-func (q *QualifiedInterface_Ipv4Neighbor) SetVal(v *Interface_Ipv4Neighbor) *QualifiedInterface_Ipv4Neighbor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Ipv4Neighbor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Ipv4Neighbor is a telemetry Collection whose Await method returns a slice of *Interface_Ipv4Neighbor samples.
-type CollectionInterface_Ipv4Neighbor struct {
-	W    *Interface_Ipv4NeighborWatcher
-	Data []*QualifiedInterface_Ipv4Neighbor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Ipv4Neighbor) Await(t testing.TB) []*QualifiedInterface_Ipv4Neighbor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Ipv4NeighborWatcher observes a stream of *Interface_Ipv4Neighbor samples.
-type Interface_Ipv4NeighborWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Ipv4Neighbor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Ipv4NeighborWatcher) Await(t testing.TB) (*QualifiedInterface_Ipv4Neighbor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Ipv6Neighbor is a *Interface_Ipv6Neighbor with a corresponding timestamp.
-type QualifiedInterface_Ipv6Neighbor struct {
-	*genutil.Metadata
-	val     *Interface_Ipv6Neighbor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Ipv6Neighbor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Ipv6Neighbor sample, erroring out if not present.
-func (q *QualifiedInterface_Ipv6Neighbor) Val(t testing.TB) *Interface_Ipv6Neighbor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Ipv6Neighbor sample.
-func (q *QualifiedInterface_Ipv6Neighbor) SetVal(v *Interface_Ipv6Neighbor) *QualifiedInterface_Ipv6Neighbor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Ipv6Neighbor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Ipv6Neighbor is a telemetry Collection whose Await method returns a slice of *Interface_Ipv6Neighbor samples.
-type CollectionInterface_Ipv6Neighbor struct {
-	W    *Interface_Ipv6NeighborWatcher
-	Data []*QualifiedInterface_Ipv6Neighbor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Ipv6Neighbor) Await(t testing.TB) []*QualifiedInterface_Ipv6Neighbor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Ipv6NeighborWatcher observes a stream of *Interface_Ipv6Neighbor samples.
-type Interface_Ipv6NeighborWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Ipv6Neighbor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Ipv6NeighborWatcher) Await(t testing.TB) (*QualifiedInterface_Ipv6Neighbor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedIsisRouter is a *IsisRouter with a corresponding timestamp.
 type QualifiedIsisRouter struct {
 	*genutil.Metadata
@@ -467,6 +272,331 @@ func (w *IsisRouter_Counters_Level2Watcher) Await(t testing.TB) (*QualifiedIsisR
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedLacp is a *Lacp with a corresponding timestamp.
+type QualifiedLacp struct {
+	*genutil.Metadata
+	val     *Lacp // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLacp) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lacp sample, erroring out if not present.
+func (q *QualifiedLacp) Val(t testing.TB) *Lacp {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lacp sample.
+func (q *QualifiedLacp) SetVal(v *Lacp) *QualifiedLacp {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLacp) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLacp is a telemetry Collection whose Await method returns a slice of *Lacp samples.
+type CollectionLacp struct {
+	W    *LacpWatcher
+	Data []*QualifiedLacp
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLacp) Await(t testing.TB) []*QualifiedLacp {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// LacpWatcher observes a stream of *Lacp samples.
+type LacpWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLacp
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *LacpWatcher) Await(t testing.TB) (*QualifiedLacp, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLacp_LagMember is a *Lacp_LagMember with a corresponding timestamp.
+type QualifiedLacp_LagMember struct {
+	*genutil.Metadata
+	val     *Lacp_LagMember // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLacp_LagMember) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lacp_LagMember sample, erroring out if not present.
+func (q *QualifiedLacp_LagMember) Val(t testing.TB) *Lacp_LagMember {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lacp_LagMember sample.
+func (q *QualifiedLacp_LagMember) SetVal(v *Lacp_LagMember) *QualifiedLacp_LagMember {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLacp_LagMember) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLacp_LagMember is a telemetry Collection whose Await method returns a slice of *Lacp_LagMember samples.
+type CollectionLacp_LagMember struct {
+	W    *Lacp_LagMemberWatcher
+	Data []*QualifiedLacp_LagMember
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLacp_LagMember) Await(t testing.TB) []*QualifiedLacp_LagMember {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lacp_LagMemberWatcher observes a stream of *Lacp_LagMember samples.
+type Lacp_LagMemberWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLacp_LagMember
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lacp_LagMemberWatcher) Await(t testing.TB) (*QualifiedLacp_LagMember, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLacp_LagMember_Counters is a *Lacp_LagMember_Counters with a corresponding timestamp.
+type QualifiedLacp_LagMember_Counters struct {
+	*genutil.Metadata
+	val     *Lacp_LagMember_Counters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLacp_LagMember_Counters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lacp_LagMember_Counters sample, erroring out if not present.
+func (q *QualifiedLacp_LagMember_Counters) Val(t testing.TB) *Lacp_LagMember_Counters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lacp_LagMember_Counters sample.
+func (q *QualifiedLacp_LagMember_Counters) SetVal(v *Lacp_LagMember_Counters) *QualifiedLacp_LagMember_Counters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLacp_LagMember_Counters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLacp_LagMember_Counters is a telemetry Collection whose Await method returns a slice of *Lacp_LagMember_Counters samples.
+type CollectionLacp_LagMember_Counters struct {
+	W    *Lacp_LagMember_CountersWatcher
+	Data []*QualifiedLacp_LagMember_Counters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLacp_LagMember_Counters) Await(t testing.TB) []*QualifiedLacp_LagMember_Counters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lacp_LagMember_CountersWatcher observes a stream of *Lacp_LagMember_Counters samples.
+type Lacp_LagMember_CountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLacp_LagMember_Counters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lacp_LagMember_CountersWatcher) Await(t testing.TB) (*QualifiedLacp_LagMember_Counters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLag is a *Lag with a corresponding timestamp.
+type QualifiedLag struct {
+	*genutil.Metadata
+	val     *Lag // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLag) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lag sample, erroring out if not present.
+func (q *QualifiedLag) Val(t testing.TB) *Lag {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lag sample.
+func (q *QualifiedLag) SetVal(v *Lag) *QualifiedLag {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLag) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLag is a telemetry Collection whose Await method returns a slice of *Lag samples.
+type CollectionLag struct {
+	W    *LagWatcher
+	Data []*QualifiedLag
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLag) Await(t testing.TB) []*QualifiedLag {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// LagWatcher observes a stream of *Lag samples.
+type LagWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLag
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *LagWatcher) Await(t testing.TB) (*QualifiedLag, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLag_Counters is a *Lag_Counters with a corresponding timestamp.
+type QualifiedLag_Counters struct {
+	*genutil.Metadata
+	val     *Lag_Counters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLag_Counters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lag_Counters sample, erroring out if not present.
+func (q *QualifiedLag_Counters) Val(t testing.TB) *Lag_Counters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lag_Counters sample.
+func (q *QualifiedLag_Counters) SetVal(v *Lag_Counters) *QualifiedLag_Counters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLag_Counters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLag_Counters is a telemetry Collection whose Await method returns a slice of *Lag_Counters samples.
+type CollectionLag_Counters struct {
+	W    *Lag_CountersWatcher
+	Data []*QualifiedLag_Counters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLag_Counters) Await(t testing.TB) []*QualifiedLag_Counters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lag_CountersWatcher observes a stream of *Lag_Counters samples.
+type Lag_CountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLag_Counters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lag_CountersWatcher) Await(t testing.TB) (*QualifiedLag_Counters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedPort is a *Port with a corresponding timestamp.
 type QualifiedPort struct {
 	*genutil.Metadata
@@ -662,19 +792,19 @@ func (w *E_BgpPeer_SessionStateWatcher) Await(t testing.TB) (*QualifiedE_BgpPeer
 	return w.LastVal, w.W.Await(t)
 }
 
-// QualifiedE_Port_Link is a E_Port_Link with a corresponding timestamp.
-type QualifiedE_Port_Link struct {
+// QualifiedE_Lag_OperStatus is a E_Lag_OperStatus with a corresponding timestamp.
+type QualifiedE_Lag_OperStatus struct {
 	*genutil.Metadata
-	val     E_Port_Link // val is the sample value.
+	val     E_Lag_OperStatus // val is the sample value.
 	present bool
 }
 
-func (q *QualifiedE_Port_Link) String() string {
+func (q *QualifiedE_Lag_OperStatus) String() string {
 	return genutil.QualifiedTypeString(q.val, q.Metadata)
 }
 
-// Val returns the value of the E_Port_Link sample, erroring out if not present.
-func (q *QualifiedE_Port_Link) Val(t testing.TB) E_Port_Link {
+// Val returns the value of the E_Lag_OperStatus sample, erroring out if not present.
+func (q *QualifiedE_Lag_OperStatus) Val(t testing.TB) E_Lag_OperStatus {
 	t.Helper()
 	if q == nil {
 		t.Fatal("No value present")
@@ -689,40 +819,105 @@ func (q *QualifiedE_Port_Link) Val(t testing.TB) E_Port_Link {
 	return q.val
 }
 
-// SetVal sets the value of the E_Port_Link sample.
-func (q *QualifiedE_Port_Link) SetVal(v E_Port_Link) *QualifiedE_Port_Link {
+// SetVal sets the value of the E_Lag_OperStatus sample.
+func (q *QualifiedE_Lag_OperStatus) SetVal(v E_Lag_OperStatus) *QualifiedE_Lag_OperStatus {
 	q.val = v
 	q.present = true
 	return q
 }
 
 // IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Port_Link) IsPresent() bool {
+func (q *QualifiedE_Lag_OperStatus) IsPresent() bool {
 	return q != nil && q.present
 }
 
-// CollectionE_Port_Link is a telemetry Collection whose Await method returns a slice of E_Port_Link samples.
-type CollectionE_Port_Link struct {
-	W    *E_Port_LinkWatcher
-	Data []*QualifiedE_Port_Link
+// CollectionE_Lag_OperStatus is a telemetry Collection whose Await method returns a slice of E_Lag_OperStatus samples.
+type CollectionE_Lag_OperStatus struct {
+	W    *E_Lag_OperStatusWatcher
+	Data []*QualifiedE_Lag_OperStatus
 }
 
 // Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Port_Link) Await(t testing.TB) []*QualifiedE_Port_Link {
+func (c *CollectionE_Lag_OperStatus) Await(t testing.TB) []*QualifiedE_Lag_OperStatus {
 	t.Helper()
 	c.W.Await(t)
 	return c.Data
 }
 
-// E_Port_LinkWatcher observes a stream of E_Port_Link samples.
-type E_Port_LinkWatcher struct {
+// E_Lag_OperStatusWatcher observes a stream of E_Lag_OperStatus samples.
+type E_Lag_OperStatusWatcher struct {
 	W       *genutil.Watcher
-	LastVal *QualifiedE_Port_Link
+	LastVal *QualifiedE_Lag_OperStatus
 }
 
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Port_LinkWatcher) Await(t testing.TB) (*QualifiedE_Port_Link, bool) {
+func (w *E_Lag_OperStatusWatcher) Await(t testing.TB) (*QualifiedE_Lag_OperStatus, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType is a E_OpenTrafficGeneratorLacp_LacpActivityType with a corresponding timestamp.
+type QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType struct {
+	*genutil.Metadata
+	val     E_OpenTrafficGeneratorLacp_LacpActivityType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_OpenTrafficGeneratorLacp_LacpActivityType sample, erroring out if not present.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) Val(t testing.TB) E_OpenTrafficGeneratorLacp_LacpActivityType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_OpenTrafficGeneratorLacp_LacpActivityType sample.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) SetVal(v E_OpenTrafficGeneratorLacp_LacpActivityType) *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_OpenTrafficGeneratorLacp_LacpActivityType is a telemetry Collection whose Await method returns a slice of E_OpenTrafficGeneratorLacp_LacpActivityType samples.
+type CollectionE_OpenTrafficGeneratorLacp_LacpActivityType struct {
+	W    *E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher
+	Data []*QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_OpenTrafficGeneratorLacp_LacpActivityType) Await(t testing.TB) []*QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher observes a stream of E_OpenTrafficGeneratorLacp_LacpActivityType samples.
+type E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher) Await(t testing.TB) (*QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

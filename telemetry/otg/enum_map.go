@@ -12,6 +12,8 @@ using the following YANG input files:
 	- models-yang/models/discovery/open-traffic-generator-discovery.yang
 	- models-yang/models/interface/open-traffic-generator-port.yang
 	- models-yang/models/bgp/open-traffic-generator-bgp.yang
+	- models-yang/models/lacp/open-traffic-generator-lacp.yang
+	- models-yang/models/lag/open-traffic-generator-lag.yang
 Imported modules were sourced from:
 	- models-yang/models/...
 */
@@ -36,6 +38,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "OPEN_SENT"},
 		5: {Name: "OPEN_CONFIRM"},
 		6: {Name: "ESTABLISHED"},
+	},
+	"E_Lag_OperStatus": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+	},
+	"E_OpenTrafficGeneratorLacp_LacpActivityType": {
+		1: {Name: "ACTIVE"},
+		2: {Name: "PASSIVE"},
+	},
+	"E_OpenTrafficGeneratorLacp_LacpSynchronizationType": {
+		1: {Name: "IN_SYNC"},
+		2: {Name: "OUT_SYNC"},
+	},
+	"E_OpenTrafficGeneratorLacp_LacpTimeoutType": {
+		1: {Name: "LONG"},
+		2: {Name: "SHORT"},
 	},
 	"E_Port_Link": {
 		1: {Name: "UP"},
@@ -90,6 +108,18 @@ func initΛEnumTypes() {
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),
+		},
+		"/lacp/lag-members/lag-member/state/activity": {
+			reflect.TypeOf((E_OpenTrafficGeneratorLacp_LacpActivityType)(0)),
+		},
+		"/lacp/lag-members/lag-member/state/synchronization": {
+			reflect.TypeOf((E_OpenTrafficGeneratorLacp_LacpSynchronizationType)(0)),
+		},
+		"/lacp/lag-members/lag-member/state/timeout": {
+			reflect.TypeOf((E_OpenTrafficGeneratorLacp_LacpTimeoutType)(0)),
+		},
+		"/lags/lag/state/oper-status": {
+			reflect.TypeOf((E_Lag_OperStatus)(0)),
 		},
 		"/ports/port/state/link": {
 			reflect.TypeOf((E_Port_Link)(0)),

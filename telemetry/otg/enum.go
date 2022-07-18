@@ -12,6 +12,8 @@ using the following YANG input files:
 	- models-yang/models/discovery/open-traffic-generator-discovery.yang
 	- models-yang/models/interface/open-traffic-generator-port.yang
 	- models-yang/models/bgp/open-traffic-generator-bgp.yang
+	- models-yang/models/lacp/open-traffic-generator-lacp.yang
+	- models-yang/models/lag/open-traffic-generator-lag.yang
 Imported modules were sourced from:
 	- models-yang/models/...
 */
@@ -56,6 +58,128 @@ const (
 	BgpPeer_SessionState_OPEN_CONFIRM E_BgpPeer_SessionState = 5
 	// BgpPeer_SessionState_ESTABLISHED corresponds to the value ESTABLISHED of BgpPeer_SessionState
 	BgpPeer_SessionState_ESTABLISHED E_BgpPeer_SessionState = 6
+)
+
+// E_Lag_OperStatus is a derived int64 type which is used to represent
+// the enumerated node Lag_OperStatus. An additional value named
+// Lag_OperStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lag_OperStatus int64
+
+// IsYANGGoEnum ensures that Lag_OperStatus implements the yang.GoEnum
+// interface. This ensures that Lag_OperStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lag_OperStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lag_OperStatus.
+func (E_Lag_OperStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lag_OperStatus.
+func (e E_Lag_OperStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lag_OperStatus")
+}
+
+const (
+	// Lag_OperStatus_UNSET corresponds to the value UNSET of Lag_OperStatus
+	Lag_OperStatus_UNSET E_Lag_OperStatus = 0
+	// Lag_OperStatus_UP corresponds to the value UP of Lag_OperStatus
+	Lag_OperStatus_UP E_Lag_OperStatus = 1
+	// Lag_OperStatus_DOWN corresponds to the value DOWN of Lag_OperStatus
+	Lag_OperStatus_DOWN E_Lag_OperStatus = 2
+)
+
+// E_OpenTrafficGeneratorLacp_LacpActivityType is a derived int64 type which is used to represent
+// the enumerated node OpenTrafficGeneratorLacp_LacpActivityType. An additional value named
+// OpenTrafficGeneratorLacp_LacpActivityType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpenTrafficGeneratorLacp_LacpActivityType int64
+
+// IsYANGGoEnum ensures that OpenTrafficGeneratorLacp_LacpActivityType implements the yang.GoEnum
+// interface. This ensures that OpenTrafficGeneratorLacp_LacpActivityType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpenTrafficGeneratorLacp_LacpActivityType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpenTrafficGeneratorLacp_LacpActivityType.
+func (E_OpenTrafficGeneratorLacp_LacpActivityType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpenTrafficGeneratorLacp_LacpActivityType.
+func (e E_OpenTrafficGeneratorLacp_LacpActivityType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpenTrafficGeneratorLacp_LacpActivityType")
+}
+
+const (
+	// OpenTrafficGeneratorLacp_LacpActivityType_UNSET corresponds to the value UNSET of OpenTrafficGeneratorLacp_LacpActivityType
+	OpenTrafficGeneratorLacp_LacpActivityType_UNSET E_OpenTrafficGeneratorLacp_LacpActivityType = 0
+	// OpenTrafficGeneratorLacp_LacpActivityType_ACTIVE corresponds to the value ACTIVE of OpenTrafficGeneratorLacp_LacpActivityType
+	OpenTrafficGeneratorLacp_LacpActivityType_ACTIVE E_OpenTrafficGeneratorLacp_LacpActivityType = 1
+	// OpenTrafficGeneratorLacp_LacpActivityType_PASSIVE corresponds to the value PASSIVE of OpenTrafficGeneratorLacp_LacpActivityType
+	OpenTrafficGeneratorLacp_LacpActivityType_PASSIVE E_OpenTrafficGeneratorLacp_LacpActivityType = 2
+)
+
+// E_OpenTrafficGeneratorLacp_LacpSynchronizationType is a derived int64 type which is used to represent
+// the enumerated node OpenTrafficGeneratorLacp_LacpSynchronizationType. An additional value named
+// OpenTrafficGeneratorLacp_LacpSynchronizationType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpenTrafficGeneratorLacp_LacpSynchronizationType int64
+
+// IsYANGGoEnum ensures that OpenTrafficGeneratorLacp_LacpSynchronizationType implements the yang.GoEnum
+// interface. This ensures that OpenTrafficGeneratorLacp_LacpSynchronizationType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpenTrafficGeneratorLacp_LacpSynchronizationType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpenTrafficGeneratorLacp_LacpSynchronizationType.
+func (E_OpenTrafficGeneratorLacp_LacpSynchronizationType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpenTrafficGeneratorLacp_LacpSynchronizationType.
+func (e E_OpenTrafficGeneratorLacp_LacpSynchronizationType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpenTrafficGeneratorLacp_LacpSynchronizationType")
+}
+
+const (
+	// OpenTrafficGeneratorLacp_LacpSynchronizationType_UNSET corresponds to the value UNSET of OpenTrafficGeneratorLacp_LacpSynchronizationType
+	OpenTrafficGeneratorLacp_LacpSynchronizationType_UNSET E_OpenTrafficGeneratorLacp_LacpSynchronizationType = 0
+	// OpenTrafficGeneratorLacp_LacpSynchronizationType_IN_SYNC corresponds to the value IN_SYNC of OpenTrafficGeneratorLacp_LacpSynchronizationType
+	OpenTrafficGeneratorLacp_LacpSynchronizationType_IN_SYNC E_OpenTrafficGeneratorLacp_LacpSynchronizationType = 1
+	// OpenTrafficGeneratorLacp_LacpSynchronizationType_OUT_SYNC corresponds to the value OUT_SYNC of OpenTrafficGeneratorLacp_LacpSynchronizationType
+	OpenTrafficGeneratorLacp_LacpSynchronizationType_OUT_SYNC E_OpenTrafficGeneratorLacp_LacpSynchronizationType = 2
+)
+
+// E_OpenTrafficGeneratorLacp_LacpTimeoutType is a derived int64 type which is used to represent
+// the enumerated node OpenTrafficGeneratorLacp_LacpTimeoutType. An additional value named
+// OpenTrafficGeneratorLacp_LacpTimeoutType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpenTrafficGeneratorLacp_LacpTimeoutType int64
+
+// IsYANGGoEnum ensures that OpenTrafficGeneratorLacp_LacpTimeoutType implements the yang.GoEnum
+// interface. This ensures that OpenTrafficGeneratorLacp_LacpTimeoutType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpenTrafficGeneratorLacp_LacpTimeoutType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpenTrafficGeneratorLacp_LacpTimeoutType.
+func (E_OpenTrafficGeneratorLacp_LacpTimeoutType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpenTrafficGeneratorLacp_LacpTimeoutType.
+func (e E_OpenTrafficGeneratorLacp_LacpTimeoutType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpenTrafficGeneratorLacp_LacpTimeoutType")
+}
+
+const (
+	// OpenTrafficGeneratorLacp_LacpTimeoutType_UNSET corresponds to the value UNSET of OpenTrafficGeneratorLacp_LacpTimeoutType
+	OpenTrafficGeneratorLacp_LacpTimeoutType_UNSET E_OpenTrafficGeneratorLacp_LacpTimeoutType = 0
+	// OpenTrafficGeneratorLacp_LacpTimeoutType_LONG corresponds to the value LONG of OpenTrafficGeneratorLacp_LacpTimeoutType
+	OpenTrafficGeneratorLacp_LacpTimeoutType_LONG E_OpenTrafficGeneratorLacp_LacpTimeoutType = 1
+	// OpenTrafficGeneratorLacp_LacpTimeoutType_SHORT corresponds to the value SHORT of OpenTrafficGeneratorLacp_LacpTimeoutType
+	OpenTrafficGeneratorLacp_LacpTimeoutType_SHORT E_OpenTrafficGeneratorLacp_LacpTimeoutType = 2
 )
 
 // E_Port_Link is a derived int64 type which is used to represent

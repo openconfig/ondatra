@@ -11,6 +11,8 @@ using the following YANG input files:
 	- models-yang/models/discovery/open-traffic-generator-discovery.yang
 	- models-yang/models/interface/open-traffic-generator-port.yang
 	- models-yang/models/bgp/open-traffic-generator-bgp.yang
+	- models-yang/models/lacp/open-traffic-generator-lacp.yang
+	- models-yang/models/lag/open-traffic-generator-lag.yang
 Imported modules were sourced from:
 	- models-yang/models/...
 */
@@ -21,6 +23,8 @@ import (
 	"github.com/openconfig/ondatra/telemetry/otg/discovery"
 	"github.com/openconfig/ondatra/telemetry/otg/flow"
 	"github.com/openconfig/ondatra/telemetry/otg/isis"
+	"github.com/openconfig/ondatra/telemetry/otg/lacp"
+	"github.com/openconfig/ondatra/telemetry/otg/lag"
 	"github.com/openconfig/ondatra/telemetry/otg/port"
 	"github.com/openconfig/ygot/ygot"
 )
@@ -175,6 +179,56 @@ func (n *DevicePath) IsisRouter(Name string) *isis.IsisRouterPath {
 	return &isis.IsisRouterPath{
 		NodePath: ygot.NewNodePath(
 			[]string{"isis-routers", "isis-router"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// Lacp (container): LACP telemetry collected by the ATE device.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-lacp"
+// Instantiating module: "open-traffic-generator-lacp"
+// Path from parent: "lacp"
+// Path from root: "/lacp"
+func (n *DevicePath) Lacp() *lacp.LacpPath {
+	return &lacp.LacpPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"lacp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LagAny (list): An individual LAG defined by an OTG.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-lag"
+// Instantiating module: "open-traffic-generator-lag"
+// Path from parent: "lags/lag"
+// Path from root: "/lags/lag"
+// Name (wildcarded): string
+func (n *DevicePath) LagAny() *lag.LagPathAny {
+	return &lag.LagPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"lags", "lag"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// Lag (list): An individual LAG defined by an OTG.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-lag"
+// Instantiating module: "open-traffic-generator-lag"
+// Path from parent: "lags/lag"
+// Path from root: "/lags/lag"
+// Name: string
+func (n *DevicePath) Lag(Name string) *lag.LagPath {
+	return &lag.LagPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"lags", "lag"},
 			map[string]interface{}{"name": Name},
 			n,
 		),
