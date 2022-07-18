@@ -257,6 +257,11 @@ type solver struct {
 	port2Port  map[*opb.Port]*opb.Port
 }
 
+// func function validates whether a generic key value selection will not lead to invalid combinations; if valid, updates the resultset
+// The first parameter is the generic key, followed by value selected. Next is a generic reference map depending on context its used.
+// The forth parameter is the keylist, then the working resultset based on past selection, then map of used value selected previously.
+// The last parameter indicates whether to 'reserve' or 'release' resources based on selection.
+// It returns a boolean; true if valid selection, false otherwise.
 type check func(interface{}, interface{}, map[interface{}][]interface{}, *[]interface{}, map[interface{}]interface{}, map[interface{}]bool, bool) bool
 
 func (s *solver) checkPort(k interface{}, v interface{}, m map[interface{}][]interface{}, keys *[]interface{}, res map[interface{}]interface{}, used map[interface{}]bool, reserve bool) bool {
