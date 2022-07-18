@@ -16,17 +16,18 @@
 package otg
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"sync"
 	"testing"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/telemetry/otg/device"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -197,6 +198,82 @@ func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.Trans
 		return nil, err
 	}
 	resp, err := api.SetTransmitState(api.NewTransmitState().SetState(state))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// WithdrawRoutes withdraw routes on the ATE.
+func (o *OTG) WithdrawRoutes(t testing.TB, routes []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "withdrawing routes for %v", o.ate)
+	warns, err := setRouteState(context.Background(), o.ate, routes, gosnappi.RouteStateState.WITHDRAW)
+	if err != nil {
+		t.Fatalf("WithdrawRoutes(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("WithdrawRoutes(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// AdvertiseRoutes advertise routes on the ATE.
+func (o *OTG) AdvertiseRoutes(t testing.TB, routes []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "advertising routes for %v", o.ate)
+	warns, err := setRouteState(context.Background(), o.ate, routes, gosnappi.RouteStateState.ADVERTISE)
+	if err != nil {
+		t.Fatalf("AdvertiseRoutes(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("AdvertiseRoutes(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state gosnappi.RouteStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetRouteState(api.NewRouteState().SetState(state).SetNames(routes))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// UpLacpMember up lacp member ports on the ATE.
+func (o *OTG) UpLacpMember(t testing.TB, lagMemberPorts []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "UpLacpMember for %v", o.ate)
+	warns, err := setLacpMemberState(context.Background(), o.ate, lagMemberPorts, gosnappi.LacpMemberStateState.UP)
+	if err != nil {
+		t.Fatalf("UpLacpMember(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("UpLacpMember(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// DownLacpMember down lacp member ports on the ATE.
+func (o *OTG) DownLacpMember(t testing.TB, lagMemberPorts []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "DownLacpMember for %v", o.ate)
+	warns, err := setLacpMemberState(context.Background(), o.ate, lagMemberPorts, gosnappi.LacpMemberStateState.DOWN)
+	if err != nil {
+		t.Fatalf("DownLacpMember(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("DownLacpMember(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+func setLacpMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []string, state gosnappi.LacpMemberStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetDeviceState(api.NewDeviceState().SetLacpMemberState(gosnappi.NewLacpMemberState().SetLagMemberPortNames(lagMemberPorts).SetState(state)))
 	if err != nil {
 		return nil, err
 	}

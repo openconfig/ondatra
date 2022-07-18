@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/golang/glog v1.0.0
 	github.com/google/go-cmp v0.5.7
-	github.com/open-traffic-generator/snappi/gosnappi v0.7.6
+	github.com/open-traffic-generator/snappi/gosnappi v0.8.2
 	github.com/openconfig/gnmi v0.0.0-20220131173555-39aa74195f0d
 	github.com/openconfig/gnoi v0.0.0-20220131192435-7dd3a95a4f1e
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
@@ -22,7 +22,7 @@ require (
 	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
 	golang.org/x/net v0.0.0-20220403103023-749bd193bc2b
 	golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12
-	google.golang.org/grpc v1.45.0
+	google.golang.org/grpc v1.47.0
 	google.golang.org/protobuf v1.28.0
 	gopkg.in/yaml.v2 v2.4.0
 )
