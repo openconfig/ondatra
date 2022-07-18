@@ -27,6 +27,193 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+func TestSolveDutError(t *testing.T) {
+	const topoText = `
+		nodes: {
+			name: "node1"
+			type: ARISTA_CEOS
+			services: {
+				key: 1
+				value: {
+					name: "gnmi"
+				}
+			}
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+		}
+		nodes: {
+			name: "node2"
+			type: ARISTA_CEOS
+			services: {
+				key: 2
+				value: {
+					name: "gnmi"
+				}
+			}
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+			interfaces: {
+				key: "eth2"
+				value: {}
+			}
+		}
+		nodes: {
+			name: "node3"
+			type: CISCO_CXR
+			services: {
+				key: 3
+				value: {
+					name: "gnmi"
+				}
+			}
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+		}
+		nodes: {
+			name: "node4"
+			type: CISCO_CXR
+			services: {
+				key: 4
+				value: {
+					name: "gnmi"
+				}
+			}
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+			interfaces: {
+				key: "eth2"
+				value: {}
+			}
+		}
+		nodes: {
+			name: "node5"
+			type: JUNIPER_CEVO
+			services: {
+				key: 5
+				value: {
+					name: "gnmi"
+				}
+			}
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+		}
+		nodes: {
+			name: "node6"
+			type: JUNIPER_CEVO
+			services: {
+				key: 6
+				value: {
+					name: "gnmi"
+				}
+			}
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+			interfaces: {
+				key: "eth2"
+				value: {}
+			}
+		}
+		nodes: {
+			name: "node7"
+			type: IXIA_TG
+			interfaces: {
+				key: "eth1"
+				value: {}
+			}
+			interfaces: {
+				key: "eth2"
+				value: {}
+			}
+			interfaces: {
+				key: "eth3"
+				value: {}
+			}
+		}
+		links: {
+			a_node: "node1"
+			a_int: "eth1"
+			z_node: "node2"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node2"
+			a_int: "eth2"
+			z_node: "node7"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node3"
+			a_int: "eth1"
+			z_node: "node4"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node4"
+			a_int: "eth2"
+			z_node: "node7"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node5"
+			a_int: "eth1"
+			z_node: "node6"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node6"
+			a_int: "eth2"
+			z_node: "node7"
+			z_int: "eth3"
+		}`
+	topo := unmarshalTopo(t, topoText)
+
+	dut1 := &opb.Device{
+		Id:     "dut1",
+		Vendor: opb.Device_ARISTA,
+		Ports:  []*opb.Port{{Id: "port1"}},
+	}
+	dut2 := &opb.Device{
+		Id:    "dut2",
+		Vendor: opb.Device_CISCO,
+		Ports: []*opb.Port{{Id: "port1"}},
+	}
+	dut3 := &opb.Device{
+		Id:    "dut3",
+		Vendor: opb.Device_JUNIPER,
+		Ports: []*opb.Port{{Id: "port1"}},
+	}
+	link12 := &opb.Link{
+		A: "dut1:port1",
+		B: "dut2:port1",
+	}
+	link23 := &opb.Link{
+		A: "dut2:port2",
+		B: "dut3:port1",
+	}
+
+	tb := &opb.Testbed{
+			Duts:  []*opb.Device{dut1, dut2, dut3},
+			Links: []*opb.Link{link12, link23},
+		}
+
+	_, err := Solve(tb, topo)
+	if err == nil {
+		t.Fatalf("Solve() got unexpected error: %v", err)
+	}
+}
+
 func TestSolve(t *testing.T) {
 	const topoText = `
 		nodes: {
