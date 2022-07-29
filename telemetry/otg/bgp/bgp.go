@@ -157,14 +157,11 @@ func (n *BgpPeerPathAny) SessionState() *BgpPeer_SessionStatePathAny {
 // Instantiating module: "open-traffic-generator-bgp"
 // Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
 // Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
 func (n *BgpPeerPath) UnicastIpv4PrefixAny() *BgpPeer_UnicastIpv4PrefixPathAny {
 	return &BgpPeer_UnicastIpv4PrefixPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
 			n,
 		),
 	}
@@ -176,283 +173,42 @@ func (n *BgpPeerPath) UnicastIpv4PrefixAny() *BgpPeer_UnicastIpv4PrefixPathAny {
 // Instantiating module: "open-traffic-generator-bgp"
 // Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
 // Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
 func (n *BgpPeerPathAny) UnicastIpv4PrefixAny() *BgpPeer_UnicastIpv4PrefixPathAny {
 	return &BgpPeer_UnicastIpv4PrefixPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
 			n,
 		),
 	}
 }
 
-// UnicastIpv4PrefixAnyPrefixLengthAnyOrigin (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
+// WithAddress sets BgpPeer_UnicastIpv4PrefixPathAny's key "address" to the specified value.
 // Address: string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4PrefixAnyPrefixLengthAnyOrigin(Address string) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": "*"},
-			n,
-		),
-	}
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithAddress(Address string) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "address", Address)
+	return n
 }
 
-// UnicastIpv4PrefixAnyPrefixLengthAnyOrigin (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4PrefixAnyPrefixLengthAnyOrigin(Address string) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyAddressAnyOrigin (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
+// WithPrefixLength sets BgpPeer_UnicastIpv4PrefixPathAny's key "prefix-length" to the specified value.
 // PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4PrefixAnyAddressAnyOrigin(PrefixLength uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPrefixLength(PrefixLength uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "prefix-length", PrefixLength)
+	return n
 }
 
-// UnicastIpv4PrefixAnyAddressAnyOrigin (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4PrefixAnyAddressAnyOrigin(PrefixLength uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyOrigin (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4PrefixAnyOrigin(Address string, PrefixLength uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyOrigin (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4PrefixAnyOrigin(Address string, PrefixLength uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyAddressAnyPrefixLength (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
+// WithOrigin sets BgpPeer_UnicastIpv4PrefixPathAny's key "origin" to the specified value.
 // Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4PrefixAnyAddressAnyPrefixLength(Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "origin", Origin)
+	return n
 }
 
-// UnicastIpv4PrefixAnyAddressAnyPrefixLength (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4PrefixAnyAddressAnyPrefixLength(Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyPrefixLength (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength (wildcarded): uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4PrefixAnyPrefixLength(Address string, Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyPrefixLength (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength (wildcarded): uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4PrefixAnyPrefixLength(Address string, Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyAddress (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4PrefixAnyAddress(PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4PrefixAnyAddress (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address (wildcarded): string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4PrefixAnyAddress(PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4Prefix (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPath {
-	return &BgpPeer_UnicastIpv4PrefixPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv4Prefix (list): A list of BGP unicast IPv4 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv4Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv4Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4PrefixPathAny {
-	return &BgpPeer_UnicastIpv4PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv4-prefixes", "unicast-ipv4-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
+// WithPathId sets BgpPeer_UnicastIpv4PrefixPathAny's key "path-id" to the specified value.
+// PathId: uint32
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_UnicastIpv4PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "path-id", PathId)
+	return n
 }
 
 // UnicastIpv6PrefixAny (list): A list of BGP unicast IPv6 prefixes.
@@ -461,14 +217,11 @@ func (n *BgpPeerPathAny) UnicastIpv4Prefix(Address string, PrefixLength uint32, 
 // Instantiating module: "open-traffic-generator-bgp"
 // Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
 // Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
 func (n *BgpPeerPath) UnicastIpv6PrefixAny() *BgpPeer_UnicastIpv6PrefixPathAny {
 	return &BgpPeer_UnicastIpv6PrefixPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
 			n,
 		),
 	}
@@ -480,283 +233,42 @@ func (n *BgpPeerPath) UnicastIpv6PrefixAny() *BgpPeer_UnicastIpv6PrefixPathAny {
 // Instantiating module: "open-traffic-generator-bgp"
 // Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
 // Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
 func (n *BgpPeerPathAny) UnicastIpv6PrefixAny() *BgpPeer_UnicastIpv6PrefixPathAny {
 	return &BgpPeer_UnicastIpv6PrefixPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
 			n,
 		),
 	}
 }
 
-// UnicastIpv6PrefixAnyPrefixLengthAnyOrigin (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
+// WithAddress sets BgpPeer_UnicastIpv6PrefixPathAny's key "address" to the specified value.
 // Address: string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6PrefixAnyPrefixLengthAnyOrigin(Address string) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": "*"},
-			n,
-		),
-	}
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithAddress(Address string) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "address", Address)
+	return n
 }
 
-// UnicastIpv6PrefixAnyPrefixLengthAnyOrigin (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength (wildcarded): uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6PrefixAnyPrefixLengthAnyOrigin(Address string) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyAddressAnyOrigin (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
+// WithPrefixLength sets BgpPeer_UnicastIpv6PrefixPathAny's key "prefix-length" to the specified value.
 // PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6PrefixAnyAddressAnyOrigin(PrefixLength uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPrefixLength(PrefixLength uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "prefix-length", PrefixLength)
+	return n
 }
 
-// UnicastIpv6PrefixAnyAddressAnyOrigin (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6PrefixAnyAddressAnyOrigin(PrefixLength uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyOrigin (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6PrefixAnyOrigin(Address string, PrefixLength uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyOrigin (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin (wildcarded): oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6PrefixAnyOrigin(Address string, PrefixLength uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": "*"},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyAddressAnyPrefixLength (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
+// WithOrigin sets BgpPeer_UnicastIpv6PrefixPathAny's key "origin" to the specified value.
 // Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6PrefixAnyAddressAnyPrefixLength(Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithOrigin(Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "origin", Origin)
+	return n
 }
 
-// UnicastIpv6PrefixAnyAddressAnyPrefixLength (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength (wildcarded): uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6PrefixAnyAddressAnyPrefixLength(Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyPrefixLength (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength (wildcarded): uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6PrefixAnyPrefixLength(Address string, Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyPrefixLength (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength (wildcarded): uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6PrefixAnyPrefixLength(Address string, Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": "*", "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyAddress (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6PrefixAnyAddress(PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6PrefixAnyAddress (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address (wildcarded): string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6PrefixAnyAddress(PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": "*", "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6Prefix (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPath) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPath {
-	return &BgpPeer_UnicastIpv6PrefixPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
-}
-
-// UnicastIpv6Prefix (list): A list of BGP unicast IPv6 prefixes.
-// ----------------------------------------
-// Defining module: "open-traffic-generator-bgp"
-// Instantiating module: "open-traffic-generator-bgp"
-// Path from parent: "unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Path from root: "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix"
-// Address: string
-// PrefixLength: uint32
-// Origin: oc.E_UnicastIpv6Prefix_Origin
-func (n *BgpPeerPathAny) UnicastIpv6Prefix(Address string, PrefixLength uint32, Origin oc.E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6PrefixPathAny {
-	return &BgpPeer_UnicastIpv6PrefixPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"unicast-ipv6-prefixes", "unicast-ipv6-prefix"},
-			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin},
-			n,
-		),
-	}
+// WithPathId sets BgpPeer_UnicastIpv6PrefixPathAny's key "path-id" to the specified value.
+// PathId: uint32
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) WithPathId(PathId uint32) *BgpPeer_UnicastIpv6PrefixPathAny {
+	ygot.ModifyKey(n.NodePath, "path-id", PathId)
+	return n
 }
 
 // BgpPeer_CountersPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters YANG schema element.
@@ -1515,7 +1027,12 @@ func (n *BgpPeer_UnicastIpv4PrefixPathAny) Origin() *BgpPeer_UnicastIpv4Prefix_O
 	}
 }
 
-// PathId (leaf): The path id.
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-bgp"
 // Instantiating module: "open-traffic-generator-bgp"
@@ -1531,7 +1048,12 @@ func (n *BgpPeer_UnicastIpv4PrefixPath) PathId() *BgpPeer_UnicastIpv4Prefix_Path
 	}
 }
 
-// PathId (leaf): The path id.
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-bgp"
 // Instantiating module: "open-traffic-generator-bgp"
@@ -2007,7 +1529,12 @@ func (n *BgpPeer_UnicastIpv6PrefixPathAny) Origin() *BgpPeer_UnicastIpv6Prefix_O
 	}
 }
 
-// PathId (leaf): The path id.
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-bgp"
 // Instantiating module: "open-traffic-generator-bgp"
@@ -2023,7 +1550,12 @@ func (n *BgpPeer_UnicastIpv6PrefixPath) PathId() *BgpPeer_UnicastIpv6Prefix_Path
 	}
 }
 
-// PathId (leaf): The path id.
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-bgp"
 // Instantiating module: "open-traffic-generator-bgp"

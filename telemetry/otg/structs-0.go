@@ -155,6 +155,7 @@ type BgpPeer_UnicastIpv4Prefix_Key struct {
 	Address      string                     `path:"address"`
 	PrefixLength uint32                     `path:"prefix-length"`
 	Origin       E_UnicastIpv4Prefix_Origin `path:"origin"`
+	PathId       uint32                     `path:"path-id"`
 }
 
 // BgpPeer_UnicastIpv6Prefix_Key represents the key for list UnicastIpv6Prefix of element /open-traffic-generator-bgp/bgp-peers/bgp-peer.
@@ -162,12 +163,13 @@ type BgpPeer_UnicastIpv6Prefix_Key struct {
 	Address      string                     `path:"address"`
 	PrefixLength uint32                     `path:"prefix-length"`
 	Origin       E_UnicastIpv6Prefix_Origin `path:"origin"`
+	PathId       uint32                     `path:"path-id"`
 }
 
 // NewUnicastIpv4Prefix creates a new entry in the UnicastIpv4Prefix list of the
 // BgpPeer struct. The keys of the list are populated from the input
 // arguments.
-func (t *BgpPeer) NewUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin) (*BgpPeer_UnicastIpv4Prefix, error) {
+func (t *BgpPeer) NewUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin, PathId uint32) (*BgpPeer_UnicastIpv4Prefix, error) {
 
 	// Initialise the list within the receiver struct if it has not already been
 	// created.
@@ -179,6 +181,7 @@ func (t *BgpPeer) NewUnicastIpv4Prefix(Address string, PrefixLength uint32, Orig
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	// Ensure that this key has not already been used in the
@@ -192,6 +195,7 @@ func (t *BgpPeer) NewUnicastIpv4Prefix(Address string, PrefixLength uint32, Orig
 		Address:      &Address,
 		PrefixLength: &PrefixLength,
 		Origin:       Origin,
+		PathId:       &PathId,
 	}
 
 	return t.UnicastIpv4Prefix[key], nil
@@ -212,6 +216,7 @@ func (t *BgpPeer) RenameUnicastIpv4Prefix(oldK, newK BgpPeer_UnicastIpv4Prefix_K
 	e.Address = &newK.Address
 	e.PrefixLength = &newK.PrefixLength
 	e.Origin = newK.Origin
+	e.PathId = &newK.PathId
 
 	t.UnicastIpv4Prefix[newK] = e
 	delete(t.UnicastIpv4Prefix, oldK)
@@ -221,12 +226,13 @@ func (t *BgpPeer) RenameUnicastIpv4Prefix(oldK, newK BgpPeer_UnicastIpv4Prefix_K
 // GetOrCreateUnicastIpv4Prefix retrieves the value with the specified keys from
 // the receiver BgpPeer. If the entry does not exist, then it is created.
 // It returns the existing or new list member.
-func (t *BgpPeer) GetOrCreateUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4Prefix {
+func (t *BgpPeer) GetOrCreateUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4Prefix {
 
 	key := BgpPeer_UnicastIpv4Prefix_Key{
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	if v, ok := t.UnicastIpv4Prefix[key]; ok {
@@ -234,7 +240,7 @@ func (t *BgpPeer) GetOrCreateUnicastIpv4Prefix(Address string, PrefixLength uint
 	}
 	// Panic if we receive an error, since we should have retrieved an existing
 	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewUnicastIpv4Prefix(Address, PrefixLength, Origin)
+	v, err := t.NewUnicastIpv4Prefix(Address, PrefixLength, Origin, PathId)
 	if err != nil {
 		panic(fmt.Sprintf("GetOrCreateUnicastIpv4Prefix got unexpected error: %v", err))
 	}
@@ -245,7 +251,7 @@ func (t *BgpPeer) GetOrCreateUnicastIpv4Prefix(Address string, PrefixLength uint
 // the UnicastIpv4Prefix map field of BgpPeer. If the receiver is nil, or
 // the specified key is not present in the list, nil is returned such that Get*
 // methods may be safely chained.
-func (t *BgpPeer) GetUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin) *BgpPeer_UnicastIpv4Prefix {
+func (t *BgpPeer) GetUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv4Prefix {
 
 	if t == nil {
 		return nil
@@ -255,6 +261,7 @@ func (t *BgpPeer) GetUnicastIpv4Prefix(Address string, PrefixLength uint32, Orig
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	if lm, ok := t.UnicastIpv4Prefix[key]; ok {
@@ -266,11 +273,12 @@ func (t *BgpPeer) GetUnicastIpv4Prefix(Address string, PrefixLength uint32, Orig
 // DeleteUnicastIpv4Prefix deletes the value with the specified keys from
 // the receiver BgpPeer. If there is no such element, the function
 // is a no-op.
-func (t *BgpPeer) DeleteUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin) {
+func (t *BgpPeer) DeleteUnicastIpv4Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv4Prefix_Origin, PathId uint32) {
 	key := BgpPeer_UnicastIpv4Prefix_Key{
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	delete(t.UnicastIpv4Prefix, key)
@@ -289,10 +297,15 @@ func (t *BgpPeer) AppendUnicastIpv4Prefix(v *BgpPeer_UnicastIpv4Prefix) error {
 		return fmt.Errorf("invalid nil key for PrefixLength")
 	}
 
+	if v.PathId == nil {
+		return fmt.Errorf("invalid nil key for PathId")
+	}
+
 	key := BgpPeer_UnicastIpv4Prefix_Key{
 		Address:      *v.Address,
 		PrefixLength: *v.PrefixLength,
 		Origin:       v.Origin,
+		PathId:       *v.PathId,
 	}
 
 	// Initialise the list within the receiver struct if it has not already been
@@ -312,7 +325,7 @@ func (t *BgpPeer) AppendUnicastIpv4Prefix(v *BgpPeer_UnicastIpv4Prefix) error {
 // NewUnicastIpv6Prefix creates a new entry in the UnicastIpv6Prefix list of the
 // BgpPeer struct. The keys of the list are populated from the input
 // arguments.
-func (t *BgpPeer) NewUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin) (*BgpPeer_UnicastIpv6Prefix, error) {
+func (t *BgpPeer) NewUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin, PathId uint32) (*BgpPeer_UnicastIpv6Prefix, error) {
 
 	// Initialise the list within the receiver struct if it has not already been
 	// created.
@@ -324,6 +337,7 @@ func (t *BgpPeer) NewUnicastIpv6Prefix(Address string, PrefixLength uint32, Orig
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	// Ensure that this key has not already been used in the
@@ -337,6 +351,7 @@ func (t *BgpPeer) NewUnicastIpv6Prefix(Address string, PrefixLength uint32, Orig
 		Address:      &Address,
 		PrefixLength: &PrefixLength,
 		Origin:       Origin,
+		PathId:       &PathId,
 	}
 
 	return t.UnicastIpv6Prefix[key], nil
@@ -357,6 +372,7 @@ func (t *BgpPeer) RenameUnicastIpv6Prefix(oldK, newK BgpPeer_UnicastIpv6Prefix_K
 	e.Address = &newK.Address
 	e.PrefixLength = &newK.PrefixLength
 	e.Origin = newK.Origin
+	e.PathId = &newK.PathId
 
 	t.UnicastIpv6Prefix[newK] = e
 	delete(t.UnicastIpv6Prefix, oldK)
@@ -366,12 +382,13 @@ func (t *BgpPeer) RenameUnicastIpv6Prefix(oldK, newK BgpPeer_UnicastIpv6Prefix_K
 // GetOrCreateUnicastIpv6Prefix retrieves the value with the specified keys from
 // the receiver BgpPeer. If the entry does not exist, then it is created.
 // It returns the existing or new list member.
-func (t *BgpPeer) GetOrCreateUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6Prefix {
+func (t *BgpPeer) GetOrCreateUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6Prefix {
 
 	key := BgpPeer_UnicastIpv6Prefix_Key{
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	if v, ok := t.UnicastIpv6Prefix[key]; ok {
@@ -379,7 +396,7 @@ func (t *BgpPeer) GetOrCreateUnicastIpv6Prefix(Address string, PrefixLength uint
 	}
 	// Panic if we receive an error, since we should have retrieved an existing
 	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewUnicastIpv6Prefix(Address, PrefixLength, Origin)
+	v, err := t.NewUnicastIpv6Prefix(Address, PrefixLength, Origin, PathId)
 	if err != nil {
 		panic(fmt.Sprintf("GetOrCreateUnicastIpv6Prefix got unexpected error: %v", err))
 	}
@@ -390,7 +407,7 @@ func (t *BgpPeer) GetOrCreateUnicastIpv6Prefix(Address string, PrefixLength uint
 // the UnicastIpv6Prefix map field of BgpPeer. If the receiver is nil, or
 // the specified key is not present in the list, nil is returned such that Get*
 // methods may be safely chained.
-func (t *BgpPeer) GetUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin) *BgpPeer_UnicastIpv6Prefix {
+func (t *BgpPeer) GetUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin, PathId uint32) *BgpPeer_UnicastIpv6Prefix {
 
 	if t == nil {
 		return nil
@@ -400,6 +417,7 @@ func (t *BgpPeer) GetUnicastIpv6Prefix(Address string, PrefixLength uint32, Orig
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	if lm, ok := t.UnicastIpv6Prefix[key]; ok {
@@ -411,11 +429,12 @@ func (t *BgpPeer) GetUnicastIpv6Prefix(Address string, PrefixLength uint32, Orig
 // DeleteUnicastIpv6Prefix deletes the value with the specified keys from
 // the receiver BgpPeer. If there is no such element, the function
 // is a no-op.
-func (t *BgpPeer) DeleteUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin) {
+func (t *BgpPeer) DeleteUnicastIpv6Prefix(Address string, PrefixLength uint32, Origin E_UnicastIpv6Prefix_Origin, PathId uint32) {
 	key := BgpPeer_UnicastIpv6Prefix_Key{
 		Address:      Address,
 		PrefixLength: PrefixLength,
 		Origin:       Origin,
+		PathId:       PathId,
 	}
 
 	delete(t.UnicastIpv6Prefix, key)
@@ -434,10 +453,15 @@ func (t *BgpPeer) AppendUnicastIpv6Prefix(v *BgpPeer_UnicastIpv6Prefix) error {
 		return fmt.Errorf("invalid nil key for PrefixLength")
 	}
 
+	if v.PathId == nil {
+		return fmt.Errorf("invalid nil key for PathId")
+	}
+
 	key := BgpPeer_UnicastIpv6Prefix_Key{
 		Address:      *v.Address,
 		PrefixLength: *v.PrefixLength,
 		Origin:       v.Origin,
+		PathId:       *v.PathId,
 	}
 
 	// Initialise the list within the receiver struct if it has not already been
@@ -828,7 +852,7 @@ type BgpPeer_UnicastIpv4Prefix struct {
 	NextHopIpv4Address *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
 	NextHopIpv6Address *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
 	Origin             E_UnicastIpv4Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
-	PathId             *uint32                                `path:"state/path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	PathId             *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
 	PrefixLength       *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
 }
 
@@ -941,6 +965,10 @@ func (t *BgpPeer_UnicastIpv4Prefix) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	if t.PathId == nil {
+		var v uint32 = 0
+		t.PathId = &v
+	}
 	for _, e := range t.AsPath {
 		e.PopulateDefaults()
 	}
@@ -955,6 +983,10 @@ func (t *BgpPeer_UnicastIpv4Prefix) ΛListKeyMap() (map[string]interface{}, erro
 		return nil, fmt.Errorf("nil value for key Address")
 	}
 
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
 	if t.PrefixLength == nil {
 		return nil, fmt.Errorf("nil value for key PrefixLength")
 	}
@@ -962,6 +994,7 @@ func (t *BgpPeer_UnicastIpv4Prefix) ΛListKeyMap() (map[string]interface{}, erro
 	return map[string]interface{}{
 		"address":       *t.Address,
 		"origin":        t.Origin,
+		"path-id":       *t.PathId,
 		"prefix-length": *t.PrefixLength,
 	}, nil
 }
@@ -1170,7 +1203,7 @@ type BgpPeer_UnicastIpv6Prefix struct {
 	NextHopIpv4Address *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
 	NextHopIpv6Address *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
 	Origin             E_UnicastIpv6Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
-	PathId             *uint32                                `path:"state/path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	PathId             *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
 	PrefixLength       *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
 }
 
@@ -1283,6 +1316,10 @@ func (t *BgpPeer_UnicastIpv6Prefix) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	if t.PathId == nil {
+		var v uint32 = 0
+		t.PathId = &v
+	}
 	for _, e := range t.AsPath {
 		e.PopulateDefaults()
 	}
@@ -1297,6 +1334,10 @@ func (t *BgpPeer_UnicastIpv6Prefix) ΛListKeyMap() (map[string]interface{}, erro
 		return nil, fmt.Errorf("nil value for key Address")
 	}
 
+	if t.PathId == nil {
+		return nil, fmt.Errorf("nil value for key PathId")
+	}
+
 	if t.PrefixLength == nil {
 		return nil, fmt.Errorf("nil value for key PrefixLength")
 	}
@@ -1304,6 +1345,7 @@ func (t *BgpPeer_UnicastIpv6Prefix) ΛListKeyMap() (map[string]interface{}, erro
 	return map[string]interface{}{
 		"address":       *t.Address,
 		"origin":        t.Origin,
+		"path-id":       *t.PathId,
 		"prefix-length": *t.PrefixLength,
 	}, nil
 }

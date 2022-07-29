@@ -2562,7 +2562,9 @@ func (n *BgpPeer_UnicastIpv4Prefix_PathIdPath) Lookup(t testing.TB) *oc.Qualifie
 	if ok {
 		return convertBgpPeer_UnicastIpv4Prefix_PathIdPath(t, md, goStruct)
 	}
-	return nil
+	return (&oc.QualifiedUint32{
+		Metadata: md,
+	}).SetVal(goStruct.GetPathId())
 }
 
 // Get fetches the value at /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/path-id with a ONCE subscription,

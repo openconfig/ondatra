@@ -3004,6 +3004,7 @@ type Component struct {
 	SoftwareVersion      *string                                 `path:"state/software-version" module:"openconfig-platform/openconfig-platform"`
 	Storage              *Component_Storage                      `path:"storage" module:"openconfig-platform"`
 	Subcomponent         map[string]*Component_Subcomponent      `path:"subcomponents/subcomponent" module:"openconfig-platform/openconfig-platform"`
+	SwitchoverReady      *bool                                   `path:"state/switchover-ready" module:"openconfig-platform/openconfig-platform"`
 	Temperature          *Component_Temperature                  `path:"state/temperature" module:"openconfig-platform/openconfig-platform"`
 	Transceiver          *Component_Transceiver                  `path:"transceiver" module:"openconfig-platform-transceiver"`
 	Type                 Component_Type_Union                    `path:"state/type" module:"openconfig-platform/openconfig-platform"`
@@ -3899,6 +3900,22 @@ func (t *Component) GetSoftwareVersion() string {
 		return ""
 	}
 	return *t.SoftwareVersion
+}
+
+// GetSwitchoverReady retrieves the value of the leaf SwitchoverReady from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SwitchoverReady is set, it can
+// safely use t.GetSwitchoverReady() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SwitchoverReady == nil' before retrieving the leaf's value.
+func (t *Component) GetSwitchoverReady() bool {
+	if t == nil || t.SwitchoverReady == nil {
+		return false
+	}
+	return *t.SwitchoverReady
 }
 
 // GetType retrieves the value of the leaf Type from the Component
