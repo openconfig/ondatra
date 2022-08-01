@@ -64,7 +64,7 @@ func (i *Interface) WithPort(p *Port) *Interface {
 }
 
 // WithLAG specifies that the interface will be configured on the given LAG.
-// TODO(b/193135106): Add Ondatra test for this feature.
+// TODO: Add Ondatra test for this feature.
 func (i *Interface) WithLAG(l *LAG) *Interface {
 	i.pb.Link = &opb.InterfaceConfig_Lag{l.pb.GetName()}
 	return i

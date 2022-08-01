@@ -296,6 +296,16 @@ type Component_SoftwareVersionPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_SwitchoverReadyPath represents the /openconfig-platform/components/component/state/switchover-ready YANG schema element.
+type Component_SwitchoverReadyPath struct {
+	*ygot.NodePath
+}
+
+// Component_SwitchoverReadyPathAny represents the wildcard version of the /openconfig-platform/components/component/state/switchover-ready YANG schema element.
+type Component_SwitchoverReadyPathAny struct {
+	*ygot.NodePath
+}
+
 // Component_TypePath represents the /openconfig-platform/components/component/state/type YANG schema element.
 type Component_TypePath struct {
 	*ygot.NodePath
@@ -1657,6 +1667,50 @@ func (n *ComponentPathAny) Subcomponent(Name string) *Component_SubcomponentPath
 		NodePath: ygot.NewNodePath(
 			[]string{"subcomponents", "subcomponent"},
 			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// SwitchoverReady (leaf): For components that have redundant roles, this reports a value
+// that indicates if the component is ready to support failover.
+//
+// The components with a redundant-role should reflect the overall
+// system's switchover status.  For example, two supervisors in a
+// device, one as primary and the other as secondary, should both
+// report the same value.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/switchover-ready"
+// Path from root: "/components/component/state/switchover-ready"
+func (n *ComponentPath) SwitchoverReady() *Component_SwitchoverReadyPath {
+	return &Component_SwitchoverReadyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "switchover-ready"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SwitchoverReady (leaf): For components that have redundant roles, this reports a value
+// that indicates if the component is ready to support failover.
+//
+// The components with a redundant-role should reflect the overall
+// system's switchover status.  For example, two supervisors in a
+// device, one as primary and the other as secondary, should both
+// report the same value.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/switchover-ready"
+// Path from root: "/components/component/state/switchover-ready"
+func (n *ComponentPathAny) SwitchoverReady() *Component_SwitchoverReadyPathAny {
+	return &Component_SwitchoverReadyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "switchover-ready"},
+			map[string]interface{}{},
 			n,
 		),
 	}

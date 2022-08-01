@@ -88,7 +88,7 @@ func QualifiedTypeString(value interface{}, md *Metadata) string {
 		// Add a blank line for JSON output.
 		valStr = "\n" + valStr
 	} else {
-		// TODO(b/206653211): Decide if value presence should be inferred by checking zero value
+		// TODO: Decide if value presence should be inferred by checking zero value
 		if val := reflect.ValueOf(value); val.IsValid() && !val.IsZero() {
 			valStr = fmt.Sprintf("%v (present)", value)
 		} else {
@@ -327,7 +327,7 @@ func unmarshal(data []*DataPoint, structSchema *yang.Entry, structPtr ygot.GoStr
 		errs.Add(fmt.Errorf("input schema for generated code is invalid"))
 		return nil, nil, errs.Err()
 	}
-	// TODO(wenovus): Add fatal check for duplicate paths, as they're not allowed by GET semantics.
+	// TODO: Add fatal check for duplicate paths, as they're not allowed by GET semantics.
 	for _, dp := range data {
 		var gcopts []ytypes.GetOrCreateNodeOpt
 		if reverseShadowPaths {
@@ -901,7 +901,7 @@ func receiveAll(sub gpb.GNMI_SubscribeClient, deletesExpected bool, mode gpb.Sub
 		data, sync, err = receive(sub, data, deletesExpected)
 		if err != nil {
 			if mode == gpb.SubscriptionList_ONCE && err == io.EOF {
-				// TODO(wenovus): It is unclear whether "subscribe ONCE stream closed without sync_response"
+				// TODO: It is unclear whether "subscribe ONCE stream closed without sync_response"
 				// should be an error, so tolerate both scenarios.
 				// See https://github.com/openconfig/reference/pull/156
 				log.V(1).Infof("subscribe ONCE stream closed without sync_response.")

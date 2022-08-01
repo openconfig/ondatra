@@ -32,27 +32,15 @@ import (
 )
 
 type fakeHTTPServer struct {
-	t               *testing.T
-	expectedPath    string
-	expectedMethod  string
-	expectedHeaders map[string]string
-	responseCode    int
-	responseBody    string
-	err             error
+	req          *http.Request
+	responseCode int
+	responseBody string
+	err          error
 }
 
 func (s *fakeHTTPServer) RoundTrip(req *http.Request) (*http.Response, error) {
-	if req.Method != s.expectedMethod {
-		s.t.Errorf("req.method got %s, want %s", req.Method, s.expectedMethod)
-	}
-	if req.URL.String() != s.expectedPath {
-		s.t.Errorf("req.url got %s, want %s", req.URL.String(), s.expectedPath)
-	}
-	for key, expectedValue := range s.expectedHeaders {
-		if value := req.Header.Get(key); value != expectedValue {
-			s.t.Errorf("req.headers[%s]: got %s, want %s", key, value, expectedValue)
-		}
-	}
+	s.req = req
+
 	if s.err != nil {
 		return nil, s.err
 	}
@@ -166,13 +154,9 @@ func TestSendRequest(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			fakeServer := &fakeHTTPServer{
-				t:               t,
-				expectedPath:    tt.req.GetUrl(),
-				expectedMethod:  tt.expectedMethod,
-				expectedHeaders: tt.expectedHeaders,
-				responseCode:    tt.responseCode,
-				responseBody:    tt.responseBody,
-				err:             tt.responseError,
+				responseCode: tt.responseCode,
+				responseBody: tt.responseBody,
+				err:          tt.responseError,
 			}
 			service := New(WithTransport(fakeServer))
 			srv := grpc.NewServer(grpc.Creds(local.NewCredentials()))
@@ -189,6 +173,18 @@ func TestSendRequest(t *testing.T) {
 			}
 			if tt.wantErr != "" {
 				return
+			}
+			req := fakeServer.req
+			if req.Method != tt.expectedMethod {
+				t.Errorf("req.method got %s, want %s", req.Method, tt.expectedMethod)
+			}
+			if req.URL.String() != tt.req.Url {
+				t.Errorf("req.url got %s, want %s", req.URL.String(), tt.req.Url)
+			}
+			for key, expectedValue := range tt.expectedHeaders {
+				if value := req.Header.Get(key); value != expectedValue {
+					t.Errorf("req.headers[%s]: got %s, want %s", key, value, expectedValue)
+				}
 			}
 			if resp.GetStatus() != int32(tt.responseCode) {
 				t.Errorf("HTTPRequest(%v) resp.status got %d, want %d", tt.req, resp.GetStatus(), tt.responseCode)

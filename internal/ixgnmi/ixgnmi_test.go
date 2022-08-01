@@ -384,7 +384,7 @@ func TestSubscribe(t *testing.T) {
 	}}
 
 	/*
-	 * TODO(greg-dennis): Add test cases for the flows root. Unfortunately today that
+	 * TODO: Add test cases for the flows root. Unfortunately today that
 	 * requires dependency on the Ondatra Telemetry API generation, which could
 	 * create a circulate dependency back on this module. If and when the
 	 * Telemetry API is an independent library, add these test cases.

@@ -78,7 +78,7 @@ var (
 	macRE         = regexp.MustCompile(`^([0-9a-f]{2}:){5}([0-9a-f]{2})$`)
 	resolveMacsFn = resolveMacs
 
-	// TODO(b/216840986): Lower timeouts after chassis hardware upgrades.
+	// TODO: Lower timeouts after chassis hardware upgrades.
 	peersImportTimeout   = time.Minute
 	trafficImportTimeout = 4 * time.Minute
 	topoImportTimeout    = 3 * time.Minute
@@ -493,7 +493,7 @@ func (ix *ixATE) configureTopology(ics []*opb.InterfaceConfig) error {
 	for _, ifs := range ifsByLink {
 		ix.addTopology(ifs)
 		for _, ifc := range ifs {
-			// TODO(greg-dennis): Add MACsec to the 'golden' ixiajsoncfg PushTopology tests.
+			// TODO: Add MACsec to the 'golden' ixiajsoncfg PushTopology tests.
 			if err := ix.addMACsecProtocol(ifc); err != nil {
 				return err
 			}
@@ -843,7 +843,7 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) ([]string, error) {
 		if topo.Status == "started" && len(topo.ProtocolActionsInProgress) == 0 {
 			return true, nil, false
 		}
-		// TODO(b/216639176): Remove IS-IS/Lag check after Ixias updated to 9.20update1
+		// TODO: Remove IS-IS/Lag check after Ixias updated to 9.20update1
 		for _, intf := range ix.intfs {
 			// Checks for the known index out of bounds error if there is any IS-IS config on any LAG.
 			// Still returns 'false' as the 'started' result for the function to trigger the retry
@@ -955,7 +955,7 @@ func (ix *ixATE) startProtocols(ctx context.Context) error {
 	}
 	// Protocols may have started even if 'startallprotocols' reported a failure,
 	// so return based on actual protocol state.
-	// TODO(b/194218629): This may be related to behavior on 9.12, try reverting
+	// TODO: This may be related to behavior on 9.12, try reverting
 	// to failing tests on a single 'startallprotocols' error and check the
 	// behavior for a topology with RSVP protocols configured after updating to
 	// IxNetwork 9.10update2 everywhere.
@@ -1296,7 +1296,7 @@ func startTraffic(ctx context.Context, ix *ixATE) error {
 		return fmt.Errorf("could not start traffic: %w", err)
 	}
 
-	// TODO(jasdeep-hundal): Investigate using JSON-based config instead of the REST API.
+	// TODO: Investigate using JSON-based config instead of the REST API.
 	if len(ix.egressTrackingFlows) > 0 {
 		if _, err := ix.c.Session().Stats().ConfigEgressView(ctx, ix.egressTrackingFlows); err != nil {
 			return fmt.Errorf("could not set egress stat tracking: %w", err)
@@ -1440,7 +1440,7 @@ func (ix *ixATE) FlushStats() {
 // UpdateBGPPeerStates exists only to match the API of the prior IxNetwork ATE binding.
 // It assumes that the only changes in the provided interface configs are updates to
 // BGP active states.
-// TODO(b/179035229): Remove this method once new Ixia config binding is used.
+// TODO: Remove this method once new Ixia config binding is used.
 func (ix *ixATE) UpdateBGPPeerStates(ctx context.Context, ifs []*opb.InterfaceConfig) error {
 	if err := validateInterfaces(ifs); err != nil {
 		return err
