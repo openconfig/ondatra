@@ -86,6 +86,7 @@ YANG_FILES=(
   public/release/models/qos/openconfig-qos-types.yang
   public/release/models/qos/openconfig-qos.yang
   public/release/models/rib/openconfig-rib-bgp.yang
+  public/release/models/sampling/openconfig-sampling-sflow.yang
   public/release/models/segment-routing/openconfig-segment-routing-types.yang
   public/release/models/system/openconfig-system.yang
   public/release/models/types/openconfig-inet-types.yang

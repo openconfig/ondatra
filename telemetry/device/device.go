@@ -45,6 +45,7 @@ using the following YANG input files:
   - public/release/models/qos/openconfig-qos-types.yang
   - public/release/models/qos/openconfig-qos.yang
   - public/release/models/rib/openconfig-rib-bgp.yang
+  - public/release/models/sampling/openconfig-sampling-sflow.yang
   - public/release/models/segment-routing/openconfig-segment-routing-types.yang
   - public/release/models/system/openconfig-system.yang
   - public/release/models/types/openconfig-inet-types.yang
@@ -74,6 +75,7 @@ import (
 	"github.com/openconfig/ondatra/telemetry/platform"
 	"github.com/openconfig/ondatra/telemetry/qos"
 	"github.com/openconfig/ondatra/telemetry/routingpolicy"
+	"github.com/openconfig/ondatra/telemetry/sampling"
 	"github.com/openconfig/ondatra/telemetry/system"
 	"github.com/openconfig/ygot/ygot"
 )
@@ -356,6 +358,23 @@ func (n *DevicePath) RoutingPolicy() *routingpolicy.RoutingPolicyPath {
 	return &routingpolicy.RoutingPolicyPath{
 		NodePath: ygot.NewNodePath(
 			[]string{"routing-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Sampling (container): Top-level container for sampling-related configuration and
+// operational state data
+// ----------------------------------------
+// Defining module: "openconfig-sampling"
+// Instantiating module: "openconfig-sampling"
+// Path from parent: "sampling"
+// Path from root: "/sampling"
+func (n *DevicePath) Sampling() *sampling.SamplingPath {
+	return &sampling.SamplingPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"sampling"},
 			map[string]interface{}{},
 			n,
 		),
