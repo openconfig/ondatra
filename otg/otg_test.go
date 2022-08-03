@@ -15,9 +15,10 @@
 package otg
 
 import (
-	"golang.org/x/net/context"
 	"strings"
 	"testing"
+
+	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
@@ -28,9 +29,9 @@ import (
 var (
 	fakeSnappi = new(fakeGosnappi)
 	fakeATE    = &fakebind.ATE{
-		AbstractATE: &binding.AbstractATE{&binding.Dims{
+		AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{
 			Ports: map[string]*binding.Port{
-				"port1": &binding.Port{},
+				"port1": {},
 			},
 		}},
 		DialOTGFn: func(context.Context) (gosnappi.GosnappiApi, error) {
@@ -110,11 +111,28 @@ func TestStopTraffic(t *testing.T) {
 	}
 }
 
+func TestWithdrawRoutes(t *testing.T) {
+	fakeSnappi.route = gosnappi.RouteStateState.WITHDRAW
+	otgAPI.WithdrawRoutes(t, []string{"peer1", "peer2"})
+	if got, want := fakeSnappi.route, gosnappi.RouteStateState.WITHDRAW; got != want {
+		t.Errorf("WithdrawRoutes got unexpected route state %v, want %v", got, want)
+	}
+}
+
+func TestAdvertiseRoutes(t *testing.T) {
+	fakeSnappi.route = gosnappi.RouteStateState.ADVERTISE
+	otgAPI.AdvertiseRoutes(t, []string{"peer1", "peer2"})
+	if got, want := fakeSnappi.route, gosnappi.RouteStateState.ADVERTISE; got != want {
+		t.Errorf("AdvertiseRoutes got unexpected route state %v, want %v", got, want)
+	}
+}
+
 type fakeGosnappi struct {
 	gosnappi.GosnappiApi
 	cfg      gosnappi.Config
 	protocol gosnappi.ProtocolStateStateEnum
 	transmit gosnappi.TransmitStateStateEnum
+	route    gosnappi.RouteStateStateEnum
 }
 
 func (fg *fakeGosnappi) NewConfig() gosnappi.Config {
@@ -148,6 +166,15 @@ func (fg *fakeGosnappi) SetTransmitState(state gosnappi.TransmitState) (gosnappi
 	return gosnappi.NewResponseWarning(), nil
 }
 
+func (fg *fakeGosnappi) NewRouteState() gosnappi.RouteState {
+	return new(fakeRouteState)
+}
+
+func (fg *fakeGosnappi) SetRouteState(state gosnappi.RouteState) (gosnappi.ResponseWarning, error) {
+	fg.route = state.(*fakeRouteState).state
+	return gosnappi.NewResponseWarning(), nil
+}
+
 type fakeProtocolState struct {
 	gosnappi.ProtocolState
 	state gosnappi.ProtocolStateStateEnum
@@ -166,4 +193,20 @@ type fakeTransmitState struct {
 func (ft *fakeTransmitState) SetState(state gosnappi.TransmitStateStateEnum) gosnappi.TransmitState {
 	ft.state = state
 	return ft
+}
+
+type fakeRouteState struct {
+	gosnappi.RouteState
+	state gosnappi.RouteStateStateEnum
+	names []string
+}
+
+func (fp *fakeRouteState) SetState(state gosnappi.RouteStateStateEnum) gosnappi.RouteState {
+	fp.state = state
+	return fp
+}
+
+func (fp *fakeRouteState) SetNames(names []string) gosnappi.RouteState {
+	fp.names = names
+	return fp
 }
