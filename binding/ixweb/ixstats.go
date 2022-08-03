@@ -299,7 +299,7 @@ func (v *StatView) fetchEgressTableFromPages(ctx context.Context) (StatTable, er
 	// represented by the egress-tracked bits, but IxNetwork doesn't enforce this.
 	// To allow users to fully track 3 bits, the egressPageSize is set to 8 and
 	// the pageSize to 200. Note: retrieving all pages may be a slow operation.
-	// TODO(team): Choose egressPageSize dynamically based on the number of bits
+	// TODO: Choose egressPageSize dynamically based on the number of bits
 	// actually being tracked?
 	const (
 		maxPageSize      = 2000

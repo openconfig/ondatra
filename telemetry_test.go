@@ -2746,7 +2746,7 @@ func TestBatchGet(t *testing.T) {
 				},
 			},
 		}),
-	}, { // TODO(b/204348304): Decide whether batch Lookup should validate that data matches subscribed paths
+	}, { // TODO: Decide whether batch Lookup should validate that data matches subscribed paths
 		desc: "non-subscribed paths",
 		stub: func(s *fakegnmi.Stubber) {
 			s.Notification(

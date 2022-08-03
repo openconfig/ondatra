@@ -42,6 +42,20 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
 	},
+	"E_State_CommunityType": {
+		1: {Name: "MANUAL_AS_NUMBER"},
+		2: {Name: "NO_EXPORT"},
+		3: {Name: "NO_ADVERTISE"},
+		4: {Name: "NO_EXPORT_SUBCONFED"},
+		5: {Name: "LLGR_STALE"},
+		6: {Name: "NO_LLGR"},
+	},
+	"E_State_SegmentType": {
+		1: {Name: "AS_SEQUENCE"},
+		2: {Name: "AS_SET"},
+		3: {Name: "AS_CONFED_SEQUENCE"},
+		4: {Name: "AS_CONFED_SET"},
+	},
 	"E_UnicastIpv4Prefix_Origin": {
 		1: {Name: "IGP"},
 		2: {Name: "EGP"},
@@ -60,8 +74,20 @@ func initΛEnumTypes() {
 		"/bgp-peers/bgp-peer/state/session-state": {
 			reflect.TypeOf((E_BgpPeer_SessionState)(0)),
 		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/as-path/segment-type": {
+			reflect.TypeOf((E_State_SegmentType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/community/community-type": {
+			reflect.TypeOf((E_State_CommunityType)(0)),
+		},
 		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv4Prefix_Origin)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/as-path/segment-type": {
+			reflect.TypeOf((E_State_SegmentType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/community/community-type": {
+			reflect.TypeOf((E_State_CommunityType)(0)),
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),

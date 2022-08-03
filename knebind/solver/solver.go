@@ -35,7 +35,7 @@ var (
 	// type2VendorMap maps the KNE node type to the Ondatra vendor.
 	type2VendorMap = map[tpb.Node_Type]opb.Device_Vendor{
 		tpb.Node_ARISTA_CEOS: opb.Device_ARISTA,
-		// TODO(greg-dennis): when Ondatra supports the OS dimension, use it to
+		// TODO: when Ondatra supports the OS dimension, use it to
 		// distinguish CSR from CXR and CEVO from VMX.
 		tpb.Node_CISCO_CSR:    opb.Device_CISCO,
 		tpb.Node_CISCO_CXR:    opb.Device_CISCO,
@@ -220,7 +220,7 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 	dims := &binding.Dims{
 		Name:   node.GetName(),
 		Vendor: vendor,
-		// TODO(greg-dennis): Determine appropriate hardware model and software version
+		// TODO: Determine appropriate hardware model and software version
 		HardwareModel:   typeName,
 		SoftwareVersion: typeName,
 		Ports:           make(map[string]*binding.Port),
@@ -285,7 +285,7 @@ func (s *solver) solve() (*assign, error) {
 		port2IntfChan := genCombos(port2Intfs)
 		for port2Intf := range port2IntfChan {
 			if a := newAssign(dev2Node, port2Intf); s.linksMatch(a) {
-				// TODO(b/190414700): When solver is rewritten, signal the gorouting
+				// TODO: When solver is rewritten, signal the gorouting
 				// channel to exit early here and avoid leaving the goroutine hanging.
 				// Not disastrous but ideally the goroutines would terminate here.
 				return a, nil
@@ -353,7 +353,7 @@ func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) (bool, map[*opb.Port]
 }
 
 func (s *solver) portMatch(port *opb.Port, intf *intf) bool {
-	// TODO(b/190414700): When solver is rewritten, support more generic port matching.
+	// TODO: When solver is rewritten, support more generic port matching.
 	if port.GetSpeed() != opb.Port_SPEED_UNSPECIFIED {
 		return false
 	}

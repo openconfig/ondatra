@@ -19,6 +19,10 @@ import (
 	"math/big"
 )
 
+// DefaultNetworkInstance is the constant name for referring to the default network
+// instance on the device.  It has been standardized in OpenConfig.
+const DefaultNetworkInstance = "DEFAULT"
+
 var one = big.NewInt(1)
 
 func maxVal(numBytes uint) *big.Int {

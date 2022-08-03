@@ -159,7 +159,7 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 			return nil, fmt.Errorf("statistics row %q has an unmappable port link state %q", row.PortName, row.LinkState)
 		}
 
-		// TODO(team): Map different speed interfaces - need to determine what the possible Ixia values are.
+		// TODO: Map different speed interfaces - need to determine what the possible Ixia values are.
 		switch row.LineSpeed {
 		case "":
 			// No error when empty.

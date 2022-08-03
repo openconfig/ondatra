@@ -115,7 +115,7 @@ func (at *ATETopology) Update(t testing.TB) {
 
 // UpdateBGPPeerStates is equivalent to Update() but only updates the BGP peer state.
 // This is provided as a temporary workaround for the high overhead of Update().
-// TODO(b/179035229): Remove this method once new Ixia config binding is used.
+// TODO: Remove this method once new Ixia config binding is used.
 func (at *ATETopology) UpdateBGPPeerStates(t testing.TB) {
 	t.Helper()
 	if err := ate.UpdateTopology(context.Background(), at.ate, at.top, true); err != nil {
