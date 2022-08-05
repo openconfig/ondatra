@@ -4,7 +4,7 @@
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# You may obtain a copy of the License at:
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
 #
@@ -254,6 +254,25 @@ go run internal/gnmigen/main/main.go \
   -trim_path_package_prefix="open-traffic-generator-" \
   "${OTG_YANG_FILES[@]}"
 
-find config telemetry -name "*.go" -exec goimports -w {} +
-find config telemetry -name "*.go" -exec gofmt -w -s {} +
+# New Telemetry Library
+go run github.com/openconfig/ygnmi/app/ygnmi generator \
+  --trim_module_prefix=openconfig \
+  --exclude_modules="${EXCLUDE_MODULES}" \
+  --base_package_path=github.com/openconfig/ondatra/gnmi/oc \
+  --output_dir=gnmi/oc \
+  --paths=public/release/models/...,public/third_party/ietf/... \
+  "${YANG_FILES[@]}"
+
+go run github.com/openconfig/ygnmi/app/ygnmi generator \
+  --trim_module_prefix=open-traffic-generator \
+  --base_package_path=github.com/openconfig/ondatra/gnmi/otg \
+  --output_dir=gnmi/otg \
+  --paths=models-yang/models/... \
+  "${OTG_YANG_FILES[@]}"
+
+find gnmi/oc gnmi/otg -name "*.go" -exec sed -i '1s/^/\/\/go:build go1.18\n/' {} +
+
+find gnmi config telemetry -name "*.go" -exec goimports -w {} +
+find gnmi config telemetry -name "*.go" -exec gofmt -w -s {} +
+
 rm -rf public gnmi-collector-metadata.yang models-yang

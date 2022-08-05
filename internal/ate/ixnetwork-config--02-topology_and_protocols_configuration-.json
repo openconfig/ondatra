@@ -1,0 +1,208 @@
+{
+   "topology": [
+      {
+         "deviceGroup": [
+            {
+               "enabled": {
+                  "singleValue": {
+                     "value": "true"
+                  }
+               },
+               "ethernet": [
+                  {
+                     "enableVlans": {
+                        "singleValue": {
+                           "value": "false"
+                        }
+                     },
+                     "ipv6": [
+                        {
+                           "address": {
+                              "singleValue": {
+                                 "value": "2a00:1450:100f:1:192:168:130:2"
+                              }
+                           },
+                           "gatewayIp": {
+                              "singleValue": {
+                                 "value": "2a00:1450:100f:1:192:168:130:1"
+                              }
+                           },
+                           "name": "IPv6 on intf1",
+                           "prefix": {
+                              "singleValue": {
+                                 "value": "126"
+                              }
+                           },
+                           "resolveGateway": {
+                              "singleValue": {
+                                 "value": "true"
+                              }
+                           }
+                        }
+                     ],
+                     "mac": {},
+                     "mtu": {
+                        "singleValue": {
+                           "value": "1500"
+                        }
+                     },
+                     "name": "Ethernet on 1/18"
+                  }
+               ],
+               "multiplier": 1,
+               "name": "Device Group on intf1",
+               "xpath": "/topology[1]/deviceGroup[1]"
+            }
+         ],
+         "name": "Topology on 1/18"
+      },
+      {
+         "deviceGroup": [
+            {
+               "enabled": {
+                  "singleValue": {
+                     "value": "true"
+                  }
+               },
+               "ethernet": [
+                  {
+                     "enableVlans": {
+                        "singleValue": {
+                           "value": "false"
+                        }
+                     },
+                     "ipv6": [
+                        {
+                           "address": {
+                              "singleValue": {
+                                 "value": "2a00:1450:100f:1:192:168:135:2"
+                              }
+                           },
+                           "gatewayIp": {
+                              "singleValue": {
+                                 "value": "2a00:1450:100f:1:192:168:135:1"
+                              }
+                           },
+                           "name": "IPv6 on intf2",
+                           "prefix": {
+                              "singleValue": {
+                                 "value": "126"
+                              }
+                           },
+                           "resolveGateway": {
+                              "singleValue": {
+                                 "value": "true"
+                              }
+                           }
+                        }
+                     ],
+                     "mac": {},
+                     "mtu": {
+                        "singleValue": {
+                           "value": "1500"
+                        }
+                     },
+                     "name": "Ethernet on 2/8"
+                  }
+               ],
+               "multiplier": 1,
+               "name": "Device Group on intf2",
+               "xpath": "/topology[2]/deviceGroup[1]"
+            }
+         ],
+         "name": "Topology on 2/8"
+      }
+   ],
+   "vport": [
+      {
+         "l1Config": {
+            "aresOneFourHundredGigLan": {
+               "autoInstrumentation": "floating",
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true
+            },
+            "atlasFourHundredGigLan": {
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true
+            },
+            "krakenFourHundredGigLan": {
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true
+            },
+            "novusHundredGigLan": {
+               "autoInstrumentation": "floating",
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true,
+               "ieeeL1Defaults": false
+            },
+            "novusTenGigLan": {
+               "autoInstrumentation": "floating"
+            },
+            "uhdOneHundredGigLan": {
+               "enableRsFec": false,
+               "forceDisableFEC": true,
+               "ieeeL1Defaults": false
+            }
+         },
+         "location": ";1;18",
+         "name": "/1/18",
+         "protocolStack": {
+            "options": {
+               "mcast_solicit": 8,
+               "retransTime": 7000
+            }
+         },
+         "protocols": {},
+         "xpath": "/vport[1]"
+      },
+      {
+         "l1Config": {
+            "aresOneFourHundredGigLan": {
+               "autoInstrumentation": "floating",
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true
+            },
+            "atlasFourHundredGigLan": {
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true
+            },
+            "krakenFourHundredGigLan": {
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true
+            },
+            "novusHundredGigLan": {
+               "autoInstrumentation": "floating",
+               "enableRsFec": false,
+               "enableRsFecStats": false,
+               "forceDisableFEC": true,
+               "ieeeL1Defaults": false
+            },
+            "novusTenGigLan": {
+               "autoInstrumentation": "floating"
+            },
+            "uhdOneHundredGigLan": {
+               "enableRsFec": false,
+               "forceDisableFEC": true,
+               "ieeeL1Defaults": false
+            }
+         },
+         "location": ";2;8",
+         "name": "/2/8",
+         "protocolStack": {
+            "options": {
+               "mcast_solicit": 8,
+               "retransTime": 7000
+            }
+         },
+         "protocols": {},
+         "xpath": "/vport[2]"
+      }
+   ]
+}

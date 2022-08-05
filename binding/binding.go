@@ -179,7 +179,7 @@ type Port struct {
 	Name      string
 	Speed     opb.Port_Speed
 	CardModel string
-	PMD       string
+	PMD       opb.Port_Pmd
 }
 
 func (p *Port) String() string {
