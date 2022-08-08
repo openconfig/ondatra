@@ -196,6 +196,8 @@ const (
 	PMD100GFR = PMD(opb.Port_PMD_100G_FR)
 	// PMD100GLR4 is a PMD of 100G-LR4.
 	PMD100GLR4 = PMD(opb.Port_PMD_100G_LR4)
+	// PMD400GFR4 is a PMD of 400G-FR4.
+	PMD400GFR4 = PMD(opb.Port_PMD_400G_FR4)
 )
 
 func (pmd PMD) String() string {
