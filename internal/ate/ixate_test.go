@@ -321,6 +321,10 @@ func toTrafficCfg(t *testing.T, filename string) *ixconfig.Traffic {
 	return cfg
 }
 
+func stubLogOperationResult() {
+	// TODO: Implement operation logging for open-source Ondatra.
+}
+
 func restoreStubs() {
 	resolveMacsFn = resolveMacs
 	sleepFn = time.Sleep
@@ -334,6 +338,7 @@ func restoreStubs() {
 
 func TestImportConfig(t *testing.T) {
 	defer restoreStubs()
+	stubLogOperationResult()
 	sleepFn = func(time.Duration) {}
 	tests := []struct {
 		desc      string
@@ -370,7 +375,7 @@ func TestImportConfig(t *testing.T) {
 				},
 				cfg: &ixconfig.Ixnetwork{},
 			}
-			gotErr := c.importConfig(context.Background(), c.cfg, false, importTimeout)
+			gotErr := c.importConfig(context.Background(), c.cfg, false, importTimeout, "import test")
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("importConfig: got err: %v, want err %q", gotErr, test.wantErr)
 			}
@@ -384,6 +389,7 @@ func TestPushTopology(t *testing.T) {
 		chassisHost = "192.168.1.1"
 	)
 	defer restoreStubs()
+	stubLogOperationResult()
 	sleepFn = func(time.Duration) {}
 	resetIxiaTrafficCfgFn = func(context.Context, *ixATE) error {
 		return nil
@@ -602,6 +608,7 @@ func TestUpdateTopology(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			fc := &fakeCfgClient{
 				importErrs: []error{test.importErr},
 				session: &fakeSession{
@@ -754,6 +761,7 @@ func TestSyncRouteTableFilesAndImport(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			sleepFn = func(time.Duration) {}
 
 			c := baseClient()
@@ -930,6 +938,7 @@ func TestValidateProtocolStart(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			sleepFn = func(time.Duration) {}
 
 			c := baseClient(test.withIsisAndLAG)
@@ -1000,6 +1009,7 @@ func TestStartProtocols(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{c: &fakeCfgClient{session: &fakeSession{
 				postErrs: map[string]error{op: test.opErr},
 			}}}
@@ -1035,6 +1045,7 @@ func TestStopProtocols(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
 					session: &fakeSession{postErrs: map[string]error{op: test.opErr}},
@@ -1058,6 +1069,7 @@ func TestSetPortState(t *testing.T) {
 	tests := []struct {
 		desc         string
 		port         string
+		enabled      bool
 		idErr, opErr error
 		wantErr      string
 	}{{
@@ -1075,11 +1087,17 @@ func TestSetPortState(t *testing.T) {
 		opErr:   errors.New("link up/down error"),
 		wantErr: "error setting port state",
 	}, {
-		desc: "successfully set port state",
-		port: port,
+		desc:    "successfully set port state up",
+		port:    port,
+		enabled: true,
+	}, {
+		desc:    "successfully set port state down",
+		port:    port,
+		enabled: false,
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg:   cfg,
 				ports: map[string]*ixconfig.Vport{port: cfg.Vport[0]},
@@ -1092,9 +1110,95 @@ func TestSetPortState(t *testing.T) {
 				},
 			}
 
-			gotErr := c.SetPortState(context.Background(), test.port, true)
+			gotErr := c.SetPortState(context.Background(), test.port, &test.enabled)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("SetPortState: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+		})
+	}
+}
+
+func TestSetLACPState(t *testing.T) {
+	const (
+		port1 = "1/1"
+		port2 = "1/2"
+	)
+	lacpXP := parseXPath(t, "/fake/xpath/lacp")
+	lag := &ixconfig.Lag{
+		ProtocolStack: &ixconfig.LagProtocolStack{
+			Ethernet: []*ixconfig.LagEthernet{{
+				Lagportlacp: []*ixconfig.LagLagportlacp{{
+					Xpath: lacpXP,
+				}},
+			}},
+		}}
+	cfg := &ixconfig.Ixnetwork{
+		Vport: []*ixconfig.Vport{
+			{Name: ixconfig.String(port1)},
+			{Name: ixconfig.String(port2)},
+		},
+	}
+
+	tests := []struct {
+		desc         string
+		port         string
+		enabled      bool
+		idErr, opErr error
+		wantErr      string
+	}{{
+		desc:    "port not in config",
+		port:    "2/2",
+		wantErr: "does not exist in current config",
+	}, {
+		desc:    "port not in lag",
+		port:    port2,
+		wantErr: "not a member of a LAG",
+	}, {
+		desc:    "error updating ID",
+		port:    port1,
+		idErr:   errors.New("update ID error"),
+		wantErr: "could not fetch ID",
+	}, {
+		desc:    "error setting LACP state",
+		port:    port1,
+		opErr:   errors.New("lacp state error"),
+		wantErr: "lacp state error",
+	}, {
+		desc:    "successfully set lacp state on",
+		port:    port1,
+		enabled: true,
+	}, {
+		desc:    "successfully set lacp state off",
+		port:    port1,
+		enabled: false,
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
+			c := &ixATE{
+				cfg: cfg,
+				ports: map[string]*ixconfig.Vport{
+					port1: cfg.Vport[0],
+					port2: cfg.Vport[1],
+				},
+				lagPorts: map[*ixconfig.Lag][]*ixconfig.Vport{
+					lag: {cfg.Vport[0]},
+				},
+				c: &fakeCfgClient{
+					session: &fakeSession{
+						postErrs: map[string]error{
+							startLACPOp: test.opErr,
+							stopLACPOp:  test.opErr,
+						},
+					},
+					xPathToID:   map[string]string{lacpXP.String(): "/id/to/lacp"},
+					updateIDErr: test.idErr,
+				},
+			}
+
+			gotErr := c.SetLACPState(context.Background(), test.port, &test.enabled)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("SetLACPState: got err: %v, want err %q", gotErr, test.wantErr)
 			}
 		})
 	}
@@ -1167,6 +1271,7 @@ func TestResolveMacs(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg: cfg,
 				c: &fakeCfgClient{
@@ -1251,6 +1356,7 @@ func TestResetTrafficCfg(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
 					session: &fakeSession{
@@ -1298,6 +1404,7 @@ func TestGenTraffic(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg: cfg,
 				c: &fakeCfgClient{
@@ -1419,6 +1526,7 @@ func TestUpdateFlows(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := baseClient()
 			c.c = &fakeCfgClient{
 				session: &fakeSession{
@@ -1461,6 +1569,7 @@ func TestStart(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{
 				cfg: &ixconfig.Ixnetwork{
 					Traffic: &ixconfig.Traffic{
@@ -1592,6 +1701,7 @@ func TestStartTraffic(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			sleepFn = func(time.Duration) {}
 			resetIxiaTrafficCfgFn = func(_ context.Context, ix *ixATE) error {
 				ix.flowToTrafficItem = map[string]*ixconfig.TrafficTrafficItem{}
@@ -1661,7 +1771,13 @@ func TestStartTraffic(t *testing.T) {
 				t.Errorf("StartTraffic: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)
 			}
 
-			if !test.wantErr && test.wantCfgFile != "" {
+			if !test.wantErr {
+				if test.wantCfgFile == "" {
+					if fc.lastImportCfg != nil {
+						t.Fatalf("StartTraffic: Did not want traffic config pushed, got\n%v", fc.lastImportCfg)
+					}
+					return
+				}
 				wantCfg := toTrafficCfg(t, test.wantCfgFile)
 				if diff := jsonCfgDiff(t, wantCfg, fc.lastImportCfg); diff != "" {
 					t.Fatalf("StartTraffic: Unexpected traffic config pushed, diff (-want, +got)\n%s", diff)
@@ -1689,6 +1805,7 @@ func TestUpdateTraffic(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
+			stubLogOperationResult()
 			c := &ixATE{operState: test.operState}
 			updateFlowsFn = func(context.Context, *ixATE, []*opb.Flow) error {
 				return test.flowsErr
@@ -1723,6 +1840,7 @@ func TestStopAllTraffic(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
 					session: &fakeSession{postErrs: map[string]error{op: test.opErr}},
@@ -1774,6 +1892,7 @@ func TestReadStats(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			stubLogOperationResult()
 			c := &ixATE{
 				egressTrackingFlows: []string{"someFlow"},
 				c: &fakeCfgClient{
@@ -1900,6 +2019,8 @@ func TestUpdateBGPPeerStates(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{{
 					Name:     ixconfig.String(port),
@@ -2010,6 +2131,8 @@ func TestUpdateNetworkGroups(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
 			cfg := &ixconfig.Ixnetwork{
 				Vport: []*ixconfig.Vport{{
 					Name:     ixconfig.String(port),
@@ -2042,4 +2165,84 @@ func parseXPath(t *testing.T, str string) *ixconfig.XPath {
 		t.Fatalf("Error parsing XPath %q: %v", str, err)
 	}
 	return xp
+}
+
+func TestSendBGPPeerNotification(t *testing.T) {
+	const (
+		peerV4ID = 4
+		peerV6ID = 6
+	)
+	bgp4XP := parseXPath(t, "/fake/xpath/bgp4")
+	bgp6XP := parseXPath(t, "/fake/xpath/bgp6")
+	bgpV4 := &ixconfig.TopologyBgpIpv4Peer{Xpath: bgp4XP, Active: ixconfig.MultivalueBool(true)}
+	bgpV6 := &ixconfig.TopologyBgpIpv6Peer{Xpath: bgp6XP, Active: ixconfig.MultivalueBool(true)}
+	cfg := &ixconfig.Ixnetwork{
+		Topology: []*ixconfig.Topology{{
+			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+				Ethernet: []*ixconfig.TopologyEthernet{{
+					Ipv4: []*ixconfig.TopologyIpv4{{
+						BgpIpv4Peer: []*ixconfig.TopologyBgpIpv4Peer{bgpV4},
+					}},
+					Ipv6: []*ixconfig.TopologyIpv6{{
+						BgpIpv6Peer: []*ixconfig.TopologyBgpIpv6Peer{bgpV6},
+					}},
+				}},
+			}},
+		}},
+	}
+	intfs := map[string]*intf{"myInt": &intf{
+		idToBGPv4Peer: map[uint32]*ixconfig.TopologyBgpIpv4Peer{peerV4ID: bgpV4},
+		idToBGPv6Peer: map[uint32]*ixconfig.TopologyBgpIpv6Peer{peerV6ID: bgpV6},
+	}}
+
+	tests := []struct {
+		desc    string
+		peerIDs []uint32
+		v4Err   error
+		v6Err   error
+		wantErr string
+	}{{
+		desc:    "no bgp peers",
+		wantErr: "no bgp peers",
+	}, {
+		desc:    "v4 send error",
+		peerIDs: []uint32{peerV4ID},
+		v4Err:   errors.New("error sending bgp v4"),
+		wantErr: "error sending bgp v4",
+	}, {
+		desc:    "v6 send error",
+		peerIDs: []uint32{peerV6ID},
+		v6Err:   errors.New("error sending bgp v6"),
+		wantErr: "error sending bgp v6",
+	}, {
+		desc:    "success sending notification for bgp v6 peer",
+		peerIDs: []uint32{peerV4ID},
+	}, {
+		desc:    "success sending notification for bgp v4 peer",
+		peerIDs: []uint32{peerV6ID},
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
+			c := &ixATE{
+				cfg:   cfg,
+				intfs: intfs,
+				c: &fakeCfgClient{
+					xPathToID: map[string]string{
+						bgp4XP.String(): "/id/to/bgpv4",
+						bgp6XP.String(): "/id/to/bgpv6",
+					},
+					session: &fakeSession{postErrs: map[string]error{
+						bgpPeerV4NotifyOp: test.v4Err,
+						bgpPeerV6NotifyOp: test.v6Err,
+					}},
+				},
+			}
+			gotErr := c.SendBGPPeerNotification(context.Background(), test.peerIDs, 0, 0)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("SendBGPPeerNotification: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+		})
+	}
 }

@@ -28,8 +28,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/ate"
 
+	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"
 	spb "github.com/openconfig/gnoi/system"
 	tpb "github.com/openconfig/gnoi/types"
@@ -70,13 +70,9 @@ func FetchGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error
 // Install executes an install operation.
 // The gNOI install scenarios are documented on the Install function here:
 // https://github.com/openconfig/gnoi/blob/master/os/os.proto
-func Install(ctx context.Context, dev binding.Device, version string, standby bool, reader io.Reader) error {
-	dut, err := checkDUT(dev, "install")
-	if err != nil {
-		return err
-	}
+func Install(ctx context.Context, dut binding.DUT, version string, standby bool, reader io.Reader) error {
 	if version == "" {
-		return fmt.Errorf("version not set in install operation on device: %v", dev)
+		return fmt.Errorf("version not set in install operation on DUT: %v", dut)
 	}
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
@@ -99,7 +95,7 @@ func Install(ctx context.Context, dev binding.Device, version string, standby bo
 	}
 	if validated == nil { // if content is needed
 		if reader == nil {
-			return fmt.Errorf("device %v does not have package and no package specified in install operation", dev)
+			return fmt.Errorf("DUT %v does not have package and no package specified in install operation", dut)
 		}
 		awaitChan := make(chan error)
 		go func() {
@@ -169,11 +165,7 @@ func awaitPackageInstall(ic ospb.OS_InstallClient) (*ospb.Validated, error) {
 }
 
 // Ping executes the ping command from target device to a specified destination.
-func Ping(ctx context.Context, dev binding.Device, dest string, count int32) error {
-	dut, err := checkDUT(dev, "ping")
-	if err != nil {
-		return err
-	}
+func Ping(ctx context.Context, dut binding.DUT, dest string, count int32) error {
 	if dest == "" {
 		return fmt.Errorf("no destination for ping operation: %v", dest)
 	}
@@ -186,7 +178,7 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 		Count:       count,
 	})
 	if err != nil {
-		return fmt.Errorf("error on gnoi ping of %s from %v: %w", dest, dev, err)
+		return fmt.Errorf("error on gnoi ping of %s from %v: %w", dest, dut, err)
 	}
 
 	// Ping result is included in the last message of the stream.
@@ -208,18 +200,39 @@ func Ping(ctx context.Context, dev binding.Device, dest string, count int32) err
 	return nil
 }
 
-// SetInterfaceState sets the state of a specified interface on a device.
-func SetInterfaceState(ctx context.Context, dev binding.Device, intf string, enabled *bool) error {
-	if intf == "" {
-		return fmt.Errorf("no interface provided in set interface state operation on device %v", dev)
+// SystemTime gives the current system time of the device.
+func SystemTime(ctx context.Context, dut binding.DUT) (time.Time, error) {
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return time.Time{}, err
 	}
-	if enabled == nil {
-		return fmt.Errorf("no enabled state provided in set interface state operation on device %v", dev)
+	resp, err := gnoi.System().Time(ctx, &spb.TimeRequest{})
+	if err != nil {
+		return time.Time{}, fmt.Errorf("error fetching system time: %w", err)
 	}
-	if dut, ok := dev.(binding.DUT); ok {
-		return setDUTInterfaceState(ctx, dut, intf, *enabled)
+	return time.Unix(0, int64(resp.GetTime())), nil
+}
+
+// FactoryReset performs a factory reset of the device.
+//
+//	factoryOS instructs the device to rollback the its original OS version
+//	zeroFill instructs the device to zero fill persistent storage state data
+func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS, zeroFill bool) error {
+	gnoi, err := FetchGNOI(ctx, dut)
+	if err != nil {
+		return err
 	}
-	return ate.SetInterfaceState(ctx, dev.(binding.ATE), intf, *enabled)
+	resp, err := gnoi.FactoryReset().Start(ctx, &frpb.StartRequest{
+		FactoryOs: factoryOS,
+		ZeroFill:  zeroFill,
+	})
+	if err != nil {
+		return fmt.Errorf("error performing factory reset: %w ", err)
+	}
+	if rpcErr := resp.GetResetError(); rpcErr != nil {
+		return fmt.Errorf("error performing factory reset: %v ", rpcErr)
+	}
+	return nil
 }
 
 var (
@@ -257,9 +270,16 @@ var (
 	}
 )
 
-func setDUTInterfaceState(ctx context.Context, dut binding.DUT, intf string, enabled bool) error {
+// SetInterfaceState sets the state of a specified interface on a device.
+func SetInterfaceState(ctx context.Context, dut binding.DUT, intf string, enabled *bool) error {
+	if intf == "" {
+		return fmt.Errorf("no interface provided in set interface state operation on DUT %v", dut)
+	}
+	if enabled == nil {
+		return fmt.Errorf("no enabled state provided in set interface state operation on DUT %v", dut)
+	}
 	configs := disableConfigs
-	if enabled {
+	if *enabled {
 		configs = enableConfigs
 	}
 	cfgFormat, ok := configs[dut.Vendor()]
@@ -274,11 +294,7 @@ func setDUTInterfaceState(ctx context.Context, dut binding.DUT, intf string, ena
 }
 
 // Reboot reboots a device.
-func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) error {
-	dut, err := checkDUT(dev, "reboot")
-	if err != nil {
-		return err
-	}
+func Reboot(ctx context.Context, dut binding.DUT, timeout time.Duration) error {
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
@@ -319,15 +335,11 @@ func Reboot(ctx context.Context, dev binding.Device, timeout time.Duration) erro
 		}
 		time.Sleep(statusWait)
 	}
-	return fmt.Errorf("reboot of %s timed out after %s", dev, rebootTimeout)
+	return fmt.Errorf("reboot of %s timed out after %s", dut, rebootTimeout)
 }
 
 // KillProcess kills a process on a device, and optionally restarts it.
-func KillProcess(ctx context.Context, dev binding.Device, req *spb.KillProcessRequest) error {
-	dut, err := checkDUT(dev, "kill process")
-	if err != nil {
-		return err
-	}
+func KillProcess(ctx context.Context, dut binding.DUT, req *spb.KillProcessRequest) error {
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
@@ -336,19 +348,8 @@ func KillProcess(ctx context.Context, dev binding.Device, req *spb.KillProcessRe
 	return err
 }
 
-func checkDUT(dev binding.Device, op string) (binding.DUT, error) {
-	if _, ok := dev.(binding.ATE); ok {
-		return nil, fmt.Errorf("%s operation not supported on ATEs: %v", op, dev)
-	}
-	return dev.(binding.DUT), nil
-}
-
 // SwitchControlProcessor switches to a provided destination route processor.
-func SwitchControlProcessor(ctx context.Context, dev binding.Device, dest string) error {
-	dut, err := checkDUT(dev, "switch control processor")
-	if err != nil {
-		return err
-	}
+func SwitchControlProcessor(ctx context.Context, dut binding.DUT, dest string) error {
 	gnoi, err := FetchGNOI(ctx, dut)
 	if err != nil {
 		return err

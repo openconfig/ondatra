@@ -136,11 +136,6 @@ func (d *Device) newPort(id string, res *binding.Port) *Port {
 	return &Port{dev: d, id: id, res: res}
 }
 
-// Operations returns a handle to the device operations API.
-func (d *Device) Operations() *Operations {
-	return &Operations{d.res}
-}
-
 // Port represents a port.
 type Port struct {
 	dev *Device
@@ -193,9 +188,23 @@ func (p *Port) CardModel() string {
 	return p.res.CardModel
 }
 
+// PMD is a Physical Medium Dependent .
+type PMD opb.Port_Pmd
+
+const (
+	// PMD100GFR is a PMD of 100G-FR.
+	PMD100GFR = PMD(opb.Port_PMD_100G_FR)
+	// PMD100GLR4 is a PMD of 100G-LR4.
+	PMD100GLR4 = PMD(opb.Port_PMD_100G_LR4)
+)
+
+func (pmd PMD) String() string {
+	return opb.Port_Pmd_name[int32(pmd)]
+}
+
 // PMD returns the Physical Medium Dependent.
-func (p *Port) PMD() string {
-	return p.res.PMD
+func (p *Port) PMD() PMD {
+	return PMD(p.res.PMD)
 }
 
 var (

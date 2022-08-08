@@ -76,7 +76,7 @@ testing, or to manually inspect the testbed before the test cases run.
 
 You don't have to code your own binding implementation before getting started
 with Ondatra, because Ondatra comes packaged with a binding for
-[KNE](https://github.com/google/kne), and an
+[KNE](https://github.com/openconfig/kne), and an
 [example Ondatra test](knebind/integration/integration_test.go) that uses that
 binding. See the [knebind README](knebind/README.md) for more on how to use the
 KNE binding and run the example test.

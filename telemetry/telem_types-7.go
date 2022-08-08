@@ -12,136 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedQos_Queue is a *Qos_Queue with a corresponding timestamp.
-type QualifiedQos_Queue struct {
-	*genutil.Metadata
-	val     *Qos_Queue // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_Queue) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_Queue sample, erroring out if not present.
-func (q *QualifiedQos_Queue) Val(t testing.TB) *Qos_Queue {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_Queue sample.
-func (q *QualifiedQos_Queue) SetVal(v *Qos_Queue) *QualifiedQos_Queue {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_Queue) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_Queue is a telemetry Collection whose Await method returns a slice of *Qos_Queue samples.
-type CollectionQos_Queue struct {
-	W    *Qos_QueueWatcher
-	Data []*QualifiedQos_Queue
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_Queue) Await(t testing.TB) []*QualifiedQos_Queue {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_QueueWatcher observes a stream of *Qos_Queue samples.
-type Qos_QueueWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_Queue
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_QueueWatcher) Await(t testing.TB) (*QualifiedQos_Queue, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_QueueManagementProfile is a *Qos_QueueManagementProfile with a corresponding timestamp.
-type QualifiedQos_QueueManagementProfile struct {
-	*genutil.Metadata
-	val     *Qos_QueueManagementProfile // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_QueueManagementProfile) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_QueueManagementProfile sample, erroring out if not present.
-func (q *QualifiedQos_QueueManagementProfile) Val(t testing.TB) *Qos_QueueManagementProfile {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_QueueManagementProfile sample.
-func (q *QualifiedQos_QueueManagementProfile) SetVal(v *Qos_QueueManagementProfile) *QualifiedQos_QueueManagementProfile {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_QueueManagementProfile) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_QueueManagementProfile is a telemetry Collection whose Await method returns a slice of *Qos_QueueManagementProfile samples.
-type CollectionQos_QueueManagementProfile struct {
-	W    *Qos_QueueManagementProfileWatcher
-	Data []*QualifiedQos_QueueManagementProfile
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_QueueManagementProfile) Await(t testing.TB) []*QualifiedQos_QueueManagementProfile {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_QueueManagementProfileWatcher observes a stream of *Qos_QueueManagementProfile samples.
-type Qos_QueueManagementProfileWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_QueueManagementProfile
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_QueueManagementProfileWatcher) Await(t testing.TB) (*QualifiedQos_QueueManagementProfile, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedQos_QueueManagementProfile_Red is a *Qos_QueueManagementProfile_Red with a corresponding timestamp.
 type QualifiedQos_QueueManagementProfile_Red struct {
 	*genutil.Metadata
@@ -3258,6 +3128,266 @@ type RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSetWatcher stru
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSetWatcher) Await(t testing.TB) (*QualifiedRoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedSampling is a *Sampling with a corresponding timestamp.
+type QualifiedSampling struct {
+	*genutil.Metadata
+	val     *Sampling // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedSampling) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Sampling sample, erroring out if not present.
+func (q *QualifiedSampling) Val(t testing.TB) *Sampling {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Sampling sample.
+func (q *QualifiedSampling) SetVal(v *Sampling) *QualifiedSampling {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedSampling) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionSampling is a telemetry Collection whose Await method returns a slice of *Sampling samples.
+type CollectionSampling struct {
+	W    *SamplingWatcher
+	Data []*QualifiedSampling
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionSampling) Await(t testing.TB) []*QualifiedSampling {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// SamplingWatcher observes a stream of *Sampling samples.
+type SamplingWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedSampling
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *SamplingWatcher) Await(t testing.TB) (*QualifiedSampling, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedSampling_Sflow is a *Sampling_Sflow with a corresponding timestamp.
+type QualifiedSampling_Sflow struct {
+	*genutil.Metadata
+	val     *Sampling_Sflow // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedSampling_Sflow) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Sampling_Sflow sample, erroring out if not present.
+func (q *QualifiedSampling_Sflow) Val(t testing.TB) *Sampling_Sflow {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Sampling_Sflow sample.
+func (q *QualifiedSampling_Sflow) SetVal(v *Sampling_Sflow) *QualifiedSampling_Sflow {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedSampling_Sflow) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionSampling_Sflow is a telemetry Collection whose Await method returns a slice of *Sampling_Sflow samples.
+type CollectionSampling_Sflow struct {
+	W    *Sampling_SflowWatcher
+	Data []*QualifiedSampling_Sflow
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionSampling_Sflow) Await(t testing.TB) []*QualifiedSampling_Sflow {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Sampling_SflowWatcher observes a stream of *Sampling_Sflow samples.
+type Sampling_SflowWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedSampling_Sflow
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Sampling_SflowWatcher) Await(t testing.TB) (*QualifiedSampling_Sflow, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedSampling_Sflow_Collector is a *Sampling_Sflow_Collector with a corresponding timestamp.
+type QualifiedSampling_Sflow_Collector struct {
+	*genutil.Metadata
+	val     *Sampling_Sflow_Collector // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedSampling_Sflow_Collector) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Sampling_Sflow_Collector sample, erroring out if not present.
+func (q *QualifiedSampling_Sflow_Collector) Val(t testing.TB) *Sampling_Sflow_Collector {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Sampling_Sflow_Collector sample.
+func (q *QualifiedSampling_Sflow_Collector) SetVal(v *Sampling_Sflow_Collector) *QualifiedSampling_Sflow_Collector {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedSampling_Sflow_Collector) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionSampling_Sflow_Collector is a telemetry Collection whose Await method returns a slice of *Sampling_Sflow_Collector samples.
+type CollectionSampling_Sflow_Collector struct {
+	W    *Sampling_Sflow_CollectorWatcher
+	Data []*QualifiedSampling_Sflow_Collector
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionSampling_Sflow_Collector) Await(t testing.TB) []*QualifiedSampling_Sflow_Collector {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Sampling_Sflow_CollectorWatcher observes a stream of *Sampling_Sflow_Collector samples.
+type Sampling_Sflow_CollectorWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedSampling_Sflow_Collector
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Sampling_Sflow_CollectorWatcher) Await(t testing.TB) (*QualifiedSampling_Sflow_Collector, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedSampling_Sflow_Interface is a *Sampling_Sflow_Interface with a corresponding timestamp.
+type QualifiedSampling_Sflow_Interface struct {
+	*genutil.Metadata
+	val     *Sampling_Sflow_Interface // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedSampling_Sflow_Interface) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Sampling_Sflow_Interface sample, erroring out if not present.
+func (q *QualifiedSampling_Sflow_Interface) Val(t testing.TB) *Sampling_Sflow_Interface {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Sampling_Sflow_Interface sample.
+func (q *QualifiedSampling_Sflow_Interface) SetVal(v *Sampling_Sflow_Interface) *QualifiedSampling_Sflow_Interface {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedSampling_Sflow_Interface) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionSampling_Sflow_Interface is a telemetry Collection whose Await method returns a slice of *Sampling_Sflow_Interface samples.
+type CollectionSampling_Sflow_Interface struct {
+	W    *Sampling_Sflow_InterfaceWatcher
+	Data []*QualifiedSampling_Sflow_Interface
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionSampling_Sflow_Interface) Await(t testing.TB) []*QualifiedSampling_Sflow_Interface {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Sampling_Sflow_InterfaceWatcher observes a stream of *Sampling_Sflow_Interface samples.
+type Sampling_Sflow_InterfaceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedSampling_Sflow_Interface
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Sampling_Sflow_InterfaceWatcher) Await(t testing.TB) (*QualifiedSampling_Sflow_Interface, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -9108,71 +9238,6 @@ type E_Ethernet_NegotiatedDuplexModeWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_Ethernet_NegotiatedDuplexModeWatcher) Await(t testing.TB) (*QualifiedE_Ethernet_NegotiatedDuplexMode, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedE_Event_Record is a E_Event_Record with a corresponding timestamp.
-type QualifiedE_Event_Record struct {
-	*genutil.Metadata
-	val     E_Event_Record // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_Event_Record) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_Event_Record sample, erroring out if not present.
-func (q *QualifiedE_Event_Record) Val(t testing.TB) E_Event_Record {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_Event_Record sample.
-func (q *QualifiedE_Event_Record) SetVal(v E_Event_Record) *QualifiedE_Event_Record {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Event_Record) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_Event_Record is a telemetry Collection whose Await method returns a slice of E_Event_Record samples.
-type CollectionE_Event_Record struct {
-	W    *E_Event_RecordWatcher
-	Data []*QualifiedE_Event_Record
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Event_Record) Await(t testing.TB) []*QualifiedE_Event_Record {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_Event_RecordWatcher observes a stream of E_Event_Record samples.
-type E_Event_RecordWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_Event_Record
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Event_RecordWatcher) Await(t testing.TB) (*QualifiedE_Event_Record, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

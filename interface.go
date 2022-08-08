@@ -15,6 +15,8 @@
 package ondatra
 
 import (
+	"github.com/openconfig/ondatra/ixnet"
+
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -23,8 +25,10 @@ type Interface struct {
 	pb *opb.InterfaceConfig
 }
 
-// Implement the Endpoint marker interface.
-func (*Interface) isEndpoint() {}
+// EndpointPB returns the Interface config as an endpoint proto message.
+func (i *Interface) EndpointPB() *opb.Flow_Endpoint {
+	return &opb.Flow_Endpoint{InterfaceName: i.pb.GetName()}
+}
 
 // IsLACPEnabled returns whether the interface has LACP enabled.
 func (i *Interface) IsLACPEnabled() bool {
@@ -78,19 +82,19 @@ func (i *Interface) Ethernet() *Ethernet {
 }
 
 // IPv4 creates an IPv4 config for the interface or returns the existing config.
-func (i *Interface) IPv4() *IP {
+func (i *Interface) IPv4() *ixnet.IP {
 	if i.pb.Ipv4 == nil {
 		i.pb.Ipv4 = &opb.IpConfig{}
 	}
-	return &IP{pb: i.pb.Ipv4}
+	return ixnet.NewIP(i.pb.Ipv4)
 }
 
 // IPv6 creates an IPv6 config for the interface or returns the existing config.
-func (i *Interface) IPv6() *IP {
+func (i *Interface) IPv6() *ixnet.IP {
 	if i.pb.Ipv6 == nil {
 		i.pb.Ipv6 = &opb.IpConfig{}
 	}
-	return &IP{pb: i.pb.Ipv6}
+	return ixnet.NewIP(i.pb.Ipv6)
 }
 
 // WithIPv4Loopback configures the IPv4 loopback address for the interface.
@@ -111,7 +115,7 @@ func (i *Interface) WithIPv6Loopback(ipv6LoopbackCIDR string) *Interface {
 // Router Id: 0.0.0.0
 // Hello Interval: 10 seconds
 // Dead Interval: 30 seconds
-func (i *Interface) ISIS() *ISIS {
+func (i *Interface) ISIS() *ixnet.ISIS {
 	if i.pb.Isis == nil {
 		i.pb.Isis = &opb.ISISConfig{
 			AreaId:           "490001",
@@ -120,7 +124,7 @@ func (i *Interface) ISIS() *ISIS {
 			DeadIntervalSec:  30,
 		}
 	}
-	return &ISIS{pb: i.pb.Isis}
+	return ixnet.NewISIS(i.pb.Isis)
 }
 
 // BGP creates a BGP config for the interface or returns the existing config.
@@ -132,8 +136,8 @@ func (i *Interface) BGP() *BGP {
 }
 
 // AddRSVP adds an RSVP config to the interface.
-func (i *Interface) AddRSVP(name string) *RSVP {
+func (i *Interface) AddRSVP(name string) *ixnet.RSVP {
 	rpb := &opb.RsvpConfig{Name: name, InterfaceName: i.pb.Name}
 	i.pb.Rsvps = append(i.pb.Rsvps, rpb)
-	return &RSVP{pb: rpb}
+	return ixnet.NewRSVP(rpb)
 }

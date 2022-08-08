@@ -27,13 +27,13 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// Traffic is ATE Traffic API.
+// Traffic is the ATE Traffic API.
 type Traffic struct {
 	ate binding.ATE
 }
 
 func (tr *Traffic) String() string {
-	return fmt.Sprintf("{ate: %s}", tr.ate)
+	return fmt.Sprintf("Traffic%+v", *tr)
 }
 
 // NewFlow returns a new Traffic flow. By default the flow will have the following properties:
@@ -104,7 +104,7 @@ type Flow struct {
 // Endpoint is a potential source or destination of a flow.
 // There are two types of endpoints: Interfaces and Networks.
 type Endpoint interface {
-	isEndpoint()
+	EndpointPB() *opb.Flow_Endpoint
 }
 
 // Transmission represents the transmission pattern of a flow.
@@ -144,24 +144,7 @@ func endpointPBs(eps []Endpoint) []*opb.Flow_Endpoint {
 		if ep == nil {
 			log.Fatalf("nil endpoint not allowed: %v", eps)
 		}
-		var epPB *opb.Flow_Endpoint
-		switch e := ep.(type) {
-		case *Interface:
-			epPB = &opb.Flow_Endpoint{InterfaceName: e.pb.GetName()}
-		case *Network:
-			epPB = &opb.Flow_Endpoint{
-				InterfaceName: e.pb.GetInterfaceName(),
-				Generated:     &opb.Flow_Endpoint_NetworkName{NetworkName: e.pb.GetName()},
-			}
-		case *RSVP:
-			epPB = &opb.Flow_Endpoint{
-				InterfaceName: e.pb.GetInterfaceName(),
-				Generated:     &opb.Flow_Endpoint_RsvpName{RsvpName: e.pb.GetName()},
-			}
-		default:
-			log.Fatalf("unknown endpoint type: %v (%T)", e, e)
-		}
-		epPBs = append(epPBs, epPB)
+		epPBs = append(epPBs, ep.EndpointPB())
 	}
 	return epPBs
 }

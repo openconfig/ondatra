@@ -360,6 +360,24 @@ func TestAddTraffic(t *testing.T) {
 		wantDstEPs:      egressLSPEPs,
 		wantStackCount:  3,
 	}, {
+		desc: "macsec traffic flow",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: intfEPs,
+			DstEndpoints: intfEPs,
+			Headers: []*opb.Header{{
+				Type: &opb.Header_Eth{&opb.EthernetHeader{}},
+			}, {
+				Type: &opb.Header_Macsec{&opb.MacsecHeader{}},
+			}, {
+				Type: &opb.Header_Ipv4{&opb.Ipv4Header{}},
+			}},
+		},
+		wantTrafficType: ipv4Traffic,
+		wantSrcEPs:      devGrpEPs,
+		wantDstEPs:      devGrpEPs,
+		wantStackCount:  4,
+	}, {
 		desc: "attempted ingress tracking by endpoint for raw traffic flow",
 		flow: &opb.Flow{
 			Name:         flowName,

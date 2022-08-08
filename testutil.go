@@ -60,7 +60,7 @@ var (
 			HardwareModel:   "juniperModel",
 			SoftwareVersion: "juniperVersion",
 			Ports: map[string]*binding.Port{
-				"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB, CardModel: "EX9200-40T", PMD: "PMD_100G_FR"},
+				"port1": &binding.Port{Name: "Et1/2/3", Speed: opb.Port_S_10GB, CardModel: "EX9200-40T", PMD: opb.Port_PMD_100G_FR},
 			},
 		}},
 	}
@@ -72,7 +72,7 @@ var (
 			SoftwareVersion: "ixiaVersion",
 			Ports: map[string]*binding.Port{
 				"port1": &binding.Port{Name: "1/1", Speed: opb.Port_S_10GB},
-				"port2": &binding.Port{Name: "1/2", Speed: opb.Port_S_100GB, CardModel: "NOVUS", PMD: "PMD_100G_FR"},
+				"port2": &binding.Port{Name: "1/2", Speed: opb.Port_S_100GB, CardModel: "NOVUS", PMD: opb.Port_PMD_100G_FR},
 			},
 		}},
 	}

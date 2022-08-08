@@ -4508,3 +4508,27 @@ func NewVlanStack(idx int) *VlanStack {
 	stack := VlanStack(newStack(idx, "vlan", vlanAliasToFieldIdx))
 	return &stack
 }
+
+type MACsecStack TrafficTrafficItemConfigElementStack
+
+func (s *MACsecStack) TrafficTrafficItemConfigElementStack() *TrafficTrafficItemConfigElementStack {
+	ts := TrafficTrafficItemConfigElementStack(*s)
+	return &ts
+}
+
+func NewMACsecStack(idx int) *MACsecStack {
+	stack := MACsecStack(newStack(idx, "macsec", nil))
+	return &stack
+}
+
+type PayloadProtocolTypeStack TrafficTrafficItemConfigElementStack
+
+func (s *PayloadProtocolTypeStack) TrafficTrafficItemConfigElementStack() *TrafficTrafficItemConfigElementStack {
+	ts := TrafficTrafficItemConfigElementStack(*s)
+	return &ts
+}
+
+func NewPayloadProtocolTypeStack(idx int) *PayloadProtocolTypeStack {
+	stack := PayloadProtocolTypeStack(newStack(idx, "payloadProtocolType", nil))
+	return &stack
+}

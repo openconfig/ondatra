@@ -101,8 +101,8 @@ func WithHTTPClient(client HTTPClient) Option {
 
 // Connect creates a connection to Ixia Web Platform on the specified hostname.
 // Unless the given options specify otherwise, IxWeb is configured as follows:
-//  - login: Ixia's default admin/admin login
-//  - http client: http.DefaultClient
+//   - login: Ixia's default admin/admin login
+//   - http client: http.DefaultClient
 func Connect(ctx context.Context, hostname string, opts ...Option) (*IxWeb, error) {
 	if hostname == "" {
 		return nil, errors.New("no hostname specified")

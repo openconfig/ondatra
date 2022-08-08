@@ -80,7 +80,9 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 			log.Exitf("Ondatra test timed out after %v", fv.RunTime)
 		}()
 	}
+
 	runFn(m)
+
 	return nil
 }
 

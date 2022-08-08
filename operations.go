@@ -32,17 +32,17 @@ import (
 
 // Operations is the device operations API.
 type Operations struct {
-	dev binding.Device
+	dut binding.DUT
 }
 
 // NewInstall creates a new install operation.
 func (o *Operations) NewInstall() *InstallOp {
-	return &InstallOp{dev: o.dev}
+	return &InstallOp{dut: o.dut}
 }
 
 // InstallOp is an OS install operation.
 type InstallOp struct {
-	dev     binding.Device
+	dut     binding.DUT
 	version string
 	standby bool
 	reader  io.Reader
@@ -104,20 +104,20 @@ func (fr *fileReader) Read(p []byte) (int, error) {
 // Operate performs the Install operation.
 func (i *InstallOp) Operate(t testing.TB) {
 	t.Helper()
-	debugger.ActionStarted(t, "Installing package on %s", i.dev)
-	if err := operations.Install(context.Background(), i.dev, i.version, i.standby, i.reader); err != nil {
+	debugger.ActionStarted(t, "Installing package on %s", i.dut)
+	if err := operations.Install(context.Background(), i.dut, i.version, i.standby, i.reader); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", i, err)
 	}
 }
 
 // NewPing creates a new ping operation.
 func (o *Operations) NewPing() *PingOp {
-	return &PingOp{dev: o.dev}
+	return &PingOp{dut: o.dut}
 }
 
 // PingOp is a ping operation.
 type PingOp struct {
-	dev   binding.Device
+	dut   binding.DUT
 	dest  string
 	count int32
 }
@@ -141,20 +141,70 @@ func (p *PingOp) WithCount(count int32) *PingOp {
 // Operate performs the Ping operation.
 func (p *PingOp) Operate(t testing.TB) {
 	t.Helper()
-	debugger.ActionStarted(t, "Pinging from %s", p.dev)
-	if err := operations.Ping(context.Background(), p.dev, p.dest, p.count); err != nil {
+	debugger.ActionStarted(t, "Pinging from %s", p.dut)
+	if err := operations.Ping(context.Background(), p.dut, p.dest, p.count); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", p, err)
+	}
+}
+
+// SystemTime returns the current system time.
+func (o *Operations) SystemTime(t testing.TB) time.Time {
+	t.Helper()
+	debugger.ActionStarted(t, "Requesting System Time from %s", o.dut)
+	time, err := operations.SystemTime(context.Background(), o.dut)
+	if err != nil {
+		t.Fatalf("SystemTime(t) on %s: %v", o.dut, err)
+	}
+	return time
+}
+
+// NewFactoryReset creates a new Factory Reset Operation.
+// By default the FactoryReset is performed without zero_fill and factory_os.
+func (o *Operations) NewFactoryReset() *FactoryResetOp {
+	return &FactoryResetOp{dut: o.dut}
+}
+
+// FactoryResetOp is a factory reset operation.
+type FactoryResetOp struct {
+	dut       binding.DUT
+	factoryOS bool
+	zeroFill  bool
+}
+
+// WithFactoryOS instructs the device to rollback to its original OS version.
+func (s *FactoryResetOp) WithFactoryOS(factoryOS bool) *FactoryResetOp {
+	s.factoryOS = factoryOS
+	return s
+}
+
+// WithZeroFill instructs the device to zero fill persistent storage state data.
+func (s *FactoryResetOp) WithZeroFill(zeroFill bool) *FactoryResetOp {
+	s.zeroFill = zeroFill
+	return s
+}
+
+// String representation of the method.
+func (s *FactoryResetOp) String() string {
+	return fmt.Sprintf("FactoryResetOp%+v", *s)
+}
+
+// Operate performs the FactoryReset operation.
+func (s *FactoryResetOp) Operate(t testing.TB) {
+	t.Helper()
+	debugger.ActionStarted(t, "Performing Factory Reset on %s", s.dut)
+	if err := operations.FactoryReset(context.Background(), s.dut, s.factoryOS, s.zeroFill); err != nil {
+		t.Fatalf("Operate(t) on %s: %v", s, err)
 	}
 }
 
 // NewSetInterfaceState creates a new set interface state operation.
 func (o *Operations) NewSetInterfaceState() *SetInterfaceStateOp {
-	return &SetInterfaceStateOp{dev: o.dev}
+	return &SetInterfaceStateOp{dut: o.dut}
 }
 
 // SetInterfaceStateOp is a set interface state operation that sets the state of an interface on a DUT.
 type SetInterfaceStateOp struct {
-	dev     binding.Device
+	dut     binding.DUT
 	intf    string
 	enabled *bool
 }
@@ -186,20 +236,20 @@ func (s *SetInterfaceStateOp) WithStateEnabled(e bool) *SetInterfaceStateOp {
 // Operate performs the set interface state operation.
 func (s *SetInterfaceStateOp) Operate(t testing.TB) {
 	t.Helper()
-	debugger.ActionStarted(t, "Setting interface state on %s", s.dev)
-	if err := operations.SetInterfaceState(context.Background(), s.dev, s.intf, s.enabled); err != nil {
+	debugger.ActionStarted(t, "Setting interface state on %s", s.dut)
+	if err := operations.SetInterfaceState(context.Background(), s.dut, s.intf, s.enabled); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", s, err)
 	}
 }
 
 // NewReboot creates a new reboot operation.
 func (o *Operations) NewReboot() *RebootOp {
-	return &RebootOp{dev: o.dev}
+	return &RebootOp{dut: o.dut}
 }
 
 // RebootOp is a reboot operation.
 type RebootOp struct {
-	dev     binding.Device
+	dut     binding.DUT
 	timeout time.Duration
 }
 
@@ -216,8 +266,8 @@ func (r *RebootOp) WithTimeout(timeout time.Duration) *RebootOp {
 // Operate performs the Reboot operation.
 func (r *RebootOp) Operate(t testing.TB) {
 	t.Helper()
-	debugger.ActionStarted(t, "Rebooting %s", r.dev)
-	if err := operations.Reboot(context.Background(), r.dev, r.timeout); err != nil {
+	debugger.ActionStarted(t, "Rebooting %s", r.dut)
+	if err := operations.Reboot(context.Background(), r.dut, r.timeout); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
 }
@@ -226,14 +276,14 @@ func (r *RebootOp) Operate(t testing.TB) {
 // By default the process is killed with a SIGTERM signal.
 func (o *Operations) NewKillProcess() *KillProcessOp {
 	return &KillProcessOp{
-		dev: o.dev,
+		dut: o.dut,
 		req: &spb.KillProcessRequest{Signal: spb.KillProcessRequest_SIGNAL_TERM},
 	}
 }
 
 // KillProcessOp is an operation that kills a process on a device.
 type KillProcessOp struct {
-	dev binding.Device
+	dut binding.DUT
 	req *spb.KillProcessRequest
 }
 
@@ -280,23 +330,21 @@ func (r *KillProcessOp) String() string {
 // Operate performs the kill process operation.
 func (r *KillProcessOp) Operate(t testing.TB) {
 	t.Helper()
-	debugger.ActionStarted(t, "Killing process on %s", r.dev)
-	if err := operations.KillProcess(context.Background(), r.dev, r.req); err != nil {
+	debugger.ActionStarted(t, "Killing process on %s", r.dut)
+	if err := operations.KillProcess(context.Background(), r.dut, r.req); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
 }
 
 // NewSwitchControlProcessor creates a new switch control processor operation.
 func (o *Operations) NewSwitchControlProcessor() *SwitchControlProcessorOp {
-	return &SwitchControlProcessorOp{
-		dev: o.dev,
-	}
+	return &SwitchControlProcessorOp{dut: o.dut}
 }
 
 // SwitchControlProcessorOp is an operation that switches from the current
 // route procesor to a provided destination route processor.
 type SwitchControlProcessorOp struct {
-	dev  binding.Device
+	dut  binding.DUT
 	dest string
 }
 
@@ -313,7 +361,7 @@ func (s *SwitchControlProcessorOp) WithDestination(dest string) *SwitchControlPr
 // Operate performs the SwitchControlProcessor operation.
 func (s *SwitchControlProcessorOp) Operate(t testing.TB) {
 	t.Helper()
-	if err := operations.SwitchControlProcessor(context.Background(), s.dev, s.dest); err != nil {
+	if err := operations.SwitchControlProcessor(context.Background(), s.dut, s.dest); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", s, err)
 	}
 }
