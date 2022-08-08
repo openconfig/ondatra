@@ -17,6 +17,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
+  - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   - public/release/models/interfaces/openconfig-if-ip-ext.yang
   - public/release/models/interfaces/openconfig-if-ip.yang
   - public/release/models/interfaces/openconfig-interfaces.yang
@@ -3855,6 +3856,38 @@ func (n *Interface_Ethernet_CountersPathAny) InCrcErrors() *Interface_Ethernet_C
 	}
 }
 
+// InDistribution (container): The size distribution of the received frames.
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-distribution"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution"
+func (n *Interface_Ethernet_CountersPath) InDistribution() *Interface_Ethernet_Counters_InDistributionPath {
+	return &Interface_Ethernet_Counters_InDistributionPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-distribution"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InDistribution (container): The size distribution of the received frames.
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-distribution"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution"
+func (n *Interface_Ethernet_CountersPathAny) InDistribution() *Interface_Ethernet_Counters_InDistributionPathAny {
+	return &Interface_Ethernet_Counters_InDistributionPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-distribution"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // InFragmentFrames (leaf): The total number of frames received that were less than
 // 64 octets in length (excluding framing bits but including
 // FCS octets) and had either a bad Frame Check Sequence
@@ -4431,6 +4464,292 @@ func (n *Interface_Ethernet_CountersPathAny) OutMacPauseFrames() *Interface_Ethe
 	return &Interface_Ethernet_Counters_OutMacPauseFramesPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"out-mac-pause-frames"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interface_Ethernet_Counters_InDistributionPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution YANG schema element.
+type Interface_Ethernet_Counters_InDistributionPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistributionPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution YANG schema element.
+type Interface_Ethernet_Counters_InDistributionPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath struct {
+	*ygot.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny struct {
+	*ygot.NodePath
+}
+
+// InFrames_1024_1518Octets (leaf): Number of good and bad packets received that were
+// between 1024 and 1518 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-1024-1518-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_1024_1518Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-1024-1518-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_1024_1518Octets (leaf): Number of good and bad packets received that were
+// between 1024 and 1518 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-1024-1518-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_1024_1518Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-1024-1518-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_128_255Octets (leaf): Number of good and bad packets received that were
+// between 128 and 255 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-128-255-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_128_255Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-128-255-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_128_255Octets (leaf): Number of good and bad packets received that were
+// between 128 and 255 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-128-255-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_128_255Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-128-255-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_256_511Octets (leaf): Number of good and bad packets received that were
+// between 256 and 511 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-256-511-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_256_511Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-256-511-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_256_511Octets (leaf): Number of good and bad packets received that were
+// between 256 and 511 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-256-511-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_256_511Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-256-511-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_512_1023Octets (leaf): Number of good and bad packets received that were
+// between 512 and 1023 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-512-1023-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_512_1023Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-512-1023-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_512_1023Octets (leaf): Number of good and bad packets received that were
+// between 512 and 1023 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-512-1023-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_512_1023Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-512-1023-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_64Octets (leaf): Number of packets (including bad packets) received that
+// were 64 bytes in length (excluding framing bits but
+// including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-64-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_64Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-64-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_64Octets (leaf): Number of packets (including bad packets) received that
+// were 64 bytes in length (excluding framing bits but
+// including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-64-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_64Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-64-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_65_127Octets (leaf): Number of good and bad packets received that were
+// between 65 and 127 bytes in length (excluding framing bits
+// but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-65-127-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_65_127Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-65-127-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InFrames_65_127Octets (leaf): Number of good and bad packets received that were
+// between 65 and 127 bytes in length (excluding framing bits
+// but including FCS bytes).
+// ----------------------------------------
+// Defining module: "openconfig-if-ethernet-ext"
+// Instantiating module: "openconfig-interfaces"
+// Path from parent: "in-frames-65-127-octets"
+// Path from root: "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_65_127Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"in-frames-65-127-octets"},
 			map[string]interface{}{},
 			n,
 		),
@@ -11534,212 +11853,6 @@ func (n *Interface_Subinterface_Ipv4PathAny) Unnumbered() *Interface_Subinterfac
 		NodePath: ygot.NewNodePath(
 			[]string{"unnumbered"},
 			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Interface_Subinterface_Ipv4_AddressPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address YANG schema element.
-type Interface_Subinterface_Ipv4_AddressPath struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_AddressPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address YANG schema element.
-type Interface_Subinterface_Ipv4_AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_Address_IpPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/ip YANG schema element.
-type Interface_Subinterface_Ipv4_Address_IpPath struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_Address_IpPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/ip YANG schema element.
-type Interface_Subinterface_Ipv4_Address_IpPathAny struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_Address_OriginPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/origin YANG schema element.
-type Interface_Subinterface_Ipv4_Address_OriginPath struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_Address_OriginPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/origin YANG schema element.
-type Interface_Subinterface_Ipv4_Address_OriginPathAny struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_Address_PrefixLengthPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/prefix-length YANG schema element.
-type Interface_Subinterface_Ipv4_Address_PrefixLengthPath struct {
-	*ygot.NodePath
-}
-
-// Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/prefix-length YANG schema element.
-type Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny struct {
-	*ygot.NodePath
-}
-
-// Ip (leaf): The IPv4 address on the interface.
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "state/ip"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/ip"
-func (n *Interface_Subinterface_Ipv4_AddressPath) Ip() *Interface_Subinterface_Ipv4_Address_IpPath {
-	return &Interface_Subinterface_Ipv4_Address_IpPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ip"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ip (leaf): The IPv4 address on the interface.
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "state/ip"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/ip"
-func (n *Interface_Subinterface_Ipv4_AddressPathAny) Ip() *Interface_Subinterface_Ipv4_Address_IpPathAny {
-	return &Interface_Subinterface_Ipv4_Address_IpPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ip"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Origin (leaf): The origin of this address, e.g., statically configured,
-// assigned by DHCP, etc..
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "state/origin"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/origin"
-func (n *Interface_Subinterface_Ipv4_AddressPath) Origin() *Interface_Subinterface_Ipv4_Address_OriginPath {
-	return &Interface_Subinterface_Ipv4_Address_OriginPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "origin"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Origin (leaf): The origin of this address, e.g., statically configured,
-// assigned by DHCP, etc..
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "state/origin"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/origin"
-func (n *Interface_Subinterface_Ipv4_AddressPathAny) Origin() *Interface_Subinterface_Ipv4_Address_OriginPathAny {
-	return &Interface_Subinterface_Ipv4_Address_OriginPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "origin"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLength (leaf): The length of the subnet prefix.
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "state/prefix-length"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/prefix-length"
-func (n *Interface_Subinterface_Ipv4_AddressPath) PrefixLength() *Interface_Subinterface_Ipv4_Address_PrefixLengthPath {
-	return &Interface_Subinterface_Ipv4_Address_PrefixLengthPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-length"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// PrefixLength (leaf): The length of the subnet prefix.
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "state/prefix-length"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/prefix-length"
-func (n *Interface_Subinterface_Ipv4_AddressPathAny) PrefixLength() *Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny {
-	return &Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "prefix-length"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// VrrpGroupAny (list): List of VRRP groups, keyed by virtual router id
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "vrrp/vrrp-group"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group"
-// VirtualRouterId (wildcarded): uint8
-func (n *Interface_Subinterface_Ipv4_AddressPath) VrrpGroupAny() *Interface_Subinterface_Ipv4_Address_VrrpGroupPathAny {
-	return &Interface_Subinterface_Ipv4_Address_VrrpGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"vrrp", "vrrp-group"},
-			map[string]interface{}{"virtual-router-id": "*"},
-			n,
-		),
-	}
-}
-
-// VrrpGroupAny (list): List of VRRP groups, keyed by virtual router id
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "vrrp/vrrp-group"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group"
-// VirtualRouterId (wildcarded): uint8
-func (n *Interface_Subinterface_Ipv4_AddressPathAny) VrrpGroupAny() *Interface_Subinterface_Ipv4_Address_VrrpGroupPathAny {
-	return &Interface_Subinterface_Ipv4_Address_VrrpGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"vrrp", "vrrp-group"},
-			map[string]interface{}{"virtual-router-id": "*"},
-			n,
-		),
-	}
-}
-
-// VrrpGroup (list): List of VRRP groups, keyed by virtual router id
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "vrrp/vrrp-group"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group"
-// VirtualRouterId: uint8
-func (n *Interface_Subinterface_Ipv4_AddressPath) VrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv4_Address_VrrpGroupPath {
-	return &Interface_Subinterface_Ipv4_Address_VrrpGroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"vrrp", "vrrp-group"},
-			map[string]interface{}{"virtual-router-id": VirtualRouterId},
-			n,
-		),
-	}
-}
-
-// VrrpGroup (list): List of VRRP groups, keyed by virtual router id
-// ----------------------------------------
-// Defining module: "openconfig-if-ip"
-// Instantiating module: "openconfig-interfaces"
-// Path from parent: "vrrp/vrrp-group"
-// Path from root: "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group"
-// VirtualRouterId: uint8
-func (n *Interface_Subinterface_Ipv4_AddressPathAny) VrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv4_Address_VrrpGroupPathAny {
-	return &Interface_Subinterface_Ipv4_Address_VrrpGroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"vrrp", "vrrp-group"},
-			map[string]interface{}{"virtual-router-id": VirtualRouterId},
 			n,
 		),
 	}

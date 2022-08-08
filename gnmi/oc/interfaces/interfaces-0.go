@@ -19,6 +19,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
+  - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   - public/release/models/interfaces/openconfig-if-ip-ext.yang
   - public/release/models/interfaces/openconfig-if-ip.yang
   - public/release/models/interfaces/openconfig-interfaces.yang
@@ -10768,6 +10769,38 @@ func (n *Interface_Ethernet_CountersPathAny) InCrcErrors() *Interface_Ethernet_C
 	}
 }
 
+// InDistribution (container): The size distribution of the received frames.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-distribution"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution"
+func (n *Interface_Ethernet_CountersPath) InDistribution() *Interface_Ethernet_Counters_InDistributionPath {
+	return &Interface_Ethernet_Counters_InDistributionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-distribution"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InDistribution (container): The size distribution of the received frames.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-distribution"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution"
+func (n *Interface_Ethernet_CountersPathAny) InDistribution() *Interface_Ethernet_Counters_InDistributionPathAny {
+	return &Interface_Ethernet_Counters_InDistributionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-distribution"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // InFragmentFrames (leaf): The total number of frames received that were less than
 // 64 octets in length (excluding framing bits but including
 // FCS octets) and had either a bad Frame Check Sequence
@@ -11375,6 +11408,741 @@ func (n *Interface_Ethernet_CountersPathAny) OutMacPauseFrames() *Interface_Ethe
 	return &Interface_Ethernet_Counters_OutMacPauseFramesPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-mac-pause-frames"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Ethernet_Counters_InDistributionPath) State() ygnmi.SingletonQuery[*oc.Interface_Ethernet_Counters_InDistribution] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Interface_Ethernet_Counters_InDistribution](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Ethernet_Counters_InDistribution] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Interface_Ethernet_Counters_InDistribution](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-1024-1518-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-1024-1518-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_1024_1518Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-1024-1518-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-1024-1518-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_1024_1518Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-128-255-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-128-255-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_128_255Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-128-255-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-128-255-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_128_255Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-256-511-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-256-511-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_256_511Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-256-511-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-256-511-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_256_511Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-512-1023-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-512-1023-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_512_1023Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-512-1023-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-512-1023-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_512_1023Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-64-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-64-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_64Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-64-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-64-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_64Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-65-127-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-65-127-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_65_127Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-if-ethernet-ext"
+//	Path from parent:     "in-frames-65-127-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets"
+func (n *Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-frames-65-127-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters_InDistribution).InFrames_65_127Octets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters_InDistribution) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets YANG schema element.
+type Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_InDistributionPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution YANG schema element.
+type Interface_Ethernet_Counters_InDistributionPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Ethernet_Counters_InDistributionPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution YANG schema element.
+type Interface_Ethernet_Counters_InDistributionPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InFrames_1024_1518Octets (leaf): Number of good and bad packets received that were
+// between 1024 and 1518 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-1024-1518-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_1024_1518Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-1024-1518-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_1024_1518Octets (leaf): Number of good and bad packets received that were
+// between 1024 and 1518 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-1024-1518-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-1024-1518-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_1024_1518Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_1024_1518OctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-1024-1518-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_128_255Octets (leaf): Number of good and bad packets received that were
+// between 128 and 255 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-128-255-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_128_255Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-128-255-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_128_255Octets (leaf): Number of good and bad packets received that were
+// between 128 and 255 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-128-255-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-128-255-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_128_255Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_128_255OctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-128-255-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_256_511Octets (leaf): Number of good and bad packets received that were
+// between 256 and 511 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-256-511-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_256_511Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-256-511-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_256_511Octets (leaf): Number of good and bad packets received that were
+// between 256 and 511 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-256-511-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-256-511-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_256_511Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_256_511OctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-256-511-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_512_1023Octets (leaf): Number of good and bad packets received that were
+// between 512 and 1023 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-512-1023-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_512_1023Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-512-1023-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_512_1023Octets (leaf): Number of good and bad packets received that were
+// between 512 and 1023 bytes in length inclusive
+// (excluding framing bits but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-512-1023-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-512-1023-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_512_1023Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_512_1023OctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-512-1023-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_64Octets (leaf): Number of packets (including bad packets) received that
+// were 64 bytes in length (excluding framing bits but
+// including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-64-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_64Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-64-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_64Octets (leaf): Number of packets (including bad packets) received that
+// were 64 bytes in length (excluding framing bits but
+// including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-64-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-64-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_64Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_64OctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-64-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_65_127Octets (leaf): Number of good and bad packets received that were
+// between 65 and 127 bytes in length (excluding framing bits
+// but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-65-127-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPath) InFrames_65_127Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-65-127-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InFrames_65_127Octets (leaf): Number of good and bad packets received that were
+// between 65 and 127 bytes in length (excluding framing bits
+// but including FCS bytes).
+//
+//	Defining module:      "openconfig-if-ethernet-ext"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-frames-65-127-octets"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/in-distribution/in-frames-65-127-octets"
+func (n *Interface_Ethernet_Counters_InDistributionPathAny) InFrames_65_127Octets() *Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny {
+	return &Interface_Ethernet_Counters_InDistribution_InFrames_65_127OctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-frames-65-127-octets"},
 			map[string]interface{}{},
 			n,
 		),

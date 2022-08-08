@@ -18,6 +18,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
+  - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   - public/release/models/interfaces/openconfig-if-ip-ext.yang
   - public/release/models/interfaces/openconfig-if-ip.yang
   - public/release/models/interfaces/openconfig-interfaces.yang
@@ -14852,32 +14853,53 @@ func (*Interface_Ethernet) ΛBelongingModule() string {
 
 // Interface_Ethernet_Counters represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters YANG schema element.
 type Interface_Ethernet_Counters struct {
-	In_8021QFrames      *uint64 `path:"in-8021q-frames" module:"openconfig-if-ethernet"`
-	InBlockErrors       *uint64 `path:"in-block-errors" module:"openconfig-if-ethernet"`
-	InCarrierErrors     *uint64 `path:"in-carrier-errors" module:"openconfig-if-ethernet"`
-	InCrcErrors         *uint64 `path:"in-crc-errors" module:"openconfig-if-ethernet"`
-	InFragmentFrames    *uint64 `path:"in-fragment-frames" module:"openconfig-if-ethernet"`
-	InInterruptedTx     *uint64 `path:"in-interrupted-tx" module:"openconfig-if-ethernet"`
-	InJabberFrames      *uint64 `path:"in-jabber-frames" module:"openconfig-if-ethernet"`
-	InLateCollision     *uint64 `path:"in-late-collision" module:"openconfig-if-ethernet"`
-	InMacControlFrames  *uint64 `path:"in-mac-control-frames" module:"openconfig-if-ethernet"`
-	InMacErrorsRx       *uint64 `path:"in-mac-errors-rx" module:"openconfig-if-ethernet"`
-	InMacPauseFrames    *uint64 `path:"in-mac-pause-frames" module:"openconfig-if-ethernet"`
-	InMaxsizeExceeded   *uint64 `path:"in-maxsize-exceeded" module:"openconfig-if-ethernet"`
-	InOversizeFrames    *uint64 `path:"in-oversize-frames" module:"openconfig-if-ethernet"`
-	InSingleCollision   *uint64 `path:"in-single-collision" module:"openconfig-if-ethernet"`
-	InSymbolError       *uint64 `path:"in-symbol-error" module:"openconfig-if-ethernet"`
-	InUndersizeFrames   *uint64 `path:"in-undersize-frames" module:"openconfig-if-ethernet"`
-	Out_8021QFrames     *uint64 `path:"out-8021q-frames" module:"openconfig-if-ethernet"`
-	OutMacControlFrames *uint64 `path:"out-mac-control-frames" module:"openconfig-if-ethernet"`
-	OutMacErrorsTx      *uint64 `path:"out-mac-errors-tx" module:"openconfig-if-ethernet"`
-	OutMacPauseFrames   *uint64 `path:"out-mac-pause-frames" module:"openconfig-if-ethernet"`
+	In_8021QFrames      *uint64                                     `path:"in-8021q-frames" module:"openconfig-if-ethernet"`
+	InBlockErrors       *uint64                                     `path:"in-block-errors" module:"openconfig-if-ethernet"`
+	InCarrierErrors     *uint64                                     `path:"in-carrier-errors" module:"openconfig-if-ethernet"`
+	InCrcErrors         *uint64                                     `path:"in-crc-errors" module:"openconfig-if-ethernet"`
+	InDistribution      *Interface_Ethernet_Counters_InDistribution `path:"in-distribution" module:"openconfig-if-ethernet-ext"`
+	InFragmentFrames    *uint64                                     `path:"in-fragment-frames" module:"openconfig-if-ethernet"`
+	InInterruptedTx     *uint64                                     `path:"in-interrupted-tx" module:"openconfig-if-ethernet"`
+	InJabberFrames      *uint64                                     `path:"in-jabber-frames" module:"openconfig-if-ethernet"`
+	InLateCollision     *uint64                                     `path:"in-late-collision" module:"openconfig-if-ethernet"`
+	InMacControlFrames  *uint64                                     `path:"in-mac-control-frames" module:"openconfig-if-ethernet"`
+	InMacErrorsRx       *uint64                                     `path:"in-mac-errors-rx" module:"openconfig-if-ethernet"`
+	InMacPauseFrames    *uint64                                     `path:"in-mac-pause-frames" module:"openconfig-if-ethernet"`
+	InMaxsizeExceeded   *uint64                                     `path:"in-maxsize-exceeded" module:"openconfig-if-ethernet"`
+	InOversizeFrames    *uint64                                     `path:"in-oversize-frames" module:"openconfig-if-ethernet"`
+	InSingleCollision   *uint64                                     `path:"in-single-collision" module:"openconfig-if-ethernet"`
+	InSymbolError       *uint64                                     `path:"in-symbol-error" module:"openconfig-if-ethernet"`
+	InUndersizeFrames   *uint64                                     `path:"in-undersize-frames" module:"openconfig-if-ethernet"`
+	Out_8021QFrames     *uint64                                     `path:"out-8021q-frames" module:"openconfig-if-ethernet"`
+	OutMacControlFrames *uint64                                     `path:"out-mac-control-frames" module:"openconfig-if-ethernet"`
+	OutMacErrorsTx      *uint64                                     `path:"out-mac-errors-tx" module:"openconfig-if-ethernet"`
+	OutMacPauseFrames   *uint64                                     `path:"out-mac-pause-frames" module:"openconfig-if-ethernet"`
 }
 
 // IsYANGGoStruct ensures that Interface_Ethernet_Counters implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*Interface_Ethernet_Counters) IsYANGGoStruct() {}
+
+// GetOrCreateInDistribution retrieves the value of the InDistribution field
+// or returns the existing field if it already exists.
+func (t *Interface_Ethernet_Counters) GetOrCreateInDistribution() *Interface_Ethernet_Counters_InDistribution {
+	if t.InDistribution != nil {
+		return t.InDistribution
+	}
+	t.InDistribution = &Interface_Ethernet_Counters_InDistribution{}
+	return t.InDistribution
+}
+
+// GetInDistribution returns the value of the InDistribution struct pointer
+// from Interface_Ethernet_Counters. If the receiver or the field InDistribution is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Ethernet_Counters) GetInDistribution() *Interface_Ethernet_Counters_InDistribution {
+	if t != nil && t.InDistribution != nil {
+		return t.InDistribution
+	}
+	return nil
+}
 
 // GetIn_8021QFrames retrieves the value of the leaf In_8021QFrames from the Interface_Ethernet_Counters
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -15207,6 +15229,7 @@ func (t *Interface_Ethernet_Counters) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	t.InDistribution.PopulateDefaults()
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -15230,6 +15253,152 @@ func (t *Interface_Ethernet_Counters) ΛEnumTypeMap() map[string][]reflect.Type 
 // of Interface_Ethernet_Counters.
 func (*Interface_Ethernet_Counters) ΛBelongingModule() string {
 	return "openconfig-if-ethernet"
+}
+
+// Interface_Ethernet_Counters_InDistribution represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/in-distribution YANG schema element.
+type Interface_Ethernet_Counters_InDistribution struct {
+	InFrames_1024_1518Octets *uint64 `path:"in-frames-1024-1518-octets" module:"openconfig-if-ethernet-ext"`
+	InFrames_128_255Octets   *uint64 `path:"in-frames-128-255-octets" module:"openconfig-if-ethernet-ext"`
+	InFrames_256_511Octets   *uint64 `path:"in-frames-256-511-octets" module:"openconfig-if-ethernet-ext"`
+	InFrames_512_1023Octets  *uint64 `path:"in-frames-512-1023-octets" module:"openconfig-if-ethernet-ext"`
+	InFrames_64Octets        *uint64 `path:"in-frames-64-octets" module:"openconfig-if-ethernet-ext"`
+	InFrames_65_127Octets    *uint64 `path:"in-frames-65-127-octets" module:"openconfig-if-ethernet-ext"`
+}
+
+// IsYANGGoStruct ensures that Interface_Ethernet_Counters_InDistribution implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Ethernet_Counters_InDistribution) IsYANGGoStruct() {}
+
+// GetInFrames_1024_1518Octets retrieves the value of the leaf InFrames_1024_1518Octets from the Interface_Ethernet_Counters_InDistribution
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InFrames_1024_1518Octets is set, it can
+// safely use t.GetInFrames_1024_1518Octets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InFrames_1024_1518Octets == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters_InDistribution) GetInFrames_1024_1518Octets() uint64 {
+	if t == nil || t.InFrames_1024_1518Octets == nil {
+		return 0
+	}
+	return *t.InFrames_1024_1518Octets
+}
+
+// GetInFrames_128_255Octets retrieves the value of the leaf InFrames_128_255Octets from the Interface_Ethernet_Counters_InDistribution
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InFrames_128_255Octets is set, it can
+// safely use t.GetInFrames_128_255Octets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InFrames_128_255Octets == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters_InDistribution) GetInFrames_128_255Octets() uint64 {
+	if t == nil || t.InFrames_128_255Octets == nil {
+		return 0
+	}
+	return *t.InFrames_128_255Octets
+}
+
+// GetInFrames_256_511Octets retrieves the value of the leaf InFrames_256_511Octets from the Interface_Ethernet_Counters_InDistribution
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InFrames_256_511Octets is set, it can
+// safely use t.GetInFrames_256_511Octets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InFrames_256_511Octets == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters_InDistribution) GetInFrames_256_511Octets() uint64 {
+	if t == nil || t.InFrames_256_511Octets == nil {
+		return 0
+	}
+	return *t.InFrames_256_511Octets
+}
+
+// GetInFrames_512_1023Octets retrieves the value of the leaf InFrames_512_1023Octets from the Interface_Ethernet_Counters_InDistribution
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InFrames_512_1023Octets is set, it can
+// safely use t.GetInFrames_512_1023Octets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InFrames_512_1023Octets == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters_InDistribution) GetInFrames_512_1023Octets() uint64 {
+	if t == nil || t.InFrames_512_1023Octets == nil {
+		return 0
+	}
+	return *t.InFrames_512_1023Octets
+}
+
+// GetInFrames_64Octets retrieves the value of the leaf InFrames_64Octets from the Interface_Ethernet_Counters_InDistribution
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InFrames_64Octets is set, it can
+// safely use t.GetInFrames_64Octets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InFrames_64Octets == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters_InDistribution) GetInFrames_64Octets() uint64 {
+	if t == nil || t.InFrames_64Octets == nil {
+		return 0
+	}
+	return *t.InFrames_64Octets
+}
+
+// GetInFrames_65_127Octets retrieves the value of the leaf InFrames_65_127Octets from the Interface_Ethernet_Counters_InDistribution
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InFrames_65_127Octets is set, it can
+// safely use t.GetInFrames_65_127Octets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InFrames_65_127Octets == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters_InDistribution) GetInFrames_65_127Octets() uint64 {
+	if t == nil || t.InFrames_65_127Octets == nil {
+		return 0
+	}
+	return *t.InFrames_65_127Octets
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Ethernet_Counters_InDistribution
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Ethernet_Counters_InDistribution) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Ethernet_Counters_InDistribution) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Ethernet_Counters_InDistribution"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Ethernet_Counters_InDistribution) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Ethernet_Counters_InDistribution) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_Ethernet_Counters_InDistribution.
+func (*Interface_Ethernet_Counters_InDistribution) ΛBelongingModule() string {
+	return "openconfig-if-ethernet-ext"
 }
 
 // Interface_Ethernet_SwitchedVlan represents the /openconfig-interfaces/interfaces/interface/ethernet/switched-vlan YANG schema element.
@@ -21636,255 +21805,5 @@ func (t *Interface_Subinterface_Ipv6_Address) ΛEnumTypeMap() map[string][]refle
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Interface_Subinterface_Ipv6_Address.
 func (*Interface_Subinterface_Ipv6_Address) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv6_Address_VrrpGroup represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/vrrp/vrrp-group YANG schema element.
-type Interface_Subinterface_Ipv6_Address_VrrpGroup struct {
-	AcceptMode            *bool                                                            `path:"state/accept-mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/accept-mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	AdvertisementInterval *uint16                                                          `path:"state/advertisement-interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/advertisement-interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	CurrentPriority       *uint8                                                           `path:"state/current-priority" module:"openconfig-if-ip/openconfig-if-ip"`
-	InterfaceTracking     *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking `path:"interface-tracking" module:"openconfig-if-ip"`
-	Preempt               *bool                                                            `path:"state/preempt" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/preempt" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	PreemptDelay          *uint16                                                          `path:"state/preempt-delay" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/preempt-delay" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Priority              *uint8                                                           `path:"state/priority" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/priority" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	VirtualAddress        []string                                                         `path:"state/virtual-address" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/virtual-address" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	VirtualLinkLocal      *string                                                          `path:"state/virtual-link-local" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/virtual-link-local" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	VirtualRouterId       *uint8                                                           `path:"state/virtual-router-id|virtual-router-id" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/virtual-router-id|virtual-router-id" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_Address_VrrpGroup implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv6_Address_VrrpGroup) IsYANGGoStruct() {}
-
-// GetOrCreateInterfaceTracking retrieves the value of the InterfaceTracking field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetOrCreateInterfaceTracking() *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking {
-	if t.InterfaceTracking != nil {
-		return t.InterfaceTracking
-	}
-	t.InterfaceTracking = &Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking{}
-	return t.InterfaceTracking
-}
-
-// GetInterfaceTracking returns the value of the InterfaceTracking struct pointer
-// from Interface_Subinterface_Ipv6_Address_VrrpGroup. If the receiver or the field InterfaceTracking is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetInterfaceTracking() *Interface_Subinterface_Ipv6_Address_VrrpGroup_InterfaceTracking {
-	if t != nil && t.InterfaceTracking != nil {
-		return t.InterfaceTracking
-	}
-	return nil
-}
-
-// GetAcceptMode retrieves the value of the leaf AcceptMode from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if AcceptMode is set, it can
-// safely use t.GetAcceptMode() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.AcceptMode == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetAcceptMode() bool {
-	if t == nil || t.AcceptMode == nil {
-		return false
-	}
-	return *t.AcceptMode
-}
-
-// GetAdvertisementInterval retrieves the value of the leaf AdvertisementInterval from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if AdvertisementInterval is set, it can
-// safely use t.GetAdvertisementInterval() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.AdvertisementInterval == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetAdvertisementInterval() uint16 {
-	if t == nil || t.AdvertisementInterval == nil {
-		return 100
-	}
-	return *t.AdvertisementInterval
-}
-
-// GetCurrentPriority retrieves the value of the leaf CurrentPriority from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if CurrentPriority is set, it can
-// safely use t.GetCurrentPriority() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.CurrentPriority == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetCurrentPriority() uint8 {
-	if t == nil || t.CurrentPriority == nil {
-		return 0
-	}
-	return *t.CurrentPriority
-}
-
-// GetPreempt retrieves the value of the leaf Preempt from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Preempt is set, it can
-// safely use t.GetPreempt() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Preempt == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetPreempt() bool {
-	if t == nil || t.Preempt == nil {
-		return true
-	}
-	return *t.Preempt
-}
-
-// GetPreemptDelay retrieves the value of the leaf PreemptDelay from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if PreemptDelay is set, it can
-// safely use t.GetPreemptDelay() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.PreemptDelay == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetPreemptDelay() uint16 {
-	if t == nil || t.PreemptDelay == nil {
-		return 0
-	}
-	return *t.PreemptDelay
-}
-
-// GetPriority retrieves the value of the leaf Priority from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Priority is set, it can
-// safely use t.GetPriority() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Priority == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetPriority() uint8 {
-	if t == nil || t.Priority == nil {
-		return 100
-	}
-	return *t.Priority
-}
-
-// GetVirtualAddress retrieves the value of the leaf VirtualAddress from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if VirtualAddress is set, it can
-// safely use t.GetVirtualAddress() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.VirtualAddress == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetVirtualAddress() []string {
-	if t == nil || t.VirtualAddress == nil {
-		return nil
-	}
-	return t.VirtualAddress
-}
-
-// GetVirtualLinkLocal retrieves the value of the leaf VirtualLinkLocal from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if VirtualLinkLocal is set, it can
-// safely use t.GetVirtualLinkLocal() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.VirtualLinkLocal == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetVirtualLinkLocal() string {
-	if t == nil || t.VirtualLinkLocal == nil {
-		return ""
-	}
-	return *t.VirtualLinkLocal
-}
-
-// GetVirtualRouterId retrieves the value of the leaf VirtualRouterId from the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if VirtualRouterId is set, it can
-// safely use t.GetVirtualRouterId() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.VirtualRouterId == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) GetVirtualRouterId() uint8 {
-	if t == nil || t.VirtualRouterId == nil {
-		return 0
-	}
-	return *t.VirtualRouterId
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6_Address_VrrpGroup
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.AcceptMode == nil {
-		var v bool = false
-		t.AcceptMode = &v
-	}
-	if t.AdvertisementInterval == nil {
-		var v uint16 = 100
-		t.AdvertisementInterval = &v
-	}
-	if t.Preempt == nil {
-		var v bool = true
-		t.Preempt = &v
-	}
-	if t.PreemptDelay == nil {
-		var v uint16 = 0
-		t.PreemptDelay = &v
-	}
-	if t.Priority == nil {
-		var v uint8 = 100
-		t.Priority = &v
-	}
-	t.InterfaceTracking.PopulateDefaults()
-}
-
-// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv6_Address_VrrpGroup struct, which is a YANG list entry.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.VirtualRouterId == nil {
-		return nil, fmt.Errorf("nil value for key VirtualRouterId")
-	}
-
-	return map[string]interface{}{
-		"virtual-router-id": *t.VirtualRouterId,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6_Address_VrrpGroup"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv6_Address_VrrpGroup) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv6_Address_VrrpGroup.
-func (*Interface_Subinterface_Ipv6_Address_VrrpGroup) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
