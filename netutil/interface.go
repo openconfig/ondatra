@@ -79,7 +79,10 @@ func NextBundleInterface(t *testing.T, dut *ondatra.DUTDevice) string {
 	t.Helper()
 	batch := dut.Telemetry().NewBatch()
 	dut.Telemetry().InterfaceAny().Aggregation().Batch(t, batch)
-	bundleIntfs := batch.Lookup(t).Val(t).Interface
+	bundleIntfs := make(map[string]*telemetry.Interface)
+	if bundles:=batch.Lookup(t); bundles!=nil {
+		bundleIntfs = bundles.Val(t).Interface
+	}
 	name, err := nextBundleInterface(dut.Vendor(), bundleIntfs)
 	if err != nil {
 		t.Fatalf("NextBundleInterface(t, %s): %v", dut.Name(), err)
@@ -93,7 +96,10 @@ func NextVLANInterface(t *testing.T, dut *ondatra.DUTDevice) string {
 	t.Helper()
 	batch := dut.Telemetry().NewBatch()
 	dut.Telemetry().InterfaceAny().RoutedVlan().Batch(t, batch)
-	vlanIntfs := batch.Lookup(t).Val(t).Interface
+	vlanIntfs := make(map[string]*telemetry.Interface)
+	if vlans:=batch.Lookup(t); vlans!=nil {
+		vlanIntfs = vlans.Val(t).Interface
+	}
 	name, err := nextVLANInterface(dut.Vendor(), vlanIntfs)
 	if err != nil {
 		t.Fatalf("NextVLANInterface(t, %s): %v", dut.Name(), err)
