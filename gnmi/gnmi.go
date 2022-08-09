@@ -32,7 +32,7 @@ import (
 )
 
 // Lookup fetches the value of a ygnmi.SingletonQuery with a ONCE subscription.
-func Lookup[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T]) *ygnmi.Value[T] {
+func Lookup[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T]) *ygnmi.Value[T] {
 	c := newClient(t, dut, "Lookup")
 	v, err := ygnmi.Lookup(context.Background(), c, q)
 	if err != nil {
@@ -44,7 +44,7 @@ func Lookup[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T
 // Get fetches the value of a SingletonQuery with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // Use Lookup to also get metadata or tolerate no value present.
-func Get[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T]) T {
+func Get[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T]) T {
 	c := newClient(t, dut, "Get")
 	v, err := ygnmi.Get(context.Background(), c, q)
 	if err != nil {
@@ -57,7 +57,7 @@ func Get[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T]) 
 type Watcher[T any] struct {
 	watcher  *ygnmi.Watcher[T]
 	cancelFn func()
-	dut      ondatra.DUTDevice
+	dut      *ondatra.DUTDevice
 	query    ygnmi.AnyQuery[T]
 }
 
@@ -85,7 +85,7 @@ func (w *Watcher[T]) Cancel() {
 // or the timeout is reached. Calling Await on the returned Watcher waits for the subscription
 // to complete. It returns the last observed value and a boolean that indicates whether
 // that value satisfies the predicate.
-func Watch[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
+func Watch[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
 	c := newClient(t, dut, "Watch")
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	w := ygnmi.Watch(ctx, c, q, func(v *ygnmi.Value[T]) error {
@@ -106,7 +106,7 @@ func Watch[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T]
 // blocking until a value that is deep equal to the specified val is received
 // or the timeout is reached. To wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func Await[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T], timeout time.Duration, val T) *ygnmi.Value[T] {
+func Await[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T], timeout time.Duration, val T) *ygnmi.Value[T] {
 	c := newClient(t, dut, "Await")
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
@@ -122,7 +122,7 @@ func Await[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T]
 type Collector[T any] struct {
 	collector *ygnmi.Collector[T]
 	cancelFn  func()
-	dut       ondatra.DUTDevice
+	dut       *ondatra.DUTDevice
 	query     ygnmi.AnyQuery[T]
 }
 
@@ -139,7 +139,7 @@ func (c *Collector[T]) Await(t testing.TB) []*ygnmi.Value[T] {
 
 // Collect starts an asynchronous collection of the values at the query with a STREAM subscription.
 // Calling Await on the return Collection waits until the timeout is reached and returns the collected values.
-func Collect[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[T], timeout time.Duration) *Collector[T] {
+func Collect[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T], timeout time.Duration) *Collector[T] {
 	c := newClient(t, dut, "Collect")
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	collect := &Collector[T]{
@@ -154,7 +154,7 @@ func Collect[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.SingletonQuery[
 
 // LookupAll fetches the values of a ygnmi.WildcardQuery with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func LookupAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery[T]) []*ygnmi.Value[T] {
+func LookupAll[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.WildcardQuery[T]) []*ygnmi.Value[T] {
 	c := newClient(t, dut, "LookupAll")
 	v, err := ygnmi.LookupAll(context.Background(), c, q)
 	if err != nil {
@@ -166,7 +166,7 @@ func LookupAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery
 // GetAll fetches the value of a WildcardQuery with a ONCE subscription skipping any non-present paths.
 // It fails the test fatally if no value is present at the path
 // Use LookupAll to also get metadata or tolerate no values present.
-func GetAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery[T]) []T {
+func GetAll[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.WildcardQuery[T]) []T {
 	c := newClient(t, dut, "GetAll")
 	v, err := ygnmi.GetAll(context.Background(), c, q)
 	if err != nil {
@@ -180,7 +180,7 @@ func GetAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery[T]
 // or the timeout is reached. Calling Await on the returned Watcher waits for the subscription
 // to complete. It returns the last observed value and a boolean that indicates whether
 // that value satisfies the predicate.
-func WatchAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
+func WatchAll[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.WildcardQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
 	c := newClient(t, dut, "WatchAll")
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	w := ygnmi.WatchAll(ctx, c, q, func(v *ygnmi.Value[T]) error {
@@ -199,7 +199,7 @@ func WatchAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery[
 
 // CollectAll starts an asynchronous collection of the values at the query with a STREAM subscription.
 // Calling Await on the return Collection waits until the timeout is reached and returns the collected values.
-func CollectAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuery[T], timeout time.Duration) *Collector[T] {
+func CollectAll[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.WildcardQuery[T], timeout time.Duration) *Collector[T] {
 	c := newClient(t, dut, "CollectAll")
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	collect := &Collector[T]{
@@ -213,7 +213,7 @@ func CollectAll[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.WildcardQuer
 }
 
 // Update updates the configuration at the given query path with the val.
-func Update[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
+func Update[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
 	c := newClient(t, dut, "Update")
 	res, err := ygnmi.Update(context.Background(), c, q, val)
 	if err != nil {
@@ -223,7 +223,7 @@ func Update[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.ConfigQuery[T], 
 }
 
 // Replace replaces the configuration at the given query path with the val.
-func Replace[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
+func Replace[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
 	c := newClient(t, dut, "Replace")
 	res, err := ygnmi.Replace(context.Background(), c, q, val)
 	if err != nil {
@@ -233,7 +233,7 @@ func Replace[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.ConfigQuery[T],
 }
 
 // Delete deletes the configuration at the given query path.
-func Delete[T any](t testing.TB, dut ondatra.DUTDevice, q ygnmi.ConfigQuery[T]) *ygnmi.Result {
+func Delete[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.ConfigQuery[T]) *ygnmi.Result {
 	c := newClient(t, dut, "Delete")
 	res, err := ygnmi.Delete(context.Background(), c, q)
 	if err != nil {
@@ -249,7 +249,7 @@ type SetBatch struct {
 }
 
 // Set performs the gnmi.Set request with all queued operations.
-func (sb *SetBatch) Set(t testing.TB, dut ondatra.DUTDevice) *ygnmi.Result {
+func (sb *SetBatch) Set(t testing.TB, dut *ondatra.DUTDevice) *ygnmi.Result {
 	c := newClient(t, dut, "Set")
 	res, err := sb.sb.Set(context.Background(), c)
 	if err != nil {
@@ -273,7 +273,7 @@ func BatchDelete[T any](sb *SetBatch, q ygnmi.ConfigQuery[T]) {
 	ygnmi.BatchDelete(sb.sb, q)
 }
 
-func newClient(t testing.TB, dut ondatra.DUTDevice, method string) *ygnmi.Client {
+func newClient(t testing.TB, dut *ondatra.DUTDevice, method string) *ygnmi.Client {
 	c, err := ygnmi.NewClient(dut.RawAPIs().GNMI().Default(t), ygnmi.WithTarget(dut.ID()))
 	if err != nil {
 		t.Fatalf("%s(t) on %s: %v", method, dut, err)

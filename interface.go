@@ -77,8 +77,8 @@ func (i *Interface) WithLACPEnabled(enabled bool) *Interface {
 }
 
 // Ethernet returns the existing Ethernet config.
-func (i *Interface) Ethernet() *Ethernet {
-	return &Ethernet{pb: i.pb.Ethernet}
+func (i *Interface) Ethernet() *ixnet.Ethernet {
+	return ixnet.NewEthernet(i.pb.Ethernet)
 }
 
 // IPv4 creates an IPv4 config for the interface or returns the existing config.

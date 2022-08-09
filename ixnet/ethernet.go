@@ -12,11 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+package ixnet
 
 import (
 	opb "github.com/openconfig/ondatra/proto"
 )
+
+// NewEthernet returns a new ethernet configuration.
+// Tests must not call this method directly.
+func NewEthernet(pb *opb.EthernetConfig) *Ethernet {
+	return &Ethernet{pb}
+}
 
 // Ethernet is a representation of Ethernet config on the ATE.
 type Ethernet struct {
@@ -122,9 +128,10 @@ func (r *RxSAKPool) WithSAK256(sak string) *RxSAKPool {
 
 // MKA creates an MKA protocol for a MACsec configuration or returns the existing config.
 // The default config params are:
-//   Capability: Not implemented
-//   Cipher Suite: GCM-AES-128
-//   Confidentiality Offset: No confidentiality
+//
+//	Capability: Not implemented
+//	Cipher Suite: GCM-AES-128
+//	Confidentiality Offset: No confidentiality
 func (m *MACsec) MKA() *MKA {
 	if m.pb.Mka == nil {
 		m.pb.Mka = &opb.MacSec_MKA{
