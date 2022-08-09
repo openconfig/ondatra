@@ -79,11 +79,7 @@ func NextBundleInterface(t *testing.T, dut *ondatra.DUTDevice) string {
 	t.Helper()
 	batch := dut.Telemetry().NewBatch()
 	dut.Telemetry().InterfaceAny().Aggregation().Batch(t, batch)
-	bundleIntfs := make(map[string]*telemetry.Interface)
-	if bundles:=batch.Lookup(t); bundles!=nil {
-		bundleIntfs = bundles.Val(t).Interface
-	}
-	name, err := nextBundleInterface(dut.Vendor(), bundleIntfs)
+	name, err := nextBundleInterface(t, dut.Vendor(), batch.Lookup(t))
 	if err != nil {
 		t.Fatalf("NextBundleInterface(t, %s): %v", dut.Name(), err)
 	}
@@ -96,11 +92,7 @@ func NextVLANInterface(t *testing.T, dut *ondatra.DUTDevice) string {
 	t.Helper()
 	batch := dut.Telemetry().NewBatch()
 	dut.Telemetry().InterfaceAny().RoutedVlan().Batch(t, batch)
-	vlanIntfs := make(map[string]*telemetry.Interface)
-	if vlans:=batch.Lookup(t); vlans!=nil {
-		vlanIntfs = vlans.Val(t).Interface
-	}
-	name, err := nextVLANInterface(dut.Vendor(), vlanIntfs)
+	name, err := nextVLANInterface(t, dut.Vendor(), batch.Lookup(t))
 	if err != nil {
 		t.Fatalf("NextVLANInterface(t, %s): %v", dut.Name(), err)
 	}
@@ -140,10 +132,14 @@ func vlanInterface(vendor ondatra.Vendor, id int) (string, error) {
 	return intfName(prefix, id), nil
 }
 
-func nextBundleInterface(vendor ondatra.Vendor, bundleIntfs map[string]*telemetry.Interface) (string, error) {
+func nextBundleInterface(t *testing.T, vendor ondatra.Vendor, val *telemetry.QualifiedDevice) (string, error) {
 	prefix, err := bundlePrefix(vendor)
 	if err != nil {
 		return "", err
+	}
+	var bundleIntfs map[string]*telemetry.Interface
+	if val.IsPresent() {
+		bundleIntfs = val.Val(t).Interface
 	}
 	for id := 1; ; id++ {
 		bundleName := intfName(prefix, id)
@@ -153,10 +149,14 @@ func nextBundleInterface(vendor ondatra.Vendor, bundleIntfs map[string]*telemetr
 	}
 }
 
-func nextVLANInterface(vendor ondatra.Vendor, vlanIntfs map[string]*telemetry.Interface) (string, error) {
+func nextVLANInterface(t *testing.T, vendor ondatra.Vendor, val *telemetry.QualifiedDevice) (string, error) {
 	prefix, err := vlanPrefix(vendor)
 	if err != nil {
 		return "", err
+	}
+	var vlanIntfs map[string]*telemetry.Interface
+	if val.IsPresent() {
+		vlanIntfs = val.Val(t).Interface
 	}
 	for id := 1; ; id++ {
 		vlanName := intfName(prefix, id)
