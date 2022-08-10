@@ -375,7 +375,7 @@ func TestImportConfig(t *testing.T) {
 				},
 				cfg: &ixconfig.Ixnetwork{},
 			}
-			gotErr := c.importConfig(context.Background(), c.cfg, false, importTimeout)
+			gotErr := c.importConfig(context.Background(), c.cfg, false, importTimeout, "import test")
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
 				t.Errorf("importConfig: got err: %v, want err %q", gotErr, test.wantErr)
 			}

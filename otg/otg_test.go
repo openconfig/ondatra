@@ -19,6 +19,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
@@ -29,9 +30,7 @@ var (
 	fakeSnappi = new(fakeGosnappi)
 	fakeATE    = &fakebind.ATE{
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
-			Ports: map[string]*binding.Port{
-				"port1": &binding.Port{},
-			},
+			Ports: map[string]*binding.Port{"port1": {}},
 		}},
 		DialOTGFn: func(context.Context) (gosnappi.GosnappiApi, error) {
 			return fakeSnappi, nil
@@ -79,42 +78,94 @@ func TestPushConfigBadPortName(t *testing.T) {
 }
 
 func TestStartProtocols(t *testing.T) {
-	fakeSnappi.protocol = gosnappi.ProtocolStateState.STOP
+	fakeSnappi.protocol = nil
 	otgAPI.StartProtocols(t)
-	if got, want := fakeSnappi.protocol, gosnappi.ProtocolStateState.START; got != want {
+	if got, want := fakeSnappi.protocol.state, gosnappi.ProtocolStateState.START; got != want {
 		t.Errorf("StartProtocols got unexpected protocol state %v, want %v", got, want)
 	}
 }
 
 func TestStopProtocols(t *testing.T) {
-	fakeSnappi.protocol = gosnappi.ProtocolStateState.START
+	fakeSnappi.protocol = nil
 	otgAPI.StopProtocols(t)
-	if got, want := fakeSnappi.protocol, gosnappi.ProtocolStateState.STOP; got != want {
+	if got, want := fakeSnappi.protocol.state, gosnappi.ProtocolStateState.STOP; got != want {
 		t.Errorf("StopProtocols got unexpected protocol state %v, want %v", got, want)
 	}
 }
 
 func TestStartTraffic(t *testing.T) {
-	fakeSnappi.transmit = gosnappi.TransmitStateState.STOP
+	fakeSnappi.transmit = nil
 	otgAPI.StartTraffic(t)
-	if got, want := fakeSnappi.transmit, gosnappi.TransmitStateState.START; got != want {
+	if got, want := fakeSnappi.transmit.state, gosnappi.TransmitStateState.START; got != want {
 		t.Errorf("StartTraffic got unexpected transmit state %v, want %v", got, want)
 	}
 }
 
 func TestStopTraffic(t *testing.T) {
-	fakeSnappi.transmit = gosnappi.TransmitStateState.START
+	fakeSnappi.transmit = nil
 	otgAPI.StopTraffic(t)
-	if got, want := fakeSnappi.transmit, gosnappi.TransmitStateState.STOP; got != want {
+	if got, want := fakeSnappi.transmit.state, gosnappi.TransmitStateState.STOP; got != want {
 		t.Errorf("StopTraffic got unexpected transmit state %v, want %v", got, want)
+	}
+}
+
+func TestAdvertiseRoutes(t *testing.T) {
+	fakeSnappi.route = nil
+	wantNames := []string{"peer1", "peer2"}
+	otgAPI.AdvertiseRoutes(t, wantNames)
+	got := fakeSnappi.route
+	if wantState := gosnappi.RouteStateState.ADVERTISE; got.state != wantState {
+		t.Errorf("AdvertiseRoutes got unexpected route state %v, want %v", got.state, wantState)
+	}
+	if !cmp.Equal(got.names, wantNames) {
+		t.Errorf("AdvertiseRoutes got unexpected route names %v, want %v", got.names, wantNames)
+	}
+}
+
+func TestWithdrawRoutes(t *testing.T) {
+	fakeSnappi.route = nil
+	wantNames := []string{"peer1", "peer2"}
+	otgAPI.WithdrawRoutes(t, wantNames)
+	got := fakeSnappi.route
+	if wantState := gosnappi.RouteStateState.WITHDRAW; got.state != wantState {
+		t.Errorf("WithdrawRoutes got unexpected route state %v, want %v", got.state, wantState)
+	}
+	if !cmp.Equal(got.names, wantNames) {
+		t.Errorf("WithdrawRoutes got unexpected route names %v, want %v", got.names, wantNames)
+	}
+}
+
+func TestEnableLACPMembers(t *testing.T) {
+	wantPorts := []string{"port1", "port2"}
+	otgAPI.EnableLACPMembers(t, wantPorts)
+	gotLACP := fakeSnappi.device.lacp
+	if wantState := gosnappi.LacpMemberStateState.UP; gotLACP.State() != wantState {
+		t.Errorf("EnableLACPMembers got unexpected LACP member state %v, want %v", gotLACP.State(), wantState)
+	}
+	if !cmp.Equal(gotLACP.LagMemberPortNames(), wantPorts) {
+		t.Errorf("EnableLACPMembers got unexpected LACP member ports %v, want %v", gotLACP.LagMemberPortNames(), wantPorts)
+	}
+}
+
+func TestDisableLACPMembers(t *testing.T) {
+	wantPorts := []string{"port1", "port2"}
+	otgAPI.DisableLACPMembers(t, wantPorts)
+	gotLACP := fakeSnappi.device.lacp
+	if wantState := gosnappi.LacpMemberStateState.DOWN; gotLACP.State() != wantState {
+		t.Errorf("DisableLACPMembers got unexpected LACP member state %v, want %v", gotLACP.State(), wantState)
+	}
+	if !cmp.Equal(gotLACP.LagMemberPortNames(), wantPorts) {
+		t.Errorf("DisableLACPMembers got unexpected LACP member ports %v, want %v", gotLACP.LagMemberPortNames(), wantPorts)
 	}
 }
 
 type fakeGosnappi struct {
 	gosnappi.GosnappiApi
 	cfg      gosnappi.Config
-	protocol gosnappi.ProtocolStateStateEnum
-	transmit gosnappi.TransmitStateStateEnum
+	protocol *fakeProtocolState
+	transmit *fakeTransmitState
+	route    *fakeRouteState
+	device   *fakeDeviceState
 }
 
 func (fg *fakeGosnappi) NewConfig() gosnappi.Config {
@@ -135,7 +186,7 @@ func (fg *fakeGosnappi) NewProtocolState() gosnappi.ProtocolState {
 }
 
 func (fg *fakeGosnappi) SetProtocolState(state gosnappi.ProtocolState) (gosnappi.ResponseWarning, error) {
-	fg.protocol = state.(*fakeProtocolState).state
+	fg.protocol = state.(*fakeProtocolState)
 	return gosnappi.NewResponseWarning(), nil
 }
 
@@ -144,7 +195,25 @@ func (fg *fakeGosnappi) NewTransmitState() gosnappi.TransmitState {
 }
 
 func (fg *fakeGosnappi) SetTransmitState(state gosnappi.TransmitState) (gosnappi.ResponseWarning, error) {
-	fg.transmit = state.(*fakeTransmitState).state
+	fg.transmit = state.(*fakeTransmitState)
+	return gosnappi.NewResponseWarning(), nil
+}
+
+func (fg *fakeGosnappi) NewRouteState() gosnappi.RouteState {
+	return new(fakeRouteState)
+}
+
+func (fg *fakeGosnappi) SetRouteState(state gosnappi.RouteState) (gosnappi.ResponseWarning, error) {
+	fg.route = state.(*fakeRouteState)
+	return gosnappi.NewResponseWarning(), nil
+}
+
+func (fg *fakeGosnappi) NewDeviceState() gosnappi.DeviceState {
+	return new(fakeDeviceState)
+}
+
+func (fg *fakeGosnappi) SetDeviceState(state gosnappi.DeviceState) (gosnappi.ResponseWarning, error) {
+	fg.device = state.(*fakeDeviceState)
 	return gosnappi.NewResponseWarning(), nil
 }
 
@@ -166,4 +235,30 @@ type fakeTransmitState struct {
 func (ft *fakeTransmitState) SetState(state gosnappi.TransmitStateStateEnum) gosnappi.TransmitState {
 	ft.state = state
 	return ft
+}
+
+type fakeRouteState struct {
+	gosnappi.RouteState
+	state gosnappi.RouteStateStateEnum
+	names []string
+}
+
+func (fp *fakeRouteState) SetState(state gosnappi.RouteStateStateEnum) gosnappi.RouteState {
+	fp.state = state
+	return fp
+}
+
+func (fp *fakeRouteState) SetNames(names []string) gosnappi.RouteState {
+	fp.names = names
+	return fp
+}
+
+type fakeDeviceState struct {
+	gosnappi.DeviceState
+	lacp gosnappi.LacpMemberState
+}
+
+func (fd *fakeDeviceState) SetLacpMemberState(lacp gosnappi.LacpMemberState) gosnappi.DeviceState {
+	fd.lacp = lacp
+	return fd
 }

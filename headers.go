@@ -15,6 +15,8 @@
 package ondatra
 
 import (
+	"github.com/openconfig/ondatra/ixnet"
+
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -51,11 +53,11 @@ func (h *EthernetHeader) WithSrcAddress(addr string) *EthernetHeader {
 // SrcAddressRange returns the range of source addresses of the Ethernet header for further configuration.
 // By default, the range will be nonrandom values in the interval ["00:00:00:00:00:01", "FF:FF:FF:FF:FF:FF").
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *EthernetHeader) SrcAddressRange() *AddressRange {
+func (h *EthernetHeader) SrcAddressRange() *ixnet.AddressRange {
 	if h.pb.SrcAddr == nil {
 		h.pb.SrcAddr = newMACAddrRange()
 	}
-	return &AddressRange{AddressIncRange{pb: h.pb.SrcAddr}}
+	return ixnet.NewAddressRange(h.pb.SrcAddr)
 }
 
 // WithDstAddress sets the destination MAC address of the Ethernet header to the specified value.
@@ -68,11 +70,11 @@ func (h *EthernetHeader) WithDstAddress(addr string) *EthernetHeader {
 // DstAddressRange returns the range of destination addresses of the Ethernet header for further configuration.
 // By default, the range will be nonrandom values in the interval ["00:00:00:00:00:01", "FF:FF:FF:FF:FF:FF").
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *EthernetHeader) DstAddressRange() *AddressRange {
+func (h *EthernetHeader) DstAddressRange() *ixnet.AddressRange {
 	if h.pb.DstAddr == nil {
 		h.pb.DstAddr = newMACAddrRange()
 	}
-	return &AddressRange{AddressIncRange{pb: h.pb.DstAddr}}
+	return ixnet.NewAddressRange(h.pb.DstAddr)
 }
 
 // WithVLANID sets the 12-bit VLAN ID of the Ethernet header to the specified value.
@@ -197,11 +199,11 @@ func (h *IPv4Header) WithSrcAddress(addr string) *IPv4Header {
 // SrcAddressRange returns the range of source addresses of the IPv4 header for further configuration.
 // By default, the range will be nonrandom values in the interval ["0.0.0.1", "255.255.255.255").
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *IPv4Header) SrcAddressRange() *AddressRange {
+func (h *IPv4Header) SrcAddressRange() *ixnet.AddressRange {
 	if h.pb.SrcAddr == nil {
 		h.pb.SrcAddr = newIPv4AddrRange()
 	}
-	return &AddressRange{AddressIncRange{pb: h.pb.SrcAddr}}
+	return ixnet.NewAddressRange(h.pb.SrcAddr)
 }
 
 // WithDstAddress sets the destination IP addresses of the IPv4 header to the specified value.
@@ -214,11 +216,11 @@ func (h *IPv4Header) WithDstAddress(addr string) *IPv4Header {
 // DstAddressRange returns the range of destination addresses of the IPv4 header for further configuration.
 // By default, the range will be nonrandom values in the interval ["0.0.0.1", "255.255.255.255").
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *IPv4Header) DstAddressRange() *AddressRange {
+func (h *IPv4Header) DstAddressRange() *ixnet.AddressRange {
 	if h.pb.DstAddr == nil {
 		h.pb.DstAddr = newIPv4AddrRange()
 	}
-	return &AddressRange{AddressIncRange{pb: h.pb.DstAddr}}
+	return ixnet.NewAddressRange(h.pb.DstAddr)
 }
 
 func (h *IPv4Header) asPB() *opb.Header {
@@ -247,11 +249,11 @@ func (h *IPv6Header) WithSrcAddress(addr string) *IPv6Header {
 // SrcAddressRange returns the range of source addresses of the IPv6 header for further configuration.
 // By default, the range will be nonrandom values in the interval ["::1", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"].
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *IPv6Header) SrcAddressRange() *AddressRange {
+func (h *IPv6Header) SrcAddressRange() *ixnet.AddressRange {
 	if h.pb.SrcAddr == nil {
 		h.pb.SrcAddr = newIPv6AddrRange()
 	}
-	return &AddressRange{AddressIncRange{pb: h.pb.SrcAddr}}
+	return ixnet.NewAddressRange(h.pb.SrcAddr)
 }
 
 // WithDstAddress sets the destination IP addresses of the IPv6 header to the specified value.
@@ -264,11 +266,11 @@ func (h *IPv6Header) WithDstAddress(addr string) *IPv6Header {
 // DstAddressRange returns the range of destination addresses of the IPv6 header for further configuration.
 // By default, the range will be nonrandom values in the interval ["::1", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"].
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *IPv6Header) DstAddressRange() *AddressRange {
+func (h *IPv6Header) DstAddressRange() *ixnet.AddressRange {
 	if h.pb.DstAddr == nil {
 		h.pb.DstAddr = newIPv6AddrRange()
 	}
-	return &AddressRange{AddressIncRange{pb: h.pb.DstAddr}}
+	return ixnet.NewAddressRange(h.pb.DstAddr)
 }
 
 // WithFlowLabel sets the flow label of the IPv6 header.
@@ -280,11 +282,11 @@ func (h *IPv6Header) WithFlowLabel(flowLabel uint32) *IPv6Header {
 // FlowLabelRange sets the flow label of the IPv6 header to a range of values and returns the range.
 // By default, the range will be nonrandom values in the interval [0, 2^20).
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *IPv6Header) FlowLabelRange() *UIntRange {
+func (h *IPv6Header) FlowLabelRange() *ixnet.UIntRange {
 	if h.pb.FlowLabel == nil {
 		h.pb.FlowLabel = newFlowLabelRange()
 	}
-	return &UIntRange{pb: h.pb.FlowLabel}
+	return ixnet.NewUIntRange(h.pb.FlowLabel)
 }
 
 // WithHopLimit sets the hop limit of the IPv6 header.
@@ -330,11 +332,11 @@ func (h *MPLSHeader) WithLabel(label uint32) *MPLSHeader {
 // LabelRange sets the label of the MPLS header to a range of values and returns the range.
 // By default, the range will be nonrandom values in the interval [0, 2^20).
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *MPLSHeader) LabelRange() *UIntRange {
+func (h *MPLSHeader) LabelRange() *ixnet.UIntRange {
 	if h.pb.Label == nil {
 		h.pb.Label = newFlowLabelRange()
 	}
-	return &UIntRange{pb: h.pb.Label}
+	return ixnet.NewUIntRange(h.pb.Label)
 }
 
 // WithEXP sets the EXP (aka traffic class) of the MPLS header.
@@ -374,11 +376,11 @@ func (h *TCPHeader) WithSrcPort(port uint16) *TCPHeader {
 // SrcPortRange returns the range of source ports of the TCP header for further configuration.
 // By default, the range will be nonrandom values in the interval [1, 2^16).
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *TCPHeader) SrcPortRange() *UIntRange {
+func (h *TCPHeader) SrcPortRange() *ixnet.UIntRange {
 	if h.pb.SrcPort == nil {
 		h.pb.SrcPort = newPortRange()
 	}
-	return &UIntRange{pb: h.pb.SrcPort}
+	return ixnet.NewUIntRange(h.pb.SrcPort)
 }
 
 // WithDstPort sets the destination port of the TCP header to the specified value.
@@ -391,11 +393,11 @@ func (h *TCPHeader) WithDstPort(port uint16) *TCPHeader {
 // DstPortRange returns the range of destination ports of the TCP header for further configuration.
 // By default, the range will be nonrandom values in the interval [1, 2^16).
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *TCPHeader) DstPortRange() *UIntRange {
+func (h *TCPHeader) DstPortRange() *ixnet.UIntRange {
 	if h.pb.DstPort == nil {
 		h.pb.DstPort = newPortRange()
 	}
-	return &UIntRange{pb: h.pb.DstPort}
+	return ixnet.NewUIntRange(h.pb.DstPort)
 }
 
 // WithSequenceNumber sets sequence number of the TCP header.
@@ -429,11 +431,11 @@ func (h *UDPHeader) WithSrcPort(port uint16) *UDPHeader {
 // SrcPortRange returns the range of source ports of the TCP header for further configuration.
 // By default, the range will be nonrandom values in the interval [1, 2^16).
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *UDPHeader) SrcPortRange() *UIntRange {
+func (h *UDPHeader) SrcPortRange() *ixnet.UIntRange {
 	if h.pb.SrcPort == nil {
 		h.pb.SrcPort = newPortRange()
 	}
-	return &UIntRange{pb: h.pb.SrcPort}
+	return ixnet.NewUIntRange(h.pb.SrcPort)
 }
 
 // WithDstPort sets the destination port of the TCP header to the specified value.
@@ -446,11 +448,11 @@ func (h *UDPHeader) WithDstPort(port uint16) *UDPHeader {
 // DstPortRange returns the range of destination ports of the TCP header for further configuration.
 // By default, the range will be nonrandom values in the interval [1, 2^16).
 // The count of values in the range is not set by default; the user must set it explicitly.
-func (h *UDPHeader) DstPortRange() *UIntRange {
+func (h *UDPHeader) DstPortRange() *ixnet.UIntRange {
 	if h.pb.DstPort == nil {
 		h.pb.DstPort = newPortRange()
 	}
-	return &UIntRange{pb: h.pb.DstPort}
+	return ixnet.NewUIntRange(h.pb.DstPort)
 }
 
 func (h *UDPHeader) asPB() *opb.Header {
@@ -1164,4 +1166,34 @@ type MACsecHeader struct {
 
 func (h *MACsecHeader) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Macsec{h.pb}}
+}
+
+func intRangeSingle(i uint32) *opb.UIntRange {
+	return &opb.UIntRange{Min: i, Max: i, Count: 1}
+}
+
+func addrRangeSingle(a string) *opb.AddressRange {
+	return &opb.AddressRange{Min: a, Max: a, Count: 1}
+}
+
+func newPortRange() *opb.UIntRange {
+	const maxPort uint32 = (1 << 16) - 1
+	return &opb.UIntRange{Min: 1, Max: maxPort}
+}
+
+func newFlowLabelRange() *opb.UIntRange {
+	const maxFlowLabel uint32 = (1 << 20) - 1
+	return &opb.UIntRange{Max: maxFlowLabel}
+}
+
+func newMACAddrRange() *opb.AddressRange {
+	return &opb.AddressRange{Min: "00:00:00:00:00:01", Max: "FF:FF:FF:FF:FF:FE"}
+}
+
+func newIPv4AddrRange() *opb.AddressRange {
+	return &opb.AddressRange{Min: "0.0.0.1", Max: "255.255.255.254"}
+}
+
+func newIPv6AddrRange() *opb.AddressRange {
+	return &opb.AddressRange{Min: "::1", Max: "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"}
 }

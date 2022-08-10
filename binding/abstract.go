@@ -25,6 +25,20 @@ import (
 	"github.com/open-traffic-generator/snappi/gosnappi"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	bpb "github.com/openconfig/gnoi/bgp"
+	cpb "github.com/openconfig/gnoi/cert"
+	dpb "github.com/openconfig/gnoi/diag"
+	frpb "github.com/openconfig/gnoi/factory_reset"
+	fpb "github.com/openconfig/gnoi/file"
+	hpb "github.com/openconfig/gnoi/healthz"
+	ipb "github.com/openconfig/gnoi/interface"
+	lpb "github.com/openconfig/gnoi/layer2"
+	mpb "github.com/openconfig/gnoi/mpls"
+	ospb "github.com/openconfig/gnoi/os"
+	otpb "github.com/openconfig/gnoi/otdr"
+	spb "github.com/openconfig/gnoi/system"
+	wpb "github.com/openconfig/gnoi/wavelength_router"
+
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
@@ -102,7 +116,7 @@ func (d *AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4Runt
 	return nil, errors.New("DialP4RT unimplemented")
 }
 
-func (d *AbstractDUT) isDUT() {}
+func (d *AbstractDUT) mustEmbedAbstractDUT() {}
 
 var _ ATE = &AbstractATE{}
 
@@ -156,7 +170,92 @@ func (a *AbstractATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
 	return nil, errors.New("DialOTG unimplemented")
 }
 
-func (a *AbstractATE) isATE() {}
+func (a *AbstractATE) mustEmbedAbstractATE() {}
+
+var _ GNOIClients = &AbstractGNOIClients{}
+
+// AbstractGNOIClients is implementation support for the GNOIClients interface.
+type AbstractGNOIClients struct{}
+
+// BGP logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) BGP() bpb.BGPClient {
+	log.Fatal("BGP unimplemented")
+	return nil
+}
+
+// CertificateManagement logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) CertificateManagement() cpb.CertificateManagementClient {
+	log.Fatal("CertificateManagement unimplemented")
+	return nil
+}
+
+// Diag logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) Diag() dpb.DiagClient {
+	log.Fatal("Diag unimplemented")
+	return nil
+}
+
+// FactoryReset logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) FactoryReset() frpb.FactoryResetClient {
+	log.Fatal("FactoryReset unimplemented")
+	return nil
+}
+
+// File logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) File() fpb.FileClient {
+	log.Fatal("File unimplemented")
+	return nil
+}
+
+// Healthz logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) Healthz() hpb.HealthzClient {
+	log.Fatal("Healthz unimplemented")
+	return nil
+}
+
+// Interface logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) Interface() ipb.InterfaceClient {
+	log.Fatal("Interface unimplemented")
+	return nil
+}
+
+// Layer2 logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) Layer2() lpb.Layer2Client {
+	log.Fatal("Layer2 unimplemented")
+	return nil
+}
+
+// MPLS logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) MPLS() mpb.MPLSClient {
+	log.Fatal("MPLS unimplemented")
+	return nil
+}
+
+// OS logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) OS() ospb.OSClient {
+	log.Fatal("OS unimplemented")
+	return nil
+}
+
+// OTDR logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) OTDR() otpb.OTDRClient {
+	log.Fatal("OTDR unimplemented")
+	return nil
+}
+
+// System logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) System() spb.SystemClient {
+	log.Fatal("System unimplemented")
+	return nil
+}
+
+// WavelengthRouter logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) WavelengthRouter() wpb.WavelengthRouterClient {
+	log.Fatal("WavelengthRouter unimplemented")
+	return nil
+}
+
+func (g *AbstractGNOIClients) mustEmbedAbstractGNOIClients() {}
 
 var _ StreamClient = &AbstractStreamClient{}
 
@@ -190,3 +289,5 @@ func (s *AbstractStreamClient) Stderr() io.ReadCloser {
 func (s *AbstractStreamClient) Close() error {
 	return errors.New("Close unimplemented")
 }
+
+func (s *AbstractStreamClient) mustEmbedAbstractStreamClient() {}

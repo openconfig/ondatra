@@ -18,10 +18,13 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"io"
+
+	"github.com/openconfig/ondatra/binding"
 )
 
 // StreamClient is a fake implementation of StreamClient for use in testing.
 type StreamClient struct {
+	*binding.AbstractStreamClient
 	stdin     *io.PipeWriter
 	stdout    *io.PipeReader
 	stderr    *io.PipeReader

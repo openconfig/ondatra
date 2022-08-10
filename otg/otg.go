@@ -203,6 +203,82 @@ func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.Trans
 	return resp.Warnings(), nil
 }
 
+// AdvertiseRoutes advertises routes on the ATE.
+func (o *OTG) AdvertiseRoutes(t testing.TB, routes []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "Advertising routes on %v", o.ate)
+	warns, err := setRouteState(context.Background(), o.ate, routes, gosnappi.RouteStateState.ADVERTISE)
+	if err != nil {
+		t.Fatalf("AdvertiseRoutes(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("AdvertiseRoutes(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// WithdrawRoutes withdraws routes on the ATE.
+func (o *OTG) WithdrawRoutes(t testing.TB, routes []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "Withdrawing routes for %v", o.ate)
+	warns, err := setRouteState(context.Background(), o.ate, routes, gosnappi.RouteStateState.WITHDRAW)
+	if err != nil {
+		t.Fatalf("WithdrawRoutes(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("WithdrawRoutes(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state gosnappi.RouteStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetRouteState(api.NewRouteState().SetState(state).SetNames(routes))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// EnableLACPMembers enables lacp member ports on the ATE.
+func (o *OTG) EnableLACPMembers(t testing.TB, ports []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "EnableLACPMembers on %v", o.ate)
+	warns, err := setLACPMemberState(context.Background(), o.ate, ports, gosnappi.LacpMemberStateState.UP)
+	if err != nil {
+		t.Fatalf("EnableLACPMembers(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("EnableLACPMembers(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// DisableLACPMembers disables lacp member ports on the ATE.
+func (o *OTG) DisableLACPMembers(t testing.TB, ports []string) {
+	t.Helper()
+	debugger.ActionStarted(t, "DisableLACPMembers on %v", o.ate)
+	warns, err := setLACPMemberState(context.Background(), o.ate, ports, gosnappi.LacpMemberStateState.DOWN)
+	if err != nil {
+		t.Fatalf("DisableLACPMembers(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("DisableLACPMembers(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+func setLACPMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []string, state gosnappi.LacpMemberStateStateEnum) ([]string, error) {
+	api, err := fetchAPI(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetDeviceState(api.NewDeviceState().SetLacpMemberState(gosnappi.NewLacpMemberState().SetLagMemberPortNames(lagMemberPorts).SetState(state)))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
 func fetchAPI(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error) {
 	mu.Lock()
 	defer mu.Unlock()

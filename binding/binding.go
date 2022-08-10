@@ -151,7 +151,7 @@ type DUT interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 
-	isDUT()
+	mustEmbedAbstractDUT()
 }
 
 // ATE is a reserved ATE.
@@ -171,7 +171,7 @@ type ATE interface {
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
 	DialOTG(context.Context) (gosnappi.GosnappiApi, error)
 
-	isATE()
+	mustEmbedAbstractATE()
 }
 
 // Port is a reserved Port.
@@ -179,7 +179,7 @@ type Port struct {
 	Name      string
 	Speed     opb.Port_Speed
 	CardModel string
-	PMD       string
+	PMD       opb.Port_Pmd
 }
 
 func (p *Port) String() string {
@@ -199,6 +199,7 @@ type IxNetwork struct {
 }
 
 // GNOIClients stores APIs to GNOI services.
+// All implementations of this interface must embed AbstractGNOIClients.
 type GNOIClients interface {
 	BGP() bpb.BGPClient
 	CertificateManagement() cpb.CertificateManagementClient
@@ -213,9 +214,11 @@ type GNOIClients interface {
 	OTDR() otpb.OTDRClient
 	System() spb.SystemClient
 	WavelengthRouter() wpb.WavelengthRouterClient
+	mustEmbedAbstractGNOIClients()
 }
 
 // StreamClient provides the interface for streaming IO to DUT.
+// All implementations of this interface must embed AbstractStreamClient.
 type StreamClient interface {
 	// SendCommand always expects a clean "prompt" on the underlying
 	// device. If the device is interleaving Stdin writes with SendCommand
@@ -227,4 +230,5 @@ type StreamClient interface {
 	Stdout() io.ReadCloser
 	Stderr() io.ReadCloser
 	Close() error
+	mustEmbedAbstractStreamClient()
 }

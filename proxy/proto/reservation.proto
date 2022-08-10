@@ -17,9 +17,7 @@ package reservation;
 
 import "proto/testbed.proto";
 
-option java_multiple_files = true;
-
-option go_package = "github.com/openconfig/ondatra/thinkit/proto/reservation";
+option go_package = "github.com/openconfig/ondatra/proto/reservation";
 
 message Reservation {
   string id = 1;
@@ -79,6 +77,8 @@ message Service {
   oneof endpoint {
     GRPCEndpoint grpc = 100;
     ProxiedGRPCEndpoint proxied_grpc = 101;
+    HTTPEndpoint http = 102;
+    HTTPOverGRPCEndpoint http_over_grpc = 103;
   }
 }
 
@@ -93,4 +93,16 @@ message ProxiedGRPCEndpoint {
   string address = 1;
   // Proxy is the form <ip / dns>:<port>. Repeated for each proxy in the chain.
   repeated string proxy = 2;
+}
+
+// HTTPEndpoint is a standard HTTP endpoint.
+message HTTPEndpoint {
+  // Address is the form <ip / dns>:<port>.
+  string address = 1;
+}
+
+// HTTPOverGRPCEndpoint is a GRPC transport for HTTP proxied connections.
+message HTTPOverGRPCEndpoint {
+  // Address is the form <ip / dns>:<port>.
+  string address = 1;
 }

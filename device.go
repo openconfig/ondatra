@@ -188,9 +188,25 @@ func (p *Port) CardModel() string {
 	return p.res.CardModel
 }
 
+// PMD is a Physical Medium Dependent .
+type PMD opb.Port_Pmd
+
+const (
+	// PMD100GFR is a PMD of 100G-FR.
+	PMD100GFR = PMD(opb.Port_PMD_100G_FR)
+	// PMD100GLR4 is a PMD of 100G-LR4.
+	PMD100GLR4 = PMD(opb.Port_PMD_100G_LR4)
+	// PMD400GFR4 is a PMD of 400G-FR4.
+	PMD400GFR4 = PMD(opb.Port_PMD_400G_FR4)
+)
+
+func (pmd PMD) String() string {
+	return opb.Port_Pmd_name[int32(pmd)]
+}
+
 // PMD returns the Physical Medium Dependent.
-func (p *Port) PMD() string {
-	return p.res.PMD
+func (p *Port) PMD() PMD {
+	return PMD(p.res.PMD)
 }
 
 var (
