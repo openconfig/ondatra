@@ -61,6 +61,227 @@ const (
 	BgpPeer_SessionState_ESTABLISHED E_BgpPeer_SessionState = 6
 )
 
+// E_ExtendedIpv4Reachability_Prefix_RedistributionType is a derived int64 type which is used to represent
+// the enumerated node ExtendedIpv4Reachability_Prefix_RedistributionType. An additional value named
+// ExtendedIpv4Reachability_Prefix_RedistributionType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_ExtendedIpv4Reachability_Prefix_RedistributionType int64
+
+// IsYANGGoEnum ensures that ExtendedIpv4Reachability_Prefix_RedistributionType implements the yang.GoEnum
+// interface. This ensures that ExtendedIpv4Reachability_Prefix_RedistributionType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_ExtendedIpv4Reachability_Prefix_RedistributionType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  ExtendedIpv4Reachability_Prefix_RedistributionType.
+func (E_ExtendedIpv4Reachability_Prefix_RedistributionType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_ExtendedIpv4Reachability_Prefix_RedistributionType.
+func (e E_ExtendedIpv4Reachability_Prefix_RedistributionType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_ExtendedIpv4Reachability_Prefix_RedistributionType")
+}
+
+const (
+	// ExtendedIpv4Reachability_Prefix_RedistributionType_UNSET corresponds to the value UNSET of ExtendedIpv4Reachability_Prefix_RedistributionType
+	ExtendedIpv4Reachability_Prefix_RedistributionType_UNSET E_ExtendedIpv4Reachability_Prefix_RedistributionType = 0
+	// ExtendedIpv4Reachability_Prefix_RedistributionType_UP corresponds to the value UP of ExtendedIpv4Reachability_Prefix_RedistributionType
+	ExtendedIpv4Reachability_Prefix_RedistributionType_UP E_ExtendedIpv4Reachability_Prefix_RedistributionType = 1
+	// ExtendedIpv4Reachability_Prefix_RedistributionType_DOWN corresponds to the value DOWN of ExtendedIpv4Reachability_Prefix_RedistributionType
+	ExtendedIpv4Reachability_Prefix_RedistributionType_DOWN E_ExtendedIpv4Reachability_Prefix_RedistributionType = 2
+)
+
+// E_Ipv4ExternalReachability_Prefix_OriginType is a derived int64 type which is used to represent
+// the enumerated node Ipv4ExternalReachability_Prefix_OriginType. An additional value named
+// Ipv4ExternalReachability_Prefix_OriginType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv4ExternalReachability_Prefix_OriginType int64
+
+// IsYANGGoEnum ensures that Ipv4ExternalReachability_Prefix_OriginType implements the yang.GoEnum
+// interface. This ensures that Ipv4ExternalReachability_Prefix_OriginType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv4ExternalReachability_Prefix_OriginType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv4ExternalReachability_Prefix_OriginType.
+func (E_Ipv4ExternalReachability_Prefix_OriginType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ipv4ExternalReachability_Prefix_OriginType.
+func (e E_Ipv4ExternalReachability_Prefix_OriginType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv4ExternalReachability_Prefix_OriginType")
+}
+
+const (
+	// Ipv4ExternalReachability_Prefix_OriginType_UNSET corresponds to the value UNSET of Ipv4ExternalReachability_Prefix_OriginType
+	Ipv4ExternalReachability_Prefix_OriginType_UNSET E_Ipv4ExternalReachability_Prefix_OriginType = 0
+	// Ipv4ExternalReachability_Prefix_OriginType_INTERNAL corresponds to the value INTERNAL of Ipv4ExternalReachability_Prefix_OriginType
+	Ipv4ExternalReachability_Prefix_OriginType_INTERNAL E_Ipv4ExternalReachability_Prefix_OriginType = 1
+	// Ipv4ExternalReachability_Prefix_OriginType_EXTERNAL corresponds to the value EXTERNAL of Ipv4ExternalReachability_Prefix_OriginType
+	Ipv4ExternalReachability_Prefix_OriginType_EXTERNAL E_Ipv4ExternalReachability_Prefix_OriginType = 2
+)
+
+// E_Ipv4ExternalReachability_Prefix_RedistributionType is a derived int64 type which is used to represent
+// the enumerated node Ipv4ExternalReachability_Prefix_RedistributionType. An additional value named
+// Ipv4ExternalReachability_Prefix_RedistributionType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv4ExternalReachability_Prefix_RedistributionType int64
+
+// IsYANGGoEnum ensures that Ipv4ExternalReachability_Prefix_RedistributionType implements the yang.GoEnum
+// interface. This ensures that Ipv4ExternalReachability_Prefix_RedistributionType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv4ExternalReachability_Prefix_RedistributionType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv4ExternalReachability_Prefix_RedistributionType.
+func (E_Ipv4ExternalReachability_Prefix_RedistributionType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ipv4ExternalReachability_Prefix_RedistributionType.
+func (e E_Ipv4ExternalReachability_Prefix_RedistributionType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv4ExternalReachability_Prefix_RedistributionType")
+}
+
+const (
+	// Ipv4ExternalReachability_Prefix_RedistributionType_UNSET corresponds to the value UNSET of Ipv4ExternalReachability_Prefix_RedistributionType
+	Ipv4ExternalReachability_Prefix_RedistributionType_UNSET E_Ipv4ExternalReachability_Prefix_RedistributionType = 0
+	// Ipv4ExternalReachability_Prefix_RedistributionType_UP corresponds to the value UP of Ipv4ExternalReachability_Prefix_RedistributionType
+	Ipv4ExternalReachability_Prefix_RedistributionType_UP E_Ipv4ExternalReachability_Prefix_RedistributionType = 1
+	// Ipv4ExternalReachability_Prefix_RedistributionType_DOWN corresponds to the value DOWN of Ipv4ExternalReachability_Prefix_RedistributionType
+	Ipv4ExternalReachability_Prefix_RedistributionType_DOWN E_Ipv4ExternalReachability_Prefix_RedistributionType = 2
+)
+
+// E_Ipv6Reachability_Prefix_OriginType is a derived int64 type which is used to represent
+// the enumerated node Ipv6Reachability_Prefix_OriginType. An additional value named
+// Ipv6Reachability_Prefix_OriginType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv6Reachability_Prefix_OriginType int64
+
+// IsYANGGoEnum ensures that Ipv6Reachability_Prefix_OriginType implements the yang.GoEnum
+// interface. This ensures that Ipv6Reachability_Prefix_OriginType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv6Reachability_Prefix_OriginType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv6Reachability_Prefix_OriginType.
+func (E_Ipv6Reachability_Prefix_OriginType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ipv6Reachability_Prefix_OriginType.
+func (e E_Ipv6Reachability_Prefix_OriginType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv6Reachability_Prefix_OriginType")
+}
+
+const (
+	// Ipv6Reachability_Prefix_OriginType_UNSET corresponds to the value UNSET of Ipv6Reachability_Prefix_OriginType
+	Ipv6Reachability_Prefix_OriginType_UNSET E_Ipv6Reachability_Prefix_OriginType = 0
+	// Ipv6Reachability_Prefix_OriginType_INTERNAL corresponds to the value INTERNAL of Ipv6Reachability_Prefix_OriginType
+	Ipv6Reachability_Prefix_OriginType_INTERNAL E_Ipv6Reachability_Prefix_OriginType = 1
+	// Ipv6Reachability_Prefix_OriginType_EXTERNAL corresponds to the value EXTERNAL of Ipv6Reachability_Prefix_OriginType
+	Ipv6Reachability_Prefix_OriginType_EXTERNAL E_Ipv6Reachability_Prefix_OriginType = 2
+)
+
+// E_Ipv6Reachability_Prefix_RedistributionType is a derived int64 type which is used to represent
+// the enumerated node Ipv6Reachability_Prefix_RedistributionType. An additional value named
+// Ipv6Reachability_Prefix_RedistributionType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv6Reachability_Prefix_RedistributionType int64
+
+// IsYANGGoEnum ensures that Ipv6Reachability_Prefix_RedistributionType implements the yang.GoEnum
+// interface. This ensures that Ipv6Reachability_Prefix_RedistributionType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv6Reachability_Prefix_RedistributionType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv6Reachability_Prefix_RedistributionType.
+func (E_Ipv6Reachability_Prefix_RedistributionType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ipv6Reachability_Prefix_RedistributionType.
+func (e E_Ipv6Reachability_Prefix_RedistributionType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv6Reachability_Prefix_RedistributionType")
+}
+
+const (
+	// Ipv6Reachability_Prefix_RedistributionType_UNSET corresponds to the value UNSET of Ipv6Reachability_Prefix_RedistributionType
+	Ipv6Reachability_Prefix_RedistributionType_UNSET E_Ipv6Reachability_Prefix_RedistributionType = 0
+	// Ipv6Reachability_Prefix_RedistributionType_UP corresponds to the value UP of Ipv6Reachability_Prefix_RedistributionType
+	Ipv6Reachability_Prefix_RedistributionType_UP E_Ipv6Reachability_Prefix_RedistributionType = 1
+	// Ipv6Reachability_Prefix_RedistributionType_DOWN corresponds to the value DOWN of Ipv6Reachability_Prefix_RedistributionType
+	Ipv6Reachability_Prefix_RedistributionType_DOWN E_Ipv6Reachability_Prefix_RedistributionType = 2
+)
+
+// E_Lsps_Flags is a derived int64 type which is used to represent
+// the enumerated node Lsps_Flags. An additional value named
+// Lsps_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lsps_Flags int64
+
+// IsYANGGoEnum ensures that Lsps_Flags implements the yang.GoEnum
+// interface. This ensures that Lsps_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lsps_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lsps_Flags.
+func (E_Lsps_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lsps_Flags.
+func (e E_Lsps_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lsps_Flags")
+}
+
+const (
+	// Lsps_Flags_UNSET corresponds to the value UNSET of Lsps_Flags
+	Lsps_Flags_UNSET E_Lsps_Flags = 0
+	// Lsps_Flags_PARTITION_REPAIR corresponds to the value PARTITION_REPAIR of Lsps_Flags
+	Lsps_Flags_PARTITION_REPAIR E_Lsps_Flags = 1
+	// Lsps_Flags_ATTACHED_ERROR corresponds to the value ATTACHED_ERROR of Lsps_Flags
+	Lsps_Flags_ATTACHED_ERROR E_Lsps_Flags = 2
+	// Lsps_Flags_ATTACHED_EXPENSE corresponds to the value ATTACHED_EXPENSE of Lsps_Flags
+	Lsps_Flags_ATTACHED_EXPENSE E_Lsps_Flags = 3
+	// Lsps_Flags_ATTACHED_DELAY corresponds to the value ATTACHED_DELAY of Lsps_Flags
+	Lsps_Flags_ATTACHED_DELAY E_Lsps_Flags = 4
+	// Lsps_Flags_ATTACHED_DEFAULT corresponds to the value ATTACHED_DEFAULT of Lsps_Flags
+	Lsps_Flags_ATTACHED_DEFAULT E_Lsps_Flags = 5
+	// Lsps_Flags_OVERLOAD corresponds to the value OVERLOAD of Lsps_Flags
+	Lsps_Flags_OVERLOAD E_Lsps_Flags = 6
+)
+
+// E_Lsps_PduType is a derived int64 type which is used to represent
+// the enumerated node Lsps_PduType. An additional value named
+// Lsps_PduType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lsps_PduType int64
+
+// IsYANGGoEnum ensures that Lsps_PduType implements the yang.GoEnum
+// interface. This ensures that Lsps_PduType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lsps_PduType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lsps_PduType.
+func (E_Lsps_PduType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lsps_PduType.
+func (e E_Lsps_PduType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lsps_PduType")
+}
+
+const (
+	// Lsps_PduType_UNSET corresponds to the value UNSET of Lsps_PduType
+	Lsps_PduType_UNSET E_Lsps_PduType = 0
+	// Lsps_PduType_LEVEL_1 corresponds to the value LEVEL_1 of Lsps_PduType
+	Lsps_PduType_LEVEL_1 E_Lsps_PduType = 1
+	// Lsps_PduType_LEVEL_2 corresponds to the value LEVEL_2 of Lsps_PduType
+	Lsps_PduType_LEVEL_2 E_Lsps_PduType = 2
+)
+
 // E_Port_Link is a derived int64 type which is used to represent
 // the enumerated node Port_Link. An additional value named
 // Port_Link_UNSET is added to the enumeration which is used as
@@ -125,6 +346,37 @@ const (
 	State_CommunityType_LLGR_STALE E_State_CommunityType = 5
 	// State_CommunityType_NO_LLGR corresponds to the value NO_LLGR of State_CommunityType
 	State_CommunityType_NO_LLGR E_State_CommunityType = 6
+)
+
+// E_State_Flags is a derived int64 type which is used to represent
+// the enumerated node State_Flags. An additional value named
+// State_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_State_Flags int64
+
+// IsYANGGoEnum ensures that State_Flags implements the yang.GoEnum
+// interface. This ensures that State_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_State_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  State_Flags.
+func (E_State_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_State_Flags.
+func (e E_State_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_State_Flags")
+}
+
+const (
+	// State_Flags_UNSET corresponds to the value UNSET of State_Flags
+	State_Flags_UNSET E_State_Flags = 0
+	// State_Flags_EXTERNAL_FLAG corresponds to the value EXTERNAL_FLAG of State_Flags
+	State_Flags_EXTERNAL_FLAG E_State_Flags = 1
+	// State_Flags_READVERTISEMENT_FLAG corresponds to the value READVERTISEMENT_FLAG of State_Flags
+	State_Flags_READVERTISEMENT_FLAG E_State_Flags = 2
+	// State_Flags_NODE_FLAG corresponds to the value NODE_FLAG of State_Flags
+	State_Flags_NODE_FLAG E_State_Flags = 3
 )
 
 // E_State_SegmentType is a derived int64 type which is used to represent

@@ -12,18 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+package ixnet
 
 import (
 	"sync/atomic"
-
-	"github.com/openconfig/ondatra/ixnet"
 
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 var peerCount uint32
+
+// NewBGP returns a new BGP configuration.
+// Tests must not call this method directly.
+func NewBGP(pb *opb.BgpConfig) *BGP {
+	return &BGP{pb}
+}
 
 // BGP is a representation of a BGP config on the ATE.
 type BGP struct {
@@ -77,6 +81,11 @@ func (b *BGP) AddPeer() *BGPPeer {
 func (b *BGP) ClearPeers() *BGP {
 	b.pb.BgpPeers = nil
 	return b
+}
+
+// ID returns the id of the peer.
+func (b *BGPPeer) ID() uint32 {
+	return b.pb.Id
 }
 
 // WithActive sets whether the peering is active.
@@ -309,6 +318,12 @@ func (c *BGPCapabilities) WithIPv6SRTEPolicyEnabled(enabled bool) *BGPCapabiliti
 func (c *BGPCapabilities) WithGracefulRestart(enabled bool) *BGPCapabilities {
 	c.pb.GracefulRestart = enabled
 	return c
+}
+
+// NewBGPAttributes returns a new set of BGP attributes.
+// Tests must not call this method directly.
+func NewBGPAttributes(pb *opb.BgpAttributes) *BGPAttributes {
+	return &BGPAttributes{pb}
 }
 
 // BGPAttributes is a representation of BGP attributes on the ATE.
@@ -578,14 +593,14 @@ func (a *BGPAttributes) WithOriginatorID(id string) *BGPAttributes {
 //
 //	Start: 0.0.0.1
 //	Step: 0.0.0.1
-func (a *BGPAttributes) OriginatorIDRange() *ixnet.StringIncRange {
+func (a *BGPAttributes) OriginatorIDRange() *StringIncRange {
 	if a.pb.OriginatorId == nil {
 		a.pb.OriginatorId = &opb.StringIncRange{
 			Start: "0.0.0.1",
 			Step:  "0.0.0.1",
 		}
 	}
-	return ixnet.NewStringIncRange(a.pb.OriginatorId)
+	return NewStringIncRange(a.pb.OriginatorId)
 }
 
 // WithClusterIDs sets the given cluster IDs for the associated routes.
@@ -688,14 +703,14 @@ func (p *BGPSRTEPolicyGroup) WithPolicyColor(policyColor uint32) *BGPSRTEPolicyG
 //
 //	Start: 100
 //	Step: 1
-func (p *BGPSRTEPolicyGroup) PolicyColorRange() *ixnet.UInt32IncRange {
+func (p *BGPSRTEPolicyGroup) PolicyColorRange() *UInt32IncRange {
 	if p.pb.PolicyColor == nil {
 		p.pb.PolicyColor = &opb.UInt32IncRange{
 			Start: 100,
 			Step:  1,
 		}
 	}
-	return ixnet.NewUInt32IncRange(p.pb.PolicyColor)
+	return NewUInt32IncRange(p.pb.PolicyColor)
 }
 
 // WithEndpoint sets the endpoint of the policies.
@@ -725,14 +740,14 @@ func (p *BGPSRTEPolicyGroup) WithOriginatorID(id string) *BGPSRTEPolicyGroup {
 //
 //	Start: 0.0.0.1
 //	Step: 0.0.0.1
-func (p *BGPSRTEPolicyGroup) OriginatorIDRange() *ixnet.StringIncRange {
+func (p *BGPSRTEPolicyGroup) OriginatorIDRange() *StringIncRange {
 	if p.pb.OriginatorId == nil {
 		p.pb.OriginatorId = &opb.StringIncRange{
 			Start: "0.0.0.1",
 			Step:  "0.0.0.1",
 		}
 	}
-	return ixnet.NewStringIncRange(p.pb.OriginatorId)
+	return NewStringIncRange(p.pb.OriginatorId)
 }
 
 // Communities creates a BGP communities config for the advertised prefixes or
@@ -841,7 +856,7 @@ func (p *BGPSRTEPolicyGroup) WithBindingSID4OctetMPLS(bsid uint32) *BGPSRTEPolic
 //
 //	Start: 0
 //	Step: 1
-func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *ixnet.UInt32IncRange {
+func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *UInt32IncRange {
 	if p.pb.Binding == nil {
 		p.pb.Binding = &opb.BgpPeer_SrtePolicyGroup_Binding{}
 	}
@@ -858,7 +873,7 @@ func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *ixnet.UInt32IncRange {
 			FourOctetSid: rpb,
 		}
 	}
-	return ixnet.NewUInt32IncRange(rpb)
+	return NewUInt32IncRange(rpb)
 }
 
 // BindingSID4OctetMPLSRange sets the binding SID of the polices to a range of
@@ -867,7 +882,7 @@ func (p *BGPSRTEPolicyGroup) BindingSID4OctetRange() *ixnet.UInt32IncRange {
 //
 //	Start: 0
 //	Step: 1
-func (p *BGPSRTEPolicyGroup) BindingSID4OctetMPLSRange() *ixnet.UInt32IncRange {
+func (p *BGPSRTEPolicyGroup) BindingSID4OctetMPLSRange() *UInt32IncRange {
 	if p.pb.Binding == nil {
 		p.pb.Binding = &opb.BgpPeer_SrtePolicyGroup_Binding{}
 	}
@@ -884,7 +899,7 @@ func (p *BGPSRTEPolicyGroup) BindingSID4OctetMPLSRange() *ixnet.UInt32IncRange {
 			FourOctetSidAsMplsLabel: rpb,
 		}
 	}
-	return ixnet.NewUInt32IncRange(rpb)
+	return NewUInt32IncRange(rpb)
 }
 
 // WithBindingSIDIPv6 sets the binding SID of the polices to the IPv6 value.

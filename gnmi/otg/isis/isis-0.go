@@ -20,6 +20,8 @@ Imported modules were sourced from:
 package isis
 
 import (
+	"reflect"
+
 	oc "github.com/openconfig/ondatra/gnmi/otg"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
@@ -235,6 +237,40 @@ func (n *IsisRouterPathAny) Counters() *IsisRouter_CountersPathAny {
 	return &IsisRouter_CountersPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinkStateDatabase (container): This sub-module describes a YANG model for the IS-IS Link State
+// Database (LSDB)
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/link-state-database"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database"
+func (n *IsisRouterPath) LinkStateDatabase() *IsisRouter_LinkStateDatabasePath {
+	return &IsisRouter_LinkStateDatabasePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "link-state-database"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinkStateDatabase (container): This sub-module describes a YANG model for the IS-IS Link State
+// Database (LSDB)
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/link-state-database"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database"
+func (n *IsisRouterPathAny) LinkStateDatabase() *IsisRouter_LinkStateDatabasePathAny {
+	return &IsisRouter_LinkStateDatabasePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "link-state-database"},
 			map[string]interface{}{},
 			n,
 		),
@@ -1539,7 +1575,7 @@ func (n *IsisRouter_Counters_Level1PathAny) InCsnp() *IsisRouter_Counters_Level1
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -1557,7 +1593,7 @@ func (n *IsisRouter_Counters_Level1Path) InLsp() *IsisRouter_Counters_Level1_InL
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -1717,7 +1753,7 @@ func (n *IsisRouter_Counters_Level1PathAny) OutCsnp() *IsisRouter_Counters_Level
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -1735,7 +1771,7 @@ func (n *IsisRouter_Counters_Level1Path) OutLsp() *IsisRouter_Counters_Level1_Ou
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -3052,7 +3088,7 @@ func (n *IsisRouter_Counters_Level2PathAny) InCsnp() *IsisRouter_Counters_Level2
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -3070,7 +3106,7 @@ func (n *IsisRouter_Counters_Level2Path) InLsp() *IsisRouter_Counters_Level2_InL
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -3230,7 +3266,7 @@ func (n *IsisRouter_Counters_Level2PathAny) OutCsnp() *IsisRouter_Counters_Level
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -3248,7 +3284,7 @@ func (n *IsisRouter_Counters_Level2Path) OutLsp() *IsisRouter_Counters_Level2_Ou
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -3399,6 +3435,5548 @@ func (n *IsisRouter_Counters_Level2PathAny) SessionsUp() *IsisRouter_Counters_Le
 	return &IsisRouter_Counters_Level2_SessionsUpPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"sessions-up"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabasePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database YANG schema element.
+type IsisRouter_LinkStateDatabasePath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabasePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database YANG schema element.
+type IsisRouter_LinkStateDatabasePathAny struct {
+	*ygnmi.NodePath
+}
+
+// LspsAny (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "lsp-states/lsps"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+func (n *IsisRouter_LinkStateDatabasePath) LspsAny() *IsisRouter_LinkStateDatabase_LspsPathAny {
+	return &IsisRouter_LinkStateDatabase_LspsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": "*"},
+			n,
+		),
+	}
+}
+
+// LspsAny (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "lsp-states/lsps"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+func (n *IsisRouter_LinkStateDatabasePathAny) LspsAny() *IsisRouter_LinkStateDatabase_LspsPathAny {
+	return &IsisRouter_LinkStateDatabase_LspsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": "*"},
+			n,
+		),
+	}
+}
+
+// Lsps (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "lsp-states/lsps"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+//
+//	LspId: string
+func (n *IsisRouter_LinkStateDatabasePath) Lsps(LspId string) *IsisRouter_LinkStateDatabase_LspsPath {
+	return &IsisRouter_LinkStateDatabase_LspsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": LspId},
+			n,
+		),
+	}
+}
+
+// Lsps (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "lsp-states/lsps"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+//
+//	LspId: string
+func (n *IsisRouter_LinkStateDatabasePathAny) Lsps(LspId string) *IsisRouter_LinkStateDatabase_LspsPathAny {
+	return &IsisRouter_LinkStateDatabase_LspsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": LspId},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabasePath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase](
+		"IsisRouter_LinkStateDatabase",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabasePathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase](
+		"IsisRouter_LinkStateDatabase",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_FlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_LspsPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_FlagsPath) State() ygnmi.SingletonQuery[[]oc.E_Lsps_Flags] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_Lsps_Flags](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Lsps_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_Lsps_Flags] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_Lsps_Flags](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Lsps_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/is-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_IsTypePath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "is-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).IsType
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/is-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "is-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).IsType
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/lsp-id"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_LspIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lsp-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).LspId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/lsp-id"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lsp-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).LspId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "lsp-id"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_LspIdPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"lsp-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).LspId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "lsp-id"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"lsp-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).LspId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_PduLengthPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewLeafSingletonQuery[uint16](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "pdu-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).PduLength
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "pdu-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).PduLength
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_PduTypePath) State() ygnmi.SingletonQuery[oc.E_Lsps_PduType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Lsps_PduType](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "pdu-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lsps_PduType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).PduType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny) State() ygnmi.WildcardQuery[oc.E_Lsps_PduType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Lsps_PduType](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "pdu-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lsps_PduType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).PduType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-lifetime"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime"
+func (n *IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewLeafSingletonQuery[uint16](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "remaining-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).RemainingLifetime
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-lifetime"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime"
+func (n *IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "remaining-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).RemainingLifetime
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/sequence-number"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number"
+func (n *IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).SequenceNumber
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/sequence-number"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number"
+func (n *IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).SequenceNumber
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_IsTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_IsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_LspIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_LspIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_LspsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps YANG schema element.
+type IsisRouter_LinkStateDatabase_LspsPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_LspsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps YANG schema element.
+type IsisRouter_LinkStateDatabase_LspsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Flags (leaf-list): LSP Type-Block flags.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) Flags() *IsisRouter_LinkStateDatabase_Lsps_FlagsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_FlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Flags (leaf-list): LSP Type-Block flags.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) Flags() *IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsType (leaf): IS Type - bits 1 and 2 indicate the type of Intermediate System.
+//
+//	 1 - ( i.e. bit 1 set) Level 1 Intermediate system.
+//	 2 - Unused value.
+//	 3 - (i.e. bits 1 and 2 set) Level 2 Intermediate system.
+//		Defining module:      "open-traffic-generator-isis"
+//		Instantiating module: "open-traffic-generator-isis"
+//		Path from parent:     "state/is-type"
+//		Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) IsType() *IsisRouter_LinkStateDatabase_Lsps_IsTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_IsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "is-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsType (leaf): IS Type - bits 1 and 2 indicate the type of Intermediate System.
+//
+//	 1 - ( i.e. bit 1 set) Level 1 Intermediate system.
+//	 2 - Unused value.
+//	 3 - (i.e. bits 1 and 2 set) Level 2 Intermediate system.
+//		Defining module:      "open-traffic-generator-isis"
+//		Instantiating module: "open-traffic-generator-isis"
+//		Path from parent:     "state/is-type"
+//		Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) IsType() *IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "is-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LspId (leaf): LSP ID of the LSP, e.g. '640000000001-00-00'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/lsp-id"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/*/lsp-id"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) LspId() *IsisRouter_LinkStateDatabase_Lsps_LspIdPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_LspIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lsp-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LspId (leaf): LSP ID of the LSP, e.g. '640000000001-00-00'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/lsp-id"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/*/lsp-id"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) LspId() *IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lsp-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PduLength (leaf): Total length of the LSP.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) PduLength() *IsisRouter_LinkStateDatabase_Lsps_PduLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pdu-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PduLength (leaf): Total length of the LSP.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) PduLength() *IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pdu-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PduType (leaf): Link State PDU type.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) PduType() *IsisRouter_LinkStateDatabase_Lsps_PduTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pdu-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PduType (leaf): Link State PDU type.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/pdu-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) PduType() *IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pdu-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RemainingLifetime (leaf): Remaining lifetime in seconds before the LSP expiration.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-lifetime"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) RemainingLifetime() *IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "remaining-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RemainingLifetime (leaf): Remaining lifetime in seconds before the LSP expiration.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-lifetime"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) RemainingLifetime() *IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "remaining-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SequenceNumber (leaf): Sequence number of the LSP.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/sequence-number"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) SequenceNumber() *IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "sequence-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SequenceNumber (leaf): Sequence number of the LSP.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/sequence-number"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) SequenceNumber() *IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "sequence-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Tlvs (container): This container defines Link State PDU TLVs. When there are multiple occurences of a  specific TLV
+// in a LSP, the data in the TLVs are combined and stored in the corresponding TLV container defined below.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "tlvs"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) Tlvs() *IsisRouter_LinkStateDatabase_Lsps_TlvsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_TlvsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Tlvs (container): This container defines Link State PDU TLVs. When there are multiple occurences of a  specific TLV
+// in a LSP, the data in the TLVs are combined and stored in the corresponding TLV container defined below.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "tlvs"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) Tlvs() *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_TlvsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_TlvsPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// ExtendedIpv4Reachability (container): This container describes list of Extended-IPv4-Reachability as defined in TLV 135.
+// It is advertised when the 'wide metric' is enabled.
+// When there are multiple occurences of Extended-IPv4-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "extended-ipv4-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) ExtendedIpv4Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"extended-ipv4-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtendedIpv4Reachability (container): This container describes list of Extended-IPv4-Reachability as defined in TLV 135.
+// It is advertised when the 'wide metric' is enabled.
+// When there are multiple occurences of Extended-IPv4-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "extended-ipv4-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) ExtendedIpv4Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"extended-ipv4-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtendedIsReachability (container): This container defines list of ISIS extended reachability
+// neighbors and attributes.
+// This container describes list of Extended-IS-Reachability as defined in TLV 22.
+// When there are multiple occurences of Extended-IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "extended-is-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) ExtendedIsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"extended-is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtendedIsReachability (container): This container defines list of ISIS extended reachability
+// neighbors and attributes.
+// This container describes list of Extended-IS-Reachability as defined in TLV 22.
+// When there are multiple occurences of Extended-IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "extended-is-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) ExtendedIsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"extended-is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostnames (container): This container describes list of Hostnames as defined in TLV 137.
+// When there are multiple occurences of Hostname TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'hostname' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "hostnames"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Hostnames() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"hostnames"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostnames (container): This container describes list of Hostnames as defined in TLV 137.
+// When there are multiple occurences of Hostname TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'hostname' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "hostnames"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Hostnames() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"hostnames"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4ExternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 130.
+// This is advertised when the origin-type is set 'external' in route range configuration.
+// When there are multiple occurences of IPv4-external-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "ipv4-external-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Ipv4ExternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-external-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4ExternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 130.
+// This is advertised when the origin-type is set 'external' in route range configuration.
+// When there are multiple occurences of IPv4-external-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "ipv4-external-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Ipv4ExternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-external-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4InternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 128.
+// This is advertised when the origin-type is set 'internal' in route range configuration.
+// When there are multiple occurences of IPv4-Internal-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "ipv4-internal-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Ipv4InternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-internal-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4InternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 128.
+// This is advertised when the origin-type is set 'internal' in route range configuration.
+// When there are multiple occurences of IPv4-Internal-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "ipv4-internal-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Ipv4InternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-internal-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv6Reachability (container): This container describes list of IPv6 Reachability as defined in TLV 236.
+// When there are multiple occurences of IPv6-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "ipv6-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Ipv6Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv6Reachability (container): This container describes list of IPv6 Reachability as defined in TLV 236.
+// When there are multiple occurences of IPv6-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "ipv6-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Ipv6Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsReachability (container): This container describes list of ISIS neighbors and
+// attributes.
+// This container describes list of IS-Reachability as defined in TLV 2.
+// When there are multiple occurences of IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "is-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) IsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsReachability (container): This container describes list of ISIS neighbors and
+// attributes.
+// This container describes list of IS-Reachability as defined in TLV 2.
+// When there are multiple occurences of IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "is-reachability"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) IsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PrefixAny (list): This list describes IPv4 extended prefixes and
+// attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): This list describes IPv4 extended prefixes and
+// attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list describes IPv4 extended prefixes and
+// attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list describes IPv4 extended prefixes and
+// attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).Metric
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).Metric
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath) State() ygnmi.SingletonQuery[oc.E_ExtendedIpv4Reachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_ExtendedIpv4Reachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_ExtendedIpv4Reachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny) State() ygnmi.WildcardQuery[oc.E_ExtendedIpv4Reachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_ExtendedIpv4Reachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_ExtendedIpv4Reachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Metric (leaf): ISIS wide metric.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Metric (leaf): ISIS wide metric.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within extended reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within extended reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-attributes"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-attributes"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath) State() ygnmi.SingletonQuery[[]oc.E_State_Flags] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_State_Flags](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_State_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_State_Flags] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_State_Flags](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_State_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// NeighborAny (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+//
+//	SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+//
+//	SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/system-id"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/system-id"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "system-id"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "system-id"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny struct {
+	*ygnmi.NodePath
+}
+
+// SystemId (leaf): System-id of the neighbor.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/system-id"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/*/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SystemId (leaf): System-id of the neighbor.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/system-id"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/*/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hostname"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath) State() ygnmi.SingletonQuery[[]string] {
+	return ygnmi.NewLeafSingletonQuery[[]string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hostname"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames).Hostname
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hostname"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny) State() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewLeafWildcardQuery[[]string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hostname"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames).Hostname
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Hostname (leaf-list): Host name of the originating node.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hostname"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath) Hostname() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "hostname"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Hostname (leaf-list): Host name of the originating node.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hostname"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny) Hostname() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "hostname"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PrefixAny (list): IPv4 external prefixes and reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): IPv4 external prefixes and reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 external prefixes and reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 external prefixes and reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).DefaultMetric
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).DefaultMetric
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath) State() ygnmi.SingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_OriginType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).OriginType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny) State() ygnmi.WildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_OriginType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).OriginType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath) State() ygnmi.SingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny) State() ygnmi.WildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PrefixAny (list): IPv4 prefixes and internal reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): IPv4 prefixes and internal reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 prefixes and internal reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 prefixes and internal reachability attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).DefaultMetric
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).DefaultMetric
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath) State() ygnmi.SingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_OriginType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).OriginType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny) State() ygnmi.WildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_OriginType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_OriginType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).OriginType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath) State() ygnmi.SingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny) State() ygnmi.WildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Ipv4ExternalReachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4ExternalReachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/default-metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PrefixAny (list): This list defines IPv6 extended prefix attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): This list defines IPv6 extended prefix attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list defines IPv6 extended prefix attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list defines IPv6 extended prefix attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+//
+//	Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).Metric
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).Metric
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath) State() ygnmi.SingletonQuery[oc.E_Ipv6Reachability_Prefix_OriginType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Ipv6Reachability_Prefix_OriginType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6Reachability_Prefix_OriginType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).OriginType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny) State() ygnmi.WildcardQuery[oc.E_Ipv6Reachability_Prefix_OriginType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Ipv6Reachability_Prefix_OriginType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6Reachability_Prefix_OriginType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).OriginType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "prefix"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath) State() ygnmi.SingletonQuery[oc.E_Ipv6Reachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Ipv6Reachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6Reachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny) State() ygnmi.WildcardQuery[oc.E_Ipv6Reachability_Prefix_RedistributionType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Ipv6Reachability_Prefix_RedistributionType](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6Reachability_Prefix_RedistributionType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix).RedistributionType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Metric (leaf): ISIS wide metric value.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Metric (leaf): ISIS wide metric value.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/origin-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv6 prefix contained within extended reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv6 prefix contained within extended reachability TLVs.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/*/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-attributes"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-attributes"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv6 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv6 prefix.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/redistribution-type"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath) State() ygnmi.SingletonQuery[[]oc.E_State_Flags] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_State_Flags](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_State_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_State_Flags] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_State_Flags](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_State_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "flags"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// NeighborAny (list): IS reachability neighbor attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): IS reachability neighbor attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): IS reachability neighbor attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+//
+//	SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): IS reachability neighbor attributes.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbors/neighbor"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+//
+//	SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/system-id"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/system-id"
+//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "system-id"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "system-id"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor).SystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny struct {
+	*ygnmi.NodePath
+}
+
+// SystemId (leaf): System-ID of IS neighbor, e.g. '640100010000'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/system-id"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/*/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SystemId (leaf): System-ID of IS neighbor, e.g. '640100010000'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/system-id"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/*/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "system-id"},
 			map[string]interface{}{},
 			n,
 		),

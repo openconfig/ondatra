@@ -128,11 +128,11 @@ func (i *Interface) ISIS() *ixnet.ISIS {
 }
 
 // BGP creates a BGP config for the interface or returns the existing config.
-func (i *Interface) BGP() *BGP {
+func (i *Interface) BGP() *ixnet.BGP {
 	if i.pb.Bgp == nil {
 		i.pb.Bgp = &opb.BgpConfig{}
 	}
-	return &BGP{pb: i.pb.Bgp}
+	return ixnet.NewBGP(i.pb.Bgp)
 }
 
 // AddRSVP adds an RSVP config to the interface.
