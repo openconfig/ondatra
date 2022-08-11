@@ -27,130 +27,88 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-func TestSolveDutError(t *testing.T) {
+func TestSolveScale(t *testing.T) {
 	const topoText = `
 		nodes: {
 			name: "node1"
-			type: ARISTA_CEOS
-			services: {
-				key: 1
-				value: {
-					name: "gnmi"
-				}
-			}
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
+			type: NOKIA_SRL
 		}
 		nodes: {
 			name: "node2"
-			type: ARISTA_CEOS
-			services: {
-				key: 2
-				value: {
-					name: "gnmi"
-				}
-			}
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
-			interfaces: {
-				key: "eth2"
-				value: {}
-			}
+			type: NOKIA_SRL
 		}
 		nodes: {
 			name: "node3"
-			type: CISCO_CXR
-			services: {
-				key: 3
-				value: {
-					name: "gnmi"
-				}
-			}
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
+			type: NOKIA_SRL
 		}
 		nodes: {
 			name: "node4"
-			type: CISCO_CXR
-			services: {
-				key: 4
-				value: {
-					name: "gnmi"
-				}
-			}
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
-			interfaces: {
-				key: "eth2"
-				value: {}
-			}
+			type: NOKIA_SRL
 		}
 		nodes: {
 			name: "node5"
-			type: JUNIPER_CEVO
-			services: {
-				key: 5
-				value: {
-					name: "gnmi"
-				}
-			}
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
+			type: NOKIA_SRL
 		}
 		nodes: {
 			name: "node6"
-			type: JUNIPER_CEVO
-			services: {
-				key: 6
-				value: {
-					name: "gnmi"
-				}
-			}
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
-			interfaces: {
-				key: "eth2"
-				value: {}
-			}
+			type: NOKIA_SRL
 		}
 		nodes: {
 			name: "node7"
+			type: NOKIA_SRL
+		}
+		nodes: {
+			name: "node8"
+			type: NOKIA_SRL
+		}
+		nodes: {
+			name: "node9"
+			type: CISCO_CXR
+		}
+		nodes: {
+			name: "node10"
+			type: CISCO_CXR
+		}
+		nodes: {
+			name: "node11"
+			type: CISCO_CXR
+		}
+		nodes: {
+			name: "node12"
+			type: JUNIPER_CEVO
+		}
+		nodes: {
+			name: "node13"
+			type: JUNIPER_CEVO
+		}
+		nodes: {
+			name: "node14"
+			type: JUNIPER_CEVO
+		}
+		nodes: {
+			name: "node15"
+			type: JUNIPER_CEVO
+		}
+		nodes: {
+			name: "node16"
+			type: ARISTA_CEOS
+		}
+		nodes: {
+			name: "node17"
+			type: ARISTA_CEOS
+		}
+		nodes: {
+			name: "node18"
+			type: ARISTA_CEOS
+		}
+		nodes: {
+			name: "node19"
 			type: IXIA_TG
-			interfaces: {
-				key: "eth1"
-				value: {}
-			}
-			interfaces: {
-				key: "eth2"
-				value: {}
-			}
-			interfaces: {
-				key: "eth3"
-				value: {}
-			}
 		}
 		links: {
 			a_node: "node1"
 			a_int: "eth1"
 			z_node: "node2"
-			z_int: "eth1"
-		}
-		links: {
-			a_node: "node2"
-			a_int: "eth2"
-			z_node: "node7"
 			z_int: "eth1"
 		}
 		links: {
@@ -160,21 +118,147 @@ func TestSolveDutError(t *testing.T) {
 			z_int: "eth1"
 		}
 		links: {
-			a_node: "node4"
-			a_int: "eth2"
-			z_node: "node7"
-			z_int: "eth2"
-		}
-		links: {
 			a_node: "node5"
 			a_int: "eth1"
 			z_node: "node6"
 			z_int: "eth1"
 		}
 		links: {
-			a_node: "node6"
+			a_node: "node7"
+			a_int: "eth1"
+			z_node: "node8"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node1"
 			a_int: "eth2"
+			z_node: "node9"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node2"
+			a_int: "eth2"
+			z_node: "node9"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node9"
+			a_int: "eth3"
+			z_node: "node16"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node10"
+			a_int: "eth1"
 			z_node: "node7"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node10"
+			a_int: "eth2"
+			z_node: "node8"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node10"
+			a_int: "eth3"
+			z_node: "node17"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node11"
+			a_int: "eth1"
+			z_node: "node18"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node11"
+			a_int: "eth2"
+			z_node: "node5"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node12"
+			a_int: "eth1"
+			z_node: "node3"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node12"
+			a_int: "eth2"
+			z_node: "node4"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node12"
+			a_int: "eth3"
+			z_node: "node16"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node13"
+			a_int: "eth1"
+			z_node: "node3"
+			z_int: "eth3"
+		}
+		links: {
+			a_node: "node13"
+			a_int: "eth2"
+			z_node: "node5"
+			z_int: "eth3"
+		}
+		links: {
+			a_node: "node13"
+			a_int: "eth3"
+			z_node: "node17"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node14"
+			a_int: "eth1"
+			z_node: "node6"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node14"
+			a_int: "eth2"
+			z_node: "node17"
+			z_int: "eth3"
+		}
+		links: {
+			a_node: "node15"
+			a_int: "eth1"
+			z_node: "node7"
+			z_int: "eth3"
+		}
+		links: {
+			a_node: "node15"
+			a_int: "eth2"
+			z_node: "node8"
+			z_int: "eth3"
+		}
+		links: {
+			a_node: "node15"
+			a_int: "eth13"
+			z_node: "node18"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node16"
+			a_int: "eth3"
+			z_node: "node19"
+			z_int: "eth1"
+		}
+		links: {
+			a_node: "node17"
+			a_int: "eth4"
+			z_node: "node19"
+			z_int: "eth2"
+		}
+		links: {
+			a_node: "node18"
+			a_int: "eth3"
+			z_node: "node19"
 			z_int: "eth3"
 		}`
 	topo := unmarshalTopo(t, topoText)
@@ -182,16 +266,40 @@ func TestSolveDutError(t *testing.T) {
 	dut1 := &opb.Device{
 		Id:     "dut1",
 		Vendor: opb.Device_ARISTA,
-		Ports:  []*opb.Port{{Id: "port1"}},
+		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}},
 	}
 	dut2 := &opb.Device{
 		Id:    "dut2",
 		Vendor: opb.Device_CISCO,
-		Ports: []*opb.Port{{Id: "port1"}},
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}},
 	}
 	dut3 := &opb.Device{
 		Id:    "dut3",
 		Vendor: opb.Device_JUNIPER,
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}},
+	}
+	dut4 := &opb.Device{
+		Id:    "dut4",
+		Vendor: opb.Device_NOKIA,
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+	}
+	dut5 := &opb.Device{
+		Id:    "dut5",
+		Vendor: opb.Device_NOKIA,
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+	}
+	dut6 := &opb.Device{
+		Id:    "dut6",
+		Vendor: opb.Device_NOKIA,
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+	}
+	dut7 := &opb.Device{
+		Id:    "dut7",
+		Vendor: opb.Device_NOKIA,
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+	}
+	ate := &opb.Device{
+		Id:    "ate",
 		Ports: []*opb.Port{{Id: "port1"}},
 	}
 	link12 := &opb.Link{
@@ -199,18 +307,50 @@ func TestSolveDutError(t *testing.T) {
 		B: "dut2:port1",
 	}
 	link23 := &opb.Link{
-		A: "dut2:port2",
+		A: "dut1:port2",
 		B: "dut3:port1",
+	}
+	link18 := &opb.Link{
+		A: "dut1:port3",
+		B: "ate:port1",
+	}
+	link24 := &opb.Link{
+		A: "dut2:port2",
+		B: "dut4:port1",
+	}
+	link25 := &opb.Link{
+		A: "dut2:port3",
+		B: "dut5:port1",
+	}
+	link45 := &opb.Link{
+		A: "dut4:port2",
+		B: "dut5:port2",
+	}
+	link36 := &opb.Link{
+		A: "dut3:port2",
+		B: "dut6:port1",
+	}
+	link37 := &opb.Link{
+		A: "dut3:port3",
+		B: "dut7:port1",
+	}
+	link67 := &opb.Link{
+		A: "dut6:port2",
+		B: "dut7:port2",
 	}
 
 	tb := &opb.Testbed{
-			Duts:  []*opb.Device{dut1, dut2, dut3},
-			Links: []*opb.Link{link12, link23},
+			Duts:  []*opb.Device{dut1, dut2, dut3, dut4, dut5, dut6, dut7},
+			Ates:  []*opb.Device{ate},
+			Links: []*opb.Link{link12, link23, link18, link24, link25, link45, link36, link37, link67},
 		}
 
-	_, err := Solve(tb, topo)
-	if err == nil {
-		t.Fatalf("Solve() got unexpected error: %v", err)
+	res, err := Solve(tb, topo)
+	if err != nil {
+		t.Fatalf("Got unexpected error: %v", err)
+	}
+	if res == nil {
+		t.Fatalf("No solution found")
 	}
 }
 
@@ -590,7 +730,101 @@ func TestSolveErrors(t *testing.T) {
 		    z_int: "eth1"
 		  }
 		`,
-		wantErr: "no KNE topology",
+		wantErr: "no combination of nodes",
+	}, {
+		desc: "group size no found",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G1"}},
+			}, {
+				Id:     "dut2",
+				Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+				Vendor: opb.Device_ARISTA,
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "dut2:port1"},
+				{A: "dut1:port2", B: "dut2:port2"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+        	type: ARISTA_CEOS
+			interfaces: {
+				key: "eth1"
+			}
+			interfaces: {
+				key: "eth2"
+				value: {group: "lag"}
+			}
+		  }
+		  nodes: {
+		    name: "node2"
+        	type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth2"
+		    z_node: "node2"
+		    z_int: "eth2"
+		  }
+		`,
+		wantErr: "no combination of nodes",
+	}, {
+		desc: "number of groups no found",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G2"}},
+			}, {
+				Id:     "dut2",
+				Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+				Vendor: opb.Device_ARISTA,
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "dut2:port1"},
+				{A: "dut1:port2", B: "dut2:port2"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+        	type: ARISTA_CEOS
+			interfaces: {
+				key: "eth1"
+			}
+			interfaces: {
+				key: "eth2"
+				value: {group: "lag"}
+			}
+		  }
+		  nodes: {
+		    name: "node2"
+        	type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth2"
+		    z_node: "node2"
+		    z_int: "eth2"
+		  }
+		`,
+		wantErr: "no combination of nodes",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
