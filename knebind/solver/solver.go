@@ -343,14 +343,19 @@ type solver struct {
 // m - is the map of all TB devices and possible node mapping
 // keys - updates this list of devices in the desired order for selection search
 func (s *solver) arrangeDevKeys(m map[*opb.Device][]*tpb.Node, keys *[]*opb.Device) {
-	// Get the first entry first
+	// Get the entry with max number of peers first
 	processed := make(map[*opb.Device]bool)
+	maxPeer := -1
+	var devPtr *opb.Device
 	for k := range m {
-		*keys = append(*keys, k)
-		processed[k] = true
-		break
+		if len(s.dev2Links[k]) > maxPeer {
+			maxPeer = len(s.dev2Links[k])
+			devPtr = k
+		}
 	}
 	index := 0
+	*keys = append(*keys, devPtr)
+	processed[devPtr] = true
 	for index < len(*keys) {
 		dev := (*keys)[index]
 		for peer, _ := range s.dev2Links[dev] {
