@@ -1258,208 +1258,6 @@ func (n *System_Aaa_Authentication_UserPath) BatchUpdate(t testing.TB, b *config
 	b.BatchUpdate(t, n, val)
 }
 
-// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.System_Aaa_Authentication_User{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, true)
-	if ok {
-		return convertSystem_Aaa_Authentication_User_PasswordHashedPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_Authentication_User{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Aaa_Authentication_User_PasswordHashedPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed with a ONCE subscription.
-func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed in the given batch object.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed in the given batch object.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/authentication/users/user/config/password-hashed in the given batch object.
-func (n *System_Aaa_Authentication_User_PasswordHashedPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertSystem_Aaa_Authentication_User_PasswordHashedPath extracts the value of the leaf PasswordHashed from its parent oc.System_Aaa_Authentication_User
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_Authentication_User_PasswordHashedPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.PasswordHashed
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Aaa_Authentication_User_PasswordPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.System_Aaa_Authentication_User{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, true)
-	if ok {
-		return convertSystem_Aaa_Authentication_User_PasswordPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/password with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_Authentication_User_PasswordPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/config/password with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Aaa_Authentication_User_PasswordPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_Authentication_User{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Aaa_Authentication_User_PasswordPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/config/password with a ONCE subscription.
-func (n *System_Aaa_Authentication_User_PasswordPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/aaa/authentication/users/user/config/password.
-func (n *System_Aaa_Authentication_User_PasswordPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/authentication/users/user/config/password in the given batch object.
-func (n *System_Aaa_Authentication_User_PasswordPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/aaa/authentication/users/user/config/password.
-func (n *System_Aaa_Authentication_User_PasswordPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/authentication/users/user/config/password in the given batch object.
-func (n *System_Aaa_Authentication_User_PasswordPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-system/system/aaa/authentication/users/user/config/password.
-func (n *System_Aaa_Authentication_User_PasswordPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/authentication/users/user/config/password in the given batch object.
-func (n *System_Aaa_Authentication_User_PasswordPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertSystem_Aaa_Authentication_User_PasswordPath extracts the value of the leaf Password from its parent oc.System_Aaa_Authentication_User
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_Authentication_User_PasswordPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Password
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/role with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_Aaa_Authentication_User_RolePath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_Authentication_User_Role_Union {
@@ -1557,107 +1355,6 @@ func convertSystem_Aaa_Authentication_User_RolePath(t testing.TB, md *genutil.Me
 	val := parent.Role
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Aaa_Authentication_User_SshKeyPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.System_Aaa_Authentication_User{}
-	md, ok := oc.Lookup(t, n, "System_Aaa_Authentication_User", goStruct, true, true)
-	if ok {
-		return convertSystem_Aaa_Authentication_User_SshKeyPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Aaa_Authentication_User_SshKeyPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Aaa_Authentication_User_SshKeyPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Aaa_Authentication_User{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_Authentication_User", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Aaa_Authentication_User_SshKeyPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key with a ONCE subscription.
-func (n *System_Aaa_Authentication_User_SshKeyPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key.
-func (n *System_Aaa_Authentication_User_SshKeyPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key in the given batch object.
-func (n *System_Aaa_Authentication_User_SshKeyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key.
-func (n *System_Aaa_Authentication_User_SshKeyPath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key in the given batch object.
-func (n *System_Aaa_Authentication_User_SshKeyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key.
-func (n *System_Aaa_Authentication_User_SshKeyPath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/authentication/users/user/config/ssh-key in the given batch object.
-func (n *System_Aaa_Authentication_User_SshKeyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertSystem_Aaa_Authentication_User_SshKeyPath extracts the value of the leaf SshKey from its parent oc.System_Aaa_Authentication_User
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertSystem_Aaa_Authentication_User_SshKeyPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_Authentication_User) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.SshKey
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
 	}
 	return qv
 }
@@ -2328,6 +2025,299 @@ func (n *System_Aaa_ServerGroup_NamePath) BatchUpdate(t testing.TB, b *config.Se
 // convertSystem_Aaa_ServerGroup_NamePath extracts the value of the leaf Name from its parent oc.System_Aaa_ServerGroup
 // and combines the update with an existing Metadata to return a *oc.QualifiedString.
 func convertSystem_Aaa_ServerGroup_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_ServerGroup_ServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Aaa_ServerGroup_Server {
+	t.Helper()
+	goStruct := &oc.System_Aaa_ServerGroup_Server{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedSystem_Aaa_ServerGroup_Server{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_ServerGroup_ServerPath) Get(t testing.TB) *oc.System_Aaa_ServerGroup_Server {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_ServerGroup_ServerPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Aaa_ServerGroup_Server {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedSystem_Aaa_ServerGroup_Server
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_ServerGroup_Server{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedSystem_Aaa_ServerGroup_Server{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server with a ONCE subscription.
+func (n *System_Aaa_ServerGroup_ServerPathAny) Get(t testing.TB) []*oc.System_Aaa_ServerGroup_Server {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.System_Aaa_ServerGroup_Server
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server.
+func (n *System_Aaa_ServerGroup_ServerPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server in the given batch object.
+func (n *System_Aaa_ServerGroup_ServerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server.
+func (n *System_Aaa_ServerGroup_ServerPath) Replace(t testing.TB, val *oc.System_Aaa_ServerGroup_Server) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server in the given batch object.
+func (n *System_Aaa_ServerGroup_ServerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Aaa_ServerGroup_Server) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server.
+func (n *System_Aaa_ServerGroup_ServerPath) Update(t testing.TB, val *oc.System_Aaa_ServerGroup_Server) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server in the given batch object.
+func (n *System_Aaa_ServerGroup_ServerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Aaa_ServerGroup_Server) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_ServerGroup_Server{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server", goStruct, true, true)
+	if ok {
+		return convertSystem_Aaa_ServerGroup_Server_AddressPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_ServerGroup_Server_AddressPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_ServerGroup_Server{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_ServerGroup_Server_AddressPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address with a ONCE subscription.
+func (n *System_Aaa_ServerGroup_Server_AddressPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address in the given batch object.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address in the given batch object.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/address in the given batch object.
+func (n *System_Aaa_ServerGroup_Server_AddressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_Aaa_ServerGroup_Server_AddressPath extracts the value of the leaf Address from its parent oc.System_Aaa_ServerGroup_Server
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_ServerGroup_Server_AddressPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.Address
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Aaa_ServerGroup_Server_NamePath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_Aaa_ServerGroup_Server{}
+	md, ok := oc.Lookup(t, n, "System_Aaa_ServerGroup_Server", goStruct, true, true)
+	if ok {
+		return convertSystem_Aaa_ServerGroup_Server_NamePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Aaa_ServerGroup_Server_NamePath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Aaa_ServerGroup_Server_NamePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Aaa_ServerGroup_Server{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Aaa_ServerGroup_Server", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Aaa_ServerGroup_Server_NamePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name with a ONCE subscription.
+func (n *System_Aaa_ServerGroup_Server_NamePathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name.
+func (n *System_Aaa_ServerGroup_Server_NamePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name in the given batch object.
+func (n *System_Aaa_ServerGroup_Server_NamePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name.
+func (n *System_Aaa_ServerGroup_Server_NamePath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name in the given batch object.
+func (n *System_Aaa_ServerGroup_Server_NamePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name.
+func (n *System_Aaa_ServerGroup_Server_NamePath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/aaa/server-groups/server-group/servers/server/config/name in the given batch object.
+func (n *System_Aaa_ServerGroup_Server_NamePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_Aaa_ServerGroup_Server_NamePath extracts the value of the leaf Name from its parent oc.System_Aaa_ServerGroup_Server
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_Aaa_ServerGroup_Server_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Aaa_ServerGroup_Server) *oc.QualifiedString {
 	t.Helper()
 	qv := &oc.QualifiedString{
 		Metadata: md,
