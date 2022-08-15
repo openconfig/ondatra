@@ -1534,6 +1534,38 @@ func (n *SystemPathAny) LoginBanner() *System_LoginBannerPathAny {
 	}
 }
 
+// MacAddress (container): Top-level container for system's MAC address configuration and state
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "mac-address"
+//	Path from root:       "/system/mac-address"
+func (n *SystemPath) MacAddress() *System_MacAddressPath {
+	return &System_MacAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacAddress (container): Top-level container for system's MAC address configuration and state
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "mac-address"
+//	Path from root:       "/system/mac-address"
+func (n *SystemPathAny) MacAddress() *System_MacAddressPathAny {
+	return &System_MacAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Memory (container): Top-level container for system memory data
 //
 //	Defining module:      "openconfig-system"
@@ -27694,6 +27726,272 @@ func (n *System_Logging_RemoteServer_SelectorPathAny) Severity() *System_Logging
 	return &System_Logging_RemoteServer_Selector_SeverityPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// System_MacAddress_RoutingMacPath represents the /openconfig-system/system/mac-address/state/routing-mac YANG schema element.
+type System_MacAddress_RoutingMacPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_MacAddress_RoutingMacPathAny represents the wildcard version of the /openconfig-system/system/mac-address/state/routing-mac YANG schema element.
+type System_MacAddress_RoutingMacPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_MacAddressPath) State() ygnmi.SingletonQuery[*oc.System_MacAddress] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.System_MacAddress](
+		"System_MacAddress",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_MacAddressPathAny) State() ygnmi.WildcardQuery[*oc.System_MacAddress] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.System_MacAddress](
+		"System_MacAddress",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_MacAddressPath) Config() ygnmi.ConfigQuery[*oc.System_MacAddress] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.System_MacAddress](
+		"System_MacAddress",
+		false,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_MacAddressPathAny) Config() ygnmi.WildcardQuery[*oc.System_MacAddress] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.System_MacAddress](
+		"System_MacAddress",
+		false,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/routing-mac"
+//	Path from root:       "/system/mac-address/state/routing-mac"
+func (n *System_MacAddress_RoutingMacPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"System_MacAddress",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "routing-mac"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_MacAddress).RoutingMac
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MacAddress) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/routing-mac"
+//	Path from root:       "/system/mac-address/state/routing-mac"
+func (n *System_MacAddress_RoutingMacPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_MacAddress",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "routing-mac"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_MacAddress).RoutingMac
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MacAddress) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/routing-mac"
+//	Path from root:       "/system/mac-address/config/routing-mac"
+func (n *System_MacAddress_RoutingMacPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_MacAddress",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "routing-mac"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_MacAddress).RoutingMac
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MacAddress) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/routing-mac"
+//	Path from root:       "/system/mac-address/config/routing-mac"
+func (n *System_MacAddress_RoutingMacPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_MacAddress",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "routing-mac"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_MacAddress).RoutingMac
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MacAddress) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// System_MacAddressPath represents the /openconfig-system/system/mac-address YANG schema element.
+type System_MacAddressPath struct {
+	*ygnmi.NodePath
+}
+
+// System_MacAddressPathAny represents the wildcard version of the /openconfig-system/system/mac-address YANG schema element.
+type System_MacAddressPathAny struct {
+	*ygnmi.NodePath
+}
+
+// RoutingMac (leaf): Any packets destined to this MAC address must be sent through the
+// routing pipeline by the system. This MAC address is used to identify
+// routed packets in addition to any other MAC addresses that the system
+// may already have been using to perform routing.
+//
+// It is not expected that this MAC address will be used as the
+// source MAC address of any routed packet, as the source MAC address of
+// any packets generated by the system, or a MAC address used in ARP
+// response. This MAC address may not be allocated from the block of
+// MAC address that system owns. For instance, it's allocation could
+// be managed by an external controller.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/routing-mac"
+//	Path from root:       "/system/mac-address/*/routing-mac"
+func (n *System_MacAddressPath) RoutingMac() *System_MacAddress_RoutingMacPath {
+	return &System_MacAddress_RoutingMacPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "routing-mac"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RoutingMac (leaf): Any packets destined to this MAC address must be sent through the
+// routing pipeline by the system. This MAC address is used to identify
+// routed packets in addition to any other MAC addresses that the system
+// may already have been using to perform routing.
+//
+// It is not expected that this MAC address will be used as the
+// source MAC address of any routed packet, as the source MAC address of
+// any packets generated by the system, or a MAC address used in ARP
+// response. This MAC address may not be allocated from the block of
+// MAC address that system owns. For instance, it's allocation could
+// be managed by an external controller.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/routing-mac"
+//	Path from root:       "/system/mac-address/*/routing-mac"
+func (n *System_MacAddressPathAny) RoutingMac() *System_MacAddress_RoutingMacPathAny {
+	return &System_MacAddress_RoutingMacPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "routing-mac"},
 			map[string]interface{}{},
 			n,
 		),

@@ -6057,6 +6057,71 @@ func (w *System_Logging_RemoteServer_SelectorWatcher) Await(t testing.TB) (*Qual
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedSystem_MacAddress is a *System_MacAddress with a corresponding timestamp.
+type QualifiedSystem_MacAddress struct {
+	*genutil.Metadata
+	val     *System_MacAddress // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedSystem_MacAddress) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *System_MacAddress sample, erroring out if not present.
+func (q *QualifiedSystem_MacAddress) Val(t testing.TB) *System_MacAddress {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *System_MacAddress sample.
+func (q *QualifiedSystem_MacAddress) SetVal(v *System_MacAddress) *QualifiedSystem_MacAddress {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedSystem_MacAddress) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionSystem_MacAddress is a telemetry Collection whose Await method returns a slice of *System_MacAddress samples.
+type CollectionSystem_MacAddress struct {
+	W    *System_MacAddressWatcher
+	Data []*QualifiedSystem_MacAddress
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionSystem_MacAddress) Await(t testing.TB) []*QualifiedSystem_MacAddress {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// System_MacAddressWatcher observes a stream of *System_MacAddress samples.
+type System_MacAddressWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedSystem_MacAddress
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *System_MacAddressWatcher) Await(t testing.TB) (*QualifiedSystem_MacAddress, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedSystem_Memory is a *System_Memory with a corresponding timestamp.
 type QualifiedSystem_Memory struct {
 	*genutil.Metadata
@@ -9173,71 +9238,6 @@ type E_EndpointPeer_PeerStateWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_EndpointPeer_PeerStateWatcher) Await(t testing.TB) (*QualifiedE_EndpointPeer_PeerState, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedE_EndpointVni_SviState is a E_EndpointVni_SviState with a corresponding timestamp.
-type QualifiedE_EndpointVni_SviState struct {
-	*genutil.Metadata
-	val     E_EndpointVni_SviState // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_EndpointVni_SviState) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_EndpointVni_SviState sample, erroring out if not present.
-func (q *QualifiedE_EndpointVni_SviState) Val(t testing.TB) E_EndpointVni_SviState {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_EndpointVni_SviState sample.
-func (q *QualifiedE_EndpointVni_SviState) SetVal(v E_EndpointVni_SviState) *QualifiedE_EndpointVni_SviState {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_EndpointVni_SviState) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_EndpointVni_SviState is a telemetry Collection whose Await method returns a slice of E_EndpointVni_SviState samples.
-type CollectionE_EndpointVni_SviState struct {
-	W    *E_EndpointVni_SviStateWatcher
-	Data []*QualifiedE_EndpointVni_SviState
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_EndpointVni_SviState) Await(t testing.TB) []*QualifiedE_EndpointVni_SviState {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_EndpointVni_SviStateWatcher observes a stream of E_EndpointVni_SviState samples.
-type E_EndpointVni_SviStateWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_EndpointVni_SviState
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_EndpointVni_SviStateWatcher) Await(t testing.TB) (*QualifiedE_EndpointVni_SviState, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

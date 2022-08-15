@@ -788,6 +788,38 @@ func (n *SystemPathAny) LoginBanner() *System_LoginBannerPathAny {
 	}
 }
 
+// MacAddress (container): Top-level container for system's MAC address configuration and state
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "mac-address"
+// Path from root: "/system/mac-address"
+func (n *SystemPath) MacAddress() *System_MacAddressPath {
+	return &System_MacAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MacAddress (container): Top-level container for system's MAC address configuration and state
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "mac-address"
+// Path from root: "/system/mac-address"
+func (n *SystemPathAny) MacAddress() *System_MacAddressPathAny {
+	return &System_MacAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Memory (container): Top-level container for system memory data
 // ----------------------------------------
 // Defining module: "openconfig-system"
@@ -7395,6 +7427,184 @@ func (n *System_DnsPathAny) Server(Address string) *System_Dns_ServerPathAny {
 		NodePath: ygot.NewNodePath(
 			[]string{"servers", "server"},
 			map[string]interface{}{"address": Address},
+			n,
+		),
+	}
+}
+
+// System_Dns_HostEntryPath represents the /openconfig-system/system/dns/host-entries/host-entry YANG schema element.
+type System_Dns_HostEntryPath struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntryPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry YANG schema element.
+type System_Dns_HostEntryPathAny struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_AliasPath represents the /openconfig-system/system/dns/host-entries/host-entry/state/alias YANG schema element.
+type System_Dns_HostEntry_AliasPath struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_AliasPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/alias YANG schema element.
+type System_Dns_HostEntry_AliasPathAny struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_HostnamePath represents the /openconfig-system/system/dns/host-entries/host-entry/state/hostname YANG schema element.
+type System_Dns_HostEntry_HostnamePath struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_HostnamePathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/hostname YANG schema element.
+type System_Dns_HostEntry_HostnamePathAny struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_Ipv4AddressPath represents the /openconfig-system/system/dns/host-entries/host-entry/state/ipv4-address YANG schema element.
+type System_Dns_HostEntry_Ipv4AddressPath struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_Ipv4AddressPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/ipv4-address YANG schema element.
+type System_Dns_HostEntry_Ipv4AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_Ipv6AddressPath represents the /openconfig-system/system/dns/host-entries/host-entry/state/ipv6-address YANG schema element.
+type System_Dns_HostEntry_Ipv6AddressPath struct {
+	*ygot.NodePath
+}
+
+// System_Dns_HostEntry_Ipv6AddressPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/ipv6-address YANG schema element.
+type System_Dns_HostEntry_Ipv6AddressPathAny struct {
+	*ygot.NodePath
+}
+
+// Alias (leaf-list): Additional aliases for the hostname
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/alias"
+// Path from root: "/system/dns/host-entries/host-entry/state/alias"
+func (n *System_Dns_HostEntryPath) Alias() *System_Dns_HostEntry_AliasPath {
+	return &System_Dns_HostEntry_AliasPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "alias"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Alias (leaf-list): Additional aliases for the hostname
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/alias"
+// Path from root: "/system/dns/host-entries/host-entry/state/alias"
+func (n *System_Dns_HostEntryPathAny) Alias() *System_Dns_HostEntry_AliasPathAny {
+	return &System_Dns_HostEntry_AliasPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "alias"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostname (leaf): Hostname for the static DNS entry
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/hostname"
+// Path from root: "/system/dns/host-entries/host-entry/state/hostname"
+func (n *System_Dns_HostEntryPath) Hostname() *System_Dns_HostEntry_HostnamePath {
+	return &System_Dns_HostEntry_HostnamePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "hostname"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostname (leaf): Hostname for the static DNS entry
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/hostname"
+// Path from root: "/system/dns/host-entries/host-entry/state/hostname"
+func (n *System_Dns_HostEntryPathAny) Hostname() *System_Dns_HostEntry_HostnamePathAny {
+	return &System_Dns_HostEntry_HostnamePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "hostname"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4Address (leaf-list): List of IPv4 addresses for the host entry
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/ipv4-address"
+// Path from root: "/system/dns/host-entries/host-entry/state/ipv4-address"
+func (n *System_Dns_HostEntryPath) Ipv4Address() *System_Dns_HostEntry_Ipv4AddressPath {
+	return &System_Dns_HostEntry_Ipv4AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4Address (leaf-list): List of IPv4 addresses for the host entry
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/ipv4-address"
+// Path from root: "/system/dns/host-entries/host-entry/state/ipv4-address"
+func (n *System_Dns_HostEntryPathAny) Ipv4Address() *System_Dns_HostEntry_Ipv4AddressPathAny {
+	return &System_Dns_HostEntry_Ipv4AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv6Address (leaf-list): List of IPv6 addresses for the host entry
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/ipv6-address"
+// Path from root: "/system/dns/host-entries/host-entry/state/ipv6-address"
+func (n *System_Dns_HostEntryPath) Ipv6Address() *System_Dns_HostEntry_Ipv6AddressPath {
+	return &System_Dns_HostEntry_Ipv6AddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv6Address (leaf-list): List of IPv6 addresses for the host entry
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/ipv6-address"
+// Path from root: "/system/dns/host-entries/host-entry/state/ipv6-address"
+func (n *System_Dns_HostEntryPathAny) Ipv6Address() *System_Dns_HostEntry_Ipv6AddressPathAny {
+	return &System_Dns_HostEntry_Ipv6AddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "ipv6-address"},
+			map[string]interface{}{},
 			n,
 		),
 	}

@@ -158,7 +158,7 @@ func TestSendRequest(t *testing.T) {
 				responseBody: tt.responseBody,
 				err:          tt.responseError,
 			}
-			service := New(WithTransport(fakeServer))
+			service := New(WithClient(&http.Client{Transport: fakeServer}))
 			srv := grpc.NewServer(grpc.Creds(local.NewCredentials()))
 			hpb.RegisterHTTPOverGRPCServer(srv, service)
 			addr := startServer(t, srv)

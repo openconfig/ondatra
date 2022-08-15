@@ -4,33 +4,43 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//    https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 package proxy
 
 import (
+	"bytes"
 	"golang.org/x/net/context"
 	"fmt"
+	"io"
 	"net"
+	"net/http"
 	"testing"
 
+	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/local"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/proto"
-	gnmipb "github.com/openconfig/gnmi/proto/gnmi"
+	"google.golang.org/protobuf/testing/protocmp"
+	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/lemming"
+
+	gnmipb "github.com/openconfig/gnmi/proto/gnmi"
+	hpb "github.com/openconfig/ondatra/proxy/proto/httpovergrpc"
 	rpb "github.com/openconfig/ondatra/proxy/proto/reservation"
 )
 
 type fakeBinding struct {
-	dialGRPC func(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
-	resolve  func() (*rpb.Reservation, error)
+	dialGRPC   func(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
+	resolve    func() (*rpb.Reservation, error)
+	httpDialer func(string) (HTTPDoCloser, error)
 }
 
 func (fb *fakeBinding) DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
@@ -40,6 +50,18 @@ func (fb *fakeBinding) DialGRPC(ctx context.Context, target string, opts ...grpc
 
 func (fb *fakeBinding) Resolve() (*rpb.Reservation, error) {
 	return fb.resolve()
+}
+
+type httpClient struct {
+	*http.Client
+}
+
+func (h *httpClient) Close() error {
+	return nil
+}
+
+func (fb *fakeBinding) HTTPClient(target string) (HTTPDoCloser, error) {
+	return fb.httpDialer(target)
 }
 
 func setupFake(t *testing.T) (*lemming.Device, *fakeBinding) {
@@ -121,6 +143,7 @@ func setupFake(t *testing.T) (*lemming.Device, *fakeBinding) {
 	}}}
 	return fake, b
 }
+
 func TestAuthProxy(t *testing.T) {
 	tests := []struct {
 		desc       string
@@ -264,4 +287,129 @@ func generateStream() [][]*gnmipb.SubscribeResponse {
 		},
 	})
 	return [][]*gnmipb.SubscribeResponse{resp}
+}
+
+type fakeHTTPServer struct {
+	req          *http.Request
+	responseCode int32
+	responseBody []byte
+	err          error
+}
+
+func (s *fakeHTTPServer) RoundTrip(req *http.Request) (*http.Response, error) {
+	s.req = req
+
+	if s.err != nil {
+		return nil, s.err
+	}
+	resp := &http.Response{
+		Status:     fmt.Sprintf("%d %s", s.responseCode, http.StatusText(int(s.responseCode))),
+		StatusCode: int(s.responseCode),
+		Body:       io.NopCloser(bytes.NewReader(s.responseBody)),
+		Header:     req.Header,
+	}
+	return resp, nil
+}
+
+func setupHTTP(t *testing.T, target string) (*fakeHTTPServer, *fakeBinding) {
+	t.Helper()
+	b := &fakeBinding{}
+	b.resolve = func() (*rpb.Reservation, error) {
+		return &rpb.Reservation{
+			Id: "fake reservation",
+			Ates: map[string]*rpb.ResolvedDevice{
+				"ate1": {
+					Id:   "ate1",
+					Name: "ate_target1",
+					Services: map[string]*rpb.Service{
+						"http": &rpb.Service{
+							Id: "http",
+							Endpoint: &rpb.Service_HttpOverGrpc{
+								HttpOverGrpc: &rpb.HTTPOverGRPCEndpoint{
+									Address: target,
+								},
+							},
+						},
+					},
+				},
+			},
+		}, nil
+	}
+	f := &fakeHTTPServer{}
+	b.httpDialer = func(target string) (HTTPDoCloser, error) {
+		if target == "error_target" {
+			return nil, fmt.Errorf("invalid target")
+		}
+		return &httpClient{&http.Client{Transport: f}}, nil
+	}
+	return f, b
+}
+
+func TestHTTPProxy(t *testing.T) {
+	tests := []struct {
+		desc       string
+		serverOpts []grpc.ServerOption
+		dialOpts   []grpc.DialOption
+		in         *hpb.Request
+		target     string
+		want       *hpb.Response
+		wantErr    string
+	}{{
+		desc: "local auth",
+		in: &hpb.Request{
+			Method: "GET",
+			Url:    "https://fake.target.com/api",
+		},
+		target: "fake.target.com",
+		want: &hpb.Response{
+			Status: 200,
+			Body:   []byte("test"),
+		},
+		serverOpts: []grpc.ServerOption{grpc.Creds(local.NewCredentials())},
+		dialOpts:   []grpc.DialOption{grpc.WithTransportCredentials(local.NewCredentials())},
+	}, {
+		desc: "failed target",
+		in: &hpb.Request{
+			Method: "GET",
+			Url:    "https://fake.target.com/api",
+		},
+		target: "error_target",
+		want: &hpb.Response{
+			Status: 200,
+			Body:   []byte("test"),
+		},
+		wantErr:    "failed to create new HTTP client",
+		serverOpts: []grpc.ServerOption{grpc.Creds(local.NewCredentials())},
+		dialOpts:   []grpc.DialOption{grpc.WithTransportCredentials(local.NewCredentials())},
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			f, b := setupHTTP(t, tt.target)
+			f.responseCode = tt.want.Status
+			f.responseBody = tt.want.Body
+
+			m, err := New(b, tt.serverOpts...)
+			if s := errdiff.Check(err, tt.wantErr); s != "" {
+				t.Fatalf("New() failed: %s", s)
+			}
+			if err != nil {
+				return
+			}
+			defer m.Stop()
+			proxies := m.Endpoints()
+
+			conn, err := grpc.DialContext(context.Background(), proxies["ate1"].Addr, tt.dialOpts...)
+			if err != nil {
+				t.Fatalf("failed to dial proxy: %v", err)
+			}
+			c := hpb.NewHTTPOverGRPCClient(conn)
+			got, err := c.HTTPRequest(context.Background(), tt.in)
+			if err != nil {
+				t.Fatalf("HTTPRequest error: %v", err)
+			}
+			if s := cmp.Diff(got, tt.want, protocmp.Transform()); s != "" {
+				t.Fatalf("HTTPRequestFailed: %s", s)
+			}
+		})
+	}
 }

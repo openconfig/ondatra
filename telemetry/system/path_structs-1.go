@@ -74,184 +74,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// System_Dns_HostEntryPath represents the /openconfig-system/system/dns/host-entries/host-entry YANG schema element.
-type System_Dns_HostEntryPath struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntryPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry YANG schema element.
-type System_Dns_HostEntryPathAny struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_AliasPath represents the /openconfig-system/system/dns/host-entries/host-entry/state/alias YANG schema element.
-type System_Dns_HostEntry_AliasPath struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_AliasPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/alias YANG schema element.
-type System_Dns_HostEntry_AliasPathAny struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_HostnamePath represents the /openconfig-system/system/dns/host-entries/host-entry/state/hostname YANG schema element.
-type System_Dns_HostEntry_HostnamePath struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_HostnamePathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/hostname YANG schema element.
-type System_Dns_HostEntry_HostnamePathAny struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_Ipv4AddressPath represents the /openconfig-system/system/dns/host-entries/host-entry/state/ipv4-address YANG schema element.
-type System_Dns_HostEntry_Ipv4AddressPath struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_Ipv4AddressPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/ipv4-address YANG schema element.
-type System_Dns_HostEntry_Ipv4AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_Ipv6AddressPath represents the /openconfig-system/system/dns/host-entries/host-entry/state/ipv6-address YANG schema element.
-type System_Dns_HostEntry_Ipv6AddressPath struct {
-	*ygot.NodePath
-}
-
-// System_Dns_HostEntry_Ipv6AddressPathAny represents the wildcard version of the /openconfig-system/system/dns/host-entries/host-entry/state/ipv6-address YANG schema element.
-type System_Dns_HostEntry_Ipv6AddressPathAny struct {
-	*ygot.NodePath
-}
-
-// Alias (leaf-list): Additional aliases for the hostname
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/alias"
-// Path from root: "/system/dns/host-entries/host-entry/state/alias"
-func (n *System_Dns_HostEntryPath) Alias() *System_Dns_HostEntry_AliasPath {
-	return &System_Dns_HostEntry_AliasPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "alias"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Alias (leaf-list): Additional aliases for the hostname
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/alias"
-// Path from root: "/system/dns/host-entries/host-entry/state/alias"
-func (n *System_Dns_HostEntryPathAny) Alias() *System_Dns_HostEntry_AliasPathAny {
-	return &System_Dns_HostEntry_AliasPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "alias"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Hostname (leaf): Hostname for the static DNS entry
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/hostname"
-// Path from root: "/system/dns/host-entries/host-entry/state/hostname"
-func (n *System_Dns_HostEntryPath) Hostname() *System_Dns_HostEntry_HostnamePath {
-	return &System_Dns_HostEntry_HostnamePath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "hostname"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Hostname (leaf): Hostname for the static DNS entry
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/hostname"
-// Path from root: "/system/dns/host-entries/host-entry/state/hostname"
-func (n *System_Dns_HostEntryPathAny) Hostname() *System_Dns_HostEntry_HostnamePathAny {
-	return &System_Dns_HostEntry_HostnamePathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "hostname"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv4Address (leaf-list): List of IPv4 addresses for the host entry
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/ipv4-address"
-// Path from root: "/system/dns/host-entries/host-entry/state/ipv4-address"
-func (n *System_Dns_HostEntryPath) Ipv4Address() *System_Dns_HostEntry_Ipv4AddressPath {
-	return &System_Dns_HostEntry_Ipv4AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ipv4-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv4Address (leaf-list): List of IPv4 addresses for the host entry
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/ipv4-address"
-// Path from root: "/system/dns/host-entries/host-entry/state/ipv4-address"
-func (n *System_Dns_HostEntryPathAny) Ipv4Address() *System_Dns_HostEntry_Ipv4AddressPathAny {
-	return &System_Dns_HostEntry_Ipv4AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ipv4-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv6Address (leaf-list): List of IPv6 addresses for the host entry
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/ipv6-address"
-// Path from root: "/system/dns/host-entries/host-entry/state/ipv6-address"
-func (n *System_Dns_HostEntryPath) Ipv6Address() *System_Dns_HostEntry_Ipv6AddressPath {
-	return &System_Dns_HostEntry_Ipv6AddressPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ipv6-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Ipv6Address (leaf-list): List of IPv6 addresses for the host entry
-// ----------------------------------------
-// Defining module: "openconfig-system"
-// Instantiating module: "openconfig-system"
-// Path from parent: "state/ipv6-address"
-// Path from root: "/system/dns/host-entries/host-entry/state/ipv6-address"
-func (n *System_Dns_HostEntryPathAny) Ipv6Address() *System_Dns_HostEntry_Ipv6AddressPathAny {
-	return &System_Dns_HostEntry_Ipv6AddressPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"state", "ipv6-address"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
 // System_Dns_ServerPath represents the /openconfig-system/system/dns/servers/server YANG schema element.
 type System_Dns_ServerPath struct {
 	*ygot.NodePath
@@ -3088,6 +2910,78 @@ func (n *System_Logging_RemoteServer_SelectorPathAny) Severity() *System_Logging
 	return &System_Logging_RemoteServer_Selector_SeverityPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// System_MacAddressPath represents the /openconfig-system/system/mac-address YANG schema element.
+type System_MacAddressPath struct {
+	*ygot.NodePath
+}
+
+// System_MacAddressPathAny represents the wildcard version of the /openconfig-system/system/mac-address YANG schema element.
+type System_MacAddressPathAny struct {
+	*ygot.NodePath
+}
+
+// System_MacAddress_RoutingMacPath represents the /openconfig-system/system/mac-address/state/routing-mac YANG schema element.
+type System_MacAddress_RoutingMacPath struct {
+	*ygot.NodePath
+}
+
+// System_MacAddress_RoutingMacPathAny represents the wildcard version of the /openconfig-system/system/mac-address/state/routing-mac YANG schema element.
+type System_MacAddress_RoutingMacPathAny struct {
+	*ygot.NodePath
+}
+
+// RoutingMac (leaf): Any packets destined to this MAC address must be sent through the
+// routing pipeline by the system. This MAC address is used to identify
+// routed packets in addition to any other MAC addresses that the system
+// may already have been using to perform routing.
+//
+// It is not expected that this MAC address will be used as the
+// source MAC address of any routed packet, as the source MAC address of
+// any packets generated by the system, or a MAC address used in ARP
+// response. This MAC address may not be allocated from the block of
+// MAC address that system owns. For instance, it's allocation could
+// be managed by an external controller.
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/routing-mac"
+// Path from root: "/system/mac-address/state/routing-mac"
+func (n *System_MacAddressPath) RoutingMac() *System_MacAddress_RoutingMacPath {
+	return &System_MacAddress_RoutingMacPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "routing-mac"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RoutingMac (leaf): Any packets destined to this MAC address must be sent through the
+// routing pipeline by the system. This MAC address is used to identify
+// routed packets in addition to any other MAC addresses that the system
+// may already have been using to perform routing.
+//
+// It is not expected that this MAC address will be used as the
+// source MAC address of any routed packet, as the source MAC address of
+// any packets generated by the system, or a MAC address used in ARP
+// response. This MAC address may not be allocated from the block of
+// MAC address that system owns. For instance, it's allocation could
+// be managed by an external controller.
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/routing-mac"
+// Path from root: "/system/mac-address/state/routing-mac"
+func (n *System_MacAddressPathAny) RoutingMac() *System_MacAddress_RoutingMacPathAny {
+	return &System_MacAddress_RoutingMacPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "routing-mac"},
 			map[string]interface{}{},
 			n,
 		),

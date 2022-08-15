@@ -15,6 +15,208 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Ntp_NtpKey_KeyIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.System_Ntp_NtpKey{}
+	md, ok := oc.Lookup(t, n, "System_Ntp_NtpKey", goStruct, true, true)
+	if ok {
+		return convertSystem_Ntp_NtpKey_KeyIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Ntp_NtpKey_KeyIdPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Ntp_NtpKey_KeyIdPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Ntp_NtpKey{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Ntp_NtpKey", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Ntp_NtpKey_KeyIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id with a ONCE subscription.
+func (n *System_Ntp_NtpKey_KeyIdPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id.
+func (n *System_Ntp_NtpKey_KeyIdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id in the given batch object.
+func (n *System_Ntp_NtpKey_KeyIdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id.
+func (n *System_Ntp_NtpKey_KeyIdPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id in the given batch object.
+func (n *System_Ntp_NtpKey_KeyIdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id.
+func (n *System_Ntp_NtpKey_KeyIdPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-id in the given batch object.
+func (n *System_Ntp_NtpKey_KeyIdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_Ntp_NtpKey_KeyIdPath extracts the value of the leaf KeyId from its parent oc.System_Ntp_NtpKey
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertSystem_Ntp_NtpKey_KeyIdPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Ntp_NtpKey) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.KeyId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_Ntp_NtpKey_KeyTypePath) Lookup(t testing.TB) *oc.QualifiedE_System_NTP_AUTH_TYPE {
+	t.Helper()
+	goStruct := &oc.System_Ntp_NtpKey{}
+	md, ok := oc.Lookup(t, n, "System_Ntp_NtpKey", goStruct, true, true)
+	if ok {
+		return convertSystem_Ntp_NtpKey_KeyTypePath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_Ntp_NtpKey_KeyTypePath) Get(t testing.TB) oc.E_System_NTP_AUTH_TYPE {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_Ntp_NtpKey_KeyTypePathAny) Lookup(t testing.TB) []*oc.QualifiedE_System_NTP_AUTH_TYPE {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_System_NTP_AUTH_TYPE
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_Ntp_NtpKey{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Ntp_NtpKey", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_Ntp_NtpKey_KeyTypePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type with a ONCE subscription.
+func (n *System_Ntp_NtpKey_KeyTypePathAny) Get(t testing.TB) []oc.E_System_NTP_AUTH_TYPE {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_System_NTP_AUTH_TYPE
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type.
+func (n *System_Ntp_NtpKey_KeyTypePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type in the given batch object.
+func (n *System_Ntp_NtpKey_KeyTypePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type.
+func (n *System_Ntp_NtpKey_KeyTypePath) Replace(t testing.TB, val oc.E_System_NTP_AUTH_TYPE) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type in the given batch object.
+func (n *System_Ntp_NtpKey_KeyTypePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_System_NTP_AUTH_TYPE) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type.
+func (n *System_Ntp_NtpKey_KeyTypePath) Update(t testing.TB, val oc.E_System_NTP_AUTH_TYPE) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-type in the given batch object.
+func (n *System_Ntp_NtpKey_KeyTypePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_System_NTP_AUTH_TYPE) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertSystem_Ntp_NtpKey_KeyTypePath extracts the value of the leaf KeyType from its parent oc.System_Ntp_NtpKey
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_System_NTP_AUTH_TYPE.
+func convertSystem_Ntp_NtpKey_KeyTypePath(t testing.TB, md *genutil.Metadata, parent *oc.System_Ntp_NtpKey) *oc.QualifiedE_System_NTP_AUTH_TYPE {
+	t.Helper()
+	qv := &oc.QualifiedE_System_NTP_AUTH_TYPE{
+		Metadata: md,
+	}
+	val := parent.KeyType
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-system/system/ntp/ntp-keys/ntp-key/config/key-value with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_Ntp_NtpKey_KeyValuePath) Lookup(t testing.TB) *oc.QualifiedString {

@@ -12,6 +12,71 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_Tlv_Reason is a E_Tlv_Reason with a corresponding timestamp.
+type QualifiedE_Tlv_Reason struct {
+	*genutil.Metadata
+	val     E_Tlv_Reason // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Tlv_Reason) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Tlv_Reason sample, erroring out if not present.
+func (q *QualifiedE_Tlv_Reason) Val(t testing.TB) E_Tlv_Reason {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Tlv_Reason sample.
+func (q *QualifiedE_Tlv_Reason) SetVal(v E_Tlv_Reason) *QualifiedE_Tlv_Reason {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Tlv_Reason) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Tlv_Reason is a telemetry Collection whose Await method returns a slice of E_Tlv_Reason samples.
+type CollectionE_Tlv_Reason struct {
+	W    *E_Tlv_ReasonWatcher
+	Data []*QualifiedE_Tlv_Reason
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Tlv_Reason) Await(t testing.TB) []*QualifiedE_Tlv_Reason {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Tlv_ReasonWatcher observes a stream of E_Tlv_Reason samples.
+type E_Tlv_ReasonWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Tlv_Reason
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Tlv_ReasonWatcher) Await(t testing.TB) (*QualifiedE_Tlv_Reason, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_Topology_Attributes is a E_Topology_Attributes with a corresponding timestamp.
 type QualifiedE_Topology_Attributes struct {
 	*genutil.Metadata

@@ -416,7 +416,7 @@ func TestSolveErrors(t *testing.T) {
 	}
 }
 
-func unmarshalTopo(t *testing.T, text string) *tpb.Topology {
+func unmarshalTopo(t testing.TB, text string) *tpb.Topology {
 	topo := new(tpb.Topology)
 	if err := prototext.Unmarshal([]byte(text), topo); err != nil {
 		t.Fatalf("Error unmarshalling topology text: %v", err)
