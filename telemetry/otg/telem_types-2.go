@@ -12,6 +12,266 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_Ipv6Reachability_Prefix_OriginType is a E_Ipv6Reachability_Prefix_OriginType with a corresponding timestamp.
+type QualifiedE_Ipv6Reachability_Prefix_OriginType struct {
+	*genutil.Metadata
+	val     E_Ipv6Reachability_Prefix_OriginType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Ipv6Reachability_Prefix_OriginType sample, erroring out if not present.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) Val(t testing.TB) E_Ipv6Reachability_Prefix_OriginType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Ipv6Reachability_Prefix_OriginType sample.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) SetVal(v E_Ipv6Reachability_Prefix_OriginType) *QualifiedE_Ipv6Reachability_Prefix_OriginType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Ipv6Reachability_Prefix_OriginType is a telemetry Collection whose Await method returns a slice of E_Ipv6Reachability_Prefix_OriginType samples.
+type CollectionE_Ipv6Reachability_Prefix_OriginType struct {
+	W    *E_Ipv6Reachability_Prefix_OriginTypeWatcher
+	Data []*QualifiedE_Ipv6Reachability_Prefix_OriginType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Ipv6Reachability_Prefix_OriginType) Await(t testing.TB) []*QualifiedE_Ipv6Reachability_Prefix_OriginType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Ipv6Reachability_Prefix_OriginTypeWatcher observes a stream of E_Ipv6Reachability_Prefix_OriginType samples.
+type E_Ipv6Reachability_Prefix_OriginTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Ipv6Reachability_Prefix_OriginType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Ipv6Reachability_Prefix_OriginTypeWatcher) Await(t testing.TB) (*QualifiedE_Ipv6Reachability_Prefix_OriginType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Ipv6Reachability_Prefix_RedistributionType is a E_Ipv6Reachability_Prefix_RedistributionType with a corresponding timestamp.
+type QualifiedE_Ipv6Reachability_Prefix_RedistributionType struct {
+	*genutil.Metadata
+	val     E_Ipv6Reachability_Prefix_RedistributionType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Ipv6Reachability_Prefix_RedistributionType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Ipv6Reachability_Prefix_RedistributionType sample, erroring out if not present.
+func (q *QualifiedE_Ipv6Reachability_Prefix_RedistributionType) Val(t testing.TB) E_Ipv6Reachability_Prefix_RedistributionType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Ipv6Reachability_Prefix_RedistributionType sample.
+func (q *QualifiedE_Ipv6Reachability_Prefix_RedistributionType) SetVal(v E_Ipv6Reachability_Prefix_RedistributionType) *QualifiedE_Ipv6Reachability_Prefix_RedistributionType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Ipv6Reachability_Prefix_RedistributionType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Ipv6Reachability_Prefix_RedistributionType is a telemetry Collection whose Await method returns a slice of E_Ipv6Reachability_Prefix_RedistributionType samples.
+type CollectionE_Ipv6Reachability_Prefix_RedistributionType struct {
+	W    *E_Ipv6Reachability_Prefix_RedistributionTypeWatcher
+	Data []*QualifiedE_Ipv6Reachability_Prefix_RedistributionType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Ipv6Reachability_Prefix_RedistributionType) Await(t testing.TB) []*QualifiedE_Ipv6Reachability_Prefix_RedistributionType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Ipv6Reachability_Prefix_RedistributionTypeWatcher observes a stream of E_Ipv6Reachability_Prefix_RedistributionType samples.
+type E_Ipv6Reachability_Prefix_RedistributionTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Ipv6Reachability_Prefix_RedistributionType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Ipv6Reachability_Prefix_RedistributionTypeWatcher) Await(t testing.TB) (*QualifiedE_Ipv6Reachability_Prefix_RedistributionType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Lsps_PduType is a E_Lsps_PduType with a corresponding timestamp.
+type QualifiedE_Lsps_PduType struct {
+	*genutil.Metadata
+	val     E_Lsps_PduType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Lsps_PduType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Lsps_PduType sample, erroring out if not present.
+func (q *QualifiedE_Lsps_PduType) Val(t testing.TB) E_Lsps_PduType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Lsps_PduType sample.
+func (q *QualifiedE_Lsps_PduType) SetVal(v E_Lsps_PduType) *QualifiedE_Lsps_PduType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Lsps_PduType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Lsps_PduType is a telemetry Collection whose Await method returns a slice of E_Lsps_PduType samples.
+type CollectionE_Lsps_PduType struct {
+	W    *E_Lsps_PduTypeWatcher
+	Data []*QualifiedE_Lsps_PduType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Lsps_PduType) Await(t testing.TB) []*QualifiedE_Lsps_PduType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Lsps_PduTypeWatcher observes a stream of E_Lsps_PduType samples.
+type E_Lsps_PduTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Lsps_PduType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Lsps_PduTypeWatcher) Await(t testing.TB) (*QualifiedE_Lsps_PduType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Port_Link is a E_Port_Link with a corresponding timestamp.
+type QualifiedE_Port_Link struct {
+	*genutil.Metadata
+	val     E_Port_Link // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Port_Link) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Port_Link sample, erroring out if not present.
+func (q *QualifiedE_Port_Link) Val(t testing.TB) E_Port_Link {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Port_Link sample.
+func (q *QualifiedE_Port_Link) SetVal(v E_Port_Link) *QualifiedE_Port_Link {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Port_Link) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Port_Link is a telemetry Collection whose Await method returns a slice of E_Port_Link samples.
+type CollectionE_Port_Link struct {
+	W    *E_Port_LinkWatcher
+	Data []*QualifiedE_Port_Link
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Port_Link) Await(t testing.TB) []*QualifiedE_Port_Link {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Port_LinkWatcher observes a stream of E_Port_Link samples.
+type E_Port_LinkWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Port_Link
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Port_LinkWatcher) Await(t testing.TB) (*QualifiedE_Port_Link, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_State_CommunityType is a E_State_CommunityType with a corresponding timestamp.
 type QualifiedE_State_CommunityType struct {
 	*genutil.Metadata
@@ -268,6 +528,201 @@ type E_UnicastIpv6Prefix_OriginWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_UnicastIpv6Prefix_OriginWatcher) Await(t testing.TB) (*QualifiedE_UnicastIpv6Prefix_Origin, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Lsps_FlagsSlice is a []E_Lsps_Flags with a corresponding timestamp.
+type QualifiedE_Lsps_FlagsSlice struct {
+	*genutil.Metadata
+	val     []E_Lsps_Flags // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Lsps_FlagsSlice) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the []E_Lsps_Flags sample, erroring out if not present.
+func (q *QualifiedE_Lsps_FlagsSlice) Val(t testing.TB) []E_Lsps_Flags {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the []E_Lsps_Flags sample.
+func (q *QualifiedE_Lsps_FlagsSlice) SetVal(v []E_Lsps_Flags) *QualifiedE_Lsps_FlagsSlice {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Lsps_FlagsSlice) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Lsps_FlagsSlice is a telemetry Collection whose Await method returns a slice of []E_Lsps_Flags samples.
+type CollectionE_Lsps_FlagsSlice struct {
+	W    *E_Lsps_FlagsSliceWatcher
+	Data []*QualifiedE_Lsps_FlagsSlice
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Lsps_FlagsSlice) Await(t testing.TB) []*QualifiedE_Lsps_FlagsSlice {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Lsps_FlagsSliceWatcher observes a stream of []E_Lsps_Flags samples.
+type E_Lsps_FlagsSliceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Lsps_FlagsSlice
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Lsps_FlagsSliceWatcher) Await(t testing.TB) (*QualifiedE_Lsps_FlagsSlice, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_State_FlagsSlice is a []E_State_Flags with a corresponding timestamp.
+type QualifiedE_State_FlagsSlice struct {
+	*genutil.Metadata
+	val     []E_State_Flags // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_State_FlagsSlice) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the []E_State_Flags sample, erroring out if not present.
+func (q *QualifiedE_State_FlagsSlice) Val(t testing.TB) []E_State_Flags {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the []E_State_Flags sample.
+func (q *QualifiedE_State_FlagsSlice) SetVal(v []E_State_Flags) *QualifiedE_State_FlagsSlice {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_State_FlagsSlice) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_State_FlagsSlice is a telemetry Collection whose Await method returns a slice of []E_State_Flags samples.
+type CollectionE_State_FlagsSlice struct {
+	W    *E_State_FlagsSliceWatcher
+	Data []*QualifiedE_State_FlagsSlice
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_State_FlagsSlice) Await(t testing.TB) []*QualifiedE_State_FlagsSlice {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_State_FlagsSliceWatcher observes a stream of []E_State_Flags samples.
+type E_State_FlagsSliceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_State_FlagsSlice
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_State_FlagsSliceWatcher) Await(t testing.TB) (*QualifiedE_State_FlagsSlice, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedStringSlice is a []string with a corresponding timestamp.
+type QualifiedStringSlice struct {
+	*genutil.Metadata
+	val     []string // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedStringSlice) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the []string sample, erroring out if not present.
+func (q *QualifiedStringSlice) Val(t testing.TB) []string {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the []string sample.
+func (q *QualifiedStringSlice) SetVal(v []string) *QualifiedStringSlice {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedStringSlice) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionStringSlice is a telemetry Collection whose Await method returns a slice of []string samples.
+type CollectionStringSlice struct {
+	W    *StringSliceWatcher
+	Data []*QualifiedStringSlice
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionStringSlice) Await(t testing.TB) []*QualifiedStringSlice {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// StringSliceWatcher observes a stream of []string samples.
+type StringSliceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedStringSlice
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *StringSliceWatcher) Await(t testing.TB) (*QualifiedStringSlice, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
@@ -723,6 +1178,71 @@ type Uint64Watcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Uint64Watcher) Await(t testing.TB) (*QualifiedUint64, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedUint8 is a uint8 with a corresponding timestamp.
+type QualifiedUint8 struct {
+	*genutil.Metadata
+	val     uint8 // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedUint8) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the uint8 sample, erroring out if not present.
+func (q *QualifiedUint8) Val(t testing.TB) uint8 {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the uint8 sample.
+func (q *QualifiedUint8) SetVal(v uint8) *QualifiedUint8 {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedUint8) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionUint8 is a telemetry Collection whose Await method returns a slice of uint8 samples.
+type CollectionUint8 struct {
+	W    *Uint8Watcher
+	Data []*QualifiedUint8
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionUint8) Await(t testing.TB) []*QualifiedUint8 {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Uint8Watcher observes a stream of uint8 samples.
+type Uint8Watcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedUint8
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Uint8Watcher) Await(t testing.TB) (*QualifiedUint8, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

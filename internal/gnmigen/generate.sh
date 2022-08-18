@@ -21,6 +21,9 @@ set -e
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
+git clone https://github.com/openconfig/gnsi.git
+# TODO: Remove the following line once the new gNSI version is ready for use
+pushd gnsi && git checkout c2ebf3e && popd
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
@@ -47,6 +50,11 @@ YGOT_COMMON_ARGS=(
 
 YANG_FILES=(
   gnmi-collector-metadata.yang
+  gnsi/authz/gnsi-authz.yang
+  gnsi/cert/gnsi-cert.yang
+  gnsi/console/gnsi-console.yang
+  gnsi/pathz/gnsi-pathz.yang
+  gnsi/ssh/gnsi-ssh.yang
   public/release/models/acl/openconfig-acl.yang
   public/release/models/acl/openconfig-packet-match.yang
   public/release/models/aft/openconfig-aft.yang
@@ -276,4 +284,4 @@ find gnmi/oc gnmi/otg -name "*.go" -exec sed -i '1s/^/\/\/go:build go1.18\n/' {}
 find gnmi config telemetry -name "*.go" -exec goimports -w {} +
 find gnmi config telemetry -name "*.go" -exec gofmt -w -s {} +
 
-rm -rf public gnmi-collector-metadata.yang models-yang
+rm -rf public gnmi-collector-metadata.yang models-yang gnsi

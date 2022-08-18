@@ -195,7 +195,13 @@ func TestNextBundleInterface(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			got, err := nextBundleInterface(test.vendor, test.intfs)
+			val := &telemetry.QualifiedDevice{}
+			if test.intfs != nil {
+				val.SetVal(&telemetry.Device{
+					Interface: test.intfs,
+				})
+			}
+			got, err := nextBundleInterface(t, test.vendor, val)
 			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
 				t.Errorf("nextBundleInterface got err %v, want %s", err, test.wantErr)
 			}
@@ -241,7 +247,13 @@ func TestNextVLANInterface(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			got, err := nextVLANInterface(test.vendor, test.intfs)
+			val := &telemetry.QualifiedDevice{}
+			if test.intfs != nil {
+				val.SetVal(&telemetry.Device{
+					Interface: test.intfs,
+				})
+			}
+			got, err := nextVLANInterface(t, test.vendor, val)
 			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
 				t.Errorf("nextVLANInterface got err %v, want %s", err, test.wantErr)
 			}

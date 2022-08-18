@@ -73,6 +73,40 @@ func (n *IsisRouterPathAny) Counters() *IsisRouter_CountersPathAny {
 	}
 }
 
+// LinkStateDatabase (container): This sub-module describes a YANG model for the IS-IS Link State
+// Database (LSDB)
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/link-state-database"
+// Path from root: "/isis-routers/isis-router/state/link-state-database"
+func (n *IsisRouterPath) LinkStateDatabase() *IsisRouter_LinkStateDatabasePath {
+	return &IsisRouter_LinkStateDatabasePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "link-state-database"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinkStateDatabase (container): This sub-module describes a YANG model for the IS-IS Link State
+// Database (LSDB)
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/link-state-database"
+// Path from root: "/isis-routers/isis-router/state/link-state-database"
+func (n *IsisRouterPathAny) LinkStateDatabase() *IsisRouter_LinkStateDatabasePathAny {
+	return &IsisRouter_LinkStateDatabasePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "link-state-database"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Name (leaf): An arbitary name of the ISIS router determined by the OTG
 // configuration.
 // ----------------------------------------
@@ -421,7 +455,7 @@ func (n *IsisRouter_Counters_Level1PathAny) InCsnp() *IsisRouter_Counters_Level1
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -438,7 +472,7 @@ func (n *IsisRouter_Counters_Level1Path) InLsp() *IsisRouter_Counters_Level1_InL
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -589,7 +623,7 @@ func (n *IsisRouter_Counters_Level1PathAny) OutCsnp() *IsisRouter_Counters_Level
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -606,7 +640,7 @@ func (n *IsisRouter_Counters_Level1Path) OutLsp() *IsisRouter_Counters_Level1_Ou
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -995,7 +1029,7 @@ func (n *IsisRouter_Counters_Level2PathAny) InCsnp() *IsisRouter_Counters_Level2
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -1012,7 +1046,7 @@ func (n *IsisRouter_Counters_Level2Path) InLsp() *IsisRouter_Counters_Level2_InL
 	}
 }
 
-// InLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// InLsp (leaf): The total number of link state protocol data units (LSPs)
 // received.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -1163,7 +1197,7 @@ func (n *IsisRouter_Counters_Level2PathAny) OutCsnp() *IsisRouter_Counters_Level
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -1180,7 +1214,7 @@ func (n *IsisRouter_Counters_Level2Path) OutLsp() *IsisRouter_Counters_Level2_Ou
 	}
 }
 
-// OutLsp (leaf): The total number of link stOTG protocol data units (LSPs)
+// OutLsp (leaf): The total number of link state protocol data units (LSPs)
 // sent.
 // ----------------------------------------
 // Defining module: "open-traffic-generator-isis"
@@ -1323,6 +1357,2378 @@ func (n *IsisRouter_Counters_Level2PathAny) SessionsUp() *IsisRouter_Counters_Le
 	return &IsisRouter_Counters_Level2_SessionsUpPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"sessions-up"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabasePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database YANG schema element.
+type IsisRouter_LinkStateDatabasePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabasePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database YANG schema element.
+type IsisRouter_LinkStateDatabasePathAny struct {
+	*ygot.NodePath
+}
+
+// LspsAny (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "lsp-states/lsps"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+// LspId (wildcarded): string
+func (n *IsisRouter_LinkStateDatabasePath) LspsAny() *IsisRouter_LinkStateDatabase_LspsPathAny {
+	return &IsisRouter_LinkStateDatabase_LspsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": "*"},
+			n,
+		),
+	}
+}
+
+// LspsAny (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "lsp-states/lsps"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+// LspId (wildcarded): string
+func (n *IsisRouter_LinkStateDatabasePathAny) LspsAny() *IsisRouter_LinkStateDatabase_LspsPathAny {
+	return &IsisRouter_LinkStateDatabase_LspsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": "*"},
+			n,
+		),
+	}
+}
+
+// Lsps (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "lsp-states/lsps"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+// LspId: string
+func (n *IsisRouter_LinkStateDatabasePath) Lsps(LspId string) *IsisRouter_LinkStateDatabase_LspsPath {
+	return &IsisRouter_LinkStateDatabase_LspsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": LspId},
+			n,
+		),
+	}
+}
+
+// Lsps (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
+// LSP ID is consist of the System ID of a neighbor, the Pseudonode ID, and the LSP number of the LSPs.
+// The last two bytes respectively represent Pseudonode ID and LSP number.
+// A pseudonode is a logical representation of the LAN which is generated by a Designated Intermediate System (DIS)
+// on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
+// is incremented by 1.
+// A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "lsp-states/lsps"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
+// LspId: string
+func (n *IsisRouter_LinkStateDatabasePathAny) Lsps(LspId string) *IsisRouter_LinkStateDatabase_LspsPathAny {
+	return &IsisRouter_LinkStateDatabase_LspsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"lsp-states", "lsps"},
+			map[string]interface{}{"lsp-id": LspId},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_LspsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps YANG schema element.
+type IsisRouter_LinkStateDatabase_LspsPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_LspsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps YANG schema element.
+type IsisRouter_LinkStateDatabase_LspsPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_FlagsPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_IsTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_IsTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_LspIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_LspIdPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduLengthPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny struct {
+	*ygot.NodePath
+}
+
+// Flags (leaf-list): LSP Type-Block flags.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/flags"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) Flags() *IsisRouter_LinkStateDatabase_Lsps_FlagsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_FlagsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Flags (leaf-list): LSP Type-Block flags.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/flags"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) Flags() *IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_FlagsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsType (leaf): IS Type - bits 1 and 2 indicate the type of Intermediate System.
+//
+//	1 - ( i.e. bit 1 set) Level 1 Intermediate system.
+//	2 - Unused value.
+//	3 - (i.e. bits 1 and 2 set) Level 2 Intermediate system.
+//
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/is-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) IsType() *IsisRouter_LinkStateDatabase_Lsps_IsTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_IsTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "is-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsType (leaf): IS Type - bits 1 and 2 indicate the type of Intermediate System.
+//
+//	1 - ( i.e. bit 1 set) Level 1 Intermediate system.
+//	2 - Unused value.
+//	3 - (i.e. bits 1 and 2 set) Level 2 Intermediate system.
+//
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/is-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/is-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) IsType() *IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_IsTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "is-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LspId (leaf): LSP ID of the LSP, e.g. '640000000001-00-00'.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/lsp-id"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) LspId() *IsisRouter_LinkStateDatabase_Lsps_LspIdPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_LspIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "lsp-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LspId (leaf): LSP ID of the LSP, e.g. '640000000001-00-00'.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/lsp-id"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/lsp-id"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) LspId() *IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_LspIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "lsp-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PduLength (leaf): Total length of the LSP.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/pdu-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) PduLength() *IsisRouter_LinkStateDatabase_Lsps_PduLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "pdu-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PduLength (leaf): Total length of the LSP.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/pdu-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-length"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) PduLength() *IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "pdu-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PduType (leaf): Link State PDU type.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/pdu-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) PduType() *IsisRouter_LinkStateDatabase_Lsps_PduTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "pdu-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PduType (leaf): Link State PDU type.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/pdu-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) PduType() *IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "pdu-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RemainingLifetime (leaf): Remaining lifetime in seconds before the LSP expiration.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/remaining-lifetime"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) RemainingLifetime() *IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "remaining-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RemainingLifetime (leaf): Remaining lifetime in seconds before the LSP expiration.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/remaining-lifetime"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/remaining-lifetime"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) RemainingLifetime() *IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_RemainingLifetimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "remaining-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SequenceNumber (leaf): Sequence number of the LSP.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/sequence-number"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) SequenceNumber() *IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sequence-number"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SequenceNumber (leaf): Sequence number of the LSP.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/sequence-number"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/sequence-number"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) SequenceNumber() *IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_SequenceNumberPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sequence-number"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Tlvs (container): This container defines Link State PDU TLVs. When there are multiple occurences of a  specific TLV
+// in a LSP, the data in the TLVs are combined and stored in the corresponding TLV container defined below.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "tlvs"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs"
+func (n *IsisRouter_LinkStateDatabase_LspsPath) Tlvs() *IsisRouter_LinkStateDatabase_Lsps_TlvsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_TlvsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Tlvs (container): This container defines Link State PDU TLVs. When there are multiple occurences of a  specific TLV
+// in a LSP, the data in the TLVs are combined and stored in the corresponding TLV container defined below.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "tlvs"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs"
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) Tlvs() *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_TlvsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_TlvsPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny struct {
+	*ygot.NodePath
+}
+
+// ExtendedIpv4Reachability (container): This container describes list of Extended-IPv4-Reachability as defined in TLV 135.
+// It is advertised when the 'wide metric' is enabled.
+// When there are multiple occurences of Extended-IPv4-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "extended-ipv4-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) ExtendedIpv4Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"extended-ipv4-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtendedIpv4Reachability (container): This container describes list of Extended-IPv4-Reachability as defined in TLV 135.
+// It is advertised when the 'wide metric' is enabled.
+// When there are multiple occurences of Extended-IPv4-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "extended-ipv4-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) ExtendedIpv4Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"extended-ipv4-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtendedIsReachability (container): This container defines list of ISIS extended reachability
+// neighbors and attributes.
+// This container describes list of Extended-IS-Reachability as defined in TLV 22.
+// When there are multiple occurences of Extended-IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "extended-is-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) ExtendedIsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"extended-is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ExtendedIsReachability (container): This container defines list of ISIS extended reachability
+// neighbors and attributes.
+// This container describes list of Extended-IS-Reachability as defined in TLV 22.
+// When there are multiple occurences of Extended-IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "extended-is-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) ExtendedIsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"extended-is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostnames (container): This container describes list of Hostnames as defined in TLV 137.
+// When there are multiple occurences of Hostname TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'hostname' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "hostnames"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Hostnames() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"hostnames"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostnames (container): This container describes list of Hostnames as defined in TLV 137.
+// When there are multiple occurences of Hostname TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'hostname' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "hostnames"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Hostnames() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"hostnames"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4ExternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 130.
+// This is advertised when the origin-type is set 'external' in route range configuration.
+// When there are multiple occurences of IPv4-external-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "ipv4-external-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Ipv4ExternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv4-external-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4ExternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 130.
+// This is advertised when the origin-type is set 'external' in route range configuration.
+// When there are multiple occurences of IPv4-external-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "ipv4-external-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Ipv4ExternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv4-external-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4InternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 128.
+// This is advertised when the origin-type is set 'internal' in route range configuration.
+// When there are multiple occurences of IPv4-Internal-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "ipv4-internal-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Ipv4InternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv4-internal-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv4InternalReachability (container): This container describes list of IPv4-Internal-Reachability as defined in TLV 128.
+// This is advertised when the origin-type is set 'internal' in route range configuration.
+// When there are multiple occurences of IPv4-Internal-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "ipv4-internal-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Ipv4InternalReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv4-internal-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv6Reachability (container): This container describes list of IPv6 Reachability as defined in TLV 236.
+// When there are multiple occurences of IPv6-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "ipv6-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) Ipv6Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv6-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Ipv6Reachability (container): This container describes list of IPv6 Reachability as defined in TLV 236.
+// When there are multiple occurences of IPv6-Reachability TLVs in a LSP,
+// the data in the TLVs are combined and stored in the 'prefixes' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "ipv6-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) Ipv6Reachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"ipv6-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsReachability (container): This container describes list of ISIS neighbors and
+// attributes.
+// This container describes list of IS-Reachability as defined in TLV 2.
+// When there are multiple occurences of IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "is-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPath) IsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsReachability (container): This container describes list of ISIS neighbors and
+// attributes.
+// This container describes list of IS-Reachability as defined in TLV 2.
+// When there are multiple occurences of IS-Reachability TLVs
+// in a LSP, the data in the TLVs are combined and stored in the 'neighbors' list.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "is-reachability"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability"
+func (n *IsisRouter_LinkStateDatabase_Lsps_TlvsPathAny) IsReachability() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"is-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixAny (list): This list describes IPv4 extended prefixes and
+// attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): This list describes IPv4 extended prefixes and
+// attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list describes IPv4 extended prefixes and
+// attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list describes IPv4 extended prefixes and
+// attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny struct {
+	*ygot.NodePath
+}
+
+// Metric (leaf): ISIS wide metric.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Metric (leaf): ISIS wide metric.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_MetricPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within extended reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within extended reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-attributes"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-attributes"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny struct {
+	*ygot.NodePath
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "flags"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPath) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "flags"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesPathAny) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes_FlagsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// NeighborAny (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+// SystemId (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+// SystemId (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+// SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPath) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): This list describes ISIS extended neighbors and
+// reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor"
+// SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachabilityPathAny) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny struct {
+	*ygot.NodePath
+}
+
+// SystemId (leaf): System-id of the neighbor.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/system-id"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPath) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SystemId (leaf): System-id of the neighbor.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/system-id"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_NeighborPathAny) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability_Neighbor_SystemIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny struct {
+	*ygot.NodePath
+}
+
+// Hostname (leaf-list): Host name of the originating node.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/hostname"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPath) Hostname() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "hostname"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Hostname (leaf-list): Host name of the originating node.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/hostname"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/hostnames/state/hostname"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_HostnamesPathAny) Hostname() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Hostnames_HostnamePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "hostname"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixAny (list): IPv4 external prefixes and reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): IPv4 external prefixes and reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 external prefixes and reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 external prefixes and reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny struct {
+	*ygot.NodePath
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/default-metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/default-metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_DefaultMetricPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/origin-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/origin-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_OriginTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4ExternalReachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixAny (list): IPv4 prefixes and internal reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): IPv4 prefixes and internal reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 prefixes and internal reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): IPv4 prefixes and internal reachability attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny struct {
+	*ygot.NodePath
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/default-metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DefaultMetric (leaf): ISIS default metric value.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/default-metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/default-metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) DefaultMetric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_DefaultMetricPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "default-metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/origin-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/origin-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_OriginTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv4 prefix contained within reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv4 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv4InternalReachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// PrefixAny (list): This list defines IPv6 extended prefix attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): This list defines IPv6 extended prefix attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+// Prefix (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny) PrefixAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list defines IPv6 extended prefix attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPath) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): This list defines IPv6 extended prefix attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "prefixes/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix"
+// Prefix: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6ReachabilityPathAny) Prefix(Prefix string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny struct {
+	*ygot.NodePath
+}
+
+// Metric (leaf): ISIS wide metric value.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Metric (leaf): ISIS wide metric value.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/metric"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/metric"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) Metric() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_MetricPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/origin-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OriginType (leaf): The origin of the advertised route-internal or external to the ISIS area.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/origin-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) OriginType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_OriginTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "origin-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv6 prefix contained within extended reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Prefix (leaf): IPv6 prefix contained within extended reachability TLVs.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) Prefix() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-attributes"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixAttributes (container): This container defines sub-TLV 4.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-attributes"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) PrefixAttributes() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-attributes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv6 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PrefixLength (leaf): The length of the IPv6 prefix.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/prefix-length"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-length"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) PrefixLength() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixLengthPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPath) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RedistributionType (leaf): The up/down bit. Set if a prefix is advertised from a
+// higher level to a lower level
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/redistribution-type"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_PrefixPathAny) RedistributionType() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_RedistributionTypePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "redistribution-type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny struct {
+	*ygot.NodePath
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "flags"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPath) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Flags (leaf-list): Additional prefix reachability flags.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "flags"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributesPathAny) Flags() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_Ipv6Reachability_Prefix_PrefixAttributes_FlagsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny struct {
+	*ygot.NodePath
+}
+
+// NeighborAny (list): IS reachability neighbor attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+// SystemId (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// NeighborAny (list): IS reachability neighbor attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+// SystemId (wildcarded): string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny) NeighborAny() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": "*"},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): IS reachability neighbor attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+// SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPath) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// Neighbor (list): IS reachability neighbor attributes.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "neighbors/neighbor"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor"
+// SystemId: string
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachabilityPathAny) Neighbor(SystemId string) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"neighbors", "neighbor"},
+			map[string]interface{}{"system-id": SystemId},
+			n,
+		),
+	}
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath struct {
+	*ygot.NodePath
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id YANG schema element.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny struct {
+	*ygot.NodePath
+}
+
+// SystemId (leaf): System-ID of IS neighbor, e.g. '640100010000'.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/system-id"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPath) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "system-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SystemId (leaf): System-ID of IS neighbor, e.g. '640100010000'.
+// ----------------------------------------
+// Defining module: "open-traffic-generator-isis"
+// Instantiating module: "open-traffic-generator-isis"
+// Path from parent: "state/system-id"
+// Path from root: "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/is-reachability/neighbors/neighbor/state/system-id"
+func (n *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborPathAny) SystemId() *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny {
+	return &IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_Neighbor_SystemIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "system-id"},
 			map[string]interface{}{},
 			n,
 		),

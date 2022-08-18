@@ -105,7 +105,13 @@ func QualifiedTypeString(value interface{}, md *Metadata) string {
 		pathStr = fmt.Sprintf("target: %v, path: %s", md.Path.GetTarget(), pathStr)
 	}
 
-	return fmt.Sprintf("\nTimestamp: %v\n%s\nVal: %s\n%s\n", md.Timestamp, pathStr, valStr, md.ComplianceErrors)
+	return fmt.Sprintf(`
+Timestamp: %v
+RecvTimestamp: %v
+%s
+Val: %s
+%s
+`, md.Timestamp, md.RecvTimestamp, pathStr, valStr, md.ComplianceErrors)
 }
 
 // TelemetryError stores the path, value, and error string from unsuccessfully

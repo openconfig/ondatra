@@ -22,6 +22,7 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/ixnet"
 )
 
 // Actions is the ATE Actions API.
@@ -130,10 +131,10 @@ func (n *BGPPeerNotification) String() string {
 }
 
 // WithPeers sets the BGP peers from which the notification is to be sent.
-func (n *BGPPeerNotification) WithPeers(bgpPeers ...*BGPPeer) *BGPPeerNotification {
+func (n *BGPPeerNotification) WithPeers(bgpPeers ...*ixnet.BGPPeer) *BGPPeerNotification {
 	n.peerIDs = nil
 	for _, bgpPeer := range bgpPeers {
-		n.peerIDs = append(n.peerIDs, bgpPeer.pb.GetId())
+		n.peerIDs = append(n.peerIDs, bgpPeer.ID())
 	}
 	return n
 }

@@ -38,6 +38,38 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		5: {Name: "OPEN_CONFIRM"},
 		6: {Name: "ESTABLISHED"},
 	},
+	"E_ExtendedIpv4Reachability_Prefix_RedistributionType": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+	},
+	"E_Ipv4ExternalReachability_Prefix_OriginType": {
+		1: {Name: "INTERNAL"},
+		2: {Name: "EXTERNAL"},
+	},
+	"E_Ipv4ExternalReachability_Prefix_RedistributionType": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+	},
+	"E_Ipv6Reachability_Prefix_OriginType": {
+		1: {Name: "INTERNAL"},
+		2: {Name: "EXTERNAL"},
+	},
+	"E_Ipv6Reachability_Prefix_RedistributionType": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+	},
+	"E_Lsps_Flags": {
+		1: {Name: "PARTITION_REPAIR"},
+		2: {Name: "ATTACHED_ERROR"},
+		3: {Name: "ATTACHED_EXPENSE"},
+		4: {Name: "ATTACHED_DELAY"},
+		5: {Name: "ATTACHED_DEFAULT"},
+		6: {Name: "OVERLOAD"},
+	},
+	"E_Lsps_PduType": {
+		1: {Name: "LEVEL_1"},
+		2: {Name: "LEVEL_2"},
+	},
 	"E_Port_Link": {
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
@@ -49,6 +81,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "NO_EXPORT_SUBCONFED"},
 		5: {Name: "LLGR_STALE"},
 		6: {Name: "NO_LLGR"},
+	},
+	"E_State_Flags": {
+		1: {Name: "EXTERNAL_FLAG"},
+		2: {Name: "READVERTISEMENT_FLAG"},
+		3: {Name: "NODE_FLAG"},
 	},
 	"E_State_SegmentType": {
 		1: {Name: "AS_SEQUENCE"},
@@ -91,6 +128,39 @@ func initΛEnumTypes() {
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags": {
+			reflect.TypeOf((E_Lsps_Flags)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type": {
+			reflect.TypeOf((E_Lsps_PduType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags": {
+			reflect.TypeOf((E_State_Flags)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type": {
+			reflect.TypeOf((E_ExtendedIpv4Reachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type": {
+			reflect.TypeOf((E_Ipv4ExternalReachability_Prefix_OriginType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/redistribution-type": {
+			reflect.TypeOf((E_Ipv4ExternalReachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/origin-type": {
+			reflect.TypeOf((E_Ipv4ExternalReachability_Prefix_OriginType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-internal-reachability/prefixes/prefix/state/redistribution-type": {
+			reflect.TypeOf((E_Ipv4ExternalReachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/origin-type": {
+			reflect.TypeOf((E_Ipv6Reachability_Prefix_OriginType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags": {
+			reflect.TypeOf((E_State_Flags)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type": {
+			reflect.TypeOf((E_Ipv6Reachability_Prefix_RedistributionType)(0)),
 		},
 		"/ports/port/state/link": {
 			reflect.TypeOf((E_Port_Link)(0)),

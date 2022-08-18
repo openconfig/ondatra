@@ -19,6 +19,7 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"net"
+	"net/http"
 	"sync"
 
 	log "github.com/golang/glog"
@@ -26,8 +27,17 @@ import (
 	"google.golang.org/grpc/metadata"
 	"github.com/openconfig/gnmi/errlist"
 	"github.com/openconfig/ondatra/proxy/grpcproxy"
+	"github.com/openconfig/ondatra/proxy/httpovergrpc"
+
+	hpb "github.com/openconfig/ondatra/proxy/proto/httpovergrpc"
 	rpb "github.com/openconfig/ondatra/proxy/proto/reservation"
 )
+
+// HTTPDoCloser provides the required interface for clients to the proxy.
+type HTTPDoCloser interface {
+	Do(req *http.Request) (*http.Response, error)
+	Close() error
+}
 
 // Dialer adds lower level binding interface for proxied connections
 // to the base ondatra.Binding interface. Binding implementors are only expected
@@ -43,19 +53,32 @@ type Dialer interface {
 	// Resolve will return the resolved devices/ates and related services for the
 	// resolved topology.
 	Resolve() (*rpb.Reservation, error)
+
+	// HTTPClient provides an HTTP Client that can connect to the provided target.
+	HTTPClient(target string) (HTTPDoCloser, error)
 }
 
 // Proxy will create a set of proxy listeners based on the provided testbed.
 // The proxy implementation relies on the underlying proxy interface for
 // allowing custom dial functions.
 type Proxy struct {
-	proxies map[string]*proxy
-	dialer  Dialer
-	resv    *rpb.Reservation
-	sOpts   []grpc.ServerOption
+	gProxies map[string]*grpcProxy
+	hProxies map[string]*httpProxy
+	dialer   Dialer
+	resv     *rpb.Reservation
+	sOpts    []grpc.ServerOption
 }
 
-type proxy struct {
+type httpProxy struct {
+	srv        grpcproxy.GRPCServer
+	targetAddr string
+	localAddr  string
+	c          HTTPDoCloser
+	errMu      sync.Mutex
+	err        error
+}
+
+type grpcProxy struct {
 	srv        grpcproxy.GRPCServer
 	targetAddr string
 	localAddr  string
@@ -73,18 +96,29 @@ func New(d Dialer, sOpts ...grpc.ServerOption) (*Proxy, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Infof("Setting up proxies for: %s", resv)
 	p := &Proxy{
-		proxies: map[string]*proxy{},
-		dialer:  d,
-		resv:    resv,
-		sOpts:   sOpts,
+		gProxies: map[string]*grpcProxy{},
+		hProxies: map[string]*httpProxy{},
+		dialer:   d,
+		resv:     resv,
+		sOpts:    sOpts,
 	}
+
 	for k, d := range resv.GetDevices() {
-		if err := p.add(k, d); err != nil {
+		if err := p.addGRPC(k, d); err != nil {
+			return nil, err
+		}
+	}
+	for k, a := range resv.GetAtes() {
+		if err := p.addHTTP(k, a); err != nil {
 			return nil, err
 		}
 	}
 	if err := grpcproxy.RegisterMetricViews(); err != nil {
+		return nil, err
+	}
+	if err := httpovergrpc.RegisterMetricViews(); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -101,7 +135,14 @@ type Endpoint struct {
 // and their state.
 func (p *Proxy) Endpoints() map[string]Endpoint {
 	ep := map[string]Endpoint{}
-	for k, v := range p.proxies {
+	for k, v := range p.gProxies {
+		ep[k] = Endpoint{
+			TargetName: k,
+			TargetAddr: v.targetAddr,
+			Addr:       v.localAddr,
+		}
+	}
+	for k, v := range p.hProxies {
 		ep[k] = Endpoint{
 			TargetName: k,
 			TargetAddr: v.targetAddr,
@@ -114,8 +155,19 @@ func (p *Proxy) Endpoints() map[string]Endpoint {
 // Stop will shutdown all current proxies.
 func (p *Proxy) Stop() error {
 	var errs errlist.List
-	for _, s := range p.proxies {
+	for _, s := range p.gProxies {
 		s.srv.Stop()
+		func() {
+			s.errMu.Lock()
+			defer s.errMu.Unlock()
+			errs.Add(s.err)
+		}()
+	}
+	for _, s := range p.hProxies {
+		s.srv.Stop()
+		if err := s.c.Close(); err != nil {
+			errs.Add(err)
+		}
 		func() {
 			s.errMu.Lock()
 			defer s.errMu.Unlock()
@@ -125,8 +177,8 @@ func (p *Proxy) Stop() error {
 	return errs.Err()
 }
 
-func (p *Proxy) add(key string, d *rpb.ResolvedDevice) error {
-	if _, ok := p.proxies[key]; ok {
+func (p *Proxy) addGRPC(key string, d *rpb.ResolvedDevice) error {
+	if _, ok := p.gProxies[key]; ok {
 		log.Infof("gRPC server already registered for device %q ignoring other grpc services", d.GetName())
 		return nil
 	}
@@ -154,17 +206,56 @@ func (p *Proxy) add(key string, d *rpb.ResolvedDevice) error {
 	if err != nil {
 		return fmt.Errorf("failed to create new gRPC proxy server: %v", err)
 	}
-	grpcProxy := &proxy{
+	gProxy := &grpcProxy{
 		srv:        srv,
 		localAddr:  lis.Addr().String(),
 		targetAddr: s.GetProxiedGrpc().GetAddress(),
 	}
 	go func() {
-		grpcProxy.errMu.Lock()
-		defer grpcProxy.errMu.Unlock()
-		grpcProxy.err = srv.Serve(lis)
+		gProxy.errMu.Lock()
+		defer gProxy.errMu.Unlock()
+		gProxy.err = srv.Serve(lis)
 	}()
-	p.proxies[key] = grpcProxy
-	log.Infof("Added grpc proxy for %q on %s", key, grpcProxy.localAddr)
+	p.gProxies[key] = gProxy
+	log.Infof("Added grpc proxy for %q on %s", key, gProxy.localAddr)
+	return nil
+}
+
+func (p *Proxy) addHTTP(key string, d *rpb.ResolvedDevice) error {
+	log.Infof("Adding HTTP proxy for %q", key)
+	if _, ok := p.hProxies[key]; ok {
+		log.Infof("HTTP server already registered for device %q ignoring other grpc services", d.GetName())
+		return nil
+	}
+	s, ok := d.GetServices()["http"]
+	if !ok || s.GetHttpOverGrpc().GetAddress() == "" {
+		log.Infof("No service found for %q", key)
+		return nil
+	}
+	lis, err := net.Listen("tcp", ":0")
+	if err != nil {
+		return fmt.Errorf("failed to create listen port for %q: %w", key, err)
+	}
+	targetAddr := s.GetHttpOverGrpc().GetAddress()
+	c, err := p.dialer.HTTPClient(targetAddr)
+	if err != nil {
+		return fmt.Errorf("failed to create new HTTP client: %w", err)
+	}
+	sProxy := httpovergrpc.New(httpovergrpc.WithClient(c))
+	srv := grpc.NewServer(p.sOpts...)
+	hpb.RegisterHTTPOverGRPCServer(srv, sProxy)
+	hProxy := &httpProxy{
+		srv:        srv,
+		c:          c,
+		localAddr:  lis.Addr().String(),
+		targetAddr: s.GetHttpOverGrpc().GetAddress(),
+	}
+	go func() {
+		hProxy.errMu.Lock()
+		defer hProxy.errMu.Unlock()
+		hProxy.err = srv.Serve(lis)
+	}()
+	p.hProxies[key] = hProxy
+	log.Infof("Added httpovergrpc proxy for %q on %s", key, hProxy.localAddr)
 	return nil
 }

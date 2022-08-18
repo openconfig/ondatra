@@ -1621,7 +1621,13 @@ func TestQualifiedTypeString(t *testing.T) {
 				Name: "network-instance",
 				Key:  map[string]string{"name": "master"},
 			}}},
-		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
+		want: `
+Timestamp: 0001-01-01 00:00:00 +0000 UTC
+RecvTimestamp: 0001-01-01 00:00:00 +0000 UTC
+target: , path: /network-instances/network-instance[name=master]
+Val: <nil> (not present)
+
+`,
 	}, {
 		desc:  "typed nil",
 		value: (*LeafContainerStruct)(nil),
@@ -1634,7 +1640,13 @@ func TestQualifiedTypeString(t *testing.T) {
 				Name: "network-instance",
 				Key:  map[string]string{"name": "master"},
 			}}},
-		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
+		want: `
+Timestamp: 0001-01-01 00:00:00 +0000 UTC
+RecvTimestamp: 0001-01-01 00:00:00 +0000 UTC
+target: , path: /network-instances/network-instance[name=master]
+Val: <nil> (not present)
+
+`,
 	}, {
 		desc:  "typed nil and GoStruct",
 		value: (*Device)(nil),
@@ -1647,12 +1659,25 @@ func TestQualifiedTypeString(t *testing.T) {
 				Name: "network-instance",
 				Key:  map[string]string{"name": "master"},
 			}}},
-		want: "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\ntarget: , path: /network-instances/network-instance[name=master]\nVal: <nil> (not present)\n\n",
+		want: `
+Timestamp: 0001-01-01 00:00:00 +0000 UTC
+RecvTimestamp: 0001-01-01 00:00:00 +0000 UTC
+target: , path: /network-instances/network-instance[name=master]
+Val: <nil> (not present)
+
+`,
 	}, {
 		desc:  "non-nil validated struct",
 		value: &Device{},
 		time:  time.Time{},
-		want:  "\nTimestamp: 0001-01-01 00:00:00 +0000 UTC\n\nVal: \n{}\n\n",
+		want: `
+Timestamp: 0001-01-01 00:00:00 +0000 UTC
+RecvTimestamp: 0001-01-01 00:00:00 +0000 UTC
+
+Val: 
+{}
+
+`,
 	}}
 
 	for _, tt := range tests {

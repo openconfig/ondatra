@@ -15,299 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
-	t.Helper()
-	goStruct := &oc.System_Dns_HostEntry{}
-	md, ok := oc.Lookup(t, n, "System_Dns_HostEntry", goStruct, true, true)
-	if ok {
-		return convertSystem_Dns_HostEntry_Ipv6AddressPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) Get(t testing.TB) []string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Dns_HostEntry_Ipv6AddressPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedStringSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Dns_HostEntry{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns_HostEntry", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Dns_HostEntry_Ipv6AddressPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address with a ONCE subscription.
-func (n *System_Dns_HostEntry_Ipv6AddressPathAny) Get(t testing.TB) [][]string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address in the given batch object.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) Replace(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address in the given batch object.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) Update(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/host-entries/host-entry/config/ipv6-address in the given batch object.
-func (n *System_Dns_HostEntry_Ipv6AddressPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertSystem_Dns_HostEntry_Ipv6AddressPath extracts the value of the leaf Ipv6Address from its parent oc.System_Dns_HostEntry
-// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
-func convertSystem_Dns_HostEntry_Ipv6AddressPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Dns_HostEntry) *oc.QualifiedStringSlice {
-	t.Helper()
-	qv := &oc.QualifiedStringSlice{
-		Metadata: md,
-	}
-	val := parent.Ipv6Address
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-system/system/dns/config/search with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Dns_SearchPath) Lookup(t testing.TB) *oc.QualifiedStringSlice {
-	t.Helper()
-	goStruct := &oc.System_Dns{}
-	md, ok := oc.Lookup(t, n, "System_Dns", goStruct, true, true)
-	if ok {
-		return convertSystem_Dns_SearchPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/dns/config/search with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Dns_SearchPath) Get(t testing.TB) []string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/dns/config/search with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Dns_SearchPathAny) Lookup(t testing.TB) []*oc.QualifiedStringSlice {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedStringSlice
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Dns{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertSystem_Dns_SearchPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/dns/config/search with a ONCE subscription.
-func (n *System_Dns_SearchPathAny) Get(t testing.TB) [][]string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data [][]string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/dns/config/search.
-func (n *System_Dns_SearchPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/config/search in the given batch object.
-func (n *System_Dns_SearchPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/dns/config/search.
-func (n *System_Dns_SearchPath) Replace(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/config/search in the given batch object.
-func (n *System_Dns_SearchPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-system/system/dns/config/search.
-func (n *System_Dns_SearchPath) Update(t testing.TB, val []string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/config/search in the given batch object.
-func (n *System_Dns_SearchPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val []string) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertSystem_Dns_SearchPath extracts the value of the leaf Search from its parent oc.System_Dns
-// and combines the update with an existing Metadata to return a *oc.QualifiedStringSlice.
-func convertSystem_Dns_SearchPath(t testing.TB, md *genutil.Metadata, parent *oc.System_Dns) *oc.QualifiedStringSlice {
-	t.Helper()
-	qv := &oc.QualifiedStringSlice{
-		Metadata: md,
-	}
-	val := parent.Search
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-system/system/dns/servers/server with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *System_Dns_ServerPath) Lookup(t testing.TB) *oc.QualifiedSystem_Dns_Server {
-	t.Helper()
-	goStruct := &oc.System_Dns_Server{}
-	md, ok := oc.Lookup(t, n, "System_Dns_Server", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedSystem_Dns_Server{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-system/system/dns/servers/server with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *System_Dns_ServerPath) Get(t testing.TB) *oc.System_Dns_Server {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-system/system/dns/servers/server with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *System_Dns_ServerPathAny) Lookup(t testing.TB) []*oc.QualifiedSystem_Dns_Server {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedSystem_Dns_Server
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.System_Dns_Server{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_Dns_Server", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedSystem_Dns_Server{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-system/system/dns/servers/server with a ONCE subscription.
-func (n *System_Dns_ServerPathAny) Get(t testing.TB) []*oc.System_Dns_Server {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.System_Dns_Server
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-system/system/dns/servers/server.
-func (n *System_Dns_ServerPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-system/system/dns/servers/server in the given batch object.
-func (n *System_Dns_ServerPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-system/system/dns/servers/server.
-func (n *System_Dns_ServerPath) Replace(t testing.TB, val *oc.System_Dns_Server) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-system/system/dns/servers/server in the given batch object.
-func (n *System_Dns_ServerPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.System_Dns_Server) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-system/system/dns/servers/server.
-func (n *System_Dns_ServerPath) Update(t testing.TB, val *oc.System_Dns_Server) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-system/system/dns/servers/server in the given batch object.
-func (n *System_Dns_ServerPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.System_Dns_Server) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
 // Lookup fetches the value at /openconfig-system/system/dns/servers/server/config/address with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_Dns_Server_AddressPath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -704,6 +411,107 @@ func (n *System_GrpcServerPath) BatchUpdate(t testing.TB, b *config.SetRequestBa
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_GrpcServer_CaTrustBundleIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_GrpcServer{}
+	md, ok := oc.Lookup(t, n, "System_GrpcServer", goStruct, true, true)
+	if ok {
+		return convertSystem_GrpcServer_CaTrustBundleIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_GrpcServer_CaTrustBundleIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_GrpcServer_CaTrustBundleIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_GrpcServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_GrpcServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_GrpcServer_CaTrustBundleIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id with a ONCE subscription.
+func (n *System_GrpcServer_CaTrustBundleIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id.
+func (n *System_GrpcServer_CaTrustBundleIdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id in the given batch object.
+func (n *System_GrpcServer_CaTrustBundleIdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id.
+func (n *System_GrpcServer_CaTrustBundleIdPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id in the given batch object.
+func (n *System_GrpcServer_CaTrustBundleIdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id.
+func (n *System_GrpcServer_CaTrustBundleIdPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/grpc-servers/grpc-server/config/ca-trust-bundle-id in the given batch object.
+func (n *System_GrpcServer_CaTrustBundleIdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_GrpcServer_CaTrustBundleIdPath extracts the value of the leaf CaTrustBundleId from its parent oc.System_GrpcServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_GrpcServer_CaTrustBundleIdPath(t testing.TB, md *genutil.Metadata, parent *oc.System_GrpcServer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.CaTrustBundleId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-id with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_GrpcServer_CertificateIdPath) Lookup(t testing.TB) *oc.QualifiedString {
@@ -805,6 +613,107 @@ func convertSystem_GrpcServer_CertificateIdPath(t testing.TB, md *genutil.Metada
 	return qv
 }
 
+// Lookup fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_GrpcServer{}
+	md, ok := oc.Lookup(t, n, "System_GrpcServer", goStruct, true, true)
+	if ok {
+		return convertSystem_GrpcServer_CertificateRevocationListBundleIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_GrpcServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_GrpcServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_GrpcServer_CertificateRevocationListBundleIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id with a ONCE subscription.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id in the given batch object.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id in the given batch object.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/grpc-servers/grpc-server/config/certificate-revocation-list-bundle-id in the given batch object.
+func (n *System_GrpcServer_CertificateRevocationListBundleIdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_GrpcServer_CertificateRevocationListBundleIdPath extracts the value of the leaf CertificateRevocationListBundleId from its parent oc.System_GrpcServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_GrpcServer_CertificateRevocationListBundleIdPath(t testing.TB, md *genutil.Metadata, parent *oc.System_GrpcServer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.CertificateRevocationListBundleId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/enable with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *System_GrpcServer_EnablePath) Lookup(t testing.TB) *oc.QualifiedBool {
@@ -900,6 +809,107 @@ func convertSystem_GrpcServer_EnablePath(t testing.TB, md *genutil.Metadata, par
 		Metadata: md,
 	}
 	val := parent.Enable
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) Lookup(t testing.TB) *oc.QualifiedString {
+	t.Helper()
+	goStruct := &oc.System_GrpcServer{}
+	md, ok := oc.Lookup(t, n, "System_GrpcServer", goStruct, true, true)
+	if ok {
+		return convertSystem_GrpcServer_GnmiPathzPolicyIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) Get(t testing.TB) string {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedString
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.System_GrpcServer{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "System_GrpcServer", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertSystem_GrpcServer_GnmiPathzPolicyIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id with a ONCE subscription.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPathAny) Get(t testing.TB) []string {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []string
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id in the given batch object.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) Replace(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id in the given batch object.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) Update(t testing.TB, val string) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-system/system/grpc-servers/grpc-server/config/gnmi-pathz-policy-id in the given batch object.
+func (n *System_GrpcServer_GnmiPathzPolicyIdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertSystem_GrpcServer_GnmiPathzPolicyIdPath extracts the value of the leaf GnmiPathzPolicyId from its parent oc.System_GrpcServer
+// and combines the update with an existing Metadata to return a *oc.QualifiedString.
+func convertSystem_GrpcServer_GnmiPathzPolicyIdPath(t testing.TB, md *genutil.Metadata, parent *oc.System_GrpcServer) *oc.QualifiedString {
+	t.Helper()
+	qv := &oc.QualifiedString{
+		Metadata: md,
+	}
+	val := parent.GnmiPathzPolicyId
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

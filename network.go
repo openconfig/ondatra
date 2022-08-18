@@ -126,7 +126,7 @@ func (n *Network) ISIS() *ixnet.IPReachabilityConfig {
 //	Active: true
 //	Origin: IGP
 //	ASN set mode: AS-SEQ
-func (n *Network) BGP() *BGPAttributes {
+func (n *Network) BGP() *ixnet.BGPAttributes {
 	if n.pb.BgpAttributes == nil {
 		n.pb.BgpAttributes = &opb.BgpAttributes{
 			Active:                true,
@@ -135,7 +135,7 @@ func (n *Network) BGP() *BGPAttributes {
 			AdvertisementProtocol: opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_SAME_AS_ROUTE,
 		}
 	}
-	return &BGPAttributes{pb: n.pb.BgpAttributes}
+	return ixnet.NewBGPAttributes(n.pb.BgpAttributes)
 }
 
 // ImportedBGPRoutes creates a BGP route import configuration for the network or
