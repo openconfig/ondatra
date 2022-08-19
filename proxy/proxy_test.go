@@ -52,14 +52,6 @@ func (fb *fakeBinding) Resolve() (*rpb.Reservation, error) {
 	return fb.resolve()
 }
 
-type httpClient struct {
-	*http.Client
-}
-
-func (h *httpClient) Close() error {
-	return nil
-}
-
 func (fb *fakeBinding) HTTPClient(target string) (HTTPDoCloser, error) {
 	return fb.httpDialer(target)
 }
@@ -340,7 +332,7 @@ func setupHTTP(t *testing.T, target string) (*fakeHTTPServer, *fakeBinding) {
 		if target == "error_target" {
 			return nil, fmt.Errorf("invalid target")
 		}
-		return &httpClient{&http.Client{Transport: f}}, nil
+		return WrapHTTPDoCloser(&http.Client{Transport: f}), nil
 	}
 	return f, b
 }

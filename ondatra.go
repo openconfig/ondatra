@@ -30,6 +30,7 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/flags"
+	"github.com/openconfig/ondatra/internal/junitxml"
 	"github.com/openconfig/ondatra/internal/testbed"
 )
 
@@ -64,6 +65,15 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 		return fmt.Errorf("failed to create binding: %w", err)
 	}
 	setBindingFn(b)
+
+	var xmlConv *junitxml.Converter
+	if fv.XMLPath != "" {
+		xmlConv, err = junitxml.StartConverter(fv.XMLPath)
+		if err != nil {
+			return fmt.Errorf("error starting JUnit XML converter: %w", err)
+		}
+	}
+
 	debugger.TestStarted(fv.Debug)
 	if err := reserveFn(fv); err != nil {
 		return err
@@ -83,6 +93,11 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 
 	runFn(m)
 
+	if xmlConv != nil {
+		if err := xmlConv.Stop(); err != nil {
+			return fmt.Errorf("error stopping JUnit XML converter: %w", err)
+		}
+	}
 	return nil
 }
 

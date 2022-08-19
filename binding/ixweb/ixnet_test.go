@@ -22,6 +22,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func TestOpArgs(t *testing.T) {
@@ -40,6 +41,51 @@ func TestOpArgs(t *testing.T) {
 	}
 	if got1, got2 := output.Arg1, output.Arg2; got1 != want1 || got2 != want2 {
 		t.Errorf("OpArgs unmarshal got [%s, %s], want [%s, %s]", got1, got2, want1, want2)
+	}
+}
+
+func TestFetchSessions(t *testing.T) {
+	tests := []struct {
+		desc         string
+		doResp       *http.Response
+		wantSessions map[int]string
+		wantErr      string
+	}{{
+		desc:   "success",
+		doResp: fakeResponse(200, `[{"id": 1, "sessionName": "session1"}, {"id": 100, "sessionName": "session100"}]`),
+		wantSessions: map[int]string{
+			1:   "session1",
+			100: "session100",
+		},
+	}, {
+		desc:    "error - 500 on fetch",
+		doResp:  fakeResponse(500, ""),
+		wantErr: "500",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			ixn := &IxNetwork{ixweb: &IxWeb{
+				client: &fakeHTTPClient{doResps: []*http.Response{test.doResp}},
+			}}
+			gotSessions, err := ixn.FetchSessions(context.Background())
+			if got, want := err != nil, test.wantErr != ""; got != want {
+				t.Fatalf("FetchSessions() got err %v, want err %v", err, want)
+			}
+
+			if err != nil {
+				if !strings.Contains(err.Error(), test.wantErr) {
+					t.Errorf("FetchSessions() got err %v, want contains %q", err, test.wantErr)
+				}
+			}
+
+			got := map[int]string{}
+			for _, s := range gotSessions {
+				got[s.ID()] = s.Name()
+			}
+			if diff := cmp.Diff(test.wantSessions, got, cmpopts.EquateEmpty()); diff != "" {
+				t.Errorf("FetchSessions() unexpected sessions returned (+want,-got): %s", diff)
+			}
+		})
 	}
 }
 

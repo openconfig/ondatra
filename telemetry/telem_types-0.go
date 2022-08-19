@@ -1442,6 +1442,71 @@ func (w *Component_Chassis_Utilization_ResourceWatcher) Await(t testing.TB) (*Qu
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedComponent_ControllerCard is a *Component_ControllerCard with a corresponding timestamp.
+type QualifiedComponent_ControllerCard struct {
+	*genutil.Metadata
+	val     *Component_ControllerCard // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_ControllerCard) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_ControllerCard sample, erroring out if not present.
+func (q *QualifiedComponent_ControllerCard) Val(t testing.TB) *Component_ControllerCard {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_ControllerCard sample.
+func (q *QualifiedComponent_ControllerCard) SetVal(v *Component_ControllerCard) *QualifiedComponent_ControllerCard {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_ControllerCard) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_ControllerCard is a telemetry Collection whose Await method returns a slice of *Component_ControllerCard samples.
+type CollectionComponent_ControllerCard struct {
+	W    *Component_ControllerCardWatcher
+	Data []*QualifiedComponent_ControllerCard
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_ControllerCard) Await(t testing.TB) []*QualifiedComponent_ControllerCard {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_ControllerCardWatcher observes a stream of *Component_ControllerCard samples.
+type Component_ControllerCardWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_ControllerCard
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_ControllerCardWatcher) Await(t testing.TB) (*QualifiedComponent_ControllerCard, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedComponent_Cpu is a *Component_Cpu with a corresponding timestamp.
 type QualifiedComponent_Cpu struct {
 	*genutil.Metadata

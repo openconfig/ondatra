@@ -45,7 +45,7 @@ type Option func(s *Service)
 
 // HTTPDoer provides an interface for round tripping an http request response.
 type HTTPDoer interface {
-	Do(req *http.Request) (*http.Response, error)
+	Do(*http.Request) (*http.Response, error)
 }
 
 // WithClient allows setting the http client for the HTTP over

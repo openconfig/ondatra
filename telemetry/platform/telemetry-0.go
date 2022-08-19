@@ -2374,6 +2374,188 @@ func convertComponent_Chassis_Utilization_Resource_UsedPath(t testing.TB, md *ge
 	return qv
 }
 
+// Lookup fetches the value at /openconfig-platform/components/component/controller-card with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_ControllerCardPath) Lookup(t testing.TB) *oc.QualifiedComponent_ControllerCard {
+	t.Helper()
+	goStruct := &oc.Component_ControllerCard{}
+	md, ok := oc.Lookup(t, n, "Component_ControllerCard", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_ControllerCard{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/controller-card with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_ControllerCardPath) Get(t testing.TB) *oc.Component_ControllerCard {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/controller-card with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_ControllerCardPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_ControllerCard {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_ControllerCard
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_ControllerCard{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_ControllerCard", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_ControllerCard{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/controller-card with a ONCE subscription.
+func (n *Component_ControllerCardPathAny) Get(t testing.TB) []*oc.Component_ControllerCard {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_ControllerCard
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/controller-card with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_ControllerCardPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_ControllerCard {
+	t.Helper()
+	c := &oc.CollectionComponent_ControllerCard{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_ControllerCard) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_ControllerCard{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_ControllerCard)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_ControllerCardPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_ControllerCard) bool) *oc.Component_ControllerCardWatcher {
+	t.Helper()
+	w := &oc.Component_ControllerCardWatcher{}
+	gs := &oc.Component_ControllerCard{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_ControllerCard", gs, queryPath, false, false)
+		qv := (&oc.QualifiedComponent_ControllerCard{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_ControllerCard)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/controller-card with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_ControllerCardPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_ControllerCard) bool) *oc.Component_ControllerCardWatcher {
+	t.Helper()
+	return watch_Component_ControllerCardPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/controller-card with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_ControllerCardPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_ControllerCard) *oc.QualifiedComponent_ControllerCard {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_ControllerCard) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/controller-card failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/controller-card to the batch object.
+func (n *Component_ControllerCardPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/controller-card with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_ControllerCardPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_ControllerCard {
+	t.Helper()
+	c := &oc.CollectionComponent_ControllerCard{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_ControllerCard) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_ControllerCardPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_ControllerCard) bool) *oc.Component_ControllerCardWatcher {
+	t.Helper()
+	w := &oc.Component_ControllerCardWatcher{}
+	structs := map[string]*oc.Component_ControllerCard{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_ControllerCard{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_ControllerCard", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_ControllerCard{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_ControllerCard)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/controller-card with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_ControllerCardPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_ControllerCard) bool) *oc.Component_ControllerCardWatcher {
+	t.Helper()
+	return watch_Component_ControllerCardPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/controller-card to the batch object.
+func (n *Component_ControllerCardPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/cpu with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_CpuPath) Lookup(t testing.TB) *oc.QualifiedComponent_Cpu {
@@ -4913,188 +5095,6 @@ func (n *Component_FabricPathAny) Watch(t testing.TB, timeout time.Duration, pre
 
 // Batch adds /openconfig-platform/components/component/fabric to the batch object.
 func (n *Component_FabricPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/fan with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_FanPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fan {
-	t.Helper()
-	goStruct := &oc.Component_Fan{}
-	md, ok := oc.Lookup(t, n, "Component_Fan", goStruct, false, false)
-	if ok {
-		return (&oc.QualifiedComponent_Fan{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/fan with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_FanPath) Get(t testing.TB) *oc.Component_Fan {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/fan with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_FanPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Fan {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Fan
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Fan{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Fan", goStruct, queryPath, false, false)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Fan{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/fan with a ONCE subscription.
-func (n *Component_FanPathAny) Get(t testing.TB) []*oc.Component_Fan {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Fan
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/fan with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_FanPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Fan {
-	t.Helper()
-	c := &oc.CollectionComponent_Fan{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Fan) bool {
-		copy, err := ygot.DeepCopy(v.Val(t))
-		if err != nil {
-			t.Fatal(err)
-		}
-		c.Data = append(c.Data, (&oc.QualifiedComponent_Fan{
-			Metadata: v.Metadata,
-		}).SetVal(copy.(*oc.Component_Fan)))
-		return false
-	})
-	return c
-}
-
-func watch_Component_FanPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Fan) bool) *oc.Component_FanWatcher {
-	t.Helper()
-	w := &oc.Component_FanWatcher{}
-	gs := &oc.Component_Fan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Fan", gs, queryPath, false, false)
-		qv := (&oc.QualifiedComponent_Fan{
-			Metadata: md,
-		}).SetVal(gs)
-		return []genutil.QualifiedValue{qv}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedComponent_Fan)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/fan with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_FanPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Fan) bool) *oc.Component_FanWatcher {
-	t.Helper()
-	return watch_Component_FanPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/fan with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_FanPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Fan) *oc.QualifiedComponent_Fan {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Fan) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/fan failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/fan to the batch object.
-func (n *Component_FanPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/fan with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_FanPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Fan {
-	t.Helper()
-	c := &oc.CollectionComponent_Fan{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Fan) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_FanPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Fan) bool) *oc.Component_FanWatcher {
-	t.Helper()
-	w := &oc.Component_FanWatcher{}
-	structs := map[string]*oc.Component_Fan{}
-	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.Component_Fan{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Fan", structs[pre], queryPath, false, false)
-			qv := (&oc.QualifiedComponent_Fan{
-				Metadata: md,
-			}).SetVal(structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedComponent_Fan)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/fan with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_FanPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Fan) bool) *oc.Component_FanWatcher {
-	t.Helper()
-	return watch_Component_FanPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/fan to the batch object.
-func (n *Component_FanPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
 }

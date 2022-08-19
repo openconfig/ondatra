@@ -46,7 +46,7 @@ abstract topology and criteria specified in the testbed file.
 ## Running an Ondatra Test
 
 An Ondatra test is a Go test, and so is run with `go test`, albeit with some
-additional flags related to the reservation of the testbed:
+additional flags to control the execution of the test:
 
 *   `-testbed` (*required*): Path to the testbed text proto file.
 *   `-wait_time` (*optional*): Maximum amount of time the test should wait until
@@ -54,6 +54,9 @@ additional flags related to the reservation of the testbed:
     time to wait.
 *   `-run_time` (*optional*): Timeout of the test run, excluding the wait time
     for the testbed to be ready. If not specified, no limit is imposed.
+*   `-xml (*optional*): File path to write JUnit XML test results; disables
+    normal Go test logging.
+*   `-debug (*optional*): Whether the test is run in debug mode.
 
 In addition, the binding implementation is free to define its own set of
 optional or required flags.

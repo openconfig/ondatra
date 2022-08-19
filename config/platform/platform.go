@@ -157,6 +157,40 @@ func (n *ComponentPathAny) Chassis() *Component_ChassisPathAny {
 	}
 }
 
+// ControllerCard (container): Data for controller card components, i.e., for components
+// with type=CONTROLLER_CARD
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "controller-card"
+// Path from root: "/components/component/controller-card"
+func (n *ComponentPath) ControllerCard() *Component_ControllerCardPath {
+	return &Component_ControllerCardPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"controller-card"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ControllerCard (container): Data for controller card components, i.e., for components
+// with type=CONTROLLER_CARD
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "controller-card"
+// Path from root: "/components/component/controller-card"
+func (n *ComponentPathAny) ControllerCard() *Component_ControllerCardPathAny {
+	return &Component_ControllerCardPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"controller-card"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Cpu (container): Data for cpu components
 // ----------------------------------------
 // Defining module: "openconfig-platform"
@@ -801,6 +835,16 @@ func (n *Component_Chassis_Utilization_ResourcePathAny) Name() *Component_Chassi
 			n,
 		),
 	}
+}
+
+// Component_ControllerCardPath represents the /openconfig-platform/components/component/controller-card YANG schema element.
+type Component_ControllerCardPath struct {
+	*ygot.NodePath
+}
+
+// Component_ControllerCardPathAny represents the wildcard version of the /openconfig-platform/components/component/controller-card YANG schema element.
+type Component_ControllerCardPathAny struct {
+	*ygot.NodePath
 }
 
 // Component_CpuPath represents the /openconfig-platform/components/component/cpu YANG schema element.

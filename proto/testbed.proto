@@ -56,8 +56,8 @@ message Device {
   string software_version = 5;
   repeated Port ports = 3;
 
-  //  // A key-value map of additional device dimensions. Optional.
-
+  // A key-value map of additional device dimensions. Optional.
+  //
   // In addition to the above fields, the extra dimensions field can be used to
   // further restrict matching devices. The set of dimension keys that are
   // supported is specific to the binding implementation. For example, if the

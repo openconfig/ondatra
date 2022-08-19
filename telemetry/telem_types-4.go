@@ -12,201 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSetWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AggregatorWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_Aggregator, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment with a corresponding timestamp.
-type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment struct {
-	*genutil.Metadata
-	val     *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment sample, erroring out if not present.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) Val(t testing.TB) *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment sample.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) SetVal(v *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment samples.
-type CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment struct {
-	W    *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher
-	Data []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher observes a stream of *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment samples.
-type NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *NetworkInstance_Protocol_Bgp_Rib_AttrSet_As4SegmentWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_As4Segment, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment is a *NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment with a corresponding timestamp.
 type QualifiedNetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment struct {
 	*genutil.Metadata
@@ -9238,6 +9043,266 @@ type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4TeRouterIdWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4TeRouterIdWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv4TeRouterId, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses is a *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses sample.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses) SetVal(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses) *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses samples.
+type CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses struct {
+	W    *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddressesWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddressesWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses samples.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddressesWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddressesWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6InterfaceAddresses, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability is a *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability sample.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability) SetVal(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability) *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability samples.
+type CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability struct {
+	W    *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6ReachabilityWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6ReachabilityWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability samples.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6ReachabilityWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6ReachabilityWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix is a *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix sample.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix) SetVal(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix) *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix samples.
+type CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix struct {
+	W    *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_PrefixWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_PrefixWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix samples.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_PrefixWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_PrefixWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv is a *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv with a corresponding timestamp.
+type QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv struct {
+	*genutil.Metadata
+	val     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv sample, erroring out if not present.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv) Val(t testing.TB) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv sample.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv) SetVal(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv) *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv is a telemetry Collection whose Await method returns a slice of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv samples.
+type CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv struct {
+	W    *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_SubtlvWatcher
+	Data []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv) Await(t testing.TB) []*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_SubtlvWatcher observes a stream of *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv samples.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_SubtlvWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_SubtlvWatcher) Await(t testing.TB) (*QualifiedNetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Ipv6Reachability_Prefix_Subtlv, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

@@ -19,7 +19,6 @@ package gnmi
 
 import (
 	"errors"
-	"io"
 	"testing"
 	"time"
 
@@ -53,12 +52,31 @@ func Get[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T])
 	return v
 }
 
+type watchAwaiter[T any] interface {
+	Await() (*ygnmi.Value[T], error)
+}
+
 // Watcher represents an ongoing watch of telemetry values.
 type Watcher[T any] struct {
-	watcher  *ygnmi.Watcher[T]
+	watcher  watchAwaiter[T]
 	cancelFn func()
 	dut      *ondatra.DUTDevice
 	query    ygnmi.AnyQuery[T]
+}
+
+func isContextErr(err error) bool {
+	// https://pkg.go.dev/google.golang.org/grpc@v1.48.0/internal/status#Error
+	var st interface {
+		GRPCStatus() *status.Status
+	}
+	ok := errors.As(err, &st)
+	return ok && (st.GRPCStatus().Code() == codes.DeadlineExceeded || st.GRPCStatus().Code() == codes.Canceled)
+}
+
+// statusErr is an interface implemented by errors returned by gRPC.
+// https://pkg.go.dev/google.golang.org/grpc@v1.48.0/internal/status#Error
+type statusErr interface {
+	GRPCStatus() *status.Status
 }
 
 // Await waits for the watch to finish and returns the last received value
@@ -67,7 +85,7 @@ type Watcher[T any] struct {
 func (w *Watcher[T]) Await(t testing.TB) (*ygnmi.Value[T], bool) {
 	v, err := w.watcher.Await()
 	if err != nil {
-		if st, ok := status.FromError(err); (ok && st.Code() == codes.DeadlineExceeded) || errors.Is(err, io.EOF) {
+		if isContextErr(err) {
 			return v, false
 		}
 		t.Fatalf("Await(t) on %s at %v: %v", w.dut, w.query, err)
@@ -118,9 +136,13 @@ func Await[T any](t testing.TB, dut *ondatra.DUTDevice, q ygnmi.SingletonQuery[T
 	return v
 }
 
+type collectAwaiter[T any] interface {
+	Await() ([]*ygnmi.Value[T], error)
+}
+
 // Collector represents an ongoing collection of telemetry values.
 type Collector[T any] struct {
-	collector *ygnmi.Collector[T]
+	collector collectAwaiter[T]
 	cancelFn  func()
 	dut       *ondatra.DUTDevice
 	query     ygnmi.AnyQuery[T]
@@ -132,6 +154,9 @@ type Collector[T any] struct {
 func (c *Collector[T]) Await(t testing.TB) []*ygnmi.Value[T] {
 	vals, err := c.collector.Await()
 	if err != nil {
+		if isContextErr(err) {
+			return vals
+		}
 		t.Fatalf("Await(t) on %s at %v: %v", c.dut, c.query, err)
 	}
 	return vals

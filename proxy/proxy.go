@@ -35,8 +35,23 @@ import (
 
 // HTTPDoCloser provides the required interface for clients to the proxy.
 type HTTPDoCloser interface {
-	Do(req *http.Request) (*http.Response, error)
+	Do(*http.Request) (*http.Response, error)
 	Close() error
+}
+
+// HTTPCloserClient provides noop wrapped http.Client.
+type HTTPCloserClient struct {
+	*http.Client
+}
+
+// Close is a noop close method.
+func (c *HTTPCloserClient) Close() error {
+	return nil
+}
+
+// WrapHTTPDoCloser wraps a standard http.Client with a noop closer.
+func WrapHTTPDoCloser(c *http.Client) HTTPDoCloser {
+	return &HTTPCloserClient{c}
 }
 
 // Dialer adds lower level binding interface for proxied connections
@@ -48,14 +63,14 @@ type Dialer interface {
 	// on the target. The service will be represented as a gRPC service name.
 	// Implementations must append transport security options necessary to reach
 	// the server.
-	DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
+	DialGRPC(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
 
 	// Resolve will return the resolved devices/ates and related services for the
 	// resolved topology.
 	Resolve() (*rpb.Reservation, error)
 
 	// HTTPClient provides an HTTP Client that can connect to the provided target.
-	HTTPClient(target string) (HTTPDoCloser, error)
+	HTTPClient(string) (HTTPDoCloser, error)
 }
 
 // Proxy will create a set of proxy listeners based on the provided testbed.
