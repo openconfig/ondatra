@@ -99,9 +99,6 @@ message Port {
     Pmd pmd = 4;
     string pmd_regex = 5;
   }
-
-  // Group name
-  string group = 6;
 }
 
 // A physical link between ports on DUTs or ATEs.

@@ -64,10 +64,10 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		topology:   topo,
 		id2Dev:     make(map[string]*opb.Device),
 		dev2Ports:  make(map[*opb.Device]map[string]*opb.Port),
-		dev2Links:  make(map[*opb.Device]map[*opb.Device]*lag),
+		dev2Links:  make(map[*opb.Device]map[*opb.Device]*[]*link),
 		name2Node:  make(map[string]*tpb.Node),
 		node2Intfs: make(map[*tpb.Node]map[string]*intf),
-		node2Links: make(map[*tpb.Node]map[*tpb.Node]*lag),
+		node2Links: make(map[*tpb.Node]map[*tpb.Node]*[]*link),
 	}
 
 	// Cache various info in the solver about the testbed and topology.
@@ -78,7 +78,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 			ports[port.GetId()] = port
 		}
 		s.dev2Ports[dev] = ports
-		s.dev2Links[dev] = make(map[*opb.Device]*lag)
+		s.dev2Links[dev] = make(map[*opb.Device]*[]*link)
 	}
 	// Build up the dev => links map for TB
 	for _, l := range tb.GetLinks() {
@@ -86,56 +86,19 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		dev := s.id2Dev[devParts[0]]
 		peerParts := strings.Split(l.GetB(), ":")
 		peer := s.id2Dev[peerParts[0]]
-		group := s.dev2Ports[dev][devParts[1]].GetGroup()
-		if group == "" {
-			group = s.dev2Ports[peer][peerParts[1]].GetGroup()
-		}
-		linkPtr := &link{name: devParts[0], port: devParts[1], peerName: peerParts[0], peerPort: peerParts[1], group: group}
+		linkPtr := &link{name: devParts[0], port: devParts[1], peerName: peerParts[0], peerPort: peerParts[1]}
 		if _, ok := s.dev2Links[dev][peer]; !ok {
-			lagPtr := &lag{lagMap: make(map[string][]*link), sortedNames: []string{}, totalLinks: 0}
-			s.dev2Links[dev][peer] = lagPtr
-			s.dev2Links[peer][dev] = lagPtr
+			linkList := []*link{}
+			s.dev2Links[dev][peer] = &linkList
+			s.dev2Links[peer][dev] = &linkList
 		}
-		s.dev2Links[dev][peer].lagMap[group] = append(s.dev2Links[dev][peer].lagMap[group], linkPtr)
+		*s.dev2Links[dev][peer] = append(*s.dev2Links[dev][peer], linkPtr)
 	}
 
-	// For LAGs arrange the group names in descending order of membership size
-	// So for multiple LAGs between two devices (and nodes), we assign interfaces for largest LAG first
-	// and go down that list; all un-assigned interfaces can be allocated to regular ports
-	sortGroupBySize := func(lagPtr *lag) {
-		// Sort lagnames based on number of members; skip for regular ports
-		for grp, links := range lagPtr.lagMap {
-			lagPtr.totalLinks = lagPtr.totalLinks + len(links)
-			if grp == "" {
-				continue
-			}
-			inserted := false
-			for index, lName := range lagPtr.sortedNames {
-				if len(lagPtr.lagMap[lName]) < len(links) {
-					lagPtr.sortedNames = append(lagPtr.sortedNames[:index+1], lagPtr.sortedNames[index:]...)
-					lagPtr.sortedNames[index] = grp
-					inserted = true
-					break
-				}
-			}
-			if !inserted {
-				lagPtr.sortedNames = append(lagPtr.sortedNames,  grp)
-			}
-		}
-	}
-	pDev := make(map[*opb.Device]bool)
-	for dev := range s.dev2Links {
-		for peer, lagPtr := range s.dev2Links[dev] {
-			if _, ok := pDev[peer]; ok {
-				sortGroupBySize(lagPtr)
-			}
-		}
-		pDev[dev] = true
-	}
 	for _, node := range s.topology.GetNodes() {
 		s.name2Node[node.GetName()] = node
 		s.node2Intfs[node] = make(map[string]*intf)
-		s.node2Links[node] = make(map[*tpb.Node]*lag)
+		s.node2Links[node] = make(map[*tpb.Node]*[]*link)
 	}
 	getIntf := func(nodeName, intfName string) *intf {
 		node := s.name2Node[nodeName]
@@ -158,26 +121,13 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	for _, l := range topo.GetLinks() {
 		node := s.name2Node[l.GetANode()]
 		peer := s.name2Node[l.GetZNode()]
-		group := node.Interfaces[l.GetAInt()].GetGroup()
-		if group == "" {
-			group = peer.Interfaces[l.GetZInt()].GetGroup()
-		}
-		linkPtr := &link{name: l.GetANode(), port: l.GetAInt(), peerName: l.GetZNode(), peerPort: l.GetZInt(), group: group}
+		linkPtr := &link{name: l.GetANode(), port: l.GetAInt(), peerName: l.GetZNode(), peerPort: l.GetZInt()}
 		if _, ok := s.node2Links[node][peer]; !ok {
-			lagPtr := &lag{lagMap: make(map[string][]*link), sortedNames: []string{}, totalLinks: 0}
-			s.node2Links[node][peer] = lagPtr
-			s.node2Links[peer][node] = lagPtr
+			linkList := []*link{}
+			s.node2Links[node][peer] = &linkList
+			s.node2Links[peer][node] = &linkList
 		}
-		s.node2Links[node][peer].lagMap[group] = append(s.node2Links[node][peer].lagMap[group], linkPtr)
-	}
-	pNode := make(map[*tpb.Node]bool)
-	for node := range s.node2Links {
-		for peer, lagPtr := range s.node2Links[node] {
-			if _, ok := pNode[peer]; ok {
-				sortGroupBySize(lagPtr)
-			}
-		}
-		pNode[node] = true
+		*s.node2Links[node][peer] = append(*s.node2Links[node][peer], linkPtr)
 	}
 
 	a, err := s.solve()
@@ -255,13 +205,6 @@ type link struct {
 	port     string
 	peerName string
 	peerPort string
-	group    string
-}
-
-type lag struct {
-	lagMap      map[string][]*link
-	sortedNames []string
-	totalLinks  int
 }
 
 func (a *assign) String() string {
@@ -332,10 +275,10 @@ type solver struct {
 	topology   *tpb.Topology
 	id2Dev     map[string]*opb.Device
 	dev2Ports  map[*opb.Device]map[string]*opb.Port
-	dev2Links  map[*opb.Device]map[*opb.Device]*lag
+	dev2Links  map[*opb.Device]map[*opb.Device]*[]*link
 	name2Node  map[string]*tpb.Node
 	node2Intfs map[*tpb.Node]map[string]*intf
-	node2Links map[*tpb.Node]map[*tpb.Node]*lag
+	node2Links map[*tpb.Node]map[*tpb.Node]*[]*link
 }
 
 // arrangeDevKeys creates a list out devices from TB. The devices are added in the order they
@@ -378,62 +321,49 @@ func (s *solver) arrangeDevKeys(m map[*opb.Device][]*tpb.Node, keys *[]*opb.Devi
 	return
 }
 
-// arrangeLinkKeys creates a list out links (between a device pair) from TB. The links are added
-// in the descending order of their group membership size. All regular links (with no group)
-// are added at the end.
-// m - is the map of all TB links and possible topo links
-// keys - updates this list of links in the desired order for selection search
-func (s *solver) arrangeLinkKeys(m map[*link][]*link, keys *[]*link) {
-	// All regular link (port) allocation should happen last
-	allRlinks := []*link{}
-	for k := range m {
-		if k.group == "" {
-			allRlinks = append(allRlinks, k)
-		} else {
-			*keys = append(*keys, k)
-		}
-	}
-	*keys = append(*keys, allRlinks...)
-	return
-}
-
 // checkDev validates whether a topology node can be assigned for a testbed device by validating
-// different LAG size requirements with their respective peers.
+// required number of links are present between node peers.
 // dev - is the testbed device
 // node - is potential mapped node.
 // res - is working resultset based on past selections.
 // It returns a boolean; true if valid selection, false otherwise.
 func (s *solver) checkDev(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*tpb.Node) bool {
-	for devPeer, lagPtr := range s.dev2Links[dev] {
-		if peer, ok := res[devPeer]; ok {
-			mappedPeer := peer
-			devRLinks := 0
-			if _, ok = lagPtr.lagMap[""]; ok {
-				devRLinks = len(lagPtr.lagMap[""])
-			}
-			if _, ok := s.node2Links[node][mappedPeer]; !ok {
+	for devPeer, linksPtr := range s.dev2Links[dev] {
+		if nodePeer, ok := res[devPeer]; ok {
+			devRLinks := len(*linksPtr)
+			if _, ok := s.node2Links[node][nodePeer]; !ok {
 				return false
 			}
-			nodeLagPtr := s.node2Links[node][mappedPeer]
-			nodeRLinks := nodeLagPtr.totalLinks
-			if len(lagPtr.sortedNames) > len(nodeLagPtr.sortedNames) {
-				return false
-			}
-			for index, lagName := range lagPtr.sortedNames {
-				nLagName := nodeLagPtr.sortedNames[index]
-				dLagSize := len(lagPtr.lagMap[lagName])
-				nLagSize := len(nodeLagPtr.lagMap[nLagName])
-				if dLagSize > nLagSize {
-					//fmt.Printf("Unable to find lag size %d in topology (max found %d)\n", dLagSize, nLagSize)
-					return false
-				}
-				// Balance links can be used as regular links
-				nodeRLinks = nodeRLinks - dLagSize
-			}
+			nodeRLinks := len(*s.node2Links[node][nodePeer])
 			if devRLinks > nodeRLinks {
-				//fmt.Printf("Unable to find regular link size %d in topology (max found %d)\n", devRLinks, nodeRLinks)
 				return false
 			}
+		}
+	}
+	return true
+}
+
+// checkLink validates whether a topology link can be assigned for a testbed link by validating
+// ports assigned match requirements.
+// d2n - device to node mapped for this solution set.
+// devLink - is the testbed link.
+// nodeLink - is potential mapped node link.
+// res - is working resultset based on past selections.
+// It returns a boolean; true if valid selection, false otherwise.
+func (s *solver) checkLink(d2n map[*opb.Device]*tpb.Node, devLink *link, nodeLink *link, res map[*link]*link) bool {
+	dev := s.id2Dev[devLink.name]
+	dPort := s.dev2Ports[dev][devLink.port]
+	pPort := s.dev2Ports[s.id2Dev[devLink.peerName]][devLink.peerPort]
+	node := s.name2Node[nodeLink.name]
+	nIntf := s.node2Intfs[node][nodeLink.port]
+	pIntf := s.node2Intfs[s.name2Node[nodeLink.peerName]][nodeLink.peerPort]
+	if d2n[dev] == node {
+		if !s.portMatch(dPort, nIntf) || !s.portMatch(pPort, pIntf) {
+			return false
+		}
+	} else {
+		if !s.portMatch(dPort, pIntf) || !s.portMatch(pPort, nIntf) {
+			return false
 		}
 	}
 	return true
@@ -465,7 +395,7 @@ func (s *solver) solve() (*assign, error) {
 		hasNodeCombo = true
 		link2link := make(map[*link][]*link)
 		s.getLinkMap(dev2Node, link2link)
-		link2LinkChan := s.genLinkCombos(link2link)
+		link2LinkChan := s.genLinkCombos(dev2Node, link2link)
 		for dLink2nLink := range link2LinkChan {
 			a := s.newAssign(dev2Node, dLink2nLink)
 			if a != nil {
@@ -485,30 +415,17 @@ func (s *solver) solve() (*assign, error) {
 }
 
 // getLinkMap generates the set of links for all TB links, for a device => node selection
-// All LAG links are matched (in descending order) between device-peer pairs and node-peer pairs
 // d2n - is the device => node map
 // l2l - is the processed TB link => topology link
 func (s *solver) getLinkMap(d2n map[*opb.Device]*tpb.Node, l2l map[*link][]*link) {
 	processed := make(map[*opb.Device]bool)
 	for dev, node := range d2n {
-		for peer, lagPtr := range s.dev2Links[dev] {
-			if _, ok := processed[peer]; ok {
-				nodePeer := d2n[peer]
-				nodeLagPtr := s.node2Links[node][nodePeer]
-				allNodeLinks := []*link{}
-				for index, lagName := range lagPtr.sortedNames {
-					nodeLagName := nodeLagPtr.sortedNames[index]
-					for _, link := range lagPtr.lagMap[lagName] {
-						l2l[link] = nodeLagPtr.lagMap[nodeLagName]
-					}
-				}
-				for _, links := range nodeLagPtr.lagMap {
-					allNodeLinks = append(allNodeLinks, links...)
-				}
-				if _, ok = lagPtr.lagMap[""]; ok {
-					for _, link := range lagPtr.lagMap[""] {
-						l2l[link] = allNodeLinks
-					}
+		for devPeer, links := range s.dev2Links[dev] {
+			if _, ok := processed[devPeer]; ok {
+				nodePeer := d2n[devPeer]
+				nodeLinks := s.node2Links[node][nodePeer]
+				for _, link := range *links {
+					l2l[link] = *nodeLinks
 				}
 			}
 		}
@@ -571,18 +488,21 @@ func softwareVersion(node *tpb.Node) string {
 }
 
 // genLinkCombos yields port link->node link mappings
-func (s *solver) genLinkCombos(m map[*link][]*link) <-chan map[*link]*link {
+func (s *solver) genLinkCombos(d2n map[*opb.Device]*tpb.Node, m map[*link][]*link) <-chan map[*link]*link {
 	keys := []*link{}
-	s.arrangeLinkKeys(m, &keys)
+	for k := range m {
+		keys = append(keys, k)
+	}
 	ch := make(chan map[*link]*link)
 	go func() {
 		defer close(ch)
-		s.genLinkRecurse(m, keys, make(map[*link]*link), make(map[*link]bool), ch)
+		s.genLinkRecurse(d2n, m, keys, make(map[*link]*link), make(map[*link]bool), ch)
 	}()
 	return ch
 }
 
 func (s *solver) genLinkRecurse(
+	d2n map[*opb.Device]*tpb.Node,
 	m map[*link][]*link,
 	keys []*link,
 	res map[*link]*link,
@@ -599,9 +519,12 @@ func (s *solver) genLinkRecurse(
 	first := keys[0]
 	for _, i := range m[first] {
 		if !used[i] {
+			if !s.checkLink(d2n, first, i, res) {
+				continue
+			}
 			res[first] = i
 			used[i] = true
-			s.genLinkRecurse(m, keys[1:], res, used, ch)
+			s.genLinkRecurse(d2n, m, keys[1:], res, used, ch)
 			delete(used, i)
 		}
 	}
@@ -664,15 +587,9 @@ func (s *solver) newAssign(dev2Node map[*opb.Device]*tpb.Node, link2link map[*li
 		nIntf := s.node2Intfs[node][nLink.port]
 		pIntf := s.node2Intfs[s.name2Node[nLink.peerName]][nLink.peerPort]
 		if dev2Node[dev] == node {
-			if !s.portMatch(dPort, nIntf) || !s.portMatch(pPort, pIntf) {
-				return nil
-			}
 			a.port2Intf[dPort] = nIntf
 			a.port2Intf[pPort] = pIntf
 		} else {
-			if !s.portMatch(dPort, pIntf) || !s.portMatch(pPort, nIntf) {
-				return nil
-			}
 			a.port2Intf[dPort] = pIntf
 			a.port2Intf[pPort] = nIntf
 		}
