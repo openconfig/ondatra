@@ -64,10 +64,10 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		topology:   topo,
 		id2Dev:     make(map[string]*opb.Device),
 		dev2Ports:  make(map[*opb.Device]map[string]*opb.Port),
-		dev2Links:  make(map[*opb.Device]map[*opb.Device]*[]*link),
+		dev2Links:  make(map[*opb.Device]map[*opb.Device]*portGroup),
 		name2Node:  make(map[string]*tpb.Node),
 		node2Intfs: make(map[*tpb.Node]map[string]*intf),
-		node2Links: make(map[*tpb.Node]map[*tpb.Node]*[]*link),
+		node2Links: make(map[*tpb.Node]map[*tpb.Node]*portGroup),
 	}
 
 	// Cache various info in the solver about the testbed and topology.
@@ -78,7 +78,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 			ports[port.GetId()] = port
 		}
 		s.dev2Ports[dev] = ports
-		s.dev2Links[dev] = make(map[*opb.Device]*[]*link)
+		s.dev2Links[dev] = make(map[*opb.Device]*portGroup)
 	}
 	// Build up the dev => links map for TB
 	for _, l := range tb.GetLinks() {
@@ -86,19 +86,55 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		dev := s.id2Dev[devParts[0]]
 		peerParts := strings.Split(l.GetB(), ":")
 		peer := s.id2Dev[peerParts[0]]
-		linkPtr := &link{name: devParts[0], port: devParts[1], peerName: peerParts[0], peerPort: peerParts[1]}
-		if _, ok := s.dev2Links[dev][peer]; !ok {
-			linkList := []*link{}
-			s.dev2Links[dev][peer] = &linkList
-			s.dev2Links[peer][dev] = &linkList
+		group := s.dev2Ports[dev][devParts[1]].GetGroup()
+		if group == "" {
+			group = s.dev2Ports[peer][peerParts[1]].GetGroup()
 		}
-		*s.dev2Links[dev][peer] = append(*s.dev2Links[dev][peer], linkPtr)
+		linkPtr := &link{name: devParts[0], port: devParts[1], peerName: peerParts[0], peerPort: peerParts[1], group: group}
+		if _, ok := s.dev2Links[dev][peer]; !ok {
+			pgPtr := &portGroup{groupMap: make(map[string][]*link), sortedNames: []string{}, totalLinks: 0}
+			s.dev2Links[dev][peer] = pgPtr
+			s.dev2Links[peer][dev] = pgPtr
+		}
+		s.dev2Links[dev][peer].groupMap[group] = append(s.dev2Links[dev][peer].groupMap[group], linkPtr)
 	}
-
+	// For port group arrange the group names in descending order of membership size
+	// So for multiple port groups between two devices (and nodes), we assign interfaces for largest port group first
+	// and go down that list; all un-assigned interfaces can be allocated to regular ports
+	sortGroupBySize := func(pgPtr *portGroup) {
+		// Sort lagnames based on number of members; skip for regular ports
+		for grp, links := range pgPtr.groupMap {
+			pgPtr.totalLinks = pgPtr.totalLinks + len(links)
+			if grp == "" {
+				continue
+			}
+			inserted := false
+			for index, pgName := range pgPtr.sortedNames {
+				if len(pgPtr.groupMap[pgName]) < len(links) {
+					pgPtr.sortedNames = append(pgPtr.sortedNames[:index+1], pgPtr.sortedNames[index:]...)
+					pgPtr.sortedNames[index] = grp
+					inserted = true
+					break
+				}
+			}
+			if !inserted {
+				pgPtr.sortedNames = append(pgPtr.sortedNames,  grp)
+			}
+		}
+	}
+	pDev := make(map[*opb.Device]bool)
+	for dev := range s.dev2Links {
+		for peer, pgPtr := range s.dev2Links[dev] {
+			if _, ok := pDev[peer]; ok {
+				sortGroupBySize(pgPtr)
+			}
+		}
+		pDev[dev] = true
+	}
 	for _, node := range s.topology.GetNodes() {
 		s.name2Node[node.GetName()] = node
 		s.node2Intfs[node] = make(map[string]*intf)
-		s.node2Links[node] = make(map[*tpb.Node]*[]*link)
+		s.node2Links[node] = make(map[*tpb.Node]*portGroup)
 	}
 	getIntf := func(nodeName, intfName string) *intf {
 		node := s.name2Node[nodeName]
@@ -121,13 +157,26 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	for _, l := range topo.GetLinks() {
 		node := s.name2Node[l.GetANode()]
 		peer := s.name2Node[l.GetZNode()]
-		linkPtr := &link{name: l.GetANode(), port: l.GetAInt(), peerName: l.GetZNode(), peerPort: l.GetZInt()}
-		if _, ok := s.node2Links[node][peer]; !ok {
-			linkList := []*link{}
-			s.node2Links[node][peer] = &linkList
-			s.node2Links[peer][node] = &linkList
+		group := node.Interfaces[l.GetAInt()].GetGroup()
+		if group == "" {
+			group = peer.Interfaces[l.GetZInt()].GetGroup()
 		}
-		*s.node2Links[node][peer] = append(*s.node2Links[node][peer], linkPtr)
+		linkPtr := &link{name: l.GetANode(), port: l.GetAInt(), peerName: l.GetZNode(), peerPort: l.GetZInt(), group: group}
+		if _, ok := s.node2Links[node][peer]; !ok {
+			pgPtr := &portGroup{groupMap: make(map[string][]*link), sortedNames: []string{}, totalLinks: 0}
+			s.node2Links[node][peer] = pgPtr
+			s.node2Links[peer][node] = pgPtr
+		}
+		s.node2Links[node][peer].groupMap[group] = append(s.node2Links[node][peer].groupMap[group], linkPtr)
+	}
+	pNode := make(map[*tpb.Node]bool)
+	for node := range s.node2Links {
+		for peer, pgPtr := range s.node2Links[node] {
+			if _, ok := pNode[peer]; ok {
+				sortGroupBySize(pgPtr)
+			}
+		}
+		pNode[node] = true
 	}
 
 	a, err := s.solve()
@@ -205,6 +254,13 @@ type link struct {
 	port     string
 	peerName string
 	peerPort string
+	group    string
+}
+
+type portGroup struct {
+	groupMap    map[string][]*link
+	sortedNames []string
+	totalLinks  int
 }
 
 func (a *assign) String() string {
@@ -275,10 +331,10 @@ type solver struct {
 	topology   *tpb.Topology
 	id2Dev     map[string]*opb.Device
 	dev2Ports  map[*opb.Device]map[string]*opb.Port
-	dev2Links  map[*opb.Device]map[*opb.Device]*[]*link
+	dev2Links  map[*opb.Device]map[*opb.Device]*portGroup
 	name2Node  map[string]*tpb.Node
 	node2Intfs map[*tpb.Node]map[string]*intf
-	node2Links map[*tpb.Node]map[*tpb.Node]*[]*link
+	node2Links map[*tpb.Node]map[*tpb.Node]*portGroup
 }
 
 // arrangeDevKeys creates a list out devices from TB. The devices are added in the order they
@@ -321,6 +377,24 @@ func (s *solver) arrangeDevKeys(m map[*opb.Device][]*tpb.Node, keys *[]*opb.Devi
 	return
 }
 
+// arrangeLinkKeys creates a list out links (between a device pair) from TB.
+// All regular links (with no group) are added at the end.
+// m - is the map of all TB links and possible topo links
+// keys - updates this list of links in the desired order for selection search
+func (s *solver) arrangeLinkKeys(m map[*link][]*link, keys *[]*link) {
+	// All regular link (port) allocation should happen last
+	allRlinks := []*link{}
+	for k := range m {
+		if k.group == "" {
+			allRlinks = append(allRlinks, k)
+		} else {
+			*keys = append(*keys, k)
+		}
+	}
+	*keys = append(*keys, allRlinks...)
+	return
+}
+
 // checkDev validates whether a topology node can be assigned for a testbed device by validating
 // required number of links are present between node peers.
 // dev - is the testbed device
@@ -328,13 +402,30 @@ func (s *solver) arrangeDevKeys(m map[*opb.Device][]*tpb.Node, keys *[]*opb.Devi
 // res - is working resultset based on past selections.
 // It returns a boolean; true if valid selection, false otherwise.
 func (s *solver) checkDev(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*tpb.Node) bool {
-	for devPeer, linksPtr := range s.dev2Links[dev] {
+	for devPeer, devPGPtr := range s.dev2Links[dev] {
 		if nodePeer, ok := res[devPeer]; ok {
-			devRLinks := len(*linksPtr)
+			devRLinks := 0
+			if _, ok = devPGPtr.groupMap[""]; ok {
+				devRLinks = len(devPGPtr.groupMap[""])
+			}
 			if _, ok := s.node2Links[node][nodePeer]; !ok {
 				return false
 			}
-			nodeRLinks := len(*s.node2Links[node][nodePeer])
+			nodePGPtr := s.node2Links[node][nodePeer]
+			nodeRLinks := nodePGPtr.totalLinks
+			if len(devPGPtr.sortedNames) > len(nodePGPtr.sortedNames) {
+				return false
+			}
+			for index, dGroupName := range devPGPtr.sortedNames {
+				nGroupName := nodePGPtr.sortedNames[index]
+				dGroupSize := len(devPGPtr.groupMap[dGroupName])
+				nGroupSize := len(nodePGPtr.groupMap[nGroupName])
+				if dGroupSize > nGroupSize {
+					return false
+				}
+				// Balance links can be used as regular links
+				nodeRLinks = nodeRLinks - dGroupSize
+			}
 			if devRLinks > nodeRLinks {
 				return false
 			}
@@ -344,12 +435,13 @@ func (s *solver) checkDev(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*
 }
 
 // checkLink validates whether a topology link can be assigned for a testbed link by validating
-// ports assigned match requirements.
+// ports assigned match requirements. Other than port specific match, device peer group links have to "map"
+// to node peer group links of the selected group.
 // d2n - device to node mapped for this solution set.
 // devLink - is the testbed link.
 // nodeLink - is potential mapped node link.
-// res - is working resultset based on past selections.
-// It returns a boolean; true if valid selection, false otherwise.
+// res - is working resultset of link mapping based on past selections.
+// It returns a boolean, true if valid selection, false otherwise.
 func (s *solver) checkLink(d2n map[*opb.Device]*tpb.Node, devLink *link, nodeLink *link, res map[*link]*link) bool {
 	dev := s.id2Dev[devLink.name]
 	dPort := s.dev2Ports[dev][devLink.port]
@@ -415,17 +507,46 @@ func (s *solver) solve() (*assign, error) {
 }
 
 // getLinkMap generates the set of links for all TB links, for a device => node selection
+// All port group links are matched (size in descending order) between device-peer pairs and node-peer pairs
+// Device peer group links can be mapped to any corresponding node peer group links as long as the node group size
+// is atleast as large as the device group size.
 // d2n - is the device => node map
 // l2l - is the processed TB link => topology link
 func (s *solver) getLinkMap(d2n map[*opb.Device]*tpb.Node, l2l map[*link][]*link) {
 	processed := make(map[*opb.Device]bool)
 	for dev, node := range d2n {
-		for devPeer, links := range s.dev2Links[dev] {
+		for devPeer, devPGPtr := range s.dev2Links[dev] {
 			if _, ok := processed[devPeer]; ok {
 				nodePeer := d2n[devPeer]
-				nodeLinks := s.node2Links[node][nodePeer]
-				for _, link := range *links {
-					l2l[link] = *nodeLinks
+				nodePGPtr := s.node2Links[node][nodePeer]
+				allNodeLinks := []*link{}
+				devGPIndex := 0
+				for _, nodeGroupName := range nodePGPtr.sortedNames {
+					devGroupName := devPGPtr.sortedNames[devGPIndex]
+					devPGSize := len(devPGPtr.groupMap[devGroupName])
+					nodePGSize := len(nodePGPtr.groupMap[nodeGroupName])
+					if devPGSize > nodePGSize {
+						for _, link := range devPGPtr.groupMap[devGroupName] {
+							l2l[link] = allNodeLinks
+						}
+						devGPIndex++
+					}
+					allNodeLinks = append(allNodeLinks, nodePGPtr.groupMap[nodeGroupName]...)
+				}
+				// Finally add to l2l for all remaining devPG links
+				for ; devGPIndex < len(devPGPtr.sortedNames); devGPIndex++ {
+					devGroupName := devPGPtr.sortedNames[devGPIndex]
+					for _, link := range devPGPtr.groupMap[devGroupName] {
+						l2l[link] = allNodeLinks
+					}
+				}
+
+				if _, ok = devPGPtr.groupMap[""]; ok {
+					// Append all regular links
+					allNodeLinks = append(allNodeLinks, nodePGPtr.groupMap[""]...)
+					for _, link := range devPGPtr.groupMap[""] {
+						l2l[link] = allNodeLinks
+					}
 				}
 			}
 		}
@@ -490,13 +611,11 @@ func softwareVersion(node *tpb.Node) string {
 // genLinkCombos yields port link->node link mappings
 func (s *solver) genLinkCombos(d2n map[*opb.Device]*tpb.Node, m map[*link][]*link) <-chan map[*link]*link {
 	keys := []*link{}
-	for k := range m {
-		keys = append(keys, k)
-	}
+	s.arrangeLinkKeys(m, &keys)
 	ch := make(chan map[*link]*link)
 	go func() {
 		defer close(ch)
-		s.genLinkRecurse(d2n, m, keys, make(map[*link]*link), make(map[*link]bool), ch)
+		s.genLinkRecurse(d2n, m, keys, make(map[*link]*link), make(map[string]string), make(map[*link]bool), ch)
 	}()
 	return ch
 }
@@ -506,6 +625,7 @@ func (s *solver) genLinkRecurse(
 	m map[*link][]*link,
 	keys []*link,
 	res map[*link]*link,
+	grpRes map[string]string,
 	used map[*link]bool,
 	ch chan<- map[*link]*link) {
 	if len(keys) == 0 {
@@ -519,13 +639,28 @@ func (s *solver) genLinkRecurse(
 	first := keys[0]
 	for _, i := range m[first] {
 		if !used[i] {
+			grpResUpdated := false
+			// Ensure that for groups, all member links for a group get mapped to node links
+			// that are co-located in a single group
+			if first.group != "" {
+				if gName, ok := grpRes[first.group]; ok && gName != i.group {
+					continue
+				} else {
+					grpResUpdated = true
+				}
+			}
 			if !s.checkLink(d2n, first, i, res) {
 				continue
 			}
 			res[first] = i
+			grpRes[first.group] = i.group
 			used[i] = true
-			s.genLinkRecurse(d2n, m, keys[1:], res, used, ch)
+			s.genLinkRecurse(d2n, m, keys[1:], res, grpRes, used, ch)
 			delete(used, i)
+			if grpResUpdated {
+				// Remove only if this link was first in the group to add the map entry
+				delete(grpRes, first.group)
+			}
 		}
 	}
 }

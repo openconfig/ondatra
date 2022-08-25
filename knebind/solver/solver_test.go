@@ -404,6 +404,100 @@ func TestSolveErrors(t *testing.T) {
 		  }
 		`,
 		wantErr: "no combination of nodes",
+	}, {
+		desc: "required port group size not found",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G1"}},
+			}, {
+				Id:     "dut2",
+				Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+				Vendor: opb.Device_ARISTA,
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "dut2:port1"},
+				{A: "dut1:port2", B: "dut2:port2"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+            type: ARISTA_CEOS
+			interfaces: {
+				key: "eth1"
+			}
+			interfaces: {
+				key: "eth2"
+				value: {group: "lag"}
+			}
+		  }
+		  nodes: {
+		    name: "node2"
+            type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth2"
+		    z_node: "node2"
+		    z_int: "eth2"
+		  }
+		`,
+		wantErr: "no combination of nodes",
+	}, {
+		desc: "required number of port groups not found",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G2"}},
+			}, {
+				Id:     "dut2",
+				Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+				Vendor: opb.Device_ARISTA,
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "dut2:port1"},
+				{A: "dut1:port2", B: "dut2:port2"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+            type: ARISTA_CEOS
+			interfaces: {
+				key: "eth1"
+			}
+			interfaces: {
+				key: "eth2"
+				value: {group: "lag"}
+			}
+		  }
+		  nodes: {
+		    name: "node2"
+            type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth2"
+		    z_node: "node2"
+		    z_int: "eth2"
+		  }
+		`,
+		wantErr: "no combination of nodes",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
