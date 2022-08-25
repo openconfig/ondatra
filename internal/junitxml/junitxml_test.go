@@ -22,6 +22,7 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/jstemmer/go-junit-report/v2/junit"
 	"github.com/openconfig/gnmi/errdiff"
 )
 
@@ -34,49 +35,45 @@ const (
         multi
         line
 --- PASS: TestPassLog (0.10s)
-PASS
-ok  	package/pass	0.160s
-=== RUN   TestOne
+=== RUN   TestFail
     fail_test.go:6: Error message
     fail_test.go:7: Longer
         error
         message.
---- FAIL: TestOne (0.151s)
-FAIL
-FAIL	package/fail	0.151s
+--- FAIL: TestFail (0.15s)
 === RUN   TestSkip
     skip_test.go:6: skip message
 --- SKIP: TestSkip (0.02s)
 === RUN   TestSkipNow
     skip_test.go:10: log message
 --- SKIP: TestSkipNow (0.13s)
-PASS
-ok  	package/skip	0.150s
-FAIL`
+FAIL
+FAIL  	example_test	0.46s`
 	testXML = `<?xml version="1.0" encoding="UTF-8"?>
 <testsuites tests="5" failures="1" skipped="2">
-	<testsuite name="package/pass" tests="2" failures="0" errors="0" id="0" time="0.160" timestamp="2022-01-01T00:00:00Z">
-		<testcase name="TestPass" classname="package/pass" time="0.060"></testcase>
-		<testcase name="TestPassLog" classname="package/pass" time="0.100">
+	<testsuite name="example_test" tests="5" failures="1" errors="0" id="0" skipped="2" time="0.460" timestamp="2022-01-01T00:00:00Z">
+		<properties>
+			<property name="suiteKey" value="suiteVal"></property>
+			<property name="TestPass.passKey" value="passVal"></property>
+			<property name="TestFail.failKey" value="failVal"></property>
+		</properties>
+		<testcase name="TestPass" classname="example_test" time="0.060"></testcase>
+		<testcase name="TestPassLog" classname="example_test" time="0.100">
 			<system-out><![CDATA[    pass_test.go:9: log line
     pass_test.go:10: log
         multi
         line]]></system-out>
 		</testcase>
-	</testsuite>
-	<testsuite name="package/fail" tests="1" failures="1" errors="0" id="1" time="0.151" timestamp="2022-01-01T00:00:00Z">
-		<testcase name="TestOne" classname="package/fail" time="0.151">
+		<testcase name="TestFail" classname="example_test" time="0.150">
 			<failure message="Failed"><![CDATA[    fail_test.go:6: Error message
     fail_test.go:7: Longer
         error
         message.]]></failure>
 		</testcase>
-	</testsuite>
-	<testsuite name="package/skip" tests="2" failures="0" errors="0" id="2" skipped="2" time="0.150" timestamp="2022-01-01T00:00:00Z">
-		<testcase name="TestSkip" classname="package/skip" time="0.020">
+		<testcase name="TestSkip" classname="example_test" time="0.020">
 			<skipped message="Skipped"><![CDATA[    skip_test.go:6: skip message]]></skipped>
 		</testcase>
-		<testcase name="TestSkipNow" classname="package/skip" time="0.130">
+		<testcase name="TestSkipNow" classname="example_test" time="0.130">
 			<skipped message="Skipped"><![CDATA[    skip_test.go:10: log message]]></skipped>
 		</testcase>
 	</testsuite>
@@ -89,7 +86,8 @@ func TestConverter(t *testing.T) {
 		return time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC)
 	}
 	buff := new(bytes.Buffer)
-	if err := mustStart(t, buff).Stop(); err != nil {
+	conv := mustStart(t, buff)
+	if err := conv.Stop(); err != nil {
 		t.Errorf("Stop failed: %v", err)
 	}
 	if diff := cmp.Diff(testXML, buff.String()); diff != "" {
@@ -106,11 +104,14 @@ func TestConverterError(t *testing.T) {
 	}
 }
 
-func mustStart(t *testing.T, dest io.Writer) *Converter {
+func mustStart(t *testing.T, dest io.Writer) *converter {
 	conv, err := startConverter(dest)
 	if err != nil {
 		t.Fatalf("startConverting failed: %v", err)
 	}
+	conv.addProperty("", "suiteKey", "suiteVal")
+	conv.addProperty("TestPass", "passKey", "passVal")
+	conv.addProperty("TestFail", "failKey", "failVal")
 	if _, err := conv.file.Write([]byte(testLog)); err != nil {
 		t.Fatalf("Write failed: %v", err)
 	}
@@ -128,4 +129,114 @@ func (w *errorWriteCloser) Write(p []byte) (int, error) {
 
 func (*errorWriteCloser) Close() error {
 	return nil
+}
+
+func TestEncodeProperty(t *testing.T) {
+	const wantVal = "propValue"
+
+	tests := []struct {
+		desc, test, name, wantName string
+	}{{
+		desc:     "suite property",
+		name:     "propName",
+		wantName: "propName",
+	}, {
+		desc:     "test property",
+		test:     "TestExample",
+		name:     "propName",
+		wantName: "TestExample.propName",
+	}, {
+		desc:     "subtest property",
+		test:     "TestExample/subtest",
+		name:     "propName",
+		wantName: "TestExample/subtest.propName",
+	}, {
+		desc: "suite property name empty",
+	}, {
+		desc:     "test property name empty",
+		test:     "TestExample",
+		wantName: "TestExample.",
+	}, {
+		desc:     "suite property name has dots",
+		name:     "foo.bar",
+		wantName: "foo..bar",
+	}, {
+		desc:     "test property name has dots",
+		test:     "TestExample",
+		name:     "foo.bar",
+		wantName: "TestExample.foo..bar",
+	}, {
+		desc:     "property name has multiple dots",
+		test:     "TestExample",
+		name:     "foo.bar.baz",
+		wantName: "TestExample.foo..bar..baz",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			got := encodeProperty(test.test, test.name, wantVal)
+			if got.Name != test.wantName {
+				t.Errorf("EncodeProperty got name %q, want %q", got.Name, test.wantName)
+			}
+			if got.Value != wantVal {
+				t.Errorf("EncodeProperty got value %q, want %q", got.Value, wantVal)
+			}
+		})
+	}
+}
+
+func TestDecodeProperty(t *testing.T) {
+	const wantVal = "propValue"
+
+	tests := []struct {
+		desc, name, wantTest, wantName string
+	}{{
+		desc:     "suite property",
+		name:     "propName",
+		wantName: "propName",
+	}, {
+		desc:     "test property",
+		name:     "TestExample.propName",
+		wantTest: "TestExample",
+		wantName: "propName",
+	}, {
+		desc:     "subtest property",
+		name:     "TestExample/subtest.propName",
+		wantTest: "TestExample/subtest",
+		wantName: "propName",
+	}, {
+		desc: "suite property name empty",
+	}, {
+		desc:     "test property name empty",
+		name:     "TestExample.",
+		wantTest: "TestExample",
+	}, {
+		desc:     "suite property name has dots",
+		name:     "foo..bar",
+		wantName: "foo.bar",
+	}, {
+		desc:     "test property name has dots",
+		name:     "TestExample.foo..bar",
+		wantTest: "TestExample",
+		wantName: "foo.bar",
+	}, {
+		desc:     "property name has multiple dots",
+		name:     "TestExample.foo..bar..baz",
+		wantTest: "TestExample",
+		wantName: "foo.bar.baz",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			prop := junit.Property{Name: test.name, Value: wantVal}
+			gotTest, gotName, gotVal := DecodeProperty(prop)
+			if gotTest != test.wantTest {
+				t.Errorf("DecodeProperty got test name %q, want %q", gotTest, test.wantTest)
+			}
+			if gotName != test.wantName {
+				t.Errorf("DecodeProperty got property name %q, want %q", gotName, test.wantName)
+			}
+			if gotVal != wantVal {
+				t.Errorf("DecodeProperty got property value %q, want %q", gotVal, wantVal)
+			}
+		})
+	}
 }

@@ -66,10 +66,8 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 	}
 	setBindingFn(b)
 
-	var xmlConv *junitxml.Converter
 	if fv.XMLPath != "" {
-		xmlConv, err = junitxml.StartConverter(fv.XMLPath)
-		if err != nil {
+		if err := junitxml.StartConverting(fv.XMLPath); err != nil {
 			return fmt.Errorf("error starting JUnit XML converter: %w", err)
 		}
 	}
@@ -93,8 +91,8 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 
 	runFn(m)
 
-	if xmlConv != nil {
-		if err := xmlConv.Stop(); err != nil {
+	if fv.XMLPath != "" {
+		if err := junitxml.StopConverting(); err != nil {
 			return fmt.Errorf("error stopping JUnit XML converter: %w", err)
 		}
 	}
