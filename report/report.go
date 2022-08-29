@@ -16,6 +16,9 @@
 package report
 
 import (
+	"encoding/xml"
+	"fmt"
+	"io"
 	"testing"
 
 	log "github.com/golang/glog"
@@ -46,6 +49,16 @@ func (r *Report) AddTestProperty(t *testing.T, name, value string) {
 // callers should prefer using AddSuiteProperty or AddTestProperty.
 func (r *Report) AddRawProperty(test, name, value string) {
 	junitxml.AddProperty(test, name, value)
+}
+
+// ReadXML decodes XML bytes into a JUnit Testsuites element.
+func ReadXML(r io.Reader) (junit.Testsuites, error) {
+	suites := junit.Testsuites{}
+	err := xml.NewDecoder(r).Decode(&suites)
+	if err != nil {
+		return suites, fmt.Errorf("error reading XML: %w", err)
+	}
+	return suites, nil
 }
 
 // ExtractProperties extracts a testName->propertyName->propertyValue map from

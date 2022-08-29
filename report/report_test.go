@@ -15,11 +15,63 @@
 package report
 
 import (
+	"encoding/xml"
+	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/jstemmer/go-junit-report/v2/junit"
 )
+
+func TestReadXML(t *testing.T) {
+	const text = `<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" skipped="0">
+	<testsuite name="example_test" tests="1" failures="0" errors="0" id="0" skipped="0" time="1.000" timestamp="2022-01-01T00:00:00Z">
+		<properties>
+			<property name="propName" value="propVal"></property>
+		</properties>
+		<testcase name="TestCase" classname="example_test" time="1.000"></testcase>
+	</testsuite>
+</testsuites>
+`
+	r := strings.NewReader(text)
+	got, err := ReadXML(r)
+	if err != nil {
+		t.Errorf("ReadXML got error: %v", err)
+	}
+	wantProps := []junit.Property{{Name: "propName", Value: "propVal"}}
+	want := junit.Testsuites{
+		XMLName: xml.Name{Local: "testsuites"},
+		Tests:   1,
+		Suites: []junit.Testsuite{{
+			Name:       "example_test",
+			Tests:      1,
+			Time:       "1.000",
+			Timestamp:  "2022-01-01T00:00:00Z",
+			Properties: &wantProps,
+			Testcases: []junit.Testcase{{
+				Name:      "TestCase",
+				Classname: "example_test",
+				Time:      "1.000",
+			}},
+		}},
+	}
+	if diff := cmp.Diff(want, got); diff != "" {
+		t.Errorf("ReadXML got unexpected diff (-want,+got): %s", diff)
+	}
+}
+
+func TestReadXMLError(t *testing.T) {
+	const text = "<>"
+	r := strings.NewReader(text)
+	suites, err := ReadXML(r)
+	if err == nil {
+		t.Fatalf("ReadXML unexpectedly succeeded: %v", suites)
+	}
+	if wantErr := "error reading XML"; !strings.Contains(err.Error(), wantErr) {
+		t.Errorf("ReadXML got unexpected error got %q, want %q", err.Error(), wantErr)
+	}
+}
 
 func TestExtractProperties(t *testing.T) {
 	props := []junit.Property{

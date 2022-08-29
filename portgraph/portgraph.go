@@ -141,7 +141,7 @@ func (s *solver) solve() (*Assignment, error) {
 	s.conPort2Port = s.superGraph.fetchPort2PortMap()
 
 	// Generate all abstract node -> concrete node mappings.
-	abs2ConNodeChan := genCombos(abs2ConNodes)
+	abs2ConNodeChan := genNodeCombos(abs2ConNodes)
 	// Iterate through each mapping. For each mapping, attempt to match edges and assign ports.
 	for abs2ConNode := range abs2ConNodeChan {
 		// For this mapping, check the concrete nodes can satisfy the abstract edges.
@@ -191,9 +191,9 @@ func (s *solver) assignPorts() {
 	return
 }
 
-// genCombos yields every key->value mapping, where no two keys map to the same
+// genNodeCombos yields every key->value mapping, where no two keys map to the same
 // value, given a map of keys to their possible values.
-func genCombos(m map[*Node][]*Node) <-chan map[*Node]*Node {
+func genNodeCombos(m map[*Node][]*Node) <-chan map[*Node]*Node {
 	var keys []*Node
 	for k := range m {
 		keys = append(keys, k)
@@ -202,12 +202,12 @@ func genCombos(m map[*Node][]*Node) <-chan map[*Node]*Node {
 	go func() {
 		// TODO: End the goroutine elegantly when the solve is done.
 		defer close(ch)
-		genRecurse(m, keys, make(map[*Node]*Node), make(map[*Node]bool), ch)
+		genNodeRecurse(m, keys, make(map[*Node]*Node), make(map[*Node]bool), ch)
 	}()
 	return ch
 }
 
-func genRecurse(
+func genNodeRecurse(
 	m map[*Node][]*Node,
 	keys []*Node,
 	res map[*Node]*Node,
@@ -226,7 +226,48 @@ func genRecurse(
 		if !used[i] {
 			res[first] = i
 			used[i] = true
-			genRecurse(m, keys[1:], res, used, ch)
+			genNodeRecurse(m, keys[1:], res, used, ch)
+			delete(used, i)
+		}
+	}
+}
+
+// genPortCombos yields every key->value mapping, where no two keys map to the same
+// value, given a map of keys to their possible values.
+func genPortCombos(m map[*Port][]*Port) <-chan map[*Port]*Port {
+	var keys []*Port
+	for k := range m {
+		keys = append(keys, k)
+	}
+	ch := make(chan map[*Port]*Port)
+	go func() {
+		// TODO: End the goroutine elegantly when the solve is done.
+		defer close(ch)
+		genPortRecurse(m, keys, make(map[*Port]*Port), make(map[*Port]bool), ch)
+	}()
+	return ch
+}
+
+func genPortRecurse(
+	m map[*Port][]*Port,
+	keys []*Port,
+	res map[*Port]*Port,
+	used map[*Port]bool,
+	ch chan<- map[*Port]*Port) {
+	if len(keys) == 0 {
+		copy := make(map[*Port]*Port)
+		for k, v := range res {
+			copy[k] = v
+		}
+		ch <- copy
+		return
+	}
+	first := keys[0]
+	for _, i := range m[first] {
+		if !used[i] {
+			res[first] = i
+			used[i] = true
+			genPortRecurse(m, keys[1:], res, used, ch)
 			delete(used, i)
 		}
 	}

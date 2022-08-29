@@ -82,6 +82,22 @@ logs to a temporary dir. Use the `-alsologtostderr` flag to output to stderr and
 the `-v` flag to increase verbosity. See the package documentation for other
 flags.
 
+## XML Test Report
+
+Ondatra has the abililty to output test results in JUnit XML format. If you pass
+`-xml=[path]` to your `go test` invocation, Ondatra will use
+[go-junit-report](https://github.com/jstemmer/go-junit-report) to translate the
+Go test log to an XML file at the provided path.
+
+To attach properties to the test or individual test cases in the XML report, use
+the `ondatra.Report()` API. For example, `ondatra.Report().AddTestProperty()`
+attaches a key-value property to the currently running test case.
+
+The help with the development of external tooling that makes use of the XML
+output, the `report` package also provides the utility functions `ReadXML` and
+`ExtractProperties` for decoding the XML and extracting a properties map,
+respectively.
+
 ## Testing on KNE
 
 You don't have to code your own binding implementation before getting started
