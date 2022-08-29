@@ -75,6 +75,13 @@ It also offers a menu option to pause the test immediately after the testbed is
 reserved. This is useful if you want to just reserve the same testbed for manual
 testing, or to manually inspect the testbed before the test cases run.
 
+### Logging
+
+Ondatra uses [glog](https://pkg.go.dev/github.com/golang/glog), which by default
+logs to a temporary dir. Use the `-alsologtostderr` flag to output to stderr and
+the `-v` flag to increase verbosity. See the package documentation for other
+flags.
+
 ## Testing on KNE
 
 You don't have to code your own binding implementation before getting started
