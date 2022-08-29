@@ -62,27 +62,44 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	s := &solver{
 		testbed:    tb,
 		topology:   topo,
-		id2Dev:     make(map[string]*opb.Device),
 		dev2Ports:  make(map[*opb.Device]map[string]*opb.Port),
+		dev2Links:  make(map[*opb.Device]map[*opb.Device][]*devLink),
 		node2Intfs: make(map[*tpb.Node]map[string]*intf),
-		intf2Intf:  make(map[*intf]*intf),
+		node2Links: make(map[*tpb.Node]map[*tpb.Node][]*nodeLink),
 	}
+	id2Dev := make(map[string]*opb.Device)
+	name2Node := make(map[string]*tpb.Node)
 
 	// Cache various info in the solver about the testbed and topology.
 	for _, dev := range devs {
-		s.id2Dev[dev.GetId()] = dev
+		id2Dev[dev.GetId()] = dev
 		ports := make(map[string]*opb.Port)
 		for _, port := range dev.GetPorts() {
 			ports[port.GetId()] = port
 		}
 		s.dev2Ports[dev] = ports
+		s.dev2Links[dev] = make(map[*opb.Device][]*devLink)
 	}
-	name2Node := make(map[string]*tpb.Node)
+
+	// Build the dev => links map for testbed
+	for _, l := range tb.GetLinks() {
+		srcParts := strings.Split(l.GetA(), ":")
+		dstParts := strings.Split(l.GetB(), ":")
+		srcDev := id2Dev[srcParts[0]]
+		dstDev := id2Dev[dstParts[0]]
+		srcPort := s.dev2Ports[srcDev][srcParts[1]]
+		dstPort := s.dev2Ports[dstDev][dstParts[1]]
+		dLink := &devLink{srcDev: srcDev, srcPort: srcPort, dstDev: dstDev, dstPort: dstPort}
+		s.dev2Links[srcDev][dstDev] = append(s.dev2Links[srcDev][dstDev], dLink)
+		s.dev2Links[dstDev][srcDev] = append(s.dev2Links[dstDev][srcDev], dLink)
+	}
+
 	for _, node := range s.topology.GetNodes() {
 		name2Node[node.GetName()] = node
 		s.node2Intfs[node] = make(map[string]*intf)
+		s.node2Links[node] = make(map[*tpb.Node][]*nodeLink)
 	}
-	getIntf := func(nodeName, intfName string) *intf {
+	addIntf := func(nodeName, intfName string) {
 		node := name2Node[nodeName]
 		i, ok := s.node2Intfs[node][intfName]
 		if !ok {
@@ -93,13 +110,21 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		if i.vendorName == "" {
 			i.vendorName = intfName
 		}
-		return i
 	}
 	for _, link := range s.topology.GetLinks() {
-		intfA := getIntf(link.GetANode(), link.GetAInt())
-		intfZ := getIntf(link.GetZNode(), link.GetZInt())
-		s.intf2Intf[intfA] = intfZ
-		s.intf2Intf[intfZ] = intfA
+		addIntf(link.GetANode(), link.GetAInt())
+		addIntf(link.GetZNode(), link.GetZInt())
+	}
+
+	// Build the node => links map for topology
+	for _, l := range topo.GetLinks() {
+		srcNode := name2Node[l.GetANode()]
+		dstNode := name2Node[l.GetZNode()]
+		srcIntf := s.node2Intfs[srcNode][l.GetAInt()]
+		dstIntf := s.node2Intfs[dstNode][l.GetZInt()]
+		nLink := &nodeLink{srcNode: srcNode, srcIntf: srcIntf, dstNode: dstNode, dstIntf: dstIntf}
+		s.node2Links[srcNode][dstNode] = append(s.node2Links[srcNode][dstNode], nLink)
+		s.node2Links[dstNode][srcNode] = append(s.node2Links[dstNode][srcNode], nLink)
 	}
 
 	a, err := s.solve()
@@ -172,6 +197,16 @@ type intf struct {
 	vendorName string
 }
 
+type devLink struct {
+	srcDev, dstDev   *opb.Device
+	srcPort, dstPort *opb.Port
+}
+
+type nodeLink struct {
+	srcNode, dstNode *tpb.Node
+	srcIntf, dstIntf *intf
+}
+
 func (a *assign) String() string {
 	var sb strings.Builder
 	for dut, node := range a.dev2Node {
@@ -238,53 +273,38 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 type solver struct {
 	testbed    *opb.Testbed
 	topology   *tpb.Topology
-	id2Dev     map[string]*opb.Device
 	dev2Ports  map[*opb.Device]map[string]*opb.Port
+	dev2Links  map[*opb.Device]map[*opb.Device][]*devLink
 	node2Intfs map[*tpb.Node]map[string]*intf
-	intf2Intf  map[*intf]*intf
+	node2Links map[*tpb.Node]map[*tpb.Node][]*nodeLink
 }
 
 func (s *solver) solve() (*assign, error) {
 	// Find all the matching device->node assignments, and
 	// for each of those, all the port->intf assignments.
-	dev2Node2Port2Intfs := make(map[*opb.Device]map[*tpb.Node]map[*opb.Port][]*intf)
+	dev2Nodes := make(map[*opb.Device][]*tpb.Node)
 	for _, dut := range s.testbed.GetDuts() {
-		node2Port2Intfs, err := s.nodeMatches(dut, false)
+		nodeList, err := s.nodeMatches(dut, false)
 		if err != nil {
 			return nil, err
 		}
-		dev2Node2Port2Intfs[dut] = node2Port2Intfs
+		dev2Nodes[dut] = nodeList
 	}
 	for _, ate := range s.testbed.GetAtes() {
-		node2Port2Intfs, err := s.nodeMatches(ate, true)
+		nodeList, err := s.nodeMatches(ate, true)
 		if err != nil {
 			return nil, err
 		}
-		dev2Node2Port2Intfs[ate] = node2Port2Intfs
+		dev2Nodes[ate] = nodeList
 	}
 
-	// Iterate over each of the possible testbed->topology combinations.
-	dev2Nodes := make(map[interface{}][]interface{})
-	for dev, node2Port2Intfs := range dev2Node2Port2Intfs {
-		for node := range node2Port2Intfs {
-			dev2Nodes[dev] = append(dev2Nodes[dev], node)
-		}
-	}
-	dev2NodeChan := genCombos(dev2Nodes)
-	var hasNodeCombo bool
+	// Generate possible testbed device -> topology node combinations.
+	dev2NodeChan := s.genDevCombos(dev2Nodes)
 	for dev2Node := range dev2NodeChan {
-		hasNodeCombo = true
-		port2Intfs := make(map[interface{}][]interface{})
-		for dut, node := range dev2Node {
-			for port, intfs := range dev2Node2Port2Intfs[dut.(*opb.Device)][node.(*tpb.Node)] {
-				for _, i := range intfs {
-					port2Intfs[port] = append(port2Intfs[port], i)
-				}
-			}
-		}
-		port2IntfChan := genCombos(port2Intfs)
-		for port2Intf := range port2IntfChan {
-			if a := newAssign(dev2Node, port2Intf); s.linksMatch(a) {
+		link2link := s.buildLink2Links(dev2Node)
+		link2LinkChan := s.genLinkCombos(dev2Node, link2link)
+		for dLink2nLink := range link2LinkChan {
+			if a := s.newAssign(dev2Node, dLink2nLink); a != nil {
 				// TODO: When solver is rewritten, signal the gorouting
 				// channel to exit early here and avoid leaving the goroutine hanging.
 				// Not disastrous but ideally the goroutines would terminate here.
@@ -292,87 +312,68 @@ func (s *solver) solve() (*assign, error) {
 			}
 		}
 	}
-	// Give a more specific error message for the case when we didn't need to even
-	// consider the links to determine that there were no matching topologies.
-	if !hasNodeCombo {
-		return nil, fmt.Errorf("no combination of nodes in the KNE topology matches the testbed, irrespective of links")
-	}
 	return nil, fmt.Errorf("no KNE topology matches the testbed")
 }
 
-func (s *solver) nodeMatches(dev *opb.Device, isATE bool) (map[*tpb.Node]map[*opb.Port][]*intf, error) {
-	node2Port2Intfs := make(map[*tpb.Node]map[*opb.Port][]*intf)
+// buildLink2Links builds a map of dev to node links, for a device => node selection
+// d2n - is the device => node map
+func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*nodeLink {
+	link2link := make(map[*devLink][]*nodeLink)
+	assignedDevs := make(map[*opb.Device]bool)
+	for dev, node := range d2n {
+		for devPeer, devLinks := range s.dev2Links[dev] {
+			if _, ok := assignedDevs[devPeer]; ok {
+				nodePeer := d2n[devPeer]
+				nodeLinks := s.node2Links[node][nodePeer]
+				for _, link := range devLinks {
+					link2link[link] = nodeLinks
+				}
+			}
+		}
+		assignedDevs[dev] = true
+	}
+	return link2link
+}
+
+func (s *solver) nodeMatches(dev *opb.Device, isATE bool) ([]*tpb.Node, error) {
+	var nodeList []*tpb.Node
 	for _, node := range s.topology.GetNodes() {
 		if isATE != ateTypes[node.GetType()] {
 			continue
 		}
-		match, port2Intfs := s.devMatch(dev, node)
+		match := s.devMatch(dev, node)
 		if match {
 			log.V(1).Infof("Found match: testbed device %q -> KNE topology node %q", dev.GetId(), node.GetName())
-			node2Port2Intfs[node] = port2Intfs
+			nodeList = append(nodeList, node)
 		}
 	}
-	if len(node2Port2Intfs) == 0 {
+	if len(nodeList) == 0 {
 		return nil, fmt.Errorf("no node in KNE topology to match testbed device %q", dev.GetId())
 	}
-	return node2Port2Intfs, nil
+	return nodeList, nil
 }
 
-func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) (bool, map[*opb.Port][]*intf) {
+func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) bool {
 	if dev.GetHardwareModel() != "" && dev.GetHardwareModel() != hardwareModel(node) {
-		return false, nil
+		return false
 	}
 	if dev.GetSoftwareVersion() != "" && dev.GetSoftwareVersion() != softwareVersion(node) {
-		return false, nil
+		return false
 	}
 	if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED && v != type2VendorMap[node.GetType()] {
-		return false, nil
+		return false
 	}
 	log.V(1).Infof("Found node match: %q", dev.GetId())
 	intfs := s.node2Intfs[node]
 	log.V(1).Infof("Interfaces: %v", intfs)
 	// If the device needs more ports than the node, this node cannot match.
-	if len(dev.GetPorts()) > len(intfs) {
-		return false, nil
-	}
-	port2Infs := make(map[*opb.Port][]*intf)
-	for _, port := range dev.GetPorts() {
-		var infs []*intf
-		for _, intf := range intfs {
-			if s.portMatch(port, intf) {
-				log.V(1).Infof("Matched Port: %q %q", port.GetId(), intf.name)
-				infs = append(infs, intf)
-			}
-		}
-		if len(intfs) == 0 {
-			return false, nil
-		}
-		port2Infs[port] = infs
-	}
-	return true, port2Infs
+	return len(dev.GetPorts()) <= len(intfs)
 }
 
 func (s *solver) portMatch(port *opb.Port, intf *intf) bool {
 	// TODO: When solver is rewritten, support more generic port matching.
 	if port.GetSpeed() != opb.Port_SPEED_UNSPECIFIED {
 		return false
-	}
-	return true
-}
-
-func (s *solver) linksMatch(a *assign) bool {
-	getIntf := func(tbLink string) *intf {
-		parts := strings.Split(tbLink, ":")
-		dut := s.id2Dev[parts[0]]
-		port := s.dev2Ports[dut][parts[1]]
-		return a.port2Intf[port]
-	}
-	for _, link := range s.testbed.GetLinks() {
-		intfA := getIntf(link.GetA())
-		intfB := getIntf(link.GetB())
-		if s.intf2Intf[intfA] != intfB {
-			return false
-		}
 	}
 	return true
 }
@@ -385,29 +386,29 @@ func softwareVersion(node *tpb.Node) string {
 	return hardwareModel(node)
 }
 
-// genCombos yields every key->value mapping, where no two keys map to the same
-// value, given a map of keys to their possible values.
-func genCombos(m map[interface{}][]interface{}) <-chan map[interface{}]interface{} {
-	var keys []interface{}
+// genLinkCombos yields port link->node link mappings
+func (s *solver) genLinkCombos(d2n map[*opb.Device]*tpb.Node, m map[*devLink][]*nodeLink) <-chan map[*devLink]*nodeLink {
+	var keys []*devLink
 	for k := range m {
 		keys = append(keys, k)
 	}
-	ch := make(chan map[interface{}]interface{})
+	ch := make(chan map[*devLink]*nodeLink)
 	go func() {
 		defer close(ch)
-		genRecurse(m, keys, make(map[interface{}]interface{}), make(map[interface{}]bool), ch)
+		s.genLinkRecurse(d2n, m, keys, make(map[*devLink]*nodeLink), make(map[*nodeLink]bool), ch)
 	}()
 	return ch
 }
 
-func genRecurse(
-	m map[interface{}][]interface{},
-	keys []interface{},
-	res map[interface{}]interface{},
-	used map[interface{}]bool,
-	ch chan<- map[interface{}]interface{}) {
+func (s *solver) genLinkRecurse(
+	d2n map[*opb.Device]*tpb.Node,
+	m map[*devLink][]*nodeLink,
+	keys []*devLink,
+	res map[*devLink]*nodeLink,
+	used map[*nodeLink]bool,
+	ch chan<- map[*devLink]*nodeLink) {
 	if len(keys) == 0 {
-		copy := make(map[interface{}]interface{})
+		copy := make(map[*devLink]*nodeLink)
 		for k, v := range res {
 			copy[k] = v
 		}
@@ -417,24 +418,123 @@ func genRecurse(
 	first := keys[0]
 	for _, i := range m[first] {
 		if !used[i] {
+			if !s.shouldLinkRecurse(d2n, first, i) {
+				continue
+			}
 			res[first] = i
 			used[i] = true
-			genRecurse(m, keys[1:], res, used, ch)
+			s.genLinkRecurse(d2n, m, keys[1:], res, used, ch)
 			delete(used, i)
 		}
 	}
 }
 
-func newAssign(dev2Node, port2Intf map[interface{}]interface{}) *assign {
+// shouldLinkRecurse returns whether a device link should be assigned to a node
+// link by checking the ports assigned match requirements.
+// d2n - device to node mapped for this solution set.
+// dLink - is the testbed link.
+// nLink - is potential mapped node link.
+// It returns a boolean; true if valid selection, false otherwise.
+func (s *solver) shouldLinkRecurse(d2n map[*opb.Device]*tpb.Node, dLink *devLink, nLink *nodeLink) bool {
+	if d2n[dLink.srcDev] == nLink.srcNode {
+		return s.portMatch(dLink.srcPort, nLink.srcIntf) && s.portMatch(dLink.dstPort, nLink.dstIntf)
+	}
+	return s.portMatch(dLink.srcPort, nLink.dstIntf) && s.portMatch(dLink.dstPort, nLink.srcIntf)
+}
+
+// genDutCombos yields device -> node mappings
+func (s *solver) genDevCombos(m map[*opb.Device][]*tpb.Node) <-chan map[*opb.Device]*tpb.Node {
+	var keys []*opb.Device
+	for dev := range m {
+		keys = append(keys, dev)
+	}
+	ch := make(chan map[*opb.Device]*tpb.Node)
+	go func() {
+		defer close(ch)
+		s.genDevRecurse(m, keys, make(map[*opb.Device]*tpb.Node), make(map[*tpb.Node]bool), ch)
+	}()
+	return ch
+}
+
+func (s *solver) genDevRecurse(
+	m map[*opb.Device][]*tpb.Node,
+	keys []*opb.Device,
+	res map[*opb.Device]*tpb.Node,
+	used map[*tpb.Node]bool,
+	ch chan<- map[*opb.Device]*tpb.Node) {
+	if len(keys) == 0 {
+		copy := make(map[*opb.Device]*tpb.Node)
+		for k, v := range res {
+			copy[k] = v
+		}
+		ch <- copy
+		return
+	}
+	first := keys[0]
+	for _, i := range m[first] {
+		if !used[i] {
+			if !s.shouldDevRecurse(first, i, res) {
+				continue
+			}
+			res[first] = i
+			used[i] = true
+			s.genDevRecurse(m, keys[1:], res, used, ch)
+			delete(used, i)
+			delete(res, first)
+		}
+	}
+}
+
+// shouldDevRecurse returns whether a device should be assigned to a node by
+// checking the required number of links are present between their peers.
+// dev - is the testbed device
+// node - is potential mapped node.
+// res - is working resultset based on past selections.
+// It returns a boolean; true if valid selection, false otherwise.
+func (s *solver) shouldDevRecurse(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*tpb.Node) bool {
+	for devPeer, devLinks := range s.dev2Links[dev] {
+		if nodePeer, ok := res[devPeer]; ok {
+			nodeLinks := s.node2Links[node][nodePeer]
+			if len(devLinks) > len(nodeLinks) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func (s *solver) newAssign(dev2Node map[*opb.Device]*tpb.Node, link2link map[*devLink]*nodeLink) *assign {
 	a := &assign{
 		dev2Node:  make(map[*opb.Device]*tpb.Node),
 		port2Intf: make(map[*opb.Port]*intf),
 	}
-	for d, n := range dev2Node {
-		a.dev2Node[d.(*opb.Device)] = n.(*tpb.Node)
+	assignedIntfs := make(map[*intf]bool)
+	// From the mapped link => link, build up the port => intf map
+	for dLink, nLink := range link2link {
+		if dev2Node[dLink.srcDev] == nLink.srcNode {
+			a.port2Intf[dLink.srcPort] = nLink.srcIntf
+			a.port2Intf[dLink.dstPort] = nLink.dstIntf
+		} else {
+			a.port2Intf[dLink.srcPort] = nLink.dstIntf
+			a.port2Intf[dLink.dstPort] = nLink.srcIntf
+		}
+		assignedIntfs[nLink.srcIntf] = true
+		assignedIntfs[nLink.dstIntf] = true
 	}
-	for p, i := range port2Intf {
-		a.port2Intf[p.(*opb.Port)] = i.(*intf)
+	for d, n := range dev2Node {
+		a.dev2Node[d] = n
+		// Assign remaining ports not connected to any device
+		for _, port := range s.dev2Ports[d] {
+			if _, ok := a.port2Intf[port]; !ok {
+				for _, intf := range s.node2Intfs[n] {
+					if _, ok = assignedIntfs[intf]; !ok {
+						a.port2Intf[port] = intf
+						assignedIntfs[intf] = true
+						break
+					}
+				}
+			}
+		}
 	}
 	return a
 }

@@ -347,7 +347,7 @@ func TestSolveErrors(t *testing.T) {
         type: CISCO_CXR
 		  }
 		`,
-		wantErr: "no combination of nodes",
+		wantErr: "no KNE topology",
 	}, {
 		desc: "no link combination",
 		tb: &opb.Testbed{
