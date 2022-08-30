@@ -75,9 +75,10 @@ type Assignment struct {
 
 type solver struct {
 	abstractGraph, superGraph *Graph
-
-	absNode2Node map[*Node]map[*Node]int // Map Node to Node and how many links there are.
-	conPort2Port map[*Port][]*Port       // Cache the concrete ports that are linked.
+	absPort2Node              map[*Port]*Node         // Map Port to Node it is part of.
+	absNode2Node              map[*Node]map[*Node]int // Map Node to Node and how many links there are.
+	conPort2Port              map[*Port][]*Port       // Cache the concrete ports that are linked.
+	absPort2Port              map[*Port][]*Port       // Cache of abstract ports that are linked.
 }
 
 // Solve returns as assignment from superGraph that satisfies abstractGraph.
@@ -107,10 +108,19 @@ func Solve(abstractGraph *Graph, superGraph *Graph) (*Assignment, error) {
 		absNode2Node[absPort2Node[srcNode]][absPort2Node[dstNode]]++
 	}
 
+	absPort2Port := abstractGraph.fetchPort2PortMap()
+	for absPort, ports := range absPort2Port {
+		if len(ports) > 1 {
+			return nil, errors.Errorf("could not solve for %q, port %q part of more than one Edge", abstractGraph.Desc, absPort.Desc)
+		}
+	}
+
 	s := &solver{
 		abstractGraph: abstractGraph,
 		superGraph:    superGraph,
 		absNode2Node:  absNode2Node,
+		absPort2Node:  absPort2Node,
+		absPort2Port:  absPort2Port,
 	}
 
 	a, err := s.solve()
@@ -150,9 +160,14 @@ func (s *solver) solve() (*Assignment, error) {
 		}
 
 		// Since the edges can be satisfied, try to assign matching ports.
-		s.assignPorts()
+		abs2ConPort := s.assignPorts(abs2ConNode, make(map[*Port]*Port), make(map[*Node]bool))
+		if abs2ConPort == nil {
+			continue
+		}
+
+		return &Assignment{abs2ConNode, abs2ConPort}, nil
 	}
-	return nil, nil
+	return nil, errors.Errorf("could not solve for %q from %q", s.abstractGraph.Desc, s.superGraph.Desc)
 }
 
 // checkEdges validates that the concrete nodes can satisfy the abstract edges.
@@ -187,8 +202,73 @@ func (s *solver) checkEdge(conSrcNode, conDstNode *Node, edgesNeeded int) bool {
 	return false
 }
 
-func (s *solver) assignPorts() {
-	return
+// assignPorts tries to assign the Ports given the Node mapping.
+func (s *solver) assignPorts(abs2ConNode map[*Node]*Node, abs2ConPort map[*Port]*Port, assignedNodes map[*Node]bool) map[*Port]*Port {
+	abs2ConPortCombos := make(map[*Port][]*Port)
+	if len(s.absPort2Node) == len(abs2ConPort) {
+		// Done.
+		return abs2ConPort
+	}
+	for absSrcNode, conSrcNode := range abs2ConNode {
+		if _, ok := assignedNodes[absSrcNode]; ok {
+			continue
+		}
+		for _, absSrcPort := range absSrcNode.Ports {
+			// Check attributes match, then check if matched ports link correctly.
+			matchedConPorts := matchPorts(absSrcPort, conSrcNode.Ports)
+			absDstPort := s.absPort2Port[absSrcPort]
+			if len(absDstPort) == 0 {
+				abs2ConPortCombos[absSrcPort] = matchedConPorts
+				continue
+			}
+			// The abstract Port is part of an Edge, so check the concrete Ports link to corresponding Node.
+			conDstNode := abs2ConNode[s.absPort2Node[absDstPort[0]]]
+			for _, conSrcPort := range matchedConPorts {
+				conDstPorts := s.conPort2Port[conSrcPort]
+				for _, p := range conDstPorts {
+					if conDstNode.containsPort(p) {
+						abs2ConPortCombos[absSrcPort] = append(abs2ConPortCombos[absSrcPort], conSrcPort)
+					}
+				}
+			}
+		}
+
+		// Try the Port combos for this Node.
+		abs2ConPortChan := genPortCombos(abs2ConPortCombos)
+		for port2Port := range abs2ConPortChan {
+			for absPort, conPort := range port2Port {
+				canAssign := true
+				if absDstPort := s.absPort2Port[absPort]; len(absDstPort) == 1 {
+					if assignedDstPort, ok := abs2ConPort[absDstPort[0]]; ok {
+						isLinked := false
+						for _, p := range s.conPort2Port[conPort] {
+							if p == assignedDstPort {
+								// This port is linked to an already assigned port; ok to assign.
+								isLinked = true
+								break
+							}
+						}
+						if !isLinked {
+							canAssign = false
+						}
+					}
+				}
+				// This Port combo does not work with previously assigned Ports.
+				if !canAssign {
+					continue
+				}
+				// Try to assign the port.
+				// If the part is part of an edge, check if the other port has been assigned. If it has, check that this port is linked to the dst port.
+				abs2ConPort[absPort] = conPort
+			}
+			assignedNodes[absSrcNode] = true
+			if ret := s.assignPorts(abs2ConNode, abs2ConPort, assignedNodes); ret != nil {
+				return ret
+			}
+		}
+	}
+	log.V(1).Infof("Only %d of %d ports were assigned; unassigning all ports", len(abs2ConPort), len(s.absPort2Node))
+	return nil
 }
 
 // genNodeCombos yields every key->value mapping, where no two keys map to the same

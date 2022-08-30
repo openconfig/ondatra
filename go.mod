@@ -13,7 +13,7 @@ require (
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.0.0
 	github.com/openconfig/gribi v0.1.1-0.20220126144445-1634932f9fd8
-	github.com/openconfig/kne v0.1.1
+	github.com/openconfig/kne v0.1.4
 	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
 	github.com/openconfig/ygnmi v0.2.1
@@ -23,7 +23,7 @@ require (
 	github.com/pborman/uuid v1.2.1
 	github.com/pkg/errors v0.9.1
 	go.opencensus.io v0.23.0
-	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
+	golang.org/x/crypto v0.0.0-20220518034528-6f7dac969898
 	golang.org/x/net v0.0.0-20220412020605-290c469a71a5
 	golang.org/x/sys v0.0.0-20220412211240-33da011f77ad
 	google.golang.org/grpc v1.48.0
