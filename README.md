@@ -46,7 +46,7 @@ abstract topology and criteria specified in the testbed file.
 ## Running an Ondatra Test
 
 An Ondatra test is a Go test, and so is run with `go test`, albeit with some
-additional flags related to the reservation of the testbed:
+additional flags to control the execution of the test:
 
 *   `-testbed` (*required*): Path to the testbed text proto file.
 *   `-wait_time` (*optional*): Maximum amount of time the test should wait until
@@ -54,6 +54,9 @@ additional flags related to the reservation of the testbed:
     time to wait.
 *   `-run_time` (*optional*): Timeout of the test run, excluding the wait time
     for the testbed to be ready. If not specified, no limit is imposed.
+*   `-xml (*optional*): File path to write JUnit XML test results; disables
+    normal Go test logging.
+*   `-debug (*optional*): Whether the test is run in debug mode.
 
 In addition, the binding implementation is free to define its own set of
 optional or required flags.
@@ -71,6 +74,29 @@ ondatra.Debug().Breakpoint(t)
 It also offers a menu option to pause the test immediately after the testbed is
 reserved. This is useful if you want to just reserve the same testbed for manual
 testing, or to manually inspect the testbed before the test cases run.
+
+### Logging
+
+Ondatra uses [glog](https://pkg.go.dev/github.com/golang/glog), which by default
+logs to a temporary dir. Use the `-alsologtostderr` flag to output to stderr and
+the `-v` flag to increase verbosity. See the package documentation for other
+flags.
+
+## XML Test Report
+
+Ondatra has the abililty to output test results in JUnit XML format. If you pass
+`-xml=[path]` to your `go test` invocation, Ondatra will use
+[go-junit-report](https://github.com/jstemmer/go-junit-report) to translate the
+Go test log to an XML file at the provided path.
+
+To attach properties to the test or individual test cases in the XML report, use
+the `ondatra.Report()` API. For example, `ondatra.Report().AddTestProperty()`
+attaches a key-value property to the currently running test case.
+
+The help with the development of external tooling that makes use of the XML
+output, the `report` package also provides the utility functions `ReadXML` and
+`ExtractProperties` for decoding the XML and extracting a properties map,
+respectively.
 
 ## Testing on KNE
 

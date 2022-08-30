@@ -71,6 +71,7 @@ func (n *IxNetwork) NewSession(ctx context.Context, name string) (*Session, erro
 }
 
 type sessionData struct {
+	ID   int    `json:"id"`
 	Name string `json:"sessionName"`
 }
 
@@ -88,9 +89,22 @@ func encodeSessionName(s string) string {
 func (n *IxNetwork) FetchSession(ctx context.Context, id int) (*Session, error) {
 	data := sessionData{}
 	if err := n.ixweb.jsonReq(ctx, get, sessionPath(id), nil, &data); err != nil {
-		return nil, fmt.Errorf("error deleting session: %w", err)
+		return nil, fmt.Errorf("error fetching session: %w", err)
 	}
 	return &Session{ixweb: n.ixweb, id: id, name: data.Name}, nil
+}
+
+// FetchSessions fetches all current IxNetwork sessions.
+func (n *IxNetwork) FetchSessions(ctx context.Context) (map[int]*Session, error) {
+	var data []*sessionData
+	if err := n.ixweb.jsonReq(ctx, get, sessionsPath, nil, &data); err != nil {
+		return nil, fmt.Errorf("error fetching sessions: %w", err)
+	}
+	idToSession := map[int]*Session{}
+	for _, s := range data {
+		idToSession[s.ID] = &Session{ixweb: n.ixweb, id: s.ID, name: s.Name}
+	}
+	return idToSession, nil
 }
 
 // DeleteSession deletes the IxNetwork session with the specified ID.

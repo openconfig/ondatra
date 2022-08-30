@@ -122,6 +122,14 @@ func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNM
 	return gpb.NewGNMIClient(conn), nil
 }
 
+func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (binding.GNOIClients, error) {
+	conn, err := d.dialGRPC(ctx, "gnoi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &gnoiClients{conn: conn}, nil
+}
+
 func (d *kneDUT) DialGRIBI(ctx context.Context, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
 	conn, err := d.dialGRPC(ctx, "gribi", opts...)
 	if err != nil {

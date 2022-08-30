@@ -73,6 +73,84 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// Component_Port_BreakoutModePath represents the /openconfig-platform/components/component/port/breakout-mode YANG schema element.
+type Component_Port_BreakoutModePath struct {
+	*ygot.NodePath
+}
+
+// Component_Port_BreakoutModePathAny represents the wildcard version of the /openconfig-platform/components/component/port/breakout-mode YANG schema element.
+type Component_Port_BreakoutModePathAny struct {
+	*ygot.NodePath
+}
+
+// GroupAny (list): List of breakout groups.
+// ----------------------------------------
+// Defining module: "openconfig-platform-port"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "groups/group"
+// Path from root: "/components/component/port/breakout-mode/groups/group"
+// Index (wildcarded): uint8
+func (n *Component_Port_BreakoutModePath) GroupAny() *Component_Port_BreakoutMode_GroupPathAny {
+	return &Component_Port_BreakoutMode_GroupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"groups", "group"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+}
+
+// GroupAny (list): List of breakout groups.
+// ----------------------------------------
+// Defining module: "openconfig-platform-port"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "groups/group"
+// Path from root: "/components/component/port/breakout-mode/groups/group"
+// Index (wildcarded): uint8
+func (n *Component_Port_BreakoutModePathAny) GroupAny() *Component_Port_BreakoutMode_GroupPathAny {
+	return &Component_Port_BreakoutMode_GroupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"groups", "group"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+}
+
+// Group (list): List of breakout groups.
+// ----------------------------------------
+// Defining module: "openconfig-platform-port"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "groups/group"
+// Path from root: "/components/component/port/breakout-mode/groups/group"
+// Index: uint8
+func (n *Component_Port_BreakoutModePath) Group(Index uint8) *Component_Port_BreakoutMode_GroupPath {
+	return &Component_Port_BreakoutMode_GroupPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"groups", "group"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+}
+
+// Group (list): List of breakout groups.
+// ----------------------------------------
+// Defining module: "openconfig-platform-port"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "groups/group"
+// Path from root: "/components/component/port/breakout-mode/groups/group"
+// Index: uint8
+func (n *Component_Port_BreakoutModePathAny) Group(Index uint8) *Component_Port_BreakoutMode_GroupPathAny {
+	return &Component_Port_BreakoutMode_GroupPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"groups", "group"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+}
+
 // Component_Port_BreakoutMode_GroupPath represents the /openconfig-platform/components/component/port/breakout-mode/groups/group YANG schema element.
 type Component_Port_BreakoutMode_GroupPath struct {
 	*ygot.NodePath

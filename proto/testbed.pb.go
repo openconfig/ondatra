@@ -301,6 +301,8 @@ type Device struct {
 	// regular expression.
 	SoftwareVersion string  `protobuf:"bytes,5,opt,name=software_version,json=softwareVersion,proto3" json:"software_version,omitempty"`
 	Ports           []*Port `protobuf:"bytes,3,rep,name=ports,proto3" json:"ports,omitempty"`
+	// A key-value map of additional device dimensions. Optional.
+	//
 	// In addition to the above fields, the extra dimensions field can be used to
 	// further restrict matching devices. The set of dimension keys that are
 	// supported is specific to the binding implementation. For example, if the

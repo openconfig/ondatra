@@ -23,6 +23,7 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/testbed"
@@ -80,6 +81,12 @@ const (
 // String returns the name of the vendor.
 func (v Vendor) String() string {
 	return opb.Device_Vendor(v).String()
+}
+
+// GNMI returns a gNMI client for the device.
+func (d *Device) GNMI() *gnmi.Client {
+	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER
+	return gnmi.NewClient(d.ID(), useGetForCfg, d.clientFn)
 }
 
 // Telemetry returns a telemetry path root for the device.

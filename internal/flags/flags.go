@@ -31,6 +31,7 @@ var (
 		"A zero value lets the binding implementation choose an appropriate wait time. Must be a non-negative value.")
 	reserve = flag.String("reserve", "", "reservation id or a mapping of device and port IDs to names of the form "+
 		"'dut=mydevice,dut:port1=Ethernet1/1,ate=myixia,ate:port2=2/3'")
+	xml = flag.String("xml", "", "File path to write JUnit XML test results; disables normal Go test logging.")
 
 	debug = flag.Bool("debug", false, "Whether the test is run in debug mode")
 
@@ -43,6 +44,7 @@ type Values struct {
 	WaitTime    time.Duration
 	ResvID      string
 	ResvPartial map[string]string
+	XMLPath     string
 	Debug       bool
 }
 
@@ -70,6 +72,7 @@ func Parse() (*Values, error) {
 		WaitTime:    *waitTime,
 		ResvID:      resvID,
 		ResvPartial: resvPartial,
+		XMLPath:     *xml,
 		Debug: *debug,
 	}, nil
 }

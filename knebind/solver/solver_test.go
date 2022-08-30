@@ -347,7 +347,7 @@ func TestSolveErrors(t *testing.T) {
         type: CISCO_CXR
 		  }
 		`,
-		wantErr: "no combination of nodes",
+		wantErr: "no KNE topology",
 	}, {
 		desc: "no link combination",
 		tb: &opb.Testbed{
@@ -403,7 +403,7 @@ func TestSolveErrors(t *testing.T) {
 		    z_int: "eth1"
 		  }
 		`,
-		wantErr: "no combination of nodes",
+		wantErr: "no KNE topology matches the testbed",
 	}, {
 		desc: "required port group size not found",
 		tb: &opb.Testbed{
@@ -450,7 +450,7 @@ func TestSolveErrors(t *testing.T) {
 		    z_int: "eth2"
 		  }
 		`,
-		wantErr: "no combination of nodes",
+		wantErr: "no KNE topology matches the testbed",
 	}, {
 		desc: "required number of port groups not found",
 		tb: &opb.Testbed{
@@ -497,7 +497,7 @@ func TestSolveErrors(t *testing.T) {
 		    z_int: "eth2"
 		  }
 		`,
-		wantErr: "no combination of nodes",
+		wantErr: "no KNE topology matches the testbed",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

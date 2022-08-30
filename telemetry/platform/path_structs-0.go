@@ -429,6 +429,40 @@ func (n *ComponentPathAny) Chassis() *Component_ChassisPathAny {
 	}
 }
 
+// ControllerCard (container): Data for controller card components, i.e., for components
+// with type=CONTROLLER_CARD
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "controller-card"
+// Path from root: "/components/component/controller-card"
+func (n *ComponentPath) ControllerCard() *Component_ControllerCardPath {
+	return &Component_ControllerCardPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"controller-card"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ControllerCard (container): Data for controller card components, i.e., for components
+// with type=CONTROLLER_CARD
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "controller-card"
+// Path from root: "/components/component/controller-card"
+func (n *ComponentPathAny) ControllerCard() *Component_ControllerCardPathAny {
+	return &Component_ControllerCardPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"controller-card"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Cpu (container): Data for cpu components
 // ----------------------------------------
 // Defining module: "openconfig-platform"
@@ -2295,6 +2329,16 @@ func (n *Component_Chassis_Utilization_ResourcePathAny) Used() *Component_Chassi
 			n,
 		),
 	}
+}
+
+// Component_ControllerCardPath represents the /openconfig-platform/components/component/controller-card YANG schema element.
+type Component_ControllerCardPath struct {
+	*ygot.NodePath
+}
+
+// Component_ControllerCardPathAny represents the wildcard version of the /openconfig-platform/components/component/controller-card YANG schema element.
+type Component_ControllerCardPathAny struct {
+	*ygot.NodePath
 }
 
 // Component_CpuPath represents the /openconfig-platform/components/component/cpu YANG schema element.
@@ -5986,84 +6030,6 @@ func (n *Component_PortPathAny) BreakoutMode() *Component_Port_BreakoutModePathA
 		NodePath: ygot.NewNodePath(
 			[]string{"breakout-mode"},
 			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Component_Port_BreakoutModePath represents the /openconfig-platform/components/component/port/breakout-mode YANG schema element.
-type Component_Port_BreakoutModePath struct {
-	*ygot.NodePath
-}
-
-// Component_Port_BreakoutModePathAny represents the wildcard version of the /openconfig-platform/components/component/port/breakout-mode YANG schema element.
-type Component_Port_BreakoutModePathAny struct {
-	*ygot.NodePath
-}
-
-// GroupAny (list): List of breakout groups.
-// ----------------------------------------
-// Defining module: "openconfig-platform-port"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "groups/group"
-// Path from root: "/components/component/port/breakout-mode/groups/group"
-// Index (wildcarded): uint8
-func (n *Component_Port_BreakoutModePath) GroupAny() *Component_Port_BreakoutMode_GroupPathAny {
-	return &Component_Port_BreakoutMode_GroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"groups", "group"},
-			map[string]interface{}{"index": "*"},
-			n,
-		),
-	}
-}
-
-// GroupAny (list): List of breakout groups.
-// ----------------------------------------
-// Defining module: "openconfig-platform-port"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "groups/group"
-// Path from root: "/components/component/port/breakout-mode/groups/group"
-// Index (wildcarded): uint8
-func (n *Component_Port_BreakoutModePathAny) GroupAny() *Component_Port_BreakoutMode_GroupPathAny {
-	return &Component_Port_BreakoutMode_GroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"groups", "group"},
-			map[string]interface{}{"index": "*"},
-			n,
-		),
-	}
-}
-
-// Group (list): List of breakout groups.
-// ----------------------------------------
-// Defining module: "openconfig-platform-port"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "groups/group"
-// Path from root: "/components/component/port/breakout-mode/groups/group"
-// Index: uint8
-func (n *Component_Port_BreakoutModePath) Group(Index uint8) *Component_Port_BreakoutMode_GroupPath {
-	return &Component_Port_BreakoutMode_GroupPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"groups", "group"},
-			map[string]interface{}{"index": Index},
-			n,
-		),
-	}
-}
-
-// Group (list): List of breakout groups.
-// ----------------------------------------
-// Defining module: "openconfig-platform-port"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "groups/group"
-// Path from root: "/components/component/port/breakout-mode/groups/group"
-// Index: uint8
-func (n *Component_Port_BreakoutModePathAny) Group(Index uint8) *Component_Port_BreakoutMode_GroupPathAny {
-	return &Component_Port_BreakoutMode_GroupPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"groups", "group"},
-			map[string]interface{}{"index": Index},
 			n,
 		),
 	}
