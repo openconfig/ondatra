@@ -12,13 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+package ixnet
 
 import (
-	"github.com/openconfig/ondatra/ixnet"
-
 	opb "github.com/openconfig/ondatra/proto"
 )
+
+// NewNetwork constructs a new Network configuration.
+// Tests should not call this directly; call Interface.AddNetwork instead.
+func NewNetwork(pb *opb.Network) *Network {
+	return &Network{pb}
+}
 
 // Network is a group of simulated device interfaces.
 type Network struct {
@@ -112,11 +116,11 @@ func (i *NetworkIP) Count() uint32 {
 
 // ISIS creates an ISIS configuration for the network or returns the existing config.
 // The default config params are Active: true, Route Origin: Internal and Metric: 10
-func (n *Network) ISIS() *ixnet.IPReachabilityConfig {
+func (n *Network) ISIS() *IPReachabilityConfig {
 	if n.pb.Isis == nil {
 		n.pb.Isis = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
-	return ixnet.NewIPReachability(n.pb.Isis)
+	return &IPReachabilityConfig{n.pb.Isis}
 }
 
 // BGP creates a BGP config for the network or returns the existing config.
@@ -126,7 +130,7 @@ func (n *Network) ISIS() *ixnet.IPReachabilityConfig {
 //	Active: true
 //	Origin: IGP
 //	ASN set mode: AS-SEQ
-func (n *Network) BGP() *ixnet.BGPAttributes {
+func (n *Network) BGP() *BGPAttributes {
 	if n.pb.BgpAttributes == nil {
 		n.pb.BgpAttributes = &opb.BgpAttributes{
 			Active:                true,
@@ -135,7 +139,7 @@ func (n *Network) BGP() *ixnet.BGPAttributes {
 			AdvertisementProtocol: opb.BgpAttributes_ADVERTISEMENT_PROTOCOL_SAME_AS_ROUTE,
 		}
 	}
-	return ixnet.NewBGPAttributes(n.pb.BgpAttributes)
+	return &BGPAttributes{n.pb.BgpAttributes}
 }
 
 // ImportedBGPRoutes creates a BGP route import configuration for the network or

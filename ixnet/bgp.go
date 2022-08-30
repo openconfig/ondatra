@@ -320,12 +320,6 @@ func (c *BGPCapabilities) WithGracefulRestart(enabled bool) *BGPCapabilities {
 	return c
 }
 
-// NewBGPAttributes returns a new set of BGP attributes.
-// Tests must not call this method directly.
-func NewBGPAttributes(pb *opb.BgpAttributes) *BGPAttributes {
-	return &BGPAttributes{pb}
-}
-
 // BGPAttributes is a representation of BGP attributes on the ATE.
 type BGPAttributes struct {
 	pb *opb.BgpAttributes

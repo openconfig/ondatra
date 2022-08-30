@@ -30,13 +30,6 @@ type ISIS struct {
 	pb *opb.ISISConfig
 }
 
-// NewIPReachability constructs a new IP Reachability configuration.
-// Tests should not call this directly; call ISISRoutes.IPReachability()
-// or Network.ISIS() instead.
-func NewIPReachability(pb *opb.IPReachability) *IPReachabilityConfig {
-	return &IPReachabilityConfig{pb: pb}
-}
-
 // IPReachabilityConfig is the IS-IS config for a simulated network pool.
 // Must be constructed by calling NewIPReachability().
 type IPReachabilityConfig struct {
@@ -585,5 +578,5 @@ func (routes *ISISRoutes) IPReachability() *IPReachabilityConfig {
 	if routes.pb.Reachability == nil {
 		routes.pb.Reachability = &opb.IPReachability{Active: true, Metric: 10, RouteOrigin: opb.IPReachability_INTERNAL}
 	}
-	return NewIPReachability(routes.pb.Reachability)
+	return &IPReachabilityConfig{routes.pb.Reachability}
 }

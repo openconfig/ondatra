@@ -20,6 +20,11 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+// Network is an alias for ixnet.Network.
+// Deprecated: use ixnet.Network
+// TODO: Remove once all tests migrated to ixnet.Network.
+type Network = ixnet.Network
+
 // Interface represents an ATE interface configuration.
 type Interface struct {
 	pb *opb.InterfaceConfig
@@ -36,10 +41,10 @@ func (i *Interface) IsLACPEnabled() bool {
 }
 
 // AddNetwork adds and returns a network with the specified name.
-func (i *Interface) AddNetwork(name string) *Network {
+func (i *Interface) AddNetwork(name string) *ixnet.Network {
 	npb := &opb.Network{Name: name, InterfaceName: i.pb.Name}
 	i.pb.Networks = append(i.pb.Networks, npb)
-	return &Network{pb: npb}
+	return ixnet.NewNetwork(npb)
 }
 
 // ClearNetworks clears networks from the interface.
@@ -49,10 +54,10 @@ func (i *Interface) ClearNetworks() *Interface {
 }
 
 // Networks returns a map of network names to networks.
-func (i *Interface) Networks() map[string]*Network {
-	nets := make(map[string]*Network)
+func (i *Interface) Networks() map[string]*ixnet.Network {
+	nets := make(map[string]*ixnet.Network)
 	for _, pb := range i.pb.GetNetworks() {
-		nets[pb.GetName()] = &Network{pb}
+		nets[pb.GetName()] = ixnet.NewNetwork(pb)
 	}
 	return nets
 }
