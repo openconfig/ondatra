@@ -348,17 +348,75 @@ func TestSolveGroup(t *testing.T) {
 		  a_int: "eth6"
 		  z_node: "node2"
 		  z_int: "eth6"
-		}`
+		}
+		links: {
+			a_node: "node1"
+			a_int: "eth7"
+			z_node: "node2"
+			z_int: "eth7"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth8"
+			z_node: "node2"
+			z_int: "eth8"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth9"
+			z_node: "node2"
+			z_int: "eth9"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth10"
+			z_node: "node2"
+			z_int: "eth10"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth11"
+			z_node: "node2"
+			z_int: "eth11"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth12"
+			z_node: "node2"
+			z_int: "eth12"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth13"
+			z_node: "node2"
+			z_int: "eth13"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth14"
+			z_node: "node2"
+			z_int: "eth14"
+		  }
+		  links: {
+			a_node: "node1"
+			a_int: "eth15"
+			z_node: "node2"
+			z_int: "eth15"
+		  }`
 	topo := unmarshalTopo(t, topoText)
 
 	dut1 := &opb.Device{
 		Id:     "dut1",
 		Vendor: opb.Device_ARISTA,
-		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"}},
+		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"},
+						 {Id: "port7"}, {Id: "port8"}, {Id: "port9"}, {Id: "port10"}, {Id: "port11"}, {Id: "port12"},
+						 {Id: "port13"}, {Id: "port14"}, {Id: "port15"}},
 	}
 	ate := &opb.Device{
 		Id:    "ate",
-		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2", Group: "G1"}, {Id: "port3", Group: "G2"}, {Id: "port4", Group: "G2"}, {Id: "port5", Group: "G3"}, {Id: "port6", Group: "G3"}},
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"},
+						 {Id: "port7"}, {Id: "port8"}, {Id: "port9"}, {Id: "port10"}, {Id: "port11", Group: "G1"},
+						 {Id: "port12", Group: "G2"}, {Id: "port13", Group: "G2"}, {Id: "port14", Group: "G3"}, {Id: "port15", Group: "G3"}},
 	}
 	link1 := &opb.Link{
 		A: "dut1:port1",
@@ -384,11 +442,47 @@ func TestSolveGroup(t *testing.T) {
 		A: "dut1:port6",
 		B: "ate:port6",
 	}
+	link7 := &opb.Link{
+		A: "dut1:port7",
+		B: "ate:port7",
+	}
+	link8 := &opb.Link{
+		A: "dut1:port8",
+		B: "ate:port8",
+	}
+	link9 := &opb.Link{
+		A: "dut1:port9",
+		B: "ate:port9",
+	}
+	link10 := &opb.Link{
+		A: "dut1:port10",
+		B: "ate:port10",
+	}
+	link11 := &opb.Link{
+		A: "dut1:port11",
+		B: "ate:port11",
+	}
+	link12 := &opb.Link{
+		A: "dut1:port12",
+		B: "ate:port12",
+	}
+	link13 := &opb.Link{
+		A: "dut1:port13",
+		B: "ate:port13",
+	}
+	link14 := &opb.Link{
+		A: "dut1:port14",
+		B: "ate:port14",
+	}
+	link15 := &opb.Link{
+		A: "dut1:port15",
+		B: "ate:port15",
+	}
 
 	tb := &opb.Testbed{
 		Duts:  []*opb.Device{dut1},
 		Ates:  []*opb.Device{ate},
-		Links: []*opb.Link{link1, link2, link3, link4, link5, link6},
+		Links: []*opb.Link{link1, link2, link3, link4, link5, link6, link7, link8, link9, link10, link11, link12, link13, link14, link15},
 	}
 
 	res, err := Solve(tb, topo)

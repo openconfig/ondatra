@@ -443,14 +443,16 @@ func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*
 				allNodeLinks := []*nodeLink{}
 				devGPIndex := 0
 				for _, nodeGroupName := range nodePG.sortedNames {
-					devGroupName := devPG.sortedNames[devGPIndex]
-					devPGSize := len(devPG.groupMap[devGroupName])
-					nodePGSize := len(nodePG.groupMap[nodeGroupName])
-					if devPGSize > nodePGSize {
-						for _, link := range devPG.groupMap[devGroupName] {
-							link2link[link] = allNodeLinks
+					if len(devPG.sortedNames) > devGPIndex {
+						devGroupName := devPG.sortedNames[devGPIndex]
+						devPGSize := len(devPG.groupMap[devGroupName])
+						nodePGSize := len(nodePG.groupMap[nodeGroupName])
+						if devPGSize > nodePGSize {
+							for _, link := range devPG.groupMap[devGroupName] {
+								link2link[link] = allNodeLinks
+							}
+							devGPIndex++
 						}
-						devGPIndex++
 					}
 					allNodeLinks = append(allNodeLinks, nodePG.groupMap[nodeGroupName]...)
 				}
