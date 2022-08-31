@@ -81,6 +81,10 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		s.dev2Links[dev] = make(map[*opb.Device]*devPG)
 	}
 	// Build the dev => links map for testbed
+	// Currently we will support port groups for ATE devices only; so group name may be specified
+	// only for one end of a link. The other end of these group links must map to a single device,
+	// for all members of a group.
+	devicePGMap := make(map[string]*opb.Device)
 	for _, l := range tb.GetLinks() {
 		srcParts := strings.Split(l.GetA(), ":")
 		dstParts := strings.Split(l.GetB(), ":")
@@ -89,16 +93,28 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		srcPort := s.dev2Ports[srcDev][srcParts[1]]
 		dstPort := s.dev2Ports[dstDev][dstParts[1]]
 		group := srcPort.GetGroup()
+		peerDev := dstDev
 		if group == "" {
 			group = dstPort.GetGroup()
+			peerDev = srcDev
 		}
-		devLinkPtr := &devLink{srcDev: srcDev, dstDev: dstDev, srcPort: srcPort, dstPort: dstPort, group: group}
+		// For valid port groups ensure dut end maps to the same device for all members of the group
+		if group != "" {
+			if expPeerDev, ok := devicePGMap[group]; ok {
+				if peerDev != expPeerDev {
+					return nil, fmt.Errorf("Inconsistent port group configuration found in testbed")
+				}
+			} else {
+				devicePGMap[group] = peerDev
+			}
+		}
+		dLink := &devLink{srcDev: srcDev, dstDev: dstDev, srcPort: srcPort, dstPort: dstPort, group: group}
 		if _, ok := s.dev2Links[srcDev][dstDev]; !ok {
-			pgPtr := &devPG{groupMap: make(map[string][]*devLink), sortedNames: []string{}, totalLinks: 0}
-			s.dev2Links[srcDev][dstDev] = pgPtr
-			s.dev2Links[dstDev][srcDev] = pgPtr
+			pg := &devPG{groupMap: make(map[string][]*devLink)}
+			s.dev2Links[srcDev][dstDev] = pg
+			s.dev2Links[dstDev][srcDev] = pg
 		}
-		s.dev2Links[srcDev][dstDev].groupMap[group] = append(s.dev2Links[srcDev][dstDev].groupMap[group], devLinkPtr)
+		s.dev2Links[srcDev][dstDev].groupMap[group] = append(s.dev2Links[srcDev][dstDev].groupMap[group], dLink)
 	}
 	// For dev / node port group arrange the group names in descending order of membership size.
 	// So for multiple port groups between two devices (and nodes), we assign interfaces for largest port group first
@@ -131,13 +147,13 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	}
 	pDev := make(map[*opb.Device]bool)
 	for srcDev := range s.dev2Links {
-		for dstDev, devPGPtr := range s.dev2Links[srcDev] {
-			if _, ok := pDev[dstDev]; ok {
+		for dstDev, devPG := range s.dev2Links[srcDev] {
+			if pDev[dstDev] {
 				pgMap := make(map[string]int)
-				for gName, devLinks := range devPGPtr.groupMap {
+				for gName, devLinks := range devPG.groupMap {
 					pgMap[gName] = len(devLinks)
 				}
-				devPGPtr.sortedNames, devPGPtr.totalLinks = sortGroupBySize(pgMap)
+				devPG.sortedNames, devPG.totalLinks = sortGroupBySize(pgMap)
 			}
 		}
 		pDev[srcDev] = true
@@ -165,32 +181,45 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		addIntf(link.GetZNode(), link.GetZInt())
 	}
 	// Build the node => links map for topology
+	nodePGMap := make(map[string]*tpb.Node)
 	for _, l := range topo.GetLinks() {
 		srcNode := name2Node[l.GetANode()]
 		dstNode := name2Node[l.GetZNode()]
 		srcIntf := s.node2Intfs[srcNode][l.GetAInt()]
 		dstIntf := s.node2Intfs[dstNode][l.GetZInt()]
 		group := srcNode.Interfaces[l.GetAInt()].GetGroup()
+		peerNode := dstNode
 		if group == "" {
 			group = dstNode.Interfaces[l.GetZInt()].GetGroup()
+			peerNode = srcNode
 		}
-		nodeLinkPtr := &nodeLink{srcNode: srcNode, dstNode: dstNode, srcIntf: srcIntf, dstIntf: dstIntf, group: group}
+		// For valid port groups ensure dut end maps to the same node for all members of the group
+		if group != "" {
+			if expPeerNode, ok := nodePGMap[group]; ok {
+				if peerNode != expPeerNode {
+					return nil, fmt.Errorf("Inconsistent port group configuration found in topology")
+				}
+			} else {
+				nodePGMap[group] = peerNode
+			}
+		}
+		nLink := &nodeLink{srcNode: srcNode, dstNode: dstNode, srcIntf: srcIntf, dstIntf: dstIntf, group: group}
 		if _, ok := s.node2Links[srcNode][dstNode]; !ok {
-			pgPtr := &nodePG{groupMap: make(map[string][]*nodeLink), sortedNames: []string{}, totalLinks: 0}
-			s.node2Links[srcNode][dstNode] = pgPtr
-			s.node2Links[dstNode][srcNode] = pgPtr
+			pg := &nodePG{groupMap: make(map[string][]*nodeLink)}
+			s.node2Links[srcNode][dstNode] = pg
+			s.node2Links[dstNode][srcNode] = pg
 		}
-		s.node2Links[srcNode][dstNode].groupMap[group] = append(s.node2Links[srcNode][dstNode].groupMap[group], nodeLinkPtr)
+		s.node2Links[srcNode][dstNode].groupMap[group] = append(s.node2Links[srcNode][dstNode].groupMap[group], nLink)
 	}
 	pNode := make(map[*tpb.Node]bool)
 	for srcNode := range s.node2Links {
-		for dstNode, nodePGPtr := range s.node2Links[srcNode] {
-			if _, ok := pNode[dstNode]; ok {
+		for dstNode, nodePG := range s.node2Links[srcNode] {
+			if pNode[dstNode] {
 				pgMap := make(map[string]int)
-				for gName, nodeLinks := range nodePGPtr.groupMap {
+				for gName, nodeLinks := range nodePG.groupMap {
 					pgMap[gName] = len(nodeLinks)
 				}
-				nodePGPtr.sortedNames, nodePGPtr.totalLinks = sortGroupBySize(pgMap)
+				nodePG.sortedNames, nodePG.totalLinks = sortGroupBySize(pgMap)
 			}
 		}
 		pNode[srcNode] = true
@@ -407,36 +436,36 @@ func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*
 	link2link := make(map[*devLink][]*nodeLink)
 	assignedDevs := make(map[*opb.Device]bool)
 	for dev, node := range d2n {
-		for devPeer, devPGPtr := range s.dev2Links[dev] {
+		for devPeer, devPG := range s.dev2Links[dev] {
 			if _, ok := assignedDevs[devPeer]; ok {
 				nodePeer := d2n[devPeer]
-				nodePGPtr := s.node2Links[node][nodePeer]
+				nodePG := s.node2Links[node][nodePeer]
 				allNodeLinks := []*nodeLink{}
 				devGPIndex := 0
-				for _, nodeGroupName := range nodePGPtr.sortedNames {
-					devGroupName := devPGPtr.sortedNames[devGPIndex]
-					devPGSize := len(devPGPtr.groupMap[devGroupName])
-					nodePGSize := len(nodePGPtr.groupMap[nodeGroupName])
+				for _, nodeGroupName := range nodePG.sortedNames {
+					devGroupName := devPG.sortedNames[devGPIndex]
+					devPGSize := len(devPG.groupMap[devGroupName])
+					nodePGSize := len(nodePG.groupMap[nodeGroupName])
 					if devPGSize > nodePGSize {
-						for _, link := range devPGPtr.groupMap[devGroupName] {
+						for _, link := range devPG.groupMap[devGroupName] {
 							link2link[link] = allNodeLinks
 						}
 						devGPIndex++
 					}
-					allNodeLinks = append(allNodeLinks, nodePGPtr.groupMap[nodeGroupName]...)
+					allNodeLinks = append(allNodeLinks, nodePG.groupMap[nodeGroupName]...)
 				}
 				// Finally add to link2link for all remaining devPG links
-				for ; devGPIndex < len(devPGPtr.sortedNames); devGPIndex++ {
-					devGroupName := devPGPtr.sortedNames[devGPIndex]
-					for _, link := range devPGPtr.groupMap[devGroupName] {
+				for ; devGPIndex < len(devPG.sortedNames); devGPIndex++ {
+					devGroupName := devPG.sortedNames[devGPIndex]
+					for _, link := range devPG.groupMap[devGroupName] {
 						link2link[link] = allNodeLinks
 					}
 				}
 
-				if _, ok = devPGPtr.groupMap[""]; ok {
+				if _, ok = devPG.groupMap[""]; ok {
 					// Append all regular links
-					allNodeLinks = append(allNodeLinks, nodePGPtr.groupMap[""]...)
-					for _, link := range devPGPtr.groupMap[""] {
+					allNodeLinks = append(allNodeLinks, nodePG.groupMap[""]...)
+					for _, link := range devPG.groupMap[""] {
 						link2link[link] = allNodeLinks
 					}
 				}
@@ -448,7 +477,7 @@ func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*
 }
 
 func (s *solver) nodeMatches(dev *opb.Device, isATE bool) ([]*tpb.Node, error) {
-	nodeList := []*tpb.Node{}
+	var nodeList []*tpb.Node
 	for _, node := range s.topology.GetNodes() {
 		if isATE != ateTypes[node.GetType()] {
 			continue
@@ -564,8 +593,7 @@ func (s *solver) genLinkRecurse(
 // returns list of key links in the desirable processing order, with all regular links added at the end
 func (s *solver) arrangeLinkKeys(m map[*devLink][]*nodeLink) []*devLink {
 	// All regular link (port) allocation should happen last
-	allRlinks := []*devLink{}
-	orderedKeys := []*devLink{}
+	var allRlinks, orderedKeys []*devLink
 	for k := range m {
 		if k.group == "" {
 			allRlinks = append(allRlinks, k)
@@ -646,26 +674,26 @@ func (s *solver) genDevRecurse(
 // res - is working resultset based on past selections.
 // It returns a boolean; true if valid selection, false otherwise.
 func (s *solver) shouldDevRecurse(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*tpb.Node) bool {
-	for devPeer, devPGPtr := range s.dev2Links[dev] {
+	for devPeer, devPG := range s.dev2Links[dev] {
 		if nodePeer, ok := res[devPeer]; ok {
 			devRLinks := 0
-			if _, ok = devPGPtr.groupMap[""]; ok {
-				devRLinks = len(devPGPtr.groupMap[""])
+			if _, ok = devPG.groupMap[""]; ok {
+				devRLinks = len(devPG.groupMap[""])
 			}
 			if _, ok = s.node2Links[node][nodePeer]; !ok {
 				// There is no link between current 'node' and previously selected peer node as required by testbed
 				return false
 			}
-			nodePGPtr := s.node2Links[node][nodePeer]
-			nodeRLinks := nodePGPtr.totalLinks
-			if len(devPGPtr.sortedNames) > len(nodePGPtr.sortedNames) {
+			nodePG := s.node2Links[node][nodePeer]
+			nodeRLinks := nodePG.totalLinks
+			if len(devPG.sortedNames) > len(nodePG.sortedNames) {
 				// The required number of port groups between device and peer is more than those between node and peer
 				return false
 			}
-			for index, dGroupName := range devPGPtr.sortedNames {
-				nGroupName := nodePGPtr.sortedNames[index]
-				dGroupSize := len(devPGPtr.groupMap[dGroupName])
-				nGroupSize := len(nodePGPtr.groupMap[nGroupName])
+			for index, dGroupName := range devPG.sortedNames {
+				nGroupName := nodePG.sortedNames[index]
+				dGroupSize := len(devPG.groupMap[dGroupName])
+				nGroupSize := len(nodePG.groupMap[nGroupName])
 				if dGroupSize > nGroupSize {
 					// The port group size between device and peer is more than that between node and peer
 					return false

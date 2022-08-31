@@ -283,6 +283,123 @@ func TestSolve(t *testing.T) {
 	}
 }
 
+func TestSolveGroup(t *testing.T) {
+	const topoText = `
+		nodes: {
+			name: "node1"
+			type: IXIA_TG
+			interfaces: {
+				key: "eth1"
+				value: {group: "lag1"}
+			}
+			interfaces: {
+				key: "eth2"
+				value: {group: "lag1"}
+			}
+			interfaces: {
+				key: "eth3"
+				value: {group: "lag2"}
+			}
+			interfaces: {
+				key: "eth4"
+				value: {group: "lag2"}
+			}
+			interfaces: {
+				key: "eth5"
+				value: {group: "lag3"}
+			}
+		}
+		nodes: {
+			name: "node2"
+			type: ARISTA_CEOS
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth1"
+		  z_node: "node2"
+		  z_int: "eth1"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth2"
+		  z_node: "node2"
+		  z_int: "eth2"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth3"
+		  z_node: "node2"
+		  z_int: "eth3"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth4"
+		  z_node: "node2"
+		  z_int: "eth4"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth5"
+		  z_node: "node2"
+		  z_int: "eth5"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth6"
+		  z_node: "node2"
+		  z_int: "eth6"
+		}`
+	topo := unmarshalTopo(t, topoText)
+
+	dut1 := &opb.Device{
+		Id:     "dut1",
+		Vendor: opb.Device_ARISTA,
+		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}, {Id: "port3"}, {Id: "port4"}, {Id: "port5"}, {Id: "port6"}},
+	}
+	ate := &opb.Device{
+		Id:    "ate",
+		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2", Group: "G1"}, {Id: "port3", Group: "G2"}, {Id: "port4", Group: "G2"}, {Id: "port5", Group: "G3"}, {Id: "port6", Group: "G3"}},
+	}
+	link1 := &opb.Link{
+		A: "dut1:port1",
+		B: "ate:port1",
+	}
+	link2 := &opb.Link{
+		A: "dut1:port2",
+		B: "ate:port2",
+	}
+	link3 := &opb.Link{
+		A: "dut1:port3",
+		B: "ate:port3",
+	}
+	link4 := &opb.Link{
+		A: "dut1:port4",
+		B: "ate:port4",
+	}
+	link5 := &opb.Link{
+		A: "dut1:port5",
+		B: "ate:port5",
+	}
+	link6 := &opb.Link{
+		A: "dut1:port6",
+		B: "ate:port6",
+	}
+
+	tb := &opb.Testbed{
+		Duts:  []*opb.Device{dut1},
+		Ates:  []*opb.Device{ate},
+		Links: []*opb.Link{link1, link2, link3, link4, link5, link6},
+	}
+
+	res, err := Solve(tb, topo)
+	if err != nil {
+		t.Fatalf("Got unexpected error: %v", err)
+	}
+	if res == nil {
+		t.Fatalf("No solution found")
+	}
+}
+
 func TestSolveErrors(t *testing.T) {
 	tests := []struct {
 		desc    string
@@ -404,6 +521,110 @@ func TestSolveErrors(t *testing.T) {
 		  }
 		`,
 		wantErr: "no KNE topology matches the testbed",
+	}, {
+		desc: "bad port group config in topology",
+		tb: &opb.Testbed{
+			Ates: []*opb.Device{{
+				Id: "ate1",
+				Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+			}},
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1"}},
+			}, {
+				Id:     "dut2",
+				Ports:  []*opb.Port{{Id: "port1"}},
+				Vendor: opb.Device_ARISTA,
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "ate1:port1"},
+				{A: "dut2:port1", B: "ate1:port2"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+            type: ARISTA_CEOS
+		  }
+		  nodes: {
+		    name: "node2"
+            type: IXIA_TG
+			interfaces: {
+				key: "eth1"
+				value: {group: "lag"}
+			}
+			interfaces: {
+				key: "eth2"
+				value: {group: "lag"}
+			}
+		  }
+		  nodes: {
+		    name: "node3"
+            type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		  links: {
+		    a_node: "node2"
+		    a_int: "eth2"
+		    z_node: "node3"
+		    z_int: "eth1"
+		  }
+		`,
+		wantErr: "Inconsistent port group configuration found in topology",
+	}, {
+		desc: "bad port group config in testbed",
+		tb: &opb.Testbed{
+			Ates: []*opb.Device{{
+				Id: "ate1",
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}, {Id: "port2", Group: "G1"}},
+			}},
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1"}},
+			}, {
+				Id:     "dut2",
+				Ports:  []*opb.Port{{Id: "port1"}},
+				Vendor: opb.Device_ARISTA,
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "ate1:port1"},
+				{A: "dut2:port1", B: "ate1:port2"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+            type: ARISTA_CEOS
+		  }
+		  nodes: {
+		    name: "node2"
+            type: IXIA_TG
+		  }
+		  nodes: {
+		    name: "node3"
+            type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		  links: {
+		    a_node: "node2"
+		    a_int: "eth2"
+		    z_node: "node3"
+		    z_int: "eth1"
+		  }
+		`,
+		wantErr: "Inconsistent port group configuration found in testbed",
 	}, {
 		desc: "required port group size not found",
 		tb: &opb.Testbed{
