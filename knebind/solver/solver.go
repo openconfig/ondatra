@@ -83,7 +83,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	// Build the dev => links map for testbed
 	// Currently we will support port groups for ATE devices only; so group name may be specified
 	// only for one end of a link. The other end of these group links must map to a single device,
-	// for all members of a group.
+	// for all members of a group. Group specified on both ends of a link is unsupported for now.
 	devicePGMap := make(map[string]*opb.Device)
 	for _, l := range tb.GetLinks() {
 		srcParts := strings.Split(l.GetA(), ":")
@@ -97,6 +97,8 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		if group == "" {
 			group = dstPort.GetGroup()
 			peerDev = srcDev
+		} else if dstPort.GetGroup() != "" {
+			return nil, fmt.Errorf("Unsupported configuration found in testbed, with group specified at both ends of link")
 		}
 		// For valid port groups ensure dut end maps to the same device for all members of the group
 		if group != "" {
@@ -123,8 +125,8 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 	// returns list of sorted port group names in the order of membership size, and number of total links
 	sortGroupBySize := func(pgMap map[string]int) ([]string, int) {
 		// Sort port group names based on number of members; skip for regular ports / intfs
-		sorted := []string{}
-		numLinks := 0
+		var sorted []string
+		var numLinks int
 		for grp, linksCount := range pgMap {
 			numLinks = numLinks + linksCount
 			if grp == "" {
@@ -192,6 +194,9 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		if group == "" {
 			group = dstNode.Interfaces[l.GetZInt()].GetGroup()
 			peerNode = srcNode
+		} else if dstNode.Interfaces[l.GetZInt()].GetGroup() != "" {
+			// Group specified on both ends of a link is unsupported for now.
+			return nil, fmt.Errorf("Unsupported configuration found in topology, with group specified at both ends of link")
 		}
 		// For valid port groups ensure dut end maps to the same node for all members of the group
 		if group != "" {
@@ -563,9 +568,11 @@ func (s *solver) genLinkRecurse(
 			// Ensure that for groups, all member links for a group get mapped to node links
 			// that are co-located in a single group
 			if first.group != "" {
-				if gName, ok := grpRes[first.group]; ok && gName != i.group {
+				if gName, ok := grpRes[first.group]; ok {
 					// Some previous member of device port group got mapped to a different node intf group
-					continue
+					if gName != i.group {
+						continue
+					}
 				} else {
 					// This is to keep track of which iteration is adding entry to grpRes map,
 					// so as to delete it when res entry is deleted for that iteration
@@ -612,7 +619,7 @@ func (s *solver) arrangeLinkKeys(m map[*devLink][]*nodeLink) []*devLink {
 // d2n - device to node mapped for this solution set.
 // dLink - is the testbed link.
 // nLink - is potential mapped node link.
-// It returns a boolean, true if valid selection, false otherwise.
+// Returns true if the ports match; false otherwise
 func (s *solver) shouldLinkRecurse(d2n map[*opb.Device]*tpb.Node, dLink *devLink, nLink *nodeLink) bool {
 	if d2n[dLink.srcDev] == nLink.srcNode {
 		if !s.portMatch(dLink.srcPort, nLink.srcIntf) || !s.portMatch(dLink.dstPort, nLink.dstIntf) {
@@ -674,7 +681,7 @@ func (s *solver) genDevRecurse(
 // dev - is the testbed device.
 // node - is potential mapped node.
 // res - is working resultset based on past selections.
-// It returns a boolean; true if valid selection, false otherwise.
+// Returns true if the devices match; false otherwise
 func (s *solver) shouldDevRecurse(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*tpb.Node) bool {
 	for devPeer, devPG := range s.dev2Links[dev] {
 		if nodePeer, ok := res[devPeer]; ok {

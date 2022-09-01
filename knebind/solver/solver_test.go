@@ -487,7 +487,7 @@ func TestSolveGroup(t *testing.T) {
 
 	res, err := Solve(tb, topo)
 	if err != nil {
-		t.Fatalf("Got unexpected error: %v", err)
+		t.Fatalf("Solve got unexpected error: %v", err)
 	}
 	if res == nil {
 		t.Fatalf("No solution found")
@@ -616,6 +616,47 @@ func TestSolveErrors(t *testing.T) {
 		`,
 		wantErr: "no KNE topology matches the testbed",
 	}, {
+		desc: "port group specified on both ends of link in topology",
+		tb: &opb.Testbed{
+			Ates: []*opb.Device{{
+				Id: "ate1",
+				Ports:  []*opb.Port{{Id: "port1"}},
+			}},
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1"}},
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "ate1:port1"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+            type: IXIA_TG
+			interfaces: {
+				key: "eth1"
+				value: {group: "lag"}
+			}
+		  }
+		  nodes: {
+		    name: "node2"
+            type: ARISTA_CEOS
+			interfaces: {
+				key: "eth1"
+				value: {group: "lag"}
+			}
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		`,
+		wantErr: "Unsupported configuration found in topology, with group specified at both ends of link",
+	}, {
 		desc: "bad port group config in topology",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
@@ -671,6 +712,39 @@ func TestSolveErrors(t *testing.T) {
 		  }
 		`,
 		wantErr: "Inconsistent port group configuration found in topology",
+	}, {
+		desc: "port group specified on both ends of link in testbed",
+		tb: &opb.Testbed{
+			Ates: []*opb.Device{{
+				Id: "ate1",
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}},
+			}},
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}},
+			}},
+			Links: []*opb.Link{
+				{A: "dut1:port1", B: "ate1:port1"},
+			},
+		},
+		topo: `
+		  nodes: {
+		    name: "node1"
+            type: IXIA_TG
+		  }
+		  nodes: {
+		    name: "node2"
+            type: ARISTA_CEOS
+		  }
+		  links: {
+		    a_node: "node1"
+		    a_int: "eth1"
+		    z_node: "node2"
+		    z_int: "eth1"
+		  }
+		`,
+		wantErr: "Unsupported configuration found in testbed, with group specified at both ends of link",
 	}, {
 		desc: "bad port group config in testbed",
 		tb: &opb.Testbed{
