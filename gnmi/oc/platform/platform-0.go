@@ -220,6 +220,72 @@ func (n *Component_AllocatedPowerPathAny) State() ygnmi.WildcardQuery[uint32] {
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/clei-code"
+//	Path from root:       "/components/component/state/clei-code"
+func (n *Component_CleiCodePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "clei-code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).CleiCode
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/clei-code"
+//	Path from root:       "/components/component/state/clei-code"
+func (n *Component_CleiCodePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "clei-code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).CleiCode
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
 //	Path from parent:     "state/description"
 //	Path from root:       "/components/component/state/description"
 func (n *Component_DescriptionPath) State() ygnmi.SingletonQuery[string] {
@@ -1834,6 +1900,18 @@ func (n *Component_UsedPowerPathAny) State() ygnmi.WildcardQuery[uint32] {
 	)
 }
 
+// Component_CleiCodePath represents the /openconfig-platform/components/component/state/clei-code YANG schema element.
+type Component_CleiCodePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_CleiCodePathAny represents the wildcard version of the /openconfig-platform/components/component/state/clei-code YANG schema element.
+type Component_CleiCodePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Component_DescriptionPath represents the /openconfig-platform/components/component/state/description YANG schema element.
 type Component_DescriptionPath struct {
 	*ygnmi.NodePath
@@ -2227,6 +2305,44 @@ func (n *ComponentPathAny) Chassis() *Component_ChassisPathAny {
 			map[string]interface{}{},
 			n,
 		),
+	}
+}
+
+// CleiCode (leaf): Common Language Equipment Identifier (CLEI) code of the
+// component.  This should be present in particular if the
+// component is also an FRU (field replaceable unit)
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/clei-code"
+//	Path from root:       "/components/component/state/clei-code"
+func (n *ComponentPath) CleiCode() *Component_CleiCodePath {
+	return &Component_CleiCodePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "clei-code"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// CleiCode (leaf): Common Language Equipment Identifier (CLEI) code of the
+// component.  This should be present in particular if the
+// component is also an FRU (field replaceable unit)
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/clei-code"
+//	Path from root:       "/components/component/state/clei-code"
+func (n *ComponentPathAny) CleiCode() *Component_CleiCodePathAny {
+	return &Component_CleiCodePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "clei-code"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 }
 

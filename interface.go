@@ -20,11 +20,6 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// Network is an alias for ixnet.Network.
-// Deprecated: use ixnet.Network
-// TODO: Remove once all tests migrated to ixnet.Network.
-type Network = ixnet.Network
-
 // Interface represents an ATE interface configuration.
 type Interface struct {
 	pb *opb.InterfaceConfig

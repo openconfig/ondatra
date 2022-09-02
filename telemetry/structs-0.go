@@ -2978,6 +2978,7 @@ type Component struct {
 	AllocatedPower       *uint32                                 `path:"state/allocated-power" module:"openconfig-platform/openconfig-platform"`
 	Backplane            *Component_Backplane                    `path:"backplane" module:"openconfig-platform"`
 	Chassis              *Component_Chassis                      `path:"chassis" module:"openconfig-platform"`
+	CleiCode             *string                                 `path:"state/clei-code" module:"openconfig-platform/openconfig-platform"`
 	ControllerCard       *Component_ControllerCard               `path:"controller-card" module:"openconfig-platform"`
 	Cpu                  *Component_Cpu                          `path:"cpu" module:"openconfig-platform"`
 	Description          *string                                 `path:"state/description" module:"openconfig-platform/openconfig-platform"`
@@ -3593,6 +3594,22 @@ func (t *Component) GetAllocatedPower() uint32 {
 		return 0
 	}
 	return *t.AllocatedPower
+}
+
+// GetCleiCode retrieves the value of the leaf CleiCode from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CleiCode is set, it can
+// safely use t.GetCleiCode() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CleiCode == nil' before retrieving the leaf's value.
+func (t *Component) GetCleiCode() string {
+	if t == nil || t.CleiCode == nil {
+		return ""
+	}
+	return *t.CleiCode
 }
 
 // GetDescription retrieves the value of the leaf Description from the Component

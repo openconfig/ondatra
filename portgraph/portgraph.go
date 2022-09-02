@@ -22,16 +22,38 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Graph is a representation of nodes, ports, and edges.
-type Graph struct {
-	Desc  string // Description for the Graph for logging.
-	Nodes []*Node
-	Edges []*Edge
+// AbstractGraph is a representation of abstract nodes, ports, and edges.
+type AbstractGraph struct {
+	Desc  string // Description for the AbstractGraph for logging.
+	Nodes []*AbstractNode
+	Edges []*AbstractEdge
 }
 
-// fetchPort2PortMap() returns the mapping of a Port any Ports it shares and Edge wtih.
-func (g *Graph) fetchPort2PortMap() map[*Port][]*Port {
-	ret := make(map[*Port][]*Port)
+// fetchPort2PortMap() returns the mapping of an AbstractPort and any AbstractPorts it shares an AbstractEdge wtih.
+func (g *AbstractGraph) fetchPort2PortMap() (map[*AbstractPort]*AbstractPort, error) {
+	ret := make(map[*AbstractPort]*AbstractPort)
+	for _, e := range g.Edges {
+		if _, ok := ret[e.Src]; ok {
+			return nil, fmt.Errorf("port %q is attached to more than one other port; can only be attached to one", e.Src.Desc)
+		} else if _, ok := ret[e.Dst]; ok {
+			return nil, fmt.Errorf("port %q is attached to more than one other port; can only be attached to one", e.Dst.Desc)
+		}
+		ret[e.Src] = e.Dst
+		ret[e.Dst] = e.Src
+	}
+	return ret, nil
+}
+
+// ConcreteGraph is a representation of concrete nodes, ports, and edges.
+type ConcreteGraph struct {
+	Desc  string // Description for the AbstractGraph for logging.
+	Nodes []*ConcreteNode
+	Edges []*ConcreteEdge
+}
+
+// fetchPort2PortMap() returns the mapping of a ConcretePort and any ConcretePorts it shares a ConcreteEdge wtih.
+func (g *ConcreteGraph) fetchPort2PortMap() map[*ConcretePort][]*ConcretePort {
+	ret := make(map[*ConcretePort][]*ConcretePort)
 	for _, e := range g.Edges {
 		ret[e.Src] = append(ret[e.Src], e.Dst)
 		ret[e.Dst] = append(ret[e.Dst], e.Src)
@@ -39,15 +61,23 @@ func (g *Graph) fetchPort2PortMap() map[*Port][]*Port {
 	return ret
 }
 
-// Node represent a vertex on a graph.
-// The Node has Ports and Edges that originate and terminate at Ports.
-type Node struct {
-	Desc  string            // Description for the Node for logging.
-	Ports []*Port           // A list Ports that may be connected to another Port.
-	Attrs map[string]string // A map of key value attributes of the Node.
+// AbstractNode represent a vertex on an AbstractGraph.
+// The AbstractNode has AbstractPorts and AbstractEdges that originate and terminate at AbstractPorts.
+type AbstractNode struct {
+	Desc  string                // Description for the AbstractNode for logging.
+	Ports []*AbstractPort       // A list AbstractPorts that may be connected to another AbstractPort.
+	Attrs map[string]Constraint // A map of key value attributes of the AbstractNode.
 }
 
-func (n *Node) containsPort(p *Port) bool {
+// ConcreteNode represent a vertex on a ConcreteGraph.
+// The ConcreteNode has ConcretePorts and ConcreteEdges that originate and terminate at ConcretePorts.
+type ConcreteNode struct {
+	Desc  string            // Description for the ConcreteNode for logging.
+	Ports []*ConcretePort   // A list ConcretePorts that may be connected to another ConcretePort.
+	Attrs map[string]string // A map of key value attributes of the ConctreteNode.
+}
+
+func (n *ConcreteNode) containsPort(p *ConcretePort) bool {
 	for _, p2 := range n.Ports {
 		if p == p2 {
 			return true
@@ -56,33 +86,45 @@ func (n *Node) containsPort(p *Port) bool {
 	return false
 }
 
-// Edge represents a link from an source Port to a destination Port.
-type Edge struct {
-	Src, Dst *Port
+// AbstractEdge represents a link from an source AbstractPort to a destination AbstractPort.
+type AbstractEdge struct {
+	Src, Dst *AbstractPort
 }
 
-// A Port is a is point on a Node where an Edge may be attached.
-type Port struct {
-	Desc  string            // Description for the Port for logging.
-	Attrs map[string]string // A map of key value attributes of the Port.
+// ConcreteEdge represents a link from an source ConcretePort to a destination ConcretePort.
+type ConcreteEdge struct {
+	Src, Dst *ConcretePort
 }
 
-// Assignment contains the Node -> Node and Port -> Port mappings.
+// AbstractPort is a is point on an AbstractNode where an AbstractEdge may be attached.
+type AbstractPort struct {
+	Desc  string                // Description for the AbstractPort for logging.
+	Attrs map[string]Constraint // A map of key value attributes of the AbstractPort.
+}
+
+// ConcretePort is a is point on a ConcreteNode where a ConcreteEdge may be attached.
+type ConcretePort struct {
+	Desc  string            // Description for the ConcretePort for logging.
+	Attrs map[string]string // A map of key value attributes of the ConcretePort.
+}
+
+// Assignment contains the AbstractNode -> ConcreteNode and AbstractPort -> ConcretePort mappings.
 type Assignment struct {
-	Node2Node map[*Node]*Node
-	Port2Port map[*Port]*Port
+	Node2Node map[*AbstractNode]*ConcreteNode
+	Port2Port map[*AbstractPort]*ConcretePort
 }
 
 type solver struct {
-	abstractGraph, superGraph *Graph
-	absPort2Node              map[*Port]*Node         // Map Port to Node it is part of.
-	absNode2Node              map[*Node]map[*Node]int // Map Node to Node and how many links there are.
-	conPort2Port              map[*Port][]*Port       // Cache the concrete ports that are linked.
-	absPort2Port              map[*Port][]*Port       // Cache of abstract ports that are linked.
+	abstractGraph *AbstractGraph
+	superGraph    *ConcreteGraph
+	absPort2Node  map[*AbstractPort]*AbstractNode         // Map Port to Node it is part of.
+	absNode2Node  map[*AbstractNode]map[*AbstractNode]int // Map Node to Node and how many links there are.
+	conPort2Port  map[*ConcretePort][]*ConcretePort       // Cache the concrete ports that are linked.
+	absPort2Port  map[*AbstractPort]*AbstractPort         // Cache of abstract ports that are linked.
 }
 
 // Solve returns as assignment from superGraph that satisfies abstractGraph.
-func Solve(abstractGraph *Graph, superGraph *Graph) (*Assignment, error) {
+func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment, error) {
 	if len(abstractGraph.Nodes) > len(superGraph.Nodes) {
 		return nil, fmt.Errorf("not enough nodes in %q to satisfy %q", superGraph.Desc, abstractGraph.Desc)
 	}
@@ -91,28 +133,26 @@ func Solve(abstractGraph *Graph, superGraph *Graph) (*Assignment, error) {
 	}
 
 	// Preprocess data for the solve.
-	// Map the abstract Port to abstract Node.
-	absPort2Node := make(map[*Port]*Node)
+	// Map the AbstractPort to AbstractNode.
+	absPort2Node := make(map[*AbstractPort]*AbstractNode)
 	for _, n := range abstractGraph.Nodes {
 		for _, p := range n.Ports {
 			absPort2Node[p] = n
 		}
 	}
-	// Map how many links there are between each abstract node to calculate matches.
-	absNode2Node := make(map[*Node]map[*Node]int)
+	// Map how many links there are between each AbstractNode to calculate matches.
+	absNode2Node := make(map[*AbstractNode]map[*AbstractNode]int)
 	for _, e := range abstractGraph.Edges {
 		srcNode, dstNode := e.Src, e.Dst
 		if _, ok := absNode2Node[absPort2Node[srcNode]]; !ok {
-			absNode2Node[absPort2Node[srcNode]] = make(map[*Node]int)
+			absNode2Node[absPort2Node[srcNode]] = make(map[*AbstractNode]int)
 		}
 		absNode2Node[absPort2Node[srcNode]][absPort2Node[dstNode]]++
 	}
 
-	absPort2Port := abstractGraph.fetchPort2PortMap()
-	for absPort, ports := range absPort2Port {
-		if len(ports) > 1 {
-			return nil, errors.Errorf("could not solve for %q, port %q part of more than one Edge", abstractGraph.Desc, absPort.Desc)
-		}
+	absPort2Port, err := abstractGraph.fetchPort2PortMap()
+	if err != nil {
+		return nil, errors.Wrapf(err, "could not solve for %q from %q", abstractGraph.Desc, superGraph.Desc)
 	}
 
 	s := &solver{
@@ -130,13 +170,13 @@ func Solve(abstractGraph *Graph, superGraph *Graph) (*Assignment, error) {
 	return a, nil
 }
 
-// solve provides a mapping of an abstract graph to a concrete graph.
+// solve provides a mapping of abstract nodes and ports to concrete nodes and ports.
 // 1. Find all concrete nodes that match the abstract node (check attributes and # of ports).
 // 2. For each mapping, check the concrete nodes and satisfy the edges of the abstract graph.
 // 3. Assign concrete ports.
 func (s *solver) solve() (*Assignment, error) {
 	// TODO: Add a "report" that prints out info about the solve.
-	abs2ConNodes := make(map[*Node][]*Node)
+	abs2ConNodes := make(map[*AbstractNode][]*ConcreteNode)
 	for _, n := range s.abstractGraph.Nodes {
 		nodes := matchNodes(n, s.superGraph)
 		if len(nodes) == 0 {
@@ -150,28 +190,30 @@ func (s *solver) solve() (*Assignment, error) {
 
 	s.conPort2Port = s.superGraph.fetchPort2PortMap()
 
-	// Generate all abstract node -> concrete node mappings.
+	// Generate all AbstractNode -> ConcreteNode mappings.
 	abs2ConNodeChan := genNodeCombos(abs2ConNodes)
 	// Iterate through each mapping. For each mapping, attempt to match edges and assign ports.
 	for abs2ConNode := range abs2ConNodeChan {
-		// For this mapping, check the concrete nodes can satisfy the abstract edges.
+		// For this mapping, check that the ConcreteNodes can satisfy the AbstractEdges.
 		if !s.checkEdges(abs2ConNode) {
 			continue
 		}
 
 		// Since the edges can be satisfied, try to assign matching ports.
-		abs2ConPort := s.assignPorts(abs2ConNode, make(map[*Port]*Port), make(map[*Node]bool))
-		if abs2ConPort == nil {
+		abs2ConPort, err := s.assignPorts(abs2ConNode, make(map[*AbstractPort]*ConcretePort), make(map[*AbstractNode]bool))
+		if err != nil {
+			return nil, err
+		} else if abs2ConPort == nil {
 			continue
 		}
 
 		return &Assignment{abs2ConNode, abs2ConPort}, nil
 	}
-	return nil, errors.Errorf("could not solve for %q from %q", s.abstractGraph.Desc, s.superGraph.Desc)
+	return nil, errors.Errorf("no assignment found for %q", s.abstractGraph.Desc)
 }
 
 // checkEdges validates that the concrete nodes can satisfy the abstract edges.
-func (s *solver) checkEdges(abs2ConNode map[*Node]*Node) bool {
+func (s *solver) checkEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
 	// Iterate through the abstract edges.
 	for absSrcNode, absDstNodes := range s.absNode2Node {
 		for absDstNode, need := range absDstNodes {
@@ -186,7 +228,7 @@ func (s *solver) checkEdges(abs2ConNode map[*Node]*Node) bool {
 	return true
 }
 
-func (s *solver) checkEdge(conSrcNode, conDstNode *Node, edgesNeeded int) bool {
+func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int) bool {
 	var count int
 	// Verify whether the concrete Edges satisfy the abstract Edges.
 	for _, conSrcPort := range conSrcNode.Ports {
@@ -202,13 +244,13 @@ func (s *solver) checkEdge(conSrcNode, conDstNode *Node, edgesNeeded int) bool {
 	return false
 }
 
-// assignPorts tries to assign the Ports given the Node mapping.
-func (s *solver) assignPorts(abs2ConNode map[*Node]*Node, abs2ConPort map[*Port]*Port, assignedNodes map[*Node]bool) map[*Port]*Port {
-	abs2ConPortCombos := make(map[*Port][]*Port)
+// assignPorts tries to assign the ConcretePorts given the Node mapping.
+func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2ConPort map[*AbstractPort]*ConcretePort, assignedNodes map[*AbstractNode]bool) (map[*AbstractPort]*ConcretePort, error) {
 	if len(s.absPort2Node) == len(abs2ConPort) {
 		// Done.
-		return abs2ConPort
+		return abs2ConPort, nil
 	}
+	abs2ConPortCombos := make(map[*AbstractPort][]*ConcretePort)
 	for absSrcNode, conSrcNode := range abs2ConNode {
 		if _, ok := assignedNodes[absSrcNode]; ok {
 			continue
@@ -216,13 +258,13 @@ func (s *solver) assignPorts(abs2ConNode map[*Node]*Node, abs2ConPort map[*Port]
 		for _, absSrcPort := range absSrcNode.Ports {
 			// Check attributes match, then check if matched ports link correctly.
 			matchedConPorts := matchPorts(absSrcPort, conSrcNode.Ports)
-			absDstPort := s.absPort2Port[absSrcPort]
-			if len(absDstPort) == 0 {
+			absDstPort, ok := s.absPort2Port[absSrcPort]
+			if !ok {
 				abs2ConPortCombos[absSrcPort] = matchedConPorts
 				continue
 			}
-			// The abstract Port is part of an Edge, so check the concrete Ports link to corresponding Node.
-			conDstNode := abs2ConNode[s.absPort2Node[absDstPort[0]]]
+			// The AbstractPort is part of an edge, so check the ConcretePorts link to corresponding ConcreteNode.
+			conDstNode := abs2ConNode[s.absPort2Node[absDstPort]]
 			for _, conSrcPort := range matchedConPorts {
 				conDstPorts := s.conPort2Port[conSrcPort]
 				for _, p := range conDstPorts {
@@ -233,13 +275,13 @@ func (s *solver) assignPorts(abs2ConNode map[*Node]*Node, abs2ConPort map[*Port]
 			}
 		}
 
-		// Try the Port combos for this Node.
+		// Try the Port combos for this ConcreteNode.
 		abs2ConPortChan := genPortCombos(abs2ConPortCombos)
 		for port2Port := range abs2ConPortChan {
+			canAssign := true
 			for absPort, conPort := range port2Port {
-				canAssign := true
-				if absDstPort := s.absPort2Port[absPort]; len(absDstPort) == 1 {
-					if assignedDstPort, ok := abs2ConPort[absDstPort[0]]; ok {
+				if absDstPort, ok := s.absPort2Port[absPort]; ok {
+					if assignedDstPort, ok := abs2ConPort[absDstPort]; ok {
 						isLinked := false
 						for _, p := range s.conPort2Port[conPort] {
 							if p == assignedDstPort {
@@ -253,48 +295,56 @@ func (s *solver) assignPorts(abs2ConNode map[*Node]*Node, abs2ConPort map[*Port]
 						}
 					}
 				}
-				// This Port combo does not work with previously assigned Ports.
+				// This port combo does not work with previously assigned ports.
 				if !canAssign {
-					continue
+					break
 				}
 				// Try to assign the port.
 				// If the part is part of an edge, check if the other port has been assigned. If it has, check that this port is linked to the dst port.
 				abs2ConPort[absPort] = conPort
 			}
-			assignedNodes[absSrcNode] = true
-			if ret := s.assignPorts(abs2ConNode, abs2ConPort, assignedNodes); ret != nil {
-				return ret
+			// Since the combo of Ports for this Node failed, try the next combo of Ports.
+			if !canAssign {
+				continue
 			}
+			assignedNodes[absSrcNode] = true
+			if ret, err := s.assignPorts(abs2ConNode, abs2ConPort, assignedNodes); err != nil {
+				return nil, err
+			} else if ret != nil {
+				return ret, nil
+			}
+			// Assignment of Ports for the next Node failed; unassign this Node.
+			assignedNodes[absSrcNode] = false
 		}
 	}
 	log.V(1).Infof("Only %d of %d ports were assigned; unassigning all ports", len(abs2ConPort), len(s.absPort2Node))
-	return nil
+	return nil, nil
 }
 
 // genNodeCombos yields every key->value mapping, where no two keys map to the same
 // value, given a map of keys to their possible values.
-func genNodeCombos(m map[*Node][]*Node) <-chan map[*Node]*Node {
-	var keys []*Node
+func genNodeCombos(m map[*AbstractNode][]*ConcreteNode) <-chan map[*AbstractNode]*ConcreteNode {
+	var keys []*AbstractNode
 	for k := range m {
 		keys = append(keys, k)
 	}
-	ch := make(chan map[*Node]*Node)
+	ch := make(chan map[*AbstractNode]*ConcreteNode)
 	go func() {
 		// TODO: End the goroutine elegantly when the solve is done.
 		defer close(ch)
-		genNodeRecurse(m, keys, make(map[*Node]*Node), make(map[*Node]bool), ch)
+		genNodeRecurse(m, keys, make(map[*AbstractNode]*ConcreteNode), make(map[*ConcreteNode]bool), ch)
 	}()
 	return ch
 }
 
 func genNodeRecurse(
-	m map[*Node][]*Node,
-	keys []*Node,
-	res map[*Node]*Node,
-	used map[*Node]bool,
-	ch chan<- map[*Node]*Node) {
+	m map[*AbstractNode][]*ConcreteNode,
+	keys []*AbstractNode,
+	res map[*AbstractNode]*ConcreteNode,
+	used map[*ConcreteNode]bool,
+	ch chan<- map[*AbstractNode]*ConcreteNode) {
 	if len(keys) == 0 {
-		copy := make(map[*Node]*Node)
+		copy := make(map[*AbstractNode]*ConcreteNode)
 		for k, v := range res {
 			copy[k] = v
 		}
@@ -314,28 +364,28 @@ func genNodeRecurse(
 
 // genPortCombos yields every key->value mapping, where no two keys map to the same
 // value, given a map of keys to their possible values.
-func genPortCombos(m map[*Port][]*Port) <-chan map[*Port]*Port {
-	var keys []*Port
+func genPortCombos(m map[*AbstractPort][]*ConcretePort) <-chan map[*AbstractPort]*ConcretePort {
+	var keys []*AbstractPort
 	for k := range m {
 		keys = append(keys, k)
 	}
-	ch := make(chan map[*Port]*Port)
+	ch := make(chan map[*AbstractPort]*ConcretePort)
 	go func() {
 		// TODO: End the goroutine elegantly when the solve is done.
 		defer close(ch)
-		genPortRecurse(m, keys, make(map[*Port]*Port), make(map[*Port]bool), ch)
+		genPortRecurse(m, keys, make(map[*AbstractPort]*ConcretePort), make(map[*ConcretePort]bool), ch)
 	}()
 	return ch
 }
 
 func genPortRecurse(
-	m map[*Port][]*Port,
-	keys []*Port,
-	res map[*Port]*Port,
-	used map[*Port]bool,
-	ch chan<- map[*Port]*Port) {
+	m map[*AbstractPort][]*ConcretePort,
+	keys []*AbstractPort,
+	res map[*AbstractPort]*ConcretePort,
+	used map[*ConcretePort]bool,
+	ch chan<- map[*AbstractPort]*ConcretePort) {
 	if len(keys) == 0 {
-		copy := make(map[*Port]*Port)
+		copy := make(map[*AbstractPort]*ConcretePort)
 		for k, v := range res {
 			copy[k] = v
 		}
@@ -354,23 +404,22 @@ func genPortRecurse(
 }
 
 // Matching code.
-// matchNodes returns all nodes in topo that match the abstract Node.
-func matchNodes(abs *Node, superGraph *Graph) []*Node {
-	match := func(n *Node) bool {
+// matchNodes returns all ConcreteNodes the ConcreteGraph that match the AbstractNode.
+func matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
+	match := func(n *ConcreteNode) bool {
 		// Check that there are at least enough Ports to satisfy potential Edges.
 		if len(abs.Ports) > len(n.Ports) {
 			return false
 		}
-		// for now, just do an equality match
-		for k, v := range abs.Attrs {
-			if v != n.Attrs[k] {
+		for k, c := range abs.Attrs {
+			if !c.match(n.Attrs[k]) {
 				return false
 			}
 		}
 		return true
 	}
 
-	var nodes []*Node
+	var nodes []*ConcreteNode
 	for _, n := range superGraph.Nodes {
 		if match(n) {
 			nodes = append(nodes, n)
@@ -379,20 +428,20 @@ func matchNodes(abs *Node, superGraph *Graph) []*Node {
 	return nodes
 }
 
-// matchPorts returns all ports that match the absPort.
-func matchPorts(absPort *Port, conPorts []*Port) []*Port {
-	match := func(p *Port) bool {
+// matchPorts returns all ConcretePorts that match the AbstractPort.
+func matchPorts(abs *AbstractPort, con []*ConcretePort) []*ConcretePort {
+	match := func(p *ConcretePort) bool {
 		// for now, just do a equality match
-		for k, v := range absPort.Attrs {
-			if v != p.Attrs[k] {
+		for k, c := range abs.Attrs {
+			if !c.match(p.Attrs[k]) {
 				return false
 			}
 		}
 		return true
 	}
 
-	var ports []*Port
-	for _, p := range conPorts {
+	var ports []*ConcretePort
+	for _, p := range con {
 		if match(p) {
 			ports = append(ports, p)
 		}

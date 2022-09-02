@@ -63,9 +63,9 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		testbed:    tb,
 		topology:   topo,
 		dev2Ports:  make(map[*opb.Device]map[string]*opb.Port),
-		dev2Links:  make(map[*opb.Device]map[*opb.Device][]*devLink),
+		dev2Links:  make(map[*opb.Device]map[*opb.Device]*devPG),
 		node2Intfs: make(map[*tpb.Node]map[string]*intf),
-		node2Links: make(map[*tpb.Node]map[*tpb.Node][]*nodeLink),
+		node2Links: make(map[*tpb.Node]map[*tpb.Node]*nodePG),
 	}
 	id2Dev := make(map[string]*opb.Device)
 	name2Node := make(map[string]*tpb.Node)
@@ -78,26 +78,93 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 			ports[port.GetId()] = port
 		}
 		s.dev2Ports[dev] = ports
-		s.dev2Links[dev] = make(map[*opb.Device][]*devLink)
+		s.dev2Links[dev] = make(map[*opb.Device]*devPG)
 	}
-
 	// Build the dev => links map for testbed
-	for _, l := range tb.GetLinks() {
-		srcParts := strings.Split(l.GetA(), ":")
-		dstParts := strings.Split(l.GetB(), ":")
+	// Currently we will support port groups for ATE devices only; so group name may be specified
+	// only for one end of a link. The other end of these group links must map to a single device,
+	// for all members of a group. Group specified on both ends of a link is unsupported for now.
+	devicePGMap := make(map[string]*opb.Device)
+	for _, link := range tb.GetLinks() {
+		srcParts := strings.Split(link.GetA(), ":")
+		dstParts := strings.Split(link.GetB(), ":")
 		srcDev := id2Dev[srcParts[0]]
 		dstDev := id2Dev[dstParts[0]]
 		srcPort := s.dev2Ports[srcDev][srcParts[1]]
 		dstPort := s.dev2Ports[dstDev][dstParts[1]]
-		dLink := &devLink{srcDev: srcDev, srcPort: srcPort, dstDev: dstDev, dstPort: dstPort}
-		s.dev2Links[srcDev][dstDev] = append(s.dev2Links[srcDev][dstDev], dLink)
-		s.dev2Links[dstDev][srcDev] = append(s.dev2Links[dstDev][srcDev], dLink)
+		group := srcPort.GetGroup()
+		peerDev := dstDev
+		if group == "" {
+			group = dstPort.GetGroup()
+			peerDev = srcDev
+		} else if dstPort.GetGroup() != "" {
+			return nil, fmt.Errorf("unsupported configuration in testbed; group specified at both ends of link: %v", link)
+		}
+		// For valid port groups ensure DUT end maps to the same device for all members of the group
+		if group != "" {
+			if expPeerDev, ok := devicePGMap[group]; ok {
+				if peerDev != expPeerDev {
+					return nil, fmt.Errorf("inconsistent port group configuration found in testbed")
+				}
+			} else {
+				devicePGMap[group] = peerDev
+			}
+		}
+		dLink := &devLink{srcDev: srcDev, dstDev: dstDev, srcPort: srcPort, dstPort: dstPort, group: group}
+		if _, ok := s.dev2Links[srcDev][dstDev]; !ok {
+			pg := &devPG{groupMap: make(map[string][]*devLink)}
+			s.dev2Links[srcDev][dstDev] = pg
+			s.dev2Links[dstDev][srcDev] = pg
+		}
+		s.dev2Links[srcDev][dstDev].groupMap[group] = append(s.dev2Links[srcDev][dstDev].groupMap[group], dLink)
+	}
+	// For dev / node port group arrange the group names in descending order of membership size.
+	// So for multiple port groups between two devices (and nodes), we assign interfaces for largest port group first
+	// and go down that list; all un-assigned interfaces can be allocated to regular port.
+	// pgSizes - map of port group name and membership size
+	// returns list of sorted port group names in the order of membership size, and number of total links
+	sortGroupBySize := func(pgSizes map[string]int) ([]string, int) {
+		// Sort port group names based on number of members; skip for regular ports / intfs
+		var sorted []string
+		var numLinks int
+		for grp, linkCount := range pgSizes {
+			numLinks = numLinks + linkCount
+			if grp == "" {
+				continue
+			}
+			inserted := false
+			for index, gName := range sorted {
+				if pgSizes[gName] < linkCount {
+					sorted = append(sorted[:index+1], sorted[index:]...)
+					sorted[index] = grp
+					inserted = true
+					break
+				}
+			}
+			if !inserted {
+				sorted = append(sorted, grp)
+			}
+		}
+		return sorted, numLinks
+	}
+	pDevs := make(map[*opb.Device]bool)
+	for srcDev := range s.dev2Links {
+		for dstDev, devPG := range s.dev2Links[srcDev] {
+			if pDevs[dstDev] {
+				pgSizes := make(map[string]int)
+				for gName, devLinks := range devPG.groupMap {
+					pgSizes[gName] = len(devLinks)
+				}
+				devPG.sortedNames, devPG.totalLinks = sortGroupBySize(pgSizes)
+			}
+		}
+		pDevs[srcDev] = true
 	}
 
 	for _, node := range s.topology.GetNodes() {
 		name2Node[node.GetName()] = node
 		s.node2Intfs[node] = make(map[string]*intf)
-		s.node2Links[node] = make(map[*tpb.Node][]*nodeLink)
+		s.node2Links[node] = make(map[*tpb.Node]*nodePG)
 	}
 	addIntf := func(nodeName, intfName string) {
 		node := name2Node[nodeName]
@@ -115,16 +182,53 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 		addIntf(link.GetANode(), link.GetAInt())
 		addIntf(link.GetZNode(), link.GetZInt())
 	}
-
 	// Build the node => links map for topology
-	for _, l := range topo.GetLinks() {
-		srcNode := name2Node[l.GetANode()]
-		dstNode := name2Node[l.GetZNode()]
-		srcIntf := s.node2Intfs[srcNode][l.GetAInt()]
-		dstIntf := s.node2Intfs[dstNode][l.GetZInt()]
-		nLink := &nodeLink{srcNode: srcNode, srcIntf: srcIntf, dstNode: dstNode, dstIntf: dstIntf}
-		s.node2Links[srcNode][dstNode] = append(s.node2Links[srcNode][dstNode], nLink)
-		s.node2Links[dstNode][srcNode] = append(s.node2Links[dstNode][srcNode], nLink)
+	pg2Node := make(map[string]*tpb.Node)
+	for _, link := range topo.GetLinks() {
+		srcNode := name2Node[link.GetANode()]
+		dstNode := name2Node[link.GetZNode()]
+		srcIntf := s.node2Intfs[srcNode][link.GetAInt()]
+		dstIntf := s.node2Intfs[dstNode][link.GetZInt()]
+		group := srcNode.Interfaces[link.GetAInt()].GetGroup()
+		dstGroup := dstNode.Interfaces[link.GetZInt()].GetGroup()
+		peerNode := dstNode
+		if group == "" {
+			group = dstGroup
+			peerNode = srcNode
+		} else if dstGroup != "" {
+			// Group specified on both ends of a link is unsupported for now.
+			return nil, fmt.Errorf("unsupported configuration; group specified at both ends of link: %v", link)
+		}
+		// For valid port groups ensure DUT end maps to the same node for all members of the group
+		if group != "" {
+			if expPeerNode, ok := pg2Node[group]; ok {
+				if peerNode != expPeerNode {
+					return nil, fmt.Errorf("inconsistent port group configuration found in topology")
+				}
+			} else {
+				pg2Node[group] = peerNode
+			}
+		}
+		nLink := &nodeLink{srcNode: srcNode, dstNode: dstNode, srcIntf: srcIntf, dstIntf: dstIntf, group: group}
+		if _, ok := s.node2Links[srcNode][dstNode]; !ok {
+			pg := &nodePG{groupMap: make(map[string][]*nodeLink)}
+			s.node2Links[srcNode][dstNode] = pg
+			s.node2Links[dstNode][srcNode] = pg
+		}
+		s.node2Links[srcNode][dstNode].groupMap[group] = append(s.node2Links[srcNode][dstNode].groupMap[group], nLink)
+	}
+	pNode := make(map[*tpb.Node]bool)
+	for srcNode := range s.node2Links {
+		for dstNode, nodePG := range s.node2Links[srcNode] {
+			if pNode[dstNode] {
+				pgMap := make(map[string]int)
+				for gName, nodeLinks := range nodePG.groupMap {
+					pgMap[gName] = len(nodeLinks)
+				}
+				nodePG.sortedNames, nodePG.totalLinks = sortGroupBySize(pgMap)
+			}
+		}
+		pNode[srcNode] = true
 	}
 
 	a, err := s.solve()
@@ -197,14 +301,28 @@ type intf struct {
 	vendorName string
 }
 
+type devPG struct {
+	groupMap    map[string][]*devLink
+	sortedNames []string
+	totalLinks  int
+}
+
+type nodePG struct {
+	groupMap    map[string][]*nodeLink
+	sortedNames []string
+	totalLinks  int
+}
+
 type devLink struct {
 	srcDev, dstDev   *opb.Device
 	srcPort, dstPort *opb.Port
+	group            string
 }
 
 type nodeLink struct {
 	srcNode, dstNode *tpb.Node
 	srcIntf, dstIntf *intf
+	group            string
 }
 
 func (a *assign) String() string {
@@ -274,9 +392,9 @@ type solver struct {
 	testbed    *opb.Testbed
 	topology   *tpb.Topology
 	dev2Ports  map[*opb.Device]map[string]*opb.Port
-	dev2Links  map[*opb.Device]map[*opb.Device][]*devLink
+	dev2Links  map[*opb.Device]map[*opb.Device]*devPG
 	node2Intfs map[*tpb.Node]map[string]*intf
-	node2Links map[*tpb.Node]map[*tpb.Node][]*nodeLink
+	node2Links map[*tpb.Node]map[*tpb.Node]*nodePG
 }
 
 func (s *solver) solve() (*assign, error) {
@@ -316,17 +434,48 @@ func (s *solver) solve() (*assign, error) {
 }
 
 // buildLink2Links builds a map of dev to node links, for a device => node selection
+// All port group links are matched (size in descending order) between device-peer pairs and node-peer pairs
+// Device peer group links can be mapped to any corresponding node peer group links as long as the node group size
+// is atleast as large as the device group size.
 // d2n - is the device => node map
 func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*nodeLink {
 	link2link := make(map[*devLink][]*nodeLink)
 	assignedDevs := make(map[*opb.Device]bool)
 	for dev, node := range d2n {
-		for devPeer, devLinks := range s.dev2Links[dev] {
+		for devPeer, devPG := range s.dev2Links[dev] {
 			if _, ok := assignedDevs[devPeer]; ok {
 				nodePeer := d2n[devPeer]
-				nodeLinks := s.node2Links[node][nodePeer]
-				for _, link := range devLinks {
-					link2link[link] = nodeLinks
+				nodePG := s.node2Links[node][nodePeer]
+				allNodeLinks := []*nodeLink{}
+				devGPIndex := 0
+				for _, nodeGroupName := range nodePG.sortedNames {
+					if len(devPG.sortedNames) > devGPIndex {
+						devGroupName := devPG.sortedNames[devGPIndex]
+						devPGSize := len(devPG.groupMap[devGroupName])
+						nodePGSize := len(nodePG.groupMap[nodeGroupName])
+						if devPGSize > nodePGSize {
+							for _, link := range devPG.groupMap[devGroupName] {
+								link2link[link] = allNodeLinks
+							}
+							devGPIndex++
+						}
+					}
+					allNodeLinks = append(allNodeLinks, nodePG.groupMap[nodeGroupName]...)
+				}
+				// Finally add to link2link for all remaining devPG links
+				for ; devGPIndex < len(devPG.sortedNames); devGPIndex++ {
+					devGroupName := devPG.sortedNames[devGPIndex]
+					for _, link := range devPG.groupMap[devGroupName] {
+						link2link[link] = allNodeLinks
+					}
+				}
+
+				if _, ok = devPG.groupMap[""]; ok {
+					// Append all regular links
+					allNodeLinks = append(allNodeLinks, nodePG.groupMap[""]...)
+					for _, link := range devPG.groupMap[""] {
+						link2link[link] = allNodeLinks
+					}
 				}
 			}
 		}
@@ -388,14 +537,11 @@ func softwareVersion(node *tpb.Node) string {
 
 // genLinkCombos yields port link->node link mappings
 func (s *solver) genLinkCombos(d2n map[*opb.Device]*tpb.Node, m map[*devLink][]*nodeLink) <-chan map[*devLink]*nodeLink {
-	var keys []*devLink
-	for k := range m {
-		keys = append(keys, k)
-	}
+	keys := s.arrangeLinkKeys(m)
 	ch := make(chan map[*devLink]*nodeLink)
 	go func() {
 		defer close(ch)
-		s.genLinkRecurse(d2n, m, keys, make(map[*devLink]*nodeLink), make(map[*nodeLink]bool), ch)
+		s.genLinkRecurse(d2n, m, keys, make(map[*devLink]*nodeLink), make(map[string]string), make(map[*nodeLink]bool), ch)
 	}()
 	return ch
 }
@@ -405,6 +551,7 @@ func (s *solver) genLinkRecurse(
 	m map[*devLink][]*nodeLink,
 	keys []*devLink,
 	res map[*devLink]*nodeLink,
+	grpRes map[string]string,
 	used map[*nodeLink]bool,
 	ch chan<- map[*devLink]*nodeLink) {
 	if len(keys) == 0 {
@@ -418,23 +565,62 @@ func (s *solver) genLinkRecurse(
 	first := keys[0]
 	for _, i := range m[first] {
 		if !used[i] {
+			grpResUpdated := false
+			// Ensure that for groups, all member links for a group get mapped to node links
+			// that are co-located in a single group
+			if first.group != "" {
+				if gName, ok := grpRes[first.group]; ok {
+					// Some previous member of device port group got mapped to a different node intf group
+					if gName != i.group {
+						continue
+					}
+				} else {
+					// This is to keep track of which iteration is adding entry to grpRes map,
+					// so as to delete it when res entry is deleted for that iteration
+					grpResUpdated = true
+				}
+			}
 			if !s.shouldLinkRecurse(d2n, first, i) {
 				continue
 			}
 			res[first] = i
+			grpRes[first.group] = i.group
 			used[i] = true
-			s.genLinkRecurse(d2n, m, keys[1:], res, used, ch)
+			s.genLinkRecurse(d2n, m, keys[1:], res, grpRes, used, ch)
 			delete(used, i)
+			delete(res, first)
+			if grpResUpdated {
+				// Remove only if this link was first in the group to add the map entry
+				delete(grpRes, first.group)
+			}
 		}
 	}
 }
 
-// shouldLinkRecurse returns whether a device link should be assigned to a node
-// link by checking the ports assigned match requirements.
+// arrangeLinkKeys creates a list of links (between a device pair) from testbed.
+// All regular links (with no group) are added at the end.
+// m - is the map of all testbed links and corresponding potential topology links for mapping
+// returns list of key links in the desirable processing order, with all regular links added at the end
+func (s *solver) arrangeLinkKeys(m map[*devLink][]*nodeLink) []*devLink {
+	// All regular link (port) allocation should happen last
+	var allRlinks, orderedKeys []*devLink
+	for k := range m {
+		if k.group == "" {
+			allRlinks = append(allRlinks, k)
+		} else {
+			orderedKeys = append(orderedKeys, k)
+		}
+	}
+	return append(orderedKeys, allRlinks...)
+}
+
+// shouldLinkRecurse validates whether a topology link can be assigned for a testbed link by validating
+// ports assigned match requirements. Other than port specific match, device peer group links have to "map"
+// to node peer group links of the selected group.
 // d2n - device to node mapped for this solution set.
 // dLink - is the testbed link.
 // nLink - is potential mapped node link.
-// It returns a boolean; true if valid selection, false otherwise.
+// returns true if the ports match; false otherwise
 func (s *solver) shouldLinkRecurse(d2n map[*opb.Device]*tpb.Node, dLink *devLink, nLink *nodeLink) bool {
 	if d2n[dLink.srcDev] == nLink.srcNode {
 		return s.portMatch(dLink.srcPort, nLink.srcIntf) && s.portMatch(dLink.dstPort, nLink.dstIntf)
@@ -485,17 +671,42 @@ func (s *solver) genDevRecurse(
 	}
 }
 
-// shouldDevRecurse returns whether a device should be assigned to a node by
-// checking the required number of links are present between their peers.
-// dev - is the testbed device
+// shouldDevRecurse validates whether a topology node can be assigned for a testbed device by validating
+// required number of links are present between node peers.
+// dev - is the testbed device.
 // node - is potential mapped node.
 // res - is working resultset based on past selections.
-// It returns a boolean; true if valid selection, false otherwise.
+// returns true if the devices match; false otherwise
 func (s *solver) shouldDevRecurse(dev *opb.Device, node *tpb.Node, res map[*opb.Device]*tpb.Node) bool {
-	for devPeer, devLinks := range s.dev2Links[dev] {
+	for devPeer, devPG := range s.dev2Links[dev] {
 		if nodePeer, ok := res[devPeer]; ok {
-			nodeLinks := s.node2Links[node][nodePeer]
-			if len(devLinks) > len(nodeLinks) {
+			devRLinks := 0
+			if _, ok = devPG.groupMap[""]; ok {
+				devRLinks = len(devPG.groupMap[""])
+			}
+			if _, ok = s.node2Links[node][nodePeer]; !ok {
+				// There is no link between current 'node' and previously selected peer node as required by testbed
+				return false
+			}
+			nodePG := s.node2Links[node][nodePeer]
+			nodeRLinks := nodePG.totalLinks
+			if len(devPG.sortedNames) > len(nodePG.sortedNames) {
+				// The required number of port groups between device and peer is more than those between node and peer
+				return false
+			}
+			for index, dGroupName := range devPG.sortedNames {
+				nGroupName := nodePG.sortedNames[index]
+				dGroupSize := len(devPG.groupMap[dGroupName])
+				nGroupSize := len(nodePG.groupMap[nGroupName])
+				if dGroupSize > nGroupSize {
+					// The port group size between device and peer is more than that between node and peer
+					return false
+				}
+				// Balance links can be used as regular links
+				nodeRLinks = nodeRLinks - dGroupSize
+			}
+			if devRLinks > nodeRLinks {
+				// The required regular links between device and peer is more than what is available between node and peer
 				return false
 			}
 		}

@@ -1410,9 +1410,9 @@ type System_Aaa_Authentication_User_UsernamePathAny struct {
 	*ygot.NodePath
 }
 
-// Role (leaf): Role assigned to the user.  The role may be supplied
-// as a string or a role defined by the SYSTEM_DEFINED_ROLES
-// identity.
+// Role (leaf): Role assigned to the user.  The role must be supplied
+// as a role defined by the SYSTEM_DEFINED_ROLES
+// identity or a string that matches a user defined role.
 // ----------------------------------------
 // Defining module: "openconfig-aaa"
 // Instantiating module: "openconfig-system"
@@ -1428,9 +1428,9 @@ func (n *System_Aaa_Authentication_UserPath) Role() *System_Aaa_Authentication_U
 	}
 }
 
-// Role (leaf): Role assigned to the user.  The role may be supplied
-// as a string or a role defined by the SYSTEM_DEFINED_ROLES
-// identity.
+// Role (leaf): Role assigned to the user.  The role must be supplied
+// as a role defined by the SYSTEM_DEFINED_ROLES
+// identity or a string that matches a user defined role.
 // ----------------------------------------
 // Defining module: "openconfig-aaa"
 // Instantiating module: "openconfig-system"

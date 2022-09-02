@@ -93,6 +93,16 @@ type Component_AllocatedPowerPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_CleiCodePath represents the /openconfig-platform/components/component/state/clei-code YANG schema element.
+type Component_CleiCodePath struct {
+	*ygot.NodePath
+}
+
+// Component_CleiCodePathAny represents the wildcard version of the /openconfig-platform/components/component/state/clei-code YANG schema element.
+type Component_CleiCodePathAny struct {
+	*ygot.NodePath
+}
+
 // Component_DescriptionPath represents the /openconfig-platform/components/component/state/description YANG schema element.
 type Component_DescriptionPath struct {
 	*ygot.NodePath
@@ -423,6 +433,42 @@ func (n *ComponentPathAny) Chassis() *Component_ChassisPathAny {
 	return &Component_ChassisPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"chassis"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CleiCode (leaf): Common Language Equipment Identifier (CLEI) code of the
+// component.  This should be present in particular if the
+// component is also an FRU (field replaceable unit)
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/clei-code"
+// Path from root: "/components/component/state/clei-code"
+func (n *ComponentPath) CleiCode() *Component_CleiCodePath {
+	return &Component_CleiCodePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "clei-code"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CleiCode (leaf): Common Language Equipment Identifier (CLEI) code of the
+// component.  This should be present in particular if the
+// component is also an FRU (field replaceable unit)
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/clei-code"
+// Path from root: "/components/component/state/clei-code"
+func (n *ComponentPathAny) CleiCode() *Component_CleiCodePathAny {
+	return &Component_CleiCodePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "clei-code"},
 			map[string]interface{}{},
 			n,
 		),
