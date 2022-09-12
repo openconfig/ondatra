@@ -66,6 +66,11 @@ func Parse() (*Values, error) {
 	if err != nil {
 		return nil, err
 	}
+	// If the XML flag is set, implicitly set verbose output,
+	// so the pass/fail data is available for conversion to XML.
+	if *xml != "" {
+		flag.Set("test.v", "true")
+	}
 	return &Values{
 		TestbedPath: *testbed,
 		RunTime:     *runTime,

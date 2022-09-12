@@ -3924,46 +3924,16 @@ func (n *Component_BackplanePathAny) Config() ygnmi.WildcardQuery[*oc.Component_
 	)
 }
 
-// Component_ChassisPath represents the /openconfig-platform/components/component/chassis YANG schema element.
-type Component_ChassisPath struct {
+// Component_Chassis_IdPath represents the /openconfig-platform/components/component/chassis/state/id YANG schema element.
+type Component_Chassis_IdPath struct {
 	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
-// Component_ChassisPathAny represents the wildcard version of the /openconfig-platform/components/component/chassis YANG schema element.
-type Component_ChassisPathAny struct {
+// Component_Chassis_IdPathAny represents the wildcard version of the /openconfig-platform/components/component/chassis/state/id YANG schema element.
+type Component_Chassis_IdPathAny struct {
 	*ygnmi.NodePath
-}
-
-// Utilization (container): Utilization of the component.
-//
-//	Defining module:      "openconfig-platform-common"
-//	Instantiating module: "openconfig-platform"
-//	Path from parent:     "utilization"
-//	Path from root:       "/components/component/chassis/utilization"
-func (n *Component_ChassisPath) Utilization() *Component_Chassis_UtilizationPath {
-	return &Component_Chassis_UtilizationPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"utilization"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-}
-
-// Utilization (container): Utilization of the component.
-//
-//	Defining module:      "openconfig-platform-common"
-//	Instantiating module: "openconfig-platform"
-//	Path from parent:     "utilization"
-//	Path from root:       "/components/component/chassis/utilization"
-func (n *Component_ChassisPathAny) Utilization() *Component_Chassis_UtilizationPathAny {
-	return &Component_Chassis_UtilizationPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"utilization"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+	parent ygnmi.PathStruct
 }
 
 // State returns a Query that can be used in gNMI operations.
@@ -4022,6 +3992,216 @@ func (n *Component_ChassisPathAny) Config() ygnmi.WildcardQuery[*oc.Component_Ch
 			Unmarshal:  oc.Unmarshal,
 		},
 	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-p4rt"
+//	Instantiating module: "openconfig-p4rt"
+//	Path from parent:     "state/id"
+//	Path from root:       "/components/component/chassis/state/id"
+func (n *Component_Chassis_IdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"Component_Chassis",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_Chassis).Id
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Chassis) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-p4rt"
+//	Instantiating module: "openconfig-p4rt"
+//	Path from parent:     "state/id"
+//	Path from root:       "/components/component/chassis/state/id"
+func (n *Component_Chassis_IdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Component_Chassis",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_Chassis).Id
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Chassis) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-p4rt"
+//	Instantiating module: "openconfig-p4rt"
+//	Path from parent:     "config/id"
+//	Path from root:       "/components/component/chassis/config/id"
+func (n *Component_Chassis_IdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewLeafConfigQuery[uint32](
+		"Component_Chassis",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_Chassis).Id
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Chassis) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-p4rt"
+//	Instantiating module: "openconfig-p4rt"
+//	Path from parent:     "config/id"
+//	Path from root:       "/components/component/chassis/config/id"
+func (n *Component_Chassis_IdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Component_Chassis",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_Chassis).Id
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Chassis) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_ChassisPath represents the /openconfig-platform/components/component/chassis YANG schema element.
+type Component_ChassisPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_ChassisPathAny represents the wildcard version of the /openconfig-platform/components/component/chassis YANG schema element.
+type Component_ChassisPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Id (leaf): An identifier used for the root of oc-p4rt:node-id. It is used to
+// indicate which oc-p4rt:node-id's belong to the same device
+//
+//	Defining module:      "openconfig-p4rt"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/id"
+//	Path from root:       "/components/component/chassis/*/id"
+func (n *Component_ChassisPath) Id() *Component_Chassis_IdPath {
+	return &Component_Chassis_IdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Id (leaf): An identifier used for the root of oc-p4rt:node-id. It is used to
+// indicate which oc-p4rt:node-id's belong to the same device
+//
+//	Defining module:      "openconfig-p4rt"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/id"
+//	Path from root:       "/components/component/chassis/*/id"
+func (n *Component_ChassisPathAny) Id() *Component_Chassis_IdPathAny {
+	return &Component_Chassis_IdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Utilization (container): Utilization of the component.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "utilization"
+//	Path from root:       "/components/component/chassis/utilization"
+func (n *Component_ChassisPath) Utilization() *Component_Chassis_UtilizationPath {
+	return &Component_Chassis_UtilizationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"utilization"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Utilization (container): Utilization of the component.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "utilization"
+//	Path from root:       "/components/component/chassis/utilization"
+func (n *Component_ChassisPathAny) Utilization() *Component_Chassis_UtilizationPathAny {
+	return &Component_Chassis_UtilizationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"utilization"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
 // Component_Chassis_UtilizationPath represents the /openconfig-platform/components/component/chassis/utilization YANG schema element.

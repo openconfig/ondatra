@@ -16,6 +16,188 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_FabricPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fabric {
+	t.Helper()
+	goStruct := &oc.Component_Fabric{}
+	md, ok := oc.Lookup(t, n, "Component_Fabric", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_Fabric{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_FabricPath) Get(t testing.TB) *oc.Component_Fabric {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/fabric with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_FabricPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Fabric {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_Fabric
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Fabric{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Fabric", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_Fabric{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/fabric with a ONCE subscription.
+func (n *Component_FabricPathAny) Get(t testing.TB) []*oc.Component_Fabric {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_Fabric
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/fabric with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_FabricPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Fabric {
+	t.Helper()
+	c := &oc.CollectionComponent_Fabric{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Fabric) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_Fabric{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_Fabric)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_FabricPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Fabric) bool) *oc.Component_FabricWatcher {
+	t.Helper()
+	w := &oc.Component_FabricWatcher{}
+	gs := &oc.Component_Fabric{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Fabric", gs, queryPath, false, false)
+		qv := (&oc.QualifiedComponent_Fabric{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Fabric)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/fabric with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_FabricPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Fabric) bool) *oc.Component_FabricWatcher {
+	t.Helper()
+	return watch_Component_FabricPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/fabric with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_FabricPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Fabric) *oc.QualifiedComponent_Fabric {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Fabric) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/fabric failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/fabric to the batch object.
+func (n *Component_FabricPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/fabric with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_FabricPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Fabric {
+	t.Helper()
+	c := &oc.CollectionComponent_Fabric{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Fabric) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_FabricPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Fabric) bool) *oc.Component_FabricWatcher {
+	t.Helper()
+	w := &oc.Component_FabricWatcher{}
+	structs := map[string]*oc.Component_Fabric{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Fabric{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Fabric", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Fabric{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Fabric)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/fabric with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_FabricPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Fabric) bool) *oc.Component_FabricWatcher {
+	t.Helper()
+	return watch_Component_FabricPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/fabric to the batch object.
+func (n *Component_FabricPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/fan with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_FanPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fan {
@@ -5089,185 +5271,4 @@ func (n *Component_LastSwitchoverReasonPathAny) Watch(t testing.TB, timeout time
 func (n *Component_LastSwitchoverReasonPathAny) Batch(t testing.TB, b *oc.Batch) {
 	t.Helper()
 	oc.MustAddToBatch(t, b, n)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/state/last-switchover-reason/details with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_LastSwitchoverReason_DetailsPath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Component_LastSwitchoverReason{}
-	md, ok := oc.Lookup(t, n, "Component_LastSwitchoverReason", goStruct, true, false)
-	if ok {
-		return convertComponent_LastSwitchoverReason_DetailsPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/state/last-switchover-reason/details with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_LastSwitchoverReason_DetailsPath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/state/last-switchover-reason/details with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_LastSwitchoverReason_DetailsPathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_LastSwitchoverReason{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_LastSwitchoverReason", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_LastSwitchoverReason_DetailsPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/state/last-switchover-reason/details with a ONCE subscription.
-func (n *Component_LastSwitchoverReason_DetailsPathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/last-switchover-reason/details with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_LastSwitchoverReason_DetailsPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_LastSwitchoverReason_DetailsPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	gs := &oc.Component_LastSwitchoverReason{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_LastSwitchoverReason", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertComponent_LastSwitchoverReason_DetailsPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/last-switchover-reason/details with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_LastSwitchoverReason_DetailsPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_LastSwitchoverReason_DetailsPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/state/last-switchover-reason/details with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_LastSwitchoverReason_DetailsPath) Await(t testing.TB, timeout time.Duration, val string) *oc.QualifiedString {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedString) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/state/last-switchover-reason/details failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/state/last-switchover-reason/details to the batch object.
-func (n *Component_LastSwitchoverReason_DetailsPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/state/last-switchover-reason/details with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_LastSwitchoverReason_DetailsPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionString {
-	t.Helper()
-	c := &oc.CollectionString{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedString) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_LastSwitchoverReason_DetailsPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	w := &oc.StringWatcher{}
-	structs := map[string]*oc.Component_LastSwitchoverReason{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.Component_LastSwitchoverReason{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_LastSwitchoverReason", structs[pre], queryPath, true, false)
-			qv := convertComponent_LastSwitchoverReason_DetailsPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedString)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/state/last-switchover-reason/details with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_LastSwitchoverReason_DetailsPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedString) bool) *oc.StringWatcher {
-	t.Helper()
-	return watch_Component_LastSwitchoverReason_DetailsPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/state/last-switchover-reason/details to the batch object.
-func (n *Component_LastSwitchoverReason_DetailsPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_LastSwitchoverReason_DetailsPath extracts the value of the leaf Details from its parent oc.Component_LastSwitchoverReason
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertComponent_LastSwitchoverReason_DetailsPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_LastSwitchoverReason) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Details
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
 }

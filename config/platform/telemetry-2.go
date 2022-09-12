@@ -15,6 +15,97 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/port with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_PortPath) Lookup(t testing.TB) *oc.QualifiedComponent_Port {
+	t.Helper()
+	goStruct := &oc.Component_Port{}
+	md, ok := oc.Lookup(t, n, "Component_Port", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedComponent_Port{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/port with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_PortPath) Get(t testing.TB) *oc.Component_Port {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/port with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_PortPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Port {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_Port
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Port{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Port", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_Port{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/port with a ONCE subscription.
+func (n *Component_PortPathAny) Get(t testing.TB) []*oc.Component_Port {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_Port
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/port.
+func (n *Component_PortPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/port in the given batch object.
+func (n *Component_PortPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/port.
+func (n *Component_PortPath) Replace(t testing.TB, val *oc.Component_Port) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/port in the given batch object.
+func (n *Component_PortPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Port) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/port.
+func (n *Component_PortPath) Update(t testing.TB, val *oc.Component_Port) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/port in the given batch object.
+func (n *Component_PortPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Port) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/port/breakout-mode with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_Port_BreakoutModePath) Lookup(t testing.TB) *oc.QualifiedComponent_Port_BreakoutMode {
@@ -880,107 +971,6 @@ func convertComponent_Property_NamePath(t testing.TB, md *genutil.Metadata, pare
 	val := parent.Name
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/properties/property/config/value with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Property_ValuePath) Lookup(t testing.TB) *oc.QualifiedComponent_Property_Value_Union {
-	t.Helper()
-	goStruct := &oc.Component_Property{}
-	md, ok := oc.Lookup(t, n, "Component_Property", goStruct, true, true)
-	if ok {
-		return convertComponent_Property_ValuePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/properties/property/config/value with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Property_ValuePath) Get(t testing.TB) oc.Component_Property_Value_Union {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/properties/property/config/value with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Property_ValuePathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Property_Value_Union {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Property_Value_Union
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Property{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Property", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Property_ValuePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/properties/property/config/value with a ONCE subscription.
-func (n *Component_Property_ValuePathAny) Get(t testing.TB) []oc.Component_Property_Value_Union {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []oc.Component_Property_Value_Union
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/properties/property/config/value.
-func (n *Component_Property_ValuePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/properties/property/config/value in the given batch object.
-func (n *Component_Property_ValuePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/properties/property/config/value.
-func (n *Component_Property_ValuePath) Replace(t testing.TB, val oc.Component_Property_Value_Union) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/properties/property/config/value in the given batch object.
-func (n *Component_Property_ValuePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.Component_Property_Value_Union) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/properties/property/config/value.
-func (n *Component_Property_ValuePath) Update(t testing.TB, val oc.Component_Property_Value_Union) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/properties/property/config/value in the given batch object.
-func (n *Component_Property_ValuePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.Component_Property_Value_Union) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// convertComponent_Property_ValuePath extracts the value of the leaf Value from its parent oc.Component_Property
-// and combines the update with an existing Metadata to return a *oc.QualifiedComponent_Property_Value_Union.
-func convertComponent_Property_ValuePath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Property) *oc.QualifiedComponent_Property_Value_Union {
-	t.Helper()
-	qv := &oc.QualifiedComponent_Property_Value_Union{
-		Metadata: md,
-	}
-	val := parent.Value
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(val)
 	}
 	return qv
 }

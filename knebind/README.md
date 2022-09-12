@@ -26,8 +26,6 @@ An example YAML config file:
 username: tester
 password: hunter2
 topology: /home/tester/topo.textproto
-cli: /home/tester/go/bin/kne_cli
-kubecfg: /home/tester/go/bin/.kube/config
 ```
 
 ## Running the Integration Test
@@ -44,4 +42,14 @@ test. To execute the test, you must:
 
 ```
 go test -testbed=testbed.textproto -config=path/to/config.yaml
+```
+
+One example KNE topology that satisfies this testbed is [2node-ixia-ceos.pb.txt](https://github.com/openconfig/kne/blob/main/examples/2node-ixia-ceos.pb.txt)
+provided by the openconfig/kne project. A YAML config file that works with that
+topology is:
+
+```
+username: admin
+password: admin
+topology: /[YOUR GIT CLONE PATH]/kne/examples/2node-ixia-ceos.pb.txt
 ```

@@ -675,6 +675,50 @@ type Component_ChassisPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_Chassis_IdPath represents the /openconfig-platform/components/component/chassis/config/id YANG schema element.
+type Component_Chassis_IdPath struct {
+	*ygot.NodePath
+}
+
+// Component_Chassis_IdPathAny represents the wildcard version of the /openconfig-platform/components/component/chassis/config/id YANG schema element.
+type Component_Chassis_IdPathAny struct {
+	*ygot.NodePath
+}
+
+// Id (leaf): An identifier used for the root of oc-p4rt:node-id. It is used to
+// indicate which oc-p4rt:node-id's belong to the same device
+// ----------------------------------------
+// Defining module: "openconfig-p4rt"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/id"
+// Path from root: "/components/component/chassis/config/id"
+func (n *Component_ChassisPath) Id() *Component_Chassis_IdPath {
+	return &Component_Chassis_IdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Id (leaf): An identifier used for the root of oc-p4rt:node-id. It is used to
+// indicate which oc-p4rt:node-id's belong to the same device
+// ----------------------------------------
+// Defining module: "openconfig-p4rt"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/id"
+// Path from root: "/components/component/chassis/config/id"
+func (n *Component_ChassisPathAny) Id() *Component_Chassis_IdPathAny {
+	return &Component_Chassis_IdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Utilization (container): Utilization of the component.
 // ----------------------------------------
 // Defining module: "openconfig-platform-common"

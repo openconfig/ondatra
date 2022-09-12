@@ -16,6 +16,188 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Transceiver_LaserBiasCurrentPath) Lookup(t testing.TB) *oc.QualifiedComponent_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	goStruct := &oc.Component_Transceiver_LaserBiasCurrent{}
+	md, ok := oc.Lookup(t, n, "Component_Transceiver_LaserBiasCurrent", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Transceiver_LaserBiasCurrentPath) Get(t testing.TB) *oc.Component_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Transceiver_LaserBiasCurrentPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_Transceiver_LaserBiasCurrent
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Transceiver_LaserBiasCurrent{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_LaserBiasCurrent", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a ONCE subscription.
+func (n *Component_Transceiver_LaserBiasCurrentPathAny) Get(t testing.TB) []*oc.Component_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_Transceiver_LaserBiasCurrent
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_LaserBiasCurrentPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	c := &oc.CollectionComponent_Transceiver_LaserBiasCurrent{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Component_Transceiver_LaserBiasCurrent)))
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_LaserBiasCurrentPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
+	t.Helper()
+	w := &oc.Component_Transceiver_LaserBiasCurrentWatcher{}
+	gs := &oc.Component_Transceiver_LaserBiasCurrent{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_LaserBiasCurrent", gs, queryPath, false, false)
+		qv := (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_LaserBiasCurrent)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_LaserBiasCurrentPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
+	t.Helper()
+	return watch_Component_Transceiver_LaserBiasCurrentPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Component_Transceiver_LaserBiasCurrentPath) Await(t testing.TB, timeout time.Duration, val *oc.Component_Transceiver_LaserBiasCurrent) *oc.QualifiedComponent_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/state/laser-bias-current failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/state/laser-bias-current to the batch object.
+func (n *Component_Transceiver_LaserBiasCurrentPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Component_Transceiver_LaserBiasCurrentPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionComponent_Transceiver_LaserBiasCurrent {
+	t.Helper()
+	c := &oc.CollectionComponent_Transceiver_LaserBiasCurrent{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Component_Transceiver_LaserBiasCurrentPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
+	t.Helper()
+	w := &oc.Component_Transceiver_LaserBiasCurrentWatcher{}
+	structs := map[string]*oc.Component_Transceiver_LaserBiasCurrent{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Component_Transceiver_LaserBiasCurrent{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_LaserBiasCurrent", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedComponent_Transceiver_LaserBiasCurrent{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedComponent_Transceiver_LaserBiasCurrent)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/laser-bias-current with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Component_Transceiver_LaserBiasCurrentPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedComponent_Transceiver_LaserBiasCurrent) bool) *oc.Component_Transceiver_LaserBiasCurrentWatcher {
+	t.Helper()
+	return watch_Component_Transceiver_LaserBiasCurrentPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-platform/components/component/transceiver/state/laser-bias-current to the batch object.
+func (n *Component_Transceiver_LaserBiasCurrentPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/laser-bias-current/avg with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_Transceiver_LaserBiasCurrent_AvgPath) Lookup(t testing.TB) *oc.QualifiedFloat64 {
@@ -5081,187 +5263,6 @@ func convertComponent_Transceiver_PreFecBer_InstantPath(t testing.TB, md *genuti
 		Metadata: md,
 	}
 	val := parent.Instant
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_Transceiver_PreFecBer_IntervalPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
-	t.Helper()
-	goStruct := &oc.Component_Transceiver_PreFecBer{}
-	md, ok := oc.Lookup(t, n, "Component_Transceiver_PreFecBer", goStruct, true, false)
-	if ok {
-		return convertComponent_Transceiver_PreFecBer_IntervalPath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_Transceiver_PreFecBer_IntervalPath) Get(t testing.TB) uint64 {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_Transceiver_PreFecBer_IntervalPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedUint64
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Transceiver_PreFecBer{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Transceiver_PreFecBer", goStruct, queryPath, true, false)
-		if !ok {
-			continue
-		}
-		qv := convertComponent_Transceiver_PreFecBer_IntervalPath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a ONCE subscription.
-func (n *Component_Transceiver_PreFecBer_IntervalPathAny) Get(t testing.TB) []uint64 {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []uint64
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_PreFecBer_IntervalPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_PreFecBer_IntervalPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	gs := &oc.Component_Transceiver_PreFecBer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Component_Transceiver_PreFecBer", gs, queryPath, true, false)
-		return []genutil.QualifiedValue{convertComponent_Transceiver_PreFecBer_IntervalPath(t, md, gs)}, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_PreFecBer_IntervalPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_PreFecBer_IntervalPath(t, n, timeout, predicate)
-}
-
-// Await observes values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a STREAM subscription,
-// blocking until a value that is deep equal to the specified val is received
-// or failing fatally if the value is not received by the specified timeout.
-// To avoid a fatal failure, to wait for a generic predicate, or to make a
-// non-blocking call, use the Watch method instead.
-func (n *Component_Transceiver_PreFecBer_IntervalPath) Await(t testing.TB, timeout time.Duration, val uint64) *oc.QualifiedUint64 {
-	t.Helper()
-	got, success := n.Watch(t, timeout, func(data *oc.QualifiedUint64) bool {
-		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
-	}).Await(t)
-	if !success {
-		t.Fatalf("Await() at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval failed: want %v, last got %v", val, got)
-	}
-	return got
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval to the batch object.
-func (n *Component_Transceiver_PreFecBer_IntervalPath) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// Collect starts an asynchronous collection of the values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a STREAM subscription.
-// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
-func (n *Component_Transceiver_PreFecBer_IntervalPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionUint64 {
-	t.Helper()
-	c := &oc.CollectionUint64{}
-	c.W = n.Watch(t, duration, func(v *oc.QualifiedUint64) bool {
-		c.Data = append(c.Data, v)
-		return false
-	})
-	return c
-}
-
-func watch_Component_Transceiver_PreFecBer_IntervalPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	w := &oc.Uint64Watcher{}
-	structs := map[string]*oc.Component_Transceiver_PreFecBer{}
-	w.W = genutil.MustWatch(t, n, nil, duration, true, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
-		t.Helper()
-		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
-		var currStructs []genutil.QualifiedValue
-		for _, pre := range sortedPrefixes {
-			if len(datapointGroups[pre]) == 0 {
-				continue
-			}
-			if _, ok := structs[pre]; !ok {
-				structs[pre] = &oc.Component_Transceiver_PreFecBer{}
-			}
-			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Component_Transceiver_PreFecBer", structs[pre], queryPath, true, false)
-			qv := convertComponent_Transceiver_PreFecBer_IntervalPath(t, md, structs[pre])
-			currStructs = append(currStructs, qv)
-		}
-		return currStructs, nil
-	}, func(qualVal genutil.QualifiedValue) bool {
-		val, ok := qualVal.(*oc.QualifiedUint64)
-		w.LastVal = val
-		return ok && predicate(val)
-	})
-	return w
-}
-
-// Watch starts an asynchronous observation of the values at /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval with a STREAM subscription,
-// evaluating each observed value with the specified predicate.
-// The subscription completes when either the predicate is true or the specified duration elapses.
-// Calling Await on the returned Watcher waits for the subscription to complete.
-// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
-func (n *Component_Transceiver_PreFecBer_IntervalPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedUint64) bool) *oc.Uint64Watcher {
-	t.Helper()
-	return watch_Component_Transceiver_PreFecBer_IntervalPathAny(t, n, timeout, predicate)
-}
-
-// Batch adds /openconfig-platform/components/component/transceiver/state/pre-fec-ber/interval to the batch object.
-func (n *Component_Transceiver_PreFecBer_IntervalPathAny) Batch(t testing.TB, b *oc.Batch) {
-	t.Helper()
-	oc.MustAddToBatch(t, b, n)
-}
-
-// convertComponent_Transceiver_PreFecBer_IntervalPath extracts the value of the leaf Interval from its parent oc.Component_Transceiver_PreFecBer
-// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
-func convertComponent_Transceiver_PreFecBer_IntervalPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Transceiver_PreFecBer) *oc.QualifiedUint64 {
-	t.Helper()
-	qv := &oc.QualifiedUint64{
-		Metadata: md,
-	}
-	val := parent.Interval
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}

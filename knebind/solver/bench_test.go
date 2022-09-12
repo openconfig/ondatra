@@ -320,11 +320,13 @@ func BenchmarkSolveScale(b *testing.B) {
 	}
 
 	b.ResetTimer()
-	_, err := Solve(tb, topo)
-	b.StopTimer()
-
-	if err != nil {
-		b.Fatalf("Solve() got unexpected error: %v", err)
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		b.StartTimer()
+		_, err := Solve(tb, topo)
+		b.StopTimer()
+		if err != nil {
+			b.Fatalf("Solve() got unexpected error: %v", err)
+		}
 	}
-	// TODO: update to check the expected topology, too
 }

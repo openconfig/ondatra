@@ -288,6 +288,107 @@ func (n *Component_ChassisPath) BatchUpdate(t testing.TB, b *config.SetRequestBa
 	b.BatchUpdate(t, n, val)
 }
 
+// Lookup fetches the value at /openconfig-platform/components/component/chassis/config/id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_Chassis_IdPath) Lookup(t testing.TB) *oc.QualifiedUint32 {
+	t.Helper()
+	goStruct := &oc.Component_Chassis{}
+	md, ok := oc.Lookup(t, n, "Component_Chassis", goStruct, true, true)
+	if ok {
+		return convertComponent_Chassis_IdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/chassis/config/id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_Chassis_IdPath) Get(t testing.TB) uint32 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/chassis/config/id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_Chassis_IdPathAny) Lookup(t testing.TB) []*oc.QualifiedUint32 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint32
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_Chassis{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Chassis", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_Chassis_IdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/chassis/config/id with a ONCE subscription.
+func (n *Component_Chassis_IdPathAny) Get(t testing.TB) []uint32 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint32
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/chassis/config/id.
+func (n *Component_Chassis_IdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/chassis/config/id in the given batch object.
+func (n *Component_Chassis_IdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/chassis/config/id.
+func (n *Component_Chassis_IdPath) Replace(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/chassis/config/id in the given batch object.
+func (n *Component_Chassis_IdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/chassis/config/id.
+func (n *Component_Chassis_IdPath) Update(t testing.TB, val uint32) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/chassis/config/id in the given batch object.
+func (n *Component_Chassis_IdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint32) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertComponent_Chassis_IdPath extracts the value of the leaf Id from its parent oc.Component_Chassis
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint32.
+func convertComponent_Chassis_IdPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_Chassis) *oc.QualifiedUint32 {
+	t.Helper()
+	qv := &oc.QualifiedUint32{
+		Metadata: md,
+	}
+	val := parent.Id
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-platform/components/component/chassis/utilization with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_Chassis_UtilizationPath) Lookup(t testing.TB) *oc.QualifiedComponent_Chassis_Utilization {
@@ -840,97 +941,6 @@ func (n *Component_Cpu_UtilizationPath) Update(t testing.TB, val *oc.Component_C
 
 // BatchUpdate buffers a config update operation at /openconfig-platform/components/component/cpu/utilization in the given batch object.
 func (n *Component_Cpu_UtilizationPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Cpu_Utilization) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_FabricPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fabric {
-	t.Helper()
-	goStruct := &oc.Component_Fabric{}
-	md, ok := oc.Lookup(t, n, "Component_Fabric", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedComponent_Fabric{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_FabricPath) Get(t testing.TB) *oc.Component_Fabric {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/fabric with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_FabricPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Fabric {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Fabric
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Fabric{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Fabric", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Fabric{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/fabric with a ONCE subscription.
-func (n *Component_FabricPathAny) Get(t testing.TB) []*oc.Component_Fabric {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Fabric
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/fabric.
-func (n *Component_FabricPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/fabric in the given batch object.
-func (n *Component_FabricPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/fabric.
-func (n *Component_FabricPath) Replace(t testing.TB, val *oc.Component_Fabric) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/fabric in the given batch object.
-func (n *Component_FabricPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Fabric) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/fabric.
-func (n *Component_FabricPath) Update(t testing.TB, val *oc.Component_Fabric) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/fabric in the given batch object.
-func (n *Component_FabricPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Fabric) {
 	t.Helper()
 	b.BatchUpdate(t, n, val)
 }
