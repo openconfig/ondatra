@@ -48,6 +48,7 @@ func (r *Report) AddTestProperty(t *testing.T, name, value string) {
 // property is attached to the test suite. For improved test readability,
 // callers should prefer using AddSuiteProperty or AddTestProperty.
 func (r *Report) AddRawProperty(test, name, value string) {
+	fmt.Printf("*** PROPERTY: %s -> %s\n", name, value)
 	junitxml.AddProperty(test, name, value)
 }
 

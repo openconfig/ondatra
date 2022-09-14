@@ -32,6 +32,7 @@ import (
 	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/internal/junitxml"
 	"github.com/openconfig/ondatra/internal/testbed"
+	"github.com/openconfig/ondatra/report"
 )
 
 var (
@@ -108,4 +109,9 @@ func fnAfterSignal(fn func() error, signals ...os.Signal) {
 	if err := fn(); err != nil {
 		log.Errorf("error calling %s: %v", fnName, err)
 	}
+}
+
+// Report returns the Ondatra Report API.
+func Report() *report.Report {
+	return &report.Report{}
 }
