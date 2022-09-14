@@ -12,71 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedE_Ipv6Reachability_Prefix_OriginType is a E_Ipv6Reachability_Prefix_OriginType with a corresponding timestamp.
-type QualifiedE_Ipv6Reachability_Prefix_OriginType struct {
-	*genutil.Metadata
-	val     E_Ipv6Reachability_Prefix_OriginType // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_Ipv6Reachability_Prefix_OriginType sample, erroring out if not present.
-func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) Val(t testing.TB) E_Ipv6Reachability_Prefix_OriginType {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_Ipv6Reachability_Prefix_OriginType sample.
-func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) SetVal(v E_Ipv6Reachability_Prefix_OriginType) *QualifiedE_Ipv6Reachability_Prefix_OriginType {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_Ipv6Reachability_Prefix_OriginType is a telemetry Collection whose Await method returns a slice of E_Ipv6Reachability_Prefix_OriginType samples.
-type CollectionE_Ipv6Reachability_Prefix_OriginType struct {
-	W    *E_Ipv6Reachability_Prefix_OriginTypeWatcher
-	Data []*QualifiedE_Ipv6Reachability_Prefix_OriginType
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Ipv6Reachability_Prefix_OriginType) Await(t testing.TB) []*QualifiedE_Ipv6Reachability_Prefix_OriginType {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_Ipv6Reachability_Prefix_OriginTypeWatcher observes a stream of E_Ipv6Reachability_Prefix_OriginType samples.
-type E_Ipv6Reachability_Prefix_OriginTypeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_Ipv6Reachability_Prefix_OriginType
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Ipv6Reachability_Prefix_OriginTypeWatcher) Await(t testing.TB) (*QualifiedE_Ipv6Reachability_Prefix_OriginType, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedE_Ipv6Reachability_Prefix_RedistributionType is a E_Ipv6Reachability_Prefix_RedistributionType with a corresponding timestamp.
 type QualifiedE_Ipv6Reachability_Prefix_RedistributionType struct {
 	*genutil.Metadata
@@ -142,6 +77,71 @@ func (w *E_Ipv6Reachability_Prefix_RedistributionTypeWatcher) Await(t testing.TB
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedE_Lag_OperStatus is a E_Lag_OperStatus with a corresponding timestamp.
+type QualifiedE_Lag_OperStatus struct {
+	*genutil.Metadata
+	val     E_Lag_OperStatus // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Lag_OperStatus) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Lag_OperStatus sample, erroring out if not present.
+func (q *QualifiedE_Lag_OperStatus) Val(t testing.TB) E_Lag_OperStatus {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Lag_OperStatus sample.
+func (q *QualifiedE_Lag_OperStatus) SetVal(v E_Lag_OperStatus) *QualifiedE_Lag_OperStatus {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Lag_OperStatus) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Lag_OperStatus is a telemetry Collection whose Await method returns a slice of E_Lag_OperStatus samples.
+type CollectionE_Lag_OperStatus struct {
+	W    *E_Lag_OperStatusWatcher
+	Data []*QualifiedE_Lag_OperStatus
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Lag_OperStatus) Await(t testing.TB) []*QualifiedE_Lag_OperStatus {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Lag_OperStatusWatcher observes a stream of E_Lag_OperStatus samples.
+type E_Lag_OperStatusWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Lag_OperStatus
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Lag_OperStatusWatcher) Await(t testing.TB) (*QualifiedE_Lag_OperStatus, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_Lsps_PduType is a E_Lsps_PduType with a corresponding timestamp.
 type QualifiedE_Lsps_PduType struct {
 	*genutil.Metadata
@@ -203,6 +203,201 @@ type E_Lsps_PduTypeWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_Lsps_PduTypeWatcher) Await(t testing.TB) (*QualifiedE_Lsps_PduType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType is a E_OpenTrafficGeneratorLacp_LacpActivityType with a corresponding timestamp.
+type QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType struct {
+	*genutil.Metadata
+	val     E_OpenTrafficGeneratorLacp_LacpActivityType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_OpenTrafficGeneratorLacp_LacpActivityType sample, erroring out if not present.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) Val(t testing.TB) E_OpenTrafficGeneratorLacp_LacpActivityType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_OpenTrafficGeneratorLacp_LacpActivityType sample.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) SetVal(v E_OpenTrafficGeneratorLacp_LacpActivityType) *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_OpenTrafficGeneratorLacp_LacpActivityType is a telemetry Collection whose Await method returns a slice of E_OpenTrafficGeneratorLacp_LacpActivityType samples.
+type CollectionE_OpenTrafficGeneratorLacp_LacpActivityType struct {
+	W    *E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher
+	Data []*QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_OpenTrafficGeneratorLacp_LacpActivityType) Await(t testing.TB) []*QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher observes a stream of E_OpenTrafficGeneratorLacp_LacpActivityType samples.
+type E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_OpenTrafficGeneratorLacp_LacpActivityTypeWatcher) Await(t testing.TB) (*QualifiedE_OpenTrafficGeneratorLacp_LacpActivityType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType is a E_OpenTrafficGeneratorLacp_LacpSynchronizationType with a corresponding timestamp.
+type QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType struct {
+	*genutil.Metadata
+	val     E_OpenTrafficGeneratorLacp_LacpSynchronizationType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_OpenTrafficGeneratorLacp_LacpSynchronizationType sample, erroring out if not present.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType) Val(t testing.TB) E_OpenTrafficGeneratorLacp_LacpSynchronizationType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_OpenTrafficGeneratorLacp_LacpSynchronizationType sample.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType) SetVal(v E_OpenTrafficGeneratorLacp_LacpSynchronizationType) *QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_OpenTrafficGeneratorLacp_LacpSynchronizationType is a telemetry Collection whose Await method returns a slice of E_OpenTrafficGeneratorLacp_LacpSynchronizationType samples.
+type CollectionE_OpenTrafficGeneratorLacp_LacpSynchronizationType struct {
+	W    *E_OpenTrafficGeneratorLacp_LacpSynchronizationTypeWatcher
+	Data []*QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_OpenTrafficGeneratorLacp_LacpSynchronizationType) Await(t testing.TB) []*QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_OpenTrafficGeneratorLacp_LacpSynchronizationTypeWatcher observes a stream of E_OpenTrafficGeneratorLacp_LacpSynchronizationType samples.
+type E_OpenTrafficGeneratorLacp_LacpSynchronizationTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_OpenTrafficGeneratorLacp_LacpSynchronizationTypeWatcher) Await(t testing.TB) (*QualifiedE_OpenTrafficGeneratorLacp_LacpSynchronizationType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType is a E_OpenTrafficGeneratorLacp_LacpTimeoutType with a corresponding timestamp.
+type QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType struct {
+	*genutil.Metadata
+	val     E_OpenTrafficGeneratorLacp_LacpTimeoutType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_OpenTrafficGeneratorLacp_LacpTimeoutType sample, erroring out if not present.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType) Val(t testing.TB) E_OpenTrafficGeneratorLacp_LacpTimeoutType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_OpenTrafficGeneratorLacp_LacpTimeoutType sample.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType) SetVal(v E_OpenTrafficGeneratorLacp_LacpTimeoutType) *QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_OpenTrafficGeneratorLacp_LacpTimeoutType is a telemetry Collection whose Await method returns a slice of E_OpenTrafficGeneratorLacp_LacpTimeoutType samples.
+type CollectionE_OpenTrafficGeneratorLacp_LacpTimeoutType struct {
+	W    *E_OpenTrafficGeneratorLacp_LacpTimeoutTypeWatcher
+	Data []*QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_OpenTrafficGeneratorLacp_LacpTimeoutType) Await(t testing.TB) []*QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_OpenTrafficGeneratorLacp_LacpTimeoutTypeWatcher observes a stream of E_OpenTrafficGeneratorLacp_LacpTimeoutType samples.
+type E_OpenTrafficGeneratorLacp_LacpTimeoutTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_OpenTrafficGeneratorLacp_LacpTimeoutTypeWatcher) Await(t testing.TB) (*QualifiedE_OpenTrafficGeneratorLacp_LacpTimeoutType, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

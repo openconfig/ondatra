@@ -1376,3 +1376,198 @@ func (w *IsisRouter_LinkStateDatabase_Lsps_TlvsWatcher) Await(t testing.TB) (*Qu
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
+
+// QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability with a corresponding timestamp.
+type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability struct {
+	*genutil.Metadata
+	val     *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability sample, erroring out if not present.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) Val(t testing.TB) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability sample.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) SetVal(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability is a telemetry Collection whose Await method returns a slice of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability samples.
+type CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability struct {
+	W    *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher
+	Data []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) Await(t testing.TB) []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher observes a stream of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability samples.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher) Await(t testing.TB) (*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix with a corresponding timestamp.
+type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct {
+	*genutil.Metadata
+	val     *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix sample, erroring out if not present.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) Val(t testing.TB) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix sample.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) SetVal(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix is a telemetry Collection whose Await method returns a slice of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix samples.
+type CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct {
+	W    *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher
+	Data []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) Await(t testing.TB) []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher observes a stream of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix samples.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher) Await(t testing.TB) (*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes with a corresponding timestamp.
+type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes struct {
+	*genutil.Metadata
+	val     *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes sample, erroring out if not present.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) Val(t testing.TB) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes sample.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) SetVal(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes is a telemetry Collection whose Await method returns a slice of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes samples.
+type CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes struct {
+	W    *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher
+	Data []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) Await(t testing.TB) []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher observes a stream of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes samples.
+type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher) Await(t testing.TB) (*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}

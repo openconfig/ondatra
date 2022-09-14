@@ -206,6 +206,8 @@ OTG_YANG_FILES=(
   models-yang/models/discovery/open-traffic-generator-discovery.yang
   models-yang/models/interface/open-traffic-generator-port.yang
   models-yang/models/bgp/open-traffic-generator-bgp.yang
+  models-yang/models/lag/open-traffic-generator-lag.yang
+  models-yang/models/lacp/open-traffic-generator-lacp.yang
 )
 
 # Generate OTG Schema Structs
