@@ -14,6 +14,8 @@ using the following YANG input files:
   - models-yang/models/discovery/open-traffic-generator-discovery.yang
   - models-yang/models/interface/open-traffic-generator-port.yang
   - models-yang/models/bgp/open-traffic-generator-bgp.yang
+  - models-yang/models/lag/open-traffic-generator-lag.yang
+  - models-yang/models/lacp/open-traffic-generator-lacp.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -214,6 +216,122 @@ const (
 	Ipv6Reachability_Prefix_RedistributionType_UP E_Ipv6Reachability_Prefix_RedistributionType = 1
 	// Ipv6Reachability_Prefix_RedistributionType_DOWN corresponds to the value DOWN of Ipv6Reachability_Prefix_RedistributionType
 	Ipv6Reachability_Prefix_RedistributionType_DOWN E_Ipv6Reachability_Prefix_RedistributionType = 2
+)
+
+// E_Lacp_LacpActivityType is a derived int64 type which is used to represent
+// the enumerated node Lacp_LacpActivityType. An additional value named
+// Lacp_LacpActivityType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lacp_LacpActivityType int64
+
+// IsYANGGoEnum ensures that Lacp_LacpActivityType implements the yang.GoEnum
+// interface. This ensures that Lacp_LacpActivityType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lacp_LacpActivityType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lacp_LacpActivityType.
+func (E_Lacp_LacpActivityType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lacp_LacpActivityType.
+func (e E_Lacp_LacpActivityType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lacp_LacpActivityType")
+}
+
+const (
+	// Lacp_LacpActivityType_UNSET corresponds to the value UNSET of Lacp_LacpActivityType
+	Lacp_LacpActivityType_UNSET E_Lacp_LacpActivityType = 0
+	// Lacp_LacpActivityType_ACTIVE corresponds to the value ACTIVE of Lacp_LacpActivityType
+	Lacp_LacpActivityType_ACTIVE E_Lacp_LacpActivityType = 1
+	// Lacp_LacpActivityType_PASSIVE corresponds to the value PASSIVE of Lacp_LacpActivityType
+	Lacp_LacpActivityType_PASSIVE E_Lacp_LacpActivityType = 2
+)
+
+// E_Lacp_LacpSynchronizationType is a derived int64 type which is used to represent
+// the enumerated node Lacp_LacpSynchronizationType. An additional value named
+// Lacp_LacpSynchronizationType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lacp_LacpSynchronizationType int64
+
+// IsYANGGoEnum ensures that Lacp_LacpSynchronizationType implements the yang.GoEnum
+// interface. This ensures that Lacp_LacpSynchronizationType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lacp_LacpSynchronizationType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lacp_LacpSynchronizationType.
+func (E_Lacp_LacpSynchronizationType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lacp_LacpSynchronizationType.
+func (e E_Lacp_LacpSynchronizationType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lacp_LacpSynchronizationType")
+}
+
+const (
+	// Lacp_LacpSynchronizationType_UNSET corresponds to the value UNSET of Lacp_LacpSynchronizationType
+	Lacp_LacpSynchronizationType_UNSET E_Lacp_LacpSynchronizationType = 0
+	// Lacp_LacpSynchronizationType_IN_SYNC corresponds to the value IN_SYNC of Lacp_LacpSynchronizationType
+	Lacp_LacpSynchronizationType_IN_SYNC E_Lacp_LacpSynchronizationType = 1
+	// Lacp_LacpSynchronizationType_OUT_SYNC corresponds to the value OUT_SYNC of Lacp_LacpSynchronizationType
+	Lacp_LacpSynchronizationType_OUT_SYNC E_Lacp_LacpSynchronizationType = 2
+)
+
+// E_Lacp_LacpTimeoutType is a derived int64 type which is used to represent
+// the enumerated node Lacp_LacpTimeoutType. An additional value named
+// Lacp_LacpTimeoutType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lacp_LacpTimeoutType int64
+
+// IsYANGGoEnum ensures that Lacp_LacpTimeoutType implements the yang.GoEnum
+// interface. This ensures that Lacp_LacpTimeoutType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lacp_LacpTimeoutType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lacp_LacpTimeoutType.
+func (E_Lacp_LacpTimeoutType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lacp_LacpTimeoutType.
+func (e E_Lacp_LacpTimeoutType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lacp_LacpTimeoutType")
+}
+
+const (
+	// Lacp_LacpTimeoutType_UNSET corresponds to the value UNSET of Lacp_LacpTimeoutType
+	Lacp_LacpTimeoutType_UNSET E_Lacp_LacpTimeoutType = 0
+	// Lacp_LacpTimeoutType_LONG corresponds to the value LONG of Lacp_LacpTimeoutType
+	Lacp_LacpTimeoutType_LONG E_Lacp_LacpTimeoutType = 1
+	// Lacp_LacpTimeoutType_SHORT corresponds to the value SHORT of Lacp_LacpTimeoutType
+	Lacp_LacpTimeoutType_SHORT E_Lacp_LacpTimeoutType = 2
+)
+
+// E_Lag_OperStatus is a derived int64 type which is used to represent
+// the enumerated node Lag_OperStatus. An additional value named
+// Lag_OperStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lag_OperStatus int64
+
+// IsYANGGoEnum ensures that Lag_OperStatus implements the yang.GoEnum
+// interface. This ensures that Lag_OperStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lag_OperStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lag_OperStatus.
+func (E_Lag_OperStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Lag_OperStatus.
+func (e E_Lag_OperStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lag_OperStatus")
+}
+
+const (
+	// Lag_OperStatus_UNSET corresponds to the value UNSET of Lag_OperStatus
+	Lag_OperStatus_UNSET E_Lag_OperStatus = 0
+	// Lag_OperStatus_UP corresponds to the value UP of Lag_OperStatus
+	Lag_OperStatus_UP E_Lag_OperStatus = 1
+	// Lag_OperStatus_DOWN corresponds to the value DOWN of Lag_OperStatus
+	Lag_OperStatus_DOWN E_Lag_OperStatus = 2
 )
 
 // E_Lsps_Flags is a derived int64 type which is used to represent

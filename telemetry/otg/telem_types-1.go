@@ -12,201 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability with a corresponding timestamp.
-type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability struct {
-	*genutil.Metadata
-	val     *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability sample, erroring out if not present.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) Val(t testing.TB) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability sample.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) SetVal(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability is a telemetry Collection whose Await method returns a slice of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability samples.
-type CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability struct {
-	W    *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher
-	Data []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability) Await(t testing.TB) []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher observes a stream of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability samples.
-type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4ReachabilityWatcher) Await(t testing.TB) (*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix with a corresponding timestamp.
-type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct {
-	*genutil.Metadata
-	val     *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix sample, erroring out if not present.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) Val(t testing.TB) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix sample.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) SetVal(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix is a telemetry Collection whose Await method returns a slice of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix samples.
-type CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix struct {
-	W    *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher
-	Data []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix) Await(t testing.TB) []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher observes a stream of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix samples.
-type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_PrefixWatcher) Await(t testing.TB) (*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes with a corresponding timestamp.
-type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes struct {
-	*genutil.Metadata
-	val     *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes sample, erroring out if not present.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) Val(t testing.TB) *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes sample.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) SetVal(v *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes is a telemetry Collection whose Await method returns a slice of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes samples.
-type CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes struct {
-	W    *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher
-	Data []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes) Await(t testing.TB) []*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher observes a stream of *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes samples.
-type IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributesWatcher) Await(t testing.TB) (*QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIpv4Reachability_Prefix_PrefixAttributes, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability is a *IsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability with a corresponding timestamp.
 type QualifiedIsisRouter_LinkStateDatabase_Lsps_Tlvs_ExtendedIsReachability struct {
 	*genutil.Metadata
@@ -987,6 +792,331 @@ func (w *IsisRouter_LinkStateDatabase_Lsps_Tlvs_IsReachability_NeighborWatcher) 
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedLacp is a *Lacp with a corresponding timestamp.
+type QualifiedLacp struct {
+	*genutil.Metadata
+	val     *Lacp // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLacp) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lacp sample, erroring out if not present.
+func (q *QualifiedLacp) Val(t testing.TB) *Lacp {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lacp sample.
+func (q *QualifiedLacp) SetVal(v *Lacp) *QualifiedLacp {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLacp) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLacp is a telemetry Collection whose Await method returns a slice of *Lacp samples.
+type CollectionLacp struct {
+	W    *LacpWatcher
+	Data []*QualifiedLacp
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLacp) Await(t testing.TB) []*QualifiedLacp {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// LacpWatcher observes a stream of *Lacp samples.
+type LacpWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLacp
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *LacpWatcher) Await(t testing.TB) (*QualifiedLacp, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLacp_LagMember is a *Lacp_LagMember with a corresponding timestamp.
+type QualifiedLacp_LagMember struct {
+	*genutil.Metadata
+	val     *Lacp_LagMember // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLacp_LagMember) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lacp_LagMember sample, erroring out if not present.
+func (q *QualifiedLacp_LagMember) Val(t testing.TB) *Lacp_LagMember {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lacp_LagMember sample.
+func (q *QualifiedLacp_LagMember) SetVal(v *Lacp_LagMember) *QualifiedLacp_LagMember {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLacp_LagMember) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLacp_LagMember is a telemetry Collection whose Await method returns a slice of *Lacp_LagMember samples.
+type CollectionLacp_LagMember struct {
+	W    *Lacp_LagMemberWatcher
+	Data []*QualifiedLacp_LagMember
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLacp_LagMember) Await(t testing.TB) []*QualifiedLacp_LagMember {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lacp_LagMemberWatcher observes a stream of *Lacp_LagMember samples.
+type Lacp_LagMemberWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLacp_LagMember
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lacp_LagMemberWatcher) Await(t testing.TB) (*QualifiedLacp_LagMember, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLacp_LagMember_Counters is a *Lacp_LagMember_Counters with a corresponding timestamp.
+type QualifiedLacp_LagMember_Counters struct {
+	*genutil.Metadata
+	val     *Lacp_LagMember_Counters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLacp_LagMember_Counters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lacp_LagMember_Counters sample, erroring out if not present.
+func (q *QualifiedLacp_LagMember_Counters) Val(t testing.TB) *Lacp_LagMember_Counters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lacp_LagMember_Counters sample.
+func (q *QualifiedLacp_LagMember_Counters) SetVal(v *Lacp_LagMember_Counters) *QualifiedLacp_LagMember_Counters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLacp_LagMember_Counters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLacp_LagMember_Counters is a telemetry Collection whose Await method returns a slice of *Lacp_LagMember_Counters samples.
+type CollectionLacp_LagMember_Counters struct {
+	W    *Lacp_LagMember_CountersWatcher
+	Data []*QualifiedLacp_LagMember_Counters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLacp_LagMember_Counters) Await(t testing.TB) []*QualifiedLacp_LagMember_Counters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lacp_LagMember_CountersWatcher observes a stream of *Lacp_LagMember_Counters samples.
+type Lacp_LagMember_CountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLacp_LagMember_Counters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lacp_LagMember_CountersWatcher) Await(t testing.TB) (*QualifiedLacp_LagMember_Counters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLag is a *Lag with a corresponding timestamp.
+type QualifiedLag struct {
+	*genutil.Metadata
+	val     *Lag // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLag) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lag sample, erroring out if not present.
+func (q *QualifiedLag) Val(t testing.TB) *Lag {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lag sample.
+func (q *QualifiedLag) SetVal(v *Lag) *QualifiedLag {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLag) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLag is a telemetry Collection whose Await method returns a slice of *Lag samples.
+type CollectionLag struct {
+	W    *LagWatcher
+	Data []*QualifiedLag
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLag) Await(t testing.TB) []*QualifiedLag {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// LagWatcher observes a stream of *Lag samples.
+type LagWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLag
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *LagWatcher) Await(t testing.TB) (*QualifiedLag, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedLag_Counters is a *Lag_Counters with a corresponding timestamp.
+type QualifiedLag_Counters struct {
+	*genutil.Metadata
+	val     *Lag_Counters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedLag_Counters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Lag_Counters sample, erroring out if not present.
+func (q *QualifiedLag_Counters) Val(t testing.TB) *Lag_Counters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Lag_Counters sample.
+func (q *QualifiedLag_Counters) SetVal(v *Lag_Counters) *QualifiedLag_Counters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedLag_Counters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionLag_Counters is a telemetry Collection whose Await method returns a slice of *Lag_Counters samples.
+type CollectionLag_Counters struct {
+	W    *Lag_CountersWatcher
+	Data []*QualifiedLag_Counters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionLag_Counters) Await(t testing.TB) []*QualifiedLag_Counters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Lag_CountersWatcher observes a stream of *Lag_Counters samples.
+type Lag_CountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedLag_Counters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Lag_CountersWatcher) Await(t testing.TB) (*QualifiedLag_Counters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedPort is a *Port with a corresponding timestamp.
 type QualifiedPort struct {
 	*genutil.Metadata
@@ -1373,6 +1503,71 @@ type E_Ipv4ExternalReachability_Prefix_RedistributionTypeWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_Ipv4ExternalReachability_Prefix_RedistributionTypeWatcher) Await(t testing.TB) (*QualifiedE_Ipv4ExternalReachability_Prefix_RedistributionType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_Ipv6Reachability_Prefix_OriginType is a E_Ipv6Reachability_Prefix_OriginType with a corresponding timestamp.
+type QualifiedE_Ipv6Reachability_Prefix_OriginType struct {
+	*genutil.Metadata
+	val     E_Ipv6Reachability_Prefix_OriginType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Ipv6Reachability_Prefix_OriginType sample, erroring out if not present.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) Val(t testing.TB) E_Ipv6Reachability_Prefix_OriginType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Ipv6Reachability_Prefix_OriginType sample.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) SetVal(v E_Ipv6Reachability_Prefix_OriginType) *QualifiedE_Ipv6Reachability_Prefix_OriginType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Ipv6Reachability_Prefix_OriginType is a telemetry Collection whose Await method returns a slice of E_Ipv6Reachability_Prefix_OriginType samples.
+type CollectionE_Ipv6Reachability_Prefix_OriginType struct {
+	W    *E_Ipv6Reachability_Prefix_OriginTypeWatcher
+	Data []*QualifiedE_Ipv6Reachability_Prefix_OriginType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Ipv6Reachability_Prefix_OriginType) Await(t testing.TB) []*QualifiedE_Ipv6Reachability_Prefix_OriginType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Ipv6Reachability_Prefix_OriginTypeWatcher observes a stream of E_Ipv6Reachability_Prefix_OriginType samples.
+type E_Ipv6Reachability_Prefix_OriginTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Ipv6Reachability_Prefix_OriginType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Ipv6Reachability_Prefix_OriginTypeWatcher) Await(t testing.TB) (*QualifiedE_Ipv6Reachability_Prefix_OriginType, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }
