@@ -37,6 +37,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -86,6 +87,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/routingpolicy"
 	"github.com/openconfig/ondatra/gnmi/oc/sampling"
 	"github.com/openconfig/ondatra/gnmi/oc/system"
+	"github.com/openconfig/ondatra/gnmi/oc/terminaldevice"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ytypes"
 )
@@ -402,6 +404,22 @@ func (n *RootPath) System() *system.SystemPath {
 	return &system.SystemPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"system"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TerminalDevice (container): Top-level container for the terminal device
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "terminal-device"
+//	Path from root:       "/terminal-device"
+func (n *RootPath) TerminalDevice() *terminaldevice.TerminalDevicePath {
+	return &terminaldevice.TerminalDevicePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terminal-device"},
 			map[string]interface{}{},
 			n,
 		),

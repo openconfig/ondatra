@@ -35,6 +35,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -1239,6 +1240,38 @@ func (n *ComponentPathAny) OperStatus() *Component_OperStatusPathAny {
 	return &Component_OperStatusPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "oper-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OpticalChannel (container): Enclosing container for the list of optical channels
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "optical-channel"
+// Path from root: "/components/component/optical-channel"
+func (n *ComponentPath) OpticalChannel() *Component_OpticalChannelPath {
+	return &Component_OpticalChannelPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"optical-channel"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OpticalChannel (container): Enclosing container for the list of optical channels
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "optical-channel"
+// Path from root: "/components/component/optical-channel"
+func (n *ComponentPathAny) OpticalChannel() *Component_OpticalChannelPathAny {
+	return &Component_OpticalChannelPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"optical-channel"},
 			map[string]interface{}{},
 			n,
 		),
@@ -3967,2158 +4000,6104 @@ func (n *Component_MemoryPathAny) Utilized() *Component_Memory_UtilizedPathAny {
 	}
 }
 
-// Component_PciePath represents the /openconfig-platform/components/component/state/pcie YANG schema element.
-type Component_PciePath struct {
+// Component_OpticalChannelPath represents the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannelPath struct {
 	*ygot.NodePath
 }
 
-// Component_PciePathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie YANG schema element.
-type Component_PciePathAny struct {
+// Component_OpticalChannelPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannelPathAny struct {
 	*ygot.NodePath
 }
 
-// CorrectableErrors (container): The count of the correctable PCIe errors.
+// Component_OpticalChannel_FecUncorrectableBlocksPath represents the /openconfig-platform/components/component/optical-channel/state/fec-uncorrectable-blocks YANG schema element.
+type Component_OpticalChannel_FecUncorrectableBlocksPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_FecUncorrectableBlocksPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/fec-uncorrectable-blocks YANG schema element.
+type Component_OpticalChannel_FecUncorrectableBlocksPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_FrequencyPath represents the /openconfig-platform/components/component/optical-channel/state/frequency YANG schema element.
+type Component_OpticalChannel_FrequencyPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_FrequencyPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/frequency YANG schema element.
+type Component_OpticalChannel_FrequencyPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_GroupIdPath represents the /openconfig-platform/components/component/optical-channel/state/group-id YANG schema element.
+type Component_OpticalChannel_GroupIdPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_GroupIdPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/group-id YANG schema element.
+type Component_OpticalChannel_GroupIdPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LinePortPath represents the /openconfig-platform/components/component/optical-channel/state/line-port YANG schema element.
+type Component_OpticalChannel_LinePortPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LinePortPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/line-port YANG schema element.
+type Component_OpticalChannel_LinePortPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OperationalModePath represents the /openconfig-platform/components/component/optical-channel/state/operational-mode YANG schema element.
+type Component_OpticalChannel_OperationalModePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OperationalModePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/operational-mode YANG schema element.
+type Component_OpticalChannel_OperationalModePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_TargetOutputPowerPath represents the /openconfig-platform/components/component/optical-channel/state/target-output-power YANG schema element.
+type Component_OpticalChannel_TargetOutputPowerPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_TargetOutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/target-output-power YANG schema element.
+type Component_OpticalChannel_TargetOutputPowerPathAny struct {
+	*ygot.NodePath
+}
+
+// CarrierFrequencyOffset (container): Carrier frequency offset in MHz with 1 decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not supported,
+// the target is expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/carrier-frequency-offset"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset"
+func (n *Component_OpticalChannelPath) CarrierFrequencyOffset() *Component_OpticalChannel_CarrierFrequencyOffsetPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffsetPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "carrier-frequency-offset"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CarrierFrequencyOffset (container): Carrier frequency offset in MHz with 1 decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not supported,
+// the target is expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/carrier-frequency-offset"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset"
+func (n *Component_OpticalChannelPathAny) CarrierFrequencyOffset() *Component_OpticalChannel_CarrierFrequencyOffsetPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffsetPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "carrier-frequency-offset"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ChromaticDispersion (container): Chromatic Dispersion of an optical channel in
+// picoseconds / nanometer (ps/nm) as reported by receiver
+// with two decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/chromatic-dispersion"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion"
+func (n *Component_OpticalChannelPath) ChromaticDispersion() *Component_OpticalChannel_ChromaticDispersionPath {
+	return &Component_OpticalChannel_ChromaticDispersionPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "chromatic-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ChromaticDispersion (container): Chromatic Dispersion of an optical channel in
+// picoseconds / nanometer (ps/nm) as reported by receiver
+// with two decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/chromatic-dispersion"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion"
+func (n *Component_OpticalChannelPathAny) ChromaticDispersion() *Component_OpticalChannel_ChromaticDispersionPathAny {
+	return &Component_OpticalChannel_ChromaticDispersionPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "chromatic-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esnr (container): Electrical signal to noise ratio. Baud rate
+// normalized signal to noise ratio based on
+// error vector magnitude in dB with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/esnr"
+// Path from root: "/components/component/optical-channel/state/esnr"
+func (n *Component_OpticalChannelPath) Esnr() *Component_OpticalChannel_EsnrPath {
+	return &Component_OpticalChannel_EsnrPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esnr (container): Electrical signal to noise ratio. Baud rate
+// normalized signal to noise ratio based on
+// error vector magnitude in dB with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/esnr"
+// Path from root: "/components/component/optical-channel/state/esnr"
+func (n *Component_OpticalChannelPathAny) Esnr() *Component_OpticalChannel_EsnrPathAny {
+	return &Component_OpticalChannel_EsnrPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "esnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
+// the FEC
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/fec-uncorrectable-blocks"
+// Path from root: "/components/component/optical-channel/state/fec-uncorrectable-blocks"
+func (n *Component_OpticalChannelPath) FecUncorrectableBlocks() *Component_OpticalChannel_FecUncorrectableBlocksPath {
+	return &Component_OpticalChannel_FecUncorrectableBlocksPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "fec-uncorrectable-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
+// the FEC
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/fec-uncorrectable-blocks"
+// Path from root: "/components/component/optical-channel/state/fec-uncorrectable-blocks"
+func (n *Component_OpticalChannelPathAny) FecUncorrectableBlocks() *Component_OpticalChannel_FecUncorrectableBlocksPathAny {
+	return &Component_OpticalChannel_FecUncorrectableBlocksPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "fec-uncorrectable-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Frequency (leaf): Frequency of the optical channel, expressed in MHz
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/frequency"
+// Path from root: "/components/component/optical-channel/state/frequency"
+func (n *Component_OpticalChannelPath) Frequency() *Component_OpticalChannel_FrequencyPath {
+	return &Component_OpticalChannel_FrequencyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "frequency"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Frequency (leaf): Frequency of the optical channel, expressed in MHz
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/frequency"
+// Path from root: "/components/component/optical-channel/state/frequency"
+func (n *Component_OpticalChannelPathAny) Frequency() *Component_OpticalChannel_FrequencyPathAny {
+	return &Component_OpticalChannel_FrequencyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "frequency"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// GroupId (leaf): If the device places constraints on which optical
+// channels must be managed together (e.g., transmitted on the
+// same line port), it can indicate that by setting the group-id
+// to the same value across related optical channels.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/group-id"
+// Path from root: "/components/component/optical-channel/state/group-id"
+func (n *Component_OpticalChannelPath) GroupId() *Component_OpticalChannel_GroupIdPath {
+	return &Component_OpticalChannel_GroupIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "group-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// GroupId (leaf): If the device places constraints on which optical
+// channels must be managed together (e.g., transmitted on the
+// same line port), it can indicate that by setting the group-id
+// to the same value across related optical channels.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/group-id"
+// Path from root: "/components/component/optical-channel/state/group-id"
+func (n *Component_OpticalChannelPathAny) GroupId() *Component_OpticalChannel_GroupIdPathAny {
+	return &Component_OpticalChannel_GroupIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "group-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InputPower (container): The input optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-platform-transceiver"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/input-power"
+// Path from root: "/components/component/optical-channel/state/input-power"
+func (n *Component_OpticalChannelPath) InputPower() *Component_OpticalChannel_InputPowerPath {
+	return &Component_OpticalChannel_InputPowerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "input-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InputPower (container): The input optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-platform-transceiver"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/input-power"
+// Path from root: "/components/component/optical-channel/state/input-power"
+func (n *Component_OpticalChannelPathAny) InputPower() *Component_OpticalChannel_InputPowerPathAny {
+	return &Component_OpticalChannel_InputPowerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "input-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LaserBiasCurrent (container): The current applied by the system to the transmit laser to
+// achieve the output power. The current is expressed in mA
+// with up to two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-platform-transceiver"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/laser-bias-current"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current"
+func (n *Component_OpticalChannelPath) LaserBiasCurrent() *Component_OpticalChannel_LaserBiasCurrentPath {
+	return &Component_OpticalChannel_LaserBiasCurrentPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "laser-bias-current"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LaserBiasCurrent (container): The current applied by the system to the transmit laser to
+// achieve the output power. The current is expressed in mA
+// with up to two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-platform-transceiver"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/laser-bias-current"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current"
+func (n *Component_OpticalChannelPathAny) LaserBiasCurrent() *Component_OpticalChannel_LaserBiasCurrentPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrentPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "laser-bias-current"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinePort (leaf): Reference to the line-side physical port that carries
+// this optical channel.  The target port should be
+// a component in the physical inventory data model.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/line-port"
+// Path from root: "/components/component/optical-channel/state/line-port"
+func (n *Component_OpticalChannelPath) LinePort() *Component_OpticalChannel_LinePortPath {
+	return &Component_OpticalChannel_LinePortPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinePort (leaf): Reference to the line-side physical port that carries
+// this optical channel.  The target port should be
+// a component in the physical inventory data model.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/line-port"
+// Path from root: "/components/component/optical-channel/state/line-port"
+func (n *Component_OpticalChannelPathAny) LinePort() *Component_OpticalChannel_LinePortPathAny {
+	return &Component_OpticalChannel_LinePortPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulationErrorRatio (container): Modulation error ratio in dB with two decimal precision. Values
+// include the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulation-error-ratio"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio"
+func (n *Component_OpticalChannelPath) ModulationErrorRatio() *Component_OpticalChannel_ModulationErrorRatioPath {
+	return &Component_OpticalChannel_ModulationErrorRatioPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulation-error-ratio"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulationErrorRatio (container): Modulation error ratio in dB with two decimal precision. Values
+// include the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulation-error-ratio"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio"
+func (n *Component_OpticalChannelPathAny) ModulationErrorRatio() *Component_OpticalChannel_ModulationErrorRatioPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatioPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulation-error-ratio"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXPhase (container): The X-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-x-phase"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase"
+func (n *Component_OpticalChannelPath) ModulatorBiasXPhase() *Component_OpticalChannel_ModulatorBiasXPhasePath {
+	return &Component_OpticalChannel_ModulatorBiasXPhasePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-x-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXPhase (container): The X-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-x-phase"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasXPhase() *Component_OpticalChannel_ModulatorBiasXPhasePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhasePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-x-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXi (container): The bias on in-phase path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-xi"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi"
+func (n *Component_OpticalChannelPath) ModulatorBiasXi() *Component_OpticalChannel_ModulatorBiasXiPath {
+	return &Component_OpticalChannel_ModulatorBiasXiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-xi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXi (container): The bias on in-phase path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-xi"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasXi() *Component_OpticalChannel_ModulatorBiasXiPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-xi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXq (container): The bias on quadrature path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-xq"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq"
+func (n *Component_OpticalChannelPath) ModulatorBiasXq() *Component_OpticalChannel_ModulatorBiasXqPath {
+	return &Component_OpticalChannel_ModulatorBiasXqPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-xq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXq (container): The bias on quadrature path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-xq"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasXq() *Component_OpticalChannel_ModulatorBiasXqPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXqPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-xq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYPhase (container): The Y-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-y-phase"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase"
+func (n *Component_OpticalChannelPath) ModulatorBiasYPhase() *Component_OpticalChannel_ModulatorBiasYPhasePath {
+	return &Component_OpticalChannel_ModulatorBiasYPhasePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-y-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYPhase (container): The Y-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-y-phase"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasYPhase() *Component_OpticalChannel_ModulatorBiasYPhasePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhasePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-y-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYi (container): The bias on in-phase path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-yi"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi"
+func (n *Component_OpticalChannelPath) ModulatorBiasYi() *Component_OpticalChannel_ModulatorBiasYiPath {
+	return &Component_OpticalChannel_ModulatorBiasYiPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-yi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYi (container): The bias on in-phase path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-yi"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasYi() *Component_OpticalChannel_ModulatorBiasYiPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYiPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-yi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYq (container): The bias on quadrature path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-yq"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq"
+func (n *Component_OpticalChannelPath) ModulatorBiasYq() *Component_OpticalChannel_ModulatorBiasYqPath {
+	return &Component_OpticalChannel_ModulatorBiasYqPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-yq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYq (container): The bias on quadrature path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/modulator-bias-yq"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasYq() *Component_OpticalChannel_ModulatorBiasYqPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYqPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "modulator-bias-yq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OperationalMode (leaf): Vendor-specific mode identifier -- sets the operational
+// mode for the channel.  The specified operational mode must
+// exist in the list of supported operational modes supplied
+// by the device
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/operational-mode"
+// Path from root: "/components/component/optical-channel/state/operational-mode"
+func (n *Component_OpticalChannelPath) OperationalMode() *Component_OpticalChannel_OperationalModePath {
+	return &Component_OpticalChannel_OperationalModePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "operational-mode"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OperationalMode (leaf): Vendor-specific mode identifier -- sets the operational
+// mode for the channel.  The specified operational mode must
+// exist in the list of supported operational modes supplied
+// by the device
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/operational-mode"
+// Path from root: "/components/component/optical-channel/state/operational-mode"
+func (n *Component_OpticalChannelPathAny) OperationalMode() *Component_OpticalChannel_OperationalModePathAny {
+	return &Component_OpticalChannel_OperationalModePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "operational-mode"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Osnr (container): Optical signal to noise ratio at 12.5GHz noise bandwidth
+// in dB with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/osnr"
+// Path from root: "/components/component/optical-channel/state/osnr"
+func (n *Component_OpticalChannelPath) Osnr() *Component_OpticalChannel_OsnrPath {
+	return &Component_OpticalChannel_OsnrPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "osnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Osnr (container): Optical signal to noise ratio at 12.5GHz noise bandwidth
+// in dB with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/osnr"
+// Path from root: "/components/component/optical-channel/state/osnr"
+func (n *Component_OpticalChannelPathAny) Osnr() *Component_OpticalChannel_OsnrPathAny {
+	return &Component_OpticalChannel_OsnrPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "osnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutputPower (container): The output optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-platform-transceiver"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/output-power"
+// Path from root: "/components/component/optical-channel/state/output-power"
+func (n *Component_OpticalChannelPath) OutputPower() *Component_OpticalChannel_OutputPowerPath {
+	return &Component_OpticalChannel_OutputPowerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutputPower (container): The output optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-platform-transceiver"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/output-power"
+// Path from root: "/components/component/optical-channel/state/output-power"
+func (n *Component_OpticalChannelPathAny) OutputPower() *Component_OpticalChannel_OutputPowerPathAny {
+	return &Component_OpticalChannel_OutputPowerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationDependentLoss (container): Polarization Dependent Loss of an optical channel
+// in dB as reported by receiver with two decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/polarization-dependent-loss"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss"
+func (n *Component_OpticalChannelPath) PolarizationDependentLoss() *Component_OpticalChannel_PolarizationDependentLossPath {
+	return &Component_OpticalChannel_PolarizationDependentLossPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "polarization-dependent-loss"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationDependentLoss (container): Polarization Dependent Loss of an optical channel
+// in dB as reported by receiver with two decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/polarization-dependent-loss"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss"
+func (n *Component_OpticalChannelPathAny) PolarizationDependentLoss() *Component_OpticalChannel_PolarizationDependentLossPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLossPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "polarization-dependent-loss"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationModeDispersion (container): Polarization Mode Dispersion of an optical channel
+// in picosends (ps) as reported by receiver with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/polarization-mode-dispersion"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion"
+func (n *Component_OpticalChannelPath) PolarizationModeDispersion() *Component_OpticalChannel_PolarizationModeDispersionPath {
+	return &Component_OpticalChannel_PolarizationModeDispersionPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationModeDispersion (container): Polarization Mode Dispersion of an optical channel
+// in picosends (ps) as reported by receiver with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/polarization-mode-dispersion"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion"
+func (n *Component_OpticalChannelPathAny) PolarizationModeDispersion() *Component_OpticalChannel_PolarizationModeDispersionPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersionPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PostFecBer (container): Bit error rate after forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/post-fec-ber"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber"
+func (n *Component_OpticalChannelPath) PostFecBer() *Component_OpticalChannel_PostFecBerPath {
+	return &Component_OpticalChannel_PostFecBerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "post-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PostFecBer (container): Bit error rate after forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/post-fec-ber"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber"
+func (n *Component_OpticalChannelPathAny) PostFecBer() *Component_OpticalChannel_PostFecBerPathAny {
+	return &Component_OpticalChannel_PostFecBerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "post-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreFecBer (container): Bit error rate before forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/pre-fec-ber"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber"
+func (n *Component_OpticalChannelPath) PreFecBer() *Component_OpticalChannel_PreFecBerPath {
+	return &Component_OpticalChannel_PreFecBerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "pre-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreFecBer (container): Bit error rate before forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/pre-fec-ber"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber"
+func (n *Component_OpticalChannelPathAny) PreFecBer() *Component_OpticalChannel_PreFecBerPathAny {
+	return &Component_OpticalChannel_PreFecBerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "pre-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QValue (container): Quality value (factor) in dB of a channel with two
+// decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/q-value"
+// Path from root: "/components/component/optical-channel/state/q-value"
+func (n *Component_OpticalChannelPath) QValue() *Component_OpticalChannel_QValuePath {
+	return &Component_OpticalChannel_QValuePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "q-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QValue (container): Quality value (factor) in dB of a channel with two
+// decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/q-value"
+// Path from root: "/components/component/optical-channel/state/q-value"
+func (n *Component_OpticalChannelPathAny) QValue() *Component_OpticalChannel_QValuePathAny {
+	return &Component_OpticalChannel_QValuePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "q-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SecondOrderPolarizationModeDispersion (container): Second Order Polarization Mode Dispersion of an optical
+// channel in picoseconds squared (ps^2) as reported by
+// receiver with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/second-order-polarization-mode-dispersion"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion"
+func (n *Component_OpticalChannelPath) SecondOrderPolarizationModeDispersion() *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "second-order-polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SecondOrderPolarizationModeDispersion (container): Second Order Polarization Mode Dispersion of an optical
+// channel in picoseconds squared (ps^2) as reported by
+// receiver with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/second-order-polarization-mode-dispersion"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion"
+func (n *Component_OpticalChannelPathAny) SecondOrderPolarizationModeDispersion() *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "second-order-polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SopRoc (container): State-of-polarization rate-of-change (SOP-ROC) in krad/s with 1
+// decimal precision. This term is defined by OIF Implementation
+// Agreement for Coherent CMIS. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/sop-roc"
+// Path from root: "/components/component/optical-channel/state/sop-roc"
+func (n *Component_OpticalChannelPath) SopRoc() *Component_OpticalChannel_SopRocPath {
+	return &Component_OpticalChannel_SopRocPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sop-roc"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SopRoc (container): State-of-polarization rate-of-change (SOP-ROC) in krad/s with 1
+// decimal precision. This term is defined by OIF Implementation
+// Agreement for Coherent CMIS. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/sop-roc"
+// Path from root: "/components/component/optical-channel/state/sop-roc"
+func (n *Component_OpticalChannelPathAny) SopRoc() *Component_OpticalChannel_SopRocPathAny {
+	return &Component_OpticalChannel_SopRocPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "sop-roc"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TargetOutputPower (leaf): Target output optical power level of the optical channel,
+// expressed in increments of 0.01 dBm (decibel-milliwats)
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/target-output-power"
+// Path from root: "/components/component/optical-channel/state/target-output-power"
+func (n *Component_OpticalChannelPath) TargetOutputPower() *Component_OpticalChannel_TargetOutputPowerPath {
+	return &Component_OpticalChannel_TargetOutputPowerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "target-output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TargetOutputPower (leaf): Target output optical power level of the optical channel,
+// expressed in increments of 0.01 dBm (decibel-milliwats)
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/target-output-power"
+// Path from root: "/components/component/optical-channel/state/target-output-power"
+func (n *Component_OpticalChannelPathAny) TargetOutputPower() *Component_OpticalChannel_TargetOutputPowerPathAny {
+	return &Component_OpticalChannel_TargetOutputPowerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "target-output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffsetPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffsetPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffsetPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffsetPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/avg YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/avg YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/instant YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/instant YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/interval YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/interval YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/avg"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Avg() *Component_OpticalChannel_CarrierFrequencyOffset_AvgPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/avg"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Avg() *Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/instant"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Instant() *Component_OpticalChannel_CarrierFrequencyOffset_InstantPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/instant"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Instant() *Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/interval"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Interval() *Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/interval"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Interval() *Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/max"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Max() *Component_OpticalChannel_CarrierFrequencyOffset_MaxPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/max"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Max() *Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/max-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) MaxTime() *Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/max-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) MaxTime() *Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/min"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Min() *Component_OpticalChannel_CarrierFrequencyOffset_MinPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/min"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Min() *Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/min-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) MinTime() *Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/carrier-frequency-offset/min-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) MinTime() *Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_ChromaticDispersionPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion YANG schema element.
+type Component_OpticalChannel_ChromaticDispersionPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersionPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion YANG schema element.
+type Component_OpticalChannel_ChromaticDispersionPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/avg YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/avg YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/instant YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/instant YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/interval YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/interval YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/avg"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Avg() *Component_OpticalChannel_ChromaticDispersion_AvgPath {
+	return &Component_OpticalChannel_ChromaticDispersion_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/avg"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Avg() *Component_OpticalChannel_ChromaticDispersion_AvgPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/instant"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Instant() *Component_OpticalChannel_ChromaticDispersion_InstantPath {
+	return &Component_OpticalChannel_ChromaticDispersion_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/instant"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Instant() *Component_OpticalChannel_ChromaticDispersion_InstantPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/interval"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Interval() *Component_OpticalChannel_ChromaticDispersion_IntervalPath {
+	return &Component_OpticalChannel_ChromaticDispersion_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/interval"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Interval() *Component_OpticalChannel_ChromaticDispersion_IntervalPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/max"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Max() *Component_OpticalChannel_ChromaticDispersion_MaxPath {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/max"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Max() *Component_OpticalChannel_ChromaticDispersion_MaxPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/max-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) MaxTime() *Component_OpticalChannel_ChromaticDispersion_MaxTimePath {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/max-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) MaxTime() *Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/min"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Min() *Component_OpticalChannel_ChromaticDispersion_MinPath {
+	return &Component_OpticalChannel_ChromaticDispersion_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/min"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Min() *Component_OpticalChannel_ChromaticDispersion_MinPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/min-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) MinTime() *Component_OpticalChannel_ChromaticDispersion_MinTimePath {
+	return &Component_OpticalChannel_ChromaticDispersion_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/chromatic-dispersion/min-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) MinTime() *Component_OpticalChannel_ChromaticDispersion_MinTimePathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_EsnrPath represents the /openconfig-platform/components/component/optical-channel/state/esnr YANG schema element.
+type Component_OpticalChannel_EsnrPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_EsnrPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr YANG schema element.
+type Component_OpticalChannel_EsnrPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/avg YANG schema element.
+type Component_OpticalChannel_Esnr_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/avg YANG schema element.
+type Component_OpticalChannel_Esnr_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/instant YANG schema element.
+type Component_OpticalChannel_Esnr_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/instant YANG schema element.
+type Component_OpticalChannel_Esnr_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/interval YANG schema element.
+type Component_OpticalChannel_Esnr_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/interval YANG schema element.
+type Component_OpticalChannel_Esnr_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/max YANG schema element.
+type Component_OpticalChannel_Esnr_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/max YANG schema element.
+type Component_OpticalChannel_Esnr_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/esnr/max-time YANG schema element.
+type Component_OpticalChannel_Esnr_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/max-time YANG schema element.
+type Component_OpticalChannel_Esnr_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MinPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/min YANG schema element.
+type Component_OpticalChannel_Esnr_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/min YANG schema element.
+type Component_OpticalChannel_Esnr_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/esnr/min-time YANG schema element.
+type Component_OpticalChannel_Esnr_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_Esnr_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/min-time YANG schema element.
+type Component_OpticalChannel_Esnr_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/esnr/avg"
+func (n *Component_OpticalChannel_EsnrPath) Avg() *Component_OpticalChannel_Esnr_AvgPath {
+	return &Component_OpticalChannel_Esnr_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/esnr/avg"
+func (n *Component_OpticalChannel_EsnrPathAny) Avg() *Component_OpticalChannel_Esnr_AvgPathAny {
+	return &Component_OpticalChannel_Esnr_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/esnr/instant"
+func (n *Component_OpticalChannel_EsnrPath) Instant() *Component_OpticalChannel_Esnr_InstantPath {
+	return &Component_OpticalChannel_Esnr_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/esnr/instant"
+func (n *Component_OpticalChannel_EsnrPathAny) Instant() *Component_OpticalChannel_Esnr_InstantPathAny {
+	return &Component_OpticalChannel_Esnr_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/esnr/interval"
+func (n *Component_OpticalChannel_EsnrPath) Interval() *Component_OpticalChannel_Esnr_IntervalPath {
+	return &Component_OpticalChannel_Esnr_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/esnr/interval"
+func (n *Component_OpticalChannel_EsnrPathAny) Interval() *Component_OpticalChannel_Esnr_IntervalPathAny {
+	return &Component_OpticalChannel_Esnr_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/esnr/max"
+func (n *Component_OpticalChannel_EsnrPath) Max() *Component_OpticalChannel_Esnr_MaxPath {
+	return &Component_OpticalChannel_Esnr_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/esnr/max"
+func (n *Component_OpticalChannel_EsnrPathAny) Max() *Component_OpticalChannel_Esnr_MaxPathAny {
+	return &Component_OpticalChannel_Esnr_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/esnr/max-time"
+func (n *Component_OpticalChannel_EsnrPath) MaxTime() *Component_OpticalChannel_Esnr_MaxTimePath {
+	return &Component_OpticalChannel_Esnr_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/esnr/max-time"
+func (n *Component_OpticalChannel_EsnrPathAny) MaxTime() *Component_OpticalChannel_Esnr_MaxTimePathAny {
+	return &Component_OpticalChannel_Esnr_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/esnr/min"
+func (n *Component_OpticalChannel_EsnrPath) Min() *Component_OpticalChannel_Esnr_MinPath {
+	return &Component_OpticalChannel_Esnr_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/esnr/min"
+func (n *Component_OpticalChannel_EsnrPathAny) Min() *Component_OpticalChannel_Esnr_MinPathAny {
+	return &Component_OpticalChannel_Esnr_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/esnr/min-time"
+func (n *Component_OpticalChannel_EsnrPath) MinTime() *Component_OpticalChannel_Esnr_MinTimePath {
+	return &Component_OpticalChannel_Esnr_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/esnr/min-time"
+func (n *Component_OpticalChannel_EsnrPathAny) MinTime() *Component_OpticalChannel_Esnr_MinTimePathAny {
+	return &Component_OpticalChannel_Esnr_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_InputPowerPath represents the /openconfig-platform/components/component/optical-channel/state/input-power YANG schema element.
+type Component_OpticalChannel_InputPowerPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power YANG schema element.
+type Component_OpticalChannel_InputPowerPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/avg YANG schema element.
+type Component_OpticalChannel_InputPower_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/avg YANG schema element.
+type Component_OpticalChannel_InputPower_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/instant YANG schema element.
+type Component_OpticalChannel_InputPower_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/instant YANG schema element.
+type Component_OpticalChannel_InputPower_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/interval YANG schema element.
+type Component_OpticalChannel_InputPower_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/interval YANG schema element.
+type Component_OpticalChannel_InputPower_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/max YANG schema element.
+type Component_OpticalChannel_InputPower_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/max YANG schema element.
+type Component_OpticalChannel_InputPower_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/input-power/max-time YANG schema element.
+type Component_OpticalChannel_InputPower_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/max-time YANG schema element.
+type Component_OpticalChannel_InputPower_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MinPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/min YANG schema element.
+type Component_OpticalChannel_InputPower_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/min YANG schema element.
+type Component_OpticalChannel_InputPower_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/input-power/min-time YANG schema element.
+type Component_OpticalChannel_InputPower_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_InputPower_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/min-time YANG schema element.
+type Component_OpticalChannel_InputPower_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/input-power/avg"
+func (n *Component_OpticalChannel_InputPowerPath) Avg() *Component_OpticalChannel_InputPower_AvgPath {
+	return &Component_OpticalChannel_InputPower_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/input-power/avg"
+func (n *Component_OpticalChannel_InputPowerPathAny) Avg() *Component_OpticalChannel_InputPower_AvgPathAny {
+	return &Component_OpticalChannel_InputPower_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/input-power/instant"
+func (n *Component_OpticalChannel_InputPowerPath) Instant() *Component_OpticalChannel_InputPower_InstantPath {
+	return &Component_OpticalChannel_InputPower_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/input-power/instant"
+func (n *Component_OpticalChannel_InputPowerPathAny) Instant() *Component_OpticalChannel_InputPower_InstantPathAny {
+	return &Component_OpticalChannel_InputPower_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/input-power/interval"
+func (n *Component_OpticalChannel_InputPowerPath) Interval() *Component_OpticalChannel_InputPower_IntervalPath {
+	return &Component_OpticalChannel_InputPower_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/input-power/interval"
+func (n *Component_OpticalChannel_InputPowerPathAny) Interval() *Component_OpticalChannel_InputPower_IntervalPathAny {
+	return &Component_OpticalChannel_InputPower_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/input-power/max"
+func (n *Component_OpticalChannel_InputPowerPath) Max() *Component_OpticalChannel_InputPower_MaxPath {
+	return &Component_OpticalChannel_InputPower_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/input-power/max"
+func (n *Component_OpticalChannel_InputPowerPathAny) Max() *Component_OpticalChannel_InputPower_MaxPathAny {
+	return &Component_OpticalChannel_InputPower_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/input-power/max-time"
+func (n *Component_OpticalChannel_InputPowerPath) MaxTime() *Component_OpticalChannel_InputPower_MaxTimePath {
+	return &Component_OpticalChannel_InputPower_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/input-power/max-time"
+func (n *Component_OpticalChannel_InputPowerPathAny) MaxTime() *Component_OpticalChannel_InputPower_MaxTimePathAny {
+	return &Component_OpticalChannel_InputPower_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/input-power/min"
+func (n *Component_OpticalChannel_InputPowerPath) Min() *Component_OpticalChannel_InputPower_MinPath {
+	return &Component_OpticalChannel_InputPower_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/input-power/min"
+func (n *Component_OpticalChannel_InputPowerPathAny) Min() *Component_OpticalChannel_InputPower_MinPathAny {
+	return &Component_OpticalChannel_InputPower_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/input-power/min-time"
+func (n *Component_OpticalChannel_InputPowerPath) MinTime() *Component_OpticalChannel_InputPower_MinTimePath {
+	return &Component_OpticalChannel_InputPower_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/input-power/min-time"
+func (n *Component_OpticalChannel_InputPowerPathAny) MinTime() *Component_OpticalChannel_InputPower_MinTimePathAny {
+	return &Component_OpticalChannel_InputPower_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_LaserBiasCurrentPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrentPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrentPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrentPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/avg YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/avg YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/instant YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/instant YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/interval YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/interval YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/avg"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Avg() *Component_OpticalChannel_LaserBiasCurrent_AvgPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/avg"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Avg() *Component_OpticalChannel_LaserBiasCurrent_AvgPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/instant"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Instant() *Component_OpticalChannel_LaserBiasCurrent_InstantPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/instant"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Instant() *Component_OpticalChannel_LaserBiasCurrent_InstantPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/interval"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Interval() *Component_OpticalChannel_LaserBiasCurrent_IntervalPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/interval"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Interval() *Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/max"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Max() *Component_OpticalChannel_LaserBiasCurrent_MaxPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/max"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Max() *Component_OpticalChannel_LaserBiasCurrent_MaxPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/max-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) MaxTime() *Component_OpticalChannel_LaserBiasCurrent_MaxTimePath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/max-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) MaxTime() *Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/min"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Min() *Component_OpticalChannel_LaserBiasCurrent_MinPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/min"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Min() *Component_OpticalChannel_LaserBiasCurrent_MinPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/min-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) MinTime() *Component_OpticalChannel_LaserBiasCurrent_MinTimePath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/laser-bias-current/min-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) MinTime() *Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_ModulationErrorRatioPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatioPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatioPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatioPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/avg YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/avg YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/instant YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/instant YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/interval YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/interval YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/avg"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Avg() *Component_OpticalChannel_ModulationErrorRatio_AvgPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/avg"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Avg() *Component_OpticalChannel_ModulationErrorRatio_AvgPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/instant"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Instant() *Component_OpticalChannel_ModulationErrorRatio_InstantPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/instant"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Instant() *Component_OpticalChannel_ModulationErrorRatio_InstantPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/interval"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Interval() *Component_OpticalChannel_ModulationErrorRatio_IntervalPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/interval"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Interval() *Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/max"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Max() *Component_OpticalChannel_ModulationErrorRatio_MaxPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/max"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Max() *Component_OpticalChannel_ModulationErrorRatio_MaxPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/max-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) MaxTime() *Component_OpticalChannel_ModulationErrorRatio_MaxTimePath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/max-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) MaxTime() *Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/min"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Min() *Component_OpticalChannel_ModulationErrorRatio_MinPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/min"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Min() *Component_OpticalChannel_ModulationErrorRatio_MinPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/min-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) MinTime() *Component_OpticalChannel_ModulationErrorRatio_MinTimePath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulation-error-ratio/min-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) MinTime() *Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhasePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhasePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhasePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhasePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Avg() *Component_OpticalChannel_ModulatorBiasXPhase_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Avg() *Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Instant() *Component_OpticalChannel_ModulatorBiasXPhase_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Instant() *Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Interval() *Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Interval() *Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Max() *Component_OpticalChannel_ModulatorBiasXPhase_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Max() *Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) MaxTime() *Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Min() *Component_OpticalChannel_ModulatorBiasXPhase_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Min() *Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) MinTime() *Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-x-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) MinTime() *Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasXiPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXiPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXiPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXiPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "correctable-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors"
-func (n *Component_PciePath) CorrectableErrors() *Component_Pcie_CorrectableErrorsPath {
-	return &Component_Pcie_CorrectableErrorsPath{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Avg() *Component_OpticalChannel_ModulatorBiasXi_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_AvgPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"correctable-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CorrectableErrors (container): The count of the correctable PCIe errors.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "correctable-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors"
-func (n *Component_PciePathAny) CorrectableErrors() *Component_Pcie_CorrectableErrorsPathAny {
-	return &Component_Pcie_CorrectableErrorsPathAny{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Avg() *Component_OpticalChannel_ModulatorBiasXi_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_AvgPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"correctable-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// FatalErrors (container): The count of the fatal PCIe errors.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "fatal-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors"
-func (n *Component_PciePath) FatalErrors() *Component_Pcie_FatalErrorsPath {
-	return &Component_Pcie_FatalErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Instant() *Component_OpticalChannel_ModulatorBiasXi_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"fatal-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// FatalErrors (container): The count of the fatal PCIe errors.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "fatal-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors"
-func (n *Component_PciePathAny) FatalErrors() *Component_Pcie_FatalErrorsPathAny {
-	return &Component_Pcie_FatalErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Instant() *Component_OpticalChannel_ModulatorBiasXi_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"fatal-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// NonFatalErrors (container): The count of the non-fatal PCIe errors.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "non-fatal-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors"
-func (n *Component_PciePath) NonFatalErrors() *Component_Pcie_NonFatalErrorsPath {
-	return &Component_Pcie_NonFatalErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Interval() *Component_OpticalChannel_ModulatorBiasXi_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"non-fatal-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// NonFatalErrors (container): The count of the non-fatal PCIe errors.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "non-fatal-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors"
-func (n *Component_PciePathAny) NonFatalErrors() *Component_Pcie_NonFatalErrorsPathAny {
-	return &Component_Pcie_NonFatalErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Interval() *Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"non-fatal-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// Component_Pcie_CorrectableErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors YANG schema element.
-type Component_Pcie_CorrectableErrorsPath struct {
-	*ygot.NodePath
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/max"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Max() *Component_OpticalChannel_ModulatorBiasXi_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors YANG schema element.
-type Component_Pcie_CorrectableErrorsPathAny struct {
-	*ygot.NodePath
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/max"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Max() *Component_OpticalChannel_ModulatorBiasXi_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath struct {
-	*ygot.NodePath
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) MaxTime() *Component_OpticalChannel_ModulatorBiasXi_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny struct {
-	*ygot.NodePath
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_BadDllpErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_BadDllpErrorsPath struct {
-	*ygot.NodePath
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/min"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Min() *Component_OpticalChannel_ModulatorBiasXi_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny struct {
-	*ygot.NodePath
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/min"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Min() *Component_OpticalChannel_ModulatorBiasXi_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_BadTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_BadTlpErrorsPath struct {
-	*ygot.NodePath
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) MinTime() *Component_OpticalChannel_ModulatorBiasXi_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny struct {
-	*ygot.NodePath
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasXqPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXqPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasXqPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXqPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_InternalErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_InternalErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasXq_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_AvgPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_InternalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_InternalErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasXq_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_AvgPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_ReceiverErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_ReceiverErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasXq_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_InstantPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasXq_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_InstantPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasXq_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_IntervalPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/replay-timeout-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasXq_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/replay-timeout-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasXq_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_TotalErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/total-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_TotalErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasXq_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxTimePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_CorrectableErrors_TotalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/total-errors YANG schema element.
-type Component_Pcie_CorrectableErrors_TotalErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny struct {
 	*ygot.NodePath
 }
 
-// AdvisoryNonFatalErrors (leaf): Number of advisory non fatal errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "advisory-non-fatal-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) AdvisoryNonFatalErrors() *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath {
-	return &Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"advisory-non-fatal-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasXq_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinPath struct {
+	*ygot.NodePath
 }
 
-// AdvisoryNonFatalErrors (leaf): Number of advisory non fatal errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "advisory-non-fatal-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) AdvisoryNonFatalErrors() *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"advisory-non-fatal-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasXq_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinPathAny struct {
+	*ygot.NodePath
 }
 
-// BadDllpErrors (leaf): Number of DLLPs with bad LCRC detected by PCIe device since the
-// system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "bad-dllp-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/bad-dllp-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) BadDllpErrors() *Component_Pcie_CorrectableErrors_BadDllpErrorsPath {
-	return &Component_Pcie_CorrectableErrors_BadDllpErrorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"bad-dllp-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasXq_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinTimePath struct {
+	*ygot.NodePath
 }
 
-// BadDllpErrors (leaf): Number of DLLPs with bad LCRC detected by PCIe device since the
-// system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "bad-dllp-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/bad-dllp-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) BadDllpErrors() *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"bad-dllp-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny struct {
+	*ygot.NodePath
 }
 
-// BadTlpErrors (leaf): Number of TLPs with bad LCRC detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "bad-tlp-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/bad-tlp-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) BadTlpErrors() *Component_Pcie_CorrectableErrors_BadTlpErrorsPath {
-	return &Component_Pcie_CorrectableErrors_BadTlpErrorsPath{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Avg() *Component_OpticalChannel_ModulatorBiasXq_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_AvgPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"bad-tlp-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// BadTlpErrors (leaf): Number of TLPs with bad LCRC detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "bad-tlp-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/bad-tlp-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) BadTlpErrors() *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Avg() *Component_OpticalChannel_ModulatorBiasXq_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_AvgPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"bad-tlp-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// HdrLogOverflowErrors (leaf): Number of header log overflow errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "hdr-log-overflow-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) HdrLogOverflowErrors() *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath {
-	return &Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Instant() *Component_OpticalChannel_ModulatorBiasXq_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"hdr-log-overflow-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// HdrLogOverflowErrors (leaf): Number of header log overflow errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "hdr-log-overflow-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) HdrLogOverflowErrors() *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Instant() *Component_OpticalChannel_ModulatorBiasXq_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"hdr-log-overflow-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// InternalErrors (leaf): Number of internal errors detected by PCIe device since the system
-// booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "internal-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/internal-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) InternalErrors() *Component_Pcie_CorrectableErrors_InternalErrorsPath {
-	return &Component_Pcie_CorrectableErrors_InternalErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Interval() *Component_OpticalChannel_ModulatorBiasXq_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"internal-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// InternalErrors (leaf): Number of internal errors detected by PCIe device since the system
-// booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "internal-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/internal-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) InternalErrors() *Component_Pcie_CorrectableErrors_InternalErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_InternalErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Interval() *Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"internal-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReceiverErrors (leaf): Number of receiver errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "receiver-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/receiver-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) ReceiverErrors() *Component_Pcie_CorrectableErrors_ReceiverErrorsPath {
-	return &Component_Pcie_CorrectableErrors_ReceiverErrorsPath{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/max"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Max() *Component_OpticalChannel_ModulatorBiasXq_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"receiver-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReceiverErrors (leaf): Number of receiver errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "receiver-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/receiver-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) ReceiverErrors() *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/max"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Max() *Component_OpticalChannel_ModulatorBiasXq_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"receiver-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// RelayRolloverErrors (leaf): Number of relay rollover errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "relay-rollover-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/relay-rollover-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) RelayRolloverErrors() *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath {
-	return &Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) MaxTime() *Component_OpticalChannel_ModulatorBiasXq_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"relay-rollover-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// RelayRolloverErrors (leaf): Number of relay rollover errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "relay-rollover-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/relay-rollover-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) RelayRolloverErrors() *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"relay-rollover-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReplayTimeoutErrors (leaf): Number of replay timeout errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "replay-timeout-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/replay-timeout-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) ReplayTimeoutErrors() *Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath {
-	return &Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/min"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Min() *Component_OpticalChannel_ModulatorBiasXq_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"replay-timeout-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReplayTimeoutErrors (leaf): Number of replay timeout errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "replay-timeout-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/replay-timeout-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) ReplayTimeoutErrors() *Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/min"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Min() *Component_OpticalChannel_ModulatorBiasXq_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"replay-timeout-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TotalErrors (leaf): Total number of correctable errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "total-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/total-errors"
-func (n *Component_Pcie_CorrectableErrorsPath) TotalErrors() *Component_Pcie_CorrectableErrors_TotalErrorsPath {
-	return &Component_Pcie_CorrectableErrors_TotalErrorsPath{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) MinTime() *Component_OpticalChannel_ModulatorBiasXq_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"total-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TotalErrors (leaf): Total number of correctable errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "total-errors"
-// Path from root: "/components/component/state/pcie/correctable-errors/total-errors"
-func (n *Component_Pcie_CorrectableErrorsPathAny) TotalErrors() *Component_Pcie_CorrectableErrors_TotalErrorsPathAny {
-	return &Component_Pcie_CorrectableErrors_TotalErrorsPathAny{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-xq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"total-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// Component_Pcie_FatalErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors YANG schema element.
-type Component_Pcie_FatalErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhasePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhasePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors YANG schema element.
-type Component_Pcie_FatalErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhasePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhasePathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_AcsViolationErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/acs-violation-errors YANG schema element.
-type Component_Pcie_FatalErrors_AcsViolationErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_AvgPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_AcsViolationErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/acs-violation-errors YANG schema element.
-type Component_Pcie_FatalErrors_AcsViolationErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors YANG schema element.
-type Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_InstantPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors YANG schema element.
-type Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_BlockedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/blocked-tlp-errors YANG schema element.
-type Component_Pcie_FatalErrors_BlockedTlpErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/blocked-tlp-errors YANG schema element.
-type Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_CompletionAbortErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-abort-errors YANG schema element.
-type Component_Pcie_FatalErrors_CompletionAbortErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-abort-errors YANG schema element.
-type Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-timeout-errors YANG schema element.
-type Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-timeout-errors YANG schema element.
-type Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_DataLinkErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/data-link-errors YANG schema element.
-type Component_Pcie_FatalErrors_DataLinkErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_DataLinkErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/data-link-errors YANG schema element.
-type Component_Pcie_FatalErrors_DataLinkErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_EcrcErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/ecrc-errors YANG schema element.
-type Component_Pcie_FatalErrors_EcrcErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_EcrcErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/ecrc-errors YANG schema element.
-type Component_Pcie_FatalErrors_EcrcErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/flow-control-protocol-errors YANG schema element.
-type Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath struct {
-	*ygot.NodePath
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Avg() *Component_OpticalChannel_ModulatorBiasYPhase_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/flow-control-protocol-errors YANG schema element.
-type Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny struct {
-	*ygot.NodePath
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Avg() *Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_InternalErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/internal-errors YANG schema element.
-type Component_Pcie_FatalErrors_InternalErrorsPath struct {
-	*ygot.NodePath
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Instant() *Component_OpticalChannel_ModulatorBiasYPhase_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_InternalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/internal-errors YANG schema element.
-type Component_Pcie_FatalErrors_InternalErrorsPathAny struct {
-	*ygot.NodePath
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Instant() *Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_MalformedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/malformed-tlp-errors YANG schema element.
-type Component_Pcie_FatalErrors_MalformedTlpErrorsPath struct {
-	*ygot.NodePath
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Interval() *Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/malformed-tlp-errors YANG schema element.
-type Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny struct {
-	*ygot.NodePath
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Interval() *Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_PoisonedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/poisoned-tlp-errors YANG schema element.
-type Component_Pcie_FatalErrors_PoisonedTlpErrorsPath struct {
-	*ygot.NodePath
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Max() *Component_OpticalChannel_ModulatorBiasYPhase_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/poisoned-tlp-errors YANG schema element.
-type Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny struct {
-	*ygot.NodePath
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Max() *Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/receiver-overflow-errors YANG schema element.
-type Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath struct {
-	*ygot.NodePath
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) MaxTime() *Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/receiver-overflow-errors YANG schema element.
-type Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny struct {
-	*ygot.NodePath
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Min() *Component_OpticalChannel_ModulatorBiasYPhase_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Min() *Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) MinTime() *Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-y-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) MinTime() *Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_FatalErrors_SurpriseDownErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/surprise-down-errors YANG schema element.
-type Component_Pcie_FatalErrors_SurpriseDownErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYiPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYiPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/surprise-down-errors YANG schema element.
-type Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYiPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYiPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors YANG schema element.
-type Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYi_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_AvgPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors YANG schema element.
-type Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYi_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_AvgPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_TotalErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/total-errors YANG schema element.
-type Component_Pcie_FatalErrors_TotalErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYi_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_InstantPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_TotalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/total-errors YANG schema element.
-type Component_Pcie_FatalErrors_TotalErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYi_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_InstantPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_UndefinedErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/undefined-errors YANG schema element.
-type Component_Pcie_FatalErrors_UndefinedErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYi_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_IntervalPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_UndefinedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/undefined-errors YANG schema element.
-type Component_Pcie_FatalErrors_UndefinedErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors YANG schema element.
-type Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYi_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors YANG schema element.
-type Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYi_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors YANG schema element.
-type Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath struct {
+// Component_OpticalChannel_ModulatorBiasYi_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxTimePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors YANG schema element.
-type Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny struct {
+// Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny struct {
 	*ygot.NodePath
 }
 
-// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "acs-violation-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/acs-violation-errors"
-func (n *Component_Pcie_FatalErrorsPath) AcsViolationErrors() *Component_Pcie_FatalErrors_AcsViolationErrorsPath {
-	return &Component_Pcie_FatalErrors_AcsViolationErrorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"acs-violation-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYi_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinPath struct {
+	*ygot.NodePath
 }
 
-// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "acs-violation-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/acs-violation-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) AcsViolationErrors() *Component_Pcie_FatalErrors_AcsViolationErrorsPathAny {
-	return &Component_Pcie_FatalErrors_AcsViolationErrorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"acs-violation-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYi_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinPathAny struct {
+	*ygot.NodePath
 }
 
-// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
-// device since the system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "atomic-op-blocked-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors"
-func (n *Component_Pcie_FatalErrorsPath) AtomicOpBlockedErrors() *Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath {
-	return &Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"atomic-op-blocked-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYi_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinTimePath struct {
+	*ygot.NodePath
 }
 
-// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
-// device since the system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "atomic-op-blocked-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) AtomicOpBlockedErrors() *Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny {
-	return &Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"atomic-op-blocked-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny struct {
+	*ygot.NodePath
 }
 
-// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "blocked-tlp-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/blocked-tlp-errors"
-func (n *Component_Pcie_FatalErrorsPath) BlockedTlpErrors() *Component_Pcie_FatalErrors_BlockedTlpErrorsPath {
-	return &Component_Pcie_FatalErrors_BlockedTlpErrorsPath{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Avg() *Component_OpticalChannel_ModulatorBiasYi_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_AvgPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"blocked-tlp-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "blocked-tlp-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/blocked-tlp-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) BlockedTlpErrors() *Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny {
-	return &Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Avg() *Component_OpticalChannel_ModulatorBiasYi_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_AvgPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"blocked-tlp-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-abort-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/completion-abort-errors"
-func (n *Component_Pcie_FatalErrorsPath) CompletionAbortErrors() *Component_Pcie_FatalErrors_CompletionAbortErrorsPath {
-	return &Component_Pcie_FatalErrors_CompletionAbortErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Instant() *Component_OpticalChannel_ModulatorBiasYi_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-abort-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-abort-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/completion-abort-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) CompletionAbortErrors() *Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny {
-	return &Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Instant() *Component_OpticalChannel_ModulatorBiasYi_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-abort-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-timeout-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/completion-timeout-errors"
-func (n *Component_Pcie_FatalErrorsPath) CompletionTimeoutErrors() *Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath {
-	return &Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Interval() *Component_OpticalChannel_ModulatorBiasYi_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-timeout-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-timeout-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/completion-timeout-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) CompletionTimeoutErrors() *Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny {
-	return &Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Interval() *Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-timeout-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "data-link-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/data-link-errors"
-func (n *Component_Pcie_FatalErrorsPath) DataLinkErrors() *Component_Pcie_FatalErrors_DataLinkErrorsPath {
-	return &Component_Pcie_FatalErrors_DataLinkErrorsPath{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/max"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Max() *Component_OpticalChannel_ModulatorBiasYi_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"data-link-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "data-link-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/data-link-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) DataLinkErrors() *Component_Pcie_FatalErrors_DataLinkErrorsPathAny {
-	return &Component_Pcie_FatalErrors_DataLinkErrorsPathAny{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/max"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Max() *Component_OpticalChannel_ModulatorBiasYi_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"data-link-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
-// booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "ecrc-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/ecrc-errors"
-func (n *Component_Pcie_FatalErrorsPath) EcrcErrors() *Component_Pcie_FatalErrors_EcrcErrorsPath {
-	return &Component_Pcie_FatalErrors_EcrcErrorsPath{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) MaxTime() *Component_OpticalChannel_ModulatorBiasYi_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"ecrc-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
-// booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "ecrc-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/ecrc-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) EcrcErrors() *Component_Pcie_FatalErrors_EcrcErrorsPathAny {
-	return &Component_Pcie_FatalErrors_EcrcErrorsPathAny{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"ecrc-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "flow-control-protocol-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/flow-control-protocol-errors"
-func (n *Component_Pcie_FatalErrorsPath) FlowControlProtocolErrors() *Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath {
-	return &Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/min"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Min() *Component_OpticalChannel_ModulatorBiasYi_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"flow-control-protocol-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "flow-control-protocol-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/flow-control-protocol-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) FlowControlProtocolErrors() *Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny {
-	return &Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/min"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Min() *Component_OpticalChannel_ModulatorBiasYi_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"flow-control-protocol-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "internal-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/internal-errors"
-func (n *Component_Pcie_FatalErrorsPath) InternalErrors() *Component_Pcie_FatalErrors_InternalErrorsPath {
-	return &Component_Pcie_FatalErrors_InternalErrorsPath{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) MinTime() *Component_OpticalChannel_ModulatorBiasYi_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"internal-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "internal-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/internal-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) InternalErrors() *Component_Pcie_FatalErrors_InternalErrorsPathAny {
-	return &Component_Pcie_FatalErrors_InternalErrorsPathAny{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"internal-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "malformed-tlp-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/malformed-tlp-errors"
-func (n *Component_Pcie_FatalErrorsPath) MalformedTlpErrors() *Component_Pcie_FatalErrors_MalformedTlpErrorsPath {
-	return &Component_Pcie_FatalErrors_MalformedTlpErrorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"malformed-tlp-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYqPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYqPath struct {
+	*ygot.NodePath
 }
 
-// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "malformed-tlp-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/malformed-tlp-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) MalformedTlpErrors() *Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny {
-	return &Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"malformed-tlp-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYqPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYqPathAny struct {
+	*ygot.NodePath
 }
 
-// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "poisoned-tlp-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/poisoned-tlp-errors"
-func (n *Component_Pcie_FatalErrorsPath) PoisonedTlpErrors() *Component_Pcie_FatalErrors_PoisonedTlpErrorsPath {
-	return &Component_Pcie_FatalErrors_PoisonedTlpErrorsPath{
-		NodePath: ygot.NewNodePath(
-			[]string{"poisoned-tlp-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYq_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_AvgPath struct {
+	*ygot.NodePath
 }
 
-// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
-// ----------------------------------------
-// Defining module: "openconfig-platform"
-// Instantiating module: "openconfig-platform"
-// Path from parent: "poisoned-tlp-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/poisoned-tlp-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) PoisonedTlpErrors() *Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny {
-	return &Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny{
-		NodePath: ygot.NewNodePath(
-			[]string{"poisoned-tlp-errors"},
-			map[string]interface{}{},
-			n,
-		),
-	}
+// Component_OpticalChannel_ModulatorBiasYq_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny struct {
+	*ygot.NodePath
 }
 
-// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "receiver-overflow-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/receiver-overflow-errors"
-func (n *Component_Pcie_FatalErrorsPath) ReceiverOverflowErrors() *Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath {
-	return &Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Avg() *Component_OpticalChannel_ModulatorBiasYq_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_AvgPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"receiver-overflow-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "receiver-overflow-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/receiver-overflow-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) ReceiverOverflowErrors() *Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny {
-	return &Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Avg() *Component_OpticalChannel_ModulatorBiasYq_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_AvgPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"receiver-overflow-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "surprise-down-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/surprise-down-errors"
-func (n *Component_Pcie_FatalErrorsPath) SurpriseDownErrors() *Component_Pcie_FatalErrors_SurpriseDownErrorsPath {
-	return &Component_Pcie_FatalErrors_SurpriseDownErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Instant() *Component_OpticalChannel_ModulatorBiasYq_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"surprise-down-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "surprise-down-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/surprise-down-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) SurpriseDownErrors() *Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny {
-	return &Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Instant() *Component_OpticalChannel_ModulatorBiasYq_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"surprise-down-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "tlp-prefix-blocked-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors"
-func (n *Component_Pcie_FatalErrorsPath) TlpPrefixBlockedErrors() *Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath {
-	return &Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Interval() *Component_OpticalChannel_ModulatorBiasYq_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"tlp-prefix-blocked-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "tlp-prefix-blocked-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) TlpPrefixBlockedErrors() *Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny {
-	return &Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Interval() *Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"tlp-prefix-blocked-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "total-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/total-errors"
-func (n *Component_Pcie_FatalErrorsPath) TotalErrors() *Component_Pcie_FatalErrors_TotalErrorsPath {
-	return &Component_Pcie_FatalErrors_TotalErrorsPath{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/max"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Max() *Component_OpticalChannel_ModulatorBiasYq_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"total-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "total-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/total-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) TotalErrors() *Component_Pcie_FatalErrors_TotalErrorsPathAny {
-	return &Component_Pcie_FatalErrors_TotalErrorsPathAny{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/max"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Max() *Component_OpticalChannel_ModulatorBiasYq_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"total-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "undefined-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/undefined-errors"
-func (n *Component_Pcie_FatalErrorsPath) UndefinedErrors() *Component_Pcie_FatalErrors_UndefinedErrorsPath {
-	return &Component_Pcie_FatalErrors_UndefinedErrorsPath{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) MaxTime() *Component_OpticalChannel_ModulatorBiasYq_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"undefined-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "undefined-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/undefined-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) UndefinedErrors() *Component_Pcie_FatalErrors_UndefinedErrorsPathAny {
-	return &Component_Pcie_FatalErrors_UndefinedErrorsPathAny{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"undefined-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unexpected-completion-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/unexpected-completion-errors"
-func (n *Component_Pcie_FatalErrorsPath) UnexpectedCompletionErrors() *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath {
-	return &Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/min"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Min() *Component_OpticalChannel_ModulatorBiasYq_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"unexpected-completion-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-transport-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unexpected-completion-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/unexpected-completion-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) UnexpectedCompletionErrors() *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny {
-	return &Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/min"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Min() *Component_OpticalChannel_ModulatorBiasYq_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"unexpected-completion-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unsupported-request-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/unsupported-request-errors"
-func (n *Component_Pcie_FatalErrorsPath) UnsupportedRequestErrors() *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath {
-	return &Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) MinTime() *Component_OpticalChannel_ModulatorBiasYq_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"unsupported-request-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unsupported-request-errors"
-// Path from root: "/components/component/state/pcie/fatal-errors/unsupported-request-errors"
-func (n *Component_Pcie_FatalErrorsPathAny) UnsupportedRequestErrors() *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny {
-	return &Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/modulator-bias-yq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"unsupported-request-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
-}
-
-// Component_Pcie_NonFatalErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors YANG schema element.
-type Component_Pcie_NonFatalErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors YANG schema element.
-type Component_Pcie_NonFatalErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_AcsViolationErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_AcsViolationErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_DataLinkErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_DataLinkErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_EcrcErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_EcrcErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_EcrcErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_EcrcErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_InternalErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_InternalErrorsPath struct {
-	*ygot.NodePath
-}
-
-// Component_Pcie_NonFatalErrors_InternalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_InternalErrorsPathAny struct {
-	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath struct {
+// Component_OpticalChannel_OsnrPath represents the /openconfig-platform/components/component/optical-channel/state/osnr YANG schema element.
+type Component_OpticalChannel_OsnrPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny struct {
+// Component_OpticalChannel_OsnrPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr YANG schema element.
+type Component_OpticalChannel_OsnrPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath struct {
+// Component_OpticalChannel_Osnr_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/avg YANG schema element.
+type Component_OpticalChannel_Osnr_AvgPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/avg YANG schema element.
+type Component_OpticalChannel_Osnr_AvgPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath struct {
+// Component_OpticalChannel_Osnr_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/instant YANG schema element.
+type Component_OpticalChannel_Osnr_InstantPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/instant YANG schema element.
+type Component_OpticalChannel_Osnr_InstantPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath struct {
+// Component_OpticalChannel_Osnr_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/interval YANG schema element.
+type Component_OpticalChannel_Osnr_IntervalPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/interval YANG schema element.
+type Component_OpticalChannel_Osnr_IntervalPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath struct {
+// Component_OpticalChannel_Osnr_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/max YANG schema element.
+type Component_OpticalChannel_Osnr_MaxPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/max YANG schema element.
+type Component_OpticalChannel_Osnr_MaxPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_TotalErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_TotalErrorsPath struct {
+// Component_OpticalChannel_Osnr_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/osnr/max-time YANG schema element.
+type Component_OpticalChannel_Osnr_MaxTimePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_TotalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_TotalErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/max-time YANG schema element.
+type Component_OpticalChannel_Osnr_MaxTimePathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_UndefinedErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_UndefinedErrorsPath struct {
+// Component_OpticalChannel_Osnr_MinPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/min YANG schema element.
+type Component_OpticalChannel_Osnr_MinPath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/min YANG schema element.
+type Component_OpticalChannel_Osnr_MinPathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath struct {
+// Component_OpticalChannel_Osnr_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/osnr/min-time YANG schema element.
+type Component_OpticalChannel_Osnr_MinTimePath struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny struct {
+// Component_OpticalChannel_Osnr_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/min-time YANG schema element.
+type Component_OpticalChannel_Osnr_MinTimePathAny struct {
 	*ygot.NodePath
 }
 
-// Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath struct {
-	*ygot.NodePath
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/osnr/avg"
+func (n *Component_OpticalChannel_OsnrPath) Avg() *Component_OpticalChannel_Osnr_AvgPath {
+	return &Component_OpticalChannel_Osnr_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors YANG schema element.
-type Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny struct {
-	*ygot.NodePath
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/osnr/avg"
+func (n *Component_OpticalChannel_OsnrPathAny) Avg() *Component_OpticalChannel_Osnr_AvgPathAny {
+	return &Component_OpticalChannel_Osnr_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "acs-violation-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/acs-violation-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) AcsViolationErrors() *Component_Pcie_NonFatalErrors_AcsViolationErrorsPath {
-	return &Component_Pcie_NonFatalErrors_AcsViolationErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/osnr/instant"
+func (n *Component_OpticalChannel_OsnrPath) Instant() *Component_OpticalChannel_Osnr_InstantPath {
+	return &Component_OpticalChannel_Osnr_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"acs-violation-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "acs-violation-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/acs-violation-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) AcsViolationErrors() *Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/osnr/instant"
+func (n *Component_OpticalChannel_OsnrPathAny) Instant() *Component_OpticalChannel_Osnr_InstantPathAny {
+	return &Component_OpticalChannel_Osnr_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"acs-violation-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
-// device since the system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "atomic-op-blocked-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) AtomicOpBlockedErrors() *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath {
-	return &Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/osnr/interval"
+func (n *Component_OpticalChannel_OsnrPath) Interval() *Component_OpticalChannel_Osnr_IntervalPath {
+	return &Component_OpticalChannel_Osnr_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"atomic-op-blocked-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
-// device since the system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "atomic-op-blocked-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) AtomicOpBlockedErrors() *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/osnr/interval"
+func (n *Component_OpticalChannel_OsnrPathAny) Interval() *Component_OpticalChannel_Osnr_IntervalPathAny {
+	return &Component_OpticalChannel_Osnr_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"atomic-op-blocked-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "blocked-tlp-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) BlockedTlpErrors() *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath {
-	return &Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/osnr/max"
+func (n *Component_OpticalChannel_OsnrPath) Max() *Component_OpticalChannel_Osnr_MaxPath {
+	return &Component_OpticalChannel_Osnr_MaxPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"blocked-tlp-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
-// the system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "blocked-tlp-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) BlockedTlpErrors() *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/osnr/max"
+func (n *Component_OpticalChannel_OsnrPathAny) Max() *Component_OpticalChannel_Osnr_MaxPathAny {
+	return &Component_OpticalChannel_Osnr_MaxPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"blocked-tlp-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-abort-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-abort-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) CompletionAbortErrors() *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath {
-	return &Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/osnr/max-time"
+func (n *Component_OpticalChannel_OsnrPath) MaxTime() *Component_OpticalChannel_Osnr_MaxTimePath {
+	return &Component_OpticalChannel_Osnr_MaxTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-abort-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-abort-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-abort-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) CompletionAbortErrors() *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/osnr/max-time"
+func (n *Component_OpticalChannel_OsnrPathAny) MaxTime() *Component_OpticalChannel_Osnr_MaxTimePathAny {
+	return &Component_OpticalChannel_Osnr_MaxTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-abort-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-timeout-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-timeout-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) CompletionTimeoutErrors() *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath {
-	return &Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/osnr/min"
+func (n *Component_OpticalChannel_OsnrPath) Min() *Component_OpticalChannel_Osnr_MinPath {
+	return &Component_OpticalChannel_Osnr_MinPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-timeout-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "completion-timeout-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-timeout-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) CompletionTimeoutErrors() *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/osnr/min"
+func (n *Component_OpticalChannel_OsnrPathAny) Min() *Component_OpticalChannel_Osnr_MinPathAny {
+	return &Component_OpticalChannel_Osnr_MinPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"completion-timeout-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "data-link-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/data-link-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) DataLinkErrors() *Component_Pcie_NonFatalErrors_DataLinkErrorsPath {
-	return &Component_Pcie_NonFatalErrors_DataLinkErrorsPath{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/osnr/min-time"
+func (n *Component_OpticalChannel_OsnrPath) MinTime() *Component_OpticalChannel_Osnr_MinTimePath {
+	return &Component_OpticalChannel_Osnr_MinTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"data-link-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "data-link-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/data-link-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) DataLinkErrors() *Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/osnr/min-time"
+func (n *Component_OpticalChannel_OsnrPathAny) MinTime() *Component_OpticalChannel_Osnr_MinTimePathAny {
+	return &Component_OpticalChannel_Osnr_MinTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"data-link-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
+}
+
+// Component_OpticalChannel_OutputPowerPath represents the /openconfig-platform/components/component/optical-channel/state/output-power YANG schema element.
+type Component_OpticalChannel_OutputPowerPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power YANG schema element.
+type Component_OpticalChannel_OutputPowerPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/avg YANG schema element.
+type Component_OpticalChannel_OutputPower_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/avg YANG schema element.
+type Component_OpticalChannel_OutputPower_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/instant YANG schema element.
+type Component_OpticalChannel_OutputPower_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/instant YANG schema element.
+type Component_OpticalChannel_OutputPower_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/interval YANG schema element.
+type Component_OpticalChannel_OutputPower_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/interval YANG schema element.
+type Component_OpticalChannel_OutputPower_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/max YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/max YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/output-power/max-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/max-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MinPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/min YANG schema element.
+type Component_OpticalChannel_OutputPower_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/min YANG schema element.
+type Component_OpticalChannel_OutputPower_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/output-power/min-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OutputPower_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/min-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MinTimePathAny struct {
+	*ygot.NodePath
 }
 
-// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
-// booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "ecrc-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/ecrc-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) EcrcErrors() *Component_Pcie_NonFatalErrors_EcrcErrorsPath {
-	return &Component_Pcie_NonFatalErrors_EcrcErrorsPath{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/output-power/avg"
+func (n *Component_OpticalChannel_OutputPowerPath) Avg() *Component_OpticalChannel_OutputPower_AvgPath {
+	return &Component_OpticalChannel_OutputPower_AvgPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"ecrc-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
-// booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "ecrc-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/ecrc-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) EcrcErrors() *Component_Pcie_NonFatalErrors_EcrcErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_EcrcErrorsPathAny{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/output-power/avg"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Avg() *Component_OpticalChannel_OutputPower_AvgPathAny {
+	return &Component_OpticalChannel_OutputPower_AvgPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"ecrc-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "flow-control-protocol-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) FlowControlProtocolErrors() *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath {
-	return &Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/output-power/instant"
+func (n *Component_OpticalChannel_OutputPowerPath) Instant() *Component_OpticalChannel_OutputPower_InstantPath {
+	return &Component_OpticalChannel_OutputPower_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"flow-control-protocol-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "flow-control-protocol-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) FlowControlProtocolErrors() *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/output-power/instant"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Instant() *Component_OpticalChannel_OutputPower_InstantPathAny {
+	return &Component_OpticalChannel_OutputPower_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"flow-control-protocol-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "internal-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/internal-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) InternalErrors() *Component_Pcie_NonFatalErrors_InternalErrorsPath {
-	return &Component_Pcie_NonFatalErrors_InternalErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/output-power/interval"
+func (n *Component_OpticalChannel_OutputPowerPath) Interval() *Component_OpticalChannel_OutputPower_IntervalPath {
+	return &Component_OpticalChannel_OutputPower_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"internal-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "internal-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/internal-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) InternalErrors() *Component_Pcie_NonFatalErrors_InternalErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_InternalErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/output-power/interval"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Interval() *Component_OpticalChannel_OutputPower_IntervalPathAny {
+	return &Component_OpticalChannel_OutputPower_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"internal-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "malformed-tlp-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) MalformedTlpErrors() *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath {
-	return &Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/output-power/max"
+func (n *Component_OpticalChannel_OutputPowerPath) Max() *Component_OpticalChannel_OutputPower_MaxPath {
+	return &Component_OpticalChannel_OutputPower_MaxPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"malformed-tlp-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "malformed-tlp-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) MalformedTlpErrors() *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/output-power/max"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Max() *Component_OpticalChannel_OutputPower_MaxPathAny {
+	return &Component_OpticalChannel_OutputPower_MaxPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"malformed-tlp-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "poisoned-tlp-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) PoisonedTlpErrors() *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath {
-	return &Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/output-power/max-time"
+func (n *Component_OpticalChannel_OutputPowerPath) MaxTime() *Component_OpticalChannel_OutputPower_MaxTimePath {
+	return &Component_OpticalChannel_OutputPower_MaxTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"poisoned-tlp-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "poisoned-tlp-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) PoisonedTlpErrors() *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/output-power/max-time"
+func (n *Component_OpticalChannel_OutputPowerPathAny) MaxTime() *Component_OpticalChannel_OutputPower_MaxTimePathAny {
+	return &Component_OpticalChannel_OutputPower_MaxTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"poisoned-tlp-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "receiver-overflow-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) ReceiverOverflowErrors() *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath {
-	return &Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/output-power/min"
+func (n *Component_OpticalChannel_OutputPowerPath) Min() *Component_OpticalChannel_OutputPower_MinPath {
+	return &Component_OpticalChannel_OutputPower_MinPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"receiver-overflow-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "receiver-overflow-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) ReceiverOverflowErrors() *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny{
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/output-power/min"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Min() *Component_OpticalChannel_OutputPower_MinPathAny {
+	return &Component_OpticalChannel_OutputPower_MinPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"receiver-overflow-errors"},
+			[]string{"min"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "surprise-down-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/surprise-down-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) SurpriseDownErrors() *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath {
-	return &Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/output-power/min-time"
+func (n *Component_OpticalChannel_OutputPowerPath) MinTime() *Component_OpticalChannel_OutputPower_MinTimePath {
+	return &Component_OpticalChannel_OutputPower_MinTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"surprise-down-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "surprise-down-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/surprise-down-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) SurpriseDownErrors() *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/output-power/min-time"
+func (n *Component_OpticalChannel_OutputPowerPathAny) MinTime() *Component_OpticalChannel_OutputPower_MinTimePathAny {
+	return &Component_OpticalChannel_OutputPower_MinTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"surprise-down-errors"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
+}
+
+// Component_OpticalChannel_PolarizationDependentLossPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLossPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLossPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLossPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/avg YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/avg YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/instant YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/instant YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/interval YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/interval YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny struct {
+	*ygot.NodePath
 }
 
-// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "tlp-prefix-blocked-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) TlpPrefixBlockedErrors() *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath {
-	return &Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/avg"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Avg() *Component_OpticalChannel_PolarizationDependentLoss_AvgPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_AvgPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"tlp-prefix-blocked-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "tlp-prefix-blocked-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) TlpPrefixBlockedErrors() *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny{
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/avg"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Avg() *Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"tlp-prefix-blocked-errors"},
+			[]string{"avg"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "total-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/total-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) TotalErrors() *Component_Pcie_NonFatalErrors_TotalErrorsPath {
-	return &Component_Pcie_NonFatalErrors_TotalErrorsPath{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/instant"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Instant() *Component_OpticalChannel_PolarizationDependentLoss_InstantPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_InstantPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"total-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Instant (leaf): The instantaneous value of the statistic.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "total-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/total-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) TotalErrors() *Component_Pcie_NonFatalErrors_TotalErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_TotalErrorsPathAny{
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/instant"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Instant() *Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"total-errors"},
+			[]string{"instant"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "undefined-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/undefined-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) UndefinedErrors() *Component_Pcie_NonFatalErrors_UndefinedErrorsPath {
-	return &Component_Pcie_NonFatalErrors_UndefinedErrorsPath{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/interval"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Interval() *Component_OpticalChannel_PolarizationDependentLoss_IntervalPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_IntervalPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"undefined-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
-// system booted, according to PCIe AER driver.
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "undefined-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/undefined-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) UndefinedErrors() *Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny{
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/interval"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Interval() *Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"undefined-errors"},
+			[]string{"interval"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unexpected-completion-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) UnexpectedCompletionErrors() *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath {
-	return &Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/max"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Max() *Component_OpticalChannel_PolarizationDependentLoss_MaxPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxPath{
 		NodePath: ygot.NewNodePath(
-			[]string{"unexpected-completion-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unexpected-completion-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) UnexpectedCompletionErrors() *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny{
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/max"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Max() *Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"unexpected-completion-errors"},
+			[]string{"max"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unsupported-request-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/unsupported-request-errors"
-func (n *Component_Pcie_NonFatalErrorsPath) UnsupportedRequestErrors() *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath {
-	return &Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/max-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) MaxTime() *Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"unsupported-request-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
-// since the system booted, according to PCIe AER driver.
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "unsupported-request-errors"
-// Path from root: "/components/component/state/pcie/non-fatal-errors/unsupported-request-errors"
-func (n *Component_Pcie_NonFatalErrorsPathAny) UnsupportedRequestErrors() *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny {
-	return &Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny{
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/max-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) MaxTime() *Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"unsupported-request-errors"},
+			[]string{"max-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// Component_PortPath represents the /openconfig-platform/components/component/port YANG schema element.
-type Component_PortPath struct {
-	*ygot.NodePath
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/min"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Min() *Component_OpticalChannel_PolarizationDependentLoss_MinPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// Component_PortPathAny represents the wildcard version of the /openconfig-platform/components/component/port YANG schema element.
-type Component_PortPathAny struct {
-	*ygot.NodePath
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/min"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Min() *Component_OpticalChannel_PolarizationDependentLoss_MinPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
 }
 
-// BreakoutMode (container): Top-level container for port breakout-mode data.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform-port"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "breakout-mode"
-// Path from root: "/components/component/port/breakout-mode"
-func (n *Component_PortPath) BreakoutMode() *Component_Port_BreakoutModePath {
-	return &Component_Port_BreakoutModePath{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/min-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) MinTime() *Component_OpticalChannel_PolarizationDependentLoss_MinTimePath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinTimePath{
 		NodePath: ygot.NewNodePath(
-			[]string{"breakout-mode"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),
 	}
 }
 
-// BreakoutMode (container): Top-level container for port breakout-mode data.
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
 // ----------------------------------------
-// Defining module: "openconfig-platform-port"
+// Defining module: "openconfig-types"
 // Instantiating module: "openconfig-platform"
-// Path from parent: "breakout-mode"
-// Path from root: "/components/component/port/breakout-mode"
-func (n *Component_PortPathAny) BreakoutMode() *Component_Port_BreakoutModePathAny {
-	return &Component_Port_BreakoutModePathAny{
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/polarization-dependent-loss/min-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) MinTime() *Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny{
 		NodePath: ygot.NewNodePath(
-			[]string{"breakout-mode"},
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),

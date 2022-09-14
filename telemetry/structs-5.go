@@ -36,6 +36,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -77,6 +78,641 @@ import (
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 )
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path struct {
+	AdvertisedToPeer         []string                                                                                                                    `path:"state/advertised-to-peer" module:"openconfig-network-instance/openconfig-network-instance"`
+	AttrIndex                *uint64                                                                                                                     `path:"state/attr-index" module:"openconfig-network-instance/openconfig-network-instance"`
+	Backup                   *bool                                                                                                                       `path:"state/backup" module:"openconfig-network-instance/openconfig-network-instance"`
+	Bestpath                 *bool                                                                                                                       `path:"state/bestpath" module:"openconfig-network-instance/openconfig-network-instance"`
+	CommunityIndex           *uint64                                                                                                                     `path:"state/community-index" module:"openconfig-network-instance/openconfig-network-instance"`
+	ExtCommunityIndex        *uint64                                                                                                                     `path:"state/ext-community-index" module:"openconfig-network-instance/openconfig-network-instance"`
+	InvalidReason            E_RibBgpTypes_INVALID_ROUTE_REASON                                                                                          `path:"state/invalid-reason" module:"openconfig-network-instance/openconfig-network-instance"`
+	Label                    *string                                                                                                                     `path:"state/label" module:"openconfig-network-instance/openconfig-network-instance"`
+	Label2                   *string                                                                                                                     `path:"state/label2" module:"openconfig-network-instance/openconfig-network-instance"`
+	LastModified             *uint64                                                                                                                     `path:"state/last-modified" module:"openconfig-network-instance/openconfig-network-instance"`
+	Multipath                *bool                                                                                                                       `path:"state/multipath" module:"openconfig-network-instance/openconfig-network-instance"`
+	PeerIp                   *string                                                                                                                     `path:"state/peer-ip|peer-ip" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"peer-ip" shadow-module:"openconfig-network-instance"`
+	PeerPathId               *uint32                                                                                                                     `path:"state/peer-path-id|peer-path-id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"peer-path-id" shadow-module:"openconfig-network-instance"`
+	SourceAddressFamily      E_BgpTypes_AFI_SAFI_TYPE                                                                                                    `path:"state/source-address-family|source-address-family" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"source-address-family" shadow-module:"openconfig-network-instance"`
+	SourceRouteDistinguisher *string                                                                                                                     `path:"state/source-route-distinguisher|source-route-distinguisher" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"source-route-distinguisher" shadow-module:"openconfig-network-instance"`
+	UnknownAttribute         map[uint8]*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute `path:"unknown-attributes/unknown-attribute" module:"openconfig-network-instance/openconfig-network-instance"`
+	ValidRoute               *bool                                                                                                                       `path:"state/valid-route" module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) IsYANGGoStruct() {
+}
+
+// NewUnknownAttribute creates a new entry in the UnknownAttribute list of the
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) NewUnknownAttribute(AttrType uint8) (*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.UnknownAttribute == nil {
+		t.UnknownAttribute = make(map[uint8]*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute)
+	}
+
+	key := AttrType
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.UnknownAttribute[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list UnknownAttribute", key)
+	}
+
+	t.UnknownAttribute[key] = &NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute{
+		AttrType: &AttrType,
+	}
+
+	return t.UnknownAttribute[key], nil
+}
+
+// RenameUnknownAttribute renames an entry in the list UnknownAttribute within
+// the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) RenameUnknownAttribute(oldK, newK uint8) error {
+	if _, ok := t.UnknownAttribute[newK]; ok {
+		return fmt.Errorf("key %v already exists in UnknownAttribute", newK)
+	}
+
+	e, ok := t.UnknownAttribute[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in UnknownAttribute", oldK)
+	}
+	e.AttrType = &newK
+
+	t.UnknownAttribute[newK] = e
+	delete(t.UnknownAttribute, oldK)
+	return nil
+}
+
+// GetOrCreateUnknownAttribute retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetOrCreateUnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute {
+
+	key := AttrType
+
+	if v, ok := t.UnknownAttribute[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewUnknownAttribute(AttrType)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateUnknownAttribute got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetUnknownAttribute retrieves the value with the specified key from
+// the UnknownAttribute map field of NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetUnknownAttribute(AttrType uint8) *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute {
+
+	if t == nil {
+		return nil
+	}
+
+	key := AttrType
+
+	if lm, ok := t.UnknownAttribute[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteUnknownAttribute deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) DeleteUnknownAttribute(AttrType uint8) {
+	key := AttrType
+
+	delete(t.UnknownAttribute, key)
+}
+
+// AppendUnknownAttribute appends the supplied NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute struct to the
+// list UnknownAttribute of NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) AppendUnknownAttribute(v *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) error {
+	if v.AttrType == nil {
+		return fmt.Errorf("invalid nil key received for AttrType")
+	}
+
+	key := *v.AttrType
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.UnknownAttribute == nil {
+		t.UnknownAttribute = make(map[uint8]*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute)
+	}
+
+	if _, ok := t.UnknownAttribute[key]; ok {
+		return fmt.Errorf("duplicate key for list UnknownAttribute %v", key)
+	}
+
+	t.UnknownAttribute[key] = v
+	return nil
+}
+
+// GetAdvertisedToPeer retrieves the value of the leaf AdvertisedToPeer from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AdvertisedToPeer is set, it can
+// safely use t.GetAdvertisedToPeer() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AdvertisedToPeer == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetAdvertisedToPeer() []string {
+	if t == nil || t.AdvertisedToPeer == nil {
+		return nil
+	}
+	return t.AdvertisedToPeer
+}
+
+// GetAttrIndex retrieves the value of the leaf AttrIndex from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AttrIndex is set, it can
+// safely use t.GetAttrIndex() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AttrIndex == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetAttrIndex() uint64 {
+	if t == nil || t.AttrIndex == nil {
+		return 0
+	}
+	return *t.AttrIndex
+}
+
+// GetBackup retrieves the value of the leaf Backup from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Backup is set, it can
+// safely use t.GetBackup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Backup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetBackup() bool {
+	if t == nil || t.Backup == nil {
+		return false
+	}
+	return *t.Backup
+}
+
+// GetBestpath retrieves the value of the leaf Bestpath from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Bestpath is set, it can
+// safely use t.GetBestpath() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Bestpath == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetBestpath() bool {
+	if t == nil || t.Bestpath == nil {
+		return false
+	}
+	return *t.Bestpath
+}
+
+// GetCommunityIndex retrieves the value of the leaf CommunityIndex from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CommunityIndex is set, it can
+// safely use t.GetCommunityIndex() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CommunityIndex == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetCommunityIndex() uint64 {
+	if t == nil || t.CommunityIndex == nil {
+		return 0
+	}
+	return *t.CommunityIndex
+}
+
+// GetExtCommunityIndex retrieves the value of the leaf ExtCommunityIndex from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ExtCommunityIndex is set, it can
+// safely use t.GetExtCommunityIndex() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ExtCommunityIndex == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetExtCommunityIndex() uint64 {
+	if t == nil || t.ExtCommunityIndex == nil {
+		return 0
+	}
+	return *t.ExtCommunityIndex
+}
+
+// GetInvalidReason retrieves the value of the leaf InvalidReason from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InvalidReason is set, it can
+// safely use t.GetInvalidReason() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InvalidReason == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetInvalidReason() E_RibBgpTypes_INVALID_ROUTE_REASON {
+	if t == nil || t.InvalidReason == 0 {
+		return 0
+	}
+	return t.InvalidReason
+}
+
+// GetLabel retrieves the value of the leaf Label from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Label is set, it can
+// safely use t.GetLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Label == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetLabel() string {
+	if t == nil || t.Label == nil {
+		return ""
+	}
+	return *t.Label
+}
+
+// GetLabel2 retrieves the value of the leaf Label2 from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Label2 is set, it can
+// safely use t.GetLabel2() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Label2 == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetLabel2() string {
+	if t == nil || t.Label2 == nil {
+		return ""
+	}
+	return *t.Label2
+}
+
+// GetLastModified retrieves the value of the leaf LastModified from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastModified is set, it can
+// safely use t.GetLastModified() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastModified == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetLastModified() uint64 {
+	if t == nil || t.LastModified == nil {
+		return 0
+	}
+	return *t.LastModified
+}
+
+// GetMultipath retrieves the value of the leaf Multipath from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Multipath is set, it can
+// safely use t.GetMultipath() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Multipath == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetMultipath() bool {
+	if t == nil || t.Multipath == nil {
+		return false
+	}
+	return *t.Multipath
+}
+
+// GetPeerIp retrieves the value of the leaf PeerIp from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PeerIp is set, it can
+// safely use t.GetPeerIp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PeerIp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetPeerIp() string {
+	if t == nil || t.PeerIp == nil {
+		return ""
+	}
+	return *t.PeerIp
+}
+
+// GetPeerPathId retrieves the value of the leaf PeerPathId from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PeerPathId is set, it can
+// safely use t.GetPeerPathId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PeerPathId == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetPeerPathId() uint32 {
+	if t == nil || t.PeerPathId == nil {
+		return 0
+	}
+	return *t.PeerPathId
+}
+
+// GetSourceAddressFamily retrieves the value of the leaf SourceAddressFamily from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SourceAddressFamily is set, it can
+// safely use t.GetSourceAddressFamily() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SourceAddressFamily == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetSourceAddressFamily() E_BgpTypes_AFI_SAFI_TYPE {
+	if t == nil || t.SourceAddressFamily == 0 {
+		return 0
+	}
+	return t.SourceAddressFamily
+}
+
+// GetSourceRouteDistinguisher retrieves the value of the leaf SourceRouteDistinguisher from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SourceRouteDistinguisher is set, it can
+// safely use t.GetSourceRouteDistinguisher() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SourceRouteDistinguisher == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetSourceRouteDistinguisher() string {
+	if t == nil || t.SourceRouteDistinguisher == nil {
+		return ""
+	}
+	return *t.SourceRouteDistinguisher
+}
+
+// GetValidRoute retrieves the value of the leaf ValidRoute from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ValidRoute is set, it can
+// safely use t.GetValidRoute() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ValidRoute == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) GetValidRoute() bool {
+	if t == nil || t.ValidRoute == nil {
+		return false
+	}
+	return *t.ValidRoute
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.UnknownAttribute {
+		e.PopulateDefaults()
+	}
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path struct, which is a YANG list entry.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.PeerIp == nil {
+		return nil, fmt.Errorf("nil value for key PeerIp")
+	}
+
+	if t.PeerPathId == nil {
+		return nil, fmt.Errorf("nil value for key PeerPathId")
+	}
+
+	if t.SourceRouteDistinguisher == nil {
+		return nil, fmt.Errorf("nil value for key SourceRouteDistinguisher")
+	}
+
+	return map[string]interface{}{
+		"peer-ip":                    *t.PeerIp,
+		"peer-path-id":               *t.PeerPathId,
+		"source-address-family":      t.SourceAddressFamily,
+		"source-route-distinguisher": *t.SourceRouteDistinguisher,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path.
+func (*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-four-ethernet-segment/type-four-route/paths/path/unknown-attributes/unknown-attribute YANG schema element.
+type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute struct {
+	AttrLen    *uint16 `path:"state/attr-len" module:"openconfig-network-instance/openconfig-network-instance"`
+	AttrType   *uint8  `path:"state/attr-type|attr-type" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"attr-type" shadow-module:"openconfig-network-instance"`
+	AttrValue  Binary  `path:"state/attr-value" module:"openconfig-network-instance/openconfig-network-instance"`
+	Extended   *bool   `path:"state/extended" module:"openconfig-network-instance/openconfig-network-instance"`
+	Optional   *bool   `path:"state/optional" module:"openconfig-network-instance/openconfig-network-instance"`
+	Partial    *bool   `path:"state/partial" module:"openconfig-network-instance/openconfig-network-instance"`
+	Transitive *bool   `path:"state/transitive" module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) IsYANGGoStruct() {
+}
+
+// GetAttrLen retrieves the value of the leaf AttrLen from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AttrLen is set, it can
+// safely use t.GetAttrLen() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AttrLen == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetAttrLen() uint16 {
+	if t == nil || t.AttrLen == nil {
+		return 0
+	}
+	return *t.AttrLen
+}
+
+// GetAttrType retrieves the value of the leaf AttrType from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AttrType is set, it can
+// safely use t.GetAttrType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AttrType == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetAttrType() uint8 {
+	if t == nil || t.AttrType == nil {
+		return 0
+	}
+	return *t.AttrType
+}
+
+// GetAttrValue retrieves the value of the leaf AttrValue from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AttrValue is set, it can
+// safely use t.GetAttrValue() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AttrValue == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetAttrValue() Binary {
+	if t == nil || t.AttrValue == nil {
+		return nil
+	}
+	return t.AttrValue
+}
+
+// GetExtended retrieves the value of the leaf Extended from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Extended is set, it can
+// safely use t.GetExtended() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Extended == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetExtended() bool {
+	if t == nil || t.Extended == nil {
+		return false
+	}
+	return *t.Extended
+}
+
+// GetOptional retrieves the value of the leaf Optional from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Optional is set, it can
+// safely use t.GetOptional() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Optional == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetOptional() bool {
+	if t == nil || t.Optional == nil {
+		return false
+	}
+	return *t.Optional
+}
+
+// GetPartial retrieves the value of the leaf Partial from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Partial is set, it can
+// safely use t.GetPartial() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Partial == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetPartial() bool {
+	if t == nil || t.Partial == nil {
+		return false
+	}
+	return *t.Partial
+}
+
+// GetTransitive retrieves the value of the leaf Transitive from the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Transitive is set, it can
+// safely use t.GetTransitive() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Transitive == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) GetTransitive() bool {
+	if t == nil || t.Transitive == nil {
+		return false
+	}
+	return *t.Transitive
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute struct, which is a YANG list entry.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.AttrType == nil {
+		return nil, fmt.Errorf("nil value for key AttrType")
+	}
+
+	return map[string]interface{}{
+		"attr-type": *t.AttrType,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute.
+func (*NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeFourRoute_Path_UnknownAttribute) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
 
 // NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/l2vpn-evpn/loc-rib/routes/route-distinguisher/type-one-ethernet-auto-discovery/type-one-route YANG schema element.
 type NetworkInstance_Protocol_Bgp_Rib_AfiSafi_L2VpnEvpn_LocRib_RouteDistinguisher_TypeOneRoute struct {
@@ -18959,5 +19595,1327 @@ func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neig
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor.
 func (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance struct {
+	Id              *uint64                                                                                                                           `path:"state/id|id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"id" shadow-module:"openconfig-network-instance"`
+	Metric          *uint32                                                                                                                           `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance"`
+	Subtlv          map[E_IsisLsdbTypes_ISIS_SUBTLV_TYPE]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv `path:"subtlvs/subtlv" module:"openconfig-network-instance/openconfig-network-instance"`
+	UndefinedSubtlv map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv                   `path:"undefined-subtlvs/undefined-subtlv" module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) IsYANGGoStruct() {
+}
+
+// NewSubtlv creates a new entry in the Subtlv list of the
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) NewSubtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Subtlv == nil {
+		t.Subtlv = make(map[E_IsisLsdbTypes_ISIS_SUBTLV_TYPE]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv)
+	}
+
+	key := Type
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Subtlv[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Subtlv", key)
+	}
+
+	t.Subtlv[key] = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv{
+		Type: Type,
+	}
+
+	return t.Subtlv[key], nil
+}
+
+// RenameSubtlv renames an entry in the list Subtlv within
+// the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) RenameSubtlv(oldK, newK E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) error {
+	if _, ok := t.Subtlv[newK]; ok {
+		return fmt.Errorf("key %v already exists in Subtlv", newK)
+	}
+
+	e, ok := t.Subtlv[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Subtlv", oldK)
+	}
+	e.Type = newK
+
+	t.Subtlv[newK] = e
+	delete(t.Subtlv, oldK)
+	return nil
+}
+
+// GetOrCreateSubtlv retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) GetOrCreateSubtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv {
+
+	key := Type
+
+	if v, ok := t.Subtlv[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewSubtlv(Type)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateSubtlv got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetSubtlv retrieves the value with the specified key from
+// the Subtlv map field of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) GetSubtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Type
+
+	if lm, ok := t.Subtlv[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteSubtlv deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) DeleteSubtlv(Type E_IsisLsdbTypes_ISIS_SUBTLV_TYPE) {
+	key := Type
+
+	delete(t.Subtlv, key)
+}
+
+// AppendSubtlv appends the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct to the
+// list Subtlv of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) AppendSubtlv(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) error {
+	key := v.Type
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Subtlv == nil {
+		t.Subtlv = make(map[E_IsisLsdbTypes_ISIS_SUBTLV_TYPE]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv)
+	}
+
+	if _, ok := t.Subtlv[key]; ok {
+		return fmt.Errorf("duplicate key for list Subtlv %v", key)
+	}
+
+	t.Subtlv[key] = v
+	return nil
+}
+
+// NewUndefinedSubtlv creates a new entry in the UndefinedSubtlv list of the
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) NewUndefinedSubtlv(Type uint8) (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.UndefinedSubtlv == nil {
+		t.UndefinedSubtlv = make(map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv)
+	}
+
+	key := Type
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.UndefinedSubtlv[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list UndefinedSubtlv", key)
+	}
+
+	t.UndefinedSubtlv[key] = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv{
+		Type: &Type,
+	}
+
+	return t.UndefinedSubtlv[key], nil
+}
+
+// RenameUndefinedSubtlv renames an entry in the list UndefinedSubtlv within
+// the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) RenameUndefinedSubtlv(oldK, newK uint8) error {
+	if _, ok := t.UndefinedSubtlv[newK]; ok {
+		return fmt.Errorf("key %v already exists in UndefinedSubtlv", newK)
+	}
+
+	e, ok := t.UndefinedSubtlv[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in UndefinedSubtlv", oldK)
+	}
+	e.Type = &newK
+
+	t.UndefinedSubtlv[newK] = e
+	delete(t.UndefinedSubtlv, oldK)
+	return nil
+}
+
+// GetOrCreateUndefinedSubtlv retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) GetOrCreateUndefinedSubtlv(Type uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv {
+
+	key := Type
+
+	if v, ok := t.UndefinedSubtlv[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewUndefinedSubtlv(Type)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateUndefinedSubtlv got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetUndefinedSubtlv retrieves the value with the specified key from
+// the UndefinedSubtlv map field of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) GetUndefinedSubtlv(Type uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Type
+
+	if lm, ok := t.UndefinedSubtlv[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteUndefinedSubtlv deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) DeleteUndefinedSubtlv(Type uint8) {
+	key := Type
+
+	delete(t.UndefinedSubtlv, key)
+}
+
+// AppendUndefinedSubtlv appends the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv struct to the
+// list UndefinedSubtlv of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) AppendUndefinedSubtlv(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv) error {
+	if v.Type == nil {
+		return fmt.Errorf("invalid nil key received for Type")
+	}
+
+	key := *v.Type
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.UndefinedSubtlv == nil {
+		t.UndefinedSubtlv = make(map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_UndefinedSubtlv)
+	}
+
+	if _, ok := t.UndefinedSubtlv[key]; ok {
+		return fmt.Errorf("duplicate key for list UndefinedSubtlv %v", key)
+	}
+
+	t.UndefinedSubtlv[key] = v
+	return nil
+}
+
+// GetId retrieves the value of the leaf Id from the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Id is set, it can
+// safely use t.GetId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Id == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) GetId() uint64 {
+	if t == nil || t.Id == nil {
+		return 0
+	}
+	return *t.Id
+}
+
+// GetMetric retrieves the value of the leaf Metric from the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Metric is set, it can
+// safely use t.GetMetric() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Metric == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) GetMetric() uint32 {
+	if t == nil || t.Metric == nil {
+		return 0
+	}
+	return *t.Metric
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.Subtlv {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.UndefinedSubtlv {
+		e.PopulateDefaults()
+	}
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance struct, which is a YANG list entry.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Id == nil {
+		return nil, fmt.Errorf("nil value for key Id")
+	}
+
+	return map[string]interface{}{
+		"id": *t.Id,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance.
+func (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct {
+	AdjacencySid               map[uint32]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid       `path:"adjacency-sids/adjacency-sid" module:"openconfig-network-instance/openconfig-network-instance"`
+	AdminGroup                 *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdminGroup                    `path:"admin-group" module:"openconfig-network-instance"`
+	AvailableBandwidth         *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AvailableBandwidth            `path:"available-bandwidth" module:"openconfig-network-instance"`
+	BandwidthConstraint        map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint `path:"bandwidth-constraints/bandwidth-constraint" module:"openconfig-network-instance/openconfig-network-instance"`
+	ExtendedAdminGroup         *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ExtendedAdminGroup            `path:"extended-admin-group" module:"openconfig-network-instance"`
+	Ipv4InterfaceAddress       *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4InterfaceAddress          `path:"ipv4-interface-address" module:"openconfig-network-instance"`
+	Ipv4NeighborAddress        *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4NeighborAddress           `path:"ipv4-neighbor-address" module:"openconfig-network-instance"`
+	Ipv6InterfaceAddress       *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6InterfaceAddress          `path:"ipv6-interface-address" module:"openconfig-network-instance"`
+	Ipv6NeighborAddress        *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6NeighborAddress           `path:"ipv6-neighbor-address" module:"openconfig-network-instance"`
+	LanAdjacencySid            map[uint32]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid    `path:"lan-adjacency-sids/lan-adjacency-sid" module:"openconfig-network-instance/openconfig-network-instance"`
+	LinkAttributes             *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkAttributes                `path:"link-attributes" module:"openconfig-network-instance"`
+	LinkDelay                  *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelay                     `path:"link-delay" module:"openconfig-network-instance"`
+	LinkDelayVariation         *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelayVariation            `path:"link-delay-variation" module:"openconfig-network-instance"`
+	LinkId                     *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkId                        `path:"link-id" module:"openconfig-network-instance"`
+	LinkLoss                   *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkLoss                      `path:"link-loss" module:"openconfig-network-instance"`
+	LinkProtectionType         *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkProtectionType            `path:"link-protection-type" module:"openconfig-network-instance"`
+	MaxLinkBandwidth           *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxLinkBandwidth              `path:"max-link-bandwidth" module:"openconfig-network-instance"`
+	MaxReservableLinkBandwidth *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth    `path:"max-reservable-link-bandwidth" module:"openconfig-network-instance"`
+	MinMaxLinkDelay            *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay               `path:"min-max-link-delay" module:"openconfig-network-instance"`
+	ResidualBandwidth          *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth             `path:"residual-bandwidth" module:"openconfig-network-instance"`
+	SetupPriority              map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority       `path:"unreserved-bandwidth/setup-priority" module:"openconfig-network-instance/openconfig-network-instance"`
+	TeDefaultMetric            *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_TeDefaultMetric               `path:"te-default-metric" module:"openconfig-network-instance"`
+	Type                       E_IsisLsdbTypes_ISIS_SUBTLV_TYPE                                                                                           `path:"state/type|type" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"type" shadow-module:"openconfig-network-instance"`
+	UnconstrainedLsp           *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UnconstrainedLsp              `path:"unconstrained-lsp" module:"openconfig-network-instance"`
+	UtilizedBandwidth          *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UtilizedBandwidth             `path:"utilized-bandwidth" module:"openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) IsYANGGoStruct() {
+}
+
+// NewAdjacencySid creates a new entry in the AdjacencySid list of the
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) NewAdjacencySid(Value uint32) (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AdjacencySid == nil {
+		t.AdjacencySid = make(map[uint32]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid)
+	}
+
+	key := Value
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.AdjacencySid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list AdjacencySid", key)
+	}
+
+	t.AdjacencySid[key] = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid{
+		Value: &Value,
+	}
+
+	return t.AdjacencySid[key], nil
+}
+
+// RenameAdjacencySid renames an entry in the list AdjacencySid within
+// the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) RenameAdjacencySid(oldK, newK uint32) error {
+	if _, ok := t.AdjacencySid[newK]; ok {
+		return fmt.Errorf("key %v already exists in AdjacencySid", newK)
+	}
+
+	e, ok := t.AdjacencySid[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in AdjacencySid", oldK)
+	}
+	e.Value = &newK
+
+	t.AdjacencySid[newK] = e
+	delete(t.AdjacencySid, oldK)
+	return nil
+}
+
+// GetOrCreateAdjacencySid retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateAdjacencySid(Value uint32) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid {
+
+	key := Value
+
+	if v, ok := t.AdjacencySid[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewAdjacencySid(Value)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateAdjacencySid got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetAdjacencySid retrieves the value with the specified key from
+// the AdjacencySid map field of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetAdjacencySid(Value uint32) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Value
+
+	if lm, ok := t.AdjacencySid[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteAdjacencySid deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) DeleteAdjacencySid(Value uint32) {
+	key := Value
+
+	delete(t.AdjacencySid, key)
+}
+
+// AppendAdjacencySid appends the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid struct to the
+// list AdjacencySid of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) AppendAdjacencySid(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid) error {
+	if v.Value == nil {
+		return fmt.Errorf("invalid nil key received for Value")
+	}
+
+	key := *v.Value
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AdjacencySid == nil {
+		t.AdjacencySid = make(map[uint32]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdjacencySid)
+	}
+
+	if _, ok := t.AdjacencySid[key]; ok {
+		return fmt.Errorf("duplicate key for list AdjacencySid %v", key)
+	}
+
+	t.AdjacencySid[key] = v
+	return nil
+}
+
+// NewBandwidthConstraint creates a new entry in the BandwidthConstraint list of the
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) NewBandwidthConstraint(ModelId uint8) (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BandwidthConstraint == nil {
+		t.BandwidthConstraint = make(map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint)
+	}
+
+	key := ModelId
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.BandwidthConstraint[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BandwidthConstraint", key)
+	}
+
+	t.BandwidthConstraint[key] = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint{
+		ModelId: &ModelId,
+	}
+
+	return t.BandwidthConstraint[key], nil
+}
+
+// RenameBandwidthConstraint renames an entry in the list BandwidthConstraint within
+// the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) RenameBandwidthConstraint(oldK, newK uint8) error {
+	if _, ok := t.BandwidthConstraint[newK]; ok {
+		return fmt.Errorf("key %v already exists in BandwidthConstraint", newK)
+	}
+
+	e, ok := t.BandwidthConstraint[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in BandwidthConstraint", oldK)
+	}
+	e.ModelId = &newK
+
+	t.BandwidthConstraint[newK] = e
+	delete(t.BandwidthConstraint, oldK)
+	return nil
+}
+
+// GetOrCreateBandwidthConstraint retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateBandwidthConstraint(ModelId uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint {
+
+	key := ModelId
+
+	if v, ok := t.BandwidthConstraint[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewBandwidthConstraint(ModelId)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateBandwidthConstraint got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetBandwidthConstraint retrieves the value with the specified key from
+// the BandwidthConstraint map field of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetBandwidthConstraint(ModelId uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint {
+
+	if t == nil {
+		return nil
+	}
+
+	key := ModelId
+
+	if lm, ok := t.BandwidthConstraint[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteBandwidthConstraint deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) DeleteBandwidthConstraint(ModelId uint8) {
+	key := ModelId
+
+	delete(t.BandwidthConstraint, key)
+}
+
+// AppendBandwidthConstraint appends the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint struct to the
+// list BandwidthConstraint of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) AppendBandwidthConstraint(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint) error {
+	if v.ModelId == nil {
+		return fmt.Errorf("invalid nil key received for ModelId")
+	}
+
+	key := *v.ModelId
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BandwidthConstraint == nil {
+		t.BandwidthConstraint = make(map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_BandwidthConstraint)
+	}
+
+	if _, ok := t.BandwidthConstraint[key]; ok {
+		return fmt.Errorf("duplicate key for list BandwidthConstraint %v", key)
+	}
+
+	t.BandwidthConstraint[key] = v
+	return nil
+}
+
+// NewLanAdjacencySid creates a new entry in the LanAdjacencySid list of the
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) NewLanAdjacencySid(Value uint32) (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LanAdjacencySid == nil {
+		t.LanAdjacencySid = make(map[uint32]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid)
+	}
+
+	key := Value
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.LanAdjacencySid[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list LanAdjacencySid", key)
+	}
+
+	t.LanAdjacencySid[key] = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid{
+		Value: &Value,
+	}
+
+	return t.LanAdjacencySid[key], nil
+}
+
+// RenameLanAdjacencySid renames an entry in the list LanAdjacencySid within
+// the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) RenameLanAdjacencySid(oldK, newK uint32) error {
+	if _, ok := t.LanAdjacencySid[newK]; ok {
+		return fmt.Errorf("key %v already exists in LanAdjacencySid", newK)
+	}
+
+	e, ok := t.LanAdjacencySid[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in LanAdjacencySid", oldK)
+	}
+	e.Value = &newK
+
+	t.LanAdjacencySid[newK] = e
+	delete(t.LanAdjacencySid, oldK)
+	return nil
+}
+
+// GetOrCreateLanAdjacencySid retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLanAdjacencySid(Value uint32) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid {
+
+	key := Value
+
+	if v, ok := t.LanAdjacencySid[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewLanAdjacencySid(Value)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateLanAdjacencySid got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetLanAdjacencySid retrieves the value with the specified key from
+// the LanAdjacencySid map field of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLanAdjacencySid(Value uint32) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Value
+
+	if lm, ok := t.LanAdjacencySid[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteLanAdjacencySid deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) DeleteLanAdjacencySid(Value uint32) {
+	key := Value
+
+	delete(t.LanAdjacencySid, key)
+}
+
+// AppendLanAdjacencySid appends the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid struct to the
+// list LanAdjacencySid of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) AppendLanAdjacencySid(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid) error {
+	if v.Value == nil {
+		return fmt.Errorf("invalid nil key received for Value")
+	}
+
+	key := *v.Value
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.LanAdjacencySid == nil {
+		t.LanAdjacencySid = make(map[uint32]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LanAdjacencySid)
+	}
+
+	if _, ok := t.LanAdjacencySid[key]; ok {
+		return fmt.Errorf("duplicate key for list LanAdjacencySid %v", key)
+	}
+
+	t.LanAdjacencySid[key] = v
+	return nil
+}
+
+// NewSetupPriority creates a new entry in the SetupPriority list of the
+// NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) NewSetupPriority(Priority uint8) (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SetupPriority == nil {
+		t.SetupPriority = make(map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority)
+	}
+
+	key := Priority
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.SetupPriority[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list SetupPriority", key)
+	}
+
+	t.SetupPriority[key] = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority{
+		Priority: &Priority,
+	}
+
+	return t.SetupPriority[key], nil
+}
+
+// RenameSetupPriority renames an entry in the list SetupPriority within
+// the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) RenameSetupPriority(oldK, newK uint8) error {
+	if _, ok := t.SetupPriority[newK]; ok {
+		return fmt.Errorf("key %v already exists in SetupPriority", newK)
+	}
+
+	e, ok := t.SetupPriority[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in SetupPriority", oldK)
+	}
+	e.Priority = &newK
+
+	t.SetupPriority[newK] = e
+	delete(t.SetupPriority, oldK)
+	return nil
+}
+
+// GetOrCreateSetupPriority retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateSetupPriority(Priority uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority {
+
+	key := Priority
+
+	if v, ok := t.SetupPriority[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewSetupPriority(Priority)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateSetupPriority got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetSetupPriority retrieves the value with the specified key from
+// the SetupPriority map field of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetSetupPriority(Priority uint8) *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Priority
+
+	if lm, ok := t.SetupPriority[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteSetupPriority deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) DeleteSetupPriority(Priority uint8) {
+	key := Priority
+
+	delete(t.SetupPriority, key)
+}
+
+// AppendSetupPriority appends the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority struct to the
+// list SetupPriority of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) AppendSetupPriority(v *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority) error {
+	if v.Priority == nil {
+		return fmt.Errorf("invalid nil key received for Priority")
+	}
+
+	key := *v.Priority
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.SetupPriority == nil {
+		t.SetupPriority = make(map[uint8]*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_SetupPriority)
+	}
+
+	if _, ok := t.SetupPriority[key]; ok {
+		return fmt.Errorf("duplicate key for list SetupPriority %v", key)
+	}
+
+	t.SetupPriority[key] = v
+	return nil
+}
+
+// GetOrCreateAdminGroup retrieves the value of the AdminGroup field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateAdminGroup() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdminGroup {
+	if t.AdminGroup != nil {
+		return t.AdminGroup
+	}
+	t.AdminGroup = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdminGroup{}
+	return t.AdminGroup
+}
+
+// GetOrCreateAvailableBandwidth retrieves the value of the AvailableBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateAvailableBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AvailableBandwidth {
+	if t.AvailableBandwidth != nil {
+		return t.AvailableBandwidth
+	}
+	t.AvailableBandwidth = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AvailableBandwidth{}
+	return t.AvailableBandwidth
+}
+
+// GetOrCreateExtendedAdminGroup retrieves the value of the ExtendedAdminGroup field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateExtendedAdminGroup() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ExtendedAdminGroup {
+	if t.ExtendedAdminGroup != nil {
+		return t.ExtendedAdminGroup
+	}
+	t.ExtendedAdminGroup = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ExtendedAdminGroup{}
+	return t.ExtendedAdminGroup
+}
+
+// GetOrCreateIpv4InterfaceAddress retrieves the value of the Ipv4InterfaceAddress field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateIpv4InterfaceAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4InterfaceAddress {
+	if t.Ipv4InterfaceAddress != nil {
+		return t.Ipv4InterfaceAddress
+	}
+	t.Ipv4InterfaceAddress = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4InterfaceAddress{}
+	return t.Ipv4InterfaceAddress
+}
+
+// GetOrCreateIpv4NeighborAddress retrieves the value of the Ipv4NeighborAddress field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateIpv4NeighborAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4NeighborAddress {
+	if t.Ipv4NeighborAddress != nil {
+		return t.Ipv4NeighborAddress
+	}
+	t.Ipv4NeighborAddress = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4NeighborAddress{}
+	return t.Ipv4NeighborAddress
+}
+
+// GetOrCreateIpv6InterfaceAddress retrieves the value of the Ipv6InterfaceAddress field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateIpv6InterfaceAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6InterfaceAddress {
+	if t.Ipv6InterfaceAddress != nil {
+		return t.Ipv6InterfaceAddress
+	}
+	t.Ipv6InterfaceAddress = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6InterfaceAddress{}
+	return t.Ipv6InterfaceAddress
+}
+
+// GetOrCreateIpv6NeighborAddress retrieves the value of the Ipv6NeighborAddress field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateIpv6NeighborAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6NeighborAddress {
+	if t.Ipv6NeighborAddress != nil {
+		return t.Ipv6NeighborAddress
+	}
+	t.Ipv6NeighborAddress = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6NeighborAddress{}
+	return t.Ipv6NeighborAddress
+}
+
+// GetOrCreateLinkAttributes retrieves the value of the LinkAttributes field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLinkAttributes() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkAttributes {
+	if t.LinkAttributes != nil {
+		return t.LinkAttributes
+	}
+	t.LinkAttributes = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkAttributes{}
+	return t.LinkAttributes
+}
+
+// GetOrCreateLinkDelay retrieves the value of the LinkDelay field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLinkDelay() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelay {
+	if t.LinkDelay != nil {
+		return t.LinkDelay
+	}
+	t.LinkDelay = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelay{}
+	return t.LinkDelay
+}
+
+// GetOrCreateLinkDelayVariation retrieves the value of the LinkDelayVariation field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLinkDelayVariation() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	if t.LinkDelayVariation != nil {
+		return t.LinkDelayVariation
+	}
+	t.LinkDelayVariation = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelayVariation{}
+	return t.LinkDelayVariation
+}
+
+// GetOrCreateLinkId retrieves the value of the LinkId field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLinkId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkId {
+	if t.LinkId != nil {
+		return t.LinkId
+	}
+	t.LinkId = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkId{}
+	return t.LinkId
+}
+
+// GetOrCreateLinkLoss retrieves the value of the LinkLoss field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLinkLoss() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkLoss {
+	if t.LinkLoss != nil {
+		return t.LinkLoss
+	}
+	t.LinkLoss = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkLoss{}
+	return t.LinkLoss
+}
+
+// GetOrCreateLinkProtectionType retrieves the value of the LinkProtectionType field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateLinkProtectionType() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkProtectionType {
+	if t.LinkProtectionType != nil {
+		return t.LinkProtectionType
+	}
+	t.LinkProtectionType = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkProtectionType{}
+	return t.LinkProtectionType
+}
+
+// GetOrCreateMaxLinkBandwidth retrieves the value of the MaxLinkBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateMaxLinkBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	if t.MaxLinkBandwidth != nil {
+		return t.MaxLinkBandwidth
+	}
+	t.MaxLinkBandwidth = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxLinkBandwidth{}
+	return t.MaxLinkBandwidth
+}
+
+// GetOrCreateMaxReservableLinkBandwidth retrieves the value of the MaxReservableLinkBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateMaxReservableLinkBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	if t.MaxReservableLinkBandwidth != nil {
+		return t.MaxReservableLinkBandwidth
+	}
+	t.MaxReservableLinkBandwidth = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth{}
+	return t.MaxReservableLinkBandwidth
+}
+
+// GetOrCreateMinMaxLinkDelay retrieves the value of the MinMaxLinkDelay field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateMinMaxLinkDelay() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	if t.MinMaxLinkDelay != nil {
+		return t.MinMaxLinkDelay
+	}
+	t.MinMaxLinkDelay = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay{}
+	return t.MinMaxLinkDelay
+}
+
+// GetOrCreateResidualBandwidth retrieves the value of the ResidualBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateResidualBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	if t.ResidualBandwidth != nil {
+		return t.ResidualBandwidth
+	}
+	t.ResidualBandwidth = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth{}
+	return t.ResidualBandwidth
+}
+
+// GetOrCreateTeDefaultMetric retrieves the value of the TeDefaultMetric field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateTeDefaultMetric() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	if t.TeDefaultMetric != nil {
+		return t.TeDefaultMetric
+	}
+	t.TeDefaultMetric = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_TeDefaultMetric{}
+	return t.TeDefaultMetric
+}
+
+// GetOrCreateUnconstrainedLsp retrieves the value of the UnconstrainedLsp field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateUnconstrainedLsp() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	if t.UnconstrainedLsp != nil {
+		return t.UnconstrainedLsp
+	}
+	t.UnconstrainedLsp = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UnconstrainedLsp{}
+	return t.UnconstrainedLsp
+}
+
+// GetOrCreateUtilizedBandwidth retrieves the value of the UtilizedBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetOrCreateUtilizedBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	if t.UtilizedBandwidth != nil {
+		return t.UtilizedBandwidth
+	}
+	t.UtilizedBandwidth = &NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UtilizedBandwidth{}
+	return t.UtilizedBandwidth
+}
+
+// GetAdminGroup returns the value of the AdminGroup struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field AdminGroup is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetAdminGroup() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AdminGroup {
+	if t != nil && t.AdminGroup != nil {
+		return t.AdminGroup
+	}
+	return nil
+}
+
+// GetAvailableBandwidth returns the value of the AvailableBandwidth struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field AvailableBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetAvailableBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_AvailableBandwidth {
+	if t != nil && t.AvailableBandwidth != nil {
+		return t.AvailableBandwidth
+	}
+	return nil
+}
+
+// GetExtendedAdminGroup returns the value of the ExtendedAdminGroup struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field ExtendedAdminGroup is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetExtendedAdminGroup() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ExtendedAdminGroup {
+	if t != nil && t.ExtendedAdminGroup != nil {
+		return t.ExtendedAdminGroup
+	}
+	return nil
+}
+
+// GetIpv4InterfaceAddress returns the value of the Ipv4InterfaceAddress struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field Ipv4InterfaceAddress is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetIpv4InterfaceAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4InterfaceAddress {
+	if t != nil && t.Ipv4InterfaceAddress != nil {
+		return t.Ipv4InterfaceAddress
+	}
+	return nil
+}
+
+// GetIpv4NeighborAddress returns the value of the Ipv4NeighborAddress struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field Ipv4NeighborAddress is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetIpv4NeighborAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv4NeighborAddress {
+	if t != nil && t.Ipv4NeighborAddress != nil {
+		return t.Ipv4NeighborAddress
+	}
+	return nil
+}
+
+// GetIpv6InterfaceAddress returns the value of the Ipv6InterfaceAddress struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field Ipv6InterfaceAddress is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetIpv6InterfaceAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6InterfaceAddress {
+	if t != nil && t.Ipv6InterfaceAddress != nil {
+		return t.Ipv6InterfaceAddress
+	}
+	return nil
+}
+
+// GetIpv6NeighborAddress returns the value of the Ipv6NeighborAddress struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field Ipv6NeighborAddress is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetIpv6NeighborAddress() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_Ipv6NeighborAddress {
+	if t != nil && t.Ipv6NeighborAddress != nil {
+		return t.Ipv6NeighborAddress
+	}
+	return nil
+}
+
+// GetLinkAttributes returns the value of the LinkAttributes struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field LinkAttributes is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLinkAttributes() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkAttributes {
+	if t != nil && t.LinkAttributes != nil {
+		return t.LinkAttributes
+	}
+	return nil
+}
+
+// GetLinkDelay returns the value of the LinkDelay struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field LinkDelay is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLinkDelay() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelay {
+	if t != nil && t.LinkDelay != nil {
+		return t.LinkDelay
+	}
+	return nil
+}
+
+// GetLinkDelayVariation returns the value of the LinkDelayVariation struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field LinkDelayVariation is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLinkDelayVariation() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkDelayVariation {
+	if t != nil && t.LinkDelayVariation != nil {
+		return t.LinkDelayVariation
+	}
+	return nil
+}
+
+// GetLinkId returns the value of the LinkId struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field LinkId is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLinkId() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkId {
+	if t != nil && t.LinkId != nil {
+		return t.LinkId
+	}
+	return nil
+}
+
+// GetLinkLoss returns the value of the LinkLoss struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field LinkLoss is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLinkLoss() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkLoss {
+	if t != nil && t.LinkLoss != nil {
+		return t.LinkLoss
+	}
+	return nil
+}
+
+// GetLinkProtectionType returns the value of the LinkProtectionType struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field LinkProtectionType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetLinkProtectionType() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_LinkProtectionType {
+	if t != nil && t.LinkProtectionType != nil {
+		return t.LinkProtectionType
+	}
+	return nil
+}
+
+// GetMaxLinkBandwidth returns the value of the MaxLinkBandwidth struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field MaxLinkBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetMaxLinkBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxLinkBandwidth {
+	if t != nil && t.MaxLinkBandwidth != nil {
+		return t.MaxLinkBandwidth
+	}
+	return nil
+}
+
+// GetMaxReservableLinkBandwidth returns the value of the MaxReservableLinkBandwidth struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field MaxReservableLinkBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetMaxReservableLinkBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MaxReservableLinkBandwidth {
+	if t != nil && t.MaxReservableLinkBandwidth != nil {
+		return t.MaxReservableLinkBandwidth
+	}
+	return nil
+}
+
+// GetMinMaxLinkDelay returns the value of the MinMaxLinkDelay struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field MinMaxLinkDelay is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetMinMaxLinkDelay() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_MinMaxLinkDelay {
+	if t != nil && t.MinMaxLinkDelay != nil {
+		return t.MinMaxLinkDelay
+	}
+	return nil
+}
+
+// GetResidualBandwidth returns the value of the ResidualBandwidth struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field ResidualBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetResidualBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_ResidualBandwidth {
+	if t != nil && t.ResidualBandwidth != nil {
+		return t.ResidualBandwidth
+	}
+	return nil
+}
+
+// GetTeDefaultMetric returns the value of the TeDefaultMetric struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field TeDefaultMetric is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetTeDefaultMetric() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_TeDefaultMetric {
+	if t != nil && t.TeDefaultMetric != nil {
+		return t.TeDefaultMetric
+	}
+	return nil
+}
+
+// GetUnconstrainedLsp returns the value of the UnconstrainedLsp struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field UnconstrainedLsp is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetUnconstrainedLsp() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UnconstrainedLsp {
+	if t != nil && t.UnconstrainedLsp != nil {
+		return t.UnconstrainedLsp
+	}
+	return nil
+}
+
+// GetUtilizedBandwidth returns the value of the UtilizedBandwidth struct pointer
+// from NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv. If the receiver or the field UtilizedBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetUtilizedBandwidth() *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv_UtilizedBandwidth {
+	if t != nil && t.UtilizedBandwidth != nil {
+		return t.UtilizedBandwidth
+	}
+	return nil
+}
+
+// GetType retrieves the value of the leaf Type from the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Type is set, it can
+// safely use t.GetType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Type == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) GetType() E_IsisLsdbTypes_ISIS_SUBTLV_TYPE {
+	if t == nil || t.Type == 0 {
+		return 0
+	}
+	return t.Type
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.AdminGroup.PopulateDefaults()
+	t.AvailableBandwidth.PopulateDefaults()
+	t.ExtendedAdminGroup.PopulateDefaults()
+	t.Ipv4InterfaceAddress.PopulateDefaults()
+	t.Ipv4NeighborAddress.PopulateDefaults()
+	t.Ipv6InterfaceAddress.PopulateDefaults()
+	t.Ipv6NeighborAddress.PopulateDefaults()
+	t.LinkAttributes.PopulateDefaults()
+	t.LinkDelay.PopulateDefaults()
+	t.LinkDelayVariation.PopulateDefaults()
+	t.LinkId.PopulateDefaults()
+	t.LinkLoss.PopulateDefaults()
+	t.LinkProtectionType.PopulateDefaults()
+	t.MaxLinkBandwidth.PopulateDefaults()
+	t.MaxReservableLinkBandwidth.PopulateDefaults()
+	t.MinMaxLinkDelay.PopulateDefaults()
+	t.ResidualBandwidth.PopulateDefaults()
+	t.TeDefaultMetric.PopulateDefaults()
+	t.UnconstrainedLsp.PopulateDefaults()
+	t.UtilizedBandwidth.PopulateDefaults()
+	for _, e := range t.AdjacencySid {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.BandwidthConstraint {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.LanAdjacencySid {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.SetupPriority {
+		e.PopulateDefaults()
+	}
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv struct, which is a YANG list entry.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"type": t.Type,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv.
+func (*NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIsReachability_Neighbor_Instance_Subtlv) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }

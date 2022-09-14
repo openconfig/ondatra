@@ -37,6 +37,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -3143,6 +3144,38 @@ func (n *ComponentPathAny) OperStatus() *Component_OperStatusPathAny {
 			n,
 		),
 		parent: n,
+	}
+}
+
+// OpticalChannel (container): Enclosing container for the list of optical channels
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "optical-channel"
+//	Path from root:       "/components/component/optical-channel"
+func (n *ComponentPath) OpticalChannel() *Component_OpticalChannelPath {
+	return &Component_OpticalChannelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"optical-channel"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OpticalChannel (container): Enclosing container for the list of optical channels
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "optical-channel"
+//	Path from root:       "/components/component/optical-channel"
+func (n *ComponentPathAny) OpticalChannel() *Component_OpticalChannelPathAny {
+	return &Component_OpticalChannelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"optical-channel"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 }
 
@@ -9447,6 +9480,19579 @@ func (n *Component_MemoryPathAny) Utilized() *Component_Memory_UtilizedPathAny {
 	return &Component_Memory_UtilizedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"utilized"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_FecUncorrectableBlocksPath represents the /openconfig-platform/components/component/optical-channel/state/fec-uncorrectable-blocks YANG schema element.
+type Component_OpticalChannel_FecUncorrectableBlocksPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_FecUncorrectableBlocksPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/fec-uncorrectable-blocks YANG schema element.
+type Component_OpticalChannel_FecUncorrectableBlocksPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannelPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel](
+		"Component_OpticalChannel",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannelPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel](
+		"Component_OpticalChannel",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannelPath) Config() ygnmi.ConfigQuery[*oc.Component_OpticalChannel] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Component_OpticalChannel](
+		"Component_OpticalChannel",
+		false,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannelPathAny) Config() ygnmi.WildcardQuery[*oc.Component_OpticalChannel] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel](
+		"Component_OpticalChannel",
+		false,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/fec-uncorrectable-blocks"
+//	Path from root:       "/components/component/optical-channel/state/fec-uncorrectable-blocks"
+func (n *Component_OpticalChannel_FecUncorrectableBlocksPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fec-uncorrectable-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).FecUncorrectableBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/fec-uncorrectable-blocks"
+//	Path from root:       "/components/component/optical-channel/state/fec-uncorrectable-blocks"
+func (n *Component_OpticalChannel_FecUncorrectableBlocksPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fec-uncorrectable-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).FecUncorrectableBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/frequency"
+//	Path from root:       "/components/component/optical-channel/state/frequency"
+func (n *Component_OpticalChannel_FrequencyPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "frequency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).Frequency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/frequency"
+//	Path from root:       "/components/component/optical-channel/state/frequency"
+func (n *Component_OpticalChannel_FrequencyPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "frequency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).Frequency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/frequency"
+//	Path from root:       "/components/component/optical-channel/config/frequency"
+func (n *Component_OpticalChannel_FrequencyPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewLeafConfigQuery[uint64](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "frequency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).Frequency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/frequency"
+//	Path from root:       "/components/component/optical-channel/config/frequency"
+func (n *Component_OpticalChannel_FrequencyPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "frequency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).Frequency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/group-id"
+//	Path from root:       "/components/component/optical-channel/state/group-id"
+func (n *Component_OpticalChannel_GroupIdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "group-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).GroupId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/group-id"
+//	Path from root:       "/components/component/optical-channel/state/group-id"
+func (n *Component_OpticalChannel_GroupIdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "group-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).GroupId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/line-port"
+//	Path from root:       "/components/component/optical-channel/state/line-port"
+func (n *Component_OpticalChannel_LinePortPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "line-port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).LinePort
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/line-port"
+//	Path from root:       "/components/component/optical-channel/state/line-port"
+func (n *Component_OpticalChannel_LinePortPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "line-port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).LinePort
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/line-port"
+//	Path from root:       "/components/component/optical-channel/config/line-port"
+func (n *Component_OpticalChannel_LinePortPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "line-port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).LinePort
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/line-port"
+//	Path from root:       "/components/component/optical-channel/config/line-port"
+func (n *Component_OpticalChannel_LinePortPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "line-port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).LinePort
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/operational-mode"
+//	Path from root:       "/components/component/optical-channel/state/operational-mode"
+func (n *Component_OpticalChannel_OperationalModePath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewLeafSingletonQuery[uint16](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "operational-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).OperationalMode
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/operational-mode"
+//	Path from root:       "/components/component/optical-channel/state/operational-mode"
+func (n *Component_OpticalChannel_OperationalModePathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "operational-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).OperationalMode
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/operational-mode"
+//	Path from root:       "/components/component/optical-channel/config/operational-mode"
+func (n *Component_OpticalChannel_OperationalModePath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewLeafConfigQuery[uint16](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "operational-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).OperationalMode
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/operational-mode"
+//	Path from root:       "/components/component/optical-channel/config/operational-mode"
+func (n *Component_OpticalChannel_OperationalModePathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "operational-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).OperationalMode
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/target-output-power"
+//	Path from root:       "/components/component/optical-channel/state/target-output-power"
+func (n *Component_OpticalChannel_TargetOutputPowerPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "target-output-power"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).TargetOutputPower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/target-output-power"
+//	Path from root:       "/components/component/optical-channel/state/target-output-power"
+func (n *Component_OpticalChannel_TargetOutputPowerPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "target-output-power"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).TargetOutputPower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/target-output-power"
+//	Path from root:       "/components/component/optical-channel/config/target-output-power"
+func (n *Component_OpticalChannel_TargetOutputPowerPath) Config() ygnmi.ConfigQuery[float64] {
+	return ygnmi.NewLeafConfigQuery[float64](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "target-output-power"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).TargetOutputPower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "config/target-output-power"
+//	Path from root:       "/components/component/optical-channel/config/target-output-power"
+func (n *Component_OpticalChannel_TargetOutputPowerPathAny) Config() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "target-output-power"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).TargetOutputPower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_FrequencyPath represents the /openconfig-platform/components/component/optical-channel/state/frequency YANG schema element.
+type Component_OpticalChannel_FrequencyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_FrequencyPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/frequency YANG schema element.
+type Component_OpticalChannel_FrequencyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_GroupIdPath represents the /openconfig-platform/components/component/optical-channel/state/group-id YANG schema element.
+type Component_OpticalChannel_GroupIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_GroupIdPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/group-id YANG schema element.
+type Component_OpticalChannel_GroupIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LinePortPath represents the /openconfig-platform/components/component/optical-channel/state/line-port YANG schema element.
+type Component_OpticalChannel_LinePortPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LinePortPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/line-port YANG schema element.
+type Component_OpticalChannel_LinePortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OperationalModePath represents the /openconfig-platform/components/component/optical-channel/state/operational-mode YANG schema element.
+type Component_OpticalChannel_OperationalModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OperationalModePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/operational-mode YANG schema element.
+type Component_OpticalChannel_OperationalModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_TargetOutputPowerPath represents the /openconfig-platform/components/component/optical-channel/state/target-output-power YANG schema element.
+type Component_OpticalChannel_TargetOutputPowerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_TargetOutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/target-output-power YANG schema element.
+type Component_OpticalChannel_TargetOutputPowerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannelPath represents the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannelPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannelPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannelPathAny struct {
+	*ygnmi.NodePath
+}
+
+// CarrierFrequencyOffset (container): Carrier frequency offset in MHz with 1 decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not supported,
+// the target is expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/carrier-frequency-offset"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset"
+func (n *Component_OpticalChannelPath) CarrierFrequencyOffset() *Component_OpticalChannel_CarrierFrequencyOffsetPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffsetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "carrier-frequency-offset"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CarrierFrequencyOffset (container): Carrier frequency offset in MHz with 1 decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not supported,
+// the target is expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/carrier-frequency-offset"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset"
+func (n *Component_OpticalChannelPathAny) CarrierFrequencyOffset() *Component_OpticalChannel_CarrierFrequencyOffsetPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffsetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "carrier-frequency-offset"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ChromaticDispersion (container): Chromatic Dispersion of an optical channel in
+// picoseconds / nanometer (ps/nm) as reported by receiver
+// with two decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/chromatic-dispersion"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion"
+func (n *Component_OpticalChannelPath) ChromaticDispersion() *Component_OpticalChannel_ChromaticDispersionPath {
+	return &Component_OpticalChannel_ChromaticDispersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "chromatic-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ChromaticDispersion (container): Chromatic Dispersion of an optical channel in
+// picoseconds / nanometer (ps/nm) as reported by receiver
+// with two decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/chromatic-dispersion"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion"
+func (n *Component_OpticalChannelPathAny) ChromaticDispersion() *Component_OpticalChannel_ChromaticDispersionPathAny {
+	return &Component_OpticalChannel_ChromaticDispersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "chromatic-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esnr (container): Electrical signal to noise ratio. Baud rate
+// normalized signal to noise ratio based on
+// error vector magnitude in dB with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/esnr"
+//	Path from root:       "/components/component/optical-channel/state/esnr"
+func (n *Component_OpticalChannelPath) Esnr() *Component_OpticalChannel_EsnrPath {
+	return &Component_OpticalChannel_EsnrPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "esnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Esnr (container): Electrical signal to noise ratio. Baud rate
+// normalized signal to noise ratio based on
+// error vector magnitude in dB with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/esnr"
+//	Path from root:       "/components/component/optical-channel/state/esnr"
+func (n *Component_OpticalChannelPathAny) Esnr() *Component_OpticalChannel_EsnrPathAny {
+	return &Component_OpticalChannel_EsnrPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "esnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
+// the FEC
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fec-uncorrectable-blocks"
+//	Path from root:       "/components/component/optical-channel/state/fec-uncorrectable-blocks"
+func (n *Component_OpticalChannelPath) FecUncorrectableBlocks() *Component_OpticalChannel_FecUncorrectableBlocksPath {
+	return &Component_OpticalChannel_FecUncorrectableBlocksPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fec-uncorrectable-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
+// the FEC
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fec-uncorrectable-blocks"
+//	Path from root:       "/components/component/optical-channel/state/fec-uncorrectable-blocks"
+func (n *Component_OpticalChannelPathAny) FecUncorrectableBlocks() *Component_OpticalChannel_FecUncorrectableBlocksPathAny {
+	return &Component_OpticalChannel_FecUncorrectableBlocksPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fec-uncorrectable-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Frequency (leaf): Frequency of the optical channel, expressed in MHz
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/frequency"
+//	Path from root:       "/components/component/optical-channel/*/frequency"
+func (n *Component_OpticalChannelPath) Frequency() *Component_OpticalChannel_FrequencyPath {
+	return &Component_OpticalChannel_FrequencyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "frequency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Frequency (leaf): Frequency of the optical channel, expressed in MHz
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/frequency"
+//	Path from root:       "/components/component/optical-channel/*/frequency"
+func (n *Component_OpticalChannelPathAny) Frequency() *Component_OpticalChannel_FrequencyPathAny {
+	return &Component_OpticalChannel_FrequencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "frequency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// GroupId (leaf): If the device places constraints on which optical
+// channels must be managed together (e.g., transmitted on the
+// same line port), it can indicate that by setting the group-id
+// to the same value across related optical channels.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/group-id"
+//	Path from root:       "/components/component/optical-channel/state/group-id"
+func (n *Component_OpticalChannelPath) GroupId() *Component_OpticalChannel_GroupIdPath {
+	return &Component_OpticalChannel_GroupIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "group-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// GroupId (leaf): If the device places constraints on which optical
+// channels must be managed together (e.g., transmitted on the
+// same line port), it can indicate that by setting the group-id
+// to the same value across related optical channels.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/group-id"
+//	Path from root:       "/components/component/optical-channel/state/group-id"
+func (n *Component_OpticalChannelPathAny) GroupId() *Component_OpticalChannel_GroupIdPathAny {
+	return &Component_OpticalChannel_GroupIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "group-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InputPower (container): The input optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-power"
+//	Path from root:       "/components/component/optical-channel/state/input-power"
+func (n *Component_OpticalChannelPath) InputPower() *Component_OpticalChannel_InputPowerPath {
+	return &Component_OpticalChannel_InputPowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InputPower (container): The input optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-power"
+//	Path from root:       "/components/component/optical-channel/state/input-power"
+func (n *Component_OpticalChannelPathAny) InputPower() *Component_OpticalChannel_InputPowerPathAny {
+	return &Component_OpticalChannel_InputPowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LaserBiasCurrent (container): The current applied by the system to the transmit laser to
+// achieve the output power. The current is expressed in mA
+// with up to two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/laser-bias-current"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current"
+func (n *Component_OpticalChannelPath) LaserBiasCurrent() *Component_OpticalChannel_LaserBiasCurrentPath {
+	return &Component_OpticalChannel_LaserBiasCurrentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LaserBiasCurrent (container): The current applied by the system to the transmit laser to
+// achieve the output power. The current is expressed in mA
+// with up to two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/laser-bias-current"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current"
+func (n *Component_OpticalChannelPathAny) LaserBiasCurrent() *Component_OpticalChannel_LaserBiasCurrentPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinePort (leaf): Reference to the line-side physical port that carries
+// this optical channel.  The target port should be
+// a component in the physical inventory data model.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/line-port"
+//	Path from root:       "/components/component/optical-channel/*/line-port"
+func (n *Component_OpticalChannelPath) LinePort() *Component_OpticalChannel_LinePortPath {
+	return &Component_OpticalChannel_LinePortPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LinePort (leaf): Reference to the line-side physical port that carries
+// this optical channel.  The target port should be
+// a component in the physical inventory data model.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/line-port"
+//	Path from root:       "/components/component/optical-channel/*/line-port"
+func (n *Component_OpticalChannelPathAny) LinePort() *Component_OpticalChannel_LinePortPathAny {
+	return &Component_OpticalChannel_LinePortPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ModulationErrorRatio (container): Modulation error ratio in dB with two decimal precision. Values
+// include the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulation-error-ratio"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio"
+func (n *Component_OpticalChannelPath) ModulationErrorRatio() *Component_OpticalChannel_ModulationErrorRatioPath {
+	return &Component_OpticalChannel_ModulationErrorRatioPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulation-error-ratio"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulationErrorRatio (container): Modulation error ratio in dB with two decimal precision. Values
+// include the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulation-error-ratio"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio"
+func (n *Component_OpticalChannelPathAny) ModulationErrorRatio() *Component_OpticalChannel_ModulationErrorRatioPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatioPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulation-error-ratio"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXPhase (container): The X-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-x-phase"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase"
+func (n *Component_OpticalChannelPath) ModulatorBiasXPhase() *Component_OpticalChannel_ModulatorBiasXPhasePath {
+	return &Component_OpticalChannel_ModulatorBiasXPhasePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-x-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXPhase (container): The X-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-x-phase"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasXPhase() *Component_OpticalChannel_ModulatorBiasXPhasePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhasePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-x-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXi (container): The bias on in-phase path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-xi"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi"
+func (n *Component_OpticalChannelPath) ModulatorBiasXi() *Component_OpticalChannel_ModulatorBiasXiPath {
+	return &Component_OpticalChannel_ModulatorBiasXiPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-xi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXi (container): The bias on in-phase path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-xi"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasXi() *Component_OpticalChannel_ModulatorBiasXiPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXiPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-xi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXq (container): The bias on quadrature path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-xq"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq"
+func (n *Component_OpticalChannelPath) ModulatorBiasXq() *Component_OpticalChannel_ModulatorBiasXqPath {
+	return &Component_OpticalChannel_ModulatorBiasXqPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-xq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasXq (container): The bias on quadrature path and Polarization X of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-xq"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasXq() *Component_OpticalChannel_ModulatorBiasXqPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXqPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-xq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYPhase (container): The Y-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-y-phase"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase"
+func (n *Component_OpticalChannelPath) ModulatorBiasYPhase() *Component_OpticalChannel_ModulatorBiasYPhasePath {
+	return &Component_OpticalChannel_ModulatorBiasYPhasePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-y-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYPhase (container): The Y-Phase bias of the coherent modulator. This is
+// represented as a percentage with 2 decimal precision. This
+// term is defined by OIF Implementation Agreement for
+// Coherent CMIS. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply
+// the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-y-phase"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasYPhase() *Component_OpticalChannel_ModulatorBiasYPhasePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhasePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-y-phase"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYi (container): The bias on in-phase path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-yi"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi"
+func (n *Component_OpticalChannelPath) ModulatorBiasYi() *Component_OpticalChannel_ModulatorBiasYiPath {
+	return &Component_OpticalChannel_ModulatorBiasYiPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-yi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYi (container): The bias on in-phase path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-yi"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasYi() *Component_OpticalChannel_ModulatorBiasYiPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYiPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-yi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYq (container): The bias on quadrature path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-yq"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq"
+func (n *Component_OpticalChannelPath) ModulatorBiasYq() *Component_OpticalChannel_ModulatorBiasYqPath {
+	return &Component_OpticalChannel_ModulatorBiasYqPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-yq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ModulatorBiasYq (container): The bias on quadrature path and Polarization Y of
+// the coherent modulator. This is represented as a percentage
+// with 2 decimal precision. This term is defined by OIF
+// Implementation Agreement for Coherent CMIS. Values include
+// the instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target is
+// expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/modulator-bias-yq"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq"
+func (n *Component_OpticalChannelPathAny) ModulatorBiasYq() *Component_OpticalChannel_ModulatorBiasYqPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYqPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "modulator-bias-yq"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OperationalMode (leaf): Vendor-specific mode identifier -- sets the operational
+// mode for the channel.  The specified operational mode must
+// exist in the list of supported operational modes supplied
+// by the device
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/operational-mode"
+//	Path from root:       "/components/component/optical-channel/*/operational-mode"
+func (n *Component_OpticalChannelPath) OperationalMode() *Component_OpticalChannel_OperationalModePath {
+	return &Component_OpticalChannel_OperationalModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "operational-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OperationalMode (leaf): Vendor-specific mode identifier -- sets the operational
+// mode for the channel.  The specified operational mode must
+// exist in the list of supported operational modes supplied
+// by the device
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/operational-mode"
+//	Path from root:       "/components/component/optical-channel/*/operational-mode"
+func (n *Component_OpticalChannelPathAny) OperationalMode() *Component_OpticalChannel_OperationalModePathAny {
+	return &Component_OpticalChannel_OperationalModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "operational-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Osnr (container): Optical signal to noise ratio at 12.5GHz noise bandwidth
+// in dB with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/osnr"
+//	Path from root:       "/components/component/optical-channel/state/osnr"
+func (n *Component_OpticalChannelPath) Osnr() *Component_OpticalChannel_OsnrPath {
+	return &Component_OpticalChannel_OsnrPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "osnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Osnr (container): Optical signal to noise ratio at 12.5GHz noise bandwidth
+// in dB with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/osnr"
+//	Path from root:       "/components/component/optical-channel/state/osnr"
+func (n *Component_OpticalChannelPathAny) Osnr() *Component_OpticalChannel_OsnrPathAny {
+	return &Component_OpticalChannel_OsnrPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "osnr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutputPower (container): The output optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/optical-channel/state/output-power"
+func (n *Component_OpticalChannelPath) OutputPower() *Component_OpticalChannel_OutputPowerPath {
+	return &Component_OpticalChannel_OutputPowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OutputPower (container): The output optical power of a physical channel in units
+// of 0.01dBm, which may be associated with individual
+// physical channels, or an aggregate of multiple physical
+// channels (i.e., for the overall transceiver). For an
+// aggregate, this may be a measurement from a photodetector
+// or a a calculation performed on the device by summing up
+// all of the related individual physical channels.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/optical-channel/state/output-power"
+func (n *Component_OpticalChannelPathAny) OutputPower() *Component_OpticalChannel_OutputPowerPathAny {
+	return &Component_OpticalChannel_OutputPowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationDependentLoss (container): Polarization Dependent Loss of an optical channel
+// in dB as reported by receiver with two decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/polarization-dependent-loss"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss"
+func (n *Component_OpticalChannelPath) PolarizationDependentLoss() *Component_OpticalChannel_PolarizationDependentLossPath {
+	return &Component_OpticalChannel_PolarizationDependentLossPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "polarization-dependent-loss"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationDependentLoss (container): Polarization Dependent Loss of an optical channel
+// in dB as reported by receiver with two decimal precision.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/polarization-dependent-loss"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss"
+func (n *Component_OpticalChannelPathAny) PolarizationDependentLoss() *Component_OpticalChannel_PolarizationDependentLossPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLossPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "polarization-dependent-loss"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationModeDispersion (container): Polarization Mode Dispersion of an optical channel
+// in picosends (ps) as reported by receiver with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/polarization-mode-dispersion"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion"
+func (n *Component_OpticalChannelPath) PolarizationModeDispersion() *Component_OpticalChannel_PolarizationModeDispersionPath {
+	return &Component_OpticalChannel_PolarizationModeDispersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PolarizationModeDispersion (container): Polarization Mode Dispersion of an optical channel
+// in picosends (ps) as reported by receiver with two decimal
+// precision. Values include the instantaneous, average,
+// minimum, and maximum statistics. If avg/min/max statistics
+// are not supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/polarization-mode-dispersion"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion"
+func (n *Component_OpticalChannelPathAny) PolarizationModeDispersion() *Component_OpticalChannel_PolarizationModeDispersionPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PostFecBer (container): Bit error rate after forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/post-fec-ber"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber"
+func (n *Component_OpticalChannelPath) PostFecBer() *Component_OpticalChannel_PostFecBerPath {
+	return &Component_OpticalChannel_PostFecBerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "post-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PostFecBer (container): Bit error rate after forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/post-fec-ber"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber"
+func (n *Component_OpticalChannelPathAny) PostFecBer() *Component_OpticalChannel_PostFecBerPathAny {
+	return &Component_OpticalChannel_PostFecBerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "post-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreFecBer (container): Bit error rate before forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/pre-fec-ber"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber"
+func (n *Component_OpticalChannelPath) PreFecBer() *Component_OpticalChannel_PreFecBerPath {
+	return &Component_OpticalChannel_PreFecBerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pre-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PreFecBer (container): Bit error rate before forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/pre-fec-ber"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber"
+func (n *Component_OpticalChannelPathAny) PreFecBer() *Component_OpticalChannel_PreFecBerPathAny {
+	return &Component_OpticalChannel_PreFecBerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pre-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QValue (container): Quality value (factor) in dB of a channel with two
+// decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/q-value"
+//	Path from root:       "/components/component/optical-channel/state/q-value"
+func (n *Component_OpticalChannelPath) QValue() *Component_OpticalChannel_QValuePath {
+	return &Component_OpticalChannel_QValuePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "q-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QValue (container): Quality value (factor) in dB of a channel with two
+// decimal precision. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected
+// to just supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/q-value"
+//	Path from root:       "/components/component/optical-channel/state/q-value"
+func (n *Component_OpticalChannelPathAny) QValue() *Component_OpticalChannel_QValuePathAny {
+	return &Component_OpticalChannel_QValuePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "q-value"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SecondOrderPolarizationModeDispersion (container): Second Order Polarization Mode Dispersion of an optical
+// channel in picoseconds squared (ps^2) as reported by
+// receiver with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/second-order-polarization-mode-dispersion"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion"
+func (n *Component_OpticalChannelPath) SecondOrderPolarizationModeDispersion() *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "second-order-polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SecondOrderPolarizationModeDispersion (container): Second Order Polarization Mode Dispersion of an optical
+// channel in picoseconds squared (ps^2) as reported by
+// receiver with two decimal precision. Values include the
+// instantaneous, average, minimum, and maximum statistics.
+// If avg/min/max statistics are not supported, the target
+// is expected to just supply the instant value
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/second-order-polarization-mode-dispersion"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion"
+func (n *Component_OpticalChannelPathAny) SecondOrderPolarizationModeDispersion() *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "second-order-polarization-mode-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SopRoc (container): State-of-polarization rate-of-change (SOP-ROC) in krad/s with 1
+// decimal precision. This term is defined by OIF Implementation
+// Agreement for Coherent CMIS. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/sop-roc"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc"
+func (n *Component_OpticalChannelPath) SopRoc() *Component_OpticalChannel_SopRocPath {
+	return &Component_OpticalChannel_SopRocPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "sop-roc"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SopRoc (container): State-of-polarization rate-of-change (SOP-ROC) in krad/s with 1
+// decimal precision. This term is defined by OIF Implementation
+// Agreement for Coherent CMIS. Values include the instantaneous,
+// average, minimum, and maximum statistics. If avg/min/max
+// statistics are not supported, the target is expected to just
+// supply the instant value.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/sop-roc"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc"
+func (n *Component_OpticalChannelPathAny) SopRoc() *Component_OpticalChannel_SopRocPathAny {
+	return &Component_OpticalChannel_SopRocPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "sop-roc"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TargetOutputPower (leaf): Target output optical power level of the optical channel,
+// expressed in increments of 0.01 dBm (decibel-milliwats)
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/target-output-power"
+//	Path from root:       "/components/component/optical-channel/*/target-output-power"
+func (n *Component_OpticalChannelPath) TargetOutputPower() *Component_OpticalChannel_TargetOutputPowerPath {
+	return &Component_OpticalChannel_TargetOutputPowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "target-output-power"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// TargetOutputPower (leaf): Target output optical power level of the optical channel,
+// expressed in increments of 0.01 dBm (decibel-milliwats)
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/target-output-power"
+//	Path from root:       "/components/component/optical-channel/*/target-output-power"
+func (n *Component_OpticalChannelPathAny) TargetOutputPower() *Component_OpticalChannel_TargetOutputPowerPathAny {
+	return &Component_OpticalChannel_TargetOutputPowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "target-output-power"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/avg YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/avg YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_CarrierFrequencyOffset] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_CarrierFrequencyOffset](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_CarrierFrequencyOffset] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_CarrierFrequencyOffset](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/avg"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/avg"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/instant"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/instant"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/interval"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/interval"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_CarrierFrequencyOffset",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_CarrierFrequencyOffset).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_CarrierFrequencyOffset) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/instant YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/instant YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/interval YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/interval YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/max-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset/min-time YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffsetPath represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffsetPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffsetPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffsetPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/avg"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Avg() *Component_OpticalChannel_CarrierFrequencyOffset_AvgPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/avg"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Avg() *Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/instant"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Instant() *Component_OpticalChannel_CarrierFrequencyOffset_InstantPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/instant"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Instant() *Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/interval"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Interval() *Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/interval"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Interval() *Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Max() *Component_OpticalChannel_CarrierFrequencyOffset_MaxPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Max() *Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) MaxTime() *Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/max-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) MaxTime() *Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) Min() *Component_OpticalChannel_CarrierFrequencyOffset_MinPath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) Min() *Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPath) MinTime() *Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/carrier-frequency-offset/min-time"
+func (n *Component_OpticalChannel_CarrierFrequencyOffsetPathAny) MinTime() *Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny {
+	return &Component_OpticalChannel_CarrierFrequencyOffset_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ChromaticDispersion_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/avg YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/avg YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ChromaticDispersionPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ChromaticDispersion] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ChromaticDispersion](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ChromaticDispersion] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ChromaticDispersion](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/avg"
+func (n *Component_OpticalChannel_ChromaticDispersion_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/avg"
+func (n *Component_OpticalChannel_ChromaticDispersion_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/instant"
+func (n *Component_OpticalChannel_ChromaticDispersion_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/instant"
+func (n *Component_OpticalChannel_ChromaticDispersion_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/interval"
+func (n *Component_OpticalChannel_ChromaticDispersion_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/interval"
+func (n *Component_OpticalChannel_ChromaticDispersion_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max"
+func (n *Component_OpticalChannel_ChromaticDispersion_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max"
+func (n *Component_OpticalChannel_ChromaticDispersion_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max-time"
+func (n *Component_OpticalChannel_ChromaticDispersion_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max-time"
+func (n *Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min"
+func (n *Component_OpticalChannel_ChromaticDispersion_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min"
+func (n *Component_OpticalChannel_ChromaticDispersion_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min-time"
+func (n *Component_OpticalChannel_ChromaticDispersion_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min-time"
+func (n *Component_OpticalChannel_ChromaticDispersion_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ChromaticDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ChromaticDispersion).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ChromaticDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ChromaticDispersion_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/instant YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/instant YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/interval YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/interval YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersion_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ChromaticDispersionPath represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion YANG schema element.
+type Component_OpticalChannel_ChromaticDispersionPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ChromaticDispersionPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion YANG schema element.
+type Component_OpticalChannel_ChromaticDispersionPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/avg"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Avg() *Component_OpticalChannel_ChromaticDispersion_AvgPath {
+	return &Component_OpticalChannel_ChromaticDispersion_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/avg"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Avg() *Component_OpticalChannel_ChromaticDispersion_AvgPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/instant"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Instant() *Component_OpticalChannel_ChromaticDispersion_InstantPath {
+	return &Component_OpticalChannel_ChromaticDispersion_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/instant"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Instant() *Component_OpticalChannel_ChromaticDispersion_InstantPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/interval"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Interval() *Component_OpticalChannel_ChromaticDispersion_IntervalPath {
+	return &Component_OpticalChannel_ChromaticDispersion_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/interval"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Interval() *Component_OpticalChannel_ChromaticDispersion_IntervalPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Max() *Component_OpticalChannel_ChromaticDispersion_MaxPath {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Max() *Component_OpticalChannel_ChromaticDispersion_MaxPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) MaxTime() *Component_OpticalChannel_ChromaticDispersion_MaxTimePath {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/max-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) MaxTime() *Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) Min() *Component_OpticalChannel_ChromaticDispersion_MinPath {
+	return &Component_OpticalChannel_ChromaticDispersion_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) Min() *Component_OpticalChannel_ChromaticDispersion_MinPathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPath) MinTime() *Component_OpticalChannel_ChromaticDispersion_MinTimePath {
+	return &Component_OpticalChannel_ChromaticDispersion_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/chromatic-dispersion/min-time"
+func (n *Component_OpticalChannel_ChromaticDispersionPathAny) MinTime() *Component_OpticalChannel_ChromaticDispersion_MinTimePathAny {
+	return &Component_OpticalChannel_ChromaticDispersion_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_Esnr_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/avg YANG schema element.
+type Component_OpticalChannel_Esnr_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/avg YANG schema element.
+type Component_OpticalChannel_Esnr_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_EsnrPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_Esnr] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_Esnr](
+		"Component_OpticalChannel_Esnr",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_EsnrPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_Esnr] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_Esnr](
+		"Component_OpticalChannel_Esnr",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/esnr/avg"
+func (n *Component_OpticalChannel_Esnr_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/esnr/avg"
+func (n *Component_OpticalChannel_Esnr_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/esnr/instant"
+func (n *Component_OpticalChannel_Esnr_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/esnr/instant"
+func (n *Component_OpticalChannel_Esnr_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/esnr/interval"
+func (n *Component_OpticalChannel_Esnr_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/esnr/interval"
+func (n *Component_OpticalChannel_Esnr_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/esnr/max"
+func (n *Component_OpticalChannel_Esnr_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/esnr/max"
+func (n *Component_OpticalChannel_Esnr_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/esnr/max-time"
+func (n *Component_OpticalChannel_Esnr_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/esnr/max-time"
+func (n *Component_OpticalChannel_Esnr_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/esnr/min"
+func (n *Component_OpticalChannel_Esnr_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/esnr/min"
+func (n *Component_OpticalChannel_Esnr_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/esnr/min-time"
+func (n *Component_OpticalChannel_Esnr_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/esnr/min-time"
+func (n *Component_OpticalChannel_Esnr_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_Esnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Esnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Esnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_Esnr_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/instant YANG schema element.
+type Component_OpticalChannel_Esnr_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/instant YANG schema element.
+type Component_OpticalChannel_Esnr_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/interval YANG schema element.
+type Component_OpticalChannel_Esnr_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/interval YANG schema element.
+type Component_OpticalChannel_Esnr_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/max YANG schema element.
+type Component_OpticalChannel_Esnr_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/max YANG schema element.
+type Component_OpticalChannel_Esnr_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/esnr/max-time YANG schema element.
+type Component_OpticalChannel_Esnr_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/max-time YANG schema element.
+type Component_OpticalChannel_Esnr_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MinPath represents the /openconfig-platform/components/component/optical-channel/state/esnr/min YANG schema element.
+type Component_OpticalChannel_Esnr_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/min YANG schema element.
+type Component_OpticalChannel_Esnr_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/esnr/min-time YANG schema element.
+type Component_OpticalChannel_Esnr_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Esnr_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr/min-time YANG schema element.
+type Component_OpticalChannel_Esnr_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_EsnrPath represents the /openconfig-platform/components/component/optical-channel/state/esnr YANG schema element.
+type Component_OpticalChannel_EsnrPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_EsnrPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/esnr YANG schema element.
+type Component_OpticalChannel_EsnrPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/esnr/avg"
+func (n *Component_OpticalChannel_EsnrPath) Avg() *Component_OpticalChannel_Esnr_AvgPath {
+	return &Component_OpticalChannel_Esnr_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/esnr/avg"
+func (n *Component_OpticalChannel_EsnrPathAny) Avg() *Component_OpticalChannel_Esnr_AvgPathAny {
+	return &Component_OpticalChannel_Esnr_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/esnr/instant"
+func (n *Component_OpticalChannel_EsnrPath) Instant() *Component_OpticalChannel_Esnr_InstantPath {
+	return &Component_OpticalChannel_Esnr_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/esnr/instant"
+func (n *Component_OpticalChannel_EsnrPathAny) Instant() *Component_OpticalChannel_Esnr_InstantPathAny {
+	return &Component_OpticalChannel_Esnr_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/esnr/interval"
+func (n *Component_OpticalChannel_EsnrPath) Interval() *Component_OpticalChannel_Esnr_IntervalPath {
+	return &Component_OpticalChannel_Esnr_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/esnr/interval"
+func (n *Component_OpticalChannel_EsnrPathAny) Interval() *Component_OpticalChannel_Esnr_IntervalPathAny {
+	return &Component_OpticalChannel_Esnr_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/esnr/max"
+func (n *Component_OpticalChannel_EsnrPath) Max() *Component_OpticalChannel_Esnr_MaxPath {
+	return &Component_OpticalChannel_Esnr_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/esnr/max"
+func (n *Component_OpticalChannel_EsnrPathAny) Max() *Component_OpticalChannel_Esnr_MaxPathAny {
+	return &Component_OpticalChannel_Esnr_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/esnr/max-time"
+func (n *Component_OpticalChannel_EsnrPath) MaxTime() *Component_OpticalChannel_Esnr_MaxTimePath {
+	return &Component_OpticalChannel_Esnr_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/esnr/max-time"
+func (n *Component_OpticalChannel_EsnrPathAny) MaxTime() *Component_OpticalChannel_Esnr_MaxTimePathAny {
+	return &Component_OpticalChannel_Esnr_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/esnr/min"
+func (n *Component_OpticalChannel_EsnrPath) Min() *Component_OpticalChannel_Esnr_MinPath {
+	return &Component_OpticalChannel_Esnr_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/esnr/min"
+func (n *Component_OpticalChannel_EsnrPathAny) Min() *Component_OpticalChannel_Esnr_MinPathAny {
+	return &Component_OpticalChannel_Esnr_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/esnr/min-time"
+func (n *Component_OpticalChannel_EsnrPath) MinTime() *Component_OpticalChannel_Esnr_MinTimePath {
+	return &Component_OpticalChannel_Esnr_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/esnr/min-time"
+func (n *Component_OpticalChannel_EsnrPathAny) MinTime() *Component_OpticalChannel_Esnr_MinTimePathAny {
+	return &Component_OpticalChannel_Esnr_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_InputPower_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/avg YANG schema element.
+type Component_OpticalChannel_InputPower_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/avg YANG schema element.
+type Component_OpticalChannel_InputPower_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_InputPowerPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_InputPower] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_InputPower](
+		"Component_OpticalChannel_InputPower",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_InputPowerPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_InputPower] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_InputPower](
+		"Component_OpticalChannel_InputPower",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/input-power/avg"
+func (n *Component_OpticalChannel_InputPower_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/input-power/avg"
+func (n *Component_OpticalChannel_InputPower_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/input-power/instant"
+func (n *Component_OpticalChannel_InputPower_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/input-power/instant"
+func (n *Component_OpticalChannel_InputPower_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/input-power/interval"
+func (n *Component_OpticalChannel_InputPower_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/input-power/interval"
+func (n *Component_OpticalChannel_InputPower_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/input-power/max"
+func (n *Component_OpticalChannel_InputPower_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/input-power/max"
+func (n *Component_OpticalChannel_InputPower_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/input-power/max-time"
+func (n *Component_OpticalChannel_InputPower_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/input-power/max-time"
+func (n *Component_OpticalChannel_InputPower_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/input-power/min"
+func (n *Component_OpticalChannel_InputPower_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/input-power/min"
+func (n *Component_OpticalChannel_InputPower_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/input-power/min-time"
+func (n *Component_OpticalChannel_InputPower_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/input-power/min-time"
+func (n *Component_OpticalChannel_InputPower_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_InputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_InputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_InputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_InputPower_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/instant YANG schema element.
+type Component_OpticalChannel_InputPower_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/instant YANG schema element.
+type Component_OpticalChannel_InputPower_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/interval YANG schema element.
+type Component_OpticalChannel_InputPower_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/interval YANG schema element.
+type Component_OpticalChannel_InputPower_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/max YANG schema element.
+type Component_OpticalChannel_InputPower_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/max YANG schema element.
+type Component_OpticalChannel_InputPower_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/input-power/max-time YANG schema element.
+type Component_OpticalChannel_InputPower_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/max-time YANG schema element.
+type Component_OpticalChannel_InputPower_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MinPath represents the /openconfig-platform/components/component/optical-channel/state/input-power/min YANG schema element.
+type Component_OpticalChannel_InputPower_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/min YANG schema element.
+type Component_OpticalChannel_InputPower_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/input-power/min-time YANG schema element.
+type Component_OpticalChannel_InputPower_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPower_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power/min-time YANG schema element.
+type Component_OpticalChannel_InputPower_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_InputPowerPath represents the /openconfig-platform/components/component/optical-channel/state/input-power YANG schema element.
+type Component_OpticalChannel_InputPowerPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_InputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/input-power YANG schema element.
+type Component_OpticalChannel_InputPowerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/input-power/avg"
+func (n *Component_OpticalChannel_InputPowerPath) Avg() *Component_OpticalChannel_InputPower_AvgPath {
+	return &Component_OpticalChannel_InputPower_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/input-power/avg"
+func (n *Component_OpticalChannel_InputPowerPathAny) Avg() *Component_OpticalChannel_InputPower_AvgPathAny {
+	return &Component_OpticalChannel_InputPower_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/input-power/instant"
+func (n *Component_OpticalChannel_InputPowerPath) Instant() *Component_OpticalChannel_InputPower_InstantPath {
+	return &Component_OpticalChannel_InputPower_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/input-power/instant"
+func (n *Component_OpticalChannel_InputPowerPathAny) Instant() *Component_OpticalChannel_InputPower_InstantPathAny {
+	return &Component_OpticalChannel_InputPower_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/input-power/interval"
+func (n *Component_OpticalChannel_InputPowerPath) Interval() *Component_OpticalChannel_InputPower_IntervalPath {
+	return &Component_OpticalChannel_InputPower_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/input-power/interval"
+func (n *Component_OpticalChannel_InputPowerPathAny) Interval() *Component_OpticalChannel_InputPower_IntervalPathAny {
+	return &Component_OpticalChannel_InputPower_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/input-power/max"
+func (n *Component_OpticalChannel_InputPowerPath) Max() *Component_OpticalChannel_InputPower_MaxPath {
+	return &Component_OpticalChannel_InputPower_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/input-power/max"
+func (n *Component_OpticalChannel_InputPowerPathAny) Max() *Component_OpticalChannel_InputPower_MaxPathAny {
+	return &Component_OpticalChannel_InputPower_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/input-power/max-time"
+func (n *Component_OpticalChannel_InputPowerPath) MaxTime() *Component_OpticalChannel_InputPower_MaxTimePath {
+	return &Component_OpticalChannel_InputPower_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/input-power/max-time"
+func (n *Component_OpticalChannel_InputPowerPathAny) MaxTime() *Component_OpticalChannel_InputPower_MaxTimePathAny {
+	return &Component_OpticalChannel_InputPower_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/input-power/min"
+func (n *Component_OpticalChannel_InputPowerPath) Min() *Component_OpticalChannel_InputPower_MinPath {
+	return &Component_OpticalChannel_InputPower_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/input-power/min"
+func (n *Component_OpticalChannel_InputPowerPathAny) Min() *Component_OpticalChannel_InputPower_MinPathAny {
+	return &Component_OpticalChannel_InputPower_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/input-power/min-time"
+func (n *Component_OpticalChannel_InputPowerPath) MinTime() *Component_OpticalChannel_InputPower_MinTimePath {
+	return &Component_OpticalChannel_InputPower_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/input-power/min-time"
+func (n *Component_OpticalChannel_InputPowerPathAny) MinTime() *Component_OpticalChannel_InputPower_MinTimePathAny {
+	return &Component_OpticalChannel_InputPower_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/avg YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/avg YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_LaserBiasCurrent] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_LaserBiasCurrent](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_LaserBiasCurrent] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_LaserBiasCurrent](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/avg"
+func (n *Component_OpticalChannel_LaserBiasCurrent_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/avg"
+func (n *Component_OpticalChannel_LaserBiasCurrent_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/instant"
+func (n *Component_OpticalChannel_LaserBiasCurrent_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/instant"
+func (n *Component_OpticalChannel_LaserBiasCurrent_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/interval"
+func (n *Component_OpticalChannel_LaserBiasCurrent_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/interval"
+func (n *Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/max"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/max"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/max-time"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/max-time"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/min"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/min"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/min-time"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/min-time"
+func (n *Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_LaserBiasCurrent",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_LaserBiasCurrent).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_LaserBiasCurrent) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/instant YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/instant YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/interval YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/interval YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/max-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current/min-time YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LaserBiasCurrentPath represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrentPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_LaserBiasCurrentPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/laser-bias-current YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrentPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/avg"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Avg() *Component_OpticalChannel_LaserBiasCurrent_AvgPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/avg"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Avg() *Component_OpticalChannel_LaserBiasCurrent_AvgPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/instant"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Instant() *Component_OpticalChannel_LaserBiasCurrent_InstantPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/instant"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Instant() *Component_OpticalChannel_LaserBiasCurrent_InstantPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/interval"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Interval() *Component_OpticalChannel_LaserBiasCurrent_IntervalPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/interval"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Interval() *Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/max"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Max() *Component_OpticalChannel_LaserBiasCurrent_MaxPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/max"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Max() *Component_OpticalChannel_LaserBiasCurrent_MaxPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/laser-bias-current/max-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) MaxTime() *Component_OpticalChannel_LaserBiasCurrent_MaxTimePath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/laser-bias-current/max-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) MaxTime() *Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/min"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) Min() *Component_OpticalChannel_LaserBiasCurrent_MinPath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/laser-bias-current/min"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) Min() *Component_OpticalChannel_LaserBiasCurrent_MinPathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/laser-bias-current/min-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPath) MinTime() *Component_OpticalChannel_LaserBiasCurrent_MinTimePath {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/laser-bias-current/min-time"
+func (n *Component_OpticalChannel_LaserBiasCurrentPathAny) MinTime() *Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny {
+	return &Component_OpticalChannel_LaserBiasCurrent_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/avg YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/avg YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulationErrorRatio] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulationErrorRatio](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulationErrorRatio] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulationErrorRatio](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/avg"
+func (n *Component_OpticalChannel_ModulationErrorRatio_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/avg"
+func (n *Component_OpticalChannel_ModulationErrorRatio_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/instant"
+func (n *Component_OpticalChannel_ModulationErrorRatio_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/instant"
+func (n *Component_OpticalChannel_ModulationErrorRatio_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/interval"
+func (n *Component_OpticalChannel_ModulationErrorRatio_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/interval"
+func (n *Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max-time"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max-time"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min-time"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min-time"
+func (n *Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulationErrorRatio",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulationErrorRatio).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulationErrorRatio) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/instant YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/instant YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/interval YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/interval YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/max-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio/min-time YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulationErrorRatioPath represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatioPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulationErrorRatioPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatioPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/avg"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Avg() *Component_OpticalChannel_ModulationErrorRatio_AvgPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/avg"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Avg() *Component_OpticalChannel_ModulationErrorRatio_AvgPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/instant"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Instant() *Component_OpticalChannel_ModulationErrorRatio_InstantPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/instant"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Instant() *Component_OpticalChannel_ModulationErrorRatio_InstantPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/interval"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Interval() *Component_OpticalChannel_ModulationErrorRatio_IntervalPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/interval"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Interval() *Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Max() *Component_OpticalChannel_ModulationErrorRatio_MaxPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Max() *Component_OpticalChannel_ModulationErrorRatio_MaxPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) MaxTime() *Component_OpticalChannel_ModulationErrorRatio_MaxTimePath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/max-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) MaxTime() *Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) Min() *Component_OpticalChannel_ModulationErrorRatio_MinPath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) Min() *Component_OpticalChannel_ModulationErrorRatio_MinPathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPath) MinTime() *Component_OpticalChannel_ModulationErrorRatio_MinTimePath {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulation-error-ratio/min-time"
+func (n *Component_OpticalChannel_ModulationErrorRatioPathAny) MinTime() *Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny {
+	return &Component_OpticalChannel_ModulationErrorRatio_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasXPhase] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasXPhase](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasXPhase] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasXPhase](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXPhase).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhasePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhasePath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhasePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhasePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Avg() *Component_OpticalChannel_ModulatorBiasXPhase_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Avg() *Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Instant() *Component_OpticalChannel_ModulatorBiasXPhase_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Instant() *Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Interval() *Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Interval() *Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Max() *Component_OpticalChannel_ModulatorBiasXPhase_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Max() *Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) MaxTime() *Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) Min() *Component_OpticalChannel_ModulatorBiasXPhase_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) Min() *Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePath) MinTime() *Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-x-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXPhasePathAny) MinTime() *Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXPhase_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasXi] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasXi](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasXi] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasXi](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXi_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXi_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXi_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXi_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXi_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXi).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXiPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXiPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXiPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXiPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Avg() *Component_OpticalChannel_ModulatorBiasXi_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Avg() *Component_OpticalChannel_ModulatorBiasXi_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Instant() *Component_OpticalChannel_ModulatorBiasXi_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Instant() *Component_OpticalChannel_ModulatorBiasXi_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Interval() *Component_OpticalChannel_ModulatorBiasXi_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Interval() *Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Max() *Component_OpticalChannel_ModulatorBiasXi_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Max() *Component_OpticalChannel_ModulatorBiasXi_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) MaxTime() *Component_OpticalChannel_ModulatorBiasXi_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) Min() *Component_OpticalChannel_ModulatorBiasXi_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) Min() *Component_OpticalChannel_ModulatorBiasXi_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPath) MinTime() *Component_OpticalChannel_ModulatorBiasXi_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXiPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXi_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasXq] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasXq](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasXq] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasXq](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXq_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXq_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXq_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXq_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXq_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasXq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasXq).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasXq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasXqPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXqPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasXqPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXqPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Avg() *Component_OpticalChannel_ModulatorBiasXq_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Avg() *Component_OpticalChannel_ModulatorBiasXq_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Instant() *Component_OpticalChannel_ModulatorBiasXq_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Instant() *Component_OpticalChannel_ModulatorBiasXq_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Interval() *Component_OpticalChannel_ModulatorBiasXq_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Interval() *Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Max() *Component_OpticalChannel_ModulatorBiasXq_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Max() *Component_OpticalChannel_ModulatorBiasXq_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) MaxTime() *Component_OpticalChannel_ModulatorBiasXq_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) Min() *Component_OpticalChannel_ModulatorBiasXq_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) Min() *Component_OpticalChannel_ModulatorBiasXq_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPath) MinTime() *Component_OpticalChannel_ModulatorBiasXq_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-xq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasXqPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasXq_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasYPhase] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasYPhase](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasYPhase] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasYPhase](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYPhase",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYPhase).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYPhase) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhasePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhasePath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhasePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhasePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Avg() *Component_OpticalChannel_ModulatorBiasYPhase_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Avg() *Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Instant() *Component_OpticalChannel_ModulatorBiasYPhase_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Instant() *Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Interval() *Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Interval() *Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Max() *Component_OpticalChannel_ModulatorBiasYPhase_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Max() *Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) MaxTime() *Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) Min() *Component_OpticalChannel_ModulatorBiasYPhase_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) Min() *Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePath) MinTime() *Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-y-phase/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYPhasePathAny) MinTime() *Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYPhase_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasYi] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasYi](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasYi] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasYi](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYi_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYi_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYi_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYi_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYi_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYi",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYi).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYi) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYiPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYiPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYiPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYiPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Avg() *Component_OpticalChannel_ModulatorBiasYi_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Avg() *Component_OpticalChannel_ModulatorBiasYi_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Instant() *Component_OpticalChannel_ModulatorBiasYi_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Instant() *Component_OpticalChannel_ModulatorBiasYi_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Interval() *Component_OpticalChannel_ModulatorBiasYi_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Interval() *Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Max() *Component_OpticalChannel_ModulatorBiasYi_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Max() *Component_OpticalChannel_ModulatorBiasYi_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) MaxTime() *Component_OpticalChannel_ModulatorBiasYi_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) Min() *Component_OpticalChannel_ModulatorBiasYi_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) Min() *Component_OpticalChannel_ModulatorBiasYi_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPath) MinTime() *Component_OpticalChannel_ModulatorBiasYi_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yi/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYiPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYi_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/avg YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasYq] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_ModulatorBiasYq](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasYq] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_ModulatorBiasYq](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYq_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYq_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYq_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYq_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYq_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_ModulatorBiasYq",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_ModulatorBiasYq).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_ModulatorBiasYq) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/instant YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/interval YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/max-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq/min-time YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_ModulatorBiasYqPath represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYqPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_ModulatorBiasYqPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYqPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Avg() *Component_OpticalChannel_ModulatorBiasYq_AvgPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/avg"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Avg() *Component_OpticalChannel_ModulatorBiasYq_AvgPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Instant() *Component_OpticalChannel_ModulatorBiasYq_InstantPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/instant"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Instant() *Component_OpticalChannel_ModulatorBiasYq_InstantPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Interval() *Component_OpticalChannel_ModulatorBiasYq_IntervalPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/interval"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Interval() *Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Max() *Component_OpticalChannel_ModulatorBiasYq_MaxPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Max() *Component_OpticalChannel_ModulatorBiasYq_MaxPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) MaxTime() *Component_OpticalChannel_ModulatorBiasYq_MaxTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/max-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) MaxTime() *Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) Min() *Component_OpticalChannel_ModulatorBiasYq_MinPath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) Min() *Component_OpticalChannel_ModulatorBiasYq_MinPathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPath) MinTime() *Component_OpticalChannel_ModulatorBiasYq_MinTimePath {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/modulator-bias-yq/min-time"
+func (n *Component_OpticalChannel_ModulatorBiasYqPathAny) MinTime() *Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny {
+	return &Component_OpticalChannel_ModulatorBiasYq_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_Osnr_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/avg YANG schema element.
+type Component_OpticalChannel_Osnr_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/avg YANG schema element.
+type Component_OpticalChannel_Osnr_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_OsnrPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_Osnr] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_Osnr](
+		"Component_OpticalChannel_Osnr",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_OsnrPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_Osnr] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_Osnr](
+		"Component_OpticalChannel_Osnr",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/osnr/avg"
+func (n *Component_OpticalChannel_Osnr_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/osnr/avg"
+func (n *Component_OpticalChannel_Osnr_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/osnr/instant"
+func (n *Component_OpticalChannel_Osnr_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/osnr/instant"
+func (n *Component_OpticalChannel_Osnr_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/osnr/interval"
+func (n *Component_OpticalChannel_Osnr_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/osnr/interval"
+func (n *Component_OpticalChannel_Osnr_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/osnr/max"
+func (n *Component_OpticalChannel_Osnr_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/osnr/max"
+func (n *Component_OpticalChannel_Osnr_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/osnr/max-time"
+func (n *Component_OpticalChannel_Osnr_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/osnr/max-time"
+func (n *Component_OpticalChannel_Osnr_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/osnr/min"
+func (n *Component_OpticalChannel_Osnr_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/osnr/min"
+func (n *Component_OpticalChannel_Osnr_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/osnr/min-time"
+func (n *Component_OpticalChannel_Osnr_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/osnr/min-time"
+func (n *Component_OpticalChannel_Osnr_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_Osnr",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_Osnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_Osnr) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_Osnr_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/instant YANG schema element.
+type Component_OpticalChannel_Osnr_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/instant YANG schema element.
+type Component_OpticalChannel_Osnr_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/interval YANG schema element.
+type Component_OpticalChannel_Osnr_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/interval YANG schema element.
+type Component_OpticalChannel_Osnr_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/max YANG schema element.
+type Component_OpticalChannel_Osnr_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/max YANG schema element.
+type Component_OpticalChannel_Osnr_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/osnr/max-time YANG schema element.
+type Component_OpticalChannel_Osnr_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/max-time YANG schema element.
+type Component_OpticalChannel_Osnr_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MinPath represents the /openconfig-platform/components/component/optical-channel/state/osnr/min YANG schema element.
+type Component_OpticalChannel_Osnr_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/min YANG schema element.
+type Component_OpticalChannel_Osnr_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/osnr/min-time YANG schema element.
+type Component_OpticalChannel_Osnr_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_Osnr_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr/min-time YANG schema element.
+type Component_OpticalChannel_Osnr_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OsnrPath represents the /openconfig-platform/components/component/optical-channel/state/osnr YANG schema element.
+type Component_OpticalChannel_OsnrPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_OsnrPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/osnr YANG schema element.
+type Component_OpticalChannel_OsnrPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/osnr/avg"
+func (n *Component_OpticalChannel_OsnrPath) Avg() *Component_OpticalChannel_Osnr_AvgPath {
+	return &Component_OpticalChannel_Osnr_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/osnr/avg"
+func (n *Component_OpticalChannel_OsnrPathAny) Avg() *Component_OpticalChannel_Osnr_AvgPathAny {
+	return &Component_OpticalChannel_Osnr_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/osnr/instant"
+func (n *Component_OpticalChannel_OsnrPath) Instant() *Component_OpticalChannel_Osnr_InstantPath {
+	return &Component_OpticalChannel_Osnr_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/osnr/instant"
+func (n *Component_OpticalChannel_OsnrPathAny) Instant() *Component_OpticalChannel_Osnr_InstantPathAny {
+	return &Component_OpticalChannel_Osnr_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/osnr/interval"
+func (n *Component_OpticalChannel_OsnrPath) Interval() *Component_OpticalChannel_Osnr_IntervalPath {
+	return &Component_OpticalChannel_Osnr_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/osnr/interval"
+func (n *Component_OpticalChannel_OsnrPathAny) Interval() *Component_OpticalChannel_Osnr_IntervalPathAny {
+	return &Component_OpticalChannel_Osnr_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/osnr/max"
+func (n *Component_OpticalChannel_OsnrPath) Max() *Component_OpticalChannel_Osnr_MaxPath {
+	return &Component_OpticalChannel_Osnr_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/osnr/max"
+func (n *Component_OpticalChannel_OsnrPathAny) Max() *Component_OpticalChannel_Osnr_MaxPathAny {
+	return &Component_OpticalChannel_Osnr_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/osnr/max-time"
+func (n *Component_OpticalChannel_OsnrPath) MaxTime() *Component_OpticalChannel_Osnr_MaxTimePath {
+	return &Component_OpticalChannel_Osnr_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/osnr/max-time"
+func (n *Component_OpticalChannel_OsnrPathAny) MaxTime() *Component_OpticalChannel_Osnr_MaxTimePathAny {
+	return &Component_OpticalChannel_Osnr_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/osnr/min"
+func (n *Component_OpticalChannel_OsnrPath) Min() *Component_OpticalChannel_Osnr_MinPath {
+	return &Component_OpticalChannel_Osnr_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/osnr/min"
+func (n *Component_OpticalChannel_OsnrPathAny) Min() *Component_OpticalChannel_Osnr_MinPathAny {
+	return &Component_OpticalChannel_Osnr_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/osnr/min-time"
+func (n *Component_OpticalChannel_OsnrPath) MinTime() *Component_OpticalChannel_Osnr_MinTimePath {
+	return &Component_OpticalChannel_Osnr_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/osnr/min-time"
+func (n *Component_OpticalChannel_OsnrPathAny) MinTime() *Component_OpticalChannel_Osnr_MinTimePathAny {
+	return &Component_OpticalChannel_Osnr_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_OutputPower_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/avg YANG schema element.
+type Component_OpticalChannel_OutputPower_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/avg YANG schema element.
+type Component_OpticalChannel_OutputPower_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_OutputPowerPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_OutputPower] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_OutputPower](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_OutputPowerPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_OutputPower] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_OutputPower](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/output-power/avg"
+func (n *Component_OpticalChannel_OutputPower_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/output-power/avg"
+func (n *Component_OpticalChannel_OutputPower_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/output-power/instant"
+func (n *Component_OpticalChannel_OutputPower_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/output-power/instant"
+func (n *Component_OpticalChannel_OutputPower_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/output-power/interval"
+func (n *Component_OpticalChannel_OutputPower_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/output-power/interval"
+func (n *Component_OpticalChannel_OutputPower_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/output-power/max"
+func (n *Component_OpticalChannel_OutputPower_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/output-power/max"
+func (n *Component_OpticalChannel_OutputPower_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/output-power/max-time"
+func (n *Component_OpticalChannel_OutputPower_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/output-power/max-time"
+func (n *Component_OpticalChannel_OutputPower_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/output-power/min"
+func (n *Component_OpticalChannel_OutputPower_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/output-power/min"
+func (n *Component_OpticalChannel_OutputPower_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/output-power/min-time"
+func (n *Component_OpticalChannel_OutputPower_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/output-power/min-time"
+func (n *Component_OpticalChannel_OutputPower_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_OutputPower",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_OutputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_OutputPower) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_OutputPower_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/instant YANG schema element.
+type Component_OpticalChannel_OutputPower_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/instant YANG schema element.
+type Component_OpticalChannel_OutputPower_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/interval YANG schema element.
+type Component_OpticalChannel_OutputPower_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/interval YANG schema element.
+type Component_OpticalChannel_OutputPower_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/max YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/max YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/output-power/max-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/max-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MinPath represents the /openconfig-platform/components/component/optical-channel/state/output-power/min YANG schema element.
+type Component_OpticalChannel_OutputPower_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/min YANG schema element.
+type Component_OpticalChannel_OutputPower_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/output-power/min-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPower_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power/min-time YANG schema element.
+type Component_OpticalChannel_OutputPower_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_OutputPowerPath represents the /openconfig-platform/components/component/optical-channel/state/output-power YANG schema element.
+type Component_OpticalChannel_OutputPowerPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_OutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/output-power YANG schema element.
+type Component_OpticalChannel_OutputPowerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/output-power/avg"
+func (n *Component_OpticalChannel_OutputPowerPath) Avg() *Component_OpticalChannel_OutputPower_AvgPath {
+	return &Component_OpticalChannel_OutputPower_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/output-power/avg"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Avg() *Component_OpticalChannel_OutputPower_AvgPathAny {
+	return &Component_OpticalChannel_OutputPower_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/output-power/instant"
+func (n *Component_OpticalChannel_OutputPowerPath) Instant() *Component_OpticalChannel_OutputPower_InstantPath {
+	return &Component_OpticalChannel_OutputPower_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/output-power/instant"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Instant() *Component_OpticalChannel_OutputPower_InstantPathAny {
+	return &Component_OpticalChannel_OutputPower_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/output-power/interval"
+func (n *Component_OpticalChannel_OutputPowerPath) Interval() *Component_OpticalChannel_OutputPower_IntervalPath {
+	return &Component_OpticalChannel_OutputPower_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/output-power/interval"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Interval() *Component_OpticalChannel_OutputPower_IntervalPathAny {
+	return &Component_OpticalChannel_OutputPower_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/output-power/max"
+func (n *Component_OpticalChannel_OutputPowerPath) Max() *Component_OpticalChannel_OutputPower_MaxPath {
+	return &Component_OpticalChannel_OutputPower_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/output-power/max"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Max() *Component_OpticalChannel_OutputPower_MaxPathAny {
+	return &Component_OpticalChannel_OutputPower_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/output-power/max-time"
+func (n *Component_OpticalChannel_OutputPowerPath) MaxTime() *Component_OpticalChannel_OutputPower_MaxTimePath {
+	return &Component_OpticalChannel_OutputPower_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/output-power/max-time"
+func (n *Component_OpticalChannel_OutputPowerPathAny) MaxTime() *Component_OpticalChannel_OutputPower_MaxTimePathAny {
+	return &Component_OpticalChannel_OutputPower_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/output-power/min"
+func (n *Component_OpticalChannel_OutputPowerPath) Min() *Component_OpticalChannel_OutputPower_MinPath {
+	return &Component_OpticalChannel_OutputPower_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/output-power/min"
+func (n *Component_OpticalChannel_OutputPowerPathAny) Min() *Component_OpticalChannel_OutputPower_MinPathAny {
+	return &Component_OpticalChannel_OutputPower_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/output-power/min-time"
+func (n *Component_OpticalChannel_OutputPowerPath) MinTime() *Component_OpticalChannel_OutputPower_MinTimePath {
+	return &Component_OpticalChannel_OutputPower_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/output-power/min-time"
+func (n *Component_OpticalChannel_OutputPowerPathAny) MinTime() *Component_OpticalChannel_OutputPower_MinTimePathAny {
+	return &Component_OpticalChannel_OutputPower_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/avg YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/avg YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_PolarizationDependentLoss] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_PolarizationDependentLoss](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_PolarizationDependentLoss] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_PolarizationDependentLoss](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/avg"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/avg"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/instant"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/instant"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/interval"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/interval"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max-time"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max-time"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min-time"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min-time"
+func (n *Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PolarizationDependentLoss",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationDependentLoss).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationDependentLoss) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/instant YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/instant YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/interval YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/interval YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationDependentLossPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLossPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_PolarizationDependentLossPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLossPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/avg"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Avg() *Component_OpticalChannel_PolarizationDependentLoss_AvgPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/avg"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Avg() *Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/instant"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Instant() *Component_OpticalChannel_PolarizationDependentLoss_InstantPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/instant"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Instant() *Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/interval"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Interval() *Component_OpticalChannel_PolarizationDependentLoss_IntervalPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/interval"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Interval() *Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Max() *Component_OpticalChannel_PolarizationDependentLoss_MaxPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Max() *Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) MaxTime() *Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/max-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) MaxTime() *Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) Min() *Component_OpticalChannel_PolarizationDependentLoss_MinPath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) Min() *Component_OpticalChannel_PolarizationDependentLoss_MinPathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPath) MinTime() *Component_OpticalChannel_PolarizationDependentLoss_MinTimePath {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-dependent-loss/min-time"
+func (n *Component_OpticalChannel_PolarizationDependentLossPathAny) MinTime() *Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny {
+	return &Component_OpticalChannel_PolarizationDependentLoss_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_PolarizationModeDispersion] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_PolarizationModeDispersion](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_PolarizationModeDispersion] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_PolarizationModeDispersion](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PolarizationModeDispersion).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PolarizationModeDispersion) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PolarizationModeDispersionPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersionPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersionPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersionPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Avg() *Component_OpticalChannel_PolarizationModeDispersion_AvgPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Avg() *Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Instant() *Component_OpticalChannel_PolarizationModeDispersion_InstantPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Instant() *Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Interval() *Component_OpticalChannel_PolarizationModeDispersion_IntervalPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Interval() *Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Max() *Component_OpticalChannel_PolarizationModeDispersion_MaxPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Max() *Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) MaxTime() *Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) MaxTime() *Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Min() *Component_OpticalChannel_PolarizationModeDispersion_MinPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Min() *Component_OpticalChannel_PolarizationModeDispersion_MinPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) MinTime() *Component_OpticalChannel_PolarizationModeDispersion_MinTimePath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) MinTime() *Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_PostFecBer_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PostFecBer_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PostFecBer_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PostFecBerPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_PostFecBer] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_PostFecBer](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PostFecBerPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_PostFecBer] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_PostFecBer](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/avg"
+func (n *Component_OpticalChannel_PostFecBer_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/avg"
+func (n *Component_OpticalChannel_PostFecBer_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/instant"
+func (n *Component_OpticalChannel_PostFecBer_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/instant"
+func (n *Component_OpticalChannel_PostFecBer_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/interval"
+func (n *Component_OpticalChannel_PostFecBer_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/interval"
+func (n *Component_OpticalChannel_PostFecBer_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/max"
+func (n *Component_OpticalChannel_PostFecBer_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/max"
+func (n *Component_OpticalChannel_PostFecBer_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/max-time"
+func (n *Component_OpticalChannel_PostFecBer_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/max-time"
+func (n *Component_OpticalChannel_PostFecBer_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/min"
+func (n *Component_OpticalChannel_PostFecBer_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/min"
+func (n *Component_OpticalChannel_PostFecBer_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/min-time"
+func (n *Component_OpticalChannel_PostFecBer_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/min-time"
+func (n *Component_OpticalChannel_PostFecBer_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PostFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PostFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PostFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_PostFecBer_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PostFecBer_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PostFecBer_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PostFecBer_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PostFecBer_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MinPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBer_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PostFecBerPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber YANG schema element.
+type Component_OpticalChannel_PostFecBerPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_PostFecBerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber YANG schema element.
+type Component_OpticalChannel_PostFecBerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/avg"
+func (n *Component_OpticalChannel_PostFecBerPath) Avg() *Component_OpticalChannel_PostFecBer_AvgPath {
+	return &Component_OpticalChannel_PostFecBer_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/avg"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Avg() *Component_OpticalChannel_PostFecBer_AvgPathAny {
+	return &Component_OpticalChannel_PostFecBer_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/instant"
+func (n *Component_OpticalChannel_PostFecBerPath) Instant() *Component_OpticalChannel_PostFecBer_InstantPath {
+	return &Component_OpticalChannel_PostFecBer_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/instant"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Instant() *Component_OpticalChannel_PostFecBer_InstantPathAny {
+	return &Component_OpticalChannel_PostFecBer_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/interval"
+func (n *Component_OpticalChannel_PostFecBerPath) Interval() *Component_OpticalChannel_PostFecBer_IntervalPath {
+	return &Component_OpticalChannel_PostFecBer_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/interval"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Interval() *Component_OpticalChannel_PostFecBer_IntervalPathAny {
+	return &Component_OpticalChannel_PostFecBer_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/max"
+func (n *Component_OpticalChannel_PostFecBerPath) Max() *Component_OpticalChannel_PostFecBer_MaxPath {
+	return &Component_OpticalChannel_PostFecBer_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/max"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Max() *Component_OpticalChannel_PostFecBer_MaxPathAny {
+	return &Component_OpticalChannel_PostFecBer_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/post-fec-ber/max-time"
+func (n *Component_OpticalChannel_PostFecBerPath) MaxTime() *Component_OpticalChannel_PostFecBer_MaxTimePath {
+	return &Component_OpticalChannel_PostFecBer_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/post-fec-ber/max-time"
+func (n *Component_OpticalChannel_PostFecBerPathAny) MaxTime() *Component_OpticalChannel_PostFecBer_MaxTimePathAny {
+	return &Component_OpticalChannel_PostFecBer_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/min"
+func (n *Component_OpticalChannel_PostFecBerPath) Min() *Component_OpticalChannel_PostFecBer_MinPath {
+	return &Component_OpticalChannel_PostFecBer_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/post-fec-ber/min"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Min() *Component_OpticalChannel_PostFecBer_MinPathAny {
+	return &Component_OpticalChannel_PostFecBer_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/post-fec-ber/min-time"
+func (n *Component_OpticalChannel_PostFecBerPath) MinTime() *Component_OpticalChannel_PostFecBer_MinTimePath {
+	return &Component_OpticalChannel_PostFecBer_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/post-fec-ber/min-time"
+func (n *Component_OpticalChannel_PostFecBerPathAny) MinTime() *Component_OpticalChannel_PostFecBer_MinTimePathAny {
+	return &Component_OpticalChannel_PostFecBer_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_PreFecBer_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PreFecBer_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PreFecBer_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PreFecBerPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_PreFecBer] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_PreFecBer](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_PreFecBerPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_PreFecBer] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_PreFecBer](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/avg"
+func (n *Component_OpticalChannel_PreFecBer_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/avg"
+func (n *Component_OpticalChannel_PreFecBer_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/instant"
+func (n *Component_OpticalChannel_PreFecBer_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/instant"
+func (n *Component_OpticalChannel_PreFecBer_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/interval"
+func (n *Component_OpticalChannel_PreFecBer_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/interval"
+func (n *Component_OpticalChannel_PreFecBer_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max"
+func (n *Component_OpticalChannel_PreFecBer_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max"
+func (n *Component_OpticalChannel_PreFecBer_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max-time"
+func (n *Component_OpticalChannel_PreFecBer_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max-time"
+func (n *Component_OpticalChannel_PreFecBer_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min"
+func (n *Component_OpticalChannel_PreFecBer_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min"
+func (n *Component_OpticalChannel_PreFecBer_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min-time"
+func (n *Component_OpticalChannel_PreFecBer_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min-time"
+func (n *Component_OpticalChannel_PreFecBer_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_PreFecBer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_PreFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_PreFecBer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_PreFecBer_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PreFecBer_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PreFecBer_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PreFecBer_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PreFecBer_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MinPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBer_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_PreFecBerPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber YANG schema element.
+type Component_OpticalChannel_PreFecBerPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_PreFecBerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber YANG schema element.
+type Component_OpticalChannel_PreFecBerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/avg"
+func (n *Component_OpticalChannel_PreFecBerPath) Avg() *Component_OpticalChannel_PreFecBer_AvgPath {
+	return &Component_OpticalChannel_PreFecBer_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/avg"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Avg() *Component_OpticalChannel_PreFecBer_AvgPathAny {
+	return &Component_OpticalChannel_PreFecBer_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/instant"
+func (n *Component_OpticalChannel_PreFecBerPath) Instant() *Component_OpticalChannel_PreFecBer_InstantPath {
+	return &Component_OpticalChannel_PreFecBer_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/instant"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Instant() *Component_OpticalChannel_PreFecBer_InstantPathAny {
+	return &Component_OpticalChannel_PreFecBer_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/interval"
+func (n *Component_OpticalChannel_PreFecBerPath) Interval() *Component_OpticalChannel_PreFecBer_IntervalPath {
+	return &Component_OpticalChannel_PreFecBer_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/interval"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Interval() *Component_OpticalChannel_PreFecBer_IntervalPathAny {
+	return &Component_OpticalChannel_PreFecBer_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max"
+func (n *Component_OpticalChannel_PreFecBerPath) Max() *Component_OpticalChannel_PreFecBer_MaxPath {
+	return &Component_OpticalChannel_PreFecBer_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Max() *Component_OpticalChannel_PreFecBer_MaxPathAny {
+	return &Component_OpticalChannel_PreFecBer_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max-time"
+func (n *Component_OpticalChannel_PreFecBerPath) MaxTime() *Component_OpticalChannel_PreFecBer_MaxTimePath {
+	return &Component_OpticalChannel_PreFecBer_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/pre-fec-ber/max-time"
+func (n *Component_OpticalChannel_PreFecBerPathAny) MaxTime() *Component_OpticalChannel_PreFecBer_MaxTimePathAny {
+	return &Component_OpticalChannel_PreFecBer_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min"
+func (n *Component_OpticalChannel_PreFecBerPath) Min() *Component_OpticalChannel_PreFecBer_MinPath {
+	return &Component_OpticalChannel_PreFecBer_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Min() *Component_OpticalChannel_PreFecBer_MinPathAny {
+	return &Component_OpticalChannel_PreFecBer_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min-time"
+func (n *Component_OpticalChannel_PreFecBerPath) MinTime() *Component_OpticalChannel_PreFecBer_MinTimePath {
+	return &Component_OpticalChannel_PreFecBer_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/pre-fec-ber/min-time"
+func (n *Component_OpticalChannel_PreFecBerPathAny) MinTime() *Component_OpticalChannel_PreFecBer_MinTimePathAny {
+	return &Component_OpticalChannel_PreFecBer_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_QValue_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/avg YANG schema element.
+type Component_OpticalChannel_QValue_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/avg YANG schema element.
+type Component_OpticalChannel_QValue_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_QValuePath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_QValue] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_QValue](
+		"Component_OpticalChannel_QValue",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_QValuePathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_QValue] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_QValue](
+		"Component_OpticalChannel_QValue",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/q-value/avg"
+func (n *Component_OpticalChannel_QValue_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/q-value/avg"
+func (n *Component_OpticalChannel_QValue_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/q-value/instant"
+func (n *Component_OpticalChannel_QValue_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/q-value/instant"
+func (n *Component_OpticalChannel_QValue_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/q-value/interval"
+func (n *Component_OpticalChannel_QValue_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/q-value/interval"
+func (n *Component_OpticalChannel_QValue_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/q-value/max"
+func (n *Component_OpticalChannel_QValue_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/q-value/max"
+func (n *Component_OpticalChannel_QValue_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/q-value/max-time"
+func (n *Component_OpticalChannel_QValue_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/q-value/max-time"
+func (n *Component_OpticalChannel_QValue_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/q-value/min"
+func (n *Component_OpticalChannel_QValue_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/q-value/min"
+func (n *Component_OpticalChannel_QValue_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/q-value/min-time"
+func (n *Component_OpticalChannel_QValue_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/q-value/min-time"
+func (n *Component_OpticalChannel_QValue_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_QValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_QValue).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_QValue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_QValue_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/instant YANG schema element.
+type Component_OpticalChannel_QValue_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/instant YANG schema element.
+type Component_OpticalChannel_QValue_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/interval YANG schema element.
+type Component_OpticalChannel_QValue_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/interval YANG schema element.
+type Component_OpticalChannel_QValue_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/max YANG schema element.
+type Component_OpticalChannel_QValue_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/max YANG schema element.
+type Component_OpticalChannel_QValue_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/q-value/max-time YANG schema element.
+type Component_OpticalChannel_QValue_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/max-time YANG schema element.
+type Component_OpticalChannel_QValue_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MinPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/min YANG schema element.
+type Component_OpticalChannel_QValue_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/min YANG schema element.
+type Component_OpticalChannel_QValue_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/q-value/min-time YANG schema element.
+type Component_OpticalChannel_QValue_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValue_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/min-time YANG schema element.
+type Component_OpticalChannel_QValue_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_QValuePath represents the /openconfig-platform/components/component/optical-channel/state/q-value YANG schema element.
+type Component_OpticalChannel_QValuePath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_QValuePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value YANG schema element.
+type Component_OpticalChannel_QValuePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/q-value/avg"
+func (n *Component_OpticalChannel_QValuePath) Avg() *Component_OpticalChannel_QValue_AvgPath {
+	return &Component_OpticalChannel_QValue_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/q-value/avg"
+func (n *Component_OpticalChannel_QValuePathAny) Avg() *Component_OpticalChannel_QValue_AvgPathAny {
+	return &Component_OpticalChannel_QValue_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/q-value/instant"
+func (n *Component_OpticalChannel_QValuePath) Instant() *Component_OpticalChannel_QValue_InstantPath {
+	return &Component_OpticalChannel_QValue_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/q-value/instant"
+func (n *Component_OpticalChannel_QValuePathAny) Instant() *Component_OpticalChannel_QValue_InstantPathAny {
+	return &Component_OpticalChannel_QValue_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/q-value/interval"
+func (n *Component_OpticalChannel_QValuePath) Interval() *Component_OpticalChannel_QValue_IntervalPath {
+	return &Component_OpticalChannel_QValue_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/q-value/interval"
+func (n *Component_OpticalChannel_QValuePathAny) Interval() *Component_OpticalChannel_QValue_IntervalPathAny {
+	return &Component_OpticalChannel_QValue_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/q-value/max"
+func (n *Component_OpticalChannel_QValuePath) Max() *Component_OpticalChannel_QValue_MaxPath {
+	return &Component_OpticalChannel_QValue_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/q-value/max"
+func (n *Component_OpticalChannel_QValuePathAny) Max() *Component_OpticalChannel_QValue_MaxPathAny {
+	return &Component_OpticalChannel_QValue_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/q-value/max-time"
+func (n *Component_OpticalChannel_QValuePath) MaxTime() *Component_OpticalChannel_QValue_MaxTimePath {
+	return &Component_OpticalChannel_QValue_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/q-value/max-time"
+func (n *Component_OpticalChannel_QValuePathAny) MaxTime() *Component_OpticalChannel_QValue_MaxTimePathAny {
+	return &Component_OpticalChannel_QValue_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/q-value/min"
+func (n *Component_OpticalChannel_QValuePath) Min() *Component_OpticalChannel_QValue_MinPath {
+	return &Component_OpticalChannel_QValue_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/q-value/min"
+func (n *Component_OpticalChannel_QValuePathAny) Min() *Component_OpticalChannel_QValue_MinPathAny {
+	return &Component_OpticalChannel_QValue_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/q-value/min-time"
+func (n *Component_OpticalChannel_QValuePath) MinTime() *Component_OpticalChannel_QValue_MinTimePath {
+	return &Component_OpticalChannel_QValue_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/q-value/min-time"
+func (n *Component_OpticalChannel_QValuePathAny) MinTime() *Component_OpticalChannel_QValue_MinTimePathAny {
+	return &Component_OpticalChannel_QValue_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_SecondOrderPolarizationModeDispersion",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_OpticalChannel_SecondOrderPolarizationModeDispersion)
+		},
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Avg() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Avg() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Instant() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Instant() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Interval() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Interval() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Max() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Max() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) MaxTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) MaxTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Min() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Min() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) MinTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) MinTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_OpticalChannel_SopRoc_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/avg YANG schema element.
+type Component_OpticalChannel_SopRoc_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/avg YANG schema element.
+type Component_OpticalChannel_SopRoc_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_SopRocPath) State() ygnmi.SingletonQuery[*oc.Component_OpticalChannel_SopRoc] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_OpticalChannel_SopRoc](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_OpticalChannel_SopRocPathAny) State() ygnmi.WildcardQuery[*oc.Component_OpticalChannel_SopRoc] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_OpticalChannel_SopRoc](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/avg"
+func (n *Component_OpticalChannel_SopRoc_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/avg"
+func (n *Component_OpticalChannel_SopRoc_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/instant"
+func (n *Component_OpticalChannel_SopRoc_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/instant"
+func (n *Component_OpticalChannel_SopRoc_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/interval"
+func (n *Component_OpticalChannel_SopRoc_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/interval"
+func (n *Component_OpticalChannel_SopRoc_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/max"
+func (n *Component_OpticalChannel_SopRoc_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/max"
+func (n *Component_OpticalChannel_SopRoc_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/max-time"
+func (n *Component_OpticalChannel_SopRoc_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/max-time"
+func (n *Component_OpticalChannel_SopRoc_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/min"
+func (n *Component_OpticalChannel_SopRoc_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewLeafSingletonQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/min"
+func (n *Component_OpticalChannel_SopRoc_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewLeafWildcardQuery[float64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/min-time"
+func (n *Component_OpticalChannel_SopRoc_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/min-time"
+func (n *Component_OpticalChannel_SopRoc_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_OpticalChannel_SopRoc",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_OpticalChannel_SopRoc).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel_SopRoc) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Component_OpticalChannel_SopRoc_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/instant YANG schema element.
+type Component_OpticalChannel_SopRoc_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/instant YANG schema element.
+type Component_OpticalChannel_SopRoc_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/interval YANG schema element.
+type Component_OpticalChannel_SopRoc_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/interval YANG schema element.
+type Component_OpticalChannel_SopRoc_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/max YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/max YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/max-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/max-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MinPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/min YANG schema element.
+type Component_OpticalChannel_SopRoc_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/min YANG schema element.
+type Component_OpticalChannel_SopRoc_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/min-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRoc_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/min-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_SopRocPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc YANG schema element.
+type Component_OpticalChannel_SopRocPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_OpticalChannel_SopRocPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc YANG schema element.
+type Component_OpticalChannel_SopRocPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/avg"
+func (n *Component_OpticalChannel_SopRocPath) Avg() *Component_OpticalChannel_SopRoc_AvgPath {
+	return &Component_OpticalChannel_SopRoc_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/avg"
+func (n *Component_OpticalChannel_SopRocPathAny) Avg() *Component_OpticalChannel_SopRoc_AvgPathAny {
+	return &Component_OpticalChannel_SopRoc_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/instant"
+func (n *Component_OpticalChannel_SopRocPath) Instant() *Component_OpticalChannel_SopRoc_InstantPath {
+	return &Component_OpticalChannel_SopRoc_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/instant"
+func (n *Component_OpticalChannel_SopRocPathAny) Instant() *Component_OpticalChannel_SopRoc_InstantPathAny {
+	return &Component_OpticalChannel_SopRoc_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/interval"
+func (n *Component_OpticalChannel_SopRocPath) Interval() *Component_OpticalChannel_SopRoc_IntervalPath {
+	return &Component_OpticalChannel_SopRoc_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/interval"
+func (n *Component_OpticalChannel_SopRocPathAny) Interval() *Component_OpticalChannel_SopRoc_IntervalPathAny {
+	return &Component_OpticalChannel_SopRoc_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/max"
+func (n *Component_OpticalChannel_SopRocPath) Max() *Component_OpticalChannel_SopRoc_MaxPath {
+	return &Component_OpticalChannel_SopRoc_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/max"
+func (n *Component_OpticalChannel_SopRocPathAny) Max() *Component_OpticalChannel_SopRoc_MaxPathAny {
+	return &Component_OpticalChannel_SopRoc_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/sop-roc/max-time"
+func (n *Component_OpticalChannel_SopRocPath) MaxTime() *Component_OpticalChannel_SopRoc_MaxTimePath {
+	return &Component_OpticalChannel_SopRoc_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/optical-channel/state/sop-roc/max-time"
+func (n *Component_OpticalChannel_SopRocPathAny) MaxTime() *Component_OpticalChannel_SopRoc_MaxTimePathAny {
+	return &Component_OpticalChannel_SopRoc_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/min"
+func (n *Component_OpticalChannel_SopRocPath) Min() *Component_OpticalChannel_SopRoc_MinPath {
+	return &Component_OpticalChannel_SopRoc_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/optical-channel/state/sop-roc/min"
+func (n *Component_OpticalChannel_SopRocPathAny) Min() *Component_OpticalChannel_SopRoc_MinPathAny {
+	return &Component_OpticalChannel_SopRoc_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/sop-roc/min-time"
+func (n *Component_OpticalChannel_SopRocPath) MinTime() *Component_OpticalChannel_SopRoc_MinTimePath {
+	return &Component_OpticalChannel_SopRoc_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/optical-channel/state/sop-roc/min-time"
+func (n *Component_OpticalChannel_SopRocPathAny) MinTime() *Component_OpticalChannel_SopRoc_MinTimePathAny {
+	return &Component_OpticalChannel_SopRoc_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
 			map[string]interface{}{},
 			n,
 		),

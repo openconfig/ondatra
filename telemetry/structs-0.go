@@ -36,6 +36,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -3001,6 +3002,7 @@ type Component struct {
 	MfgName              *string                                 `path:"state/mfg-name" module:"openconfig-platform/openconfig-platform"`
 	Name                 *string                                 `path:"state/name|name" module:"openconfig-platform/openconfig-platform|openconfig-platform" shadow-path:"config/name|name" shadow-module:"openconfig-platform/openconfig-platform|openconfig-platform"`
 	OperStatus           E_PlatformTypes_COMPONENT_OPER_STATUS   `path:"state/oper-status" module:"openconfig-platform/openconfig-platform"`
+	OpticalChannel       *Component_OpticalChannel               `path:"optical-channel" module:"openconfig-terminal-device"`
 	Parent               *string                                 `path:"state/parent" module:"openconfig-platform/openconfig-platform"`
 	PartNo               *string                                 `path:"state/part-no" module:"openconfig-platform/openconfig-platform"`
 	Pcie                 *Component_Pcie                         `path:"state/pcie" module:"openconfig-platform/openconfig-platform"`
@@ -3350,6 +3352,16 @@ func (t *Component) GetOrCreateMemory() *Component_Memory {
 	return t.Memory
 }
 
+// GetOrCreateOpticalChannel retrieves the value of the OpticalChannel field
+// or returns the existing field if it already exists.
+func (t *Component) GetOrCreateOpticalChannel() *Component_OpticalChannel {
+	if t.OpticalChannel != nil {
+		return t.OpticalChannel
+	}
+	t.OpticalChannel = &Component_OpticalChannel{}
+	return t.OpticalChannel
+}
+
 // GetOrCreatePcie retrieves the value of the Pcie field
 // or returns the existing field if it already exists.
 func (t *Component) GetOrCreatePcie() *Component_Pcie {
@@ -3506,6 +3518,16 @@ func (t *Component) GetLastSwitchoverReason() *Component_LastSwitchoverReason {
 func (t *Component) GetMemory() *Component_Memory {
 	if t != nil && t.Memory != nil {
 		return t.Memory
+	}
+	return nil
+}
+
+// GetOpticalChannel returns the value of the OpticalChannel struct pointer
+// from Component. If the receiver or the field OpticalChannel is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component) GetOpticalChannel() *Component_OpticalChannel {
+	if t != nil && t.OpticalChannel != nil {
+		return t.OpticalChannel
 	}
 	return nil
 }
@@ -4025,6 +4047,7 @@ func (t *Component) PopulateDefaults() {
 	t.IntegratedCircuit.PopulateDefaults()
 	t.LastSwitchoverReason.PopulateDefaults()
 	t.Memory.PopulateDefaults()
+	t.OpticalChannel.PopulateDefaults()
 	t.Pcie.PopulateDefaults()
 	t.Port.PopulateDefaults()
 	t.PowerSupply.PopulateDefaults()
@@ -5725,6 +5748,4031 @@ func (t *Component_Memory) ΛEnumTypeMap() map[string][]reflect.Type { return Λ
 // of Component_Memory.
 func (*Component_Memory) ΛBelongingModule() string {
 	return "openconfig-platform"
+}
+
+// Component_OpticalChannel represents the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannel struct {
+	CarrierFrequencyOffset                *Component_OpticalChannel_CarrierFrequencyOffset                `path:"state/carrier-frequency-offset" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ChromaticDispersion                   *Component_OpticalChannel_ChromaticDispersion                   `path:"state/chromatic-dispersion" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Esnr                                  *Component_OpticalChannel_Esnr                                  `path:"state/esnr" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	FecUncorrectableBlocks                *uint64                                                         `path:"state/fec-uncorrectable-blocks" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Frequency                             *uint64                                                         `path:"state/frequency" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/frequency" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
+	GroupId                               *uint32                                                         `path:"state/group-id" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	InputPower                            *Component_OpticalChannel_InputPower                            `path:"state/input-power" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	LaserBiasCurrent                      *Component_OpticalChannel_LaserBiasCurrent                      `path:"state/laser-bias-current" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	LinePort                              *string                                                         `path:"state/line-port" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/line-port" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulationErrorRatio                  *Component_OpticalChannel_ModulationErrorRatio                  `path:"state/modulation-error-ratio" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulatorBiasXPhase                   *Component_OpticalChannel_ModulatorBiasXPhase                   `path:"state/modulator-bias-x-phase" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulatorBiasXi                       *Component_OpticalChannel_ModulatorBiasXi                       `path:"state/modulator-bias-xi" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulatorBiasXq                       *Component_OpticalChannel_ModulatorBiasXq                       `path:"state/modulator-bias-xq" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulatorBiasYPhase                   *Component_OpticalChannel_ModulatorBiasYPhase                   `path:"state/modulator-bias-y-phase" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulatorBiasYi                       *Component_OpticalChannel_ModulatorBiasYi                       `path:"state/modulator-bias-yi" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ModulatorBiasYq                       *Component_OpticalChannel_ModulatorBiasYq                       `path:"state/modulator-bias-yq" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	OperationalMode                       *uint16                                                         `path:"state/operational-mode" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/operational-mode" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Osnr                                  *Component_OpticalChannel_Osnr                                  `path:"state/osnr" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	OutputPower                           *Component_OpticalChannel_OutputPower                           `path:"state/output-power" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PolarizationDependentLoss             *Component_OpticalChannel_PolarizationDependentLoss             `path:"state/polarization-dependent-loss" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PolarizationModeDispersion            *Component_OpticalChannel_PolarizationModeDispersion            `path:"state/polarization-mode-dispersion" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PostFecBer                            *Component_OpticalChannel_PostFecBer                            `path:"state/post-fec-ber" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PreFecBer                             *Component_OpticalChannel_PreFecBer                             `path:"state/pre-fec-ber" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	QValue                                *Component_OpticalChannel_QValue                                `path:"state/q-value" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	SecondOrderPolarizationModeDispersion *Component_OpticalChannel_SecondOrderPolarizationModeDispersion `path:"state/second-order-polarization-mode-dispersion" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	SopRoc                                *Component_OpticalChannel_SopRoc                                `path:"state/sop-roc" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	TargetOutputPower                     *float64                                                        `path:"state/target-output-power" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/target-output-power" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel) IsYANGGoStruct() {}
+
+// GetOrCreateCarrierFrequencyOffset retrieves the value of the CarrierFrequencyOffset field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateCarrierFrequencyOffset() *Component_OpticalChannel_CarrierFrequencyOffset {
+	if t.CarrierFrequencyOffset != nil {
+		return t.CarrierFrequencyOffset
+	}
+	t.CarrierFrequencyOffset = &Component_OpticalChannel_CarrierFrequencyOffset{}
+	return t.CarrierFrequencyOffset
+}
+
+// GetOrCreateChromaticDispersion retrieves the value of the ChromaticDispersion field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateChromaticDispersion() *Component_OpticalChannel_ChromaticDispersion {
+	if t.ChromaticDispersion != nil {
+		return t.ChromaticDispersion
+	}
+	t.ChromaticDispersion = &Component_OpticalChannel_ChromaticDispersion{}
+	return t.ChromaticDispersion
+}
+
+// GetOrCreateEsnr retrieves the value of the Esnr field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateEsnr() *Component_OpticalChannel_Esnr {
+	if t.Esnr != nil {
+		return t.Esnr
+	}
+	t.Esnr = &Component_OpticalChannel_Esnr{}
+	return t.Esnr
+}
+
+// GetOrCreateInputPower retrieves the value of the InputPower field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateInputPower() *Component_OpticalChannel_InputPower {
+	if t.InputPower != nil {
+		return t.InputPower
+	}
+	t.InputPower = &Component_OpticalChannel_InputPower{}
+	return t.InputPower
+}
+
+// GetOrCreateLaserBiasCurrent retrieves the value of the LaserBiasCurrent field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateLaserBiasCurrent() *Component_OpticalChannel_LaserBiasCurrent {
+	if t.LaserBiasCurrent != nil {
+		return t.LaserBiasCurrent
+	}
+	t.LaserBiasCurrent = &Component_OpticalChannel_LaserBiasCurrent{}
+	return t.LaserBiasCurrent
+}
+
+// GetOrCreateModulationErrorRatio retrieves the value of the ModulationErrorRatio field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulationErrorRatio() *Component_OpticalChannel_ModulationErrorRatio {
+	if t.ModulationErrorRatio != nil {
+		return t.ModulationErrorRatio
+	}
+	t.ModulationErrorRatio = &Component_OpticalChannel_ModulationErrorRatio{}
+	return t.ModulationErrorRatio
+}
+
+// GetOrCreateModulatorBiasXPhase retrieves the value of the ModulatorBiasXPhase field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulatorBiasXPhase() *Component_OpticalChannel_ModulatorBiasXPhase {
+	if t.ModulatorBiasXPhase != nil {
+		return t.ModulatorBiasXPhase
+	}
+	t.ModulatorBiasXPhase = &Component_OpticalChannel_ModulatorBiasXPhase{}
+	return t.ModulatorBiasXPhase
+}
+
+// GetOrCreateModulatorBiasXi retrieves the value of the ModulatorBiasXi field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulatorBiasXi() *Component_OpticalChannel_ModulatorBiasXi {
+	if t.ModulatorBiasXi != nil {
+		return t.ModulatorBiasXi
+	}
+	t.ModulatorBiasXi = &Component_OpticalChannel_ModulatorBiasXi{}
+	return t.ModulatorBiasXi
+}
+
+// GetOrCreateModulatorBiasXq retrieves the value of the ModulatorBiasXq field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulatorBiasXq() *Component_OpticalChannel_ModulatorBiasXq {
+	if t.ModulatorBiasXq != nil {
+		return t.ModulatorBiasXq
+	}
+	t.ModulatorBiasXq = &Component_OpticalChannel_ModulatorBiasXq{}
+	return t.ModulatorBiasXq
+}
+
+// GetOrCreateModulatorBiasYPhase retrieves the value of the ModulatorBiasYPhase field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulatorBiasYPhase() *Component_OpticalChannel_ModulatorBiasYPhase {
+	if t.ModulatorBiasYPhase != nil {
+		return t.ModulatorBiasYPhase
+	}
+	t.ModulatorBiasYPhase = &Component_OpticalChannel_ModulatorBiasYPhase{}
+	return t.ModulatorBiasYPhase
+}
+
+// GetOrCreateModulatorBiasYi retrieves the value of the ModulatorBiasYi field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulatorBiasYi() *Component_OpticalChannel_ModulatorBiasYi {
+	if t.ModulatorBiasYi != nil {
+		return t.ModulatorBiasYi
+	}
+	t.ModulatorBiasYi = &Component_OpticalChannel_ModulatorBiasYi{}
+	return t.ModulatorBiasYi
+}
+
+// GetOrCreateModulatorBiasYq retrieves the value of the ModulatorBiasYq field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateModulatorBiasYq() *Component_OpticalChannel_ModulatorBiasYq {
+	if t.ModulatorBiasYq != nil {
+		return t.ModulatorBiasYq
+	}
+	t.ModulatorBiasYq = &Component_OpticalChannel_ModulatorBiasYq{}
+	return t.ModulatorBiasYq
+}
+
+// GetOrCreateOsnr retrieves the value of the Osnr field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateOsnr() *Component_OpticalChannel_Osnr {
+	if t.Osnr != nil {
+		return t.Osnr
+	}
+	t.Osnr = &Component_OpticalChannel_Osnr{}
+	return t.Osnr
+}
+
+// GetOrCreateOutputPower retrieves the value of the OutputPower field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateOutputPower() *Component_OpticalChannel_OutputPower {
+	if t.OutputPower != nil {
+		return t.OutputPower
+	}
+	t.OutputPower = &Component_OpticalChannel_OutputPower{}
+	return t.OutputPower
+}
+
+// GetOrCreatePolarizationDependentLoss retrieves the value of the PolarizationDependentLoss field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreatePolarizationDependentLoss() *Component_OpticalChannel_PolarizationDependentLoss {
+	if t.PolarizationDependentLoss != nil {
+		return t.PolarizationDependentLoss
+	}
+	t.PolarizationDependentLoss = &Component_OpticalChannel_PolarizationDependentLoss{}
+	return t.PolarizationDependentLoss
+}
+
+// GetOrCreatePolarizationModeDispersion retrieves the value of the PolarizationModeDispersion field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreatePolarizationModeDispersion() *Component_OpticalChannel_PolarizationModeDispersion {
+	if t.PolarizationModeDispersion != nil {
+		return t.PolarizationModeDispersion
+	}
+	t.PolarizationModeDispersion = &Component_OpticalChannel_PolarizationModeDispersion{}
+	return t.PolarizationModeDispersion
+}
+
+// GetOrCreatePostFecBer retrieves the value of the PostFecBer field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreatePostFecBer() *Component_OpticalChannel_PostFecBer {
+	if t.PostFecBer != nil {
+		return t.PostFecBer
+	}
+	t.PostFecBer = &Component_OpticalChannel_PostFecBer{}
+	return t.PostFecBer
+}
+
+// GetOrCreatePreFecBer retrieves the value of the PreFecBer field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreatePreFecBer() *Component_OpticalChannel_PreFecBer {
+	if t.PreFecBer != nil {
+		return t.PreFecBer
+	}
+	t.PreFecBer = &Component_OpticalChannel_PreFecBer{}
+	return t.PreFecBer
+}
+
+// GetOrCreateQValue retrieves the value of the QValue field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateQValue() *Component_OpticalChannel_QValue {
+	if t.QValue != nil {
+		return t.QValue
+	}
+	t.QValue = &Component_OpticalChannel_QValue{}
+	return t.QValue
+}
+
+// GetOrCreateSecondOrderPolarizationModeDispersion retrieves the value of the SecondOrderPolarizationModeDispersion field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateSecondOrderPolarizationModeDispersion() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion {
+	if t.SecondOrderPolarizationModeDispersion != nil {
+		return t.SecondOrderPolarizationModeDispersion
+	}
+	t.SecondOrderPolarizationModeDispersion = &Component_OpticalChannel_SecondOrderPolarizationModeDispersion{}
+	return t.SecondOrderPolarizationModeDispersion
+}
+
+// GetOrCreateSopRoc retrieves the value of the SopRoc field
+// or returns the existing field if it already exists.
+func (t *Component_OpticalChannel) GetOrCreateSopRoc() *Component_OpticalChannel_SopRoc {
+	if t.SopRoc != nil {
+		return t.SopRoc
+	}
+	t.SopRoc = &Component_OpticalChannel_SopRoc{}
+	return t.SopRoc
+}
+
+// GetCarrierFrequencyOffset returns the value of the CarrierFrequencyOffset struct pointer
+// from Component_OpticalChannel. If the receiver or the field CarrierFrequencyOffset is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetCarrierFrequencyOffset() *Component_OpticalChannel_CarrierFrequencyOffset {
+	if t != nil && t.CarrierFrequencyOffset != nil {
+		return t.CarrierFrequencyOffset
+	}
+	return nil
+}
+
+// GetChromaticDispersion returns the value of the ChromaticDispersion struct pointer
+// from Component_OpticalChannel. If the receiver or the field ChromaticDispersion is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetChromaticDispersion() *Component_OpticalChannel_ChromaticDispersion {
+	if t != nil && t.ChromaticDispersion != nil {
+		return t.ChromaticDispersion
+	}
+	return nil
+}
+
+// GetEsnr returns the value of the Esnr struct pointer
+// from Component_OpticalChannel. If the receiver or the field Esnr is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetEsnr() *Component_OpticalChannel_Esnr {
+	if t != nil && t.Esnr != nil {
+		return t.Esnr
+	}
+	return nil
+}
+
+// GetInputPower returns the value of the InputPower struct pointer
+// from Component_OpticalChannel. If the receiver or the field InputPower is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetInputPower() *Component_OpticalChannel_InputPower {
+	if t != nil && t.InputPower != nil {
+		return t.InputPower
+	}
+	return nil
+}
+
+// GetLaserBiasCurrent returns the value of the LaserBiasCurrent struct pointer
+// from Component_OpticalChannel. If the receiver or the field LaserBiasCurrent is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetLaserBiasCurrent() *Component_OpticalChannel_LaserBiasCurrent {
+	if t != nil && t.LaserBiasCurrent != nil {
+		return t.LaserBiasCurrent
+	}
+	return nil
+}
+
+// GetModulationErrorRatio returns the value of the ModulationErrorRatio struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulationErrorRatio is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulationErrorRatio() *Component_OpticalChannel_ModulationErrorRatio {
+	if t != nil && t.ModulationErrorRatio != nil {
+		return t.ModulationErrorRatio
+	}
+	return nil
+}
+
+// GetModulatorBiasXPhase returns the value of the ModulatorBiasXPhase struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulatorBiasXPhase is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulatorBiasXPhase() *Component_OpticalChannel_ModulatorBiasXPhase {
+	if t != nil && t.ModulatorBiasXPhase != nil {
+		return t.ModulatorBiasXPhase
+	}
+	return nil
+}
+
+// GetModulatorBiasXi returns the value of the ModulatorBiasXi struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulatorBiasXi is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulatorBiasXi() *Component_OpticalChannel_ModulatorBiasXi {
+	if t != nil && t.ModulatorBiasXi != nil {
+		return t.ModulatorBiasXi
+	}
+	return nil
+}
+
+// GetModulatorBiasXq returns the value of the ModulatorBiasXq struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulatorBiasXq is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulatorBiasXq() *Component_OpticalChannel_ModulatorBiasXq {
+	if t != nil && t.ModulatorBiasXq != nil {
+		return t.ModulatorBiasXq
+	}
+	return nil
+}
+
+// GetModulatorBiasYPhase returns the value of the ModulatorBiasYPhase struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulatorBiasYPhase is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulatorBiasYPhase() *Component_OpticalChannel_ModulatorBiasYPhase {
+	if t != nil && t.ModulatorBiasYPhase != nil {
+		return t.ModulatorBiasYPhase
+	}
+	return nil
+}
+
+// GetModulatorBiasYi returns the value of the ModulatorBiasYi struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulatorBiasYi is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulatorBiasYi() *Component_OpticalChannel_ModulatorBiasYi {
+	if t != nil && t.ModulatorBiasYi != nil {
+		return t.ModulatorBiasYi
+	}
+	return nil
+}
+
+// GetModulatorBiasYq returns the value of the ModulatorBiasYq struct pointer
+// from Component_OpticalChannel. If the receiver or the field ModulatorBiasYq is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetModulatorBiasYq() *Component_OpticalChannel_ModulatorBiasYq {
+	if t != nil && t.ModulatorBiasYq != nil {
+		return t.ModulatorBiasYq
+	}
+	return nil
+}
+
+// GetOsnr returns the value of the Osnr struct pointer
+// from Component_OpticalChannel. If the receiver or the field Osnr is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetOsnr() *Component_OpticalChannel_Osnr {
+	if t != nil && t.Osnr != nil {
+		return t.Osnr
+	}
+	return nil
+}
+
+// GetOutputPower returns the value of the OutputPower struct pointer
+// from Component_OpticalChannel. If the receiver or the field OutputPower is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetOutputPower() *Component_OpticalChannel_OutputPower {
+	if t != nil && t.OutputPower != nil {
+		return t.OutputPower
+	}
+	return nil
+}
+
+// GetPolarizationDependentLoss returns the value of the PolarizationDependentLoss struct pointer
+// from Component_OpticalChannel. If the receiver or the field PolarizationDependentLoss is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetPolarizationDependentLoss() *Component_OpticalChannel_PolarizationDependentLoss {
+	if t != nil && t.PolarizationDependentLoss != nil {
+		return t.PolarizationDependentLoss
+	}
+	return nil
+}
+
+// GetPolarizationModeDispersion returns the value of the PolarizationModeDispersion struct pointer
+// from Component_OpticalChannel. If the receiver or the field PolarizationModeDispersion is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetPolarizationModeDispersion() *Component_OpticalChannel_PolarizationModeDispersion {
+	if t != nil && t.PolarizationModeDispersion != nil {
+		return t.PolarizationModeDispersion
+	}
+	return nil
+}
+
+// GetPostFecBer returns the value of the PostFecBer struct pointer
+// from Component_OpticalChannel. If the receiver or the field PostFecBer is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetPostFecBer() *Component_OpticalChannel_PostFecBer {
+	if t != nil && t.PostFecBer != nil {
+		return t.PostFecBer
+	}
+	return nil
+}
+
+// GetPreFecBer returns the value of the PreFecBer struct pointer
+// from Component_OpticalChannel. If the receiver or the field PreFecBer is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetPreFecBer() *Component_OpticalChannel_PreFecBer {
+	if t != nil && t.PreFecBer != nil {
+		return t.PreFecBer
+	}
+	return nil
+}
+
+// GetQValue returns the value of the QValue struct pointer
+// from Component_OpticalChannel. If the receiver or the field QValue is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetQValue() *Component_OpticalChannel_QValue {
+	if t != nil && t.QValue != nil {
+		return t.QValue
+	}
+	return nil
+}
+
+// GetSecondOrderPolarizationModeDispersion returns the value of the SecondOrderPolarizationModeDispersion struct pointer
+// from Component_OpticalChannel. If the receiver or the field SecondOrderPolarizationModeDispersion is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetSecondOrderPolarizationModeDispersion() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion {
+	if t != nil && t.SecondOrderPolarizationModeDispersion != nil {
+		return t.SecondOrderPolarizationModeDispersion
+	}
+	return nil
+}
+
+// GetSopRoc returns the value of the SopRoc struct pointer
+// from Component_OpticalChannel. If the receiver or the field SopRoc is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_OpticalChannel) GetSopRoc() *Component_OpticalChannel_SopRoc {
+	if t != nil && t.SopRoc != nil {
+		return t.SopRoc
+	}
+	return nil
+}
+
+// GetFecUncorrectableBlocks retrieves the value of the leaf FecUncorrectableBlocks from the Component_OpticalChannel
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FecUncorrectableBlocks is set, it can
+// safely use t.GetFecUncorrectableBlocks() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FecUncorrectableBlocks == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel) GetFecUncorrectableBlocks() uint64 {
+	if t == nil || t.FecUncorrectableBlocks == nil {
+		return 0
+	}
+	return *t.FecUncorrectableBlocks
+}
+
+// GetFrequency retrieves the value of the leaf Frequency from the Component_OpticalChannel
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Frequency is set, it can
+// safely use t.GetFrequency() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Frequency == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel) GetFrequency() uint64 {
+	if t == nil || t.Frequency == nil {
+		return 0
+	}
+	return *t.Frequency
+}
+
+// GetGroupId retrieves the value of the leaf GroupId from the Component_OpticalChannel
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GroupId is set, it can
+// safely use t.GetGroupId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GroupId == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel) GetGroupId() uint32 {
+	if t == nil || t.GroupId == nil {
+		return 0
+	}
+	return *t.GroupId
+}
+
+// GetLinePort retrieves the value of the leaf LinePort from the Component_OpticalChannel
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LinePort is set, it can
+// safely use t.GetLinePort() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LinePort == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel) GetLinePort() string {
+	if t == nil || t.LinePort == nil {
+		return ""
+	}
+	return *t.LinePort
+}
+
+// GetOperationalMode retrieves the value of the leaf OperationalMode from the Component_OpticalChannel
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OperationalMode is set, it can
+// safely use t.GetOperationalMode() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OperationalMode == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel) GetOperationalMode() uint16 {
+	if t == nil || t.OperationalMode == nil {
+		return 0
+	}
+	return *t.OperationalMode
+}
+
+// GetTargetOutputPower retrieves the value of the leaf TargetOutputPower from the Component_OpticalChannel
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TargetOutputPower is set, it can
+// safely use t.GetTargetOutputPower() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TargetOutputPower == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel) GetTargetOutputPower() float64 {
+	if t == nil || t.TargetOutputPower == nil {
+		return 0.0
+	}
+	return *t.TargetOutputPower
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.CarrierFrequencyOffset.PopulateDefaults()
+	t.ChromaticDispersion.PopulateDefaults()
+	t.Esnr.PopulateDefaults()
+	t.InputPower.PopulateDefaults()
+	t.LaserBiasCurrent.PopulateDefaults()
+	t.ModulationErrorRatio.PopulateDefaults()
+	t.ModulatorBiasXPhase.PopulateDefaults()
+	t.ModulatorBiasXi.PopulateDefaults()
+	t.ModulatorBiasXq.PopulateDefaults()
+	t.ModulatorBiasYPhase.PopulateDefaults()
+	t.ModulatorBiasYi.PopulateDefaults()
+	t.ModulatorBiasYq.PopulateDefaults()
+	t.Osnr.PopulateDefaults()
+	t.OutputPower.PopulateDefaults()
+	t.PolarizationDependentLoss.PopulateDefaults()
+	t.PolarizationModeDispersion.PopulateDefaults()
+	t.PostFecBer.PopulateDefaults()
+	t.PreFecBer.PopulateDefaults()
+	t.QValue.PopulateDefaults()
+	t.SecondOrderPolarizationModeDispersion.PopulateDefaults()
+	t.SopRoc.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel.
+func (*Component_OpticalChannel) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffset represents the /openconfig-platform/components/component/optical-channel/state/carrier-frequency-offset YANG schema element.
+type Component_OpticalChannel_CarrierFrequencyOffset struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_CarrierFrequencyOffset implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_CarrierFrequencyOffset) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_CarrierFrequencyOffset
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_CarrierFrequencyOffset
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_CarrierFrequencyOffset"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_CarrierFrequencyOffset) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_CarrierFrequencyOffset.
+func (*Component_OpticalChannel_CarrierFrequencyOffset) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ChromaticDispersion represents the /openconfig-platform/components/component/optical-channel/state/chromatic-dispersion YANG schema element.
+type Component_OpticalChannel_ChromaticDispersion struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ChromaticDispersion implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ChromaticDispersion) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ChromaticDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ChromaticDispersion) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ChromaticDispersion
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ChromaticDispersion) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ChromaticDispersion) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ChromaticDispersion"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ChromaticDispersion) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ChromaticDispersion) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ChromaticDispersion.
+func (*Component_OpticalChannel_ChromaticDispersion) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_Esnr represents the /openconfig-platform/components/component/optical-channel/state/esnr YANG schema element.
+type Component_OpticalChannel_Esnr struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_Esnr implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_Esnr) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_Esnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Esnr) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_Esnr
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_Esnr) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_Esnr) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_Esnr"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_Esnr) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_Esnr) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_Esnr.
+func (*Component_OpticalChannel_Esnr) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_InputPower represents the /openconfig-platform/components/component/optical-channel/state/input-power YANG schema element.
+type Component_OpticalChannel_InputPower struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_InputPower implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_InputPower) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_InputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_InputPower) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_InputPower
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_InputPower) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_InputPower) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_InputPower"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_InputPower) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_InputPower) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_InputPower.
+func (*Component_OpticalChannel_InputPower) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_LaserBiasCurrent represents the /openconfig-platform/components/component/optical-channel/state/laser-bias-current YANG schema element.
+type Component_OpticalChannel_LaserBiasCurrent struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_LaserBiasCurrent implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_LaserBiasCurrent) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_LaserBiasCurrent
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_LaserBiasCurrent) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_LaserBiasCurrent
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_LaserBiasCurrent) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_LaserBiasCurrent) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_LaserBiasCurrent"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_LaserBiasCurrent) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_LaserBiasCurrent) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_LaserBiasCurrent.
+func (*Component_OpticalChannel_LaserBiasCurrent) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulationErrorRatio represents the /openconfig-platform/components/component/optical-channel/state/modulation-error-ratio YANG schema element.
+type Component_OpticalChannel_ModulationErrorRatio struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulationErrorRatio implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulationErrorRatio) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulationErrorRatio
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulationErrorRatio) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulationErrorRatio
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulationErrorRatio) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulationErrorRatio) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulationErrorRatio"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulationErrorRatio) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulationErrorRatio) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulationErrorRatio.
+func (*Component_OpticalChannel_ModulationErrorRatio) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhase represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-x-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXPhase struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulatorBiasXPhase implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulatorBiasXPhase) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulatorBiasXPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulatorBiasXPhase
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulatorBiasXPhase"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulatorBiasXPhase) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulatorBiasXPhase.
+func (*Component_OpticalChannel_ModulatorBiasXPhase) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulatorBiasXi represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXi struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulatorBiasXi implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulatorBiasXi) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulatorBiasXi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXi) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulatorBiasXi
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulatorBiasXi) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasXi) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulatorBiasXi"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasXi) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulatorBiasXi) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulatorBiasXi.
+func (*Component_OpticalChannel_ModulatorBiasXi) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulatorBiasXq represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-xq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasXq struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulatorBiasXq implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulatorBiasXq) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulatorBiasXq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasXq) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulatorBiasXq
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulatorBiasXq) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasXq) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulatorBiasXq"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasXq) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulatorBiasXq) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulatorBiasXq.
+func (*Component_OpticalChannel_ModulatorBiasXq) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhase represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-y-phase YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYPhase struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulatorBiasYPhase implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulatorBiasYPhase) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulatorBiasYPhase
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulatorBiasYPhase
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulatorBiasYPhase"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulatorBiasYPhase) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulatorBiasYPhase.
+func (*Component_OpticalChannel_ModulatorBiasYPhase) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulatorBiasYi represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yi YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYi struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulatorBiasYi implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulatorBiasYi) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulatorBiasYi
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYi) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulatorBiasYi
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulatorBiasYi) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasYi) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulatorBiasYi"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasYi) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulatorBiasYi) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulatorBiasYi.
+func (*Component_OpticalChannel_ModulatorBiasYi) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_ModulatorBiasYq represents the /openconfig-platform/components/component/optical-channel/state/modulator-bias-yq YANG schema element.
+type Component_OpticalChannel_ModulatorBiasYq struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_ModulatorBiasYq implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_ModulatorBiasYq) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_ModulatorBiasYq
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_ModulatorBiasYq) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_ModulatorBiasYq
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_ModulatorBiasYq) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasYq) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_ModulatorBiasYq"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_ModulatorBiasYq) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_ModulatorBiasYq) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_ModulatorBiasYq.
+func (*Component_OpticalChannel_ModulatorBiasYq) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_Osnr represents the /openconfig-platform/components/component/optical-channel/state/osnr YANG schema element.
+type Component_OpticalChannel_Osnr struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_Osnr implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_Osnr) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_Osnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_Osnr) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_Osnr
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_Osnr) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_Osnr) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_Osnr"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_Osnr) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_Osnr) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_Osnr.
+func (*Component_OpticalChannel_Osnr) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_OutputPower represents the /openconfig-platform/components/component/optical-channel/state/output-power YANG schema element.
+type Component_OpticalChannel_OutputPower struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_OutputPower implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_OutputPower) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_OutputPower
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_OutputPower) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_OutputPower
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_OutputPower) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_OutputPower) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_OutputPower"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_OutputPower) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_OutputPower) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_OutputPower.
+func (*Component_OpticalChannel_OutputPower) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_PolarizationDependentLoss represents the /openconfig-platform/components/component/optical-channel/state/polarization-dependent-loss YANG schema element.
+type Component_OpticalChannel_PolarizationDependentLoss struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_PolarizationDependentLoss implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_PolarizationDependentLoss) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_PolarizationDependentLoss
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_PolarizationDependentLoss
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_PolarizationDependentLoss"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_PolarizationDependentLoss) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_PolarizationDependentLoss.
+func (*Component_OpticalChannel_PolarizationDependentLoss) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_PolarizationModeDispersion implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_PolarizationModeDispersion) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_PolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_PolarizationModeDispersion
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_PolarizationModeDispersion"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_PolarizationModeDispersion) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_PolarizationModeDispersion.
+func (*Component_OpticalChannel_PolarizationModeDispersion) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_PostFecBer represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber YANG schema element.
+type Component_OpticalChannel_PostFecBer struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_PostFecBer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_PostFecBer) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_PostFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PostFecBer) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_PostFecBer
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_PostFecBer) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PostFecBer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_PostFecBer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PostFecBer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_PostFecBer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_PostFecBer.
+func (*Component_OpticalChannel_PostFecBer) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_PreFecBer represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber YANG schema element.
+type Component_OpticalChannel_PreFecBer struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_PreFecBer implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_PreFecBer) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_PreFecBer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_PreFecBer) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_PreFecBer
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_PreFecBer) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PreFecBer) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_PreFecBer"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_PreFecBer) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_PreFecBer) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_PreFecBer.
+func (*Component_OpticalChannel_PreFecBer) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_QValue represents the /openconfig-platform/components/component/optical-channel/state/q-value YANG schema element.
+type Component_OpticalChannel_QValue struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_QValue implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_QValue) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_QValue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_QValue) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_QValue
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_QValue) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_QValue) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_QValue"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_QValue) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_QValue) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_QValue.
+func (*Component_OpticalChannel_QValue) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_SecondOrderPolarizationModeDispersion implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_SecondOrderPolarizationModeDispersion) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_SecondOrderPolarizationModeDispersion
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_SecondOrderPolarizationModeDispersion"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_SecondOrderPolarizationModeDispersion.
+func (*Component_OpticalChannel_SecondOrderPolarizationModeDispersion) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
+}
+
+// Component_OpticalChannel_SopRoc represents the /openconfig-platform/components/component/optical-channel/state/sop-roc YANG schema element.
+type Component_OpticalChannel_SopRoc struct {
+	Avg      *float64 `path:"avg" module:"openconfig-terminal-device"`
+	Instant  *float64 `path:"instant" module:"openconfig-terminal-device"`
+	Interval *uint64  `path:"interval" module:"openconfig-terminal-device"`
+	Max      *float64 `path:"max" module:"openconfig-terminal-device"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-terminal-device"`
+	Min      *float64 `path:"min" module:"openconfig-terminal-device"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-terminal-device"`
+}
+
+// IsYANGGoStruct ensures that Component_OpticalChannel_SopRoc implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_OpticalChannel_SopRoc) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_OpticalChannel_SopRoc
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_OpticalChannel_SopRoc) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_OpticalChannel_SopRoc
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_OpticalChannel_SopRoc) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_SopRoc) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_OpticalChannel_SopRoc"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_OpticalChannel_SopRoc) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_OpticalChannel_SopRoc) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_OpticalChannel_SopRoc.
+func (*Component_OpticalChannel_SopRoc) ΛBelongingModule() string {
+	return "openconfig-terminal-device"
 }
 
 // Component_Pcie represents the /openconfig-platform/components/component/state/pcie YANG schema element.
@@ -10551,6 +14599,7 @@ type Device struct {
 	RoutingPolicy   *RoutingPolicy              `path:"routing-policy" module:"openconfig-routing-policy"`
 	Sampling        *Sampling                   `path:"sampling" module:"openconfig-sampling"`
 	System          *System                     `path:"system" module:"openconfig-system"`
+	TerminalDevice  *TerminalDevice             `path:"terminal-device" module:"openconfig-terminal-device"`
 }
 
 // IsYANGGoStruct ensures that Device implements the yang.GoStruct
@@ -11223,6 +15272,16 @@ func (t *Device) GetOrCreateSystem() *System {
 	return t.System
 }
 
+// GetOrCreateTerminalDevice retrieves the value of the TerminalDevice field
+// or returns the existing field if it already exists.
+func (t *Device) GetOrCreateTerminalDevice() *TerminalDevice {
+	if t.TerminalDevice != nil {
+		return t.TerminalDevice
+	}
+	t.TerminalDevice = &TerminalDevice{}
+	return t.TerminalDevice
+}
+
 // GetAcl returns the value of the Acl struct pointer
 // from Device. If the receiver or the field Acl is nil, nil
 // is returned such that the Get* methods can be safely chained.
@@ -11303,6 +15362,16 @@ func (t *Device) GetSystem() *System {
 	return nil
 }
 
+// GetTerminalDevice returns the value of the TerminalDevice struct pointer
+// from Device. If the receiver or the field TerminalDevice is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Device) GetTerminalDevice() *TerminalDevice {
+	if t != nil && t.TerminalDevice != nil {
+		return t.TerminalDevice
+	}
+	return nil
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the Device
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -11319,6 +15388,7 @@ func (t *Device) PopulateDefaults() {
 	t.RoutingPolicy.PopulateDefaults()
 	t.Sampling.PopulateDefaults()
 	t.System.PopulateDefaults()
+	t.TerminalDevice.PopulateDefaults()
 	for _, e := range t.Component {
 		e.PopulateDefaults()
 	}
@@ -18340,3573 +22410,5 @@ func (t *Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking) ΛEnumTy
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking.
 func (*Interface_RoutedVlan_Ipv6_Address_VrrpGroup_InterfaceTracking) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_RoutedVlan_Ipv6_Counters represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters YANG schema element.
-type Interface_RoutedVlan_Ipv6_Counters struct {
-	InDiscardedPkts    *uint64 `path:"in-discarded-pkts" module:"openconfig-if-ip"`
-	InErrorPkts        *uint64 `path:"in-error-pkts" module:"openconfig-if-ip"`
-	InForwardedOctets  *uint64 `path:"in-forwarded-octets" module:"openconfig-if-ip"`
-	InForwardedPkts    *uint64 `path:"in-forwarded-pkts" module:"openconfig-if-ip"`
-	InOctets           *uint64 `path:"in-octets" module:"openconfig-if-ip"`
-	InPkts             *uint64 `path:"in-pkts" module:"openconfig-if-ip"`
-	OutDiscardedPkts   *uint64 `path:"out-discarded-pkts" module:"openconfig-if-ip"`
-	OutErrorPkts       *uint64 `path:"out-error-pkts" module:"openconfig-if-ip"`
-	OutForwardedOctets *uint64 `path:"out-forwarded-octets" module:"openconfig-if-ip"`
-	OutForwardedPkts   *uint64 `path:"out-forwarded-pkts" module:"openconfig-if-ip"`
-	OutOctets          *uint64 `path:"out-octets" module:"openconfig-if-ip"`
-	OutPkts            *uint64 `path:"out-pkts" module:"openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_Counters implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_RoutedVlan_Ipv6_Counters) IsYANGGoStruct() {}
-
-// GetInDiscardedPkts retrieves the value of the leaf InDiscardedPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InDiscardedPkts is set, it can
-// safely use t.GetInDiscardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InDiscardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetInDiscardedPkts() uint64 {
-	if t == nil || t.InDiscardedPkts == nil {
-		return 0
-	}
-	return *t.InDiscardedPkts
-}
-
-// GetInErrorPkts retrieves the value of the leaf InErrorPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InErrorPkts is set, it can
-// safely use t.GetInErrorPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InErrorPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetInErrorPkts() uint64 {
-	if t == nil || t.InErrorPkts == nil {
-		return 0
-	}
-	return *t.InErrorPkts
-}
-
-// GetInForwardedOctets retrieves the value of the leaf InForwardedOctets from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InForwardedOctets is set, it can
-// safely use t.GetInForwardedOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InForwardedOctets == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetInForwardedOctets() uint64 {
-	if t == nil || t.InForwardedOctets == nil {
-		return 0
-	}
-	return *t.InForwardedOctets
-}
-
-// GetInForwardedPkts retrieves the value of the leaf InForwardedPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InForwardedPkts is set, it can
-// safely use t.GetInForwardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InForwardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetInForwardedPkts() uint64 {
-	if t == nil || t.InForwardedPkts == nil {
-		return 0
-	}
-	return *t.InForwardedPkts
-}
-
-// GetInOctets retrieves the value of the leaf InOctets from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InOctets is set, it can
-// safely use t.GetInOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InOctets == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetInOctets() uint64 {
-	if t == nil || t.InOctets == nil {
-		return 0
-	}
-	return *t.InOctets
-}
-
-// GetInPkts retrieves the value of the leaf InPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InPkts is set, it can
-// safely use t.GetInPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetInPkts() uint64 {
-	if t == nil || t.InPkts == nil {
-		return 0
-	}
-	return *t.InPkts
-}
-
-// GetOutDiscardedPkts retrieves the value of the leaf OutDiscardedPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutDiscardedPkts is set, it can
-// safely use t.GetOutDiscardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutDiscardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetOutDiscardedPkts() uint64 {
-	if t == nil || t.OutDiscardedPkts == nil {
-		return 0
-	}
-	return *t.OutDiscardedPkts
-}
-
-// GetOutErrorPkts retrieves the value of the leaf OutErrorPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutErrorPkts is set, it can
-// safely use t.GetOutErrorPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutErrorPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetOutErrorPkts() uint64 {
-	if t == nil || t.OutErrorPkts == nil {
-		return 0
-	}
-	return *t.OutErrorPkts
-}
-
-// GetOutForwardedOctets retrieves the value of the leaf OutForwardedOctets from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutForwardedOctets is set, it can
-// safely use t.GetOutForwardedOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutForwardedOctets == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetOutForwardedOctets() uint64 {
-	if t == nil || t.OutForwardedOctets == nil {
-		return 0
-	}
-	return *t.OutForwardedOctets
-}
-
-// GetOutForwardedPkts retrieves the value of the leaf OutForwardedPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutForwardedPkts is set, it can
-// safely use t.GetOutForwardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutForwardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetOutForwardedPkts() uint64 {
-	if t == nil || t.OutForwardedPkts == nil {
-		return 0
-	}
-	return *t.OutForwardedPkts
-}
-
-// GetOutOctets retrieves the value of the leaf OutOctets from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutOctets is set, it can
-// safely use t.GetOutOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutOctets == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetOutOctets() uint64 {
-	if t == nil || t.OutOctets == nil {
-		return 0
-	}
-	return *t.OutOctets
-}
-
-// GetOutPkts retrieves the value of the leaf OutPkts from the Interface_RoutedVlan_Ipv6_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutPkts is set, it can
-// safely use t.GetOutPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutPkts == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Counters) GetOutPkts() uint64 {
-	if t == nil || t.OutPkts == nil {
-		return 0
-	}
-	return *t.OutPkts
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_Counters
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_RoutedVlan_Ipv6_Counters) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_Counters"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Counters) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_RoutedVlan_Ipv6_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_RoutedVlan_Ipv6_Counters.
-func (*Interface_RoutedVlan_Ipv6_Counters) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_RoutedVlan_Ipv6_Neighbor represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor YANG schema element.
-type Interface_RoutedVlan_Ipv6_Neighbor struct {
-	Ip               *string                  `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
-	IsRouter         *bool                    `path:"state/is-router" module:"openconfig-if-ip/openconfig-if-ip"`
-	LinkLayerAddress *string                  `path:"state/link-layer-address" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/link-layer-address" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	NeighborState    E_Neighbor_NeighborState `path:"state/neighbor-state" module:"openconfig-if-ip/openconfig-if-ip"`
-	Origin           E_IfIp_NeighborOrigin    `path:"state/origin" module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_Neighbor implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_RoutedVlan_Ipv6_Neighbor) IsYANGGoStruct() {}
-
-// GetIp retrieves the value of the leaf Ip from the Interface_RoutedVlan_Ipv6_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Ip is set, it can
-// safely use t.GetIp() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Ip == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) GetIp() string {
-	if t == nil || t.Ip == nil {
-		return ""
-	}
-	return *t.Ip
-}
-
-// GetIsRouter retrieves the value of the leaf IsRouter from the Interface_RoutedVlan_Ipv6_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if IsRouter is set, it can
-// safely use t.GetIsRouter() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.IsRouter == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) GetIsRouter() bool {
-	if t == nil || t.IsRouter == nil {
-		return false
-	}
-	return *t.IsRouter
-}
-
-// GetLinkLayerAddress retrieves the value of the leaf LinkLayerAddress from the Interface_RoutedVlan_Ipv6_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if LinkLayerAddress is set, it can
-// safely use t.GetLinkLayerAddress() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.LinkLayerAddress == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) GetLinkLayerAddress() string {
-	if t == nil || t.LinkLayerAddress == nil {
-		return ""
-	}
-	return *t.LinkLayerAddress
-}
-
-// GetNeighborState retrieves the value of the leaf NeighborState from the Interface_RoutedVlan_Ipv6_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if NeighborState is set, it can
-// safely use t.GetNeighborState() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.NeighborState == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) GetNeighborState() E_Neighbor_NeighborState {
-	if t == nil || t.NeighborState == 0 {
-		return 0
-	}
-	return t.NeighborState
-}
-
-// GetOrigin retrieves the value of the leaf Origin from the Interface_RoutedVlan_Ipv6_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Origin is set, it can
-// safely use t.GetOrigin() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Origin == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) GetOrigin() E_IfIp_NeighborOrigin {
-	if t == nil || t.Origin == 0 {
-		return 0
-	}
-	return t.Origin
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_Neighbor
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// ΛListKeyMap returns the keys of the Interface_RoutedVlan_Ipv6_Neighbor struct, which is a YANG list entry.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Ip == nil {
-		return nil, fmt.Errorf("nil value for key Ip")
-	}
-
-	return map[string]interface{}{
-		"ip": *t.Ip,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_Neighbor"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_RoutedVlan_Ipv6_Neighbor) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_RoutedVlan_Ipv6_Neighbor.
-func (*Interface_RoutedVlan_Ipv6_Neighbor) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_RoutedVlan_Ipv6_RouterAdvertisement represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement YANG schema element.
-type Interface_RoutedVlan_Ipv6_RouterAdvertisement struct {
-	Interval *uint32 `path:"state/interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Lifetime *uint32 `path:"state/lifetime" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/lifetime" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Suppress *bool   `path:"state/suppress" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/suppress" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_RouterAdvertisement implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_RoutedVlan_Ipv6_RouterAdvertisement) IsYANGGoStruct() {}
-
-// GetInterval retrieves the value of the leaf Interval from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Interval is set, it can
-// safely use t.GetInterval() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Interval == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetInterval() uint32 {
-	if t == nil || t.Interval == nil {
-		return 0
-	}
-	return *t.Interval
-}
-
-// GetLifetime retrieves the value of the leaf Lifetime from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Lifetime is set, it can
-// safely use t.GetLifetime() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Lifetime == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetLifetime() uint32 {
-	if t == nil || t.Lifetime == nil {
-		return 0
-	}
-	return *t.Lifetime
-}
-
-// GetSuppress retrieves the value of the leaf Suppress from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Suppress is set, it can
-// safely use t.GetSuppress() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Suppress == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetSuppress() bool {
-	if t == nil || t.Suppress == nil {
-		return false
-	}
-	return *t.Suppress
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_RouterAdvertisement
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.Suppress == nil {
-		var v bool = false
-		t.Suppress = &v
-	}
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_RouterAdvertisement"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_RoutedVlan_Ipv6_RouterAdvertisement.
-func (*Interface_RoutedVlan_Ipv6_RouterAdvertisement) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_RoutedVlan_Ipv6_Unnumbered represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered YANG schema element.
-type Interface_RoutedVlan_Ipv6_Unnumbered struct {
-	Enabled      *bool                                              `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	InterfaceRef *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef `path:"interface-ref" module:"openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_Unnumbered implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_RoutedVlan_Ipv6_Unnumbered) IsYANGGoStruct() {}
-
-// GetOrCreateInterfaceRef retrieves the value of the InterfaceRef field
-// or returns the existing field if it already exists.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) GetOrCreateInterfaceRef() *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef {
-	if t.InterfaceRef != nil {
-		return t.InterfaceRef
-	}
-	t.InterfaceRef = &Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef{}
-	return t.InterfaceRef
-}
-
-// GetInterfaceRef returns the value of the InterfaceRef struct pointer
-// from Interface_RoutedVlan_Ipv6_Unnumbered. If the receiver or the field InterfaceRef is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) GetInterfaceRef() *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef {
-	if t != nil && t.InterfaceRef != nil {
-		return t.InterfaceRef
-	}
-	return nil
-}
-
-// GetEnabled retrieves the value of the leaf Enabled from the Interface_RoutedVlan_Ipv6_Unnumbered
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Enabled is set, it can
-// safely use t.GetEnabled() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Enabled == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) GetEnabled() bool {
-	if t == nil || t.Enabled == nil {
-		return false
-	}
-	return *t.Enabled
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_Unnumbered
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.Enabled == nil {
-		var v bool = false
-		t.Enabled = &v
-	}
-	t.InterfaceRef.PopulateDefaults()
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_Unnumbered"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_RoutedVlan_Ipv6_Unnumbered.
-func (*Interface_RoutedVlan_Ipv6_Unnumbered) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/unnumbered/interface-ref YANG schema element.
-type Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef struct {
-	Interface    *string `path:"state/interface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Subinterface *uint32 `path:"state/subinterface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/subinterface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) IsYANGGoStruct() {}
-
-// GetInterface retrieves the value of the leaf Interface from the Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Interface is set, it can
-// safely use t.GetInterface() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Interface == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) GetInterface() string {
-	if t == nil || t.Interface == nil {
-		return ""
-	}
-	return *t.Interface
-}
-
-// GetSubinterface retrieves the value of the leaf Subinterface from the Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Subinterface is set, it can
-// safely use t.GetSubinterface() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Subinterface == nil' before retrieving the leaf's value.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) GetSubinterface() uint32 {
-	if t == nil || t.Subinterface == nil {
-		return 0
-	}
-	return *t.Subinterface
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef.
-func (*Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRef) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface YANG schema element.
-type Interface_Subinterface struct {
-	AdminStatus E_Interface_AdminStatus          `path:"state/admin-status" module:"openconfig-interfaces/openconfig-interfaces"`
-	Counters    *Interface_Subinterface_Counters `path:"state/counters" module:"openconfig-interfaces/openconfig-interfaces"`
-	Cpu         *bool                            `path:"state/cpu" module:"openconfig-interfaces/openconfig-interfaces"`
-	Description *string                          `path:"state/description" module:"openconfig-interfaces/openconfig-interfaces" shadow-path:"config/description" shadow-module:"openconfig-interfaces/openconfig-interfaces"`
-	Enabled     *bool                            `path:"state/enabled" module:"openconfig-interfaces/openconfig-interfaces" shadow-path:"config/enabled" shadow-module:"openconfig-interfaces/openconfig-interfaces"`
-	Ifindex     *uint32                          `path:"state/ifindex" module:"openconfig-interfaces/openconfig-interfaces"`
-	Index       *uint32                          `path:"state/index|index" module:"openconfig-interfaces/openconfig-interfaces|openconfig-interfaces" shadow-path:"config/index|index" shadow-module:"openconfig-interfaces/openconfig-interfaces|openconfig-interfaces"`
-	Ipv4        *Interface_Subinterface_Ipv4     `path:"ipv4" module:"openconfig-if-ip"`
-	Ipv6        *Interface_Subinterface_Ipv6     `path:"ipv6" module:"openconfig-if-ip"`
-	LastChange  *uint64                          `path:"state/last-change" module:"openconfig-interfaces/openconfig-interfaces"`
-	Logical     *bool                            `path:"state/logical" module:"openconfig-interfaces/openconfig-interfaces"`
-	Management  *bool                            `path:"state/management" module:"openconfig-interfaces/openconfig-interfaces"`
-	Name        *string                          `path:"state/name" module:"openconfig-interfaces/openconfig-interfaces"`
-	OperStatus  E_Interface_OperStatus           `path:"state/oper-status" module:"openconfig-interfaces/openconfig-interfaces"`
-	Vlan        *Interface_Subinterface_Vlan     `path:"vlan" module:"openconfig-vlan"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface) IsYANGGoStruct() {}
-
-// GetOrCreateCounters retrieves the value of the Counters field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface) GetOrCreateCounters() *Interface_Subinterface_Counters {
-	if t.Counters != nil {
-		return t.Counters
-	}
-	t.Counters = &Interface_Subinterface_Counters{}
-	return t.Counters
-}
-
-// GetOrCreateIpv4 retrieves the value of the Ipv4 field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface) GetOrCreateIpv4() *Interface_Subinterface_Ipv4 {
-	if t.Ipv4 != nil {
-		return t.Ipv4
-	}
-	t.Ipv4 = &Interface_Subinterface_Ipv4{}
-	return t.Ipv4
-}
-
-// GetOrCreateIpv6 retrieves the value of the Ipv6 field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface) GetOrCreateIpv6() *Interface_Subinterface_Ipv6 {
-	if t.Ipv6 != nil {
-		return t.Ipv6
-	}
-	t.Ipv6 = &Interface_Subinterface_Ipv6{}
-	return t.Ipv6
-}
-
-// GetOrCreateVlan retrieves the value of the Vlan field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface) GetOrCreateVlan() *Interface_Subinterface_Vlan {
-	if t.Vlan != nil {
-		return t.Vlan
-	}
-	t.Vlan = &Interface_Subinterface_Vlan{}
-	return t.Vlan
-}
-
-// GetCounters returns the value of the Counters struct pointer
-// from Interface_Subinterface. If the receiver or the field Counters is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface) GetCounters() *Interface_Subinterface_Counters {
-	if t != nil && t.Counters != nil {
-		return t.Counters
-	}
-	return nil
-}
-
-// GetIpv4 returns the value of the Ipv4 struct pointer
-// from Interface_Subinterface. If the receiver or the field Ipv4 is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface) GetIpv4() *Interface_Subinterface_Ipv4 {
-	if t != nil && t.Ipv4 != nil {
-		return t.Ipv4
-	}
-	return nil
-}
-
-// GetIpv6 returns the value of the Ipv6 struct pointer
-// from Interface_Subinterface. If the receiver or the field Ipv6 is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface) GetIpv6() *Interface_Subinterface_Ipv6 {
-	if t != nil && t.Ipv6 != nil {
-		return t.Ipv6
-	}
-	return nil
-}
-
-// GetVlan returns the value of the Vlan struct pointer
-// from Interface_Subinterface. If the receiver or the field Vlan is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface) GetVlan() *Interface_Subinterface_Vlan {
-	if t != nil && t.Vlan != nil {
-		return t.Vlan
-	}
-	return nil
-}
-
-// GetAdminStatus retrieves the value of the leaf AdminStatus from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if AdminStatus is set, it can
-// safely use t.GetAdminStatus() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.AdminStatus == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetAdminStatus() E_Interface_AdminStatus {
-	if t == nil || t.AdminStatus == 0 {
-		return 0
-	}
-	return t.AdminStatus
-}
-
-// GetCpu retrieves the value of the leaf Cpu from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Cpu is set, it can
-// safely use t.GetCpu() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Cpu == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetCpu() bool {
-	if t == nil || t.Cpu == nil {
-		return false
-	}
-	return *t.Cpu
-}
-
-// GetDescription retrieves the value of the leaf Description from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Description is set, it can
-// safely use t.GetDescription() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Description == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetDescription() string {
-	if t == nil || t.Description == nil {
-		return ""
-	}
-	return *t.Description
-}
-
-// GetEnabled retrieves the value of the leaf Enabled from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Enabled is set, it can
-// safely use t.GetEnabled() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Enabled == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetEnabled() bool {
-	if t == nil || t.Enabled == nil {
-		return true
-	}
-	return *t.Enabled
-}
-
-// GetIfindex retrieves the value of the leaf Ifindex from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Ifindex is set, it can
-// safely use t.GetIfindex() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Ifindex == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetIfindex() uint32 {
-	if t == nil || t.Ifindex == nil {
-		return 0
-	}
-	return *t.Ifindex
-}
-
-// GetIndex retrieves the value of the leaf Index from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Index is set, it can
-// safely use t.GetIndex() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Index == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetIndex() uint32 {
-	if t == nil || t.Index == nil {
-		return 0
-	}
-	return *t.Index
-}
-
-// GetLastChange retrieves the value of the leaf LastChange from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if LastChange is set, it can
-// safely use t.GetLastChange() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.LastChange == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetLastChange() uint64 {
-	if t == nil || t.LastChange == nil {
-		return 0
-	}
-	return *t.LastChange
-}
-
-// GetLogical retrieves the value of the leaf Logical from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Logical is set, it can
-// safely use t.GetLogical() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Logical == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetLogical() bool {
-	if t == nil || t.Logical == nil {
-		return false
-	}
-	return *t.Logical
-}
-
-// GetManagement retrieves the value of the leaf Management from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Management is set, it can
-// safely use t.GetManagement() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Management == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetManagement() bool {
-	if t == nil || t.Management == nil {
-		return false
-	}
-	return *t.Management
-}
-
-// GetName retrieves the value of the leaf Name from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Name is set, it can
-// safely use t.GetName() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Name == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetName() string {
-	if t == nil || t.Name == nil {
-		return ""
-	}
-	return *t.Name
-}
-
-// GetOperStatus retrieves the value of the leaf OperStatus from the Interface_Subinterface
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OperStatus is set, it can
-// safely use t.GetOperStatus() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OperStatus == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface) GetOperStatus() E_Interface_OperStatus {
-	if t == nil || t.OperStatus == 0 {
-		return 0
-	}
-	return t.OperStatus
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.Enabled == nil {
-		var v bool = true
-		t.Enabled = &v
-	}
-	if t.Index == nil {
-		var v uint32 = 0
-		t.Index = &v
-	}
-	t.Counters.PopulateDefaults()
-	t.Ipv4.PopulateDefaults()
-	t.Ipv6.PopulateDefaults()
-	t.Vlan.PopulateDefaults()
-}
-
-// ΛListKeyMap returns the keys of the Interface_Subinterface struct, which is a YANG list entry.
-func (t *Interface_Subinterface) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Index == nil {
-		return nil, fmt.Errorf("nil value for key Index")
-	}
-
-	return map[string]interface{}{
-		"index": *t.Index,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface.
-func (*Interface_Subinterface) ΛBelongingModule() string {
-	return "openconfig-interfaces"
-}
-
-// Interface_Subinterface_Counters represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/counters YANG schema element.
-type Interface_Subinterface_Counters struct {
-	CarrierTransitions *uint64 `path:"carrier-transitions" module:"openconfig-interfaces"`
-	InBroadcastPkts    *uint64 `path:"in-broadcast-pkts" module:"openconfig-interfaces"`
-	InDiscards         *uint64 `path:"in-discards" module:"openconfig-interfaces"`
-	InErrors           *uint64 `path:"in-errors" module:"openconfig-interfaces"`
-	InFcsErrors        *uint64 `path:"in-fcs-errors" module:"openconfig-interfaces"`
-	InMulticastPkts    *uint64 `path:"in-multicast-pkts" module:"openconfig-interfaces"`
-	InOctets           *uint64 `path:"in-octets" module:"openconfig-interfaces"`
-	InPkts             *uint64 `path:"in-pkts" module:"openconfig-interfaces"`
-	InUnicastPkts      *uint64 `path:"in-unicast-pkts" module:"openconfig-interfaces"`
-	InUnknownProtos    *uint64 `path:"in-unknown-protos" module:"openconfig-interfaces"`
-	LastClear          *uint64 `path:"last-clear" module:"openconfig-interfaces"`
-	OutBroadcastPkts   *uint64 `path:"out-broadcast-pkts" module:"openconfig-interfaces"`
-	OutDiscards        *uint64 `path:"out-discards" module:"openconfig-interfaces"`
-	OutErrors          *uint64 `path:"out-errors" module:"openconfig-interfaces"`
-	OutMulticastPkts   *uint64 `path:"out-multicast-pkts" module:"openconfig-interfaces"`
-	OutOctets          *uint64 `path:"out-octets" module:"openconfig-interfaces"`
-	OutPkts            *uint64 `path:"out-pkts" module:"openconfig-interfaces"`
-	OutUnicastPkts     *uint64 `path:"out-unicast-pkts" module:"openconfig-interfaces"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Counters implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Counters) IsYANGGoStruct() {}
-
-// GetCarrierTransitions retrieves the value of the leaf CarrierTransitions from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if CarrierTransitions is set, it can
-// safely use t.GetCarrierTransitions() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.CarrierTransitions == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetCarrierTransitions() uint64 {
-	if t == nil || t.CarrierTransitions == nil {
-		return 0
-	}
-	return *t.CarrierTransitions
-}
-
-// GetInBroadcastPkts retrieves the value of the leaf InBroadcastPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InBroadcastPkts is set, it can
-// safely use t.GetInBroadcastPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InBroadcastPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInBroadcastPkts() uint64 {
-	if t == nil || t.InBroadcastPkts == nil {
-		return 0
-	}
-	return *t.InBroadcastPkts
-}
-
-// GetInDiscards retrieves the value of the leaf InDiscards from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InDiscards is set, it can
-// safely use t.GetInDiscards() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InDiscards == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInDiscards() uint64 {
-	if t == nil || t.InDiscards == nil {
-		return 0
-	}
-	return *t.InDiscards
-}
-
-// GetInErrors retrieves the value of the leaf InErrors from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InErrors is set, it can
-// safely use t.GetInErrors() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InErrors == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInErrors() uint64 {
-	if t == nil || t.InErrors == nil {
-		return 0
-	}
-	return *t.InErrors
-}
-
-// GetInFcsErrors retrieves the value of the leaf InFcsErrors from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InFcsErrors is set, it can
-// safely use t.GetInFcsErrors() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InFcsErrors == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInFcsErrors() uint64 {
-	if t == nil || t.InFcsErrors == nil {
-		return 0
-	}
-	return *t.InFcsErrors
-}
-
-// GetInMulticastPkts retrieves the value of the leaf InMulticastPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InMulticastPkts is set, it can
-// safely use t.GetInMulticastPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InMulticastPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInMulticastPkts() uint64 {
-	if t == nil || t.InMulticastPkts == nil {
-		return 0
-	}
-	return *t.InMulticastPkts
-}
-
-// GetInOctets retrieves the value of the leaf InOctets from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InOctets is set, it can
-// safely use t.GetInOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InOctets == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInOctets() uint64 {
-	if t == nil || t.InOctets == nil {
-		return 0
-	}
-	return *t.InOctets
-}
-
-// GetInPkts retrieves the value of the leaf InPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InPkts is set, it can
-// safely use t.GetInPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInPkts() uint64 {
-	if t == nil || t.InPkts == nil {
-		return 0
-	}
-	return *t.InPkts
-}
-
-// GetInUnicastPkts retrieves the value of the leaf InUnicastPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InUnicastPkts is set, it can
-// safely use t.GetInUnicastPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InUnicastPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInUnicastPkts() uint64 {
-	if t == nil || t.InUnicastPkts == nil {
-		return 0
-	}
-	return *t.InUnicastPkts
-}
-
-// GetInUnknownProtos retrieves the value of the leaf InUnknownProtos from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InUnknownProtos is set, it can
-// safely use t.GetInUnknownProtos() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InUnknownProtos == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetInUnknownProtos() uint64 {
-	if t == nil || t.InUnknownProtos == nil {
-		return 0
-	}
-	return *t.InUnknownProtos
-}
-
-// GetLastClear retrieves the value of the leaf LastClear from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if LastClear is set, it can
-// safely use t.GetLastClear() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.LastClear == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetLastClear() uint64 {
-	if t == nil || t.LastClear == nil {
-		return 0
-	}
-	return *t.LastClear
-}
-
-// GetOutBroadcastPkts retrieves the value of the leaf OutBroadcastPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutBroadcastPkts is set, it can
-// safely use t.GetOutBroadcastPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutBroadcastPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutBroadcastPkts() uint64 {
-	if t == nil || t.OutBroadcastPkts == nil {
-		return 0
-	}
-	return *t.OutBroadcastPkts
-}
-
-// GetOutDiscards retrieves the value of the leaf OutDiscards from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutDiscards is set, it can
-// safely use t.GetOutDiscards() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutDiscards == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutDiscards() uint64 {
-	if t == nil || t.OutDiscards == nil {
-		return 0
-	}
-	return *t.OutDiscards
-}
-
-// GetOutErrors retrieves the value of the leaf OutErrors from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutErrors is set, it can
-// safely use t.GetOutErrors() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutErrors == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutErrors() uint64 {
-	if t == nil || t.OutErrors == nil {
-		return 0
-	}
-	return *t.OutErrors
-}
-
-// GetOutMulticastPkts retrieves the value of the leaf OutMulticastPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutMulticastPkts is set, it can
-// safely use t.GetOutMulticastPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutMulticastPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutMulticastPkts() uint64 {
-	if t == nil || t.OutMulticastPkts == nil {
-		return 0
-	}
-	return *t.OutMulticastPkts
-}
-
-// GetOutOctets retrieves the value of the leaf OutOctets from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutOctets is set, it can
-// safely use t.GetOutOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutOctets == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutOctets() uint64 {
-	if t == nil || t.OutOctets == nil {
-		return 0
-	}
-	return *t.OutOctets
-}
-
-// GetOutPkts retrieves the value of the leaf OutPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutPkts is set, it can
-// safely use t.GetOutPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutPkts() uint64 {
-	if t == nil || t.OutPkts == nil {
-		return 0
-	}
-	return *t.OutPkts
-}
-
-// GetOutUnicastPkts retrieves the value of the leaf OutUnicastPkts from the Interface_Subinterface_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutUnicastPkts is set, it can
-// safely use t.GetOutUnicastPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutUnicastPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Counters) GetOutUnicastPkts() uint64 {
-	if t == nil || t.OutUnicastPkts == nil {
-		return 0
-	}
-	return *t.OutUnicastPkts
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Counters
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Counters) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Counters"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Counters) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Counters.
-func (*Interface_Subinterface_Counters) ΛBelongingModule() string {
-	return "openconfig-interfaces"
-}
-
-// Interface_Subinterface_Ipv4 represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4 YANG schema element.
-type Interface_Subinterface_Ipv4 struct {
-	Address    map[string]*Interface_Subinterface_Ipv4_Address  `path:"addresses/address" module:"openconfig-if-ip/openconfig-if-ip"`
-	Counters   *Interface_Subinterface_Ipv4_Counters            `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
-	DhcpClient *bool                                            `path:"state/dhcp-client" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dhcp-client" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Enabled    *bool                                            `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Mtu        *uint16                                          `path:"state/mtu" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mtu" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Neighbor   map[string]*Interface_Subinterface_Ipv4_Neighbor `path:"neighbors/neighbor" module:"openconfig-if-ip/openconfig-if-ip"`
-	ProxyArp   *Interface_Subinterface_Ipv4_ProxyArp            `path:"proxy-arp" module:"openconfig-if-ip"`
-	Unnumbered *Interface_Subinterface_Ipv4_Unnumbered          `path:"unnumbered" module:"openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4 implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4) IsYANGGoStruct() {}
-
-// NewAddress creates a new entry in the Address list of the
-// Interface_Subinterface_Ipv4 struct. The keys of the list are populated from the input
-// arguments.
-func (t *Interface_Subinterface_Ipv4) NewAddress(Ip string) (*Interface_Subinterface_Ipv4_Address, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Address == nil {
-		t.Address = make(map[string]*Interface_Subinterface_Ipv4_Address)
-	}
-
-	key := Ip
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Address[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Address", key)
-	}
-
-	t.Address[key] = &Interface_Subinterface_Ipv4_Address{
-		Ip: &Ip,
-	}
-
-	return t.Address[key], nil
-}
-
-// RenameAddress renames an entry in the list Address within
-// the Interface_Subinterface_Ipv4 struct. The entry with key oldK is renamed to newK updating
-// the key within the value.
-func (t *Interface_Subinterface_Ipv4) RenameAddress(oldK, newK string) error {
-	if _, ok := t.Address[newK]; ok {
-		return fmt.Errorf("key %v already exists in Address", newK)
-	}
-
-	e, ok := t.Address[oldK]
-	if !ok {
-		return fmt.Errorf("key %v not found in Address", oldK)
-	}
-	e.Ip = &newK
-
-	t.Address[newK] = e
-	delete(t.Address, oldK)
-	return nil
-}
-
-// GetOrCreateAddress retrieves the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv4. If the entry does not exist, then it is created.
-// It returns the existing or new list member.
-func (t *Interface_Subinterface_Ipv4) GetOrCreateAddress(Ip string) *Interface_Subinterface_Ipv4_Address {
-
-	key := Ip
-
-	if v, ok := t.Address[key]; ok {
-		return v
-	}
-	// Panic if we receive an error, since we should have retrieved an existing
-	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewAddress(Ip)
-	if err != nil {
-		panic(fmt.Sprintf("GetOrCreateAddress got unexpected error: %v", err))
-	}
-	return v
-}
-
-// GetAddress retrieves the value with the specified key from
-// the Address map field of Interface_Subinterface_Ipv4. If the receiver is nil, or
-// the specified key is not present in the list, nil is returned such that Get*
-// methods may be safely chained.
-func (t *Interface_Subinterface_Ipv4) GetAddress(Ip string) *Interface_Subinterface_Ipv4_Address {
-
-	if t == nil {
-		return nil
-	}
-
-	key := Ip
-
-	if lm, ok := t.Address[key]; ok {
-		return lm
-	}
-	return nil
-}
-
-// DeleteAddress deletes the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv4. If there is no such element, the function
-// is a no-op.
-func (t *Interface_Subinterface_Ipv4) DeleteAddress(Ip string) {
-	key := Ip
-
-	delete(t.Address, key)
-}
-
-// AppendAddress appends the supplied Interface_Subinterface_Ipv4_Address struct to the
-// list Address of Interface_Subinterface_Ipv4. If the key value(s) specified in
-// the supplied Interface_Subinterface_Ipv4_Address already exist in the list, an error is
-// returned.
-func (t *Interface_Subinterface_Ipv4) AppendAddress(v *Interface_Subinterface_Ipv4_Address) error {
-	if v.Ip == nil {
-		return fmt.Errorf("invalid nil key received for Ip")
-	}
-
-	key := *v.Ip
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Address == nil {
-		t.Address = make(map[string]*Interface_Subinterface_Ipv4_Address)
-	}
-
-	if _, ok := t.Address[key]; ok {
-		return fmt.Errorf("duplicate key for list Address %v", key)
-	}
-
-	t.Address[key] = v
-	return nil
-}
-
-// NewNeighbor creates a new entry in the Neighbor list of the
-// Interface_Subinterface_Ipv4 struct. The keys of the list are populated from the input
-// arguments.
-func (t *Interface_Subinterface_Ipv4) NewNeighbor(Ip string) (*Interface_Subinterface_Ipv4_Neighbor, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Neighbor == nil {
-		t.Neighbor = make(map[string]*Interface_Subinterface_Ipv4_Neighbor)
-	}
-
-	key := Ip
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Neighbor[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Neighbor", key)
-	}
-
-	t.Neighbor[key] = &Interface_Subinterface_Ipv4_Neighbor{
-		Ip: &Ip,
-	}
-
-	return t.Neighbor[key], nil
-}
-
-// RenameNeighbor renames an entry in the list Neighbor within
-// the Interface_Subinterface_Ipv4 struct. The entry with key oldK is renamed to newK updating
-// the key within the value.
-func (t *Interface_Subinterface_Ipv4) RenameNeighbor(oldK, newK string) error {
-	if _, ok := t.Neighbor[newK]; ok {
-		return fmt.Errorf("key %v already exists in Neighbor", newK)
-	}
-
-	e, ok := t.Neighbor[oldK]
-	if !ok {
-		return fmt.Errorf("key %v not found in Neighbor", oldK)
-	}
-	e.Ip = &newK
-
-	t.Neighbor[newK] = e
-	delete(t.Neighbor, oldK)
-	return nil
-}
-
-// GetOrCreateNeighbor retrieves the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv4. If the entry does not exist, then it is created.
-// It returns the existing or new list member.
-func (t *Interface_Subinterface_Ipv4) GetOrCreateNeighbor(Ip string) *Interface_Subinterface_Ipv4_Neighbor {
-
-	key := Ip
-
-	if v, ok := t.Neighbor[key]; ok {
-		return v
-	}
-	// Panic if we receive an error, since we should have retrieved an existing
-	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewNeighbor(Ip)
-	if err != nil {
-		panic(fmt.Sprintf("GetOrCreateNeighbor got unexpected error: %v", err))
-	}
-	return v
-}
-
-// GetNeighbor retrieves the value with the specified key from
-// the Neighbor map field of Interface_Subinterface_Ipv4. If the receiver is nil, or
-// the specified key is not present in the list, nil is returned such that Get*
-// methods may be safely chained.
-func (t *Interface_Subinterface_Ipv4) GetNeighbor(Ip string) *Interface_Subinterface_Ipv4_Neighbor {
-
-	if t == nil {
-		return nil
-	}
-
-	key := Ip
-
-	if lm, ok := t.Neighbor[key]; ok {
-		return lm
-	}
-	return nil
-}
-
-// DeleteNeighbor deletes the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv4. If there is no such element, the function
-// is a no-op.
-func (t *Interface_Subinterface_Ipv4) DeleteNeighbor(Ip string) {
-	key := Ip
-
-	delete(t.Neighbor, key)
-}
-
-// AppendNeighbor appends the supplied Interface_Subinterface_Ipv4_Neighbor struct to the
-// list Neighbor of Interface_Subinterface_Ipv4. If the key value(s) specified in
-// the supplied Interface_Subinterface_Ipv4_Neighbor already exist in the list, an error is
-// returned.
-func (t *Interface_Subinterface_Ipv4) AppendNeighbor(v *Interface_Subinterface_Ipv4_Neighbor) error {
-	if v.Ip == nil {
-		return fmt.Errorf("invalid nil key received for Ip")
-	}
-
-	key := *v.Ip
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Neighbor == nil {
-		t.Neighbor = make(map[string]*Interface_Subinterface_Ipv4_Neighbor)
-	}
-
-	if _, ok := t.Neighbor[key]; ok {
-		return fmt.Errorf("duplicate key for list Neighbor %v", key)
-	}
-
-	t.Neighbor[key] = v
-	return nil
-}
-
-// GetOrCreateCounters retrieves the value of the Counters field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv4) GetOrCreateCounters() *Interface_Subinterface_Ipv4_Counters {
-	if t.Counters != nil {
-		return t.Counters
-	}
-	t.Counters = &Interface_Subinterface_Ipv4_Counters{}
-	return t.Counters
-}
-
-// GetOrCreateProxyArp retrieves the value of the ProxyArp field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv4) GetOrCreateProxyArp() *Interface_Subinterface_Ipv4_ProxyArp {
-	if t.ProxyArp != nil {
-		return t.ProxyArp
-	}
-	t.ProxyArp = &Interface_Subinterface_Ipv4_ProxyArp{}
-	return t.ProxyArp
-}
-
-// GetOrCreateUnnumbered retrieves the value of the Unnumbered field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv4) GetOrCreateUnnumbered() *Interface_Subinterface_Ipv4_Unnumbered {
-	if t.Unnumbered != nil {
-		return t.Unnumbered
-	}
-	t.Unnumbered = &Interface_Subinterface_Ipv4_Unnumbered{}
-	return t.Unnumbered
-}
-
-// GetCounters returns the value of the Counters struct pointer
-// from Interface_Subinterface_Ipv4. If the receiver or the field Counters is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv4) GetCounters() *Interface_Subinterface_Ipv4_Counters {
-	if t != nil && t.Counters != nil {
-		return t.Counters
-	}
-	return nil
-}
-
-// GetProxyArp returns the value of the ProxyArp struct pointer
-// from Interface_Subinterface_Ipv4. If the receiver or the field ProxyArp is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv4) GetProxyArp() *Interface_Subinterface_Ipv4_ProxyArp {
-	if t != nil && t.ProxyArp != nil {
-		return t.ProxyArp
-	}
-	return nil
-}
-
-// GetUnnumbered returns the value of the Unnumbered struct pointer
-// from Interface_Subinterface_Ipv4. If the receiver or the field Unnumbered is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv4) GetUnnumbered() *Interface_Subinterface_Ipv4_Unnumbered {
-	if t != nil && t.Unnumbered != nil {
-		return t.Unnumbered
-	}
-	return nil
-}
-
-// GetDhcpClient retrieves the value of the leaf DhcpClient from the Interface_Subinterface_Ipv4
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if DhcpClient is set, it can
-// safely use t.GetDhcpClient() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.DhcpClient == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4) GetDhcpClient() bool {
-	if t == nil || t.DhcpClient == nil {
-		return false
-	}
-	return *t.DhcpClient
-}
-
-// GetEnabled retrieves the value of the leaf Enabled from the Interface_Subinterface_Ipv4
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Enabled is set, it can
-// safely use t.GetEnabled() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Enabled == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4) GetEnabled() bool {
-	if t == nil || t.Enabled == nil {
-		return true
-	}
-	return *t.Enabled
-}
-
-// GetMtu retrieves the value of the leaf Mtu from the Interface_Subinterface_Ipv4
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Mtu is set, it can
-// safely use t.GetMtu() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Mtu == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4) GetMtu() uint16 {
-	if t == nil || t.Mtu == nil {
-		return 0
-	}
-	return *t.Mtu
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.DhcpClient == nil {
-		var v bool = false
-		t.DhcpClient = &v
-	}
-	if t.Enabled == nil {
-		var v bool = true
-		t.Enabled = &v
-	}
-	t.Counters.PopulateDefaults()
-	t.ProxyArp.PopulateDefaults()
-	t.Unnumbered.PopulateDefaults()
-	for _, e := range t.Address {
-		e.PopulateDefaults()
-	}
-	for _, e := range t.Neighbor {
-		e.PopulateDefaults()
-	}
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4.
-func (*Interface_Subinterface_Ipv4) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Address represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address YANG schema element.
-type Interface_Subinterface_Ipv4_Address struct {
-	Ip           *string                                                  `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
-	Origin       E_IfIp_IpAddressOrigin                                   `path:"state/origin" module:"openconfig-if-ip/openconfig-if-ip"`
-	PrefixLength *uint8                                                   `path:"state/prefix-length" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/prefix-length" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	VrrpGroup    map[uint8]*Interface_Subinterface_Ipv4_Address_VrrpGroup `path:"vrrp/vrrp-group" module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Address implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Address) IsYANGGoStruct() {}
-
-// NewVrrpGroup creates a new entry in the VrrpGroup list of the
-// Interface_Subinterface_Ipv4_Address struct. The keys of the list are populated from the input
-// arguments.
-func (t *Interface_Subinterface_Ipv4_Address) NewVrrpGroup(VirtualRouterId uint8) (*Interface_Subinterface_Ipv4_Address_VrrpGroup, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.VrrpGroup == nil {
-		t.VrrpGroup = make(map[uint8]*Interface_Subinterface_Ipv4_Address_VrrpGroup)
-	}
-
-	key := VirtualRouterId
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.VrrpGroup[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list VrrpGroup", key)
-	}
-
-	t.VrrpGroup[key] = &Interface_Subinterface_Ipv4_Address_VrrpGroup{
-		VirtualRouterId: &VirtualRouterId,
-	}
-
-	return t.VrrpGroup[key], nil
-}
-
-// RenameVrrpGroup renames an entry in the list VrrpGroup within
-// the Interface_Subinterface_Ipv4_Address struct. The entry with key oldK is renamed to newK updating
-// the key within the value.
-func (t *Interface_Subinterface_Ipv4_Address) RenameVrrpGroup(oldK, newK uint8) error {
-	if _, ok := t.VrrpGroup[newK]; ok {
-		return fmt.Errorf("key %v already exists in VrrpGroup", newK)
-	}
-
-	e, ok := t.VrrpGroup[oldK]
-	if !ok {
-		return fmt.Errorf("key %v not found in VrrpGroup", oldK)
-	}
-	e.VirtualRouterId = &newK
-
-	t.VrrpGroup[newK] = e
-	delete(t.VrrpGroup, oldK)
-	return nil
-}
-
-// GetOrCreateVrrpGroup retrieves the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv4_Address. If the entry does not exist, then it is created.
-// It returns the existing or new list member.
-func (t *Interface_Subinterface_Ipv4_Address) GetOrCreateVrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv4_Address_VrrpGroup {
-
-	key := VirtualRouterId
-
-	if v, ok := t.VrrpGroup[key]; ok {
-		return v
-	}
-	// Panic if we receive an error, since we should have retrieved an existing
-	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewVrrpGroup(VirtualRouterId)
-	if err != nil {
-		panic(fmt.Sprintf("GetOrCreateVrrpGroup got unexpected error: %v", err))
-	}
-	return v
-}
-
-// GetVrrpGroup retrieves the value with the specified key from
-// the VrrpGroup map field of Interface_Subinterface_Ipv4_Address. If the receiver is nil, or
-// the specified key is not present in the list, nil is returned such that Get*
-// methods may be safely chained.
-func (t *Interface_Subinterface_Ipv4_Address) GetVrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv4_Address_VrrpGroup {
-
-	if t == nil {
-		return nil
-	}
-
-	key := VirtualRouterId
-
-	if lm, ok := t.VrrpGroup[key]; ok {
-		return lm
-	}
-	return nil
-}
-
-// DeleteVrrpGroup deletes the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv4_Address. If there is no such element, the function
-// is a no-op.
-func (t *Interface_Subinterface_Ipv4_Address) DeleteVrrpGroup(VirtualRouterId uint8) {
-	key := VirtualRouterId
-
-	delete(t.VrrpGroup, key)
-}
-
-// AppendVrrpGroup appends the supplied Interface_Subinterface_Ipv4_Address_VrrpGroup struct to the
-// list VrrpGroup of Interface_Subinterface_Ipv4_Address. If the key value(s) specified in
-// the supplied Interface_Subinterface_Ipv4_Address_VrrpGroup already exist in the list, an error is
-// returned.
-func (t *Interface_Subinterface_Ipv4_Address) AppendVrrpGroup(v *Interface_Subinterface_Ipv4_Address_VrrpGroup) error {
-	if v.VirtualRouterId == nil {
-		return fmt.Errorf("invalid nil key received for VirtualRouterId")
-	}
-
-	key := *v.VirtualRouterId
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.VrrpGroup == nil {
-		t.VrrpGroup = make(map[uint8]*Interface_Subinterface_Ipv4_Address_VrrpGroup)
-	}
-
-	if _, ok := t.VrrpGroup[key]; ok {
-		return fmt.Errorf("duplicate key for list VrrpGroup %v", key)
-	}
-
-	t.VrrpGroup[key] = v
-	return nil
-}
-
-// GetIp retrieves the value of the leaf Ip from the Interface_Subinterface_Ipv4_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Ip is set, it can
-// safely use t.GetIp() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Ip == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address) GetIp() string {
-	if t == nil || t.Ip == nil {
-		return ""
-	}
-	return *t.Ip
-}
-
-// GetOrigin retrieves the value of the leaf Origin from the Interface_Subinterface_Ipv4_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Origin is set, it can
-// safely use t.GetOrigin() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Origin == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address) GetOrigin() E_IfIp_IpAddressOrigin {
-	if t == nil || t.Origin == 0 {
-		return 0
-	}
-	return t.Origin
-}
-
-// GetPrefixLength retrieves the value of the leaf PrefixLength from the Interface_Subinterface_Ipv4_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if PrefixLength is set, it can
-// safely use t.GetPrefixLength() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.PrefixLength == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address) GetPrefixLength() uint8 {
-	if t == nil || t.PrefixLength == nil {
-		return 0
-	}
-	return *t.PrefixLength
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Address
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Address) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	for _, e := range t.VrrpGroup {
-		e.PopulateDefaults()
-	}
-}
-
-// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv4_Address struct, which is a YANG list entry.
-func (t *Interface_Subinterface_Ipv4_Address) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Ip == nil {
-		return nil, fmt.Errorf("nil value for key Ip")
-	}
-
-	return map[string]interface{}{
-		"ip": *t.Ip,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Address) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Address"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Address) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Address) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Address.
-func (*Interface_Subinterface_Ipv4_Address) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Address_VrrpGroup represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group YANG schema element.
-type Interface_Subinterface_Ipv4_Address_VrrpGroup struct {
-	AcceptMode            *bool                                                            `path:"state/accept-mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/accept-mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	AdvertisementInterval *uint16                                                          `path:"state/advertisement-interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/advertisement-interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	CurrentPriority       *uint8                                                           `path:"state/current-priority" module:"openconfig-if-ip/openconfig-if-ip"`
-	InterfaceTracking     *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking `path:"interface-tracking" module:"openconfig-if-ip"`
-	Preempt               *bool                                                            `path:"state/preempt" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/preempt" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	PreemptDelay          *uint16                                                          `path:"state/preempt-delay" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/preempt-delay" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Priority              *uint8                                                           `path:"state/priority" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/priority" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	VirtualAddress        []string                                                         `path:"state/virtual-address" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/virtual-address" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	VirtualRouterId       *uint8                                                           `path:"state/virtual-router-id|virtual-router-id" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/virtual-router-id|virtual-router-id" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Address_VrrpGroup implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Address_VrrpGroup) IsYANGGoStruct() {}
-
-// GetOrCreateInterfaceTracking retrieves the value of the InterfaceTracking field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetOrCreateInterfaceTracking() *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking {
-	if t.InterfaceTracking != nil {
-		return t.InterfaceTracking
-	}
-	t.InterfaceTracking = &Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking{}
-	return t.InterfaceTracking
-}
-
-// GetInterfaceTracking returns the value of the InterfaceTracking struct pointer
-// from Interface_Subinterface_Ipv4_Address_VrrpGroup. If the receiver or the field InterfaceTracking is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetInterfaceTracking() *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking {
-	if t != nil && t.InterfaceTracking != nil {
-		return t.InterfaceTracking
-	}
-	return nil
-}
-
-// GetAcceptMode retrieves the value of the leaf AcceptMode from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if AcceptMode is set, it can
-// safely use t.GetAcceptMode() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.AcceptMode == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetAcceptMode() bool {
-	if t == nil || t.AcceptMode == nil {
-		return false
-	}
-	return *t.AcceptMode
-}
-
-// GetAdvertisementInterval retrieves the value of the leaf AdvertisementInterval from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if AdvertisementInterval is set, it can
-// safely use t.GetAdvertisementInterval() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.AdvertisementInterval == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetAdvertisementInterval() uint16 {
-	if t == nil || t.AdvertisementInterval == nil {
-		return 100
-	}
-	return *t.AdvertisementInterval
-}
-
-// GetCurrentPriority retrieves the value of the leaf CurrentPriority from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if CurrentPriority is set, it can
-// safely use t.GetCurrentPriority() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.CurrentPriority == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetCurrentPriority() uint8 {
-	if t == nil || t.CurrentPriority == nil {
-		return 0
-	}
-	return *t.CurrentPriority
-}
-
-// GetPreempt retrieves the value of the leaf Preempt from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Preempt is set, it can
-// safely use t.GetPreempt() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Preempt == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetPreempt() bool {
-	if t == nil || t.Preempt == nil {
-		return true
-	}
-	return *t.Preempt
-}
-
-// GetPreemptDelay retrieves the value of the leaf PreemptDelay from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if PreemptDelay is set, it can
-// safely use t.GetPreemptDelay() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.PreemptDelay == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetPreemptDelay() uint16 {
-	if t == nil || t.PreemptDelay == nil {
-		return 0
-	}
-	return *t.PreemptDelay
-}
-
-// GetPriority retrieves the value of the leaf Priority from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Priority is set, it can
-// safely use t.GetPriority() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Priority == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetPriority() uint8 {
-	if t == nil || t.Priority == nil {
-		return 100
-	}
-	return *t.Priority
-}
-
-// GetVirtualAddress retrieves the value of the leaf VirtualAddress from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if VirtualAddress is set, it can
-// safely use t.GetVirtualAddress() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.VirtualAddress == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetVirtualAddress() []string {
-	if t == nil || t.VirtualAddress == nil {
-		return nil
-	}
-	return t.VirtualAddress
-}
-
-// GetVirtualRouterId retrieves the value of the leaf VirtualRouterId from the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if VirtualRouterId is set, it can
-// safely use t.GetVirtualRouterId() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.VirtualRouterId == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) GetVirtualRouterId() uint8 {
-	if t == nil || t.VirtualRouterId == nil {
-		return 0
-	}
-	return *t.VirtualRouterId
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Address_VrrpGroup
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.AcceptMode == nil {
-		var v bool = false
-		t.AcceptMode = &v
-	}
-	if t.AdvertisementInterval == nil {
-		var v uint16 = 100
-		t.AdvertisementInterval = &v
-	}
-	if t.Preempt == nil {
-		var v bool = true
-		t.Preempt = &v
-	}
-	if t.PreemptDelay == nil {
-		var v uint16 = 0
-		t.PreemptDelay = &v
-	}
-	if t.Priority == nil {
-		var v uint8 = 100
-		t.Priority = &v
-	}
-	t.InterfaceTracking.PopulateDefaults()
-}
-
-// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv4_Address_VrrpGroup struct, which is a YANG list entry.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.VirtualRouterId == nil {
-		return nil, fmt.Errorf("nil value for key VirtualRouterId")
-	}
-
-	return map[string]interface{}{
-		"virtual-router-id": *t.VirtualRouterId,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Address_VrrpGroup"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Address_VrrpGroup.
-func (*Interface_Subinterface_Ipv4_Address_VrrpGroup) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/vrrp/vrrp-group/interface-tracking YANG schema element.
-type Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking struct {
-	PriorityDecrement *uint8   `path:"state/priority-decrement" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/priority-decrement" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	TrackInterface    []string `path:"state/track-interface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/track-interface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) IsYANGGoStruct() {}
-
-// GetPriorityDecrement retrieves the value of the leaf PriorityDecrement from the Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if PriorityDecrement is set, it can
-// safely use t.GetPriorityDecrement() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.PriorityDecrement == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) GetPriorityDecrement() uint8 {
-	if t == nil || t.PriorityDecrement == nil {
-		return 0
-	}
-	return *t.PriorityDecrement
-}
-
-// GetTrackInterface retrieves the value of the leaf TrackInterface from the Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if TrackInterface is set, it can
-// safely use t.GetTrackInterface() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.TrackInterface == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) GetTrackInterface() []string {
-	if t == nil || t.TrackInterface == nil {
-		return nil
-	}
-	return t.TrackInterface
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.PriorityDecrement == nil {
-		var v uint8 = 0
-		t.PriorityDecrement = &v
-	}
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking.
-func (*Interface_Subinterface_Ipv4_Address_VrrpGroup_InterfaceTracking) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Counters represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters YANG schema element.
-type Interface_Subinterface_Ipv4_Counters struct {
-	InDiscardedPkts    *uint64 `path:"in-discarded-pkts" module:"openconfig-if-ip"`
-	InErrorPkts        *uint64 `path:"in-error-pkts" module:"openconfig-if-ip"`
-	InForwardedOctets  *uint64 `path:"in-forwarded-octets" module:"openconfig-if-ip"`
-	InForwardedPkts    *uint64 `path:"in-forwarded-pkts" module:"openconfig-if-ip"`
-	InOctets           *uint64 `path:"in-octets" module:"openconfig-if-ip"`
-	InPkts             *uint64 `path:"in-pkts" module:"openconfig-if-ip"`
-	OutDiscardedPkts   *uint64 `path:"out-discarded-pkts" module:"openconfig-if-ip"`
-	OutErrorPkts       *uint64 `path:"out-error-pkts" module:"openconfig-if-ip"`
-	OutForwardedOctets *uint64 `path:"out-forwarded-octets" module:"openconfig-if-ip"`
-	OutForwardedPkts   *uint64 `path:"out-forwarded-pkts" module:"openconfig-if-ip"`
-	OutOctets          *uint64 `path:"out-octets" module:"openconfig-if-ip"`
-	OutPkts            *uint64 `path:"out-pkts" module:"openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Counters implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Counters) IsYANGGoStruct() {}
-
-// GetInDiscardedPkts retrieves the value of the leaf InDiscardedPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InDiscardedPkts is set, it can
-// safely use t.GetInDiscardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InDiscardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetInDiscardedPkts() uint64 {
-	if t == nil || t.InDiscardedPkts == nil {
-		return 0
-	}
-	return *t.InDiscardedPkts
-}
-
-// GetInErrorPkts retrieves the value of the leaf InErrorPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InErrorPkts is set, it can
-// safely use t.GetInErrorPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InErrorPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetInErrorPkts() uint64 {
-	if t == nil || t.InErrorPkts == nil {
-		return 0
-	}
-	return *t.InErrorPkts
-}
-
-// GetInForwardedOctets retrieves the value of the leaf InForwardedOctets from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InForwardedOctets is set, it can
-// safely use t.GetInForwardedOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InForwardedOctets == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetInForwardedOctets() uint64 {
-	if t == nil || t.InForwardedOctets == nil {
-		return 0
-	}
-	return *t.InForwardedOctets
-}
-
-// GetInForwardedPkts retrieves the value of the leaf InForwardedPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InForwardedPkts is set, it can
-// safely use t.GetInForwardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InForwardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetInForwardedPkts() uint64 {
-	if t == nil || t.InForwardedPkts == nil {
-		return 0
-	}
-	return *t.InForwardedPkts
-}
-
-// GetInOctets retrieves the value of the leaf InOctets from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InOctets is set, it can
-// safely use t.GetInOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InOctets == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetInOctets() uint64 {
-	if t == nil || t.InOctets == nil {
-		return 0
-	}
-	return *t.InOctets
-}
-
-// GetInPkts retrieves the value of the leaf InPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if InPkts is set, it can
-// safely use t.GetInPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.InPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetInPkts() uint64 {
-	if t == nil || t.InPkts == nil {
-		return 0
-	}
-	return *t.InPkts
-}
-
-// GetOutDiscardedPkts retrieves the value of the leaf OutDiscardedPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutDiscardedPkts is set, it can
-// safely use t.GetOutDiscardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutDiscardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetOutDiscardedPkts() uint64 {
-	if t == nil || t.OutDiscardedPkts == nil {
-		return 0
-	}
-	return *t.OutDiscardedPkts
-}
-
-// GetOutErrorPkts retrieves the value of the leaf OutErrorPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutErrorPkts is set, it can
-// safely use t.GetOutErrorPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutErrorPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetOutErrorPkts() uint64 {
-	if t == nil || t.OutErrorPkts == nil {
-		return 0
-	}
-	return *t.OutErrorPkts
-}
-
-// GetOutForwardedOctets retrieves the value of the leaf OutForwardedOctets from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutForwardedOctets is set, it can
-// safely use t.GetOutForwardedOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutForwardedOctets == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetOutForwardedOctets() uint64 {
-	if t == nil || t.OutForwardedOctets == nil {
-		return 0
-	}
-	return *t.OutForwardedOctets
-}
-
-// GetOutForwardedPkts retrieves the value of the leaf OutForwardedPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutForwardedPkts is set, it can
-// safely use t.GetOutForwardedPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutForwardedPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetOutForwardedPkts() uint64 {
-	if t == nil || t.OutForwardedPkts == nil {
-		return 0
-	}
-	return *t.OutForwardedPkts
-}
-
-// GetOutOctets retrieves the value of the leaf OutOctets from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutOctets is set, it can
-// safely use t.GetOutOctets() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutOctets == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetOutOctets() uint64 {
-	if t == nil || t.OutOctets == nil {
-		return 0
-	}
-	return *t.OutOctets
-}
-
-// GetOutPkts retrieves the value of the leaf OutPkts from the Interface_Subinterface_Ipv4_Counters
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if OutPkts is set, it can
-// safely use t.GetOutPkts() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.OutPkts == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Counters) GetOutPkts() uint64 {
-	if t == nil || t.OutPkts == nil {
-		return 0
-	}
-	return *t.OutPkts
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Counters
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Counters) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Counters"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Counters) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Counters.
-func (*Interface_Subinterface_Ipv4_Counters) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Neighbor represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/neighbors/neighbor YANG schema element.
-type Interface_Subinterface_Ipv4_Neighbor struct {
-	Ip               *string               `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
-	LinkLayerAddress *string               `path:"state/link-layer-address" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/link-layer-address" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Origin           E_IfIp_NeighborOrigin `path:"state/origin" module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Neighbor implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Neighbor) IsYANGGoStruct() {}
-
-// GetIp retrieves the value of the leaf Ip from the Interface_Subinterface_Ipv4_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Ip is set, it can
-// safely use t.GetIp() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Ip == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Neighbor) GetIp() string {
-	if t == nil || t.Ip == nil {
-		return ""
-	}
-	return *t.Ip
-}
-
-// GetLinkLayerAddress retrieves the value of the leaf LinkLayerAddress from the Interface_Subinterface_Ipv4_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if LinkLayerAddress is set, it can
-// safely use t.GetLinkLayerAddress() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.LinkLayerAddress == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Neighbor) GetLinkLayerAddress() string {
-	if t == nil || t.LinkLayerAddress == nil {
-		return ""
-	}
-	return *t.LinkLayerAddress
-}
-
-// GetOrigin retrieves the value of the leaf Origin from the Interface_Subinterface_Ipv4_Neighbor
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Origin is set, it can
-// safely use t.GetOrigin() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Origin == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Neighbor) GetOrigin() E_IfIp_NeighborOrigin {
-	if t == nil || t.Origin == 0 {
-		return 0
-	}
-	return t.Origin
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Neighbor
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Neighbor) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv4_Neighbor struct, which is a YANG list entry.
-func (t *Interface_Subinterface_Ipv4_Neighbor) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Ip == nil {
-		return nil, fmt.Errorf("nil value for key Ip")
-	}
-
-	return map[string]interface{}{
-		"ip": *t.Ip,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Neighbor) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Neighbor"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Neighbor) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Neighbor) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Neighbor.
-func (*Interface_Subinterface_Ipv4_Neighbor) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_ProxyArp represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp YANG schema element.
-type Interface_Subinterface_Ipv4_ProxyArp struct {
-	Mode E_ProxyArp_Mode `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_ProxyArp implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_ProxyArp) IsYANGGoStruct() {}
-
-// GetMode retrieves the value of the leaf Mode from the Interface_Subinterface_Ipv4_ProxyArp
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Mode is set, it can
-// safely use t.GetMode() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Mode == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_ProxyArp) GetMode() E_ProxyArp_Mode {
-	if t == nil || t.Mode == 0 {
-		return ProxyArp_Mode_DISABLE
-	}
-	return t.Mode
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_ProxyArp
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_ProxyArp) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.Mode == 0 {
-		t.Mode = ProxyArp_Mode_DISABLE
-	}
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_ProxyArp) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_ProxyArp"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_ProxyArp) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_ProxyArp) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_ProxyArp.
-func (*Interface_Subinterface_Ipv4_ProxyArp) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Unnumbered represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered YANG schema element.
-type Interface_Subinterface_Ipv4_Unnumbered struct {
-	Enabled      *bool                                                `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	InterfaceRef *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef `path:"interface-ref" module:"openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Unnumbered implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Unnumbered) IsYANGGoStruct() {}
-
-// GetOrCreateInterfaceRef retrieves the value of the InterfaceRef field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) GetOrCreateInterfaceRef() *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
-	if t.InterfaceRef != nil {
-		return t.InterfaceRef
-	}
-	t.InterfaceRef = &Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef{}
-	return t.InterfaceRef
-}
-
-// GetInterfaceRef returns the value of the InterfaceRef struct pointer
-// from Interface_Subinterface_Ipv4_Unnumbered. If the receiver or the field InterfaceRef is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) GetInterfaceRef() *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
-	if t != nil && t.InterfaceRef != nil {
-		return t.InterfaceRef
-	}
-	return nil
-}
-
-// GetEnabled retrieves the value of the leaf Enabled from the Interface_Subinterface_Ipv4_Unnumbered
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Enabled is set, it can
-// safely use t.GetEnabled() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Enabled == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) GetEnabled() bool {
-	if t == nil || t.Enabled == nil {
-		return false
-	}
-	return *t.Enabled
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Unnumbered
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.Enabled == nil {
-		var v bool = false
-		t.Enabled = &v
-	}
-	t.InterfaceRef.PopulateDefaults()
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Unnumbered"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Unnumbered) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Unnumbered.
-func (*Interface_Subinterface_Ipv4_Unnumbered) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref YANG schema element.
-type Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef struct {
-	Interface    *string `path:"state/interface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Subinterface *uint32 `path:"state/subinterface" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/subinterface" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) IsYANGGoStruct() {}
-
-// GetInterface retrieves the value of the leaf Interface from the Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Interface is set, it can
-// safely use t.GetInterface() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Interface == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) GetInterface() string {
-	if t == nil || t.Interface == nil {
-		return ""
-	}
-	return *t.Interface
-}
-
-// GetSubinterface retrieves the value of the leaf Subinterface from the Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Subinterface is set, it can
-// safely use t.GetSubinterface() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Subinterface == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) GetSubinterface() uint32 {
-	if t == nil || t.Subinterface == nil {
-		return 0
-	}
-	return *t.Subinterface
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef.
-func (*Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv6 represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6 YANG schema element.
-type Interface_Subinterface_Ipv6 struct {
-	Address                map[string]*Interface_Subinterface_Ipv6_Address  `path:"addresses/address" module:"openconfig-if-ip/openconfig-if-ip"`
-	Autoconf               *Interface_Subinterface_Ipv6_Autoconf            `path:"autoconf" module:"openconfig-if-ip-ext"`
-	Counters               *Interface_Subinterface_Ipv6_Counters            `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
-	DhcpClient             *bool                                            `path:"state/dhcp-client" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dhcp-client" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	DupAddrDetectTransmits *uint32                                          `path:"state/dup-addr-detect-transmits" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dup-addr-detect-transmits" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Enabled                *bool                                            `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Mtu                    *uint32                                          `path:"state/mtu" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mtu" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Neighbor               map[string]*Interface_Subinterface_Ipv6_Neighbor `path:"neighbors/neighbor" module:"openconfig-if-ip/openconfig-if-ip"`
-	RouterAdvertisement    *Interface_Subinterface_Ipv6_RouterAdvertisement `path:"router-advertisement" module:"openconfig-if-ip"`
-	Unnumbered             *Interface_Subinterface_Ipv6_Unnumbered          `path:"unnumbered" module:"openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6 implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv6) IsYANGGoStruct() {}
-
-// NewAddress creates a new entry in the Address list of the
-// Interface_Subinterface_Ipv6 struct. The keys of the list are populated from the input
-// arguments.
-func (t *Interface_Subinterface_Ipv6) NewAddress(Ip string) (*Interface_Subinterface_Ipv6_Address, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Address == nil {
-		t.Address = make(map[string]*Interface_Subinterface_Ipv6_Address)
-	}
-
-	key := Ip
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Address[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Address", key)
-	}
-
-	t.Address[key] = &Interface_Subinterface_Ipv6_Address{
-		Ip: &Ip,
-	}
-
-	return t.Address[key], nil
-}
-
-// RenameAddress renames an entry in the list Address within
-// the Interface_Subinterface_Ipv6 struct. The entry with key oldK is renamed to newK updating
-// the key within the value.
-func (t *Interface_Subinterface_Ipv6) RenameAddress(oldK, newK string) error {
-	if _, ok := t.Address[newK]; ok {
-		return fmt.Errorf("key %v already exists in Address", newK)
-	}
-
-	e, ok := t.Address[oldK]
-	if !ok {
-		return fmt.Errorf("key %v not found in Address", oldK)
-	}
-	e.Ip = &newK
-
-	t.Address[newK] = e
-	delete(t.Address, oldK)
-	return nil
-}
-
-// GetOrCreateAddress retrieves the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv6. If the entry does not exist, then it is created.
-// It returns the existing or new list member.
-func (t *Interface_Subinterface_Ipv6) GetOrCreateAddress(Ip string) *Interface_Subinterface_Ipv6_Address {
-
-	key := Ip
-
-	if v, ok := t.Address[key]; ok {
-		return v
-	}
-	// Panic if we receive an error, since we should have retrieved an existing
-	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewAddress(Ip)
-	if err != nil {
-		panic(fmt.Sprintf("GetOrCreateAddress got unexpected error: %v", err))
-	}
-	return v
-}
-
-// GetAddress retrieves the value with the specified key from
-// the Address map field of Interface_Subinterface_Ipv6. If the receiver is nil, or
-// the specified key is not present in the list, nil is returned such that Get*
-// methods may be safely chained.
-func (t *Interface_Subinterface_Ipv6) GetAddress(Ip string) *Interface_Subinterface_Ipv6_Address {
-
-	if t == nil {
-		return nil
-	}
-
-	key := Ip
-
-	if lm, ok := t.Address[key]; ok {
-		return lm
-	}
-	return nil
-}
-
-// DeleteAddress deletes the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv6. If there is no such element, the function
-// is a no-op.
-func (t *Interface_Subinterface_Ipv6) DeleteAddress(Ip string) {
-	key := Ip
-
-	delete(t.Address, key)
-}
-
-// AppendAddress appends the supplied Interface_Subinterface_Ipv6_Address struct to the
-// list Address of Interface_Subinterface_Ipv6. If the key value(s) specified in
-// the supplied Interface_Subinterface_Ipv6_Address already exist in the list, an error is
-// returned.
-func (t *Interface_Subinterface_Ipv6) AppendAddress(v *Interface_Subinterface_Ipv6_Address) error {
-	if v.Ip == nil {
-		return fmt.Errorf("invalid nil key received for Ip")
-	}
-
-	key := *v.Ip
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Address == nil {
-		t.Address = make(map[string]*Interface_Subinterface_Ipv6_Address)
-	}
-
-	if _, ok := t.Address[key]; ok {
-		return fmt.Errorf("duplicate key for list Address %v", key)
-	}
-
-	t.Address[key] = v
-	return nil
-}
-
-// NewNeighbor creates a new entry in the Neighbor list of the
-// Interface_Subinterface_Ipv6 struct. The keys of the list are populated from the input
-// arguments.
-func (t *Interface_Subinterface_Ipv6) NewNeighbor(Ip string) (*Interface_Subinterface_Ipv6_Neighbor, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Neighbor == nil {
-		t.Neighbor = make(map[string]*Interface_Subinterface_Ipv6_Neighbor)
-	}
-
-	key := Ip
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.Neighbor[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list Neighbor", key)
-	}
-
-	t.Neighbor[key] = &Interface_Subinterface_Ipv6_Neighbor{
-		Ip: &Ip,
-	}
-
-	return t.Neighbor[key], nil
-}
-
-// RenameNeighbor renames an entry in the list Neighbor within
-// the Interface_Subinterface_Ipv6 struct. The entry with key oldK is renamed to newK updating
-// the key within the value.
-func (t *Interface_Subinterface_Ipv6) RenameNeighbor(oldK, newK string) error {
-	if _, ok := t.Neighbor[newK]; ok {
-		return fmt.Errorf("key %v already exists in Neighbor", newK)
-	}
-
-	e, ok := t.Neighbor[oldK]
-	if !ok {
-		return fmt.Errorf("key %v not found in Neighbor", oldK)
-	}
-	e.Ip = &newK
-
-	t.Neighbor[newK] = e
-	delete(t.Neighbor, oldK)
-	return nil
-}
-
-// GetOrCreateNeighbor retrieves the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv6. If the entry does not exist, then it is created.
-// It returns the existing or new list member.
-func (t *Interface_Subinterface_Ipv6) GetOrCreateNeighbor(Ip string) *Interface_Subinterface_Ipv6_Neighbor {
-
-	key := Ip
-
-	if v, ok := t.Neighbor[key]; ok {
-		return v
-	}
-	// Panic if we receive an error, since we should have retrieved an existing
-	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewNeighbor(Ip)
-	if err != nil {
-		panic(fmt.Sprintf("GetOrCreateNeighbor got unexpected error: %v", err))
-	}
-	return v
-}
-
-// GetNeighbor retrieves the value with the specified key from
-// the Neighbor map field of Interface_Subinterface_Ipv6. If the receiver is nil, or
-// the specified key is not present in the list, nil is returned such that Get*
-// methods may be safely chained.
-func (t *Interface_Subinterface_Ipv6) GetNeighbor(Ip string) *Interface_Subinterface_Ipv6_Neighbor {
-
-	if t == nil {
-		return nil
-	}
-
-	key := Ip
-
-	if lm, ok := t.Neighbor[key]; ok {
-		return lm
-	}
-	return nil
-}
-
-// DeleteNeighbor deletes the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv6. If there is no such element, the function
-// is a no-op.
-func (t *Interface_Subinterface_Ipv6) DeleteNeighbor(Ip string) {
-	key := Ip
-
-	delete(t.Neighbor, key)
-}
-
-// AppendNeighbor appends the supplied Interface_Subinterface_Ipv6_Neighbor struct to the
-// list Neighbor of Interface_Subinterface_Ipv6. If the key value(s) specified in
-// the supplied Interface_Subinterface_Ipv6_Neighbor already exist in the list, an error is
-// returned.
-func (t *Interface_Subinterface_Ipv6) AppendNeighbor(v *Interface_Subinterface_Ipv6_Neighbor) error {
-	if v.Ip == nil {
-		return fmt.Errorf("invalid nil key received for Ip")
-	}
-
-	key := *v.Ip
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.Neighbor == nil {
-		t.Neighbor = make(map[string]*Interface_Subinterface_Ipv6_Neighbor)
-	}
-
-	if _, ok := t.Neighbor[key]; ok {
-		return fmt.Errorf("duplicate key for list Neighbor %v", key)
-	}
-
-	t.Neighbor[key] = v
-	return nil
-}
-
-// GetOrCreateAutoconf retrieves the value of the Autoconf field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv6) GetOrCreateAutoconf() *Interface_Subinterface_Ipv6_Autoconf {
-	if t.Autoconf != nil {
-		return t.Autoconf
-	}
-	t.Autoconf = &Interface_Subinterface_Ipv6_Autoconf{}
-	return t.Autoconf
-}
-
-// GetOrCreateCounters retrieves the value of the Counters field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv6) GetOrCreateCounters() *Interface_Subinterface_Ipv6_Counters {
-	if t.Counters != nil {
-		return t.Counters
-	}
-	t.Counters = &Interface_Subinterface_Ipv6_Counters{}
-	return t.Counters
-}
-
-// GetOrCreateRouterAdvertisement retrieves the value of the RouterAdvertisement field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv6) GetOrCreateRouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement {
-	if t.RouterAdvertisement != nil {
-		return t.RouterAdvertisement
-	}
-	t.RouterAdvertisement = &Interface_Subinterface_Ipv6_RouterAdvertisement{}
-	return t.RouterAdvertisement
-}
-
-// GetOrCreateUnnumbered retrieves the value of the Unnumbered field
-// or returns the existing field if it already exists.
-func (t *Interface_Subinterface_Ipv6) GetOrCreateUnnumbered() *Interface_Subinterface_Ipv6_Unnumbered {
-	if t.Unnumbered != nil {
-		return t.Unnumbered
-	}
-	t.Unnumbered = &Interface_Subinterface_Ipv6_Unnumbered{}
-	return t.Unnumbered
-}
-
-// GetAutoconf returns the value of the Autoconf struct pointer
-// from Interface_Subinterface_Ipv6. If the receiver or the field Autoconf is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv6) GetAutoconf() *Interface_Subinterface_Ipv6_Autoconf {
-	if t != nil && t.Autoconf != nil {
-		return t.Autoconf
-	}
-	return nil
-}
-
-// GetCounters returns the value of the Counters struct pointer
-// from Interface_Subinterface_Ipv6. If the receiver or the field Counters is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv6) GetCounters() *Interface_Subinterface_Ipv6_Counters {
-	if t != nil && t.Counters != nil {
-		return t.Counters
-	}
-	return nil
-}
-
-// GetRouterAdvertisement returns the value of the RouterAdvertisement struct pointer
-// from Interface_Subinterface_Ipv6. If the receiver or the field RouterAdvertisement is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv6) GetRouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement {
-	if t != nil && t.RouterAdvertisement != nil {
-		return t.RouterAdvertisement
-	}
-	return nil
-}
-
-// GetUnnumbered returns the value of the Unnumbered struct pointer
-// from Interface_Subinterface_Ipv6. If the receiver or the field Unnumbered is nil, nil
-// is returned such that the Get* methods can be safely chained.
-func (t *Interface_Subinterface_Ipv6) GetUnnumbered() *Interface_Subinterface_Ipv6_Unnumbered {
-	if t != nil && t.Unnumbered != nil {
-		return t.Unnumbered
-	}
-	return nil
-}
-
-// GetDhcpClient retrieves the value of the leaf DhcpClient from the Interface_Subinterface_Ipv6
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if DhcpClient is set, it can
-// safely use t.GetDhcpClient() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.DhcpClient == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6) GetDhcpClient() bool {
-	if t == nil || t.DhcpClient == nil {
-		return false
-	}
-	return *t.DhcpClient
-}
-
-// GetDupAddrDetectTransmits retrieves the value of the leaf DupAddrDetectTransmits from the Interface_Subinterface_Ipv6
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if DupAddrDetectTransmits is set, it can
-// safely use t.GetDupAddrDetectTransmits() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.DupAddrDetectTransmits == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6) GetDupAddrDetectTransmits() uint32 {
-	if t == nil || t.DupAddrDetectTransmits == nil {
-		return 1
-	}
-	return *t.DupAddrDetectTransmits
-}
-
-// GetEnabled retrieves the value of the leaf Enabled from the Interface_Subinterface_Ipv6
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Enabled is set, it can
-// safely use t.GetEnabled() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Enabled == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6) GetEnabled() bool {
-	if t == nil || t.Enabled == nil {
-		return true
-	}
-	return *t.Enabled
-}
-
-// GetMtu retrieves the value of the leaf Mtu from the Interface_Subinterface_Ipv6
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Mtu is set, it can
-// safely use t.GetMtu() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Mtu == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6) GetMtu() uint32 {
-	if t == nil || t.Mtu == nil {
-		return 0
-	}
-	return *t.Mtu
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv6) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	if t.DhcpClient == nil {
-		var v bool = false
-		t.DhcpClient = &v
-	}
-	if t.DupAddrDetectTransmits == nil {
-		var v uint32 = 1
-		t.DupAddrDetectTransmits = &v
-	}
-	if t.Enabled == nil {
-		var v bool = true
-		t.Enabled = &v
-	}
-	t.Autoconf.PopulateDefaults()
-	t.Counters.PopulateDefaults()
-	t.RouterAdvertisement.PopulateDefaults()
-	t.Unnumbered.PopulateDefaults()
-	for _, e := range t.Address {
-		e.PopulateDefaults()
-	}
-	for _, e := range t.Neighbor {
-		e.PopulateDefaults()
-	}
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv6) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv6) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv6) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv6.
-func (*Interface_Subinterface_Ipv6) ΛBelongingModule() string {
-	return "openconfig-if-ip"
-}
-
-// Interface_Subinterface_Ipv6_Address represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address YANG schema element.
-type Interface_Subinterface_Ipv6_Address struct {
-	Ip           *string                                                  `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
-	Origin       E_IfIp_IpAddressOrigin                                   `path:"state/origin" module:"openconfig-if-ip/openconfig-if-ip"`
-	PrefixLength *uint8                                                   `path:"state/prefix-length" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/prefix-length" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Status       E_Address_Status                                         `path:"state/status" module:"openconfig-if-ip/openconfig-if-ip"`
-	VrrpGroup    map[uint8]*Interface_Subinterface_Ipv6_Address_VrrpGroup `path:"vrrp/vrrp-group" module:"openconfig-if-ip/openconfig-if-ip"`
-}
-
-// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_Address implements the yang.GoStruct
-// interface. This allows functions that need to handle this struct to
-// identify it as being generated by ygen.
-func (*Interface_Subinterface_Ipv6_Address) IsYANGGoStruct() {}
-
-// NewVrrpGroup creates a new entry in the VrrpGroup list of the
-// Interface_Subinterface_Ipv6_Address struct. The keys of the list are populated from the input
-// arguments.
-func (t *Interface_Subinterface_Ipv6_Address) NewVrrpGroup(VirtualRouterId uint8) (*Interface_Subinterface_Ipv6_Address_VrrpGroup, error) {
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.VrrpGroup == nil {
-		t.VrrpGroup = make(map[uint8]*Interface_Subinterface_Ipv6_Address_VrrpGroup)
-	}
-
-	key := VirtualRouterId
-
-	// Ensure that this key has not already been used in the
-	// list. Keyed YANG lists do not allow duplicate keys to
-	// be created.
-	if _, ok := t.VrrpGroup[key]; ok {
-		return nil, fmt.Errorf("duplicate key %v for list VrrpGroup", key)
-	}
-
-	t.VrrpGroup[key] = &Interface_Subinterface_Ipv6_Address_VrrpGroup{
-		VirtualRouterId: &VirtualRouterId,
-	}
-
-	return t.VrrpGroup[key], nil
-}
-
-// RenameVrrpGroup renames an entry in the list VrrpGroup within
-// the Interface_Subinterface_Ipv6_Address struct. The entry with key oldK is renamed to newK updating
-// the key within the value.
-func (t *Interface_Subinterface_Ipv6_Address) RenameVrrpGroup(oldK, newK uint8) error {
-	if _, ok := t.VrrpGroup[newK]; ok {
-		return fmt.Errorf("key %v already exists in VrrpGroup", newK)
-	}
-
-	e, ok := t.VrrpGroup[oldK]
-	if !ok {
-		return fmt.Errorf("key %v not found in VrrpGroup", oldK)
-	}
-	e.VirtualRouterId = &newK
-
-	t.VrrpGroup[newK] = e
-	delete(t.VrrpGroup, oldK)
-	return nil
-}
-
-// GetOrCreateVrrpGroup retrieves the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv6_Address. If the entry does not exist, then it is created.
-// It returns the existing or new list member.
-func (t *Interface_Subinterface_Ipv6_Address) GetOrCreateVrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv6_Address_VrrpGroup {
-
-	key := VirtualRouterId
-
-	if v, ok := t.VrrpGroup[key]; ok {
-		return v
-	}
-	// Panic if we receive an error, since we should have retrieved an existing
-	// list member. This allows chaining of GetOrCreate methods.
-	v, err := t.NewVrrpGroup(VirtualRouterId)
-	if err != nil {
-		panic(fmt.Sprintf("GetOrCreateVrrpGroup got unexpected error: %v", err))
-	}
-	return v
-}
-
-// GetVrrpGroup retrieves the value with the specified key from
-// the VrrpGroup map field of Interface_Subinterface_Ipv6_Address. If the receiver is nil, or
-// the specified key is not present in the list, nil is returned such that Get*
-// methods may be safely chained.
-func (t *Interface_Subinterface_Ipv6_Address) GetVrrpGroup(VirtualRouterId uint8) *Interface_Subinterface_Ipv6_Address_VrrpGroup {
-
-	if t == nil {
-		return nil
-	}
-
-	key := VirtualRouterId
-
-	if lm, ok := t.VrrpGroup[key]; ok {
-		return lm
-	}
-	return nil
-}
-
-// DeleteVrrpGroup deletes the value with the specified keys from
-// the receiver Interface_Subinterface_Ipv6_Address. If there is no such element, the function
-// is a no-op.
-func (t *Interface_Subinterface_Ipv6_Address) DeleteVrrpGroup(VirtualRouterId uint8) {
-	key := VirtualRouterId
-
-	delete(t.VrrpGroup, key)
-}
-
-// AppendVrrpGroup appends the supplied Interface_Subinterface_Ipv6_Address_VrrpGroup struct to the
-// list VrrpGroup of Interface_Subinterface_Ipv6_Address. If the key value(s) specified in
-// the supplied Interface_Subinterface_Ipv6_Address_VrrpGroup already exist in the list, an error is
-// returned.
-func (t *Interface_Subinterface_Ipv6_Address) AppendVrrpGroup(v *Interface_Subinterface_Ipv6_Address_VrrpGroup) error {
-	if v.VirtualRouterId == nil {
-		return fmt.Errorf("invalid nil key received for VirtualRouterId")
-	}
-
-	key := *v.VirtualRouterId
-
-	// Initialise the list within the receiver struct if it has not already been
-	// created.
-	if t.VrrpGroup == nil {
-		t.VrrpGroup = make(map[uint8]*Interface_Subinterface_Ipv6_Address_VrrpGroup)
-	}
-
-	if _, ok := t.VrrpGroup[key]; ok {
-		return fmt.Errorf("duplicate key for list VrrpGroup %v", key)
-	}
-
-	t.VrrpGroup[key] = v
-	return nil
-}
-
-// GetIp retrieves the value of the leaf Ip from the Interface_Subinterface_Ipv6_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Ip is set, it can
-// safely use t.GetIp() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Ip == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address) GetIp() string {
-	if t == nil || t.Ip == nil {
-		return ""
-	}
-	return *t.Ip
-}
-
-// GetOrigin retrieves the value of the leaf Origin from the Interface_Subinterface_Ipv6_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Origin is set, it can
-// safely use t.GetOrigin() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Origin == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address) GetOrigin() E_IfIp_IpAddressOrigin {
-	if t == nil || t.Origin == 0 {
-		return 0
-	}
-	return t.Origin
-}
-
-// GetPrefixLength retrieves the value of the leaf PrefixLength from the Interface_Subinterface_Ipv6_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if PrefixLength is set, it can
-// safely use t.GetPrefixLength() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.PrefixLength == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address) GetPrefixLength() uint8 {
-	if t == nil || t.PrefixLength == nil {
-		return 0
-	}
-	return *t.PrefixLength
-}
-
-// GetStatus retrieves the value of the leaf Status from the Interface_Subinterface_Ipv6_Address
-// struct. If the field is unset but has a default value in the YANG schema,
-// then the default value will be returned.
-// Caution should be exercised whilst using this method since when without a
-// default value, it will return the Go zero value if the field is explicitly
-// unset. If the caller explicitly does not care if Status is set, it can
-// safely use t.GetStatus() to retrieve the value. In the case that the
-// caller has different actions based on whether the leaf is set or unset, it
-// should use 'if t.Status == nil' before retrieving the leaf's value.
-func (t *Interface_Subinterface_Ipv6_Address) GetStatus() E_Address_Status {
-	if t == nil || t.Status == 0 {
-		return 0
-	}
-	return t.Status
-}
-
-// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6_Address
-// with default values as specified in the YANG schema, instantiating any nil
-// container fields.
-func (t *Interface_Subinterface_Ipv6_Address) PopulateDefaults() {
-	if t == nil {
-		return
-	}
-	ygot.BuildEmptyTree(t)
-	for _, e := range t.VrrpGroup {
-		e.PopulateDefaults()
-	}
-}
-
-// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv6_Address struct, which is a YANG list entry.
-func (t *Interface_Subinterface_Ipv6_Address) ΛListKeyMap() (map[string]interface{}, error) {
-	if t.Ip == nil {
-		return nil, fmt.Errorf("nil value for key Ip")
-	}
-
-	return map[string]interface{}{
-		"ip": *t.Ip,
-	}, nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv6_Address) ΛValidate(opts ...ygot.ValidationOption) error {
-	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6_Address"], t, opts...); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Validate validates s against the YANG schema corresponding to its type.
-func (t *Interface_Subinterface_Ipv6_Address) Validate(opts ...ygot.ValidationOption) error {
-	return t.ΛValidate(opts...)
-}
-
-// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
-// that are included in the generated code.
-func (t *Interface_Subinterface_Ipv6_Address) ΛEnumTypeMap() map[string][]reflect.Type {
-	return ΛEnumTypes
-}
-
-// ΛBelongingModule returns the name of the module that defines the namespace
-// of Interface_Subinterface_Ipv6_Address.
-func (*Interface_Subinterface_Ipv6_Address) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }

@@ -36,6 +36,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -619,6 +620,35 @@ const (
 	AsExternalLsa_MetricType_TYPE_1 E_AsExternalLsa_MetricType = 1
 	// AsExternalLsa_MetricType_TYPE_2 corresponds to the value TYPE_2 of AsExternalLsa_MetricType
 	AsExternalLsa_MetricType_TYPE_2 E_AsExternalLsa_MetricType = 2
+)
+
+// E_Assignment_AssignmentType is a derived int64 type which is used to represent
+// the enumerated node Assignment_AssignmentType. An additional value named
+// Assignment_AssignmentType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Assignment_AssignmentType int64
+
+// IsYANGGoEnum ensures that Assignment_AssignmentType implements the yang.GoEnum
+// interface. This ensures that Assignment_AssignmentType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Assignment_AssignmentType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Assignment_AssignmentType.
+func (E_Assignment_AssignmentType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Assignment_AssignmentType.
+func (e E_Assignment_AssignmentType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Assignment_AssignmentType")
+}
+
+const (
+	// Assignment_AssignmentType_UNSET corresponds to the value UNSET of Assignment_AssignmentType
+	Assignment_AssignmentType_UNSET E_Assignment_AssignmentType = 0
+	// Assignment_AssignmentType_LOGICAL_CHANNEL corresponds to the value LOGICAL_CHANNEL of Assignment_AssignmentType
+	Assignment_AssignmentType_LOGICAL_CHANNEL E_Assignment_AssignmentType = 1
+	// Assignment_AssignmentType_OPTICAL_CHANNEL corresponds to the value OPTICAL_CHANNEL of Assignment_AssignmentType
+	Assignment_AssignmentType_OPTICAL_CHANNEL E_Assignment_AssignmentType = 2
 )
 
 // E_Authentication_CryptoType is a derived int64 type which is used to represent
@@ -1291,6 +1321,37 @@ const (
 	Capability_Flags_DOWN E_Capability_Flags = 2
 )
 
+// E_Channel_LinkState is a derived int64 type which is used to represent
+// the enumerated node Channel_LinkState. An additional value named
+// Channel_LinkState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Channel_LinkState int64
+
+// IsYANGGoEnum ensures that Channel_LinkState implements the yang.GoEnum
+// interface. This ensures that Channel_LinkState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Channel_LinkState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Channel_LinkState.
+func (E_Channel_LinkState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Channel_LinkState.
+func (e E_Channel_LinkState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Channel_LinkState")
+}
+
+const (
+	// Channel_LinkState_UNSET corresponds to the value UNSET of Channel_LinkState
+	Channel_LinkState_UNSET E_Channel_LinkState = 0
+	// Channel_LinkState_UP corresponds to the value UP of Channel_LinkState
+	Channel_LinkState_UP E_Channel_LinkState = 1
+	// Channel_LinkState_DOWN corresponds to the value DOWN of Channel_LinkState
+	Channel_LinkState_DOWN E_Channel_LinkState = 2
+	// Channel_LinkState_TESTING corresponds to the value TESTING of Channel_LinkState
+	Channel_LinkState_TESTING E_Channel_LinkState = 3
+)
+
 // E_Cpu_Index_Enum is a derived int64 type which is used to represent
 // the enumerated node Cpu_Index_Enum. An additional value named
 // Cpu_Index_Enum_UNSET is added to the enumeration which is used as
@@ -1577,6 +1638,37 @@ const (
 	EthernetSegment_Esi_Enum_UNSET E_EthernetSegment_Esi_Enum = 0
 	// EthernetSegment_Esi_Enum_AUTO corresponds to the value AUTO of EthernetSegment_Esi_Enum
 	EthernetSegment_Esi_Enum_AUTO E_EthernetSegment_Esi_Enum = 1
+)
+
+// E_Ethernet_ClientAls is a derived int64 type which is used to represent
+// the enumerated node Ethernet_ClientAls. An additional value named
+// Ethernet_ClientAls_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ethernet_ClientAls int64
+
+// IsYANGGoEnum ensures that Ethernet_ClientAls implements the yang.GoEnum
+// interface. This ensures that Ethernet_ClientAls can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ethernet_ClientAls) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ethernet_ClientAls.
+func (E_Ethernet_ClientAls) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ethernet_ClientAls.
+func (e E_Ethernet_ClientAls) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ethernet_ClientAls")
+}
+
+const (
+	// Ethernet_ClientAls_UNSET corresponds to the value UNSET of Ethernet_ClientAls
+	Ethernet_ClientAls_UNSET E_Ethernet_ClientAls = 0
+	// Ethernet_ClientAls_NONE corresponds to the value NONE of Ethernet_ClientAls
+	Ethernet_ClientAls_NONE E_Ethernet_ClientAls = 1
+	// Ethernet_ClientAls_LASER_SHUTDOWN corresponds to the value LASER_SHUTDOWN of Ethernet_ClientAls
+	Ethernet_ClientAls_LASER_SHUTDOWN E_Ethernet_ClientAls = 2
+	// Ethernet_ClientAls_ETHERNET corresponds to the value ETHERNET of Ethernet_ClientAls
+	Ethernet_ClientAls_ETHERNET E_Ethernet_ClientAls = 3
 )
 
 // E_Ethernet_DuplexMode is a derived int64 type which is used to represent
@@ -8099,6 +8191,80 @@ const (
 	Transceiver_Present_NOT_PRESENT E_Transceiver_Present = 2
 )
 
+// E_TransportTypes_AdminStateType is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_AdminStateType. An additional value named
+// TransportTypes_AdminStateType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_AdminStateType int64
+
+// IsYANGGoEnum ensures that TransportTypes_AdminStateType implements the yang.GoEnum
+// interface. This ensures that TransportTypes_AdminStateType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_AdminStateType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_AdminStateType.
+func (E_TransportTypes_AdminStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_AdminStateType.
+func (e E_TransportTypes_AdminStateType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_AdminStateType")
+}
+
+const (
+	// TransportTypes_AdminStateType_UNSET corresponds to the value UNSET of TransportTypes_AdminStateType
+	TransportTypes_AdminStateType_UNSET E_TransportTypes_AdminStateType = 0
+	// TransportTypes_AdminStateType_ENABLED corresponds to the value ENABLED of TransportTypes_AdminStateType
+	TransportTypes_AdminStateType_ENABLED E_TransportTypes_AdminStateType = 1
+	// TransportTypes_AdminStateType_DISABLED corresponds to the value DISABLED of TransportTypes_AdminStateType
+	TransportTypes_AdminStateType_DISABLED E_TransportTypes_AdminStateType = 2
+	// TransportTypes_AdminStateType_MAINT corresponds to the value MAINT of TransportTypes_AdminStateType
+	TransportTypes_AdminStateType_MAINT E_TransportTypes_AdminStateType = 3
+)
+
+// E_TransportTypes_CLIENT_MAPPING_MODE is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_CLIENT_MAPPING_MODE. An additional value named
+// TransportTypes_CLIENT_MAPPING_MODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_CLIENT_MAPPING_MODE int64
+
+// IsYANGGoEnum ensures that TransportTypes_CLIENT_MAPPING_MODE implements the yang.GoEnum
+// interface. This ensures that TransportTypes_CLIENT_MAPPING_MODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_CLIENT_MAPPING_MODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_CLIENT_MAPPING_MODE.
+func (E_TransportTypes_CLIENT_MAPPING_MODE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_CLIENT_MAPPING_MODE.
+func (e E_TransportTypes_CLIENT_MAPPING_MODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_CLIENT_MAPPING_MODE")
+}
+
+const (
+	// TransportTypes_CLIENT_MAPPING_MODE_UNSET corresponds to the value UNSET of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_UNSET E_TransportTypes_CLIENT_MAPPING_MODE = 0
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_1X100G corresponds to the value MODE_1X100G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_1X100G E_TransportTypes_CLIENT_MAPPING_MODE = 1
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_1X200G corresponds to the value MODE_1X200G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_1X200G E_TransportTypes_CLIENT_MAPPING_MODE = 2
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_1X400G corresponds to the value MODE_1X400G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_1X400G E_TransportTypes_CLIENT_MAPPING_MODE = 3
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_2X100G corresponds to the value MODE_2X100G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_2X100G E_TransportTypes_CLIENT_MAPPING_MODE = 4
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_2X200G corresponds to the value MODE_2X200G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_2X200G E_TransportTypes_CLIENT_MAPPING_MODE = 5
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_3X100G corresponds to the value MODE_3X100G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_3X100G E_TransportTypes_CLIENT_MAPPING_MODE = 6
+	// TransportTypes_CLIENT_MAPPING_MODE_MODE_4X100G corresponds to the value MODE_4X100G of TransportTypes_CLIENT_MAPPING_MODE
+	TransportTypes_CLIENT_MAPPING_MODE_MODE_4X100G E_TransportTypes_CLIENT_MAPPING_MODE = 7
+)
+
 // E_TransportTypes_ETHERNET_PMD_TYPE is a derived int64 type which is used to represent
 // the enumerated node TransportTypes_ETHERNET_PMD_TYPE. An additional value named
 // TransportTypes_ETHERNET_PMD_TYPE_UNSET is added to the enumeration which is used as
@@ -8219,6 +8385,109 @@ const (
 	TransportTypes_FIBER_CONNECTOR_TYPE_MPO_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 4
 	// TransportTypes_FIBER_CONNECTOR_TYPE_SC_CONNECTOR corresponds to the value SC_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
 	TransportTypes_FIBER_CONNECTOR_TYPE_SC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 5
+)
+
+// E_TransportTypes_FRAME_MAPPING_PROTOCOL is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_FRAME_MAPPING_PROTOCOL. An additional value named
+// TransportTypes_FRAME_MAPPING_PROTOCOL_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_FRAME_MAPPING_PROTOCOL int64
+
+// IsYANGGoEnum ensures that TransportTypes_FRAME_MAPPING_PROTOCOL implements the yang.GoEnum
+// interface. This ensures that TransportTypes_FRAME_MAPPING_PROTOCOL can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_FRAME_MAPPING_PROTOCOL) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_FRAME_MAPPING_PROTOCOL.
+func (E_TransportTypes_FRAME_MAPPING_PROTOCOL) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_FRAME_MAPPING_PROTOCOL.
+func (e E_TransportTypes_FRAME_MAPPING_PROTOCOL) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_FRAME_MAPPING_PROTOCOL")
+}
+
+const (
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_UNSET corresponds to the value UNSET of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_UNSET E_TransportTypes_FRAME_MAPPING_PROTOCOL = 0
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_AMP corresponds to the value AMP of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_AMP E_TransportTypes_FRAME_MAPPING_PROTOCOL = 1
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_BMP corresponds to the value BMP of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_BMP E_TransportTypes_FRAME_MAPPING_PROTOCOL = 2
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_CBR corresponds to the value CBR of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_CBR E_TransportTypes_FRAME_MAPPING_PROTOCOL = 3
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_GFP_F corresponds to the value GFP_F of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_GFP_F E_TransportTypes_FRAME_MAPPING_PROTOCOL = 4
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_GFP_T corresponds to the value GFP_T of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_GFP_T E_TransportTypes_FRAME_MAPPING_PROTOCOL = 5
+	// TransportTypes_FRAME_MAPPING_PROTOCOL_GMP corresponds to the value GMP of TransportTypes_FRAME_MAPPING_PROTOCOL
+	TransportTypes_FRAME_MAPPING_PROTOCOL_GMP E_TransportTypes_FRAME_MAPPING_PROTOCOL = 6
+)
+
+// E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE. An additional value named
+// TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE int64
+
+// IsYANGGoEnum ensures that TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE implements the yang.GoEnum
+// interface. This ensures that TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE.
+func (E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE.
+func (e E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE")
+}
+
+const (
+	// TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_UNSET corresponds to the value UNSET of TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE
+	TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_UNSET E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE = 0
+	// TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_ETHERNET corresponds to the value PROT_ETHERNET of TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE
+	TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_ETHERNET E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE = 1
+	// TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_OTN corresponds to the value PROT_OTN of TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE
+	TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_OTN E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE = 2
+)
+
+// E_TransportTypes_LoopbackModeType is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_LoopbackModeType. An additional value named
+// TransportTypes_LoopbackModeType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_LoopbackModeType int64
+
+// IsYANGGoEnum ensures that TransportTypes_LoopbackModeType implements the yang.GoEnum
+// interface. This ensures that TransportTypes_LoopbackModeType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_LoopbackModeType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_LoopbackModeType.
+func (E_TransportTypes_LoopbackModeType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_LoopbackModeType.
+func (e E_TransportTypes_LoopbackModeType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_LoopbackModeType")
+}
+
+const (
+	// TransportTypes_LoopbackModeType_UNSET corresponds to the value UNSET of TransportTypes_LoopbackModeType
+	TransportTypes_LoopbackModeType_UNSET E_TransportTypes_LoopbackModeType = 0
+	// TransportTypes_LoopbackModeType_NONE corresponds to the value NONE of TransportTypes_LoopbackModeType
+	TransportTypes_LoopbackModeType_NONE E_TransportTypes_LoopbackModeType = 1
+	// TransportTypes_LoopbackModeType_FACILITY corresponds to the value FACILITY of TransportTypes_LoopbackModeType
+	TransportTypes_LoopbackModeType_FACILITY E_TransportTypes_LoopbackModeType = 2
+	// TransportTypes_LoopbackModeType_TERMINAL corresponds to the value TERMINAL of TransportTypes_LoopbackModeType
+	TransportTypes_LoopbackModeType_TERMINAL E_TransportTypes_LoopbackModeType = 3
 )
 
 // E_TransportTypes_OTN_APPLICATION_CODE is a derived int64 type which is used to represent
@@ -8381,6 +8650,217 @@ const (
 	TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE_TYPE_DIGITAL_COHERENT_OPTIC E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE = 1
 	// TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE_TYPE_STANDARD_OPTIC corresponds to the value TYPE_STANDARD_OPTIC of TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE
 	TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE_TYPE_STANDARD_OPTIC E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE = 2
+)
+
+// E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_TRIBUTARY_PROTOCOL_TYPE. An additional value named
+// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE int64
+
+// IsYANGGoEnum ensures that TransportTypes_TRIBUTARY_PROTOCOL_TYPE implements the yang.GoEnum
+// interface. This ensures that TransportTypes_TRIBUTARY_PROTOCOL_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_TRIBUTARY_PROTOCOL_TYPE.
+func (E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE.
+func (e E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE")
+}
+
+const (
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_UNSET corresponds to the value UNSET of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_UNSET E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 0
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_100GE corresponds to the value PROT_100GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_100GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 1
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_100G_MLG corresponds to the value PROT_100G_MLG of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_100G_MLG E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 2
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_LAN corresponds to the value PROT_10GE_LAN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_LAN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 3
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_WAN corresponds to the value PROT_10GE_WAN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_WAN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 4
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1GE corresponds to the value PROT_1GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 5
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_400GE corresponds to the value PROT_400GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_400GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 6
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_40GE corresponds to the value PROT_40GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_40GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 7
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC192 corresponds to the value PROT_OC192 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC192 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 8
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC48 corresponds to the value PROT_OC48 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC48 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 9
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC768 corresponds to the value PROT_OC768 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC768 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 10
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2 corresponds to the value PROT_ODU2 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 11
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2E corresponds to the value PROT_ODU2E of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 12
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU3 corresponds to the value PROT_ODU3 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU3 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 13
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU4 corresponds to the value PROT_ODU4 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU4 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 14
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUCN corresponds to the value PROT_ODUCN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUCN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 15
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_CBR corresponds to the value PROT_ODUFLEX_CBR of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_CBR E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 16
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_GFP corresponds to the value PROT_ODUFLEX_GFP of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_GFP E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 17
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSIG corresponds to the value PROT_OTSIG of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSIG E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 18
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU1E corresponds to the value PROT_OTU1E of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU1E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 19
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2 corresponds to the value PROT_OTU2 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 20
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2E corresponds to the value PROT_OTU2E of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 21
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU3 corresponds to the value PROT_OTU3 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU3 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 22
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU4 corresponds to the value PROT_OTU4 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU4 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 23
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTUCN corresponds to the value PROT_OTUCN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTUCN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 24
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM16 corresponds to the value PROT_STM16 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM16 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 25
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM256 corresponds to the value PROT_STM256 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM256 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 26
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM64 corresponds to the value PROT_STM64 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM64 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 27
+)
+
+// E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_TRIBUTARY_RATE_CLASS_TYPE. An additional value named
+// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE int64
+
+// IsYANGGoEnum ensures that TransportTypes_TRIBUTARY_RATE_CLASS_TYPE implements the yang.GoEnum
+// interface. This ensures that TransportTypes_TRIBUTARY_RATE_CLASS_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_TRIBUTARY_RATE_CLASS_TYPE.
+func (E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE.
+func (e E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE")
+}
+
+const (
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_UNSET corresponds to the value UNSET of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_UNSET E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 0
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1000G corresponds to the value TRIB_RATE_1000G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1000G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 1
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_100G corresponds to the value TRIB_RATE_100G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_100G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 2
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1050G corresponds to the value TRIB_RATE_1050G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1050G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 3
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_10G corresponds to the value TRIB_RATE_10G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_10G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 4
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1100G corresponds to the value TRIB_RATE_1100G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1100G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 5
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1150G corresponds to the value TRIB_RATE_1150G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1150G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 6
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1200G corresponds to the value TRIB_RATE_1200G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1200G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 7
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1250G corresponds to the value TRIB_RATE_1250G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1250G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 8
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1300G corresponds to the value TRIB_RATE_1300G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1300G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 9
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1350G corresponds to the value TRIB_RATE_1350G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1350G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 10
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1400G corresponds to the value TRIB_RATE_1400G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1400G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 11
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1450G corresponds to the value TRIB_RATE_1450G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1450G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 12
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1500G corresponds to the value TRIB_RATE_1500G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1500G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 13
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_150G corresponds to the value TRIB_RATE_150G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_150G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 14
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1550G corresponds to the value TRIB_RATE_1550G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1550G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 15
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1600G corresponds to the value TRIB_RATE_1600G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1600G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 16
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1G corresponds to the value TRIB_RATE_1G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_1G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 17
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_2_5G corresponds to the value TRIB_RATE_2_5G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_2_5G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 18
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_200G corresponds to the value TRIB_RATE_200G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_200G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 19
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_250G corresponds to the value TRIB_RATE_250G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_250G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 20
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_300G corresponds to the value TRIB_RATE_300G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_300G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 21
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_350G corresponds to the value TRIB_RATE_350G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_350G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 22
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_400G corresponds to the value TRIB_RATE_400G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_400G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 23
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_40G corresponds to the value TRIB_RATE_40G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_40G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 24
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_450G corresponds to the value TRIB_RATE_450G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_450G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 25
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_500G corresponds to the value TRIB_RATE_500G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_500G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 26
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_550G corresponds to the value TRIB_RATE_550G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_550G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 27
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_600G corresponds to the value TRIB_RATE_600G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_600G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 28
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_650G corresponds to the value TRIB_RATE_650G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_650G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 29
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_700G corresponds to the value TRIB_RATE_700G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_700G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 30
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_750G corresponds to the value TRIB_RATE_750G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_750G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 31
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_800G corresponds to the value TRIB_RATE_800G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_800G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 32
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_850G corresponds to the value TRIB_RATE_850G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_850G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 33
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_900G corresponds to the value TRIB_RATE_900G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_900G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 34
+	// TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_950G corresponds to the value TRIB_RATE_950G of TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+	TransportTypes_TRIBUTARY_RATE_CLASS_TYPE_TRIB_RATE_950G E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE = 35
+)
+
+// E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_TRIBUTARY_SLOT_GRANULARITY. An additional value named
+// TransportTypes_TRIBUTARY_SLOT_GRANULARITY_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY int64
+
+// IsYANGGoEnum ensures that TransportTypes_TRIBUTARY_SLOT_GRANULARITY implements the yang.GoEnum
+// interface. This ensures that TransportTypes_TRIBUTARY_SLOT_GRANULARITY can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_TRIBUTARY_SLOT_GRANULARITY.
+func (E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY.
+func (e E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY")
+}
+
+const (
+	// TransportTypes_TRIBUTARY_SLOT_GRANULARITY_UNSET corresponds to the value UNSET of TransportTypes_TRIBUTARY_SLOT_GRANULARITY
+	TransportTypes_TRIBUTARY_SLOT_GRANULARITY_UNSET E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY = 0
+	// TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_1_25G corresponds to the value TRIB_SLOT_1_25G of TransportTypes_TRIBUTARY_SLOT_GRANULARITY
+	TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_1_25G E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY = 1
+	// TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_2_5G corresponds to the value TRIB_SLOT_2_5G of TransportTypes_TRIBUTARY_SLOT_GRANULARITY
+	TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_2_5G E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY = 2
+	// TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_5G corresponds to the value TRIB_SLOT_5G of TransportTypes_TRIBUTARY_SLOT_GRANULARITY
+	TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_5G E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY = 3
 )
 
 // E_Types_ADDRESS_FAMILY is a derived int64 type which is used to represent

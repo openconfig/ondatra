@@ -36,6 +36,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -170,6 +171,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_AsExternalLsa_MetricType": {
 		1: {Name: "TYPE_1"},
 		2: {Name: "TYPE_2"},
+	},
+	"E_Assignment_AssignmentType": {
+		1: {Name: "LOGICAL_CHANNEL"},
+		2: {Name: "OPTICAL_CHANNEL"},
 	},
 	"E_Authentication_CryptoType": {
 		1: {Name: "HMAC_MD5"},
@@ -312,6 +317,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "FLOOD"},
 		2: {Name: "DOWN"},
 	},
+	"E_Channel_LinkState": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+		3: {Name: "TESTING"},
+	},
 	"E_Cpu_Index_Enum": {
 		1: {Name: "ALL"},
 	},
@@ -349,6 +359,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_EthernetSegment_Esi_Enum": {
 		1: {Name: "AUTO"},
+	},
+	"E_Ethernet_ClientAls": {
+		1: {Name: "NONE"},
+		2: {Name: "LASER_SHUTDOWN"},
+		3: {Name: "ETHERNET"},
 	},
 	"E_Ethernet_DuplexMode": {
 		1: {Name: "FULL"},
@@ -1655,6 +1670,20 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "PRESENT"},
 		2: {Name: "NOT_PRESENT"},
 	},
+	"E_TransportTypes_AdminStateType": {
+		1: {Name: "ENABLED"},
+		2: {Name: "DISABLED"},
+		3: {Name: "MAINT"},
+	},
+	"E_TransportTypes_CLIENT_MAPPING_MODE": {
+		1: {Name: "MODE_1X100G", DefiningModule: "openconfig-transport-types"},
+		2: {Name: "MODE_1X200G", DefiningModule: "openconfig-transport-types"},
+		3: {Name: "MODE_1X400G", DefiningModule: "openconfig-transport-types"},
+		4: {Name: "MODE_2X100G", DefiningModule: "openconfig-transport-types"},
+		5: {Name: "MODE_2X200G", DefiningModule: "openconfig-transport-types"},
+		6: {Name: "MODE_3X100G", DefiningModule: "openconfig-transport-types"},
+		7: {Name: "MODE_4X100G", DefiningModule: "openconfig-transport-types"},
+	},
 	"E_TransportTypes_ETHERNET_PMD_TYPE": {
 		1:  {Name: "ETH_100GBASE_CLR4", DefiningModule: "openconfig-transport-types"},
 		2:  {Name: "ETH_100GBASE_CR4", DefiningModule: "openconfig-transport-types"},
@@ -1693,6 +1722,23 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "MPO_CONNECTOR", DefiningModule: "openconfig-transport-types"},
 		5: {Name: "SC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
 	},
+	"E_TransportTypes_FRAME_MAPPING_PROTOCOL": {
+		1: {Name: "AMP", DefiningModule: "openconfig-transport-types"},
+		2: {Name: "BMP", DefiningModule: "openconfig-transport-types"},
+		3: {Name: "CBR", DefiningModule: "openconfig-transport-types"},
+		4: {Name: "GFP_F", DefiningModule: "openconfig-transport-types"},
+		5: {Name: "GFP_T", DefiningModule: "openconfig-transport-types"},
+		6: {Name: "GMP", DefiningModule: "openconfig-transport-types"},
+	},
+	"E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE": {
+		1: {Name: "PROT_ETHERNET", DefiningModule: "openconfig-transport-types"},
+		2: {Name: "PROT_OTN", DefiningModule: "openconfig-transport-types"},
+	},
+	"E_TransportTypes_LoopbackModeType": {
+		1: {Name: "NONE"},
+		2: {Name: "FACILITY"},
+		3: {Name: "TERMINAL"},
+	},
 	"E_TransportTypes_OTN_APPLICATION_CODE": {
 		1: {Name: "OTN_UNDEFINED", DefiningModule: "openconfig-transport-types"},
 		2: {Name: "P1L1_2D1", DefiningModule: "openconfig-transport-types"},
@@ -1727,6 +1773,77 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE": {
 		1: {Name: "TYPE_DIGITAL_COHERENT_OPTIC", DefiningModule: "openconfig-transport-types"},
 		2: {Name: "TYPE_STANDARD_OPTIC", DefiningModule: "openconfig-transport-types"},
+	},
+	"E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE": {
+		1:  {Name: "PROT_100GE", DefiningModule: "openconfig-transport-types"},
+		2:  {Name: "PROT_100G_MLG", DefiningModule: "openconfig-transport-types"},
+		3:  {Name: "PROT_10GE_LAN", DefiningModule: "openconfig-transport-types"},
+		4:  {Name: "PROT_10GE_WAN", DefiningModule: "openconfig-transport-types"},
+		5:  {Name: "PROT_1GE", DefiningModule: "openconfig-transport-types"},
+		6:  {Name: "PROT_400GE", DefiningModule: "openconfig-transport-types"},
+		7:  {Name: "PROT_40GE", DefiningModule: "openconfig-transport-types"},
+		8:  {Name: "PROT_OC192", DefiningModule: "openconfig-transport-types"},
+		9:  {Name: "PROT_OC48", DefiningModule: "openconfig-transport-types"},
+		10: {Name: "PROT_OC768", DefiningModule: "openconfig-transport-types"},
+		11: {Name: "PROT_ODU2", DefiningModule: "openconfig-transport-types"},
+		12: {Name: "PROT_ODU2E", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "PROT_ODU3", DefiningModule: "openconfig-transport-types"},
+		14: {Name: "PROT_ODU4", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "PROT_ODUCN", DefiningModule: "openconfig-transport-types"},
+		16: {Name: "PROT_ODUFLEX_CBR", DefiningModule: "openconfig-transport-types"},
+		17: {Name: "PROT_ODUFLEX_GFP", DefiningModule: "openconfig-transport-types"},
+		18: {Name: "PROT_OTSIG", DefiningModule: "openconfig-transport-types"},
+		19: {Name: "PROT_OTU1E", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "PROT_OTU2", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "PROT_OTU2E", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "PROT_OTU3", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "PROT_OTU4", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "PROT_OTUCN", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "PROT_STM16", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "PROT_STM256", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "PROT_STM64", DefiningModule: "openconfig-transport-types"},
+	},
+	"E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE": {
+		1:  {Name: "TRIB_RATE_1000G", DefiningModule: "openconfig-transport-types"},
+		2:  {Name: "TRIB_RATE_100G", DefiningModule: "openconfig-transport-types"},
+		3:  {Name: "TRIB_RATE_1050G", DefiningModule: "openconfig-transport-types"},
+		4:  {Name: "TRIB_RATE_10G", DefiningModule: "openconfig-transport-types"},
+		5:  {Name: "TRIB_RATE_1100G", DefiningModule: "openconfig-transport-types"},
+		6:  {Name: "TRIB_RATE_1150G", DefiningModule: "openconfig-transport-types"},
+		7:  {Name: "TRIB_RATE_1200G", DefiningModule: "openconfig-transport-types"},
+		8:  {Name: "TRIB_RATE_1250G", DefiningModule: "openconfig-transport-types"},
+		9:  {Name: "TRIB_RATE_1300G", DefiningModule: "openconfig-transport-types"},
+		10: {Name: "TRIB_RATE_1350G", DefiningModule: "openconfig-transport-types"},
+		11: {Name: "TRIB_RATE_1400G", DefiningModule: "openconfig-transport-types"},
+		12: {Name: "TRIB_RATE_1450G", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "TRIB_RATE_1500G", DefiningModule: "openconfig-transport-types"},
+		14: {Name: "TRIB_RATE_150G", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "TRIB_RATE_1550G", DefiningModule: "openconfig-transport-types"},
+		16: {Name: "TRIB_RATE_1600G", DefiningModule: "openconfig-transport-types"},
+		17: {Name: "TRIB_RATE_1G", DefiningModule: "openconfig-transport-types"},
+		18: {Name: "TRIB_RATE_2.5G", DefiningModule: "openconfig-transport-types"},
+		19: {Name: "TRIB_RATE_200G", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "TRIB_RATE_250G", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "TRIB_RATE_300G", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "TRIB_RATE_350G", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "TRIB_RATE_400G", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "TRIB_RATE_40G", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "TRIB_RATE_450G", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "TRIB_RATE_500G", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "TRIB_RATE_550G", DefiningModule: "openconfig-transport-types"},
+		28: {Name: "TRIB_RATE_600G", DefiningModule: "openconfig-transport-types"},
+		29: {Name: "TRIB_RATE_650G", DefiningModule: "openconfig-transport-types"},
+		30: {Name: "TRIB_RATE_700G", DefiningModule: "openconfig-transport-types"},
+		31: {Name: "TRIB_RATE_750G", DefiningModule: "openconfig-transport-types"},
+		32: {Name: "TRIB_RATE_800G", DefiningModule: "openconfig-transport-types"},
+		33: {Name: "TRIB_RATE_850G", DefiningModule: "openconfig-transport-types"},
+		34: {Name: "TRIB_RATE_900G", DefiningModule: "openconfig-transport-types"},
+		35: {Name: "TRIB_RATE_950G", DefiningModule: "openconfig-transport-types"},
+	},
+	"E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY": {
+		1: {Name: "TRIB_SLOT_1.25G", DefiningModule: "openconfig-transport-types"},
+		2: {Name: "TRIB_SLOT_2.5G", DefiningModule: "openconfig-transport-types"},
+		3: {Name: "TRIB_SLOT_5G", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_Types_ADDRESS_FAMILY": {
 		1: {Name: "IPV4", DefiningModule: "openconfig-types"},
@@ -3227,6 +3344,45 @@ func initΛEnumTypes() {
 		},
 		"/system/ssh-server/state/protocol-version": {
 			reflect.TypeOf((E_SshServer_ProtocolVersion)(0)),
+		},
+		"/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/chassis-id-type": {
+			reflect.TypeOf((E_LldpTypes_ChassisIdType)(0)),
+		},
+		"/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/port-id-type": {
+			reflect.TypeOf((E_LldpTypes_PortIdType)(0)),
+		},
+		"/terminal-device/logical-channels/channel/ethernet/state/client-als": {
+			reflect.TypeOf((E_Ethernet_ClientAls)(0)),
+		},
+		"/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/state/assignment-type": {
+			reflect.TypeOf((E_Assignment_AssignmentType)(0)),
+		},
+		"/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/state/mapping": {
+			reflect.TypeOf((E_TransportTypes_FRAME_MAPPING_PROTOCOL)(0)),
+		},
+		"/terminal-device/logical-channels/channel/otn/state/tributary-slot-granularity": {
+			reflect.TypeOf((E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/admin-state": {
+			reflect.TypeOf((E_TransportTypes_AdminStateType)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/client-mapping-mode": {
+			reflect.TypeOf((E_TransportTypes_CLIENT_MAPPING_MODE)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/link-state": {
+			reflect.TypeOf((E_Channel_LinkState)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/logical-channel-type": {
+			reflect.TypeOf((E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/loopback-mode": {
+			reflect.TypeOf((E_TransportTypes_LoopbackModeType)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/rate-class": {
+			reflect.TypeOf((E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE)(0)),
+		},
+		"/terminal-device/logical-channels/channel/state/trib-protocol": {
+			reflect.TypeOf((E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE)(0)),
 		},
 	}
 }

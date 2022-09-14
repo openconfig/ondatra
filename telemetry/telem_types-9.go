@@ -12,6 +12,266 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_TransportTypes_LoopbackModeType is a E_TransportTypes_LoopbackModeType with a corresponding timestamp.
+type QualifiedE_TransportTypes_LoopbackModeType struct {
+	*genutil.Metadata
+	val     E_TransportTypes_LoopbackModeType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_LoopbackModeType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_LoopbackModeType sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_LoopbackModeType) Val(t testing.TB) E_TransportTypes_LoopbackModeType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_LoopbackModeType sample.
+func (q *QualifiedE_TransportTypes_LoopbackModeType) SetVal(v E_TransportTypes_LoopbackModeType) *QualifiedE_TransportTypes_LoopbackModeType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_LoopbackModeType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_LoopbackModeType is a telemetry Collection whose Await method returns a slice of E_TransportTypes_LoopbackModeType samples.
+type CollectionE_TransportTypes_LoopbackModeType struct {
+	W    *E_TransportTypes_LoopbackModeTypeWatcher
+	Data []*QualifiedE_TransportTypes_LoopbackModeType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_LoopbackModeType) Await(t testing.TB) []*QualifiedE_TransportTypes_LoopbackModeType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_LoopbackModeTypeWatcher observes a stream of E_TransportTypes_LoopbackModeType samples.
+type E_TransportTypes_LoopbackModeTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_LoopbackModeType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_LoopbackModeTypeWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_LoopbackModeType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_OTN_APPLICATION_CODE is a E_TransportTypes_OTN_APPLICATION_CODE with a corresponding timestamp.
+type QualifiedE_TransportTypes_OTN_APPLICATION_CODE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_OTN_APPLICATION_CODE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_OTN_APPLICATION_CODE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_OTN_APPLICATION_CODE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_OTN_APPLICATION_CODE) Val(t testing.TB) E_TransportTypes_OTN_APPLICATION_CODE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_OTN_APPLICATION_CODE sample.
+func (q *QualifiedE_TransportTypes_OTN_APPLICATION_CODE) SetVal(v E_TransportTypes_OTN_APPLICATION_CODE) *QualifiedE_TransportTypes_OTN_APPLICATION_CODE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_OTN_APPLICATION_CODE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_OTN_APPLICATION_CODE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_OTN_APPLICATION_CODE samples.
+type CollectionE_TransportTypes_OTN_APPLICATION_CODE struct {
+	W    *E_TransportTypes_OTN_APPLICATION_CODEWatcher
+	Data []*QualifiedE_TransportTypes_OTN_APPLICATION_CODE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_OTN_APPLICATION_CODE) Await(t testing.TB) []*QualifiedE_TransportTypes_OTN_APPLICATION_CODE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_OTN_APPLICATION_CODEWatcher observes a stream of E_TransportTypes_OTN_APPLICATION_CODE samples.
+type E_TransportTypes_OTN_APPLICATION_CODEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_OTN_APPLICATION_CODE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_OTN_APPLICATION_CODEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_OTN_APPLICATION_CODE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_SONET_APPLICATION_CODE is a E_TransportTypes_SONET_APPLICATION_CODE with a corresponding timestamp.
+type QualifiedE_TransportTypes_SONET_APPLICATION_CODE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_SONET_APPLICATION_CODE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_SONET_APPLICATION_CODE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_SONET_APPLICATION_CODE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_SONET_APPLICATION_CODE) Val(t testing.TB) E_TransportTypes_SONET_APPLICATION_CODE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_SONET_APPLICATION_CODE sample.
+func (q *QualifiedE_TransportTypes_SONET_APPLICATION_CODE) SetVal(v E_TransportTypes_SONET_APPLICATION_CODE) *QualifiedE_TransportTypes_SONET_APPLICATION_CODE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_SONET_APPLICATION_CODE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_SONET_APPLICATION_CODE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_SONET_APPLICATION_CODE samples.
+type CollectionE_TransportTypes_SONET_APPLICATION_CODE struct {
+	W    *E_TransportTypes_SONET_APPLICATION_CODEWatcher
+	Data []*QualifiedE_TransportTypes_SONET_APPLICATION_CODE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_SONET_APPLICATION_CODE) Await(t testing.TB) []*QualifiedE_TransportTypes_SONET_APPLICATION_CODE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_SONET_APPLICATION_CODEWatcher observes a stream of E_TransportTypes_SONET_APPLICATION_CODE samples.
+type E_TransportTypes_SONET_APPLICATION_CODEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_SONET_APPLICATION_CODE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_SONET_APPLICATION_CODEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_SONET_APPLICATION_CODE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE is a E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) Val(t testing.TB) E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE sample.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) SetVal(v E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE samples.
+type CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE struct {
+	W    *E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher
+	Data []*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE) Await(t testing.TB) []*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher observes a stream of E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE samples.
+type E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE is a E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE with a corresponding timestamp.
 type QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE struct {
 	*genutil.Metadata
@@ -73,6 +333,201 @@ type E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPEWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE is a E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) Val(t testing.TB) E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE sample.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) SetVal(v E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) *QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE samples.
+type CollectionE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE struct {
+	W    *E_TransportTypes_TRIBUTARY_PROTOCOL_TYPEWatcher
+	Data []*QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE) Await(t testing.TB) []*QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRIBUTARY_PROTOCOL_TYPEWatcher observes a stream of E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE samples.
+type E_TransportTypes_TRIBUTARY_PROTOCOL_TYPEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRIBUTARY_PROTOCOL_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRIBUTARY_PROTOCOL_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE is a E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) Val(t testing.TB) E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE sample.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) SetVal(v E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) *QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE samples.
+type CollectionE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE struct {
+	W    *E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPEWatcher
+	Data []*QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE) Await(t testing.TB) []*QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPEWatcher observes a stream of E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE samples.
+type E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPEWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPEWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY is a E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY with a corresponding timestamp.
+type QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY struct {
+	*genutil.Metadata
+	val     E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY sample, erroring out if not present.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) Val(t testing.TB) E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY sample.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) SetVal(v E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) *QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY is a telemetry Collection whose Await method returns a slice of E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY samples.
+type CollectionE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY struct {
+	W    *E_TransportTypes_TRIBUTARY_SLOT_GRANULARITYWatcher
+	Data []*QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY) Await(t testing.TB) []*QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_TransportTypes_TRIBUTARY_SLOT_GRANULARITYWatcher observes a stream of E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY samples.
+type E_TransportTypes_TRIBUTARY_SLOT_GRANULARITYWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_TransportTypes_TRIBUTARY_SLOT_GRANULARITYWatcher) Await(t testing.TB) (*QualifiedE_TransportTypes_TRIBUTARY_SLOT_GRANULARITY, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

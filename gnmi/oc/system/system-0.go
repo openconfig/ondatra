@@ -37,6 +37,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -810,6 +811,72 @@ func (n *System_MotdBannerPathAny) Config() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/software-version"
+//	Path from root:       "/system/state/software-version"
+func (n *System_SoftwareVersionPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"System",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "software-version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System).SoftwareVersion
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/software-version"
+//	Path from root:       "/system/state/software-version"
+func (n *System_SoftwareVersionPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "software-version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System).SoftwareVersion
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
 // System_CurrentDatetimePath represents the /openconfig-system/system/state/current-datetime YANG schema element.
 type System_CurrentDatetimePath struct {
 	*ygnmi.NodePath
@@ -866,6 +933,18 @@ type System_MotdBannerPath struct {
 
 // System_MotdBannerPathAny represents the wildcard version of the /openconfig-system/system/state/motd-banner YANG schema element.
 type System_MotdBannerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_SoftwareVersionPath represents the /openconfig-system/system/state/software-version YANG schema element.
+type System_SoftwareVersionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_SoftwareVersionPathAny represents the wildcard version of the /openconfig-system/system/state/software-version YANG schema element.
+type System_SoftwareVersionPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -1835,6 +1914,46 @@ func (n *SystemPathAny) Process(Pid uint64) *System_ProcessPathAny {
 			map[string]interface{}{"pid": Pid},
 			n,
 		),
+	}
+}
+
+// SoftwareVersion (leaf): Operating system version of the currently active controller
+// of the device.  It is required that this value matches the
+// value of the state/software-version leaf in the component
+// of type OPERATING_SYSTEM.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/software-version"
+//	Path from root:       "/system/state/software-version"
+func (n *SystemPath) SoftwareVersion() *System_SoftwareVersionPath {
+	return &System_SoftwareVersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "software-version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SoftwareVersion (leaf): Operating system version of the currently active controller
+// of the device.  It is required that this value matches the
+// value of the state/software-version leaf in the component
+// of type OPERATING_SYSTEM.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/software-version"
+//	Path from root:       "/system/state/software-version"
+func (n *SystemPathAny) SoftwareVersion() *System_SoftwareVersionPathAny {
+	return &System_SoftwareVersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "software-version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 }
 

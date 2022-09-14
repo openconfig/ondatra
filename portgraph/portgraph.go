@@ -191,7 +191,8 @@ func (s *solver) solve() (*Assignment, error) {
 	s.conPort2Port = s.superGraph.fetchPort2PortMap()
 
 	// Generate all AbstractNode -> ConcreteNode mappings.
-	abs2ConNodeChan := genNodeCombos(abs2ConNodes)
+	abs2ConNodeChan, stop := genCombos(abs2ConNodes)
+	defer stop()
 	// Iterate through each mapping. For each mapping, attempt to match edges and assign ports.
 	for abs2ConNode := range abs2ConNodeChan {
 		// For this mapping, check that the ConcreteNodes can satisfy the AbstractEdges.
@@ -276,7 +277,8 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 		}
 
 		// Try the Port combos for this ConcreteNode.
-		abs2ConPortChan := genPortCombos(abs2ConPortCombos)
+		abs2ConPortChan, stop := genCombos(abs2ConPortCombos)
+		defer stop()
 		for port2Port := range abs2ConPortChan {
 			canAssign := true
 			for absPort, conPort := range port2Port {
@@ -319,88 +321,6 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 	}
 	log.V(1).Infof("Only %d of %d ports were assigned; unassigning all ports", len(abs2ConPort), len(s.absPort2Node))
 	return nil, nil
-}
-
-// genNodeCombos yields every key->value mapping, where no two keys map to the same
-// value, given a map of keys to their possible values.
-func genNodeCombos(m map[*AbstractNode][]*ConcreteNode) <-chan map[*AbstractNode]*ConcreteNode {
-	var keys []*AbstractNode
-	for k := range m {
-		keys = append(keys, k)
-	}
-	ch := make(chan map[*AbstractNode]*ConcreteNode)
-	go func() {
-		// TODO: End the goroutine elegantly when the solve is done.
-		defer close(ch)
-		genNodeRecurse(m, keys, make(map[*AbstractNode]*ConcreteNode), make(map[*ConcreteNode]bool), ch)
-	}()
-	return ch
-}
-
-func genNodeRecurse(
-	m map[*AbstractNode][]*ConcreteNode,
-	keys []*AbstractNode,
-	res map[*AbstractNode]*ConcreteNode,
-	used map[*ConcreteNode]bool,
-	ch chan<- map[*AbstractNode]*ConcreteNode) {
-	if len(keys) == 0 {
-		copy := make(map[*AbstractNode]*ConcreteNode)
-		for k, v := range res {
-			copy[k] = v
-		}
-		ch <- copy
-		return
-	}
-	first := keys[0]
-	for _, i := range m[first] {
-		if !used[i] {
-			res[first] = i
-			used[i] = true
-			genNodeRecurse(m, keys[1:], res, used, ch)
-			delete(used, i)
-		}
-	}
-}
-
-// genPortCombos yields every key->value mapping, where no two keys map to the same
-// value, given a map of keys to their possible values.
-func genPortCombos(m map[*AbstractPort][]*ConcretePort) <-chan map[*AbstractPort]*ConcretePort {
-	var keys []*AbstractPort
-	for k := range m {
-		keys = append(keys, k)
-	}
-	ch := make(chan map[*AbstractPort]*ConcretePort)
-	go func() {
-		// TODO: End the goroutine elegantly when the solve is done.
-		defer close(ch)
-		genPortRecurse(m, keys, make(map[*AbstractPort]*ConcretePort), make(map[*ConcretePort]bool), ch)
-	}()
-	return ch
-}
-
-func genPortRecurse(
-	m map[*AbstractPort][]*ConcretePort,
-	keys []*AbstractPort,
-	res map[*AbstractPort]*ConcretePort,
-	used map[*ConcretePort]bool,
-	ch chan<- map[*AbstractPort]*ConcretePort) {
-	if len(keys) == 0 {
-		copy := make(map[*AbstractPort]*ConcretePort)
-		for k, v := range res {
-			copy[k] = v
-		}
-		ch <- copy
-		return
-	}
-	first := keys[0]
-	for _, i := range m[first] {
-		if !used[i] {
-			res[first] = i
-			used[i] = true
-			genPortRecurse(m, keys[1:], res, used, ch)
-			delete(used, i)
-		}
-	}
 }
 
 // Matching code.

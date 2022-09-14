@@ -35,6 +35,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -72,6 +73,4132 @@ package platform
 import (
 	"github.com/openconfig/ygot/ygot"
 )
+
+// Component_OpticalChannel_PolarizationModeDispersionPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersionPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersionPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersionPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinPath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Avg() *Component_OpticalChannel_PolarizationModeDispersion_AvgPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Avg() *Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Instant() *Component_OpticalChannel_PolarizationModeDispersion_InstantPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Instant() *Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Interval() *Component_OpticalChannel_PolarizationModeDispersion_IntervalPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Interval() *Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Max() *Component_OpticalChannel_PolarizationModeDispersion_MaxPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Max() *Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) MaxTime() *Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) MaxTime() *Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) Min() *Component_OpticalChannel_PolarizationModeDispersion_MinPath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) Min() *Component_OpticalChannel_PolarizationModeDispersion_MinPathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPath) MinTime() *Component_OpticalChannel_PolarizationModeDispersion_MinTimePath {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_PolarizationModeDispersionPathAny) MinTime() *Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny {
+	return &Component_OpticalChannel_PolarizationModeDispersion_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_PostFecBerPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber YANG schema element.
+type Component_OpticalChannel_PostFecBerPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber YANG schema element.
+type Component_OpticalChannel_PostFecBerPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PostFecBer_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PostFecBer_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PostFecBer_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PostFecBer_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PostFecBer_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PostFecBer_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MinPath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PostFecBer_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/post-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PostFecBer_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/avg"
+func (n *Component_OpticalChannel_PostFecBerPath) Avg() *Component_OpticalChannel_PostFecBer_AvgPath {
+	return &Component_OpticalChannel_PostFecBer_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/avg"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Avg() *Component_OpticalChannel_PostFecBer_AvgPathAny {
+	return &Component_OpticalChannel_PostFecBer_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/instant"
+func (n *Component_OpticalChannel_PostFecBerPath) Instant() *Component_OpticalChannel_PostFecBer_InstantPath {
+	return &Component_OpticalChannel_PostFecBer_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/instant"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Instant() *Component_OpticalChannel_PostFecBer_InstantPathAny {
+	return &Component_OpticalChannel_PostFecBer_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/interval"
+func (n *Component_OpticalChannel_PostFecBerPath) Interval() *Component_OpticalChannel_PostFecBer_IntervalPath {
+	return &Component_OpticalChannel_PostFecBer_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/interval"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Interval() *Component_OpticalChannel_PostFecBer_IntervalPathAny {
+	return &Component_OpticalChannel_PostFecBer_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/max"
+func (n *Component_OpticalChannel_PostFecBerPath) Max() *Component_OpticalChannel_PostFecBer_MaxPath {
+	return &Component_OpticalChannel_PostFecBer_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/max"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Max() *Component_OpticalChannel_PostFecBer_MaxPathAny {
+	return &Component_OpticalChannel_PostFecBer_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/max-time"
+func (n *Component_OpticalChannel_PostFecBerPath) MaxTime() *Component_OpticalChannel_PostFecBer_MaxTimePath {
+	return &Component_OpticalChannel_PostFecBer_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/max-time"
+func (n *Component_OpticalChannel_PostFecBerPathAny) MaxTime() *Component_OpticalChannel_PostFecBer_MaxTimePathAny {
+	return &Component_OpticalChannel_PostFecBer_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/min"
+func (n *Component_OpticalChannel_PostFecBerPath) Min() *Component_OpticalChannel_PostFecBer_MinPath {
+	return &Component_OpticalChannel_PostFecBer_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/min"
+func (n *Component_OpticalChannel_PostFecBerPathAny) Min() *Component_OpticalChannel_PostFecBer_MinPathAny {
+	return &Component_OpticalChannel_PostFecBer_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/min-time"
+func (n *Component_OpticalChannel_PostFecBerPath) MinTime() *Component_OpticalChannel_PostFecBer_MinTimePath {
+	return &Component_OpticalChannel_PostFecBer_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/post-fec-ber/min-time"
+func (n *Component_OpticalChannel_PostFecBerPathAny) MinTime() *Component_OpticalChannel_PostFecBer_MinTimePathAny {
+	return &Component_OpticalChannel_PostFecBer_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_PreFecBerPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber YANG schema element.
+type Component_OpticalChannel_PreFecBerPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber YANG schema element.
+type Component_OpticalChannel_PreFecBerPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PreFecBer_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/avg YANG schema element.
+type Component_OpticalChannel_PreFecBer_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PreFecBer_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/instant YANG schema element.
+type Component_OpticalChannel_PreFecBer_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PreFecBer_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/interval YANG schema element.
+type Component_OpticalChannel_PreFecBer_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/max-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MinPath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_PreFecBer_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/pre-fec-ber/min-time YANG schema element.
+type Component_OpticalChannel_PreFecBer_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/avg"
+func (n *Component_OpticalChannel_PreFecBerPath) Avg() *Component_OpticalChannel_PreFecBer_AvgPath {
+	return &Component_OpticalChannel_PreFecBer_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/avg"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Avg() *Component_OpticalChannel_PreFecBer_AvgPathAny {
+	return &Component_OpticalChannel_PreFecBer_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/instant"
+func (n *Component_OpticalChannel_PreFecBerPath) Instant() *Component_OpticalChannel_PreFecBer_InstantPath {
+	return &Component_OpticalChannel_PreFecBer_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/instant"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Instant() *Component_OpticalChannel_PreFecBer_InstantPathAny {
+	return &Component_OpticalChannel_PreFecBer_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/interval"
+func (n *Component_OpticalChannel_PreFecBerPath) Interval() *Component_OpticalChannel_PreFecBer_IntervalPath {
+	return &Component_OpticalChannel_PreFecBer_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/interval"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Interval() *Component_OpticalChannel_PreFecBer_IntervalPathAny {
+	return &Component_OpticalChannel_PreFecBer_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/max"
+func (n *Component_OpticalChannel_PreFecBerPath) Max() *Component_OpticalChannel_PreFecBer_MaxPath {
+	return &Component_OpticalChannel_PreFecBer_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/max"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Max() *Component_OpticalChannel_PreFecBer_MaxPathAny {
+	return &Component_OpticalChannel_PreFecBer_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/max-time"
+func (n *Component_OpticalChannel_PreFecBerPath) MaxTime() *Component_OpticalChannel_PreFecBer_MaxTimePath {
+	return &Component_OpticalChannel_PreFecBer_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/max-time"
+func (n *Component_OpticalChannel_PreFecBerPathAny) MaxTime() *Component_OpticalChannel_PreFecBer_MaxTimePathAny {
+	return &Component_OpticalChannel_PreFecBer_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/min"
+func (n *Component_OpticalChannel_PreFecBerPath) Min() *Component_OpticalChannel_PreFecBer_MinPath {
+	return &Component_OpticalChannel_PreFecBer_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/min"
+func (n *Component_OpticalChannel_PreFecBerPathAny) Min() *Component_OpticalChannel_PreFecBer_MinPathAny {
+	return &Component_OpticalChannel_PreFecBer_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/min-time"
+func (n *Component_OpticalChannel_PreFecBerPath) MinTime() *Component_OpticalChannel_PreFecBer_MinTimePath {
+	return &Component_OpticalChannel_PreFecBer_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/pre-fec-ber/min-time"
+func (n *Component_OpticalChannel_PreFecBerPathAny) MinTime() *Component_OpticalChannel_PreFecBer_MinTimePathAny {
+	return &Component_OpticalChannel_PreFecBer_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_QValuePath represents the /openconfig-platform/components/component/optical-channel/state/q-value YANG schema element.
+type Component_OpticalChannel_QValuePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValuePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value YANG schema element.
+type Component_OpticalChannel_QValuePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/avg YANG schema element.
+type Component_OpticalChannel_QValue_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/avg YANG schema element.
+type Component_OpticalChannel_QValue_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/instant YANG schema element.
+type Component_OpticalChannel_QValue_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/instant YANG schema element.
+type Component_OpticalChannel_QValue_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/interval YANG schema element.
+type Component_OpticalChannel_QValue_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/interval YANG schema element.
+type Component_OpticalChannel_QValue_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/max YANG schema element.
+type Component_OpticalChannel_QValue_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/max YANG schema element.
+type Component_OpticalChannel_QValue_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/q-value/max-time YANG schema element.
+type Component_OpticalChannel_QValue_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/max-time YANG schema element.
+type Component_OpticalChannel_QValue_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MinPath represents the /openconfig-platform/components/component/optical-channel/state/q-value/min YANG schema element.
+type Component_OpticalChannel_QValue_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/min YANG schema element.
+type Component_OpticalChannel_QValue_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/q-value/min-time YANG schema element.
+type Component_OpticalChannel_QValue_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_QValue_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/q-value/min-time YANG schema element.
+type Component_OpticalChannel_QValue_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/q-value/avg"
+func (n *Component_OpticalChannel_QValuePath) Avg() *Component_OpticalChannel_QValue_AvgPath {
+	return &Component_OpticalChannel_QValue_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/q-value/avg"
+func (n *Component_OpticalChannel_QValuePathAny) Avg() *Component_OpticalChannel_QValue_AvgPathAny {
+	return &Component_OpticalChannel_QValue_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/q-value/instant"
+func (n *Component_OpticalChannel_QValuePath) Instant() *Component_OpticalChannel_QValue_InstantPath {
+	return &Component_OpticalChannel_QValue_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/q-value/instant"
+func (n *Component_OpticalChannel_QValuePathAny) Instant() *Component_OpticalChannel_QValue_InstantPathAny {
+	return &Component_OpticalChannel_QValue_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/q-value/interval"
+func (n *Component_OpticalChannel_QValuePath) Interval() *Component_OpticalChannel_QValue_IntervalPath {
+	return &Component_OpticalChannel_QValue_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/q-value/interval"
+func (n *Component_OpticalChannel_QValuePathAny) Interval() *Component_OpticalChannel_QValue_IntervalPathAny {
+	return &Component_OpticalChannel_QValue_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/q-value/max"
+func (n *Component_OpticalChannel_QValuePath) Max() *Component_OpticalChannel_QValue_MaxPath {
+	return &Component_OpticalChannel_QValue_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/q-value/max"
+func (n *Component_OpticalChannel_QValuePathAny) Max() *Component_OpticalChannel_QValue_MaxPathAny {
+	return &Component_OpticalChannel_QValue_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/q-value/max-time"
+func (n *Component_OpticalChannel_QValuePath) MaxTime() *Component_OpticalChannel_QValue_MaxTimePath {
+	return &Component_OpticalChannel_QValue_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/q-value/max-time"
+func (n *Component_OpticalChannel_QValuePathAny) MaxTime() *Component_OpticalChannel_QValue_MaxTimePathAny {
+	return &Component_OpticalChannel_QValue_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/q-value/min"
+func (n *Component_OpticalChannel_QValuePath) Min() *Component_OpticalChannel_QValue_MinPath {
+	return &Component_OpticalChannel_QValue_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/q-value/min"
+func (n *Component_OpticalChannel_QValuePathAny) Min() *Component_OpticalChannel_QValue_MinPathAny {
+	return &Component_OpticalChannel_QValue_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/q-value/min-time"
+func (n *Component_OpticalChannel_QValuePath) MinTime() *Component_OpticalChannel_QValue_MinTimePath {
+	return &Component_OpticalChannel_QValue_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/q-value/min-time"
+func (n *Component_OpticalChannel_QValuePathAny) MinTime() *Component_OpticalChannel_QValue_MinTimePathAny {
+	return &Component_OpticalChannel_QValue_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time YANG schema element.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Avg() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/avg"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Avg() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Instant() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/instant"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Instant() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Interval() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/interval"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Interval() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Max() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Max() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) MaxTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/max-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) MaxTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) Min() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) Min() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPath) MinTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/second-order-polarization-mode-dispersion/min-time"
+func (n *Component_OpticalChannel_SecondOrderPolarizationModeDispersionPathAny) MinTime() *Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny {
+	return &Component_OpticalChannel_SecondOrderPolarizationModeDispersion_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannel_SopRocPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc YANG schema element.
+type Component_OpticalChannel_SopRocPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRocPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc YANG schema element.
+type Component_OpticalChannel_SopRocPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_AvgPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/avg YANG schema element.
+type Component_OpticalChannel_SopRoc_AvgPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/avg YANG schema element.
+type Component_OpticalChannel_SopRoc_AvgPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_InstantPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/instant YANG schema element.
+type Component_OpticalChannel_SopRoc_InstantPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/instant YANG schema element.
+type Component_OpticalChannel_SopRoc_InstantPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_IntervalPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/interval YANG schema element.
+type Component_OpticalChannel_SopRoc_IntervalPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/interval YANG schema element.
+type Component_OpticalChannel_SopRoc_IntervalPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MaxPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/max YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/max YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MaxTimePath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/max-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/max-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MaxTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MinPath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/min YANG schema element.
+type Component_OpticalChannel_SopRoc_MinPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/min YANG schema element.
+type Component_OpticalChannel_SopRoc_MinPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MinTimePath represents the /openconfig-platform/components/component/optical-channel/state/sop-roc/min-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MinTimePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_SopRoc_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/sop-roc/min-time YANG schema element.
+type Component_OpticalChannel_SopRoc_MinTimePathAny struct {
+	*ygot.NodePath
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/sop-roc/avg"
+func (n *Component_OpticalChannel_SopRocPath) Avg() *Component_OpticalChannel_SopRoc_AvgPath {
+	return &Component_OpticalChannel_SopRoc_AvgPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "avg"
+// Path from root: "/components/component/optical-channel/state/sop-roc/avg"
+func (n *Component_OpticalChannel_SopRocPathAny) Avg() *Component_OpticalChannel_SopRoc_AvgPathAny {
+	return &Component_OpticalChannel_SopRoc_AvgPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/sop-roc/instant"
+func (n *Component_OpticalChannel_SopRocPath) Instant() *Component_OpticalChannel_SopRoc_InstantPath {
+	return &Component_OpticalChannel_SopRoc_InstantPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "instant"
+// Path from root: "/components/component/optical-channel/state/sop-roc/instant"
+func (n *Component_OpticalChannel_SopRocPathAny) Instant() *Component_OpticalChannel_SopRoc_InstantPathAny {
+	return &Component_OpticalChannel_SopRoc_InstantPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/sop-roc/interval"
+func (n *Component_OpticalChannel_SopRocPath) Interval() *Component_OpticalChannel_SopRoc_IntervalPath {
+	return &Component_OpticalChannel_SopRoc_IntervalPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "interval"
+// Path from root: "/components/component/optical-channel/state/sop-roc/interval"
+func (n *Component_OpticalChannel_SopRocPathAny) Interval() *Component_OpticalChannel_SopRoc_IntervalPathAny {
+	return &Component_OpticalChannel_SopRoc_IntervalPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/sop-roc/max"
+func (n *Component_OpticalChannel_SopRocPath) Max() *Component_OpticalChannel_SopRoc_MaxPath {
+	return &Component_OpticalChannel_SopRoc_MaxPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max"
+// Path from root: "/components/component/optical-channel/state/sop-roc/max"
+func (n *Component_OpticalChannel_SopRocPathAny) Max() *Component_OpticalChannel_SopRoc_MaxPathAny {
+	return &Component_OpticalChannel_SopRoc_MaxPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/sop-roc/max-time"
+func (n *Component_OpticalChannel_SopRocPath) MaxTime() *Component_OpticalChannel_SopRoc_MaxTimePath {
+	return &Component_OpticalChannel_SopRoc_MaxTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "max-time"
+// Path from root: "/components/component/optical-channel/state/sop-roc/max-time"
+func (n *Component_OpticalChannel_SopRocPathAny) MaxTime() *Component_OpticalChannel_SopRoc_MaxTimePathAny {
+	return &Component_OpticalChannel_SopRoc_MaxTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/sop-roc/min"
+func (n *Component_OpticalChannel_SopRocPath) Min() *Component_OpticalChannel_SopRoc_MinPath {
+	return &Component_OpticalChannel_SopRoc_MinPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+// ----------------------------------------
+// Defining module: "openconfig-transport-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min"
+// Path from root: "/components/component/optical-channel/state/sop-roc/min"
+func (n *Component_OpticalChannel_SopRocPathAny) Min() *Component_OpticalChannel_SopRoc_MinPathAny {
+	return &Component_OpticalChannel_SopRoc_MinPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/sop-roc/min-time"
+func (n *Component_OpticalChannel_SopRocPath) MinTime() *Component_OpticalChannel_SopRoc_MinTimePath {
+	return &Component_OpticalChannel_SopRoc_MinTimePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+// ----------------------------------------
+// Defining module: "openconfig-types"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "min-time"
+// Path from root: "/components/component/optical-channel/state/sop-roc/min-time"
+func (n *Component_OpticalChannel_SopRocPathAny) MinTime() *Component_OpticalChannel_SopRoc_MinTimePathAny {
+	return &Component_OpticalChannel_SopRoc_MinTimePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_PciePath represents the /openconfig-platform/components/component/state/pcie YANG schema element.
+type Component_PciePath struct {
+	*ygot.NodePath
+}
+
+// Component_PciePathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie YANG schema element.
+type Component_PciePathAny struct {
+	*ygot.NodePath
+}
+
+// CorrectableErrors (container): The count of the correctable PCIe errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "correctable-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors"
+func (n *Component_PciePath) CorrectableErrors() *Component_Pcie_CorrectableErrorsPath {
+	return &Component_Pcie_CorrectableErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"correctable-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CorrectableErrors (container): The count of the correctable PCIe errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "correctable-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors"
+func (n *Component_PciePathAny) CorrectableErrors() *Component_Pcie_CorrectableErrorsPathAny {
+	return &Component_Pcie_CorrectableErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"correctable-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FatalErrors (container): The count of the fatal PCIe errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "fatal-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors"
+func (n *Component_PciePath) FatalErrors() *Component_Pcie_FatalErrorsPath {
+	return &Component_Pcie_FatalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"fatal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FatalErrors (container): The count of the fatal PCIe errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "fatal-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors"
+func (n *Component_PciePathAny) FatalErrors() *Component_Pcie_FatalErrorsPathAny {
+	return &Component_Pcie_FatalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"fatal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NonFatalErrors (container): The count of the non-fatal PCIe errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "non-fatal-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors"
+func (n *Component_PciePath) NonFatalErrors() *Component_Pcie_NonFatalErrorsPath {
+	return &Component_Pcie_NonFatalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"non-fatal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NonFatalErrors (container): The count of the non-fatal PCIe errors.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "non-fatal-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors"
+func (n *Component_PciePathAny) NonFatalErrors() *Component_Pcie_NonFatalErrorsPathAny {
+	return &Component_Pcie_NonFatalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"non-fatal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_Pcie_CorrectableErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors YANG schema element.
+type Component_Pcie_CorrectableErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors YANG schema element.
+type Component_Pcie_CorrectableErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_BadDllpErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_BadDllpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-dllp-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_BadTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_BadTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/bad-tlp-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_InternalErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_InternalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_InternalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/internal-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_InternalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_ReceiverErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_ReceiverErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/receiver-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/relay-rollover-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/replay-timeout-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/replay-timeout-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_TotalErrorsPath represents the /openconfig-platform/components/component/state/pcie/correctable-errors/total-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_TotalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_CorrectableErrors_TotalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/correctable-errors/total-errors YANG schema element.
+type Component_Pcie_CorrectableErrors_TotalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// AdvisoryNonFatalErrors (leaf): Number of advisory non fatal errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "advisory-non-fatal-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) AdvisoryNonFatalErrors() *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath {
+	return &Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"advisory-non-fatal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AdvisoryNonFatalErrors (leaf): Number of advisory non fatal errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "advisory-non-fatal-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/advisory-non-fatal-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) AdvisoryNonFatalErrors() *Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_AdvisoryNonFatalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"advisory-non-fatal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BadDllpErrors (leaf): Number of DLLPs with bad LCRC detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "bad-dllp-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/bad-dllp-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) BadDllpErrors() *Component_Pcie_CorrectableErrors_BadDllpErrorsPath {
+	return &Component_Pcie_CorrectableErrors_BadDllpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"bad-dllp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BadDllpErrors (leaf): Number of DLLPs with bad LCRC detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "bad-dllp-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/bad-dllp-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) BadDllpErrors() *Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_BadDllpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"bad-dllp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BadTlpErrors (leaf): Number of TLPs with bad LCRC detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "bad-tlp-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/bad-tlp-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) BadTlpErrors() *Component_Pcie_CorrectableErrors_BadTlpErrorsPath {
+	return &Component_Pcie_CorrectableErrors_BadTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"bad-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BadTlpErrors (leaf): Number of TLPs with bad LCRC detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "bad-tlp-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/bad-tlp-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) BadTlpErrors() *Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_BadTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"bad-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HdrLogOverflowErrors (leaf): Number of header log overflow errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "hdr-log-overflow-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) HdrLogOverflowErrors() *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath {
+	return &Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"hdr-log-overflow-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HdrLogOverflowErrors (leaf): Number of header log overflow errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "hdr-log-overflow-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/hdr-log-overflow-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) HdrLogOverflowErrors() *Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_HdrLogOverflowErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"hdr-log-overflow-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InternalErrors (leaf): Number of internal errors detected by PCIe device since the system
+// booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "internal-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/internal-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) InternalErrors() *Component_Pcie_CorrectableErrors_InternalErrorsPath {
+	return &Component_Pcie_CorrectableErrors_InternalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"internal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InternalErrors (leaf): Number of internal errors detected by PCIe device since the system
+// booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "internal-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/internal-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) InternalErrors() *Component_Pcie_CorrectableErrors_InternalErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_InternalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"internal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReceiverErrors (leaf): Number of receiver errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "receiver-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/receiver-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) ReceiverErrors() *Component_Pcie_CorrectableErrors_ReceiverErrorsPath {
+	return &Component_Pcie_CorrectableErrors_ReceiverErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"receiver-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReceiverErrors (leaf): Number of receiver errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "receiver-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/receiver-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) ReceiverErrors() *Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_ReceiverErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"receiver-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RelayRolloverErrors (leaf): Number of relay rollover errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "relay-rollover-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/relay-rollover-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) RelayRolloverErrors() *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath {
+	return &Component_Pcie_CorrectableErrors_RelayRolloverErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"relay-rollover-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// RelayRolloverErrors (leaf): Number of relay rollover errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "relay-rollover-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/relay-rollover-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) RelayRolloverErrors() *Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_RelayRolloverErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"relay-rollover-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReplayTimeoutErrors (leaf): Number of replay timeout errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "replay-timeout-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/replay-timeout-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) ReplayTimeoutErrors() *Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath {
+	return &Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"replay-timeout-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReplayTimeoutErrors (leaf): Number of replay timeout errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "replay-timeout-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/replay-timeout-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) ReplayTimeoutErrors() *Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_ReplayTimeoutErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"replay-timeout-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalErrors (leaf): Total number of correctable errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "total-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/total-errors"
+func (n *Component_Pcie_CorrectableErrorsPath) TotalErrors() *Component_Pcie_CorrectableErrors_TotalErrorsPath {
+	return &Component_Pcie_CorrectableErrors_TotalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"total-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalErrors (leaf): Total number of correctable errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "total-errors"
+// Path from root: "/components/component/state/pcie/correctable-errors/total-errors"
+func (n *Component_Pcie_CorrectableErrorsPathAny) TotalErrors() *Component_Pcie_CorrectableErrors_TotalErrorsPathAny {
+	return &Component_Pcie_CorrectableErrors_TotalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"total-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_Pcie_FatalErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors YANG schema element.
+type Component_Pcie_FatalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors YANG schema element.
+type Component_Pcie_FatalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_AcsViolationErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/acs-violation-errors YANG schema element.
+type Component_Pcie_FatalErrors_AcsViolationErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_AcsViolationErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/acs-violation-errors YANG schema element.
+type Component_Pcie_FatalErrors_AcsViolationErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors YANG schema element.
+type Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors YANG schema element.
+type Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_BlockedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/blocked-tlp-errors YANG schema element.
+type Component_Pcie_FatalErrors_BlockedTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/blocked-tlp-errors YANG schema element.
+type Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_CompletionAbortErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-abort-errors YANG schema element.
+type Component_Pcie_FatalErrors_CompletionAbortErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-abort-errors YANG schema element.
+type Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-timeout-errors YANG schema element.
+type Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/completion-timeout-errors YANG schema element.
+type Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_DataLinkErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/data-link-errors YANG schema element.
+type Component_Pcie_FatalErrors_DataLinkErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_DataLinkErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/data-link-errors YANG schema element.
+type Component_Pcie_FatalErrors_DataLinkErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_EcrcErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/ecrc-errors YANG schema element.
+type Component_Pcie_FatalErrors_EcrcErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_EcrcErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/ecrc-errors YANG schema element.
+type Component_Pcie_FatalErrors_EcrcErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/flow-control-protocol-errors YANG schema element.
+type Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/flow-control-protocol-errors YANG schema element.
+type Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_InternalErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/internal-errors YANG schema element.
+type Component_Pcie_FatalErrors_InternalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_InternalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/internal-errors YANG schema element.
+type Component_Pcie_FatalErrors_InternalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_MalformedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/malformed-tlp-errors YANG schema element.
+type Component_Pcie_FatalErrors_MalformedTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/malformed-tlp-errors YANG schema element.
+type Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_PoisonedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/poisoned-tlp-errors YANG schema element.
+type Component_Pcie_FatalErrors_PoisonedTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/poisoned-tlp-errors YANG schema element.
+type Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/receiver-overflow-errors YANG schema element.
+type Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/receiver-overflow-errors YANG schema element.
+type Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_SurpriseDownErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/surprise-down-errors YANG schema element.
+type Component_Pcie_FatalErrors_SurpriseDownErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/surprise-down-errors YANG schema element.
+type Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors YANG schema element.
+type Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors YANG schema element.
+type Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_TotalErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/total-errors YANG schema element.
+type Component_Pcie_FatalErrors_TotalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_TotalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/total-errors YANG schema element.
+type Component_Pcie_FatalErrors_TotalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_UndefinedErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/undefined-errors YANG schema element.
+type Component_Pcie_FatalErrors_UndefinedErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_UndefinedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/undefined-errors YANG schema element.
+type Component_Pcie_FatalErrors_UndefinedErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors YANG schema element.
+type Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/unexpected-completion-errors YANG schema element.
+type Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath represents the /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors YANG schema element.
+type Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/fatal-errors/unsupported-request-errors YANG schema element.
+type Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "acs-violation-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/acs-violation-errors"
+func (n *Component_Pcie_FatalErrorsPath) AcsViolationErrors() *Component_Pcie_FatalErrors_AcsViolationErrorsPath {
+	return &Component_Pcie_FatalErrors_AcsViolationErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"acs-violation-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "acs-violation-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/acs-violation-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) AcsViolationErrors() *Component_Pcie_FatalErrors_AcsViolationErrorsPathAny {
+	return &Component_Pcie_FatalErrors_AcsViolationErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"acs-violation-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
+// device since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "atomic-op-blocked-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors"
+func (n *Component_Pcie_FatalErrorsPath) AtomicOpBlockedErrors() *Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath {
+	return &Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"atomic-op-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
+// device since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "atomic-op-blocked-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/atomic-op-blocked-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) AtomicOpBlockedErrors() *Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny {
+	return &Component_Pcie_FatalErrors_AtomicOpBlockedErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"atomic-op-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "blocked-tlp-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/blocked-tlp-errors"
+func (n *Component_Pcie_FatalErrorsPath) BlockedTlpErrors() *Component_Pcie_FatalErrors_BlockedTlpErrorsPath {
+	return &Component_Pcie_FatalErrors_BlockedTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"blocked-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "blocked-tlp-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/blocked-tlp-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) BlockedTlpErrors() *Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny {
+	return &Component_Pcie_FatalErrors_BlockedTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"blocked-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-abort-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/completion-abort-errors"
+func (n *Component_Pcie_FatalErrorsPath) CompletionAbortErrors() *Component_Pcie_FatalErrors_CompletionAbortErrorsPath {
+	return &Component_Pcie_FatalErrors_CompletionAbortErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-abort-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-abort-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/completion-abort-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) CompletionAbortErrors() *Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny {
+	return &Component_Pcie_FatalErrors_CompletionAbortErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-abort-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-timeout-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/completion-timeout-errors"
+func (n *Component_Pcie_FatalErrorsPath) CompletionTimeoutErrors() *Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath {
+	return &Component_Pcie_FatalErrors_CompletionTimeoutErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-timeout-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-timeout-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/completion-timeout-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) CompletionTimeoutErrors() *Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny {
+	return &Component_Pcie_FatalErrors_CompletionTimeoutErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-timeout-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "data-link-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/data-link-errors"
+func (n *Component_Pcie_FatalErrorsPath) DataLinkErrors() *Component_Pcie_FatalErrors_DataLinkErrorsPath {
+	return &Component_Pcie_FatalErrors_DataLinkErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"data-link-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "data-link-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/data-link-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) DataLinkErrors() *Component_Pcie_FatalErrors_DataLinkErrorsPathAny {
+	return &Component_Pcie_FatalErrors_DataLinkErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"data-link-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
+// booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "ecrc-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/ecrc-errors"
+func (n *Component_Pcie_FatalErrorsPath) EcrcErrors() *Component_Pcie_FatalErrors_EcrcErrorsPath {
+	return &Component_Pcie_FatalErrors_EcrcErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"ecrc-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
+// booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "ecrc-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/ecrc-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) EcrcErrors() *Component_Pcie_FatalErrors_EcrcErrorsPathAny {
+	return &Component_Pcie_FatalErrors_EcrcErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"ecrc-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "flow-control-protocol-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/flow-control-protocol-errors"
+func (n *Component_Pcie_FatalErrorsPath) FlowControlProtocolErrors() *Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath {
+	return &Component_Pcie_FatalErrors_FlowControlProtocolErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"flow-control-protocol-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "flow-control-protocol-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/flow-control-protocol-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) FlowControlProtocolErrors() *Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny {
+	return &Component_Pcie_FatalErrors_FlowControlProtocolErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"flow-control-protocol-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "internal-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/internal-errors"
+func (n *Component_Pcie_FatalErrorsPath) InternalErrors() *Component_Pcie_FatalErrors_InternalErrorsPath {
+	return &Component_Pcie_FatalErrors_InternalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"internal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "internal-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/internal-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) InternalErrors() *Component_Pcie_FatalErrors_InternalErrorsPathAny {
+	return &Component_Pcie_FatalErrors_InternalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"internal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "malformed-tlp-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/malformed-tlp-errors"
+func (n *Component_Pcie_FatalErrorsPath) MalformedTlpErrors() *Component_Pcie_FatalErrors_MalformedTlpErrorsPath {
+	return &Component_Pcie_FatalErrors_MalformedTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"malformed-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "malformed-tlp-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/malformed-tlp-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) MalformedTlpErrors() *Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny {
+	return &Component_Pcie_FatalErrors_MalformedTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"malformed-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "poisoned-tlp-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/poisoned-tlp-errors"
+func (n *Component_Pcie_FatalErrorsPath) PoisonedTlpErrors() *Component_Pcie_FatalErrors_PoisonedTlpErrorsPath {
+	return &Component_Pcie_FatalErrors_PoisonedTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"poisoned-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "poisoned-tlp-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/poisoned-tlp-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) PoisonedTlpErrors() *Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny {
+	return &Component_Pcie_FatalErrors_PoisonedTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"poisoned-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "receiver-overflow-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/receiver-overflow-errors"
+func (n *Component_Pcie_FatalErrorsPath) ReceiverOverflowErrors() *Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath {
+	return &Component_Pcie_FatalErrors_ReceiverOverflowErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"receiver-overflow-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "receiver-overflow-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/receiver-overflow-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) ReceiverOverflowErrors() *Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny {
+	return &Component_Pcie_FatalErrors_ReceiverOverflowErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"receiver-overflow-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "surprise-down-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/surprise-down-errors"
+func (n *Component_Pcie_FatalErrorsPath) SurpriseDownErrors() *Component_Pcie_FatalErrors_SurpriseDownErrorsPath {
+	return &Component_Pcie_FatalErrors_SurpriseDownErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"surprise-down-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "surprise-down-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/surprise-down-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) SurpriseDownErrors() *Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny {
+	return &Component_Pcie_FatalErrors_SurpriseDownErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"surprise-down-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "tlp-prefix-blocked-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors"
+func (n *Component_Pcie_FatalErrorsPath) TlpPrefixBlockedErrors() *Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath {
+	return &Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"tlp-prefix-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "tlp-prefix-blocked-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/tlp-prefix-blocked-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) TlpPrefixBlockedErrors() *Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny {
+	return &Component_Pcie_FatalErrors_TlpPrefixBlockedErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"tlp-prefix-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "total-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/total-errors"
+func (n *Component_Pcie_FatalErrorsPath) TotalErrors() *Component_Pcie_FatalErrors_TotalErrorsPath {
+	return &Component_Pcie_FatalErrors_TotalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"total-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "total-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/total-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) TotalErrors() *Component_Pcie_FatalErrors_TotalErrorsPathAny {
+	return &Component_Pcie_FatalErrors_TotalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"total-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "undefined-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/undefined-errors"
+func (n *Component_Pcie_FatalErrorsPath) UndefinedErrors() *Component_Pcie_FatalErrors_UndefinedErrorsPath {
+	return &Component_Pcie_FatalErrors_UndefinedErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "undefined-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/undefined-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) UndefinedErrors() *Component_Pcie_FatalErrors_UndefinedErrorsPathAny {
+	return &Component_Pcie_FatalErrors_UndefinedErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unexpected-completion-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/unexpected-completion-errors"
+func (n *Component_Pcie_FatalErrorsPath) UnexpectedCompletionErrors() *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath {
+	return &Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unexpected-completion-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unexpected-completion-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/unexpected-completion-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) UnexpectedCompletionErrors() *Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny {
+	return &Component_Pcie_FatalErrors_UnexpectedCompletionErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unexpected-completion-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unsupported-request-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/unsupported-request-errors"
+func (n *Component_Pcie_FatalErrorsPath) UnsupportedRequestErrors() *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath {
+	return &Component_Pcie_FatalErrors_UnsupportedRequestErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unsupported-request-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unsupported-request-errors"
+// Path from root: "/components/component/state/pcie/fatal-errors/unsupported-request-errors"
+func (n *Component_Pcie_FatalErrorsPathAny) UnsupportedRequestErrors() *Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny {
+	return &Component_Pcie_FatalErrors_UnsupportedRequestErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unsupported-request-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_Pcie_NonFatalErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors YANG schema element.
+type Component_Pcie_NonFatalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors YANG schema element.
+type Component_Pcie_NonFatalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_AcsViolationErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_AcsViolationErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/acs-violation-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-abort-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/completion-timeout-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_DataLinkErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_DataLinkErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/data-link-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_EcrcErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_EcrcErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_EcrcErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/ecrc-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_EcrcErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_InternalErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_InternalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_InternalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/internal-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_InternalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/surprise-down-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_TotalErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_TotalErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_TotalErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/total-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_TotalErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_UndefinedErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_UndefinedErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/undefined-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath represents the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath struct {
+	*ygot.NodePath
+}
+
+// Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/pcie/non-fatal-errors/unsupported-request-errors YANG schema element.
+type Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny struct {
+	*ygot.NodePath
+}
+
+// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "acs-violation-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/acs-violation-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) AcsViolationErrors() *Component_Pcie_NonFatalErrors_AcsViolationErrorsPath {
+	return &Component_Pcie_NonFatalErrors_AcsViolationErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"acs-violation-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AcsViolationErrors (leaf): Number of access control errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "acs-violation-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/acs-violation-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) AcsViolationErrors() *Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_AcsViolationErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"acs-violation-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
+// device since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "atomic-op-blocked-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) AtomicOpBlockedErrors() *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath {
+	return &Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"atomic-op-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// AtomicOpBlockedErrors (leaf): Number of atomic operation blocked errors detected by PCIe
+// device since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "atomic-op-blocked-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/atomic-op-blocked-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) AtomicOpBlockedErrors() *Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_AtomicOpBlockedErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"atomic-op-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "blocked-tlp-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) BlockedTlpErrors() *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath {
+	return &Component_Pcie_NonFatalErrors_BlockedTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"blocked-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BlockedTlpErrors (leaf): Number of blocked TLP errors detected by PCIe device since
+// the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "blocked-tlp-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/blocked-tlp-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) BlockedTlpErrors() *Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_BlockedTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"blocked-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-abort-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-abort-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) CompletionAbortErrors() *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath {
+	return &Component_Pcie_NonFatalErrors_CompletionAbortErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-abort-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionAbortErrors (leaf): Number of completion abort errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-abort-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-abort-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) CompletionAbortErrors() *Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_CompletionAbortErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-abort-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-timeout-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-timeout-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) CompletionTimeoutErrors() *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath {
+	return &Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-timeout-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// CompletionTimeoutErrors (leaf): Number of completion timeout errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "completion-timeout-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/completion-timeout-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) CompletionTimeoutErrors() *Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_CompletionTimeoutErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"completion-timeout-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "data-link-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/data-link-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) DataLinkErrors() *Component_Pcie_NonFatalErrors_DataLinkErrorsPath {
+	return &Component_Pcie_NonFatalErrors_DataLinkErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"data-link-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DataLinkErrors (leaf): Number of data-link errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "data-link-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/data-link-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) DataLinkErrors() *Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_DataLinkErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"data-link-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
+// booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "ecrc-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/ecrc-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) EcrcErrors() *Component_Pcie_NonFatalErrors_EcrcErrorsPath {
+	return &Component_Pcie_NonFatalErrors_EcrcErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"ecrc-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EcrcErrors (leaf): Number of ECRC errors detected by PCIe device since the system
+// booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "ecrc-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/ecrc-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) EcrcErrors() *Component_Pcie_NonFatalErrors_EcrcErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_EcrcErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"ecrc-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "flow-control-protocol-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) FlowControlProtocolErrors() *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath {
+	return &Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"flow-control-protocol-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FlowControlProtocolErrors (leaf): Number of flow control protocol errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "flow-control-protocol-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/flow-control-protocol-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) FlowControlProtocolErrors() *Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_FlowControlProtocolErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"flow-control-protocol-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "internal-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/internal-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) InternalErrors() *Component_Pcie_NonFatalErrors_InternalErrorsPath {
+	return &Component_Pcie_NonFatalErrors_InternalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"internal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InternalErrors (leaf): Number of internal errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "internal-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/internal-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) InternalErrors() *Component_Pcie_NonFatalErrors_InternalErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_InternalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"internal-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "malformed-tlp-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) MalformedTlpErrors() *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath {
+	return &Component_Pcie_NonFatalErrors_MalformedTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"malformed-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// MalformedTlpErrors (leaf): Number of malformed TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "malformed-tlp-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/malformed-tlp-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) MalformedTlpErrors() *Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_MalformedTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"malformed-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "poisoned-tlp-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) PoisonedTlpErrors() *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath {
+	return &Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"poisoned-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PoisonedTlpErrors (leaf): Number of poisoned TLP errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "poisoned-tlp-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/poisoned-tlp-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) PoisonedTlpErrors() *Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_PoisonedTlpErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"poisoned-tlp-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "receiver-overflow-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) ReceiverOverflowErrors() *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath {
+	return &Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"receiver-overflow-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ReceiverOverflowErrors (leaf): Number of receiver overflow errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "receiver-overflow-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/receiver-overflow-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) ReceiverOverflowErrors() *Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_ReceiverOverflowErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"receiver-overflow-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "surprise-down-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/surprise-down-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) SurpriseDownErrors() *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath {
+	return &Component_Pcie_NonFatalErrors_SurpriseDownErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"surprise-down-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SurpriseDownErrors (leaf): Number of unexpected link down errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "surprise-down-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/surprise-down-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) SurpriseDownErrors() *Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_SurpriseDownErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"surprise-down-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "tlp-prefix-blocked-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) TlpPrefixBlockedErrors() *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath {
+	return &Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"tlp-prefix-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TlpPrefixBlockedErrors (leaf): Number of TLP prefix blocked errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "tlp-prefix-blocked-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/tlp-prefix-blocked-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) TlpPrefixBlockedErrors() *Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_TlpPrefixBlockedErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"tlp-prefix-blocked-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "total-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/total-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) TotalErrors() *Component_Pcie_NonFatalErrors_TotalErrorsPath {
+	return &Component_Pcie_NonFatalErrors_TotalErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"total-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TotalErrors (leaf): Total number of uncorrectable errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "total-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/total-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) TotalErrors() *Component_Pcie_NonFatalErrors_TotalErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_TotalErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"total-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "undefined-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/undefined-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) UndefinedErrors() *Component_Pcie_NonFatalErrors_UndefinedErrorsPath {
+	return &Component_Pcie_NonFatalErrors_UndefinedErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UndefinedErrors (leaf): Number of undefined errors detected by PCIe device since the
+// system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "undefined-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/undefined-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) UndefinedErrors() *Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_UndefinedErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"undefined-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unexpected-completion-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) UnexpectedCompletionErrors() *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath {
+	return &Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unexpected-completion-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnexpectedCompletionErrors (leaf): Number of unexpected completion errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unexpected-completion-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/unexpected-completion-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) UnexpectedCompletionErrors() *Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_UnexpectedCompletionErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unexpected-completion-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unsupported-request-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/unsupported-request-errors"
+func (n *Component_Pcie_NonFatalErrorsPath) UnsupportedRequestErrors() *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath {
+	return &Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"unsupported-request-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UnsupportedRequestErrors (leaf): Number of unsupported request errors detected by PCIe device
+// since the system booted, according to PCIe AER driver.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "unsupported-request-errors"
+// Path from root: "/components/component/state/pcie/non-fatal-errors/unsupported-request-errors"
+func (n *Component_Pcie_NonFatalErrorsPathAny) UnsupportedRequestErrors() *Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny {
+	return &Component_Pcie_NonFatalErrors_UnsupportedRequestErrorsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"unsupported-request-errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_PortPath represents the /openconfig-platform/components/component/port YANG schema element.
+type Component_PortPath struct {
+	*ygot.NodePath
+}
+
+// Component_PortPathAny represents the wildcard version of the /openconfig-platform/components/component/port YANG schema element.
+type Component_PortPathAny struct {
+	*ygot.NodePath
+}
+
+// BreakoutMode (container): Top-level container for port breakout-mode data.
+// ----------------------------------------
+// Defining module: "openconfig-platform-port"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "breakout-mode"
+// Path from root: "/components/component/port/breakout-mode"
+func (n *Component_PortPath) BreakoutMode() *Component_Port_BreakoutModePath {
+	return &Component_Port_BreakoutModePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"breakout-mode"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BreakoutMode (container): Top-level container for port breakout-mode data.
+// ----------------------------------------
+// Defining module: "openconfig-platform-port"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "breakout-mode"
+// Path from root: "/components/component/port/breakout-mode"
+func (n *Component_PortPathAny) BreakoutMode() *Component_Port_BreakoutModePathAny {
+	return &Component_Port_BreakoutModePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"breakout-mode"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
 
 // Component_Port_BreakoutModePath represents the /openconfig-platform/components/component/port/breakout-mode YANG schema element.
 type Component_Port_BreakoutModePath struct {

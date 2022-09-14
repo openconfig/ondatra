@@ -35,6 +35,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -351,6 +352,38 @@ func (n *ComponentPathAny) Name() *Component_NamePathAny {
 	return &Component_NamePathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"config", "name"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OpticalChannel (container): Enclosing container for the list of optical channels
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "optical-channel"
+// Path from root: "/components/component/optical-channel"
+func (n *ComponentPath) OpticalChannel() *Component_OpticalChannelPath {
+	return &Component_OpticalChannelPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"optical-channel"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OpticalChannel (container): Enclosing container for the list of optical channels
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "optical-channel"
+// Path from root: "/components/component/optical-channel"
+func (n *ComponentPathAny) OpticalChannel() *Component_OpticalChannelPathAny {
+	return &Component_OpticalChannelPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"optical-channel"},
 			map[string]interface{}{},
 			n,
 		),
@@ -1285,6 +1318,196 @@ func (n *Component_IntegratedCircuit_Utilization_ResourcePathAny) Name() *Compon
 	return &Component_IntegratedCircuit_Utilization_Resource_NamePathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"config", "name"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_OpticalChannelPath represents the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannelPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannelPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel YANG schema element.
+type Component_OpticalChannelPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_FrequencyPath represents the /openconfig-platform/components/component/optical-channel/config/frequency YANG schema element.
+type Component_OpticalChannel_FrequencyPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_FrequencyPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/config/frequency YANG schema element.
+type Component_OpticalChannel_FrequencyPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LinePortPath represents the /openconfig-platform/components/component/optical-channel/config/line-port YANG schema element.
+type Component_OpticalChannel_LinePortPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_LinePortPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/config/line-port YANG schema element.
+type Component_OpticalChannel_LinePortPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OperationalModePath represents the /openconfig-platform/components/component/optical-channel/config/operational-mode YANG schema element.
+type Component_OpticalChannel_OperationalModePath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_OperationalModePathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/config/operational-mode YANG schema element.
+type Component_OpticalChannel_OperationalModePathAny struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_TargetOutputPowerPath represents the /openconfig-platform/components/component/optical-channel/config/target-output-power YANG schema element.
+type Component_OpticalChannel_TargetOutputPowerPath struct {
+	*ygot.NodePath
+}
+
+// Component_OpticalChannel_TargetOutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/config/target-output-power YANG schema element.
+type Component_OpticalChannel_TargetOutputPowerPathAny struct {
+	*ygot.NodePath
+}
+
+// Frequency (leaf): Frequency of the optical channel, expressed in MHz
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/frequency"
+// Path from root: "/components/component/optical-channel/config/frequency"
+func (n *Component_OpticalChannelPath) Frequency() *Component_OpticalChannel_FrequencyPath {
+	return &Component_OpticalChannel_FrequencyPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "frequency"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Frequency (leaf): Frequency of the optical channel, expressed in MHz
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/frequency"
+// Path from root: "/components/component/optical-channel/config/frequency"
+func (n *Component_OpticalChannelPathAny) Frequency() *Component_OpticalChannel_FrequencyPathAny {
+	return &Component_OpticalChannel_FrequencyPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "frequency"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinePort (leaf): Reference to the line-side physical port that carries
+// this optical channel.  The target port should be
+// a component in the physical inventory data model.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/line-port"
+// Path from root: "/components/component/optical-channel/config/line-port"
+func (n *Component_OpticalChannelPath) LinePort() *Component_OpticalChannel_LinePortPath {
+	return &Component_OpticalChannel_LinePortPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LinePort (leaf): Reference to the line-side physical port that carries
+// this optical channel.  The target port should be
+// a component in the physical inventory data model.
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/line-port"
+// Path from root: "/components/component/optical-channel/config/line-port"
+func (n *Component_OpticalChannelPathAny) LinePort() *Component_OpticalChannel_LinePortPathAny {
+	return &Component_OpticalChannel_LinePortPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OperationalMode (leaf): Vendor-specific mode identifier -- sets the operational
+// mode for the channel.  The specified operational mode must
+// exist in the list of supported operational modes supplied
+// by the device
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/operational-mode"
+// Path from root: "/components/component/optical-channel/config/operational-mode"
+func (n *Component_OpticalChannelPath) OperationalMode() *Component_OpticalChannel_OperationalModePath {
+	return &Component_OpticalChannel_OperationalModePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "operational-mode"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OperationalMode (leaf): Vendor-specific mode identifier -- sets the operational
+// mode for the channel.  The specified operational mode must
+// exist in the list of supported operational modes supplied
+// by the device
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/operational-mode"
+// Path from root: "/components/component/optical-channel/config/operational-mode"
+func (n *Component_OpticalChannelPathAny) OperationalMode() *Component_OpticalChannel_OperationalModePathAny {
+	return &Component_OpticalChannel_OperationalModePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "operational-mode"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TargetOutputPower (leaf): Target output optical power level of the optical channel,
+// expressed in increments of 0.01 dBm (decibel-milliwats)
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/target-output-power"
+// Path from root: "/components/component/optical-channel/config/target-output-power"
+func (n *Component_OpticalChannelPath) TargetOutputPower() *Component_OpticalChannel_TargetOutputPowerPath {
+	return &Component_OpticalChannel_TargetOutputPowerPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "target-output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TargetOutputPower (leaf): Target output optical power level of the optical channel,
+// expressed in increments of 0.01 dBm (decibel-milliwats)
+// ----------------------------------------
+// Defining module: "openconfig-terminal-device"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "config/target-output-power"
+// Path from root: "/components/component/optical-channel/config/target-output-power"
+func (n *Component_OpticalChannelPathAny) TargetOutputPower() *Component_OpticalChannel_TargetOutputPowerPathAny {
+	return &Component_OpticalChannel_TargetOutputPowerPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "target-output-power"},
 			map[string]interface{}{},
 			n,
 		),

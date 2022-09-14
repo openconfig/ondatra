@@ -35,6 +35,7 @@ using the following YANG input files:
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -141,6 +142,16 @@ type System_MotdBannerPath struct {
 
 // System_MotdBannerPathAny represents the wildcard version of the /openconfig-system/system/state/motd-banner YANG schema element.
 type System_MotdBannerPathAny struct {
+	*ygot.NodePath
+}
+
+// System_SoftwareVersionPath represents the /openconfig-system/system/state/software-version YANG schema element.
+type System_SoftwareVersionPath struct {
+	*ygot.NodePath
+}
+
+// System_SoftwareVersionPathAny represents the wildcard version of the /openconfig-system/system/state/software-version YANG schema element.
+type System_SoftwareVersionPathAny struct {
 	*ygot.NodePath
 }
 
@@ -1085,6 +1096,44 @@ func (n *SystemPathAny) Process(Pid uint64) *System_ProcessPathAny {
 		NodePath: ygot.NewNodePath(
 			[]string{"processes", "process"},
 			map[string]interface{}{"pid": Pid},
+			n,
+		),
+	}
+}
+
+// SoftwareVersion (leaf): Operating system version of the currently active controller
+// of the device.  It is required that this value matches the
+// value of the state/software-version leaf in the component
+// of type OPERATING_SYSTEM.
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/software-version"
+// Path from root: "/system/state/software-version"
+func (n *SystemPath) SoftwareVersion() *System_SoftwareVersionPath {
+	return &System_SoftwareVersionPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "software-version"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SoftwareVersion (leaf): Operating system version of the currently active controller
+// of the device.  It is required that this value matches the
+// value of the state/software-version leaf in the component
+// of type OPERATING_SYSTEM.
+// ----------------------------------------
+// Defining module: "openconfig-system"
+// Instantiating module: "openconfig-system"
+// Path from parent: "state/software-version"
+// Path from root: "/system/state/software-version"
+func (n *SystemPathAny) SoftwareVersion() *System_SoftwareVersionPathAny {
+	return &System_SoftwareVersionPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "software-version"},
+			map[string]interface{}{},
 			n,
 		),
 	}

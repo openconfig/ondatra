@@ -2222,6 +2222,1436 @@ func (w *Component_MemoryWatcher) Await(t testing.TB) (*QualifiedComponent_Memor
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedComponent_OpticalChannel is a *Component_OpticalChannel with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel) Val(t testing.TB) *Component_OpticalChannel {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel sample.
+func (q *QualifiedComponent_OpticalChannel) SetVal(v *Component_OpticalChannel) *QualifiedComponent_OpticalChannel {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel samples.
+type CollectionComponent_OpticalChannel struct {
+	W    *Component_OpticalChannelWatcher
+	Data []*QualifiedComponent_OpticalChannel
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel) Await(t testing.TB) []*QualifiedComponent_OpticalChannel {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannelWatcher observes a stream of *Component_OpticalChannel samples.
+type Component_OpticalChannelWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannelWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_CarrierFrequencyOffset is a *Component_OpticalChannel_CarrierFrequencyOffset with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_CarrierFrequencyOffset struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_CarrierFrequencyOffset // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_CarrierFrequencyOffset) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_CarrierFrequencyOffset sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_CarrierFrequencyOffset) Val(t testing.TB) *Component_OpticalChannel_CarrierFrequencyOffset {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_CarrierFrequencyOffset sample.
+func (q *QualifiedComponent_OpticalChannel_CarrierFrequencyOffset) SetVal(v *Component_OpticalChannel_CarrierFrequencyOffset) *QualifiedComponent_OpticalChannel_CarrierFrequencyOffset {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_CarrierFrequencyOffset) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_CarrierFrequencyOffset is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_CarrierFrequencyOffset samples.
+type CollectionComponent_OpticalChannel_CarrierFrequencyOffset struct {
+	W    *Component_OpticalChannel_CarrierFrequencyOffsetWatcher
+	Data []*QualifiedComponent_OpticalChannel_CarrierFrequencyOffset
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_CarrierFrequencyOffset) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_CarrierFrequencyOffset {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_CarrierFrequencyOffsetWatcher observes a stream of *Component_OpticalChannel_CarrierFrequencyOffset samples.
+type Component_OpticalChannel_CarrierFrequencyOffsetWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_CarrierFrequencyOffset
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_CarrierFrequencyOffsetWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_CarrierFrequencyOffset, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ChromaticDispersion is a *Component_OpticalChannel_ChromaticDispersion with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ChromaticDispersion struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ChromaticDispersion // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ChromaticDispersion) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ChromaticDispersion sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ChromaticDispersion) Val(t testing.TB) *Component_OpticalChannel_ChromaticDispersion {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ChromaticDispersion sample.
+func (q *QualifiedComponent_OpticalChannel_ChromaticDispersion) SetVal(v *Component_OpticalChannel_ChromaticDispersion) *QualifiedComponent_OpticalChannel_ChromaticDispersion {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ChromaticDispersion) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ChromaticDispersion is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ChromaticDispersion samples.
+type CollectionComponent_OpticalChannel_ChromaticDispersion struct {
+	W    *Component_OpticalChannel_ChromaticDispersionWatcher
+	Data []*QualifiedComponent_OpticalChannel_ChromaticDispersion
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ChromaticDispersion) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ChromaticDispersion {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ChromaticDispersionWatcher observes a stream of *Component_OpticalChannel_ChromaticDispersion samples.
+type Component_OpticalChannel_ChromaticDispersionWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ChromaticDispersion
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ChromaticDispersionWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ChromaticDispersion, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_Esnr is a *Component_OpticalChannel_Esnr with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_Esnr struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_Esnr // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_Esnr) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_Esnr sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_Esnr) Val(t testing.TB) *Component_OpticalChannel_Esnr {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_Esnr sample.
+func (q *QualifiedComponent_OpticalChannel_Esnr) SetVal(v *Component_OpticalChannel_Esnr) *QualifiedComponent_OpticalChannel_Esnr {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_Esnr) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_Esnr is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_Esnr samples.
+type CollectionComponent_OpticalChannel_Esnr struct {
+	W    *Component_OpticalChannel_EsnrWatcher
+	Data []*QualifiedComponent_OpticalChannel_Esnr
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_Esnr) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_Esnr {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_EsnrWatcher observes a stream of *Component_OpticalChannel_Esnr samples.
+type Component_OpticalChannel_EsnrWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_Esnr
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_EsnrWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_Esnr, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_InputPower is a *Component_OpticalChannel_InputPower with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_InputPower struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_InputPower // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_InputPower) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_InputPower sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_InputPower) Val(t testing.TB) *Component_OpticalChannel_InputPower {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_InputPower sample.
+func (q *QualifiedComponent_OpticalChannel_InputPower) SetVal(v *Component_OpticalChannel_InputPower) *QualifiedComponent_OpticalChannel_InputPower {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_InputPower) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_InputPower is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_InputPower samples.
+type CollectionComponent_OpticalChannel_InputPower struct {
+	W    *Component_OpticalChannel_InputPowerWatcher
+	Data []*QualifiedComponent_OpticalChannel_InputPower
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_InputPower) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_InputPower {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_InputPowerWatcher observes a stream of *Component_OpticalChannel_InputPower samples.
+type Component_OpticalChannel_InputPowerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_InputPower
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_InputPowerWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_InputPower, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_LaserBiasCurrent is a *Component_OpticalChannel_LaserBiasCurrent with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_LaserBiasCurrent struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_LaserBiasCurrent // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_LaserBiasCurrent) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_LaserBiasCurrent sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_LaserBiasCurrent) Val(t testing.TB) *Component_OpticalChannel_LaserBiasCurrent {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_LaserBiasCurrent sample.
+func (q *QualifiedComponent_OpticalChannel_LaserBiasCurrent) SetVal(v *Component_OpticalChannel_LaserBiasCurrent) *QualifiedComponent_OpticalChannel_LaserBiasCurrent {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_LaserBiasCurrent) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_LaserBiasCurrent is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_LaserBiasCurrent samples.
+type CollectionComponent_OpticalChannel_LaserBiasCurrent struct {
+	W    *Component_OpticalChannel_LaserBiasCurrentWatcher
+	Data []*QualifiedComponent_OpticalChannel_LaserBiasCurrent
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_LaserBiasCurrent) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_LaserBiasCurrent {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_LaserBiasCurrentWatcher observes a stream of *Component_OpticalChannel_LaserBiasCurrent samples.
+type Component_OpticalChannel_LaserBiasCurrentWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_LaserBiasCurrent
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_LaserBiasCurrentWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_LaserBiasCurrent, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulationErrorRatio is a *Component_OpticalChannel_ModulationErrorRatio with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulationErrorRatio struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulationErrorRatio // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulationErrorRatio) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulationErrorRatio sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulationErrorRatio) Val(t testing.TB) *Component_OpticalChannel_ModulationErrorRatio {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulationErrorRatio sample.
+func (q *QualifiedComponent_OpticalChannel_ModulationErrorRatio) SetVal(v *Component_OpticalChannel_ModulationErrorRatio) *QualifiedComponent_OpticalChannel_ModulationErrorRatio {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulationErrorRatio) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulationErrorRatio is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulationErrorRatio samples.
+type CollectionComponent_OpticalChannel_ModulationErrorRatio struct {
+	W    *Component_OpticalChannel_ModulationErrorRatioWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulationErrorRatio
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulationErrorRatio) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulationErrorRatio {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulationErrorRatioWatcher observes a stream of *Component_OpticalChannel_ModulationErrorRatio samples.
+type Component_OpticalChannel_ModulationErrorRatioWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulationErrorRatio
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulationErrorRatioWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulationErrorRatio, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulatorBiasXPhase is a *Component_OpticalChannel_ModulatorBiasXPhase with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulatorBiasXPhase struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulatorBiasXPhase // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXPhase) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulatorBiasXPhase sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXPhase) Val(t testing.TB) *Component_OpticalChannel_ModulatorBiasXPhase {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulatorBiasXPhase sample.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXPhase) SetVal(v *Component_OpticalChannel_ModulatorBiasXPhase) *QualifiedComponent_OpticalChannel_ModulatorBiasXPhase {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXPhase) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulatorBiasXPhase is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulatorBiasXPhase samples.
+type CollectionComponent_OpticalChannel_ModulatorBiasXPhase struct {
+	W    *Component_OpticalChannel_ModulatorBiasXPhaseWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulatorBiasXPhase
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulatorBiasXPhase) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulatorBiasXPhase {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulatorBiasXPhaseWatcher observes a stream of *Component_OpticalChannel_ModulatorBiasXPhase samples.
+type Component_OpticalChannel_ModulatorBiasXPhaseWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulatorBiasXPhase
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulatorBiasXPhaseWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulatorBiasXPhase, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulatorBiasXi is a *Component_OpticalChannel_ModulatorBiasXi with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulatorBiasXi struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulatorBiasXi // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXi) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulatorBiasXi sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXi) Val(t testing.TB) *Component_OpticalChannel_ModulatorBiasXi {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulatorBiasXi sample.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXi) SetVal(v *Component_OpticalChannel_ModulatorBiasXi) *QualifiedComponent_OpticalChannel_ModulatorBiasXi {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXi) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulatorBiasXi is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulatorBiasXi samples.
+type CollectionComponent_OpticalChannel_ModulatorBiasXi struct {
+	W    *Component_OpticalChannel_ModulatorBiasXiWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulatorBiasXi
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulatorBiasXi) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulatorBiasXi {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulatorBiasXiWatcher observes a stream of *Component_OpticalChannel_ModulatorBiasXi samples.
+type Component_OpticalChannel_ModulatorBiasXiWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulatorBiasXi
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulatorBiasXiWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulatorBiasXi, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulatorBiasXq is a *Component_OpticalChannel_ModulatorBiasXq with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulatorBiasXq struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulatorBiasXq // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXq) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulatorBiasXq sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXq) Val(t testing.TB) *Component_OpticalChannel_ModulatorBiasXq {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulatorBiasXq sample.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXq) SetVal(v *Component_OpticalChannel_ModulatorBiasXq) *QualifiedComponent_OpticalChannel_ModulatorBiasXq {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasXq) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulatorBiasXq is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulatorBiasXq samples.
+type CollectionComponent_OpticalChannel_ModulatorBiasXq struct {
+	W    *Component_OpticalChannel_ModulatorBiasXqWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulatorBiasXq
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulatorBiasXq) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulatorBiasXq {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulatorBiasXqWatcher observes a stream of *Component_OpticalChannel_ModulatorBiasXq samples.
+type Component_OpticalChannel_ModulatorBiasXqWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulatorBiasXq
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulatorBiasXqWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulatorBiasXq, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulatorBiasYPhase is a *Component_OpticalChannel_ModulatorBiasYPhase with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulatorBiasYPhase struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulatorBiasYPhase // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYPhase) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulatorBiasYPhase sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYPhase) Val(t testing.TB) *Component_OpticalChannel_ModulatorBiasYPhase {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulatorBiasYPhase sample.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYPhase) SetVal(v *Component_OpticalChannel_ModulatorBiasYPhase) *QualifiedComponent_OpticalChannel_ModulatorBiasYPhase {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYPhase) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulatorBiasYPhase is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulatorBiasYPhase samples.
+type CollectionComponent_OpticalChannel_ModulatorBiasYPhase struct {
+	W    *Component_OpticalChannel_ModulatorBiasYPhaseWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulatorBiasYPhase
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulatorBiasYPhase) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulatorBiasYPhase {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulatorBiasYPhaseWatcher observes a stream of *Component_OpticalChannel_ModulatorBiasYPhase samples.
+type Component_OpticalChannel_ModulatorBiasYPhaseWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulatorBiasYPhase
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulatorBiasYPhaseWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulatorBiasYPhase, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulatorBiasYi is a *Component_OpticalChannel_ModulatorBiasYi with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulatorBiasYi struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulatorBiasYi // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYi) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulatorBiasYi sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYi) Val(t testing.TB) *Component_OpticalChannel_ModulatorBiasYi {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulatorBiasYi sample.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYi) SetVal(v *Component_OpticalChannel_ModulatorBiasYi) *QualifiedComponent_OpticalChannel_ModulatorBiasYi {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYi) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulatorBiasYi is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulatorBiasYi samples.
+type CollectionComponent_OpticalChannel_ModulatorBiasYi struct {
+	W    *Component_OpticalChannel_ModulatorBiasYiWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulatorBiasYi
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulatorBiasYi) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulatorBiasYi {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulatorBiasYiWatcher observes a stream of *Component_OpticalChannel_ModulatorBiasYi samples.
+type Component_OpticalChannel_ModulatorBiasYiWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulatorBiasYi
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulatorBiasYiWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulatorBiasYi, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_ModulatorBiasYq is a *Component_OpticalChannel_ModulatorBiasYq with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_ModulatorBiasYq struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_ModulatorBiasYq // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYq) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_ModulatorBiasYq sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYq) Val(t testing.TB) *Component_OpticalChannel_ModulatorBiasYq {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_ModulatorBiasYq sample.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYq) SetVal(v *Component_OpticalChannel_ModulatorBiasYq) *QualifiedComponent_OpticalChannel_ModulatorBiasYq {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_ModulatorBiasYq) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_ModulatorBiasYq is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_ModulatorBiasYq samples.
+type CollectionComponent_OpticalChannel_ModulatorBiasYq struct {
+	W    *Component_OpticalChannel_ModulatorBiasYqWatcher
+	Data []*QualifiedComponent_OpticalChannel_ModulatorBiasYq
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_ModulatorBiasYq) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_ModulatorBiasYq {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_ModulatorBiasYqWatcher observes a stream of *Component_OpticalChannel_ModulatorBiasYq samples.
+type Component_OpticalChannel_ModulatorBiasYqWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_ModulatorBiasYq
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_ModulatorBiasYqWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_ModulatorBiasYq, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_Osnr is a *Component_OpticalChannel_Osnr with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_Osnr struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_Osnr // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_Osnr) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_Osnr sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_Osnr) Val(t testing.TB) *Component_OpticalChannel_Osnr {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_Osnr sample.
+func (q *QualifiedComponent_OpticalChannel_Osnr) SetVal(v *Component_OpticalChannel_Osnr) *QualifiedComponent_OpticalChannel_Osnr {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_Osnr) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_Osnr is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_Osnr samples.
+type CollectionComponent_OpticalChannel_Osnr struct {
+	W    *Component_OpticalChannel_OsnrWatcher
+	Data []*QualifiedComponent_OpticalChannel_Osnr
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_Osnr) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_Osnr {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_OsnrWatcher observes a stream of *Component_OpticalChannel_Osnr samples.
+type Component_OpticalChannel_OsnrWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_Osnr
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_OsnrWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_Osnr, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_OutputPower is a *Component_OpticalChannel_OutputPower with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_OutputPower struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_OutputPower // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_OutputPower) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_OutputPower sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_OutputPower) Val(t testing.TB) *Component_OpticalChannel_OutputPower {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_OutputPower sample.
+func (q *QualifiedComponent_OpticalChannel_OutputPower) SetVal(v *Component_OpticalChannel_OutputPower) *QualifiedComponent_OpticalChannel_OutputPower {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_OutputPower) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_OutputPower is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_OutputPower samples.
+type CollectionComponent_OpticalChannel_OutputPower struct {
+	W    *Component_OpticalChannel_OutputPowerWatcher
+	Data []*QualifiedComponent_OpticalChannel_OutputPower
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_OutputPower) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_OutputPower {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_OutputPowerWatcher observes a stream of *Component_OpticalChannel_OutputPower samples.
+type Component_OpticalChannel_OutputPowerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_OutputPower
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_OutputPowerWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_OutputPower, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_PolarizationDependentLoss is a *Component_OpticalChannel_PolarizationDependentLoss with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_PolarizationDependentLoss struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_PolarizationDependentLoss // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_PolarizationDependentLoss) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_PolarizationDependentLoss sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_PolarizationDependentLoss) Val(t testing.TB) *Component_OpticalChannel_PolarizationDependentLoss {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_PolarizationDependentLoss sample.
+func (q *QualifiedComponent_OpticalChannel_PolarizationDependentLoss) SetVal(v *Component_OpticalChannel_PolarizationDependentLoss) *QualifiedComponent_OpticalChannel_PolarizationDependentLoss {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_PolarizationDependentLoss) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_PolarizationDependentLoss is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_PolarizationDependentLoss samples.
+type CollectionComponent_OpticalChannel_PolarizationDependentLoss struct {
+	W    *Component_OpticalChannel_PolarizationDependentLossWatcher
+	Data []*QualifiedComponent_OpticalChannel_PolarizationDependentLoss
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_PolarizationDependentLoss) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_PolarizationDependentLoss {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_PolarizationDependentLossWatcher observes a stream of *Component_OpticalChannel_PolarizationDependentLoss samples.
+type Component_OpticalChannel_PolarizationDependentLossWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_PolarizationDependentLoss
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_PolarizationDependentLossWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_PolarizationDependentLoss, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_PolarizationModeDispersion is a *Component_OpticalChannel_PolarizationModeDispersion with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_PolarizationModeDispersion struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_PolarizationModeDispersion // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_PolarizationModeDispersion) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_PolarizationModeDispersion sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_PolarizationModeDispersion) Val(t testing.TB) *Component_OpticalChannel_PolarizationModeDispersion {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_PolarizationModeDispersion sample.
+func (q *QualifiedComponent_OpticalChannel_PolarizationModeDispersion) SetVal(v *Component_OpticalChannel_PolarizationModeDispersion) *QualifiedComponent_OpticalChannel_PolarizationModeDispersion {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_PolarizationModeDispersion) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_PolarizationModeDispersion is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_PolarizationModeDispersion samples.
+type CollectionComponent_OpticalChannel_PolarizationModeDispersion struct {
+	W    *Component_OpticalChannel_PolarizationModeDispersionWatcher
+	Data []*QualifiedComponent_OpticalChannel_PolarizationModeDispersion
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_PolarizationModeDispersion) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_PolarizationModeDispersion {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_PolarizationModeDispersionWatcher observes a stream of *Component_OpticalChannel_PolarizationModeDispersion samples.
+type Component_OpticalChannel_PolarizationModeDispersionWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_PolarizationModeDispersion
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_PolarizationModeDispersionWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_PolarizationModeDispersion, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_PostFecBer is a *Component_OpticalChannel_PostFecBer with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_PostFecBer struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_PostFecBer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_PostFecBer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_PostFecBer sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_PostFecBer) Val(t testing.TB) *Component_OpticalChannel_PostFecBer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_PostFecBer sample.
+func (q *QualifiedComponent_OpticalChannel_PostFecBer) SetVal(v *Component_OpticalChannel_PostFecBer) *QualifiedComponent_OpticalChannel_PostFecBer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_PostFecBer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_PostFecBer is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_PostFecBer samples.
+type CollectionComponent_OpticalChannel_PostFecBer struct {
+	W    *Component_OpticalChannel_PostFecBerWatcher
+	Data []*QualifiedComponent_OpticalChannel_PostFecBer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_PostFecBer) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_PostFecBer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_PostFecBerWatcher observes a stream of *Component_OpticalChannel_PostFecBer samples.
+type Component_OpticalChannel_PostFecBerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_PostFecBer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_PostFecBerWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_PostFecBer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_PreFecBer is a *Component_OpticalChannel_PreFecBer with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_PreFecBer struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_PreFecBer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_PreFecBer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_PreFecBer sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_PreFecBer) Val(t testing.TB) *Component_OpticalChannel_PreFecBer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_PreFecBer sample.
+func (q *QualifiedComponent_OpticalChannel_PreFecBer) SetVal(v *Component_OpticalChannel_PreFecBer) *QualifiedComponent_OpticalChannel_PreFecBer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_PreFecBer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_PreFecBer is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_PreFecBer samples.
+type CollectionComponent_OpticalChannel_PreFecBer struct {
+	W    *Component_OpticalChannel_PreFecBerWatcher
+	Data []*QualifiedComponent_OpticalChannel_PreFecBer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_PreFecBer) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_PreFecBer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_PreFecBerWatcher observes a stream of *Component_OpticalChannel_PreFecBer samples.
+type Component_OpticalChannel_PreFecBerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_PreFecBer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_PreFecBerWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_PreFecBer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_QValue is a *Component_OpticalChannel_QValue with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_QValue struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_QValue // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_QValue) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_QValue sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_QValue) Val(t testing.TB) *Component_OpticalChannel_QValue {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_QValue sample.
+func (q *QualifiedComponent_OpticalChannel_QValue) SetVal(v *Component_OpticalChannel_QValue) *QualifiedComponent_OpticalChannel_QValue {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_QValue) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_QValue is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_QValue samples.
+type CollectionComponent_OpticalChannel_QValue struct {
+	W    *Component_OpticalChannel_QValueWatcher
+	Data []*QualifiedComponent_OpticalChannel_QValue
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_QValue) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_QValue {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_QValueWatcher observes a stream of *Component_OpticalChannel_QValue samples.
+type Component_OpticalChannel_QValueWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_QValue
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_QValueWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_QValue, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion is a *Component_OpticalChannel_SecondOrderPolarizationModeDispersion with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_SecondOrderPolarizationModeDispersion // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_SecondOrderPolarizationModeDispersion sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion) Val(t testing.TB) *Component_OpticalChannel_SecondOrderPolarizationModeDispersion {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_SecondOrderPolarizationModeDispersion sample.
+func (q *QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion) SetVal(v *Component_OpticalChannel_SecondOrderPolarizationModeDispersion) *QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_SecondOrderPolarizationModeDispersion is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_SecondOrderPolarizationModeDispersion samples.
+type CollectionComponent_OpticalChannel_SecondOrderPolarizationModeDispersion struct {
+	W    *Component_OpticalChannel_SecondOrderPolarizationModeDispersionWatcher
+	Data []*QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_SecondOrderPolarizationModeDispersion) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_SecondOrderPolarizationModeDispersionWatcher observes a stream of *Component_OpticalChannel_SecondOrderPolarizationModeDispersion samples.
+type Component_OpticalChannel_SecondOrderPolarizationModeDispersionWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_SecondOrderPolarizationModeDispersionWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_SecondOrderPolarizationModeDispersion, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedComponent_OpticalChannel_SopRoc is a *Component_OpticalChannel_SopRoc with a corresponding timestamp.
+type QualifiedComponent_OpticalChannel_SopRoc struct {
+	*genutil.Metadata
+	val     *Component_OpticalChannel_SopRoc // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedComponent_OpticalChannel_SopRoc) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *Component_OpticalChannel_SopRoc sample, erroring out if not present.
+func (q *QualifiedComponent_OpticalChannel_SopRoc) Val(t testing.TB) *Component_OpticalChannel_SopRoc {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *Component_OpticalChannel_SopRoc sample.
+func (q *QualifiedComponent_OpticalChannel_SopRoc) SetVal(v *Component_OpticalChannel_SopRoc) *QualifiedComponent_OpticalChannel_SopRoc {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedComponent_OpticalChannel_SopRoc) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionComponent_OpticalChannel_SopRoc is a telemetry Collection whose Await method returns a slice of *Component_OpticalChannel_SopRoc samples.
+type CollectionComponent_OpticalChannel_SopRoc struct {
+	W    *Component_OpticalChannel_SopRocWatcher
+	Data []*QualifiedComponent_OpticalChannel_SopRoc
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionComponent_OpticalChannel_SopRoc) Await(t testing.TB) []*QualifiedComponent_OpticalChannel_SopRoc {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// Component_OpticalChannel_SopRocWatcher observes a stream of *Component_OpticalChannel_SopRoc samples.
+type Component_OpticalChannel_SopRocWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedComponent_OpticalChannel_SopRoc
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *Component_OpticalChannel_SopRocWatcher) Await(t testing.TB) (*QualifiedComponent_OpticalChannel_SopRoc, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedComponent_Pcie is a *Component_Pcie with a corresponding timestamp.
 type QualifiedComponent_Pcie struct {
 	*genutil.Metadata
@@ -8198,1111 +9628,6 @@ type Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangeWatcher struct
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRangeWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerOuterRange, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange is a *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange with a corresponding timestamp.
-type QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange struct {
-	*genutil.Metadata
-	val     *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange sample, erroring out if not present.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) Val(t testing.TB) *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange sample.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) SetVal(v *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange is a telemetry Collection whose Await method returns a slice of *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange samples.
-type CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange struct {
-	W    *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher
-	Data []*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange) Await(t testing.TB) []*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher observes a stream of *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRange samples.
-type Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerRangeWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerRange, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList is a *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList with a corresponding timestamp.
-type QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList struct {
-	*genutil.Metadata
-	val     *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList sample, erroring out if not present.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) Val(t testing.TB) *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList sample.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) SetVal(v *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList) *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList is a telemetry Collection whose Await method returns a slice of *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList samples.
-type CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList struct {
-	W    *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher
-	Data []*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList) Await(t testing.TB) []*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher observes a stream of *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterList samples.
-type Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterListWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterList, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange is a *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange with a corresponding timestamp.
-type QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange struct {
-	*genutil.Metadata
-	val     *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange sample, erroring out if not present.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) Val(t testing.TB) *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange sample.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) SetVal(v *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange is a telemetry Collection whose Await method returns a slice of *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange samples.
-type CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange struct {
-	W    *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher
-	Data []*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange) Await(t testing.TB) []*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher observes a stream of *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRange samples.
-type Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Subinterface_Vlan_Match_DoubleTaggedOuterRangeWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedOuterRange, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Subinterface_Vlan_Match_SingleTagged is a *Interface_Subinterface_Vlan_Match_SingleTagged with a corresponding timestamp.
-type QualifiedInterface_Subinterface_Vlan_Match_SingleTagged struct {
-	*genutil.Metadata
-	val     *Interface_Subinterface_Vlan_Match_SingleTagged // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTagged) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Subinterface_Vlan_Match_SingleTagged sample, erroring out if not present.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTagged) Val(t testing.TB) *Interface_Subinterface_Vlan_Match_SingleTagged {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Subinterface_Vlan_Match_SingleTagged sample.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTagged) SetVal(v *Interface_Subinterface_Vlan_Match_SingleTagged) *QualifiedInterface_Subinterface_Vlan_Match_SingleTagged {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTagged) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Subinterface_Vlan_Match_SingleTagged is a telemetry Collection whose Await method returns a slice of *Interface_Subinterface_Vlan_Match_SingleTagged samples.
-type CollectionInterface_Subinterface_Vlan_Match_SingleTagged struct {
-	W    *Interface_Subinterface_Vlan_Match_SingleTaggedWatcher
-	Data []*QualifiedInterface_Subinterface_Vlan_Match_SingleTagged
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Subinterface_Vlan_Match_SingleTagged) Await(t testing.TB) []*QualifiedInterface_Subinterface_Vlan_Match_SingleTagged {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Subinterface_Vlan_Match_SingleTaggedWatcher observes a stream of *Interface_Subinterface_Vlan_Match_SingleTagged samples.
-type Interface_Subinterface_Vlan_Match_SingleTaggedWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Subinterface_Vlan_Match_SingleTagged
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Subinterface_Vlan_Match_SingleTaggedWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_SingleTagged, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList is a *Interface_Subinterface_Vlan_Match_SingleTaggedList with a corresponding timestamp.
-type QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList struct {
-	*genutil.Metadata
-	val     *Interface_Subinterface_Vlan_Match_SingleTaggedList // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Subinterface_Vlan_Match_SingleTaggedList sample, erroring out if not present.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList) Val(t testing.TB) *Interface_Subinterface_Vlan_Match_SingleTaggedList {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Subinterface_Vlan_Match_SingleTaggedList sample.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList) SetVal(v *Interface_Subinterface_Vlan_Match_SingleTaggedList) *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Subinterface_Vlan_Match_SingleTaggedList is a telemetry Collection whose Await method returns a slice of *Interface_Subinterface_Vlan_Match_SingleTaggedList samples.
-type CollectionInterface_Subinterface_Vlan_Match_SingleTaggedList struct {
-	W    *Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher
-	Data []*QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Subinterface_Vlan_Match_SingleTaggedList) Await(t testing.TB) []*QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher observes a stream of *Interface_Subinterface_Vlan_Match_SingleTaggedList samples.
-type Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Subinterface_Vlan_Match_SingleTaggedListWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedList, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange is a *Interface_Subinterface_Vlan_Match_SingleTaggedRange with a corresponding timestamp.
-type QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange struct {
-	*genutil.Metadata
-	val     *Interface_Subinterface_Vlan_Match_SingleTaggedRange // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Interface_Subinterface_Vlan_Match_SingleTaggedRange sample, erroring out if not present.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange) Val(t testing.TB) *Interface_Subinterface_Vlan_Match_SingleTaggedRange {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Interface_Subinterface_Vlan_Match_SingleTaggedRange sample.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange) SetVal(v *Interface_Subinterface_Vlan_Match_SingleTaggedRange) *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionInterface_Subinterface_Vlan_Match_SingleTaggedRange is a telemetry Collection whose Await method returns a slice of *Interface_Subinterface_Vlan_Match_SingleTaggedRange samples.
-type CollectionInterface_Subinterface_Vlan_Match_SingleTaggedRange struct {
-	W    *Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher
-	Data []*QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionInterface_Subinterface_Vlan_Match_SingleTaggedRange) Await(t testing.TB) []*QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher observes a stream of *Interface_Subinterface_Vlan_Match_SingleTaggedRange samples.
-type Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Interface_Subinterface_Vlan_Match_SingleTaggedRangeWatcher) Await(t testing.TB) (*QualifiedInterface_Subinterface_Vlan_Match_SingleTaggedRange, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedKeychain is a *Keychain with a corresponding timestamp.
-type QualifiedKeychain struct {
-	*genutil.Metadata
-	val     *Keychain // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedKeychain) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Keychain sample, erroring out if not present.
-func (q *QualifiedKeychain) Val(t testing.TB) *Keychain {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Keychain sample.
-func (q *QualifiedKeychain) SetVal(v *Keychain) *QualifiedKeychain {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedKeychain) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionKeychain is a telemetry Collection whose Await method returns a slice of *Keychain samples.
-type CollectionKeychain struct {
-	W    *KeychainWatcher
-	Data []*QualifiedKeychain
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionKeychain) Await(t testing.TB) []*QualifiedKeychain {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// KeychainWatcher observes a stream of *Keychain samples.
-type KeychainWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedKeychain
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *KeychainWatcher) Await(t testing.TB) (*QualifiedKeychain, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedKeychain_Key is a *Keychain_Key with a corresponding timestamp.
-type QualifiedKeychain_Key struct {
-	*genutil.Metadata
-	val     *Keychain_Key // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedKeychain_Key) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Keychain_Key sample, erroring out if not present.
-func (q *QualifiedKeychain_Key) Val(t testing.TB) *Keychain_Key {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Keychain_Key sample.
-func (q *QualifiedKeychain_Key) SetVal(v *Keychain_Key) *QualifiedKeychain_Key {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedKeychain_Key) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionKeychain_Key is a telemetry Collection whose Await method returns a slice of *Keychain_Key samples.
-type CollectionKeychain_Key struct {
-	W    *Keychain_KeyWatcher
-	Data []*QualifiedKeychain_Key
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionKeychain_Key) Await(t testing.TB) []*QualifiedKeychain_Key {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Keychain_KeyWatcher observes a stream of *Keychain_Key samples.
-type Keychain_KeyWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedKeychain_Key
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Keychain_KeyWatcher) Await(t testing.TB) (*QualifiedKeychain_Key, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedKeychain_Key_ReceiveLifetime is a *Keychain_Key_ReceiveLifetime with a corresponding timestamp.
-type QualifiedKeychain_Key_ReceiveLifetime struct {
-	*genutil.Metadata
-	val     *Keychain_Key_ReceiveLifetime // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedKeychain_Key_ReceiveLifetime) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Keychain_Key_ReceiveLifetime sample, erroring out if not present.
-func (q *QualifiedKeychain_Key_ReceiveLifetime) Val(t testing.TB) *Keychain_Key_ReceiveLifetime {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Keychain_Key_ReceiveLifetime sample.
-func (q *QualifiedKeychain_Key_ReceiveLifetime) SetVal(v *Keychain_Key_ReceiveLifetime) *QualifiedKeychain_Key_ReceiveLifetime {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedKeychain_Key_ReceiveLifetime) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionKeychain_Key_ReceiveLifetime is a telemetry Collection whose Await method returns a slice of *Keychain_Key_ReceiveLifetime samples.
-type CollectionKeychain_Key_ReceiveLifetime struct {
-	W    *Keychain_Key_ReceiveLifetimeWatcher
-	Data []*QualifiedKeychain_Key_ReceiveLifetime
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionKeychain_Key_ReceiveLifetime) Await(t testing.TB) []*QualifiedKeychain_Key_ReceiveLifetime {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Keychain_Key_ReceiveLifetimeWatcher observes a stream of *Keychain_Key_ReceiveLifetime samples.
-type Keychain_Key_ReceiveLifetimeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedKeychain_Key_ReceiveLifetime
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Keychain_Key_ReceiveLifetimeWatcher) Await(t testing.TB) (*QualifiedKeychain_Key_ReceiveLifetime, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedKeychain_Key_SendLifetime is a *Keychain_Key_SendLifetime with a corresponding timestamp.
-type QualifiedKeychain_Key_SendLifetime struct {
-	*genutil.Metadata
-	val     *Keychain_Key_SendLifetime // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedKeychain_Key_SendLifetime) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Keychain_Key_SendLifetime sample, erroring out if not present.
-func (q *QualifiedKeychain_Key_SendLifetime) Val(t testing.TB) *Keychain_Key_SendLifetime {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Keychain_Key_SendLifetime sample.
-func (q *QualifiedKeychain_Key_SendLifetime) SetVal(v *Keychain_Key_SendLifetime) *QualifiedKeychain_Key_SendLifetime {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedKeychain_Key_SendLifetime) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionKeychain_Key_SendLifetime is a telemetry Collection whose Await method returns a slice of *Keychain_Key_SendLifetime samples.
-type CollectionKeychain_Key_SendLifetime struct {
-	W    *Keychain_Key_SendLifetimeWatcher
-	Data []*QualifiedKeychain_Key_SendLifetime
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionKeychain_Key_SendLifetime) Await(t testing.TB) []*QualifiedKeychain_Key_SendLifetime {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Keychain_Key_SendLifetimeWatcher observes a stream of *Keychain_Key_SendLifetime samples.
-type Keychain_Key_SendLifetimeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedKeychain_Key_SendLifetime
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Keychain_Key_SendLifetimeWatcher) Await(t testing.TB) (*QualifiedKeychain_Key_SendLifetime, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLacp is a *Lacp with a corresponding timestamp.
-type QualifiedLacp struct {
-	*genutil.Metadata
-	val     *Lacp // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLacp) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lacp sample, erroring out if not present.
-func (q *QualifiedLacp) Val(t testing.TB) *Lacp {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lacp sample.
-func (q *QualifiedLacp) SetVal(v *Lacp) *QualifiedLacp {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLacp) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLacp is a telemetry Collection whose Await method returns a slice of *Lacp samples.
-type CollectionLacp struct {
-	W    *LacpWatcher
-	Data []*QualifiedLacp
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLacp) Await(t testing.TB) []*QualifiedLacp {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// LacpWatcher observes a stream of *Lacp samples.
-type LacpWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLacp
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *LacpWatcher) Await(t testing.TB) (*QualifiedLacp, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLacp_Interface is a *Lacp_Interface with a corresponding timestamp.
-type QualifiedLacp_Interface struct {
-	*genutil.Metadata
-	val     *Lacp_Interface // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLacp_Interface) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lacp_Interface sample, erroring out if not present.
-func (q *QualifiedLacp_Interface) Val(t testing.TB) *Lacp_Interface {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lacp_Interface sample.
-func (q *QualifiedLacp_Interface) SetVal(v *Lacp_Interface) *QualifiedLacp_Interface {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLacp_Interface) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLacp_Interface is a telemetry Collection whose Await method returns a slice of *Lacp_Interface samples.
-type CollectionLacp_Interface struct {
-	W    *Lacp_InterfaceWatcher
-	Data []*QualifiedLacp_Interface
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLacp_Interface) Await(t testing.TB) []*QualifiedLacp_Interface {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lacp_InterfaceWatcher observes a stream of *Lacp_Interface samples.
-type Lacp_InterfaceWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLacp_Interface
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lacp_InterfaceWatcher) Await(t testing.TB) (*QualifiedLacp_Interface, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLacp_Interface_Member is a *Lacp_Interface_Member with a corresponding timestamp.
-type QualifiedLacp_Interface_Member struct {
-	*genutil.Metadata
-	val     *Lacp_Interface_Member // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLacp_Interface_Member) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lacp_Interface_Member sample, erroring out if not present.
-func (q *QualifiedLacp_Interface_Member) Val(t testing.TB) *Lacp_Interface_Member {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lacp_Interface_Member sample.
-func (q *QualifiedLacp_Interface_Member) SetVal(v *Lacp_Interface_Member) *QualifiedLacp_Interface_Member {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLacp_Interface_Member) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLacp_Interface_Member is a telemetry Collection whose Await method returns a slice of *Lacp_Interface_Member samples.
-type CollectionLacp_Interface_Member struct {
-	W    *Lacp_Interface_MemberWatcher
-	Data []*QualifiedLacp_Interface_Member
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLacp_Interface_Member) Await(t testing.TB) []*QualifiedLacp_Interface_Member {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lacp_Interface_MemberWatcher observes a stream of *Lacp_Interface_Member samples.
-type Lacp_Interface_MemberWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLacp_Interface_Member
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lacp_Interface_MemberWatcher) Await(t testing.TB) (*QualifiedLacp_Interface_Member, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLacp_Interface_Member_Counters is a *Lacp_Interface_Member_Counters with a corresponding timestamp.
-type QualifiedLacp_Interface_Member_Counters struct {
-	*genutil.Metadata
-	val     *Lacp_Interface_Member_Counters // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLacp_Interface_Member_Counters) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lacp_Interface_Member_Counters sample, erroring out if not present.
-func (q *QualifiedLacp_Interface_Member_Counters) Val(t testing.TB) *Lacp_Interface_Member_Counters {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lacp_Interface_Member_Counters sample.
-func (q *QualifiedLacp_Interface_Member_Counters) SetVal(v *Lacp_Interface_Member_Counters) *QualifiedLacp_Interface_Member_Counters {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLacp_Interface_Member_Counters) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLacp_Interface_Member_Counters is a telemetry Collection whose Await method returns a slice of *Lacp_Interface_Member_Counters samples.
-type CollectionLacp_Interface_Member_Counters struct {
-	W    *Lacp_Interface_Member_CountersWatcher
-	Data []*QualifiedLacp_Interface_Member_Counters
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLacp_Interface_Member_Counters) Await(t testing.TB) []*QualifiedLacp_Interface_Member_Counters {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lacp_Interface_Member_CountersWatcher observes a stream of *Lacp_Interface_Member_Counters samples.
-type Lacp_Interface_Member_CountersWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLacp_Interface_Member_Counters
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lacp_Interface_Member_CountersWatcher) Await(t testing.TB) (*QualifiedLacp_Interface_Member_Counters, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp is a *Lldp with a corresponding timestamp.
-type QualifiedLldp struct {
-	*genutil.Metadata
-	val     *Lldp // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp sample, erroring out if not present.
-func (q *QualifiedLldp) Val(t testing.TB) *Lldp {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp sample.
-func (q *QualifiedLldp) SetVal(v *Lldp) *QualifiedLldp {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp is a telemetry Collection whose Await method returns a slice of *Lldp samples.
-type CollectionLldp struct {
-	W    *LldpWatcher
-	Data []*QualifiedLldp
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp) Await(t testing.TB) []*QualifiedLldp {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// LldpWatcher observes a stream of *Lldp samples.
-type LldpWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *LldpWatcher) Await(t testing.TB) (*QualifiedLldp, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Counters is a *Lldp_Counters with a corresponding timestamp.
-type QualifiedLldp_Counters struct {
-	*genutil.Metadata
-	val     *Lldp_Counters // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Counters) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Counters sample, erroring out if not present.
-func (q *QualifiedLldp_Counters) Val(t testing.TB) *Lldp_Counters {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Counters sample.
-func (q *QualifiedLldp_Counters) SetVal(v *Lldp_Counters) *QualifiedLldp_Counters {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Counters) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Counters is a telemetry Collection whose Await method returns a slice of *Lldp_Counters samples.
-type CollectionLldp_Counters struct {
-	W    *Lldp_CountersWatcher
-	Data []*QualifiedLldp_Counters
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Counters) Await(t testing.TB) []*QualifiedLldp_Counters {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_CountersWatcher observes a stream of *Lldp_Counters samples.
-type Lldp_CountersWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Counters
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_CountersWatcher) Await(t testing.TB) (*QualifiedLldp_Counters, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedLldp_Interface is a *Lldp_Interface with a corresponding timestamp.
-type QualifiedLldp_Interface struct {
-	*genutil.Metadata
-	val     *Lldp_Interface // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedLldp_Interface) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Lldp_Interface sample, erroring out if not present.
-func (q *QualifiedLldp_Interface) Val(t testing.TB) *Lldp_Interface {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Lldp_Interface sample.
-func (q *QualifiedLldp_Interface) SetVal(v *Lldp_Interface) *QualifiedLldp_Interface {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedLldp_Interface) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionLldp_Interface is a telemetry Collection whose Await method returns a slice of *Lldp_Interface samples.
-type CollectionLldp_Interface struct {
-	W    *Lldp_InterfaceWatcher
-	Data []*QualifiedLldp_Interface
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionLldp_Interface) Await(t testing.TB) []*QualifiedLldp_Interface {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Lldp_InterfaceWatcher observes a stream of *Lldp_Interface samples.
-type Lldp_InterfaceWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedLldp_Interface
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Lldp_InterfaceWatcher) Await(t testing.TB) (*QualifiedLldp_Interface, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

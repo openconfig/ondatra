@@ -12,851 +12,6 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
-// QualifiedQos_SchedulerPolicy_Scheduler is a *Qos_SchedulerPolicy_Scheduler with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) SetVal(v *Qos_SchedulerPolicy_Scheduler) *QualifiedQos_SchedulerPolicy_Scheduler {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler samples.
-type CollectionQos_SchedulerPolicy_Scheduler struct {
-	W    *Qos_SchedulerPolicy_SchedulerWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_SchedulerWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler samples.
-type Qos_SchedulerPolicy_SchedulerWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_SchedulerWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_Input is a *Qos_SchedulerPolicy_Scheduler_Input with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_Input struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_Input // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_Input sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_Input {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_Input sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) SetVal(v *Qos_SchedulerPolicy_Scheduler_Input) *QualifiedQos_SchedulerPolicy_Scheduler_Input {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Input) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_Input is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_Input samples.
-type CollectionQos_SchedulerPolicy_Scheduler_Input struct {
-	W    *Qos_SchedulerPolicy_Scheduler_InputWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_Input
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_Input) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_Input {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_InputWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_Input samples.
-type Qos_SchedulerPolicy_Scheduler_InputWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_Input
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_InputWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_Input, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColorWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ConformAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction is a *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction samples.
-type Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_OneRateTwoColor_ExceedAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_Output is a *Qos_SchedulerPolicy_Scheduler_Output with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_Output struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_Output // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Output) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_Output sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Output) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_Output {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_Output sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Output) SetVal(v *Qos_SchedulerPolicy_Scheduler_Output) *QualifiedQos_SchedulerPolicy_Scheduler_Output {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_Output) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_Output is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_Output samples.
-type CollectionQos_SchedulerPolicy_Scheduler_Output struct {
-	W    *Qos_SchedulerPolicy_Scheduler_OutputWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_Output
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_Output) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_Output {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_OutputWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_Output samples.
-type Qos_SchedulerPolicy_Scheduler_OutputWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_Output
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_OutputWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_Output, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor is a *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor) SetVal(v *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor) *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor samples.
-type CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor struct {
-	W    *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColorWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_TwoRateThreeColorWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor samples.
-type Qos_SchedulerPolicy_Scheduler_TwoRateThreeColorWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColorWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction is a *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction) *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction samples.
-type Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ConformAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction is a *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction) *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction samples.
-type Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ExceedAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction is a *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction with a corresponding timestamp.
-type QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction struct {
-	*genutil.Metadata
-	val     *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction sample, erroring out if not present.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction) Val(t testing.TB) *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction sample.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction) SetVal(v *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction) *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction is a telemetry Collection whose Await method returns a slice of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction samples.
-type CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction struct {
-	W    *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateActionWatcher
-	Data []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction) Await(t testing.TB) []*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateActionWatcher observes a stream of *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction samples.
-type Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateActionWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *Qos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateActionWatcher) Await(t testing.TB) (*QualifiedQos_SchedulerPolicy_Scheduler_TwoRateThreeColor_ViolateAction, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedRoutingPolicy is a *RoutingPolicy with a corresponding timestamp.
-type QualifiedRoutingPolicy struct {
-	*genutil.Metadata
-	val     *RoutingPolicy // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedRoutingPolicy) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *RoutingPolicy sample, erroring out if not present.
-func (q *QualifiedRoutingPolicy) Val(t testing.TB) *RoutingPolicy {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *RoutingPolicy sample.
-func (q *QualifiedRoutingPolicy) SetVal(v *RoutingPolicy) *QualifiedRoutingPolicy {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedRoutingPolicy) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionRoutingPolicy is a telemetry Collection whose Await method returns a slice of *RoutingPolicy samples.
-type CollectionRoutingPolicy struct {
-	W    *RoutingPolicyWatcher
-	Data []*QualifiedRoutingPolicy
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionRoutingPolicy) Await(t testing.TB) []*QualifiedRoutingPolicy {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// RoutingPolicyWatcher observes a stream of *RoutingPolicy samples.
-type RoutingPolicyWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedRoutingPolicy
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *RoutingPolicyWatcher) Await(t testing.TB) (*QualifiedRoutingPolicy, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedRoutingPolicy_DefinedSets is a *RoutingPolicy_DefinedSets with a corresponding timestamp.
-type QualifiedRoutingPolicy_DefinedSets struct {
-	*genutil.Metadata
-	val     *RoutingPolicy_DefinedSets // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedRoutingPolicy_DefinedSets) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *RoutingPolicy_DefinedSets sample, erroring out if not present.
-func (q *QualifiedRoutingPolicy_DefinedSets) Val(t testing.TB) *RoutingPolicy_DefinedSets {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *RoutingPolicy_DefinedSets sample.
-func (q *QualifiedRoutingPolicy_DefinedSets) SetVal(v *RoutingPolicy_DefinedSets) *QualifiedRoutingPolicy_DefinedSets {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedRoutingPolicy_DefinedSets) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionRoutingPolicy_DefinedSets is a telemetry Collection whose Await method returns a slice of *RoutingPolicy_DefinedSets samples.
-type CollectionRoutingPolicy_DefinedSets struct {
-	W    *RoutingPolicy_DefinedSetsWatcher
-	Data []*QualifiedRoutingPolicy_DefinedSets
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionRoutingPolicy_DefinedSets) Await(t testing.TB) []*QualifiedRoutingPolicy_DefinedSets {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// RoutingPolicy_DefinedSetsWatcher observes a stream of *RoutingPolicy_DefinedSets samples.
-type RoutingPolicy_DefinedSetsWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedRoutingPolicy_DefinedSets
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *RoutingPolicy_DefinedSetsWatcher) Await(t testing.TB) (*QualifiedRoutingPolicy_DefinedSets, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets is a *RoutingPolicy_DefinedSets_BgpDefinedSets with a corresponding timestamp.
-type QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets struct {
-	*genutil.Metadata
-	val     *RoutingPolicy_DefinedSets_BgpDefinedSets // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the *RoutingPolicy_DefinedSets_BgpDefinedSets sample, erroring out if not present.
-func (q *QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets) Val(t testing.TB) *RoutingPolicy_DefinedSets_BgpDefinedSets {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the *RoutingPolicy_DefinedSets_BgpDefinedSets sample.
-func (q *QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets) SetVal(v *RoutingPolicy_DefinedSets_BgpDefinedSets) *QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionRoutingPolicy_DefinedSets_BgpDefinedSets is a telemetry Collection whose Await method returns a slice of *RoutingPolicy_DefinedSets_BgpDefinedSets samples.
-type CollectionRoutingPolicy_DefinedSets_BgpDefinedSets struct {
-	W    *RoutingPolicy_DefinedSets_BgpDefinedSetsWatcher
-	Data []*QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionRoutingPolicy_DefinedSets_BgpDefinedSets) Await(t testing.TB) []*QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// RoutingPolicy_DefinedSets_BgpDefinedSetsWatcher observes a stream of *RoutingPolicy_DefinedSets_BgpDefinedSets samples.
-type RoutingPolicy_DefinedSets_BgpDefinedSetsWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *RoutingPolicy_DefinedSets_BgpDefinedSetsWatcher) Await(t testing.TB) (*QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
 // QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets_AsPathSet is a *RoutingPolicy_DefinedSets_BgpDefinedSets_AsPathSet with a corresponding timestamp.
 type QualifiedRoutingPolicy_DefinedSets_BgpDefinedSets_AsPathSet struct {
 	*genutil.Metadata
@@ -6512,6 +5667,1241 @@ func (w *System_TelnetServerWatcher) Await(t testing.TB) (*QualifiedSystem_Telne
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedTerminalDevice is a *TerminalDevice with a corresponding timestamp.
+type QualifiedTerminalDevice struct {
+	*genutil.Metadata
+	val     *TerminalDevice // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice sample, erroring out if not present.
+func (q *QualifiedTerminalDevice) Val(t testing.TB) *TerminalDevice {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice sample.
+func (q *QualifiedTerminalDevice) SetVal(v *TerminalDevice) *QualifiedTerminalDevice {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice is a telemetry Collection whose Await method returns a slice of *TerminalDevice samples.
+type CollectionTerminalDevice struct {
+	W    *TerminalDeviceWatcher
+	Data []*QualifiedTerminalDevice
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice) Await(t testing.TB) []*QualifiedTerminalDevice {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDeviceWatcher observes a stream of *TerminalDevice samples.
+type TerminalDeviceWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDeviceWatcher) Await(t testing.TB) (*QualifiedTerminalDevice, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel is a *TerminalDevice_Channel with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel) Val(t testing.TB) *TerminalDevice_Channel {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel sample.
+func (q *QualifiedTerminalDevice_Channel) SetVal(v *TerminalDevice_Channel) *QualifiedTerminalDevice_Channel {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel samples.
+type CollectionTerminalDevice_Channel struct {
+	W    *TerminalDevice_ChannelWatcher
+	Data []*QualifiedTerminalDevice_Channel
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel) Await(t testing.TB) []*QualifiedTerminalDevice_Channel {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_ChannelWatcher observes a stream of *TerminalDevice_Channel samples.
+type TerminalDevice_ChannelWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_ChannelWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Assignment is a *TerminalDevice_Channel_Assignment with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Assignment struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Assignment // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Assignment) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Assignment sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Assignment) Val(t testing.TB) *TerminalDevice_Channel_Assignment {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Assignment sample.
+func (q *QualifiedTerminalDevice_Channel_Assignment) SetVal(v *TerminalDevice_Channel_Assignment) *QualifiedTerminalDevice_Channel_Assignment {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Assignment) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Assignment is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Assignment samples.
+type CollectionTerminalDevice_Channel_Assignment struct {
+	W    *TerminalDevice_Channel_AssignmentWatcher
+	Data []*QualifiedTerminalDevice_Channel_Assignment
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Assignment) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Assignment {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_AssignmentWatcher observes a stream of *TerminalDevice_Channel_Assignment samples.
+type TerminalDevice_Channel_AssignmentWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Assignment
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_AssignmentWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Assignment, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet is a *TerminalDevice_Channel_Ethernet with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet) Val(t testing.TB) *TerminalDevice_Channel_Ethernet {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet) SetVal(v *TerminalDevice_Channel_Ethernet) *QualifiedTerminalDevice_Channel_Ethernet {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet samples.
+type CollectionTerminalDevice_Channel_Ethernet struct {
+	W    *TerminalDevice_Channel_EthernetWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_EthernetWatcher observes a stream of *TerminalDevice_Channel_Ethernet samples.
+type TerminalDevice_Channel_EthernetWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_EthernetWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_Esnr is a *TerminalDevice_Channel_Ethernet_Esnr with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_Esnr struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_Esnr // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Esnr) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_Esnr sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Esnr) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_Esnr {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_Esnr sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Esnr) SetVal(v *TerminalDevice_Channel_Ethernet_Esnr) *QualifiedTerminalDevice_Channel_Ethernet_Esnr {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Esnr) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_Esnr is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_Esnr samples.
+type CollectionTerminalDevice_Channel_Ethernet_Esnr struct {
+	W    *TerminalDevice_Channel_Ethernet_EsnrWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_Esnr
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_Esnr) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_Esnr {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_EsnrWatcher observes a stream of *TerminalDevice_Channel_Ethernet_Esnr samples.
+type TerminalDevice_Channel_Ethernet_EsnrWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_Esnr
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_EsnrWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_Esnr, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_Lldp is a *TerminalDevice_Channel_Ethernet_Lldp with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_Lldp struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_Lldp // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_Lldp sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_Lldp {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_Lldp sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp) SetVal(v *TerminalDevice_Channel_Ethernet_Lldp) *QualifiedTerminalDevice_Channel_Ethernet_Lldp {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_Lldp is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_Lldp samples.
+type CollectionTerminalDevice_Channel_Ethernet_Lldp struct {
+	W    *TerminalDevice_Channel_Ethernet_LldpWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_Lldp
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_Lldp) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_Lldp {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_LldpWatcher observes a stream of *TerminalDevice_Channel_Ethernet_Lldp samples.
+type TerminalDevice_Channel_Ethernet_LldpWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_Lldp
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_LldpWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_Lldp, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters is a *TerminalDevice_Channel_Ethernet_Lldp_Counters with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_Lldp_Counters // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_Lldp_Counters sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_Lldp_Counters {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_Lldp_Counters sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters) SetVal(v *TerminalDevice_Channel_Ethernet_Lldp_Counters) *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_Lldp_Counters is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_Lldp_Counters samples.
+type CollectionTerminalDevice_Channel_Ethernet_Lldp_Counters struct {
+	W    *TerminalDevice_Channel_Ethernet_Lldp_CountersWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_Lldp_Counters) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_CountersWatcher observes a stream of *TerminalDevice_Channel_Ethernet_Lldp_Counters samples.
+type TerminalDevice_Channel_Ethernet_Lldp_CountersWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_Lldp_CountersWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Counters, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor is a *TerminalDevice_Channel_Ethernet_Lldp_Neighbor with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_Lldp_Neighbor // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_Lldp_Neighbor sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_Lldp_Neighbor {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_Lldp_Neighbor sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetVal(v *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_Lldp_Neighbor is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_Lldp_Neighbor samples.
+type CollectionTerminalDevice_Channel_Ethernet_Lldp_Neighbor struct {
+	W    *TerminalDevice_Channel_Ethernet_Lldp_NeighborWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_Lldp_Neighbor) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_NeighborWatcher observes a stream of *TerminalDevice_Channel_Ethernet_Lldp_Neighbor samples.
+type TerminalDevice_Channel_Ethernet_Lldp_NeighborWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_Lldp_NeighborWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv is a *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) SetVal(v *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv samples.
+type CollectionTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv struct {
+	W    *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvWatcher observes a stream of *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv samples.
+type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_TlvWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_PostFecBer is a *TerminalDevice_Channel_Ethernet_PostFecBer with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_PostFecBer struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_PostFecBer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PostFecBer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_PostFecBer sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PostFecBer) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_PostFecBer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_PostFecBer sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PostFecBer) SetVal(v *TerminalDevice_Channel_Ethernet_PostFecBer) *QualifiedTerminalDevice_Channel_Ethernet_PostFecBer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PostFecBer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_PostFecBer is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_PostFecBer samples.
+type CollectionTerminalDevice_Channel_Ethernet_PostFecBer struct {
+	W    *TerminalDevice_Channel_Ethernet_PostFecBerWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_PostFecBer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_PostFecBer) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_PostFecBer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_PostFecBerWatcher observes a stream of *TerminalDevice_Channel_Ethernet_PostFecBer samples.
+type TerminalDevice_Channel_Ethernet_PostFecBerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_PostFecBer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_PostFecBerWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_PostFecBer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_PreFecBer is a *TerminalDevice_Channel_Ethernet_PreFecBer with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_PreFecBer struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_PreFecBer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PreFecBer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_PreFecBer sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PreFecBer) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_PreFecBer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_PreFecBer sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PreFecBer) SetVal(v *TerminalDevice_Channel_Ethernet_PreFecBer) *QualifiedTerminalDevice_Channel_Ethernet_PreFecBer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_PreFecBer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_PreFecBer is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_PreFecBer samples.
+type CollectionTerminalDevice_Channel_Ethernet_PreFecBer struct {
+	W    *TerminalDevice_Channel_Ethernet_PreFecBerWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_PreFecBer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_PreFecBer) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_PreFecBer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_PreFecBerWatcher observes a stream of *TerminalDevice_Channel_Ethernet_PreFecBer samples.
+type TerminalDevice_Channel_Ethernet_PreFecBerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_PreFecBer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_PreFecBerWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_PreFecBer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ethernet_QValue is a *TerminalDevice_Channel_Ethernet_QValue with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ethernet_QValue struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ethernet_QValue // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ethernet_QValue) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ethernet_QValue sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_QValue) Val(t testing.TB) *TerminalDevice_Channel_Ethernet_QValue {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ethernet_QValue sample.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_QValue) SetVal(v *TerminalDevice_Channel_Ethernet_QValue) *QualifiedTerminalDevice_Channel_Ethernet_QValue {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ethernet_QValue) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ethernet_QValue is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ethernet_QValue samples.
+type CollectionTerminalDevice_Channel_Ethernet_QValue struct {
+	W    *TerminalDevice_Channel_Ethernet_QValueWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ethernet_QValue
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ethernet_QValue) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ethernet_QValue {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Ethernet_QValueWatcher observes a stream of *TerminalDevice_Channel_Ethernet_QValue samples.
+type TerminalDevice_Channel_Ethernet_QValueWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ethernet_QValue
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Ethernet_QValueWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ethernet_QValue, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Ingress is a *TerminalDevice_Channel_Ingress with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Ingress struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Ingress // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Ingress) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Ingress sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Ingress) Val(t testing.TB) *TerminalDevice_Channel_Ingress {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Ingress sample.
+func (q *QualifiedTerminalDevice_Channel_Ingress) SetVal(v *TerminalDevice_Channel_Ingress) *QualifiedTerminalDevice_Channel_Ingress {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Ingress) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Ingress is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Ingress samples.
+type CollectionTerminalDevice_Channel_Ingress struct {
+	W    *TerminalDevice_Channel_IngressWatcher
+	Data []*QualifiedTerminalDevice_Channel_Ingress
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Ingress) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Ingress {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_IngressWatcher observes a stream of *TerminalDevice_Channel_Ingress samples.
+type TerminalDevice_Channel_IngressWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Ingress
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_IngressWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Ingress, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Otn is a *TerminalDevice_Channel_Otn with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Otn struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Otn // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Otn) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Otn sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Otn) Val(t testing.TB) *TerminalDevice_Channel_Otn {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Otn sample.
+func (q *QualifiedTerminalDevice_Channel_Otn) SetVal(v *TerminalDevice_Channel_Otn) *QualifiedTerminalDevice_Channel_Otn {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Otn) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Otn is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Otn samples.
+type CollectionTerminalDevice_Channel_Otn struct {
+	W    *TerminalDevice_Channel_OtnWatcher
+	Data []*QualifiedTerminalDevice_Channel_Otn
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Otn) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Otn {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_OtnWatcher observes a stream of *TerminalDevice_Channel_Otn samples.
+type TerminalDevice_Channel_OtnWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Otn
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_OtnWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Otn, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Otn_Esnr is a *TerminalDevice_Channel_Otn_Esnr with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Otn_Esnr struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Otn_Esnr // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Otn_Esnr) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Otn_Esnr sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Otn_Esnr) Val(t testing.TB) *TerminalDevice_Channel_Otn_Esnr {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Otn_Esnr sample.
+func (q *QualifiedTerminalDevice_Channel_Otn_Esnr) SetVal(v *TerminalDevice_Channel_Otn_Esnr) *QualifiedTerminalDevice_Channel_Otn_Esnr {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Otn_Esnr) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Otn_Esnr is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Otn_Esnr samples.
+type CollectionTerminalDevice_Channel_Otn_Esnr struct {
+	W    *TerminalDevice_Channel_Otn_EsnrWatcher
+	Data []*QualifiedTerminalDevice_Channel_Otn_Esnr
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Otn_Esnr) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Otn_Esnr {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Otn_EsnrWatcher observes a stream of *TerminalDevice_Channel_Otn_Esnr samples.
+type TerminalDevice_Channel_Otn_EsnrWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Otn_Esnr
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Otn_EsnrWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Otn_Esnr, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Otn_PostFecBer is a *TerminalDevice_Channel_Otn_PostFecBer with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Otn_PostFecBer struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Otn_PostFecBer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Otn_PostFecBer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Otn_PostFecBer sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Otn_PostFecBer) Val(t testing.TB) *TerminalDevice_Channel_Otn_PostFecBer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Otn_PostFecBer sample.
+func (q *QualifiedTerminalDevice_Channel_Otn_PostFecBer) SetVal(v *TerminalDevice_Channel_Otn_PostFecBer) *QualifiedTerminalDevice_Channel_Otn_PostFecBer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Otn_PostFecBer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Otn_PostFecBer is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Otn_PostFecBer samples.
+type CollectionTerminalDevice_Channel_Otn_PostFecBer struct {
+	W    *TerminalDevice_Channel_Otn_PostFecBerWatcher
+	Data []*QualifiedTerminalDevice_Channel_Otn_PostFecBer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Otn_PostFecBer) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Otn_PostFecBer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Otn_PostFecBerWatcher observes a stream of *TerminalDevice_Channel_Otn_PostFecBer samples.
+type TerminalDevice_Channel_Otn_PostFecBerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Otn_PostFecBer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Otn_PostFecBerWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Otn_PostFecBer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Otn_PreFecBer is a *TerminalDevice_Channel_Otn_PreFecBer with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Otn_PreFecBer struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Otn_PreFecBer // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Otn_PreFecBer) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Otn_PreFecBer sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Otn_PreFecBer) Val(t testing.TB) *TerminalDevice_Channel_Otn_PreFecBer {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Otn_PreFecBer sample.
+func (q *QualifiedTerminalDevice_Channel_Otn_PreFecBer) SetVal(v *TerminalDevice_Channel_Otn_PreFecBer) *QualifiedTerminalDevice_Channel_Otn_PreFecBer {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Otn_PreFecBer) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Otn_PreFecBer is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Otn_PreFecBer samples.
+type CollectionTerminalDevice_Channel_Otn_PreFecBer struct {
+	W    *TerminalDevice_Channel_Otn_PreFecBerWatcher
+	Data []*QualifiedTerminalDevice_Channel_Otn_PreFecBer
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Otn_PreFecBer) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Otn_PreFecBer {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Otn_PreFecBerWatcher observes a stream of *TerminalDevice_Channel_Otn_PreFecBer samples.
+type TerminalDevice_Channel_Otn_PreFecBerWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Otn_PreFecBer
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Otn_PreFecBerWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Otn_PreFecBer, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Channel_Otn_QValue is a *TerminalDevice_Channel_Otn_QValue with a corresponding timestamp.
+type QualifiedTerminalDevice_Channel_Otn_QValue struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Channel_Otn_QValue // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Channel_Otn_QValue) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Channel_Otn_QValue sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Channel_Otn_QValue) Val(t testing.TB) *TerminalDevice_Channel_Otn_QValue {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Channel_Otn_QValue sample.
+func (q *QualifiedTerminalDevice_Channel_Otn_QValue) SetVal(v *TerminalDevice_Channel_Otn_QValue) *QualifiedTerminalDevice_Channel_Otn_QValue {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Channel_Otn_QValue) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Channel_Otn_QValue is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Channel_Otn_QValue samples.
+type CollectionTerminalDevice_Channel_Otn_QValue struct {
+	W    *TerminalDevice_Channel_Otn_QValueWatcher
+	Data []*QualifiedTerminalDevice_Channel_Otn_QValue
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Channel_Otn_QValue) Await(t testing.TB) []*QualifiedTerminalDevice_Channel_Otn_QValue {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_Channel_Otn_QValueWatcher observes a stream of *TerminalDevice_Channel_Otn_QValue samples.
+type TerminalDevice_Channel_Otn_QValueWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Channel_Otn_QValue
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_Channel_Otn_QValueWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Channel_Otn_QValue, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedTerminalDevice_Mode is a *TerminalDevice_Mode with a corresponding timestamp.
+type QualifiedTerminalDevice_Mode struct {
+	*genutil.Metadata
+	val     *TerminalDevice_Mode // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedTerminalDevice_Mode) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the *TerminalDevice_Mode sample, erroring out if not present.
+func (q *QualifiedTerminalDevice_Mode) Val(t testing.TB) *TerminalDevice_Mode {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the *TerminalDevice_Mode sample.
+func (q *QualifiedTerminalDevice_Mode) SetVal(v *TerminalDevice_Mode) *QualifiedTerminalDevice_Mode {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedTerminalDevice_Mode) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionTerminalDevice_Mode is a telemetry Collection whose Await method returns a slice of *TerminalDevice_Mode samples.
+type CollectionTerminalDevice_Mode struct {
+	W    *TerminalDevice_ModeWatcher
+	Data []*QualifiedTerminalDevice_Mode
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionTerminalDevice_Mode) Await(t testing.TB) []*QualifiedTerminalDevice_Mode {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// TerminalDevice_ModeWatcher observes a stream of *TerminalDevice_Mode samples.
+type TerminalDevice_ModeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedTerminalDevice_Mode
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *TerminalDevice_ModeWatcher) Await(t testing.TB) (*QualifiedTerminalDevice_Mode, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedAcl_AclSet_AclEntry_Ipv4_Protocol_Union is a Acl_AclSet_AclEntry_Ipv4_Protocol_Union with a corresponding timestamp.
 type QualifiedAcl_AclSet_AclEntry_Ipv4_Protocol_Union struct {
 	*genutil.Metadata
@@ -7877,6 +8267,71 @@ func (w *E_AsExternalLsa_MetricTypeWatcher) Await(t testing.TB) (*QualifiedE_AsE
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedE_Assignment_AssignmentType is a E_Assignment_AssignmentType with a corresponding timestamp.
+type QualifiedE_Assignment_AssignmentType struct {
+	*genutil.Metadata
+	val     E_Assignment_AssignmentType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Assignment_AssignmentType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Assignment_AssignmentType sample, erroring out if not present.
+func (q *QualifiedE_Assignment_AssignmentType) Val(t testing.TB) E_Assignment_AssignmentType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Assignment_AssignmentType sample.
+func (q *QualifiedE_Assignment_AssignmentType) SetVal(v E_Assignment_AssignmentType) *QualifiedE_Assignment_AssignmentType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Assignment_AssignmentType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Assignment_AssignmentType is a telemetry Collection whose Await method returns a slice of E_Assignment_AssignmentType samples.
+type CollectionE_Assignment_AssignmentType struct {
+	W    *E_Assignment_AssignmentTypeWatcher
+	Data []*QualifiedE_Assignment_AssignmentType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Assignment_AssignmentType) Await(t testing.TB) []*QualifiedE_Assignment_AssignmentType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Assignment_AssignmentTypeWatcher observes a stream of E_Assignment_AssignmentType samples.
+type E_Assignment_AssignmentTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Assignment_AssignmentType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Assignment_AssignmentTypeWatcher) Await(t testing.TB) (*QualifiedE_Assignment_AssignmentType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_Authentication_CryptoType is a E_Authentication_CryptoType with a corresponding timestamp.
 type QualifiedE_Authentication_CryptoType struct {
 	*genutil.Metadata
@@ -8657,6 +9112,71 @@ func (w *E_Bgp_Neighbor_SessionStateWatcher) Await(t testing.TB) (*QualifiedE_Bg
 	return w.LastVal, w.W.Await(t)
 }
 
+// QualifiedE_Channel_LinkState is a E_Channel_LinkState with a corresponding timestamp.
+type QualifiedE_Channel_LinkState struct {
+	*genutil.Metadata
+	val     E_Channel_LinkState // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Channel_LinkState) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Channel_LinkState sample, erroring out if not present.
+func (q *QualifiedE_Channel_LinkState) Val(t testing.TB) E_Channel_LinkState {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Channel_LinkState sample.
+func (q *QualifiedE_Channel_LinkState) SetVal(v E_Channel_LinkState) *QualifiedE_Channel_LinkState {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Channel_LinkState) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Channel_LinkState is a telemetry Collection whose Await method returns a slice of E_Channel_LinkState samples.
+type CollectionE_Channel_LinkState struct {
+	W    *E_Channel_LinkStateWatcher
+	Data []*QualifiedE_Channel_LinkState
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Channel_LinkState) Await(t testing.TB) []*QualifiedE_Channel_LinkState {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Channel_LinkStateWatcher observes a stream of E_Channel_LinkState samples.
+type E_Channel_LinkStateWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Channel_LinkState
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Channel_LinkStateWatcher) Await(t testing.TB) (*QualifiedE_Channel_LinkState, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_DefaultMetric_Flags is a E_DefaultMetric_Flags with a corresponding timestamp.
 type QualifiedE_DefaultMetric_Flags struct {
 	*genutil.Metadata
@@ -9108,201 +9628,6 @@ type E_Entry_EntryTypeWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_Entry_EntryTypeWatcher) Await(t testing.TB) (*QualifiedE_Entry_EntryType, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedE_Ethernet_DuplexMode is a E_Ethernet_DuplexMode with a corresponding timestamp.
-type QualifiedE_Ethernet_DuplexMode struct {
-	*genutil.Metadata
-	val     E_Ethernet_DuplexMode // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_Ethernet_DuplexMode) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_Ethernet_DuplexMode sample, erroring out if not present.
-func (q *QualifiedE_Ethernet_DuplexMode) Val(t testing.TB) E_Ethernet_DuplexMode {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_Ethernet_DuplexMode sample.
-func (q *QualifiedE_Ethernet_DuplexMode) SetVal(v E_Ethernet_DuplexMode) *QualifiedE_Ethernet_DuplexMode {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Ethernet_DuplexMode) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_Ethernet_DuplexMode is a telemetry Collection whose Await method returns a slice of E_Ethernet_DuplexMode samples.
-type CollectionE_Ethernet_DuplexMode struct {
-	W    *E_Ethernet_DuplexModeWatcher
-	Data []*QualifiedE_Ethernet_DuplexMode
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Ethernet_DuplexMode) Await(t testing.TB) []*QualifiedE_Ethernet_DuplexMode {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_Ethernet_DuplexModeWatcher observes a stream of E_Ethernet_DuplexMode samples.
-type E_Ethernet_DuplexModeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_Ethernet_DuplexMode
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Ethernet_DuplexModeWatcher) Await(t testing.TB) (*QualifiedE_Ethernet_DuplexMode, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedE_Ethernet_NegotiatedDuplexMode is a E_Ethernet_NegotiatedDuplexMode with a corresponding timestamp.
-type QualifiedE_Ethernet_NegotiatedDuplexMode struct {
-	*genutil.Metadata
-	val     E_Ethernet_NegotiatedDuplexMode // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_Ethernet_NegotiatedDuplexMode) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_Ethernet_NegotiatedDuplexMode sample, erroring out if not present.
-func (q *QualifiedE_Ethernet_NegotiatedDuplexMode) Val(t testing.TB) E_Ethernet_NegotiatedDuplexMode {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_Ethernet_NegotiatedDuplexMode sample.
-func (q *QualifiedE_Ethernet_NegotiatedDuplexMode) SetVal(v E_Ethernet_NegotiatedDuplexMode) *QualifiedE_Ethernet_NegotiatedDuplexMode {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Ethernet_NegotiatedDuplexMode) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_Ethernet_NegotiatedDuplexMode is a telemetry Collection whose Await method returns a slice of E_Ethernet_NegotiatedDuplexMode samples.
-type CollectionE_Ethernet_NegotiatedDuplexMode struct {
-	W    *E_Ethernet_NegotiatedDuplexModeWatcher
-	Data []*QualifiedE_Ethernet_NegotiatedDuplexMode
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Ethernet_NegotiatedDuplexMode) Await(t testing.TB) []*QualifiedE_Ethernet_NegotiatedDuplexMode {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_Ethernet_NegotiatedDuplexModeWatcher observes a stream of E_Ethernet_NegotiatedDuplexMode samples.
-type E_Ethernet_NegotiatedDuplexModeWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_Ethernet_NegotiatedDuplexMode
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Ethernet_NegotiatedDuplexModeWatcher) Await(t testing.TB) (*QualifiedE_Ethernet_NegotiatedDuplexMode, bool) {
-	t.Helper()
-	return w.LastVal, w.W.Await(t)
-}
-
-// QualifiedE_Event_Record is a E_Event_Record with a corresponding timestamp.
-type QualifiedE_Event_Record struct {
-	*genutil.Metadata
-	val     E_Event_Record // val is the sample value.
-	present bool
-}
-
-func (q *QualifiedE_Event_Record) String() string {
-	return genutil.QualifiedTypeString(q.val, q.Metadata)
-}
-
-// Val returns the value of the E_Event_Record sample, erroring out if not present.
-func (q *QualifiedE_Event_Record) Val(t testing.TB) E_Event_Record {
-	t.Helper()
-	if q == nil {
-		t.Fatal("No value present")
-	}
-	if !q.present {
-		pathStr, err := ygot.PathToString(q.Path)
-		if err != nil {
-			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
-		}
-		t.Fatalf("No value present at path %s", pathStr)
-	}
-	return q.val
-}
-
-// SetVal sets the value of the E_Event_Record sample.
-func (q *QualifiedE_Event_Record) SetVal(v E_Event_Record) *QualifiedE_Event_Record {
-	q.val = v
-	q.present = true
-	return q
-}
-
-// IsPresent returns true if the qualified struct contains a value.
-func (q *QualifiedE_Event_Record) IsPresent() bool {
-	return q != nil && q.present
-}
-
-// CollectionE_Event_Record is a telemetry Collection whose Await method returns a slice of E_Event_Record samples.
-type CollectionE_Event_Record struct {
-	W    *E_Event_RecordWatcher
-	Data []*QualifiedE_Event_Record
-}
-
-// Await blocks until the telemetry collection is complete and returns the slice of values collected.
-func (c *CollectionE_Event_Record) Await(t testing.TB) []*QualifiedE_Event_Record {
-	t.Helper()
-	c.W.Await(t)
-	return c.Data
-}
-
-// E_Event_RecordWatcher observes a stream of E_Event_Record samples.
-type E_Event_RecordWatcher struct {
-	W       *genutil.Watcher
-	LastVal *QualifiedE_Event_Record
-}
-
-// Await blocks until the Watch predicate is true or the duration elapses.
-// It returns the last value received and a boolean indicating whether it satisfies the predicate.
-func (w *E_Event_RecordWatcher) Await(t testing.TB) (*QualifiedE_Event_Record, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

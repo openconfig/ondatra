@@ -15,97 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Component_FabricPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fabric {
-	t.Helper()
-	goStruct := &oc.Component_Fabric{}
-	md, ok := oc.Lookup(t, n, "Component_Fabric", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedComponent_Fabric{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-platform/components/component/fabric with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Component_FabricPath) Get(t testing.TB) *oc.Component_Fabric {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-platform/components/component/fabric with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Component_FabricPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_Fabric {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedComponent_Fabric
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Component_Fabric{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_Fabric", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedComponent_Fabric{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-platform/components/component/fabric with a ONCE subscription.
-func (n *Component_FabricPathAny) Get(t testing.TB) []*oc.Component_Fabric {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Component_Fabric
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-platform/components/component/fabric.
-func (n *Component_FabricPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/fabric in the given batch object.
-func (n *Component_FabricPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-platform/components/component/fabric.
-func (n *Component_FabricPath) Replace(t testing.TB, val *oc.Component_Fabric) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/fabric in the given batch object.
-func (n *Component_FabricPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Fabric) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-platform/components/component/fabric.
-func (n *Component_FabricPath) Update(t testing.TB, val *oc.Component_Fabric) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/fabric in the given batch object.
-func (n *Component_FabricPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_Fabric) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
 // Lookup fetches the value at /openconfig-platform/components/component/fan with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Component_FanPath) Lookup(t testing.TB) *oc.QualifiedComponent_Fan {
@@ -949,6 +858,198 @@ func convertComponent_NamePath(t testing.TB, md *genutil.Metadata, parent *oc.Co
 		Metadata: md,
 	}
 	val := parent.Name
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/optical-channel with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_OpticalChannelPath) Lookup(t testing.TB) *oc.QualifiedComponent_OpticalChannel {
+	t.Helper()
+	goStruct := &oc.Component_OpticalChannel{}
+	md, ok := oc.Lookup(t, n, "Component_OpticalChannel", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedComponent_OpticalChannel{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/optical-channel with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_OpticalChannelPath) Get(t testing.TB) *oc.Component_OpticalChannel {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/optical-channel with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_OpticalChannelPathAny) Lookup(t testing.TB) []*oc.QualifiedComponent_OpticalChannel {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedComponent_OpticalChannel
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_OpticalChannel{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_OpticalChannel", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedComponent_OpticalChannel{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/optical-channel with a ONCE subscription.
+func (n *Component_OpticalChannelPathAny) Get(t testing.TB) []*oc.Component_OpticalChannel {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Component_OpticalChannel
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/optical-channel.
+func (n *Component_OpticalChannelPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/optical-channel in the given batch object.
+func (n *Component_OpticalChannelPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/optical-channel.
+func (n *Component_OpticalChannelPath) Replace(t testing.TB, val *oc.Component_OpticalChannel) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/optical-channel in the given batch object.
+func (n *Component_OpticalChannelPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Component_OpticalChannel) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/optical-channel.
+func (n *Component_OpticalChannelPath) Update(t testing.TB, val *oc.Component_OpticalChannel) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/optical-channel in the given batch object.
+func (n *Component_OpticalChannelPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Component_OpticalChannel) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-platform/components/component/optical-channel/config/frequency with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Component_OpticalChannel_FrequencyPath) Lookup(t testing.TB) *oc.QualifiedUint64 {
+	t.Helper()
+	goStruct := &oc.Component_OpticalChannel{}
+	md, ok := oc.Lookup(t, n, "Component_OpticalChannel", goStruct, true, true)
+	if ok {
+		return convertComponent_OpticalChannel_FrequencyPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-platform/components/component/optical-channel/config/frequency with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Component_OpticalChannel_FrequencyPath) Get(t testing.TB) uint64 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-platform/components/component/optical-channel/config/frequency with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Component_OpticalChannel_FrequencyPathAny) Lookup(t testing.TB) []*oc.QualifiedUint64 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint64
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Component_OpticalChannel{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Component_OpticalChannel", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertComponent_OpticalChannel_FrequencyPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-platform/components/component/optical-channel/config/frequency with a ONCE subscription.
+func (n *Component_OpticalChannel_FrequencyPathAny) Get(t testing.TB) []uint64 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint64
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-platform/components/component/optical-channel/config/frequency.
+func (n *Component_OpticalChannel_FrequencyPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-platform/components/component/optical-channel/config/frequency in the given batch object.
+func (n *Component_OpticalChannel_FrequencyPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-platform/components/component/optical-channel/config/frequency.
+func (n *Component_OpticalChannel_FrequencyPath) Replace(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-platform/components/component/optical-channel/config/frequency in the given batch object.
+func (n *Component_OpticalChannel_FrequencyPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-platform/components/component/optical-channel/config/frequency.
+func (n *Component_OpticalChannel_FrequencyPath) Update(t testing.TB, val uint64) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-platform/components/component/optical-channel/config/frequency in the given batch object.
+func (n *Component_OpticalChannel_FrequencyPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint64) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertComponent_OpticalChannel_FrequencyPath extracts the value of the leaf Frequency from its parent oc.Component_OpticalChannel
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint64.
+func convertComponent_OpticalChannel_FrequencyPath(t testing.TB, md *genutil.Metadata, parent *oc.Component_OpticalChannel) *oc.QualifiedUint64 {
+	t.Helper()
+	qv := &oc.QualifiedUint64{
+		Metadata: md,
+	}
+	val := parent.Frequency
 	if !reflect.ValueOf(val).IsZero() {
 		qv.SetVal(*val)
 	}
