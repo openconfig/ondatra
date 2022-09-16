@@ -64,9 +64,9 @@ func (g *ConcreteGraph) fetchPort2PortMap() map[*ConcretePort][]*ConcretePort {
 // AbstractNode represent a vertex on an AbstractGraph.
 // The AbstractNode has AbstractPorts and AbstractEdges that originate and terminate at AbstractPorts.
 type AbstractNode struct {
-	Desc  string                // Description for the AbstractNode for logging.
-	Ports []*AbstractPort       // A list AbstractPorts that may be connected to another AbstractPort.
-	Attrs map[string]Constraint // A map of key value attributes of the AbstractNode.
+	Desc  string                    // Description for the AbstractNode for logging.
+	Ports []*AbstractPort           // A list AbstractPorts that may be connected to another AbstractPort.
+	Attrs map[string]NodeConstraint // A map of key value attributes of the AbstractNode.
 }
 
 // ConcreteNode represent a vertex on a ConcreteGraph.
@@ -98,8 +98,8 @@ type ConcreteEdge struct {
 
 // AbstractPort is a is point on an AbstractNode where an AbstractEdge may be attached.
 type AbstractPort struct {
-	Desc  string                // Description for the AbstractPort for logging.
-	Attrs map[string]Constraint // A map of key value attributes of the AbstractPort.
+	Desc  string                    // Description for the AbstractPort for logging.
+	Attrs map[string]PortConstraint // A map of key value attributes of the AbstractPort.
 }
 
 // ConcretePort is a is point on a ConcreteNode where a ConcreteEdge may be attached.
@@ -332,8 +332,17 @@ func matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
 			return false
 		}
 		for k, c := range abs.Attrs {
-			if !c.match(n.Attrs[k]) {
-				return false
+			switch t := c.(type) {
+			case *sameAsNode:
+				// TODO: Implement handler
+			case *notSameAsNode:
+				// TODO: Implement handler
+			case Constraint:
+				if !c.(Constraint).match(n.Attrs[k]) {
+					return false
+				}
+			default:
+				log.Fatalf("Unrecognized constraint type %T for port matching", t)
 			}
 		}
 		return true
@@ -351,10 +360,18 @@ func matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
 // matchPorts returns all ConcretePorts that match the AbstractPort.
 func matchPorts(abs *AbstractPort, con []*ConcretePort) []*ConcretePort {
 	match := func(p *ConcretePort) bool {
-		// for now, just do a equality match
 		for k, c := range abs.Attrs {
-			if !c.match(p.Attrs[k]) {
-				return false
+			switch t := c.(type) {
+			case *sameAsPort:
+				// TODO: Implement handler
+			case *notSameAsPort:
+				// TODO: Implement handler
+			case Constraint:
+				if !c.(Constraint).match(p.Attrs[k]) {
+					return false
+				}
+			default:
+				log.Fatalf("Unrecognized constraint type %T for port matching", t)
 			}
 		}
 		return true

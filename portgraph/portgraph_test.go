@@ -172,17 +172,17 @@ var superGraph = &ConcreteGraph{
 // Setup abstract Nodes and Ports for testing.
 var (
 	// One Node
-	abs1 = &AbstractNode{Desc: "one node", Attrs: map[string]Constraint{"vendor": Equal("UNIQUE8")}}
+	abs1 = &AbstractNode{Desc: "one node", Attrs: map[string]NodeConstraint{"vendor": Equal("UNIQUE8")}}
 
 	// One Node, one Port
-	abs2      = &AbstractNode{Desc: "one node, one port", Ports: []*AbstractPort{abs2port1}, Attrs: map[string]Constraint{"vendor": Equal("UNIQUE8")}}
+	abs2      = &AbstractNode{Desc: "one node, one port", Ports: []*AbstractPort{abs2port1}, Attrs: map[string]NodeConstraint{"vendor": Equal("UNIQUE8")}}
 	abs2port1 = &AbstractPort{Desc: "one port"}
 
 	// Four Nodes, interconnected
-	abs3      = &AbstractNode{Desc: "abs3", Ports: []*AbstractPort{abs3port1, abs3port2, abs3port3}, Attrs: map[string]Constraint{"vendor": Equal("CISCO1")}}
-	abs4      = &AbstractNode{Desc: "abs4", Ports: []*AbstractPort{abs4port1, abs4port2}, Attrs: map[string]Constraint{"vendor": Equal("CISCO2")}}
-	abs5      = &AbstractNode{Desc: "abs5", Ports: []*AbstractPort{abs5port1, abs5port2}, Attrs: map[string]Constraint{"vendor": Equal("CISCO3")}}
-	abs6      = &AbstractNode{Desc: "abs6", Ports: []*AbstractPort{abs6port1, abs6port2}, Attrs: map[string]Constraint{"vendor": Equal("CISCO4")}}
+	abs3      = &AbstractNode{Desc: "abs3", Ports: []*AbstractPort{abs3port1, abs3port2, abs3port3}, Attrs: map[string]NodeConstraint{"vendor": Equal("CISCO1")}}
+	abs4      = &AbstractNode{Desc: "abs4", Ports: []*AbstractPort{abs4port1, abs4port2}, Attrs: map[string]NodeConstraint{"vendor": Equal("CISCO2")}}
+	abs5      = &AbstractNode{Desc: "abs5", Ports: []*AbstractPort{abs5port1, abs5port2}, Attrs: map[string]NodeConstraint{"vendor": Equal("CISCO3")}}
+	abs6      = &AbstractNode{Desc: "abs6", Ports: []*AbstractPort{abs6port1, abs6port2}, Attrs: map[string]NodeConstraint{"vendor": Equal("CISCO4")}}
 	abs3port1 = &AbstractPort{Desc: "abs3port1"}
 	abs3port2 = &AbstractPort{Desc: "abs3port2"}
 	abs3port3 = &AbstractPort{Desc: "abs3port3"}
@@ -195,36 +195,36 @@ var (
 
 	// One Node, 8 Ports
 	abs7      = &AbstractNode{Desc: "abs3", Ports: []*AbstractPort{abs7port1, abs7port2, abs7port3, abs7port4, abs7port5, abs7port6, abs7port7, abs7port8}}
-	abs7port1 = &AbstractPort{Desc: "abs7port1", Attrs: map[string]Constraint{"speed": Equal("S_100G")}}
-	abs7port2 = &AbstractPort{Desc: "abs7port2", Attrs: map[string]Constraint{"speed": Equal("S_101G")}}
-	abs7port3 = &AbstractPort{Desc: "abs7port3", Attrs: map[string]Constraint{"speed": Equal("S_102G")}}
-	abs7port4 = &AbstractPort{Desc: "abs7port4", Attrs: map[string]Constraint{"speed": Equal("S_103G")}}
-	abs7port5 = &AbstractPort{Desc: "abs7port5", Attrs: map[string]Constraint{"speed": Equal("S_104G")}}
-	abs7port6 = &AbstractPort{Desc: "abs7port6", Attrs: map[string]Constraint{"speed": Equal("S_105G")}}
-	abs7port7 = &AbstractPort{Desc: "abs7port7", Attrs: map[string]Constraint{"speed": Equal("S_106G")}}
-	abs7port8 = &AbstractPort{Desc: "abs7port8", Attrs: map[string]Constraint{"speed": Equal("S_107G")}}
+	abs7port1 = &AbstractPort{Desc: "abs7port1", Attrs: map[string]PortConstraint{"speed": Equal("S_100G")}}
+	abs7port2 = &AbstractPort{Desc: "abs7port2", Attrs: map[string]PortConstraint{"speed": Equal("S_101G")}}
+	abs7port3 = &AbstractPort{Desc: "abs7port3", Attrs: map[string]PortConstraint{"speed": Equal("S_102G")}}
+	abs7port4 = &AbstractPort{Desc: "abs7port4", Attrs: map[string]PortConstraint{"speed": Equal("S_103G")}}
+	abs7port5 = &AbstractPort{Desc: "abs7port5", Attrs: map[string]PortConstraint{"speed": Equal("S_104G")}}
+	abs7port6 = &AbstractPort{Desc: "abs7port6", Attrs: map[string]PortConstraint{"speed": Equal("S_105G")}}
+	abs7port7 = &AbstractPort{Desc: "abs7port7", Attrs: map[string]PortConstraint{"speed": Equal("S_106G")}}
+	abs7port8 = &AbstractPort{Desc: "abs7port8", Attrs: map[string]PortConstraint{"speed": Equal("S_107G")}}
 
 	// Two Nodes, Many Links
 	abs8       = &AbstractNode{Desc: "abs8", Ports: []*AbstractPort{abs8port1, abs8port2, abs8port3, abs8port4, abs8port5, abs8port6, abs8port9, abs8port10}}
 	abs9       = &AbstractNode{Desc: "abs9", Ports: []*AbstractPort{abs9port1, abs9port2, abs9port3, abs9port4}}
-	abs8port1  = &AbstractPort{Desc: "abs8port1", Attrs: map[string]Constraint{"speed": Equal("S_100G")}}
-	abs8port2  = &AbstractPort{Desc: "abs8port2", Attrs: map[string]Constraint{"speed": Equal("S_101G")}}
-	abs8port3  = &AbstractPort{Desc: "abs8port3", Attrs: map[string]Constraint{"speed": Equal("S_102G")}}
-	abs8port4  = &AbstractPort{Desc: "abs8port4", Attrs: map[string]Constraint{"speed": Equal("S_103G")}}
-	abs8port5  = &AbstractPort{Desc: "abs8port5", Attrs: map[string]Constraint{"speed": Equal("S_104G")}}
-	abs8port6  = &AbstractPort{Desc: "abs8port6", Attrs: map[string]Constraint{"speed": Equal("S_105G")}}
-	abs8port9  = &AbstractPort{Desc: "abs8port9", Attrs: map[string]Constraint{"attr": Equal("FOO")}}
-	abs8port10 = &AbstractPort{Desc: "abs8port10", Attrs: map[string]Constraint{"attr": Equal("BAR")}}
-	abs9port1  = &AbstractPort{Desc: "abs9port1", Attrs: map[string]Constraint{"speed": Equal("S_100G")}}
-	abs9port2  = &AbstractPort{Desc: "abs9port2", Attrs: map[string]Constraint{"speed": Equal("S_101G")}}
-	abs9port3  = &AbstractPort{Desc: "abs9port3", Attrs: map[string]Constraint{"speed": Equal("S_102G")}}
-	abs9port4  = &AbstractPort{Desc: "abs9port4", Attrs: map[string]Constraint{"speed": Equal("S_103G")}}
+	abs8port1  = &AbstractPort{Desc: "abs8port1", Attrs: map[string]PortConstraint{"speed": Equal("S_100G")}}
+	abs8port2  = &AbstractPort{Desc: "abs8port2", Attrs: map[string]PortConstraint{"speed": Equal("S_101G")}}
+	abs8port3  = &AbstractPort{Desc: "abs8port3", Attrs: map[string]PortConstraint{"speed": Equal("S_102G")}}
+	abs8port4  = &AbstractPort{Desc: "abs8port4", Attrs: map[string]PortConstraint{"speed": Equal("S_103G")}}
+	abs8port5  = &AbstractPort{Desc: "abs8port5", Attrs: map[string]PortConstraint{"speed": Equal("S_104G")}}
+	abs8port6  = &AbstractPort{Desc: "abs8port6", Attrs: map[string]PortConstraint{"speed": Equal("S_105G")}}
+	abs8port9  = &AbstractPort{Desc: "abs8port9", Attrs: map[string]PortConstraint{"attr": Equal("FOO")}}
+	abs8port10 = &AbstractPort{Desc: "abs8port10", Attrs: map[string]PortConstraint{"attr": Equal("BAR")}}
+	abs9port1  = &AbstractPort{Desc: "abs9port1", Attrs: map[string]PortConstraint{"speed": Equal("S_100G")}}
+	abs9port2  = &AbstractPort{Desc: "abs9port2", Attrs: map[string]PortConstraint{"speed": Equal("S_101G")}}
+	abs9port3  = &AbstractPort{Desc: "abs9port3", Attrs: map[string]PortConstraint{"speed": Equal("S_102G")}}
+	abs9port4  = &AbstractPort{Desc: "abs9port4", Attrs: map[string]PortConstraint{"speed": Equal("S_103G")}}
 
 	// Two Nodes, links via shared ports
-	abs10      = &AbstractNode{Desc: "abs10", Ports: []*AbstractPort{abs10port1, abs10port2}, Attrs: map[string]Constraint{"attr": Equal("multi1")}}
+	abs10      = &AbstractNode{Desc: "abs10", Ports: []*AbstractPort{abs10port1, abs10port2}, Attrs: map[string]NodeConstraint{"attr": Equal("multi1")}}
 	abs11      = &AbstractNode{Desc: "abs11", Ports: []*AbstractPort{abs11port1, abs11port2}}
-	abs10port1 = &AbstractPort{Desc: "abs10port1", Attrs: map[string]Constraint{"attr": Equal("FOO")}}
-	abs10port2 = &AbstractPort{Desc: "abs10port2", Attrs: map[string]Constraint{"attr": Equal("BAR")}}
+	abs10port1 = &AbstractPort{Desc: "abs10port1", Attrs: map[string]PortConstraint{"attr": Equal("FOO")}}
+	abs10port2 = &AbstractPort{Desc: "abs10port2", Attrs: map[string]PortConstraint{"attr": Equal("BAR")}}
 	abs11port1 = &AbstractPort{Desc: "abs11port1"}
 	abs11port2 = &AbstractPort{Desc: "abs11port2"}
 
@@ -232,12 +232,12 @@ var (
 	abs12      = &AbstractNode{Desc: "abs12", Ports: []*AbstractPort{abs12port1, abs12port2, abs12port3, abs12port4}}
 	abs13      = &AbstractNode{Desc: "abs13", Ports: []*AbstractPort{abs13port1, abs13port2, abs13port3, abs13port4}}
 	abs12port1 = &AbstractPort{Desc: "abs12port1"}
-	abs12port2 = &AbstractPort{Desc: "abs12port2", Attrs: map[string]Constraint{"attr": Equal("B")}}
+	abs12port2 = &AbstractPort{Desc: "abs12port2", Attrs: map[string]PortConstraint{"attr": Equal("B")}}
 	abs12port3 = &AbstractPort{Desc: "abs12port3"}
-	abs12port4 = &AbstractPort{Desc: "abs12port4", Attrs: map[string]Constraint{"attr": Equal("D")}}
-	abs13port1 = &AbstractPort{Desc: "abs13port1", Attrs: map[string]Constraint{"attr": Equal("A2")}}
+	abs12port4 = &AbstractPort{Desc: "abs12port4", Attrs: map[string]PortConstraint{"attr": Equal("D")}}
+	abs13port1 = &AbstractPort{Desc: "abs13port1", Attrs: map[string]PortConstraint{"attr": Equal("A2")}}
 	abs13port2 = &AbstractPort{Desc: "abs13port2"}
-	abs13port3 = &AbstractPort{Desc: "abs13port3", Attrs: map[string]Constraint{"attr": Equal("C2")}}
+	abs13port3 = &AbstractPort{Desc: "abs13port3", Attrs: map[string]PortConstraint{"attr": Equal("C2")}}
 	abs13port4 = &AbstractPort{Desc: "abs13port4"}
 )
 
@@ -384,13 +384,13 @@ func TestSolveNotSolvable(t *testing.T) {
 		graph *AbstractGraph
 	}{{
 		desc:  "Node does not exist in super",
-		graph: &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: "dut1", Attrs: map[string]Constraint{"DOES NOT EXIST": Equal("???")}}}},
+		graph: &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: "dut1", Attrs: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
 	}, {
 		desc: "Port does not exist in super",
 		graph: &AbstractGraph{
 			Desc: "Port does not exist",
 			Nodes: []*AbstractNode{
-				&AbstractNode{Desc: "dut1", Ports: []*AbstractPort{&AbstractPort{Desc: "dut1:port1", Attrs: map[string]Constraint{"DOES NOT EXIST": Equal("???")}}}},
+				&AbstractNode{Desc: "dut1", Ports: []*AbstractPort{&AbstractPort{Desc: "dut1:port1", Attrs: map[string]PortConstraint{"DOES NOT EXIST": Equal("???")}}}},
 			},
 		},
 	}}

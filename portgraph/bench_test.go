@@ -153,35 +153,35 @@ func BenchmarkSolveScale(b *testing.B) {
 		Nodes: []*AbstractNode{{
 			Desc:  "dut1",
 			Ports: []*AbstractPort{dut1port1, dut1port2, dut1port3},
-			Attrs: map[string]Constraint{"type": Equal("ARISTA_CEOS")},
+			Attrs: map[string]NodeConstraint{"type": Equal("ARISTA_CEOS")},
 		}, {
 			Desc:  "dut2",
 			Ports: []*AbstractPort{dut2port1, dut2port2, dut2port3},
-			Attrs: map[string]Constraint{"type": Equal("CISCO_CXR")},
+			Attrs: map[string]NodeConstraint{"type": Equal("CISCO_CXR")},
 		}, {
 			Desc:  "dut3",
 			Ports: []*AbstractPort{dut3port1, dut3port2, dut3port3},
-			Attrs: map[string]Constraint{"type": Equal("JUNIPER_CEVO")},
+			Attrs: map[string]NodeConstraint{"type": Equal("JUNIPER_CEVO")},
 		}, {
 			Desc:  "dut4",
 			Ports: []*AbstractPort{dut4port1, dut4port2},
-			Attrs: map[string]Constraint{"type": Equal("NOKIA_SRL")},
+			Attrs: map[string]NodeConstraint{"type": Equal("NOKIA_SRL")},
 		}, {
 			Desc:  "dut5",
 			Ports: []*AbstractPort{dut5port1, dut5port2},
-			Attrs: map[string]Constraint{"type": Equal("NOKIA_SRL")},
+			Attrs: map[string]NodeConstraint{"type": Equal("NOKIA_SRL")},
 		}, {
 			Desc:  "dut6",
 			Ports: []*AbstractPort{dut6port1, dut6port2},
-			Attrs: map[string]Constraint{"type": Equal("NOKIA_SRL")},
+			Attrs: map[string]NodeConstraint{"type": Equal("NOKIA_SRL")},
 		}, {
 			Desc:  "dut7",
 			Ports: []*AbstractPort{dut7port1, dut7port2},
-			Attrs: map[string]Constraint{"type": Equal("NOKIA_SRL")},
+			Attrs: map[string]NodeConstraint{"type": Equal("NOKIA_SRL")},
 		}, {
 			Desc:  "ate1",
 			Ports: []*AbstractPort{ate1port1},
-			Attrs: map[string]Constraint{"type": Equal("IXIA_TG")},
+			Attrs: map[string]NodeConstraint{"type": Equal("IXIA_TG")},
 		}},
 		Edges: []*AbstractEdge{
 			{Src: dut1port1, Dst: dut2port1},

@@ -40,6 +40,7 @@ message Device {
     NOKIA = 7;
     ZPE = 8;
     DELL = 9;
+    OPENCONFIG = 10;
   }
   Vendor vendor = 2;
   // Hardware model of the device. Optional.

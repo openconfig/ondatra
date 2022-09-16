@@ -24,6 +24,7 @@ import (
 	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/telemetry/otg/device"
@@ -301,6 +302,11 @@ func (o *OTG) Telemetry() *device.DevicePath {
 		return fetchGNMI(ctx, o.ate)
 	})
 	return root
+}
+
+// GNMI returns a telemetry path root for the device.
+func (o *OTG) GNMI() *gnmi.Client {
+	return gnmi.NewClient("", false, func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, o.ate) })
 }
 
 func fetchGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) {

@@ -45,6 +45,7 @@ var (
 		tpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
 		tpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
 		tpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
+		tpb.Node_LEMMING:      opb.Device_OPENCONFIG,
 	}
 )
 

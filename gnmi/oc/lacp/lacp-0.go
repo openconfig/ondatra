@@ -1,5 +1,3 @@
-//go:build go1.18
-
 /*
 Package lacp is a generated package which contains definitions
 of structs which generate gNMI paths for a YANG schema. The generated paths are

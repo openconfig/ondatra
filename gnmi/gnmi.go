@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:build go1.18
-
 // Package gnmi contains test-friendly gNMI funcs.
 package gnmi
 
@@ -42,7 +40,7 @@ type Client struct {
 	opts            []ygnmi.Option
 }
 
-// NewClient creates a new gNMI client. DO NOT USE: call dut.GNMI() instead.
+// NewClient creates a new gNMI client. DO NOT USE: call dut.GNMI() or ate.OTG().GNMI() instead.
 func NewClient(id string, useGetForConfig bool, initClient func(context.Context) (gpb.GNMIClient, error)) *Client {
 	return &Client{
 		initClientFn:    initClient,
@@ -72,17 +70,17 @@ func (c *Client) WithYGNMIOpts(opts ...ygnmi.Option) *Client {
 // GNMI implements the DUTOrGNMI interface.
 func (c *Client) GNMI() *Client { return c }
 
-// DUTOrGNMI is an interface that is ondatra.DUT or a gnmi.Client
-type DUTOrGNMI interface {
+// DeviceOrGNMI is an interface that is ondatra.DUT or a gnmi.Client
+type DeviceOrGNMI interface {
 	GNMI() *Client
 }
 
 // Lookup fetches the value of a ygnmi.SingletonQuery with a ONCE subscription.
-func Lookup[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T]) *ygnmi.Value[T] {
-	c := newClient(t, dut, "Lookup")
-	v, err := ygnmi.Lookup(createContext(dut), c, q, createGetOpts[T](dut, q)...)
+func Lookup[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) *ygnmi.Value[T] {
+	c := newClient(t, dev, "Lookup")
+	v, err := ygnmi.Lookup(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
-		t.Fatalf("Lookup(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("Lookup(t) on %s at %v: %v", dev, q, err)
 	}
 	return v
 }
@@ -90,11 +88,11 @@ func Lookup[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T]) *ygnm
 // Get fetches the value of a SingletonQuery with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // Use Lookup to also get metadata or tolerate no value present.
-func Get[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T]) T {
-	c := newClient(t, dut, "Get")
-	v, err := ygnmi.Get(createContext(dut), c, q, createGetOpts[T](dut, q)...)
+func Get[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) T {
+	c := newClient(t, dev, "Get")
+	v, err := ygnmi.Get(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
-		t.Fatalf("Get(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("Get(t) on %s at %v: %v", dev, q, err)
 	}
 	return v
 }
@@ -107,7 +105,7 @@ type watchAwaiter[T any] interface {
 type Watcher[T any] struct {
 	watcher  watchAwaiter[T]
 	cancelFn func()
-	dut      DUTOrGNMI
+	dev      DeviceOrGNMI
 	query    ygnmi.AnyQuery[T]
 }
 
@@ -135,7 +133,7 @@ func (w *Watcher[T]) Await(t testing.TB) (*ygnmi.Value[T], bool) {
 		if isContextErr(err) {
 			return v, false
 		}
-		t.Fatalf("Await(t) on %s at %v: %v", w.dut, w.query, err)
+		t.Fatalf("Await(t) on %s at %v: %v", w.dev, w.query, err)
 	}
 	return v, true
 }
@@ -150,19 +148,19 @@ func (w *Watcher[T]) Cancel() {
 // or the timeout is reached. Calling Await on the returned Watcher waits for the subscription
 // to complete. It returns the last observed value and a boolean that indicates whether
 // that value satisfies the predicate.
-func Watch[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
-	c := newClient(t, dut, "Watch")
-	ctx, cancel := context.WithTimeout(createContext(dut), timeout)
+func Watch[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
+	c := newClient(t, dev, "Watch")
+	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	w := ygnmi.Watch(ctx, c, q, func(v *ygnmi.Value[T]) error {
 		if ok := pred(v); ok {
 			return nil
 		}
 		return ygnmi.Continue
-	}, dut.GNMI().opts...)
+	}, dev.GNMI().opts...)
 	return &Watcher[T]{
 		watcher:  w,
 		cancelFn: cancel,
-		dut:      dut,
+		dev:      dev,
 		query:    q,
 	}
 }
@@ -171,14 +169,14 @@ func Watch[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T], timeou
 // blocking until a value that is deep equal to the specified val is received
 // or the timeout is reached. To wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
-func Await[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration, val T) *ygnmi.Value[T] {
-	c := newClient(t, dut, "Await")
-	ctx, cancel := context.WithTimeout(createContext(dut), timeout)
+func Await[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration, val T) *ygnmi.Value[T] {
+	c := newClient(t, dev, "Await")
+	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	defer cancel()
 
-	v, err := ygnmi.Await(ctx, c, q, val, dut.GNMI().opts...)
+	v, err := ygnmi.Await(ctx, c, q, val, dev.GNMI().opts...)
 	if err != nil {
-		t.Fatalf("Await(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("Await(t) on %s at %v: %v", dev, q, err)
 	}
 	return v
 }
@@ -191,7 +189,7 @@ type collectAwaiter[T any] interface {
 type Collector[T any] struct {
 	collector collectAwaiter[T]
 	cancelFn  func()
-	dut       DUTOrGNMI
+	dev       DeviceOrGNMI
 	query     ygnmi.AnyQuery[T]
 }
 
@@ -204,20 +202,20 @@ func (c *Collector[T]) Await(t testing.TB) []*ygnmi.Value[T] {
 		if isContextErr(err) {
 			return vals
 		}
-		t.Fatalf("Await(t) on %s at %v: %v", c.dut, c.query, err)
+		t.Fatalf("Await(t) on %s at %v: %v", c.dev, c.query, err)
 	}
 	return vals
 }
 
 // Collect starts an asynchronous collection of the values at the query with a STREAM subscription.
 // Calling Await on the return Collection waits until the timeout is reached and returns the collected values.
-func Collect[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration) *Collector[T] {
-	c := newClient(t, dut, "Collect")
-	ctx, cancel := context.WithTimeout(createContext(dut), timeout)
+func Collect[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration) *Collector[T] {
+	c := newClient(t, dev, "Collect")
+	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	collect := &Collector[T]{
-		collector: ygnmi.Collect(ctx, c, q, dut.GNMI().opts...),
+		collector: ygnmi.Collect(ctx, c, q, dev.GNMI().opts...),
 		cancelFn:  cancel,
-		dut:       dut,
+		dev:       dev,
 		query:     q,
 	}
 
@@ -226,11 +224,11 @@ func Collect[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.SingletonQuery[T], time
 
 // LookupAll fetches the values of a ygnmi.WildcardQuery with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
-func LookupAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T]) []*ygnmi.Value[T] {
-	c := newClient(t, dut, "LookupAll")
-	v, err := ygnmi.LookupAll(createContext(dut), c, q, createGetOpts[T](dut, q)...)
+func LookupAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T]) []*ygnmi.Value[T] {
+	c := newClient(t, dev, "LookupAll")
+	v, err := ygnmi.LookupAll(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
-		t.Fatalf("LookupAll(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("LookupAll(t) on %s at %v: %v", dev, q, err)
 	}
 	return v
 }
@@ -238,11 +236,11 @@ func LookupAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T]) []*
 // GetAll fetches the value of a WildcardQuery with a ONCE subscription skipping any non-present paths.
 // It fails the test fatally if no value is present at the path
 // Use LookupAll to also get metadata or tolerate no values present.
-func GetAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T]) []T {
-	c := newClient(t, dut, "GetAll")
-	v, err := ygnmi.GetAll(createContext(dut), c, q, createGetOpts[T](dut, q)...)
+func GetAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T]) []T {
+	c := newClient(t, dev, "GetAll")
+	v, err := ygnmi.GetAll(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
-		t.Fatalf("GetAll(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("GetAll(t) on %s at %v: %v", dev, q, err)
 	}
 	return v
 }
@@ -252,32 +250,32 @@ func GetAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T]) []T {
 // or the timeout is reached. Calling Await on the returned Watcher waits for the subscription
 // to complete. It returns the last observed value and a boolean that indicates whether
 // that value satisfies the predicate.
-func WatchAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
-	c := newClient(t, dut, "WatchAll")
-	ctx, cancel := context.WithTimeout(createContext(dut), timeout)
+func WatchAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
+	c := newClient(t, dev, "WatchAll")
+	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	w := ygnmi.WatchAll(ctx, c, q, func(v *ygnmi.Value[T]) error {
 		if ok := pred(v); ok {
 			return nil
 		}
 		return ygnmi.Continue
-	}, dut.GNMI().opts...)
+	}, dev.GNMI().opts...)
 	return &Watcher[T]{
 		watcher:  w,
 		cancelFn: cancel,
-		dut:      dut,
+		dev:      dev,
 		query:    q,
 	}
 }
 
 // CollectAll starts an asynchronous collection of the values at the query with a STREAM subscription.
 // Calling Await on the return Collection waits until the timeout is reached and returns the collected values.
-func CollectAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T], timeout time.Duration) *Collector[T] {
-	c := newClient(t, dut, "CollectAll")
-	ctx, cancel := context.WithTimeout(createContext(dut), timeout)
+func CollectAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T], timeout time.Duration) *Collector[T] {
+	c := newClient(t, dev, "CollectAll")
+	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	collect := &Collector[T]{
-		collector: ygnmi.CollectAll(ctx, c, q, dut.GNMI().opts...),
+		collector: ygnmi.CollectAll(ctx, c, q, dev.GNMI().opts...),
 		cancelFn:  cancel,
-		dut:       dut,
+		dev:       dev,
 		query:     q,
 	}
 
@@ -285,31 +283,31 @@ func CollectAll[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.WildcardQuery[T], ti
 }
 
 // Update updates the configuration at the given query path with the val.
-func Update[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
-	c := newClient(t, dut, "Update")
-	res, err := ygnmi.Update(createContext(dut), c, q, val)
+func Update[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
+	c := newClient(t, dev, "Update")
+	res, err := ygnmi.Update(createContext(dev), c, q, val)
 	if err != nil {
-		t.Fatalf("Update(t) on %s %v: %v", dut, q, err)
+		t.Fatalf("Update(t) on %s %v: %v", dev, q, err)
 	}
 	return res
 }
 
 // Replace replaces the configuration at the given query path with the val.
-func Replace[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
-	c := newClient(t, dut, "Replace")
-	res, err := ygnmi.Replace(createContext(dut), c, q, val)
+func Replace[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
+	c := newClient(t, dev, "Replace")
+	res, err := ygnmi.Replace(createContext(dev), c, q, val)
 	if err != nil {
-		t.Fatalf("Replace(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("Replace(t) on %s at %v: %v", dev, q, err)
 	}
 	return res
 }
 
 // Delete deletes the configuration at the given query path.
-func Delete[T any](t testing.TB, dut DUTOrGNMI, q ygnmi.ConfigQuery[T]) *ygnmi.Result {
-	c := newClient(t, dut, "Delete")
-	res, err := ygnmi.Delete(createContext(dut), c, q)
+func Delete[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T]) *ygnmi.Result {
+	c := newClient(t, dev, "Delete")
+	res, err := ygnmi.Delete(createContext(dev), c, q)
 	if err != nil {
-		t.Fatalf("Delete(t) on %s at %v: %v", dut, q, err)
+		t.Fatalf("Delete(t) on %s at %v: %v", dev, q, err)
 	}
 	return res
 }
@@ -321,11 +319,11 @@ type SetBatch struct {
 }
 
 // Set performs the gnmi.Set request with all queued operations.
-func (sb *SetBatch) Set(t testing.TB, dut DUTOrGNMI) *ygnmi.Result {
-	c := newClient(t, dut, "Set")
-	res, err := sb.sb.Set(createContext(dut), c)
+func (sb *SetBatch) Set(t testing.TB, dev DeviceOrGNMI) *ygnmi.Result {
+	c := newClient(t, dev, "Set")
+	res, err := sb.sb.Set(createContext(dev), c)
 	if err != nil {
-		t.Fatalf("Set(t) on %s: %v", dut, err)
+		t.Fatalf("Set(t) on %s: %v", dev, err)
 	}
 	return res
 }
@@ -345,7 +343,7 @@ func BatchDelete[T any](sb *SetBatch, q ygnmi.ConfigQuery[T]) {
 	ygnmi.BatchDelete(sb.sb, q)
 }
 
-func createContext(d DUTOrGNMI) context.Context {
+func createContext(d DeviceOrGNMI) context.Context {
 	ctx := context.Background()
 	if d.GNMI().md == nil {
 		return ctx
@@ -353,7 +351,7 @@ func createContext(d DUTOrGNMI) context.Context {
 	return metadata.NewOutgoingContext(ctx, d.GNMI().md)
 }
 
-func createGetOpts[T any](d DUTOrGNMI, q ygnmi.AnyQuery[T]) []ygnmi.Option {
+func createGetOpts[T any](d DeviceOrGNMI, q ygnmi.AnyQuery[T]) []ygnmi.Option {
 	opts := d.GNMI().opts
 	if d.GNMI().useGetForConfig && !q.IsState() {
 		opts = append(opts, ygnmi.WithUseGet())
@@ -361,19 +359,19 @@ func createGetOpts[T any](d DUTOrGNMI, q ygnmi.AnyQuery[T]) []ygnmi.Option {
 	return opts
 }
 
-func newClient(t testing.TB, dut DUTOrGNMI, method string) *ygnmi.Client {
-	gnmiC := dut.GNMI().client
+func newClient(t testing.TB, dev DeviceOrGNMI, method string) *ygnmi.Client {
+	gnmiC := dev.GNMI().client
 	if gnmiC == nil {
 		var err error
-		gnmiC, err = dut.GNMI().initClientFn(context.Background())
+		gnmiC, err = dev.GNMI().initClientFn(context.Background())
 		if err != nil {
 			t.Fatalf("Failed to get client: %v", err)
 		}
 	}
 
-	c, err := ygnmi.NewClient(gnmiC, ygnmi.WithTarget(dut.GNMI().id))
+	c, err := ygnmi.NewClient(gnmiC, ygnmi.WithTarget(dev.GNMI().id))
 	if err != nil {
-		t.Fatalf("%s(t) on %s: %v", method, dut, err)
+		t.Fatalf("%s(t) on %s: %v", method, dev, err)
 	}
 	return c
 }

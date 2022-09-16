@@ -282,8 +282,6 @@ go run github.com/openconfig/ygnmi/app/ygnmi generator \
   --paths=models-yang/models/... \
   "${OTG_YANG_FILES[@]}"
 
-find gnmi/oc gnmi/otg -name "*.go" -exec sed -i '1s/^/\/\/go:build go1.18\n/' {} +
-
 find gnmi config telemetry -name "*.go" -exec goimports -w {} +
 find gnmi config telemetry -name "*.go" -exec gofmt -w -s {} +
 

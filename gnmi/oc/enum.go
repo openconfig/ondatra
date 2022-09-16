@@ -1,5 +1,3 @@
-//go:build go1.18
-
 /*
 Package oc is a generated package which contains definitions
 of structs which represent a YANG schema. The generated schema can be
