@@ -25378,3 +25378,106 @@ func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_Al
 	}
 	return qv
 }
+
+// Lookup fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions{}
+	md, ok := oc.Lookup(t, n, "NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions", goStruct, true, true)
+	if ok {
+		return convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetEnableAigp())
+}
+
+// Get fetches the value at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp with a ONCE subscription.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/config/enable-aigp in the given batch object.
+func (n *NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath extracts the value of the leaf EnableAigp from its parent oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertNetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions_EnableAigpPath(t testing.TB, md *genutil.Metadata, parent *oc.NetworkInstance_Protocol_Bgp_Global_AfiSafi_RouteSelectionOptions) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.EnableAigp
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}

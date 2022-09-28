@@ -134,7 +134,7 @@ func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context,
 	return destCtx, c, nil
 }
 
-func (p *proxy) instrumentedStreamHandler(srv interface{}, stream grpc.ServerStream) error {
+func (p *proxy) instrumentedStreamHandler(srv any, stream grpc.ServerStream) error {
 	ctx := stream.Context()
 	method, ok := grpc.MethodFromServerStream(stream)
 	if !strings.HasPrefix(method, "/") {

@@ -77,6 +77,7 @@ type DeviceOrGNMI interface {
 
 // Lookup fetches the value of a ygnmi.SingletonQuery with a ONCE subscription.
 func Lookup[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) *ygnmi.Value[T] {
+	t.Helper()
 	c := newClient(t, dev, "Lookup")
 	v, err := ygnmi.Lookup(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
@@ -89,6 +90,7 @@ func Lookup[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) *y
 // failing the test fatally if no value is present at the path.
 // Use Lookup to also get metadata or tolerate no value present.
 func Get[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) T {
+	t.Helper()
 	c := newClient(t, dev, "Get")
 	v, err := ygnmi.Get(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
@@ -128,6 +130,7 @@ type statusErr interface {
 // and a boolean indicating whether the predicate evaluated to true.
 // When Await returns the watcher is closed, and Await may not be called again.
 func (w *Watcher[T]) Await(t testing.TB) (*ygnmi.Value[T], bool) {
+	t.Helper()
 	v, err := w.watcher.Await()
 	if err != nil {
 		if isContextErr(err) {
@@ -170,6 +173,7 @@ func Watch[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T], tim
 // or the timeout is reached. To wait for a generic predicate, or to make a
 // non-blocking call, use the Watch method instead.
 func Await[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T], timeout time.Duration, val T) *ygnmi.Value[T] {
+	t.Helper()
 	c := newClient(t, dev, "Await")
 	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	defer cancel()
@@ -197,6 +201,7 @@ type Collector[T any] struct {
 // When Await returns the watcher is closed, and Await may not be called again.
 // Note: the func blocks until the timeout is reached.
 func (c *Collector[T]) Await(t testing.TB) []*ygnmi.Value[T] {
+	t.Helper()
 	vals, err := c.collector.Await()
 	if err != nil {
 		if isContextErr(err) {
@@ -225,6 +230,7 @@ func Collect[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T], t
 // LookupAll fetches the values of a ygnmi.WildcardQuery with a ONCE subscription.
 // It returns an empty list if no values are present at the path.
 func LookupAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T]) []*ygnmi.Value[T] {
+	t.Helper()
 	c := newClient(t, dev, "LookupAll")
 	v, err := ygnmi.LookupAll(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
@@ -237,6 +243,7 @@ func LookupAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T]) 
 // It fails the test fatally if no value is present at the path
 // Use LookupAll to also get metadata or tolerate no values present.
 func GetAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T]) []T {
+	t.Helper()
 	c := newClient(t, dev, "GetAll")
 	v, err := ygnmi.GetAll(createContext(dev), c, q, createGetOpts[T](dev, q)...)
 	if err != nil {
@@ -284,6 +291,7 @@ func CollectAll[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.WildcardQuery[T],
 
 // Update updates the configuration at the given query path with the val.
 func Update[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
+	t.Helper()
 	c := newClient(t, dev, "Update")
 	res, err := ygnmi.Update(createContext(dev), c, q, val)
 	if err != nil {
@@ -294,6 +302,7 @@ func Update[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T], val T
 
 // Replace replaces the configuration at the given query path with the val.
 func Replace[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T], val T) *ygnmi.Result {
+	t.Helper()
 	c := newClient(t, dev, "Replace")
 	res, err := ygnmi.Replace(createContext(dev), c, q, val)
 	if err != nil {
@@ -304,6 +313,7 @@ func Replace[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T], val 
 
 // Delete deletes the configuration at the given query path.
 func Delete[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T]) *ygnmi.Result {
+	t.Helper()
 	c := newClient(t, dev, "Delete")
 	res, err := ygnmi.Delete(createContext(dev), c, q)
 	if err != nil {
@@ -320,6 +330,7 @@ type SetBatch struct {
 
 // Set performs the gnmi.Set request with all queued operations.
 func (sb *SetBatch) Set(t testing.TB, dev DeviceOrGNMI) *ygnmi.Result {
+	t.Helper()
 	c := newClient(t, dev, "Set")
 	res, err := sb.sb.Set(createContext(dev), c)
 	if err != nil {
@@ -360,6 +371,7 @@ func createGetOpts[T any](d DeviceOrGNMI, q ygnmi.AnyQuery[T]) []ygnmi.Option {
 }
 
 func newClient(t testing.TB, dev DeviceOrGNMI, method string) *ygnmi.Client {
+	t.Helper()
 	gnmiC := dev.GNMI().client
 	if gnmiC == nil {
 		var err error

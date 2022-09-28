@@ -195,7 +195,8 @@ func TestAddTraffic(t *testing.T) {
 					link:        cfg.Lag[0],
 				},
 			},
-			flowToTrafficItem: map[string]*ixconfig.TrafficTrafficItem{},
+			flowToTrafficItem:     map[string]*ixconfig.TrafficTrafficItem{},
+			egressTrackFlowCounts: map[string]int{},
 		}
 	}
 	tests := []struct {
@@ -207,7 +208,7 @@ func TestAddTraffic(t *testing.T) {
 		wantIngressTracking, wantEgressTracking bool
 		wantFrameRateType, wantFrameSizeType    string
 		wantCRC                                 string
-		wantErr                                 bool
+		wantErr                                 string
 	}{{
 		desc: "no flow headers specified",
 		flow: &opb.Flow{
@@ -216,7 +217,7 @@ func TestAddTraffic(t *testing.T) {
 			DstEndpoints: intfEPs,
 			Headers:      []*opb.Header{},
 		},
-		wantErr: true,
+		wantErr: "at least one header",
 	}, {
 		desc: "first header is not an ethernet header",
 		flow: &opb.Flow{
@@ -227,7 +228,7 @@ func TestAddTraffic(t *testing.T) {
 				{Type: &opb.Header_Ipv4{&opb.Ipv4Header{}}},
 			},
 		},
-		wantErr: true,
+		wantErr: "must be an ethernet header",
 	}, {
 		desc: "endpoints not set",
 		flow: &opb.Flow{
@@ -236,7 +237,7 @@ func TestAddTraffic(t *testing.T) {
 				{Type: &opb.Header_Eth{&opb.EthernetHeader{}}},
 			},
 		},
-		wantErr: true,
+		wantErr: "endpoints defined",
 	}, {
 		desc: "bad interface for source endpoint",
 		flow: &opb.Flow{
@@ -247,7 +248,7 @@ func TestAddTraffic(t *testing.T) {
 				{Type: &opb.Header_Eth{&opb.EthernetHeader{}}},
 			},
 		},
-		wantErr: true,
+		wantErr: "no interface configured for source",
 	}, {
 		desc: "bad interface for dest endpoint",
 		flow: &opb.Flow{
@@ -258,7 +259,7 @@ func TestAddTraffic(t *testing.T) {
 				{Type: &opb.Header_Eth{&opb.EthernetHeader{}}},
 			},
 		},
-		wantErr: true,
+		wantErr: "no interface configured for dest",
 	}, {
 		desc: "raw traffic flow",
 		flow: &opb.Flow{
@@ -287,7 +288,7 @@ func TestAddTraffic(t *testing.T) {
 				},
 			}}},
 		},
-		wantErr: true,
+		wantErr: "Ethernet header should not be set",
 	}, {
 		desc: "ethernet traffic flow",
 		flow: &opb.Flow{
@@ -340,7 +341,7 @@ func TestAddTraffic(t *testing.T) {
 			DstEndpoints: lspEPs,
 			Headers:      []*opb.Header{{Type: &opb.Header_Eth{&opb.EthernetHeader{}}}},
 		},
-		wantErr: true,
+		wantErr: "cannot use RSVP endpoint",
 	}, {
 		desc: "lsp traffic flow",
 		flow: &opb.Flow{
@@ -392,7 +393,7 @@ func TestAddTraffic(t *testing.T) {
 				DstEndpoint: true,
 			},
 		},
-		wantErr: true,
+		wantErr: "ingress tracking by src/dst",
 	}, {
 		desc: "ingress tracking",
 		flow: &opb.Flow{
@@ -426,7 +427,7 @@ func TestAddTraffic(t *testing.T) {
 			}}},
 			ConvergenceTracking: true,
 		},
-		wantErr: true,
+		wantErr: "convergence tracking for raw traffic",
 	}, {
 		desc: "attempted configuration of both ingress tracking and convergence measurements",
 		flow: &opb.Flow{
@@ -439,7 +440,7 @@ func TestAddTraffic(t *testing.T) {
 			},
 			ConvergenceTracking: true,
 		},
-		wantErr: true,
+		wantErr: "ingress and convergence tracking tracking for the same flow",
 	}, {
 		desc: "ingress tracking for convergence measurements",
 		flow: &opb.Flow{
@@ -466,8 +467,9 @@ func TestAddTraffic(t *testing.T) {
 				},
 			}}},
 			EgressTracking: &opb.EgressTracking{
-				CustomOffset: 128,
-				CustomWidth:  4,
+				Enabled: true,
+				Offset:  128,
+				Width:   4,
 			},
 		},
 		wantTrafficType:    rawTraffic,
@@ -475,6 +477,42 @@ func TestAddTraffic(t *testing.T) {
 		wantDstEPs:         vportEPs,
 		wantEgressTracking: true,
 		wantStackCount:     1,
+	}, {
+		desc: "egress tracking bad offset",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: intfEPs,
+			DstEndpoints: intfEPs,
+			Headers: []*opb.Header{{Type: &opb.Header_Eth{
+				&opb.EthernetHeader{
+					SrcAddr: singleAddr("01:02:03:04:05:06"),
+				},
+			}}},
+			EgressTracking: &opb.EgressTracking{
+				Enabled: true,
+				Offset:  30,
+				Width:   4,
+			},
+		},
+		wantErr: "egress tracking offset",
+	}, {
+		desc: "egress tracking bad width",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: intfEPs,
+			DstEndpoints: intfEPs,
+			Headers: []*opb.Header{{Type: &opb.Header_Eth{
+				&opb.EthernetHeader{
+					SrcAddr: singleAddr("01:02:03:04:05:06"),
+				},
+			}}},
+			EgressTracking: &opb.EgressTracking{
+				Enabled: true,
+				Offset:  32,
+				Width:   23,
+			},
+		},
+		wantErr: "egress tracking width",
 	}, {
 		desc: "frames by preset distribution and percentage of line rate",
 		flow: &opb.Flow{
@@ -578,10 +616,10 @@ func TestAddTraffic(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			c := baseClient()
 			gotErr := c.addTraffic([]*opb.Flow{test.flow})
-			if (gotErr != nil) != test.wantErr {
-				t.Fatalf("addTraffic: unexpected error result, got err: %v, want err? %t", gotErr, test.wantErr)
+			if (gotErr != nil) != (test.wantErr != "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Fatalf("addTraffic: unexpected error got %v, want %s", gotErr, test.wantErr)
 			}
-			if test.wantErr {
+			if test.wantErr != "" {
 				return
 			}
 
@@ -662,7 +700,7 @@ func TestFrameRate(t *testing.T) {
 		desc             string
 		frameRatePB      *opb.FrameRate
 		wantFrameRate    *ixconfig.TrafficTrafficItemConfigElementFrameRate
-		wantFrameRateMap map[string]interface{}
+		wantFrameRateMap map[string]any
 	}{{
 		desc: "no frame rate set",
 	}, {
@@ -674,7 +712,7 @@ func TestFrameRate(t *testing.T) {
 			Type_: ixconfig.String("percentLineRate"),
 			Rate:  ixconfig.NumberFloat64(50),
 		},
-		wantFrameRateMap: map[string]interface{}{
+		wantFrameRateMap: map[string]any{
 			"rate": 50.0,
 		},
 	}, {
@@ -687,7 +725,7 @@ func TestFrameRate(t *testing.T) {
 			BitRateUnitsType: ixconfig.String("bitsPerSec"),
 			Rate:             ixconfig.NumberUint64(1024),
 		},
-		wantFrameRateMap: map[string]interface{}{
+		wantFrameRateMap: map[string]any{
 			"bitRateUnitsType": "bitsPerSec",
 			"rate":             uint64(1024),
 		},
@@ -700,7 +738,7 @@ func TestFrameRate(t *testing.T) {
 			Type_: ixconfig.String("framesPerSecond"),
 			Rate:  ixconfig.NumberUint64(1000),
 		},
-		wantFrameRateMap: map[string]interface{}{
+		wantFrameRateMap: map[string]any{
 			"rate": uint64(1000),
 		},
 	}}
@@ -725,7 +763,7 @@ func TestFrameSize(t *testing.T) {
 		desc             string
 		frameSizePB      *opb.FrameSize
 		wantFrameSize    *ixconfig.TrafficTrafficItemConfigElementFrameSize
-		wantFrameSizeMap map[string]interface{}
+		wantFrameSizeMap map[string]any
 		wantErr          string
 	}{{
 		desc: "no frame size set",
@@ -750,7 +788,7 @@ func TestFrameSize(t *testing.T) {
 			QuadGaussian:       []float32{},
 			WeightedPairs:      []float32{},
 		},
-		wantFrameSizeMap: map[string]interface{}{
+		wantFrameSizeMap: map[string]any{
 			"presetDistribution": `"imix"`,
 		},
 	}, {
@@ -762,7 +800,7 @@ func TestFrameSize(t *testing.T) {
 			QuadGaussian:  []float32{},
 			WeightedPairs: []float32{},
 		},
-		wantFrameSizeMap: map[string]interface{}{
+		wantFrameSizeMap: map[string]any{
 			"fixedSize": uint32(1500),
 		},
 	}, {
@@ -779,7 +817,7 @@ func TestFrameSize(t *testing.T) {
 			QuadGaussian:  []float32{},
 			WeightedPairs: []float32{},
 		},
-		wantFrameSizeMap: map[string]interface{}{
+		wantFrameSizeMap: map[string]any{
 			"randomMin": uint32(64),
 			"randomMax": uint32(512),
 		},
@@ -803,7 +841,7 @@ func TestFrameSize(t *testing.T) {
 			QuadGaussian:  []float32{},
 			WeightedPairs: []float32{82, 35, 125, 22},
 		},
-		wantFrameSizeMap: map[string]interface{}{
+		wantFrameSizeMap: map[string]any{
 			"weightedPairs": []float32{82, 35, 125, 22},
 		},
 	}}

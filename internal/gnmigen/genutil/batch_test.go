@@ -57,7 +57,7 @@ func (n *DevicePath) Interface(Name string) *InterfacePath {
 	return &InterfacePath{
 		NodePath: ygot.NewNodePath(
 			[]string{"interfaces", "interface"},
-			map[string]interface{}{"name": Name},
+			map[string]any{"name": Name},
 			n,
 		),
 	}
@@ -68,7 +68,7 @@ func (n *InterfacePath) Description() *InterfaceDescriptionPath {
 	return &InterfaceDescriptionPath{
 		NodePath: ygot.NewNodePath(
 			[]string{"config", "description"},
-			map[string]interface{}{},
+			map[string]any{},
 			n,
 		),
 	}
@@ -85,7 +85,7 @@ func mustPath(t *testing.T, s string) *gpb.Path {
 
 type batchSetInput struct {
 	path ygot.PathStruct
-	val  interface{}
+	val  any
 	op   setOperation
 }
 

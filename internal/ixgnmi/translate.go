@@ -95,12 +95,8 @@ func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device
 
 	d := &telemetry.Device{}
 	for _, row := range portCPURows {
-		portName, err := shortPortName(row.PortName)
-		if err != nil {
-			return nil, err
-		}
-		port := d.GetOrCreateComponent(portName)
-		cpu := d.GetOrCreateComponent(fmt.Sprintf("%s_CPU", portName))
+		port := d.GetOrCreateComponent(row.PortName)
+		cpu := d.GetOrCreateComponent(fmt.Sprintf("%s_CPU", row.PortName))
 
 		port.Type = telemetry.PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PORT
 		port.NewSubcomponent(*cpu.Name)
@@ -132,11 +128,7 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 
 	d := &telemetry.Device{}
 	for _, row := range portRows {
-		portName, err := shortPortName(row.PortName)
-		if err != nil {
-			return nil, err
-		}
-		i := d.GetOrCreateInterface(portName)
+		i := d.GetOrCreateInterface(row.PortName)
 		i.Counters = &telemetry.Interface_Counters{
 			InOctets:  row.BytesRx,
 			InPkts:    row.FramesRx,
@@ -339,15 +331,6 @@ func vlanIDFromUint(id *uint64) uint16 {
 		return 0
 	}
 	return uint16(*id)
-}
-
-// Strips off the Ixia name from the port name.
-func shortPortName(fullPortName string) (string, error) {
-	parts := strings.SplitAfterN(fullPortName, "/", 2)
-	if len(parts) < 2 || len(parts[1]) == 0 {
-		return "", fmt.Errorf("invalid port name: got %q, want [ixia_name]/[port_name]", fullPortName)
-	}
-	return parts[1], nil
 }
 
 func pfloat32Bytes(f *float32) telemetry.Binary {

@@ -13,7 +13,7 @@
             }
          },
          "location": ";1;18",
-         "name": "/1/18",
+         "name": "1/18",
          "protocolStack": {
             "options": {
                "mcast_solicit": 8,
@@ -36,7 +36,7 @@
             }
          },
          "location": ";2;8",
-         "name": "/2/8",
+         "name": "2/8",
          "protocolStack": {
             "options": {
                "mcast_solicit": 8,

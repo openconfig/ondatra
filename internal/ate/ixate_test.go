@@ -54,7 +54,7 @@ var (
 // updateXPaths sets fake XPaths only for those nodes that require it for config
 // generation: vports, lags, and any node that may be a traffic item endpoint.
 func updateXPaths(cfg *ixconfig.Ixnetwork) error {
-	toXPath := func(format string, args ...interface{}) *ixconfig.XPath {
+	toXPath := func(format string, args ...any) *ixconfig.XPath {
 		xp, err := ixconfig.ParseXPath(fmt.Sprintf(format, args...))
 		if err != nil {
 			log.Fatalf("Impossible XPath parsing error: %v", err)
@@ -189,18 +189,18 @@ func (s *fakeSession) Delete(_ context.Context, p string) error {
 	return s.deleteErrs[p]
 }
 
-func (s *fakeSession) Get(_ context.Context, p string, v interface{}) error {
+func (s *fakeSession) Get(_ context.Context, p string, v any) error {
 	if s.getRsps[p] != "" {
 		json.Unmarshal([]byte(s.getRsps[p]), v)
 	}
 	return s.getErrs[p]
 }
 
-func (s *fakeSession) Patch(_ context.Context, p string, _ interface{}) error {
+func (s *fakeSession) Patch(_ context.Context, p string, _ any) error {
 	return s.patchErrs[p]
 }
 
-func (s *fakeSession) Post(_ context.Context, p string, _, out interface{}) error {
+func (s *fakeSession) Post(_ context.Context, p string, _, out any) error {
 	if s.postRsps[p] != "" && out != nil {
 		if err := json.Unmarshal([]byte(s.postRsps[p]), out); err != nil {
 			return err
@@ -252,7 +252,7 @@ func (s *fakeStats) Views(context.Context) (map[string]view, error) {
 	return s.viewsOut, s.viewsErr
 }
 
-func (s *fakeStats) ConfigEgressView(context.Context, []string) (*ixweb.StatView, error) {
+func (s *fakeStats) ConfigEgressView(context.Context, []string, int) (*ixweb.StatView, error) {
 	return nil, s.egressErr
 }
 
@@ -275,7 +275,7 @@ func jsonCfgDiff(t *testing.T, wantCfg, gotCfg ixconfig.IxiaCfgNode) string {
 		t.Fatalf("Could not marshal actual config to JSON: %v", err)
 	}
 
-	var want, got map[string]interface{}
+	var want, got map[string]any
 	if err := json.Unmarshal(wantBytes, &want); err != nil {
 		t.Fatalf("Could not unmarshal expected config to a map: %v", err)
 	}
@@ -546,8 +546,12 @@ func TestPushTopology(t *testing.T) {
 
 // Config generation is tested in TestPushTopology, this test is only for Ixnetwork interactions.
 func TestUpdateTopology(t *testing.T) {
+	const vportID = "/fake/vport/1"
+	vportXP := parseXPath(t, "/fake/vport/1")
+
 	tests := []struct {
 		desc                 string
+		vportState           string
 		top                  *Topology
 		operState            operState
 		importErr            error
@@ -558,16 +562,16 @@ func TestUpdateTopology(t *testing.T) {
 		startErr             error
 		wantErr              string
 	}{{
-		desc:    "Error if no interfaces",
+		desc:    "error if no interfaces",
 		top:     &Topology{},
 		wantErr: "zero interfaces",
 	}, {
-		desc:      "Error on config push",
+		desc:      "error on config push",
 		top:       simpleTop,
 		importErr: errors.New("push error"),
 		wantErr:   "push error",
 	}, {
-		desc:                "Error on route table import",
+		desc:                "error on route table import",
 		top:                 simpleTop,
 		routeTableImportErr: errors.New("route table import error"),
 		wantErr:             "route table import error",
@@ -575,9 +579,16 @@ func TestUpdateTopology(t *testing.T) {
 		desc: "traffic/protocols not yet running",
 		top:  simpleTop,
 	}, {
+		desc:       "error vport down",
+		top:        simpleTop,
+		operState:  operStateProtocolsOn,
+		vportState: "connectedLinkDown",
+		wantErr:    "connectedLinkDown",
+	}, {
 		desc:                 "error starting protocols",
 		top:                  simpleTop,
 		operState:            operStateProtocolsOn,
+		vportState:           "connectedLinkUp",
 		startProtocolsErr:    errors.New("could not start protocols"),
 		validateProtocolsErr: errors.New("protocols not up"),
 		// TODO; Revert to checking start protocols error (see comment in 'startProtocols' section.)
@@ -586,24 +597,28 @@ func TestUpdateTopology(t *testing.T) {
 		desc:                 "error waiting for protocols",
 		top:                  simpleTop,
 		operState:            operStateProtocolsOn,
+		vportState:           "connectedLinkUp",
 		validateProtocolsErr: errors.New("protocols not up"),
 		wantErr:              "protocols not up",
 	}, {
-		desc:      "error starting traffic",
-		top:       simpleTop,
-		operState: operStateTrafficOn,
-		genErr:    errors.New("could not generate traffic"),
-		wantErr:   "could not generate traffic",
+		desc:       "error starting traffic",
+		top:        simpleTop,
+		operState:  operStateTrafficOn,
+		vportState: "connectedLinkUp",
+		genErr:     errors.New("could not generate traffic"),
+		wantErr:    "could not generate traffic",
 	}, {
-		desc:      "error starting traffic",
-		top:       simpleTop,
-		operState: operStateTrafficOn,
-		startErr:  errors.New("could not start traffic"),
-		wantErr:   "could not start traffic",
+		desc:       "error starting traffic",
+		top:        simpleTop,
+		operState:  operStateTrafficOn,
+		vportState: "connectedLinkUp",
+		startErr:   errors.New("could not start traffic"),
+		wantErr:    "could not start traffic",
 	}, {
-		desc:      "successful protocol/traffic start",
-		top:       simpleTop,
-		operState: operStateTrafficOn,
+		desc:       "successful protocol/traffic start",
+		top:        simpleTop,
+		operState:  operStateTrafficOn,
+		vportState: "connectedLinkUp",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -613,7 +628,9 @@ func TestUpdateTopology(t *testing.T) {
 				importErrs: []error{test.importErr},
 				session: &fakeSession{
 					postErrs: map[string]error{"/operations/startallprotocols": test.startProtocolsErr},
+					getRsps:  map[string]string{vportID: fmt.Sprintf("{\"connectionState\": \"%s\"}", test.vportState)},
 				},
+				xPathToID: map[string]string{vportXP.String(): vportID},
 			}
 			c := &ixATE{
 				c:         fc,
@@ -621,7 +638,8 @@ func TestUpdateTopology(t *testing.T) {
 				operState: test.operState,
 				ports: map[string]*ixconfig.Vport{
 					"port": &ixconfig.Vport{
-						Xpath:    &ixconfig.XPath{},
+						Name:     ixconfig.String("1/2"),
+						Xpath:    vportXP,
 						L1Config: &ixconfig.VportL1Config{},
 					},
 				},
@@ -826,8 +844,11 @@ func TestValidateProtocolStart(t *testing.T) {
 			Topology: []*ixconfig.Topology{{
 				DeviceGroup: []*ixconfig.TopologyDeviceGroup{dg},
 			}},
-			Lag:   []*ixconfig.Lag{{}},
-			Vport: []*ixconfig.Vport{{}, {}},
+			Lag: []*ixconfig.Lag{{}},
+			Vport: []*ixconfig.Vport{
+				{Name: ixconfig.String("1/1")},
+				{Name: ixconfig.String("2/2")},
+			},
 		}
 		updateXPaths(cfg) // Only needed for IS-IS/LAG test case
 
@@ -848,10 +869,6 @@ func TestValidateProtocolStart(t *testing.T) {
 					link:              link,
 					isrToNetworkGroup: isr,
 				},
-			},
-			vportToPort: map[*ixconfig.Vport]string{
-				cfg.Vport[0]: "1/1",
-				cfg.Vport[1]: "2/2",
 			},
 			lagPorts: map[*ixconfig.Lag][]*ixconfig.Vport{
 				cfg.Lag[0]: []*ixconfig.Vport{cfg.Vport[0], cfg.Vport[1]},
@@ -983,36 +1000,55 @@ func TestValidateProtocolStart(t *testing.T) {
 }
 
 func TestStartProtocols(t *testing.T) {
-	const op = "operations/startallprotocols"
+	const vportID = "/fake/vport/1"
+	vportXP := parseXPath(t, "/fake/vport/1")
+
 	tests := []struct {
-		desc                string
-		opErr, protocolsErr error
-		wantErr             string
+		desc, vportState, wantErr string
+		opErr, protocolsErr       error
 	}{{
+		desc:       "error vport down",
+		vportState: "connectedLinkDown",
+		wantErr:    "connectedLinkDown",
+	}, {
 		// Currently a failure is only reported if protocols are not up, even if the operation failed.
 		// TODO: Revert to checking that an error is produced(see comment in 'startProtocols' section.)
-		desc:  "Error from op",
-		opErr: errors.New("someError"),
+		desc:       "error from op",
+		vportState: "connectedLinkUp",
+		opErr:      errors.New("someError"),
 	}, {
-		desc:         "Error waiting for protocol status validation",
+		desc:         "error waiting for protocol status validation",
+		vportState:   "connectedLinkUp",
 		protocolsErr: errors.New("protocols not up"),
 		wantErr:      "not up",
 	}, {
 		// Errors from 'startallprotcols' op should be reported if protocols fail to come up.
-		desc:         "Error on op and error on validation",
+		desc:         "error on op and error on validation",
+		vportState:   "connectedLinkUp",
 		opErr:        errors.New("someError"),
 		protocolsErr: errors.New("protocols not up"),
 		wantErr:      "someError",
 	}, {
-		desc: "No error",
+		desc:       "no error",
+		vportState: "connectedLinkUp",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			defer restoreStubs()
 			stubLogOperationResult()
-			c := &ixATE{c: &fakeCfgClient{session: &fakeSession{
-				postErrs: map[string]error{op: test.opErr},
-			}}}
+			c := &ixATE{
+				c: &fakeCfgClient{
+					session: &fakeSession{
+						postErrs: map[string]error{"operations/startallprotocols": test.opErr},
+						getRsps:  map[string]string{vportID: fmt.Sprintf("{\"connectionState\": \"%s\"}", test.vportState)},
+					},
+					xPathToID: map[string]string{vportXP.String(): vportID},
+				},
+				cfg: &ixconfig.Ixnetwork{},
+				ports: map[string]*ixconfig.Vport{
+					"port1": &ixconfig.Vport{Xpath: vportXP},
+				},
+			}
 			validateProtocolStartFn = func(context.Context, *ixATE) ([]string, error) {
 				return nil, test.protocolsErr
 			}
@@ -1413,7 +1449,7 @@ func TestGenTraffic(t *testing.T) {
 						postErrs: map[string]error{generateOp: test.generateErr},
 					},
 				},
-				egressTrackingFlows: []string{"someFlow"},
+				egressTrackFlowCounts: map[string]int{"someFlow": 1},
 			}
 			gotErr := genTraffic(context.Background(), c)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
@@ -1562,7 +1598,7 @@ func TestStart(t *testing.T) {
 	}, {
 		desc:      "failed to configure egress tracking",
 		egressErr: errors.New("failed to config egress tracking"),
-		wantErr:   "could not set egress stat tracking",
+		wantErr:   "could not configure egress tracking view",
 	}, {
 		desc: "no errors",
 	}}
@@ -1584,7 +1620,7 @@ func TestStart(t *testing.T) {
 						egressErr: test.egressErr,
 					},
 				}},
-				egressTrackingFlows: []string{"someFlow"},
+				egressTrackFlowCounts: map[string]int{"someFlow": 1},
 			}
 			gotErr := startTraffic(context.Background(), c)
 			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
@@ -1894,7 +1930,7 @@ func TestReadStats(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			stubLogOperationResult()
 			c := &ixATE{
-				egressTrackingFlows: []string{"someFlow"},
+				egressTrackFlowCounts: map[string]int{"someFlow": 1},
 				c: &fakeCfgClient{
 					session: &fakeSession{stats: &fakeStats{
 						viewsOut: test.viewsOut,

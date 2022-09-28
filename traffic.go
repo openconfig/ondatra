@@ -37,9 +37,10 @@ func (tr *Traffic) String() string {
 }
 
 // NewFlow returns a new Traffic flow. By default the flow will have the following properties:
-//   frame size: max(64, sizeof(headers) + (4 * number of ethernet headers))
-//   frame rate: 10% of the line rate
-//   header addresses inferred: true
+//
+//	frame size: max(64, sizeof(headers) + (4 * number of ethernet headers))
+//	frame rate: 10% of the line rate
+//	header addresses inferred: true
 func (tr *Traffic) NewFlow(name string) *Flow {
 	return &Flow{pb: &opb.Flow{Name: name}}
 }
@@ -177,9 +178,60 @@ func (f *Flow) WithFrameRateBPS(n uint64) *Flow {
 	return f
 }
 
+// EgressTracking represents the egress tracking configuration of a flow.
+type EgressTracking struct {
+	pb *opb.EgressTracking
+}
+
+// EgressTracking returns the egress tracking configuration of the flow.
+// By default the configuration has the following properties:
+// enabled: true
+// offset: 32
+// width: 3
+// count: 8
+func (f *Flow) EgressTracking() *EgressTracking {
+	if f.pb.EgressTracking == nil {
+		f.pb.EgressTracking = &opb.EgressTracking{
+			Enabled: true,
+			Offset:  32,
+			Width:   3,
+			Count:   8,
+		}
+	}
+	return &EgressTracking{f.pb.EgressTracking}
+}
+
+// WithEnabled sets whether egress tracking is enabled.
+func (et *EgressTracking) WithEnabled(enabled bool) {
+	et.pb.Enabled = enabled
+}
+
+// WithOffset sets the egress tracking bit offset.
+func (et *EgressTracking) WithOffset(offset uint32) *EgressTracking {
+	et.pb.Offset = offset
+	return et
+}
+
+// WithWidth sets the egress tracking bit width.
+func (et *EgressTracking) WithWidth(width uint32) *EgressTracking {
+	et.pb.Width = width
+	return et
+}
+
+// WithCount sets the number of unique values to egress track.
+func (et *EgressTracking) WithCount(count uint32) *EgressTracking {
+	et.pb.Count = count
+	return et
+}
+
 // WithEgressTrackingEnabled enables egress tracking with custom offset and width bits.
-func (f *Flow) WithEgressTrackingEnabled(customOffset, customWidth uint32) *Flow {
-	f.pb.EgressTracking = &opb.EgressTracking{CustomOffset: customOffset, CustomWidth: customWidth}
+func (f *Flow) WithEgressTrackingEnabled(offset, width uint32) *Flow {
+	f.pb.EgressTracking = &opb.EgressTracking{
+		Enabled: true,
+		Offset:  offset,
+		Width:   width,
+		Count:   8,
+	}
 	return f
 }
 

@@ -671,7 +671,7 @@ func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 }
 
 func macsecStack(macsec *opb.MacsecHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
-	return ixconfig.NewMACsecStack(idx).TrafficTrafficItemConfigElementStack(), nil
+	return ixconfig.NewMacsecStack(idx).TrafficTrafficItemConfigElementStack(), nil
 }
 
 func payloadProtocolTypeStack(idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {

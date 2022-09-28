@@ -107,9 +107,9 @@ type session interface {
 	ID() int
 	AbsPath(string) string
 	Delete(context.Context, string) error
-	Get(context.Context, string, interface{}) error
-	Patch(context.Context, string, interface{}) error
-	Post(context.Context, string, interface{}, interface{}) error
+	Get(context.Context, string, any) error
+	Patch(context.Context, string, any) error
+	Post(context.Context, string, any, any) error
 	Errors(context.Context) ([]*ixweb.Error, error)
 	Files() files
 	Stats() stats
@@ -123,7 +123,7 @@ type files interface {
 
 type stats interface {
 	Views(context.Context) (map[string]view, error)
-	ConfigEgressView(context.Context, []string) (*ixweb.StatView, error)
+	ConfigEgressView(context.Context, []string, int) (*ixweb.StatView, error)
 }
 
 type view interface {
@@ -266,22 +266,21 @@ func newIxATE(ctx context.Context, name string, ixn *binding.IxNetwork) (*ixATE,
 
 // ixATE provides an ATE interface backed by an IxNetwork session.
 type ixATE struct {
-	c                    cfgClient
-	name                 string
-	syslogHost           string
-	chassisHost          string
-	cfgPushCount         int
-	cfg                  *ixconfig.Ixnetwork
-	routeTableToIxFile   map[string]string // Mapping of route tables (by local path) to IxNetwork file name.
-	vportToPort          map[*ixconfig.Vport]string
-	ports                map[string]*ixconfig.Vport
-	lags                 map[string]*ixconfig.Lag
-	lagPorts             map[*ixconfig.Lag][]*ixconfig.Vport
-	intfs                map[string]*intf
-	flowToTrafficItem    map[string]*ixconfig.TrafficTrafficItem
-	ingressTrackingFlows []string
-	egressTrackingFlows  []string
-	convergenceTracking  bool
+	c                     cfgClient
+	name                  string
+	syslogHost            string
+	chassisHost           string
+	cfgPushCount          int
+	cfg                   *ixconfig.Ixnetwork
+	routeTableToIxFile    map[string]string // Mapping of route tables (by local path) to IxNetwork file name.
+	ports                 map[string]*ixconfig.Vport
+	lags                  map[string]*ixconfig.Lag
+	lagPorts              map[*ixconfig.Lag][]*ixconfig.Vport
+	intfs                 map[string]*intf
+	flowToTrafficItem     map[string]*ixconfig.TrafficTrafficItem
+	ingressTrackFlows     []string
+	egressTrackFlowCounts map[string]int
+	convergenceTracking   bool
 	// Operational state is updated as needed on successful API calls.
 	operState operState
 
@@ -293,13 +292,11 @@ func linkToPorts(ix *ixATE, link ixconfig.IxiaCfgNode) ([]string, error) {
 	var ports []string
 	switch l := link.(type) {
 	case *ixconfig.Vport:
-		p := ix.vportToPort[l]
-		ports = []string{p}
+		ports = []string{*l.Name}
 	case *ixconfig.Lag:
 		vports := ix.lagPorts[l]
 		for _, vp := range vports {
-			p := ix.vportToPort[vp]
-			ports = append(ports, p)
+			ports = append(ports, *vp.Name)
 		}
 	default:
 		return nil, fmt.Errorf("link node is not a Vport or Lag link: %v(%T)", link, link)
@@ -379,7 +376,7 @@ func (ix *ixATE) logOp(ctx context.Context, path string, opErr error, start, end
 	log.Infof(opResult.String())
 }
 
-func (ix *ixATE) runOp(ctx context.Context, path string, in interface{}, out interface{}) error {
+func (ix *ixATE) runOp(ctx context.Context, path string, in any, out any) error {
 	start := time.Now()
 	err := ix.c.Session().Post(ctx, path, in, out)
 	end := time.Now()
@@ -391,8 +388,8 @@ func (ix *ixATE) runOp(ctx context.Context, path string, in interface{}, out int
 func (ix *ixATE) resetClientTrafficCfg() {
 	ix.cfg.Traffic = nil
 	ix.flowToTrafficItem = make(map[string]*ixconfig.TrafficTrafficItem)
-	ix.ingressTrackingFlows = nil
-	ix.egressTrackingFlows = nil
+	ix.ingressTrackFlows = nil
+	ix.egressTrackFlowCounts = make(map[string]int)
 	ix.convergenceTracking = false
 }
 
@@ -422,7 +419,6 @@ func (ix *ixATE) resetClientCfg() {
 		}
 	}
 	ix.routeTableToIxFile = make(map[string]string)
-	ix.vportToPort = make(map[*ixconfig.Vport]string)
 	ix.ports = make(map[string]*ixconfig.Vport)
 	ix.lags = make(map[string]*ixconfig.Lag)
 	ix.lagPorts = make(map[*ixconfig.Lag][]*ixconfig.Vport)
@@ -476,7 +472,10 @@ func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, ov
 	defer cancel()
 
 	for i := 0; i < importRetries; i++ {
+		start := time.Now()
 		err := ix.c.ImportConfig(importCtx, ix.cfg, node, overwrite)
+		end := time.Now()
+		ix.logOp(ctx, "importconfig", err, start, end)
 		// If no error or if there is an error and the request did not timeout.
 		if err == nil || importCtx.Err() != context.DeadlineExceeded {
 			return err
@@ -947,7 +946,37 @@ func validateProtocolStart(ctx context.Context, ix *ixATE) ([]string, error) {
 	return failedNodesWithPorts(ix, "some ingress LSP instances did not start", ingressLSPNodes, nodeToLink)
 }
 
+func (ix *ixATE) checkPortsUp(ctx context.Context) error {
+	const upState = "connectedLinkUp"
+	var vports []ixconfig.IxiaCfgNode
+	for _, vport := range ix.ports {
+		vports = append(vports, vport)
+	}
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, vports...); err != nil {
+		return err
+	}
+	for port, vport := range ix.ports {
+		vpid, err := ix.c.NodeID(vport)
+		if err != nil {
+			return err
+		}
+		var data struct {
+			ConnectionState string `json:"connectionState"`
+		}
+		if err := ix.c.Session().Get(ctx, vpid, &data); err != nil {
+			return err
+		}
+		if data.ConnectionState != upState {
+			return fmt.Errorf("port %q in state %q, not %q", port, data.ConnectionState, upState)
+		}
+	}
+	return nil
+}
+
 func (ix *ixATE) startProtocols(ctx context.Context) error {
+	if err := ix.checkPortsUp(ctx); err != nil {
+		return err
+	}
 	errStart := ix.runOp(ctx, "operations/startallprotocols", syncedOpArgs, nil)
 	if errStart != nil {
 		log.Warningf("First attempted startallprotocols op failed: %v", errStart)
@@ -1240,10 +1269,10 @@ func configureTraffic(ctx context.Context, ix *ixATE, flows []*opb.Flow) error {
 			// Update latency/convergence tracking configuration. This can't be done via config push
 			// because convergence tracking will be automatically unset if latency tracking is not
 			// separately disabled first.
-			if err := ix.c.Session().Patch(ctx, "/traffic/statistics/latency", map[string]interface{}{"enabled": false}); err != nil {
+			if err := ix.c.Session().Patch(ctx, "/traffic/statistics/latency", map[string]any{"enabled": false}); err != nil {
 				return fmt.Errorf("could not disable latency statistics: %w", err)
 			}
-			if err := ix.c.Session().Patch(ctx, "/traffic/statistics/cpdpConvergence", map[string]interface{}{
+			if err := ix.c.Session().Patch(ctx, "/traffic/statistics/cpdpConvergence", map[string]any{
 				"enabled":                          true,
 				"enableControlPlaneEvents":         true,
 				"enableDataPlaneEventsRateMonitor": true,
@@ -1293,16 +1322,22 @@ func applyTraffic(ctx context.Context, ix *ixATE) error {
 }
 
 func startTraffic(ctx context.Context, ix *ixATE) error {
+	if len(ix.egressTrackFlowCounts) > 0 {
+		var maxCount int
+		var egressTrackFlows []string
+		for flow, count := range ix.egressTrackFlowCounts {
+			egressTrackFlows = append(egressTrackFlows, flow)
+			if count > maxCount {
+				maxCount = count
+			}
+		}
+		if _, err := ix.c.Session().Stats().ConfigEgressView(ctx, egressTrackFlows, maxCount); err != nil {
+			return fmt.Errorf("could not configure egress tracking view: %w", err)
+		}
+	}
 	trafficArgs := ixweb.OpArgs{ix.c.Session().AbsPath("traffic")}
 	if err := ix.runOp(ctx, "traffic/operations/start", trafficArgs, nil); err != nil {
 		return fmt.Errorf("could not start traffic: %w", err)
-	}
-
-	// TODO: Investigate using JSON-based config instead of the REST API.
-	if len(ix.egressTrackingFlows) > 0 {
-		if _, err := ix.c.Session().Stats().ConfigEgressView(ctx, ix.egressTrackingFlows); err != nil {
-			return fmt.Errorf("could not set egress stat tracking: %w", err)
-		}
 	}
 	return nil
 }
@@ -1388,7 +1423,7 @@ func (ix *ixATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNM
 }
 
 func (ix *ixATE) readStats(ctx context.Context, captions []string) (*ixgnmi.Stats, error) {
-	if len(ix.egressTrackingFlows) == 0 {
+	if len(ix.egressTrackFlowCounts) == 0 {
 		var cmod []string
 		for _, c := range captions {
 			if c != ixweb.EgressStatsCaption {
@@ -1422,10 +1457,14 @@ func (ix *ixATE) readStats(ctx context.Context, captions []string) (*ixgnmi.Stat
 	if err != nil {
 		return nil, fmt.Errorf("error retrieving statistics for views %v: %w", captions, err)
 	}
+	var egressTrackFlows []string
+	for flow := range ix.egressTrackFlowCounts {
+		egressTrackFlows = append(egressTrackFlows, flow)
+	}
 	return &ixgnmi.Stats{
 		Tables:            tables,
-		IngressTrackFlows: ix.ingressTrackingFlows,
-		EgressTrackFlows:  ix.egressTrackingFlows,
+		IngressTrackFlows: ix.ingressTrackFlows,
+		EgressTrackFlows:  egressTrackFlows,
 	}, nil
 }
 

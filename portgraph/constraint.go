@@ -16,6 +16,8 @@ package portgraph
 
 import (
 	"regexp"
+
+	log "github.com/golang/glog"
 )
 
 // NodeConstraint is a constraint on a Node.
@@ -26,12 +28,13 @@ type NodeConstraint interface {
 // PortConstraint is a constraint on a Port.
 type PortConstraint interface {
 	isPortConstraint()
+	fetchPort() *AbstractPort
 }
 
 // Constraint is a constraint checker that checks an input matches based on some matching criteria.
 type Constraint interface {
 	universalConstraint
-	match(s string) bool
+	match(string, bool) bool
 }
 
 type universalConstraint interface {
@@ -44,8 +47,8 @@ type equal struct {
 	s string
 }
 
-func (c *equal) match(s string) bool {
-	return s == c.s
+func (c *equal) match(s string, ok bool) bool {
+	return ok && s == c.s
 }
 
 type notEqual struct {
@@ -53,8 +56,8 @@ type notEqual struct {
 	s string
 }
 
-func (c *notEqual) match(s string) bool {
-	return s != c.s
+func (c *notEqual) match(s string, ok bool) bool {
+	return ok && s != c.s
 }
 
 type regex struct {
@@ -62,8 +65,8 @@ type regex struct {
 	re *regexp.Regexp
 }
 
-func (c *regex) match(s string) bool {
-	return c.re.MatchString(s)
+func (c *regex) match(s string, ok bool) bool {
+	return ok && c.re.MatchString(s)
 }
 
 type notRegex struct {
@@ -71,8 +74,48 @@ type notRegex struct {
 	re *regexp.Regexp
 }
 
-func (c *notRegex) match(s string) bool {
-	return !c.re.MatchString(s)
+func (c *notRegex) match(s string, ok bool) bool {
+	return ok && !c.re.MatchString(s)
+}
+
+func attrsNodePair(k string, n1, n2 *AbstractNode, abs2ConNode map[*AbstractNode]*ConcreteNode) (string, string, bool) {
+	cn1, ok := abs2ConNode[n1]
+	if !ok {
+		log.Fatalf("node %q does not have an assignment", n1.Desc)
+	}
+	v1, ok := cn1.Attrs[k]
+	if !ok {
+		return "", "", false
+	}
+	cn2, ok := abs2ConNode[n2]
+	if !ok {
+		log.Fatalf("node %q does not have an assignment", n2.Desc)
+	}
+	v2, ok := cn2.Attrs[k]
+	if !ok {
+		return "", "", false
+	}
+	return v1, v2, ok
+}
+
+func attrsPortPair(k string, p1, p2 *AbstractPort, abs2ConPort map[*AbstractPort]*ConcretePort) (string, string, bool) {
+	cp1, ok := abs2ConPort[p1]
+	if !ok {
+		log.Fatalf("port %q does not have an assignement", p1.Desc)
+	}
+	v1, ok := cp1.Attrs[k]
+	if !ok {
+		return "", "", false
+	}
+	cp2, ok := abs2ConPort[p2]
+	if !ok {
+		log.Fatalf("port %q does not have an assignment", p2.Desc)
+	}
+	v2, ok := cp2.Attrs[k]
+	if !ok {
+		return "", "", false
+	}
+	return v1, v2, ok
 }
 
 type sameAsNode struct {
@@ -81,11 +124,23 @@ type sameAsNode struct {
 
 func (c *sameAsNode) isNodeConstraint() {}
 
+func (c *sameAsNode) match(k string, n *AbstractNode, abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
+	v1, v2, ok := attrsNodePair(k, n, c.n, abs2ConNode)
+	return ok && v1 == v2
+}
+
 type sameAsPort struct {
 	p *AbstractPort
 }
 
 func (c *sameAsPort) isPortConstraint() {}
+
+func (c *sameAsPort) fetchPort() *AbstractPort { return c.p }
+
+func (c *sameAsPort) match(k string, p *AbstractPort, abs2ConPort map[*AbstractPort]*ConcretePort) bool {
+	v1, v2, ok := attrsPortPair(k, p, c.p, abs2ConPort)
+	return ok && v1 == v2
+}
 
 type notSameAsNode struct {
 	n *AbstractNode
@@ -93,11 +148,23 @@ type notSameAsNode struct {
 
 func (c *notSameAsNode) isNodeConstraint() {}
 
+func (c *notSameAsNode) match(k string, n *AbstractNode, abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
+	v1, v2, ok := attrsNodePair(k, n, c.n, abs2ConNode)
+	return ok && v1 != v2
+}
+
 type notSameAsPort struct {
 	p *AbstractPort
 }
 
 func (c *notSameAsPort) isPortConstraint() {}
+
+func (c *notSameAsPort) fetchPort() *AbstractPort { return c.p }
+
+func (c *notSameAsPort) match(k string, p *AbstractPort, abs2ConPort map[*AbstractPort]*ConcretePort) bool {
+	v1, v2, ok := attrsPortPair(k, p, c.p, abs2ConPort)
+	return ok && v1 != v2
+}
 
 // Equal returns a constraint that an attribute is equal to the specified string.
 func Equal(s string) Constraint {

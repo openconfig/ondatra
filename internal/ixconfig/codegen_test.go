@@ -73,7 +73,7 @@ func TestMarshalUnmarshalConfig(t *testing.T) {
 				t.Fatalf("Could not marshal IxNetwork config to JSON: %v", err)
 			}
 
-			var got, want map[string]interface{}
+			var got, want map[string]any
 			if err := json.Unmarshal(jsonBytes, &got); err != nil {
 				t.Fatalf("Could not unmarshal transformed JSON to a map: %v", err)
 			}
@@ -107,7 +107,7 @@ func TestCopy(t *testing.T) {
 		t.Fatalf("Incorrect data in copied config, diff (-got +want):\n%s", diff)
 	}
 	// Check that the copy actually points to different subconfigs than the original.
-	testPtrDiff := func(a, b interface{}, itemDesc string) {
+	testPtrDiff := func(a, b any, itemDesc string) {
 		if reflect.ValueOf(a).Pointer() == reflect.ValueOf(b).Pointer() {
 			t.Errorf("Pointers for config object %q are the same", itemDesc)
 		}

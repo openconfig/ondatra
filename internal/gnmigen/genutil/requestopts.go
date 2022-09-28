@@ -59,7 +59,7 @@ type requestOpts struct {
 }
 
 // extractRequestOpts translates the root path's custom data to request options.
-func extractRequestOpts(customData map[string]interface{}) (*requestOpts, error) {
+func extractRequestOpts(customData map[string]any) (*requestOpts, error) {
 	opts := new(requestOpts)
 	if v, ok := customData[subscriptionModeKey]; ok {
 		m, ok := v.(gpb.SubscriptionMode)

@@ -150,17 +150,25 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 		return fmt.Errorf("could not configure ingress tracking for flow %q: %w", f.GetName(), err)
 	}
 	if trackFlow {
-		ix.ingressTrackingFlows = append(ix.ingressTrackingFlows, f.GetName())
+		ix.ingressTrackFlows = append(ix.ingressTrackFlows, f.GetName())
 	}
 	ti.Tracking = []*ixconfig.TrafficTrafficItemTracking{ingressTracking}
 
-	if f.GetEgressTracking() != nil {
-		ix.egressTrackingFlows = append(ix.egressTrackingFlows, f.GetName())
+	if et := f.GetEgressTracking(); et != nil && et.GetEnabled() {
+		const minOffset, maxOffset = 32, 262128
+		if offset := et.GetOffset(); offset < minOffset || offset > maxOffset {
+			return fmt.Errorf("egress tracking offset %v not in allowed range [%v, %v]", offset, minOffset, maxOffset)
+		}
+		const minWidth, maxWidth = 1, 22
+		if width := et.GetWidth(); width < minWidth || width > maxWidth {
+			return fmt.Errorf("egress tracking width %v not in allowed range [%v, %v]", width, minWidth, maxWidth)
+		}
+		ix.egressTrackFlowCounts[f.GetName()] = int(et.GetCount())
 		ti.EgressEnabled = ixconfig.Bool(true)
 		ti.EgressTracking = []*ixconfig.TrafficTrafficItemEgressTracking{{
 			Encapsulation:    ixconfig.String("Any: Use Custom Settings"),
-			CustomOffsetBits: ixconfig.NumberUint32(f.GetEgressTracking().GetCustomOffset()),
-			CustomWidthBits:  ixconfig.NumberUint32(f.GetEgressTracking().GetCustomWidth()),
+			CustomOffsetBits: ixconfig.NumberUint32(et.GetOffset()),
+			CustomWidthBits:  ixconfig.NumberUint32(et.GetWidth()),
 		}}
 	}
 
@@ -368,7 +376,7 @@ func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP
 	return nodes, nil
 }
 
-func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficTrafficItemConfigElementFrameRate, map[string]interface{}, error) {
+func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficTrafficItemConfigElementFrameRate, map[string]any, error) {
 	if fr == nil || fr.Type == nil {
 		return nil, nil, nil
 	}
@@ -378,13 +386,13 @@ func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficTrafficItemConfigElementFram
 		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("percentLineRate"),
 			Rate:  ixconfig.NumberFloat64(fr.GetPercent()),
-		}, map[string]interface{}{"rate": fr.GetPercent()}, nil
+		}, map[string]any{"rate": fr.GetPercent()}, nil
 	case *opb.FrameRate_Bps:
 		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 				Type_:            ixconfig.String("bitsPerSecond"),
 				BitRateUnitsType: ixconfig.String("bitsPerSec"),
 				Rate:             ixconfig.NumberUint64(fr.GetBps()),
-			}, map[string]interface{}{
+			}, map[string]any{
 				"bitRateUnitsType": "bitsPerSec",
 				"rate":             fr.GetBps(),
 			}, nil
@@ -392,13 +400,13 @@ func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficTrafficItemConfigElementFram
 		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("framesPerSecond"),
 			Rate:  ixconfig.NumberUint64(fr.GetFps()),
-		}, map[string]interface{}{"rate": fr.GetFps()}, nil
+		}, map[string]any{"rate": fr.GetFps()}, nil
 	default:
 		return nil, nil, fmt.Errorf("unrecognized FrameRate type %T", frt)
 	}
 }
 
-func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficTrafficItemConfigElementFrameSize, map[string]interface{}, error) {
+func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficTrafficItemConfigElementFrameSize, map[string]any, error) {
 	if fs == nil || fs.Type == nil {
 		return nil, nil, nil
 	}
@@ -408,7 +416,7 @@ func frameSize(fs *opb.FrameSize) (*ixconfig.TrafficTrafficItemConfigElementFram
 		WeightedPairs: []float32{},
 		QuadGaussian:  []float32{},
 	}
-	fsMap := map[string]interface{}{}
+	fsMap := map[string]any{}
 
 	switch fst := fs.Type.(type) {
 	case *opb.FrameSize_ImixPreset_:

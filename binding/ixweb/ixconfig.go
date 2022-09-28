@@ -89,15 +89,15 @@ func (c *Config) QueryIDs(ctx context.Context, xpaths ...string) (map[string]str
 	}
 
 	const selectOpPath = "operations/select?xpath=true"
-	selectReq := map[string][]interface{}{
-		"selects": []interface{}{
-			map[string]interface{}{
+	selectReq := map[string][]any{
+		"selects": []any{
+			map[string]any{
 				// Base path in IxNetwork REST hierarchy to query from.
 				// Since we can't assume we know any IDs we can't make this narrower.
 				"from":       "/",
 				"properties": []string{""},
-				"children": []interface{}{
-					map[string]interface{}{
+				"children": []any{
+					map[string]any{
 						// Regex of field names of objects to return IDs for. This operation
 						// will not recurse on a field name in the hierarchy that is not
 						// included here, so the field names of all parent objects of a
@@ -112,8 +112,8 @@ func (c *Config) QueryIDs(ctx context.Context, xpaths ...string) (map[string]str
 						},
 					},
 				},
-				"inlines": []map[string]interface{}{
-					map[string]interface{}{
+				"inlines": []map[string]any{
+					map[string]any{
 						"child":      "",
 						"properties": []string{""},
 					},
@@ -121,7 +121,7 @@ func (c *Config) QueryIDs(ctx context.Context, xpaths ...string) (map[string]str
 			},
 		},
 	}
-	var resp []map[string]interface{}
+	var resp []map[string]any
 	if err := c.sess.Post(ctx, selectOpPath, selectReq, &resp); err != nil {
 		return nil, fmt.Errorf("error querying for node IDs: %w", err)
 	}
@@ -148,7 +148,7 @@ func (c *Config) QueryIDs(ctx context.Context, xpaths ...string) (map[string]str
 
 // updateIDsFromMap recurses through a nested map response from the IxNetwork
 // 'select' operation, updating the IDs for xpaths in the given xpathToID map.
-func updateIDsFromMap(m map[string]interface{}, xpathToID map[string]string) {
+func updateIDsFromMap(m map[string]any, xpathToID map[string]string) {
 	xp, hasXPath := m["xpath"].(string)
 	id, hasID := m["href"].(string)
 	if hasXPath && hasID {
@@ -158,14 +158,14 @@ func updateIDsFromMap(m map[string]interface{}, xpathToID map[string]string) {
 	}
 
 	// Update on an sublists/maps.
-	var updateIDs func(interface{})
-	updateIDs = func(mapOrList interface{}) {
+	var updateIDs func(any)
+	updateIDs = func(mapOrList any) {
 		switch val := mapOrList.(type) {
-		case []interface{}:
+		case []any:
 			for _, v := range val {
 				updateIDs(v)
 			}
-		case map[string]interface{}:
+		case map[string]any:
 			updateIDsFromMap(val, xpathToID)
 		}
 	}

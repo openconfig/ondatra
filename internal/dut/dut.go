@@ -102,7 +102,7 @@ func PushConfig(ctx context.Context, dut binding.DUT, cfg *Config, reset bool) e
 // - {{ secrets "<arg1>" "<arg2>" }}: left untouched, returned as-is
 // - {{ var "<key>" }}: returns the value for the key in the vars map
 func interpolateConfig(dut binding.DUT, config string, vars map[string]string) (string, error) {
-	funcMap := map[string]interface{}{
+	funcMap := map[string]any{
 		"port": func(portID string) (string, error) {
 			port, err := testbed.Port(dut, portID)
 			if err != nil {

@@ -102,8 +102,8 @@ type cfgClient interface {
 }
 
 type session interface {
-	Get(context.Context, string, interface{}) error
-	Post(context.Context, string, interface{}, interface{}) error
+	Get(context.Context, string, any) error
+	Post(context.Context, string, any, any) error
 }
 
 type clientWrapper struct {

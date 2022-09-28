@@ -28,17 +28,17 @@ func (cfg *Ixnetwork) updateAllXPathsAndRefs() {
 
 // Copy returns a new deep copy of the IxNetwork config.
 func (cfg *Ixnetwork) Copy() *Ixnetwork {
-	return (cfg.copyCfg(map[interface{}]interface{}{})).(*Ixnetwork)
+	return (cfg.copyCfg(map[any]any{})).(*Ixnetwork)
 }
 
-func removeNilsMap(m map[string]interface{}) {
-	var removeNils func(interface{})
-	removeNils = func(v interface{}) {
-		if vl, ok := v.([]interface{}); ok {
+func removeNilsMap(m map[string]any) {
+	var removeNils func(any)
+	removeNils = func(v any) {
+		if vl, ok := v.([]any); ok {
 			for _, v := range vl {
 				removeNils(v)
 			}
-		} else if vm, ok := v.(map[string]interface{}); ok {
+		} else if vm, ok := v.(map[string]any); ok {
 			removeNilsMap(vm)
 		}
 	}
@@ -61,7 +61,7 @@ func (cfg *Ixnetwork) MarshalJSON() ([]byte, error) {
 		return nil, err
 	}
 
-	var jsonMap map[string]interface{}
+	var jsonMap map[string]any
 	if err := json.Unmarshal(b, &jsonMap); err != nil {
 		return nil, fmt.Errorf("could not unmarshal the already marshaled Ixnetwork config: %w", err)
 	}
@@ -78,7 +78,7 @@ func (cfg *Ixnetwork) MarshalJSON() ([]byte, error) {
 // ResolvedConfig returns a copy of the config node with XPaths updated and
 // object references resolved. It does not modify the original config.
 func (cfg *Ixnetwork) ResolvedConfig(node IxiaCfgNode) (IxiaCfgNode, error) {
-	origToCopy := map[interface{}]interface{}{}
+	origToCopy := map[any]any{}
 	cpy := (cfg.copyCfg(origToCopy)).(*Ixnetwork)
 	cpy.updateAllXPathsAndRefs()
 	nodeCpy, ok := (origToCopy[node]).(IxiaCfgNode)
@@ -99,7 +99,7 @@ func (stack *TrafficTrafficItemConfigElementStack) MarshalJSON() ([]byte, error)
 			cfgFields = append(cfgFields, f)
 		}
 	}
-	return json.Marshal(map[string]interface{}{
+	return json.Marshal(map[string]any{
 		"xpath": stack.Xpath,
 		"field": cfgFields,
 	})

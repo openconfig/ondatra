@@ -86,7 +86,7 @@ func (v Vendor) String() string {
 // GNMI returns a gNMI client for the device.
 func (d *Device) GNMI() *gnmi.Client {
 	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER
-	return gnmi.NewClient(d.ID(), useGetForCfg, d.clientFn)
+	return gnmi.NewClient(d.Name(), useGetForCfg, d.clientFn)
 }
 
 // Telemetry returns a telemetry path root for the device.

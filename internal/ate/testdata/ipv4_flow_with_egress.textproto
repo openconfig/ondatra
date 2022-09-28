@@ -40,7 +40,8 @@ flows: {
     }
   }
   egress_tracking: {
-    custom_offset: 128
-    custom_width: 4
+    enabled: true
+    offset: 128
+    width: 4
   }
 }

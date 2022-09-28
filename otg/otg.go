@@ -306,7 +306,7 @@ func (o *OTG) Telemetry() *device.DevicePath {
 
 // GNMI returns a telemetry path root for the device.
 func (o *OTG) GNMI() *gnmi.Client {
-	return gnmi.NewClient("", false, func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, o.ate) })
+	return gnmi.NewClient(o.ate.Name(), false, func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, o.ate) })
 }
 
 func fetchGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) {

@@ -94,7 +94,7 @@ func ReservationDone() {
 		"Testbed Reservation Complete",
 		fmt.Sprintf("ID: %s\n", res.ID),
 	}
-	addLine := func(format string, args ...interface{}) {
+	addLine := func(format string, args ...any) {
 		lines = append(lines, fmt.Sprintf(format, args...))
 	}
 	addAssign := func(id, name string) {
@@ -132,7 +132,7 @@ func ReservationDone() {
 // LoggerT is a minimal subset of the testing.T API for logging only.
 type LoggerT interface {
 	Helper()
-	Log(...interface{})
+	Log(...any)
 }
 
 // ActionStarted notifies the debugger that the specific action has started.
@@ -147,6 +147,7 @@ func Breakpoint(t LoggerT) error {
 	if reader == nil {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
+	t.Helper()
 	t.Log(bannerMsg("Breakpoint: Press ENTER to continue."))
 	reader.readLine()
 	return nil

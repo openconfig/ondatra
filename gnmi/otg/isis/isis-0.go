@@ -3459,6 +3459,8 @@ type IsisRouter_LinkStateDatabasePathAny struct {
 // on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
 // is incremented by 1.
 // A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// pdu-type can be either one of LEVEL_1 or LEVEL_2.
+// A learned LSP is uniquely determined by LSP ID and pdu-type together.
 //
 //	Defining module:      "open-traffic-generator-isis"
 //	Instantiating module: "open-traffic-generator-isis"
@@ -3468,7 +3470,7 @@ func (n *IsisRouter_LinkStateDatabasePath) LspsAny() *IsisRouter_LinkStateDataba
 	return &IsisRouter_LinkStateDatabase_LspsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"lsp-states", "lsps"},
-			map[string]interface{}{"lsp-id": "*"},
+			map[string]interface{}{"lsp-id": "*", "pdu-type": "*"},
 			n,
 		),
 	}
@@ -3481,6 +3483,8 @@ func (n *IsisRouter_LinkStateDatabasePath) LspsAny() *IsisRouter_LinkStateDataba
 // on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
 // is incremented by 1.
 // A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// pdu-type can be either one of LEVEL_1 or LEVEL_2.
+// A learned LSP is uniquely determined by LSP ID and pdu-type together.
 //
 //	Defining module:      "open-traffic-generator-isis"
 //	Instantiating module: "open-traffic-generator-isis"
@@ -3490,10 +3494,24 @@ func (n *IsisRouter_LinkStateDatabasePathAny) LspsAny() *IsisRouter_LinkStateDat
 	return &IsisRouter_LinkStateDatabase_LspsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"lsp-states", "lsps"},
-			map[string]interface{}{"lsp-id": "*"},
+			map[string]interface{}{"lsp-id": "*", "pdu-type": "*"},
 			n,
 		),
 	}
+}
+
+// WithLspId sets IsisRouter_LinkStateDatabase_LspsPathAny's key "lsp-id" to the specified value.
+// LspId: string
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) WithLspId(LspId string) *IsisRouter_LinkStateDatabase_LspsPathAny {
+	ygnmi.ModifyKey(n.NodePath, "lsp-id", LspId)
+	return n
+}
+
+// WithPduType sets IsisRouter_LinkStateDatabase_LspsPathAny's key "pdu-type" to the specified value.
+// PduType: oc.E_Lsps_PduType
+func (n *IsisRouter_LinkStateDatabase_LspsPathAny) WithPduType(PduType oc.E_Lsps_PduType) *IsisRouter_LinkStateDatabase_LspsPathAny {
+	ygnmi.ModifyKey(n.NodePath, "pdu-type", PduType)
+	return n
 }
 
 // Lsps (list): LSP ID of the LSP, in the format, e.g. '640000000001-00-00'.
@@ -3503,6 +3521,8 @@ func (n *IsisRouter_LinkStateDatabasePathAny) LspsAny() *IsisRouter_LinkStateDat
 // on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
 // is incremented by 1.
 // A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// pdu-type can be either one of LEVEL_1 or LEVEL_2.
+// A learned LSP is uniquely determined by LSP ID and pdu-type together.
 //
 //	Defining module:      "open-traffic-generator-isis"
 //	Instantiating module: "open-traffic-generator-isis"
@@ -3510,11 +3530,12 @@ func (n *IsisRouter_LinkStateDatabasePathAny) LspsAny() *IsisRouter_LinkStateDat
 //	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
 //
 //	LspId: string
-func (n *IsisRouter_LinkStateDatabasePath) Lsps(LspId string) *IsisRouter_LinkStateDatabase_LspsPath {
+//	PduType: oc.E_Lsps_PduType
+func (n *IsisRouter_LinkStateDatabasePath) Lsps(LspId string, PduType oc.E_Lsps_PduType) *IsisRouter_LinkStateDatabase_LspsPath {
 	return &IsisRouter_LinkStateDatabase_LspsPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"lsp-states", "lsps"},
-			map[string]interface{}{"lsp-id": LspId},
+			map[string]interface{}{"lsp-id": LspId, "pdu-type": PduType},
 			n,
 		),
 	}
@@ -3527,6 +3548,8 @@ func (n *IsisRouter_LinkStateDatabasePath) Lsps(LspId string) *IsisRouter_LinkSt
 // on a LAN segment. If one LSP is not fit by maximum LSP size then thats sent in another LSP with LSP number
 // is incremented by 1.
 // A router's learned LSP gets refreshed by 'remaining_lifetime'. Then the sequence number is incremented by 1.
+// pdu-type can be either one of LEVEL_1 or LEVEL_2.
+// A learned LSP is uniquely determined by LSP ID and pdu-type together.
 //
 //	Defining module:      "open-traffic-generator-isis"
 //	Instantiating module: "open-traffic-generator-isis"
@@ -3534,11 +3557,12 @@ func (n *IsisRouter_LinkStateDatabasePath) Lsps(LspId string) *IsisRouter_LinkSt
 //	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps"
 //
 //	LspId: string
-func (n *IsisRouter_LinkStateDatabasePathAny) Lsps(LspId string) *IsisRouter_LinkStateDatabase_LspsPathAny {
+//	PduType: oc.E_Lsps_PduType
+func (n *IsisRouter_LinkStateDatabasePathAny) Lsps(LspId string, PduType oc.E_Lsps_PduType) *IsisRouter_LinkStateDatabase_LspsPathAny {
 	return &IsisRouter_LinkStateDatabase_LspsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"lsp-states", "lsps"},
-			map[string]interface{}{"lsp-id": LspId},
+			map[string]interface{}{"lsp-id": LspId, "pdu-type": PduType},
 			n,
 		),
 	}
@@ -3994,6 +4018,64 @@ func (n *IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny) State() ygnmi.Wildcar
 	)
 }
 
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "pdu-type"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_PduTypePath) Config() ygnmi.ConfigQuery[oc.E_Lsps_PduType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Lsps_PduType](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"pdu-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lsps_PduType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).PduType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "pdu-type"
+//	Path from root:       ""
+func (n *IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny) Config() ygnmi.WildcardQuery[oc.E_Lsps_PduType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Lsps_PduType](
+		"IsisRouter_LinkStateDatabase_Lsps",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"pdu-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lsps_PduType, bool) {
+			ret := gs.(*oc.IsisRouter_LinkStateDatabase_Lsps).PduType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_LinkStateDatabase_Lsps) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
 // State returns a Query that can be used in gNMI operations.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -4354,12 +4436,12 @@ func (n *IsisRouter_LinkStateDatabase_LspsPathAny) PduLength() *IsisRouter_LinkS
 //
 //	Defining module:      "open-traffic-generator-isis"
 //	Instantiating module: "open-traffic-generator-isis"
-//	Path from parent:     "state/pdu-type"
-//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+//	Path from parent:     "*/pdu-type"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/*/pdu-type"
 func (n *IsisRouter_LinkStateDatabase_LspsPath) PduType() *IsisRouter_LinkStateDatabase_Lsps_PduTypePath {
 	return &IsisRouter_LinkStateDatabase_Lsps_PduTypePath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "pdu-type"},
+			[]string{"*", "pdu-type"},
 			map[string]interface{}{},
 			n,
 		),
@@ -4371,12 +4453,12 @@ func (n *IsisRouter_LinkStateDatabase_LspsPath) PduType() *IsisRouter_LinkStateD
 //
 //	Defining module:      "open-traffic-generator-isis"
 //	Instantiating module: "open-traffic-generator-isis"
-//	Path from parent:     "state/pdu-type"
-//	Path from root:       "/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/pdu-type"
+//	Path from parent:     "*/pdu-type"
+//	Path from root:       "/isis-routers/isis-router/*/link-state-database/lsp-states/lsps/*/pdu-type"
 func (n *IsisRouter_LinkStateDatabase_LspsPathAny) PduType() *IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny {
 	return &IsisRouter_LinkStateDatabase_Lsps_PduTypePathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "pdu-type"},
+			[]string{"*", "pdu-type"},
 			map[string]interface{}{},
 			n,
 		),

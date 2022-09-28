@@ -151,7 +151,7 @@ func (ix *IxWeb) setAPIKey(ctx context.Context, username, password string) error
 
 // jsonReq issues a JSON HTTP request. The "in" JSON object is marshalled to
 // the request body, and the response is unmarshalled to "out" JSON object.
-func (ix *IxWeb) jsonReq(ctx context.Context, method httpMethod, path string, in, out interface{}) error {
+func (ix *IxWeb) jsonReq(ctx context.Context, method httpMethod, path string, in, out any) error {
 	var body []byte
 	if in != nil {
 		var err error
@@ -184,7 +184,7 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 	}
 	req, err := http.NewRequestWithContext(ctx, string(method), url, body)
 	if err != nil {
-		return 0, nil, err
+		return 0, nil, fmt.Errorf("error creating HTTP request: %w", err)
 	}
 	if len(content) > 0 {
 		req.Header.Set("Content-Type", contentType)
@@ -214,7 +214,7 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 		}
 		// If out of retries or if the original context is no longer active (there would be error from the 'Do' in the latter case.).
 		if i == RetryLimit || ctx.Err() != nil {
-			return 0, nil, err
+			return 0, nil, fmt.Errorf("error on HTTP request %v: %w", req, err)
 		}
 
 		if ctx.Err() != nil {
@@ -241,7 +241,7 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 	return status, data, nil
 }
 
-func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out interface{}) error {
+func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 	const pollDelay = 5 * time.Second
 	status := struct {
 		State   string          `json:"state"`
@@ -256,9 +256,9 @@ func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out interface{})
 	for i := 0; i < pollLimit; i++ {
 		switch status.State {
 		case "EXCEPTION":
-			return errors.New(status.Message)
+			return fmt.Errorf("operation exception: %q", status.Message)
 		case "ERROR":
-			return errors.New(string(status.Result))
+			return fmt.Errorf("operation error: %q", string(status.Result))
 		case "IN_PROGRESS":
 			pollURL, err := url.Parse(status.URL)
 			if err != nil {
@@ -278,7 +278,7 @@ func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out interface{})
 	return fmt.Errorf("operation timeout; last status: %v", status)
 }
 
-func unmarshal(data []byte, out interface{}) error {
+func unmarshal(data []byte, out any) error {
 	// Unmarshal will fail if data is empty or out is nil; make it a noop instead.
 	if out != nil && len(data) > 0 {
 		if err := json.Unmarshal(data, out); err != nil {

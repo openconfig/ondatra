@@ -90,7 +90,7 @@ func TestProxyChain(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to dial proxy: %v", err)
 	}
-	fake.GNMI().GetResponses = []interface{}{
+	fake.GNMI().GetResponses = []any{
 		&gnmipb.GetResponse{
 			Notification: []*gnmipb.Notification{{
 				Timestamp: 1,

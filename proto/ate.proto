@@ -603,8 +603,10 @@ message Transmission {
 }
 
 message EgressTracking {
-  uint32 custom_offset = 1;
-  uint32 custom_width = 2;
+  bool enabled = 1;
+  uint32 offset = 2;
+  uint32 width = 3;
+  uint32 count = 4;
 }
 
 // A packet header.

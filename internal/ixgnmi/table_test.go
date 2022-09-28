@@ -45,9 +45,9 @@ var fullTable = &table{
 func TestUnmarshalTable(t *testing.T) {
 	tests := []struct {
 		name    string
-		inSlice interface{}
+		inSlice any
 		inTable *table
-		want    interface{}
+		want    any
 		wantErr string
 	}{{
 		name:    "not a pointer",

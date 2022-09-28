@@ -198,7 +198,7 @@ func TestUdpStack(t *testing.T) {
 }
 
 func TestMACsecStack(t *testing.T) {
-	stack := NewMACsecStack(2)
+	stack := NewMacsecStack(2)
 	wantStackAlias := "macsec-3"
 	if !strings.Contains(stack.Xpath.String(), wantStackAlias) {
 		t.Errorf("Unexpected xpath %q for MACsecStack (wanted alias text to contain %q)", stack.Xpath.String(), wantStackAlias)
@@ -236,7 +236,7 @@ func TestTrafficStackMarshalJSON(t *testing.T) {
 		t.Fatalf("Could not marshal traffic stack config to JSON: %v", err)
 	}
 
-	var got, want map[string]interface{}
+	var got, want map[string]any
 	if err := json.Unmarshal(stackJSONBytes, &got); err != nil {
 		t.Fatalf("Could not unmarshal transformed JSON to a map: %v", err)
 	}

@@ -115,6 +115,16 @@ type NetworkInstance_EnabledAddressFamiliesPathAny struct {
 	*ygot.NodePath
 }
 
+// NetworkInstance_FallbackNetworkInstancePath represents the /openconfig-network-instance/network-instances/network-instance/config/fallback-network-instance YANG schema element.
+type NetworkInstance_FallbackNetworkInstancePath struct {
+	*ygot.NodePath
+}
+
+// NetworkInstance_FallbackNetworkInstancePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/config/fallback-network-instance YANG schema element.
+type NetworkInstance_FallbackNetworkInstancePathAny struct {
+	*ygot.NodePath
+}
+
 // NetworkInstance_MtuPath represents the /openconfig-network-instance/network-instances/network-instance/config/mtu YANG schema element.
 type NetworkInstance_MtuPath struct {
 	*ygot.NodePath
@@ -417,6 +427,46 @@ func (n *NetworkInstancePathAny) Evpn() *NetworkInstance_EvpnPathAny {
 	return &NetworkInstance_EvpnPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"evpn"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FallbackNetworkInstance (leaf): When this leaf is populated, the specified network instance
+// should be used as a fallback instance when a route cannot
+// be resolved in the local network-instance.
+// This configuration is only valid when specified in a non-default
+// instance which must be a L3 capable VRF (i.e., L2L3, or L3VRF).
+// ----------------------------------------
+// Defining module: "openconfig-network-instance"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/fallback-network-instance"
+// Path from root: "/network-instances/network-instance/config/fallback-network-instance"
+func (n *NetworkInstancePath) FallbackNetworkInstance() *NetworkInstance_FallbackNetworkInstancePath {
+	return &NetworkInstance_FallbackNetworkInstancePath{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "fallback-network-instance"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FallbackNetworkInstance (leaf): When this leaf is populated, the specified network instance
+// should be used as a fallback instance when a route cannot
+// be resolved in the local network-instance.
+// This configuration is only valid when specified in a non-default
+// instance which must be a L3 capable VRF (i.e., L2L3, or L3VRF).
+// ----------------------------------------
+// Defining module: "openconfig-network-instance"
+// Instantiating module: "openconfig-network-instance"
+// Path from parent: "config/fallback-network-instance"
+// Path from root: "/network-instances/network-instance/config/fallback-network-instance"
+func (n *NetworkInstancePathAny) FallbackNetworkInstance() *NetworkInstance_FallbackNetworkInstancePathAny {
+	return &NetworkInstance_FallbackNetworkInstancePathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"config", "fallback-network-instance"},
 			map[string]interface{}{},
 			n,
 		),

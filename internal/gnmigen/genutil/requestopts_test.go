@@ -28,61 +28,61 @@ func TestExtractRequestOptions(t *testing.T) {
 	c := gpb.NewGNMIClient(nil)
 	tests := []struct {
 		name          string
-		inCustomData  map[string]interface{}
+		inCustomData  map[string]any
 		want          *requestOpts
 		wantErrSubstr string
 	}{{
 		name: "invalid client mode",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			clientKey: 1,
 		},
 		wantErrSubstr: "value is not GNMIClient type",
 	}, {
 		name: "nil client mode",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			clientKey: nil,
 		},
 		wantErrSubstr: "value is nil",
 	}, {
 		name: "get client mode",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			clientKey: c,
 		},
 		want: &requestOpts{client: c, md: metadata.MD{}},
 	}, {
 		name: "get subscription mode",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			subscriptionModeKey: gpb.SubscriptionMode_ON_CHANGE,
 		},
 		want: &requestOpts{subMode: gpb.SubscriptionMode_ON_CHANGE, md: metadata.MD{}},
 	}, {
 		name: "single metadata field",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			metadataKeyPrefix + "replica": "5",
 		},
 		want: &requestOpts{md: metadata.Pairs("replica", "5")},
 	}, {
 		name: "single metadata field but not string type",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			metadataKeyPrefix + "replica": 5,
 		},
 		wantErrSubstr: "value is not string type",
 	}, {
 		name: "non-metadata field, non-string type",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			"replica": 5,
 		},
 		want: &requestOpts{md: metadata.MD{}},
 	}, {
 		name: "multiple metadata fields",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			metadataKeyPrefix + "replica": "5",
 			metadataKeyPrefix + "foo":     "bar",
 		},
 		want: &requestOpts{md: metadata.Pairs("replica", "5", "foo", "bar")},
 	}, {
 		name: "mix of metadata and non-metadata fields",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			metadataKeyPrefix + "replica": "5",
 			metadataKeyPrefix + "foo":     "bar",
 			"replica":                     10,
@@ -91,7 +91,7 @@ func TestExtractRequestOptions(t *testing.T) {
 		want: &requestOpts{md: metadata.Pairs("replica", "5", "foo", "bar")},
 	}, {
 		name: "mix of metadata and non-metadata fields with a non-string metadata type",
-		inCustomData: map[string]interface{}{
+		inCustomData: map[string]any{
 			metadataKeyPrefix + "replica": "5",
 			metadataKeyPrefix + "foo":     uint64(2345),
 			"replica":                     10,

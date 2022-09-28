@@ -9743,29 +9743,30 @@ func (*Meta_Window) ΛBelongingModule() string {
 
 // NetworkInstance represents the /openconfig-network-instance/network-instances/network-instance YANG schema element.
 type NetworkInstance struct {
-	Afts                   *NetworkInstance_Afts                                                    `path:"afts" module:"openconfig-network-instance"`
-	ConnectionPoint        map[string]*NetworkInstance_ConnectionPoint                              `path:"connection-points/connection-point" module:"openconfig-network-instance/openconfig-network-instance"`
-	Description            *string                                                                  `path:"state/description" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/description" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Enabled                *bool                                                                    `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	EnabledAddressFamilies []E_Types_ADDRESS_FAMILY                                                 `path:"state/enabled-address-families" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled-address-families" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Encapsulation          *NetworkInstance_Encapsulation                                           `path:"encapsulation" module:"openconfig-network-instance"`
-	Evpn                   *NetworkInstance_Evpn                                                    `path:"evpn" module:"openconfig-network-instance"`
-	Fdb                    *NetworkInstance_Fdb                                                     `path:"fdb" module:"openconfig-network-instance"`
-	InterInstancePolicies  *NetworkInstance_InterInstancePolicies                                   `path:"inter-instance-policies" module:"openconfig-network-instance"`
-	Interface              map[string]*NetworkInstance_Interface                                    `path:"interfaces/interface" module:"openconfig-network-instance/openconfig-network-instance"`
-	Mpls                   *NetworkInstance_Mpls                                                    `path:"mpls" module:"openconfig-network-instance"`
-	Mtu                    *uint16                                                                  `path:"state/mtu" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/mtu" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Name                   *string                                                                  `path:"state/name|name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/name|name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
-	PolicyForwarding       *NetworkInstance_PolicyForwarding                                        `path:"policy-forwarding" module:"openconfig-network-instance"`
-	Protocol               map[NetworkInstance_Protocol_Key]*NetworkInstance_Protocol               `path:"protocols/protocol" module:"openconfig-network-instance/openconfig-network-instance"`
-	RouteDistinguisher     *string                                                                  `path:"state/route-distinguisher" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/route-distinguisher" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	RouteLimit             map[E_Types_ADDRESS_FAMILY]*NetworkInstance_RouteLimit                   `path:"route-limits/route-limit" module:"openconfig-network-instance/openconfig-network-instance"`
-	RouterId               *string                                                                  `path:"state/router-id" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/router-id" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	SegmentRouting         *NetworkInstance_SegmentRouting                                          `path:"segment-routing" module:"openconfig-network-instance"`
-	Table                  map[NetworkInstance_Table_Key]*NetworkInstance_Table                     `path:"tables/table" module:"openconfig-network-instance/openconfig-network-instance"`
-	TableConnection        map[NetworkInstance_TableConnection_Key]*NetworkInstance_TableConnection `path:"table-connections/table-connection" module:"openconfig-network-instance/openconfig-network-instance"`
-	Type                   E_NetworkInstanceTypes_NETWORK_INSTANCE_TYPE                             `path:"state/type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Vlan                   map[uint16]*NetworkInstance_Vlan                                         `path:"vlans/vlan" module:"openconfig-network-instance/openconfig-network-instance"`
+	Afts                    *NetworkInstance_Afts                                                    `path:"afts" module:"openconfig-network-instance"`
+	ConnectionPoint         map[string]*NetworkInstance_ConnectionPoint                              `path:"connection-points/connection-point" module:"openconfig-network-instance/openconfig-network-instance"`
+	Description             *string                                                                  `path:"state/description" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/description" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Enabled                 *bool                                                                    `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	EnabledAddressFamilies  []E_Types_ADDRESS_FAMILY                                                 `path:"state/enabled-address-families" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled-address-families" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Encapsulation           *NetworkInstance_Encapsulation                                           `path:"encapsulation" module:"openconfig-network-instance"`
+	Evpn                    *NetworkInstance_Evpn                                                    `path:"evpn" module:"openconfig-network-instance"`
+	FallbackNetworkInstance *string                                                                  `path:"state/fallback-network-instance" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/fallback-network-instance" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Fdb                     *NetworkInstance_Fdb                                                     `path:"fdb" module:"openconfig-network-instance"`
+	InterInstancePolicies   *NetworkInstance_InterInstancePolicies                                   `path:"inter-instance-policies" module:"openconfig-network-instance"`
+	Interface               map[string]*NetworkInstance_Interface                                    `path:"interfaces/interface" module:"openconfig-network-instance/openconfig-network-instance"`
+	Mpls                    *NetworkInstance_Mpls                                                    `path:"mpls" module:"openconfig-network-instance"`
+	Mtu                     *uint16                                                                  `path:"state/mtu" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/mtu" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Name                    *string                                                                  `path:"state/name|name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/name|name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	PolicyForwarding        *NetworkInstance_PolicyForwarding                                        `path:"policy-forwarding" module:"openconfig-network-instance"`
+	Protocol                map[NetworkInstance_Protocol_Key]*NetworkInstance_Protocol               `path:"protocols/protocol" module:"openconfig-network-instance/openconfig-network-instance"`
+	RouteDistinguisher      *string                                                                  `path:"state/route-distinguisher" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/route-distinguisher" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	RouteLimit              map[E_Types_ADDRESS_FAMILY]*NetworkInstance_RouteLimit                   `path:"route-limits/route-limit" module:"openconfig-network-instance/openconfig-network-instance"`
+	RouterId                *string                                                                  `path:"state/router-id" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/router-id" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SegmentRouting          *NetworkInstance_SegmentRouting                                          `path:"segment-routing" module:"openconfig-network-instance"`
+	Table                   map[NetworkInstance_Table_Key]*NetworkInstance_Table                     `path:"tables/table" module:"openconfig-network-instance/openconfig-network-instance"`
+	TableConnection         map[NetworkInstance_TableConnection_Key]*NetworkInstance_TableConnection `path:"table-connections/table-connection" module:"openconfig-network-instance/openconfig-network-instance"`
+	Type                    E_NetworkInstanceTypes_NETWORK_INSTANCE_TYPE                             `path:"state/type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Vlan                    map[uint16]*NetworkInstance_Vlan                                         `path:"vlans/vlan" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance implements the yang.GoStruct
@@ -10863,6 +10864,22 @@ func (t *NetworkInstance) GetEnabledAddressFamilies() []E_Types_ADDRESS_FAMILY {
 		return nil
 	}
 	return t.EnabledAddressFamilies
+}
+
+// GetFallbackNetworkInstance retrieves the value of the leaf FallbackNetworkInstance from the NetworkInstance
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FallbackNetworkInstance is set, it can
+// safely use t.GetFallbackNetworkInstance() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FallbackNetworkInstance == nil' before retrieving the leaf's value.
+func (t *NetworkInstance) GetFallbackNetworkInstance() string {
+	if t == nil || t.FallbackNetworkInstance == nil {
+		return ""
+	}
+	return *t.FallbackNetworkInstance
 }
 
 // GetMtu retrieves the value of the leaf Mtu from the NetworkInstance

@@ -53,7 +53,7 @@ func (ix *ixATE) addPorts(top *Topology) error {
 	sort.Strings(portList)
 	for _, port := range portList {
 		vport := &ixconfig.Vport{
-			Name:      ixconfig.String(fmt.Sprintf("%s/%s", ix.name, port)),
+			Name:      ixconfig.String(port),
 			Location:  ixconfig.String(fmt.Sprintf("%s;%s", ix.chassisHost, strings.ReplaceAll(port, "/", ";"))),
 			L1Config:  &ixconfig.VportL1Config{},
 			Protocols: &ixconfig.VportProtocols{}, // Used as the target for traffic endpoints
@@ -71,7 +71,6 @@ func (ix *ixATE) addPorts(top *Topology) error {
 		novusHundredGigLan(vport.L1Config).AutoInstrumentation = ixconfig.String(portInstrumentation)
 		novusTenGigLan(vport.L1Config).AutoInstrumentation = ixconfig.String(portInstrumentation)
 		ix.cfg.Vport = append(ix.cfg.Vport, vport)
-		ix.vportToPort[vport] = port
 		ix.ports[port] = vport
 	}
 	return nil

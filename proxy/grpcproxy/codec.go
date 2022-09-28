@@ -29,7 +29,7 @@ type rawProto struct {
 // Raw codec implements encoding.Codec. It Marshals and Unmarshals data into proto as raw bytes.
 type rawCodec struct{}
 
-func (rawCodec) Marshal(msg interface{}) ([]byte, error) {
+func (rawCodec) Marshal(msg any) ([]byte, error) {
 	out, ok := msg.(*rawProto)
 	if !ok {
 		return nil, fmt.Errorf("failed to marshal, message is %T, want bytes", msg)
@@ -37,7 +37,7 @@ func (rawCodec) Marshal(msg interface{}) ([]byte, error) {
 	return out.data, nil
 }
 
-func (rawCodec) Unmarshal(data []byte, msg interface{}) error {
+func (rawCodec) Unmarshal(data []byte, msg any) error {
 	set, ok := msg.(*rawProto)
 	if !ok {
 		return fmt.Errorf("failed to unmarshal, message is %T, want bytes", msg)

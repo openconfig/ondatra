@@ -196,12 +196,12 @@ func (t *Model) RenameSingleKey(oldK, newK int32) error {
 }
 
 // ΛListKeyMap returns the keys of the Model_SingleKey struct, which is a YANG list entry.
-func (t *Model_SingleKey) ΛListKeyMap() (map[string]interface{}, error) {
+func (t *Model_SingleKey) ΛListKeyMap() (map[string]any, error) {
 	if t.Key == nil {
 		return nil, fmt.Errorf("nil value for key Key")
 	}
 
-	return map[string]interface{}{
+	return map[string]any{
 		"key": *t.Key,
 	}, nil
 }
@@ -214,7 +214,7 @@ func (*LeafContainerStruct) ΛEnumTypeMap() map[string][]reflect.Type {
 	}
 }
 
-func (*LeafContainerStruct) To_UnionLeafType(i interface{}) (UnionLeafType, error) {
+func (*LeafContainerStruct) To_UnionLeafType(i any) (UnionLeafType, error) {
 	switch v := i.(type) {
 	case string:
 		return &UnionLeafType_String{v}, nil
@@ -250,7 +250,7 @@ func TestUnmarshal(t *testing.T) {
 	rootSchema := &yang.Entry{
 		Name:       "device",
 		Kind:       yang.DirectoryEntry,
-		Annotation: map[string]interface{}{"isFakeRoot": true},
+		Annotation: map[string]any{"isFakeRoot": true},
 		Dir: map[string]*yang.Entry{
 			"super-container": {
 				Name: "super-container",
@@ -1606,7 +1606,7 @@ func TestQualifiedTypeString(t *testing.T) {
 	tests := []struct {
 		desc  string
 		want  string
-		value interface{}
+		value any
 		time  time.Time
 		path  *gpb.Path
 	}{{

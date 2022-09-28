@@ -72,7 +72,12 @@ func (s *Stats) Views(ctx context.Context) (map[string]*StatView, error) {
 // ConfigEgressView will create a statistics views for the specified traffic
 // item names, broken down by their egress-tracked values. If an egress stat
 // view already exists, it will be deleted first before the new one is created.
-func (s *Stats) ConfigEgressView(ctx context.Context, trafficItems []string) (*StatView, error) {
+// The egressPageSize is the number of unique values that will be tracked.
+func (s *Stats) ConfigEgressView(ctx context.Context, trafficItems []string, egressPageSize int) (*StatView, error) {
+	const minEgressPageSize, maxEgressPageSize = 1, 79
+	if egressPageSize < minEgressPageSize || egressPageSize > maxEgressPageSize {
+		return nil, fmt.Errorf("egress page size %v not in allowed range [%v, %v]", egressPageSize, minEgressPageSize, maxEgressPageSize)
+	}
 	views, err := s.Views(ctx)
 	if err != nil {
 		return nil, err
@@ -112,6 +117,26 @@ func (s *Stats) ConfigEgressView(ctx context.Context, trafficItems []string) (*S
 	egressView := &StatView{sess: s.sess, id: id, caption: EgressStatsCaption}
 	if err := egressView.configEgressFilters(ctx, trafficItems); err != nil {
 		return nil, err
+	}
+
+	// IxNetwork has a maximum number of rows per page of 2000, so the following
+	// condition must be true: pageSize * (egressPageSize + 1) <= 2000.
+	// In addition, IxNetwork requires the pageSize to be a multiple of 25.
+	const (
+		maxPageSize      = 2000
+		pageSizeMultiple = 25
+	)
+	pageSize := ((maxPageSize / (egressPageSize + 1)) / pageSizeMultiple) * pageSizeMultiple
+	pageSizes := struct {
+		PageSize       int `json:"pageSize"`
+		EgressPageSize int `json:"egressPageSize"`
+	}{
+		PageSize:       pageSize,
+		EgressPageSize: egressPageSize,
+	}
+	dataPath := path.Join(egressView.path(), "data")
+	if err := egressView.sess.Patch(ctx, dataPath, pageSizes); err != nil {
+		return nil, fmt.Errorf("error setting page sizes: %w", err)
 	}
 	return egressView, nil
 }
@@ -292,35 +317,10 @@ func (v *StatView) fetchTableFromCSV(ctx context.Context) (StatTable, error) {
 }
 
 func (v *StatView) fetchEgressTableFromPages(ctx context.Context) (StatTable, error) {
-	// IxNetwork has a maximum number of rows per page of 2000, so the following
-	// condition must be true: pageSize * (egressPageSize + 1) <= 2000.
-	// In addition, IxNetwork requires the pageSize to be a multiple of 25.
-	// The egressPageSize should be a power of 2, so that it can store all values
-	// represented by the egress-tracked bits, but IxNetwork doesn't enforce this.
-	// To allow users to fully track 3 bits, the egressPageSize is set to 8 and
-	// the pageSize to 200. Note: retrieving all pages may be a slow operation.
-	// TODO: Choose egressPageSize dynamically based on the number of bits
-	// actually being tracked?
-	const (
-		maxPageSize      = 2000
-		pageSizeMultiple = 25
-		egressPageSize   = 8
-	)
-	pageSizes := struct {
-		EgressPageSize int `json:"egressPageSize"`
-		PageSize       int `json:"pageSize"`
-	}{
-		PageSize:       (maxPageSize / (egressPageSize + 1) / pageSizeMultiple) * pageSizeMultiple,
-		EgressPageSize: egressPageSize,
-	}
-	dataPath := path.Join(v.path(), "data")
-	if err := v.sess.Patch(ctx, dataPath, pageSizes); err != nil {
-		return nil, fmt.Errorf("error setting page sizes: %w", err)
-	}
 	if err := v.waitForReady(ctx); err != nil {
 		return nil, err
 	}
-
+	dataPath := path.Join(v.path(), "data")
 	pageNum := struct {
 		PageNum int `json:"currentPage"`
 	}{}

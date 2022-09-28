@@ -91,7 +91,7 @@ func setupFake(t *testing.T) (*lemming.Device, *fakeBinding) {
 			},
 		}, nil
 	}
-	fake.GNMI().GetResponses = []interface{}{
+	fake.GNMI().GetResponses = []any{
 		&gnmipb.GetResponse{
 			Notification: []*gnmipb.Notification{{
 				Timestamp: 1,

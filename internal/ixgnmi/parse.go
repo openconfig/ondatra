@@ -327,7 +327,7 @@ func parseEgressStats(t ixweb.StatTable) ([]*egressRow, error) {
 	return egressRows, nil
 }
 
-func rowString(row interface{}) string {
+func rowString(row any) string {
 	var fields []string
 	val := reflect.ValueOf(row).Elem()
 	for i := 0; i < val.NumField(); i++ {

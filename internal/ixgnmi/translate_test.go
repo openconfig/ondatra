@@ -44,7 +44,7 @@ func TestTranslate(t *testing.T) {
 		name: "single view, success",
 		tables: map[string]ixweb.StatTable{
 			portCPUStatsCaption: {{
-				"Port Name":        "ixia2/port1",
+				"Port Name":        "port1",
 				"Total Memory(KB)": "420",
 				"Free Memory(KB)":  "100",
 				"%CPU Load":        "100",
@@ -74,7 +74,7 @@ func TestTranslate(t *testing.T) {
 		name: "one valid and one unknown view, success",
 		tables: map[string]ixweb.StatTable{
 			portCPUStatsCaption: {{
-				"Port Name": "ixia2/port1",
+				"Port Name": "port1",
 				"%CPU Load": "100",
 			}},
 			"Some Unknown View": {{
@@ -107,11 +107,11 @@ func TestTranslate(t *testing.T) {
 		name: "multiple stats",
 		tables: map[string]ixweb.StatTable{
 			portCPUStatsCaption: {{
-				"Port Name": "ixia2/port1",
+				"Port Name": "port1",
 				"%CPU Load": "100",
 			}},
 			portStatsCaption: {{
-				"Port Name": "ixia2/port1",
+				"Port Name": "port1",
 				"Bytes Rx.": "10",
 				"Bytes Tx.": "20",
 			}},
@@ -167,7 +167,7 @@ func TestTranslatePortCPUStats(t *testing.T) {
 	}{{
 		name: "complete single component mapping",
 		table: ixweb.StatTable{{
-			"Port Name":        "ixia2/port1",
+			"Port Name":        "port1",
 			"Total Memory(KB)": "42",
 			"Free Memory(KB)":  "21",
 			"%CPU Load":        "100",
@@ -192,7 +192,7 @@ func TestTranslatePortCPUStats(t *testing.T) {
 	}, {
 		name: "partial component mapping",
 		table: ixweb.StatTable{{
-			"Port Name": "ixia2/port2",
+			"Port Name": "port2",
 			"%CPU Load": "42",
 		}},
 		want: func() *telemetry.Device {
@@ -212,10 +212,10 @@ func TestTranslatePortCPUStats(t *testing.T) {
 	}, {
 		name: "multiple components",
 		table: ixweb.StatTable{{
-			"Port Name": "ixia2/port1",
+			"Port Name": "port1",
 			"%CPU Load": "1",
 		}, {
-			"Port Name": "ixia2/port2",
+			"Port Name": "port2",
 			"%CPU Load": "2",
 		}},
 		want: func() *telemetry.Device {
@@ -246,12 +246,6 @@ func TestTranslatePortCPUStats(t *testing.T) {
 			"%CPU Load": "42",
 		}},
 		wantErrSubstring: "required key",
-	}, {
-		name: "invalid port name",
-		table: ixweb.StatTable{{
-			"Port Name": "port2",
-		}},
-		wantErrSubstring: "invalid port name",
 	}, {
 		name: "invalid total memory",
 		table: ixweb.StatTable{{
@@ -307,7 +301,7 @@ func TestTranslatePortStats(t *testing.T) {
 	}{{
 		name: "single port statistics",
 		table: ixweb.StatTable{{
-			"Port Name":        "ixia2/port1",
+			"Port Name":        "port1",
 			"Valid Frames Rx.": "10",
 			"Frames Tx.":       "20",
 			"Bytes Rx.":        "30",
@@ -337,11 +331,11 @@ func TestTranslatePortStats(t *testing.T) {
 	}, {
 		name: "two ports statistics",
 		table: ixweb.StatTable{{
-			"Port Name": "ixia2/port1",
+			"Port Name": "port1",
 			"Bytes Rx.": "10",
 			"Bytes Tx.": "20",
 		}, {
-			"Port Name": "ixia2/port2",
+			"Port Name": "port2",
 			"Bytes Rx.": "100",
 			"Bytes Tx.": "200",
 		}},
@@ -364,7 +358,7 @@ func TestTranslatePortStats(t *testing.T) {
 	}, {
 		name: "single interface oper status up",
 		table: ixweb.StatTable{{
-			"Port Name":  "ixia2/p4",
+			"Port Name":  "p4",
 			"Link State": "Link Up",
 		}},
 		want: func() *telemetry.Device {
@@ -377,7 +371,7 @@ func TestTranslatePortStats(t *testing.T) {
 	}, {
 		name: "single interface link down",
 		table: ixweb.StatTable{{
-			"Port Name":  "ixia2/p5",
+			"Port Name":  "p5",
 			"Link State": "Link Down",
 		}},
 		want: func() *telemetry.Device {
@@ -390,7 +384,7 @@ func TestTranslatePortStats(t *testing.T) {
 	}, {
 		name: "single interface no pcs lock",
 		table: ixweb.StatTable{{
-			"Port Name":  "ixia2/p5",
+			"Port Name":  "p5",
 			"Link State": "No PCS Lock",
 		}},
 		want: func() *telemetry.Device {
@@ -401,22 +395,16 @@ func TestTranslatePortStats(t *testing.T) {
 			return d
 		}(),
 	}, {
-		name: "invalid port name",
-		table: ixweb.StatTable{{
-			"Port Name": "port2",
-		}},
-		wantErrSubstring: "invalid port name",
-	}, {
 		name: "invalid input for uint64 statistic",
 		table: ixweb.StatTable{{
-			"Port Name": "ixia2/port42",
+			"Port Name": "port42",
 			"Bytes Rx.": "four hundred and ninety seven",
 		}},
 		wantErrSubstring: "Bytes Rx.",
 	}, {
 		name: "invalid input for float32 statistic",
 		table: ixweb.StatTable{{
-			"Port Name":      "ixia2/port48",
+			"Port Name":      "port48",
 			"Tx. Rate (bps)": "one point eight gigabits per second",
 		}},
 		wantErrSubstring: "Tx. Rate (bps)",
@@ -429,7 +417,7 @@ func TestTranslatePortStats(t *testing.T) {
 	}, {
 		name: "invalid port status",
 		table: ixweb.StatTable{{
-			"Port Name":  "ixia2/port42",
+			"Port Name":  "port42",
 			"Link State": "Unmappable Value",
 		}},
 		wantErrSubstring: "unmappable port link state",

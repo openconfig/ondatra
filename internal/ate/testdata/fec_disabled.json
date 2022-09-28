@@ -89,7 +89,7 @@
         "xpath": "/vport[1]/l1Config"
       },
       "location": "192.168.1.1;12;1",
-      "name": "ixia1/12/1",
+      "name": "12/1",
       "protocols": {
         "xpath": "/vport[1]/protocols"
       },

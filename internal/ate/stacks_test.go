@@ -958,7 +958,7 @@ func TestHeaderStacks(t *testing.T) {
 				t.Fatalf("headerStacks(%v): unexpected stack count %d, wanted %d", test.hdr, len(stacks), len(test.wantFields))
 			}
 			for i, s := range stacks {
-				wantVals, gotVals := make(map[string]interface{}), make(map[string]interface{})
+				wantVals, gotVals := make(map[string]any), make(map[string]any)
 				for _, wf := range test.wantFields[i] {
 					field := wf.toField(s)
 					if wf.wantVal != nil {

@@ -165,7 +165,7 @@ func (s *Session) AbsPath(relPath string) string {
 }
 
 // Get submits a JSON GET request, at a path relative to the IxNetwork session.
-func (s *Session) Get(ctx context.Context, path string, out interface{}) error {
+func (s *Session) Get(ctx context.Context, path string, out any) error {
 	return s.jsonReq(ctx, get, path, nil, out)
 }
 
@@ -176,12 +176,12 @@ func (s *Session) Delete(ctx context.Context, path string) error {
 }
 
 // Patch submits a JSON PATCH request, at a path relative to the IxNetwork session.
-func (s *Session) Patch(ctx context.Context, path string, in interface{}) error {
+func (s *Session) Patch(ctx context.Context, path string, in any) error {
 	return s.jsonReq(ctx, patch, path, in, nil)
 }
 
 // Post submits a JSON POST request, at a path relative to the IxNetwork session.
-func (s *Session) Post(ctx context.Context, path string, in, out interface{}) error {
+func (s *Session) Post(ctx context.Context, path string, in, out any) error {
 	return s.jsonReq(ctx, post, path, in, out)
 }
 
@@ -241,7 +241,7 @@ func (s *Session) Errors(ctx context.Context) ([]*Error, error) {
 	return errors, nil
 }
 
-func (s *Session) jsonReq(ctx context.Context, method httpMethod, path string, in, out interface{}) error {
+func (s *Session) jsonReq(ctx context.Context, method httpMethod, path string, in, out any) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	return s.ixweb.jsonReq(ctx, method, s.AbsPath(path), in, out)
@@ -254,11 +254,11 @@ func (s *Session) binaryReq(ctx context.Context, method httpMethod, path string,
 }
 
 // OpArgs is a list of arguments for an operation to use as input to a POST request.
-type OpArgs []interface{}
+type OpArgs []any
 
 // MarshalJSON marshals the operation arguments to JSON.
 func (a OpArgs) MarshalJSON() ([]byte, error) {
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 	for i, v := range a {
 		m["arg"+strconv.Itoa(i+1)] = v
 	}

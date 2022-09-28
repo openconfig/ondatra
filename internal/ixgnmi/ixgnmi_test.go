@@ -492,14 +492,14 @@ type fakeSession struct {
 	postErrs map[string]error
 }
 
-func (f *fakeSession) Get(_ context.Context, p string, v interface{}) error {
+func (f *fakeSession) Get(_ context.Context, p string, v any) error {
 	if f.getRsps[p] != "" {
 		json.Unmarshal([]byte(f.getRsps[p]), v)
 	}
 	return f.getErrs[p]
 }
 
-func (f *fakeSession) Post(_ context.Context, p string, _, v interface{}) error {
+func (f *fakeSession) Post(_ context.Context, p string, _, v any) error {
 	if f.postRsps[p] != "" {
 		json.Unmarshal([]byte(f.postRsps[p]), v)
 	}
@@ -740,7 +740,7 @@ func TestPathToOCRIB(t *testing.T) {
 		want      *gpb.Notification
 		rib       *table
 		ribErr    error
-		initCache map[string]interface{}
+		initCache map[string]any
 		wantErr   string
 	}{{
 		desc:    "nil path",
@@ -776,7 +776,7 @@ func TestPathToOCRIB(t *testing.T) {
 				{Name: "index"},
 			},
 		},
-		initCache: map[string]interface{}{
+		initCache: map[string]any{
 			peerInfoCacheKey: peerInfo{},
 		},
 	}, {
@@ -789,7 +789,7 @@ func TestPathToOCRIB(t *testing.T) {
 	}, {
 		desc: "rib cache hit with same peer",
 		path: indexPath,
-		initCache: map[string]interface{}{
+		initCache: map[string]any{
 			ribOCPath: true,
 			peerInfoCacheKey: peerInfo{
 				protocolName: "1",
@@ -819,7 +819,7 @@ func TestPathToOCRIB(t *testing.T) {
 			Values:  [][]string{{"192.168.1.1", "IGP"}},
 		},
 		want:      createSampleDev(t),
-		initCache: map[string]interface{}{},
+		initCache: map[string]any{},
 	}, {
 		desc: "cached success",
 		path: indexPath,
@@ -833,7 +833,7 @@ func TestPathToOCRIB(t *testing.T) {
 		),
 		// This is a contrived example where there is garbage data in the cache, used to verify delete notifications are created.
 		// In normal usage, only BGP RIB info could be in the cache.
-		initCache: map[string]interface{}{
+		initCache: map[string]any{
 			oldRibCacheKey: &telemetry.Device{
 				Interface: map[string]*telemetry.Interface{
 					"fake": &telemetry.Interface{
@@ -983,14 +983,14 @@ func TestPathToOCLSPs(t *testing.T) {
 
 	tests := []struct {
 		desc      string
-		initCache map[string]interface{}
+		initCache map[string]any
 		lsps      map[string][]*ingressLSP
 		lspsErr   error
 		want      *gpb.Notification
 		wantErr   string
 	}{{
 		desc: "data is fresh",
-		initCache: map[string]interface{}{
+		initCache: map[string]any{
 			lspsOCPath: true,
 		},
 	}, {
@@ -1006,7 +1006,7 @@ func TestPathToOCLSPs(t *testing.T) {
 				dst: "2.2.2.2",
 			}},
 		},
-		initCache: map[string]interface{}{
+		initCache: map[string]any{
 			oldLSPCacheKey: &telemetry.Device{
 				NetworkInstance: map[string]*telemetry.NetworkInstance{
 					"fake": &telemetry.NetworkInstance{

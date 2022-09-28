@@ -59,10 +59,13 @@ func TestConfigEgressStatView(t *testing.T) {
 	}}}
 
 	tests := []struct {
-		name    string
-		doResps []*http.Response
+		name       string
+		egPageSize int
+		doResps    []*http.Response
+		wantErr    string
 	}{{
-		name: "no existing",
+		name:       "no existing",
+		egPageSize: 1,
 		doResps: []*http.Response{
 			fakeResponse(200, "[]"),
 			fakeResponse(200, `{"links": [{"href": "/api/v1/sessions/1/ixnetwork/statistics/view/11"}]}`),
@@ -74,9 +77,11 @@ func TestConfigEgressStatView(t *testing.T) {
 			fakeResponse(200, `[{"name": "statisticFilter1", "links": [{"href": "sf1"}]}]`),
 			fakeResponse(200, "enabled statisticFilter"),
 			fakeResponse(200, "enabled EgressStatView"),
+			fakeResponse(200, "set page sizes"),
 		},
 	}, {
-		name: "delete existing",
+		name:       "delete existing",
+		egPageSize: 1,
 		doResps: []*http.Response{
 			fakeResponse(200, `[{"id": 11, "caption": "EgressStatView"}]`),
 			fakeResponse(200, "deleted EgressStatView"),
@@ -89,20 +94,28 @@ func TestConfigEgressStatView(t *testing.T) {
 			fakeResponse(200, `[{"name": "statisticFilter1", "links": [{"href": "sf1"}]}]`),
 			fakeResponse(200, "enabled statisticFilter"),
 			fakeResponse(200, "enabled EgressStatView"),
+			fakeResponse(200, "set page sizes"),
 		},
+	}, {
+		name:       "bad egress page size",
+		egPageSize: 100,
+		wantErr:    "not in allowed range",
 	}}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			fakeClient.doResps = test.doResps
-			view, err := stats.ConfigEgressView(context.Background(), []string{"item1"})
-			if err != nil {
-				t.Fatalf("ConfigEgressStatView unexpected err: %v", err)
+			view, err := stats.ConfigEgressView(context.Background(), []string{"item1"}, test.egPageSize)
+			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
+				t.Fatalf("ConfigEgressStatView unexpected err: got %v, want %v", err, test.wantErr)
+			}
+			if test.wantErr != "" {
+				return
 			}
 			if view.id != 11 {
-				t.Fatalf("ConfigEgressStatView unexpected id, got %v, want %v", view.id, 11)
+				t.Errorf("ConfigEgressStatView unexpected id, got %v, want %v", view.id, 11)
 			}
 			if view.caption != EgressStatsCaption {
-				t.Fatalf("ConfigEgressStatView unexpected caption, got %v, want %v", view.caption, EgressStatsCaption)
+				t.Errorf("ConfigEgressStatView unexpected caption, got %v, want %v", view.caption, EgressStatsCaption)
 			}
 		})
 	}
@@ -132,7 +145,6 @@ func TestFetchEgressStatsTable(t *testing.T) {
 	view := &StatView{
 		caption: EgressStatsCaption,
 		sess: &Session{ixweb: &IxWeb{client: &fakeHTTPClient{doResps: []*http.Response{
-			fakeResponse(200, "set pages sizes"),
 			fakeResponse(200, `{"isReady": true}`),
 			fakeResponse(200, "set current page"),
 			fakeResponse(200, `{

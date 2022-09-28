@@ -37,9 +37,9 @@ func (s *fakeSession) Config() config {
 
 type fakeConfig struct {
 	config
-	exportRes interface{}
+	exportRes any
 	importErr error
-	queryRes  interface{}
+	queryRes  any
 }
 
 func (c *fakeConfig) Export(context.Context) (string, error) {
@@ -83,7 +83,7 @@ func TestExportConfig(t *testing.T) {
 
 	tests := []struct {
 		desc    string
-		res     interface{}
+		res     any
 		wantErr string
 		wantCfg *Ixnetwork
 	}{{
@@ -170,7 +170,7 @@ func TestUpdateIDs(t *testing.T) {
 	tests := []struct {
 		desc    string
 		nodes   []IxiaCfgNode
-		res     interface{}
+		res     any
 		ids     map[string]string
 		wantIDs map[string]string
 		wantErr string

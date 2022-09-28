@@ -26,7 +26,6 @@ import (
 
 func TestAddPorts(t *testing.T) {
 	const (
-		ixiaName            = "ixia1"
 		chassisHost         = "192.168.1.1"
 		portInstrumentation = "floating"
 		firstPort           = "1/1"
@@ -34,7 +33,7 @@ func TestAddPorts(t *testing.T) {
 	)
 	wantCfg := &ixconfig.Ixnetwork{
 		Vport: []*ixconfig.Vport{{
-			Name:     ixconfig.String(fmt.Sprintf("%s/1/1", ixiaName)),
+			Name:     ixconfig.String("1/1"),
 			Location: ixconfig.String(fmt.Sprintf("%s;1;1", chassisHost)),
 			L1Config: &ixconfig.VportL1Config{
 				AresOneFourHundredGigLan: &ixconfig.VportL1ConfigAresOneFourHundredGigLan{
@@ -55,7 +54,7 @@ func TestAddPorts(t *testing.T) {
 				},
 			},
 		}, {
-			Name:     ixconfig.String(fmt.Sprintf("%s/2/2", ixiaName)),
+			Name:     ixconfig.String("2/2"),
 			Location: ixconfig.String(fmt.Sprintf("%s;2;2", chassisHost)),
 			L1Config: &ixconfig.VportL1Config{
 				AresOneFourHundredGigLan: &ixconfig.VportL1ConfigAresOneFourHundredGigLan{
@@ -79,10 +78,8 @@ func TestAddPorts(t *testing.T) {
 	}
 
 	c := &ixATE{
-		name:        ixiaName,
 		chassisHost: chassisHost,
 		cfg:         &ixconfig.Ixnetwork{},
-		vportToPort: make(map[*ixconfig.Vport]string),
 		ports:       make(map[string]*ixconfig.Vport),
 	}
 
@@ -146,11 +143,11 @@ func TestAddPortsErrors(t *testing.T) {
 
 func TestAddLAGs(t *testing.T) {
 	vport1 := &ixconfig.Vport{
-		Name:     ixconfig.String("ixia1/1/1"),
+		Name:     ixconfig.String("1/1"),
 		Location: ixconfig.String("192.168.1.1;1;1"),
 	}
 	vport2 := &ixconfig.Vport{
-		Name:     ixconfig.String("ixia1/2/2"),
+		Name:     ixconfig.String("2/2"),
 		Location: ixconfig.String("192.168.1.1;2;2"),
 	}
 

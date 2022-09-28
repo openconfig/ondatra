@@ -69,7 +69,7 @@ const (
 
 // QualifiedTypeString renders a Qualified* telemetry value to a format that's
 // easier to read when debugging.
-func QualifiedTypeString(value interface{}, md *Metadata) string {
+func QualifiedTypeString(value any, md *Metadata) string {
 	// Get string for value
 	var valStr string
 	if v, ok := value.(ygot.GoStruct); ok && !reflect.ValueOf(v).IsNil() {
@@ -599,7 +599,7 @@ func (c *Watcher) Await(t testing.TB) bool {
 	return !isTimeout
 }
 
-func batchSet(ctx context.Context, origin string, customData map[string]interface{}, req *gpb.SetRequest) (*gpb.SetResponse, error) {
+func batchSet(ctx context.Context, origin string, customData map[string]any, req *gpb.SetRequest) (*gpb.SetResponse, error) {
 	opts, err := resolveBatch(ctx, customData)
 	if err != nil {
 		return nil, err
@@ -607,7 +607,7 @@ func batchSet(ctx context.Context, origin string, customData map[string]interfac
 	return setVals(ctx, opts, origin, req)
 }
 
-func resolveBatch(ctx context.Context, customData map[string]interface{}) (*requestOpts, error) {
+func resolveBatch(ctx context.Context, customData map[string]any) (*requestOpts, error) {
 	opts, err := extractRequestOpts(customData)
 	if err != nil {
 		return nil, fmt.Errorf("error extracting request options from %v: %w", customData, err)
@@ -644,7 +644,7 @@ func Delete(t testing.TB, n ygot.PathStruct) *gpb.SetResponse {
 
 // Replace creates and makes a gNMI SetRequest replace call for the given value
 // for the path specified by the path struct.
-func Replace(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
+func Replace(t testing.TB, n ygot.PathStruct, val any) *gpb.SetResponse {
 	t.Helper()
 	resp, path, err := set(context.Background(), n, val, replacePath)
 	if err != nil {
@@ -655,7 +655,7 @@ func Replace(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse 
 
 // Update creates and makes a gNMI SetRequest update call for the given value
 // for the path specified by the path struct.
-func Update(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
+func Update(t testing.TB, n ygot.PathStruct, val any) *gpb.SetResponse {
 	t.Helper()
 	resp, path, err := set(context.Background(), n, val, updatePath)
 	if err != nil {
@@ -667,7 +667,7 @@ func Update(t testing.TB, n ygot.PathStruct, val interface{}) *gpb.SetResponse {
 // set configures the target with the input SetRequest. The target should be
 // specified in the req.Prefix.Target field of the SetRequest; this field will
 // be erased before the request is forwarded to the target in the gNMI call.
-func set(ctx context.Context, n ygot.PathStruct, val interface{}, op setOperation) (*gpb.SetResponse, *gpb.Path, error) {
+func set(ctx context.Context, n ygot.PathStruct, val any, op setOperation) (*gpb.SetResponse, *gpb.Path, error) {
 	path, opts, err := resolve(ctx, n)
 	if err != nil {
 		return nil, path, err
@@ -694,7 +694,7 @@ func setVals(ctx context.Context, opts *requestOpts, origin string, req *gpb.Set
 }
 
 // ResolvePath resolves a path struct to a path and request options.
-func ResolvePath(n ygot.PathStruct) (*gpb.Path, map[string]interface{}, error) {
+func ResolvePath(n ygot.PathStruct) (*gpb.Path, map[string]any, error) {
 	path, customData, errs := ygot.ResolvePath(n)
 	if len(errs) > 0 {
 		return nil, nil, fmt.Errorf("errors resolving path struct %v: %v", n, errs)

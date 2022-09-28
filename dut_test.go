@@ -232,7 +232,7 @@ type gnoiClients struct {
 	otdr         otpb.OTDRClient
 	system       spb.SystemClient
 	waveRtr      wpb.WavelengthRouterClient
-	custom       interface{}
+	custom       any
 }
 
 func (g *gnoiClients) BGP() bpb.BGPClient {

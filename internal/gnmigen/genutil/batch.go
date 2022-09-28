@@ -29,8 +29,8 @@ import (
 type FakeRootPathStruct interface {
 	ygot.PathStruct
 	Id() string
-	CustomData() map[string]interface{}
-	PutCustomData(key string, val interface{})
+	CustomData() map[string]any
+	PutCustomData(key string, val any)
 }
 
 // SetRequestBatch implements batch operations for doing a gNMI SetRequest
@@ -87,7 +87,7 @@ func (b *SetRequestBatch) BatchDelete(t testing.TB, n ygot.PathStruct) {
 }
 
 // BatchReplace buffers an replace operation in the SetRequestBatch.
-func (b *SetRequestBatch) BatchReplace(t testing.TB, n ygot.PathStruct, val interface{}) {
+func (b *SetRequestBatch) BatchReplace(t testing.TB, n ygot.PathStruct, val any) {
 	t.Helper()
 	if err := b.batchSet(n, val, replacePath); err != nil {
 		t.Fatal(err)
@@ -95,7 +95,7 @@ func (b *SetRequestBatch) BatchReplace(t testing.TB, n ygot.PathStruct, val inte
 }
 
 // BatchUpdate buffers an update operation in the SetRequestBatch.
-func (b *SetRequestBatch) BatchUpdate(t testing.TB, n ygot.PathStruct, val interface{}) {
+func (b *SetRequestBatch) BatchUpdate(t testing.TB, n ygot.PathStruct, val any) {
 	t.Helper()
 	if err := b.batchSet(n, val, updatePath); err != nil {
 		t.Fatal(err)
@@ -103,7 +103,7 @@ func (b *SetRequestBatch) BatchUpdate(t testing.TB, n ygot.PathStruct, val inter
 }
 
 // batchSet buffers a replace Update object in the SetRequestBatch.
-func (b *SetRequestBatch) batchSet(n ygot.PathStruct, val interface{}, op setOperation) error {
+func (b *SetRequestBatch) batchSet(n ygot.PathStruct, val any, op setOperation) error {
 	path, customData, errs := ygot.ResolvePath(n)
 	if len(errs) > 0 {
 		return fmt.Errorf("%v", errs)
@@ -130,7 +130,7 @@ const (
 	updatePath
 )
 
-func populateSetRequest(req *gpb.SetRequest, path *gpb.Path, val interface{}, op setOperation) error {
+func populateSetRequest(req *gpb.SetRequest, path *gpb.Path, val any, op setOperation) error {
 	if req == nil {
 		return fmt.Errorf("cannot populate a nil SetRequest")
 	}

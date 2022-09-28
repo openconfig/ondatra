@@ -64,9 +64,9 @@ func (g *ConcreteGraph) fetchPort2PortMap() map[*ConcretePort][]*ConcretePort {
 // AbstractNode represent a vertex on an AbstractGraph.
 // The AbstractNode has AbstractPorts and AbstractEdges that originate and terminate at AbstractPorts.
 type AbstractNode struct {
-	Desc  string                    // Description for the AbstractNode for logging.
-	Ports []*AbstractPort           // A list AbstractPorts that may be connected to another AbstractPort.
-	Attrs map[string]NodeConstraint // A map of key value attributes of the AbstractNode.
+	Desc        string                    // Description for the AbstractNode for logging.
+	Ports       []*AbstractPort           // A list AbstractPorts that may be connected to another AbstractPort.
+	Constraints map[string]NodeConstraint // A map of key value constraints of the AbstractNode.
 }
 
 // ConcreteNode represent a vertex on a ConcreteGraph.
@@ -98,8 +98,8 @@ type ConcreteEdge struct {
 
 // AbstractPort is a is point on an AbstractNode where an AbstractEdge may be attached.
 type AbstractPort struct {
-	Desc  string                    // Description for the AbstractPort for logging.
-	Attrs map[string]PortConstraint // A map of key value attributes of the AbstractPort.
+	Desc        string                    // Description for the AbstractPort for logging.
+	Constraints map[string]PortConstraint // A map of key value constraints of the AbstractPort.
 }
 
 // ConcretePort is a is point on a ConcreteNode where a ConcreteEdge may be attached.
@@ -114,6 +114,9 @@ type Assignment struct {
 	Port2Port map[*AbstractPort]*ConcretePort
 }
 
+type deferredNodeConstraint func(map[*AbstractNode]*ConcreteNode) bool
+type deferredPortConstraint func(map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error)
+
 type solver struct {
 	abstractGraph *AbstractGraph
 	superGraph    *ConcreteGraph
@@ -121,6 +124,12 @@ type solver struct {
 	absNode2Node  map[*AbstractNode]map[*AbstractNode]int // Map Node to Node and how many links there are.
 	conPort2Port  map[*ConcretePort][]*ConcretePort       // Cache the concrete ports that are linked.
 	absPort2Port  map[*AbstractPort]*AbstractPort         // Cache of abstract ports that are linked.
+
+	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
+	nodeConstraints         map[*AbstractNode]map[string]Constraint
+	portConstraints         map[*AbstractPort]map[string]Constraint
+	deferredNodeConstraints map[*AbstractNode][]deferredNodeConstraint
+	deferredPortConstraints map[*AbstractPort][]deferredPortConstraint
 }
 
 // Solve returns as assignment from superGraph that satisfies abstractGraph.
@@ -156,11 +165,15 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 	}
 
 	s := &solver{
-		abstractGraph: abstractGraph,
-		superGraph:    superGraph,
-		absNode2Node:  absNode2Node,
-		absPort2Node:  absPort2Node,
-		absPort2Port:  absPort2Port,
+		abstractGraph:           abstractGraph,
+		superGraph:              superGraph,
+		absNode2Node:            absNode2Node,
+		absPort2Node:            absPort2Node,
+		absPort2Port:            absPort2Port,
+		nodeConstraints:         make(map[*AbstractNode]map[string]Constraint),
+		deferredNodeConstraints: make(map[*AbstractNode][]deferredNodeConstraint),
+		portConstraints:         make(map[*AbstractPort]map[string]Constraint),
+		deferredPortConstraints: make(map[*AbstractPort][]deferredPortConstraint),
 	}
 
 	a, err := s.solve()
@@ -177,8 +190,9 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 func (s *solver) solve() (*Assignment, error) {
 	// TODO: Add a "report" that prints out info about the solve.
 	abs2ConNodes := make(map[*AbstractNode][]*ConcreteNode)
+	s.processConstraints()
 	for _, n := range s.abstractGraph.Nodes {
-		nodes := matchNodes(n, s.superGraph)
+		nodes := s.matchNodes(n, s.superGraph)
 		if len(nodes) == 0 {
 			// TODO: Migrate this to something like a "report" that prints out info about the solve.
 			return nil, errors.Errorf("node %q could not be assigned to any node in %q", n.Desc, s.superGraph.Desc)
@@ -193,15 +207,19 @@ func (s *solver) solve() (*Assignment, error) {
 	// Generate all AbstractNode -> ConcreteNode mappings.
 	abs2ConNodeChan, stop := genCombos(abs2ConNodes)
 	defer stop()
-	// Iterate through each mapping. For each mapping, attempt to match edges and assign ports.
+	// Iterate through each mapping.
+	// For each mapping, evaluate deferred constraints and attempt to match edges and assign ports.
 	for abs2ConNode := range abs2ConNodeChan {
+		if !s.matchDeferredNodes(abs2ConNode) {
+			continue
+		}
 		// For this mapping, check that the ConcreteNodes can satisfy the AbstractEdges.
 		if !s.checkEdges(abs2ConNode) {
 			continue
 		}
 
 		// Since the edges can be satisfied, try to assign matching ports.
-		abs2ConPort, err := s.assignPorts(abs2ConNode, make(map[*AbstractPort]*ConcretePort), make(map[*AbstractNode]bool))
+		abs2ConPort, err := s.assignPorts(abs2ConNode, make(map[*AbstractPort]*ConcretePort), make(map[*AbstractNode]bool), make(map[*AbstractPort][]deferredPortConstraint))
 		if err != nil {
 			return nil, err
 		} else if abs2ConPort == nil {
@@ -246,7 +264,7 @@ func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int
 }
 
 // assignPorts tries to assign the ConcretePorts given the Node mapping.
-func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2ConPort map[*AbstractPort]*ConcretePort, assignedNodes map[*AbstractNode]bool) (map[*AbstractPort]*ConcretePort, error) {
+func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2ConPort map[*AbstractPort]*ConcretePort, assignedNodes map[*AbstractNode]bool, deferredConstraints map[*AbstractPort][]deferredPortConstraint) (map[*AbstractPort]*ConcretePort, error) {
 	if len(s.absPort2Node) == len(abs2ConPort) {
 		// Done.
 		return abs2ConPort, nil
@@ -258,7 +276,7 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 		}
 		for _, absSrcPort := range absSrcNode.Ports {
 			// Check attributes match, then check if matched ports link correctly.
-			matchedConPorts := matchPorts(absSrcPort, conSrcNode.Ports)
+			matchedConPorts := s.matchPorts(absSrcPort, conSrcNode.Ports)
 			absDstPort, ok := s.absPort2Port[absSrcPort]
 			if !ok {
 				abs2ConPortCombos[absSrcPort] = matchedConPorts
@@ -280,10 +298,18 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 		abs2ConPortChan, stop := genCombos(abs2ConPortCombos)
 		defer stop()
 		for port2Port := range abs2ConPortChan {
+			deferredConstraintsCopy := make(map[*AbstractPort][]deferredPortConstraint)
+			for n, cons := range deferredConstraints {
+				deferredConstraintsCopy[n] = cons
+			}
+			abs2ConPortCopy := make(map[*AbstractPort]*ConcretePort)
+			for a, c := range abs2ConPort {
+				abs2ConPortCopy[a] = c
+			}
 			canAssign := true
 			for absPort, conPort := range port2Port {
 				if absDstPort, ok := s.absPort2Port[absPort]; ok {
-					if assignedDstPort, ok := abs2ConPort[absDstPort]; ok {
+					if assignedDstPort, ok := abs2ConPortCopy[absDstPort]; ok {
 						isLinked := false
 						for _, p := range s.conPort2Port[conPort] {
 							if p == assignedDstPort {
@@ -301,16 +327,48 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 				if !canAssign {
 					break
 				}
-				// Try to assign the port.
-				// If the part is part of an edge, check if the other port has been assigned. If it has, check that this port is linked to the dst port.
-				abs2ConPort[absPort] = conPort
+				// Try to assign the port, then evaluate deferred constraints.
+				abs2ConPortCopy[absPort] = conPort
+
+				// Start with constraints from previously assigned ports that depend on the port currently being assigned.
+				if dcs, ok := deferredConstraintsCopy[absPort]; ok {
+					for _, dc := range dcs {
+						if ok, _, err := dc(abs2ConPortCopy); err != nil {
+							// This constraint was already deferred from a previously assigned port.
+							// An error means a port that should have been assigned is not.
+							return nil, err
+						} else if !ok {
+							canAssign = false
+							break
+						}
+					}
+				}
+				if !canAssign {
+					break
+				}
+				// Check deferred constraints.
+				// If the constraint depends on another port that has not been assigned yet, defer the constraint.
+				if constraints, ok := s.deferredPortConstraints[absPort]; ok {
+					for _, dc := range constraints {
+						if ok, p, err := dc(abs2ConPortCopy); err != nil {
+							// At this stage, an error is fine. The check must be deferred until both ports are assigned.
+							deferredConstraintsCopy[p] = append(deferredConstraintsCopy[p], dc)
+						} else if !ok {
+							canAssign = false
+							break
+						}
+					}
+					if !canAssign {
+						break
+					}
+				}
 			}
 			// Since the combo of Ports for this Node failed, try the next combo of Ports.
 			if !canAssign {
 				continue
 			}
 			assignedNodes[absSrcNode] = true
-			if ret, err := s.assignPorts(abs2ConNode, abs2ConPort, assignedNodes); err != nil {
+			if ret, err := s.assignPorts(abs2ConNode, abs2ConPortCopy, assignedNodes, deferredConstraintsCopy); err != nil {
 				return nil, err
 			} else if ret != nil {
 				return ret, nil
@@ -324,25 +382,87 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 }
 
 // Matching code.
+// processConstraints iterates through the abstract graph and processes constraints.
+func (s *solver) processConstraints() {
+	for _, n := range s.abstractGraph.Nodes {
+		n := n
+		nc := make(map[string]Constraint)
+		dnc := []deferredNodeConstraint{}
+		for k, c := range n.Constraints {
+			k, c := k, c
+			switch v := c.(type) {
+			case *sameAsNode:
+				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
+					return c.(*sameAsNode).match(k, n, abs2ConNode)
+				})
+			case *notSameAsNode:
+				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
+					return c.(*notSameAsNode).match(k, n, abs2ConNode)
+				})
+			case Constraint:
+				nc[k] = c.(Constraint)
+			default:
+				log.Fatalf("Unrecognized constraint type %T for node matching", v)
+			}
+		}
+		s.nodeConstraints[n] = nc
+		s.deferredNodeConstraints[n] = dnc
+		for _, p := range n.Ports {
+			p := p
+			pc := make(map[string]Constraint)
+			dpc := []deferredPortConstraint{}
+			for k, c := range p.Constraints {
+				k, c := k, c
+				switch v := c.(type) {
+				case *sameAsPort:
+					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
+						if _, ok := abs2ConPort[c.fetchPort()]; !ok {
+							return false, c.fetchPort(), errors.Errorf("port %q not assigned", c.fetchPort().Desc)
+						}
+						return c.(*sameAsPort).match(k, p, abs2ConPort), nil, nil
+					})
+				case *notSameAsPort:
+					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
+						if _, ok := abs2ConPort[c.fetchPort()]; !ok {
+							return false, c.fetchPort(), errors.Errorf("port %q not assigned", c.fetchPort().Desc)
+						}
+						return c.(*notSameAsPort).match(k, p, abs2ConPort), nil, nil
+					})
+				case Constraint:
+					pc[k] = c.(Constraint)
+				default:
+					log.Fatalf("Unrecognized constraint type %T for port matching", v)
+				}
+			}
+			s.portConstraints[p] = pc
+			s.deferredPortConstraints[p] = dpc
+		}
+	}
+}
+
+// matchDeferredNodes checks whether the proposed node mapping fulfills constraints.
+func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
+	for _, dncs := range s.deferredNodeConstraints {
+		for _, dnc := range dncs {
+			if !dnc(abs2ConNode) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
 // matchNodes returns all ConcreteNodes the ConcreteGraph that match the AbstractNode.
-func matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
+func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
 	match := func(n *ConcreteNode) bool {
 		// Check that there are at least enough Ports to satisfy potential Edges.
 		if len(abs.Ports) > len(n.Ports) {
 			return false
 		}
-		for k, c := range abs.Attrs {
-			switch t := c.(type) {
-			case *sameAsNode:
-				// TODO: Implement handler
-			case *notSameAsNode:
-				// TODO: Implement handler
-			case Constraint:
-				if !c.(Constraint).match(n.Attrs[k]) {
-					return false
-				}
-			default:
-				log.Fatalf("Unrecognized constraint type %T for port matching", t)
+		for k, c := range s.nodeConstraints[abs] {
+			s, ok := n.Attrs[k]
+			if !c.match(s, ok) {
+				return false
 			}
 		}
 		return true
@@ -357,21 +477,31 @@ func matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
 	return nodes
 }
 
+// matchDeferredPort checks the deferred constraints against the port.
+func (s *solver) matchDeferredPort(port *AbstractPort, abs2ConPort map[*AbstractPort]*ConcretePort, attr string, constraint PortConstraint) bool {
+	switch v := constraint.(type) {
+	case *sameAsPort:
+		if !constraint.(*sameAsPort).match(attr, port, abs2ConPort) {
+			return false
+		}
+	case *notSameAsPort:
+		if !constraint.(*notSameAsPort).match(attr, port, abs2ConPort) {
+			return false
+		}
+	default:
+		log.Fatalf("Unrecognized constraint type %T for port matching", v)
+	}
+	return true
+
+}
+
 // matchPorts returns all ConcretePorts that match the AbstractPort.
-func matchPorts(abs *AbstractPort, con []*ConcretePort) []*ConcretePort {
+func (s *solver) matchPorts(abs *AbstractPort, con []*ConcretePort) []*ConcretePort {
 	match := func(p *ConcretePort) bool {
-		for k, c := range abs.Attrs {
-			switch t := c.(type) {
-			case *sameAsPort:
-				// TODO: Implement handler
-			case *notSameAsPort:
-				// TODO: Implement handler
-			case Constraint:
-				if !c.(Constraint).match(p.Attrs[k]) {
-					return false
-				}
-			default:
-				log.Fatalf("Unrecognized constraint type %T for port matching", t)
+		for k, c := range s.portConstraints[abs] {
+			s, ok := p.Attrs[k]
+			if !c.match(s, ok) {
+				return false
 			}
 		}
 		return true

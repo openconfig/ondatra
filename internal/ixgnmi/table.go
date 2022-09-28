@@ -33,7 +33,7 @@ type table struct {
 // unmarshalTable converts the input table in to slice of structs.
 // s must be a pointer to a slice of structs or pointer to a slice of struct pointers.
 // The structs must have "ixia" tags corresponding to the column names in the table.
-func unmarshalTable(t *table, s interface{}) error {
+func unmarshalTable(t *table, s any) error {
 	rt := reflect.TypeOf(s)
 	if rt.Kind() != reflect.Ptr || rt.Elem().Kind() != reflect.Slice {
 		return errors.New("must pass in a pointer to slice")
