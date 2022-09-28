@@ -101,6 +101,10 @@ message Port {
     string pmd_regex = 5;
   }
 
+  // A hint that the test intends to create a LAG from this port and other ports
+  // in the same group. For some kinds of devices, including OTG on KNE, a group
+  // hint is necessary to create a LAG, because a LAG requires additional
+  // topological constraints that can't otherwise be expressed in the testbed.
   string group = 6;
 }
 

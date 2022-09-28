@@ -406,7 +406,11 @@ type Port struct {
 	//	*Port_Pmd_
 	//	*Port_PmdRegex
 	PmdValue isPort_PmdValue `protobuf_oneof:"pmd_value"`
-	Group    string          `protobuf:"bytes,6,opt,name=group,proto3" json:"group,omitempty"`
+	// A hint that the test intends to create a LAG from this port and other ports
+	// in the same group. For some kinds of devices, including OTG on KNE, a group
+	// hint is necessary to create a LAG, because a LAG requires additional
+	// topological constraints that can't otherwise be expressed in the testbed.
+	Group string `protobuf:"bytes,6,opt,name=group,proto3" json:"group,omitempty"`
 }
 
 func (x *Port) Reset() {
