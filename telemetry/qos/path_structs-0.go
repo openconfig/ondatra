@@ -4107,6 +4107,16 @@ type Qos_Interface_Input_Queue_AvgQueueLenPathAny struct {
 	*ygot.NodePath
 }
 
+// Qos_Interface_Input_Queue_DroppedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_Queue_DroppedOctetsPath struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Input_Queue_DroppedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_Queue_DroppedOctetsPathAny struct {
+	*ygot.NodePath
+}
+
 // Qos_Interface_Input_Queue_DroppedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts YANG schema element.
 type Qos_Interface_Input_Queue_DroppedPktsPath struct {
 	*ygot.NodePath
@@ -4193,6 +4203,38 @@ func (n *Qos_Interface_Input_QueuePathAny) AvgQueueLen() *Qos_Interface_Input_Qu
 	return &Qos_Interface_Input_Queue_AvgQueueLenPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "avg-queue-len"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// ----------------------------------------
+// Defining module: "openconfig-qos-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/dropped-octets"
+// Path from root: "/qos/interfaces/interface/input/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_QueuePath) DroppedOctets() *Qos_Interface_Input_Queue_DroppedOctetsPath {
+	return &Qos_Interface_Input_Queue_DroppedOctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// ----------------------------------------
+// Defining module: "openconfig-qos-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/dropped-octets"
+// Path from root: "/qos/interfaces/interface/input/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_QueuePathAny) DroppedOctets() *Qos_Interface_Input_Queue_DroppedOctetsPathAny {
+	return &Qos_Interface_Input_Queue_DroppedOctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dropped-octets"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5007,6 +5049,16 @@ type Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny struct {
 	*ygot.NodePath
 }
 
+// Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath struct {
+	*ygot.NodePath
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny struct {
+	*ygot.NodePath
+}
+
 // Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts YANG schema element.
 type Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath struct {
 	*ygot.NodePath
@@ -5083,6 +5135,38 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) AvgQueueLen() *Qos_Inter
 	return &Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "avg-queue-len"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// ----------------------------------------
+// Defining module: "openconfig-qos-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/dropped-octets"
+// Path from root: "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) DroppedOctets() *Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath {
+	return &Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// ----------------------------------------
+// Defining module: "openconfig-qos-interfaces"
+// Instantiating module: "openconfig-qos"
+// Path from parent: "state/dropped-octets"
+// Path from root: "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) DroppedOctets() *Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny {
+	return &Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "dropped-octets"},
 			map[string]interface{}{},
 			n,
 		),

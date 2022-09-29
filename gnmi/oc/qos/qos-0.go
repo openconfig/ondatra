@@ -12250,6 +12250,72 @@ func (n *Qos_Interface_Input_Queue_AvgQueueLenPathAny) State() ygnmi.WildcardQue
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_Queue_DroppedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).DroppedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_Queue_DroppedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).DroppedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/dropped-pkts"
 //	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/dropped-pkts"
 func (n *Qos_Interface_Input_Queue_DroppedPktsPath) State() ygnmi.SingletonQuery[uint64] {
@@ -12774,6 +12840,18 @@ func (n *Qos_Interface_Input_Queue_TransmitPktsPathAny) State() ygnmi.WildcardQu
 	)
 }
 
+// Qos_Interface_Input_Queue_DroppedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_Queue_DroppedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_Queue_DroppedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_Queue_DroppedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Interface_Input_Queue_DroppedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/dropped-pkts YANG schema element.
 type Qos_Interface_Input_Queue_DroppedPktsPath struct {
 	*ygnmi.NodePath
@@ -12883,6 +12961,40 @@ func (n *Qos_Interface_Input_QueuePathAny) AvgQueueLen() *Qos_Interface_Input_Qu
 	return &Qos_Interface_Input_Queue_AvgQueueLenPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "avg-queue-len"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_QueuePath) DroppedOctets() *Qos_Interface_Input_Queue_DroppedOctetsPath {
+	return &Qos_Interface_Input_Queue_DroppedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_QueuePathAny) DroppedOctets() *Qos_Interface_Input_Queue_DroppedOctetsPathAny {
+	return &Qos_Interface_Input_Queue_DroppedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
 			map[string]interface{}{},
 			n,
 		),
@@ -14803,6 +14915,72 @@ func (n *Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny) State() ygnm
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).DroppedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).DroppedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/dropped-pkts"
 //	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts"
 func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath) State() ygnmi.SingletonQuery[uint64] {
@@ -15195,6 +15373,18 @@ func (n *Qos_Interface_Input_VoqInterface_Queue_TransmitPktsPathAny) State() ygn
 	)
 }
 
+// Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-pkts YANG schema element.
 type Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPath struct {
 	*ygnmi.NodePath
@@ -15292,6 +15482,40 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) AvgQueueLen() *Qos_Inter
 	return &Qos_Interface_Input_VoqInterface_Queue_AvgQueueLenPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "avg-queue-len"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) DroppedOctets() *Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath {
+	return &Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) DroppedOctets() *Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny {
+	return &Qos_Interface_Input_VoqInterface_Queue_DroppedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
 			map[string]interface{}{},
 			n,
 		),
@@ -18290,6 +18514,72 @@ func (n *Qos_Interface_Output_Queue_AvgQueueLenPathAny) State() ygnmi.WildcardQu
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Output_Queue_DroppedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).DroppedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Output_Queue_DroppedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).DroppedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/dropped-pkts"
 //	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/dropped-pkts"
 func (n *Qos_Interface_Output_Queue_DroppedPktsPath) State() ygnmi.SingletonQuery[uint64] {
@@ -18814,6 +19104,18 @@ func (n *Qos_Interface_Output_Queue_TransmitPktsPathAny) State() ygnmi.WildcardQ
 	)
 }
 
+// Qos_Interface_Output_Queue_DroppedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Output_Queue_DroppedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Output_Queue_DroppedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/dropped-octets YANG schema element.
+type Qos_Interface_Output_Queue_DroppedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Interface_Output_Queue_DroppedPktsPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/dropped-pkts YANG schema element.
 type Qos_Interface_Output_Queue_DroppedPktsPath struct {
 	*ygnmi.NodePath
@@ -18923,6 +19225,40 @@ func (n *Qos_Interface_Output_QueuePathAny) AvgQueueLen() *Qos_Interface_Output_
 	return &Qos_Interface_Output_Queue_AvgQueueLenPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "avg-queue-len"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Output_QueuePath) DroppedOctets() *Qos_Interface_Output_Queue_DroppedOctetsPath {
+	return &Qos_Interface_Output_Queue_DroppedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dropped-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/dropped-octets"
+func (n *Qos_Interface_Output_QueuePathAny) DroppedOctets() *Qos_Interface_Output_Queue_DroppedOctetsPathAny {
+	return &Qos_Interface_Output_Queue_DroppedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-octets"},
 			map[string]interface{}{},
 			n,
 		),

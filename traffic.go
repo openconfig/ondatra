@@ -224,23 +224,6 @@ func (et *EgressTracking) WithCount(count uint32) *EgressTracking {
 	return et
 }
 
-// WithEgressTrackingEnabled enables egress tracking with custom offset and width bits.
-func (f *Flow) WithEgressTrackingEnabled(offset, width uint32) *Flow {
-	f.pb.EgressTracking = &opb.EgressTracking{
-		Enabled: true,
-		Offset:  offset,
-		Width:   width,
-		Count:   8,
-	}
-	return f
-}
-
-// WithEgressTrackingDisabled disables egress tracking.
-func (f *Flow) WithEgressTrackingDisabled() *Flow {
-	f.pb.EgressTracking = nil
-	return f
-}
-
 // WithIngressTrackingByPorts enables ingress tracking by rx/tx ports.
 func (f *Flow) WithIngressTrackingByPorts(enable bool) *Flow {
 	if f.pb.IngressTrackingFilters == nil {

@@ -13532,6 +13532,7 @@ func (*Qos_Interface_Input_Classifier_Term) ΛBelongingModule() string {
 // Qos_Interface_Input_Queue represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue YANG schema element.
 type Qos_Interface_Input_Queue struct {
 	AvgQueueLen            *uint64 `path:"state/avg-queue-len" module:"openconfig-qos/openconfig-qos"`
+	DroppedOctets          *uint64 `path:"state/dropped-octets" module:"openconfig-qos/openconfig-qos"`
 	DroppedPkts            *uint64 `path:"state/dropped-pkts" module:"openconfig-qos/openconfig-qos"`
 	MaxQueueLen            *uint64 `path:"state/max-queue-len" module:"openconfig-qos/openconfig-qos"`
 	Name                   *string `path:"state/name|name" module:"openconfig-qos/openconfig-qos|openconfig-qos" shadow-path:"config/name|name" shadow-module:"openconfig-qos/openconfig-qos|openconfig-qos"`
@@ -13559,6 +13560,22 @@ func (t *Qos_Interface_Input_Queue) GetAvgQueueLen() uint64 {
 		return 0
 	}
 	return *t.AvgQueueLen
+}
+
+// GetDroppedOctets retrieves the value of the leaf DroppedOctets from the Qos_Interface_Input_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DroppedOctets is set, it can
+// safely use t.GetDroppedOctets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DroppedOctets == nil' before retrieving the leaf's value.
+func (t *Qos_Interface_Input_Queue) GetDroppedOctets() uint64 {
+	if t == nil || t.DroppedOctets == nil {
+		return 0
+	}
+	return *t.DroppedOctets
 }
 
 // GetDroppedPkts retrieves the value of the leaf DroppedPkts from the Qos_Interface_Input_Queue
@@ -14253,6 +14270,7 @@ func (*Qos_Interface_Input_VoqInterface) ΛBelongingModule() string {
 // Qos_Interface_Input_VoqInterface_Queue represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue YANG schema element.
 type Qos_Interface_Input_VoqInterface_Queue struct {
 	AvgQueueLen    *uint64 `path:"state/avg-queue-len" module:"openconfig-qos/openconfig-qos"`
+	DroppedOctets  *uint64 `path:"state/dropped-octets" module:"openconfig-qos/openconfig-qos"`
 	DroppedPkts    *uint64 `path:"state/dropped-pkts" module:"openconfig-qos/openconfig-qos"`
 	MaxQueueLen    *uint64 `path:"state/max-queue-len" module:"openconfig-qos/openconfig-qos"`
 	Name           *string `path:"state/name|name" module:"openconfig-qos/openconfig-qos|openconfig-qos" shadow-path:"config/name|name" shadow-module:"openconfig-qos/openconfig-qos|openconfig-qos"`
@@ -14279,6 +14297,22 @@ func (t *Qos_Interface_Input_VoqInterface_Queue) GetAvgQueueLen() uint64 {
 		return 0
 	}
 	return *t.AvgQueueLen
+}
+
+// GetDroppedOctets retrieves the value of the leaf DroppedOctets from the Qos_Interface_Input_VoqInterface_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DroppedOctets is set, it can
+// safely use t.GetDroppedOctets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DroppedOctets == nil' before retrieving the leaf's value.
+func (t *Qos_Interface_Input_VoqInterface_Queue) GetDroppedOctets() uint64 {
+	if t == nil || t.DroppedOctets == nil {
+		return 0
+	}
+	return *t.DroppedOctets
 }
 
 // GetDroppedPkts retrieves the value of the leaf DroppedPkts from the Qos_Interface_Input_VoqInterface_Queue
@@ -15252,6 +15286,7 @@ func (*Qos_Interface_Output_InterfaceRef) ΛBelongingModule() string {
 // Qos_Interface_Output_Queue represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue YANG schema element.
 type Qos_Interface_Output_Queue struct {
 	AvgQueueLen            *uint64 `path:"state/avg-queue-len" module:"openconfig-qos/openconfig-qos"`
+	DroppedOctets          *uint64 `path:"state/dropped-octets" module:"openconfig-qos/openconfig-qos"`
 	DroppedPkts            *uint64 `path:"state/dropped-pkts" module:"openconfig-qos/openconfig-qos"`
 	MaxQueueLen            *uint64 `path:"state/max-queue-len" module:"openconfig-qos/openconfig-qos"`
 	Name                   *string `path:"state/name|name" module:"openconfig-qos/openconfig-qos|openconfig-qos" shadow-path:"config/name|name" shadow-module:"openconfig-qos/openconfig-qos|openconfig-qos"`
@@ -15279,6 +15314,22 @@ func (t *Qos_Interface_Output_Queue) GetAvgQueueLen() uint64 {
 		return 0
 	}
 	return *t.AvgQueueLen
+}
+
+// GetDroppedOctets retrieves the value of the leaf DroppedOctets from the Qos_Interface_Output_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DroppedOctets is set, it can
+// safely use t.GetDroppedOctets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DroppedOctets == nil' before retrieving the leaf's value.
+func (t *Qos_Interface_Output_Queue) GetDroppedOctets() uint64 {
+	if t == nil || t.DroppedOctets == nil {
+		return 0
+	}
+	return *t.DroppedOctets
 }
 
 // GetDroppedPkts retrieves the value of the leaf DroppedPkts from the Qos_Interface_Output_Queue

@@ -243,22 +243,19 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 
 func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 	const pollDelay = 5 * time.Second
-	status := struct {
-		State   string          `json:"state"`
-		URL     string          `json:"url"`
-		Message string          `json:"message"`
-		Result  json.RawMessage `json:"result"`
-	}{}
+	var status struct {
+		State  string          `json:"state"`
+		URL    string          `json:"url"`
+		Result json.RawMessage `json:"result"`
+	}
 	if err := unmarshal(data, &status); err != nil {
 		return err
 	}
 
 	for i := 0; i < pollLimit; i++ {
 		switch status.State {
-		case "EXCEPTION":
-			return fmt.Errorf("operation exception: %q", status.Message)
-		case "ERROR":
-			return fmt.Errorf("operation error: %q", string(status.Result))
+		case "ERROR", "EXCEPTION":
+			return fmt.Errorf("operation failed: %s", string(data))
 		case "IN_PROGRESS":
 			pollURL, err := url.Parse(status.URL)
 			if err != nil {
