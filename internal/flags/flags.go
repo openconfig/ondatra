@@ -53,6 +53,12 @@ func Parse() (*Values, error) {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
+
+	// Always stream verbose test output. This is necessary for XML support,
+	// for notifying users when breakpoints are reached, and is generally
+	// a better default user experience for Ondatra tests.
+	flag.Set("test.v", "true")
+
 	if *testbed == "" {
 		return nil, fmt.Errorf("testbed path not specified")
 	}
@@ -65,11 +71,6 @@ func Parse() (*Values, error) {
 	resvID, resvPartial, err := parseReserve(*reserve)
 	if err != nil {
 		return nil, err
-	}
-	// If the XML flag is set, implicitly set verbose output,
-	// so the pass/fail data is available for conversion to XML.
-	if *xml != "" {
-		flag.Set("test.v", "true")
 	}
 	return &Values{
 		TestbedPath: *testbed,

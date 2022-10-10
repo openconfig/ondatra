@@ -44,3 +44,13 @@ func (a *ATEDevice) Traffic() *Traffic {
 func (a *ATEDevice) Actions() *Actions {
 	return &Actions{a.res.(binding.ATE)}
 }
+
+// RawAPIs returns a handle to raw protocol APIs on the ATE.
+func (a *ATEDevice) RawAPIs() *RawATEAPIs {
+	return &RawATEAPIs{ate: a.res.(binding.ATE)}
+}
+
+// RawATEAPIs provides access to raw ATE protocol APIs.
+type RawATEAPIs struct {
+	ate binding.ATE
+}

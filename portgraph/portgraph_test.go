@@ -15,6 +15,8 @@
 package portgraph
 
 import (
+	"fmt"
+	"regexp"
 	"testing"
 )
 
@@ -439,20 +441,27 @@ func TestSolve(t *testing.T) {
 }
 
 func TestSolveNotSolvable(t *testing.T) {
+	nodeDesc := "dut1"
+	portDesc := "dut:port1"
 	tests := []struct {
-		desc  string
-		graph *AbstractGraph
+		desc           string
+		graph          *AbstractGraph
+		wantAssigned   []string
+		wantUnassigned []string
 	}{{
-		desc:  "Node does not exist in super",
-		graph: &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: "dut1", Constraints: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
+		desc:           "Node does not exist in super",
+		graph:          &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: nodeDesc, Constraints: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
+		wantUnassigned: []string{nodeDesc},
 	}, {
 		desc: "Port does not exist in super",
 		graph: &AbstractGraph{
 			Desc: "Port does not exist",
 			Nodes: []*AbstractNode{
-				&AbstractNode{Desc: "dut1", Ports: []*AbstractPort{&AbstractPort{Desc: "dut1:port1", Constraints: map[string]PortConstraint{"DOES NOT EXIST": Equal("???")}}}},
+				&AbstractNode{Desc: nodeDesc, Ports: []*AbstractPort{&AbstractPort{Desc: portDesc, Constraints: map[string]PortConstraint{"DOES NOT EXIST": Equal("???")}}}},
 			},
 		},
+		wantAssigned:   []string{nodeDesc},
+		wantUnassigned: []string{portDesc},
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -462,6 +471,23 @@ func TestSolveNotSolvable(t *testing.T) {
 			}
 			if err == nil {
 				t.Errorf("Solve got nil error, want error")
+			}
+			solveErr, ok := err.(*SolveErr)
+			if !ok {
+				t.Fatal("Solve got not *SolveErr type err, want *SolveErr type")
+			}
+			errString := solveErr.String()
+			for _, assigned := range tc.wantAssigned {
+				re := regexp.MustCompile(fmt.Sprintf("%s.*%s", assigned, "assigned"))
+				if !re.MatchString(errString) {
+					t.Errorf("Solve got error %q, want error to report %q is assigned", errString, assigned)
+				}
+			}
+			for _, unassigned := range tc.wantUnassigned {
+				re := regexp.MustCompile(fmt.Sprintf("%s.*%s", unassigned, "not assigned"))
+				if !re.MatchString(errString) {
+					t.Errorf("Solve got error %q, want error to report %q is not assigned", errString, unassigned)
+				}
 			}
 		})
 	}

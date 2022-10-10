@@ -54,8 +54,8 @@ func ParseConfigFile(configFile string) (*Config, error) {
 		return nil, fmt.Errorf("no topology path specified in config: %v", c)
 	}
 	if c.CLIPath == "" {
-		// If no CLI path specified, use kne_cli available in PATH.
-		c.CLIPath = "kne_cli"
+		// If no CLI path specified, use kne available in PATH.
+		c.CLIPath = "kne"
 	}
 	return c, nil
 }

@@ -15,7 +15,6 @@
 package debugger
 
 import (
-	"bufio"
 	"fmt"
 	"strings"
 	"sync"
@@ -29,7 +28,7 @@ var (
 	stubLine string
 )
 
-func resetStdinReader() {
+func resetTTYReader() {
 	reader = nil
 }
 
@@ -40,7 +39,7 @@ func writeLine(line string) {
 }
 
 func init() {
-	readStringFn = func(_ *bufio.Reader, b byte) (string, error) {
+	readString := func(b byte) (string, error) {
 		stubMu.Lock()
 		defer stubMu.Unlock()
 		if i := strings.IndexByte(stubLine, b); i < 0 {
@@ -48,12 +47,16 @@ func init() {
 		}
 		return stubLine, nil
 	}
+	close := func() error { return nil }
+	openTTYFn = func() (readStringFn, closeFn, error) {
+		return readString, close, nil
+	}
 	reservationFn = func() (*binding.Reservation, error) {
 		return &binding.Reservation{}, nil
 	}
 }
 func TestNoDebugMode(t *testing.T) {
-	resetStdinReader()
+	resetTTYReader()
 	TestStarted(false)
 	defer TestCasesDone()
 
@@ -63,7 +66,7 @@ func TestNoDebugMode(t *testing.T) {
 }
 
 func TestDebugModeRunTests(t *testing.T) {
-	resetStdinReader()
+	resetTTYReader()
 	writeLine("1\n")
 	TestStarted(true)
 	defer TestCasesDone()
@@ -75,7 +78,7 @@ func TestDebugModeRunTests(t *testing.T) {
 }
 
 func TestDebugModeJustReserve(t *testing.T) {
-	resetStdinReader()
+	resetTTYReader()
 	writeLine("2\n")
 	TestStarted(true)
 	defer TestCasesDone()

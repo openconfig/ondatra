@@ -14,7 +14,7 @@ Key        | Required? | Description
 `username` | yes       | username to log into the KNE nodes
 `password` | yes       | password to log into the KNE nodes
 `topology` | yes       | path to a KNE topology text proto
-`cli`      | no        | path to the kne_cli binary
+`cli`      | no        | path to the kne binary
 `kubecfg`  | no        | path to your kubeconfig file
 
 If `cli` and `kubecfg` are not specified, they will be inferred from the `PATH`

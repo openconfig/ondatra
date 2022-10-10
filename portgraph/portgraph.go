@@ -114,6 +114,11 @@ type Assignment struct {
 	Port2Port map[*AbstractPort]*ConcretePort
 }
 
+type maxAssignment struct {
+	assignment         *Assignment
+	numNodes, numPorts int
+}
+
 type deferredNodeConstraint func(map[*AbstractNode]*ConcreteNode) bool
 type deferredPortConstraint func(map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error)
 
@@ -125,6 +130,8 @@ type solver struct {
 	conPort2Port  map[*ConcretePort][]*ConcretePort       // Cache the concrete ports that are linked.
 	absPort2Port  map[*AbstractPort]*AbstractPort         // Cache of abstract ports that are linked.
 
+	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
+
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
 	nodeConstraints         map[*AbstractNode]map[string]Constraint
 	portConstraints         map[*AbstractPort]map[string]Constraint
@@ -134,19 +141,25 @@ type solver struct {
 
 // Solve returns as assignment from superGraph that satisfies abstractGraph.
 func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment, error) {
+	solveErr := &SolveErr{absGraphDesc: abstractGraph.Desc, conGraphDesc: superGraph.Desc}
 	if len(abstractGraph.Nodes) > len(superGraph.Nodes) {
-		return nil, fmt.Errorf("not enough nodes in %q to satisfy %q", superGraph.Desc, abstractGraph.Desc)
+		return nil, solveErr
+
 	}
 	if len(abstractGraph.Edges) > len(superGraph.Edges) {
-		return nil, fmt.Errorf("not enough edges in %q to satisfy %q", superGraph.Desc, abstractGraph.Desc)
+		return nil, solveErr
 	}
 
 	// Preprocess data for the solve.
-	// Map the AbstractPort to AbstractNode.
+	// Map the AbstractPort to AbstractNode and initialize maps for maxSolve.
 	absPort2Node := make(map[*AbstractPort]*AbstractNode)
+	node2Node := make(map[*AbstractNode]*ConcreteNode)
+	port2Port := make(map[*AbstractPort]*ConcretePort)
 	for _, n := range abstractGraph.Nodes {
+		node2Node[n] = nil
 		for _, p := range n.Ports {
 			absPort2Node[p] = n
+			port2Port[p] = nil
 		}
 	}
 	// Map how many links there are between each AbstractNode to calculate matches.
@@ -161,7 +174,7 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 
 	absPort2Port, err := abstractGraph.fetchPort2PortMap()
 	if err != nil {
-		return nil, errors.Wrapf(err, "could not solve for %q from %q", abstractGraph.Desc, superGraph.Desc)
+		return nil, solveErr
 	}
 
 	s := &solver{
@@ -170,15 +183,17 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 		absNode2Node:            absNode2Node,
 		absPort2Node:            absPort2Node,
 		absPort2Port:            absPort2Port,
+		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
 		nodeConstraints:         make(map[*AbstractNode]map[string]Constraint),
 		deferredNodeConstraints: make(map[*AbstractNode][]deferredNodeConstraint),
 		portConstraints:         make(map[*AbstractPort]map[string]Constraint),
 		deferredPortConstraints: make(map[*AbstractPort][]deferredPortConstraint),
 	}
 
-	a, err := s.solve()
-	if err != nil {
-		return nil, errors.Wrapf(err, "could not solve for %q from %q", abstractGraph.Desc, superGraph.Desc)
+	a, ok := s.solve()
+	if !ok {
+		solveErr.maxAssign = s.maxAssign.assignment
+		return nil, solveErr
 	}
 	return a, nil
 }
@@ -187,15 +202,14 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 // 1. Find all concrete nodes that match the abstract node (check attributes and # of ports).
 // 2. For each mapping, check the concrete nodes and satisfy the edges of the abstract graph.
 // 3. Assign concrete ports.
-func (s *solver) solve() (*Assignment, error) {
-	// TODO: Add a "report" that prints out info about the solve.
+// solve always returns the max assignment and true if the solve completed.
+func (s *solver) solve() (*Assignment, bool) {
 	abs2ConNodes := make(map[*AbstractNode][]*ConcreteNode)
 	s.processConstraints()
 	for _, n := range s.abstractGraph.Nodes {
 		nodes := s.matchNodes(n, s.superGraph)
 		if len(nodes) == 0 {
-			// TODO: Migrate this to something like a "report" that prints out info about the solve.
-			return nil, errors.Errorf("node %q could not be assigned to any node in %q", n.Desc, s.superGraph.Desc)
+			return nil, false
 		}
 		for _, conNode := range nodes {
 			abs2ConNodes[n] = append(abs2ConNodes[n], conNode)
@@ -217,18 +231,20 @@ func (s *solver) solve() (*Assignment, error) {
 		if !s.checkEdges(abs2ConNode) {
 			continue
 		}
+		if len(abs2ConNode) > s.maxAssign.numNodes {
+			s.maxAssign.assignment.Node2Node = abs2ConNode
+			s.maxAssign.numNodes = len(abs2ConNode)
+		}
 
 		// Since the edges can be satisfied, try to assign matching ports.
-		abs2ConPort, err := s.assignPorts(abs2ConNode, make(map[*AbstractPort]*ConcretePort), make(map[*AbstractNode]bool), make(map[*AbstractPort][]deferredPortConstraint))
-		if err != nil {
-			return nil, err
-		} else if abs2ConPort == nil {
+		abs2ConPort, _ := s.assignPorts(abs2ConNode, make(map[*AbstractPort]*ConcretePort), make(map[*AbstractNode]bool), make(map[*AbstractPort][]deferredPortConstraint))
+		if abs2ConPort == nil {
 			continue
 		}
 
-		return &Assignment{abs2ConNode, abs2ConPort}, nil
+		return &Assignment{abs2ConNode, abs2ConPort}, true
 	}
-	return nil, errors.Errorf("no assignment found for %q", s.abstractGraph.Desc)
+	return nil, false
 }
 
 // checkEdges validates that the concrete nodes can satisfy the abstract edges.
@@ -264,10 +280,11 @@ func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int
 }
 
 // assignPorts tries to assign the ConcretePorts given the Node mapping.
-func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2ConPort map[*AbstractPort]*ConcretePort, assignedNodes map[*AbstractNode]bool, deferredConstraints map[*AbstractPort][]deferredPortConstraint) (map[*AbstractPort]*ConcretePort, error) {
+// Returns the port mapping if the solve was successful and a boolean for whether to continue recursing with this Node mapping.
+func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2ConPort map[*AbstractPort]*ConcretePort, assignedNodes map[*AbstractNode]bool, deferredConstraints map[*AbstractPort][]deferredPortConstraint) (map[*AbstractPort]*ConcretePort, bool) {
 	if len(s.absPort2Node) == len(abs2ConPort) {
 		// Done.
-		return abs2ConPort, nil
+		return abs2ConPort, true
 	}
 	abs2ConPortCombos := make(map[*AbstractPort][]*ConcretePort)
 	for absSrcNode, conSrcNode := range abs2ConNode {
@@ -336,7 +353,7 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 						if ok, _, err := dc(abs2ConPortCopy); err != nil {
 							// This constraint was already deferred from a previously assigned port.
 							// An error means a port that should have been assigned is not.
-							return nil, err
+							return nil, false
 						} else if !ok {
 							canAssign = false
 							break
@@ -368,17 +385,27 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 				continue
 			}
 			assignedNodes[absSrcNode] = true
-			if ret, err := s.assignPorts(abs2ConNode, abs2ConPortCopy, assignedNodes, deferredConstraintsCopy); err != nil {
-				return nil, err
+			if ret, ok := s.assignPorts(abs2ConNode, abs2ConPortCopy, assignedNodes, deferredConstraintsCopy); !ok {
+				if len(abs2ConPortCopy) > s.maxAssign.numPorts {
+					s.maxAssign.assignment.Node2Node = abs2ConNode
+					s.maxAssign.assignment.Port2Port = abs2ConPortCopy
+					s.maxAssign.numPorts = len(abs2ConPortCopy)
+				}
+				return nil, false
 			} else if ret != nil {
-				return ret, nil
+				return ret, true
 			}
 			// Assignment of Ports for the next Node failed; unassign this Node.
 			assignedNodes[absSrcNode] = false
 		}
 	}
 	log.V(1).Infof("Only %d of %d ports were assigned; unassigning all ports", len(abs2ConPort), len(s.absPort2Node))
-	return nil, nil
+	if len(abs2ConPort) > s.maxAssign.numPorts {
+		s.maxAssign.assignment.Node2Node = abs2ConNode
+		s.maxAssign.assignment.Port2Port = abs2ConPort
+		s.maxAssign.numPorts = len(abs2ConPort)
+	}
+	return nil, true
 }
 
 // Matching code.

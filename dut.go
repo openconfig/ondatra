@@ -171,27 +171,27 @@ func (d *DUTDevice) Operations() *Operations {
 }
 
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
-func (d *DUTDevice) RawAPIs() *RawAPIs {
-	return &RawAPIs{dut: d.res.(binding.DUT)}
+func (d *DUTDevice) RawAPIs() *RawDUTAPIs {
+	return &RawDUTAPIs{dut: d.res.(binding.DUT)}
 }
 
-// RawAPIs provides access to raw DUT protocols APIs.
-type RawAPIs struct {
+// RawDUTAPIs provides access to raw DUT protocol APIs.
+type RawDUTAPIs struct {
 	dut binding.DUT
 }
 
 // GNMI provides access to either a new or default gNMI client.
-func (r *RawAPIs) GNMI() *GNMIAPI {
+func (r *RawDUTAPIs) GNMI() *GNMIAPI {
 	return &GNMIAPI{dut: r.dut}
 }
 
 // GNOI provides access to either a new or default gNOI client.
-func (r *RawAPIs) GNOI() *GNOIAPI {
+func (r *RawDUTAPIs) GNOI() *GNOIAPI {
 	return &GNOIAPI{dut: r.dut}
 }
 
 // GRIBI provides access to either a new or default GRIBI client.
-func (r *RawAPIs) GRIBI() *GRIBIAPI {
+func (r *RawDUTAPIs) GRIBI() *GRIBIAPI {
 	return &GRIBIAPI{dut: r.dut}
 }
 
@@ -288,7 +288,7 @@ type privateGNOI interface {
 }
 
 // P4RT returns a P4RT client on the DUT.
-func (r *RawAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
+func (r *RawDUTAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating P4RT client for %s", r.dut)
 	p4rtClient, err := p4rt.NewP4RT(context.Background(), r.dut)
@@ -310,7 +310,7 @@ type privateStreamClient interface {
 }
 
 // CLI returns a streaming CLI client on the DUT.
-func (r *RawAPIs) CLI(t testing.TB) StreamClient {
+func (r *RawDUTAPIs) CLI(t testing.TB) StreamClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating CLI client for %s", r.dut)
 	c, err := cli.NewCLI(context.Background(), r.dut)
@@ -321,7 +321,7 @@ func (r *RawAPIs) CLI(t testing.TB) StreamClient {
 }
 
 // Console returns a transactional CLI client on the DUT.
-func (r *RawAPIs) Console(t testing.TB) StreamClient {
+func (r *RawDUTAPIs) Console(t testing.TB) StreamClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating console client for %s", r.dut)
 	c, err := console.NewConsole(context.Background(), r.dut)
