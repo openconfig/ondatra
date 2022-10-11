@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"google.golang.org/protobuf/proto"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -166,7 +167,7 @@ func TestHeaderStacks(t *testing.T) {
 					DontFragment:   true,
 					MoreFragments:  true,
 					FragmentOffset: 4,
-					Ttl:            ttl,
+					Ttl:            proto.Uint32(ttl),
 					Protocol: func() *uint32 {
 						protocol := uint32(5)
 						return &protocol
@@ -257,7 +258,7 @@ func TestHeaderStacks(t *testing.T) {
 					DstAddr:   &opb.AddressRange{Min: dstIpv6Addr, Max: dstIpv6Addr, Count: 1},
 					FlowLabel: &opb.UIntRange{Min: label, Max: label, Count: 1},
 					Dscp:      1,
-					HopLimit:  hopLimit,
+					HopLimit:  proto.Uint32(hopLimit),
 				},
 			},
 		},

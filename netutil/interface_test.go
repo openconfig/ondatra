@@ -45,6 +45,11 @@ func TestLoopbackInterface(t *testing.T) {
 		num:    3,
 		want:   "lo3",
 	}, {
+		desc:   "nokia",
+		vendor: ondatra.NOKIA,
+		num:    4,
+		want:   "lo4",
+	}, {
 		desc:    "no prefix",
 		vendor:  ondatra.IXIA,
 		wantErr: "no loopback interface prefix",
@@ -90,6 +95,11 @@ func TestBundleInterface(t *testing.T) {
 		vendor: ondatra.JUNIPER,
 		num:    113,
 		want:   "ae113",
+	}, {
+		desc:   "nokia",
+		vendor: ondatra.NOKIA,
+		num:    24,
+		want:   "lag24",
 	}, {
 		desc:    "no prefix",
 		vendor:  ondatra.IXIA,
@@ -137,6 +147,11 @@ func TestVLANInterface(t *testing.T) {
 		num:    5,
 		want:   "irb.5",
 	}, {
+		desc:   "nokia",
+		vendor: ondatra.NOKIA,
+		num:    6,
+		want:   "irb1.6",
+	}, {
 		desc:    "no prefix",
 		vendor:  ondatra.IXIA,
 		wantErr: "no VLAN interface prefix",
@@ -179,6 +194,10 @@ func TestNextBundleInterface(t *testing.T) {
 		desc:   "juniper first",
 		vendor: ondatra.JUNIPER,
 		want:   "ae1",
+	}, {
+		desc:   "nokia first",
+		vendor: ondatra.NOKIA,
+		want:   "lag1",
 	}, {
 		desc:   "between intfs",
 		vendor: ondatra.ARISTA,
@@ -231,6 +250,10 @@ func TestNextVLANInterface(t *testing.T) {
 		desc:   "juniper first",
 		vendor: ondatra.JUNIPER,
 		want:   "irb.1",
+	}, {
+		desc:   "nokia first",
+		vendor: ondatra.NOKIA,
+		want:   "irb1.1",
 	}, {
 		desc:   "between intfs",
 		vendor: ondatra.CISCO,

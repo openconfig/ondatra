@@ -76,6 +76,8 @@ const (
 	PALOALTO = Vendor(opb.Device_PALOALTO)
 	// ZPE vendor.
 	ZPE = Vendor(opb.Device_ZPE)
+	// NOKIA vendor.
+	NOKIA = Vendor(opb.Device_NOKIA)
 )
 
 // String returns the name of the vendor.

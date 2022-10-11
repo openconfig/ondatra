@@ -27,16 +27,19 @@ var (
 		ondatra.ARISTA:  "Loopback",
 		ondatra.CISCO:   "Loopback",
 		ondatra.JUNIPER: "lo",
+		ondatra.NOKIA:   "lo",
 	}
 	bundlePrefixes = map[ondatra.Vendor]string{
 		ondatra.ARISTA:  "Port-Channel",
 		ondatra.CISCO:   "Bundle-Ether",
 		ondatra.JUNIPER: "ae",
+		ondatra.NOKIA:   "lag",
 	}
 	vlanPrefixes = map[ondatra.Vendor]string{
 		ondatra.ARISTA:  "Vlan",
 		ondatra.CISCO:   "BVI",
 		ondatra.JUNIPER: "irb.",
+		ondatra.NOKIA:   "irb1.",
 	}
 )
 

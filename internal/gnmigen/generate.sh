@@ -44,6 +44,7 @@ YGOT_COMMON_ARGS=(
   -generate_rename
   -generate_delete
   -generate_leaf_getters
+  -generate_leaf_setters
   -generate_populate_defaults
   -list_builder_key_threshold=4
 )

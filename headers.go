@@ -15,6 +15,7 @@
 package ondatra
 
 import (
+	"google.golang.org/protobuf/proto"
 	"github.com/openconfig/ondatra/ixnet"
 
 	opb "github.com/openconfig/ondatra/proto"
@@ -125,7 +126,7 @@ func (h *GREHeader) asPB() *opb.Header {
 // The header is initialized with a hop limit of 64, DSCP of 0 (best effort), and ECN of 0 (not ECN capable).
 // Unless specified, a best effort will be made to infer the src and dst addresses from the topology.
 func NewIPv4Header() *IPv4Header {
-	return &IPv4Header{&opb.Ipv4Header{Ttl: 64, Dscp: 0, Ecn: 0}}
+	return &IPv4Header{&opb.Ipv4Header{Ttl: proto.Uint32(64), Dscp: 0, Ecn: 0}}
 }
 
 // IPv4Header is an IPv4 packet header.
@@ -171,15 +172,14 @@ func (h *IPv4Header) WithFragmentOffset(fragmentOffset int) *IPv4Header {
 
 // WithTTL sets the TTL of the IPv4 header.
 func (h *IPv4Header) WithTTL(ttl uint8) *IPv4Header {
-	h.pb.Ttl = uint32(ttl)
+	h.pb.Ttl = proto.Uint32(uint32(ttl))
 	return h
 }
 
 // WithProtocol sets the protocol field of the IPv4 header.
 // If left unspecified, it will be inferred from the next header in the flow.
 func (h *IPv4Header) WithProtocol(protocol int) *IPv4Header {
-	p := uint32(protocol)
-	h.pb.Protocol = &p
+	h.pb.Protocol = proto.Uint32(uint32(protocol))
 	return h
 }
 
@@ -231,7 +231,7 @@ func (h *IPv4Header) asPB() *opb.Header {
 // The header is initialized with a hop limit of 64, DSCP of 0 (best effort), and ECN of 0 (not ECN capable).
 // Unless specified, a best effort will be made to infer the src and dst addresses from the topology.
 func NewIPv6Header() *IPv6Header {
-	return &IPv6Header{&opb.Ipv6Header{HopLimit: 64, Dscp: 0, Ecn: 0}}
+	return &IPv6Header{&opb.Ipv6Header{HopLimit: proto.Uint32(64), Dscp: 0, Ecn: 0}}
 }
 
 // IPv6Header is an IPv6 packet header.
@@ -291,7 +291,7 @@ func (h *IPv6Header) FlowLabelRange() *ixnet.UIntRange {
 
 // WithHopLimit sets the hop limit of the IPv6 header.
 func (h *IPv6Header) WithHopLimit(hopLimit uint8) *IPv6Header {
-	h.pb.HopLimit = uint32(hopLimit)
+	h.pb.HopLimit = proto.Uint32(uint32(hopLimit))
 	return h
 }
 

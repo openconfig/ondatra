@@ -649,7 +649,7 @@ message Ipv4Header {
   bool dont_fragment = 4;
   bool more_fragments = 5;
   uint32 fragment_offset = 6;
-  uint32 ttl = 7;
+  optional uint32 ttl = 7;
   optional uint32 protocol = 8;
   uint32 checksum = 9;
   AddressRange src_addr = 10;
@@ -659,7 +659,7 @@ message Ipv4Header {
 message Ipv6Header {
   AddressRange src_addr = 1;
   AddressRange dst_addr = 2;
-  uint32 hop_limit = 3;
+  optional uint32 hop_limit = 3;
   UIntRange flow_label = 4;
   uint32 dscp = 5;
   uint32 ecn = 6;

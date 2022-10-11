@@ -182,8 +182,8 @@ func ipv4Stack(ipv4 *opb.Ipv4Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 	if offset := ipv4.GetFragmentOffset(); offset > 0 {
 		setSingleValue(stack.FragmentOffset(), uintToStr(offset))
 	}
-	if ttl := ipv4.GetTtl(); ttl > 0 {
-		setSingleValue(stack.Ttl(), uintToStr(ttl))
+	if ttl := ipv4.Ttl; ttl != nil {
+		setSingleValue(stack.Ttl(), uintToStr(*ttl))
 	}
 	if protocol := ipv4.Protocol; protocol != nil {
 		setSingleValue(stack.Protocol(), uintToStr(*protocol))
@@ -214,8 +214,8 @@ func ipv6Stack(ipv6 *opb.Ipv6Header, idx int) (*ixconfig.TrafficTrafficItemConfi
 			return nil, fmt.Errorf("could not set IPv6 flow label: %w", err)
 		}
 	}
-	if ipv6.GetHopLimit() != 0 {
-		setSingleValue(stack.HopLimit(), uintToStr(ipv6.GetHopLimit()))
+	if hopLimit := ipv6.HopLimit; hopLimit != nil {
+		setSingleValue(stack.HopLimit(), uintToStr(*hopLimit))
 	}
 	if ipv6.GetSrcAddr() != nil {
 		if err := setAddrRangeField(stack.SrcIP(), ipv6AddrType, ipv6.GetSrcAddr()); err != nil {
