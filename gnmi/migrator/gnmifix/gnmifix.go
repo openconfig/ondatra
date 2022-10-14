@@ -42,10 +42,21 @@ var telemFns = map[string]bool{
 	"Watch":   true,
 	"Collect": true,
 	"Await":   true,
+	"Replace": true,
+	"Delete":  true,
+	"Update":  true,
 }
+
 var (
-	ondatraPath = regexp.MustCompile("openconfig/ondatra/[telemetry|config]")
+	ondatraPath = regexp.MustCompile("openconfig/ondatra/(?:telemetry|config).*Path")
 )
+
+const newImports = `
+  "github.com/openconfig/ygnmi/ygnmi"
+  "github.com/openconfig/ondatra/gnmi"
+  "github.com/openconfig/ondatra/gnmi/oc/ocpath"
+  "github.com/openconfig/ondatra/gnmi/oc"
+`
 
 func run(pass *analysis.Pass) (any, error) {
 	inspect := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
@@ -54,20 +65,21 @@ func run(pass *analysis.Pass) (any, error) {
 	var funcsDiag []*analysis.Diagnostic
 
 	inspect.Preorder([]ast.Node{&ast.SelectorExpr{}}, func(n ast.Node) {
+		pos, end := n.Pos(), n.End() // Save the pos before the ast is modified.
 		if !telemetryTypesToYGNMITypes(n) {
 			return
 		}
 		buf := &strings.Builder{}
 		printer.Fprint(buf, pass.Fset, n)
 		diag := analysis.Diagnostic{
-			Pos:     n.Pos(),
-			End:     n.End(),
+			Pos:     pos,
+			End:     end,
 			Message: "Deprecated usage of ondatra generated types",
 			SuggestedFixes: []analysis.SuggestedFix{{
 				Message: "ygmni type",
 				TextEdits: []analysis.TextEdit{{
-					Pos:     n.Pos(),
-					End:     n.End(),
+					Pos:     pos,
+					End:     end,
 					NewText: []byte(buf.String()),
 				}},
 			}},
@@ -82,7 +94,7 @@ func run(pass *analysis.Pass) (any, error) {
 			return
 		}
 		// If Get, Lookup, etc is called on an Ondatra telemetry/config struct.
-		if telemFns[selector.Sel.Name] && ondatraPath.Match([]byte(pass.TypesInfo.TypeOf(selector.X).String())) {
+		if typeStr := pass.TypesInfo.TypeOf(selector.X).String(); telemFns[selector.Sel.Name] && ondatraPath.Match([]byte(typeStr)) {
 			buf := &strings.Builder{}
 			for i := 1; i < len(expr.Args); i++ {
 				fmt.Fprint(buf, ", ")
@@ -98,8 +110,23 @@ func run(pass *analysis.Pass) (any, error) {
 		}
 	})
 
-	for _, typeD := range funcsDiag {
-		pass.Report(*typeD)
+	type diagPos struct {
+		Start token.Pos
+		End   token.Pos
+	}
+
+	diagMap := map[diagPos]*analysis.Diagnostic{}
+
+	// When there are multiple telemetry calls on the same path variable, may have duplicate diagnostics.
+	for _, funcsD := range funcsDiag {
+		diagMap[diagPos{
+			Start: funcsD.Pos,
+			End:   funcsD.End,
+		}] = funcsD
+
+	}
+	for _, diag := range diagMap {
+		pass.Report(*diag)
 	}
 
 	// Prevent overlapping diagnostics as it prevents fixes from being applied.
@@ -113,6 +140,29 @@ func run(pass *analysis.Pass) (any, error) {
 		if report {
 			pass.Report(*typeD)
 		}
+	}
+
+	// If there are diagnostics, add new imports.
+	if len(funcsDiag) == 0 && len(typesDiag) == 0 {
+		return nil, nil
+	}
+
+	for _, f := range pass.Files {
+		importPos := f.Imports[len(f.Imports)-1].End()
+		diag := analysis.Diagnostic{
+			Pos:     importPos,
+			End:     importPos,
+			Message: "Adding new telemetry imports",
+			SuggestedFixes: []analysis.SuggestedFix{{
+				Message: "ygmni imports",
+				TextEdits: []analysis.TextEdit{{
+					Pos:     importPos,
+					End:     importPos,
+					NewText: []byte(newImports),
+				}},
+			}},
+		}
+		pass.Report(diag)
 	}
 
 	return nil, nil
@@ -133,31 +183,39 @@ type callInfo struct {
 	pathOnly  bool
 }
 
-func (c callInfo) String() string {
-	if c.pathOnly && c.pathFound {
-		return fmt.Sprintf("ocpath.Root().%s", strings.TrimSuffix(c.path, "."))
-	} else if c.pathOnly {
-		return fmt.Sprintf("%s.%s", c.caller, strings.TrimSuffix(c.path, "."))
+func (c callInfo) pathToString() string {
+	left := strings.TrimSuffix(c.caller, ".")
+	if c.pathFound && !c.indirect {
+		left = "ocpath.Root()"
 	}
+
+	right := strings.TrimSuffix(c.path, ".")
+	if right == "" {
+		return left
+	}
+	return fmt.Sprintf("%s.%s", left, right)
+}
+
+func (c callInfo) String() string {
+	path := c.pathToString()
+	if c.pathOnly {
+		return path
+	}
+
 	queryType := "State()"
 	if c.config {
 		queryType = "Config()"
 	}
+
 	var callSuffix string
 	if c.wildcard {
 		callSuffix = "All"
 	}
-	caller := "ocpath.Root()"
-	if c.indirect {
-		caller = c.caller
-	}
-	return fmt.Sprintf("gnmi.%s%s(t, %s, %s.%s%s%s)", c.call, callSuffix, c.client, caller, c.path, queryType, c.args)
+	return fmt.Sprintf("gnmi.%s%s(t, %s, %s.%s%s)", c.call, callSuffix, c.client, path, queryType, c.args)
 }
 
 // handleCallExpr builds the chained path calls.
-func handleCallExpr(expr *ast.CallExpr, fset *token.FileSet, info *callInfo) ast.Expr {
-	buf := &strings.Builder{}
-	selector := expr.Fun.(*ast.SelectorExpr)
+func handleCallExpr(expr *ast.CallExpr, selector *ast.SelectorExpr, fset *token.FileSet, info *callInfo) ast.Expr {
 	// If reached a Telemetry() or State() call means full path is found.
 	if selector.Sel.Name == "Telemetry" {
 		info.pathFound = true
@@ -167,9 +225,12 @@ func handleCallExpr(expr *ast.CallExpr, fset *token.FileSet, info *callInfo) ast
 	}
 	// If haven't found the last path elem or this is a different call chain.
 	if !info.pathFound && !info.indirect {
+		xbuf := &strings.Builder{}
+		buf := &strings.Builder{}
+		printer.Fprint(xbuf, fset, selector.X)
 		printer.Fprint(buf, fset, expr)
 		fullCall := buf.String()
-		call := fullCall[strings.LastIndex(fullCall, selector.Sel.Name):]
+		call := fullCall[len(xbuf.String())+1:]
 		if strings.Contains(call, "Any(") {
 			info.wildcard = true
 		}
@@ -204,7 +265,11 @@ func buildDiagnostic(expr *ast.Ident, info *callInfo) *analysis.Diagnostic {
 func handleTelemCalls(pass *analysis.Pass, n ast.Node, info *callInfo, diags *[]*analysis.Diagnostic) {
 	switch expr := n.(type) {
 	case *ast.CallExpr:
-		next := handleCallExpr(expr, pass.Fset, info)
+		selector, ok := expr.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return
+		}
+		next := handleCallExpr(expr, selector, pass.Fset, info)
 		handleTelemCalls(pass, next, info, diags)
 	case *ast.Ident: // At an Ident, reached the end of the call chain.
 		if !info.indirect {

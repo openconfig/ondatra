@@ -22,6 +22,7 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/ixweb"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -54,6 +55,15 @@ func ixiaForATE(ctx context.Context, ate binding.ATE) (*ixATE, error) {
 		ixias[ate] = ix
 	}
 	return ix, nil
+}
+
+// IxSession returns the raw IxNetwork session for the specified ATE.
+func IxSession(ctx context.Context, ate binding.ATE) (*ixweb.Session, error) {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	return ix.c.Session().(*sessionWrapper).Session, nil
 }
 
 // PushTopology pushes a topology to an ATE.
