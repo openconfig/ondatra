@@ -36,7 +36,9 @@ func TestReserve(t *testing.T) {
 	const topo = `
 		nodes: {
 		  name: "node1"
-      type: ARISTA_CEOS
+			model: "ceos"
+			os: "eos"
+      vendor: ARISTA
       services: {
         key: 1234
         value: {
@@ -52,7 +54,7 @@ func TestReserve(t *testing.T) {
     }
 		nodes: {
 		  name: "node2"
-      type: IXIA_TG
+      vendor: KEYSIGHT
 			interfaces: {
 			  key: "eth1"
 				value: {}
@@ -101,8 +103,8 @@ func TestReserve(t *testing.T) {
 					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 						Name:            "node1",
 						Vendor:          opb.Device_ARISTA,
-						HardwareModel:   "ARISTA_CEOS",
-						SoftwareVersion: "ARISTA_CEOS",
+						HardwareModel:   "ceos",
+						SoftwareVersion: "eos",
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "Ethernet1"},
 						},
@@ -118,10 +120,8 @@ func TestReserve(t *testing.T) {
 			"ate": &kneATE{
 				ServiceATE: &solver.ServiceATE{
 					AbstractATE: &binding.AbstractATE{&binding.Dims{
-						Name:            "node2",
-						Vendor:          opb.Device_IXIA,
-						HardwareModel:   "IXIA_TG",
-						SoftwareVersion: "IXIA_TG",
+						Name:   "node2",
+						Vendor: opb.Device_IXIA,
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "eth1"},
 						},
@@ -166,7 +166,7 @@ func TestServices(t *testing.T) {
 		topo: `
 		  nodes: {
 		    name: "node1"
-        type: ARISTA_CEOS
+        vendor: ARISTA
 		  }
 		`,
 		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
@@ -183,7 +183,7 @@ func TestServices(t *testing.T) {
 		topo: `
 		  nodes: {
 		    name: "node1"
-        type: ARISTA_CEOS
+        vendor: ARISTA
 		  }
 		`,
 		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
@@ -202,7 +202,7 @@ func TestServices(t *testing.T) {
 		topo: `
 		  nodes: {
 		    name: "node1"
-        type: CISCO_CXR
+        vendor: CISCO
 				services {
 				  key: 9339
 					value {
@@ -229,7 +229,7 @@ func TestServices(t *testing.T) {
 		topo: `
 		  nodes: {
 		    name: "node1"
-        type: CISCO_CXR
+        vendor: CISCO
 				services {
 				  key: 9336
 					value {

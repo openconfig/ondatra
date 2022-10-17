@@ -76,10 +76,10 @@ func TestReadXMLError(t *testing.T) {
 func TestExtractProperties(t *testing.T) {
 	props := []junit.Property{
 		{Name: "foo", Value: "bar"},
-		{Name: "TestExample.foo", Value: "bar"},
-		{Name: "TestExample/subtest.foo", Value: "bar"},
+		{Name: "TestExample/foo", Value: "bar"},
+		{Name: "TestExample/subtest/foo", Value: "bar"},
 		{Name: "foo", Value: "baz"},
-		{Name: "TestExample.bar", Value: "baz"},
+		{Name: "TestExample/bar", Value: "baz"},
 	}
 	want := map[string]map[string]string{
 		"":                    {"foo": "baz"},

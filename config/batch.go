@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package config contains generated code to perform gNMI Set operations on devices.
 package config
 
 import (

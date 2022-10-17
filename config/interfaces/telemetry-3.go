@@ -15,198 +15,6 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Lookup(t testing.TB) *oc.QualifiedInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
-	t.Helper()
-	goStruct := &oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef{}
-	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef", goStruct, false, true)
-	if ok {
-		return (&oc.QualifiedInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef{
-			Metadata: md,
-		}).SetVal(goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Get(t testing.TB) *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny) Lookup(t testing.TB) []*oc.QualifiedInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef", goStruct, queryPath, false, true)
-		if !ok {
-			continue
-		}
-		qv := (&oc.QualifiedInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef{
-			Metadata: md,
-		}).SetVal(goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref with a ONCE subscription.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny) Get(t testing.TB) []*oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []*oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref in the given batch object.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Replace(t testing.TB, val *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref in the given batch object.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) {
-	t.Helper()
-	b.BatchReplace(t, n, val)
-}
-
-// Update updates the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) Update(t testing.TB, val *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref in the given batch object.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) {
-	t.Helper()
-	b.BatchUpdate(t, n, val)
-}
-
-// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface with a ONCE subscription.
-// It returns nil if there is no value present at the path.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) Lookup(t testing.TB) *oc.QualifiedString {
-	t.Helper()
-	goStruct := &oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef{}
-	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef", goStruct, true, true)
-	if ok {
-		return convertInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath(t, md, goStruct)
-	}
-	return nil
-}
-
-// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface with a ONCE subscription,
-// failing the test fatally if no value is present at the path.
-// To avoid a fatal test failure, use the Lookup method instead.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) Get(t testing.TB) string {
-	t.Helper()
-	return n.Lookup(t).Val(t)
-}
-
-// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface with a ONCE subscription.
-// It returns an empty list if no values are present at the path.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePathAny) Lookup(t testing.TB) []*oc.QualifiedString {
-	t.Helper()
-	datapoints, queryPath := genutil.MustGet(t, n)
-	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
-
-	var data []*oc.QualifiedString
-	for _, prefix := range sortedPrefixes {
-		goStruct := &oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef{}
-		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef", goStruct, queryPath, true, true)
-		if !ok {
-			continue
-		}
-		qv := convertInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath(t, md, goStruct)
-		data = append(data, qv)
-	}
-	return data
-}
-
-// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface with a ONCE subscription.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePathAny) Get(t testing.TB) []string {
-	t.Helper()
-	fulldata := n.Lookup(t)
-	var data []string
-	for _, full := range fulldata {
-		data = append(data, full.Val(t))
-	}
-	return data
-}
-
-// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) Delete(t testing.TB) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Delete(t, n)
-}
-
-// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface in the given batch object.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
-	t.Helper()
-	b.BatchDelete(t, n)
-}
-
-// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) Replace(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Replace(t, n, &val)
-}
-
-// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface in the given batch object.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchReplace(t, n, &val)
-}
-
-// Update updates the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) Update(t testing.TB, val string) *gpb.SetResponse {
-	t.Helper()
-	return genutil.Update(t, n, &val)
-}
-
-// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/interface in the given batch object.
-func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val string) {
-	t.Helper()
-	b.BatchUpdate(t, n, &val)
-}
-
-// convertInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath extracts the value of the leaf Interface from its parent oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef
-// and combines the update with an existing Metadata to return a *oc.QualifiedString.
-func convertInterface_Subinterface_Ipv4_Unnumbered_InterfaceRef_InterfacePath(t testing.TB, md *genutil.Metadata, parent *oc.Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef) *oc.QualifiedString {
-	t.Helper()
-	qv := &oc.QualifiedString{
-		Metadata: md,
-	}
-	val := parent.Interface
-	if !reflect.ValueOf(val).IsZero() {
-		qv.SetVal(*val)
-	}
-	return qv
-}
-
 // Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/unnumbered/interface-ref/config/subinterface with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRef_SubinterfacePath) Lookup(t testing.TB) *oc.QualifiedUint32 {
@@ -4074,4 +3882,297 @@ func (n *Interface_Subinterface_VlanPath) Update(t testing.TB, val *oc.Interface
 func (n *Interface_Subinterface_VlanPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Vlan) {
 	t.Helper()
 	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Lookup(t testing.TB) *oc.QualifiedInterface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Vlan_EgressMapping", goStruct, false, true)
+	if ok {
+		return (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Lookup(t testing.TB) []*oc.QualifiedInterface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedInterface_Subinterface_Vlan_EgressMapping
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", goStruct, queryPath, false, true)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_EgressMapping{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping with a ONCE subscription.
+func (n *Interface_Subinterface_Vlan_EgressMappingPathAny) Get(t testing.TB) []*oc.Interface_Subinterface_Vlan_EgressMapping {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Interface_Subinterface_Vlan_EgressMapping
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Replace(t testing.TB, val *oc.Interface_Subinterface_Vlan_EgressMapping) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Vlan_EgressMapping) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) Update(t testing.TB, val *oc.Interface_Subinterface_Vlan_EgressMapping) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMappingPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val *oc.Interface_Subinterface_Vlan_EgressMapping) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Lookup(t testing.TB) *oc.QualifiedE_VlanTypes_TPID_TYPES {
+	t.Helper()
+	goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Vlan_EgressMapping", goStruct, true, true)
+	if ok {
+		return convertInterface_Subinterface_Vlan_EgressMapping_TpidPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Get(t testing.TB) oc.E_VlanTypes_TPID_TYPES {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPathAny) Lookup(t testing.TB) []*oc.QualifiedE_VlanTypes_TPID_TYPES {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedE_VlanTypes_TPID_TYPES
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertInterface_Subinterface_Vlan_EgressMapping_TpidPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid with a ONCE subscription.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPathAny) Get(t testing.TB) []oc.E_VlanTypes_TPID_TYPES {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []oc.E_VlanTypes_TPID_TYPES
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Replace(t testing.TB, val oc.E_VlanTypes_TPID_TYPES) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val oc.E_VlanTypes_TPID_TYPES) {
+	t.Helper()
+	b.BatchReplace(t, n, val)
+}
+
+// Update updates the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) Update(t testing.TB, val oc.E_VlanTypes_TPID_TYPES) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/tpid in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMapping_TpidPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val oc.E_VlanTypes_TPID_TYPES) {
+	t.Helper()
+	b.BatchUpdate(t, n, val)
+}
+
+// convertInterface_Subinterface_Vlan_EgressMapping_TpidPath extracts the value of the leaf Tpid from its parent oc.Interface_Subinterface_Vlan_EgressMapping
+// and combines the update with an existing Metadata to return a *oc.QualifiedE_VlanTypes_TPID_TYPES.
+func convertInterface_Subinterface_Vlan_EgressMapping_TpidPath(t testing.TB, md *genutil.Metadata, parent *oc.Interface_Subinterface_Vlan_EgressMapping) *oc.QualifiedE_VlanTypes_TPID_TYPES {
+	t.Helper()
+	qv := &oc.QualifiedE_VlanTypes_TPID_TYPES{
+		Metadata: md,
+	}
+	val := parent.Tpid
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(val)
+	}
+	return qv
+}
+
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Lookup(t testing.TB) *oc.QualifiedUint16 {
+	t.Helper()
+	goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Vlan_EgressMapping", goStruct, true, true)
+	if ok {
+		return convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath(t, md, goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Get(t testing.TB) uint16 {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny) Lookup(t testing.TB) []*oc.QualifiedUint16 {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedUint16
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface_Subinterface_Vlan_EgressMapping{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Vlan_EgressMapping", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id with a ONCE subscription.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPathAny) Get(t testing.TB) []uint16 {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []uint16
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Replace(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) Update(t testing.TB, val uint16) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/egress-mapping/config/vlan-id in the given batch object.
+func (n *Interface_Subinterface_Vlan_EgressMapping_VlanIdPath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val uint16) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath extracts the value of the leaf VlanId from its parent oc.Interface_Subinterface_Vlan_EgressMapping
+// and combines the update with an existing Metadata to return a *oc.QualifiedUint16.
+func convertInterface_Subinterface_Vlan_EgressMapping_VlanIdPath(t testing.TB, md *genutil.Metadata, parent *oc.Interface_Subinterface_Vlan_EgressMapping) *oc.QualifiedUint16 {
+	t.Helper()
+	qv := &oc.QualifiedUint16{
+		Metadata: md,
+	}
+	val := parent.VlanId
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
 }

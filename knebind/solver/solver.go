@@ -28,12 +28,16 @@ import (
 )
 
 var (
+	// TODO: Cleanup after Type deprecation
 	ateTypes = map[tpb.Node_Type]bool{
 		tpb.Node_IXIA_TG: true,
 	}
 
-	// type2VendorMap maps the KNE node type to the Ondatra vendor.
-	type2VendorMap = map[tpb.Node_Type]opb.Device_Vendor{
+	ateVendors = map[tpb.Vendor]bool{
+		tpb.Vendor_KEYSIGHT: true,
+	}
+
+	deviceTypes = map[tpb.Node_Type]opb.Device_Vendor{
 		tpb.Node_ARISTA_CEOS: opb.Device_ARISTA,
 		// TODO: when Ondatra supports the OS dimension, use it to
 		// distinguish CSR from CXR and CEVO from VMX.
@@ -47,10 +51,51 @@ var (
 		tpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
 		tpb.Node_LEMMING:      opb.Device_OPENCONFIG,
 	}
+
+	deviceVendors = map[tpb.Vendor]opb.Device_Vendor{
+		tpb.Vendor_ARISTA:     opb.Device_ARISTA,
+		tpb.Vendor_CISCO:      opb.Device_CISCO,
+		tpb.Vendor_KEYSIGHT:   opb.Device_IXIA,
+		tpb.Vendor_JUNIPER:    opb.Device_JUNIPER,
+		tpb.Vendor_NOKIA:      opb.Device_NOKIA,
+		tpb.Vendor_OPENCONFIG: opb.Device_OPENCONFIG,
+	}
 )
+
+func filterTopology(topo *tpb.Topology) *tpb.Topology {
+	t := &tpb.Topology{}
+	for _, node := range topo.GetNodes() {
+		_, vendorOK := deviceVendors[node.GetVendor()]
+		_, typeOK := deviceTypes[node.GetType()]
+		// Only include nodes with known type/vendor.
+		if vendorOK || typeOK {
+			t.Nodes = append(t.Nodes, node)
+		} else {
+			log.Infof("No known device vendor for node %q (vendor %v, type %v), ignoring node", node.GetName(), node.GetVendor(), node.GetType())
+		}
+	}
+	for _, link := range topo.GetLinks() {
+		foundA := false
+		foundZ := false
+		for _, node := range t.GetNodes() {
+			if link.GetANode() == node.GetName() {
+				foundA = true
+			}
+			if link.GetZNode() == node.GetName() {
+				foundZ = true
+			}
+		}
+		// Only include links with nodes passing filter.
+		if foundA && foundZ {
+			t.Links = append(t.Links, link)
+		}
+	}
+	return t
+}
 
 // Solve creates a new Reservation from a desired testbed and an available topology.
 func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
+	topo = filterTopology(topo)
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
 	if numDevs, numNodes := len(devs), len(topo.GetNodes()); numDevs > numNodes {
 		return nil, fmt.Errorf("not enough nodes in KNE topology for specified testbed: "+
@@ -366,17 +411,19 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 	if !ok {
 		return nil, nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
-	vendor, ok := type2VendorMap[node.GetType()]
+	// TODO: Cleanup after Type deprecation
+	vendor, ok := deviceVendors[node.GetVendor()]
 	if !ok {
-		return nil, nil, nil, fmt.Errorf("no known device vendor for node type: %v", node.GetType())
+		vendor, ok = deviceTypes[node.GetType()]
+		if !ok {
+			return nil, nil, nil, fmt.Errorf("no known device vendor for node %q (vendor %v, type %v)", node.GetName(), node.GetVendor(), node.GetType())
+		}
 	}
-	typeName := tpb.Node_Type_name[int32(node.GetType())]
 	dims := &binding.Dims{
-		Name:   node.GetName(),
-		Vendor: vendor,
-		// TODO: Determine appropriate hardware model and software version
-		HardwareModel:   typeName,
-		SoftwareVersion: typeName,
+		Name:            node.GetName(),
+		Vendor:          vendor,
+		HardwareModel:   node.GetModel(),
+		SoftwareVersion: node.GetOs(),
 		Ports:           make(map[string]*binding.Port),
 	}
 	for _, p := range dev.GetPorts() {
@@ -488,7 +535,8 @@ func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*
 func (s *solver) nodeMatches(dev *opb.Device, isATE bool) ([]*tpb.Node, error) {
 	var nodeList []*tpb.Node
 	for _, node := range s.topology.GetNodes() {
-		if isATE != ateTypes[node.GetType()] {
+		// TODO: Cleanup after Type deprecation
+		if ateVendors[node.GetVendor()] != isATE && ateTypes[node.GetType()] != isATE {
 			continue
 		}
 		match := s.devMatch(dev, node)
@@ -510,7 +558,11 @@ func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) bool {
 	if dev.GetSoftwareVersion() != "" && dev.GetSoftwareVersion() != softwareVersion(node) {
 		return false
 	}
-	if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED && v != type2VendorMap[node.GetType()] {
+	vendor, ok := deviceVendors[node.GetVendor()]
+	if !ok {
+		vendor = deviceTypes[node.GetType()]
+	}
+	if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED && v != vendor {
 		return false
 	}
 	log.V(1).Infof("Found node match: %q", dev.GetId())

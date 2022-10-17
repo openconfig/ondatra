@@ -18,11 +18,9 @@ import (
 	"bufio"
 	"golang.org/x/net/context"
 	"errors"
-	"path/filepath"
 	"strings"
 	"testing"
 
-	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"github.com/openconfig/gnmi/errdiff"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -37,6 +35,7 @@ import (
 	mpb "github.com/openconfig/gnoi/mpls"
 	ospb "github.com/openconfig/gnoi/os"
 	otpb "github.com/openconfig/gnoi/otdr"
+	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
@@ -59,135 +58,6 @@ func initDUTFakes(t *testing.T) {
 		gotConfig = config
 		gotReset = reset
 		return nil
-	}
-}
-
-func TestConfigPush(t *testing.T) {
-	initDUTFakes(t)
-	dutArista := DUT(t, "dut_arista")
-	testsPass := []struct {
-		desc       string
-		config     *DUTConfig
-		wantConfig string
-	}{{
-		desc:       "correct text",
-		config:     dutArista.Config().New().WithText("generated"),
-		wantConfig: "generated",
-	}, {
-		desc:       "correct file",
-		config:     dutArista.Config().New().WithFile(filepath.Join("testdata", "example_config_1.txt")),
-		wantConfig: "example_config_1",
-	}, {
-		desc: "correct per-vendor text",
-		config: dutArista.Config().New().
-			WithAristaText("Arista config").
-			WithCiscoText("Cisco config").
-			WithJuniperText("Juniper config"),
-		wantConfig: "Arista config",
-	}, {
-		desc: "correct per-vendor file",
-		config: dutArista.Config().New().
-			WithAristaFile(filepath.Join("testdata", "example_config_1.txt")).
-			WithCiscoText("Cisco config").
-			WithJuniperFile(filepath.Join("testdata", "example_config_2.txt")),
-		wantConfig: "example_config_1",
-	}, {
-		desc: "port template",
-		config: dutArista.Config().New().
-			WithAristaText(`reconfigure {{ port "port1" }} and {{ port "port2" }}`),
-		wantConfig: "reconfigure Et1/2/3 and Et4/5/6",
-	}, {
-		desc: "secrets template",
-		config: dutArista.Config().New().
-			WithAristaText(`shh {{ secrets "hello" "there" }} wink`),
-		wantConfig: `shh {{ secrets "hello" "there" }} wink`,
-	}, {
-		desc: "var template",
-		config: dutArista.Config().New().
-			WithAristaText(`hello {{ var "foo" }} there`).
-			WithVarValue("foo", "bar"),
-		wantConfig: `hello bar there`,
-	}, {
-		desc: "var map template",
-		config: dutArista.Config().New().
-			WithAristaText(`hello {{ var "x" }} and {{ var "y" }}`).
-			WithVarMap(map[string]string{"x": "apple", "y": "orange"}),
-		wantConfig: `hello apple and orange`,
-	}}
-
-	for _, tt := range testsPass {
-		t.Run(tt.desc, func(t *testing.T) {
-			gotConfig = ""
-			gotReset = false
-			tt.config.Push(t)
-			if diff := cmp.Diff(tt.wantConfig, gotConfig); diff != "" {
-				t.Errorf("Push(t) got unexpected config diff(-want,+got):\n %s", diff)
-			}
-			if !gotReset {
-				t.Errorf("Push(t) got unexpected reset %v, want true", gotReset)
-			}
-		})
-	}
-}
-
-func TestConfigPushErrors(t *testing.T) {
-	initDUTFakes(t)
-	dutArista := DUT(t, "dut_arista")
-	testsFail := []struct {
-		desc         string
-		config       *DUTConfig
-		wantFatalMsg string
-	}{{
-		desc:         "no config",
-		config:       dutArista.Config().New().WithCiscoText("gaga"),
-		wantFatalMsg: "no config",
-	}, {
-		desc: "all-vendor and per-vendor",
-		config: dutArista.Config().New().
-			WithText("text1").
-			WithAristaText("text2"),
-		wantFatalMsg: "all-vendor and per-vendor",
-	}, {
-		desc:         "template function does not exist",
-		config:       dutArista.Config().New().WithAristaText(`{{ qwerty "port1" }}`),
-		wantFatalMsg: `function "qwerty" not defined`,
-	}, {
-		desc:         "port name does not exist",
-		config:       dutArista.Config().New().WithAristaText(`{{ port "port10" }}`),
-		wantFatalMsg: "not found",
-	}, {
-		desc:         "template malformed",
-		config:       dutArista.Config().New().WithAristaText(`{{ port"port10" }}`),
-		wantFatalMsg: "bad character",
-	}, {
-		desc:         "var has no value",
-		config:       dutArista.Config().New().WithAristaText(`{{ var "key1" }}`),
-		wantFatalMsg: "no value for key",
-	}}
-
-	for _, tt := range testsFail {
-		t.Run(tt.desc, func(t *testing.T) {
-			got := testt.ExpectFatal(t, func(t testing.TB) {
-				tt.config.Push(t)
-			})
-			if !strings.Contains(got, tt.wantFatalMsg) {
-				t.Errorf("Push(t) failed with message %q, want %q", got, tt.wantFatalMsg)
-			}
-		})
-	}
-}
-
-func TestConfigAppend(t *testing.T) {
-	initDUTFakes(t)
-	gotConfig = ""
-	gotReset = false
-	wantConfig := "arista config"
-	DUT(t, "dut_arista").Config().New().WithAristaText(wantConfig).Append(t)
-	if gotConfig != wantConfig {
-		t.Errorf("Append(t) got pushed config %v, want %v", gotConfig, wantConfig)
-	}
-	if gotReset {
-		t.Errorf("Append(t) got unexpected reset %v, want false", gotReset)
 	}
 }
 
@@ -219,20 +89,21 @@ func TestGNMIError(t *testing.T) {
 
 type gnoiClients struct {
 	binding.GNOIClients
-	bgp          bpb.BGPClient
-	certMgmt     cpb.CertificateManagementClient
-	diag         dpb.DiagClient
-	factoryReset frpb.FactoryResetClient
-	file         fpb.FileClient
-	healthz      hpb.HealthzClient
-	intface      ipb.InterfaceClient
-	layer2       lpb.Layer2Client
-	mpls         mpb.MPLSClient
-	os           ospb.OSClient
-	otdr         otpb.OTDRClient
-	system       spb.SystemClient
-	waveRtr      wpb.WavelengthRouterClient
-	custom       any
+	bgp               bpb.BGPClient
+	certMgmt          cpb.CertificateManagementClient
+	diag              dpb.DiagClient
+	factoryReset      frpb.FactoryResetClient
+	file              fpb.FileClient
+	healthz           hpb.HealthzClient
+	intface           ipb.InterfaceClient
+	layer2            lpb.Layer2Client
+	linkQualification plqpb.LinkQualificationClient
+	mpls              mpb.MPLSClient
+	os                ospb.OSClient
+	otdr              otpb.OTDRClient
+	system            spb.SystemClient
+	waveRtr           wpb.WavelengthRouterClient
+	custom            any
 }
 
 func (g *gnoiClients) BGP() bpb.BGPClient {
@@ -267,6 +138,10 @@ func (g *gnoiClients) Layer2() lpb.Layer2Client {
 	return g.layer2
 }
 
+func (g *gnoiClients) LinkQualification() plqpb.LinkQualificationClient {
+	return g.linkQualification
+}
+
 func (g *gnoiClients) MPLS() mpb.MPLSClient {
 	return g.mpls
 }
@@ -294,18 +169,19 @@ func TestGNOI(t *testing.T) {
 		certMgmt: struct {
 			cpb.CertificateManagementClient
 		}{},
-		diag:         struct{ dpb.DiagClient }{},
-		factoryReset: struct{ frpb.FactoryResetClient }{},
-		file:         struct{ fpb.FileClient }{},
-		healthz:      struct{ hpb.HealthzClient }{},
-		intface:      struct{ ipb.InterfaceClient }{},
-		layer2:       struct{ lpb.Layer2Client }{},
-		mpls:         struct{ mpb.MPLSClient }{},
-		os:           struct{ ospb.OSClient }{},
-		otdr:         struct{ otpb.OTDRClient }{},
-		system:       struct{ spb.SystemClient }{},
-		waveRtr:      struct{ wpb.WavelengthRouterClient }{},
-		custom:       struct{}{},
+		diag:              struct{ dpb.DiagClient }{},
+		factoryReset:      struct{ frpb.FactoryResetClient }{},
+		file:              struct{ fpb.FileClient }{},
+		healthz:           struct{ hpb.HealthzClient }{},
+		intface:           struct{ ipb.InterfaceClient }{},
+		layer2:            struct{ lpb.Layer2Client }{},
+		linkQualification: struct{ plqpb.LinkQualificationClient }{},
+		mpls:              struct{ mpb.MPLSClient }{},
+		os:                struct{ ospb.OSClient }{},
+		otdr:              struct{ otpb.OTDRClient }{},
+		system:            struct{ spb.SystemClient }{},
+		waveRtr:           struct{ wpb.WavelengthRouterClient }{},
+		custom:            struct{}{},
 	}
 	fakeJuniper.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return bgnoi, nil
@@ -334,6 +210,9 @@ func TestGNOI(t *testing.T) {
 	}
 	if got, want := gnoi.Layer2(), bgnoi.Layer2(); got != want {
 		t.Errorf("GNOI(t) got Layer2 client %v, want %v", got, want)
+	}
+	if got, want := gnoi.LinkQualification(), bgnoi.LinkQualification(); got != want {
+		t.Errorf("GNOI(t) got LinkQualification client %v, want %v", got, want)
 	}
 	if got, want := gnoi.MPLS(), bgnoi.MPLS(); got != want {
 		t.Errorf("GNOI(t) got MPLS client %v, want %v", got, want)

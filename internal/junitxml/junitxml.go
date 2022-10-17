@@ -136,22 +136,27 @@ func writeXML(testsuites *junit.Testsuites, w io.Writer) error {
 
 // encodeProperty encodes a test name and property name-value in a JUnit Property.
 func encodeProperty(test, name, value string) junit.Property {
-	name = strings.ReplaceAll(name, ".", "..")
+	name = strings.ReplaceAll(name, "/", "//")
 	if test != "" {
-		name = fmt.Sprintf("%s.%s", test, name)
+		name = fmt.Sprintf("%s/%s", test, name)
 	}
 	return junit.Property{Name: name, Value: value}
 }
 
 // DecodeProperty decodes a test name and property name-value from a JUnit Property.
 func DecodeProperty(prop junit.Property) (string, string, string) {
+	var lastSlashIdx int
+	if doubleSlashIdx := strings.Index(prop.Name, "//"); doubleSlashIdx == -1 {
+		lastSlashIdx = strings.LastIndex(prop.Name, "/")
+	} else {
+		lastSlashIdx = strings.LastIndex(prop.Name[0:doubleSlashIdx], "/")
+	}
 	test := ""
 	name := prop.Name
-	dotIdx := strings.Index(name, ".")
-	if dotIdx != -1 && (dotIdx == len(name)-1 || name[dotIdx+1] != '.') {
-		test = prop.Name[:dotIdx]
-		name = prop.Name[dotIdx+1:]
+	if lastSlashIdx != -1 {
+		test = prop.Name[:lastSlashIdx]
+		name = prop.Name[lastSlashIdx+1:]
 	}
-	name = strings.ReplaceAll(name, "..", ".")
+	name = strings.ReplaceAll(name, "//", "/")
 	return test, name, prop.Value
 }

@@ -49,14 +49,20 @@ var telemFns = map[string]bool{
 
 var (
 	ondatraPath = regexp.MustCompile("openconfig/ondatra/(?:telemetry|config).*Path")
+	telemCaller = regexp.MustCompile(`ondatra\.DUTDevice|ondatra\.ATEDevice|otg\.OTG`)
 )
 
-const newImports = `
-  "github.com/openconfig/ygnmi/ygnmi"
-  "github.com/openconfig/ondatra/gnmi"
-  "github.com/openconfig/ondatra/gnmi/oc/ocpath"
-  "github.com/openconfig/ondatra/gnmi/oc"
+const (
+	newImports = `
+	"github.com/openconfig/ygnmi/ygnmi"
+	"github.com/openconfig/ondatra/gnmi"
+	"github.com/openconfig/ondatra/gnmi/oc/ocpath"
+	"github.com/openconfig/ondatra/gnmi/otg/otgpath"
+	"github.com/openconfig/ondatra/gnmi/oc"
 `
+	oldOTGTypesImport = `"github.com/openconfig/ondatra/telemetry/otg"`
+	newOTGTypesImport = `"github.com/openconfig/ondatra/gnmi/otg"`
+)
 
 func run(pass *analysis.Pass) (any, error) {
 	inspect := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
@@ -94,7 +100,7 @@ func run(pass *analysis.Pass) (any, error) {
 			return
 		}
 		// If Get, Lookup, etc is called on an Ondatra telemetry/config struct.
-		if typeStr := pass.TypesInfo.TypeOf(selector.X).String(); telemFns[selector.Sel.Name] && ondatraPath.Match([]byte(typeStr)) {
+		if typeStr := pass.TypesInfo.TypeOf(selector.X).String(); telemFns[selector.Sel.Name] && ondatraPath.MatchString(typeStr) {
 			buf := &strings.Builder{}
 			for i := 1; i < len(expr.Args); i++ {
 				fmt.Fprint(buf, ", ")
@@ -142,12 +148,29 @@ func run(pass *analysis.Pass) (any, error) {
 		}
 	}
 
-	// If there are diagnostics, add new imports.
-	if len(funcsDiag) == 0 && len(typesDiag) == 0 {
-		return nil, nil
-	}
-
 	for _, f := range pass.Files {
+		for _, imp := range f.Imports {
+			if imp.Path.Value == oldOTGTypesImport {
+				diag := analysis.Diagnostic{
+					Pos:     imp.Path.Pos(),
+					End:     imp.Path.End(),
+					Message: "Adding new telemetry imports",
+					SuggestedFixes: []analysis.SuggestedFix{{
+						Message: "ygmni imports",
+						TextEdits: []analysis.TextEdit{{
+							Pos:     imp.Path.Pos(),
+							End:     imp.Path.End(),
+							NewText: []byte(newOTGTypesImport),
+						}},
+					}},
+				}
+				pass.Report(diag)
+			}
+		}
+		// If there are diagnostics, add new imports.
+		if len(funcsDiag) == 0 && len(typesDiag) == 0 {
+			continue
+		}
 		importPos := f.Imports[len(f.Imports)-1].End()
 		diag := analysis.Diagnostic{
 			Pos:     importPos,
@@ -181,12 +204,16 @@ type callInfo struct {
 	pos       token.Pos
 	end       token.Pos
 	pathOnly  bool
+	otg       bool
 }
 
 func (c callInfo) pathToString() string {
 	left := strings.TrimSuffix(c.caller, ".")
 	if c.pathFound && !c.indirect {
 		left = "ocpath.Root()"
+		if c.otg {
+			left = "otgpath.Root()"
+		}
 	}
 
 	right := strings.TrimSuffix(c.path, ".")
@@ -223,24 +250,27 @@ func handleCallExpr(expr *ast.CallExpr, selector *ast.SelectorExpr, fset *token.
 		info.config = true
 		info.pathFound = true
 	}
+
+	xbuf := &strings.Builder{}
+	buf := &strings.Builder{}
+	printer.Fprint(xbuf, fset, selector.X)
+	printer.Fprint(buf, fset, expr)
+	fullCall := buf.String()
+
+	call := fullCall[len(xbuf.String())+1:]
+	if strings.Contains(call, "Any(") {
+		info.wildcard = true
+	}
+
 	// If haven't found the last path elem or this is a different call chain.
 	if !info.pathFound && !info.indirect {
-		xbuf := &strings.Builder{}
-		buf := &strings.Builder{}
-		printer.Fprint(xbuf, fset, selector.X)
-		printer.Fprint(buf, fset, expr)
-		fullCall := buf.String()
-		call := fullCall[len(xbuf.String())+1:]
-		if strings.Contains(call, "Any(") {
-			info.wildcard = true
-		}
 		info.path = fmt.Sprintf("%s.%s", call, info.path)
 	}
 	return selector.X
 }
 
-func buildDiagnostic(expr *ast.Ident, info *callInfo) *analysis.Diagnostic {
-	info.client = expr.Name
+func buildDiagnostic(client string, info *callInfo) *analysis.Diagnostic {
+	info.client = client
 	msg := "Deprecated usage of Ondatra Get, Lookup, etc"
 	if info.pathOnly {
 		msg = "Deprecated Ondatra telemetry path"
@@ -265,6 +295,9 @@ func buildDiagnostic(expr *ast.Ident, info *callInfo) *analysis.Diagnostic {
 func handleTelemCalls(pass *analysis.Pass, n ast.Node, info *callInfo, diags *[]*analysis.Diagnostic) {
 	switch expr := n.(type) {
 	case *ast.CallExpr:
+		if reportIfValid(pass, expr, info, diags) {
+			return
+		}
 		selector, ok := expr.Fun.(*ast.SelectorExpr)
 		if !ok {
 			return
@@ -272,14 +305,7 @@ func handleTelemCalls(pass *analysis.Pass, n ast.Node, info *callInfo, diags *[]
 		next := handleCallExpr(expr, selector, pass.Fset, info)
 		handleTelemCalls(pass, next, info, diags)
 	case *ast.Ident: // At an Ident, reached the end of the call chain.
-		if !info.indirect {
-			info.caller = expr.Name
-		}
-		// If the root is a DUT, then we're done.
-		typ := pass.TypesInfo.TypeOf(expr)
-		if strings.Contains(typ.String(), "ondatra.DUTDevice") || strings.Contains(typ.String(), "ondatra.ATEDevice") { // If called on DUTDevice have everything we need.
-			diag := buildDiagnostic(expr, info)
-			*diags = append(*diags, diag)
+		if reportIfValid(pass, expr, info, diags) {
 			return
 		}
 		// If not, try to find device by looking at its declaration.
@@ -297,7 +323,28 @@ func handleTelemCalls(pass *analysis.Pass, n ast.Node, info *callInfo, diags *[]
 				}, diags)
 			}
 		}
+	case *ast.SelectorExpr: // Handles case where dut is a struct member.
+		reportIfValid(pass, expr, info, diags)
 	}
+}
+
+func reportIfValid(pass *analysis.Pass, caller ast.Expr, info *callInfo, diags *[]*analysis.Diagnostic) bool {
+	buf := &strings.Builder{}
+	printer.Fprint(buf, pass.Fset, caller)
+	callerStr := buf.String()
+	if !info.indirect {
+		info.caller = callerStr
+	}
+
+	typeStr := pass.TypesInfo.TypeOf(caller).String()
+	if !telemCaller.MatchString(typeStr) {
+		return false
+	}
+
+	info.otg = strings.Contains(typeStr, "otg.OTG")
+	diag := buildDiagnostic(callerStr, info)
+	*diags = append(*diags, diag)
+	return true
 }
 
 var (
@@ -322,6 +369,10 @@ func telemetryTypesToYGNMITypes(n ast.Node) bool {
 		return false
 	}
 	name := expr.Sel.Name
+	if name == "Device" { // The root object was renamed from Device to Root.
+		expr.Sel.Name = "Root"
+	}
+
 	if !strings.HasPrefix(name, "Qualified") { // Turn telemetry.bar in to oc.bar.
 		x.Name = "oc"
 		return true

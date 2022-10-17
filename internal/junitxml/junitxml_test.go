@@ -54,8 +54,8 @@ FAIL  	example_test	0.46s`
 	<testsuite name="example_test" tests="5" failures="1" errors="0" id="0" skipped="2" time="0.460" timestamp="2022-01-01T00:00:00Z">
 		<properties>
 			<property name="suiteKey" value="suiteVal"></property>
-			<property name="TestPass.passKey" value="passVal"></property>
-			<property name="TestFail.failKey" value="failVal"></property>
+			<property name="TestPass/passKey" value="passVal"></property>
+			<property name="TestFail/failKey" value="failVal"></property>
 		</properties>
 		<testcase name="TestPass" classname="example_test" time="0.060"></testcase>
 		<testcase name="TestPassLog" classname="example_test" time="0.100">
@@ -144,32 +144,32 @@ func TestEncodeProperty(t *testing.T) {
 		desc:     "test property",
 		test:     "TestExample",
 		name:     "propName",
-		wantName: "TestExample.propName",
+		wantName: "TestExample/propName",
 	}, {
 		desc:     "subtest property",
 		test:     "TestExample/subtest",
 		name:     "propName",
-		wantName: "TestExample/subtest.propName",
+		wantName: "TestExample/subtest/propName",
 	}, {
 		desc: "suite property name empty",
 	}, {
 		desc:     "test property name empty",
 		test:     "TestExample",
-		wantName: "TestExample.",
+		wantName: "TestExample/",
 	}, {
-		desc:     "suite property name has dots",
-		name:     "foo.bar",
-		wantName: "foo..bar",
+		desc:     "suite property name has slashes",
+		name:     "foo/bar",
+		wantName: "foo//bar",
 	}, {
-		desc:     "test property name has dots",
+		desc:     "test property name has slashes",
 		test:     "TestExample",
-		name:     "foo.bar",
-		wantName: "TestExample.foo..bar",
+		name:     "foo/bar",
+		wantName: "TestExample/foo//bar",
 	}, {
-		desc:     "property name has multiple dots",
+		desc:     "property name has multiple slashes",
 		test:     "TestExample",
-		name:     "foo.bar.baz",
-		wantName: "TestExample.foo..bar..baz",
+		name:     "foo/bar/baz",
+		wantName: "TestExample/foo//bar//baz",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -195,34 +195,34 @@ func TestDecodeProperty(t *testing.T) {
 		wantName: "propName",
 	}, {
 		desc:     "test property",
-		name:     "TestExample.propName",
+		name:     "TestExample/propName",
 		wantTest: "TestExample",
 		wantName: "propName",
 	}, {
 		desc:     "subtest property",
-		name:     "TestExample/subtest.propName",
+		name:     "TestExample/subtest/propName",
 		wantTest: "TestExample/subtest",
 		wantName: "propName",
 	}, {
 		desc: "suite property name empty",
 	}, {
 		desc:     "test property name empty",
-		name:     "TestExample.",
+		name:     "TestExample/",
 		wantTest: "TestExample",
 	}, {
-		desc:     "suite property name has dots",
-		name:     "foo..bar",
-		wantName: "foo.bar",
+		desc:     "suite property name has slashes",
+		name:     "foo//bar",
+		wantName: "foo/bar",
 	}, {
-		desc:     "test property name has dots",
-		name:     "TestExample.foo..bar",
+		desc:     "test property name has slashes",
+		name:     "TestExample/foo//bar",
 		wantTest: "TestExample",
-		wantName: "foo.bar",
+		wantName: "foo/bar",
 	}, {
-		desc:     "property name has multiple dots",
-		name:     "TestExample.foo..bar..baz",
+		desc:     "property name has multiple slashes",
+		name:     "TestExample/foo//bar//baz",
 		wantTest: "TestExample",
-		wantName: "foo.bar.baz",
+		wantName: "foo/bar/baz",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

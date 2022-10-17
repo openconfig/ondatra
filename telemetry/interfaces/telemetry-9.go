@@ -16,6 +16,188 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_Subinterface_Vlan_MatchPath) Lookup(t testing.TB) *oc.QualifiedInterface_Subinterface_Vlan_Match {
+	t.Helper()
+	goStruct := &oc.Interface_Subinterface_Vlan_Match{}
+	md, ok := oc.Lookup(t, n, "Interface_Subinterface_Vlan_Match", goStruct, false, false)
+	if ok {
+		return (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+			Metadata: md,
+		}).SetVal(goStruct)
+	}
+	return nil
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_Subinterface_Vlan_MatchPath) Get(t testing.TB) *oc.Interface_Subinterface_Vlan_Match {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_Subinterface_Vlan_MatchPathAny) Lookup(t testing.TB) []*oc.QualifiedInterface_Subinterface_Vlan_Match {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedInterface_Subinterface_Vlan_Match
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface_Subinterface_Vlan_Match{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface_Subinterface_Vlan_Match", goStruct, queryPath, false, false)
+		if !ok {
+			continue
+		}
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+			Metadata: md,
+		}).SetVal(goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a ONCE subscription.
+func (n *Interface_Subinterface_Vlan_MatchPathAny) Get(t testing.TB) []*oc.Interface_Subinterface_Vlan_Match {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []*oc.Interface_Subinterface_Vlan_Match
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Interface_Subinterface_Vlan_MatchPath) Collect(t testing.TB, duration time.Duration) *oc.CollectionInterface_Subinterface_Vlan_Match {
+	t.Helper()
+	c := &oc.CollectionInterface_Subinterface_Vlan_Match{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedInterface_Subinterface_Vlan_Match) bool {
+		copy, err := ygot.DeepCopy(v.Val(t))
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.Data = append(c.Data, (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+			Metadata: v.Metadata,
+		}).SetVal(copy.(*oc.Interface_Subinterface_Vlan_Match)))
+		return false
+	})
+	return c
+}
+
+func watch_Interface_Subinterface_Vlan_MatchPath(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match) bool) *oc.Interface_Subinterface_Vlan_MatchWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_MatchWatcher{}
+	gs := &oc.Interface_Subinterface_Vlan_Match{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		md, _ := genutil.MustUnmarshal(t, upd, oc.GetSchema(), "Interface_Subinterface_Vlan_Match", gs, queryPath, false, false)
+		qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+			Metadata: md,
+		}).SetVal(gs)
+		return []genutil.QualifiedValue{qv}, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Interface_Subinterface_Vlan_MatchPath) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match) bool) *oc.Interface_Subinterface_Vlan_MatchWatcher {
+	t.Helper()
+	return watch_Interface_Subinterface_Vlan_MatchPath(t, n, timeout, predicate)
+}
+
+// Await observes values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a STREAM subscription,
+// blocking until a value that is deep equal to the specified val is received
+// or failing fatally if the value is not received by the specified timeout.
+// To avoid a fatal failure, to wait for a generic predicate, or to make a
+// non-blocking call, use the Watch method instead.
+func (n *Interface_Subinterface_Vlan_MatchPath) Await(t testing.TB, timeout time.Duration, val *oc.Interface_Subinterface_Vlan_Match) *oc.QualifiedInterface_Subinterface_Vlan_Match {
+	t.Helper()
+	got, success := n.Watch(t, timeout, func(data *oc.QualifiedInterface_Subinterface_Vlan_Match) bool {
+		return data.IsPresent() && reflect.DeepEqual(data.Val(t), val)
+	}).Await(t)
+	if !success {
+		t.Fatalf("Await() at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match failed: want %v, last got %v", val, got)
+	}
+	return got
+}
+
+// Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match to the batch object.
+func (n *Interface_Subinterface_Vlan_MatchPath) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
+// Collect starts an asynchronous collection of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a STREAM subscription.
+// Calling Await on the return Collection waits for the specified duration to elapse and returns the collected values.
+func (n *Interface_Subinterface_Vlan_MatchPathAny) Collect(t testing.TB, duration time.Duration) *oc.CollectionInterface_Subinterface_Vlan_Match {
+	t.Helper()
+	c := &oc.CollectionInterface_Subinterface_Vlan_Match{}
+	c.W = n.Watch(t, duration, func(v *oc.QualifiedInterface_Subinterface_Vlan_Match) bool {
+		c.Data = append(c.Data, v)
+		return false
+	})
+	return c
+}
+
+func watch_Interface_Subinterface_Vlan_MatchPathAny(t testing.TB, n ygot.PathStruct, duration time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match) bool) *oc.Interface_Subinterface_Vlan_MatchWatcher {
+	t.Helper()
+	w := &oc.Interface_Subinterface_Vlan_MatchWatcher{}
+	structs := map[string]*oc.Interface_Subinterface_Vlan_Match{}
+	w.W = genutil.MustWatch(t, n, nil, duration, false, func(upd []*genutil.DataPoint, queryPath *gpb.Path) ([]genutil.QualifiedValue, error) {
+		t.Helper()
+		datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, upd, uint(len(queryPath.Elem)))
+		var currStructs []genutil.QualifiedValue
+		for _, pre := range sortedPrefixes {
+			if len(datapointGroups[pre]) == 0 {
+				continue
+			}
+			if _, ok := structs[pre]; !ok {
+				structs[pre] = &oc.Interface_Subinterface_Vlan_Match{}
+			}
+			md, _ := genutil.MustUnmarshal(t, datapointGroups[pre], oc.GetSchema(), "Interface_Subinterface_Vlan_Match", structs[pre], queryPath, false, false)
+			qv := (&oc.QualifiedInterface_Subinterface_Vlan_Match{
+				Metadata: md,
+			}).SetVal(structs[pre])
+			currStructs = append(currStructs, qv)
+		}
+		return currStructs, nil
+	}, func(qualVal genutil.QualifiedValue) bool {
+		val, ok := qualVal.(*oc.QualifiedInterface_Subinterface_Vlan_Match)
+		w.LastVal = val
+		return ok && predicate(val)
+	})
+	return w
+}
+
+// Watch starts an asynchronous observation of the values at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match with a STREAM subscription,
+// evaluating each observed value with the specified predicate.
+// The subscription completes when either the predicate is true or the specified duration elapses.
+// Calling Await on the returned Watcher waits for the subscription to complete.
+// It returns the last observed value and a boolean that indicates whether that value satisfies the predicate.
+func (n *Interface_Subinterface_Vlan_MatchPathAny) Watch(t testing.TB, timeout time.Duration, predicate func(val *oc.QualifiedInterface_Subinterface_Vlan_Match) bool) *oc.Interface_Subinterface_Vlan_MatchWatcher {
+	t.Helper()
+	return watch_Interface_Subinterface_Vlan_MatchPathAny(t, n, timeout, predicate)
+}
+
+// Batch adds /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match to the batch object.
+func (n *Interface_Subinterface_Vlan_MatchPathAny) Batch(t testing.TB, b *oc.Batch) {
+	t.Helper()
+	oc.MustAddToBatch(t, b, n)
+}
+
 // Lookup fetches the value at /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/vlan/match/double-tagged-inner-list with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Interface_Subinterface_Vlan_Match_DoubleTaggedInnerListPath) Lookup(t testing.TB) *oc.QualifiedInterface_Subinterface_Vlan_Match_DoubleTaggedInnerList {

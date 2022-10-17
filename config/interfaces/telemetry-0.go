@@ -2498,6 +2498,109 @@ func convertInterface_Ethernet_SwitchedVlan_TrunkVlansPath(t testing.TB, md *gen
 	return qv
 }
 
+// Lookup fetches the value at /openconfig-interfaces/interfaces/interface/config/forwarding-viable with a ONCE subscription.
+// It returns nil if there is no value present at the path.
+func (n *Interface_ForwardingViablePath) Lookup(t testing.TB) *oc.QualifiedBool {
+	t.Helper()
+	goStruct := &oc.Interface{}
+	md, ok := oc.Lookup(t, n, "Interface", goStruct, true, true)
+	if ok {
+		return convertInterface_ForwardingViablePath(t, md, goStruct)
+	}
+	return (&oc.QualifiedBool{
+		Metadata: md,
+	}).SetVal(goStruct.GetForwardingViable())
+}
+
+// Get fetches the value at /openconfig-interfaces/interfaces/interface/config/forwarding-viable with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// To avoid a fatal test failure, use the Lookup method instead.
+func (n *Interface_ForwardingViablePath) Get(t testing.TB) bool {
+	t.Helper()
+	return n.Lookup(t).Val(t)
+}
+
+// Lookup fetches the values at /openconfig-interfaces/interfaces/interface/config/forwarding-viable with a ONCE subscription.
+// It returns an empty list if no values are present at the path.
+func (n *Interface_ForwardingViablePathAny) Lookup(t testing.TB) []*oc.QualifiedBool {
+	t.Helper()
+	datapoints, queryPath := genutil.MustGet(t, n)
+	datapointGroups, sortedPrefixes := genutil.BundleDatapoints(t, datapoints, uint(len(queryPath.Elem)))
+
+	var data []*oc.QualifiedBool
+	for _, prefix := range sortedPrefixes {
+		goStruct := &oc.Interface{}
+		md, ok := genutil.MustUnmarshal(t, datapointGroups[prefix], oc.GetSchema(), "Interface", goStruct, queryPath, true, true)
+		if !ok {
+			continue
+		}
+		qv := convertInterface_ForwardingViablePath(t, md, goStruct)
+		data = append(data, qv)
+	}
+	return data
+}
+
+// Get fetches the values at /openconfig-interfaces/interfaces/interface/config/forwarding-viable with a ONCE subscription.
+func (n *Interface_ForwardingViablePathAny) Get(t testing.TB) []bool {
+	t.Helper()
+	fulldata := n.Lookup(t)
+	var data []bool
+	for _, full := range fulldata {
+		data = append(data, full.Val(t))
+	}
+	return data
+}
+
+// Delete deletes the configuration at /openconfig-interfaces/interfaces/interface/config/forwarding-viable.
+func (n *Interface_ForwardingViablePath) Delete(t testing.TB) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Delete(t, n)
+}
+
+// BatchDelete buffers a config delete operation at /openconfig-interfaces/interfaces/interface/config/forwarding-viable in the given batch object.
+func (n *Interface_ForwardingViablePath) BatchDelete(t testing.TB, b *config.SetRequestBatch) {
+	t.Helper()
+	b.BatchDelete(t, n)
+}
+
+// Replace replaces the configuration at /openconfig-interfaces/interfaces/interface/config/forwarding-viable.
+func (n *Interface_ForwardingViablePath) Replace(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Replace(t, n, &val)
+}
+
+// BatchReplace buffers a config replace operation at /openconfig-interfaces/interfaces/interface/config/forwarding-viable in the given batch object.
+func (n *Interface_ForwardingViablePath) BatchReplace(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchReplace(t, n, &val)
+}
+
+// Update updates the configuration at /openconfig-interfaces/interfaces/interface/config/forwarding-viable.
+func (n *Interface_ForwardingViablePath) Update(t testing.TB, val bool) *gpb.SetResponse {
+	t.Helper()
+	return genutil.Update(t, n, &val)
+}
+
+// BatchUpdate buffers a config update operation at /openconfig-interfaces/interfaces/interface/config/forwarding-viable in the given batch object.
+func (n *Interface_ForwardingViablePath) BatchUpdate(t testing.TB, b *config.SetRequestBatch, val bool) {
+	t.Helper()
+	b.BatchUpdate(t, n, &val)
+}
+
+// convertInterface_ForwardingViablePath extracts the value of the leaf ForwardingViable from its parent oc.Interface
+// and combines the update with an existing Metadata to return a *oc.QualifiedBool.
+func convertInterface_ForwardingViablePath(t testing.TB, md *genutil.Metadata, parent *oc.Interface) *oc.QualifiedBool {
+	t.Helper()
+	qv := &oc.QualifiedBool{
+		Metadata: md,
+	}
+	val := parent.ForwardingViable
+	if !reflect.ValueOf(val).IsZero() {
+		qv.SetVal(*val)
+	}
+	return qv
+}
+
 // Lookup fetches the value at /openconfig-interfaces/interfaces/interface/hold-time with a ONCE subscription.
 // It returns nil if there is no value present at the path.
 func (n *Interface_HoldTimePath) Lookup(t testing.TB) *oc.QualifiedInterface_HoldTime {

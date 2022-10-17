@@ -28,10 +28,12 @@ import (
 )
 
 func TestSolve(t *testing.T) {
-	const topoText = `
+	const topoTextType = `
 		nodes: {
 		  name: "node1"
 		  type: ARISTA_CEOS
+			model: "ceos"
+			os: "eos"
 		  services: {
 		    key: 1234
 		    value: {
@@ -72,6 +74,8 @@ func TestSolve(t *testing.T) {
 		nodes: {
 		  name: "node3"
 		  type: JUNIPER_CEVO
+			model: "cptx"
+			os: "evo"
 		  services: {
 		    key: 3456
 		    value: {
@@ -109,7 +113,94 @@ func TestSolve(t *testing.T) {
 		  z_node: "node4"
 		  z_int: "eth1"
 		}`
-	topo := unmarshalTopo(t, topoText)
+	topoType := unmarshalTopo(t, topoTextType)
+
+	const topoTextVendor = `
+		nodes: {
+		  name: "node1"
+		  vendor: ARISTA
+			model: "ceos"
+			os: "eos"
+		  services: {
+		    key: 1234
+		    value: {
+		      name: "gnmi"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth1"
+		    value: {
+		      name: "Ethernet1"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth2"
+		    value: {
+		      name: "Ethernet2"
+		    }
+		  }
+		}
+		nodes: {
+		  name: "node2"
+		  vendor: CISCO
+		  services: {
+		    key: 2345
+		    value: {
+		      name: "gnmi"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth1"
+		    value: {}
+		  }
+		  interfaces: {
+		    key: "eth2"
+		    value: {}
+		  }
+		}
+		nodes: {
+		  name: "node3"
+		  vendor: JUNIPER
+			model: "cptx"
+			os: "evo"
+		  services: {
+		    key: 3456
+		    value: {
+		      name: "gnmi"
+		    }
+		  }
+		  interfaces: {
+		    key: "eth1"
+		    value: {}
+		  }
+		}
+		nodes: {
+		  name: "node4"
+		  vendor: KEYSIGHT
+		  interfaces: {
+		    key: "eth1"
+		    value: {}
+		  }
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth1"
+		  z_node: "node2"
+		  z_int: "eth1"
+		}
+		links: {
+		  a_node: "node2"
+		  a_int: "eth2"
+		  z_node: "node3"
+		  z_int: "eth1"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth2"
+		  z_node: "node4"
+		  z_int: "eth1"
+		}`
+	topoVendor := unmarshalTopo(t, topoTextVendor)
 
 	dut1 := &opb.Device{
 		Id:     "dut1",
@@ -146,8 +237,8 @@ func TestSolve(t *testing.T) {
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Name:            "node1",
 			Vendor:          opb.Device_ARISTA,
-			HardwareModel:   "ARISTA_CEOS",
-			SoftwareVersion: "ARISTA_CEOS",
+			HardwareModel:   "ceos",
+			SoftwareVersion: "eos",
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "Ethernet1"},
 				"port2": {Name: "Ethernet2"},
@@ -159,10 +250,8 @@ func TestSolve(t *testing.T) {
 	}
 	wantDUT2 := &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
-			Name:            "node2",
-			Vendor:          opb.Device_CISCO,
-			HardwareModel:   "CISCO_CXR",
-			SoftwareVersion: "CISCO_CXR",
+			Name:   "node2",
+			Vendor: opb.Device_CISCO,
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 				"port2": {Name: "eth2"},
@@ -176,8 +265,8 @@ func TestSolve(t *testing.T) {
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Name:            "node3",
 			Vendor:          opb.Device_JUNIPER,
-			HardwareModel:   "JUNIPER_CEVO",
-			SoftwareVersion: "JUNIPER_CEVO",
+			HardwareModel:   "cptx",
+			SoftwareVersion: "evo",
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 			},
@@ -188,10 +277,8 @@ func TestSolve(t *testing.T) {
 	}
 	wantATE := &ServiceATE{
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
-			Name:            "node4",
-			Vendor:          opb.Device_IXIA,
-			HardwareModel:   "IXIA_TG",
-			SoftwareVersion: "IXIA_TG",
+			Name:   "node4",
+			Vendor: opb.Device_IXIA,
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 			},
@@ -201,10 +288,12 @@ func TestSolve(t *testing.T) {
 
 	tests := []struct {
 		desc    string
+		topo    *tpb.Topology
 		tb      *opb.Testbed
 		wantRes *binding.Reservation
 	}{{
 		desc: "one dut",
+		topo: topoVendor,
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{dut3},
 		},
@@ -216,6 +305,7 @@ func TestSolve(t *testing.T) {
 		},
 	}, {
 		desc: "one ate",
+		topo: topoVendor,
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{ate},
 		},
@@ -227,6 +317,7 @@ func TestSolve(t *testing.T) {
 		},
 	}, {
 		desc: "two duts",
+		topo: topoVendor,
 		tb: &opb.Testbed{
 			Duts:  []*opb.Device{dut1, dut2},
 			Links: []*opb.Link{link12},
@@ -240,6 +331,23 @@ func TestSolve(t *testing.T) {
 		},
 	}, {
 		desc: "dut and ate",
+		topo: topoVendor,
+		tb: &opb.Testbed{
+			Duts:  []*opb.Device{dut1},
+			Ates:  []*opb.Device{ate},
+			Links: []*opb.Link{link14},
+		},
+		wantRes: &binding.Reservation{
+			DUTs: map[string]binding.DUT{
+				"dut1": wantDUT1,
+			},
+			ATEs: map[string]binding.ATE{
+				"ate": wantATE,
+			},
+		},
+	}, {
+		desc: "dut and ate topo with types",
+		topo: topoType,
 		tb: &opb.Testbed{
 			Duts:  []*opb.Device{dut1},
 			Ates:  []*opb.Device{ate},
@@ -255,6 +363,7 @@ func TestSolve(t *testing.T) {
 		},
 	}, {
 		desc: "three duts",
+		topo: topoVendor,
 		tb: &opb.Testbed{
 			Duts:  []*opb.Device{dut1, dut2, dut3},
 			Links: []*opb.Link{link12, link23},
@@ -271,7 +380,7 @@ func TestSolve(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			gotRes, err := Solve(test.tb, topo)
+			gotRes, err := Solve(test.tb, test.topo)
 			if err != nil {
 				t.Fatalf("Solve() got unexpected error: %v", err)
 			}
@@ -284,7 +393,7 @@ func TestSolve(t *testing.T) {
 }
 
 func TestSolvePortGroups(t *testing.T) {
-	const topoText = `
+	const topoTypeText = `
 		nodes: {
 		  name: "node1"
 		  type: IXIA_TG
@@ -403,7 +512,128 @@ func TestSolvePortGroups(t *testing.T) {
 		  z_node: "node2"
 		  z_int: "eth15"
 		}`
-	topo := unmarshalTopo(t, topoText)
+	topoType := unmarshalTopo(t, topoTypeText)
+
+	const topoVendorText = `
+		nodes: {
+		  name: "node1"
+		  vendor: KEYSIGHT
+		  interfaces: {
+		    key: "eth1"
+		    value: {group: "lag1"}
+		  }
+		  interfaces: {
+		    key: "eth2"
+		    value: {group: "lag1"}
+		  }
+		  interfaces: {
+		    key: "eth3"
+		    value: {group: "lag2"}
+		  }
+		  interfaces: {
+		    key: "eth4"
+		    value: {group: "lag2"}
+		  }
+		  interfaces: {
+		    key: "eth5"
+		    value: {group: "lag3"}
+		  }
+		}
+		nodes: {
+		  name: "node2"
+		  vendor: ARISTA
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth1"
+		  z_node: "node2"
+		  z_int: "eth1"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth2"
+		  z_node: "node2"
+		  z_int: "eth2"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth3"
+		  z_node: "node2"
+		  z_int: "eth3"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth4"
+		  z_node: "node2"
+		  z_int: "eth4"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth5"
+		  z_node: "node2"
+		  z_int: "eth5"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth6"
+		  z_node: "node2"
+		  z_int: "eth6"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth7"
+		  z_node: "node2"
+		  z_int: "eth7"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth8"
+		  z_node: "node2"
+		  z_int: "eth8"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth9"
+		  z_node: "node2"
+		  z_int: "eth9"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth10"
+		  z_node: "node2"
+		  z_int: "eth10"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth11"
+		  z_node: "node2"
+		  z_int: "eth11"
+		}
+		links: {
+			a_node: "node1"
+			a_int: "eth12"
+			z_node: "node2"
+			z_int: "eth12"
+		}
+		links: {
+			a_node: "node1"
+			a_int: "eth13"
+			z_node: "node2"
+			z_int: "eth13"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth14"
+		  z_node: "node2"
+		  z_int: "eth14"
+		}
+		links: {
+		  a_node: "node1"
+		  a_int: "eth15"
+		  z_node: "node2"
+		  z_int: "eth15"
+		}`
+	topoVendor := unmarshalTopo(t, topoVendorText)
 
 	dut1 := &opb.Device{
 		Id:     "dut1",
@@ -485,12 +715,20 @@ func TestSolvePortGroups(t *testing.T) {
 		Links: []*opb.Link{link1, link2, link3, link4, link5, link6, link7, link8, link9, link10, link11, link12, link13, link14, link15},
 	}
 
-	res, err := Solve(tb, topo)
+	res, err := Solve(tb, topoType)
 	if err != nil {
-		t.Fatalf("Solve got unexpected error: %v", err)
+		t.Fatalf("Solve got unexpected error for topology with types: %v", err)
 	}
 	if res == nil {
-		t.Fatalf("No solution found")
+		t.Fatalf("No solution found for topology with types")
+	}
+
+	res, err = Solve(tb, topoVendor)
+	if err != nil {
+		t.Fatalf("Solve got unexpected error for topology with vendors: %v", err)
+	}
+	if res == nil {
+		t.Fatalf("No solution found for topology with vendors")
 	}
 }
 
@@ -505,9 +743,29 @@ func TestSolveErrors(t *testing.T) {
 		tb:      &opb.Testbed{Duts: []*opb.Device{{Id: "dut1"}}},
 		wantErr: "not enough nodes",
 	}, {
+		desc: "too few nodes after filter",
+		tb:   &opb.Testbed{Duts: []*opb.Device{{Id: "dut1"}}},
+		topo: `
+			nodes: {
+			  name: "node1"
+			  vendor: HOST
+			}`,
+		wantErr: "not enough nodes",
+	}, {
 		desc:    "too few links",
 		tb:      &opb.Testbed{Links: []*opb.Link{{A: "dut1:port1", B: "dut2:port1"}}},
 		wantErr: "not enough links",
+	}, {
+		desc:    "too few links after filter",
+		tb:      &opb.Testbed{Links: []*opb.Link{{A: "dut1:port1", B: "dut2:port1"}}},
+		wantErr: "not enough links",
+		topo: `
+			links: {
+			  a_node: "node1"
+			  a_int: "eth1"
+			  z_node: "node2"
+			  z_int: "eth1"
+			}`,
 	}, {
 		desc: "no match for DUT",
 		tb: &opb.Testbed{
@@ -536,7 +794,7 @@ func TestSolveErrors(t *testing.T) {
 			}`,
 		wantErr: "no node in KNE topology to match testbed",
 	}, {
-		desc: "no node combination",
+		desc: "no node combination - types",
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{{
 				Id:     "dut1",
@@ -555,6 +813,27 @@ func TestSolveErrors(t *testing.T) {
 			  name: "node2"
 			  type: CISCO_CXR
 			}`,
+		wantErr: "no KNE topology",
+	}, {
+		desc: "no node combination - vendors",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:     "dut1",
+				Vendor: opb.Device_ARISTA,
+			}, {
+				Id:     "dut2",
+				Vendor: opb.Device_ARISTA,
+			}},
+		},
+		topo: `
+				nodes: {
+					name: "node1"
+					vendor: ARISTA
+				}
+				nodes: {
+					name: "node2"
+					vendor: CISCO
+				}`,
 		wantErr: "no KNE topology",
 	}, {
 		desc: "no link combination",

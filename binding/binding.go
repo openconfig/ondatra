@@ -37,6 +37,7 @@ import (
 	mpb "github.com/openconfig/gnoi/mpls"
 	ospb "github.com/openconfig/gnoi/os"
 	otpb "github.com/openconfig/gnoi/otdr"
+	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
@@ -209,6 +210,7 @@ type GNOIClients interface {
 	Healthz() hpb.HealthzClient
 	Interface() ipb.InterfaceClient
 	Layer2() lpb.Layer2Client
+	LinkQualification() plqpb.LinkQualificationClient
 	MPLS() mpb.MPLSClient
 	OS() ospb.OSClient
 	OTDR() otpb.OTDRClient

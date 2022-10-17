@@ -36,6 +36,7 @@ import (
 	mpb "github.com/openconfig/gnoi/mpls"
 	ospb "github.com/openconfig/gnoi/os"
 	otpb "github.com/openconfig/gnoi/otdr"
+	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
 
@@ -222,6 +223,12 @@ func (g *AbstractGNOIClients) Interface() ipb.InterfaceClient {
 // Layer2 logs a fatal unimplemented error.
 func (g *AbstractGNOIClients) Layer2() lpb.Layer2Client {
 	log.Fatal("Layer2 unimplemented")
+	return nil
+}
+
+// LinkQualification logs a fatal unimplemented error.
+func (g *AbstractGNOIClients) LinkQualification() plqpb.LinkQualificationClient {
+	log.Fatal("LinkQualification unimplemented")
 	return nil
 }
 

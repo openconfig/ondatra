@@ -16,15 +16,14 @@ package ondatra
 
 import (
 	"golang.org/x/net/context"
-	"fmt"
 	"testing"
 
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/config"
 	"github.com/openconfig/ondatra/config/device"
 	"github.com/openconfig/ondatra/internal/cli"
 	"github.com/openconfig/ondatra/internal/console"
 	"github.com/openconfig/ondatra/internal/debugger"
-	"github.com/openconfig/ondatra/internal/dut"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/gribi"
 	"github.com/openconfig/ondatra/internal/operations"
@@ -32,7 +31,6 @@ import (
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
-	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 
 )
@@ -62,107 +60,8 @@ type Config struct {
 }
 
 // New returns an empty DUT configuration.
-func (a *Config) New() *DUTConfig {
-	return &DUTConfig{
-		dut: a.dut,
-		cfg: &dut.Config{
-			PerVendor: make(map[opb.Device_Vendor]dut.ConfigProvider),
-			Vars:      make(map[string]string),
-		},
-	}
-}
-
-// DUTConfig is a configuration of a device under test.
-type DUTConfig struct {
-	dut binding.DUT
-	cfg *dut.Config
-}
-
-func (c *DUTConfig) String() string {
-	return fmt.Sprintf("DUTConfig%+v", *c)
-}
-
-// WithText sets the config to be pushed regardless of the DUT vendor.
-// This should only be used when the DUT vendor was already taken into account
-// in the generation of the config and only when no per-vendor configs are set.
-func (c *DUTConfig) WithText(text string) *DUTConfig {
-	c.cfg.AllVendor = dut.ConfigText(text)
-	return c
-}
-
-// WithAristaText sets the config to be pushed if the DUT vendor is Arista.
-func (c *DUTConfig) WithAristaText(text string) *DUTConfig {
-	c.cfg.PerVendor[opb.Device_ARISTA] = dut.ConfigText(text)
-	return c
-}
-
-// WithCiscoText sets the config to be pushed if the DUT vendor is Cisco.
-func (c *DUTConfig) WithCiscoText(text string) *DUTConfig {
-	c.cfg.PerVendor[opb.Device_CISCO] = dut.ConfigText(text)
-	return c
-}
-
-// WithJuniperText sets the config to be pushed if the DUT vendor is Juniper.
-func (c *DUTConfig) WithJuniperText(text string) *DUTConfig {
-	c.cfg.PerVendor[opb.Device_JUNIPER] = dut.ConfigText(text)
-	return c
-}
-
-// WithFile sets the config to be pushed regardless of the DUT vendor.
-// This should only be used when the DUT vendor was already taken into account
-// in the generation of the config and only when no per-vendor configs are set.
-func (c *DUTConfig) WithFile(path string) *DUTConfig {
-	c.cfg.AllVendor = dut.ConfigFile(path)
-	return c
-}
-
-// WithAristaFile sets the config to be pushed if the DUT vendor is Arista.
-func (c *DUTConfig) WithAristaFile(path string) *DUTConfig {
-	c.cfg.PerVendor[opb.Device_ARISTA] = dut.ConfigFile(path)
-	return c
-}
-
-// WithCiscoFile sets the config to be pushed if the DUT vendor is Cisco.
-func (c *DUTConfig) WithCiscoFile(path string) *DUTConfig {
-	c.cfg.PerVendor[opb.Device_CISCO] = dut.ConfigFile(path)
-	return c
-}
-
-// WithJuniperFile sets the config to be pushed if the DUT vendor is Juniper.
-func (c *DUTConfig) WithJuniperFile(path string) *DUTConfig {
-	c.cfg.PerVendor[opb.Device_JUNIPER] = dut.ConfigFile(path)
-	return c
-}
-
-// WithVarValue replaces each occurrence of {{ var "key" }} in the pushed config
-// with the specified value.
-func (c *DUTConfig) WithVarValue(key, value string) *DUTConfig {
-	c.cfg.Vars[key] = value
-	return c
-}
-
-// WithVarMap sets the map used to replace each occurrence of {{ var "key" }} in the pushed config.
-func (c *DUTConfig) WithVarMap(m map[string]string) *DUTConfig {
-	c.cfg.Vars = m
-	return c
-}
-
-// Push resets the device to its base config and appends the specified config.
-func (c *DUTConfig) Push(t testing.TB) {
-	t.Helper()
-	debugger.ActionStarted(t, "Pushing config to %s", c.dut)
-	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, true); err != nil {
-		t.Fatalf("Push(t) on %s: %v", c.dut, err)
-	}
-}
-
-// Append appends the specified config to the current config.
-func (c *DUTConfig) Append(t testing.TB) {
-	t.Helper()
-	debugger.ActionStarted(t, "Appending config to %s", c.dut)
-	if err := dut.PushConfig(context.Background(), c.dut, c.cfg, false); err != nil {
-		t.Fatalf("Append(t) on %s: %v", c.dut, err)
-	}
+func (c *Config) New() *config.VendorConfig {
+	return config.NewVendorConfig(c.dut)
 }
 
 // Operations returns a handle to the DUT operations API.
