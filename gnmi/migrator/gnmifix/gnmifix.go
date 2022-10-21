@@ -237,6 +237,8 @@ func (c callInfo) String() string {
 	var callSuffix string
 	if c.wildcard {
 		callSuffix = "All"
+	} else if c.config && (c.call == "Get" || c.call == "Lookup") {
+		callSuffix = "Config"
 	}
 	return fmt.Sprintf("gnmi.%s%s(t, %s, %s.%s%s)", c.call, callSuffix, c.client, path, queryType, c.args)
 }

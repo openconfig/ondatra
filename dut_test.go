@@ -50,10 +50,8 @@ var (
 	gotReset  bool
 )
 
-func initDUTFakes(t *testing.T) {
-	t.Helper()
-	initFakeBinding(t)
-	reserveFakeTestbed(t)
+func initDUTFakes() {
+	fakebind.Setup().WithReservation(fakeRes)
 	fakeArista.PushConfigFn = func(_ context.Context, config string, reset bool) error {
 		gotConfig = config
 		gotReset = reset
@@ -62,7 +60,7 @@ func initDUTFakes(t *testing.T) {
 }
 
 func TestGNMI(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	want := struct{ gpb.GNMIClient }{}
 	fakeCisco.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return want, nil
@@ -73,7 +71,7 @@ func TestGNMI(t *testing.T) {
 }
 
 func TestGNMIError(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	wantErr := "bad gnmi"
 	fakeJuniper.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 		return nil, errors.New(wantErr)
@@ -163,7 +161,7 @@ func (g *gnoiClients) WavelengthRouter() wpb.WavelengthRouterClient {
 }
 
 func TestGNOI(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	bgnoi := &gnoiClients{
 		bgp: struct{ bpb.BGPClient }{},
 		certMgmt: struct {
@@ -235,7 +233,7 @@ func TestGNOI(t *testing.T) {
 }
 
 func TestGNOIError(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	wantErr := "bad gnoi"
 	fakeCisco.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 		return nil, errors.New(wantErr)
@@ -250,7 +248,7 @@ func TestGNOIError(t *testing.T) {
 }
 
 func TestGRIBI(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	tests := []struct {
 		desc string
 		want struct{ grpb.GRIBIClient }
@@ -279,7 +277,7 @@ func TestGRIBI(t *testing.T) {
 }
 
 func TestGRIBIError(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	tests := []struct {
 		desc    string
 		wantErr string
@@ -312,7 +310,7 @@ func TestGRIBIError(t *testing.T) {
 }
 
 func TestStreamingClient(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	fCLI := fakebind.NewStreamClient()
 	fConsole := fakebind.NewStreamClient()
 	fakeJuniper.DialCLIFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
@@ -370,7 +368,7 @@ func TestStreamingClient(t *testing.T) {
 }
 
 func TestSendCommand(t *testing.T) {
-	initDUTFakes(t)
+	initDUTFakes()
 	fCLI := &fakebind.StreamClient{}
 	fConsole := &fakebind.StreamClient{}
 	fakeArista.DialCLIFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {

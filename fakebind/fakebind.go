@@ -31,12 +31,12 @@ import (
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
-// Setup creates and initializes Ondatra with a new fake binding and returns
-// that fake binding for further stubbing.
+// Setup initializes Ondatra with a new fake binding, initializes the testbed
+// to an unreserved state, and returns the fake binding for further stubbing.
 func Setup() *Binding {
 	bind := new(Binding)
 	testbed.SetBinding(bind)
-	return bind
+	return bind.WithReservation(nil)
 }
 
 var _ binding.Binding = new(Binding)
@@ -48,18 +48,12 @@ type Binding struct {
 	FetchReservationFn func(context.Context, string) (*binding.Reservation, error)
 }
 
-// StubReservation sets b.ReserveFn and b.FetchReservationFn to functions that
-// return the specified reservation and sets b.ReleaseFn to a noop.
-func (b *Binding) StubReservation(res *binding.Reservation) *Binding {
-	b.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
-		return res, nil
-	}
-	b.FetchReservationFn = func(context.Context, string) (*binding.Reservation, error) {
-		return res, nil
-	}
-	b.ReleaseFn = func(context.Context) error {
-		return nil
-	}
+// WithReservation sets Ondatra to a state in which the specified reservation
+// has been reserved. It does not alter the implementation of this binding's
+// stub functions in any way. If a nil reservation is supplied, Ondatra is set
+// to an unreserved state.
+func (b *Binding) WithReservation(res *binding.Reservation) *Binding {
+	testbed.SetReservationForTesting(res)
 	return b
 }
 

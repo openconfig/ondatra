@@ -45,10 +45,8 @@ var fakeGNOI = func() *fakeGNOIClient {
 	return fg
 }()
 
-func initOperationFakes(t *testing.T) {
-	t.Helper()
-	initFakeBinding(t)
-	reserveFakeTestbed(t)
+func initOperationFakes() {
+	fakebind.Setup().WithReservation(fakeRes)
 	for _, dut := range fakeRes.DUTs {
 		dut.(*fakebind.DUT).DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 			return fakeGNOI, nil
@@ -141,7 +139,7 @@ func (*fakeInstallClient) CloseSend() error {
 }
 
 func TestInstall(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	const version = "1.2.3"
 	dut := DUT(t, "dut_arista")
 
@@ -238,7 +236,7 @@ func TestInstall(t *testing.T) {
 }
 
 func TestInstallErrors(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	const version = "1.2.3"
 	dut := DUT(t, "dut_cisco")
 
@@ -315,7 +313,7 @@ func (*fakePingClient) CloseSend() error {
 }
 
 func TestPing(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	tests := []struct {
 		desc, dest string
 		count      int32
@@ -342,7 +340,7 @@ func TestPing(t *testing.T) {
 }
 
 func TestPingErrors(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	tests := []struct {
 		wantErr, dest string
 		pinger        func(context.Context, *spb.PingRequest, ...grpc.CallOption) (spb.System_PingClient, error)
@@ -388,7 +386,7 @@ func TestPingErrors(t *testing.T) {
 }
 
 func TestSetInterfaceState(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	var gotConfig string
 	for _, dut := range fakeRes.DUTs {
 		dut.(*fakebind.DUT).PushConfigFn = func(_ context.Context, config string, _ bool) error {
@@ -500,7 +498,7 @@ func TestSetInterfaceState(t *testing.T) {
 }
 
 func TestSetInterfaceStateErrors(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	dut := DUT(t, "dut_juniper")
 	port := dut.Port(t, "port1")
 
@@ -532,7 +530,7 @@ func TestSetInterfaceStateErrors(t *testing.T) {
 }
 
 func TestReboot(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	reboot := DUT(t, "dut_arista").Operations().NewReboot()
 
 	tests := []struct {
@@ -571,7 +569,7 @@ func TestReboot(t *testing.T) {
 }
 
 func TestRebootErrors(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	tests := []struct {
 		desc                 string
 		dut                  *DUTDevice
@@ -615,7 +613,7 @@ func TestRebootErrors(t *testing.T) {
 }
 
 func TestKillProcess(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	var killed bool
 	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {
 		killed = true
@@ -631,7 +629,7 @@ func TestKillProcess(t *testing.T) {
 }
 
 func TestSystemTime(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	fakeGNOI.SystemTimer = func(context.Context, *spb.TimeRequest, ...grpc.CallOption) (*spb.TimeResponse, error) {
 		return &spb.TimeResponse{Time: 12345}, nil
 	}
@@ -643,7 +641,7 @@ func TestSystemTime(t *testing.T) {
 }
 
 func TestFactoryReset(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	dut := DUT(t, "dut_cisco")
 
 	t.Run("success", func(t *testing.T) {
@@ -664,7 +662,7 @@ func TestFactoryReset(t *testing.T) {
 }
 
 func TestKillProcessErrors(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	fakeGNOI.KillProcessor = func(context.Context, *spb.KillProcessRequest, ...grpc.CallOption) (*spb.KillProcessResponse, error) {
 		return nil, errors.New("bad bad bad :(")
 	}
@@ -698,7 +696,7 @@ func TestKillProcessErrors(t *testing.T) {
 }
 
 func TestSwitchControlProcessor(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	var got string
 	fakeGNOI.SwitchController = func(ctx context.Context, in *spb.SwitchControlProcessorRequest, opts ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
 		got = in.GetControlProcessor().GetElem()[1].GetKey()["name"]
@@ -730,7 +728,7 @@ func TestSwitchControlProcessor(t *testing.T) {
 }
 
 func TestSwitchControlProcessorErrors(t *testing.T) {
-	initOperationFakes(t)
+	initOperationFakes()
 	sw := DUT(t, "dut_arista").Operations().NewSwitchControlProcessor()
 	fakeGNOI.SwitchController = func(context.Context, *spb.SwitchControlProcessorRequest, ...grpc.CallOption) (*spb.SwitchControlProcessorResponse, error) {
 		return nil, errors.New("invalid route controller")

@@ -42,6 +42,13 @@ func SetBinding(b binding.Binding) {
 	bind = b
 }
 
+// SetReservationForTesting sets Ondatra to a state in which the specified
+// reservation has been reserved. A nil reservation argument sets Ondatra to
+// an unreserved state. This is only called by fakebind for testing purposes.
+func SetReservationForTesting(r *binding.Reservation) {
+	res = r
+}
+
 // Reservation returns the current reservation.
 func Reservation() (*binding.Reservation, error) {
 	resMu.RLock()

@@ -35,7 +35,8 @@ func (g *AbstractGraph) fetchPort2PortMap() (map[*AbstractPort]*AbstractPort, er
 	for _, e := range g.Edges {
 		if _, ok := ret[e.Src]; ok {
 			return nil, fmt.Errorf("port %q is attached to more than one other port; can only be attached to one", e.Src.Desc)
-		} else if _, ok := ret[e.Dst]; ok {
+		}
+		if _, ok := ret[e.Dst]; ok {
 			return nil, fmt.Errorf("port %q is attached to more than one other port; can only be attached to one", e.Dst.Desc)
 		}
 		ret[e.Src] = e.Dst
@@ -133,8 +134,8 @@ type solver struct {
 	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
 
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
-	nodeConstraints         map[*AbstractNode]map[string]Constraint
-	portConstraints         map[*AbstractPort]map[string]Constraint
+	nodeConstraints         map[*AbstractNode]map[string]LeafConstraint
+	portConstraints         map[*AbstractPort]map[string]LeafConstraint
 	deferredNodeConstraints map[*AbstractNode][]deferredNodeConstraint
 	deferredPortConstraints map[*AbstractPort][]deferredPortConstraint
 }
@@ -184,9 +185,9 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 		absPort2Node:            absPort2Node,
 		absPort2Port:            absPort2Port,
 		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
-		nodeConstraints:         make(map[*AbstractNode]map[string]Constraint),
+		nodeConstraints:         make(map[*AbstractNode]map[string]LeafConstraint),
 		deferredNodeConstraints: make(map[*AbstractNode][]deferredNodeConstraint),
-		portConstraints:         make(map[*AbstractPort]map[string]Constraint),
+		portConstraints:         make(map[*AbstractPort]map[string]LeafConstraint),
 		deferredPortConstraints: make(map[*AbstractPort][]deferredPortConstraint),
 	}
 
@@ -350,11 +351,13 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 				// Start with constraints from previously assigned ports that depend on the port currently being assigned.
 				if dcs, ok := deferredConstraintsCopy[absPort]; ok {
 					for _, dc := range dcs {
-						if ok, _, err := dc(abs2ConPortCopy); err != nil {
+						ok, _, err := dc(abs2ConPortCopy)
+						if err != nil {
 							// This constraint was already deferred from a previously assigned port.
 							// An error means a port that should have been assigned is not.
 							return nil, false
-						} else if !ok {
+						}
+						if !ok {
 							canAssign = false
 							break
 						}
@@ -385,14 +388,16 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 				continue
 			}
 			assignedNodes[absSrcNode] = true
-			if ret, ok := s.assignPorts(abs2ConNode, abs2ConPortCopy, assignedNodes, deferredConstraintsCopy); !ok {
+			ret, ok := s.assignPorts(abs2ConNode, abs2ConPortCopy, assignedNodes, deferredConstraintsCopy)
+			if !ok {
 				if len(abs2ConPortCopy) > s.maxAssign.numPorts {
 					s.maxAssign.assignment.Node2Node = abs2ConNode
 					s.maxAssign.assignment.Port2Port = abs2ConPortCopy
 					s.maxAssign.numPorts = len(abs2ConPortCopy)
 				}
 				return nil, false
-			} else if ret != nil {
+			}
+			if ret != nil {
 				return ret, true
 			}
 			// Assignment of Ports for the next Node failed; unassign this Node.
@@ -413,52 +418,68 @@ func (s *solver) assignPorts(abs2ConNode map[*AbstractNode]*ConcreteNode, abs2Co
 func (s *solver) processConstraints() {
 	for _, n := range s.abstractGraph.Nodes {
 		n := n
-		nc := make(map[string]Constraint)
+		nc := make(map[string]LeafConstraint)
 		dnc := []deferredNodeConstraint{}
-		for k, c := range n.Constraints {
-			k, c := k, c
+		addNodeConstraint := func(k string, c NodeConstraint, n *AbstractNode) {
 			switch v := c.(type) {
 			case *sameAsNode:
 				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
-					return c.(*sameAsNode).match(k, n, abs2ConNode)
+					return v.match(k, n, abs2ConNode)
 				})
 			case *notSameAsNode:
 				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
-					return c.(*notSameAsNode).match(k, n, abs2ConNode)
+					return v.match(k, n, abs2ConNode)
 				})
-			case Constraint:
-				nc[k] = c.(Constraint)
+			case LeafConstraint:
+				nc[k] = v
 			default:
 				log.Fatalf("Unrecognized constraint type %T for node matching", v)
+			}
+		}
+		for k, c := range n.Constraints {
+			if v, ok := c.(*andNode); ok {
+				for _, c := range v.nlcs {
+					addNodeConstraint(k, c, n)
+				}
+			} else {
+				addNodeConstraint(k, c, n)
 			}
 		}
 		s.nodeConstraints[n] = nc
 		s.deferredNodeConstraints[n] = dnc
 		for _, p := range n.Ports {
 			p := p
-			pc := make(map[string]Constraint)
+			pc := make(map[string]LeafConstraint)
 			dpc := []deferredPortConstraint{}
-			for k, c := range p.Constraints {
-				k, c := k, c
+			addPortConstraint := func(k string, c PortConstraint, p *AbstractPort) {
 				switch v := c.(type) {
 				case *sameAsPort:
 					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
-						if _, ok := abs2ConPort[c.fetchPort()]; !ok {
-							return false, c.fetchPort(), errors.Errorf("port %q not assigned", c.fetchPort().Desc)
+						if _, ok := abs2ConPort[v.p]; !ok {
+							return false, v.p, errors.Errorf("port %q not assigned", v.p.Desc)
 						}
-						return c.(*sameAsPort).match(k, p, abs2ConPort), nil, nil
+						return v.match(k, p, abs2ConPort), nil, nil
 					})
 				case *notSameAsPort:
 					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
-						if _, ok := abs2ConPort[c.fetchPort()]; !ok {
-							return false, c.fetchPort(), errors.Errorf("port %q not assigned", c.fetchPort().Desc)
+						if _, ok := abs2ConPort[v.p]; !ok {
+							return false, v.p, errors.Errorf("port %q not assigned", v.p.Desc)
 						}
-						return c.(*notSameAsPort).match(k, p, abs2ConPort), nil, nil
+						return v.match(k, p, abs2ConPort), nil, nil
 					})
-				case Constraint:
-					pc[k] = c.(Constraint)
+				case LeafConstraint:
+					pc[k] = v
 				default:
 					log.Fatalf("Unrecognized constraint type %T for port matching", v)
+				}
+			}
+			for k, c := range p.Constraints {
+				if v, ok := c.(*andPort); ok {
+					for _, c := range v.plcs {
+						addPortConstraint(k, c, p)
+					}
+				} else {
+					addPortConstraint(k, c, p)
 				}
 			}
 			s.portConstraints[p] = pc

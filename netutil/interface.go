@@ -41,7 +41,54 @@ var (
 		ondatra.JUNIPER: "irb.",
 		ondatra.NOKIA:   "irb1.",
 	}
+	enableConfigs = map[ondatra.Vendor]string{
+		ondatra.ARISTA: `
+		  interface %s
+        no shutdown
+      !`,
+		ondatra.CISCO: `
+		  interface %s
+        no shutdown
+      !`,
+		ondatra.JUNIPER: `
+		  interfaces {
+		    %s {
+	        delete: disable;
+	      }
+	    }`,
+	}
+	disableConfigs = map[ondatra.Vendor]string{
+		ondatra.ARISTA: `
+		  interface %s
+        shutdown
+      !`,
+		ondatra.CISCO: `
+		  interface %s
+        shutdown
+      !`,
+		ondatra.JUNIPER: `
+		  interfaces {
+		    %s {
+	        disable;
+	      }
+	    }`,
+	}
 )
+
+// SetInterfaceState sets the state of a specified interface on a device.
+func SetInterfaceState(t testing.TB, dut *ondatra.DUTDevice, intf string, enabled bool) {
+	t.Helper()
+	configs := disableConfigs
+	if enabled {
+		configs = enableConfigs
+	}
+	cfgFormat, ok := configs[dut.Vendor()]
+	if !ok {
+		t.Fatalf("SetInterfaceState not yet supported on vendor %v", dut.Vendor())
+	}
+	cfg := fmt.Sprintf(cfgFormat, intf)
+	dut.Config().New().WithText(cfg).Append(t)
+}
 
 // LoopbackInterface returns the vendor-specific name of the loopback interface with
 // the specified integer id.

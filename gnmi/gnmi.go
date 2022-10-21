@@ -86,6 +86,13 @@ func Lookup[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) *y
 	return v
 }
 
+// LookupConfig fetches the value of a ygnmi.SingletonQuery with a ONCE subscription.
+// Note: This is a workaround for Go's type inference not working for this use case and may be removed in a subsequent release.
+// Note: This is equivalent to calling Lookup with a ConfigQuery and providing a fully-qualified type parameter.
+func LookupConfig[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T]) *ygnmi.Value[T] {
+	return Lookup[T](t, dev, q)
+}
+
 // Get fetches the value of a SingletonQuery with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // Use Lookup to also get metadata or tolerate no value present.
@@ -97,6 +104,15 @@ func Get[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.SingletonQuery[T]) T {
 		t.Fatalf("Get(t) on %s at %v: %v", dev, q, err)
 	}
 	return v
+}
+
+// GetConfig fetches the value of a SingletonQuery with a ONCE subscription,
+// failing the test fatally if no value is present at the path.
+// Use Lookup to also get metadata or tolerate no value present.
+// Note: This is a workaround for Go's type inference not working for this use case and may be removed in a subsequent release.
+// Note: This is equivalent to calling Get with a ConfigQuery and providing a fully-qualified type parameter.
+func GetConfig[T any](t testing.TB, dev DeviceOrGNMI, q ygnmi.ConfigQuery[T]) T {
+	return Get[T](t, dev, q)
 }
 
 type watchAwaiter[T any] interface {

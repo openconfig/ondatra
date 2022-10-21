@@ -18,127 +18,28 @@ import (
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/testt"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-func TestReserveErrors(t *testing.T) {
-	initFakeBinding(t)
-
-	tests := []struct {
-		name, tbProto string
-		res           *binding.Reservation
-		wantErr       string
-	}{{
-		name:    "Bad testbed proto",
-		tbProto: "gaga",
-		wantErr: "proto",
-	}, {
-		name:    "Nonexistent device ID",
-		tbProto: `duts{id:"gaga"}`,
-		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
-		wantErr: "gaga",
-	}, {
-		name:    "Nonexistent port ID",
-		tbProto: `duts{id:"dut" ports{id:"gaga"}}`,
-		res: &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{
-			&binding.Dims{Name: "d1", Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
-		}}},
-		wantErr: "gaga",
-	}, {
-		name:    "Disallowed device ID",
-		tbProto: `duts{id:"$^&#(#"}`,
-		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
-		wantErr: "invalid testbed ID",
-	}, {
-		name:    "Disallowed port ID",
-		tbProto: `duts{id:"dut" ports{id:"$^&#(#"}}`,
-		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
-		wantErr: "invalid testbed ID",
-	}, {
-		name:    "Duplicate port ID",
-		tbProto: `duts{id:"dut" ports{id:"port1"} ports{id:"port1"}}`,
-		wantErr: "duplicate",
-	}, {
-		name:    "Link from bad device ID",
-		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"gaga:port1", b:"ate1:port1"}`,
-		wantErr: "port ID",
-	}, {
-		name:    "Link to bad device ID",
-		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:port1", b:"gaga:port1"}`,
-		wantErr: "port ID",
-	}, {
-		name:    "Link from bad port ID",
-		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:gaga", b:"ate1:port1"}`,
-		wantErr: "port ID",
-	}, {
-		name:    "Link to bad port ID",
-		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:port1", b:"ate1:gaga"}`,
-		wantErr: "port ID",
-	}, {
-		name:    "Two links from same port on DUT",
-		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"} ports:{id:"port2"}} links{a:"dut:port1", b:"ate1:port1"} links{a:"dut:port1", b:"ate1:port2"}`,
-		wantErr: `from "dut:port1" to "ate1:port1" and "ate1:port2"`,
-	}, {
-		name:    "Two links from same port on ATE",
-		tbProto: `duts{id:"dut" ports{id:"port1"} ports:{id:"port2"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"ate1:port1", b:"dut:port1"} links{a:"ate1:port1", b:"dut:port2"}`,
-		wantErr: `from "ate1:port1" to "dut:port1" and "dut:port2"`,
-	}, {
-		name:    "Two links to same port on DUT",
-		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"} ports:{id:"port2"}} links{a:"ate1:port1", b:"dut:port1"} links{a:"ate1:port2", b:"dut:port1"}`,
-		wantErr: `from "dut:port1" to "ate1:port1" and "ate1:port2"`,
-	}, {
-		name:    "Two links to same port on ATE",
-		tbProto: `duts{id:"dut" ports{id:"port1"} ports:{id:"port2"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:port1", b:"ate1:port1"} links{a:"dut:port2", b:"ate1:port1"}`,
-		wantErr: `from "ate1:port1" to "dut:port1" and "dut:port2"`,
-	}, {
-		name:    "No device name",
-		tbProto: `duts{id:"dut"}`,
-		res: &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{
-			&binding.Dims{Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
-		}}},
-		wantErr: "no name",
-	}}
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			fakeBind.StubReservation(test.res)
-			err := reserve(&flags.Values{TestbedPath: writeTemp(t, test.tbProto)})
-			if err == nil {
-				release()
-				t.Fatalf("Reserve unexpectedly succeeded, must fail")
-			}
-			t.Logf("Testbed reservation error: %v", err)
-			if !strings.Contains(err.Error(), test.wantErr) {
-				t.Errorf("Reserve error message was '%s', must contain '%s'", err.Error(), test.wantErr)
-			}
-		})
-	}
-}
-
-func TestDoubleReserveFails(t *testing.T) {
-	initFakeBinding(t)
-	fv := &flags.Values{TestbedPath: fakeTBPath}
-	if err := reserve(fv); err != nil {
-		t.Fatalf("First Reserve() call failed: %v", err)
-	}
-	if err := reserve(fv); err == nil {
-		t.Errorf("Second Reserve() call succeeded, but must fail")
-	}
-	if err := release(); err != nil {
-		t.Errorf("Release() failed: %v", err)
-	}
-}
+var fakeTBPath = filepath.Join("testdata", "testbed.pb.txt")
 
 func TestReserve(t *testing.T) {
-	initFakeBinding(t)
+	bind := fakebind.Setup()
+	bind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
+		return fakeRes, nil
+	}
 	if err := reserve(&flags.Values{TestbedPath: fakeTBPath}); err != nil {
-		t.Fatal(err)
+		t.Fatalf("Reserve got unexpected error: %v", err)
 	}
 
 	t.Run("Get DUT", func(t *testing.T) {
@@ -266,11 +167,126 @@ func TestReserve(t *testing.T) {
 			t.Errorf("pmd = %q, want %q", got, want)
 		}
 	})
+
+	t.Run("Release", func(t *testing.T) {
+		bind.ReleaseFn = func(context.Context) error { return nil }
+		if err := release(); err != nil {
+			t.Errorf("Release got unexpected error: %v", err)
+		}
+	})
+}
+
+func TestReserveErrors(t *testing.T) {
+	bind := fakebind.Setup()
+
+	tests := []struct {
+		name, tbProto string
+		res           *binding.Reservation
+		wantErr       string
+	}{{
+		name:    "Bad testbed proto",
+		tbProto: "gaga",
+		wantErr: "proto",
+	}, {
+		name:    "Nonexistent device ID",
+		tbProto: `duts{id:"gaga"}`,
+		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
+		wantErr: "gaga",
+	}, {
+		name:    "Nonexistent port ID",
+		tbProto: `duts{id:"dut" ports{id:"gaga"}}`,
+		res: &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{
+			&binding.Dims{Name: "d1", Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
+		}}},
+		wantErr: "gaga",
+	}, {
+		name:    "Disallowed device ID",
+		tbProto: `duts{id:"$^&#(#"}`,
+		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
+		wantErr: "invalid testbed ID",
+	}, {
+		name:    "Disallowed port ID",
+		tbProto: `duts{id:"dut" ports{id:"$^&#(#"}}`,
+		res:     &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{&binding.Dims{}}}},
+		wantErr: "invalid testbed ID",
+	}, {
+		name:    "Duplicate port ID",
+		tbProto: `duts{id:"dut" ports{id:"port1"} ports{id:"port1"}}`,
+		wantErr: "duplicate",
+	}, {
+		name:    "Link from bad device ID",
+		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"gaga:port1", b:"ate1:port1"}`,
+		wantErr: "port ID",
+	}, {
+		name:    "Link to bad device ID",
+		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:port1", b:"gaga:port1"}`,
+		wantErr: "port ID",
+	}, {
+		name:    "Link from bad port ID",
+		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:gaga", b:"ate1:port1"}`,
+		wantErr: "port ID",
+	}, {
+		name:    "Link to bad port ID",
+		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:port1", b:"ate1:gaga"}`,
+		wantErr: "port ID",
+	}, {
+		name:    "Two links from same port on DUT",
+		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"} ports:{id:"port2"}} links{a:"dut:port1", b:"ate1:port1"} links{a:"dut:port1", b:"ate1:port2"}`,
+		wantErr: `from "dut:port1" to "ate1:port1" and "ate1:port2"`,
+	}, {
+		name:    "Two links from same port on ATE",
+		tbProto: `duts{id:"dut" ports{id:"port1"} ports:{id:"port2"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"ate1:port1", b:"dut:port1"} links{a:"ate1:port1", b:"dut:port2"}`,
+		wantErr: `from "ate1:port1" to "dut:port1" and "dut:port2"`,
+	}, {
+		name:    "Two links to same port on DUT",
+		tbProto: `duts{id:"dut" ports{id:"port1"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"} ports:{id:"port2"}} links{a:"ate1:port1", b:"dut:port1"} links{a:"ate1:port2", b:"dut:port1"}`,
+		wantErr: `from "dut:port1" to "ate1:port1" and "ate1:port2"`,
+	}, {
+		name:    "Two links to same port on ATE",
+		tbProto: `duts{id:"dut" ports{id:"port1"} ports:{id:"port2"}} ates{vendor:IXIA, id:"ate1" ports:{id:"port1"}} links{a:"dut:port1", b:"ate1:port1"} links{a:"dut:port2", b:"ate1:port1"}`,
+		wantErr: `from "ate1:port1" to "dut:port1" and "dut:port2"`,
+	}, {
+		name:    "No device name",
+		tbProto: `duts{id:"dut"}`,
+		res: &binding.Reservation{DUTs: map[string]binding.DUT{"dut": &binding.AbstractDUT{
+			&binding.Dims{Vendor: opb.Device_ARISTA, HardwareModel: "m", SoftwareVersion: "v"},
+		}}},
+		wantErr: "no name",
+	}}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			bind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
+				return test.res, nil
+			}
+			err := reserve(&flags.Values{TestbedPath: writeTemp(t, test.tbProto)})
+			if !strings.Contains(err.Error(), test.wantErr) {
+				t.Errorf("Reserve error message was '%s', must contain '%s'", err.Error(), test.wantErr)
+			}
+		})
+	}
+}
+
+func TestDoubleReserveFails(t *testing.T) {
+	bind := fakebind.Setup()
+	bind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
+		return fakeRes, nil
+	}
+	bind.ReleaseFn = func(context.Context) error { return nil }
+	fv := &flags.Values{TestbedPath: fakeTBPath}
+	if err := reserve(fv); err != nil {
+		t.Fatalf("First Reserve() call failed: %v", err)
+	}
+	if err := reserve(fv); err == nil {
+		t.Errorf("Second Reserve() call succeeded, but must fail")
+	}
+	if err := release(); err != nil {
+		t.Errorf("Release() failed: %v", err)
+	}
 }
 
 func TestFetch(t *testing.T) {
-	initFakeBinding(t)
-	fakeBind.FetchReservationFn = func(context.Context, string) (*binding.Reservation, error) {
+	bind := fakebind.Setup()
+	bind.FetchReservationFn = func(context.Context, string) (*binding.Reservation, error) {
 		return fakeRes, nil
 	}
 	if err := reserve(&flags.Values{TestbedPath: fakeTBPath, ResvID: "1234"}); err != nil {

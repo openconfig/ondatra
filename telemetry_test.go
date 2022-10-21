@@ -49,10 +49,8 @@ var fakeGNMI = func() *fakegnmi.FakeGNMI {
 	return fg
 }()
 
-func initTelemetryFakes(t *testing.T) {
-	t.Helper()
-	initFakeBinding(t)
-	reserveFakeTestbed(t)
+func initTelemetryFakes() {
+	fakebind.Setup().WithReservation(fakeRes)
 	for _, dut := range fakeRes.DUTs {
 		dut.(*fakebind.DUT).DialGNMIFn = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return fakeGNMI.Dial(ctx, opts...)
@@ -154,7 +152,7 @@ func verifyTelemetryErrSubstr(t *testing.T, complianceErrs *genutil.ComplianceEr
 }
 
 func TestMetadata(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 	connPath := gnmiPath(t, "meta/connected")
 	syncPath := gnmiPath(t, "meta/sync")
@@ -322,7 +320,7 @@ func TestMetadata(t *testing.T) {
 }
 
 func TestGet(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_cisco")
 	port := dut.Port(t, "port1")
 
@@ -640,7 +638,7 @@ func TestGet(t *testing.T) {
 }
 
 func TestGetDefault(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
@@ -728,7 +726,7 @@ func TestGetDefault(t *testing.T) {
 }
 
 func TestGetConfig(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 	port := dut.Port(t, "port1")
 
@@ -1051,7 +1049,7 @@ func TestGetConfig(t *testing.T) {
 }
 
 func TestGetNonleaf(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 	port := dut.Port(t, "port1")
 
@@ -1501,7 +1499,7 @@ func TestGetNonleaf(t *testing.T) {
 }
 
 func TestWildcardGet(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
@@ -1683,7 +1681,7 @@ func TestWildcardGet(t *testing.T) {
 }
 
 func TestWildcardNonleafGet(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
@@ -1880,7 +1878,7 @@ func TestWildcardNonleafGet(t *testing.T) {
 }
 
 func TestCollect(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_cisco")
 	port := dut.Port(t, "port1")
 
@@ -2201,7 +2199,7 @@ func TestCollect(t *testing.T) {
 }
 
 func TestWatch(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
@@ -2377,7 +2375,7 @@ func TestWatch(t *testing.T) {
 }
 
 func TestWildcardWatch(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
@@ -2516,7 +2514,7 @@ func TestWildcardWatch(t *testing.T) {
 }
 
 func TestNonleafWildcardWatch(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_cisco")
 
 	getStrPath := func(iname, counter string) string {
@@ -2626,7 +2624,7 @@ func TestNonleafWildcardWatch(t *testing.T) {
 }
 
 func TestBatchGet(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {
@@ -2849,7 +2847,7 @@ func TestBatchGet(t *testing.T) {
 }
 
 func TestBatchWatch(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_arista")
 
 	getStrPath := func(iname string) string {
@@ -3295,7 +3293,7 @@ func TestBatchWatch(t *testing.T) {
 }
 
 func TestBatchCollect(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_cisco")
 
 	getStrPath := func(iname string) string {
@@ -3683,7 +3681,7 @@ func TestBatchCollect(t *testing.T) {
 }
 
 func TestNonleafWatch(t *testing.T) {
-	initTelemetryFakes(t)
+	initTelemetryFakes()
 	dut := DUT(t, "dut_juniper")
 
 	getStrPath := func(iname string) string {

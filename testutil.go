@@ -15,21 +15,13 @@
 package ondatra
 
 import (
-	"path/filepath"
-	"testing"
-
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
-	"github.com/openconfig/ondatra/internal/flags"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 var (
-	fakeBind *fakebind.Binding
-
-	fakeTBPath = filepath.Join("testdata", "testbed.pb.txt")
-
 	fakeArista = &fakebind.DUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Name:            "pf01.xxx01",
@@ -87,21 +79,3 @@ var (
 		},
 	}
 )
-
-// Initializes Ondatra with a fake binding implementation.
-func initFakeBinding(t *testing.T) {
-	if fakeBind != nil {
-		if err := release(); err != nil {
-			t.Fatalf("Failed to release prior testbed: %v", err)
-		}
-	}
-	fakeBind = fakebind.Setup().StubReservation(fakeRes)
-}
-
-// Reserves the fake testbed.
-func reserveFakeTestbed(t *testing.T) {
-	t.Helper()
-	if err := reserve(&flags.Values{TestbedPath: fakeTBPath}); err != nil {
-		t.Fatalf("Failed to reserve testbed: %v", err)
-	}
-}

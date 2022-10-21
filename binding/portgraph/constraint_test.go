@@ -22,7 +22,7 @@ import (
 func TestMatch(t *testing.T) {
 	tests := []struct {
 		desc    string
-		c       Constraint
+		c       LeafConstraint
 		v       string
 		b, want bool
 	}{{
@@ -131,6 +131,51 @@ func TestMatch(t *testing.T) {
 	}
 }
 
+func TestNodeConstraint(t *testing.T) {
+	dut1 := &AbstractNode{Desc: "dut1"}
+	dut2 := &AbstractNode{Desc: "dut2"}
+	node1 := &ConcreteNode{Desc: "node1", Attrs: map[string]string{"attr": "A"}}
+	node2 := &ConcreteNode{Desc: "node2", Attrs: map[string]string{"attr": "B"}}
+	abs2ConNode := map[*AbstractNode]*ConcreteNode{
+		dut1: node1,
+		dut2: node2,
+	}
+
+	tests := []struct {
+		desc  string
+		match func(string, *AbstractNode, map[*AbstractNode]*ConcreteNode) bool
+		n     *AbstractNode
+		want  bool
+	}{{
+		desc:  "sameAsNode; match",
+		match: SameAsNode(dut1).(*sameAsNode).match,
+		n:     dut1,
+		want:  true,
+	}, {
+		desc:  "sameAsNode; no match",
+		match: SameAsNode(dut1).(*sameAsNode).match,
+		n:     dut2,
+		want:  false,
+	}, {
+		desc:  "notSameAsNode; match",
+		match: NotSameAsNode(dut1).(*notSameAsNode).match,
+		n:     dut2,
+		want:  true,
+	}, {
+		desc:  "notSameAsNode; no match",
+		match: NotSameAsNode(dut1).(*notSameAsNode).match,
+		n:     dut1,
+		want:  false,
+	}}
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
+			if m := tc.match("attr", tc.n, abs2ConNode); m != tc.want {
+				t.Errorf("match() got %t, want %t", m, tc.want)
+			}
+		})
+	}
+}
+
 func TestPortConstraint(t *testing.T) {
 	dut1port1 := &AbstractPort{Desc: "dut1:port1"}
 	dut1port2 := &AbstractPort{Desc: "dut1:port2"}
@@ -144,7 +189,6 @@ func TestPortConstraint(t *testing.T) {
 	tests := []struct {
 		desc  string
 		match func(string, *AbstractPort, map[*AbstractPort]*ConcretePort) bool
-		pc    PortConstraint
 		p     *AbstractPort
 		want  bool
 	}{{

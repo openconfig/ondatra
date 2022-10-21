@@ -1014,6 +1014,7 @@ func (ix *ixATE) startProtocols(ctx context.Context) error {
 		}
 		return fmt.Errorf("failed to validate protocols after error on start: %v, %w%s", err, errStart, sErr)
 	}
+	log.Infof("Protocols started successfully")
 	return nil
 }
 

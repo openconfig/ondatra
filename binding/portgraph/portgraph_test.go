@@ -66,6 +66,10 @@ var (
 	node33port4  = &ConcretePort{Desc: "node33:port4"}
 	node33port5  = &ConcretePort{Desc: "node33:port5", Attrs: map[string]string{"attr": "C"}}
 	node33port6  = &ConcretePort{Desc: "node33:port6"}
+	node40port1  = &ConcretePort{Desc: "node40:port1", Attrs: map[string]string{"attr": "A"}}
+	node40port2  = &ConcretePort{Desc: "node40:port2"}
+	node41port1  = &ConcretePort{Desc: "node41:port1", Attrs: map[string]string{"attr": "A"}}
+	node41port2  = &ConcretePort{Desc: "node41:port2"}
 	node60port1  = &ConcretePort{Desc: "node60:port1", Attrs: map[string]string{"speed": "S_100G"}}
 	node60port2  = &ConcretePort{Desc: "node60:port2", Attrs: map[string]string{"speed": "S_101G"}}
 	node60port3  = &ConcretePort{Desc: "node60:port3", Attrs: map[string]string{"speed": "S_102G"}}
@@ -107,6 +111,8 @@ var (
 	node31 = &ConcreteNode{Desc: "node31", Attrs: map[string]string{"attr": "PAIRED", "vendor": "CISCO1"}}
 	node32 = &ConcreteNode{Desc: "node32", Ports: []*ConcretePort{node32port1, node32port2, node32port3, node32port4, node32port5, node32port6}, Attrs: map[string]string{"attr": "group"}}
 	node33 = &ConcreteNode{Desc: "node33", Ports: []*ConcretePort{node33port1, node33port2, node33port3, node33port4, node33port5, node33port6}, Attrs: map[string]string{"attr": "group"}}
+	node40 = &ConcreteNode{Desc: "node40", Ports: []*ConcretePort{node40port1, node40port2}, Attrs: map[string]string{"vendor": "CISCO1", "attr": "40"}}
+	node41 = &ConcreteNode{Desc: "node41", Ports: []*ConcretePort{node41port1, node41port2}, Attrs: map[string]string{"vendor": "CISCO1"}}
 	node60 = &ConcreteNode{Desc: "node60", Ports: []*ConcretePort{node60port1, node60port2, node60port3, node60port4, node60port5, node60port6, node60port7, node60port8}, Attrs: map[string]string{"vendor": "CISCO1"}}
 	node61 = &ConcreteNode{Desc: "node61", Ports: []*ConcretePort{node61port1, node61port2, node61port3, node61port4, node61port5, node61port6, node61port7, node61port8, node61port9, node61port10}, Attrs: map[string]string{"vendor": "CISCO1"}}
 )
@@ -114,7 +120,7 @@ var (
 var superGraph = &ConcreteGraph{
 	Desc: "super",
 	Nodes: []*ConcreteNode{
-		node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node20, node21, node22, node23, node30, node31, node32, node33, node60, node61,
+		node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node20, node21, node22, node23, node30, node31, node32, node33, node40, node41, node60, node61,
 		// Additional entries for benchmark purposes.
 		{Desc: "node15", Attrs: map[string]string{"vendor": "CISCO2"}},
 		{Desc: "node16", Attrs: map[string]string{"vendor": "CISCO3"}},
@@ -135,8 +141,6 @@ var superGraph = &ConcreteGraph{
 		{Desc: "node37", Attrs: map[string]string{"vendor": "CISCO1"}},
 		{Desc: "node38", Attrs: map[string]string{"vendor": "CISCO1"}},
 		{Desc: "node39", Attrs: map[string]string{"vendor": "CISCO1"}},
-		{Desc: "node40", Attrs: map[string]string{"vendor": "CISCO1"}},
-		{Desc: "node41", Attrs: map[string]string{"vendor": "CISCO1"}},
 		{Desc: "node42", Attrs: map[string]string{"vendor": "CISCO1"}},
 		{Desc: "node43", Attrs: map[string]string{"vendor": "CISCO1"}},
 		{Desc: "node44", Attrs: map[string]string{"vendor": "CISCO1"}},
@@ -275,6 +279,12 @@ var (
 	abs17port1 = &AbstractPort{Desc: "abs17port1", Constraints: map[string]PortConstraint{"attr": Equal("A")}}
 	abs17port3 = &AbstractPort{Desc: "abs17port3", Constraints: map[string]PortConstraint{"attr": Equal("B")}}
 	abs17port5 = &AbstractPort{Desc: "abs17port5", Constraints: map[string]PortConstraint{"attr": Equal("C")}}
+
+	// 2 nodes, 2 ports with and constraints
+	abs18      = &AbstractNode{Desc: "abs18", Ports: []*AbstractPort{abs18port1}, Constraints: map[string]NodeConstraint{"vendor": AndNode(Equal("CISCO1"), SameAsNode(abs19)), "attr": Equal("40")}}
+	abs19      = &AbstractNode{Desc: "abs19", Ports: []*AbstractPort{abs19port1}}
+	abs18port1 = &AbstractPort{Desc: "abs18port1", Constraints: map[string]PortConstraint{"attr": AndPort(Equal("A"), SameAsPort(abs19port1))}}
+	abs19port1 = &AbstractPort{Desc: "abs19port1"}
 )
 
 func TestSolve(t *testing.T) {
@@ -409,6 +419,14 @@ func TestSolve(t *testing.T) {
 			abs17port3: node33port3,
 			abs17port5: node33port5,
 		},
+	}, {
+		desc: "2 nodes, 2 ports with ands",
+		graph: &AbstractGraph{
+			Desc:  "2 nodes, 2 ports with ands",
+			Nodes: []*AbstractNode{abs18, abs19},
+		},
+		wantNodes: map[*AbstractNode]*ConcreteNode{abs18: node40, abs19: node41},
+		wantPorts: map[*AbstractPort]*ConcretePort{abs18port1: node40port1, abs19port1: node41port1},
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {

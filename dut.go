@@ -42,7 +42,7 @@ type DUTDevice struct {
 
 // Config returns a handle to the DUT configuration API.
 func (d *DUTDevice) Config() *Config {
-	root := device.DeviceRoot(d.ID())
+	root := device.DeviceRoot(d.Name())
 	if d.Vendor() == CISCO || d.Vendor() == JUNIPER {
 		genutil.PutUseGetForConfig(root, true)
 	}

@@ -110,7 +110,7 @@ type kneDUT struct {
 }
 
 func (d *kneDUT) resetConfig() error {
-	_, err := kneCmdFn(d.cfg, "topology", "reset", d.cfg.TopoPath, d.Name(), "--push")
+	_, err := kneCmdFn(d.cfg, "topology", "reset", d.cfg.TopoPath, d.Name(), "--push", "--skip")
 	return err
 }
 
