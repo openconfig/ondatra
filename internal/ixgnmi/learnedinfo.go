@@ -43,30 +43,39 @@ type bgpLearnedInfo struct {
 	LargeCommunity string `ixia:"Large Community"`
 }
 
-// learnedInfoToRIB appends the info contained in the learnedInfo table into the OC RIB struct.
-func learnedInfoToRIB(learnedInfo []bgpLearnedInfo, neighbor string, v4 bool, rib *telemetry.NetworkInstance_Protocol_Bgp_Rib) error {
+func learnedBGPToOC(learnedBGP []bgpLearnedInfo, intf, protocol, neighbor string, v4 bool) (*telemetry.Device, error) {
+	dev := &telemetry.Device{}
+	rib := dev.GetOrCreateNetworkInstance(intf).
+		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, protocol).
+		GetOrCreateBgp().
+		GetOrCreateRib()
 	var ipv4RIB *telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre
 	var ipv6RIB *telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre
-
 	if v4 {
-		ipv4RIB = rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).GetOrCreateIpv4Unicast().GetOrCreateNeighbor(neighbor).GetOrCreateAdjRibInPre()
+		ipv4RIB = rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
+			GetOrCreateIpv4Unicast().
+			GetOrCreateNeighbor(neighbor).
+			GetOrCreateAdjRibInPre()
 	} else {
-		ipv6RIB = rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).GetOrCreateIpv6Unicast().GetOrCreateNeighbor(neighbor).GetOrCreateAdjRibInPre()
+		ipv6RIB = rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).
+			GetOrCreateIpv6Unicast().
+			GetOrCreateNeighbor(neighbor).
+			GetOrCreateAdjRibInPre()
 	}
 
 	attrLen := len(rib.AttrSet)
 	commLen := len(rib.Community)
 
-	for i, info := range learnedInfo {
+	for i, info := range learnedBGP {
 		if info == (bgpLearnedInfo{}) {
-			log.Infof("Skipping empty learned info")
+			log.Infof("Skipping empty BGP learned info")
 			continue
 		}
 
 		attrIndex := uint64(i + attrLen)
 		commIndex := uint64(i + commLen)
 		if err := appendDetails(info, rib, attrIndex, commIndex, v4); err != nil {
-			return fmt.Errorf("failed to append details for elem %d: %w", i, err)
+			return nil, fmt.Errorf("failed to append details for elem %d: %w", i, err)
 		}
 
 		var err error
@@ -86,11 +95,10 @@ func learnedInfoToRIB(learnedInfo []bgpLearnedInfo, neighbor string, v4 bool, ri
 			})
 		}
 		if err != nil {
-			return fmt.Errorf("failed to append route for elem %d: %w", i, err)
+			return nil, fmt.Errorf("failed to append route for elem %d: %w", i, err)
 		}
 	}
-
-	return nil
+	return dev, nil
 }
 
 func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_Bgp_Rib, attrIndex, commIndex uint64, v4 bool) error {
@@ -129,4 +137,59 @@ func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_
 		}
 	}
 	return rib.AppendCommunity(community)
+}
+
+type isisLearnedInfo struct {
+	LearnedVia      string `ixia:"Learned Via"`
+	LearnedFrom     string `ixia:"Learned From"`
+	Metric          int    `ixia:"Metric"`
+	IPv4Prefix      string `ixia:"IPv4 Prefix"`
+	Mask            int    `ixia:"Mask"`
+	PrefixAttrFlags string `ixia:"Prefix Attribute Flags"`
+	IPv4SrcRouterID string `ixia:"IPv4 Source Router ID"`
+	IPv6SrcRouterID string `ixia:"IPv6 Source Router ID"`
+	SIDLabel        int    `ixia:"SID/Label"`
+	Algorithm       int    `ixia:"Algorithm"`
+	FAPMMetric      int    `ixia:"FAPM Metric"`
+	SystemID        string `ixia:"System ID"`
+	PseudoNodeIndex int    `ixia:"Pseudo Node Index"`
+	LSPIndex        int    `ixia:"LSP Index"`
+	HostName        string `ixia:"Host Name"`
+	SeqNumber       uint32 `ixia:"Sequence Number"`
+	AgeSecs         int    `ixia:"Age (in secs)"`
+}
+
+func learnedISISToOC(learnedISIS []isisLearnedInfo, intf, protocol string) (*telemetry.Device, error) {
+	dev := &telemetry.Device{}
+	isis := dev.GetOrCreateNetworkInstance(intf).
+		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, protocol).
+		GetOrCreateIsis()
+
+	for _, info := range learnedISIS {
+		if info == (isisLearnedInfo{}) {
+			log.Infof("Skipping empty ISIS learned info")
+			continue
+		}
+
+		var levelNum uint8
+		switch info.LearnedVia {
+		case "L1":
+			levelNum = 1
+		case "L2":
+			levelNum = 2
+		default:
+			return nil, fmt.Errorf("unknown ISIS level: %q", info.LearnedVia)
+		}
+		lspID := fmt.Sprintf("%s%s.%s%s.%s%s.%02d-%02d", info.SystemID[0:2], info.SystemID[3:5],
+			info.SystemID[6:8], info.SystemID[9:11], info.SystemID[12:14], info.SystemID[15:17],
+			info.PseudoNodeIndex, info.LSPIndex)
+		var flags []telemetry.E_Lsp_Flags
+		// TODO: infer the flags
+		lsp := isis.GetOrCreateLevel(levelNum).GetOrCreateLsp(lspID)
+		lsp.SetIsType(levelNum)
+		lsp.SetFlags(flags)
+		lsp.SetSequenceNumber(info.SeqNumber)
+	}
+
+	return dev, nil
 }

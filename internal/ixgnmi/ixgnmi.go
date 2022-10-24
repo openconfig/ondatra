@@ -335,10 +335,10 @@ func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 }
 
 type peerInfo struct {
-	protocolName string
-	intf         string
-	neighbor     string
-	isIPV4       bool
+	intf     string
+	protocol string
+	neighbor string
+	isIPV4   bool
 }
 
 const (
@@ -379,10 +379,10 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 	}
 
 	pi := peerInfo{
-		protocolName: p.GetElem()[3].GetKey()["name"],
-		intf:         p.GetElem()[1].GetKey()["name"],
-		neighbor:     p.GetElem()[10].GetKey()["neighbor-address"],
-		isIPV4:       strings.HasPrefix(schemaPath, bgpV4UnicastOCPath),
+		intf:     p.GetElem()[1].GetKey()["name"],
+		protocol: p.GetElem()[3].GetKey()["name"],
+		neighbor: p.GetElem()[10].GetKey()["neighbor-address"],
+		isIPV4:   strings.HasPrefix(schemaPath, bgpV4UnicastOCPath),
 	}
 
 	_, hasFreshInfo := c.fresh.Get(ribOCPath)
@@ -405,9 +405,8 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 		return nil, fmt.Errorf("failed to unmarshal Ixia table: %w", err)
 	}
 
-	dev := &telemetry.Device{}
-	rib := dev.GetOrCreateNetworkInstance(cachePI.intf).GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, cachePI.protocolName).GetOrCreateBgp().GetOrCreateRib()
-	if err := learnedInfoToRIB(info, cachePI.neighbor, cachePI.isIPV4, rib); err != nil {
+	dev, err := learnedBGPToOC(info, cachePI.intf, cachePI.protocol, cachePI.neighbor, cachePI.isIPV4)
+	if err != nil {
 		return nil, err
 	}
 

@@ -197,51 +197,6 @@ func (s *FactoryResetOp) Operate(t testing.TB) {
 	}
 }
 
-// NewSetInterfaceState creates a new set interface state operation.
-func (o *Operations) NewSetInterfaceState() *SetInterfaceStateOp {
-	return &SetInterfaceStateOp{dut: o.dut}
-}
-
-// SetInterfaceStateOp is a set interface state operation that sets the state of an interface on a DUT.
-type SetInterfaceStateOp struct {
-	dut     binding.DUT
-	intf    string
-	enabled *bool
-}
-
-func (s *SetInterfaceStateOp) String() string {
-	return fmt.Sprintf("SetInterfaceStateOp%+v", *s)
-}
-
-// WithPhysicalInterface specifies the target physcial interface of the set interface state operation.
-// Only one of the logical interface and physical interface properties can be set at a time.
-func (s *SetInterfaceStateOp) WithPhysicalInterface(port *Port) *SetInterfaceStateOp {
-	s.intf = port.Name()
-	return s
-}
-
-// WithLogicalInterface specifies the target logical interface of the set interface state operation.
-// Only one of the logical interface and physical interface properties can be set at a time.
-func (s *SetInterfaceStateOp) WithLogicalInterface(intf string) *SetInterfaceStateOp {
-	s.intf = intf
-	return s
-}
-
-// WithStateEnabled specifies that the target interface should be enabled.
-func (s *SetInterfaceStateOp) WithStateEnabled(e bool) *SetInterfaceStateOp {
-	s.enabled = &e
-	return s
-}
-
-// Operate performs the set interface state operation.
-func (s *SetInterfaceStateOp) Operate(t testing.TB) {
-	t.Helper()
-	debugger.ActionStarted(t, "Setting interface state on %s", s.dut)
-	if err := operations.SetInterfaceState(context.Background(), s.dut, s.intf, s.enabled); err != nil {
-		t.Fatalf("Operate(t) on %s: %v", s, err)
-	}
-}
-
 // NewReboot creates a new reboot operation.
 func (o *Operations) NewReboot() *RebootOp {
 	return &RebootOp{dut: o.dut}

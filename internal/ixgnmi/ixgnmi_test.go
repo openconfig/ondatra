@@ -792,10 +792,10 @@ func TestPathToOCRIB(t *testing.T) {
 		initCache: map[string]any{
 			ribOCPath: true,
 			peerInfoCacheKey: peerInfo{
-				protocolName: "1",
-				intf:         "foo",
-				neighbor:     "localhost",
-				isIPV4:       true,
+				protocol: "1",
+				intf:     "foo",
+				neighbor: "localhost",
+				isIPV4:   true,
 			},
 		},
 	}, {

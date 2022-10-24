@@ -92,6 +92,7 @@ message Port {
   // Pmd enum values are PMD of the port.
   enum Pmd {
     PMD_UNSPECIFIED = 0;
+    PMD_100G_DR = 4;
     PMD_100G_FR = 1;
     PMD_100G_LR4 = 2;
     PMD_400G_FR4 = 3;

@@ -15,11 +15,17 @@
 package netutil
 
 import (
+	"golang.org/x/net/context"
 	"strings"
 	"testing"
 
+	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/testt"
+
+	opb "github.com/openconfig/ondatra/proto"
 )
 
 func TestLoopbackInterface(t *testing.T) {
@@ -285,4 +291,75 @@ func TestNextVLANInterface(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestSetInterfaceState(t *testing.T) {
+	var gotConfig string
+	bdut := &fakebind.DUT{
+		AbstractDUT: &binding.AbstractDUT{&binding.Dims{}},
+		PushConfigFn: func(_ context.Context, config string, _ bool) error {
+			gotConfig = config
+			return nil
+		},
+	}
+	fakebind.Setup().WithReservation(
+		&binding.Reservation{DUTs: map[string]binding.DUT{"dut": bdut}})
+	dut := ondatra.DUT(t, "dut")
+
+	tests := []struct {
+		desc       string
+		vendor     opb.Device_Vendor
+		enable     bool
+		wantConfig string
+	}{{
+		desc:       "Arista enable",
+		vendor:     opb.Device_ARISTA,
+		enable:     true,
+		wantConfig: "no shutdown",
+	}, {
+		desc:       "Cisco enable",
+		vendor:     opb.Device_CISCO,
+		enable:     true,
+		wantConfig: "no shutdown",
+	}, {
+		desc:       "Juniper enable",
+		vendor:     opb.Device_JUNIPER,
+		enable:     true,
+		wantConfig: "delete: disable",
+	}, {
+		desc:       "Arista disable",
+		vendor:     opb.Device_ARISTA,
+		enable:     false,
+		wantConfig: "  shutdown",
+	}, {
+		desc:       "Cisco disable",
+		vendor:     opb.Device_CISCO,
+		enable:     false,
+		wantConfig: "  shutdown",
+	}, {
+		desc:       "Juniper disable",
+		vendor:     opb.Device_JUNIPER,
+		enable:     false,
+		wantConfig: "  disable",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			gotConfig = ""
+			bdut.AbstractDUT.Dims.Vendor = test.vendor
+			SetInterfaceState(t, dut, "intf", test.enable)
+			if !strings.Contains(gotConfig, test.wantConfig) {
+				t.Errorf("SetInterfaceState() got config %q, want %q", gotConfig, test.wantConfig)
+			}
+		})
+	}
+
+	t.Run("unsupported vendor", func(t *testing.T) {
+		bdut.AbstractDUT.Dims.Vendor = opb.Device_DELL
+		msg := testt.ExpectFatal(t, func(t testing.TB) {
+			SetInterfaceState(t, dut, "intf", true)
+		})
+		if want := "supported"; !strings.Contains(msg, want) {
+			t.Errorf("SetInterfaceState got fatal msg %q, want %q", msg, want)
+		}
+	})
 }
