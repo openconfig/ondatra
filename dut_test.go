@@ -313,10 +313,10 @@ func TestStreamingClient(t *testing.T) {
 	initDUTFakes()
 	fCLI := fakebind.NewStreamClient()
 	fConsole := fakebind.NewStreamClient()
-	fakeJuniper.DialCLIFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeJuniper.DialCLIFn = func(context.Context) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
-	fakeJuniper.DialConsoleFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeJuniper.DialConsoleFn = func(context.Context) (binding.StreamClient, error) {
 		return fConsole, nil
 	}
 	cliClient := DUT(t, "dut_juniper").RawAPIs().CLI(t)
@@ -371,10 +371,10 @@ func TestSendCommand(t *testing.T) {
 	initDUTFakes()
 	fCLI := &fakebind.StreamClient{}
 	fConsole := &fakebind.StreamClient{}
-	fakeArista.DialCLIFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeArista.DialCLIFn = func(context.Context) (binding.StreamClient, error) {
 		return fCLI, nil
 	}
-	fakeArista.DialConsoleFn = func(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+	fakeArista.DialConsoleFn = func(context.Context) (binding.StreamClient, error) {
 		return fConsole, nil
 	}
 	cliClient := DUT(t, "dut_arista").RawAPIs().CLI(t)

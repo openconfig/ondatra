@@ -18,11 +18,10 @@ package console
 import (
 	"golang.org/x/net/context"
 
-	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 )
 
 // NewConsole creates a console client for the specified DUT.
 func NewConsole(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
-	return dut.DialConsole(ctx, grpc.WithBlock())
+	return dut.DialConsole(ctx)
 }

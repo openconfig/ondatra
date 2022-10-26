@@ -129,12 +129,10 @@ type DUT interface {
 	PushConfig(ctx context.Context, config string, reset bool) error
 
 	// DialCLI creates a client connection to the DUT's CLI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialCLI(context.Context, ...grpc.DialOption) (StreamClient, error)
+	DialCLI(context.Context) (StreamClient, error)
 
 	// DialConsole creates a client connection to the DUT's Console endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialConsole(context.Context, ...grpc.DialOption) (StreamClient, error)
+	DialConsole(context.Context) (StreamClient, error)
 
 	// DialGNMI creates a client connection to the DUT's gNMI endpoint.
 	// Implementations must append transport security options necessary to reach the server.

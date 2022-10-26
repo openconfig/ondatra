@@ -18,11 +18,10 @@ package cli
 import (
 	"golang.org/x/net/context"
 
-	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 )
 
 // NewCLI creates a CLI client for the specified DUT.
 func NewCLI(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
-	return dut.DialCLI(ctx, grpc.WithBlock())
+	return dut.DialCLI(ctx)
 }

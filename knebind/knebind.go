@@ -200,7 +200,7 @@ func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) erro
 	return err
 }
 
-func (d *kneDUT) DialCLI(context.Context, ...grpc.DialOption) (binding.StreamClient, error) {
+func (d *kneDUT) DialCLI(context.Context) (binding.StreamClient, error) {
 	return &kneCLI{dut: d}, nil
 }
 

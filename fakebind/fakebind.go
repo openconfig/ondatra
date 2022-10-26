@@ -85,8 +85,8 @@ func (b *Binding) FetchReservation(ctx context.Context, id string) (*binding.Res
 type DUT struct {
 	*binding.AbstractDUT
 	PushConfigFn  func(context.Context, string, bool) error
-	DialCLIFn     func(context.Context, ...grpc.DialOption) (binding.StreamClient, error)
-	DialConsoleFn func(context.Context, ...grpc.DialOption) (binding.StreamClient, error)
+	DialCLIFn     func(context.Context) (binding.StreamClient, error)
+	DialConsoleFn func(context.Context) (binding.StreamClient, error)
 	DialGNMIFn    func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 	DialGNOIFn    func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error)
 	DialGRIBIFn func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
@@ -102,19 +102,19 @@ func (d *DUT) PushConfig(ctx context.Context, config string, reset bool) error {
 }
 
 // DialCLI delegates to d.DialCLIFn.
-func (d *DUT) DialCLI(ctx context.Context, opts ...grpc.DialOption) (binding.StreamClient, error) {
+func (d *DUT) DialCLI(ctx context.Context) (binding.StreamClient, error) {
 	if d.DialCLIFn == nil {
 		log.Fatal("fakebind DialCLI called but DialCLIFn not set")
 	}
-	return d.DialCLIFn(ctx, opts...)
+	return d.DialCLIFn(ctx)
 }
 
 // DialConsole delegates to d.DialConsoleFn.
-func (d *DUT) DialConsole(ctx context.Context, opts ...grpc.DialOption) (binding.StreamClient, error) {
+func (d *DUT) DialConsole(ctx context.Context) (binding.StreamClient, error) {
 	if d.DialConsoleFn == nil {
 		log.Fatal("fakebind DialConsole called but DialConsoleFn not set")
 	}
-	return d.DialConsoleFn(ctx, opts...)
+	return d.DialConsoleFn(ctx)
 }
 
 // DialGNMI delegates to d.DialGNMIFn.

@@ -88,12 +88,12 @@ func (d *AbstractDUT) PushConfig(ctx context.Context, config string, reset bool)
 }
 
 // DialCLI returns an unimplemented error.
-func (d *AbstractDUT) DialCLI(context.Context, ...grpc.DialOption) (StreamClient, error) {
+func (d *AbstractDUT) DialCLI(context.Context) (StreamClient, error) {
 	return nil, errors.New("DialCLI unimplemented")
 }
 
 // DialConsole returns an unimplemented error.
-func (d *AbstractDUT) DialConsole(context.Context, ...grpc.DialOption) (StreamClient, error) {
+func (d *AbstractDUT) DialConsole(context.Context) (StreamClient, error) {
 	return nil, errors.New("DialConsole unimplemented")
 }
 
