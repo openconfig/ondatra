@@ -148,12 +148,16 @@ func ActionStarted(t LoggerT, format string, dev binding.Device) {
 
 // Breakpoint suspends the execution until the user presses enter.
 // Returns an error when the test is not run in debug mode.
-func Breakpoint(t LoggerT) error {
+func Breakpoint(t LoggerT, msg string) error {
 	if reader == nil {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
 	t.Helper()
-	t.Log(bannerMsg("Breakpoint: Press ENTER to continue."))
+	firstLine := "BREAKPOINT"
+	if msg != "" {
+		firstLine += ": " + msg
+	}
+	t.Log(bannerMsg(firstLine, "", "Press ENTER to continue."))
 	reader.readLine()
 	return nil
 }

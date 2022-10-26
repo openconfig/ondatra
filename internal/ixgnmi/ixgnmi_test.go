@@ -398,7 +398,7 @@ func TestSubscribe(t *testing.T) {
 				t.Fatalf("NewClient() got unexpected error: %v", err)
 			}
 
-			prefixToReader[ribOCPath] = &prefixReader{read: func(_ context.Context, _ *Client, p *gpb.Path) ([]*gpb.Notification, error) {
+			prefixToReader[bgpRIBPath] = &prefixReader{read: func(_ context.Context, _ *Client, p *gpb.Path) ([]*gpb.Notification, error) {
 				if len(tt.learnedInfo) == 0 {
 					return nil, nil
 				}
@@ -506,7 +506,7 @@ func (f *fakeSession) Post(_ context.Context, p string, _, v any) error {
 	return f.postErrs[p]
 }
 
-func TestRIBFromIxia(t *testing.T) {
+func TestBGPRIBFromIxia(t *testing.T) {
 	bgp4XP := parseXPath(t, "/xpath/to/bgpv4")
 	bgp6XP := parseXPath(t, "/xpath/to/bgpv6")
 	fullCfg := &ixconfig.Ixnetwork{
@@ -554,11 +554,11 @@ func TestRIBFromIxia(t *testing.T) {
 		updateErr: errors.New("fake"),
 		cfg:       fullCfg,
 	}, {
-		desc:    "not in cache",
-		wantErr: `no peer "" on interface ""`,
+		desc:    "no interface in cache",
+		wantErr: `no interface ""`,
 		cfg:     fullCfg,
 	}, {
-		desc:     "not in cache no ethernet",
+		desc:     "no peer in cache",
 		intfName: "eth0",
 		wantErr:  `no peer "" on interface "eth0"`,
 		cfg: &ixconfig.Ixnetwork{
@@ -569,7 +569,7 @@ func TestRIBFromIxia(t *testing.T) {
 			}},
 		},
 	}, {
-		desc:     "not in cache no ipv4",
+		desc:     "no peer in cache no ipv4",
 		intfName: "eth0",
 		wantErr:  `no peer "" on interface "eth0"`,
 		cfg: &ixconfig.Ixnetwork{
@@ -583,7 +583,7 @@ func TestRIBFromIxia(t *testing.T) {
 			}},
 		},
 	}, {
-		desc:     "not in cache no ipv6",
+		desc:     "no peer in cache no ipv6",
 		intfName: "eth0",
 		wantErr:  `no peer "" on interface "eth0"`,
 		cfg: &ixconfig.Ixnetwork{
@@ -640,17 +640,17 @@ func TestRIBFromIxia(t *testing.T) {
 		},
 		cfg: fullCfg,
 	}}
-	for _, tt := range tests {
-		t.Run(tt.desc, func(t *testing.T) {
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
 			c := &Client{
 				client: &fakeCfgClient{
 					sess: &fakeSession{
-						postErrs: tt.postErr,
-						getErrs:  tt.getErr,
-						getRsps:  tt.getRsps,
+						postErrs: test.postErr,
+						getErrs:  test.getErr,
+						getRsps:  test.getRsps,
 					},
-					cfg:       tt.cfg,
-					updateErr: tt.updateErr,
+					cfg:       test.cfg,
+					updateErr: test.updateErr,
 					xpathToID: map[string]string{
 						bgp4XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1",
 						bgp6XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1",
@@ -658,19 +658,19 @@ func TestRIBFromIxia(t *testing.T) {
 				},
 			}
 			pi := peerInfo{
-				neighbor: tt.neighbor,
-				intf:     tt.intfName,
-				isIPV4:   tt.ipv4,
+				neighbor: test.neighbor,
+				intf:     test.intfName,
+				isIPV4:   test.ipv4,
 			}
-			got, err := c.ribFromIxia(context.Background(), pi)
-			if d := errdiff.Substring(err, tt.wantErr); d != "" {
-				t.Fatalf("unexpected error diff\n%s", d)
+			got, err := c.bgpRIBFromIxia(context.Background(), pi)
+			if d := errdiff.Substring(err, test.wantErr); d != "" {
+				t.Fatalf("bgpRIBFromIxia got unexpected error diff\n%s", d)
 			}
 			if err != nil {
 				return
 			}
-			if d := cmp.Diff(tt.want, got); d != "" {
-				t.Errorf("unexpected table diff (-want +got)\n%s", d)
+			if d := cmp.Diff(test.want, got); d != "" {
+				t.Errorf("bgpRIBFromIxia got unexpected diff (-want +got)\n%s", d)
 			}
 		})
 	}
@@ -713,7 +713,7 @@ func createSampleDev(t testing.TB, deletes ...*gpb.Path) *gpb.Notification {
 	return ns[0]
 }
 
-func TestPathToOCRIB(t *testing.T) {
+func TestPathToBGPRIB(t *testing.T) {
 	indexPath := &gpb.Path{
 		Elem: []*gpb.PathElem{
 			{Name: "network-instances"},
@@ -790,7 +790,7 @@ func TestPathToOCRIB(t *testing.T) {
 		desc: "rib cache hit with same peer",
 		path: indexPath,
 		initCache: map[string]any{
-			ribOCPath: true,
+			bgpRIBPath: true,
 			peerInfoCacheKey: peerInfo{
 				protocol: "1",
 				intf:     "foo",
@@ -844,20 +844,20 @@ func TestPathToOCRIB(t *testing.T) {
 		},
 	}}
 
-	for _, tt := range tests {
-		t.Run(tt.desc, func(t *testing.T) {
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
 			c := &Client{
 				fresh: cache.New(30*time.Second, cache.NoExpiration),
 			}
-			for k, v := range tt.initCache {
+			for k, v := range test.initCache {
 				c.fresh.Set(k, v, -1)
 			}
-			ribFromIxiaFn = func(*Client, context.Context, peerInfo) (*table, error) {
-				return tt.rib, tt.ribErr
+			bgpRIBFromIxiaFn = func(*Client, context.Context, peerInfo) (*table, error) {
+				return test.rib, test.ribErr
 			}
 
-			got, gotErr := c.pathToOCRIB(context.Background(), tt.path)
-			if diff := errdiff.Substring(gotErr, tt.wantErr); diff != "" {
+			got, gotErr := c.pathToBGPRIB(context.Background(), test.path)
+			if diff := errdiff.Substring(gotErr, test.wantErr); diff != "" {
 				t.Errorf("pathToOCRIB() got unexpected error diff\n%s", diff)
 			}
 			if gotErr != nil {
@@ -866,22 +866,24 @@ func TestPathToOCRIB(t *testing.T) {
 			if got != nil {
 				got.Timestamp = 0
 			}
-			if diff := cmp.Diff(tt.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
+			if diff := cmp.Diff(test.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
 				t.Errorf("pathToOCRIB() got unexpected response diff (-want,+got)\n%s", diff)
 			}
 		})
 	}
 }
 
-func TestLSPsFromIxia(t *testing.T) {
+func TestRSVPTEFromIxia(t *testing.T) {
 	const (
-		lspName = "lsp0"
-		lspID   = "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps"
+		intfName = "intf"
+		lspName  = "lsp0"
+		lspID    = "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps"
 	)
 	lspXP := parseXPath(t, "/fake/xpath/lsp")
 	lspCfg := &ixconfig.Ixnetwork{
 		Topology: []*ixconfig.Topology{{
 			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+				Name: ygot.String("Device Group on " + intfName),
 				NetworkGroup: []*ixconfig.TopologyNetworkGroup{{
 					DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
 						Ipv4Loopback: []*ixconfig.TopologyIpv4Loopback{{
@@ -906,6 +908,7 @@ func TestLSPsFromIxia(t *testing.T) {
 		mvRsp        string
 		mvErr        error
 		updateIDsErr error
+		initCache    map[string]*cachedNodes
 		want         map[string][]*ingressLSP
 		wantErr      string
 	}{{
@@ -921,6 +924,10 @@ func TestLSPsFromIxia(t *testing.T) {
 		lspRsp:  `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
 		mvErr:   errors.New("some error"),
 		wantErr: "failed to fetch source IPs for LSP",
+	}, {
+		desc:      "no interface in cache",
+		initCache: map[string]*cachedNodes{"eth1": &cachedNodes{}},
+		wantErr:   "no interface",
 	}, {
 		desc:   "success",
 		lspRsp: `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
@@ -938,48 +945,57 @@ func TestLSPsFromIxia(t *testing.T) {
 			}},
 		},
 	}}
-	for _, tt := range tests {
-		t.Run(tt.desc, func(t *testing.T) {
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
 			c := &Client{
 				client: &fakeCfgClient{
 					sess: &fakeSession{
 						getErrs: map[string]error{
-							lspID: tt.lspErr,
+							lspID: test.lspErr,
 						},
 						getRsps: map[string]string{
-							lspID: tt.lspRsp,
+							lspID: test.lspRsp,
 						},
 						postErrs: map[string]error{
-							"multivalue/operations/getvalues": tt.mvErr,
+							"multivalue/operations/getvalues": test.mvErr,
 						},
 						postRsps: map[string]string{
-							"multivalue/operations/getvalues": tt.mvRsp,
+							"multivalue/operations/getvalues": test.mvRsp,
 						},
 					},
 					cfg:       lspCfg,
-					updateErr: tt.updateIDsErr,
+					updateErr: test.updateIDsErr,
 					xpathToID: map[string]string{
 						lspXP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps",
 					},
 				},
+				intfCache: test.initCache,
 			}
-			got, err := c.lspsFromIxia(context.Background())
-			if d := errdiff.Substring(err, tt.wantErr); d != "" {
-				t.Fatalf("unexpected error diff\n%s", d)
+			got, err := c.rsvpTEFromIxia(context.Background(), intfName)
+			if d := errdiff.Substring(err, test.wantErr); d != "" {
+				t.Fatalf("rsvpTEFromIxia() got unexpected error diff\n%s", d)
 			}
 			if err != nil {
 				return
 			}
-			if d := cmp.Diff(tt.want, got, cmp.AllowUnexported(ingressLSP{})); d != "" {
-				t.Errorf("unexpected LSP diff (-want +got)\n%s", d)
+			if d := cmp.Diff(test.want, got, cmp.AllowUnexported(ingressLSP{})); d != "" {
+				t.Errorf("rsvpTEFromIxia() got unexpected diff (-want +got)\n%s", d)
 			}
 		})
 	}
 }
 
-func TestPathToOCLSPs(t *testing.T) {
-	oldLSPsFn := lspsFromIxiaFn
-	defer func() { lspsFromIxiaFn = oldLSPsFn }()
+func TestPathToRSVPTE(t *testing.T) {
+	oldLSPsFn := rsvpTEFromIxiaFn
+	defer func() { rsvpTEFromIxiaFn = oldLSPsFn }()
+
+	inPath := &gpb.Path{Elem: []*gpb.PathElem{
+		{Name: "network-instances"},
+		{Name: "network-instance", Key: map[string]string{"name": "foo"}},
+		{Name: "mpls"},
+		{Name: "signaling-protocols"},
+		{Name: "rsvp-te"},
+	}}
 
 	tests := []struct {
 		desc      string
@@ -991,7 +1007,7 @@ func TestPathToOCLSPs(t *testing.T) {
 	}{{
 		desc: "data is fresh",
 		initCache: map[string]any{
-			lspsOCPath: true,
+			rsvpTEPath + ",foo": true,
 		},
 	}, {
 		desc:    "failed to read LSP data from ATE",
@@ -1007,7 +1023,8 @@ func TestPathToOCLSPs(t *testing.T) {
 			}},
 		},
 		initCache: map[string]any{
-			oldLSPCacheKey: &telemetry.Device{
+			rsvpTEPath + ",bar": true,
+			"old " + rsvpTEPath + ",foo": &telemetry.Device{
 				NetworkInstance: map[string]*telemetry.NetworkInstance{
 					"fake": &telemetry.NetworkInstance{
 						Name: ygot.String("fake"),
@@ -1017,7 +1034,7 @@ func TestPathToOCLSPs(t *testing.T) {
 		},
 		want: func(t *testing.T) *gpb.Notification {
 			dev := &telemetry.Device{}
-			lsp := dev.GetOrCreateNetworkInstance("default").GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe().GetOrCreateSession(2765635037960339456)
+			lsp := dev.GetOrCreateNetworkInstance("foo").GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe().GetOrCreateSession(2765635037960339456)
 			lsp.SessionName = ygot.String("lsp0 0")
 			lsp.Type = telemetry.MplsTypes_LSP_ROLE_INGRESS
 			lsp.SourceAddress = ygot.String("1.1.1.1")
@@ -1036,21 +1053,21 @@ func TestPathToOCLSPs(t *testing.T) {
 		}(t),
 	}}
 
-	for _, tt := range tests {
-		t.Run(tt.desc, func(t *testing.T) {
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
 			c := &Client{
 				fresh: cache.New(30*time.Second, cache.NoExpiration),
 			}
-			for k, v := range tt.initCache {
+			for k, v := range test.initCache {
 				c.fresh.Set(k, v, -1)
 			}
-			lspsFromIxiaFn = func(*Client, context.Context) (map[string][]*ingressLSP, error) {
-				return tt.lsps, tt.lspsErr
+			rsvpTEFromIxiaFn = func(*Client, context.Context, string) (map[string][]*ingressLSP, error) {
+				return test.lsps, test.lspsErr
 			}
 
-			got, gotErr := c.pathToOCLSPs(context.Background())
-			if diff := errdiff.Substring(gotErr, tt.wantErr); diff != "" {
-				t.Errorf("pathToOCLSPs() got unexpected error diff\n%s", diff)
+			got, gotErr := c.pathToRSVPTE(context.Background(), inPath)
+			if diff := errdiff.Substring(gotErr, test.wantErr); diff != "" {
+				t.Errorf("pathToRSVPTE() got unexpected error diff\n%s", diff)
 			}
 			if gotErr != nil {
 				return
@@ -1058,8 +1075,8 @@ func TestPathToOCLSPs(t *testing.T) {
 			if got != nil {
 				got.Timestamp = 0
 			}
-			if diff := cmp.Diff(tt.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
-				t.Errorf("pathToOCLSPS() got unexpected response diff (-want,+got)\n%s", diff)
+			if diff := cmp.Diff(test.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
+				t.Errorf("pathToRSVPTE() got unexpected response diff (-want,+got)\n%s", diff)
 			}
 		})
 	}

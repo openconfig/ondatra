@@ -60,7 +60,10 @@ func TestNoDebugMode(t *testing.T) {
 	TestStarted(false)
 	defer TestCasesDone()
 
-	if err := Breakpoint(t); err == nil {
+	if err := Breakpoint(t, ""); err == nil {
+		t.Fatal("Breakpoint unexpectedly succeeded")
+	}
+	if err := Breakpoint(t, "msg"); err == nil {
 		t.Fatal("Breakpoint unexpectedly succeeded")
 	}
 }
@@ -72,7 +75,10 @@ func TestDebugModeRunTests(t *testing.T) {
 	defer TestCasesDone()
 
 	writeLine("\n")
-	if err := Breakpoint(t); err != nil {
+	if err := Breakpoint(t, ""); err != nil {
+		t.Fatalf("Breakpoint got error %v", err)
+	}
+	if err := Breakpoint(t, "msg"); err != nil {
 		t.Fatalf("Breakpoint got error %v", err)
 	}
 }
@@ -87,7 +93,10 @@ func TestDebugModeJustReserve(t *testing.T) {
 	ReservationDone()
 
 	writeLine("\n")
-	if err := Breakpoint(t); err != nil {
+	if err := Breakpoint(t, ""); err != nil {
+		t.Fatalf("Breakpoint got error %v", err)
+	}
+	if err := Breakpoint(t, "msg"); err != nil {
 		t.Fatalf("Breakpoint got error %v", err)
 	}
 }

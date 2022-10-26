@@ -71,16 +71,41 @@ with one simple line:
 ondatra.Debug().Breakpoint(t)
 ```
 
-It also offers a menu option to pause the test immediately after the testbed is
-reserved. This is useful if you want to just reserve the same testbed for manual
-testing, or to manually inspect the testbed before the test cases run.
+The `Breakpoint` and `Breakpointf` functions allow you to include custom text in
+the breakpoint message, too. For example:
 
-### Logging
+```
+ondatra.Debug().Breakpoint(t, "this should be unreachable")
+ondatra.Debug().Breakpointf(t, "myVar has value %v", myVar)
+```
 
-Ondatra uses [glog](https://pkg.go.dev/github.com/golang/glog), which by default
-logs to a temporary dir. Use the `-alsologtostderr` flag to output to stderr and
-the `-v` flag to increase verbosity. See the package documentation for other
-flags.
+Debug mode also offers a menu option to pause the test immediately after the
+testbed is reserved. This is useful if you want to just reserve the same testbed
+for manual testing, or to manually inspect the testbed before the test cases
+run.
+
+## Increasing Logging Verbosity
+
+Ondatra always sets the Go test `-v` flag to true for verbose test output, so
+there is no need to set this flag explicitly in your test invocations.
+
+Ondatra uses [glog](https://pkg.go.dev/github.com/golang/glog) for its own
+logging. By default, glog logs to a temporary dir, but setting the
+`-alsologtostderr` flag will output those logs to stderr. The Go test `-v` flag
+shadows glog's own flag of the same name, so Ondatra provides the flag `-vlog`
+as an alias to control the V-level logging behavior of glog. When used in
+combination with `-alsologtostderr`, the `-vlog` level provides
+increasingly-granular logging details:
+
+Log Level | Example Information
+--------- | --------------------------------------------------------
+1         | `SetRequest`/`SubscribeRequest` dumps
+2         | Each `Update`/`Delete` received in a `SubscribeResponse`
+3         | Ixia gNMI translation details
+
+See the
+[glog package documentation](https://pkg.go.dev/github.com/golang/glog#pkg-overview)
+for more information on all the glog flags.
 
 ## XML Test Report
 

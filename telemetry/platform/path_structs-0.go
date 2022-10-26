@@ -95,6 +95,16 @@ type Component_AllocatedPowerPathAny struct {
 	*ygot.NodePath
 }
 
+// Component_BaseMacAddressPath represents the /openconfig-platform/components/component/state/base-mac-address YANG schema element.
+type Component_BaseMacAddressPath struct {
+	*ygot.NodePath
+}
+
+// Component_BaseMacAddressPathAny represents the wildcard version of the /openconfig-platform/components/component/state/base-mac-address YANG schema element.
+type Component_BaseMacAddressPathAny struct {
+	*ygot.NodePath
+}
+
 // Component_CleiCodePath represents the /openconfig-platform/components/component/state/clei-code YANG schema element.
 type Component_CleiCodePath struct {
 	*ygot.NodePath
@@ -403,6 +413,46 @@ func (n *ComponentPathAny) Backplane() *Component_BackplanePathAny {
 	return &Component_BackplanePathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"backplane"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BaseMacAddress (leaf): This is a MAC address representing the root or primary MAC
+// address for a component.  Components such as CHASSIS and
+// CONTROLLER_CARD are expected to provide a base-mac-address.  The
+// base mac-address for CHASSIS and a PRIMARY CONTROLLER_CARD may
+// contain the same value.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/base-mac-address"
+// Path from root: "/components/component/state/base-mac-address"
+func (n *ComponentPath) BaseMacAddress() *Component_BaseMacAddressPath {
+	return &Component_BaseMacAddressPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "base-mac-address"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// BaseMacAddress (leaf): This is a MAC address representing the root or primary MAC
+// address for a component.  Components such as CHASSIS and
+// CONTROLLER_CARD are expected to provide a base-mac-address.  The
+// base mac-address for CHASSIS and a PRIMARY CONTROLLER_CARD may
+// contain the same value.
+// ----------------------------------------
+// Defining module: "openconfig-platform"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/base-mac-address"
+// Path from root: "/components/component/state/base-mac-address"
+func (n *ComponentPathAny) BaseMacAddress() *Component_BaseMacAddressPathAny {
+	return &Component_BaseMacAddressPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "base-mac-address"},
 			map[string]interface{}{},
 			n,
 		),

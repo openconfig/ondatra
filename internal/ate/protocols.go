@@ -329,7 +329,9 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		DiscardLSPs:        ixconfig.MultivalueBool(isis.GetDiscardLsps()),
 		AreaAddresses:      ixconfig.MultivalueStr(areaID),
 		TERouterId:         ixconfig.MultivalueStr(isis.GetTeRouterId()),
-		RtrcapId:           ixconfig.MultivalueStr(isis.GetCapabilityRouterId()),
+	}
+	if isis.GetCapabilityRouterId() != "" {
+		isisRtr.RtrcapId = ixconfig.MultivalueStr(isis.GetCapabilityRouterId())
 	}
 
 	if err = isisSegmentRouting(isisIntf, isisRtr, isis.GetSegmentRouting()); err != nil {

@@ -3285,6 +3285,7 @@ func (*Acl_Interface_InterfaceRef) ΛBelongingModule() string {
 type Component struct {
 	AllocatedPower       *uint32                                 `path:"state/allocated-power" module:"openconfig-platform/openconfig-platform"`
 	Backplane            *Component_Backplane                    `path:"backplane" module:"openconfig-platform"`
+	BaseMacAddress       *string                                 `path:"state/base-mac-address" module:"openconfig-platform/openconfig-platform"`
 	Chassis              *Component_Chassis                      `path:"chassis" module:"openconfig-platform"`
 	CleiCode             *string                                 `path:"state/clei-code" module:"openconfig-platform/openconfig-platform"`
 	ControllerCard       *Component_ControllerCard               `path:"controller-card" module:"openconfig-platform"`
@@ -3925,6 +3926,22 @@ func (t *Component) GetAllocatedPower() uint32 {
 	return *t.AllocatedPower
 }
 
+// GetBaseMacAddress retrieves the value of the leaf BaseMacAddress from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if BaseMacAddress is set, it can
+// safely use t.GetBaseMacAddress() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.BaseMacAddress == nil' before retrieving the leaf's value.
+func (t *Component) GetBaseMacAddress() string {
+	if t == nil || t.BaseMacAddress == nil {
+		return ""
+	}
+	return *t.BaseMacAddress
+}
+
 // GetCleiCode retrieves the value of the leaf CleiCode from the Component
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -4329,6 +4346,12 @@ func (t *Component) GetUsedPower() uint32 {
 // struct.
 func (t *Component) SetAllocatedPower(v uint32) {
 	t.AllocatedPower = &v
+}
+
+// SetBaseMacAddress sets the value of the leaf BaseMacAddress in the Component
+// struct.
+func (t *Component) SetBaseMacAddress(v string) {
+	t.BaseMacAddress = &v
 }
 
 // SetCleiCode sets the value of the leaf CleiCode in the Component

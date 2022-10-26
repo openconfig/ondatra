@@ -42,8 +42,8 @@ import (
 )
 
 const (
-	ribOCPath  = "/network-instances/network-instance/protocols/protocol/bgp/rib"
-	lspsOCPath = "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te"
+	bgpRIBPath = "/network-instances/network-instance/protocols/protocol/bgp/rib"
+	rsvpTEPath = "/network-instances/network-instance/mpls/signaling-protocols/rsvp-te"
 
 	portStatsCaption    = "Port Statistics"
 	portCPUStatsCaption = "Port CPU Statistics"
@@ -55,15 +55,15 @@ var (
 		"/components": statViewReader(portCPUStatsCaption),
 		"/flows":      statViewReader(ixweb.TrafficItemStatsCaption, flowStatsCaption, ixweb.EgressStatsCaption),
 		"/interfaces": statViewReader(portStatsCaption),
-		ribOCPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
-			n, err := c.pathToOCRIB(ctx, p)
+		bgpRIBPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
+			n, err := c.pathToBGPRIB(ctx, p)
 			if n != nil {
 				return []*gpb.Notification{n}, err
 			}
 			return nil, err
 		}},
-		lspsOCPath: &prefixReader{read: func(ctx context.Context, c *Client, _ *gpb.Path) ([]*gpb.Notification, error) {
-			n, err := c.pathToOCLSPs(ctx)
+		rsvpTEPath: &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
+			n, err := c.pathToRSVPTE(ctx, p)
 			if n != nil {
 				return []*gpb.Notification{n}, err
 			}
@@ -75,8 +75,8 @@ var (
 	readStatsFn = func(ctx context.Context, c *Client, cacheKey string, captions []string) (ygot.GoStruct, error) {
 		return c.readStats(ctx, cacheKey, captions)
 	}
-	ribFromIxiaFn  = (*Client).ribFromIxia
-	lspsFromIxiaFn = (*Client).lspsFromIxia
+	bgpRIBFromIxiaFn = (*Client).bgpRIBFromIxia
+	rsvpTEFromIxiaFn = (*Client).rsvpTEFromIxia
 )
 
 type prefixReader struct {
@@ -179,13 +179,18 @@ type Client struct {
 	target *gcache.Target
 	reader StatReader
 	client cfgClient
-	// mu guards access to peerCache.
+	// mu guards access to intfCache.
 	mu        sync.Mutex
-	peerCache map[string]map[string]ixconfig.IxiaCfgNode
+	intfCache map[string]*cachedNodes
 	// fresh tracks whether stats in the Cache are fresh.
 	// Keys are the prefix strings enumerated in prefixToReader.
 	// A key's presence in the map indicates that the data at that path is fresh.
 	fresh *cache.Cache
+}
+
+type cachedNodes struct {
+	bgpPeers map[string]ixconfig.IxiaCfgNode
+	rsvpLSPs map[string]*ixconfig.TopologyRsvpP2PIngressLsps
 }
 
 // Flush flushes the GNMI data for the Ixia.
@@ -195,7 +200,7 @@ func (c *Client) Flush() {
 	c.target.Connect()
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	c.peerCache = nil
+	c.intfCache = nil
 }
 
 func (c *Client) Subscribe(ctx context.Context, opts ...grpc.CallOption) (gpb.GNMI_SubscribeClient, error) {
@@ -257,61 +262,93 @@ func (c *Client) readStats(ctx context.Context, cacheKey string, captions []stri
 	return rs, nil
 }
 
-func (c *Client) fetchPeerCache(ctx context.Context) (map[string]map[string]ixconfig.IxiaCfgNode, error) {
+func (c *Client) fetchCachedNodes(ctx context.Context, intf string) (*cachedNodes, error) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	if c.peerCache != nil {
-		return c.peerCache, nil
+	if c.intfCache == nil {
+		if err := c.updateIntfCache(ctx); err != nil {
+			return nil, err
+		}
 	}
-	c.peerCache = make(map[string]map[string]ixconfig.IxiaCfgNode)
+	nodes, ok := c.intfCache[intf]
+	if !ok {
+		return nil, fmt.Errorf("no interface %q", intf)
+	}
+	return nodes, nil
+}
+
+func (c *Client) updateIntfCache(ctx context.Context) error {
+	c.intfCache = make(map[string]*cachedNodes)
 	cfg := c.client.LastImportedConfig()
 	if cfg == nil {
-		return nil, errors.New("no IxNetwork config found")
+		return errors.New("no IxNetwork config found")
 	}
 
-	var allPeers []ixconfig.IxiaCfgNode
+	var allNodes []ixconfig.IxiaCfgNode
 	for _, topo := range cfg.Topology {
 		for _, dg := range topo.DeviceGroup {
-			if len(dg.Ethernet) < 1 {
-				continue
-			}
 			var iface string
 			cnt, err := fmt.Sscanf(*dg.Name, "Device Group on %s", &iface)
 			if err != nil || cnt != 1 {
 				continue
 			}
-			c.peerCache[iface] = make(map[string]ixconfig.IxiaCfgNode)
-			if len(dg.Ethernet[0].Ipv4) > 0 {
+			nodes := &cachedNodes{
+				bgpPeers: make(map[string]ixconfig.IxiaCfgNode),
+				rsvpLSPs: make(map[string]*ixconfig.TopologyRsvpP2PIngressLsps),
+			}
+			c.intfCache[iface] = nodes
+			if len(dg.Ethernet) > 0 && len(dg.Ethernet[0].Ipv4) > 0 {
 				for _, p := range dg.Ethernet[0].Ipv4[0].BgpIpv4Peer {
-					c.peerCache[iface][*p.DutIp.SingleValue.Value] = p
-					allPeers = append(allPeers, p)
+					nodes.bgpPeers[*p.DutIp.SingleValue.Value] = p
+					allNodes = append(allNodes, p)
 				}
 			}
-			if len(dg.Ethernet[0].Ipv6) > 0 {
+			if len(dg.Ethernet) > 0 && len(dg.Ethernet[0].Ipv6) > 0 {
 				for _, p := range dg.Ethernet[0].Ipv6[0].BgpIpv6Peer {
-					c.peerCache[iface][*p.DutIp.SingleValue.Value] = p
-					allPeers = append(allPeers, p)
+					nodes.bgpPeers[*p.DutIp.SingleValue.Value] = p
+					allNodes = append(allNodes, p)
+				}
+			}
+			for _, lsp := range dgToLSPs(dg) {
+				if ilsp := lsp.RsvpP2PIngressLsps; ilsp != nil && *(ilsp.Active.SingleValue.Value) == "true" {
+					nodes.rsvpLSPs[*(lsp.Name)] = ilsp
+					allNodes = append(allNodes, ilsp)
 				}
 			}
 		}
 	}
-	if err := c.client.UpdateIDs(ctx, cfg, allPeers...); err != nil {
-		return nil, fmt.Errorf("failed to update IDs for bgp peers: %v", allPeers)
+	if err := c.client.UpdateIDs(ctx, cfg, allNodes...); err != nil {
+		return fmt.Errorf("failed to update IDs for nodes: %v", allNodes)
 	}
-	return c.peerCache, nil
+	return nil
 }
 
-// ribFromIxia gets the BGP RIB from an IXIA device.
-func (c *Client) ribFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
+func dgToLSPs(dg *ixconfig.TopologyDeviceGroup) []*ixconfig.TopologyRsvpteLsps {
+	var lsps []*ixconfig.TopologyRsvpteLsps
+	for _, ng := range dg.NetworkGroup {
+		for _, ndg := range ng.DeviceGroup {
+			for _, lb := range ndg.Ipv4Loopback {
+				lsps = append(lsps, lb.RsvpteLsps...)
+			}
+		}
+	}
+	for _, ndg := range dg.DeviceGroup {
+		lsps = append(lsps, dgToLSPs(ndg)...)
+	}
+	return lsps
+}
+
+// bgpRIBFromIxia gets the BGP RIB from an IXIA device.
+func (c *Client) bgpRIBFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
 	const (
 		bgpV4OpPath = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo"
 		bgpV6OpPath = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo"
 	)
-	peerCache, err := c.fetchPeerCache(ctx)
+	nodes, err := c.fetchCachedNodes(ctx, pi.intf)
 	if err != nil {
-		return nil, fmt.Errorf("failed to update cache: %w", err)
+		return nil, err
 	}
-	node, ok := peerCache[pi.intf][pi.neighbor]
+	node, ok := nodes.bgpPeers[pi.neighbor]
 	if !ok {
 		return nil, fmt.Errorf("no peer %q on interface %q", pi.neighbor, pi.intf)
 	}
@@ -346,12 +383,12 @@ const (
 	oldRibCacheKey   = "bgpRIBCacheKey"
 )
 
-func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notification, error) {
+func (c *Client) pathToBGPRIB(ctx context.Context, p *gpb.Path) (*gpb.Notification, error) {
 	const (
-		attrSetOCPath      = ribOCPath + "/attr-sets"
-		communityOCPath    = ribOCPath + "/communities"
-		bgpV4UnicastOCPath = ribOCPath + "/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-pre/"
-		bgpV6UnicastOCPath = ribOCPath + "/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-pre/"
+		attrSetOCPath      = bgpRIBPath + "/attr-sets"
+		communityOCPath    = bgpRIBPath + "/communities"
+		bgpV4UnicastOCPath = bgpRIBPath + "/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-pre/"
+		bgpV6UnicastOCPath = bgpRIBPath + "/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-pre/"
 	)
 
 	schemaPath, err := ygot.PathToSchemaPath(p)
@@ -385,7 +422,7 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 		isIPV4:   strings.HasPrefix(schemaPath, bgpV4UnicastOCPath),
 	}
 
-	_, hasFreshInfo := c.fresh.Get(ribOCPath)
+	_, hasFreshInfo := c.fresh.Get(bgpRIBPath)
 
 	// Getting a new path ignores the cache duration and forces a refresh.
 	if hasFreshInfo && cachePI == pi {
@@ -395,7 +432,7 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 	cachePI = pi
 	c.fresh.Set(peerInfoCacheKey, cachePI, -1)
 
-	table, err := ribFromIxiaFn(c, ctx, pi)
+	table, err := bgpRIBFromIxiaFn(c, ctx, pi)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read Ixia table: %w", err)
 	}
@@ -405,7 +442,7 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 		return nil, fmt.Errorf("failed to unmarshal Ixia table: %w", err)
 	}
 
-	dev, err := learnedBGPToOC(info, cachePI.intf, cachePI.protocol, cachePI.neighbor, cachePI.isIPV4)
+	dev, err := bgpRIBDevice(info, cachePI.intf, cachePI.protocol, cachePI.neighbor, cachePI.isIPV4)
 	if err != nil {
 		return nil, err
 	}
@@ -422,55 +459,20 @@ func (c *Client) pathToOCRIB(ctx context.Context, p *gpb.Path) (*gpb.Notificatio
 	notif.Timestamp = time.Now().UnixNano()
 
 	c.fresh.Set(oldRibCacheKey, dev, -1)
-	c.fresh.SetDefault(ribOCPath, true)
+	c.fresh.SetDefault(bgpRIBPath, true)
 
 	return notif, nil
 }
 
-func dgToLSPs(dg *ixconfig.TopologyDeviceGroup) []*ixconfig.TopologyRsvpteLsps {
-	var lsps []*ixconfig.TopologyRsvpteLsps
-	for _, ng := range dg.NetworkGroup {
-		for _, ndg := range ng.DeviceGroup {
-			for _, lb := range ndg.Ipv4Loopback {
-				lsps = append(lsps, lb.RsvpteLsps...)
-			}
-		}
-	}
-	for _, ndg := range dg.DeviceGroup {
-		lsps = append(lsps, dgToLSPs(ndg)...)
-	}
-	return lsps
-}
-
-func (c *Client) lspsFromIxia(ctx context.Context) (map[string][]*ingressLSP, error) {
+func (c *Client) rsvpTEFromIxia(ctx context.Context, intf string) (map[string][]*ingressLSP, error) {
 	const mvEP = "multivalue/operations/getvalues"
-	cfg := c.client.LastImportedConfig()
-	if cfg == nil {
-		return nil, errors.New("no IxNetwork config found")
-	}
-
-	var lsps []*ixconfig.TopologyRsvpteLsps
-	for _, topo := range cfg.Topology {
-		for _, dg := range topo.DeviceGroup {
-			lsps = append(lsps, dgToLSPs(dg)...)
-		}
-	}
-
-	var ingressLSPNodes []ixconfig.IxiaCfgNode
-	nameToIngressLSP := map[string]*ixconfig.TopologyRsvpP2PIngressLsps{}
-	for _, lspNode := range lsps {
-		if iLSP := lspNode.RsvpP2PIngressLsps; iLSP != nil && *(iLSP.Active.SingleValue.Value) == "true" {
-			ingressLSPNodes = append(ingressLSPNodes, iLSP)
-			nameToIngressLSP[*(lspNode.Name)] = iLSP
-		}
-	}
-
-	if err := c.client.UpdateIDs(ctx, cfg, ingressLSPNodes...); err != nil {
-		return nil, fmt.Errorf("failed to update IDs for ingress LSPs: %w", err)
+	nodes, err := c.fetchCachedNodes(ctx, intf)
+	if err != nil {
+		return nil, err
 	}
 
 	ingressLSPsByPrefix := map[string][]*ingressLSP{}
-	for n, lspCfg := range nameToIngressLSP {
+	for n, lspCfg := range nodes.rsvpLSPs {
 		nodeID, err := c.client.NodeID(lspCfg)
 		if err != nil {
 			return nil, err
@@ -504,38 +506,34 @@ func (c *Client) lspsFromIxia(ctx context.Context) (map[string][]*ingressLSP, er
 	return ingressLSPsByPrefix, nil
 }
 
-const oldLSPCacheKey = "lspCacheKey"
-
-func (c *Client) pathToOCLSPs(ctx context.Context) (*gpb.Notification, error) {
-	if _, hasFreshInfo := c.fresh.Get(lspsOCPath); hasFreshInfo {
+func (c *Client) pathToRSVPTE(ctx context.Context, path *gpb.Path) (*gpb.Notification, error) {
+	intf := path.GetElem()[1].GetKey()["name"]
+	cacheKey := strings.Join([]string{rsvpTEPath, intf}, ",")
+	if _, hasFreshInfo := c.fresh.Get(cacheKey); hasFreshInfo {
 		return nil, nil
 	}
 
-	ingressLSPs, err := lspsFromIxiaFn(c, ctx)
+	ingressLSPs, err := rsvpTEFromIxiaFn(c, ctx, intf)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read LSPs from Ixia: %w", err)
 	}
-
-	dev := &telemetry.Device{}
-	rsvpTE := dev.GetOrCreateNetworkInstance("default").GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe()
-	if err := lsps(ingressLSPs, rsvpTE); err != nil {
+	dev, err := rsvpTEDevice(ingressLSPs, intf)
+	if err != nil {
 		return nil, err
 	}
 
-	var oldLSPs *telemetry.Device
-	if old, ok := c.fresh.Get(oldLSPCacheKey); ok {
-		oldLSPs = old.(*telemetry.Device)
+	var oldDev *telemetry.Device
+	oldCacheKey := "old " + cacheKey
+	if old, ok := c.fresh.Get(oldCacheKey); ok {
+		oldDev = old.(*telemetry.Device)
 	}
-
-	notif, err := ygot.Diff(oldLSPs, dev)
+	notif, err := ygot.Diff(oldDev, dev)
 	if err != nil {
 		return nil, fmt.Errorf("failed to render notifications: %w", err)
 	}
 	notif.Timestamp = time.Now().UnixNano()
-
-	c.fresh.Set(oldLSPCacheKey, dev, -1)
-	c.fresh.SetDefault(lspsOCPath, true)
-
+	c.fresh.Set(oldCacheKey, dev, cache.NoExpiration)
+	c.fresh.SetDefault(cacheKey, true)
 	return notif, nil
 }
 

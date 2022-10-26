@@ -529,7 +529,7 @@ func TestAddISISProtocols(t *testing.T) {
 	tests := []struct {
 		desc                                              string
 		ifc                                               *opb.InterfaceConfig
-		wantIsisIntfName, wantIsisRtrName                 string
+		wantIsisIntfName, wantIsisRtrName, wantRtrCapID   string
 		wantEnable3WayHandshake, wantSR, wantAdjacencySid bool
 		wantNetwGrpCount                                  int
 	}{{
@@ -615,6 +615,19 @@ func TestAddISISProtocols(t *testing.T) {
 		wantIsisIntfName: fmt.Sprintf("IS-IS on %s", ifName),
 		wantIsisRtrName:  fmt.Sprintf("IS-IS Router on %s", ifName),
 		wantNetwGrpCount: 2,
+	}, {
+		desc: "IS-IS config with router capability ID",
+		ifc: &opb.InterfaceConfig{
+			Name: ifName,
+			Isis: &opb.ISISConfig{
+				Level:              opb.ISISConfig_L1,
+				NetworkType:        opb.ISISConfig_BROADCAST,
+				CapabilityRouterId: "1.2.3.4",
+			},
+		},
+		wantIsisIntfName: fmt.Sprintf("IS-IS on %s", ifName),
+		wantIsisRtrName:  fmt.Sprintf("IS-IS Router on %s", ifName),
+		wantRtrCapID:     "1.2.3.4",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -624,7 +637,7 @@ func TestAddISISProtocols(t *testing.T) {
 				t.Fatalf("addISISProtocols: unexpected error: %v", gotErr)
 			}
 
-			var gotIsisIntfName, gotIsisRtrName string
+			var gotIsisIntfName, gotIsisRtrName, gotRtrCapID string
 			var gotEnable3WayHandshake, gotSR, gotAdjacencySid bool
 			dg := c.cfg.Topology[0].DeviceGroup[0]
 			eth := dg.Ethernet[0]
@@ -640,6 +653,9 @@ func TestAddISISProtocols(t *testing.T) {
 				rtr := dg.IsisL3Router[0]
 				gotIsisRtrName = *(rtr.Name)
 				gotSR = *(rtr.EnableSR)
+				if rtr.RtrcapId != nil {
+					gotRtrCapID = *(rtr.RtrcapId.SingleValue.Value)
+				}
 			}
 			gotNetwGrpCount := len(dg.NetworkGroup)
 
@@ -666,6 +682,9 @@ func TestAddISISProtocols(t *testing.T) {
 			}
 			if test.wantAdjacencySid != gotAdjacencySid {
 				t.Errorf("addISISProtocols: incorrect adjacency config: enabled SID? %t, wanted enabled SID? %t", gotAdjacencySid, test.wantAdjacencySid)
+			}
+			if test.wantRtrCapID != gotRtrCapID {
+				t.Errorf("addISISProtocols: incorrect router capability ID: got %q, want %q", gotRtrCapID, test.wantRtrCapID)
 			}
 			if test.wantNetwGrpCount != gotNetwGrpCount {
 				t.Errorf("addISISProtocols: incorrect network group config: got %d network group, wanted %d", gotNetwGrpCount, test.wantNetwGrpCount)

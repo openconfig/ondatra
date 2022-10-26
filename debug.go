@@ -15,6 +15,7 @@
 package ondatra
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/openconfig/ondatra/internal/debugger"
@@ -28,10 +29,20 @@ func Debug() *Debugger {
 // Debugger is the debugger API.
 type Debugger struct{}
 
-// Breakpoint inserts a breakpoint in the test.
-func (d *Debugger) Breakpoint(t *testing.T) {
+// Breakpoint inserts a breakpoint in the test and prints fmt.Sprint(a...) in
+// the breakpoint message.
+func (d *Debugger) Breakpoint(t *testing.T, a ...any) {
 	t.Helper()
-	if err := debugger.Breakpoint(t); err != nil {
+	if err := debugger.Breakpoint(t, fmt.Sprint(a...)); err != nil {
 		t.Fatalf("Breakpoint(t): %v", err)
+	}
+}
+
+// Breakpointf inserts a breakpoint in the test and prints fmt.Sprintf(a...) in
+// the breakpoint message.
+func (d *Debugger) Breakpointf(t *testing.T, format string, a ...any) {
+	t.Helper()
+	if err := debugger.Breakpoint(t, fmt.Sprintf(format, a...)); err != nil {
+		t.Fatalf("Breakpointf(t): %v", err)
 	}
 }

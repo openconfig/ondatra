@@ -17,6 +17,7 @@ package flags
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -29,12 +30,11 @@ var (
 		"A zero value means here is no time limit. Must be a non-negative value.")
 	waitTime = flag.Duration("wait_time", 0, "Maximum amount of time the test should wait until the testbed is ready. "+
 		"A zero value lets the binding implementation choose an appropriate wait time. Must be a non-negative value.")
-	reserve = flag.String("reserve", "", "reservation id or a mapping of device and port IDs to names of the form "+
+	reserve = flag.String("reserve", "", "Reservation id or a mapping of device and port IDs to names of the form "+
 		"'dut=mydevice,dut:port1=Ethernet1/1,ate=myixia,ate:port2=2/3'")
-	xml = flag.String("xml", "", "File path to write JUnit XML test results; disables normal Go test logging.")
-
+	xml  = flag.String("xml", "", "File path to write JUnit XML test results; disables normal Go test logging.")
+	vlog = flag.Int("vlog", 0, "Logging level for glog V logging; an alias for the glog -v flag.")
 	debug = flag.Bool("debug", false, "Whether the test is run in debug mode")
-
 )
 
 // Values is the set of parsed and validated flag values.
@@ -58,6 +58,10 @@ func Parse() (*Values, error) {
 	// for notifying users when breakpoints are reached, and is generally
 	// a better default user experience for Ondatra tests.
 	flag.Set("test.v", "true")
+
+	// The Go -v flag shadows the glog flag of the same name.
+	// Set the glog v flag to the value of the vlog alias flag.
+	flag.Set("v", strconv.Itoa(*vlog))
 
 	if *testbed == "" {
 		return nil, fmt.Errorf("testbed path not specified")
