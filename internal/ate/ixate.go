@@ -1408,19 +1408,18 @@ func (ix *ixATE) StopAllTraffic(ctx context.Context) error {
 	return nil
 }
 
-// DialGNMI constructs and returns a GNMI client for the Ixia.
-func (ix *ixATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+// FetchGNMI returns the GNMI client for the Ixia.
+func (ix *ixATE) FetchGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 	ix.mu.Lock()
 	defer ix.mu.Unlock()
-	if ix.gclient != nil {
-		return nil, fmt.Errorf("GNMI client for Ixia %s already dialed", ix.name)
+	if ix.gclient == nil {
+		gclient, err := ixgnmi.NewClient(ctx, ix.name, ix.readStats, unwrapClient(ix.c), opts...)
+		if err != nil {
+			return nil, err
+		}
+		ix.gclient = gclient
 	}
-	gclient, err := ixgnmi.NewClient(ctx, ix.name, ix.readStats, unwrapClient(ix.c), opts...)
-	if err != nil {
-		return nil, err
-	}
-	ix.gclient = gclient
-	return gclient, nil
+	return ix.gclient, nil
 }
 
 func (ix *ixATE) readStats(ctx context.Context, captions []string) (*ixgnmi.Stats, error) {

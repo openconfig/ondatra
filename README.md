@@ -84,24 +84,31 @@ testbed is reserved. This is useful if you want to just reserve the same testbed
 for manual testing, or to manually inspect the testbed before the test cases
 run.
 
-## Increasing Logging Verbosity
+## Logging Verbosity
 
 Ondatra always sets the Go test `-v` flag to true for verbose test output, so
 there is no need to set this flag explicitly in your test invocations.
 
 Ondatra uses [glog](https://pkg.go.dev/github.com/golang/glog) for its own
 logging. By default, glog logs to a temporary dir, but setting the
-`-alsologtostderr` flag will output those logs to stderr. The Go test `-v` flag
-shadows glog's own flag of the same name, so Ondatra provides the flag `-vlog`
-as an alias to control the V-level logging behavior of glog. When used in
-combination with `-alsologtostderr`, the `-vlog` level provides
-increasingly-granular logging details:
+`-alsologtostderr` flag will output those logs to stderr. You can increase the
+verbosity glog by setting its `-v` flag to a positive integer. Increasing the
+value of `v` produces increasingly verbose and granular details in the logs, as
+outlined in this table:
 
 Log Level | Example Information
 --------- | --------------------------------------------------------
 1         | `SetRequest`/`SubscribeRequest` dumps
 2         | Each `Update`/`Delete` received in a `SubscribeResponse`
 3         | Ixia gNMI translation details
+
+Because go test has its own `-v` flag, setting glog's `-v` value must be
+preceded by `-args` to avoid it being interpreted by go test itself. For
+example:
+
+```
+go test -alsologtostderr -args -v=1
+```
 
 See the
 [glog package documentation](https://pkg.go.dev/github.com/golang/glog#pkg-overview)

@@ -20,14 +20,13 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"sync"
 	"time"
 
 	log "github.com/golang/glog"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/rawapis"
 
 	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"
@@ -41,32 +40,6 @@ const (
 	defaultStatusWait    = 10 * time.Second
 )
 
-var (
-	mu    sync.Mutex
-	gnois = make(map[binding.DUT]binding.GNOIClients)
-)
-
-// NewGNOI creates a gNOI client for the specified DUT.
-func NewGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
-	return dut.DialGNOI(ctx, grpc.WithBlock())
-}
-
-// FetchGNOI fetches a cached gNOI client for the given DUT.
-func FetchGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
-	mu.Lock()
-	defer mu.Unlock()
-	gnoi, ok := gnois[dut]
-	if !ok {
-		var err error
-		gnoi, err = NewGNOI(ctx, dut)
-		if err != nil {
-			return nil, fmt.Errorf("error dialing gNOI: %w", err)
-		}
-		gnois[dut] = gnoi
-	}
-	return gnoi, nil
-}
-
 // Install executes an install operation.
 // The gNOI install scenarios are documented on the Install function here:
 // https://github.com/openconfig/gnoi/blob/master/os/os.proto
@@ -74,7 +47,7 @@ func Install(ctx context.Context, dut binding.DUT, version string, standby bool,
 	if version == "" {
 		return fmt.Errorf("version not set in install operation on DUT: %v", dut)
 	}
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}
@@ -169,7 +142,7 @@ func Ping(ctx context.Context, dut binding.DUT, dest string, count int32) error 
 	if dest == "" {
 		return fmt.Errorf("no destination for ping operation: %v", dest)
 	}
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}
@@ -202,7 +175,7 @@ func Ping(ctx context.Context, dut binding.DUT, dest string, count int32) error 
 
 // SystemTime gives the current system time of the device.
 func SystemTime(ctx context.Context, dut binding.DUT) (time.Time, error) {
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return time.Time{}, err
 	}
@@ -218,7 +191,7 @@ func SystemTime(ctx context.Context, dut binding.DUT) (time.Time, error) {
 //	factoryOS instructs the device to rollback the its original OS version
 //	zeroFill instructs the device to zero fill persistent storage state data
 func FactoryReset(ctx context.Context, dut binding.DUT, factoryOS, zeroFill bool) error {
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}
@@ -295,7 +268,7 @@ func SetInterfaceState(ctx context.Context, dut binding.DUT, intf string, enable
 
 // Reboot reboots a device.
 func Reboot(ctx context.Context, dut binding.DUT, timeout time.Duration) error {
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}
@@ -340,7 +313,7 @@ func Reboot(ctx context.Context, dut binding.DUT, timeout time.Duration) error {
 
 // KillProcess kills a process on a device, and optionally restarts it.
 func KillProcess(ctx context.Context, dut binding.DUT, req *spb.KillProcessRequest) error {
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}
@@ -350,7 +323,7 @@ func KillProcess(ctx context.Context, dut binding.DUT, req *spb.KillProcessReque
 
 // SwitchControlProcessor switches to a provided destination route processor.
 func SwitchControlProcessor(ctx context.Context, dut binding.DUT, dest string) error {
-	gnoi, err := FetchGNOI(ctx, dut)
+	gnoi, err := rawapis.FetchGNOI(ctx, dut)
 	if err != nil {
 		return err
 	}

@@ -18,24 +18,17 @@ package otg
 import (
 	"golang.org/x/net/context"
 	"fmt"
-	"sync"
 	"testing"
 
-	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
+	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/telemetry/otg/device"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
-)
-
-var (
-	mu    sync.Mutex
-	apis  = make(map[binding.ATE]gosnappi.GosnappiApi)
-	gnmis = make(map[binding.ATE]gpb.GNMIClient)
 )
 
 // New constructs a new OTG instance.
@@ -66,7 +59,7 @@ func (o *OTG) NewConfig(t testing.TB) gosnappi.Config {
 }
 
 func newConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +80,7 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 }
 
 func pushConfig(ctx context.Context, ate binding.ATE, cfg gosnappi.Config) ([]string, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +114,7 @@ func (o *OTG) FetchConfig(t testing.TB) gosnappi.Config {
 }
 
 func fetchConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +148,7 @@ func (o *OTG) StopProtocols(t testing.TB) {
 }
 
 func setProtocolState(ctx context.Context, ate binding.ATE, state gosnappi.ProtocolStateStateEnum) ([]string, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -193,7 +186,7 @@ func (o *OTG) StopTraffic(t testing.TB) {
 }
 
 func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.TransmitStateStateEnum) ([]string, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -231,7 +224,7 @@ func (o *OTG) WithdrawRoutes(t testing.TB, routes []string) {
 }
 
 func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state gosnappi.RouteStateStateEnum) ([]string, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -269,7 +262,7 @@ func (o *OTG) DisableLACPMembers(t testing.TB, ports []string) {
 }
 
 func setLACPMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []string, state gosnappi.LacpMemberStateStateEnum) ([]string, error) {
-	api, err := fetchAPI(ctx, ate)
+	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
@@ -280,46 +273,18 @@ func setLACPMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []s
 	return resp.Warnings(), nil
 }
 
-func fetchAPI(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error) {
-	mu.Lock()
-	defer mu.Unlock()
-	api, ok := apis[ate]
-	if !ok {
-		var err error
-		api, err = ate.DialOTG(ctx)
-		if err != nil {
-			return nil, err
-		}
-		apis[ate] = api
-	}
-	return api, nil
-}
-
 // Telemetry returns a telemetry path root for the device.
 func (o *OTG) Telemetry() *device.DevicePath {
 	root := device.DeviceRoot(o.ate.Name())
 	root.PutCustomData(genutil.DefaultClientKey, func(ctx context.Context) (gpb.GNMIClient, error) {
-		return fetchGNMI(ctx, o.ate)
+		return rawapis.FetchOTGGNMI(ctx, o.ate)
 	})
 	return root
 }
 
 // GNMI returns a telemetry path root for the device.
 func (o *OTG) GNMI() *gnmi.Client {
-	return gnmi.NewClient(o.ate.Name(), false, func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, o.ate) })
-}
-
-func fetchGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) {
-	mu.Lock()
-	defer mu.Unlock()
-	gnmi, ok := gnmis[ate]
-	if !ok {
-		var err error
-		gnmi, err = ate.DialGNMI(ctx, grpc.WithBlock())
-		if err != nil {
-			return nil, err
-		}
-		gnmis[ate] = gnmi
-	}
-	return gnmi, nil
+	return gnmi.NewClient(o.ate.Name(), false, func(ctx context.Context) (gpb.GNMIClient, error) {
+		return rawapis.FetchOTGGNMI(ctx, o.ate)
+	})
 }

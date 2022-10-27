@@ -21,13 +21,9 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/config"
 	"github.com/openconfig/ondatra/config/device"
-	"github.com/openconfig/ondatra/internal/cli"
-	"github.com/openconfig/ondatra/internal/console"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/internal/gribi"
-	"github.com/openconfig/ondatra/internal/operations"
-	"github.com/openconfig/ondatra/internal/p4rt"
+	"github.com/openconfig/ondatra/internal/rawapis"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
@@ -113,7 +109,7 @@ type GRIBIAPI struct {
 func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating gNMI client for %s", g.dut)
-	gnmi, err := newGNMI(context.Background(), g.dut)
+	gnmi, err := rawapis.NewGNMI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
 	}
@@ -124,7 +120,7 @@ func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Fetching gNMI client for %s", g.dut)
-	gnmi, err := fetchGNMI(context.Background(), g.dut, nil)
+	gnmi, err := rawapis.FetchGNMI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
 	}
@@ -135,7 +131,7 @@ func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 func (g *GNOIAPI) New(t testing.TB) GNOI {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating gNOI client for %s", g.dut)
-	bgnoi, err := operations.NewGNOI(context.Background(), g.dut)
+	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
 	}
@@ -146,7 +142,7 @@ func (g *GNOIAPI) New(t testing.TB) GNOI {
 func (g *GNOIAPI) Default(t testing.TB) GNOI {
 	t.Helper()
 	debugger.ActionStarted(t, "Fetching gNOI client for %s", g.dut)
-	bgnoi, err := operations.FetchGNOI(context.Background(), g.dut)
+	bgnoi, err := rawapis.FetchGNOI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
 	}
@@ -157,7 +153,7 @@ func (g *GNOIAPI) Default(t testing.TB) GNOI {
 func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
-	grc, err := gribi.NewGRIBI(context.Background(), g.dut)
+	grc, err := rawapis.NewGRIBI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
 	}
@@ -168,7 +164,7 @@ func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
 func (g *GRIBIAPI) Default(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Fetching gRIBI client for %s", g.dut)
-	grc, err := gribi.FetchGRIBI(context.Background(), g.dut)
+	grc, err := rawapis.FetchGRIBI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
 	}
@@ -190,7 +186,7 @@ type privateGNOI interface {
 func (r *RawDUTAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating P4RT client for %s", r.dut)
-	p4rtClient, err := p4rt.NewP4RT(context.Background(), r.dut)
+	p4rtClient, err := rawapis.NewP4RT(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("Failed to create P4RT client on %v: %v", r.dut, err)
 	}
@@ -212,7 +208,7 @@ type privateStreamClient interface {
 func (r *RawDUTAPIs) CLI(t testing.TB) StreamClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating CLI client for %s", r.dut)
-	c, err := cli.NewCLI(context.Background(), r.dut)
+	c, err := rawapis.NewCLI(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("Failed to create CLI client on %v: %v", r.dut, err)
 	}
@@ -223,7 +219,7 @@ func (r *RawDUTAPIs) CLI(t testing.TB) StreamClient {
 func (r *RawDUTAPIs) Console(t testing.TB) StreamClient {
 	t.Helper()
 	debugger.ActionStarted(t, "Creating console client for %s", r.dut)
-	c, err := console.NewConsole(context.Background(), r.dut)
+	c, err := rawapis.NewConsole(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("Failed to create console client on %v: %v", r.dut, err)
 	}

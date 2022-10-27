@@ -22,7 +22,7 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/internal/rawapis"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -44,7 +44,7 @@ func ixiaForATE(ctx context.Context, ate binding.ATE) (*ixATE, error) {
 	defer mu.Unlock()
 	ix, ok := ixias[ate]
 	if !ok {
-		ixnet, err := ate.DialIxNetwork(ctx)
+		ixnet, err := rawapis.FetchIxNetwork(ctx, ate)
 		if err != nil {
 			return nil, err
 		}
@@ -55,15 +55,6 @@ func ixiaForATE(ctx context.Context, ate binding.ATE) (*ixATE, error) {
 		ixias[ate] = ix
 	}
 	return ix, nil
-}
-
-// IxSession returns the raw IxNetwork session for the specified ATE.
-func IxSession(ctx context.Context, ate binding.ATE) (*ixweb.Session, error) {
-	ix, err := ixiaForATE(ctx, ate)
-	if err != nil {
-		return nil, err
-	}
-	return ix.c.Session().(*sessionWrapper).Session, nil
 }
 
 // PushTopology pushes a topology to an ATE.
@@ -172,13 +163,13 @@ func StopTraffic(ctx context.Context, ate binding.ATE) error {
 	return nil
 }
 
-// DialGNMI constructs and returns a GNMI client for the Ixia.
-func DialGNMI(ctx context.Context, ate binding.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+// FetchGNMI returns the GNMI client for the Ixia.
+func FetchGNMI(ctx context.Context, ate binding.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 	ix, err := ixiaForATE(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	return ix.DialGNMI(ctx, opts...)
+	return ix.FetchGNMI(ctx, opts...)
 }
 
 // SetPortState sets the state of a specified interface on the ATE.

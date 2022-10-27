@@ -19,7 +19,9 @@ import (
 	"testing"
 
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/flags"
+	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/internal/testbed"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -65,9 +67,11 @@ func DUTs(t testing.TB) map[string]*DUTDevice {
 
 func newDUT(id string, res binding.DUT) *DUTDevice {
 	return &DUTDevice{&Device{
-		id:       id,
-		res:      res,
-		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, res, nil) },
+		id:  id,
+		res: res,
+		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) {
+			return rawapis.FetchGNMI(ctx, res)
+		},
 	}}
 }
 
@@ -94,9 +98,11 @@ func ATEs(t testing.TB) map[string]*ATEDevice {
 
 func newATE(id string, res binding.ATE) *ATEDevice {
 	return &ATEDevice{Device: &Device{
-		id:       id,
-		res:      res,
-		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) { return fetchGNMI(ctx, res, nil) },
+		id:  id,
+		res: res,
+		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) {
+			return ate.FetchGNMI(ctx, res)
+		},
 	}}
 }
 

@@ -17,14 +17,10 @@ package ondatra
 import (
 	"golang.org/x/net/context"
 	"fmt"
-	"math"
-	"sync"
 	"testing"
 
-	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/gnmi"
-	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/testbed"
 	"github.com/openconfig/ondatra/telemetry/device"
@@ -216,44 +212,4 @@ func (pmd PMD) String() string {
 // PMD returns the Physical Medium Dependent.
 func (p *Port) PMD() PMD {
 	return PMD(p.res.PMD)
-}
-
-var (
-	gnmisMu sync.Mutex
-	gnmis   = make(map[binding.Device]gpb.GNMIClient)
-)
-
-// newGNMI creates a new gNMI client for the specified Device.
-func newGNMI(ctx context.Context, dev binding.Device) (gpb.GNMIClient, error) {
-	dialGNMI := func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-		return dev.(binding.DUT).DialGNMI(ctx, opts...)
-	}
-	if ba, ok := dev.(binding.ATE); ok {
-		dialGNMI = func(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-			return ate.DialGNMI(ctx, ba, opts...)
-		}
-	}
-	return dialGNMI(ctx,
-		grpc.WithBlock(),
-		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32)))
-}
-
-// fetchGNMI fetches the gNMI client for the given device.
-// If a GNMIClient is provided it will be just returned as is and not cached.
-func fetchGNMI(ctx context.Context, dev binding.Device, c gpb.GNMIClient) (gpb.GNMIClient, error) {
-	if c != nil {
-		return c, nil
-	}
-	gnmisMu.Lock()
-	defer gnmisMu.Unlock()
-	c, ok := gnmis[dev]
-	if !ok {
-		var err error
-		c, err = newGNMI(ctx, dev)
-		if err != nil {
-			return nil, err
-		}
-		gnmis[dev] = c
-	}
-	return c, nil
 }
