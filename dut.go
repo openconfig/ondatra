@@ -24,6 +24,7 @@ import (
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/rawapis"
+	"github.com/openconfig/ondatra/operations"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
@@ -61,8 +62,8 @@ func (c *Config) New() *config.VendorConfig {
 }
 
 // Operations returns a handle to the DUT operations API.
-func (d *DUTDevice) Operations() *Operations {
-	return &Operations{dut: d.res.(binding.DUT)}
+func (d *DUTDevice) Operations() *operations.Operations {
+	return operations.New(d.res.(binding.DUT))
 }
 
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
