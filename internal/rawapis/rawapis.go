@@ -25,7 +25,6 @@ package rawapis
 import (
 	"golang.org/x/net/context"
 	"fmt"
-	"math"
 	"sync"
 
 	"google.golang.org/grpc"
@@ -36,6 +35,14 @@ import (
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
+
+// CommonDialOpts to include in all gRPC dial calls.
+// TODO: Unexport once IxNetwork is removed.
+var CommonDialOpts = []grpc.DialOption{
+	grpc.WithBlock(),
+	withUnaryAnnotateErrors(),
+	withStreamAnnotateErrors(),
+}
 
 // NewCLI creates a CLI client for the specified DUT.
 func NewCLI(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
@@ -54,7 +61,7 @@ var (
 
 // NewGNMI creates a new gNMI client for the specified DUT.
 func NewGNMI(ctx context.Context, dut binding.DUT) (gpb.GNMIClient, error) {
-	return dut.DialGNMI(ctx, grpc.WithBlock(), grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(math.MaxInt32)))
+	return dut.DialGNMI(ctx, CommonDialOpts...)
 }
 
 // FetchGNMI fetches the cached gNMI client for the specified DUT.
@@ -80,7 +87,7 @@ var (
 
 // NewGNOI creates a gNOI client for the specified DUT.
 func NewGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
-	return dut.DialGNOI(ctx, grpc.WithBlock())
+	return dut.DialGNOI(ctx, CommonDialOpts...)
 }
 
 // FetchGNOI fetches the cached gNOI client for the specified DUT.
@@ -106,7 +113,7 @@ var (
 
 // NewGRIBI creates a new gRIBI client for the specified DUT.
 func NewGRIBI(ctx context.Context, dut binding.DUT) (grpb.GRIBIClient, error) {
-	return dut.DialGRIBI(ctx, grpc.WithBlock())
+	return dut.DialGRIBI(ctx, CommonDialOpts...)
 }
 
 // FetchGRIBI fetches the cached gRIBI client for the specified DUT.
@@ -132,7 +139,7 @@ var (
 
 // NewP4RT creates a new P4RT client for the specified DUT.
 func NewP4RT(ctx context.Context, dut binding.DUT) (p4pb.P4RuntimeClient, error) {
-	return dut.DialP4RT(ctx, grpc.WithBlock())
+	return dut.DialP4RT(ctx, CommonDialOpts...)
 }
 
 // FetchP4RT fetches the cached P4RT client for the specified DUT.
@@ -184,6 +191,8 @@ func FetchOTG(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error
 	c, ok := otgs[ate]
 	if !ok {
 		var err error
+		// TODO: Add common dial options here when/if supported:
+		// https://github.com/open-traffic-generator/snappi/issues/192
 		c, err = ate.DialOTG(ctx)
 		if err != nil {
 			return nil, fmt.Errorf("error dialing OTG: %w", err)
@@ -205,7 +214,7 @@ func FetchOTGGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) 
 	c, ok := otgGNMIs[ate]
 	if !ok {
 		var err error
-		c, err = ate.DialGNMI(ctx)
+		c, err = ate.DialGNMI(ctx, CommonDialOpts...)
 		if err != nil {
 			return nil, fmt.Errorf("error dialing OTG GNMI: %w", err)
 		}

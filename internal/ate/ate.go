@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/rawapis"
 
@@ -164,12 +163,12 @@ func StopTraffic(ctx context.Context, ate binding.ATE) error {
 }
 
 // FetchGNMI returns the GNMI client for the Ixia.
-func FetchGNMI(ctx context.Context, ate binding.ATE, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+func FetchGNMI(ctx context.Context, ate binding.ATE) (gpb.GNMIClient, error) {
 	ix, err := ixiaForATE(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	return ix.FetchGNMI(ctx, opts...)
+	return ix.FetchGNMI(ctx)
 }
 
 // SetPortState sets the state of a specified interface on the ATE.

@@ -31,11 +31,11 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/internal/ixgnmi"
+	"github.com/openconfig/ondatra/internal/rawapis"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -1409,11 +1409,11 @@ func (ix *ixATE) StopAllTraffic(ctx context.Context) error {
 }
 
 // FetchGNMI returns the GNMI client for the Ixia.
-func (ix *ixATE) FetchGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+func (ix *ixATE) FetchGNMI(ctx context.Context) (gpb.GNMIClient, error) {
 	ix.mu.Lock()
 	defer ix.mu.Unlock()
 	if ix.gclient == nil {
-		gclient, err := ixgnmi.NewClient(ctx, ix.name, ix.readStats, unwrapClient(ix.c), opts...)
+		gclient, err := ixgnmi.NewClient(ctx, ix.name, ix.readStats, unwrapClient(ix.c), rawapis.CommonDialOpts...)
 		if err != nil {
 			return nil, err
 		}
