@@ -75,8 +75,9 @@ var (
 	readStatsFn = func(ctx context.Context, c *Client, cacheKey string, captions []string) (ygot.GoStruct, error) {
 		return c.readStats(ctx, cacheKey, captions)
 	}
-	bgpRIBFromIxiaFn = (*Client).bgpRIBFromIxia
-	rsvpTEFromIxiaFn = (*Client).rsvpTEFromIxia
+	bgp4RIBFromIxiaFn = (*Client).bgp4RIBFromIxia
+	bgp6RIBFromIxiaFn = (*Client).bgp6RIBFromIxia
+	rsvpTEFromIxiaFn  = (*Client).rsvpTEFromIxia
 )
 
 type prefixReader struct {
@@ -189,8 +190,9 @@ type Client struct {
 }
 
 type cachedNodes struct {
-	bgpPeers map[string]ixconfig.IxiaCfgNode
-	rsvpLSPs map[string]*ixconfig.TopologyRsvpP2PIngressLsps
+	bgp4Peers map[string]*ixconfig.TopologyBgpIpv4Peer
+	bgp6Peers map[string]*ixconfig.TopologyBgpIpv6Peer
+	rsvpLSPs  map[string]*ixconfig.TopologyRsvpP2PIngressLsps
 }
 
 // Flush flushes the GNMI data for the Ixia.
@@ -272,7 +274,7 @@ func (c *Client) fetchCachedNodes(ctx context.Context, intf string) (*cachedNode
 	}
 	nodes, ok := c.intfCache[intf]
 	if !ok {
-		return nil, fmt.Errorf("no interface %q", intf)
+		nodes = new(cachedNodes)
 	}
 	return nodes, nil
 }
@@ -293,19 +295,20 @@ func (c *Client) updateIntfCache(ctx context.Context) error {
 				continue
 			}
 			nodes := &cachedNodes{
-				bgpPeers: make(map[string]ixconfig.IxiaCfgNode),
-				rsvpLSPs: make(map[string]*ixconfig.TopologyRsvpP2PIngressLsps),
+				bgp4Peers: make(map[string]*ixconfig.TopologyBgpIpv4Peer),
+				bgp6Peers: make(map[string]*ixconfig.TopologyBgpIpv6Peer),
+				rsvpLSPs:  make(map[string]*ixconfig.TopologyRsvpP2PIngressLsps),
 			}
 			c.intfCache[iface] = nodes
 			if len(dg.Ethernet) > 0 && len(dg.Ethernet[0].Ipv4) > 0 {
 				for _, p := range dg.Ethernet[0].Ipv4[0].BgpIpv4Peer {
-					nodes.bgpPeers[*p.DutIp.SingleValue.Value] = p
+					nodes.bgp4Peers[*p.DutIp.SingleValue.Value] = p
 					allNodes = append(allNodes, p)
 				}
 			}
 			if len(dg.Ethernet) > 0 && len(dg.Ethernet[0].Ipv6) > 0 {
 				for _, p := range dg.Ethernet[0].Ipv6[0].BgpIpv6Peer {
-					nodes.bgpPeers[*p.DutIp.SingleValue.Value] = p
+					nodes.bgp6Peers[*p.DutIp.SingleValue.Value] = p
 					allNodes = append(allNodes, p)
 				}
 			}
@@ -338,129 +341,127 @@ func dgToLSPs(dg *ixconfig.TopologyDeviceGroup) []*ixconfig.TopologyRsvpteLsps {
 	return lsps
 }
 
-// bgpRIBFromIxia gets the BGP RIB from an IXIA device.
-func (c *Client) bgpRIBFromIxia(ctx context.Context, pi peerInfo) (*table, error) {
-	const (
-		bgpV4OpPath = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo"
-		bgpV6OpPath = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo"
-	)
-	nodes, err := c.fetchCachedNodes(ctx, pi.intf)
+// bgp4RIBFromIxia gets the BGP v4 RIB from an IXIA device.
+// TODO: merge with bgp6RIBFromIxia
+func (c *Client) bgp4RIBFromIxia(ctx context.Context, intf string) (map[string]*table, error) {
+	const opPath = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo"
+	nodes, err := c.fetchCachedNodes(ctx, intf)
 	if err != nil {
 		return nil, err
 	}
-	node, ok := nodes.bgpPeers[pi.neighbor]
-	if !ok {
-		return nil, fmt.Errorf("no peer %q on interface %q", pi.neighbor, pi.intf)
+	if len(nodes.bgp4Peers) == 0 {
+		return nil, nil
 	}
-
-	opPath := bgpV6OpPath
-	if pi.isIPV4 {
-		opPath = bgpV4OpPath
-	}
-	nodeID, err := c.client.NodeID(node)
-	if err != nil {
-		return nil, err
-	}
-	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{[]string{nodeID}}, nil); err != nil {
-		return nil, fmt.Errorf("failed to run op: %w", err)
-	}
-	table := &table{}
-	if err := c.client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
-		return nil, fmt.Errorf("failed to get learned info: %w", err)
-	}
-	return table, nil
-}
-
-type peerInfo struct {
-	intf     string
-	protocol string
-	neighbor string
-	isIPV4   bool
-}
-
-const (
-	peerInfoCacheKey = "bgpLearnedInfoCacheKey"
-	oldRibCacheKey   = "bgpRIBCacheKey"
-)
-
-func (c *Client) pathToBGPRIB(ctx context.Context, p *gpb.Path) (*gpb.Notification, error) {
-	const (
-		attrSetOCPath      = bgpRIBPath + "/attr-sets"
-		communityOCPath    = bgpRIBPath + "/communities"
-		bgpV4UnicastOCPath = bgpRIBPath + "/afi-safis/afi-safi/ipv4-unicast/neighbors/neighbor/adj-rib-in-pre/"
-		bgpV6UnicastOCPath = bgpRIBPath + "/afi-safis/afi-safi/ipv6-unicast/neighbors/neighbor/adj-rib-in-pre/"
-	)
-
-	schemaPath, err := ygot.PathToSchemaPath(p)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get schema path: %w", err)
-	}
-
-	var cachePI peerInfo
-	cached, hasCachedPeer := c.fresh.Get(peerInfoCacheKey)
-	if hasCachedPeer {
-		cachePI = cached.(peerInfo)
-	}
-
-	// Attr set and communities are only valid and updated on calls to Adj RIB paths.
-	if strings.HasPrefix(schemaPath, attrSetOCPath) || strings.HasPrefix(schemaPath, communityOCPath) {
-		if !hasCachedPeer {
-			return nil, errors.New("need to read the attr index or comm index before reading attr sets or communities")
+	var nodeIDs []string
+	for _, peerNode := range nodes.bgp4Peers {
+		nodeID, err := c.client.NodeID(peerNode)
+		if err != nil {
+			return nil, err
 		}
-		return nil, nil
+		nodeIDs = append(nodeIDs, nodeID)
 	}
-
-	// Ignore unknown paths.
-	if !strings.HasPrefix(schemaPath, bgpV4UnicastOCPath) && !strings.HasPrefix(schemaPath, bgpV6UnicastOCPath) {
-		return nil, nil
+	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{nodeIDs}, nil); err != nil {
+		return nil, err
 	}
-
-	pi := peerInfo{
-		intf:     p.GetElem()[1].GetKey()["name"],
-		protocol: p.GetElem()[3].GetKey()["name"],
-		neighbor: p.GetElem()[10].GetKey()["neighbor-address"],
-		isIPV4:   strings.HasPrefix(schemaPath, bgpV4UnicastOCPath),
+	peer2Table := make(map[string]*table, len(nodes.bgp4Peers))
+	for peerIP, peerNode := range nodes.bgp4Peers {
+		nodeID, err := c.client.NodeID(peerNode)
+		if err != nil {
+			return nil, err
+		}
+		table := &table{}
+		if err := c.client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
+			return nil, fmt.Errorf("failed to get learned info: %w", err)
+		}
+		peer2Table[peerIP] = table
 	}
+	return peer2Table, nil
+}
 
-	_, hasFreshInfo := c.fresh.Get(bgpRIBPath)
-
-	// Getting a new path ignores the cache duration and forces a refresh.
-	if hasFreshInfo && cachePI == pi {
-		return nil, nil
-	}
-
-	cachePI = pi
-	c.fresh.Set(peerInfoCacheKey, cachePI, -1)
-
-	table, err := bgpRIBFromIxiaFn(c, ctx, pi)
+func (c *Client) bgp6RIBFromIxia(ctx context.Context, intf string) (map[string]*table, error) {
+	const opPath = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo"
+	nodes, err := c.fetchCachedNodes(ctx, intf)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read Ixia table: %w", err)
+		return nil, err
+	}
+	if len(nodes.bgp6Peers) == 0 {
+		return nil, nil
+	}
+	var nodeIDs []string
+	for _, peerNode := range nodes.bgp6Peers {
+		nodeID, err := c.client.NodeID(peerNode)
+		if err != nil {
+			return nil, err
+		}
+		nodeIDs = append(nodeIDs, nodeID)
+	}
+	if err := c.client.Session().Post(ctx, opPath, ixweb.OpArgs{nodeIDs}, nil); err != nil {
+		return nil, err
+	}
+	peer2Table := make(map[string]*table, len(nodes.bgp6Peers))
+	for peerIP, peerNode := range nodes.bgp6Peers {
+		nodeID, err := c.client.NodeID(peerNode)
+		if err != nil {
+			return nil, err
+		}
+		table := &table{}
+		if err := c.client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
+			return nil, fmt.Errorf("failed to get learned info: %w", err)
+		}
+		peer2Table[peerIP] = table
+	}
+	return peer2Table, nil
+}
+
+func (c *Client) pathToBGPRIB(ctx context.Context, path *gpb.Path) (*gpb.Notification, error) {
+	intf := path.GetElem()[1].GetKey()["name"]
+	cacheKey := strings.Join([]string{bgpRIBPath, intf}, ",")
+	if _, hasFreshInfo := c.fresh.Get(cacheKey); hasFreshInfo {
+		return nil, nil
 	}
 
-	var info []bgpLearnedInfo
-	if err := unmarshalTable(table, &info); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal Ixia table: %w", err)
+	peer4Tables, err := bgp4RIBFromIxiaFn(c, ctx, intf)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read rib v4 table: %w", err)
 	}
-
-	dev, err := bgpRIBDevice(info, cachePI.intf, cachePI.protocol, cachePI.neighbor, cachePI.isIPV4)
+	peer6Tables, err := bgp6RIBFromIxiaFn(c, ctx, intf)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read rib v6 table: %w", err)
+	}
+	peer4Infos := make(map[string][]bgpLearnedInfo)
+	for peer, table := range peer4Tables {
+		var info []bgpLearnedInfo
+		if err := unmarshalTable(table, &info); err != nil {
+			return nil, fmt.Errorf("failed to unmarshal rib v4 table: %w", err)
+		}
+		peer4Infos[peer] = info
+	}
+	peer6Infos := make(map[string][]bgpLearnedInfo)
+	for peer, table := range peer6Tables {
+		var info []bgpLearnedInfo
+		if err := unmarshalTable(table, &info); err != nil {
+			return nil, fmt.Errorf("failed to unmarshal rib v6 table: %w", err)
+		}
+		peer6Infos[peer] = info
+	}
+	protocol := path.GetElem()[3].GetKey()["name"]
+	dev, err := bgpRIBDevice(intf, protocol, peer4Infos, peer6Infos)
 	if err != nil {
 		return nil, err
 	}
 
-	var oldRIB *telemetry.Device
-	if old, ok := c.fresh.Get(oldRibCacheKey); ok {
-		oldRIB = old.(*telemetry.Device)
+	var oldDev *telemetry.Device
+	oldCacheKey := "old " + cacheKey
+	if old, ok := c.fresh.Get(oldCacheKey); ok {
+		oldDev = old.(*telemetry.Device)
 	}
-
-	notif, err := ygot.Diff(oldRIB, dev)
+	notif, err := ygot.Diff(oldDev, dev)
 	if err != nil {
 		return nil, fmt.Errorf("failed to render notifications: %w", err)
 	}
 	notif.Timestamp = time.Now().UnixNano()
-
-	c.fresh.Set(oldRibCacheKey, dev, -1)
-	c.fresh.SetDefault(bgpRIBPath, true)
-
+	c.fresh.Set(oldCacheKey, dev, cache.NoExpiration)
+	c.fresh.SetDefault(cacheKey, true)
 	return notif, nil
 }
 
@@ -470,8 +471,11 @@ func (c *Client) rsvpTEFromIxia(ctx context.Context, intf string) (map[string][]
 	if err != nil {
 		return nil, err
 	}
+	if len(nodes.rsvpLSPs) == 0 {
+		return nil, nil
+	}
 
-	ingressLSPsByPrefix := map[string][]*ingressLSP{}
+	ingressLSPsByPrefix := make(map[string][]*ingressLSP)
 	for n, lspCfg := range nodes.rsvpLSPs {
 		nodeID, err := c.client.NodeID(lspCfg)
 		if err != nil {
@@ -517,7 +521,7 @@ func (c *Client) pathToRSVPTE(ctx context.Context, path *gpb.Path) (*gpb.Notific
 	if err != nil {
 		return nil, fmt.Errorf("failed to read LSPs from Ixia: %w", err)
 	}
-	dev, err := rsvpTEDevice(ingressLSPs, intf)
+	dev, err := rsvpTEDevice(intf, ingressLSPs)
 	if err != nil {
 		return nil, err
 	}

@@ -95,7 +95,7 @@ func TestRSVPTEDevice(t *testing.T) {
 			}
 			defer func() { hashImpl = origHashImpl }()
 
-			got, err := rsvpTEDevice(test.ingressLSPs, "foo")
+			got, err := rsvpTEDevice("foo", test.ingressLSPs)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("rsvpTEDevice() got unexpected error diff\n%s", d)
 			}

@@ -41,7 +41,7 @@ type isisLearnedInfo struct {
 	AgeSecs         int    `ixia:"Age (in secs)"`
 }
 
-func isisLSDBDevice(learnedISIS []isisLearnedInfo, intf, protocol string) (*telemetry.Device, error) {
+func isisLSDBDevice(intf, protocol string, learnedISIS []isisLearnedInfo) (*telemetry.Device, error) {
 	dev := &telemetry.Device{}
 	isis := dev.GetOrCreateNetworkInstance(intf).
 		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, protocol).

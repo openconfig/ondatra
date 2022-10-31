@@ -25,33 +25,31 @@ import (
 
 func TestBGPRIBDevice(t *testing.T) {
 	tests := []struct {
-		desc    string
-		info    []bgpLearnedInfo
-		v4      bool
-		wantRIB *telemetry.NetworkInstance_Protocol_Bgp_Rib
-		wantErr string
+		desc           string
+		infos4, infos6 map[string][]bgpLearnedInfo
+		wantRIB        *telemetry.NetworkInstance_Protocol_Bgp_Rib
+		wantErr        string
 	}{{
 		desc: "invalid attr set index",
-		info: []bgpLearnedInfo{{
+		infos4: map[string][]bgpLearnedInfo{"1.2.3.4": {{
 			IPV4NextHop: "localhost",
-		}},
+		}}},
 		wantErr: "failed to append details for elem 0",
 	}, {
 		desc: "invalid community index",
-		info: []bgpLearnedInfo{{
+		infos4: map[string][]bgpLearnedInfo{"1.2.3.4": {{
 			Community: "65532 : 10200",
-		}},
+		}}},
 		wantErr: "failed to append details for elem 0",
 	}, {
 		desc: "invalid origin type",
-		info: []bgpLearnedInfo{{
+		infos4: map[string][]bgpLearnedInfo{"1.2.3.4": {{
 			Origin: "foo",
-		}},
+		}}},
 		wantErr: "unknown origin type",
 	}, {
 		desc: "duplicate v4 route",
-		v4:   true,
-		info: []bgpLearnedInfo{{
+		infos4: map[string][]bgpLearnedInfo{"1.2.3.4": {{
 			IPV4Prefix: "127.0.0.1",
 			PathID:     0,
 			Origin:     "IGP",
@@ -59,11 +57,11 @@ func TestBGPRIBDevice(t *testing.T) {
 			IPV4Prefix: "127.0.0.1",
 			PathID:     0,
 			Origin:     "IGP",
-		}},
+		}}},
 		wantErr: "failed to append route for elem 1",
 	}, {
 		desc: "duplicate v6 route",
-		info: []bgpLearnedInfo{{
+		infos6: map[string][]bgpLearnedInfo{"1:2:3:4:5:6:7:8": {{
 			IPV6Prefix: "::1",
 			PathID:     0,
 			Origin:     "IGP",
@@ -71,19 +69,31 @@ func TestBGPRIBDevice(t *testing.T) {
 			IPV6Prefix: "::1",
 			PathID:     0,
 			Origin:     "IGP",
-		}},
+		}}},
 		wantErr: "failed to append route for elem 1",
 	}, {
-		desc: "empty learned info",
-		info: []bgpLearnedInfo{{}},
+		desc:   "empty learned info",
+		infos4: map[string][]bgpLearnedInfo{"1.2.3.4": {{}}},
+		infos6: map[string][]bgpLearnedInfo{"1:2:3:4:5:6:7:8": {{}}},
 		wantRIB: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
 			AfiSafi: map[telemetry.E_BgpTypes_AFI_SAFI_TYPE]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
+				telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
+					AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
+					Ipv4Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
+						Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
+							"1.2.3.4": &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
+								NeighborAddress: ygot.String("1.2.3.4"),
+								AdjRibInPre:     &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{},
+							},
+						},
+					},
+				},
 				telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
 					AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
 					Ipv6Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
 						Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
-							"neighbor": {
-								NeighborAddress: ygot.String("neighbor"),
+							"1:2:3:4:5:6:7:8": {
+								NeighborAddress: ygot.String("1:2:3:4:5:6:7:8"),
 								AdjRibInPre:     &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{},
 							},
 						},
@@ -93,8 +103,7 @@ func TestBGPRIBDevice(t *testing.T) {
 		},
 	}, {
 		desc: "v4 routes",
-		v4:   true,
-		info: []bgpLearnedInfo{{
+		infos4: map[string][]bgpLearnedInfo{"1.2.3.4": {{
 			IPV4Prefix:  "127.0.0.1",
 			PathID:      0,
 			IPV4NextHop: "127.0.0.2",
@@ -107,7 +116,7 @@ func TestBGPRIBDevice(t *testing.T) {
 			IPV4Prefix:  "127.0.0.3",
 			IPV4NextHop: "127.0.0.4",
 			Origin:      "EGP",
-		}},
+		}}},
 		wantRIB: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
 			AttrSet: map[uint64]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 				0: {
@@ -139,8 +148,8 @@ func TestBGPRIBDevice(t *testing.T) {
 					AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
 					Ipv4Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
 						Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
-							"neighbor": {
-								NeighborAddress: ygot.String("neighbor"),
+							"1.2.3.4": {
+								NeighborAddress: ygot.String("1.2.3.4"),
 								AdjRibInPre: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{
 									Route: map[telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route_Key]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
 										{Prefix: "127.0.0.1/0"}: {
@@ -165,7 +174,7 @@ func TestBGPRIBDevice(t *testing.T) {
 		},
 	}, {
 		desc: "v6 routes",
-		info: []bgpLearnedInfo{{
+		infos6: map[string][]bgpLearnedInfo{"1:2:3:4:5:6:7:8": {{
 			IPV6Prefix:  "::1",
 			IPV6NextHop: "::2",
 			MED:         100,
@@ -176,7 +185,7 @@ func TestBGPRIBDevice(t *testing.T) {
 			IPV6Prefix:  "::3",
 			IPV6NextHop: "::4",
 			Origin:      "IGP",
-		}},
+		}}},
 		wantRIB: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
 			AttrSet: map[uint64]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 				0: {
@@ -207,8 +216,8 @@ func TestBGPRIBDevice(t *testing.T) {
 					AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
 					Ipv6Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
 						Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
-							"neighbor": {
-								NeighborAddress: ygot.String("neighbor"),
+							"1:2:3:4:5:6:7:8": {
+								NeighborAddress: ygot.String("1:2:3:4:5:6:7:8"),
 								AdjRibInPre: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{
 									Route: map[telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route_Key]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
 										{Prefix: "::1/0"}: {
@@ -234,7 +243,7 @@ func TestBGPRIBDevice(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			got, err := bgpRIBDevice(test.info, "interface", "protocol", "neighbor", test.v4)
+			got, err := bgpRIBDevice("interface", "protocol", test.infos4, test.infos6)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("bgpRIBDevice got unexpected error diff\n%s", d)
 			}

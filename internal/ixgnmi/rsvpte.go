@@ -29,7 +29,7 @@ type ingressLSP struct {
 	src, dst string
 }
 
-func rsvpTEDevice(ingressLSPsBySessionPrefix map[string][]*ingressLSP, intf string) (*telemetry.Device, error) {
+func rsvpTEDevice(intf string, ingressLSPsBySessionPrefix map[string][]*ingressLSP) (*telemetry.Device, error) {
 	dev := &telemetry.Device{}
 	rsvpTE := dev.GetOrCreateNetworkInstance(intf).GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe()
 

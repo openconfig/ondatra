@@ -54,9 +54,9 @@ additional flags to control the execution of the test:
     time to wait.
 *   `-run_time` (*optional*): Timeout of the test run, excluding the wait time
     for the testbed to be ready. If not specified, no limit is imposed.
-*   `-xml (*optional*): File path to write JUnit XML test results; disables
+*   `-xml` (*optional*): File path to write JUnit XML test results; disables
     normal Go test logging.
-*   `-debug (*optional*): Whether the test is run in debug mode.
+*   `-debug` (*optional*): Whether the test is run in debug mode.
 
 In addition, the binding implementation is free to define its own set of
 optional or required flags.

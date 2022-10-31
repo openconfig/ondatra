@@ -506,26 +506,17 @@ func (f *fakeSession) Post(_ context.Context, p string, _, v any) error {
 	return f.postErrs[p]
 }
 
-func TestBGPRIBFromIxia(t *testing.T) {
+func TestBGP4RIBFromIxia(t *testing.T) {
 	bgp4XP := parseXPath(t, "/xpath/to/bgpv4")
-	bgp6XP := parseXPath(t, "/xpath/to/bgpv6")
-	fullCfg := &ixconfig.Ixnetwork{
+	inCfg := &ixconfig.Ixnetwork{
 		Topology: []*ixconfig.Topology{{
 			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
 				Name: ixconfig.String("Device Group on eth0"),
 				Ethernet: []*ixconfig.TopologyEthernet{{
 					Ipv4: []*ixconfig.TopologyIpv4{{
 						BgpIpv4Peer: []*ixconfig.TopologyBgpIpv4Peer{{
-							Name:  ixconfig.String("fake v4"),
-							DutIp: ixconfig.MultivalueStr("localhost"),
+							DutIp: ixconfig.MultivalueStr("1.2.3.4"),
 							Xpath: bgp4XP,
-						}},
-					}},
-					Ipv6: []*ixconfig.TopologyIpv6{{
-						BgpIpv6Peer: []*ixconfig.TopologyBgpIpv6Peer{{
-							Name:  ixconfig.String("fake v6"),
-							DutIp: ixconfig.MultivalueStr("::1"),
-							Xpath: bgp6XP,
 						}},
 					}},
 				}},
@@ -535,110 +526,50 @@ func TestBGPRIBFromIxia(t *testing.T) {
 
 	tests := []struct {
 		desc      string
-		ipv4      bool
-		neighbor  string
-		intfName  string
+		intf      string
 		cfg       *ixconfig.Ixnetwork
 		postErr   map[string]error
 		getErr    map[string]error
 		getRsps   map[string]string
 		updateErr error
-		want      *table
+		want      map[string]*table
 		wantErr   string
 	}{{
 		desc:    "get config error",
 		wantErr: "no IxNetwork config found",
 	}, {
 		desc:      "update ID error",
-		wantErr:   "failed to update IDs",
+		cfg:       inCfg,
 		updateErr: errors.New("fake"),
-		cfg:       fullCfg,
+		wantErr:   "failed to update IDs",
 	}, {
-		desc:    "no interface in cache",
-		wantErr: `no interface ""`,
-		cfg:     fullCfg,
-	}, {
-		desc:     "no peer in cache",
-		intfName: "eth0",
-		wantErr:  `no peer "" on interface "eth0"`,
-		cfg: &ixconfig.Ixnetwork{
-			Topology: []*ixconfig.Topology{{
-				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
-					Name: ixconfig.String("Device Group on eth0"),
-				}},
-			}},
-		},
-	}, {
-		desc:     "no peer in cache no ipv4",
-		intfName: "eth0",
-		wantErr:  `no peer "" on interface "eth0"`,
-		cfg: &ixconfig.Ixnetwork{
-			Topology: []*ixconfig.Topology{{
-				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
-					Name: ixconfig.String("Device Group on eth0"),
-					Ethernet: []*ixconfig.TopologyEthernet{{
-						Ipv6: []*ixconfig.TopologyIpv6{{}},
-					}},
-				}},
-			}},
-		},
-	}, {
-		desc:     "no peer in cache no ipv6",
-		intfName: "eth0",
-		wantErr:  `no peer "" on interface "eth0"`,
-		cfg: &ixconfig.Ixnetwork{
-			Topology: []*ixconfig.Topology{{
-				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
-					Name: ixconfig.String("Device Group on eth0"),
-					Ethernet: []*ixconfig.TopologyEthernet{{
-						Ipv4: []*ixconfig.TopologyIpv4{{}},
-					}},
-				}},
-			}},
-		},
-	}, {
-		desc:     "run op error",
-		wantErr:  "failed to run op",
-		intfName: "eth0",
-		neighbor: "localhost",
-		ipv4:     true,
+		desc: "run op error",
+		intf: "eth0",
+		cfg:  inCfg,
 		postErr: map[string]error{
-			"topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo": errors.New("v4 fake"),
+			"topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo": errors.New("run fail"),
 		},
-		cfg: fullCfg,
+		wantErr: "run fail",
 	}, {
-		desc:     "get error",
-		wantErr:  "failed to get learned info",
-		intfName: "eth0",
-		neighbor: "localhost",
-		ipv4:     true,
+		desc: "get error",
+		intf: "eth0",
+		cfg:  inCfg,
 		getErr: map[string]error{
-			"/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1/learnedInfo/1/table/1": errors.New("fake"),
+			"/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1/learnedInfo/1/table/1": errors.New("get fail"),
 		},
-		cfg: fullCfg,
+		wantErr: "get fail",
 	}, {
-		desc:     "success ipv4",
-		intfName: "eth0",
-		neighbor: "localhost",
-		ipv4:     true,
+		desc: "no data for interface",
+		intf: "eth1",
+		cfg:  inCfg,
+	}, {
+		desc: "success ipv4",
+		intf: "eth0",
+		cfg:  inCfg,
 		getRsps: map[string]string{
 			"/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1/learnedInfo/1/table/1": `{"id": 1}`,
 		},
-		want: &table{
-			ID: 1,
-		},
-		cfg: fullCfg,
-	}, {
-		desc:     "success ipv6",
-		intfName: "eth0",
-		neighbor: "::1",
-		getRsps: map[string]string{
-			"/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1/learnedInfo/1/table/1": `{"id": 1}`,
-		},
-		want: &table{
-			ID: 1,
-		},
-		cfg: fullCfg,
+		want: map[string]*table{"1.2.3.4": {ID: 1}},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -653,24 +584,113 @@ func TestBGPRIBFromIxia(t *testing.T) {
 					updateErr: test.updateErr,
 					xpathToID: map[string]string{
 						bgp4XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv4/1/bgpIpv4Peer/1",
-						bgp6XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1",
 					},
 				},
 			}
-			pi := peerInfo{
-				neighbor: test.neighbor,
-				intf:     test.intfName,
-				isIPV4:   test.ipv4,
-			}
-			got, err := c.bgpRIBFromIxia(context.Background(), pi)
+			got, err := c.bgp4RIBFromIxia(context.Background(), test.intf)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
-				t.Fatalf("bgpRIBFromIxia got unexpected error diff\n%s", d)
+				t.Fatalf("bgp4RIBFromIxia got unexpected error diff\n%s", d)
 			}
 			if err != nil {
 				return
 			}
 			if d := cmp.Diff(test.want, got); d != "" {
-				t.Errorf("bgpRIBFromIxia got unexpected diff (-want +got)\n%s", d)
+				t.Errorf("bgp4RIBFromIxia got unexpected diff (-want +got)\n%s", d)
+			}
+		})
+	}
+}
+
+func TestBGP6RIBFromIxia(t *testing.T) {
+	bgp6XP := parseXPath(t, "/xpath/to/bgpv6")
+	inCfg := &ixconfig.Ixnetwork{
+		Topology: []*ixconfig.Topology{{
+			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+				Name: ixconfig.String("Device Group on eth0"),
+				Ethernet: []*ixconfig.TopologyEthernet{{
+					Ipv6: []*ixconfig.TopologyIpv6{{
+						BgpIpv6Peer: []*ixconfig.TopologyBgpIpv6Peer{{
+							DutIp: ixconfig.MultivalueStr("::1"),
+							Xpath: bgp6XP,
+						}},
+					}},
+				}},
+			}},
+		}},
+	}
+
+	tests := []struct {
+		desc      string
+		intf      string
+		cfg       *ixconfig.Ixnetwork
+		postErr   map[string]error
+		getErr    map[string]error
+		getRsps   map[string]string
+		updateErr error
+		want      map[string]*table
+		wantErr   string
+	}{{
+		desc:    "get config error",
+		wantErr: "no IxNetwork config found",
+	}, {
+		desc:      "update ID error",
+		cfg:       inCfg,
+		updateErr: errors.New("fake"),
+		wantErr:   "failed to update IDs",
+	}, {
+		desc: "run op error",
+		intf: "eth0",
+		cfg:  inCfg,
+		postErr: map[string]error{
+			"topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo": errors.New("run fail"),
+		},
+		wantErr: "run fail",
+	}, {
+		desc: "get error",
+		intf: "eth0",
+		cfg:  inCfg,
+		getErr: map[string]error{
+			"/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1/learnedInfo/1/table/1": errors.New("get fail"),
+		},
+		wantErr: "get fail",
+	}, {
+		desc: "no data for interface",
+		intf: "eth1",
+		cfg:  inCfg,
+	}, {
+		desc: "success ipv6",
+		intf: "eth0",
+		getRsps: map[string]string{
+			"/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1/learnedInfo/1/table/1": `{"id": 1}`,
+		},
+		want: map[string]*table{"::1": {ID: 1}},
+		cfg:  inCfg,
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			c := &Client{
+				client: &fakeCfgClient{
+					sess: &fakeSession{
+						postErrs: test.postErr,
+						getErrs:  test.getErr,
+						getRsps:  test.getRsps,
+					},
+					cfg:       test.cfg,
+					updateErr: test.updateErr,
+					xpathToID: map[string]string{
+						bgp6XP.String(): "/api/v1/sessions/0/topology/1/deviceGroup/1/ethernet/1/ipv6/1/bgpIpv6Peer/1",
+					},
+				},
+			}
+			got, err := c.bgp6RIBFromIxia(context.Background(), test.intf)
+			if d := errdiff.Substring(err, test.wantErr); d != "" {
+				t.Fatalf("bgp6RIBFromIxia got unexpected error diff\n%s", d)
+			}
+			if err != nil {
+				return
+			}
+			if d := cmp.Diff(test.want, got); d != "" {
+				t.Errorf("bgp6RIBFromIxia got unexpected diff (-want +got)\n%s", d)
 			}
 		})
 	}
@@ -690,20 +710,31 @@ func createSampleDev(t testing.TB, deletes ...*gpb.Path) *gpb.Notification {
 		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
 		GetOrCreateBgp().GetOrCreateRib()
 
-	route := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
-		GetOrCreateIpv4Unicast().GetOrCreateNeighbor("localhost").
+	route4 := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
+		GetOrCreateIpv4Unicast().GetOrCreateNeighbor("1.2.3.4").
 		GetOrCreateAdjRibInPre().GetOrCreateRoute("192.168.1.1/0", 0)
-
-	route.AttrIndex = ygot.Uint64(0)
-	route.CommunityIndex = ygot.Uint64(0)
-
+	route4.AttrIndex = ygot.Uint64(0)
+	route4.CommunityIndex = ygot.Uint64(0)
 	rib.GetOrCreateCommunity(0)
-	attr := rib.GetOrCreateAttrSet(0)
-	attr.Origin = telemetry.BgpTypes_BgpOriginAttrType_IGP
-	attr.NextHop = ygot.String("")
-	attr.Aigp = ygot.Uint64(0)
-	attr.LocalPref = ygot.Uint32(0)
-	attr.Med = ygot.Uint32(0)
+	attr0 := rib.GetOrCreateAttrSet(0)
+	attr0.Origin = telemetry.BgpTypes_BgpOriginAttrType_IGP
+	attr0.NextHop = ygot.String("")
+	attr0.Aigp = ygot.Uint64(0)
+	attr0.LocalPref = ygot.Uint32(0)
+	attr0.Med = ygot.Uint32(0)
+
+	route6 := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).
+		GetOrCreateIpv6Unicast().GetOrCreateNeighbor("1:2:3:4:5:6:7:8").
+		GetOrCreateAdjRibInPre().GetOrCreateRoute("::1/0", 0)
+	route6.AttrIndex = ygot.Uint64(1)
+	route6.CommunityIndex = ygot.Uint64(1)
+	rib.GetOrCreateCommunity(1)
+	attr1 := rib.GetOrCreateAttrSet(1)
+	attr1.Origin = telemetry.BgpTypes_BgpOriginAttrType_EGP
+	attr1.NextHop = ygot.String("")
+	attr1.Aigp = ygot.Uint64(0)
+	attr1.LocalPref = ygot.Uint32(0)
+	attr1.Med = ygot.Uint32(0)
 
 	ns, err := ygot.TogNMINotifications(dev, 0, ygot.GNMINotificationsConfig{UsePathElem: true})
 	if err != nil {
@@ -714,7 +745,7 @@ func createSampleDev(t testing.TB, deletes ...*gpb.Path) *gpb.Notification {
 }
 
 func TestPathToBGPRIB(t *testing.T) {
-	indexPath := &gpb.Path{
+	inPath := &gpb.Path{
 		Elem: []*gpb.PathElem{
 			{Name: "network-instances"},
 			{Name: "network-instance", Key: map[string]string{"name": "foo"}},
@@ -722,111 +753,59 @@ func TestPathToBGPRIB(t *testing.T) {
 			{Name: "protocol", Key: map[string]string{"identifier": "BGP", "name": "1"}},
 			{Name: "bgp"},
 			{Name: "rib"},
-			{Name: "afi-safis"},
-			{Name: "afi-safi"},
-			{Name: "ipv4-unicast"},
-			{Name: "neighbors"},
-			{Name: "neighbor", Key: map[string]string{"neighbor-address": "localhost"}},
-			{Name: "adj-rib-in-pre"},
-			{Name: "routes"},
-			{Name: "route"},
-			{Name: "state"},
 		},
 	}
 
 	tests := []struct {
-		desc      string
-		path      *gpb.Path
-		want      *gpb.Notification
-		rib       *table
-		ribErr    error
-		initCache map[string]any
-		wantErr   string
+		desc             string
+		rib4, rib6       map[string]*table
+		rib4Err, rib6Err error
+		initCache        map[string]any
+		want             *gpb.Notification
+		wantErr          string
 	}{{
-		desc:    "nil path",
-		wantErr: "failed to get schema path",
+		desc:    "get rib v4 error",
+		rib4Err: errors.New("foo"),
+		wantErr: "failed to read rib v4",
 	}, {
-		desc: "read attr set with nothing cached",
-		path: &gpb.Path{
-			Elem: []*gpb.PathElem{
-				{Name: "network-instances"},
-				{Name: "network-instance"},
-				{Name: "protocols"},
-				{Name: "protocol"},
-				{Name: "bgp"},
-				{Name: "rib"},
-				{Name: "attr-sets"},
-				{Name: "attr-set"},
-				{Name: "index"},
-			},
-		},
-		wantErr: "need to read the attr index",
+		desc:    "get rib v6 error",
+		rib6Err: errors.New("foo"),
+		wantErr: "failed to read rib v6",
 	}, {
-		desc: "read attr set with cached values",
-		path: &gpb.Path{
-			Elem: []*gpb.PathElem{
-				{Name: "network-instances"},
-				{Name: "network-instance"},
-				{Name: "protocols"},
-				{Name: "protocol"},
-				{Name: "bgp"},
-				{Name: "rib"},
-				{Name: "attr-sets"},
-				{Name: "attr-set"},
-				{Name: "index"},
-			},
-		},
-		initCache: map[string]any{
-			peerInfoCacheKey: peerInfo{},
-		},
-	}, {
-		desc: "unknown paths",
-		path: &gpb.Path{
-			Elem: []*gpb.PathElem{
-				{Name: "network-instances"},
-			},
-		},
-	}, {
-		desc: "rib cache hit with same peer",
-		path: indexPath,
-		initCache: map[string]any{
-			bgpRIBPath: true,
-			peerInfoCacheKey: peerInfo{
-				protocol: "1",
-				intf:     "foo",
-				neighbor: "localhost",
-				isIPV4:   true,
-			},
-		},
-	}, {
-		desc:    "get rib error",
-		path:    indexPath,
-		ribErr:  errors.New("foo"),
-		wantErr: "failed to read Ixia table",
-	}, {
-		desc:    "unmarshal error",
-		path:    indexPath,
-		wantErr: "failed to unmarshal Ixia table",
-		rib: &table{
+		desc: "unmarshal v4 error",
+		rib4: map[string]*table{"1.2.3.4": {
 			Columns: []string{"Prefix Length"},
 			Values:  [][]string{{"foo"}},
-		},
+		}},
+		wantErr: "failed to unmarshal rib v4 table",
 	}, {
-		desc: "uncached success",
-		path: indexPath,
-		rib: &table{
-			Columns: []string{"IPv4 Prefix ", "Origin"},
-			Values:  [][]string{{"192.168.1.1", "IGP"}},
-		},
-		want:      createSampleDev(t),
-		initCache: map[string]any{},
+		desc: "unmarshal v6 error",
+		rib6: map[string]*table{"1:2:3:4:5:6:7:8": {
+			Columns: []string{"Prefix Length"},
+			Values:  [][]string{{"foo"}},
+		}},
+		wantErr: "failed to unmarshal rib v6 table",
 	}, {
-		desc: "cached success",
-		path: indexPath,
-		rib: &table{
-			Columns: []string{"IPv4 Prefix ", "Origin"},
+		desc: "success uncached",
+		rib4: map[string]*table{"1.2.3.4": {
+			Columns: []string{"IPv4 Prefix", "Origin"},
 			Values:  [][]string{{"192.168.1.1", "IGP"}},
-		},
+		}},
+		rib6: map[string]*table{"1:2:3:4:5:6:7:8": {
+			Columns: []string{"IPv6 Prefix", "Origin"},
+			Values:  [][]string{{"::1", "EGP"}},
+		}},
+		want: createSampleDev(t),
+	}, {
+		desc: "success cached",
+		rib4: map[string]*table{"1.2.3.4": {
+			Columns: []string{"IPv4 Prefix", "Origin"},
+			Values:  [][]string{{"192.168.1.1", "IGP"}},
+		}},
+		rib6: map[string]*table{"1:2:3:4:5:6:7:8": {
+			Columns: []string{"IPv6 Prefix", "Origin"},
+			Values:  [][]string{{"::1", "EGP"}},
+		}},
 		want: createSampleDev(t,
 			&gpb.Path{Elem: []*gpb.PathElem{{Name: "interfaces"}, {Name: "interface", Key: map[string]string{"name": "fake"}}, {Name: "state"}, {Name: "name"}}},
 			&gpb.Path{Elem: []*gpb.PathElem{{Name: "interfaces"}, {Name: "interface", Key: map[string]string{"name": "fake"}}, {Name: "name"}}},
@@ -834,7 +813,7 @@ func TestPathToBGPRIB(t *testing.T) {
 		// This is a contrived example where there is garbage data in the cache, used to verify delete notifications are created.
 		// In normal usage, only BGP RIB info could be in the cache.
 		initCache: map[string]any{
-			oldRibCacheKey: &telemetry.Device{
+			"old " + bgpRIBPath + ",foo": &telemetry.Device{
 				Interface: map[string]*telemetry.Interface{
 					"fake": &telemetry.Interface{
 						Name: ygot.String("fake"),
@@ -852,13 +831,16 @@ func TestPathToBGPRIB(t *testing.T) {
 			for k, v := range test.initCache {
 				c.fresh.Set(k, v, -1)
 			}
-			bgpRIBFromIxiaFn = func(*Client, context.Context, peerInfo) (*table, error) {
-				return test.rib, test.ribErr
+			bgp4RIBFromIxiaFn = func(*Client, context.Context, string) (map[string]*table, error) {
+				return test.rib4, test.rib4Err
+			}
+			bgp6RIBFromIxiaFn = func(*Client, context.Context, string) (map[string]*table, error) {
+				return test.rib6, test.rib6Err
 			}
 
-			got, gotErr := c.pathToBGPRIB(context.Background(), test.path)
+			got, gotErr := c.pathToBGPRIB(context.Background(), inPath)
 			if diff := errdiff.Substring(gotErr, test.wantErr); diff != "" {
-				t.Errorf("pathToOCRIB() got unexpected error diff\n%s", diff)
+				t.Errorf("pathToBGPRIB() got unexpected error diff\n%s", diff)
 			}
 			if gotErr != nil {
 				return
@@ -867,28 +849,24 @@ func TestPathToBGPRIB(t *testing.T) {
 				got.Timestamp = 0
 			}
 			if diff := cmp.Diff(test.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
-				t.Errorf("pathToOCRIB() got unexpected response diff (-want,+got)\n%s", diff)
+				t.Errorf("pathToBGPRIB() got unexpected response diff (-want,+got)\n%s", diff)
 			}
 		})
 	}
 }
 
 func TestRSVPTEFromIxia(t *testing.T) {
-	const (
-		intfName = "intf"
-		lspName  = "lsp0"
-		lspID    = "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps"
-	)
+	const lspID = "/api/v1/sessions/0/topology/1/deviceGroup/1/networkGroup/1/deviceGroup/1/ipv4Loopback/1/rsvpteLsps/1/rsvpP2PIngressLsps"
 	lspXP := parseXPath(t, "/fake/xpath/lsp")
 	lspCfg := &ixconfig.Ixnetwork{
 		Topology: []*ixconfig.Topology{{
 			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
-				Name: ygot.String("Device Group on " + intfName),
+				Name: ygot.String("Device Group on eth0"),
 				NetworkGroup: []*ixconfig.TopologyNetworkGroup{{
 					DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
 						Ipv4Loopback: []*ixconfig.TopologyIpv4Loopback{{
 							RsvpteLsps: []*ixconfig.TopologyRsvpteLsps{{
-								Name: ixconfig.String(lspName),
+								Name: ixconfig.String("lsp0"),
 								RsvpP2PIngressLsps: &ixconfig.TopologyRsvpP2PIngressLsps{
 									Xpath:  lspXP,
 									Active: ixconfig.MultivalueTrue(),
@@ -903,6 +881,7 @@ func TestRSVPTEFromIxia(t *testing.T) {
 
 	tests := []struct {
 		desc         string
+		intf         string
 		lspRsp       string
 		lspErr       error
 		mvRsp        string
@@ -913,27 +892,30 @@ func TestRSVPTEFromIxia(t *testing.T) {
 		wantErr      string
 	}{{
 		desc:         "update IDs error",
+		intf:         "eth0",
 		updateIDsErr: errors.New("some error"),
 		wantErr:      "failed to update IDs",
 	}, {
 		desc:    "lsp lookup error",
+		intf:    "eth0",
 		lspErr:  errors.New("some error"),
 		wantErr: "failed to fetch ingress LSPs config",
 	}, {
 		desc:    "multivalue lookup error",
+		intf:    "eth0",
 		lspRsp:  `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
 		mvErr:   errors.New("some error"),
 		wantErr: "failed to fetch source IPs for LSP",
 	}, {
-		desc:      "no interface in cache",
-		initCache: map[string]*cachedNodes{"eth1": &cachedNodes{}},
-		wantErr:   "no interface",
+		desc: "no data for interface",
+		intf: "eth1",
 	}, {
 		desc:   "success",
+		intf:   "eth0",
 		lspRsp: `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
 		mvRsp:  `["1.1.1.1", "2.2.2.2"]`,
 		want: map[string][]*ingressLSP{
-			lspName: []*ingressLSP{{
+			"lsp0": []*ingressLSP{{
 				up:  true,
 				src: "1.1.1.1",
 				dst: "1.1.1.1",
@@ -971,7 +953,7 @@ func TestRSVPTEFromIxia(t *testing.T) {
 				},
 				intfCache: test.initCache,
 			}
-			got, err := c.rsvpTEFromIxia(context.Background(), intfName)
+			got, err := c.rsvpTEFromIxia(context.Background(), test.intf)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("rsvpTEFromIxia() got unexpected error diff\n%s", d)
 			}

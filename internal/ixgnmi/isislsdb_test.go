@@ -79,7 +79,7 @@ func TestISISLSDBDevice(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			got, err := isisLSDBDevice(test.info, "interface", "protocol")
+			got, err := isisLSDBDevice("interface", "protocol", test.info)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("isisLSDBDevice got unexpected error diff\n%s", d)
 			}

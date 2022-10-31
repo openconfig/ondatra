@@ -26,7 +26,7 @@ import (
 // bgpLearnedInfo is the output of learned info for BGP from an Ixia device.
 // This struct is used for ipv4 and ipv6 info.
 type bgpLearnedInfo struct {
-	IPV4Prefix     string `ixia:"IPv4 Prefix "`
+	IPV4Prefix     string `ixia:"IPv4 Prefix"`
 	IPV6Prefix     string `ixia:"IPv6 Prefix"`
 	PrefixLen      int    `ixia:"Prefix Length"`
 	PathID         uint32 `ixia:"Path ID"`
@@ -43,59 +43,70 @@ type bgpLearnedInfo struct {
 	LargeCommunity string `ixia:"Large Community"`
 }
 
-func bgpRIBDevice(learnedBGP []bgpLearnedInfo, intf, protocol, neighbor string, v4 bool) (*telemetry.Device, error) {
+func bgpRIBDevice(intf, protocol string, peer4Infos, peer6Infos map[string][]bgpLearnedInfo) (*telemetry.Device, error) {
 	dev := &telemetry.Device{}
 	rib := dev.GetOrCreateNetworkInstance(intf).
 		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, protocol).
 		GetOrCreateBgp().
 		GetOrCreateRib()
-	var ipv4RIB *telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre
-	var ipv6RIB *telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre
-	if v4 {
-		ipv4RIB = rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
+
+	for peer, infos := range peer4Infos {
+		ipv4RIB := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
 			GetOrCreateIpv4Unicast().
-			GetOrCreateNeighbor(neighbor).
+			GetOrCreateNeighbor(peer).
 			GetOrCreateAdjRibInPre()
-	} else {
-		ipv6RIB = rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).
-			GetOrCreateIpv6Unicast().
-			GetOrCreateNeighbor(neighbor).
-			GetOrCreateAdjRibInPre()
-	}
+		attrLen := len(rib.AttrSet)
+		commLen := len(rib.Community)
 
-	attrLen := len(rib.AttrSet)
-	commLen := len(rib.Community)
-
-	for i, info := range learnedBGP {
-		if info == (bgpLearnedInfo{}) {
-			log.Infof("Skipping empty BGP learned info")
-			continue
-		}
-
-		attrIndex := uint64(i + attrLen)
-		commIndex := uint64(i + commLen)
-		if err := appendDetails(info, rib, attrIndex, commIndex, v4); err != nil {
-			return nil, fmt.Errorf("failed to append details for elem %d: %w", i, err)
-		}
-
-		var err error
-		if v4 {
-			err = ipv4RIB.AppendRoute(&telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
+		for i, info := range infos {
+			if info == (bgpLearnedInfo{}) {
+				log.Infof("Skipping empty BGP learned info")
+				continue
+			}
+			attrIndex := uint64(i + attrLen)
+			commIndex := uint64(i + commLen)
+			if err := appendDetails(info, rib, attrIndex, commIndex, true); err != nil {
+				return nil, fmt.Errorf("failed to append details for elem %d: %w", i, err)
+			}
+			route := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
 				Prefix:         ygot.String(fmt.Sprintf("%s/%d", info.IPV4Prefix, info.PrefixLen)),
 				PathId:         ygot.Uint32(info.PathID),
 				AttrIndex:      &attrIndex,
 				CommunityIndex: &commIndex,
-			})
-		} else {
-			err = ipv6RIB.AppendRoute(&telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
+			}
+			if err := ipv4RIB.AppendRoute(route); err != nil {
+				return nil, fmt.Errorf("failed to append route for elem %d: %w", i, err)
+			}
+		}
+	}
+
+	for peer, infos := range peer6Infos {
+		ipv6RIB := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).
+			GetOrCreateIpv6Unicast().
+			GetOrCreateNeighbor(peer).
+			GetOrCreateAdjRibInPre()
+		attrLen := len(rib.AttrSet)
+		commLen := len(rib.Community)
+
+		for i, info := range infos {
+			if info == (bgpLearnedInfo{}) {
+				log.Infof("Skipping empty BGP learned info")
+				continue
+			}
+			attrIndex := uint64(i + attrLen)
+			commIndex := uint64(i + commLen)
+			if err := appendDetails(info, rib, attrIndex, commIndex, false); err != nil {
+				return nil, fmt.Errorf("failed to append details for elem %d: %w", i, err)
+			}
+			route := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
 				Prefix:         ygot.String(fmt.Sprintf("%s/%d", info.IPV6Prefix, info.PrefixLen)),
 				PathId:         ygot.Uint32(info.PathID),
 				AttrIndex:      &attrIndex,
 				CommunityIndex: &commIndex,
-			})
-		}
-		if err != nil {
-			return nil, fmt.Errorf("failed to append route for elem %d: %w", i, err)
+			}
+			if err := ipv6RIB.AppendRoute(route); err != nil {
+				return nil, fmt.Errorf("failed to append route for elem %d: %w", i, err)
+			}
 		}
 	}
 	return dev, nil
