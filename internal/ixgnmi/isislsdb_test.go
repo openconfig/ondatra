@@ -15,81 +15,140 @@
 package ixgnmi
 
 import (
+	"golang.org/x/net/context"
+	"errors"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
 )
 
-func TestISISLSDBDevice(t *testing.T) {
+func TestISISLSDBFromIxia(t *testing.T) {
+	const isisID = "/fake/isis/id"
+	isisXP := parseXPath(t, "/xpath/to/isis")
+	nodes := &cachedNodes{
+		isisL3s: []*ixconfig.TopologyIsisL3{{Xpath: isisXP}},
+	}
+
 	tests := []struct {
-		desc     string
-		info     []isisLearnedInfo
-		wantISIS *telemetry.NetworkInstance_Protocol_Isis
-		wantErr  string
+		desc    string
+		postErr map[string]error
+		getErr  map[string]error
+		getRsps map[string]string
+		want    *telemetry.NetworkInstance
+		wantErr string
 	}{{
-		desc:     "empty learned info",
-		info:     []isisLearnedInfo{{}},
-		wantISIS: &telemetry.NetworkInstance_Protocol_Isis{},
+		desc: "run op error",
+		postErr: map[string]error{
+			"topology/deviceGroup/ethernet/isisL3/operations/getLearnedInfo": errors.New("op fail"),
+		},
+		wantErr: "op fail",
 	}, {
-		desc: "success",
-		info: []isisLearnedInfo{{
-			LearnedVia:      "L1",
-			SystemID:        "01 23 45 67 89 AB",
-			PseudoNodeIndex: 2,
-			LSPIndex:        34,
-			SeqNumber:       5,
-		}, {
-			LearnedVia:      "L2",
-			SystemID:        "CD EF 01 23 45 67",
-			PseudoNodeIndex: 98,
-			LSPIndex:        7,
-			SeqNumber:       0,
-		}},
-		wantISIS: &telemetry.NetworkInstance_Protocol_Isis{
-			Level: map[uint8]*telemetry.NetworkInstance_Protocol_Isis_Level{
-				1: &telemetry.NetworkInstance_Protocol_Isis_Level{
-					LevelNumber: ygot.Uint8(1),
-					Lsp: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
-						"0123.4567.89AB.02-34": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
-							IsType:         ygot.Uint8(1),
-							LspId:          ygot.String("0123.4567.89AB.02-34"),
-							SequenceNumber: ygot.Uint32(5),
-						},
-					},
+		desc: "get error",
+		getErr: map[string]error{
+			isisID + "/learnedInfo/1/table/1": errors.New("get fail"),
+		},
+		wantErr: "get fail",
+	}, {
+		desc: "unknown level",
+		getRsps: map[string]string{
+			isisID + "/learnedInfo/1/table/1": `{
+				"columns": ["Learned Via"],
+				"values": [["L3"]]
+			}`,
+		},
+		wantErr: "level",
+	}, {
+		desc: "no data",
+		want: &telemetry.NetworkInstance{
+			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
+				telemetry.NetworkInstance_Protocol_Key{
+					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+					Name:       "0",
+				}: {
+					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+					Name:       ygot.String("0"),
+					Isis:       &telemetry.NetworkInstance_Protocol_Isis{},
 				},
-				2: &telemetry.NetworkInstance_Protocol_Isis_Level{
-					LevelNumber: ygot.Uint8(2),
-					Lsp: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
-						"CDEF.0123.4567.98-07": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
-							IsType:         ygot.Uint8(2),
-							LspId:          ygot.String("CDEF.0123.4567.98-07"),
-							SequenceNumber: ygot.Uint32(0),
+			},
+		},
+	}, {
+		desc: "full data",
+		getRsps: map[string]string{
+			isisID + "/learnedInfo/1/table/1": `{
+				"columns": ["Learned Via", "System ID", "Pseudo Node Index", "LSP Index", "Sequence Number"],
+				"values": [
+					["L1", "01 23 45 67 89 AB",  "2", "34", "5"],
+					["L2", "CD EF 01 23 45 67", "98",  "7", "0"]
+				]
+			}`,
+		},
+		want: &telemetry.NetworkInstance{
+			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
+				telemetry.NetworkInstance_Protocol_Key{
+					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+					Name:       "0",
+				}: {
+					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+					Name:       ygot.String("0"),
+					Isis: &telemetry.NetworkInstance_Protocol_Isis{
+						Level: map[uint8]*telemetry.NetworkInstance_Protocol_Isis_Level{
+							1: &telemetry.NetworkInstance_Protocol_Isis_Level{
+								LevelNumber: ygot.Uint8(1),
+								Lsp: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
+									"0123.4567.89AB.02-34": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
+										IsType:         ygot.Uint8(1),
+										LspId:          ygot.String("0123.4567.89AB.02-34"),
+										SequenceNumber: ygot.Uint32(5),
+									},
+								},
+							},
+							2: &telemetry.NetworkInstance_Protocol_Isis_Level{
+								LevelNumber: ygot.Uint8(2),
+								Lsp: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
+									"CDEF.0123.4567.98-07": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
+										IsType:         ygot.Uint8(2),
+										LspId:          ygot.String("CDEF.0123.4567.98-07"),
+										SequenceNumber: ygot.Uint32(0),
+									},
+								},
+							},
 						},
 					},
 				},
 			},
 		},
-	}, {
-		desc:    "unknown level",
-		info:    []isisLearnedInfo{{LearnedFrom: "L3"}},
-		wantErr: "level",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			got, err := isisLSDBDevice("interface", "protocol", test.info)
+			getRsps := make(map[string][]string)
+			for p, r := range test.getRsps {
+				getRsps[p] = []string{r}
+			}
+			client := &fakeCfgClient{
+				sess: &fakeSession{
+					postErrs: test.postErr,
+					getErrs:  test.getErr,
+					getRsps:  getRsps,
+				},
+				xpathToID: map[string]string{
+					isisXP.String(): isisID,
+				},
+			}
+
+			got := new(telemetry.NetworkInstance)
+			err := isisLSDBFromIxia(context.Background(), client, got, nodes)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
-				t.Fatalf("isisLSDBDevice got unexpected error diff\n%s", d)
+				t.Fatalf("isisLSDBFromIxia() got unexpected error diff\n%s", d)
 			}
 			if err != nil {
 				return
 			}
-			gotISIS := got.GetNetworkInstance("interface").
-				GetProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, "protocol").GetIsis()
-			if d := cmp.Diff(test.wantISIS, gotISIS); d != "" {
-				t.Errorf("isisLSDBDevice got unexpected ISIS diff (-want +got)\n%s", d)
+			if d := cmp.Diff(test.want, got); d != "" {
+				t.Errorf("isisLSDBFromIxia() got unexpected diff (-want +got)\n%s", d)
 			}
 		})
 	}

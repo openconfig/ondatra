@@ -15,13 +15,77 @@
 package ixgnmi
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
+	"path"
 	"strings"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
 )
+
+func bgpRIBFromIxia(ctx context.Context, client cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+	const (
+		bgp4Path = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo"
+		bgp6Path = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo"
+	)
+	peer4Infos, err := fetchBGPInfos(ctx, client, bgp4Path, nodes.bgp4Peers)
+	if err != nil {
+		return fmt.Errorf("failed to read bgp rib v4 learned info: %w", err)
+	}
+	peer6Infos, err := fetchBGPInfos(ctx, client, bgp6Path, nodes.bgp6Peers)
+	if err != nil {
+		return fmt.Errorf("failed to read bgp rib v6 learned info: %w", err)
+	}
+	return populateRIB(netInst, peer4Infos, peer6Infos)
+}
+
+func fetchBGPInfos[T ixconfig.IxiaCfgNode](ctx context.Context, client cfgClient, opPath string, bgpPeers []T) (map[string][]bgpLearnedInfo, error) {
+	if len(bgpPeers) == 0 {
+		return nil, nil
+	}
+	var nodeIDs []string
+	for _, peerNode := range bgpPeers {
+		nodeID, err := client.NodeID(peerNode)
+		if err != nil {
+			return nil, err
+		}
+		nodeIDs = append(nodeIDs, nodeID)
+	}
+	if err := client.Session().Post(ctx, opPath, ixweb.OpArgs{nodeIDs}, nil); err != nil {
+		return nil, err
+	}
+	peer2Infos := make(map[string][]bgpLearnedInfo, len(bgpPeers))
+	for _, peerNode := range bgpPeers {
+		nodeID, err := client.NodeID(peerNode)
+		if err != nil {
+			return nil, err
+		}
+		table := &table{}
+		if err := client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
+			return nil, fmt.Errorf("failed to get learned info: %w", err)
+		}
+		var infos []bgpLearnedInfo
+		unmarshalTable(table, &infos)
+		peer2Infos[dutIP(peerNode)] = infos
+	}
+	return peer2Infos, nil
+}
+
+func dutIP(bgpPeer ixconfig.IxiaCfgNode) string {
+	switch v := bgpPeer.(type) {
+	case *ixconfig.TopologyBgpIpv4Peer:
+		return *(v.DutIp.SingleValue.Value)
+	case *ixconfig.TopologyBgpIpv6Peer:
+		return *(v.DutIp.SingleValue.Value)
+	default:
+		log.Fatalf("impossible: not a bgp peer type %v (%T)", v, v)
+	}
+	return ""
+}
 
 // bgpLearnedInfo is the output of learned info for BGP from an Ixia device.
 // This struct is used for ipv4 and ipv6 info.
@@ -43,12 +107,10 @@ type bgpLearnedInfo struct {
 	LargeCommunity string `ixia:"Large Community"`
 }
 
-func bgpRIBDevice(intf, protocol string, peer4Infos, peer6Infos map[string][]bgpLearnedInfo) (*telemetry.Device, error) {
-	dev := &telemetry.Device{}
-	rib := dev.GetOrCreateNetworkInstance(intf).
-		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, protocol).
-		GetOrCreateBgp().
-		GetOrCreateRib()
+func populateRIB(netInst *telemetry.NetworkInstance, peer4Infos, peer6Infos map[string][]bgpLearnedInfo) error {
+	rib := netInst.
+		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").
+		GetOrCreateBgp().GetOrCreateRib()
 
 	for peer, infos := range peer4Infos {
 		ipv4RIB := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
@@ -66,7 +128,7 @@ func bgpRIBDevice(intf, protocol string, peer4Infos, peer6Infos map[string][]bgp
 			attrIndex := uint64(i + attrLen)
 			commIndex := uint64(i + commLen)
 			if err := appendDetails(info, rib, attrIndex, commIndex, true); err != nil {
-				return nil, fmt.Errorf("failed to append details for elem %d: %w", i, err)
+				return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 			}
 			route := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
 				Prefix:         ygot.String(fmt.Sprintf("%s/%d", info.IPV4Prefix, info.PrefixLen)),
@@ -75,7 +137,7 @@ func bgpRIBDevice(intf, protocol string, peer4Infos, peer6Infos map[string][]bgp
 				CommunityIndex: &commIndex,
 			}
 			if err := ipv4RIB.AppendRoute(route); err != nil {
-				return nil, fmt.Errorf("failed to append route for elem %d: %w", i, err)
+				return fmt.Errorf("failed to append route for elem %d: %w", i, err)
 			}
 		}
 	}
@@ -96,7 +158,7 @@ func bgpRIBDevice(intf, protocol string, peer4Infos, peer6Infos map[string][]bgp
 			attrIndex := uint64(i + attrLen)
 			commIndex := uint64(i + commLen)
 			if err := appendDetails(info, rib, attrIndex, commIndex, false); err != nil {
-				return nil, fmt.Errorf("failed to append details for elem %d: %w", i, err)
+				return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 			}
 			route := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
 				Prefix:         ygot.String(fmt.Sprintf("%s/%d", info.IPV6Prefix, info.PrefixLen)),
@@ -105,11 +167,11 @@ func bgpRIBDevice(intf, protocol string, peer4Infos, peer6Infos map[string][]bgp
 				CommunityIndex: &commIndex,
 			}
 			if err := ipv6RIB.AppendRoute(route); err != nil {
-				return nil, fmt.Errorf("failed to append route for elem %d: %w", i, err)
+				return fmt.Errorf("failed to append route for elem %d: %w", i, err)
 			}
 		}
 	}
-	return dev, nil
+	return nil
 }
 
 func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_Bgp_Rib, attrIndex, commIndex uint64, v4 bool) error {
@@ -142,7 +204,7 @@ func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_
 	community := &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
 		Index: &commIndex,
 	}
-	for _, str := range strings.Split(info.Community, ",") {
+	for _, str := range strings.Split(info.Community, ", ") {
 		if str != "" {
 			community.Community = append(community.Community, telemetry.UnionString(str))
 		}

@@ -15,12 +15,23 @@
 package ixgnmi
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
 	"hash/fnv"
 
 	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
 )
+
+func rsvpTEFromIxia(ctx context.Context, client cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+	ingressLSPs, err := fetchIngressLSPs(ctx, client, nodes.rsvpLSPs)
+	if err != nil {
+		return err
+	}
+	return populateIngressLSPs(netInst, ingressLSPs)
+}
 
 var hashImpl = fnv.New32()
 
@@ -29,9 +40,49 @@ type ingressLSP struct {
 	src, dst string
 }
 
-func rsvpTEDevice(intf string, ingressLSPsBySessionPrefix map[string][]*ingressLSP) (*telemetry.Device, error) {
-	dev := &telemetry.Device{}
-	rsvpTE := dev.GetOrCreateNetworkInstance(intf).GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe()
+func fetchIngressLSPs(ctx context.Context, client cfgClient, rsvpLSPs []*ixconfig.TopologyRsvpP2PIngressLsps) (map[string][]*ingressLSP, error) {
+	const mvEP = "multivalue/operations/getvalues"
+	if len(rsvpLSPs) == 0 {
+		return nil, nil
+	}
+
+	ingressLSPsByPrefix := make(map[string][]*ingressLSP)
+	for _, lspNode := range rsvpLSPs {
+		nodeID, err := client.NodeID(lspNode)
+		if err != nil {
+			return nil, err
+		}
+		ixLSPs := new(struct {
+			State    []string
+			SourceIP string
+			RemoteIP string
+		})
+		if err := client.Session().Get(ctx, nodeID, ixLSPs); err != nil {
+			return nil, fmt.Errorf("failed to fetch ingress LSPs config: %w", err)
+		}
+		var srcIPs, dstIPs []string
+		if err := client.Session().Post(ctx, mvEP, ixweb.OpArgs{ixLSPs.SourceIP, 0, len(ixLSPs.State)}, &srcIPs); err != nil {
+			return nil, fmt.Errorf("failed to fetch source IPs for LSP: %w", err)
+		}
+		if err := client.Session().Post(ctx, mvEP, ixweb.OpArgs{ixLSPs.RemoteIP, 0, len(ixLSPs.State)}, &dstIPs); err != nil {
+			return nil, fmt.Errorf("failed to fetch destination IPs for LSP: %w", err)
+		}
+		var lsps []*ingressLSP
+		for i, state := range ixLSPs.State {
+			lsps = append(lsps, &ingressLSP{
+				up:  state == "up",
+				src: srcIPs[i],
+				dst: dstIPs[i],
+			})
+		}
+		ingressLSPsByPrefix[*(lspNode.Name)] = lsps
+	}
+
+	return ingressLSPsByPrefix, nil
+}
+
+func populateIngressLSPs(netInst *telemetry.NetworkInstance, ingressLSPsBySessionPrefix map[string][]*ingressLSP) error {
+	rsvpTE := netInst.GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe()
 
 	// Hash prefixes to maintain constant session indices for a given config.
 	pfxToHash := make(map[string]uint32, len(ingressLSPsBySessionPrefix))
@@ -39,11 +90,11 @@ func rsvpTEDevice(intf string, ingressLSPsBySessionPrefix map[string][]*ingressL
 	for pfx := range ingressLSPsBySessionPrefix {
 		_, err := hashImpl.Write([]byte(pfx))
 		if err != nil {
-			return nil, fmt.Errorf("failed to hash session prefix %q: %w", pfx, err)
+			return fmt.Errorf("failed to hash session prefix %q: %w", pfx, err)
 		}
 		h := hashImpl.Sum32()
 		if hPfx, exists := hashToPfx[h]; exists {
-			return nil, fmt.Errorf("hash collision for session prefixes %q, %q", pfx, hPfx)
+			return fmt.Errorf("hash collision for session prefixes %q, %q", pfx, hPfx)
 		}
 		hashToPfx[h] = pfx
 		pfxToHash[pfx] = h
@@ -69,5 +120,5 @@ func rsvpTEDevice(intf string, ingressLSPsBySessionPrefix map[string][]*ingressL
 			}
 		}
 	}
-	return dev, nil
+	return nil
 }

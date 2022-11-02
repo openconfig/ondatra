@@ -15,12 +15,15 @@
 package ixgnmi
 
 import (
+	"golang.org/x/net/context"
+	"errors"
 	"hash"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
 )
 
@@ -32,82 +35,131 @@ func (constantHash) Write(p []byte) (int, error) { return len(p), nil }
 func (constantHash) Reset()                      {}
 func (constantHash) Sum32() uint32               { return 0 }
 
-func TestRSVPTEDevice(t *testing.T) {
-	origHashImpl := hashImpl
+func TestRSVPTEFromIxia(t *testing.T) {
+	const (
+		lsp1ID = "/fake/rsvpte/lsp1"
+		lsp2ID = "/fake/rsvpte/lsp2"
+	)
+	lsp1XP := parseXPath(t, "/fake/xpath/lsp1")
+	lsp2XP := parseXPath(t, "/fake/xpath/lsp2")
+	nodes := &cachedNodes{rsvpLSPs: []*ixconfig.TopologyRsvpP2PIngressLsps{
+		{Xpath: lsp1XP, Name: ixconfig.String("lsp0")},
+		{Xpath: lsp2XP, Name: ixconfig.String("lsp1")},
+	}}
+
 	tests := []struct {
-		name        string
-		ingressLSPs map[string][]*ingressLSP
-		hashImpl    hash.Hash32
-		wantRSVPTE  *telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe
-		wantErr     string
+		desc     string
+		lspRsps  map[string]string
+		lspErrs  map[string]error
+		mvRsps   []string
+		mvErr    error
+		hashImpl hash.Hash32
+		want     *telemetry.NetworkInstance
+		wantErr  string
 	}{{
-		name: "hash collision on LSP session prefixes",
-		ingressLSPs: map[string][]*ingressLSP{
-			"lsp0": []*ingressLSP{},
-			"lsp1": []*ingressLSP{},
-		},
-		hashImpl: constantHash{},
+		desc:    "lsp lookup error",
+		lspErrs: map[string]error{lsp1ID: errors.New("some error")},
+		wantErr: "failed to fetch ingress LSPs config",
+	}, {
+		desc:    "multivalue lookup error",
+		lspRsps: map[string]string{lsp1ID: `{"state": ["up"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`},
+		mvErr:   errors.New("some error"),
+		wantErr: "failed to fetch source IPs for LSP",
+	}, {
+		desc:     "hash collision",
+		hashImpl: new(constantHash),
 		wantErr:  "hash collision",
 	}, {
-		name: "full LSP update",
-		ingressLSPs: map[string][]*ingressLSP{
-			"lsp0": []*ingressLSP{
-				{up: true, src: "1.1.1.1", dst: "1.1.1.2"},
-				{up: false, src: "2.2.2.1", dst: "2.2.2.2"},
+		desc: "no data",
+		want: &telemetry.NetworkInstance{Mpls: &telemetry.NetworkInstance_Mpls{
+			SignalingProtocols: &telemetry.NetworkInstance_Mpls_SignalingProtocols{
+				RsvpTe: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
+					Session: map[uint64]*telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{},
+				},
 			},
-			"lsp1": []*ingressLSP{
-				{up: true, src: "3.3.3.3", dst: "4.4.4.4"},
-			},
+		}},
+	}, {
+		desc: "full data",
+		lspRsps: map[string]string{
+			lsp1ID: `{"state": ["up", "notStarted"], "sourceIP": "/api/v1/sessions/0/multivalue/1", "destIP": "/api/v1/sessions/0/multivalue/2"}`,
+			lsp2ID: `{"state": ["up"], "sourceIP": "/api/v1/sessions/0/multivalue/3", "destIP": "/api/v1/sessions/0/multivalue/4"}`,
 		},
-		wantRSVPTE: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
-			Session: map[uint64]*telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
-				2765635037960339456: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
-					LocalIndex:         ygot.Uint64(2765635037960339456),
-					SessionName:        ygot.String("lsp0 0"),
-					Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
-					SourceAddress:      ygot.String("1.1.1.1"),
-					DestinationAddress: ygot.String("1.1.1.2"),
-					Status:             telemetry.Session_Status_UP,
-				},
-				2765635037960339457: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
-					LocalIndex:         ygot.Uint64(2765635037960339457),
-					SessionName:        ygot.String("lsp0 1"),
-					Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
-					SourceAddress:      ygot.String("2.2.2.1"),
-					DestinationAddress: ygot.String("2.2.2.2"),
-					Status:             telemetry.Session_Status_DOWN,
-				},
-				2765635042255306752: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
-					LocalIndex:         ygot.Uint64(2765635042255306752),
-					SessionName:        ygot.String("lsp1 0"),
-					Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
-					SourceAddress:      ygot.String("3.3.3.3"),
-					DestinationAddress: ygot.String("4.4.4.4"),
-					Status:             telemetry.Session_Status_UP,
+		mvRsps: []string{
+			`["1.1.1.1", "2.2.2.1"]`,
+			`["1.1.1.2", "2.2.2.2"]`,
+			`["3.3.3.1"]`,
+			`["3.3.3.2"]`,
+		},
+		want: &telemetry.NetworkInstance{Mpls: &telemetry.NetworkInstance_Mpls{
+			SignalingProtocols: &telemetry.NetworkInstance_Mpls_SignalingProtocols{
+				RsvpTe: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
+					Session: map[uint64]*telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+						2765635037960339456: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+							LocalIndex:         ygot.Uint64(2765635037960339456),
+							SessionName:        ygot.String("lsp0 0"),
+							Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
+							SourceAddress:      ygot.String("1.1.1.1"),
+							DestinationAddress: ygot.String("1.1.1.2"),
+							Status:             telemetry.Session_Status_UP,
+						},
+						2765635037960339457: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+							LocalIndex:         ygot.Uint64(2765635037960339457),
+							SessionName:        ygot.String("lsp0 1"),
+							Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
+							SourceAddress:      ygot.String("2.2.2.1"),
+							DestinationAddress: ygot.String("2.2.2.2"),
+							Status:             telemetry.Session_Status_DOWN,
+						},
+						2765635042255306752: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+							LocalIndex:         ygot.Uint64(2765635042255306752),
+							SessionName:        ygot.String("lsp1 0"),
+							Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
+							SourceAddress:      ygot.String("3.3.3.1"),
+							DestinationAddress: ygot.String("3.3.3.2"),
+							Status:             telemetry.Session_Status_UP,
+						},
+					},
 				},
 			},
-		},
+		}},
 	}}
 	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
+		t.Run(test.desc, func(t *testing.T) {
 			if test.hashImpl != nil {
+				origHashImpl := hashImpl
+				defer func() {
+					hashImpl = origHashImpl
+				}()
 				hashImpl = test.hashImpl
 			}
-			defer func() { hashImpl = origHashImpl }()
 
-			got, err := rsvpTEDevice("foo", test.ingressLSPs)
+			getRsps := make(map[string][]string)
+			for id, rsp := range test.lspRsps {
+				getRsps[id] = []string{rsp}
+			}
+			client := &fakeCfgClient{
+				sess: &fakeSession{
+					getErrs:  test.lspErrs,
+					getRsps:  getRsps,
+					postErrs: map[string]error{"multivalue/operations/getvalues": test.mvErr},
+					postRsps: map[string][]string{"multivalue/operations/getvalues": test.mvRsps},
+				},
+				xpathToID: map[string]string{
+					lsp1XP.String(): lsp1ID,
+					lsp2XP.String(): lsp2ID,
+				},
+			}
+
+			got := new(telemetry.NetworkInstance)
+			err := rsvpTEFromIxia(context.Background(), client, got, nodes)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
-				t.Fatalf("rsvpTEDevice() got unexpected error diff\n%s", d)
+				t.Fatalf("rsvpTEFromIxia() got unexpected error diff\n%s", d)
 			}
 			if err != nil {
 				return
 			}
-			want := new(telemetry.Device)
-			want.GetOrCreateNetworkInstance("foo").
-				GetOrCreateMpls().
-				GetOrCreateSignalingProtocols().RsvpTe = test.wantRSVPTE
-			if d := cmp.Diff(want, got); d != "" {
-				t.Errorf("rsvpTEDevice() got unexpected diff (-want +got)\n%s", d)
+			if d := cmp.Diff(test.want, got); d != "" {
+				t.Errorf("rsvpTEFromIxia() got unexpected diff (-want +got)\n%s", d)
 			}
 		})
 	}

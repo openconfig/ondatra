@@ -15,11 +15,23 @@
 package ixgnmi
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
+	"path"
 
 	log "github.com/golang/glog"
+	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/telemetry"
 )
+
+func isisLSDBFromIxia(ctx context.Context, client cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+	info, err := fetchISISInfo(ctx, client, nodes.isisL3s)
+	if err != nil {
+		return err
+	}
+	return populateISIS(netInst, info)
+}
 
 type isisLearnedInfo struct {
 	LearnedVia      string `ixia:"Learned Via"`
@@ -41,10 +53,35 @@ type isisLearnedInfo struct {
 	AgeSecs         int    `ixia:"Age (in secs)"`
 }
 
-func isisLSDBDevice(intf, protocol string, learnedISIS []isisLearnedInfo) (*telemetry.Device, error) {
-	dev := &telemetry.Device{}
-	isis := dev.GetOrCreateNetworkInstance(intf).
-		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, protocol).
+func fetchISISInfo(ctx context.Context, client cfgClient, isisL3s []*ixconfig.TopologyIsisL3) ([]isisLearnedInfo, error) {
+	const opPath = "topology/deviceGroup/ethernet/isisL3/operations/getLearnedInfo"
+	var nodeIDs []string
+	for _, isisNode := range isisL3s {
+		nodeID, err := client.NodeID(isisNode)
+		if err != nil {
+			return nil, err
+		}
+		nodeIDs = append(nodeIDs, nodeID)
+	}
+	if err := client.Session().Post(ctx, opPath, ixweb.OpArgs{nodeIDs}, nil); err != nil {
+		return nil, fmt.Errorf("failed to run op: %w", err)
+	}
+	var allInfos []isisLearnedInfo
+	for _, nodeID := range nodeIDs {
+		table := &table{}
+		if err := client.Session().Get(ctx, path.Join(nodeID, "learnedInfo/1/table/1"), table); err != nil {
+			return nil, fmt.Errorf("failed to get learned info: %w", err)
+		}
+		var infos []isisLearnedInfo
+		unmarshalTable(table, &infos)
+		allInfos = append(allInfos, infos...)
+	}
+	return allInfos, nil
+}
+
+func populateISIS(netInst *telemetry.NetworkInstance, learnedISIS []isisLearnedInfo) error {
+	isis := netInst.
+		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, "0").
 		GetOrCreateIsis()
 
 	for _, info := range learnedISIS {
@@ -60,7 +97,7 @@ func isisLSDBDevice(intf, protocol string, learnedISIS []isisLearnedInfo) (*tele
 		case "L2":
 			levelNum = 2
 		default:
-			return nil, fmt.Errorf("unknown ISIS level: %q", info.LearnedVia)
+			return fmt.Errorf("unknown ISIS level: %q", info.LearnedVia)
 		}
 		lspID := fmt.Sprintf("%s%s.%s%s.%s%s.%02d-%02d", info.SystemID[0:2], info.SystemID[3:5],
 			info.SystemID[6:8], info.SystemID[9:11], info.SystemID[12:14], info.SystemID[15:17],
@@ -72,6 +109,5 @@ func isisLSDBDevice(intf, protocol string, learnedISIS []isisLearnedInfo) (*tele
 		lsp.SetFlags(flags)
 		lsp.SetSequenceNumber(info.SeqNumber)
 	}
-
-	return dev, nil
+	return nil
 }

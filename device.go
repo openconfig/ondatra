@@ -90,7 +90,6 @@ func (d *Device) GNMI() *gnmi.Client {
 // Telemetry returns a telemetry path root for the device.
 func (d *Device) Telemetry() *device.DevicePath {
 	root := device.DeviceRoot(d.Name())
-	// TODO: Add field to root node in ygot instead of using custom data.
 	root.PutCustomData(genutil.DefaultClientKey, d.clientFn)
 	return root
 }
