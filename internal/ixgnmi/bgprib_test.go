@@ -73,7 +73,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		desc: "unknown origin",
 		getRsps: map[string]string{
 			bgp4ID + "/learnedInfo/1/table/1": `{
-				"columns": ["IPv4 Prefix"],
+				"columns": ["Origin"],
 				"values": [["Bad Origin"]]
 			}`,
 		},
@@ -82,7 +82,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		desc: "duplicate v4 prefix",
 		getRsps: map[string]string{
 			bgp4ID + "/learnedInfo/1/table/1": `{
-				"columns": ["IPv4 Prefix", "Origin"],
+				"columns": ["IPv4 Prefix ", "Origin"],
 				"values": [["127.0.0.1", "EGP"], ["127.0.0.1", "EGP"]]
 			}`,
 		},
@@ -142,7 +142,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		getRsps: map[string]string{
 			bgp4ID + "/learnedInfo/1/table/1": `{
 				"id": 1,
-				"columns": ["IPv4 Prefix", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community"],
+				"columns": ["IPv4 Prefix ", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community"],
 				"values": [
 					["127.0.0.1", "30", "1", "127.0.0.2", "IGP", "200", "1000", "100", "65532 : 10200, 65533 : 10100"],
 					["127.0.0.3", "24", "2", "127.0.0.4", "EGP",    "",     "",    "",                             ""]

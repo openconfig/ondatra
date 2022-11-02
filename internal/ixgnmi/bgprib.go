@@ -90,7 +90,7 @@ func dutIP(bgpPeer ixconfig.IxiaCfgNode) string {
 // bgpLearnedInfo is the output of learned info for BGP from an Ixia device.
 // This struct is used for ipv4 and ipv6 info.
 type bgpLearnedInfo struct {
-	IPV4Prefix     string `ixia:"IPv4 Prefix"`
+	IPV4Prefix     string `ixia:"IPv4 Prefix "`
 	IPV6Prefix     string `ixia:"IPv6 Prefix"`
 	PrefixLen      int    `ixia:"Prefix Length"`
 	PathID         uint32 `ixia:"Path ID"`
