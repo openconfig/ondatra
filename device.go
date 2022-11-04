@@ -196,11 +196,6 @@ func (p *Port) CardModel() string {
 type PMD opb.Port_Pmd
 
 const (
-	// PMD100GFR is the PMD 100GBASE-FR.
-	// Deprecated: use PMD100GBASEFR.
-	// TODO: Remove this constant.
-	PMD100GFR = PMD(opb.Port_PMD_100GBASE_FR)
-
 	// PMD10GBASELRM is the PMD 10GBASE-LRM
 	PMD10GBASELRM = PMD(opb.Port_PMD_10GBASE_LRM)
 	// PMD10GBASELR is the PMD 10GBASE-LR.

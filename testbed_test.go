@@ -132,7 +132,7 @@ func TestReserve(t *testing.T) {
 		if got, want := p.CardModel(), "EX9200-40T"; got != want {
 			t.Errorf("card model = %q, want %q", got, want)
 		}
-		if got, want := p.PMD(), PMD100GFR; got != want {
+		if got, want := p.PMD(), PMD100GBASEFR; got != want {
 			t.Errorf("pmd = %q, want %q", got, want)
 		}
 	})
@@ -163,7 +163,7 @@ func TestReserve(t *testing.T) {
 		if got, want := p.CardModel(), "NOVUS"; got != want {
 			t.Errorf("card model = %q, want %q", got, want)
 		}
-		if got, want := p.PMD(), PMD100GFR; got != want {
+		if got, want := p.PMD(), PMD100GBASEFR; got != want {
 			t.Errorf("pmd = %q, want %q", got, want)
 		}
 	})

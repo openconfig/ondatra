@@ -205,3 +205,21 @@ func BenchmarkSolveScale(b *testing.B) {
 		}
 	}
 }
+
+func BenchmarkManyLinksSolve(b *testing.B) {
+	b.ReportAllocs()
+	requestGraph := &AbstractGraph{
+		Desc:  "2 nodes, 3 port groups",
+		Nodes: []*AbstractNode{abs16, abs17},
+		Edges: []*AbstractEdge{{abs16port1, abs17port1}, {abs16port2, abs17port2}, {abs16port3, abs17port3}, {abs16port4, abs17port4}, {abs16port5, abs17port5}, {abs16port6, abs17port6}, {abs16port7, abs17port7}, {abs16port8, abs17port8}, {abs16port9, abs17port9}, {abs16port10, abs17port10}, {abs16port11, abs17port11}, {abs16port12, abs17port12}, {abs16port13, abs17port13}, {abs16port14, abs17port14}},
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StartTimer()
+		_, err := Solve(requestGraph, superGraph)
+		b.StopTimer()
+		if err != nil {
+			b.Fatalf("Solve() got unexpected error: %v", err)
+		}
+	}
+}
