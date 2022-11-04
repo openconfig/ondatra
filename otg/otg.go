@@ -236,10 +236,10 @@ func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state 
 }
 
 // EnableLACPMembers enables lacp member ports on the ATE.
-func (o *OTG) EnableLACPMembers(t testing.TB, ports []string) {
+func (o *OTG) EnableLACPMembers(t testing.TB, ports ...string) {
 	t.Helper()
 	debugger.ActionStarted(t, "EnableLACPMembers on %v", o.ate)
-	warns, err := setLACPMemberState(context.Background(), o.ate, ports, gosnappi.LacpMemberStateState.UP)
+	warns, err := setLACPMemberState(context.Background(), o.ate, gosnappi.LacpMemberStateState.UP, ports)
 	if err != nil {
 		t.Fatalf("EnableLACPMembers(t) on %s: %v", o.ate, err)
 	}
@@ -249,10 +249,10 @@ func (o *OTG) EnableLACPMembers(t testing.TB, ports []string) {
 }
 
 // DisableLACPMembers disables lacp member ports on the ATE.
-func (o *OTG) DisableLACPMembers(t testing.TB, ports []string) {
+func (o *OTG) DisableLACPMembers(t testing.TB, ports ...string) {
 	t.Helper()
 	debugger.ActionStarted(t, "DisableLACPMembers on %v", o.ate)
-	warns, err := setLACPMemberState(context.Background(), o.ate, ports, gosnappi.LacpMemberStateState.DOWN)
+	warns, err := setLACPMemberState(context.Background(), o.ate, gosnappi.LacpMemberStateState.DOWN, ports)
 	if err != nil {
 		t.Fatalf("DisableLACPMembers(t) on %s: %v", o.ate, err)
 	}
@@ -261,7 +261,7 @@ func (o *OTG) DisableLACPMembers(t testing.TB, ports []string) {
 	}
 }
 
-func setLACPMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []string, state gosnappi.LacpMemberStateStateEnum) ([]string, error) {
+func setLACPMemberState(ctx context.Context, ate binding.ATE, state gosnappi.LacpMemberStateStateEnum, lagMemberPorts []string) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
@@ -271,6 +271,63 @@ func setLACPMemberState(ctx context.Context, ate binding.ATE, lagMemberPorts []s
 		return nil, err
 	}
 	return resp.Warnings(), nil
+}
+
+// StartCapture starts capturing bytes on the specified ports.
+func (o *OTG) StartCapture(t *testing.T, portNames ...string) {
+	t.Helper()
+	debugger.ActionStarted(t, "StartCapture on %v", o.ate)
+	warns, err := setCaptureState(context.Background(), o.ate, gosnappi.CaptureStateState.START, portNames)
+	if err != nil {
+		t.Fatalf("StartCapture(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("StartCapture(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+// StopCapture starts capturing bytes on the specified ports.
+func (o *OTG) StopCapture(t *testing.T, portNames ...string) {
+	t.Helper()
+	debugger.ActionStarted(t, "StopCapture on %v", o.ate)
+	warns, err := setCaptureState(context.Background(), o.ate, gosnappi.CaptureStateState.STOP, portNames)
+	if err != nil {
+		t.Fatalf("StopCapture(t) on %s: %v", o.ate, err)
+	}
+	if len(warns) > 0 {
+		t.Logf("StopCapture(t) on %s non-fatal warnings: %v", o.ate, warns)
+	}
+}
+
+func setCaptureState(ctx context.Context, ate binding.ATE, state gosnappi.CaptureStateStateEnum, portNames []string) ([]string, error) {
+	api, err := rawapis.FetchOTG(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := api.SetCaptureState(api.NewCaptureState().SetState(state).SetPortNames(portNames))
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
+}
+
+// FetchCapture fetches the captured bytes on the specified port.
+func (o *OTG) FetchCapture(t *testing.T, portName string) []byte {
+	t.Helper()
+	debugger.ActionStarted(t, "FetchCapture on %v", o.ate)
+	bytes, err := fetchCapture(context.Background(), o.ate, portName)
+	if err != nil {
+		t.Fatalf("FetchCapture(t) on %s: %v", o.ate, err)
+	}
+	return bytes
+}
+
+func fetchCapture(ctx context.Context, ate binding.ATE, postName string) ([]byte, error) {
+	api, err := rawapis.FetchOTG(ctx, ate)
+	if err != nil {
+		return nil, err
+	}
+	return api.GetCapture(api.NewCaptureRequest().SetPortName(postName))
 }
 
 // Telemetry returns a telemetry path root for the device.

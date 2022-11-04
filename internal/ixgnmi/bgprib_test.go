@@ -97,6 +97,24 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		},
 		wantErr: "duplicate key",
 	}, {
+		desc: "invalid AS path",
+		getRsps: map[string]string{
+			bgp4ID + "/learnedInfo/1/table/1": `{
+				"columns": ["Origin", "AS Path"],
+				"values": [["EGP", "foo"]]
+			}`,
+		},
+		wantErr: "invalid AS path",
+	}, {
+		desc: "invalid AS segment",
+		getRsps: map[string]string{
+			bgp4ID + "/learnedInfo/1/table/1": `{
+				"columns": ["Origin", "AS Path"],
+				"values": [["EGP", "<foo bar>"]]
+			}`,
+		},
+		wantErr: "invalid AS segment",
+	}, {
 		desc: "no data",
 		want: &telemetry.NetworkInstance{
 			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
@@ -142,18 +160,18 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		getRsps: map[string]string{
 			bgp4ID + "/learnedInfo/1/table/1": `{
 				"id": 1,
-				"columns": ["IPv4 Prefix ", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community"],
+				"columns": ["IPv4 Prefix ", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "AS Path"],
 				"values": [
-					["127.0.0.1", "30", "1", "127.0.0.2", "IGP", "200", "1000", "100", "65532 : 10200, 65533 : 10100"],
-					["127.0.0.3", "24", "2", "127.0.0.4", "EGP",    "",     "",    "",                             ""]
+					["127.0.0.1", "30", "1", "127.0.0.2", "IGP", "200", "1000", "100", "65532 : 10200, 65533 : 10100", "<65532 65533>"],
+					["127.0.0.3", "24", "2", "127.0.0.4", "EGP",    "",     "",    "",                             "",              ""]
 				]
 			}`,
 			bgp6ID + "/learnedInfo/1/table/1": `{
 				"id": 2,
-				"columns": ["IPv6 Prefix", "Prefix Length", "Path ID", "IPv6 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community"],
+				"columns": ["IPv6 Prefix", "Prefix Length", "Path ID", "IPv6 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "AS Path"],
 				"values": [
-					["::1", "28", "3", "::2", "Incomplete", "200", "1000", "100", ""],
-					["::3", "26", "4", "::4",        "IGP",   "",     "",    "",  ""]
+					["::1", "28", "3", "::2", "Incomplete", "200", "1000", "100", "65534 : 10400, 65535 : 10300", "<65534 65535>"],
+					["::3", "26", "4", "::4",        "IGP",   "",     "",    "",                              "",              ""]
 				]
 			}`,
 		},
@@ -229,6 +247,10 @@ func TestBGPRIBFromIxia(t *testing.T) {
 									Med:       ygot.Uint32(100),
 									NextHop:   ygot.String("127.0.0.2"),
 									Origin:    telemetry.BgpTypes_BgpOriginAttrType_IGP,
+									AsSegment: []*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+										Member: []uint32{65532, 65533},
+										Type:   telemetry.BgpTypes_AsPathSegmentType_AS_SEQ,
+									}},
 								},
 								1: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 									Aigp:      ygot.Uint64(0),
@@ -245,6 +267,10 @@ func TestBGPRIBFromIxia(t *testing.T) {
 									Med:       ygot.Uint32(100),
 									NextHop:   ygot.String("::2"),
 									Origin:    telemetry.BgpTypes_BgpOriginAttrType_INCOMPLETE,
+									AsSegment: []*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+										Member: []uint32{65534, 65535},
+										Type:   telemetry.BgpTypes_AsPathSegmentType_AS_SEQ,
+									}},
 								},
 								3: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 									Aigp:      ygot.Uint64(0),
@@ -268,6 +294,10 @@ func TestBGPRIBFromIxia(t *testing.T) {
 								},
 								2: &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
 									Index: ygot.Uint64(2),
+									Community: []telemetry.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
+										telemetry.UnionString("65534 : 10400"),
+										telemetry.UnionString("65535 : 10300"),
+									},
 								},
 								3: &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
 									Index: ygot.Uint64(3),

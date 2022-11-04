@@ -18,6 +18,7 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"path"
+	"strconv"
 	"strings"
 
 	log "github.com/golang/glog"
@@ -197,6 +198,26 @@ func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_
 	default:
 		return fmt.Errorf("unknown origin type: %q", info.Origin)
 	}
+
+	if len(info.ASPath) > 0 {
+		lastIdx := len(info.ASPath) - 1
+		if info.ASPath[0] != '<' || info.ASPath[lastIdx] != '>' {
+			return fmt.Errorf("invalid AS path string: %q", info.ASPath)
+		}
+		var members []uint32
+		for _, s := range strings.Split(info.ASPath[1:lastIdx], " ") {
+			member, err := strconv.ParseUint(s, 10, 32)
+			if err != nil {
+				return fmt.Errorf("invalid AS segment member: %q", s)
+			}
+			members = append(members, uint32(member))
+		}
+		as.AsSegment = []*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+			Member: members,
+			Type:   telemetry.BgpTypes_AsPathSegmentType_AS_SEQ,
+		}}
+	}
+
 	if err := rib.AppendAttrSet(as); err != nil {
 		return err
 	}
