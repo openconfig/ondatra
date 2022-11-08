@@ -15,89 +15,211 @@
 package ondatra
 
 import (
+	"golang.org/x/net/context"
 	"errors"
 	"os"
-	"sync"
+	"strings"
 	"testing"
+	"time"
 
+	"flag"
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/internal/flags"
+	"github.com/openconfig/ondatra/fakebind"
+	"github.com/openconfig/testt"
+
+	opb "github.com/openconfig/ondatra/proto"
 )
 
-func TestReserveOnRun(t *testing.T) {
-	flagParseFn = func() (*flags.Values, error) {
-		return &flags.Values{}, nil
+func TestRunTests(t *testing.T) {
+	emptyTB, err := os.CreateTemp(t.TempDir(), "*.textproto")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
 	}
-	origRun := runFn
-	defer func() {
-		reserveFn = reserve
-		releaseFn = release
-		runFn = origRun
-	}()
+	if err := emptyTB.Close(); err != nil {
+		t.Errorf("Failed to close temp file: %v", err)
+	}
+	flag.Set("testbed", emptyTB.Name())
+
 	tests := []struct {
-		desc                  string
-		sig                   os.Signal
-		reservErr, releaseErr error
-		wantErr               string
+		desc                   string
+		interrupt              bool
+		reserveErr, releaseErr error
+		wantErr                string
 	}{{
-		desc:      "error on reserve",
-		reservErr: errors.New("error reserving testbed"),
-		wantErr:   "error reserving testbed",
+		desc: "success",
 	}, {
-		desc:       "error on release",
-		releaseErr: errors.New("error releasing testbed"),
-		wantErr:    "error releasing testbed",
+		desc:       "reserve error",
+		reserveErr: errors.New("reserve error"),
+		wantErr:    "reserve error",
 	}, {
-		desc: "release on signal",
-		sig:  os.Interrupt,
+		desc:       "release error",
+		releaseErr: errors.New("release error"),
+		wantErr:    "release error",
 	}, {
-		desc: "release on test completion",
+		desc:      "interrupted",
+		interrupt: true,
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			reserveFn = func(*flags.Values) error {
-				return test.reservErr
+			fakeBind := fakebind.Setup()
+			fakeBind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
+				return new(binding.Reservation), test.reserveErr
 			}
-			var releaseMu sync.Mutex
-			var released bool
 			releaseCh := make(chan struct{}, 1)
-			releaseErr := test.releaseErr
 			defer close(releaseCh)
-			releaseFn = func() error {
-				releaseMu.Lock()
-				defer releaseMu.Unlock()
-				if !released {
-					released = true
-					releaseCh <- struct{}{}
-				}
-				return releaseErr
+			fakeBind.ReleaseFn = func(context.Context) error {
+				releaseCh <- struct{}{}
+				return test.releaseErr
 			}
-			runFn = func(*testing.M) int {
-				if test.sig != nil {
-					sigc <- test.sig
+			runFn := func() int {
+				if test.interrupt {
+					sigc <- os.Interrupt
+					// Wait for the release immediately to confirm it is triggered from
+					// the interrupt and not from the  release at the end of runTests.
+					<-releaseCh
 				}
 				return 0
 			}
-			var initBindCalled bool
-			setBindingFn = func(b binding.Binding) {
-				initBindCalled = true
+
+			gotErr := runTests(runFn, func() (binding.Binding, error) { return fakeBind, nil })
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("runTests() got err %v, want %q", gotErr, test.wantErr)
 			}
-			fakeBinder := func() (binding.Binding, error) { return nil, nil }
-			if gotErr := doRun(nil, fakeBinder); (gotErr != nil) != (test.wantErr != "") {
-				t.Fatalf("doRun: got err %v, wanted err? %t", gotErr, test.wantErr != "")
-			}
-			if !initBindCalled {
-				t.Errorf("doRun did not initialize the binding")
-			}
-			wantReleased := test.reservErr == nil
-			if wantReleased {
+			// If there was no error reserving and the test wasn't interrupted
+			// wait for the deferred release at the end of runTests.
+			if test.reserveErr == nil && !test.interrupt {
 				<-releaseCh
-			}
-			releaseMu.Lock()
-			defer releaseMu.Unlock()
-			if released != wantReleased {
-				t.Errorf("doRun: testbed released? %t, wanted testbed released? %t", released, wantReleased)
 			}
 		})
 	}
+}
+
+func TestGetters(t *testing.T) {
+	fakebind.Setup().WithReservation(fakeRes)
+
+	t.Run("DUT", func(t *testing.T) {
+		id := "dut_arista"
+		d := DUT(t, id)
+		if got, want := d.ID(), id; got != want {
+			t.Errorf("DUT id = %q, want %q", got, want)
+		}
+		if got, want := d.Name(), "pf01.xxx01"; got != want {
+			t.Errorf("DUT name = %q, want %q", got, want)
+		}
+		if got, want := d.Vendor(), ARISTA; got != want {
+			t.Errorf("DUT vendor = %v, want %v", got, want)
+		}
+		if got, want := d.Model(), "aristaModel"; got != want {
+			t.Errorf("DUT model = %v, want %v", got, want)
+		}
+		if got, want := d.Version(), "aristaVersion"; got != want {
+			t.Errorf("DUT version = %v, want %v", got, want)
+		}
+	})
+
+	t.Run("DUTs", func(t *testing.T) {
+		id := "dut_cisco"
+		duts := DUTs(t)
+		d, ok := duts[id]
+		if !ok {
+			t.Errorf("DUT id %q not present in DUTs map %q, must be present", id, duts)
+		}
+		if got, want := d.ID(), id; got != want {
+			t.Errorf("DUT id = %q, want %q", got, want)
+		}
+	})
+
+	t.Run("DUT failure", func(t *testing.T) {
+		id := "gaga"
+		got := testt.ExpectFatal(t, func(t testing.TB) {
+			DUT(t, id)
+		})
+		if !strings.Contains(got, id) {
+			t.Errorf("DUT(%q) failed with message %q, want %q", id, got, id)
+		}
+	})
+
+	t.Run("ATE", func(t *testing.T) {
+		id := "ate_ixia"
+		a := ATE(t, id)
+		if got, want := a.ID(), id; got != want {
+			t.Errorf("ATE id = %q, want %q", got, want)
+		}
+		if got, want := a.Name(), "ix1"; got != want {
+			t.Errorf("ATE name = %q, want %q", got, want)
+		}
+	})
+
+	t.Run("ATEs", func(t *testing.T) {
+		id := "ate_ixia"
+		ates := ATEs(t)
+		a, ok := ates[id]
+		if !ok {
+			t.Errorf("ATE id %q not present in ATEs map %q, must be present", id, ates)
+		}
+		if got, want := a.ID(), id; got != want {
+			t.Errorf("ATE id = %q, want %q", got, want)
+		}
+	})
+
+	t.Run("ATE failure", func(t *testing.T) {
+		id := "gaga"
+		got := testt.ExpectFatal(t, func(t testing.TB) {
+			ATE(t, id)
+		})
+		if !strings.Contains(got, id) {
+			t.Errorf("ATE(%q) failed with message %q, want %q", id, got, id)
+		}
+	})
+
+	t.Run("Port", func(t *testing.T) {
+		did, pid := "dut_juniper", "port1"
+		p := DUT(t, did).Port(t, pid)
+		if got, want := p.ID(), pid; got != want {
+			t.Errorf("port id = %q, want %q", got, want)
+		}
+		if got, want := p.Device().ID(), did; got != want {
+			t.Errorf("port device id = %q, want %q", got, want)
+		}
+		if got, want := p.Speed(), Speed10Gb; got != want {
+			t.Errorf("port speed = %d, want %d", got, want)
+		}
+		if got, want := p.CardModel(), "EX9200-40T"; got != want {
+			t.Errorf("card model = %q, want %q", got, want)
+		}
+		if got, want := p.PMD(), PMD100GBASEFR; got != want {
+			t.Errorf("pmd = %q, want %q", got, want)
+		}
+	})
+
+	t.Run("Port failure", func(t *testing.T) {
+		d := DUT(t, "dut_arista")
+		pid := "gaga"
+		got := testt.ExpectFatal(t, func(t testing.TB) {
+			d.Port(t, pid)
+		})
+		if !strings.Contains(got, pid) {
+			t.Errorf("Port(%q) failed with message %q, want %q", pid, got, pid)
+		}
+	})
+
+	t.Run("Get Ixia Port", func(t *testing.T) {
+		iid, pid := "ate_ixia", "port2"
+		p := ATE(t, iid).Port(t, pid)
+		if got, want := p.ID(), pid; got != want {
+			t.Errorf("port id = %q, want %q", got, want)
+		}
+		if got, want := p.Device().ID(), iid; got != want {
+			t.Errorf("port device id = %q, want %q", got, want)
+		}
+		if got, want := p.Speed(), Speed100Gb; got != want {
+			t.Errorf("port speed = %d, want %d", got, want)
+		}
+		if got, want := p.CardModel(), "NOVUS"; got != want {
+			t.Errorf("card model = %q, want %q", got, want)
+		}
+		if got, want := p.PMD(), PMD100GBASEFR; got != want {
+			t.Errorf("pmd = %q, want %q", got, want)
+		}
+	})
 }

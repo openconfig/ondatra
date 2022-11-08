@@ -37,6 +37,8 @@ func New(ate binding.ATE) *OTG {
 	return &OTG{ate: ate}
 }
 
+var _ gnmi.DeviceOrOpts = (*OTG)(nil)
+
 // OTG provides the Open Traffic Generator API to an ATE.
 // Tests should not construct this directly; call ate.OTG() instead.
 type OTG struct {
@@ -339,9 +341,9 @@ func (o *OTG) Telemetry() *device.DevicePath {
 	return root
 }
 
-// GNMI returns a telemetry path root for the device.
-func (o *OTG) GNMI() *gnmi.Client {
-	return gnmi.NewClient(o.ate.Name(), false, func(ctx context.Context) (gpb.GNMIClient, error) {
+// GNMIOpts returns a new set of options to customize gNMI queries.
+func (o *OTG) GNMIOpts() *gnmi.Opts {
+	return gnmi.NewOpts(o.ate.Name(), false, func(ctx context.Context) (gpb.GNMIClient, error) {
 		return rawapis.FetchOTGGNMI(ctx, o.ate)
 	})
 }

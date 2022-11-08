@@ -16,11 +16,10 @@
 package ondatra
 
 import (
+	"golang.org/x/net/context"
 	"fmt"
 	"os"
 	"os/signal"
-	"reflect"
-	"runtime"
 	"testing"
 	"time"
 
@@ -28,71 +27,66 @@ import (
 	"golang.org/x/sys/unix"
 	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/debugger"
 	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/internal/junitxml"
+	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/internal/testbed"
 	"github.com/openconfig/ondatra/report"
+
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-var (
-	sigc         = make(chan os.Signal, 1)
-	reserveFn    = reserve
-	releaseFn    = release
-	runFn        = (*testing.M).Run
-	flagParseFn  = flags.Parse
-	setBindingFn = testbed.SetBinding
-)
-
-// Binder creates the binding for the test.
-type Binder func() (binding.Binding, error)
+var sigc = make(chan os.Signal, 1)
 
 // RunTests acquires the testbed of devices and runs the tests. Every device is
 // initialized with a baseline configuration that allows it to be managed.
-func RunTests(m *testing.M, binder Binder) {
+func RunTests(m *testing.M, newBindFn func() (binding.Binding, error)) {
 	// Careful to only exit at the very end, because exiting skips all pending defers.
-	if err := doRun(m, binder); err != nil {
+	if err := runTests(m.Run, newBindFn); err != nil {
 		log.Exit(err)
 	}
 }
 
-func doRun(m *testing.M, binder Binder) (rerr error) {
-	fv, err := flagParseFn()
+func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr error) {
+	flagVals, err := flags.Parse()
 	if err != nil {
 		return err
 	}
-	b, err := binder()
+	bind, err := newBindFn()
 	if err != nil {
 		return fmt.Errorf("failed to create binding: %w", err)
 	}
-	setBindingFn(b)
+	testbed.SetBinding(bind)
 
-	if fv.XMLPath != "" {
-		if err := junitxml.StartConverting(fv.XMLPath); err != nil {
+	if flagVals.XMLPath != "" {
+		if err := junitxml.StartConverting(flagVals.XMLPath); err != nil {
 			return fmt.Errorf("error starting JUnit XML converter: %w", err)
 		}
 	}
 
-	debugger.TestStarted(fv.Debug)
-	if err := reserveFn(fv); err != nil {
+	debugger.TestStarted(flagVals.Debug)
+	ctx := context.Background()
+	if err := testbed.Reserve(ctx, flagVals); err != nil {
 		return err
 	}
-	go fnAfterSignal(releaseFn, unix.SIGINT, unix.SIGTERM)
+	go releaseOnSignal(ctx)
 	defer closer.Close(&rerr, func() error {
 		debugger.TestCasesDone()
-		return releaseFn()
+		return testbed.Release(ctx)
 	}, "error releasing testbed")
 	debugger.ReservationDone()
-	if fv.RunTime > 0 {
+	if flagVals.RunTime > 0 {
 		go func() {
-			time.Sleep(fv.RunTime)
-			log.Exitf("Ondatra test timed out after %v", fv.RunTime)
+			time.Sleep(flagVals.RunTime)
+			log.Exitf("Ondatra test timed out after %v", flagVals.RunTime)
 		}()
 	}
 
-	runFn(m)
+	runFn()
 
-	if fv.XMLPath != "" {
+	if flagVals.XMLPath != "" {
 		if err := junitxml.StopConverting(); err != nil {
 			return fmt.Errorf("error stopping JUnit XML converter: %w", err)
 		}
@@ -100,18 +94,93 @@ func doRun(m *testing.M, binder Binder) (rerr error) {
 	return nil
 }
 
-// fnAfterSignal waits for one of `signals` then calls `fn`.
-func fnAfterSignal(fn func() error, signals ...os.Signal) {
-	signal.Notify(sigc, signals...)
+func releaseOnSignal(ctx context.Context) {
+	signal.Notify(sigc, unix.SIGINT, unix.SIGTERM)
 	s := <-sigc
-	fnName := runtime.FuncForPC(reflect.ValueOf(fn).Pointer()).Name()
-	log.Infof("caught signal %s, calling %s\n", s, fnName)
-	if err := fn(); err != nil {
-		log.Errorf("error calling %s: %v", fnName, err)
+	log.Infof("Caught signal %s, releasing testbed", s)
+	if err := testbed.Release(ctx); err != nil {
+		log.Errorf("Error releasing testbed: %v", err)
 	}
 }
 
 // Report returns the Ondatra Report API.
 func Report() *report.Report {
 	return &report.Report{}
+}
+
+func checkRes(t testing.TB) *binding.Reservation {
+	t.Helper()
+	res, err := testbed.Reservation()
+	if err != nil {
+		t.Fatal(err)
+	}
+	return res
+}
+
+// DUT returns the DUT in the testbed with a given id.
+func DUT(t testing.TB, id string) *DUTDevice {
+	t.Helper()
+	rd, err := testbed.DUT(checkRes(t), id)
+	if err != nil {
+		t.Fatalf("DUT(t, %s): %v", id, err)
+	}
+	return newDUT(id, rd)
+}
+
+// DUTs returns a map of DUT id to DUT in the testbed.
+func DUTs(t testing.TB) map[string]*DUTDevice {
+	t.Helper()
+	rm := checkRes(t).DUTs
+	m := make(map[string]*DUTDevice)
+	for id, rd := range rm {
+		m[id] = newDUT(id, rd)
+	}
+	return m
+}
+
+func newDUT(id string, res binding.DUT) *DUTDevice {
+	return &DUTDevice{&Device{
+		id:  id,
+		res: res,
+		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) {
+			return rawapis.FetchGNMI(ctx, res)
+		},
+	}}
+}
+
+// ATE returns the ATE in the testbed with a given id.
+func ATE(t testing.TB, id string) *ATEDevice {
+	t.Helper()
+	ra, err := testbed.ATE(checkRes(t), id)
+	if err != nil {
+		t.Fatalf("ATE(t, %s): %v", id, err)
+	}
+	return newATE(id, ra)
+}
+
+// ATEs returns a map of ATE id to ATE in the testbed.
+func ATEs(t testing.TB) map[string]*ATEDevice {
+	t.Helper()
+	rm := checkRes(t).ATEs
+	m := make(map[string]*ATEDevice)
+	for id, ra := range rm {
+		m[id] = newATE(id, ra)
+	}
+	return m
+}
+
+func newATE(id string, res binding.ATE) *ATEDevice {
+	return &ATEDevice{Device: &Device{
+		id:  id,
+		res: res,
+		clientFn: func(ctx context.Context) (gpb.GNMIClient, error) {
+			return ate.FetchGNMI(ctx, res)
+		},
+	}}
+}
+
+// ReservationID returns the reservation ID for the testbed.
+func ReservationID(t testing.TB) string {
+	t.Helper()
+	return checkRes(t).ID
 }

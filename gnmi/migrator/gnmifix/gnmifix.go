@@ -56,8 +56,6 @@ const (
 	newImports = `
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ondatra/gnmi"
-	"github.com/openconfig/ondatra/gnmi/oc/ocpath"
-	"github.com/openconfig/ondatra/gnmi/otg/otgpath"
 	"github.com/openconfig/ondatra/gnmi/oc"
 `
 	oldOTGTypesImport = `"github.com/openconfig/ondatra/telemetry/otg"`
@@ -210,9 +208,9 @@ type callInfo struct {
 func (c callInfo) pathToString() string {
 	left := strings.TrimSuffix(c.caller, ".")
 	if c.pathFound && !c.indirect {
-		left = "ocpath.Root()"
+		left = "gnmi.OC()"
 		if c.otg {
-			left = "otgpath.Root()"
+			left = "gnmi.OTG()"
 		}
 	}
 

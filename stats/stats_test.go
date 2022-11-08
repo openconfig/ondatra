@@ -81,11 +81,11 @@ func TestMeanRateUint64(t *testing.T) {
 	}{{
 		desc:         "zero values",
 		inVals:       nil,
-		wantFatalMsg: "cannot calculate rate from 0 length slice",
+		wantFatalMsg: "Cannot calculate rate from 0 length slice",
 	}, {
 		desc:         "one value",
 		inVals:       []*telemetry.QualifiedUint64{{}},
-		wantFatalMsg: "cannot calculate rate from 1 length slice",
+		wantFatalMsg: "Cannot calculate rate from 1 length slice",
 	}}
 
 	for _, tt := range testsFail {

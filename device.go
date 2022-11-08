@@ -29,6 +29,8 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+var _ gnmi.DeviceOrOpts = (*Device)(nil)
+
 // Device represents a network device.
 type Device struct {
 	id  string
@@ -81,10 +83,10 @@ func (v Vendor) String() string {
 	return opb.Device_Vendor(v).String()
 }
 
-// GNMI returns a gNMI client for the device.
-func (d *Device) GNMI() *gnmi.Client {
+// GNMIOpts returns a new set of options to customize gNMI queries.
+func (d *Device) GNMIOpts() *gnmi.Opts {
 	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER
-	return gnmi.NewClient(d.Name(), useGetForCfg, d.clientFn)
+	return gnmi.NewOpts(d.Name(), useGetForCfg, d.clientFn)
 }
 
 // Telemetry returns a telemetry path root for the device.

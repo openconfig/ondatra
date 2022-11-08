@@ -20,7 +20,9 @@ import (
 	"sort"
 	"testing"
 
+	"golang.org/x/exp/constraints"
 	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/ygnmi/ygnmi"
 )
 
 // MeanRateUint64 calculates the average rate across the supplied interval
@@ -31,7 +33,7 @@ func MeanRateUint64(t testing.TB, vals []*telemetry.QualifiedUint64) float64 {
 	t.Helper()
 
 	if len(vals) < 2 {
-		t.Fatalf("cannot calculate rate from %d length slice, got: %v", len(vals), vals)
+		t.Fatalf("Cannot calculate rate from %d length slice, got: %v", len(vals), vals)
 	}
 
 	sort.Slice(vals, func(i, j int) bool {
@@ -39,4 +41,30 @@ func MeanRateUint64(t testing.TB, vals []*telemetry.QualifiedUint64) float64 {
 	})
 
 	return float64(vals[len(vals)-1].Val(t)-vals[0].Val(t)) / vals[len(vals)-1].Timestamp.Sub(vals[0].Timestamp).Seconds()
+}
+
+// MeanRate calculates the average rate across the supplied interval
+// from the values supplied in the vals slice. It sorts the values by
+// timestamp and uses the earliest and latest to calculate the rate. Errors
+// are reported using the supplied testing.TB.
+func MeanRate[T constraints.Integer](t testing.TB, vals []*ygnmi.Value[T]) float64 {
+	t.Helper()
+
+	if len(vals) < 2 {
+		t.Fatalf("Cannot calculate rate from %d length slice, got: %v", len(vals), vals)
+	}
+
+	sort.Slice(vals, func(i, j int) bool {
+		return vals[i].Timestamp.Before(vals[j].Timestamp)
+	})
+	first, ok := vals[0].Val()
+	if !ok {
+		t.Fatalf("First value is not present: %v", vals[0])
+	}
+	last, ok := vals[len(vals)-1].Val()
+	if !ok {
+		t.Fatalf("Last value is not present: %v", vals[len(vals)-1])
+	}
+
+	return float64(last-first) / vals[len(vals)-1].Timestamp.Sub(vals[0].Timestamp).Seconds()
 }

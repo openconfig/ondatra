@@ -47,6 +47,7 @@ func SetBinding(b binding.Binding) {
 // an unreserved state. This is only called by fakebind for testing purposes.
 func SetReservationForTesting(r *binding.Reservation) {
 	res = r
+	fetched = false
 }
 
 // Reservation returns the current reservation.
