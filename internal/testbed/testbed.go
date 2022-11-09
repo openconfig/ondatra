@@ -19,7 +19,7 @@ import (
 	"golang.org/x/net/context"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"regexp"
 	"sync"
 
@@ -68,7 +68,7 @@ func Reserve(ctx context.Context, fv *flags.Values) error {
 		return errors.New("testbed is already reserved; Did you call ondatra.RunTests multiple times?")
 	}
 	tb := &opb.Testbed{}
-	s, err := ioutil.ReadFile(fv.TestbedPath)
+	s, err := os.ReadFile(fv.TestbedPath)
 	if err != nil {
 		return fmt.Errorf("failed to read testbed proto %s: %w", fv.TestbedPath, err)
 	}

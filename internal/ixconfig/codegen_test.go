@@ -16,7 +16,7 @@ package ixconfig
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"reflect"
 	"testing"
@@ -52,11 +52,11 @@ func TestMarshalUnmarshalConfig(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
 			// Fetch JSON configs from files.
-			fromJSON, err := ioutil.ReadFile(filepath.Join("testdata", tc.fromJSONFile))
+			fromJSON, err := os.ReadFile(filepath.Join("testdata", tc.fromJSONFile))
 			if err != nil {
 				t.Fatalf("Could not load file %s: %v", tc.fromJSONFile, err)
 			}
-			wantJSON, err := ioutil.ReadFile(filepath.Join("testdata", tc.wantJSONFile))
+			wantJSON, err := os.ReadFile(filepath.Join("testdata", tc.wantJSONFile))
 			if err != nil {
 				t.Fatalf("Could not load file %s: %v", tc.wantJSONFile, err)
 			}

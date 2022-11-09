@@ -19,7 +19,6 @@ import (
 	"golang.org/x/net/context"
 	"errors"
 	"io"
-	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
@@ -135,13 +134,13 @@ func TestInstall(t *testing.T) {
 	const version = "1.2.3"
 
 	// Make a temp file to test specifying a file by file path.
-	file, err := ioutil.TempFile("", "package")
+	file, err := os.CreateTemp("", "package")
 	if err != nil {
 		t.Fatalf("error creating temp file: %v", err)
 	}
 	defer os.Remove(file.Name())
 	defer file.Close()
-	if err := ioutil.WriteFile(file.Name(), []byte{0}, os.ModePerm); err != nil {
+	if err := os.WriteFile(file.Name(), []byte{0}, os.ModePerm); err != nil {
 		t.Fatalf("error writing temp file: %v", err)
 	}
 

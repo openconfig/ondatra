@@ -16,7 +16,7 @@ package knebind
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"gopkg.in/yaml.v2"
 )
@@ -28,6 +28,7 @@ type Config struct {
 	TopoPath           string `yaml:"topology"`
 	CLIPath            string `yaml:"cli"`
 	KubecfgPath        string `yaml:"kubecfg"`
+	SkipReset          bool   `yaml:"skip_reset"`
 }
 
 func (c *Config) String() string {
@@ -36,7 +37,7 @@ func (c *Config) String() string {
 
 // ParseConfigFile parses a yaml file containing a serialized Config.
 func ParseConfigFile(configFile string) (*Config, error) {
-	data, err := ioutil.ReadFile(configFile)
+	data, err := os.ReadFile(configFile)
 	if err != nil {
 		return nil, fmt.Errorf("error reading config file: %w", err)
 	}

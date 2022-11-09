@@ -85,10 +85,13 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 			ServiceDUT: dut.(*solver.ServiceDUT),
 			cfg:        b.cfg,
 		}
+		res.DUTs[i] = kdut
+		if b.cfg.SkipReset {
+			continue
+		}
 		if err := kdut.resetConfig(); err != nil {
 			return nil, err
 		}
-		res.DUTs[i] = kdut
 	}
 	for i, ate := range res.ATEs {
 		res.ATEs[i] = &kneATE{

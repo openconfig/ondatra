@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
@@ -80,7 +81,6 @@ func TestReserve(t *testing.T) {
 		}
 	}
 
-	bind := &Bind{cfg: &Config{}}
 	tb := &opb.Testbed{
 		Duts: []*opb.Device{{
 			Id:    "dut",
@@ -113,7 +113,6 @@ func TestReserve(t *testing.T) {
 						"gnmi": &tpb.Service{Name: "gnmi"},
 					},
 				},
-				cfg: bind.cfg,
 			},
 		},
 		ATEs: map[string]binding.ATE{
@@ -128,25 +127,42 @@ func TestReserve(t *testing.T) {
 					}},
 					Services: make(map[string]*tpb.Service),
 				},
-				cfg: bind.cfg,
 			},
 		},
 	}
 
-	gotResets = 0
-	gotRes, err := bind.Reserve(context.Background(), tb, time.Minute, time.Minute, nil)
-	if err != nil {
-		t.Fatalf("Reserve() got error: %v", err)
-	}
-	if gotRes.ID == "" {
-		t.Errorf("Reserve() got reservation missing ID: %v", gotRes)
-	}
-	gotRes.ID = ""
-	if diff := cmp.Diff(wantRes, gotRes, protocmp.Transform(), cmp.AllowUnexported(kneDUT{}, kneATE{})); diff != "" {
-		t.Errorf("Reserve() got unexpected diff in reservation (-want,+got): %s", diff)
-	}
-	if wantResets := len(wantRes.DUTs); wantResets != gotResets {
-		t.Errorf("Reserve() got unexpected DUT resets: want %v, got %v", wantResets, gotResets)
+	tests := []struct {
+		desc      string
+		skipReset bool
+	}{{
+		desc: "with reset",
+	}, {
+		desc:      "skip reset",
+		skipReset: true,
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			bind := &Bind{cfg: &Config{}}
+			wantResets := len(wantRes.DUTs)
+			if tt.skipReset {
+				bind.cfg.SkipReset = true
+				wantResets = 0
+			}
+			gotResets = 0
+			gotRes, err := bind.Reserve(context.Background(), tb, time.Minute, time.Minute, nil)
+			if err != nil {
+				t.Fatalf("Reserve() got error: %v", err)
+			}
+			if gotRes.ID == "" {
+				t.Errorf("Reserve() got reservation missing ID: %v", gotRes)
+			}
+			if diff := cmp.Diff(wantRes, gotRes, protocmp.Transform(), cmp.AllowUnexported(kneDUT{}, kneATE{}), cmpopts.IgnoreFields(kneDUT{}, "cfg"), cmpopts.IgnoreFields(kneATE{}, "cfg"), cmpopts.IgnoreFields(binding.Reservation{}, "ID")); diff != "" {
+				t.Errorf("Reserve() got unexpected diff in reservation (-want,+got): %s", diff)
+			}
+			if wantResets != gotResets {
+				t.Errorf("Reserve() got unexpected DUT resets: want %v, got %v", wantResets, gotResets)
+			}
+		})
 	}
 }
 

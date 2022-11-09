@@ -20,8 +20,8 @@ import (
 	"errors"
 	"fmt"
 	"hash/crc32"
-	"io/ioutil"
 	"net"
+	"os"
 	"path"
 	"regexp"
 	"sort"
@@ -461,7 +461,7 @@ func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, ov
 		if err != nil {
 			log.Errorf("could not marshal IxNetwork config for logging to file: %v", err)
 		}
-		if err := ioutil.WriteFile(filePath, jsonStr, 0644); err != nil {
+		if err := os.WriteFile(filePath, jsonStr, 0644); err != nil {
 			log.Errorf("could not log IxNetwork config to file: %v", err)
 		}
 		log.Infof("IxNetwork config push attempt logged to file %s", filePath)
@@ -607,7 +607,7 @@ func syncRouteTableFilesAndImport(ctx context.Context, ix *ixATE) error {
 
 	hashToFile := map[string]string{}
 	for f := range toSync {
-		b, err := ioutil.ReadFile(f)
+		b, err := os.ReadFile(f)
 		if err != nil {
 			return fmt.Errorf("could not read route table file at %s for hashing: %w", f, err)
 		}
@@ -642,7 +642,7 @@ func syncRouteTableFilesAndImport(ctx context.Context, ix *ixATE) error {
 	}
 
 	for h, f := range hashToFile {
-		b, err := ioutil.ReadFile(f)
+		b, err := os.ReadFile(f)
 		if err != nil {
 			return fmt.Errorf("could not read route table file at %s for upload: %w", f, err)
 		}

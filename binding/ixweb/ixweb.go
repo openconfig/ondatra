@@ -22,7 +22,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
@@ -229,7 +228,7 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 
 	// The contract of 'Do' ensures Body is non-nil.
 	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
+	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return 0, nil, fmt.Errorf("could not read response body: %w", err)
 	}

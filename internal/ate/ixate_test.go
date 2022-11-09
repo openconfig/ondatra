@@ -19,7 +19,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
 	"strings"
@@ -286,7 +286,7 @@ func jsonCfgDiff(t *testing.T, wantCfg, gotCfg ixconfig.IxiaCfgNode) string {
 }
 
 func toFlows(t *testing.T, filename string) []*opb.Flow {
-	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
+	b, err := os.ReadFile(filepath.Join(testDataPath, filename))
 	if err != nil {
 		t.Fatalf("Could not read file %q: %v", filename, err)
 	}
@@ -298,7 +298,7 @@ func toFlows(t *testing.T, filename string) []*opb.Flow {
 }
 
 func toCfg(t *testing.T, filename string) *ixconfig.Ixnetwork {
-	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
+	b, err := os.ReadFile(filepath.Join(testDataPath, filename))
 	if err != nil {
 		t.Fatalf("Could not read file %q: %v", filename, err)
 	}
@@ -310,7 +310,7 @@ func toCfg(t *testing.T, filename string) *ixconfig.Ixnetwork {
 }
 
 func toTrafficCfg(t *testing.T, filename string) *ixconfig.Traffic {
-	b, err := ioutil.ReadFile(filepath.Join(testDataPath, filename))
+	b, err := os.ReadFile(filepath.Join(testDataPath, filename))
 	if err != nil {
 		t.Fatalf("Could not read file %q: %v", filename, err)
 	}

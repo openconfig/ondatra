@@ -15,7 +15,7 @@
 package gnmigen
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -98,9 +98,9 @@ func generateCodeTestHelper(t *testing.T, dirName string, generatedFileName stri
 			wantFile := filepath.Join(datapath, tt.resultsFolder, dirName, generatedFileName)
 			got := code.String(tt.inConfig.PackageName)
 			diffDetected := false
-			wantCodeBytes, err := ioutil.ReadFile(wantFile)
+			wantCodeBytes, err := os.ReadFile(wantFile)
 			if err != nil {
-				t.Fatalf("ioutil.ReadFile(%q) error: %v", wantFile, err)
+				t.Fatalf("os.ReadFile(%q) error: %v", wantFile, err)
 			}
 			if diff := codeDiff(t, string(wantCodeBytes), got); diff != "" {
 				diffDetected = true
