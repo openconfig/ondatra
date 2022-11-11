@@ -18,46 +18,29 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"io"
-	"net"
 	"strings"
 	"testing"
 
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
+	"github.com/openconfig/ondatra/binding/grpcutil/testservice"
 
-	tgrpcpb "github.com/openconfig/ondatra/internal/rawapis/testservice"
-	tpb "github.com/openconfig/ondatra/internal/rawapis/testservice"
+	tgrpcpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
+	tpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
 )
 
 func TestAnnotateErrors(t *testing.T) {
-	interceptSrv := new(interceptServer)
-	srv := grpc.NewServer()
-	defer srv.Stop()
-	tgrpcpb.RegisterTestServer(srv, interceptSrv)
-	lis, err := net.Listen("tcp", "localhost:0")
-	if err != nil {
-		t.Fatalf("error listening on localhost: %v", err)
-	}
-	defer lis.Close()
-	go srv.Serve(lis)
-
+	errSrv := new(errServer)
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, lis.Addr().String(),
-		grpc.WithTransportCredentials(local.NewCredentials()),
+	serv := testservice.Start(ctx, t, errSrv,
 		withUnaryAnnotateErrors(),
-		withStreamAnnotateErrors(),
-	)
-	if err != nil {
-		t.Fatalf("error dialing server: %v", err)
-	}
-	interceptClient := tgrpcpb.NewTestClient(conn)
+		withStreamAnnotateErrors())
+	defer serv.Stop()
 
 	t.Run("unary success", func(t *testing.T) {
-		interceptSrv.unaryErr = nil
-		if _, gotErr := interceptClient.SendUnary(ctx, new(tpb.TestRequest)); gotErr != nil {
-			t.Errorf("unaryInterceptErr got error %v, want no error", gotErr)
+		errSrv.unaryErr = nil
+		if _, gotErr := serv.SendUnary(ctx, new(tpb.TestRequest)); gotErr != nil {
+			t.Errorf("withUnaryAnnotateErrors() got error %v, want no error", gotErr)
 		}
 	})
 
@@ -67,13 +50,10 @@ func TestAnnotateErrors(t *testing.T) {
 			wantErrMsg = "unary error"
 			wantReqMsg = "unary msg"
 		)
-		interceptSrv.unaryErr = status.Error(wantCode, wantErrMsg)
-		_, gotErr := interceptClient.SendUnary(ctx, &tpb.TestRequest{Message: wantReqMsg})
-		if gotErr == nil {
-			t.Fatalf("unaryInterceptErr got no error, want error, %v", gotErr)
-		}
+		errSrv.unaryErr = status.Error(wantCode, wantErrMsg)
+		_, gotErr := serv.SendUnary(ctx, &tpb.TestRequest{Message: wantReqMsg})
 		if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg, wantReqMsg); diff != "" {
-			t.Errorf("unaryInterceptErr got grpc error diff:\n%s", diff)
+			t.Errorf("withUnaryAnnotateErrors() got grpc error diff:\n%s", diff)
 		}
 	})
 
@@ -83,22 +63,19 @@ func TestAnnotateErrors(t *testing.T) {
 			wantErrMsg = "unknown error"
 			wantReqMsg = "unknown msg"
 		)
-		interceptSrv.unaryErr = fmt.Errorf(wantErrMsg)
-		_, gotErr := interceptClient.SendUnary(ctx, &tpb.TestRequest{Message: wantReqMsg})
-		if gotErr == nil {
-			t.Fatalf("unaryInterceptErr got no error, want error, %v", gotErr)
-		}
+		errSrv.unaryErr = fmt.Errorf(wantErrMsg)
+		_, gotErr := serv.SendUnary(ctx, &tpb.TestRequest{Message: wantReqMsg})
 		if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg, wantReqMsg); diff != "" {
-			t.Errorf("unaryInterceptErr got grpc error diff:\n%s", diff)
+			t.Errorf("withUnaryAnnotateErrors() got grpc error diff:\n%s", diff)
 		}
 	})
 
 	t.Run("stream recv eof", func(t *testing.T) {
-		interceptSrv.streamErr = nil
-		streamClient := mustStartStream(t, interceptClient)
-		mustSendMessage(t, streamClient, "msg")
+		errSrv.streamErr = nil
+		streamClient := serv.MustSendStream(ctx, t)
+		streamClient.MustSend(t, "msg")
 		if _, gotErr := streamClient.Recv(); gotErr != io.EOF {
-			t.Errorf("streamInterceptErr got error %v, want %v", gotErr, io.EOF)
+			t.Errorf("withStreamAnnotateErrors() got error %v, want %v", gotErr, io.EOF)
 		}
 	})
 
@@ -107,14 +84,11 @@ func TestAnnotateErrors(t *testing.T) {
 			wantCode   = codes.PermissionDenied
 			wantErrMsg = "stream error"
 		)
-		interceptSrv.streamErr = status.Error(wantCode, wantErrMsg)
-		streamClient := mustStartStream(t, interceptClient)
+		errSrv.streamErr = status.Error(wantCode, wantErrMsg)
+		streamClient := serv.MustSendStream(ctx, t)
 		_, gotErr := streamClient.Recv()
-		if gotErr == nil {
-			t.Fatalf("streamInterceptErr got no error, want error, %v", gotErr)
-		}
 		if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg); diff != "" {
-			t.Errorf("streamInterceptErr got grpc error diff:\n%s", diff)
+			t.Errorf("withStreamAnnotateErrors() got grpc error diff:\n%s", diff)
 		}
 	})
 
@@ -124,53 +98,42 @@ func TestAnnotateErrors(t *testing.T) {
 			wantErrMsg = "stream error"
 			wantReqMsg = "stream msg"
 		)
-		interceptSrv.streamErr = status.Error(wantCode, wantErrMsg)
-		streamClient := mustStartStream(t, interceptClient)
-		mustSendMessage(t, streamClient, wantReqMsg)
+		errSrv.streamErr = status.Error(wantCode, wantErrMsg)
+		streamClient := serv.MustSendStream(ctx, t)
+		streamClient.MustSend(t, wantReqMsg)
 		_, gotErr := streamClient.Recv()
 		if gotErr == nil {
-			t.Fatalf("streamInterceptErr got no error, want error, %v", gotErr)
+			t.Fatalf("withStreamAnnotateErrors() got no error, want error, %v", gotErr)
 		}
 		if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg, wantReqMsg); diff != "" {
-			t.Errorf("streamInterceptErr got grpc error diff:\n%s", diff)
+			t.Errorf("withStreamAnnotateErrors() got grpc error diff:\n%s", diff)
 		}
 	})
 }
 
-type interceptServer struct {
+type errServer struct {
 	tgrpcpb.UnimplementedTestServer
 	unaryErr  error
 	streamErr error
 }
 
-func (s *interceptServer) SendUnary(context.Context, *tpb.TestRequest) (*tpb.TestResponse, error) {
+func (s *errServer) SendUnary(context.Context, *tpb.TestRequest) (*tpb.TestResponse, error) {
 	return new(tpb.TestResponse), s.unaryErr
 }
 
-func (s *interceptServer) SendStream(srv tgrpcpb.Test_SendStreamServer) error {
+func (s *errServer) SendStream(srv tgrpcpb.Test_SendStreamServer) error {
 	return s.streamErr
 }
 
-func mustStartStream(t *testing.T, client tgrpcpb.TestClient) tgrpcpb.Test_SendStreamClient {
-	streamClient, err := client.SendStream(context.Background())
-	if err != nil {
-		t.Fatalf("SendStream failed with error: %v", err)
-	}
-	return streamClient
-}
-
-func mustSendMessage(t *testing.T, streamClient tgrpcpb.Test_SendStreamClient, msg string) {
-	if err := streamClient.Send(&tpb.TestRequest{Message: msg}); err != nil {
-		t.Fatalf("Send failed with error: %v", err)
-	}
-}
-
 func grpcErrDiff(t *testing.T, err error, wantCode codes.Code, wantSubstrs ...string) string {
-	st, ok := status.FromError(err)
-	if !ok {
-		t.Fatalf("status.FromError failed to convert error: %v", err)
+	gotCode, gotMsg := codes.OK, ""
+	if err != nil {
+		st, ok := status.FromError(err)
+		if !ok {
+			t.Fatalf("status.FromError failed to convert error: %v", err)
+		}
+		gotCode, gotMsg = st.Code(), st.Message()
 	}
-	gotCode, gotMsg := st.Code(), st.Message()
 	var lines []string
 	if gotCode != wantCode {
 		lines = append(lines, fmt.Sprintf("want code %v, got %v", wantCode, gotCode))

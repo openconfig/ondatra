@@ -28,7 +28,7 @@ import (
 // withUnaryAnnotateErrors annotates every gRPC error returned by an RPC with
 // the RPC request message.
 func withUnaryAnnotateErrors() grpc.DialOption {
-	return grpc.WithUnaryInterceptor(
+	return grpc.WithChainUnaryInterceptor(
 		func(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 			err := invoker(ctx, method, req, reply, cc, opts...)
 			return maybeAnnotateErr(err, req)
@@ -38,7 +38,7 @@ func withUnaryAnnotateErrors() grpc.DialOption {
 // withStreamAnnotateErrors annotates every gRPC error returned by an RPC with
 // the preceding RPC request message.
 func withStreamAnnotateErrors() grpc.DialOption {
-	return grpc.WithStreamInterceptor(
+	return grpc.WithChainStreamInterceptor(
 		func(ctx context.Context, desc *grpc.StreamDesc, cc *grpc.ClientConn, method string, streamer grpc.Streamer, opts ...grpc.CallOption) (grpc.ClientStream, error) {
 			client, err := streamer(ctx, desc, cc, method, opts...)
 			if client != nil {

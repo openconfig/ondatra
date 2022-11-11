@@ -12502,7 +12502,7 @@
     {
       "xpath": "/vport[1]",
       "connectedTo": "/availableHardware/chassis[@alias = '108.177.95.165']/card[3]/port[3]",
-      "name": "ixia02-sql80.corp.google.com/6/3",
+      "name": "ixia02.example.com/6/3",
       "rxMode": "captureAndMeasure",
       "traceLevel": "kTrace",
       "traceTag": "AppErrorModule;StatViewer;ixnetservice;TRACE_CPF_DOD;PROFILE_PCPUSYNC;IxNetwork",
@@ -12564,7 +12564,7 @@
     {
       "xpath": "/vport[2]",
       "connectedTo": "/availableHardware/chassis[@alias = '108.177.95.165']/card[3]/port[4]",
-      "name": "ixia02-sql80.corp.google.com/6/4",
+      "name": "ixia02.example.com/6/4",
       "rxMode": "captureAndMeasure",
       "traceLevel": "kTrace",
       "traceTag": "AppErrorModule;StatViewer;ixnetservice;TRACE_CPF_DOD;PROFILE_PCPUSYNC;IxNetwork",
