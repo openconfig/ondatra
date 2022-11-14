@@ -63799,7 +63799,8 @@ func (n *NetworkInstance_Protocol_Static_NextHopPathAny) EnableBfd() *NetworkIns
 // Index (leaf): An user-specified identifier utilised to uniquely reference
 // the next-hop entry in the next-hop list. The value of this
 // index has no semantic meaning other than for referencing
-// the entry.
+// the entry.  It is observed that implementations typically
+// only support a numeric value for this string.
 // ----------------------------------------
 // Defining module: "openconfig-local-routing"
 // Instantiating module: "openconfig-network-instance"
@@ -63818,7 +63819,8 @@ func (n *NetworkInstance_Protocol_Static_NextHopPath) Index() *NetworkInstance_P
 // Index (leaf): An user-specified identifier utilised to uniquely reference
 // the next-hop entry in the next-hop list. The value of this
 // index has no semantic meaning other than for referencing
-// the entry.
+// the entry.  It is observed that implementations typically
+// only support a numeric value for this string.
 // ----------------------------------------
 // Defining module: "openconfig-local-routing"
 // Instantiating module: "openconfig-network-instance"

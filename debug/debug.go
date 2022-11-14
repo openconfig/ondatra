@@ -12,37 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package ondatra
+// Package debug contains the Ondatra debug API.
+package debug
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/events"
 )
 
-// Debug returns the debugger API.
-func Debug() *Debugger {
-	return &Debugger{}
-}
-
-// Debugger is the debugger API.
-type Debugger struct{}
+// Debug is the Ondatra debug API.
+type Debug struct{}
 
 // Breakpoint inserts a breakpoint in the test and prints fmt.Sprint(a...) in
 // the breakpoint message.
-func (d *Debugger) Breakpoint(t *testing.T, a ...any) {
+func (d *Debug) Breakpoint(t *testing.T, a ...any) {
 	t.Helper()
-	if err := debugger.Breakpoint(t, fmt.Sprint(a...)); err != nil {
+	if err := events.Breakpoint(t, fmt.Sprint(a...)); err != nil {
 		t.Fatalf("Breakpoint(t): %v", err)
 	}
 }
 
 // Breakpointf inserts a breakpoint in the test and prints fmt.Sprintf(a...) in
 // the breakpoint message.
-func (d *Debugger) Breakpointf(t *testing.T, format string, a ...any) {
+func (d *Debug) Breakpointf(t *testing.T, format string, a ...any) {
 	t.Helper()
-	if err := debugger.Breakpoint(t, fmt.Sprintf(format, a...)); err != nil {
+	if err := events.Breakpoint(t, fmt.Sprintf(format, a...)); err != nil {
 		t.Fatalf("Breakpointf(t): %v", err)
 	}
 }

@@ -27,8 +27,9 @@ import (
 	"golang.org/x/sys/unix"
 	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/debug"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/flags"
 	"github.com/openconfig/ondatra/internal/junitxml"
 	"github.com/openconfig/ondatra/internal/rawapis"
@@ -66,17 +67,17 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 		}
 	}
 
-	debugger.TestStarted(flagVals.Debug)
+	events.TestStarted(flagVals.Debug)
 	ctx := context.Background()
 	if err := testbed.Reserve(ctx, flagVals); err != nil {
 		return err
 	}
 	go releaseOnSignal(ctx)
 	defer closer.Close(&rerr, func() error {
-		debugger.TestCasesDone()
+		events.TestCasesDone()
 		return testbed.Release(ctx)
 	}, "error releasing testbed")
-	debugger.ReservationDone()
+	events.ReservationDone()
 	if flagVals.RunTime > 0 {
 		go func() {
 			time.Sleep(flagVals.RunTime)
@@ -105,7 +106,12 @@ func releaseOnSignal(ctx context.Context) {
 
 // Report returns the Ondatra Report API.
 func Report() *report.Report {
-	return &report.Report{}
+	return new(report.Report)
+}
+
+// Debug returns the Ondatra Debug API.
+func Debug() *debug.Debug {
+	return new(debug.Debug)
 }
 
 func checkRes(t testing.TB) *binding.Reservation {

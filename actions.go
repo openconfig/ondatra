@@ -21,7 +21,7 @@ import (
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"
-	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/ixnet"
 )
 
@@ -65,7 +65,7 @@ func (s *SetPortState) WithEnabled(enabled bool) *SetPortState {
 // Send sends the SetPortState action to the ATE.
 func (s *SetPortState) Send(t *testing.T) {
 	t.Helper()
-	debugger.ActionStarted(t, "Setting port state on %s", s.ate)
+	events.ActionStarted(t, "Setting port state on %s", s.ate)
 	if err := ate.SetPortState(context.Background(), s.ate, s.portName, s.enabled); err != nil {
 		t.Fatalf("Send(t) of %v: %v", s, err)
 	}
@@ -102,7 +102,7 @@ func (s *SetLACPState) WithEnabled(enabled bool) *SetLACPState {
 // Send sends the SetLACPState action to the ATE.
 func (s *SetLACPState) Send(t *testing.T) {
 	t.Helper()
-	debugger.ActionStarted(t, "Setting LACP state on %s", s.ate)
+	events.ActionStarted(t, "Setting LACP state on %s", s.ate)
 	if err := ate.SetLACPState(context.Background(), s.ate, s.portName, s.enabled); err != nil {
 		t.Fatalf("Send(t) of %v: %v", s, err)
 	}

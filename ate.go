@@ -20,7 +20,7 @@ import (
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/ixweb"
-	"github.com/openconfig/ondatra/internal/debugger"
+	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/otg"
 )
@@ -65,7 +65,7 @@ type RawATEAPIs struct {
 // TODO: Add unit tests once raw APIs is factored out into its own package.
 func (r *RawATEAPIs) IxNetwork(t testing.TB) *ixweb.Session {
 	t.Helper()
-	debugger.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)
+	events.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)
 	ixnet, err := rawapis.FetchIxNetwork(context.Background(), r.ate)
 	if err != nil {
 		t.Fatalf("IxNetwork(t) on %v: %v", r.ate, err)

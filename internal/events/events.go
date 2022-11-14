@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package debugger provides debugging utilities.
-package debugger
+// Package events prints and responds to test events.
+package events
 
 import (
 	"bufio"
@@ -39,8 +39,8 @@ var (
 	reservationFn = testbed.Reservation
 )
 
-// TestStarted notifies the debugger that the test has started and whether debug
-// mode should be enabled.
+// TestStarted notifies that the test has started, whether it was started in
+// debug mode, and that the testbed is about to be reserved.
 func TestStarted(debugMode bool) {
 	if debugMode {
 		readFn, closeFn, err := openTTYFn()
@@ -78,8 +78,8 @@ func readMenuOption() {
 	}
 }
 
-// TestCasesDone notifies the debugger that the test cases are completed, and
-// the testbed is about to be released.
+// TestCasesDone notifies that the test cases are complete and the testbed is
+// about to be released.
 func TestCasesDone() {
 	if reader != nil {
 		reader.stop()
@@ -87,7 +87,7 @@ func TestCasesDone() {
 	logMain(actionMsg("Releasing the testbed"))
 }
 
-// ReservationDone notifes the debugger that the reservation is complete.
+// ReservationDone notifies that the reservation is complete.
 func ReservationDone() {
 	res, err := reservationFn()
 	if err != nil {
@@ -140,14 +140,16 @@ type LoggerT interface {
 	Log(...any)
 }
 
-// ActionStarted notifies the debugger that the specific action has started.
+// ActionStarted notifies that the specified action has started.
+// Used to restrict the library to calling t.Helper and t.Log only.
 func ActionStarted(t LoggerT, format string, dev binding.Device) {
 	t.Helper()
 	t.Log(actionMsg(fmt.Sprintf(format, dev.Name())))
 }
 
-// Breakpoint suspends the execution until the user presses enter.
-// Returns an error when the test is not run in debug mode.
+// Breakpoint notifies a breakpoint has been reached, which suspends test
+// execution until the user indicates test execution should be resumed.
+// Returns an error if the test is not in debug mode.
 func Breakpoint(t LoggerT, msg string) error {
 	if reader == nil {
 		return errors.New("Breakpoints are only allowed in debug mode")
