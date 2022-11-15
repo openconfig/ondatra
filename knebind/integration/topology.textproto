@@ -1,0 +1,74 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https:#www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# proto-file: google3/third_party/openconfig/kne/proto/topo.proto
+# proto-message: Topology
+
+name: "arista-ixia"
+nodes: {
+  name: "otg"
+  vendor: KEYSIGHT
+  version: "0.0.1-9999"
+  services: {
+    key: 443
+    value: {
+      name: "https"
+      inside: 443
+    }
+  }
+  services: {
+    key: 40051
+    value: {
+      name: "grpc"
+      inside: 40051
+    }
+  }
+  services: {
+    key: 50051
+    value: {
+      name: "gnmi"
+      inside: 50051
+    }
+  }
+}
+nodes: {
+  name: "arista"
+  vendor: ARISTA
+  model: "ceos"
+  os: "eos"
+  config: {
+    config_path: "/mnt/flash"
+    config_file: "startup-config"
+    file: "arista.cfg"
+    cert: {
+      self_signed: {
+        cert_name: "gnmiCert.pem"
+        key_name: "gnmiCertKey.pem"
+        key_size: 4096
+      }
+    }
+  }
+}
+links: {
+  a_node: "otg"
+  a_int: "eth1"
+  z_node: "arista"
+  z_int: "eth1"
+}
+links: {
+  a_node: "arista"
+  a_int: "eth2"
+  z_node: "otg"
+  z_int: "eth2"
+}

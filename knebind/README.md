@@ -34,8 +34,9 @@ topology: /home/tester/topo.textproto
 
 This repo includes an
 [example integration test](integration/integration_test.go) that uses the KNE
-binding, as well as a [testbed file](integration/testbed.textproto) for that
-test. To execute the test, you must:
+binding, a [testbed file](integration/testbed.textproto) for that
+test, and a [KNE topology file](integration/topology.textproto) that is matched
+by the testbed. To execute the test, you must:
 
 1.  create a local KNE topology with at least two linked nodes, as the testbed
     requires
@@ -46,13 +47,11 @@ test. To execute the test, you must:
 go test -testbed=testbed.textproto -config=path/to/config.yaml
 ```
 
-One example KNE topology that satisfies this testbed is
-[ceos-traffic.pb.txt](https://github.com/openconfig/kne/blob/main/examples/arista/ceos-traffic/ceos-traffic.pb.txt)
-provided by the openconfig/kne project. A YAML config file that works with that
+A YAML config file that works with that
 topology is:
 
 ```
 username: admin
 password: admin
-topology: /[YOUR GIT CLONE PATH]/kne/examples/arista/ceos-traffic/ceos-traffic.pb.txt
+topology: /[YOUR GIT CLONE PATH]/ondatra/knebind/integration/topology.textproto
 ```
