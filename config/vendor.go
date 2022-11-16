@@ -125,7 +125,7 @@ func (c *VendorConfig) WithVarMap(m map[string]string) *VendorConfig {
 // Push resets the device to its base config and appends the specified config.
 func (c *VendorConfig) Push(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Pushing config to %s", c.dut)
+	t = events.ActionStarted(t, "Pushing config to %s", c.dut)
 	if err := c.pushConfig(context.Background(), true); err != nil {
 		t.Fatalf("Push(t) on %s: %v", c.dut, err)
 	}
@@ -134,7 +134,7 @@ func (c *VendorConfig) Push(t testing.TB) {
 // Append appends the specified config to the current config.
 func (c *VendorConfig) Append(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Appending config to %s", c.dut)
+	t = events.ActionStarted(t, "Appending config to %s", c.dut)
 	if err := c.pushConfig(context.Background(), false); err != nil {
 		t.Fatalf("Append(t) on %s: %v", c.dut, err)
 	}

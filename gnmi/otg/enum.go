@@ -555,6 +555,8 @@ const (
 	UnicastIpv4Prefix_Origin_IGP E_UnicastIpv4Prefix_Origin = 1
 	// UnicastIpv4Prefix_Origin_EGP corresponds to the value EGP of UnicastIpv4Prefix_Origin
 	UnicastIpv4Prefix_Origin_EGP E_UnicastIpv4Prefix_Origin = 2
+	// UnicastIpv4Prefix_Origin_INCOMPLETE corresponds to the value INCOMPLETE of UnicastIpv4Prefix_Origin
+	UnicastIpv4Prefix_Origin_INCOMPLETE E_UnicastIpv4Prefix_Origin = 3
 )
 
 // E_UnicastIpv6Prefix_Origin is a derived int64 type which is used to represent
@@ -584,4 +586,6 @@ const (
 	UnicastIpv6Prefix_Origin_IGP E_UnicastIpv6Prefix_Origin = 1
 	// UnicastIpv6Prefix_Origin_EGP corresponds to the value EGP of UnicastIpv6Prefix_Origin
 	UnicastIpv6Prefix_Origin_EGP E_UnicastIpv6Prefix_Origin = 2
+	// UnicastIpv6Prefix_Origin_INCOMPLETE corresponds to the value INCOMPLETE of UnicastIpv6Prefix_Origin
+	UnicastIpv6Prefix_Origin_INCOMPLETE E_UnicastIpv6Prefix_Origin = 3
 )

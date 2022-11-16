@@ -65,7 +65,7 @@ type RawATEAPIs struct {
 // TODO: Add unit tests once raw APIs is factored out into its own package.
 func (r *RawATEAPIs) IxNetwork(t testing.TB) *ixweb.Session {
 	t.Helper()
-	events.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)
+	t = events.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)
 	ixnet, err := rawapis.FetchIxNetwork(context.Background(), r.ate)
 	if err != nil {
 		t.Fatalf("IxNetwork(t) on %v: %v", r.ate, err)

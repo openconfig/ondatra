@@ -109,7 +109,7 @@ type GRIBIAPI struct {
 // New returns a new gNMI client on the DUT. This client will not be cached.
 func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 	t.Helper()
-	events.ActionStarted(t, "Creating gNMI client for %s", g.dut)
+	t = events.ActionStarted(t, "Creating gNMI client for %s", g.dut)
 	gnmi, err := rawapis.NewGNMI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
@@ -120,7 +120,7 @@ func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 // Default returns the default gNMI client for the DUT.
 func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 	t.Helper()
-	events.ActionStarted(t, "Fetching gNMI client for %s", g.dut)
+	t = events.ActionStarted(t, "Fetching gNMI client for %s", g.dut)
 	gnmi, err := rawapis.FetchGNMI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
@@ -131,7 +131,7 @@ func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 // New returns a new gNOI client on the DUT.
 func (g *GNOIAPI) New(t testing.TB) GNOI {
 	t.Helper()
-	events.ActionStarted(t, "Creating gNOI client for %s", g.dut)
+	t = events.ActionStarted(t, "Creating gNOI client for %s", g.dut)
 	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
@@ -142,7 +142,7 @@ func (g *GNOIAPI) New(t testing.TB) GNOI {
 // Default returns the default gNOI client for the DUT.
 func (g *GNOIAPI) Default(t testing.TB) GNOI {
 	t.Helper()
-	events.ActionStarted(t, "Fetching gNOI client for %s", g.dut)
+	t = events.ActionStarted(t, "Fetching gNOI client for %s", g.dut)
 	bgnoi, err := rawapis.FetchGNOI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
@@ -153,7 +153,7 @@ func (g *GNOIAPI) Default(t testing.TB) GNOI {
 // New returns a new gRIBI client on the DUT.
 func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
-	events.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
+	t = events.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
 	grc, err := rawapis.NewGRIBI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
@@ -164,7 +164,7 @@ func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
 // Default returns the default gRIBI client for the DUT.
 func (g *GRIBIAPI) Default(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
-	events.ActionStarted(t, "Fetching gRIBI client for %s", g.dut)
+	t = events.ActionStarted(t, "Fetching gRIBI client for %s", g.dut)
 	grc, err := rawapis.FetchGRIBI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
@@ -186,7 +186,7 @@ type privateGNOI interface {
 // P4RT returns a P4RT client on the DUT.
 func (r *RawDUTAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
-	events.ActionStarted(t, "Creating P4RT client for %s", r.dut)
+	t = events.ActionStarted(t, "Creating P4RT client for %s", r.dut)
 	p4rtClient, err := rawapis.NewP4RT(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("Failed to create P4RT client on %v: %v", r.dut, err)
@@ -208,7 +208,7 @@ type privateStreamClient interface {
 // CLI returns a streaming CLI client on the DUT.
 func (r *RawDUTAPIs) CLI(t testing.TB) StreamClient {
 	t.Helper()
-	events.ActionStarted(t, "Creating CLI client for %s", r.dut)
+	t = events.ActionStarted(t, "Creating CLI client for %s", r.dut)
 	c, err := rawapis.NewCLI(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("Failed to create CLI client on %v: %v", r.dut, err)
@@ -219,7 +219,7 @@ func (r *RawDUTAPIs) CLI(t testing.TB) StreamClient {
 // Console returns a transactional CLI client on the DUT.
 func (r *RawDUTAPIs) Console(t testing.TB) StreamClient {
 	t.Helper()
-	events.ActionStarted(t, "Creating console client for %s", r.dut)
+	t = events.ActionStarted(t, "Creating console client for %s", r.dut)
 	c, err := rawapis.NewConsole(context.Background(), r.dut)
 	if err != nil {
 		t.Fatalf("Failed to create console client on %v: %v", r.dut, err)

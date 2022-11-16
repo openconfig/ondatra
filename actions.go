@@ -63,9 +63,9 @@ func (s *SetPortState) WithEnabled(enabled bool) *SetPortState {
 }
 
 // Send sends the SetPortState action to the ATE.
-func (s *SetPortState) Send(t *testing.T) {
+func (s *SetPortState) Send(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Setting port state on %s", s.ate)
+	t = events.ActionStarted(t, "Setting port state on %s", s.ate)
 	if err := ate.SetPortState(context.Background(), s.ate, s.portName, s.enabled); err != nil {
 		t.Fatalf("Send(t) of %v: %v", s, err)
 	}
@@ -100,9 +100,9 @@ func (s *SetLACPState) WithEnabled(enabled bool) *SetLACPState {
 }
 
 // Send sends the SetLACPState action to the ATE.
-func (s *SetLACPState) Send(t *testing.T) {
+func (s *SetLACPState) Send(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Setting LACP state on %s", s.ate)
+	t = events.ActionStarted(t, "Setting LACP state on %s", s.ate)
 	if err := ate.SetLACPState(context.Background(), s.ate, s.portName, s.enabled); err != nil {
 		t.Fatalf("Send(t) of %v: %v", s, err)
 	}

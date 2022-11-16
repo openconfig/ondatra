@@ -23,6 +23,7 @@ import (
 	"runtime"
 	"strings"
 	"sync"
+	"testing"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
@@ -134,23 +135,21 @@ func ReservationDone() {
 	}
 }
 
-// LoggerT is a minimal subset of the testing.T API for logging only.
-type LoggerT interface {
-	Helper()
-	Log(...any)
-}
-
 // ActionStarted notifies that the specified action has started.
 // Used to restrict the library to calling t.Helper and t.Log only.
-func ActionStarted(t LoggerT, format string, dev binding.Device) {
+func ActionStarted(t testing.TB, format string, dev binding.Device) testing.TB {
 	t.Helper()
 	t.Log(actionMsg(fmt.Sprintf(format, dev.Name())))
+	if reader != nil {
+		return &breakpointT{t}
+	}
+	return t
 }
 
 // Breakpoint notifies a breakpoint has been reached, which suspends test
 // execution until the user indicates test execution should be resumed.
 // Returns an error if the test is not in debug mode.
-func Breakpoint(t LoggerT, msg string) error {
+func Breakpoint(t testing.TB, msg string) error {
 	if reader == nil {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
@@ -261,4 +260,38 @@ func (r *ttyReader) stop() {
 	r.done = true
 	r.mu.Unlock()
 	r.closeFn()
+}
+
+type breakpointT struct {
+	testing.TB
+}
+
+func (t *breakpointT) Error(args ...any) {
+	Breakpoint(t, "TEST FAILED\n"+fmt.Sprint(args...))
+	t.TB.Error(args...)
+}
+
+func (t *breakpointT) Errorf(format string, args ...any) {
+	Breakpoint(t, "TEST FAILED\n"+fmt.Sprintf(format, args...))
+	t.TB.Errorf(format, args...)
+}
+
+func (t *breakpointT) Fail() {
+	Breakpoint(t, "TEST FAILED")
+	t.TB.Fail()
+}
+
+func (t *breakpointT) FailNow() {
+	Breakpoint(t, "TEST FAILED")
+	t.TB.FailNow()
+}
+
+func (t *breakpointT) Fatal(args ...any) {
+	Breakpoint(t, "TEST FAILED\n"+fmt.Sprint(args...))
+	t.TB.Fatal(args...)
+}
+
+func (t *breakpointT) Fatalf(format string, args ...any) {
+	Breakpoint(t, "TEST FAILED\n"+fmt.Sprintf(format, args...))
+	t.TB.Fatalf(format, args...)
 }

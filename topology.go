@@ -96,7 +96,7 @@ func (at *ATETopology) AddLAG(name string) *LAG {
 // Currently running protocols will stop.
 func (at *ATETopology) Push(t testing.TB) *ATETopology {
 	t.Helper()
-	events.ActionStarted(t, "Pushing topology to %s", at.ate)
+	t = events.ActionStarted(t, "Pushing topology to %s", at.ate)
 	if err := ate.PushTopology(context.Background(), at.ate, at.top); err != nil {
 		t.Fatalf("Push(t) on %s: %v", at, err)
 	}
@@ -107,7 +107,7 @@ func (at *ATETopology) Push(t testing.TB) *ATETopology {
 // Currently running protocols will continue running.
 func (at *ATETopology) Update(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Updating topology to %s", at.ate)
+	t = events.ActionStarted(t, "Updating topology to %s", at.ate)
 	if err := ate.UpdateTopology(context.Background(), at.ate, at.top, false); err != nil {
 		t.Fatalf("Update(t) on %s: %v", at, err)
 	}
@@ -134,7 +134,7 @@ func (at *ATETopology) UpdateNetworks(t testing.TB) {
 // StartProtocols starts the control plane protocols on the ATE.
 func (at *ATETopology) StartProtocols(t testing.TB) *ATETopology {
 	t.Helper()
-	events.ActionStarted(t, "Starting protocols on %s", at.ate)
+	t = events.ActionStarted(t, "Starting protocols on %s", at.ate)
 	if err := ate.StartProtocols(context.Background(), at.ate); err != nil {
 		t.Fatalf("StartProtocols(t) on %s: %v", at, err)
 	}
@@ -144,7 +144,7 @@ func (at *ATETopology) StartProtocols(t testing.TB) *ATETopology {
 // StopProtocols stops the control plane protocols on the ATE.
 func (at *ATETopology) StopProtocols(t testing.TB) *ATETopology {
 	t.Helper()
-	events.ActionStarted(t, "Stopping protocols to %s", at.ate)
+	t = events.ActionStarted(t, "Stopping protocols to %s", at.ate)
 	if err := ate.StopProtocols(context.Background(), at.ate); err != nil {
 		t.Fatalf("StopProtocols(t) on %s: %v", at, err)
 	}

@@ -114,10 +114,12 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_UnicastIpv4Prefix_Origin": {
 		1: {Name: "IGP"},
 		2: {Name: "EGP"},
+		3: {Name: "INCOMPLETE"},
 	},
 	"E_UnicastIpv6Prefix_Origin": {
 		1: {Name: "IGP"},
 		2: {Name: "EGP"},
+		3: {Name: "INCOMPLETE"},
 	},
 }
 

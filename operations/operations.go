@@ -117,7 +117,7 @@ func (fr *fileReader) Read(p []byte) (int, error) {
 // Operate performs the Install operation.
 func (i *InstallOp) Operate(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Installing package on %s", i.dut)
+	t = events.ActionStarted(t, "Installing package on %s", i.dut)
 	if err := install(context.Background(), i.dut, i.version, i.standby, i.reader); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", i, err)
 	}
@@ -250,7 +250,7 @@ func (p *PingOp) WithCount(count int32) *PingOp {
 // Operate performs the Ping operation.
 func (p *PingOp) Operate(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Pinging from %s", p.dut)
+	t = events.ActionStarted(t, "Pinging from %s", p.dut)
 	if err := ping(context.Background(), p.dut, p.dest, p.count); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", p, err)
 	}
@@ -294,7 +294,7 @@ func ping(ctx context.Context, dut binding.DUT, dest string, count int32) error 
 // Time returns the current system time.
 func (o *Operations) Time(t testing.TB) time.Time {
 	t.Helper()
-	events.ActionStarted(t, "Requesting System Time from %s", o.dut)
+	t = events.ActionStarted(t, "Requesting System Time from %s", o.dut)
 	time, err := sysTime(context.Background(), o.dut)
 	if err != nil {
 		t.Fatalf("SystemTime(t) on %s: %v", o.dut, err)
@@ -347,7 +347,7 @@ func (s *FactoryResetOp) String() string {
 // Operate performs the FactoryReset operation.
 func (s *FactoryResetOp) Operate(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Performing Factory Reset on %s", s.dut)
+	t = events.ActionStarted(t, "Performing Factory Reset on %s", s.dut)
 	if err := factoryReset(context.Background(), s.dut, s.factoryOS, s.zeroFill); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", s, err)
 	}
@@ -395,7 +395,7 @@ func (r *RebootOp) WithTimeout(timeout time.Duration) *RebootOp {
 // Operate performs the Reboot operation.
 func (r *RebootOp) Operate(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Rebooting %s", r.dut)
+	t = events.ActionStarted(t, "Rebooting %s", r.dut)
 	if err := reboot(context.Background(), r.dut, r.timeout); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
@@ -507,7 +507,7 @@ func (r *KillProcessOp) String() string {
 // Operate performs the kill process operation.
 func (r *KillProcessOp) Operate(t testing.TB) {
 	t.Helper()
-	events.ActionStarted(t, "Killing process on %s", r.dut)
+	t = events.ActionStarted(t, "Killing process on %s", r.dut)
 	if err := killProcess(context.Background(), r.dut, r.req); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", r, err)
 	}
