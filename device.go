@@ -70,6 +70,8 @@ const (
 	IXIA = Vendor(opb.Device_IXIA)
 	// CIENA vendor.
 	CIENA = Vendor(opb.Device_CIENA)
+	// OPENCONFIG vendor.
+	OPENCONFIG = Vendor(opb.Device_OPENCONFIG)
 	// PALOALTO vendor.
 	PALOALTO = Vendor(opb.Device_PALOALTO)
 	// ZPE vendor.

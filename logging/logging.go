@@ -21,13 +21,13 @@ import (
 	"sync"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ondatra"
+	"github.com/openconfig/ondatra/raw"
 )
 
 // StartStreamLogger creates and starts a new StreamLogger for recording output
 // from a StreamClient to an io.Writer. The caller is responsible for calling
 // Close() on the StreamLogger to properly shutdown the wrapper.
-func StartStreamLogger(sc ondatra.StreamClient, out io.Writer) *StreamLogger {
+func StartStreamLogger(sc raw.StreamClient, out io.Writer) *StreamLogger {
 	sl := &StreamLogger{sc: sc, out: out}
 	sl.start()
 	return sl
@@ -36,7 +36,7 @@ func StartStreamLogger(sc ondatra.StreamClient, out io.Writer) *StreamLogger {
 // StreamLogger wraps a provided StreamClient and sends the output of
 // Stdout and Stderr to a provided io.Writer.
 type StreamLogger struct {
-	sc      ondatra.StreamClient
+	sc      raw.StreamClient
 	mu      sync.Mutex
 	closed  bool
 	stopped bool

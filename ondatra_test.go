@@ -95,36 +95,67 @@ func TestRunTests(t *testing.T) {
 }
 
 func TestGetters(t *testing.T) {
+	const dutID, ateID, portID = "dut", "ate", "port"
+	fakeRes := &binding.Reservation{
+		DUTs: map[string]binding.DUT{
+			dutID: &fakebind.DUT{
+				AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
+					Name:            "fakeDUT.net",
+					Vendor:          opb.Device_OPENCONFIG,
+					HardwareModel:   "fakeDUTModel",
+					SoftwareVersion: "fakeDUTVersion",
+					Ports: map[string]*binding.Port{portID: &binding.Port{
+						CardModel: "fakeDUTCardModel",
+						PMD:       opb.Port_PMD_10GBASE_LR,
+						Speed:     opb.Port_S_10GB,
+					}},
+				}},
+			},
+		},
+		ATEs: map[string]binding.ATE{
+			ateID: &fakebind.ATE{
+				AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{
+					Name:            "fakeATE.net",
+					Vendor:          opb.Device_IXIA,
+					HardwareModel:   "fakeATEModel",
+					SoftwareVersion: "fakeATEVersion",
+					Ports: map[string]*binding.Port{portID: &binding.Port{
+						CardModel: "fakeATECardModel",
+						PMD:       opb.Port_PMD_100GBASE_FR,
+						Speed:     opb.Port_S_100GB,
+					}},
+				}},
+			},
+		},
+	}
 	fakebind.Setup().WithReservation(fakeRes)
 
 	t.Run("DUT", func(t *testing.T) {
-		id := "dut_arista"
-		d := DUT(t, id)
-		if got, want := d.ID(), id; got != want {
+		d := DUT(t, dutID)
+		if got, want := d.ID(), dutID; got != want {
 			t.Errorf("DUT id = %q, want %q", got, want)
 		}
-		if got, want := d.Name(), "pf01.xxx01"; got != want {
+		if got, want := d.Name(), "fakeDUT.net"; got != want {
 			t.Errorf("DUT name = %q, want %q", got, want)
 		}
-		if got, want := d.Vendor(), ARISTA; got != want {
+		if got, want := d.Vendor(), OPENCONFIG; got != want {
 			t.Errorf("DUT vendor = %v, want %v", got, want)
 		}
-		if got, want := d.Model(), "aristaModel"; got != want {
+		if got, want := d.Model(), "fakeDUTModel"; got != want {
 			t.Errorf("DUT model = %v, want %v", got, want)
 		}
-		if got, want := d.Version(), "aristaVersion"; got != want {
+		if got, want := d.Version(), "fakeDUTVersion"; got != want {
 			t.Errorf("DUT version = %v, want %v", got, want)
 		}
 	})
 
 	t.Run("DUTs", func(t *testing.T) {
-		id := "dut_cisco"
 		duts := DUTs(t)
-		d, ok := duts[id]
+		d, ok := duts[dutID]
 		if !ok {
-			t.Errorf("DUT id %q not present in DUTs map %q, must be present", id, duts)
+			t.Errorf("DUT id %q not present in DUTs map %q, must be present", dutID, duts)
 		}
-		if got, want := d.ID(), id; got != want {
+		if got, want := d.ID(), dutID; got != want {
 			t.Errorf("DUT id = %q, want %q", got, want)
 		}
 	})
@@ -140,24 +171,31 @@ func TestGetters(t *testing.T) {
 	})
 
 	t.Run("ATE", func(t *testing.T) {
-		id := "ate_ixia"
-		a := ATE(t, id)
-		if got, want := a.ID(), id; got != want {
+		a := ATE(t, ateID)
+		if got, want := a.ID(), ateID; got != want {
 			t.Errorf("ATE id = %q, want %q", got, want)
 		}
-		if got, want := a.Name(), "ix1"; got != want {
+		if got, want := a.Name(), "fakeATE.net"; got != want {
 			t.Errorf("ATE name = %q, want %q", got, want)
+		}
+		if got, want := a.Vendor(), IXIA; got != want {
+			t.Errorf("ATE vendor = %v, want %v", got, want)
+		}
+		if got, want := a.Model(), "fakeATEModel"; got != want {
+			t.Errorf("ATE model = %v, want %v", got, want)
+		}
+		if got, want := a.Version(), "fakeATEVersion"; got != want {
+			t.Errorf("ATE version = %v, want %v", got, want)
 		}
 	})
 
 	t.Run("ATEs", func(t *testing.T) {
-		id := "ate_ixia"
 		ates := ATEs(t)
-		a, ok := ates[id]
+		a, ok := ates[ateID]
 		if !ok {
-			t.Errorf("ATE id %q not present in ATEs map %q, must be present", id, ates)
+			t.Errorf("ATE id %q not present in ATEs map %q, must be present", ateID, ates)
 		}
-		if got, want := a.ID(), id; got != want {
+		if got, want := a.ID(), ateID; got != want {
 			t.Errorf("ATE id = %q, want %q", got, want)
 		}
 	})
@@ -172,54 +210,63 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("Port", func(t *testing.T) {
-		did, pid := "dut_juniper", "port1"
-		p := DUT(t, did).Port(t, pid)
-		if got, want := p.ID(), pid; got != want {
+	t.Run("DUT Port", func(t *testing.T) {
+		p := DUT(t, dutID).Port(t, portID)
+		if got, want := p.ID(), portID; got != want {
 			t.Errorf("port id = %q, want %q", got, want)
 		}
-		if got, want := p.Device().ID(), did; got != want {
+		if got, want := p.Device().ID(), dutID; got != want {
 			t.Errorf("port device id = %q, want %q", got, want)
 		}
 		if got, want := p.Speed(), Speed10Gb; got != want {
 			t.Errorf("port speed = %d, want %d", got, want)
 		}
-		if got, want := p.CardModel(), "EX9200-40T"; got != want {
+		if got, want := p.CardModel(), "fakeDUTCardModel"; got != want {
 			t.Errorf("card model = %q, want %q", got, want)
 		}
-		if got, want := p.PMD(), PMD100GBASEFR; got != want {
+		if got, want := p.PMD(), PMD10GBASELR; got != want {
 			t.Errorf("pmd = %q, want %q", got, want)
 		}
 	})
 
-	t.Run("Port failure", func(t *testing.T) {
-		d := DUT(t, "dut_arista")
-		pid := "gaga"
+	t.Run("DUT Port failure", func(t *testing.T) {
+		const portID = "gaga"
+		d := DUT(t, dutID)
 		got := testt.ExpectFatal(t, func(t testing.TB) {
-			d.Port(t, pid)
+			d.Port(t, portID)
 		})
-		if !strings.Contains(got, pid) {
-			t.Errorf("Port(%q) failed with message %q, want %q", pid, got, pid)
+		if !strings.Contains(got, portID) {
+			t.Errorf("Port(%q) failed with message %q, want %q", portID, got, portID)
 		}
 	})
 
-	t.Run("Get Ixia Port", func(t *testing.T) {
-		iid, pid := "ate_ixia", "port2"
-		p := ATE(t, iid).Port(t, pid)
-		if got, want := p.ID(), pid; got != want {
+	t.Run("ATE Port", func(t *testing.T) {
+		p := ATE(t, ateID).Port(t, portID)
+		if got, want := p.ID(), portID; got != want {
 			t.Errorf("port id = %q, want %q", got, want)
 		}
-		if got, want := p.Device().ID(), iid; got != want {
+		if got, want := p.Device().ID(), ateID; got != want {
 			t.Errorf("port device id = %q, want %q", got, want)
 		}
 		if got, want := p.Speed(), Speed100Gb; got != want {
 			t.Errorf("port speed = %d, want %d", got, want)
 		}
-		if got, want := p.CardModel(), "NOVUS"; got != want {
+		if got, want := p.CardModel(), "fakeATECardModel"; got != want {
 			t.Errorf("card model = %q, want %q", got, want)
 		}
 		if got, want := p.PMD(), PMD100GBASEFR; got != want {
 			t.Errorf("pmd = %q, want %q", got, want)
+		}
+	})
+
+	t.Run("ATE Port failure", func(t *testing.T) {
+		const portID = "gaga"
+		a := ATE(t, ateID)
+		got := testt.ExpectFatal(t, func(t testing.TB) {
+			a.Port(t, portID)
+		})
+		if !strings.Contains(got, portID) {
+			t.Errorf("Port(%q) failed with message %q, want %q", portID, got, portID)
 		}
 	})
 }

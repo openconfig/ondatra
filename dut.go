@@ -15,21 +15,12 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
-	"testing"
-
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/config"
 	"github.com/openconfig/ondatra/config/device"
-	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/operations"
-
-	gpb "github.com/openconfig/gnmi/proto/gnmi"
-	grpb "github.com/openconfig/gribi/v1/proto/service"
-	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-
+	"github.com/openconfig/ondatra/raw"
 )
 
 // DUTDevice is a device under test.
@@ -67,162 +58,6 @@ func (d *DUTDevice) Operations() *operations.Operations {
 }
 
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
-func (d *DUTDevice) RawAPIs() *RawDUTAPIs {
-	return &RawDUTAPIs{dut: d.res.(binding.DUT)}
-}
-
-// RawDUTAPIs provides access to raw DUT protocol APIs.
-type RawDUTAPIs struct {
-	dut binding.DUT
-}
-
-// GNMI provides access to either a new or default gNMI client.
-func (r *RawDUTAPIs) GNMI() *GNMIAPI {
-	return &GNMIAPI{dut: r.dut}
-}
-
-// GNOI provides access to either a new or default gNOI client.
-func (r *RawDUTAPIs) GNOI() *GNOIAPI {
-	return &GNOIAPI{dut: r.dut}
-}
-
-// GRIBI provides access to either a new or default GRIBI client.
-func (r *RawDUTAPIs) GRIBI() *GRIBIAPI {
-	return &GRIBIAPI{dut: r.dut}
-}
-
-// GNMIAPI provides access for creating a default or new gNMI client on the DUT.
-type GNMIAPI struct {
-	dut binding.DUT
-}
-
-// GNOIAPI provides access for creating a default or new gNOI client on the DUT.
-type GNOIAPI struct {
-	dut binding.DUT
-}
-
-// GRIBIAPI provides access for creating a default or new GRIBI client on the DUT.
-type GRIBIAPI struct {
-	dut binding.DUT
-}
-
-// New returns a new gNMI client on the DUT. This client will not be cached.
-func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating gNMI client for %s", g.dut)
-	gnmi, err := rawapis.NewGNMI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
-	}
-	return gnmi
-}
-
-// Default returns the default gNMI client for the DUT.
-func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNMI client for %s", g.dut)
-	gnmi, err := rawapis.FetchGNMI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("GNMI(t) on %v: %v", g.dut, err)
-	}
-	return gnmi
-}
-
-// New returns a new gNOI client on the DUT.
-func (g *GNOIAPI) New(t testing.TB) GNOI {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating gNOI client for %s", g.dut)
-	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
-	}
-	return bgnoi
-}
-
-// Default returns the default gNOI client for the DUT.
-func (g *GNOIAPI) Default(t testing.TB) GNOI {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNOI client for %s", g.dut)
-	bgnoi, err := rawapis.FetchGNOI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("GNOI(t) on %v: %v", g.dut, err)
-	}
-	return bgnoi
-}
-
-// New returns a new gRIBI client on the DUT.
-func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
-	grc, err := rawapis.NewGRIBI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
-	}
-	return grc
-}
-
-// Default returns the default gRIBI client for the DUT.
-func (g *GRIBIAPI) Default(t testing.TB) grpb.GRIBIClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching gRIBI client for %s", g.dut)
-	grc, err := rawapis.FetchGRIBI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("GRIBI(t) on %v: %v", g.dut, err)
-	}
-	return grc
-}
-
-// GNOI stores gNOI clients to a DUT.
-type GNOI interface {
-	// Embed an unexported interface that wraps binding.GNOIClients,
-	// so as to not expose the binding.GNOIClients instance directly.
-	privateGNOI
-}
-
-type privateGNOI interface {
-	binding.GNOIClients
-}
-
-// P4RT returns a P4RT client on the DUT.
-func (r *RawDUTAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating P4RT client for %s", r.dut)
-	p4rtClient, err := rawapis.NewP4RT(context.Background(), r.dut)
-	if err != nil {
-		t.Fatalf("Failed to create P4RT client on %v: %v", r.dut, err)
-	}
-	return p4rtClient
-}
-
-// StreamClient provides the interface for streaming IO to DUT.
-type StreamClient interface {
-	// Embed an unexported interface that wraps binding.GNOIClients,
-	// so as to not expose the binding.GNOIClients instance directly.
-	privateStreamClient
-}
-
-type privateStreamClient interface {
-	binding.StreamClient
-}
-
-// CLI returns a streaming CLI client on the DUT.
-func (r *RawDUTAPIs) CLI(t testing.TB) StreamClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating CLI client for %s", r.dut)
-	c, err := rawapis.NewCLI(context.Background(), r.dut)
-	if err != nil {
-		t.Fatalf("Failed to create CLI client on %v: %v", r.dut, err)
-	}
-	return c
-}
-
-// Console returns a transactional CLI client on the DUT.
-func (r *RawDUTAPIs) Console(t testing.TB) StreamClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating console client for %s", r.dut)
-	c, err := rawapis.NewConsole(context.Background(), r.dut)
-	if err != nil {
-		t.Fatalf("Failed to create console client on %v: %v", r.dut, err)
-	}
-	return c
+func (d *DUTDevice) RawAPIs() *raw.DUTAPIs {
+	return raw.NewDUTAPIs(d.res.(binding.DUT))
 }
