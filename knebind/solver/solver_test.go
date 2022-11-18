@@ -715,20 +715,27 @@ func TestSolvePortGroups(t *testing.T) {
 		Links: []*opb.Link{link1, link2, link3, link4, link5, link6, link7, link8, link9, link10, link11, link12, link13, link14, link15},
 	}
 
-	res, err := Solve(tb, topoType)
-	if err != nil {
-		t.Fatalf("Solve got unexpected error for topology with types: %v", err)
-	}
-	if res == nil {
-		t.Fatalf("No solution found for topology with types")
-	}
+	tests := []struct {
+		desc string
+		topo *tpb.Topology
+	}{{
+		desc: "Groups vendor via type",
+		topo: topoType,
+	}, {
+		desc: "Groups vendor via vendor",
+		topo: topoVendor,
+	}}
 
-	res, err = Solve(tb, topoVendor)
-	if err != nil {
-		t.Fatalf("Solve got unexpected error for topology with vendors: %v", err)
-	}
-	if res == nil {
-		t.Fatalf("No solution found for topology with vendors")
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			res, err := Solve(tb, test.topo)
+			if err != nil {
+				t.Fatalf("Solve() got unexpected error: %v", err)
+			}
+			if res == nil {
+				t.Fatalf("Solve() found no solution")
+			}
+		})
 	}
 }
 

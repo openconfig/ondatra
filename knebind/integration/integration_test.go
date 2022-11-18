@@ -30,14 +30,14 @@ func TestMain(m *testing.M) {
 func TestConfig(t *testing.T) {
 	dut := ondatra.DUT(t, "dut")
 	const config = `
-	  interface {{ port "port1" }}
-	    no switchport
-    !
-	  interface {{ port "port2" }}
-	    no switchport
-    !
-	  ip routing
-	  !`
+interface {{ port "port1" }}
+ no switchport
+!
+interface {{ port "port2" }}
+ no switchport
+!
+ip routing
+!`
 	dut.Config().New().WithAristaText(config).Push(t)
 }
 
