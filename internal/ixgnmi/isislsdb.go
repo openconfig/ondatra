@@ -15,9 +15,10 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"path"
+
+	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding/ixweb"
@@ -108,6 +109,12 @@ func populateISIS(netInst *telemetry.NetworkInstance, learnedISIS []isisLearnedI
 		lsp.SetIsType(levelNum)
 		lsp.SetFlags(flags)
 		lsp.SetSequenceNumber(info.SeqNumber)
+		// TODO: Populate ipv4 prefixes based on learned info value when IxNetwork provides support.
+		extV4Prefix := lsp.
+			GetOrCreateTlv(telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY).
+			GetOrCreateExtendedIpv4Reachability().GetOrCreatePrefix(info.IPv4Prefix)
+		extV4Prefix.SetPrefix(info.IPv4Prefix)
+		extV4Prefix.SetMetric(uint32(info.Metric))
 	}
 	return nil
 }

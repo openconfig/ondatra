@@ -79,10 +79,10 @@ func TestISISLSDBFromIxia(t *testing.T) {
 		desc: "full data",
 		getRsps: map[string]string{
 			isisID + "/learnedInfo/1/table/1": `{
-				"columns": ["Learned Via", "System ID", "Pseudo Node Index", "LSP Index", "Sequence Number"],
+				"columns": ["Learned Via", "System ID", "Pseudo Node Index", "LSP Index", "Sequence Number", "IPv4 Prefix", "Metric"],
 				"values": [
-					["L1", "01 23 45 67 89 AB",  "2", "34", "5"],
-					["L2", "CD EF 01 23 45 67", "98",  "7", "0"]
+					["L1", "01 23 45 67 89 AB",  "2", "34", "5", "1.1.1.1", "20"],
+					["L2", "CD EF 01 23 45 67", "98",  "7", "0", "2.2.2.2", "10"]
 				]
 			}`,
 		},
@@ -103,6 +103,19 @@ func TestISISLSDBFromIxia(t *testing.T) {
 										IsType:         ygot.Uint8(1),
 										LspId:          ygot.String("0123.4567.89AB.02-34"),
 										SequenceNumber: ygot.Uint32(5),
+										Tlv: map[telemetry.E_IsisLsdbTypes_ISIS_TLV_TYPE]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+												Type: telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
+												ExtendedIpv4Reachability: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
+													Prefix: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+														"1.1.1.1": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+															Prefix: ygot.String("1.1.1.1"),
+															Metric: ygot.Uint32(20),
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -113,6 +126,19 @@ func TestISISLSDBFromIxia(t *testing.T) {
 										IsType:         ygot.Uint8(2),
 										LspId:          ygot.String("CDEF.0123.4567.98-07"),
 										SequenceNumber: ygot.Uint32(0),
+										Tlv: map[telemetry.E_IsisLsdbTypes_ISIS_TLV_TYPE]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+												Type: telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
+												ExtendedIpv4Reachability: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
+													Prefix: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+														"2.2.2.2": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+															Prefix: ygot.String("2.2.2.2"),
+															Metric: ygot.Uint32(10),
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
