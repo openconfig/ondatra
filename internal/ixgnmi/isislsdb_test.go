@@ -104,11 +104,11 @@ func TestISISLSDBFromIxia(t *testing.T) {
 										LspId:          ygot.String("0123.4567.89AB.02-34"),
 										SequenceNumber: ygot.Uint32(5),
 										Tlv: map[telemetry.E_IsisLsdbTypes_ISIS_TLV_TYPE]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
-											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: {
 												Type: telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
 												ExtendedIpv4Reachability: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
 													Prefix: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
-														"1.1.1.1": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+														"1.1.1.1": {
 															Prefix: ygot.String("1.1.1.1"),
 															Metric: ygot.Uint32(20),
 														},
@@ -127,11 +127,11 @@ func TestISISLSDBFromIxia(t *testing.T) {
 										LspId:          ygot.String("CDEF.0123.4567.98-07"),
 										SequenceNumber: ygot.Uint32(0),
 										Tlv: map[telemetry.E_IsisLsdbTypes_ISIS_TLV_TYPE]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
-											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: {
 												Type: telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
 												ExtendedIpv4Reachability: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
 													Prefix: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
-														"2.2.2.2": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+														"2.2.2.2": {
 															Prefix: ygot.String("2.2.2.2"),
 															Metric: ygot.Uint32(10),
 														},
