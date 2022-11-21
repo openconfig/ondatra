@@ -22,7 +22,7 @@ git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
 git clone https://github.com/openconfig/gnsi.git
-# TODO: Remove the following line once the new gNSI version is ready for use
+# TODO(team): Remove the following line once the new gNSI version is ready for use
 pushd gnsi && git checkout c2ebf3e && popd
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
@@ -86,6 +86,7 @@ YANG_FILES=(
   public/release/models/ospf/openconfig-ospfv2.yang
   public/release/models/p4rt/openconfig-p4rt.yang
   public/release/models/platform/openconfig-platform-cpu.yang
+  public/release/models/platform/openconfig-platform-ext.yang
   public/release/models/platform/openconfig-platform-fan.yang
   public/release/models/platform/openconfig-platform-integrated-circuit.yang
   public/release/models/platform/openconfig-platform-software.yang

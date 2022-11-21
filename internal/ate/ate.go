@@ -75,7 +75,7 @@ func UpdateTopology(ctx context.Context, ate binding.ATE, top *Topology, bgpPeer
 	if err != nil {
 		return err
 	}
-	// TODO: Remove this branching once new Ixia config binding is used.
+	// TODO(team): Remove this branching once new Ixia config binding is used.
 	if bgpPeerStateOnly {
 		err = ix.UpdateBGPPeerStates(ctx, top.Interfaces)
 	} else {

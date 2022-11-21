@@ -19,7 +19,7 @@ import (
 	"strconv"
 	"testing"
 
-	// TODO: If open-sourced, replace with the equivalent "github.com/google/go-cmp/cmp" package.
+	// TODO(team): If open-sourced, replace with the equivalent "github.com/google/go-cmp/cmp" package.
 	"github.com/google/go-cmp/cmp"
 )
 

@@ -41,6 +41,7 @@ using the following YANG input files:
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
+  - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-software.yang
@@ -132,6 +133,16 @@ type Component_EmptyPath struct {
 
 // Component_EmptyPathAny represents the wildcard version of the /openconfig-platform/components/component/state/empty YANG schema element.
 type Component_EmptyPathAny struct {
+	*ygot.NodePath
+}
+
+// Component_EntityIdPath represents the /openconfig-platform/components/component/state/entity-id YANG schema element.
+type Component_EntityIdPath struct {
+	*ygot.NodePath
+}
+
+// Component_EntityIdPathAny represents the wildcard version of the /openconfig-platform/components/component/state/entity-id YANG schema element.
+type Component_EntityIdPathAny struct {
 	*ygot.NodePath
 }
 
@@ -659,6 +670,42 @@ func (n *ComponentPathAny) Empty() *Component_EmptyPathAny {
 	return &Component_EmptyPathAny{
 		NodePath: ygot.NewNodePath(
 			[]string{"state", "empty"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EntityId (leaf): A unique numeric identifier assigned by the system to the
+// component. This identifier may be used to represent the
+// corresponding SNMP Entity MIB identifier.
+// ----------------------------------------
+// Defining module: "openconfig-platform-ext"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/entity-id"
+// Path from root: "/components/component/state/entity-id"
+func (n *ComponentPath) EntityId() *Component_EntityIdPath {
+	return &Component_EntityIdPath{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "entity-id"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// EntityId (leaf): A unique numeric identifier assigned by the system to the
+// component. This identifier may be used to represent the
+// corresponding SNMP Entity MIB identifier.
+// ----------------------------------------
+// Defining module: "openconfig-platform-ext"
+// Instantiating module: "openconfig-platform"
+// Path from parent: "state/entity-id"
+// Path from root: "/components/component/state/entity-id"
+func (n *ComponentPathAny) EntityId() *Component_EntityIdPathAny {
+	return &Component_EntityIdPathAny{
+		NodePath: ygot.NewNodePath(
+			[]string{"state", "entity-id"},
 			map[string]interface{}{},
 			n,
 		),

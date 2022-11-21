@@ -37,7 +37,7 @@ import (
 )
 
 // CommonDialOpts to include in all gRPC dial calls.
-// TODO: Unexport once IxNetwork is removed.
+// TODO(greg-dennis): Unexport once IxNetwork is removed.
 var CommonDialOpts = []grpc.DialOption{
 	grpc.WithBlock(),
 	withUnaryAnnotateErrors(),
@@ -191,7 +191,7 @@ func FetchOTG(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error
 	c, ok := otgs[ate]
 	if !ok {
 		var err error
-		// TODO: Add common dial options here when/if supported:
+		// TODO(greg-dennis): Add common dial options here when/if supported:
 		// https://github.com/open-traffic-generator/snappi/issues/192
 		c, err = ate.DialOTG(ctx)
 		if err != nil {

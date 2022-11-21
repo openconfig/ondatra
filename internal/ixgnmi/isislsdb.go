@@ -103,11 +103,17 @@ func populateISIS(netInst *telemetry.NetworkInstance, learnedISIS []isisLearnedI
 			info.SystemID[6:8], info.SystemID[9:11], info.SystemID[12:14], info.SystemID[15:17],
 			info.PseudoNodeIndex, info.LSPIndex)
 		var flags []telemetry.E_Lsp_Flags
-		// TODO: infer the flags
+		// TODO(greg-dennis): Infer the flags when we learn what they look like in learned info.
 		lsp := isis.GetOrCreateLevel(levelNum).GetOrCreateLsp(lspID)
 		lsp.SetIsType(levelNum)
 		lsp.SetFlags(flags)
 		lsp.SetSequenceNumber(info.SeqNumber)
+		// TODO(team): Populate IPv4 prefixes when IxNetwork provides support in learned info.
+		extV4Prefix := lsp.
+			GetOrCreateTlv(telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY).
+			GetOrCreateExtendedIpv4Reachability().
+			GetOrCreatePrefix(info.IPv4Prefix)
+		extV4Prefix.SetMetric(uint32(info.Metric))
 	}
 	return nil
 }

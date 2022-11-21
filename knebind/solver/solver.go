@@ -28,7 +28,7 @@ import (
 )
 
 var (
-	// TODO: Cleanup after Type deprecation
+	// TODO(team): Cleanup after Type deprecation
 	ateTypes = map[tpb.Node_Type]bool{
 		tpb.Node_IXIA_TG: true,
 	}
@@ -39,7 +39,7 @@ var (
 
 	deviceTypes = map[tpb.Node_Type]opb.Device_Vendor{
 		tpb.Node_ARISTA_CEOS: opb.Device_ARISTA,
-		// TODO: when Ondatra supports the OS dimension, use it to
+		// TODO(greg-dennis): when Ondatra supports the OS dimension, use it to
 		// distinguish CSR from CXR and CEVO from VMX.
 		tpb.Node_CISCO_CSR:    opb.Device_CISCO,
 		tpb.Node_CISCO_CXR:    opb.Device_CISCO,
@@ -411,7 +411,7 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 	if !ok {
 		return nil, nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
-	// TODO: Cleanup after Type deprecation
+	// TODO(team): Cleanup after Type deprecation
 	vendor, ok := deviceVendors[node.GetVendor()]
 	if !ok {
 		vendor, ok = deviceTypes[node.GetType()]
@@ -471,7 +471,7 @@ func (s *solver) solve() (*assign, error) {
 		link2LinkChan := s.genLinkCombos(dev2Node, link2link)
 		for dLink2nLink := range link2LinkChan {
 			if a := s.newAssign(dev2Node, dLink2nLink); a != nil {
-				// TODO: When solver is rewritten, signal the gorouting
+				// TODO(team): When solver is rewritten, signal the gorouting
 				// channel to exit early here and avoid leaving the goroutine hanging.
 				// Not disastrous but ideally the goroutines would terminate here.
 				return a, nil
@@ -535,7 +535,7 @@ func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*
 func (s *solver) nodeMatches(dev *opb.Device, isATE bool) ([]*tpb.Node, error) {
 	var nodeList []*tpb.Node
 	for _, node := range s.topology.GetNodes() {
-		// TODO: Cleanup after Type deprecation
+		// TODO(team): Cleanup after Type deprecation
 		if ateVendors[node.GetVendor()] != isATE && ateTypes[node.GetType()] != isATE {
 			continue
 		}
@@ -573,7 +573,7 @@ func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) bool {
 }
 
 func (s *solver) portMatch(port *opb.Port, intf *intf) bool {
-	// TODO: When solver is rewritten, support more generic port matching.
+	// TODO(team): When solver is rewritten, support more generic port matching.
 	if port.GetSpeed() != opb.Port_SPEED_UNSPECIFIED {
 		return false
 	}

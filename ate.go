@@ -62,7 +62,7 @@ type RawATEAPIs struct {
 }
 
 // IxNetwork returns the raw IxNetwork session for the ATE.
-// TODO: Add unit tests once raw APIs is factored out into its own package.
+// TODO(team): Add unit tests once raw APIs is factored out into its own package.
 func (r *RawATEAPIs) IxNetwork(t testing.TB) *ixweb.Session {
 	t.Helper()
 	t = events.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)

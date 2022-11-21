@@ -42,6 +42,7 @@ using the following YANG input files:
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
+  - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-software.yang
@@ -3292,6 +3293,7 @@ type Component struct {
 	Cpu                  *Component_Cpu                          `path:"cpu" module:"openconfig-platform"`
 	Description          *string                                 `path:"state/description" module:"openconfig-platform/openconfig-platform"`
 	Empty                *bool                                   `path:"state/empty" module:"openconfig-platform/openconfig-platform"`
+	EntityId             *uint32                                 `path:"state/entity-id" module:"openconfig-platform/openconfig-platform-ext"`
 	EquipmentFailure     *bool                                   `path:"state/equipment-failure" module:"openconfig-platform/openconfig-alarms"`
 	EquipmentMismatch    *bool                                   `path:"state/equipment-mismatch" module:"openconfig-platform/openconfig-alarms"`
 	Fabric               *Component_Fabric                       `path:"fabric" module:"openconfig-platform"`
@@ -3990,6 +3992,22 @@ func (t *Component) GetEmpty() bool {
 	return *t.Empty
 }
 
+// GetEntityId retrieves the value of the leaf EntityId from the Component
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EntityId is set, it can
+// safely use t.GetEntityId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EntityId == nil' before retrieving the leaf's value.
+func (t *Component) GetEntityId() uint32 {
+	if t == nil || t.EntityId == nil {
+		return 0
+	}
+	return *t.EntityId
+}
+
 // GetEquipmentFailure retrieves the value of the leaf EquipmentFailure from the Component
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -4370,6 +4388,12 @@ func (t *Component) SetDescription(v string) {
 // struct.
 func (t *Component) SetEmpty(v bool) {
 	t.Empty = &v
+}
+
+// SetEntityId sets the value of the leaf EntityId in the Component
+// struct.
+func (t *Component) SetEntityId(v uint32) {
+	t.EntityId = &v
 }
 
 // SetEquipmentFailure sets the value of the leaf EquipmentFailure in the Component

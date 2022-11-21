@@ -893,7 +893,7 @@ func TestUnmarshal(t *testing.T) {
 		wantStruct: &SuperContainer{
 			LeafContainerStruct: &LeafContainerStruct{
 				Uint64Leaf: ygot.Uint64(200),
-				// TODO: If Collect calls are to be
+				// TODO(wenovus): If Collect calls are to be
 				// implemented, then need to add tests for adds
 				// and deletes to same and different children,
 				// whether leaf or non-leaf, under a non-leaf.
