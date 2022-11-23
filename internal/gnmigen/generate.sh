@@ -18,6 +18,7 @@
 
 set -e
 
+rm -rf public models-yang gnsi gnmi-collector-metadata.yang
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
@@ -212,6 +213,7 @@ OTG_YANG_FILES=(
   models-yang/models/bgp/open-traffic-generator-bgp.yang
   models-yang/models/lag/open-traffic-generator-lag.yang
   models-yang/models/lacp/open-traffic-generator-lacp.yang
+  models-yang/models/lldp/open-traffic-generator-lldp.yang
 )
 
 # Generate OTG Schema Structs
