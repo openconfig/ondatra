@@ -72,11 +72,7 @@ Imported modules were sourced from:
 package ocpath
 
 import (
-	"reflect"
 	oc "github.com/openconfig/ondatra/gnmi/oc"
-	"github.com/openconfig/ygot/ygot"
-	"github.com/openconfig/ygnmi/ygnmi"
-	"github.com/openconfig/ygot/ytypes"
 	"github.com/openconfig/ondatra/gnmi/oc/acl"
 	"github.com/openconfig/ondatra/gnmi/oc/ateflow"
 	"github.com/openconfig/ondatra/gnmi/oc/gnmicollectormetadata"
@@ -91,6 +87,9 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/sampling"
 	"github.com/openconfig/ondatra/gnmi/oc/system"
 	"github.com/openconfig/ondatra/gnmi/oc/terminaldevice"
+	"github.com/openconfig/ygnmi/ygnmi"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/openconfig/ygot/ytypes"
 )
 
 // RootPath represents the /root YANG schema element.
@@ -284,7 +283,7 @@ func (n *RootPath) Lldp() *lldp.LldpPath {
 	}
 }
 
-// Meta (container): 
+// Meta (container):
 // 	Defining module:      "gnmi-collector-metadata"
 // 	Instantiating module: "gnmi-collector-metadata"
 // 	Path from parent:     "meta"
@@ -412,13 +411,13 @@ func (n *RootPath) TerminalDevice() *terminaldevice.TerminalDevicePath {
 // Calling State() or Config() on the batch returns a query
 // that can use to Lookup, Watch, etc on multiple paths at once.
 type Batch struct {
-    paths []ygnmi.PathStruct
+	paths []ygnmi.PathStruct
 }
 
 // AddPaths adds the paths to the batch.
 func (b *Batch) AddPaths(paths ...ygnmi.PathStruct) *Batch {
-    b.paths = append(b.paths, paths...)
-    return b
+	b.paths = append(b.paths, paths...)
+	return b
 }
 
 // State returns a Query that can be used in gNMI operations.
@@ -426,17 +425,17 @@ func (b *Batch) AddPaths(paths ...ygnmi.PathStruct) *Batch {
 func (b *Batch) State() ygnmi.SingletonQuery[*oc.Root] {
 	queryPaths := make([]ygnmi.PathStruct, len(b.paths))
 	copy(queryPaths, b.paths)
-    return ygnmi.NewNonLeafSingletonQuery[*oc.Root](
-        "Root",
-        true,
-        ygnmi.NewDeviceRootBase(),
-        queryPaths,
-        &ytypes.Schema{
-            Root:       &oc.Root{},
-            SchemaTree: oc.SchemaTree,
-            Unmarshal:  oc.Unmarshal,
-        },
-    )
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Root](
+		"Root",
+		true,
+		ygnmi.NewDeviceRootBase(),
+		queryPaths,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
 }
 
 // Config returns a Query that can be used in gNMI operations.
@@ -444,17 +443,17 @@ func (b *Batch) State() ygnmi.SingletonQuery[*oc.Root] {
 func (b *Batch) Config() ygnmi.SingletonQuery[*oc.Root] {
 	queryPaths := make([]ygnmi.PathStruct, len(b.paths))
 	copy(queryPaths, b.paths)
-    return ygnmi.NewNonLeafSingletonQuery[*oc.Root](
-        "Root",
-        false,
-        ygnmi.NewDeviceRootBase(),
-        queryPaths,
-        &ytypes.Schema{
-            Root:       &oc.Root{},
-            SchemaTree: oc.SchemaTree,
-            Unmarshal:  oc.Unmarshal,
-        },
-    )
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Root](
+		"Root",
+		false,
+		ygnmi.NewDeviceRootBase(),
+		queryPaths,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
 }
 
 func binarySliceToFloatSlice(in []oc.Binary) []float32 {

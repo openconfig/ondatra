@@ -72,10 +72,9 @@ Imported modules were sourced from:
 package sampling
 
 import (
-	"reflect"
 	oc "github.com/openconfig/ondatra/gnmi/oc"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygnmi/ygnmi"
+	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 )
 
@@ -270,7 +269,7 @@ func (n *Sampling_Sflow_AgentIdIpv4Path) State() ygnmi.SingletonQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv4
 			if ret == nil {
 				var zero string
@@ -302,7 +301,7 @@ func (n *Sampling_Sflow_AgentIdIpv4PathAny) State() ygnmi.WildcardQuery[string] 
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv4
 			if ret == nil {
 				var zero string
@@ -334,7 +333,7 @@ func (n *Sampling_Sflow_AgentIdIpv4Path) Config() ygnmi.ConfigQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv4
 			if ret == nil {
 				var zero string
@@ -366,7 +365,7 @@ func (n *Sampling_Sflow_AgentIdIpv4PathAny) Config() ygnmi.WildcardQuery[string]
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv4
 			if ret == nil {
 				var zero string
@@ -398,7 +397,7 @@ func (n *Sampling_Sflow_AgentIdIpv6Path) State() ygnmi.SingletonQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv6
 			if ret == nil {
 				var zero string
@@ -430,7 +429,7 @@ func (n *Sampling_Sflow_AgentIdIpv6PathAny) State() ygnmi.WildcardQuery[string] 
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv6
 			if ret == nil {
 				var zero string
@@ -462,7 +461,7 @@ func (n *Sampling_Sflow_AgentIdIpv6Path) Config() ygnmi.ConfigQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv6
 			if ret == nil {
 				var zero string
@@ -494,7 +493,7 @@ func (n *Sampling_Sflow_AgentIdIpv6PathAny) Config() ygnmi.WildcardQuery[string]
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow).AgentIdIpv6
 			if ret == nil {
 				var zero string
@@ -526,7 +525,7 @@ func (n *Sampling_Sflow_DscpPath) State() ygnmi.SingletonQuery[uint8] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Dscp
 			if ret == nil {
 				var zero uint8
@@ -558,7 +557,7 @@ func (n *Sampling_Sflow_DscpPathAny) State() ygnmi.WildcardQuery[uint8] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Dscp
 			if ret == nil {
 				var zero uint8
@@ -590,7 +589,7 @@ func (n *Sampling_Sflow_DscpPath) Config() ygnmi.ConfigQuery[uint8] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Dscp
 			if ret == nil {
 				var zero uint8
@@ -622,7 +621,7 @@ func (n *Sampling_Sflow_DscpPathAny) Config() ygnmi.WildcardQuery[uint8] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Dscp
 			if ret == nil {
 				var zero uint8
@@ -654,7 +653,7 @@ func (n *Sampling_Sflow_EgressSamplingRatePath) State() ygnmi.SingletonQuery[uin
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -686,7 +685,7 @@ func (n *Sampling_Sflow_EgressSamplingRatePathAny) State() ygnmi.WildcardQuery[u
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -718,7 +717,7 @@ func (n *Sampling_Sflow_EgressSamplingRatePath) Config() ygnmi.ConfigQuery[uint3
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -750,7 +749,7 @@ func (n *Sampling_Sflow_EgressSamplingRatePathAny) Config() ygnmi.WildcardQuery[
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -782,7 +781,7 @@ func (n *Sampling_Sflow_EnabledPath) State() ygnmi.SingletonQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Enabled
 			if ret == nil {
 				var zero bool
@@ -814,7 +813,7 @@ func (n *Sampling_Sflow_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Enabled
 			if ret == nil {
 				var zero bool
@@ -846,7 +845,7 @@ func (n *Sampling_Sflow_EnabledPath) Config() ygnmi.ConfigQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Enabled
 			if ret == nil {
 				var zero bool
@@ -878,7 +877,7 @@ func (n *Sampling_Sflow_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow).Enabled
 			if ret == nil {
 				var zero bool
@@ -910,7 +909,7 @@ func (n *Sampling_Sflow_IngressSamplingRatePath) State() ygnmi.SingletonQuery[ui
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -942,7 +941,7 @@ func (n *Sampling_Sflow_IngressSamplingRatePathAny) State() ygnmi.WildcardQuery[
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -974,7 +973,7 @@ func (n *Sampling_Sflow_IngressSamplingRatePath) Config() ygnmi.ConfigQuery[uint
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -1006,7 +1005,7 @@ func (n *Sampling_Sflow_IngressSamplingRatePathAny) Config() ygnmi.WildcardQuery
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -1038,7 +1037,7 @@ func (n *Sampling_Sflow_PollingIntervalPath) State() ygnmi.SingletonQuery[uint16
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -1070,7 +1069,7 @@ func (n *Sampling_Sflow_PollingIntervalPathAny) State() ygnmi.WildcardQuery[uint
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -1102,7 +1101,7 @@ func (n *Sampling_Sflow_PollingIntervalPath) Config() ygnmi.ConfigQuery[uint16] 
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -1134,7 +1133,7 @@ func (n *Sampling_Sflow_PollingIntervalPathAny) Config() ygnmi.WildcardQuery[uin
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -1166,7 +1165,7 @@ func (n *Sampling_Sflow_SampleSizePath) State() ygnmi.SingletonQuery[uint16] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).SampleSize
 			if ret == nil {
 				var zero uint16
@@ -1198,7 +1197,7 @@ func (n *Sampling_Sflow_SampleSizePathAny) State() ygnmi.WildcardQuery[uint16] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).SampleSize
 			if ret == nil {
 				var zero uint16
@@ -1230,7 +1229,7 @@ func (n *Sampling_Sflow_SampleSizePath) Config() ygnmi.ConfigQuery[uint16] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).SampleSize
 			if ret == nil {
 				var zero uint16
@@ -1262,7 +1261,7 @@ func (n *Sampling_Sflow_SampleSizePathAny) Config() ygnmi.WildcardQuery[uint16] 
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow).SampleSize
 			if ret == nil {
 				var zero uint16
@@ -1559,7 +1558,7 @@ func (n *Sampling_SflowPathAny) Dscp() *Sampling_Sflow_DscpPathAny {
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -1582,7 +1581,7 @@ func (n *Sampling_SflowPath) EgressSamplingRate() *Sampling_Sflow_EgressSampling
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -1637,7 +1636,7 @@ func (n *Sampling_SflowPathAny) Enabled() *Sampling_Sflow_EnabledPathAny {
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -1660,7 +1659,7 @@ func (n *Sampling_SflowPath) IngressSamplingRate() *Sampling_Sflow_IngressSampli
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -1894,7 +1893,7 @@ func (n *Sampling_Sflow_Collector_AddressPath) State() ygnmi.SingletonQuery[stri
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Address
 			if ret == nil {
 				var zero string
@@ -1926,7 +1925,7 @@ func (n *Sampling_Sflow_Collector_AddressPathAny) State() ygnmi.WildcardQuery[st
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Address
 			if ret == nil {
 				var zero string
@@ -1958,7 +1957,7 @@ func (n *Sampling_Sflow_Collector_AddressPath) Config() ygnmi.ConfigQuery[string
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Address
 			if ret == nil {
 				var zero string
@@ -1990,7 +1989,7 @@ func (n *Sampling_Sflow_Collector_AddressPathAny) Config() ygnmi.WildcardQuery[s
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Address
 			if ret == nil {
 				var zero string
@@ -2022,7 +2021,7 @@ func (n *Sampling_Sflow_Collector_NetworkInstancePath) State() ygnmi.SingletonQu
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).NetworkInstance
 			if ret == nil {
 				var zero string
@@ -2054,7 +2053,7 @@ func (n *Sampling_Sflow_Collector_NetworkInstancePathAny) State() ygnmi.Wildcard
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).NetworkInstance
 			if ret == nil {
 				var zero string
@@ -2086,7 +2085,7 @@ func (n *Sampling_Sflow_Collector_NetworkInstancePath) Config() ygnmi.ConfigQuer
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).NetworkInstance
 			if ret == nil {
 				var zero string
@@ -2118,7 +2117,7 @@ func (n *Sampling_Sflow_Collector_NetworkInstancePathAny) Config() ygnmi.Wildcar
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).NetworkInstance
 			if ret == nil {
 				var zero string
@@ -2150,7 +2149,7 @@ func (n *Sampling_Sflow_Collector_PacketsSentPath) State() ygnmi.SingletonQuery[
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).PacketsSent
 			if ret == nil {
 				var zero uint64
@@ -2182,7 +2181,7 @@ func (n *Sampling_Sflow_Collector_PacketsSentPathAny) State() ygnmi.WildcardQuer
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).PacketsSent
 			if ret == nil {
 				var zero uint64
@@ -2214,7 +2213,7 @@ func (n *Sampling_Sflow_Collector_PortPath) State() ygnmi.SingletonQuery[uint16]
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Port
 			if ret == nil {
 				var zero uint16
@@ -2246,7 +2245,7 @@ func (n *Sampling_Sflow_Collector_PortPathAny) State() ygnmi.WildcardQuery[uint1
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Port
 			if ret == nil {
 				var zero uint16
@@ -2278,7 +2277,7 @@ func (n *Sampling_Sflow_Collector_PortPath) Config() ygnmi.ConfigQuery[uint16] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Port
 			if ret == nil {
 				var zero uint16
@@ -2310,7 +2309,7 @@ func (n *Sampling_Sflow_Collector_PortPathAny) Config() ygnmi.WildcardQuery[uint
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).Port
 			if ret == nil {
 				var zero uint16
@@ -2342,7 +2341,7 @@ func (n *Sampling_Sflow_Collector_SourceAddressPath) State() ygnmi.SingletonQuer
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).SourceAddress
 			if ret == nil {
 				var zero string
@@ -2374,7 +2373,7 @@ func (n *Sampling_Sflow_Collector_SourceAddressPathAny) State() ygnmi.WildcardQu
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).SourceAddress
 			if ret == nil {
 				var zero string
@@ -2406,7 +2405,7 @@ func (n *Sampling_Sflow_Collector_SourceAddressPath) Config() ygnmi.ConfigQuery[
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).SourceAddress
 			if ret == nil {
 				var zero string
@@ -2438,7 +2437,7 @@ func (n *Sampling_Sflow_Collector_SourceAddressPathAny) Config() ygnmi.WildcardQ
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Collector).SourceAddress
 			if ret == nil {
 				var zero string
@@ -2766,7 +2765,7 @@ func (n *Sampling_Sflow_Interface_EgressSamplingRatePath) State() ygnmi.Singleto
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -2798,7 +2797,7 @@ func (n *Sampling_Sflow_Interface_EgressSamplingRatePathAny) State() ygnmi.Wildc
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -2830,7 +2829,7 @@ func (n *Sampling_Sflow_Interface_EgressSamplingRatePath) Config() ygnmi.ConfigQ
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -2862,7 +2861,7 @@ func (n *Sampling_Sflow_Interface_EgressSamplingRatePathAny) Config() ygnmi.Wild
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).EgressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -2894,7 +2893,7 @@ func (n *Sampling_Sflow_Interface_EnabledPath) State() ygnmi.SingletonQuery[bool
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Enabled
 			if ret == nil {
 				var zero bool
@@ -2926,7 +2925,7 @@ func (n *Sampling_Sflow_Interface_EnabledPathAny) State() ygnmi.WildcardQuery[bo
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Enabled
 			if ret == nil {
 				var zero bool
@@ -2958,7 +2957,7 @@ func (n *Sampling_Sflow_Interface_EnabledPath) Config() ygnmi.ConfigQuery[bool] 
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Enabled
 			if ret == nil {
 				var zero bool
@@ -2990,7 +2989,7 @@ func (n *Sampling_Sflow_Interface_EnabledPathAny) Config() ygnmi.WildcardQuery[b
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Enabled
 			if ret == nil {
 				var zero bool
@@ -3022,7 +3021,7 @@ func (n *Sampling_Sflow_Interface_IngressSamplingRatePath) State() ygnmi.Singlet
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -3054,7 +3053,7 @@ func (n *Sampling_Sflow_Interface_IngressSamplingRatePathAny) State() ygnmi.Wild
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -3086,7 +3085,7 @@ func (n *Sampling_Sflow_Interface_IngressSamplingRatePath) Config() ygnmi.Config
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -3118,7 +3117,7 @@ func (n *Sampling_Sflow_Interface_IngressSamplingRatePathAny) Config() ygnmi.Wil
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).IngressSamplingRate
 			if ret == nil {
 				var zero uint32
@@ -3150,7 +3149,7 @@ func (n *Sampling_Sflow_Interface_NamePath) State() ygnmi.SingletonQuery[string]
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Name
 			if ret == nil {
 				var zero string
@@ -3182,7 +3181,7 @@ func (n *Sampling_Sflow_Interface_NamePathAny) State() ygnmi.WildcardQuery[strin
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Name
 			if ret == nil {
 				var zero string
@@ -3214,7 +3213,7 @@ func (n *Sampling_Sflow_Interface_NamePath) Config() ygnmi.ConfigQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Name
 			if ret == nil {
 				var zero string
@@ -3246,7 +3245,7 @@ func (n *Sampling_Sflow_Interface_NamePathAny) Config() ygnmi.WildcardQuery[stri
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).Name
 			if ret == nil {
 				var zero string
@@ -3278,7 +3277,7 @@ func (n *Sampling_Sflow_Interface_PacketsSampledPath) State() ygnmi.SingletonQue
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).PacketsSampled
 			if ret == nil {
 				var zero uint64
@@ -3310,7 +3309,7 @@ func (n *Sampling_Sflow_Interface_PacketsSampledPathAny) State() ygnmi.WildcardQ
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).PacketsSampled
 			if ret == nil {
 				var zero uint64
@@ -3342,7 +3341,7 @@ func (n *Sampling_Sflow_Interface_PollingIntervalPath) State() ygnmi.SingletonQu
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -3374,7 +3373,7 @@ func (n *Sampling_Sflow_Interface_PollingIntervalPathAny) State() ygnmi.Wildcard
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -3406,7 +3405,7 @@ func (n *Sampling_Sflow_Interface_PollingIntervalPath) Config() ygnmi.ConfigQuer
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -3438,7 +3437,7 @@ func (n *Sampling_Sflow_Interface_PollingIntervalPathAny) Config() ygnmi.Wildcar
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint16, bool) { 
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
 			ret := gs.(*oc.Sampling_Sflow_Interface).PollingInterval
 			if ret == nil {
 				var zero uint16
@@ -3529,7 +3528,7 @@ type Sampling_Sflow_InterfacePathAny struct {
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -3552,7 +3551,7 @@ func (n *Sampling_Sflow_InterfacePath) EgressSamplingRate() *Sampling_Sflow_Inte
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -3613,7 +3612,7 @@ func (n *Sampling_Sflow_InterfacePathAny) Enabled() *Sampling_Sflow_Interface_En
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.
@@ -3636,7 +3635,7 @@ func (n *Sampling_Sflow_InterfacePath) IngressSamplingRate() *Sampling_Sflow_Int
 // as an integer N, where the intended sampling rate is 1/N
 // packets.  An implementation may implement the sampling rate as
 // a statistical average, rather than a strict periodic sampling.
-// 
+//
 // The allowable sampling rate range is generally a property of
 // the system, e.g., determined by the capability of the
 // hardware.

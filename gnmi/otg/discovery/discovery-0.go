@@ -20,10 +20,9 @@ Imported modules were sourced from:
 package discovery
 
 import (
-	"reflect"
 	oc "github.com/openconfig/ondatra/gnmi/otg"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygnmi/ygnmi"
+	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 )
 
@@ -91,7 +90,7 @@ func (n *Interface_NamePath) State() ygnmi.SingletonQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface).Name
 			if ret == nil {
 				var zero string
@@ -123,7 +122,7 @@ func (n *Interface_NamePathAny) State() ygnmi.WildcardQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface).Name
 			if ret == nil {
 				var zero string
@@ -155,7 +154,7 @@ func (n *Interface_NamePath) Config() ygnmi.ConfigQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface).Name
 			if ret == nil {
 				var zero string
@@ -187,7 +186,7 @@ func (n *Interface_NamePathAny) Config() ygnmi.WildcardQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface).Name
 			if ret == nil {
 				var zero string
@@ -432,7 +431,7 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPath) State() ygnmi.SingletonQuery[st
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv4Neighbor).Ipv4Address
 			if ret == nil {
 				var zero string
@@ -464,7 +463,7 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPathAny) State() ygnmi.WildcardQuery[
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv4Neighbor).Ipv4Address
 			if ret == nil {
 				var zero string
@@ -496,7 +495,7 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPath) Config() ygnmi.ConfigQuery[stri
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv4Neighbor).Ipv4Address
 			if ret == nil {
 				var zero string
@@ -528,7 +527,7 @@ func (n *Interface_Ipv4Neighbor_Ipv4AddressPathAny) Config() ygnmi.WildcardQuery
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv4Neighbor).Ipv4Address
 			if ret == nil {
 				var zero string
@@ -560,7 +559,7 @@ func (n *Interface_Ipv4Neighbor_LinkLayerAddressPath) State() ygnmi.SingletonQue
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv4Neighbor).LinkLayerAddress
 			if ret == nil {
 				var zero string
@@ -592,7 +591,7 @@ func (n *Interface_Ipv4Neighbor_LinkLayerAddressPathAny) State() ygnmi.WildcardQ
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv4Neighbor).LinkLayerAddress
 			if ret == nil {
 				var zero string
@@ -751,7 +750,7 @@ func (n *Interface_Ipv6Neighbor_Ipv6AddressPath) State() ygnmi.SingletonQuery[st
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv6Neighbor).Ipv6Address
 			if ret == nil {
 				var zero string
@@ -783,7 +782,7 @@ func (n *Interface_Ipv6Neighbor_Ipv6AddressPathAny) State() ygnmi.WildcardQuery[
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv6Neighbor).Ipv6Address
 			if ret == nil {
 				var zero string
@@ -815,7 +814,7 @@ func (n *Interface_Ipv6Neighbor_Ipv6AddressPath) Config() ygnmi.ConfigQuery[stri
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv6Neighbor).Ipv6Address
 			if ret == nil {
 				var zero string
@@ -847,7 +846,7 @@ func (n *Interface_Ipv6Neighbor_Ipv6AddressPathAny) Config() ygnmi.WildcardQuery
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv6Neighbor).Ipv6Address
 			if ret == nil {
 				var zero string
@@ -879,7 +878,7 @@ func (n *Interface_Ipv6Neighbor_LinkLayerAddressPath) State() ygnmi.SingletonQue
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv6Neighbor).LinkLayerAddress
 			if ret == nil {
 				var zero string
@@ -911,7 +910,7 @@ func (n *Interface_Ipv6Neighbor_LinkLayerAddressPathAny) State() ygnmi.WildcardQ
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Interface_Ipv6Neighbor).LinkLayerAddress
 			if ret == nil {
 				var zero string

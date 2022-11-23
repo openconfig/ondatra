@@ -72,10 +72,9 @@ Imported modules were sourced from:
 package gnmicollectormetadata
 
 import (
-	"reflect"
 	oc "github.com/openconfig/ondatra/gnmi/oc"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygnmi/ygnmi"
+	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 )
 
@@ -172,7 +171,7 @@ func (n *Meta_ConnectErrorPath) State() ygnmi.SingletonQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta).ConnectError
 			if ret == nil {
 				var zero string
@@ -204,7 +203,7 @@ func (n *Meta_ConnectErrorPathAny) State() ygnmi.WildcardQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta).ConnectError
 			if ret == nil {
 				var zero string
@@ -236,7 +235,7 @@ func (n *Meta_ConnectedAddressPath) State() ygnmi.SingletonQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta).ConnectedAddress
 			if ret == nil {
 				var zero string
@@ -268,7 +267,7 @@ func (n *Meta_ConnectedAddressPathAny) State() ygnmi.WildcardQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta).ConnectedAddress
 			if ret == nil {
 				var zero string
@@ -300,7 +299,7 @@ func (n *Meta_ConnectedPath) State() ygnmi.SingletonQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Meta).Connected
 			if ret == nil {
 				var zero bool
@@ -332,7 +331,7 @@ func (n *Meta_ConnectedPathAny) State() ygnmi.WildcardQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Meta).Connected
 			if ret == nil {
 				var zero bool
@@ -364,7 +363,7 @@ func (n *Meta_LatencyAvgPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatencyAvg
 			if ret == nil {
 				var zero int64
@@ -396,7 +395,7 @@ func (n *Meta_LatencyAvgPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatencyAvg
 			if ret == nil {
 				var zero int64
@@ -428,7 +427,7 @@ func (n *Meta_LatencyMaxPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatencyMax
 			if ret == nil {
 				var zero int64
@@ -460,7 +459,7 @@ func (n *Meta_LatencyMaxPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatencyMax
 			if ret == nil {
 				var zero int64
@@ -492,7 +491,7 @@ func (n *Meta_LatencyMinPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatencyMin
 			if ret == nil {
 				var zero int64
@@ -524,7 +523,7 @@ func (n *Meta_LatencyMinPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatencyMin
 			if ret == nil {
 				var zero int64
@@ -556,7 +555,7 @@ func (n *Meta_LatestTimestampPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatestTimestamp
 			if ret == nil {
 				var zero int64
@@ -588,7 +587,7 @@ func (n *Meta_LatestTimestampPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).LatestTimestamp
 			if ret == nil {
 				var zero int64
@@ -620,7 +619,7 @@ func (n *Meta_SyncPath) State() ygnmi.SingletonQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Meta).Sync
 			if ret == nil {
 				var zero bool
@@ -652,7 +651,7 @@ func (n *Meta_SyncPathAny) State() ygnmi.WildcardQuery[bool] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) { 
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
 			ret := gs.(*oc.Meta).Sync
 			if ret == nil {
 				var zero bool
@@ -684,7 +683,7 @@ func (n *Meta_TargetLeavesAddedPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesAdded
 			if ret == nil {
 				var zero int64
@@ -716,7 +715,7 @@ func (n *Meta_TargetLeavesAddedPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesAdded
 			if ret == nil {
 				var zero int64
@@ -748,7 +747,7 @@ func (n *Meta_TargetLeavesDeletedPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesDeleted
 			if ret == nil {
 				var zero int64
@@ -780,7 +779,7 @@ func (n *Meta_TargetLeavesDeletedPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesDeleted
 			if ret == nil {
 				var zero int64
@@ -812,7 +811,7 @@ func (n *Meta_TargetLeavesEmptyPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesEmpty
 			if ret == nil {
 				var zero int64
@@ -844,7 +843,7 @@ func (n *Meta_TargetLeavesEmptyPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesEmpty
 			if ret == nil {
 				var zero int64
@@ -876,7 +875,7 @@ func (n *Meta_TargetLeavesPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeaves
 			if ret == nil {
 				var zero int64
@@ -908,7 +907,7 @@ func (n *Meta_TargetLeavesPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeaves
 			if ret == nil {
 				var zero int64
@@ -940,7 +939,7 @@ func (n *Meta_TargetLeavesStalePath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesStale
 			if ret == nil {
 				var zero int64
@@ -972,7 +971,7 @@ func (n *Meta_TargetLeavesStalePathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesStale
 			if ret == nil {
 				var zero int64
@@ -1004,7 +1003,7 @@ func (n *Meta_TargetLeavesSuppressedPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesSuppressed
 			if ret == nil {
 				var zero int64
@@ -1036,7 +1035,7 @@ func (n *Meta_TargetLeavesSuppressedPathAny) State() ygnmi.WildcardQuery[int64] 
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesSuppressed
 			if ret == nil {
 				var zero int64
@@ -1068,7 +1067,7 @@ func (n *Meta_TargetLeavesUpdatedPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesUpdated
 			if ret == nil {
 				var zero int64
@@ -1100,7 +1099,7 @@ func (n *Meta_TargetLeavesUpdatedPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetLeavesUpdated
 			if ret == nil {
 				var zero int64
@@ -1132,7 +1131,7 @@ func (n *Meta_TargetSizePath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetSize
 			if ret == nil {
 				var zero int64
@@ -1164,7 +1163,7 @@ func (n *Meta_TargetSizePathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta).TargetSize
 			if ret == nil {
 				var zero int64
@@ -2086,7 +2085,7 @@ func (n *Meta_Window_AvgPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta_Window).Avg
 			if ret == nil {
 				var zero int64
@@ -2118,7 +2117,7 @@ func (n *Meta_Window_AvgPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta_Window).Avg
 			if ret == nil {
 				var zero int64
@@ -2150,7 +2149,7 @@ func (n *Meta_Window_MaxPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta_Window).Max
 			if ret == nil {
 				var zero int64
@@ -2182,7 +2181,7 @@ func (n *Meta_Window_MaxPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta_Window).Max
 			if ret == nil {
 				var zero int64
@@ -2214,7 +2213,7 @@ func (n *Meta_Window_MinPath) State() ygnmi.SingletonQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta_Window).Min
 			if ret == nil {
 				var zero int64
@@ -2246,7 +2245,7 @@ func (n *Meta_Window_MinPathAny) State() ygnmi.WildcardQuery[int64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (int64, bool) { 
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.Meta_Window).Min
 			if ret == nil {
 				var zero int64
@@ -2278,7 +2277,7 @@ func (n *Meta_Window_SizePath) State() ygnmi.SingletonQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta_Window).Size
 			if ret == nil {
 				var zero string
@@ -2310,7 +2309,7 @@ func (n *Meta_Window_SizePathAny) State() ygnmi.WildcardQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta_Window).Size
 			if ret == nil {
 				var zero string
@@ -2342,7 +2341,7 @@ func (n *Meta_Window_SizePath) Config() ygnmi.ConfigQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta_Window).Size
 			if ret == nil {
 				var zero string
@@ -2374,7 +2373,7 @@ func (n *Meta_Window_SizePathAny) Config() ygnmi.WildcardQuery[string] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) { 
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Meta_Window).Size
 			if ret == nil {
 				var zero string
