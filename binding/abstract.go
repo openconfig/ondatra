@@ -167,7 +167,7 @@ func (a *AbstractATE) DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMICli
 }
 
 // DialOTG returns an unimplemented error.
-func (a *AbstractATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
+func (a *AbstractATE) DialOTG(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
 	return nil, errors.New("DialOTG unimplemented")
 }
 

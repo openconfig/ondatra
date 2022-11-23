@@ -22,8 +22,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 )
 
 func TestISISLSDBFromIxia(t *testing.T) {
@@ -38,7 +38,7 @@ func TestISISLSDBFromIxia(t *testing.T) {
 		postErr map[string]error
 		getErr  map[string]error
 		getRsps map[string]string
-		want    *telemetry.NetworkInstance
+		want    *oc.NetworkInstance
 		wantErr string
 	}{{
 		desc: "run op error",
@@ -63,15 +63,15 @@ func TestISISLSDBFromIxia(t *testing.T) {
 		wantErr: "level",
 	}, {
 		desc: "no data",
-		want: &telemetry.NetworkInstance{
-			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
-				telemetry.NetworkInstance_Protocol_Key{
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+		want: &oc.NetworkInstance{
+			Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
+				oc.NetworkInstance_Protocol_Key{
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
 					Name:       "0",
 				}: {
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
 					Name:       ygot.String("0"),
-					Isis:       &telemetry.NetworkInstance_Protocol_Isis{},
+					Isis:       &oc.NetworkInstance_Protocol_Isis{},
 				},
 			},
 		},
@@ -86,28 +86,28 @@ func TestISISLSDBFromIxia(t *testing.T) {
 				]
 			}`,
 		},
-		want: &telemetry.NetworkInstance{
-			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
-				telemetry.NetworkInstance_Protocol_Key{
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+		want: &oc.NetworkInstance{
+			Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
+				oc.NetworkInstance_Protocol_Key{
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
 					Name:       "0",
 				}: {
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS,
 					Name:       ygot.String("0"),
-					Isis: &telemetry.NetworkInstance_Protocol_Isis{
-						Level: map[uint8]*telemetry.NetworkInstance_Protocol_Isis_Level{
-							1: &telemetry.NetworkInstance_Protocol_Isis_Level{
+					Isis: &oc.NetworkInstance_Protocol_Isis{
+						Level: map[uint8]*oc.NetworkInstance_Protocol_Isis_Level{
+							1: &oc.NetworkInstance_Protocol_Isis_Level{
 								LevelNumber: ygot.Uint8(1),
-								Lsp: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
-									"0123.4567.89AB.02-34": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
+								Lsp: map[string]*oc.NetworkInstance_Protocol_Isis_Level_Lsp{
+									"0123.4567.89AB.02-34": &oc.NetworkInstance_Protocol_Isis_Level_Lsp{
 										IsType:         ygot.Uint8(1),
 										LspId:          ygot.String("0123.4567.89AB.02-34"),
 										SequenceNumber: ygot.Uint32(5),
-										Tlv: map[telemetry.E_IsisLsdbTypes_ISIS_TLV_TYPE]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
-											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: {
-												Type: telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
-												ExtendedIpv4Reachability: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
-													Prefix: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+										Tlv: map[oc.E_IsisLsdbTypes_ISIS_TLV_TYPE]*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+											oc.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: {
+												Type: oc.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
+												ExtendedIpv4Reachability: &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
+													Prefix: map[string]*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
 														"1.1.1.1": {
 															Prefix: ygot.String("1.1.1.1"),
 															Metric: ygot.Uint32(20),
@@ -119,18 +119,18 @@ func TestISISLSDBFromIxia(t *testing.T) {
 									},
 								},
 							},
-							2: &telemetry.NetworkInstance_Protocol_Isis_Level{
+							2: &oc.NetworkInstance_Protocol_Isis_Level{
 								LevelNumber: ygot.Uint8(2),
-								Lsp: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
-									"CDEF.0123.4567.98-07": &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp{
+								Lsp: map[string]*oc.NetworkInstance_Protocol_Isis_Level_Lsp{
+									"CDEF.0123.4567.98-07": &oc.NetworkInstance_Protocol_Isis_Level_Lsp{
 										IsType:         ygot.Uint8(2),
 										LspId:          ygot.String("CDEF.0123.4567.98-07"),
 										SequenceNumber: ygot.Uint32(0),
-										Tlv: map[telemetry.E_IsisLsdbTypes_ISIS_TLV_TYPE]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
-											telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: {
-												Type: telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
-												ExtendedIpv4Reachability: &telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
-													Prefix: map[string]*telemetry.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
+										Tlv: map[oc.E_IsisLsdbTypes_ISIS_TLV_TYPE]*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv{
+											oc.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY: {
+												Type: oc.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY,
+												ExtendedIpv4Reachability: &oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability{
+													Prefix: map[string]*oc.NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_ExtendedIpv4Reachability_Prefix{
 														"2.2.2.2": {
 															Prefix: ygot.String("2.2.2.2"),
 															Metric: ygot.Uint32(10),
@@ -165,7 +165,7 @@ func TestISISLSDBFromIxia(t *testing.T) {
 				},
 			}
 
-			got := new(telemetry.NetworkInstance)
+			got := new(oc.NetworkInstance)
 			err := isisLSDBFromIxia(context.Background(), client, got, nodes)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("isisLSDBFromIxia() got unexpected error diff\n%s", d)

@@ -191,9 +191,7 @@ func FetchOTG(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error
 	c, ok := otgs[ate]
 	if !ok {
 		var err error
-		// TODO(greg-dennis): Add common dial options here when/if supported:
-		// https://github.com/open-traffic-generator/snappi/issues/192
-		c, err = ate.DialOTG(ctx)
+		c, err = ate.DialOTG(ctx, CommonDialOpts...)
 		if err != nil {
 			return nil, fmt.Errorf("error dialing OTG: %w", err)
 		}

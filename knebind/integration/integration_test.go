@@ -19,6 +19,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/openconfig/ondatra/gnmi"
 	kinit "github.com/openconfig/ondatra/knebind/init"
 	"github.com/openconfig/ondatra"
 )
@@ -43,7 +44,7 @@ ip routing
 
 func TestGNMI(t *testing.T) {
 	dut := ondatra.DUT(t, "dut")
-	sys := dut.Telemetry().System().Lookup(t)
+	sys := gnmi.Lookup(t, dut, gnmi.OC().System().State())
 	if !sys.IsPresent() {
 		t.Fatalf("No System telemetry for %v", dut)
 	}
@@ -56,7 +57,7 @@ func TestOTG(t *testing.T) {
 	cfg.Ports().Add().SetName("port2")
 	ate.OTG().PushConfig(t, cfg)
 
-	portNames := ate.OTG().Telemetry().PortAny().Name().Get(t)
+	portNames := gnmi.GetAll(t, ate.OTG(), gnmi.OTG().PortAny().Name().State())
 	sort.Strings(portNames)
 	if want := []string{"port1", "port2"}; !cmp.Equal(portNames, want) {
 		t.Errorf("Telemetry got port names %v, want %v", portNames, want)

@@ -21,11 +21,11 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 )
 
-func isisLSDBFromIxia(ctx context.Context, client cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+func isisLSDBFromIxia(ctx context.Context, client cfgClient, netInst *oc.NetworkInstance, nodes *cachedNodes) error {
 	info, err := fetchISISInfo(ctx, client, nodes.isisL3s)
 	if err != nil {
 		return err
@@ -79,9 +79,9 @@ func fetchISISInfo(ctx context.Context, client cfgClient, isisL3s []*ixconfig.To
 	return allInfos, nil
 }
 
-func populateISIS(netInst *telemetry.NetworkInstance, learnedISIS []isisLearnedInfo) error {
+func populateISIS(netInst *oc.NetworkInstance, learnedISIS []isisLearnedInfo) error {
 	isis := netInst.
-		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, "0").
+		GetOrCreateProtocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, "0").
 		GetOrCreateIsis()
 
 	for _, info := range learnedISIS {
@@ -102,7 +102,7 @@ func populateISIS(netInst *telemetry.NetworkInstance, learnedISIS []isisLearnedI
 		lspID := fmt.Sprintf("%s%s.%s%s.%s%s.%02d-%02d", info.SystemID[0:2], info.SystemID[3:5],
 			info.SystemID[6:8], info.SystemID[9:11], info.SystemID[12:14], info.SystemID[15:17],
 			info.PseudoNodeIndex, info.LSPIndex)
-		var flags []telemetry.E_Lsp_Flags
+		var flags []oc.E_Lsp_Flags
 		// TODO(greg-dennis): Infer the flags when we learn what they look like in learned info.
 		lsp := isis.GetOrCreateLevel(levelNum).GetOrCreateLsp(lspID)
 		lsp.SetIsType(levelNum)
@@ -110,7 +110,7 @@ func populateISIS(netInst *telemetry.NetworkInstance, learnedISIS []isisLearnedI
 		lsp.SetSequenceNumber(info.SeqNumber)
 		// TODO(team): Populate IPv4 prefixes when IxNetwork provides support in learned info.
 		extV4Prefix := lsp.
-			GetOrCreateTlv(telemetry.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY).
+			GetOrCreateTlv(oc.IsisLsdbTypes_ISIS_TLV_TYPE_EXTENDED_IPV4_REACHABILITY).
 			GetOrCreateExtendedIpv4Reachability().
 			GetOrCreatePrefix(info.IPv4Prefix)
 		extV4Prefix.SetMetric(uint32(info.Metric))

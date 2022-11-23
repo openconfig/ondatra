@@ -28,8 +28,8 @@ import (
 	"github.com/openconfig/ygot/uexampleoc"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -57,15 +57,15 @@ func TestSubscribe(t *testing.T) {
 		return data, nil
 	}
 
-	devWithAttr1 := &telemetry.Device{}
-	devWithAttr1.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
+	devWithAttr1 := &oc.Root{}
+	devWithAttr1.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
 		GetOrCreateBgp().GetOrCreateRib().GetOrCreateAttrSet(1)
 
-	devWithAttr2 := &telemetry.Device{}
-	devWithAttr2.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
+	devWithAttr2 := &oc.Root{}
+	devWithAttr2.GetOrCreateNetworkInstance("foo").GetOrCreateProtocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "1").
 		GetOrCreateBgp().GetOrCreateRib().GetOrCreateAttrSet(2)
 
-	devWithPartial := &telemetry.Device{}
+	devWithPartial := &oc.Root{}
 	devWithPartial.GetOrCreateNetworkInstance("foo")
 
 	tests := []struct {
@@ -73,7 +73,7 @@ func TestSubscribe(t *testing.T) {
 		mode        gpb.SubscriptionList_Mode
 		path        *gpb.Path
 		stats       []map[string]ygot.GoStruct
-		learnedInfo []*telemetry.Device
+		learnedInfo []*oc.Root
 		want        []*gpb.SubscribeResponse
 	}{{
 		name: "no such path",
@@ -231,7 +231,7 @@ func TestSubscribe(t *testing.T) {
 	}, {
 		name: "bgp rib once",
 		mode: gpb.SubscriptionList_ONCE,
-		learnedInfo: []*telemetry.Device{
+		learnedInfo: []*oc.Root{
 			devWithAttr1,
 		},
 		path: &gpb.Path{
@@ -273,7 +273,7 @@ func TestSubscribe(t *testing.T) {
 	}, {
 		name: "bgp rib streaming",
 		mode: gpb.SubscriptionList_STREAM,
-		learnedInfo: []*telemetry.Device{
+		learnedInfo: []*oc.Root{
 			devWithAttr1,
 			devWithAttr2,
 		},
@@ -338,7 +338,7 @@ func TestSubscribe(t *testing.T) {
 	}, {
 		name: "bgp rib streaming with no data",
 		mode: gpb.SubscriptionList_STREAM,
-		learnedInfo: []*telemetry.Device{
+		learnedInfo: []*oc.Root{
 			nil,
 			nil,
 			devWithAttr1,
@@ -514,8 +514,8 @@ func TestProtocolReader(t *testing.T) {
 	activeRSVPLSP := &ixconfig.TopologyRsvpP2PIngressLsps{Active: ixconfig.MultivalueTrue()}
 
 	var gotNodes *cachedNodes
-	var readFn func(*telemetry.NetworkInstance) error
-	fetch := func(_ context.Context, _ cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+	var readFn func(*oc.NetworkInstance) error
+	fetch := func(_ context.Context, _ cfgClient, netInst *oc.NetworkInstance, nodes *cachedNodes) error {
 		gotNodes = nodes
 		return readFn(netInst)
 	}
@@ -526,7 +526,7 @@ func TestProtocolReader(t *testing.T) {
 		desc      string
 		initCache map[string]any
 		cfg       *ixconfig.Ixnetwork
-		readFn    func(*telemetry.NetworkInstance) error
+		readFn    func(*oc.NetworkInstance) error
 		want      *gpb.Notification
 		wantNodes *cachedNodes
 		wantErr   string
@@ -539,15 +539,15 @@ func TestProtocolReader(t *testing.T) {
 	}, {
 		desc:    "failed to get ixia data",
 		cfg:     &ixconfig.Ixnetwork{},
-		readFn:  func(*telemetry.NetworkInstance) error { return errors.New("ixia error") },
+		readFn:  func(*oc.NetworkInstance) error { return errors.New("ixia error") },
 		wantErr: "ixia error",
 	}, {
 		desc: "success",
 		// Contrived example where there is garbage data in the cache.
 		// Used to verify delete notifications are created.
 		initCache: map[string]any{
-			prevKey: &telemetry.Device{
-				Interface: map[string]*telemetry.Interface{
+			prevKey: &oc.Root{
+				Interface: map[string]*oc.Interface{
 					"fake": {Name: ygot.String("fake")},
 				},
 			},
@@ -591,7 +591,7 @@ func TestProtocolReader(t *testing.T) {
 				}},
 			}},
 		},
-		readFn: func(netInst *telemetry.NetworkInstance) error {
+		readFn: func(netInst *oc.NetworkInstance) error {
 			netInst.GetOrCreateInterface("bar")
 			return nil
 		},

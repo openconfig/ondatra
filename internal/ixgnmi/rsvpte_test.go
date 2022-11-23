@@ -23,8 +23,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 )
 
 type constantHash struct {
@@ -54,7 +54,7 @@ func TestRSVPTEFromIxia(t *testing.T) {
 		mvRsps   []string
 		mvErr    error
 		hashImpl hash.Hash32
-		want     *telemetry.NetworkInstance
+		want     *oc.NetworkInstance
 		wantErr  string
 	}{{
 		desc:    "lsp lookup error",
@@ -71,10 +71,10 @@ func TestRSVPTEFromIxia(t *testing.T) {
 		wantErr:  "hash collision",
 	}, {
 		desc: "no data",
-		want: &telemetry.NetworkInstance{Mpls: &telemetry.NetworkInstance_Mpls{
-			SignalingProtocols: &telemetry.NetworkInstance_Mpls_SignalingProtocols{
-				RsvpTe: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
-					Session: map[uint64]*telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{},
+		want: &oc.NetworkInstance{Mpls: &oc.NetworkInstance_Mpls{
+			SignalingProtocols: &oc.NetworkInstance_Mpls_SignalingProtocols{
+				RsvpTe: &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
+					Session: map[uint64]*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{},
 				},
 			},
 		}},
@@ -90,33 +90,33 @@ func TestRSVPTEFromIxia(t *testing.T) {
 			`["3.3.3.1"]`,
 			`["3.3.3.2"]`,
 		},
-		want: &telemetry.NetworkInstance{Mpls: &telemetry.NetworkInstance_Mpls{
-			SignalingProtocols: &telemetry.NetworkInstance_Mpls_SignalingProtocols{
-				RsvpTe: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
-					Session: map[uint64]*telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
-						2765635037960339456: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+		want: &oc.NetworkInstance{Mpls: &oc.NetworkInstance_Mpls{
+			SignalingProtocols: &oc.NetworkInstance_Mpls_SignalingProtocols{
+				RsvpTe: &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe{
+					Session: map[uint64]*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+						2765635037960339456: &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
 							LocalIndex:         ygot.Uint64(2765635037960339456),
 							SessionName:        ygot.String("lsp0 0"),
-							Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
+							Type:               oc.MplsTypes_LSP_ROLE_INGRESS,
 							SourceAddress:      ygot.String("1.1.1.1"),
 							DestinationAddress: ygot.String("1.1.1.2"),
-							Status:             telemetry.Session_Status_UP,
+							Status:             oc.Session_Status_UP,
 						},
-						2765635037960339457: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+						2765635037960339457: &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
 							LocalIndex:         ygot.Uint64(2765635037960339457),
 							SessionName:        ygot.String("lsp0 1"),
-							Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
+							Type:               oc.MplsTypes_LSP_ROLE_INGRESS,
 							SourceAddress:      ygot.String("2.2.2.1"),
 							DestinationAddress: ygot.String("2.2.2.2"),
-							Status:             telemetry.Session_Status_DOWN,
+							Status:             oc.Session_Status_DOWN,
 						},
-						2765635042255306752: &telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
+						2765635042255306752: &oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{
 							LocalIndex:         ygot.Uint64(2765635042255306752),
 							SessionName:        ygot.String("lsp1 0"),
-							Type:               telemetry.MplsTypes_LSP_ROLE_INGRESS,
+							Type:               oc.MplsTypes_LSP_ROLE_INGRESS,
 							SourceAddress:      ygot.String("3.3.3.1"),
 							DestinationAddress: ygot.String("3.3.3.2"),
-							Status:             telemetry.Session_Status_UP,
+							Status:             oc.Session_Status_UP,
 						},
 					},
 				},
@@ -150,7 +150,7 @@ func TestRSVPTEFromIxia(t *testing.T) {
 				},
 			}
 
-			got := new(telemetry.NetworkInstance)
+			got := new(oc.NetworkInstance)
 			err := rsvpTEFromIxia(context.Background(), client, got, nodes)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("rsvpTEFromIxia() got unexpected error diff\n%s", d)

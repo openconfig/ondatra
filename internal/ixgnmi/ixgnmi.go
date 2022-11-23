@@ -36,8 +36,8 @@ import (
 	"github.com/openconfig/gnmi/subscribe"
 	"github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -124,7 +124,7 @@ func statViewReader(captions ...string) *prefixReader {
 	}}
 }
 
-func protocolReader(fetch func(context.Context, cfgClient, *telemetry.NetworkInstance, *cachedNodes) error) *prefixReader {
+func protocolReader(fetch func(context.Context, cfgClient, *oc.NetworkInstance, *cachedNodes) error) *prefixReader {
 	return &prefixReader{read: func(ctx context.Context, c *Client, p *gpb.Path) ([]*gpb.Notification, error) {
 		intf := p.GetElem()[1].GetKey()["name"]
 		key, prevKey := cacheKeys(fetch, intf)
@@ -132,7 +132,7 @@ func protocolReader(fetch func(context.Context, cfgClient, *telemetry.NetworkIns
 			return nil, nil
 		}
 
-		dev := new(telemetry.Device)
+		dev := new(oc.Root)
 		nodes, err := c.fetchCachedNodes(ctx, intf)
 		if err != nil {
 			return nil, err
@@ -142,9 +142,9 @@ func protocolReader(fetch func(context.Context, cfgClient, *telemetry.NetworkIns
 			return nil, err
 		}
 
-		var prevDev *telemetry.Device
+		var prevDev *oc.Root
 		if prev, ok := c.fresh.Get(prevKey); ok {
-			prevDev = prev.(*telemetry.Device)
+			prevDev = prev.(*oc.Root)
 		}
 		notif, err := ygot.Diff(prevDev, dev)
 		if err != nil {

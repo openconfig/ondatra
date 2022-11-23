@@ -22,8 +22,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 )
 
 func TestBGPRIBFromIxia(t *testing.T) {
@@ -43,7 +43,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		postErr map[string]error
 		getErr  map[string]error
 		getRsps map[string]string
-		want    *telemetry.NetworkInstance
+		want    *oc.NetworkInstance
 		wantErr string
 	}{{
 		desc: "run op v4 error",
@@ -116,35 +116,35 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		wantErr: "invalid AS segment",
 	}, {
 		desc: "no data",
-		want: &telemetry.NetworkInstance{
-			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
-				telemetry.NetworkInstance_Protocol_Key{
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+		want: &oc.NetworkInstance{
+			Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
+				oc.NetworkInstance_Protocol_Key{
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
 					Name:       "0",
 				}: {
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
 					Name:       ygot.String("0"),
-					Bgp: &telemetry.NetworkInstance_Protocol_Bgp{
-						Rib: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
-							AfiSafi: map[telemetry.E_BgpTypes_AFI_SAFI_TYPE]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
-								telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
-									AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
-									Ipv4Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
-										Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
+					Bgp: &oc.NetworkInstance_Protocol_Bgp{
+						Rib: &oc.NetworkInstance_Protocol_Bgp_Rib{
+							AfiSafi: map[oc.E_BgpTypes_AFI_SAFI_TYPE]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
+									Ipv4Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
 											"1.2.3.4": {
 												NeighborAddress: ygot.String("1.2.3.4"),
-												AdjRibInPre:     &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{},
+												AdjRibInPre:     &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{},
 											},
 										},
 									},
 								},
-								telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
-									AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
-									Ipv6Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
-										Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
+									Ipv6Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
 											"::1": {
 												NeighborAddress: ygot.String("::1"),
-												AdjRibInPre:     &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{},
+												AdjRibInPre:     &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{},
 											},
 										},
 									},
@@ -175,25 +175,25 @@ func TestBGPRIBFromIxia(t *testing.T) {
 				]
 			}`,
 		},
-		want: &telemetry.NetworkInstance{
-			Protocol: map[telemetry.NetworkInstance_Protocol_Key]*telemetry.NetworkInstance_Protocol{
-				telemetry.NetworkInstance_Protocol_Key{
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+		want: &oc.NetworkInstance{
+			Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
+				oc.NetworkInstance_Protocol_Key{
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
 					Name:       "0",
 				}: {
-					Identifier: telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
 					Name:       ygot.String("0"),
-					Bgp: &telemetry.NetworkInstance_Protocol_Bgp{
-						Rib: &telemetry.NetworkInstance_Protocol_Bgp_Rib{
-							AfiSafi: map[telemetry.E_BgpTypes_AFI_SAFI_TYPE]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
-								telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
-									AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
-									Ipv4Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
-										Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
+					Bgp: &oc.NetworkInstance_Protocol_Bgp{
+						Rib: &oc.NetworkInstance_Protocol_Bgp_Rib{
+							AfiSafi: map[oc.E_BgpTypes_AFI_SAFI_TYPE]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
+									Ipv4Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
 											"1.2.3.4": {
 												NeighborAddress: ygot.String("1.2.3.4"),
-												AdjRibInPre: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{
-													Route: map[telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route_Key]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
+												AdjRibInPre: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{
+													Route: map[oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route_Key]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
 														{Prefix: "127.0.0.1/30", PathId: 1}: {
 															AttrIndex:      ygot.Uint64(0),
 															CommunityIndex: ygot.Uint64(0),
@@ -212,14 +212,14 @@ func TestBGPRIBFromIxia(t *testing.T) {
 										},
 									},
 								},
-								telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
-									AfiSafiName: telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
-									Ipv6Unicast: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
-										Neighbor: map[string]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
+									Ipv6Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
 											"::1": {
 												NeighborAddress: ygot.String("::1"),
-												AdjRibInPre: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{
-													Route: map[telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route_Key]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
+												AdjRibInPre: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{
+													Route: map[oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route_Key]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
 														{Prefix: "::1/28", PathId: 3}: {
 															AttrIndex:      ygot.Uint64(2),
 															CommunityIndex: ygot.Uint64(2),
@@ -239,67 +239,67 @@ func TestBGPRIBFromIxia(t *testing.T) {
 									},
 								},
 							},
-							AttrSet: map[uint64]*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
-								0: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+							AttrSet: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+								0: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 									Aigp:      ygot.Uint64(200),
 									Index:     ygot.Uint64(0),
 									LocalPref: ygot.Uint32(1000),
 									Med:       ygot.Uint32(100),
 									NextHop:   ygot.String("127.0.0.2"),
-									Origin:    telemetry.BgpTypes_BgpOriginAttrType_IGP,
-									AsSegment: []*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+									Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
+									AsSegment: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
 										Member: []uint32{65532, 65533},
-										Type:   telemetry.BgpTypes_AsPathSegmentType_AS_SEQ,
+										Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
 									}},
 								},
-								1: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+								1: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 									Aigp:      ygot.Uint64(0),
 									Index:     ygot.Uint64(1),
 									LocalPref: ygot.Uint32(0),
 									Med:       ygot.Uint32(0),
 									NextHop:   ygot.String("127.0.0.4"),
-									Origin:    telemetry.BgpTypes_BgpOriginAttrType_EGP,
+									Origin:    oc.RibBgp_BgpOriginAttrType_EGP,
 								},
-								2: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+								2: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 									Aigp:      ygot.Uint64(200),
 									Index:     ygot.Uint64(2),
 									LocalPref: ygot.Uint32(1000),
 									Med:       ygot.Uint32(100),
 									NextHop:   ygot.String("::2"),
-									Origin:    telemetry.BgpTypes_BgpOriginAttrType_INCOMPLETE,
-									AsSegment: []*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+									Origin:    oc.RibBgp_BgpOriginAttrType_INCOMPLETE,
+									AsSegment: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
 										Member: []uint32{65534, 65535},
-										Type:   telemetry.BgpTypes_AsPathSegmentType_AS_SEQ,
+										Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
 									}},
 								},
-								3: &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+								3: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 									Aigp:      ygot.Uint64(0),
 									Index:     ygot.Uint64(3),
 									LocalPref: ygot.Uint32(0),
 									Med:       ygot.Uint32(0),
 									NextHop:   ygot.String("::4"),
-									Origin:    telemetry.BgpTypes_BgpOriginAttrType_IGP,
+									Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
 								},
 							},
-							Community: map[uint64]*telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
-								0: &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
+							Community: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+								0: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
 									Index: ygot.Uint64(0),
-									Community: []telemetry.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
-										telemetry.UnionString("65532 : 10200"),
-										telemetry.UnionString("65533 : 10100"),
+									Community: []oc.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
+										oc.UnionString("65532 : 10200"),
+										oc.UnionString("65533 : 10100"),
 									},
 								},
-								1: &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
+								1: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
 									Index: ygot.Uint64(1),
 								},
-								2: &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
+								2: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
 									Index: ygot.Uint64(2),
-									Community: []telemetry.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
-										telemetry.UnionString("65534 : 10400"),
-										telemetry.UnionString("65535 : 10300"),
+									Community: []oc.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
+										oc.UnionString("65534 : 10400"),
+										oc.UnionString("65535 : 10300"),
 									},
 								},
-								3: &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
+								3: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
 									Index: ygot.Uint64(3),
 								},
 							},
@@ -327,7 +327,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 				},
 			}
 
-			got := new(telemetry.NetworkInstance)
+			got := new(oc.NetworkInstance)
 			err := bgpRIBFromIxia(context.Background(), client, got, nodes)
 			if d := errdiff.Substring(err, test.wantErr); d != "" {
 				t.Fatalf("bgpRIBFromIxia() got unexpected error diff\n%s", d)

@@ -24,11 +24,11 @@ import (
 	log "github.com/golang/glog"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 )
 
-func bgpRIBFromIxia(ctx context.Context, client cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+func bgpRIBFromIxia(ctx context.Context, client cfgClient, netInst *oc.NetworkInstance, nodes *cachedNodes) error {
 	const (
 		bgp4Path = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/getAllLearnedInfo"
 		bgp6Path = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/getAllLearnedInfo"
@@ -108,13 +108,13 @@ type bgpLearnedInfo struct {
 	LargeCommunity string `ixia:"Large Community"`
 }
 
-func populateRIB(netInst *telemetry.NetworkInstance, peer4Infos, peer6Infos map[string][]bgpLearnedInfo) error {
+func populateRIB(netInst *oc.NetworkInstance, peer4Infos, peer6Infos map[string][]bgpLearnedInfo) error {
 	rib := netInst.
-		GetOrCreateProtocol(telemetry.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").
+		GetOrCreateProtocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").
 		GetOrCreateBgp().GetOrCreateRib()
 
 	for peer, infos := range peer4Infos {
-		ipv4RIB := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
+		ipv4RIB := rib.GetOrCreateAfiSafi(oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).
 			GetOrCreateIpv4Unicast().
 			GetOrCreateNeighbor(peer).
 			GetOrCreateAdjRibInPre()
@@ -131,7 +131,7 @@ func populateRIB(netInst *telemetry.NetworkInstance, peer4Infos, peer6Infos map[
 			if err := appendDetails(info, rib, attrIndex, commIndex, true); err != nil {
 				return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 			}
-			route := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
+			route := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
 				Prefix:         ygot.String(fmt.Sprintf("%s/%d", info.IPV4Prefix, info.PrefixLen)),
 				PathId:         ygot.Uint32(info.PathID),
 				AttrIndex:      &attrIndex,
@@ -144,7 +144,7 @@ func populateRIB(netInst *telemetry.NetworkInstance, peer4Infos, peer6Infos map[
 	}
 
 	for peer, infos := range peer6Infos {
-		ipv6RIB := rib.GetOrCreateAfiSafi(telemetry.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).
+		ipv6RIB := rib.GetOrCreateAfiSafi(oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).
 			GetOrCreateIpv6Unicast().
 			GetOrCreateNeighbor(peer).
 			GetOrCreateAdjRibInPre()
@@ -161,7 +161,7 @@ func populateRIB(netInst *telemetry.NetworkInstance, peer4Infos, peer6Infos map[
 			if err := appendDetails(info, rib, attrIndex, commIndex, false); err != nil {
 				return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 			}
-			route := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
+			route := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
 				Prefix:         ygot.String(fmt.Sprintf("%s/%d", info.IPV6Prefix, info.PrefixLen)),
 				PathId:         ygot.Uint32(info.PathID),
 				AttrIndex:      &attrIndex,
@@ -175,13 +175,13 @@ func populateRIB(netInst *telemetry.NetworkInstance, peer4Infos, peer6Infos map[
 	return nil
 }
 
-func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_Bgp_Rib, attrIndex, commIndex uint64, v4 bool) error {
+func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib, attrIndex, commIndex uint64, v4 bool) error {
 	nextHop := info.IPV6NextHop
 	if v4 {
 		nextHop = info.IPV4NextHop
 	}
 
-	as := &telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+	as := &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
 		NextHop:   &nextHop,
 		Aigp:      ygot.Uint64(info.AIGP),
 		LocalPref: ygot.Uint32(info.LocalPref),
@@ -190,11 +190,11 @@ func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_
 	}
 	switch info.Origin {
 	case "IGP":
-		as.Origin = telemetry.BgpTypes_BgpOriginAttrType_IGP
+		as.Origin = oc.RibBgp_BgpOriginAttrType_IGP
 	case "EGP":
-		as.Origin = telemetry.BgpTypes_BgpOriginAttrType_EGP
+		as.Origin = oc.RibBgp_BgpOriginAttrType_EGP
 	case "Incomplete":
-		as.Origin = telemetry.BgpTypes_BgpOriginAttrType_INCOMPLETE
+		as.Origin = oc.RibBgp_BgpOriginAttrType_INCOMPLETE
 	default:
 		return fmt.Errorf("unknown origin type: %q", info.Origin)
 	}
@@ -212,9 +212,9 @@ func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_
 			}
 			members = append(members, uint32(member))
 		}
-		as.AsSegment = []*telemetry.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+		as.AsSegment = []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
 			Member: members,
-			Type:   telemetry.BgpTypes_AsPathSegmentType_AS_SEQ,
+			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
 		}}
 	}
 
@@ -222,12 +222,12 @@ func appendDetails(info bgpLearnedInfo, rib *telemetry.NetworkInstance_Protocol_
 		return err
 	}
 
-	community := &telemetry.NetworkInstance_Protocol_Bgp_Rib_Community{
+	community := &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
 		Index: &commIndex,
 	}
 	for _, str := range strings.Split(info.Community, ", ") {
 		if str != "" {
-			community.Community = append(community.Community, telemetry.UnionString(str))
+			community.Community = append(community.Community, oc.UnionString(str))
 		}
 	}
 	return rib.AppendCommunity(community)

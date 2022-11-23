@@ -168,7 +168,8 @@ type ATE interface {
 	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
-	DialOTG(context.Context) (gosnappi.GosnappiApi, error)
+	// Implementations must append transport security options necessary to reach the server.
+	DialOTG(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error)
 
 	mustEmbedAbstractATE()
 }

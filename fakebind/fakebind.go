@@ -39,7 +39,7 @@ func Setup() *Binding {
 	return bind.WithReservation(nil)
 }
 
-var _ binding.Binding = new(Binding)
+var _ binding.Binding = (*Binding)(nil)
 
 // Binding is a fake binding.Binding implementation comprised of stubs.
 type Binding struct {
@@ -80,6 +80,8 @@ func (b *Binding) FetchReservation(ctx context.Context, id string) (*binding.Res
 	}
 	return b.FetchReservationFn(ctx, id)
 }
+
+var _ binding.DUT = (*DUT)(nil)
 
 // DUT is a fake implementation of binding.DUT comprised of stubs.
 type DUT struct {
@@ -149,12 +151,14 @@ func (d *DUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4Run
 	return d.DialP4RTFn(ctx, opts...)
 }
 
+var _ binding.ATE = (*ATE)(nil)
+
 // ATE is a fake implementation of binding.ATE comprised of stubs.
 type ATE struct {
 	*binding.AbstractATE
 	DialIxNetworkFn func(context.Context) (*binding.IxNetwork, error)
 	DialGNMIFn      func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
-	DialOTGFn       func(context.Context) (gosnappi.GosnappiApi, error)
+	DialOTGFn       func(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error)
 }
 
 // DialIxNetwork delegates to a.DialIxNetworkFn.
@@ -174,9 +178,9 @@ func (a *ATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMICl
 }
 
 // DialOTG delegates to a.DialOTGFn.
-func (a *ATE) DialOTG(ctx context.Context) (gosnappi.GosnappiApi, error) {
+func (a *ATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
 	if a.DialOTGFn == nil {
 		log.Fatal("fakebind DialOTG called but DialOTGFn not set")
 	}
-	return a.DialOTGFn(ctx)
+	return a.DialOTGFn(ctx, opts...)
 }

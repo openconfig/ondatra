@@ -18,16 +18,15 @@ go build ./...
 go test $(go list ./... | grep -v /integration)
 ```
 
-## Binding API
+## Providing a Binding
 
 The Ondatra *binding* is the API layer through which Ondatra connects to and
 controls the devices in your test environment. For an Ondatra test to run in
-your environment, you must provide an implementation of the
-[Binding](binding/binding.go) interface. The interface defines the primitive
-operations that Ondatra needs to be able to test against devices in your lab.
-When authoring a new binding implementation, many methods can be left
-unimplemented to start, with their implementation postponed until you have a
-test that requires that piece of functionality.
+your environment, you must provide an implementation of the `Binding` interface.
+For [testing on KNE](#testing-on-kne), Ondatra comes bundled with a binding
+implementation for accessing KNE on your local machine. For testing on your
+physical devices,
+[read how to author your own Binding implementation](binding/README.md).
 
 ## Testbed File
 
@@ -42,6 +41,17 @@ under test), ATEs (automated test equipment), the links between them, as well as
 properties of the DUTs, ATEs, and links. It is the job of the `Reserve` method
 in the binding implementation to locate available resources that match the
 abstract topology and criteria specified in the testbed file.
+
+## Writing an Ondatra Test
+
+Ondatra provides a set of
+[fluent interfaces](https://en.wikipedia.org/wiki/Fluent_interface) for
+configuring and interacting with network devices. See the
+[full API reference documentation](https://pkg.go.dev/github.com/openconfig/ondatra#section-documentation){:target="_blank"}.
+
+The Ondatra gNMI API plays a particularly central role in Ondatra tests. It
+provide a set of test helpers for querying telemetry and setting the state of
+the device via gNMI. [Read more about the Ondatra gNMI API](gnmi/README.md).
 
 ## Running an Ondatra Test
 

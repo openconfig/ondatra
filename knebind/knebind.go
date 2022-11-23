@@ -28,6 +28,7 @@ import (
 	log "github.com/golang/glog"
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/open-traffic-generator/snappi/gosnappi"
@@ -155,7 +156,7 @@ func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	log.Infof("Dialing service %q on dut %s@%s", serviceName, d.Name(), addr)
+	log.Infof("Dialing service %q on DUT %s@%s", serviceName, d.Name(), addr)
 	opts = append(opts,
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),
 		grpc.WithPerRPCCredentials(&passCred{
@@ -264,31 +265,40 @@ type kneATE struct {
 	cfg *Config
 }
 
-func (a *kneATE) DialOTG(context.Context) (gosnappi.GosnappiApi, error) {
-	s, err := a.Service("grpc")
+func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := a.dialGRPC(ctx, "grpc", opts...)
 	if err != nil {
 		return nil, err
 	}
 	api := gosnappi.NewApi()
 	api.NewGrpcTransport().
-		SetLocation(serviceAddr(s)).
+		SetClientConnection(conn).
 		SetRequestTimeout(30 * time.Second)
 	return api, nil
 }
 
 func (a *kneATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-	s, err := a.Service("gnmi")
+	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	conn, err := a.dialGRPC(ctx, "gnmi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return gpb.NewGNMIClient(conn), nil
+}
+
+func (a *kneATE) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	s, err := a.Service(serviceName)
 	if err != nil {
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	log.Infof("Dialing service %q on ate %s@%s", addr, a.Name(), addr)
-	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	log.Infof("Dialing service %q on ATE %s@%s", serviceName, a.Name(), addr)
 	conn, err := grpc.DialContext(ctx, addr, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("DialContext(ctx, %s, %v): %w", addr, opts, err)
 	}
-	return gpb.NewGNMIClient(conn), nil
+	return conn, nil
 }
 
 func kneCmd(cfg *Config, args ...string) ([]byte, error) {

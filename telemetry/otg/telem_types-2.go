@@ -12,6 +12,71 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// QualifiedE_Ipv6Reachability_Prefix_OriginType is a E_Ipv6Reachability_Prefix_OriginType with a corresponding timestamp.
+type QualifiedE_Ipv6Reachability_Prefix_OriginType struct {
+	*genutil.Metadata
+	val     E_Ipv6Reachability_Prefix_OriginType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_Ipv6Reachability_Prefix_OriginType sample, erroring out if not present.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) Val(t testing.TB) E_Ipv6Reachability_Prefix_OriginType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_Ipv6Reachability_Prefix_OriginType sample.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) SetVal(v E_Ipv6Reachability_Prefix_OriginType) *QualifiedE_Ipv6Reachability_Prefix_OriginType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_Ipv6Reachability_Prefix_OriginType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_Ipv6Reachability_Prefix_OriginType is a telemetry Collection whose Await method returns a slice of E_Ipv6Reachability_Prefix_OriginType samples.
+type CollectionE_Ipv6Reachability_Prefix_OriginType struct {
+	W    *E_Ipv6Reachability_Prefix_OriginTypeWatcher
+	Data []*QualifiedE_Ipv6Reachability_Prefix_OriginType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_Ipv6Reachability_Prefix_OriginType) Await(t testing.TB) []*QualifiedE_Ipv6Reachability_Prefix_OriginType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_Ipv6Reachability_Prefix_OriginTypeWatcher observes a stream of E_Ipv6Reachability_Prefix_OriginType samples.
+type E_Ipv6Reachability_Prefix_OriginTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_Ipv6Reachability_Prefix_OriginType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_Ipv6Reachability_Prefix_OriginTypeWatcher) Await(t testing.TB) (*QualifiedE_Ipv6Reachability_Prefix_OriginType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
 // QualifiedE_Ipv6Reachability_Prefix_RedistributionType is a E_Ipv6Reachability_Prefix_RedistributionType with a corresponding timestamp.
 type QualifiedE_Ipv6Reachability_Prefix_RedistributionType struct {
 	*genutil.Metadata
@@ -138,6 +203,136 @@ type E_Lag_OperStatusWatcher struct {
 // Await blocks until the Watch predicate is true or the duration elapses.
 // It returns the last value received and a boolean indicating whether it satisfies the predicate.
 func (w *E_Lag_OperStatusWatcher) Await(t testing.TB) (*QualifiedE_Lag_OperStatus, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_LldpNeighbor_ChassisIdType is a E_LldpNeighbor_ChassisIdType with a corresponding timestamp.
+type QualifiedE_LldpNeighbor_ChassisIdType struct {
+	*genutil.Metadata
+	val     E_LldpNeighbor_ChassisIdType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_LldpNeighbor_ChassisIdType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_LldpNeighbor_ChassisIdType sample, erroring out if not present.
+func (q *QualifiedE_LldpNeighbor_ChassisIdType) Val(t testing.TB) E_LldpNeighbor_ChassisIdType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_LldpNeighbor_ChassisIdType sample.
+func (q *QualifiedE_LldpNeighbor_ChassisIdType) SetVal(v E_LldpNeighbor_ChassisIdType) *QualifiedE_LldpNeighbor_ChassisIdType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_LldpNeighbor_ChassisIdType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_LldpNeighbor_ChassisIdType is a telemetry Collection whose Await method returns a slice of E_LldpNeighbor_ChassisIdType samples.
+type CollectionE_LldpNeighbor_ChassisIdType struct {
+	W    *E_LldpNeighbor_ChassisIdTypeWatcher
+	Data []*QualifiedE_LldpNeighbor_ChassisIdType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_LldpNeighbor_ChassisIdType) Await(t testing.TB) []*QualifiedE_LldpNeighbor_ChassisIdType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_LldpNeighbor_ChassisIdTypeWatcher observes a stream of E_LldpNeighbor_ChassisIdType samples.
+type E_LldpNeighbor_ChassisIdTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_LldpNeighbor_ChassisIdType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_LldpNeighbor_ChassisIdTypeWatcher) Await(t testing.TB) (*QualifiedE_LldpNeighbor_ChassisIdType, bool) {
+	t.Helper()
+	return w.LastVal, w.W.Await(t)
+}
+
+// QualifiedE_LldpNeighbor_PortIdType is a E_LldpNeighbor_PortIdType with a corresponding timestamp.
+type QualifiedE_LldpNeighbor_PortIdType struct {
+	*genutil.Metadata
+	val     E_LldpNeighbor_PortIdType // val is the sample value.
+	present bool
+}
+
+func (q *QualifiedE_LldpNeighbor_PortIdType) String() string {
+	return genutil.QualifiedTypeString(q.val, q.Metadata)
+}
+
+// Val returns the value of the E_LldpNeighbor_PortIdType sample, erroring out if not present.
+func (q *QualifiedE_LldpNeighbor_PortIdType) Val(t testing.TB) E_LldpNeighbor_PortIdType {
+	t.Helper()
+	if q == nil {
+		t.Fatal("No value present")
+	}
+	if !q.present {
+		pathStr, err := ygot.PathToString(q.Path)
+		if err != nil {
+			pathStr = fmt.Sprintf("%v", q.Path.GetElem())
+		}
+		t.Fatalf("No value present at path %s", pathStr)
+	}
+	return q.val
+}
+
+// SetVal sets the value of the E_LldpNeighbor_PortIdType sample.
+func (q *QualifiedE_LldpNeighbor_PortIdType) SetVal(v E_LldpNeighbor_PortIdType) *QualifiedE_LldpNeighbor_PortIdType {
+	q.val = v
+	q.present = true
+	return q
+}
+
+// IsPresent returns true if the qualified struct contains a value.
+func (q *QualifiedE_LldpNeighbor_PortIdType) IsPresent() bool {
+	return q != nil && q.present
+}
+
+// CollectionE_LldpNeighbor_PortIdType is a telemetry Collection whose Await method returns a slice of E_LldpNeighbor_PortIdType samples.
+type CollectionE_LldpNeighbor_PortIdType struct {
+	W    *E_LldpNeighbor_PortIdTypeWatcher
+	Data []*QualifiedE_LldpNeighbor_PortIdType
+}
+
+// Await blocks until the telemetry collection is complete and returns the slice of values collected.
+func (c *CollectionE_LldpNeighbor_PortIdType) Await(t testing.TB) []*QualifiedE_LldpNeighbor_PortIdType {
+	t.Helper()
+	c.W.Await(t)
+	return c.Data
+}
+
+// E_LldpNeighbor_PortIdTypeWatcher observes a stream of E_LldpNeighbor_PortIdType samples.
+type E_LldpNeighbor_PortIdTypeWatcher struct {
+	W       *genutil.Watcher
+	LastVal *QualifiedE_LldpNeighbor_PortIdType
+}
+
+// Await blocks until the Watch predicate is true or the duration elapses.
+// It returns the last value received and a boolean indicating whether it satisfies the predicate.
+func (w *E_LldpNeighbor_PortIdTypeWatcher) Await(t testing.TB) (*QualifiedE_LldpNeighbor_PortIdType, bool) {
 	t.Helper()
 	return w.LastVal, w.W.Await(t)
 }

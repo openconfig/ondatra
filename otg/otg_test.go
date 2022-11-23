@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
@@ -32,7 +33,7 @@ var (
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
 			Ports: map[string]*binding.Port{"port1": {}},
 		}},
-		DialOTGFn: func(context.Context) (gosnappi.GosnappiApi, error) {
+		DialOTGFn: func(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
 			return fakeSnappi, nil
 		},
 	}

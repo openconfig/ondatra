@@ -21,9 +21,10 @@ import (
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra"
-	"github.com/openconfig/ondatra/telemetry"
 	"github.com/openconfig/testt"
+	"github.com/openconfig/ygnmi/ygnmi"
 
 	opb "github.com/openconfig/ondatra/proto"
 )
@@ -185,7 +186,7 @@ func TestNextBundleInterface(t *testing.T) {
 	tests := []struct {
 		desc    string
 		vendor  ondatra.Vendor
-		intfs   map[string]*telemetry.Interface
+		intfs   map[string]*oc.Interface
 		want    string
 		wantErr string
 	}{{
@@ -207,9 +208,9 @@ func TestNextBundleInterface(t *testing.T) {
 	}, {
 		desc:   "between intfs",
 		vendor: ondatra.ARISTA,
-		intfs: map[string]*telemetry.Interface{
-			"Port-Channel1": &telemetry.Interface{},
-			"Port-Channel3": &telemetry.Interface{},
+		intfs: map[string]*oc.Interface{
+			"Port-Channel1": &oc.Interface{},
+			"Port-Channel3": &oc.Interface{},
 		},
 		want: "Port-Channel2",
 	}, {
@@ -220,9 +221,9 @@ func TestNextBundleInterface(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			val := &telemetry.QualifiedDevice{}
+			val := &ygnmi.Value[*oc.Root]{}
 			if test.intfs != nil {
-				val.SetVal(&telemetry.Device{
+				val.SetVal(&oc.Root{
 					Interface: test.intfs,
 				})
 			}
@@ -241,7 +242,7 @@ func TestNextVLANInterface(t *testing.T) {
 	tests := []struct {
 		desc    string
 		vendor  ondatra.Vendor
-		intfs   map[string]*telemetry.Interface
+		intfs   map[string]*oc.Interface
 		want    string
 		wantErr string
 	}{{
@@ -263,9 +264,9 @@ func TestNextVLANInterface(t *testing.T) {
 	}, {
 		desc:   "between intfs",
 		vendor: ondatra.CISCO,
-		intfs: map[string]*telemetry.Interface{
-			"BVI1": &telemetry.Interface{},
-			"BVI3": &telemetry.Interface{},
+		intfs: map[string]*oc.Interface{
+			"BVI1": &oc.Interface{},
+			"BVI3": &oc.Interface{},
 		},
 		want: "BVI2",
 	}, {
@@ -276,9 +277,9 @@ func TestNextVLANInterface(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			val := &telemetry.QualifiedDevice{}
+			val := &ygnmi.Value[*oc.Root]{}
 			if test.intfs != nil {
-				val.SetVal(&telemetry.Device{
+				val.SetVal(&oc.Root{
 					Interface: test.intfs,
 				})
 			}

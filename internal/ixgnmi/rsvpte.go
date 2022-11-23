@@ -21,11 +21,11 @@ import (
 
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
-	"github.com/openconfig/ondatra/telemetry"
 )
 
-func rsvpTEFromIxia(ctx context.Context, client cfgClient, netInst *telemetry.NetworkInstance, nodes *cachedNodes) error {
+func rsvpTEFromIxia(ctx context.Context, client cfgClient, netInst *oc.NetworkInstance, nodes *cachedNodes) error {
 	ingressLSPs, err := fetchIngressLSPs(ctx, client, nodes.rsvpLSPs)
 	if err != nil {
 		return err
@@ -81,7 +81,7 @@ func fetchIngressLSPs(ctx context.Context, client cfgClient, rsvpLSPs []*ixconfi
 	return ingressLSPsByPrefix, nil
 }
 
-func populateIngressLSPs(netInst *telemetry.NetworkInstance, ingressLSPsBySessionPrefix map[string][]*ingressLSP) error {
+func populateIngressLSPs(netInst *oc.NetworkInstance, ingressLSPsBySessionPrefix map[string][]*ingressLSP) error {
 	rsvpTE := netInst.GetOrCreateMpls().GetOrCreateSignalingProtocols().GetOrCreateRsvpTe()
 
 	// Hash prefixes to maintain constant session indices for a given config.
@@ -101,7 +101,7 @@ func populateIngressLSPs(netInst *telemetry.NetworkInstance, ingressLSPsBySessio
 		hashImpl.Reset()
 	}
 
-	rsvpTE.Session = map[uint64]*telemetry.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{}
+	rsvpTE.Session = map[uint64]*oc.NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Session{}
 	for pfx, lsps := range ingressLSPsBySessionPrefix {
 		// Left-shift hash of the LSP config to the upper bits of a uint64.
 		// The lower bits will be used to indicate the indices of tunnels
@@ -111,12 +111,12 @@ func populateIngressLSPs(netInst *telemetry.NetworkInstance, ingressLSPsBySessio
 			//
 			session := rsvpTE.GetOrCreateSession(h | uint64(i))
 			session.SessionName = ygot.String(fmt.Sprintf("%s %d", pfx, i))
-			session.Type = telemetry.MplsTypes_LSP_ROLE_INGRESS
+			session.Type = oc.MplsTypes_LSP_ROLE_INGRESS
 			session.SourceAddress = ygot.String(lsp.src)
 			session.DestinationAddress = ygot.String(lsp.dst)
-			session.Status = telemetry.Session_Status_DOWN
+			session.Status = oc.Session_Status_DOWN
 			if lsp.up {
-				session.Status = telemetry.Session_Status_UP
+				session.Status = oc.Session_Status_UP
 			}
 		}
 	}

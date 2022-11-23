@@ -204,14 +204,15 @@ go run internal/gnmigen/main/main.go \
   "${YANG_FILES[@]}"
 
 OTG_YANG_FILES=(
-  models-yang/models/isis/open-traffic-generator-isis.yang
-  models-yang/models/types/open-traffic-generator-types.yang
-  models-yang/models/flow/open-traffic-generator-flow.yang
-  models-yang/models/discovery/open-traffic-generator-discovery.yang
-  models-yang/models/interface/open-traffic-generator-port.yang
   models-yang/models/bgp/open-traffic-generator-bgp.yang
-  models-yang/models/lag/open-traffic-generator-lag.yang
+  models-yang/models/discovery/open-traffic-generator-discovery.yang
+  models-yang/models/flow/open-traffic-generator-flow.yang
+  models-yang/models/interface/open-traffic-generator-port.yang
+  models-yang/models/isis/open-traffic-generator-isis.yang
   models-yang/models/lacp/open-traffic-generator-lacp.yang
+  models-yang/models/lag/open-traffic-generator-lag.yang
+  models-yang/models/lldp/open-traffic-generator-lldp.yang
+  models-yang/models/types/open-traffic-generator-types.yang
 )
 
 # Generate OTG Schema Structs

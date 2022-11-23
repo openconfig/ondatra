@@ -24,11 +24,11 @@ import (
 	log "github.com/golang/glog"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/binding/ixweb"
-	"github.com/openconfig/ondatra/telemetry"
+	"github.com/openconfig/ondatra/gnmi/oc"
 )
 
 var (
-	translateFunctions = map[string]func(ixweb.StatTable, []string, []string) (*telemetry.Device, error){
+	translateFunctions = map[string]func(ixweb.StatTable, []string, []string) (*oc.Root, error){
 		portStatsCaption:              translatePortStats,
 		portCPUStatsCaption:           translatePortCPUStats,
 		ixweb.TrafficItemStatsCaption: translateTrafficItemStats,
@@ -63,7 +63,7 @@ var (
 // The itFlows and etFlows parameters indicates which flows have ingress
 // tracking and egress tracking enabled, respectively.
 func translate(st *Stats) (ygot.GoStruct, error) {
-	root := &telemetry.Device{}
+	root := &oc.Root{}
 	for caption, table := range st.Tables {
 		if fn, ok := translateFunctions[caption]; ok {
 			d, err := fn(table, st.IngressTrackFlows, st.EgressTrackFlows)
@@ -76,7 +76,7 @@ func translate(st *Stats) (ygot.GoStruct, error) {
 				log.Errorf("Got error: %v while merging %s", err, caption)
 				continue
 			}
-			root = n.(*telemetry.Device)
+			root = n.(*oc.Root)
 		}
 	}
 
@@ -86,26 +86,26 @@ func translate(st *Stats) (ygot.GoStruct, error) {
 	return root, nil
 }
 
-func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
+func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*oc.Root, error) {
 	portCPURows, err := parsePortCPUStats(in)
 	if err != nil {
 		return nil, err
 	}
 	log.V(3).Infof("Parsed Port CPU Stats: %v", portCPURows)
 
-	d := &telemetry.Device{}
+	d := &oc.Root{}
 	for _, row := range portCPURows {
 		port := d.GetOrCreateComponent(row.PortName)
 		cpu := d.GetOrCreateComponent(fmt.Sprintf("%s_CPU", row.PortName))
 
-		port.Type = telemetry.PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PORT
+		port.Type = oc.PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PORT
 		port.NewSubcomponent(*cpu.Name)
 
-		cpu.Type = telemetry.PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_CPU
+		cpu.Type = oc.PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_CPU
 		cpu.Parent = port.Name
 
 		if row.TotalMemory != nil && row.FreeMemory != nil {
-			port.Memory = &telemetry.Component_Memory{
+			port.Memory = &oc.Component_Memory{
 				Available: ygot.Uint64(*row.FreeMemory),
 				Utilized:  ygot.Uint64(*row.TotalMemory - *row.FreeMemory),
 			}
@@ -119,17 +119,17 @@ func translatePortCPUStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device
 	return d, nil
 }
 
-func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
+func translatePortStats(in ixweb.StatTable, _, _ []string) (*oc.Root, error) {
 	portRows, err := parsePortStats(in)
 	if err != nil {
 		return nil, err
 	}
 	log.V(3).Infof("Parsed Port Stats: %v", portRows)
 
-	d := &telemetry.Device{}
+	d := &oc.Root{}
 	for _, row := range portRows {
 		i := d.GetOrCreateInterface(row.PortName)
-		i.Counters = &telemetry.Interface_Counters{
+		i.Counters = &oc.Interface_Counters{
 			InOctets:  row.BytesRx,
 			InPkts:    row.FramesRx,
 			OutOctets: row.BytesTx,
@@ -139,14 +139,14 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 		i.InRate = pfloat32Bytes(row.RxRate)
 		i.OutRate = pfloat32Bytes(row.TxRate)
 
-		i.Type = telemetry.IETFInterfaces_InterfaceType_ethernetCsmacd
+		i.Type = oc.IETFInterfaces_InterfaceType_ethernetCsmacd
 		switch row.LinkState {
 		case "":
 			// No error when empty.
 		case "Link Up":
-			i.OperStatus = telemetry.Interface_OperStatus_UP
+			i.OperStatus = oc.Interface_OperStatus_UP
 		case "Link Down", "No PCS Lock":
-			i.OperStatus = telemetry.Interface_OperStatus_DOWN
+			i.OperStatus = oc.Interface_OperStatus_DOWN
 		default:
 			return nil, fmt.Errorf("statistics row %q has an unmappable port link state %q", row.PortName, row.LinkState)
 		}
@@ -156,11 +156,11 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 		case "":
 			// No error when empty.
 		case "10GE LAN":
-			i.GetOrCreateEthernet().PortSpeed = telemetry.IfEthernet_ETHERNET_SPEED_SPEED_10GB
+			i.GetOrCreateEthernet().PortSpeed = oc.IfEthernet_ETHERNET_SPEED_SPEED_10GB
 		case "100GE":
-			i.GetOrCreateEthernet().PortSpeed = telemetry.IfEthernet_ETHERNET_SPEED_SPEED_100GB
+			i.GetOrCreateEthernet().PortSpeed = oc.IfEthernet_ETHERNET_SPEED_SPEED_100GB
 		case "400GE":
-			i.GetOrCreateEthernet().PortSpeed = telemetry.IfEthernet_ETHERNET_SPEED_SPEED_400GB
+			i.GetOrCreateEthernet().PortSpeed = oc.IfEthernet_ETHERNET_SPEED_SPEED_400GB
 		default:
 			return nil, fmt.Errorf("statistics row %q has an unmappable port link speed %q", row.PortName, row.LineSpeed)
 		}
@@ -169,17 +169,17 @@ func translatePortStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 	return d, nil
 }
 
-func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
+func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*oc.Root, error) {
 	itemRows, err := parseFlowStats(in)
 	if err != nil {
 		return nil, err
 	}
 	log.V(3).Infof("Parsed Item Stats: %v", itemRows)
 
-	d := &telemetry.Device{}
+	d := &oc.Root{}
 	for _, row := range itemRows {
 		f := d.GetOrCreateFlow(row.TrafficItem)
-		f.Counters = &telemetry.Flow_Counters{
+		f.Counters = &oc.Flow_Counters{
 			InOctets: row.RxBytes,
 			InPkts:   row.RxFrames,
 			OutPkts:  row.TxFrames,
@@ -195,18 +195,18 @@ func translateTrafficItemStats(in ixweb.StatTable, _, _ []string) (*telemetry.De
 	return d, nil
 }
 
-func translateFlowStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, error) {
+func translateFlowStats(in ixweb.StatTable, _, _ []string) (*oc.Root, error) {
 	flowRows, err := parseFlowStats(in)
 	if err != nil {
 		return nil, err
 	}
 	log.V(3).Infof("Parsed Flow Stats: %v", flowRows)
 
-	d := &telemetry.Device{}
+	d := &oc.Root{}
 	for _, row := range flowRows {
 		f := d.GetOrCreateFlow(row.TrafficItem)
 		it := ingressTrackingFromFlowStats(f, row)
-		it.Counters = &telemetry.Flow_IngressTracking_Counters{
+		it.Counters = &oc.Flow_IngressTracking_Counters{
 			InOctets: row.RxBytes,
 			InPkts:   row.RxFrames,
 			OutPkts:  row.TxFrames,
@@ -220,16 +220,16 @@ func translateFlowStats(in ixweb.StatTable, _, _ []string) (*telemetry.Device, e
 	return d, nil
 }
 
-func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telemetry.Device, error) {
+func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*oc.Root, error) {
 	egressRows, err := parseEgressStats(in)
 	if err != nil {
 		return nil, err
 	}
 	log.V(3).Infof("Parsed Egress Stats: %v", egressRows)
 
-	d := &telemetry.Device{}
-	var f *telemetry.Flow
-	var it *telemetry.Flow_IngressTracking
+	d := &oc.Root{}
+	var f *oc.Flow
+	var it *oc.Flow_IngressTracking
 	for i, row := range egressRows {
 		// When there is only a single egress tracking flow, Ixia will omit the
 		// "Traffic Item" column entirely, so populate it with that flow name.
@@ -261,7 +261,7 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 
 		if it == nil {
 			ef := f.GetOrCreateEgressTracking(row.filter)
-			ef.Counters = &telemetry.Flow_EgressTracking_Counters{
+			ef.Counters = &oc.Flow_EgressTracking_Counters{
 				InOctets: row.RxBytes,
 				InPkts:   row.RxFrames,
 				OutPkts:  row.TxFrames,
@@ -273,7 +273,7 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 			ef.OutFrameRate = pfloat32Bytes(row.TxFrameRate)
 		} else {
 			ef := it.GetOrCreateEgressTracking(row.filter)
-			ef.Counters = &telemetry.Flow_IngressTracking_EgressTracking_Counters{
+			ef.Counters = &oc.Flow_IngressTracking_EgressTracking_Counters{
 				InOctets: row.RxBytes,
 				InPkts:   row.RxFrames,
 				OutPkts:  row.TxFrames,
@@ -289,7 +289,7 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*telem
 	return d, nil
 }
 
-func ingressTrackingFromFlowStats(flow *telemetry.Flow, row *flowRow) *telemetry.Flow_IngressTracking {
+func ingressTrackingFromFlowStats(flow *oc.Flow, row *flowRow) *oc.Flow_IngressTracking {
 	return flow.GetOrCreateIngressTracking(
 		row.TxPort,
 		row.RxPort,
@@ -302,28 +302,28 @@ func ingressTrackingFromFlowStats(flow *telemetry.Flow, row *flowRow) *telemetry
 	)
 }
 
-func mplsLabelFromUint(label *uint64) telemetry.Flow_IngressTracking_MplsLabel_Union {
+func mplsLabelFromUint(label *uint64) oc.Flow_IngressTracking_MplsLabel_Union {
 	if label == nil {
-		return telemetry.MplsTypes_MplsLabel_Enum_NO_LABEL
+		return oc.IngressTracking_MplsLabel_NO_LABEL
 	}
 	labelNum := *label
 	switch labelNum {
 	case 0:
-		return telemetry.MplsTypes_MplsLabel_Enum_IPV4_EXPLICIT_NULL
+		return oc.IngressTracking_MplsLabel_IPV4_EXPLICIT_NULL
 	case 1:
-		return telemetry.MplsTypes_MplsLabel_Enum_ROUTER_ALERT
+		return oc.IngressTracking_MplsLabel_ROUTER_ALERT
 	case 2:
-		return telemetry.MplsTypes_MplsLabel_Enum_IPV6_EXPLICIT_NULL
+		return oc.IngressTracking_MplsLabel_IPV6_EXPLICIT_NULL
 	case 3:
-		return telemetry.MplsTypes_MplsLabel_Enum_IMPLICIT_NULL
+		return oc.IngressTracking_MplsLabel_IMPLICIT_NULL
 	case 7:
-		return telemetry.MplsTypes_MplsLabel_Enum_ENTROPY_LABEL_INDICATOR
+		return oc.IngressTracking_MplsLabel_ENTROPY_LABEL_INDICATOR
 	}
 	const maxUint32 = uint64(^uint32(0))
 	if labelNum > maxUint32 {
-		return telemetry.MplsTypes_MplsLabel_Enum_UNSET
+		return oc.IngressTracking_MplsLabel_UNSET
 	}
-	return telemetry.UnionUint32(labelNum)
+	return oc.UnionUint32(labelNum)
 }
 
 func vlanIDFromUint(id *uint64) uint16 {
@@ -333,23 +333,23 @@ func vlanIDFromUint(id *uint64) uint16 {
 	return uint16(*id)
 }
 
-func pfloat32Bytes(f *float32) telemetry.Binary {
+func pfloat32Bytes(f *float32) oc.Binary {
 	if f == nil {
 		return nil
 	}
 	return float32Bytes(*f)
 }
 
-func float32Bytes(f float32) telemetry.Binary {
+func float32Bytes(f float32) oc.Binary {
 	b := make([]byte, 4)
 	binary.BigEndian.PutUint32(b, math.Float32bits(f))
-	return telemetry.Binary(b)
+	return oc.Binary(b)
 }
 
 // jsonDebug renders a device struct to JSON such that it can be logged.
 // Since it is used only in debugging, it logs an error if the device struct
 // cannot be rendered to JSON, and returns an error string to the user.
-func jsonDebug(d *telemetry.Device) string {
+func jsonDebug(d *oc.Root) string {
 	js, err := ygot.ConstructIETFJSON(d, nil)
 	if err != nil {
 		log.Errorf("cannot render device to JSON during debugging, %v", err)
