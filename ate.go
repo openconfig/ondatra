@@ -15,14 +15,9 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
-	"testing"
-
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/binding/ixweb"
-	"github.com/openconfig/ondatra/internal/events"
-	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/otg"
+	"github.com/openconfig/ondatra/raw"
 )
 
 // ATEDevice is an automated test equipment.
@@ -52,23 +47,6 @@ func (a *ATEDevice) Actions() *Actions {
 }
 
 // RawAPIs returns a handle to raw protocol APIs on the ATE.
-func (a *ATEDevice) RawAPIs() *RawATEAPIs {
-	return &RawATEAPIs{ate: a.res.(binding.ATE)}
-}
-
-// RawATEAPIs provides access to raw ATE protocol APIs.
-type RawATEAPIs struct {
-	ate binding.ATE
-}
-
-// IxNetwork returns the raw IxNetwork session for the ATE.
-// TODO(team): Add unit tests once raw APIs is factored out into its own package.
-func (r *RawATEAPIs) IxNetwork(t testing.TB) *ixweb.Session {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)
-	ixnet, err := rawapis.FetchIxNetwork(context.Background(), r.ate)
-	if err != nil {
-		t.Fatalf("IxNetwork(t) on %v: %v", r.ate, err)
-	}
-	return ixnet.Session
+func (a *ATEDevice) RawAPIs() *raw.ATEAPIs {
+	return raw.NewATEAPIs(a.res.(binding.ATE))
 }

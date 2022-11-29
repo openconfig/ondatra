@@ -22,6 +22,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/pkg/errors"
+	"github.com/openconfig/ondatra/internal/orderedmap"
 )
 
 var (
@@ -155,10 +156,11 @@ type solver struct {
 	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
 
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
-	nodeConstraints         map[*AbstractNode]map[string]LeafConstraint
-	portConstraints         map[*AbstractPort]map[string]LeafConstraint
-	deferredNodeConstraints map[*AbstractNode][]deferredNodeConstraint
-	deferredPortConstraints map[*AbstractPort][]deferredPortConstraint
+	// Constraints are ordered for deterministic iteration.
+	nodeConstraints         *orderedmap.OrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]]
+	portConstraints         *orderedmap.OrderedMap[*AbstractPort, *orderedmap.OrderedMap[string, LeafConstraint]]
+	deferredNodeConstraints *orderedmap.OrderedMap[*AbstractNode, []deferredNodeConstraint]
+	deferredPortConstraints *orderedmap.OrderedMap[*AbstractPort, []deferredPortConstraint]
 }
 
 // Solve returns as assignment from superGraph that satisfies abstractGraph.
@@ -206,10 +208,10 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 		absPort2Node:            absPort2Node,
 		absPort2Port2Edge:       absPort2Port2Edge,
 		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
-		nodeConstraints:         make(map[*AbstractNode]map[string]LeafConstraint),
-		deferredNodeConstraints: make(map[*AbstractNode][]deferredNodeConstraint),
-		portConstraints:         make(map[*AbstractPort]map[string]LeafConstraint),
-		deferredPortConstraints: make(map[*AbstractPort][]deferredPortConstraint),
+		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
+		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
+		portConstraints:         orderedmap.NewOrderedMap[*AbstractPort, *orderedmap.OrderedMap[string, LeafConstraint]](),
+		deferredPortConstraints: orderedmap.NewOrderedMap[*AbstractPort, []deferredPortConstraint](),
 	}
 
 	a, ok := s.solve()
@@ -272,7 +274,8 @@ func (s *solver) solve() (*Assignment, bool) {
 // checkEdges validates that the concrete nodes can satisfy the abstract edges.
 func (s *solver) checkEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
 	// Iterate through the abstract edges.
-	for absSrcNode, absDstNodes := range s.absNode2Node {
+	for _, absSrcNode := range s.abstractGraph.Nodes {
+		absDstNodes := s.absNode2Node[absSrcNode]
 		for absDstNode, need := range absDstNodes {
 			conSrcNode, conDstNode := abs2ConNode[absSrcNode], abs2ConNode[absDstNode]
 			if !s.checkEdge(conSrcNode, conDstNode, need) {
@@ -305,11 +308,11 @@ type portAssigner struct {
 	// Pre-processed data for this port solve. These maps should not change.
 	absPort2Edge            map[*AbstractPort]*AbstractEdge
 	abs2ConEdges            map[*AbstractEdge][]*ConcreteEdge
-	deferredPortConstraints map[*AbstractPort][]deferredPortConstraint
+	deferredPortConstraints *orderedmap.OrderedMap[*AbstractPort, []deferredPortConstraint]
 	orderedAbsEdges         []*AbstractEdge
 
 	// Stored data between recursions.
-	deferredUntilPortConstraints map[*AbstractPort][]deferredPortConstraint
+	deferredUntilPortConstraints *orderedmap.OrderedMap[*AbstractPort, []deferredPortConstraint]
 	abs2ConPorts                 map[*AbstractPort]*ConcretePort // Ports that have been assigned.
 	assignedConPorts             map[*ConcretePort]struct{}
 	assignQueue                  *assignQueue
@@ -362,7 +365,7 @@ func (pa *portAssigner) assign() bool {
 	// The ports that were assigned/enqueued.
 	var assignedAbsPorts []*AbstractPort
 	var assignedConPorts []*ConcretePort
-	var enqueuedPorts []*AbstractPort
+	var numEnqueuedPortConstraints map[*AbstractPort]int
 	rewindState := func() {
 		for _, p := range assignedAbsPorts {
 			delete(pa.abs2ConPorts, p)
@@ -370,8 +373,17 @@ func (pa *portAssigner) assign() bool {
 		for _, p := range assignedConPorts {
 			delete(pa.assignedConPorts, p)
 		}
-		for _, p := range enqueuedPorts {
-			delete(pa.deferredUntilPortConstraints, p)
+		for p, i := range numEnqueuedPortConstraints {
+			pcs, ok := pa.deferredUntilPortConstraints.Get(p)
+			if !ok {
+				// This should be impossible.
+				log.Fatalf("cannot remove non-existant port constraints; bad state")
+			}
+			if len(pcs) <= i {
+				pa.deferredUntilPortConstraints.Delete(p)
+			} else {
+				pa.deferredUntilPortConstraints.Set(p, pcs[:len(pcs)-i])
+			}
 		}
 	}
 	for _, conEdge := range pa.abs2ConEdges[absEdge] {
@@ -387,7 +399,7 @@ func (pa *portAssigner) assign() bool {
 		tryPortAssignment := func(queue *assignQueue) bool {
 			assignedAbsPorts = nil
 			assignedConPorts = nil
-			enqueuedPorts = nil
+			numEnqueuedPortConstraints = make(map[*AbstractPort]int, len(pa.absPort2Edge))
 
 			// Try assigning the ports.
 			assign := func(a *AbstractPort, c *ConcretePort) {
@@ -404,7 +416,7 @@ func (pa *portAssigner) assign() bool {
 			// Check whether the assigned ports work with constraints.
 			checkAssignment := func(absPort *AbstractPort) bool {
 				// Start with constraints from previously assigned ports that depend on the port currently being assigned.
-				if dcs, ok := pa.deferredUntilPortConstraints[absPort]; ok {
+				if dcs, ok := pa.deferredUntilPortConstraints.Get(absPort); ok {
 					for _, dc := range dcs {
 						ok, _, err := dc(pa.abs2ConPorts)
 						if err != nil {
@@ -419,12 +431,13 @@ func (pa *portAssigner) assign() bool {
 				// Check deferred constraints.
 				// If the constraint depends on another port that has not been assigned yet, defer the constraint
 				// and add associated edge to the queue.
-				if constraints, ok := pa.deferredPortConstraints[absPort]; ok {
+				if constraints, ok := pa.deferredPortConstraints.Get(absPort); ok {
 					for _, dc := range constraints {
 						if ok, p, err := dc(pa.abs2ConPorts); err != nil {
-							pa.deferredUntilPortConstraints[p] = append(pa.deferredUntilPortConstraints[p], dc)
+							dpcs, _ := pa.deferredUntilPortConstraints.Get(p)
+							pa.deferredUntilPortConstraints.Set(p, append(dpcs, dc))
 							queue.queue = append(queue.queue, pa.absPort2Edge[p])
-							enqueuedPorts = append(enqueuedPorts, p)
+							numEnqueuedPortConstraints[p]++
 						} else if !ok {
 							return false
 						}
@@ -475,7 +488,12 @@ func (s *solver) assignEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) map[*A
 	// Generate all possible edges for this node assignment.
 	abs2ConEdgeCombos := make(map[*AbstractEdge][]*ConcreteEdge)
 	absPort2Edge := make(map[*AbstractPort]*AbstractEdge)
-	for absSrcNode, conSrcNode := range abs2ConNode {
+	for _, absSrcNode := range s.abstractGraph.Nodes {
+		conSrcNode, ok := abs2ConNode[absSrcNode]
+		if !ok {
+			// This should never happen; there is a node in Abstract Graph that wasn't assigned.
+			return nil
+		}
 		for _, absSrcPort := range absSrcNode.Ports {
 			// Check attributes match, then check if matched ports link correctly.
 			matchedConPorts := s.matchPorts(absSrcPort, conSrcNode.Ports)
@@ -545,7 +563,7 @@ func (s *solver) assignEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) map[*A
 		absPort2Edge:                 absPort2Edge,
 		deferredPortConstraints:      s.deferredPortConstraints,
 		orderedAbsEdges:              orderedEdges,
-		deferredUntilPortConstraints: make(map[*AbstractPort][]deferredPortConstraint, len(s.deferredPortConstraints)),
+		deferredUntilPortConstraints: orderedmap.NewOrderedMap[*AbstractPort, []deferredPortConstraint](),
 		abs2ConPorts:                 make(map[*AbstractPort]*ConcretePort, len(s.absPort2Node)),
 		assignedConPorts:             make(map[*ConcretePort]struct{}, len(s.absPort2Node)),
 		assignQueue:                  aq,
@@ -575,7 +593,7 @@ func (s *solver) assignEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) map[*A
 func (s *solver) processConstraints() {
 	for _, n := range s.abstractGraph.Nodes {
 		n := n
-		nc := make(map[string]LeafConstraint)
+		nc := orderedmap.NewOrderedMap[string, LeafConstraint]()
 		var dnc []deferredNodeConstraint
 		addNodeConstraint := func(k string, c NodeConstraint, n *AbstractNode) {
 			switch v := c.(type) {
@@ -583,14 +601,14 @@ func (s *solver) processConstraints() {
 				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
 					return v.match(k, n, abs2ConNode)
 				})
-				nc[k] = reAny
+				nc.Set(k, reAny)
 			case *notSameAsNode:
 				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
 					return v.match(k, n, abs2ConNode)
 				})
-				nc[k] = reAny
+				nc.Set(k, reAny)
 			case LeafConstraint:
-				nc[k] = v
+				nc.Set(k, v)
 			default:
 				log.Fatalf("Unrecognized constraint type %T for node matching", v)
 			}
@@ -604,11 +622,11 @@ func (s *solver) processConstraints() {
 				addNodeConstraint(k, c, n)
 			}
 		}
-		s.nodeConstraints[n] = nc
-		s.deferredNodeConstraints[n] = dnc
+		s.nodeConstraints.Set(n, nc)
+		s.deferredNodeConstraints.Set(n, dnc)
 		for _, p := range n.Ports {
 			p := p
-			pc := make(map[string]LeafConstraint)
+			pc := orderedmap.NewOrderedMap[string, LeafConstraint]()
 			var dpc []deferredPortConstraint
 			addPortConstraint := func(k string, c PortConstraint, p *AbstractPort) {
 				switch v := c.(type) {
@@ -619,7 +637,7 @@ func (s *solver) processConstraints() {
 						}
 						return v.match(k, p, abs2ConPort), nil, nil
 					})
-					pc[k] = reAny
+					pc.Set(k, reAny)
 				case *notSameAsPort:
 					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
 						if _, ok := abs2ConPort[v.p]; !ok {
@@ -627,9 +645,9 @@ func (s *solver) processConstraints() {
 						}
 						return v.match(k, p, abs2ConPort), nil, nil
 					})
-					pc[k] = reAny
+					pc.Set(k, reAny)
 				case LeafConstraint:
-					pc[k] = v
+					pc.Set(k, v)
 				default:
 					log.Fatalf("Unrecognized constraint type %T for port matching", v)
 				}
@@ -643,15 +661,19 @@ func (s *solver) processConstraints() {
 					addPortConstraint(k, c, p)
 				}
 			}
-			s.portConstraints[p] = pc
-			s.deferredPortConstraints[p] = dpc
+			s.portConstraints.Set(p, pc)
+			s.deferredPortConstraints.Set(p, dpc)
 		}
 	}
 }
 
 // matchDeferredNodes checks whether the proposed node mapping fulfills constraints.
 func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
-	for _, dncs := range s.deferredNodeConstraints {
+	for _, n := range s.deferredNodeConstraints.Keys() {
+		dncs, ok := s.deferredNodeConstraints.Get(n)
+		if !ok {
+			log.Fatalf("Impossible: node %q not present in orderedmap", n.Desc)
+		}
 		for _, dnc := range dncs {
 			if !dnc(abs2ConNode) {
 				return false
@@ -668,7 +690,15 @@ func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*Con
 		if len(abs.Ports) > len(n.Ports) {
 			return false
 		}
-		for k, c := range s.nodeConstraints[abs] {
+		constraints, ok := s.nodeConstraints.Get(abs)
+		if !ok {
+			return true
+		}
+		for _, k := range constraints.Keys() {
+			c, ok := constraints.Get(k)
+			if !ok {
+				continue
+			}
 			s, ok := n.Attrs[k]
 			if !c.match(s, ok) {
 				return false
@@ -705,7 +735,15 @@ func (s *solver) matchDeferredPort(port *AbstractPort, abs2ConPort map[*Abstract
 }
 
 func (s *solver) matchPort(abs *AbstractPort, p *ConcretePort) bool {
-	for k, c := range s.portConstraints[abs] {
+	constraints, ok := s.portConstraints.Get(abs)
+	if !ok {
+		return true
+	}
+	for _, k := range constraints.Keys() {
+		c, ok := constraints.Get(k)
+		if !ok {
+			log.Fatalf("Impossible: key %q not present in orderedmap", k)
+		}
 		s, ok := p.Attrs[k]
 		if !c.match(s, ok) {
 			return false

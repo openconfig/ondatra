@@ -56,16 +56,21 @@ func NewConsole(ctx context.Context, dut binding.DUT) (binding.StreamClient, err
 
 var (
 	gnmiMu sync.Mutex
-	gnmis  = make(map[binding.DUT]gpb.GNMIClient)
+	gnmis  = make(map[GNMIDialer]gpb.GNMIClient)
 )
 
+// GNMIDialer is an interface for devices that can dial gNMI.
+type GNMIDialer interface {
+	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
+}
+
 // NewGNMI creates a new gNMI client for the specified DUT.
-func NewGNMI(ctx context.Context, dut binding.DUT) (gpb.GNMIClient, error) {
-	return dut.DialGNMI(ctx, CommonDialOpts...)
+func NewGNMI(ctx context.Context, dialer GNMIDialer) (gpb.GNMIClient, error) {
+	return dialer.DialGNMI(ctx, CommonDialOpts...)
 }
 
 // FetchGNMI fetches the cached gNMI client for the specified DUT.
-func FetchGNMI(ctx context.Context, dut binding.DUT) (gpb.GNMIClient, error) {
+func FetchGNMI(ctx context.Context, dut GNMIDialer) (gpb.GNMIClient, error) {
 	gnmiMu.Lock()
 	defer gnmiMu.Unlock()
 	c, ok := gnmis[dut]

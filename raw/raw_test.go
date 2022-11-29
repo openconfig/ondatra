@@ -22,6 +22,7 @@ import (
 
 	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
 
@@ -30,7 +31,10 @@ import (
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
-var dut = &fakebind.DUT{AbstractDUT: &binding.AbstractDUT{&binding.Dims{Name: "fakeDUT"}}}
+var (
+	dut = &fakebind.DUT{AbstractDUT: &binding.AbstractDUT{&binding.Dims{Name: "fakeDUT"}}}
+	ate = &fakebind.ATE{AbstractATE: &binding.AbstractATE{&binding.Dims{Name: "fakeATE"}}}
+)
 
 func TestGNMI(t *testing.T) {
 	gnmi := NewDUTAPIs(dut).GNMI()
@@ -226,6 +230,68 @@ func TestConsole(t *testing.T) {
 		}
 		if got := apis.Console(t); want != got {
 			t.Errorf("Console(t) got %v, want %v", got, want)
+		}
+	})
+}
+
+func TestATEGNMI(t *testing.T) {
+	gnmi := NewATEAPIs(ate).GNMI()
+
+	t.Run("error", func(t *testing.T) {
+		wantErr := "bad gnmi"
+		ate.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
+			return nil, errors.New(wantErr)
+		}
+		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+			gnmi.New(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
+		}
+		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
+			gnmi.Default(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		want := struct{ gpb.GNMIClient }{}
+		ate.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
+			return want, nil
+		}
+		if got := gnmi.New(t); got != want {
+			t.Errorf("New(t) got %v, want %v", got, want)
+		}
+		if got := gnmi.Default(t); got != want {
+			t.Errorf("Default(t) got %v, want %v", got, want)
+		}
+	})
+}
+
+func TestATEIxNetwork(t *testing.T) {
+	ateAPIs := NewATEAPIs(ate)
+	t.Run("error", func(t *testing.T) {
+		wantErr := "bad ixnetwork"
+		ate.DialIxNetworkFn = func(context.Context) (*binding.IxNetwork, error) {
+			return nil, errors.New(wantErr)
+		}
+		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+			ateAPIs.IxNetwork(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("IxNetwork(t) got err %v, want %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		want := &ixweb.Session{}
+		ate.DialIxNetworkFn = func(context.Context) (*binding.IxNetwork, error) {
+			return &binding.IxNetwork{Session: want}, nil
+		}
+		if got := ateAPIs.IxNetwork(t); got != want {
+			t.Errorf("IxNetwork(t) got %v, want %v", got, want)
 		}
 	})
 }
