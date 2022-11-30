@@ -15,14 +15,15 @@
 package netutil
 
 import (
-	"golang.org/x/net/context"
 	"strings"
 	"testing"
 
+	"golang.org/x/net/context"
+
+	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/ondatra/gnmi/oc"
-	"github.com/openconfig/ondatra"
 	"github.com/openconfig/testt"
 	"github.com/openconfig/ygnmi/ygnmi"
 

@@ -15,9 +15,10 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"testing"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/ate"

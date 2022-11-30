@@ -14,7 +14,6 @@
 package httpovergrpc
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"net"
@@ -22,13 +21,15 @@ import (
 	"strings"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/gnmi/errdiff"
 	hpb "github.com/openconfig/ondatra/proxy/proto/httpovergrpc"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/local"
+	"google.golang.org/protobuf/testing/protocmp"
 )
 
 type fakeHTTPServer struct {

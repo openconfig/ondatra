@@ -15,7 +15,6 @@
 package ate
 
 import (
-	"golang.org/x/net/context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -26,13 +25,15 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/internal/ixconfig"
 	"github.com/openconfig/ondatra/internal/ixgnmi"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	opb "github.com/openconfig/ondatra/proto"
 )

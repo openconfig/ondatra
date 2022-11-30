@@ -16,13 +16,14 @@
 package fakegnmi
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 
-	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/gnmi/testing/fake/gnmi"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/local"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	fpb "github.com/openconfig/gnmi/testing/fake/proto"

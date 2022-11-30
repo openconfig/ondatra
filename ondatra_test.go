@@ -15,14 +15,16 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"os"
 	"strings"
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"flag"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"

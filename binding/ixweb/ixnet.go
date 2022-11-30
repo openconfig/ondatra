@@ -15,7 +15,6 @@
 package ixweb
 
 import (
-	"golang.org/x/net/context"
 	"encoding/json"
 	"fmt"
 	"path"
@@ -23,6 +22,8 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+
+	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 )

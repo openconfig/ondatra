@@ -20,36 +20,16 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/pborman/uuid"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/pborman/uuid"
 
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 var (
-	// TODO(team): Cleanup after Type deprecation
-	ateTypes = map[tpb.Node_Type]bool{
-		tpb.Node_IXIA_TG: true,
-	}
-
 	ateVendors = map[tpb.Vendor]bool{
 		tpb.Vendor_KEYSIGHT: true,
-	}
-
-	deviceTypes = map[tpb.Node_Type]opb.Device_Vendor{
-		tpb.Node_ARISTA_CEOS: opb.Device_ARISTA,
-		// TODO(greg-dennis): when Ondatra supports the OS dimension, use it to
-		// distinguish CSR from CXR and CEVO from VMX.
-		tpb.Node_CISCO_CSR:    opb.Device_CISCO,
-		tpb.Node_CISCO_CXR:    opb.Device_CISCO,
-		tpb.Node_CISCO_E8000:  opb.Device_CISCO,
-		tpb.Node_CISCO_XRD:    opb.Device_CISCO,
-		tpb.Node_IXIA_TG:      opb.Device_IXIA,
-		tpb.Node_JUNIPER_CEVO: opb.Device_JUNIPER,
-		tpb.Node_JUNIPER_VMX:  opb.Device_JUNIPER,
-		tpb.Node_NOKIA_SRL:    opb.Device_NOKIA,
-		tpb.Node_LEMMING:      opb.Device_OPENCONFIG,
 	}
 
 	deviceVendors = map[tpb.Vendor]opb.Device_Vendor{
@@ -65,13 +45,11 @@ var (
 func filterTopology(topo *tpb.Topology) *tpb.Topology {
 	t := &tpb.Topology{}
 	for _, node := range topo.GetNodes() {
-		_, vendorOK := deviceVendors[node.GetVendor()]
-		_, typeOK := deviceTypes[node.GetType()]
-		// Only include nodes with known type/vendor.
-		if vendorOK || typeOK {
+		// Only include nodes with known vendor.
+		if _, ok := deviceVendors[node.GetVendor()]; ok {
 			t.Nodes = append(t.Nodes, node)
 		} else {
-			log.Infof("No known device vendor for node %q (vendor %v, type %v), ignoring node", node.GetName(), node.GetVendor(), node.GetType())
+			log.Infof("No known device vendor for node %q (vendor %v), ignoring node", node.GetName(), node.GetVendor())
 		}
 	}
 	for _, link := range topo.GetLinks() {
@@ -411,13 +389,9 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 	if !ok {
 		return nil, nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
-	// TODO(team): Cleanup after Type deprecation
 	vendor, ok := deviceVendors[node.GetVendor()]
 	if !ok {
-		vendor, ok = deviceTypes[node.GetType()]
-		if !ok {
-			return nil, nil, nil, fmt.Errorf("no known device vendor for node %q (vendor %v, type %v)", node.GetName(), node.GetVendor(), node.GetType())
-		}
+		return nil, nil, nil, fmt.Errorf("no known device vendor for node %q (vendor %v)", node.GetName(), node.GetVendor())
 	}
 	dims := &binding.Dims{
 		Name:            node.GetName(),
@@ -535,8 +509,7 @@ func (s *solver) buildLink2Links(d2n map[*opb.Device]*tpb.Node) map[*devLink][]*
 func (s *solver) nodeMatches(dev *opb.Device, isATE bool) ([]*tpb.Node, error) {
 	var nodeList []*tpb.Node
 	for _, node := range s.topology.GetNodes() {
-		// TODO(team): Cleanup after Type deprecation
-		if ateVendors[node.GetVendor()] != isATE && ateTypes[node.GetType()] != isATE {
+		if ateVendors[node.GetVendor()] != isATE {
 			continue
 		}
 		match := s.devMatch(dev, node)
@@ -558,11 +531,7 @@ func (s *solver) devMatch(dev *opb.Device, node *tpb.Node) bool {
 	if dev.GetSoftwareVersion() != "" && dev.GetSoftwareVersion() != softwareVersion(node) {
 		return false
 	}
-	vendor, ok := deviceVendors[node.GetVendor()]
-	if !ok {
-		vendor = deviceTypes[node.GetType()]
-	}
-	if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED && v != vendor {
+	if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED && v != deviceVendors[node.GetVendor()] {
 		return false
 	}
 	log.V(1).Infof("Found node match: %q", dev.GetId())

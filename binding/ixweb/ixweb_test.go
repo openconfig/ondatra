@@ -16,7 +16,6 @@ package ixweb
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"io"
@@ -24,6 +23,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"golang.org/x/net/context"
 )
 
 func init() {

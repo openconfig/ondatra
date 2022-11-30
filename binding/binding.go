@@ -16,14 +16,15 @@
 package binding
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"time"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding/ixweb"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	bpb "github.com/openconfig/gnoi/bgp"
@@ -43,7 +44,6 @@ import (
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-
 )
 
 // Binding is a strategy interface for Ondatra vendor implementations.

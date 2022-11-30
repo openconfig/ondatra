@@ -15,14 +15,15 @@
 package binding
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"io"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	bpb "github.com/openconfig/gnoi/bgp"

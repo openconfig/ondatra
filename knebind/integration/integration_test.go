@@ -19,9 +19,9 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/gnmi"
 	kinit "github.com/openconfig/ondatra/knebind/init"
-	"github.com/openconfig/ondatra"
 )
 
 func TestMain(m *testing.M) {

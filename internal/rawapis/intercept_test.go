@@ -15,15 +15,16 @@
 package rawapis
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"strings"
 	"testing"
 
+	"golang.org/x/net/context"
+
+	"github.com/openconfig/ondatra/binding/grpcutil/testservice"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"github.com/openconfig/ondatra/binding/grpcutil/testservice"
 
 	tgrpcpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
 	tpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"

@@ -19,85 +19,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
-	"github.com/openconfig/ondatra/telemetry"
 	"github.com/openconfig/testt"
 	"github.com/openconfig/ygnmi/ygnmi"
 )
-
-func TestMeanRateUint64(t *testing.T) {
-	testsPass := []struct {
-		desc   string
-		inVals []*telemetry.QualifiedUint64
-		want   float64
-	}{{
-		desc: "two values",
-		inVals: []*telemetry.QualifiedUint64{
-			(&telemetry.QualifiedUint64{
-				Metadata: &genutil.Metadata{
-					Timestamp: time.Unix(1, 0),
-				}}).SetVal(1),
-			(&telemetry.QualifiedUint64{
-				Metadata: &genutil.Metadata{
-					Timestamp: time.Unix(2, 0),
-				}}).SetVal(2),
-		},
-		want: 1.0,
-	}, {
-		desc: "vals must be sorted",
-		inVals: []*telemetry.QualifiedUint64{
-			(&telemetry.QualifiedUint64{
-				Metadata: &genutil.Metadata{
-					Timestamp: time.Unix(50, 0),
-				}}).SetVal(9000),
-			(&telemetry.QualifiedUint64{
-				Metadata: &genutil.Metadata{
-					Timestamp: time.Unix(40, 0),
-				}}).SetVal(0),
-			(&telemetry.QualifiedUint64{
-				Metadata: &genutil.Metadata{
-					Timestamp: time.Unix(20, 0),
-				},
-			}).SetVal(0),
-			(&telemetry.QualifiedUint64{
-				Metadata: &genutil.Metadata{
-					Timestamp: time.Unix(30, 0),
-				}}).SetVal(0),
-		},
-		want: 300.0,
-	}}
-	for _, test := range testsPass {
-		t.Run(test.desc, func(t *testing.T) {
-			if got := MeanRateUint64(t, test.inVals); got != test.want {
-				t.Errorf("MeanRate(%v) got %.4f, want %.4f", test.inVals, got, test.want)
-			}
-		})
-	}
-
-	testsFail := []struct {
-		desc         string
-		inVals       []*telemetry.QualifiedUint64
-		wantFatalMsg string
-	}{{
-		desc:         "zero values",
-		inVals:       nil,
-		wantFatalMsg: "Cannot calculate rate from 0 length slice",
-	}, {
-		desc:         "one value",
-		inVals:       []*telemetry.QualifiedUint64{{}},
-		wantFatalMsg: "Cannot calculate rate from 1 length slice",
-	}}
-	for _, test := range testsFail {
-		t.Run(test.desc, func(t *testing.T) {
-			got := testt.ExpectFatal(t, func(t testing.TB) {
-				MeanRateUint64(t, test.inVals)
-			})
-			if !strings.Contains(got, test.wantFatalMsg) {
-				t.Errorf("MeanRateUint64(%v) got failure %q, want %q", test.inVals, got, test.wantFatalMsg)
-			}
-		})
-	}
-}
 
 func TestMeanRate(t *testing.T) {
 	testsPass := []struct {

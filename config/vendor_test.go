@@ -36,8 +36,8 @@ func TestPush(t *testing.T) {
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Vendor: opb.Device_ARISTA,
 			Ports: map[string]*binding.Port{
-				"port1": {Name: "Eth1/2/3"},
-				"port2": {Name: "Eth4/5/6"},
+				"port1": &binding.Port{Name: "Eth1/2/3"},
+				"port2": &binding.Port{Name: "Eth4/5/6"},
 			},
 		}},
 		PushConfigFn: func(_ context.Context, config string, reset bool) error {

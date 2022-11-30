@@ -18,11 +18,11 @@ import (
 	"fmt"
 	"testing"
 
-	"google.golang.org/protobuf/encoding/prototext"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/gnmi/oc"
+	"github.com/openconfig/ygot/ygot"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )

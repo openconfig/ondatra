@@ -15,7 +15,6 @@
 package ate
 
 import (
-	"golang.org/x/net/context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -29,6 +28,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
@@ -92,7 +93,6 @@ var (
 	configureTrafficFn             = configureTraffic
 	applyTrafficFn                 = applyTraffic
 	startTrafficFn                 = startTraffic
-
 )
 
 type cfgClient interface {

@@ -15,14 +15,15 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"hash/fnv"
 
-	"github.com/openconfig/ygot/ygot"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
+	"github.com/openconfig/ygot/ygot"
 )
 
 func rsvpTEFromIxia(ctx context.Context, client cfgClient, netInst *oc.NetworkInstance, nodes *cachedNodes) error {

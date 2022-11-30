@@ -21,8 +21,8 @@ import (
 	"sort"
 
 	log "github.com/golang/glog"
-	"github.com/pkg/errors"
 	"github.com/openconfig/ondatra/internal/orderedmap"
+	"github.com/pkg/errors"
 )
 
 var (
@@ -346,17 +346,21 @@ func (pa *portAssigner) nextEdge() *AbstractEdge {
 
 func (pa *portAssigner) assign() bool {
 	var absEdge *AbstractEdge
-	// If there are enqueued edges, pop one off.
-	if len(pa.assignQueue.queue) != 0 {
+	// If there are enqueued edges, pop until we find one that hasn't been assigned.
+	for len(pa.assignQueue.queue) > 0 {
 		absEdge = pa.assignQueue.queue[len(pa.assignQueue.queue)-1]
 		pa.assignQueue.queue = pa.assignQueue.queue[:len(pa.assignQueue.queue)-1]
-	} else {
+		if _, ok := pa.abs2ConPorts[absEdge.Src]; !ok {
+			break
+		}
+		absEdge = nil
+	}
+	if absEdge == nil {
 		absEdge = pa.nextEdge()
 		if absEdge == nil {
 			// Done.
 			return true
 		}
-
 	}
 
 	// Assign the port(s) in the edge.
@@ -376,8 +380,7 @@ func (pa *portAssigner) assign() bool {
 		for p, i := range numEnqueuedPortConstraints {
 			pcs, ok := pa.deferredUntilPortConstraints.Get(p)
 			if !ok {
-				// This should be impossible.
-				log.Fatalf("cannot remove non-existant port constraints; bad state")
+				log.Fatalf("Impossible: cannot remove non-existant port constraints")
 			}
 			if len(pcs) <= i {
 				pa.deferredUntilPortConstraints.Delete(p)
@@ -542,7 +545,7 @@ func (s *solver) assignEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) map[*A
 	for e := range abs2ConEdgeCombos {
 		orderedEdges = append(orderedEdges, e)
 	}
-	sort.Slice(orderedEdges, func(i, j int) bool {
+	sort.SliceStable(orderedEdges, func(i, j int) bool {
 		ei, ej := orderedEdges[i], orderedEdges[j]
 		eiWeight, ejWeight := len(ei.Src.Constraints), len(ej.Src.Constraints)
 		if ei.Dst != nil {

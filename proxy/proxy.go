@@ -16,18 +16,19 @@
 package proxy
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"net"
 	"net/http"
 	"sync"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 	"github.com/openconfig/gnmi/errlist"
 	"github.com/openconfig/ondatra/proxy/grpcproxy"
 	"github.com/openconfig/ondatra/proxy/httpovergrpc"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 
 	hpb "github.com/openconfig/ondatra/proxy/proto/httpovergrpc"
 	rpb "github.com/openconfig/ondatra/proxy/proto/reservation"

@@ -16,13 +16,14 @@
 package testservice
 
 import (
-	"golang.org/x/net/context"
 	"io"
 	"net"
 	"testing"
 
-	"google.golang.org/grpc/credentials/local"
+	"golang.org/x/net/context"
+
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/local"
 
 	tgrpcpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
 	tpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"

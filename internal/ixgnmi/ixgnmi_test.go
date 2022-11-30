@@ -15,21 +15,22 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"github.com/patrickmn/go-cache"
-	"google.golang.org/protobuf/testing/protocmp"
-	"github.com/openconfig/ygot/uexampleoc"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
+	"github.com/openconfig/ygot/uexampleoc"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/patrickmn/go-cache"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )

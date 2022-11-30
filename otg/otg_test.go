@@ -15,16 +15,17 @@
 package otg
 
 import (
-	"golang.org/x/net/context"
 	"strings"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
+	"google.golang.org/grpc"
 )
 
 var (

@@ -16,21 +16,22 @@ package proxy
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"net"
 	"net/http"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/lemming"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials/local"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	gnmipb "github.com/openconfig/gnmi/proto/gnmi"
 	hpb "github.com/openconfig/ondatra/proxy/proto/httpovergrpc"

@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//	https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,16 +14,17 @@
 package grpcproxy
 
 import (
-	"golang.org/x/net/context"
 	"net"
 	"testing"
 
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/protobuf/proto"
+	"golang.org/x/net/context"
+
 	gnmipb "github.com/openconfig/gnmi/proto/gnmi"
 	"github.com/openconfig/lemming"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/protobuf/proto"
 )
 
 type dialer struct{}

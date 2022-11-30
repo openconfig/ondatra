@@ -19,8 +19,8 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/internal/ixconfig"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	opb "github.com/openconfig/ondatra/proto"
 )

@@ -15,9 +15,10 @@
 package grpcutil
 
 import (
-	"golang.org/x/net/context"
 	"testing"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding/grpcutil/testservice"
 

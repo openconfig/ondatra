@@ -16,16 +16,17 @@
 package testbed
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"os"
 	"regexp"
 	"sync"
 
-	"google.golang.org/protobuf/encoding/prototext"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/flags"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	opb "github.com/openconfig/ondatra/proto"
 )

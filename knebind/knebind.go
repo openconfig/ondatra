@@ -17,7 +17,6 @@ package knebind
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"crypto/tls"
 	"errors"
 	"fmt"
@@ -25,17 +24,19 @@ import (
 	"os/exec"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"golang.org/x/crypto/ssh"
-	"google.golang.org/grpc/credentials"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/encoding/prototext"
 	"github.com/open-traffic-generator/snappi/gosnappi"
-	"github.com/openconfig/gocloser"
+	closer "github.com/openconfig/gocloser"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"golang.org/x/crypto/ssh"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/protobuf/encoding/prototext"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	tpb "github.com/openconfig/kne/proto/topo"

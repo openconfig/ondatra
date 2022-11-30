@@ -21,8 +21,8 @@ import (
 
 	"github.com/openconfig/ondatra/internal/ixconfig"
 
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	opb "github.com/openconfig/ondatra/proto"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 func clientWithTopoCfg(ifName string) *ixATE {

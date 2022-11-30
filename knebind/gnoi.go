@@ -15,8 +15,8 @@
 package knebind
 
 import (
-	"google.golang.org/grpc"
 	"github.com/openconfig/ondatra/binding"
+	"google.golang.org/grpc"
 
 	bpb "github.com/openconfig/gnoi/bgp"
 	cmpb "github.com/openconfig/gnoi/cert"

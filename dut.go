@@ -17,8 +17,6 @@ package ondatra
 import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/config"
-	"github.com/openconfig/ondatra/config/device"
-	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/operations"
 	"github.com/openconfig/ondatra/raw"
 )
@@ -30,21 +28,14 @@ type DUTDevice struct {
 
 // Config returns a handle to the DUT configuration API.
 func (d *DUTDevice) Config() *Config {
-	root := device.DeviceRoot(d.Name())
-	if d.Vendor() == CISCO || d.Vendor() == JUNIPER {
-		genutil.PutUseGetForConfig(root, true)
-	}
-	root.PutCustomData(genutil.DefaultClientKey, d.Device.clientFn)
 	return &Config{
-		dut:        d.res.(binding.DUT),
-		DevicePath: root,
+		dut: d.res.(binding.DUT),
 	}
 }
 
 // Config is the DUT configuration API.
 type Config struct {
 	dut binding.DUT
-	*device.DevicePath
 }
 
 // New returns an empty DUT configuration.

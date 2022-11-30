@@ -15,16 +15,17 @@
 package raw
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"strings"
 	"testing"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"

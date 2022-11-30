@@ -15,19 +15,20 @@
 package knebind
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"strings"
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"golang.org/x/crypto/ssh"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"golang.org/x/crypto/ssh"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"

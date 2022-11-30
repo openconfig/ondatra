@@ -15,16 +15,17 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"hash"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
+	"github.com/openconfig/ygot/ygot"
 )
 
 type constantHash struct {

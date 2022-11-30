@@ -19,20 +19,21 @@
 package grpcproxy
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"net"
 	"strings"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 	"go.opencensus.io/trace"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 )
 
 var (

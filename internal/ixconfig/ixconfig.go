@@ -25,9 +25,10 @@
 package ixconfig
 
 import (
-	"golang.org/x/net/context"
 	"encoding/json"
 	"fmt"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding/ixweb"
 )

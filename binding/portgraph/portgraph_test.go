@@ -323,10 +323,10 @@ var (
 	abs16       = &AbstractNode{Desc: "abs16", Ports: []*AbstractPort{abs16port1, abs16port2, abs16port3, abs16port4, abs16port5, abs16port6, abs16port7, abs16port8, abs16port9, abs16port10, abs16port11, abs16port12, abs16port13, abs16port14, abs16port15}, Constraints: map[string]NodeConstraint{"attr": Equal("group")}}
 	abs17       = &AbstractNode{Desc: "abs17", Ports: []*AbstractPort{abs17port1, abs17port2, abs17port3, abs17port4, abs17port5, abs17port6, abs17port7, abs17port8, abs17port9, abs17port10, abs17port11, abs17port12, abs17port13, abs17port14, abs17port15}, Constraints: map[string]NodeConstraint{"attr": Equal("group")}}
 	abs16port1  = &AbstractPort{Desc: "abs16:port1", Constraints: map[string]PortConstraint{"group": SameAsPort(abs16port2)}}
-	abs16port2  = &AbstractPort{Desc: "abs16:port2", Constraints: map[string]PortConstraint{"group": NotSameAsPort(abs16port4)}}
-	abs16port3  = &AbstractPort{Desc: "abs16:port3", Constraints: map[string]PortConstraint{"group": SameAsPort(abs16port4)}}
-	abs16port4  = &AbstractPort{Desc: "abs16:port4", Constraints: map[string]PortConstraint{"group": NotSameAsPort(abs16port5)}}
-	abs16port5  = &AbstractPort{Desc: "abs16:port5", Constraints: map[string]PortConstraint{"group": SameAsPort(abs16port6)}}
+	abs16port2  = &AbstractPort{Desc: "abs16:port2", Constraints: map[string]PortConstraint{"group": reAny}}
+	abs16port3  = &AbstractPort{Desc: "abs16:port3", Constraints: map[string]PortConstraint{"group": AndPort(SameAsPort(abs16port4), NotSameAsPort(abs16port1))}}
+	abs16port4  = &AbstractPort{Desc: "abs16:port4", Constraints: map[string]PortConstraint{"group": reAny}}
+	abs16port5  = &AbstractPort{Desc: "abs16:port5", Constraints: map[string]PortConstraint{"group": AndPort(SameAsPort(abs16port6), NotSameAsPort(abs16port1), NotSameAsPort(abs16port3))}}
 	abs16port6  = &AbstractPort{Desc: "abs16:port6"}
 	abs16port7  = &AbstractPort{Desc: "abs16:port7"}
 	abs16port8  = &AbstractPort{Desc: "abs16:port8"}

@@ -20,16 +20,17 @@ package httpovergrpc
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
 	"net/http"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
 
+	closer "github.com/openconfig/gocloser"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
-	"github.com/openconfig/gocloser"
 
 	hpb "github.com/openconfig/ondatra/proxy/proto/httpovergrpc"
 )

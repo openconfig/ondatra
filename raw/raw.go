@@ -16,8 +16,9 @@
 package raw
 
 import (
-	"golang.org/x/net/context"
 	"testing"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/ixweb"

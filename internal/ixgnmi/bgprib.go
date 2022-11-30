@@ -15,17 +15,18 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"path"
 	"strconv"
 	"strings"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
+	"github.com/openconfig/ygot/ygot"
 )
 
 func bgpRIBFromIxia(ctx context.Context, client cfgClient, netInst *oc.NetworkInstance, nodes *cachedNodes) error {

@@ -15,11 +15,12 @@
 package ixweb
 
 import (
-	"golang.org/x/net/context"
 	"encoding/json"
 	"net/http"
 	"strings"
 	"testing"
+
+	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"

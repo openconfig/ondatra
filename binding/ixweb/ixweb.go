@@ -17,7 +17,6 @@ package ixweb
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -25,6 +24,8 @@ import (
 	"net/http"
 	"net/url"
 	"time"
+
+	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 )

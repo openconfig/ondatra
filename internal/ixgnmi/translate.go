@@ -22,9 +22,9 @@ import (
 	"strings"
 
 	log "github.com/golang/glog"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/gnmi/oc"
+	"github.com/openconfig/ygot/ygot"
 )
 
 var (

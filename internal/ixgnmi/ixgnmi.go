@@ -16,7 +16,6 @@
 package ixgnmi
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"net"
@@ -26,18 +25,20 @@ import (
 	"sync"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc/credentials/local"
-	"google.golang.org/grpc"
-	"github.com/patrickmn/go-cache"
-	"github.com/openconfig/ygot/util"
-	"github.com/openconfig/ygot/ygot"
 	gcache "github.com/openconfig/gnmi/cache"
 	"github.com/openconfig/gnmi/subscribe"
-	"github.com/openconfig/gocloser"
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/internal/ixconfig"
+	"github.com/openconfig/ygot/util"
+	"github.com/openconfig/ygot/ygot"
+	"github.com/patrickmn/go-cache"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/local"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )

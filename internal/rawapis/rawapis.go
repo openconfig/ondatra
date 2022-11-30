@@ -23,13 +23,14 @@
 package rawapis
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"sync"
 
-	"google.golang.org/grpc"
+	"golang.org/x/net/context"
+
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
+	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"

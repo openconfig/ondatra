@@ -16,16 +16,16 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"os"
 	"os/signal"
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"golang.org/x/sys/unix"
-	"github.com/openconfig/gocloser"
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/debug"
 	"github.com/openconfig/ondatra/internal/ate"
@@ -35,6 +35,7 @@ import (
 	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/internal/testbed"
 	"github.com/openconfig/ondatra/report"
+	"golang.org/x/sys/unix"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )

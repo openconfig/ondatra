@@ -15,8 +15,8 @@
 package ondatra
 
 import (
-	"google.golang.org/protobuf/proto"
 	"github.com/openconfig/ondatra/ixnet"
+	"google.golang.org/protobuf/proto"
 
 	opb "github.com/openconfig/ondatra/proto"
 )

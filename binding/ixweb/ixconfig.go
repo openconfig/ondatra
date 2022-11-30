@@ -15,10 +15,11 @@
 package ixweb
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"regexp"
 	"strings"
+
+	"golang.org/x/net/context"
 )
 
 const resourceManagerPath = "resourceManager"

@@ -15,15 +15,14 @@
 package ondatra
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/gnmi"
-	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/testbed"
-	"github.com/openconfig/ondatra/telemetry/device"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
@@ -89,13 +88,6 @@ func (v Vendor) String() string {
 func (d *Device) GNMIOpts() *gnmi.Opts {
 	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER
 	return gnmi.NewOpts(d.Name(), useGetForCfg, d.clientFn)
-}
-
-// Telemetry returns a telemetry path root for the device.
-func (d *Device) Telemetry() *device.DevicePath {
-	root := device.DeviceRoot(d.Name())
-	root.PutCustomData(genutil.DefaultClientKey, d.clientFn)
-	return root
 }
 
 // Vendor returns the device vendor.

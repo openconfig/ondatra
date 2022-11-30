@@ -15,7 +15,6 @@
 package operations
 
 import (
-	"golang.org/x/net/context"
 	"errors"
 	"fmt"
 	"io"
@@ -23,13 +22,15 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
-	"github.com/openconfig/gocloser"
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/rawapis"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"

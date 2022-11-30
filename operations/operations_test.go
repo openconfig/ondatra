@@ -16,7 +16,6 @@ package operations
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"errors"
 	"io"
 	"os"
@@ -24,12 +23,14 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
-	"google.golang.org/grpc"
-	"google.golang.org/protobuf/testing/protocmp"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
+	"google.golang.org/grpc"
+	"google.golang.org/protobuf/testing/protocmp"
 
 	frpb "github.com/openconfig/gnoi/factory_reset"
 	ospb "github.com/openconfig/gnoi/os"

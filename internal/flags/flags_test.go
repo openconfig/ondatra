@@ -23,8 +23,8 @@ import (
 
 func TestParseReserve(t *testing.T) {
 	tests := []struct {
-		desc string
-		res  string
+		desc        string
+		res         string
 		wantID      string
 		wantPartial map[string]string
 		wantErr     string

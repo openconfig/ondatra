@@ -67,32 +67,59 @@ additional flags to control the execution of the test:
 *   `-xml` (*optional*): File path to write JUnit XML test results; disables
     normal Go test logging.
 *   `-debug` (*optional*): Whether the test is run in debug mode.
+*   `-reserve` (*optional*): Reservation id or a mapping of device and port IDs
+    to names; allowed only in [debug mode](#debugging-an-ondatra-test)
 
-In addition, the binding implementation is free to define its own set of
-optional or required flags.
+To run a subset of the test cases of an Ondatra test, use the Go test `-run`
+flag. While the `-run` flag accepts an arbitrary
+[Go regexp](https://golang.org/s/re2syntax), to match a single test case it is
+usually sufficient to just pass the name of the test function:
+
+```shell
+$ go test -testbed=testbed.textproto -config=config.yaml -run=$RUN_THIS_TEST_CASE
+```
+
+Read the
+[Go doc on subtests](https://pkg.go.dev/testing#hdr-Subtests_and_Sub_benchmarks)
+for more details on matching subtests with the `-run` flag.
 
 ## Debugging an Ondatra Test
 
 To run an Ondatra test in "debug mode," pass the `-debug` flag to `go test.`
-Debug mode gives you the option allows you to insert breakpoints in your code
-with one simple line:
+Debug mode allows you to insert breakpoints in your code with one simple line:
 
-```
+```go
 ondatra.Debug().Breakpoint(t)
 ```
 
 The `Breakpoint` and `Breakpointf` functions allow you to include custom text in
 the breakpoint message, too. For example:
 
-```
+```go
 ondatra.Debug().Breakpoint(t, "this should be unreachable")
 ondatra.Debug().Breakpointf(t, "myVar has value %v", myVar)
 ```
 
 Debug mode also offers a menu option to pause the test immediately after the
-testbed is reserved. This is useful if you want to just reserve the same testbed
-for manual testing, or to manually inspect the testbed before the test cases
-run.
+testbed is reserved. This is useful if you want to manually inspect the testbed
+before the test cases run, or to run a separate test execution against with the
+same reservation.
+
+To debug a test against a pre-allocated reservation, set the `-reserve` flag to
+the reservation ID:
+
+```shell
+$ go test -testbed=testbed.textproto -config=config.yaml -debug -reserve=123abc
+```
+
+To debug the test against specifically-named devices, set the `-reserve` flag to
+a comma-separated list of *id=name* strings at the command line, where ports are
+named with the syntax *deviceID:portID=portName*:
+
+```shell
+$ go test -testbed=testbed.textproto -config=config.yaml -debug \
+    -reserve=dut=mydevice,dut:port1=Ethernet1/1,ate=myixia,ate:port2=2/3
+```
 
 ## Logging Verbosity
 
@@ -126,7 +153,7 @@ for more information on all the glog flags.
 
 ## XML Test Report
 
-Ondatra has the abililty to output test results in JUnit XML format. If you pass
+Ondatra has the ability to output test results in JUnit XML format. If you pass
 `-xml=[path]` to your `go test` invocation, Ondatra will use
 [go-junit-report](https://github.com/jstemmer/go-junit-report) to translate the
 Go test log to an XML file at the provided path.

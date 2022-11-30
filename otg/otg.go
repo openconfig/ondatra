@@ -16,17 +16,16 @@
 package otg
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"testing"
+
+	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/events"
-	"github.com/openconfig/ondatra/internal/gnmigen/genutil"
 	"github.com/openconfig/ondatra/internal/rawapis"
-	"github.com/openconfig/ondatra/telemetry/otg/device"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -330,15 +329,6 @@ func fetchCapture(ctx context.Context, ate binding.ATE, postName string) ([]byte
 		return nil, err
 	}
 	return api.GetCapture(api.NewCaptureRequest().SetPortName(postName))
-}
-
-// Telemetry returns a telemetry path root for the device.
-func (o *OTG) Telemetry() *device.DevicePath {
-	root := device.DeviceRoot(o.ate.Name())
-	root.PutCustomData(genutil.DefaultClientKey, func(ctx context.Context) (gpb.GNMIClient, error) {
-		return rawapis.FetchOTGGNMI(ctx, o.ate)
-	})
-	return root
 }
 
 // GNMIOpts returns a new set of options to customize gNMI queries.

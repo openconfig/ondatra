@@ -17,8 +17,8 @@ package ixnet
 import (
 	"sync/atomic"
 
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	opb "github.com/openconfig/ondatra/proto"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 var peerCount uint32

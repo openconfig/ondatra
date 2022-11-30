@@ -15,9 +15,10 @@
 package fakebind
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"io"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 )

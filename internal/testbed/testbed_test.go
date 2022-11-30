@@ -15,12 +15,13 @@
 package testbed_test
 
 import (
-	"golang.org/x/net/context"
 	"fmt"
 	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"

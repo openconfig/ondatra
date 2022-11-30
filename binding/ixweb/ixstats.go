@@ -16,7 +16,6 @@ package ixweb
 
 import (
 	"bytes"
-	"golang.org/x/net/context"
 	"encoding/csv"
 	"errors"
 	"fmt"
@@ -27,7 +26,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/openconfig/gocloser"
+	"golang.org/x/net/context"
+
+	closer "github.com/openconfig/gocloser"
 )
 
 const (

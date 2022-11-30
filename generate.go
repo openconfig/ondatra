@@ -15,6 +15,6 @@
 package ondatra
 
 //go:generate ./binding/grpcutil/testservice/generate.sh
-//go:generate ./internal/gnmigen/generate.sh
+//go:generate ./gnmi/generate.sh
 //go:generate ./proto/generate.sh
 //go:generate ./proxy/proto/generate.sh
