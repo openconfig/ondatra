@@ -10,25 +10,57 @@ The KNE Binding requires a YAML config file that lets the binding know how to
 connect to your KNE topology. The YAML must be specified in a `-config` flag
 passed to the Ondatra test. The file supports the following keys:
 
-Key          | Required? | Description
------------- | --------- | ----------------------------------
-`username`   | yes       | username to log into the KNE nodes
-`password`   | yes       | password to log into the KNE nodes
-`topology`   | yes       | path to a KNE topology text proto
-`cli`        | no        | path to the kne binary
-`kubecfg`    | no        | path to your kubeconfig file
-`skip_reset` | no        | if true, skip initial device reset that happens during reservation
+Key           | Required? | Description
+------------- | --------- | ----------------------------------
+`username`    | no        | default username to log into the KNE nodes
+`password`    | no        | default password to log into the KNE nodes
+`credentials` | no        | map of credentials to use for specific nodes / vendors
+`topology`    | yes       | path to a KNE topology text proto
+`cli`         | no        | path to the kne binary
+`kubecfg`     | no        | path to your kubeconfig file
+`skip_reset`  | no        | if true, skip initial device reset that happens during reservation
 
 If `cli` and `kubecfg` are not specified, they will be inferred from the `PATH`
 environment.
 
-An example YAML config file:
+A basic example YAML config file:
 
 ```
 username: tester
 password: hunter2
 topology: /home/tester/topo.textproto
 ```
+
+### Device Credentials
+
+An example YAML config file with optional extra credential fields:
+
+```
+username: tester
+password: hunter2
+credentials:
+  node:
+    r1:
+      username: user
+      password: pass
+    r2:
+      username: root
+      password: root123
+  vendor:
+    ARISTA:
+      username: admin
+      password: admin
+topology: /home/tester/topo.textproto
+```
+
+The per-node credentials are used over the per-vendor credentials. The default
+username/password are used if there are no matches. A precedence order is
+defined below:
+
+1. credential provided for a specific node by name
+1. credential provided for a vendor of the node
+1. credential from the default username and password fields
+1. no credentials
 
 ## Running the Integration Test
 

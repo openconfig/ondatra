@@ -113,6 +113,7 @@ func TestReserve(t *testing.T) {
 					Services: map[string]*tpb.Service{
 						"gnmi": &tpb.Service{Name: "gnmi"},
 					},
+					NodeVendor: tpb.Vendor_ARISTA,
 				},
 			},
 		},
@@ -126,7 +127,8 @@ func TestReserve(t *testing.T) {
 							"port1": {Name: "eth1"},
 						},
 					}},
-					Services: make(map[string]*tpb.Service),
+					Services:   make(map[string]*tpb.Service),
+					NodeVendor: tpb.Vendor_KEYSIGHT,
 				},
 			},
 		},
@@ -162,6 +164,119 @@ func TestReserve(t *testing.T) {
 			}
 			if wantResets != gotResets {
 				t.Errorf("Reserve() got unexpected DUT resets: want %v, got %v", wantResets, gotResets)
+			}
+		})
+	}
+}
+
+func TestNewRPCCredentials(t *testing.T) {
+	tests := []struct {
+		desc      string
+		cfg       *Config
+		name      string
+		vendor    tpb.Vendor
+		wantCreds *rpcCredentials
+	}{{
+		desc: "nil cfg.Credentials",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+		},
+		name:      "r1",
+		vendor:    tpb.Vendor_ARISTA,
+		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+	}, {
+		desc: "nil cfg.Credentials.Node",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+			Credentials: &Credentials{
+				Vendor: map[tpb.Vendor]*UserPass{},
+			},
+		},
+		name:      "r1",
+		vendor:    tpb.Vendor_ARISTA,
+		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+	}, {
+		desc: "nil cfg.Credentials.Vendor",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+			Credentials: &Credentials{
+				Node: map[string]*UserPass{},
+			},
+		},
+		name:      "r1",
+		vendor:    tpb.Vendor_ARISTA,
+		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+	}, {
+		desc: "node only",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+			Credentials: &Credentials{
+				Node: map[string]*UserPass{
+					"r1": &UserPass{Username: "nodeUser", Password: "nodePass"},
+				},
+			},
+		},
+		name:      "r1",
+		vendor:    tpb.Vendor_ARISTA,
+		wantCreds: &rpcCredentials{username: "nodeUser", password: "nodePass"},
+	}, {
+		desc: "vendor only",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+			Credentials: &Credentials{
+				Vendor: map[tpb.Vendor]*UserPass{
+					tpb.Vendor_ARISTA: &UserPass{Username: "vendorUser", Password: "vendorPass"},
+				},
+			},
+		},
+		name:      "r1",
+		vendor:    tpb.Vendor_ARISTA,
+		wantCreds: &rpcCredentials{username: "vendorUser", password: "vendorPass"},
+	}, {
+		desc: "node and vendor",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+			Credentials: &Credentials{
+				Node: map[string]*UserPass{
+					"r1": &UserPass{Username: "nodeUser", Password: "nodePass"},
+				},
+				Vendor: map[tpb.Vendor]*UserPass{
+					tpb.Vendor_ARISTA: &UserPass{Username: "vendorUser", Password: "vendorPass"},
+				},
+			},
+		},
+		name:      "r1",
+		vendor:    tpb.Vendor_ARISTA,
+		wantCreds: &rpcCredentials{username: "nodeUser", password: "nodePass"},
+	}, {
+		desc: "no match",
+		cfg: &Config{
+			Username: "user",
+			Password: "pass",
+			Credentials: &Credentials{
+				Node: map[string]*UserPass{
+					"r1": &UserPass{Username: "nodeUser", Password: "nodePass"},
+				},
+				Vendor: map[tpb.Vendor]*UserPass{
+					tpb.Vendor_ARISTA: &UserPass{Username: "vendorUser", Password: "vendorPass"},
+				},
+			},
+		},
+		name:      "r2",
+		vendor:    tpb.Vendor_CISCO,
+		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			gotCreds := newRPCCredentials(tt.cfg, tt.name, tt.vendor)
+			if diff := cmp.Diff(tt.wantCreds, gotCreds, cmp.AllowUnexported(rpcCredentials{})); diff != "" {
+				t.Errorf("newRPCCredentials() got unexpected diff (-want,+got): %s", diff)
 			}
 		})
 	}

@@ -22,6 +22,7 @@ import (
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/pborman/uuid"
+	"google.golang.org/protobuf/proto"
 
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -71,8 +72,37 @@ func filterTopology(topo *tpb.Topology) *tpb.Topology {
 	return t
 }
 
+// runtimeProtoCheck checks the proto messages have the expected number of fields.
+func runtimeProtoCheck() error {
+	const (
+		testbedDeviceFields = 6
+		testbedPortFields   = 6
+		topoNodeFields      = 11
+		topoIntfFields      = 7
+	)
+	numFields := func(m proto.Message) int {
+		return m.ProtoReflect().Descriptor().Fields().Len()
+	}
+	if n := numFields((*opb.Device)(nil)); n != testbedDeviceFields {
+		return fmt.Errorf("Ondatra testbed proto Device has %d fields, want %d", n, testbedDeviceFields)
+	}
+	if n := numFields((*opb.Port)(nil)); n != testbedPortFields {
+		return fmt.Errorf("Ondatra testbed proto Port has %d fields, want %d", n, testbedPortFields)
+	}
+	if n := numFields((*tpb.Node)(nil)); n != topoNodeFields {
+		return fmt.Errorf("Ondatra topology proto Node has %d fields, want %d", n, topoNodeFields)
+	}
+	if n := numFields((*tpb.Interface)(nil)); n != topoIntfFields {
+		return fmt.Errorf("Ondatra topology proto Interface has %d fields, want %d", n, topoIntfFields)
+	}
+	return nil
+}
+
 // Solve creates a new Reservation from a desired testbed and an available topology.
 func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
+	if err := runtimeProtoCheck(); err != nil {
+		return nil, err
+	}
 	topo = filterTopology(topo)
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
 	if numDevs, numNodes := len(devs), len(topo.GetNodes()); numDevs > numNodes {
@@ -286,8 +316,9 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology) (*binding.Reservation, error) {
 // ServiceDUT is a DUT that contains a service map.
 type ServiceDUT struct {
 	*binding.AbstractDUT
-	Services map[string]*tpb.Service
-	Cert     *tpb.CertificateCfg
+	Services   map[string]*tpb.Service
+	Cert       *tpb.CertificateCfg
+	NodeVendor tpb.Vendor
 }
 
 // Service returns the KNE service details for a given service name.
@@ -302,8 +333,9 @@ func (d *ServiceDUT) Service(service string) (*tpb.Service, error) {
 // ServiceATE is an ATE that contains a service map.
 type ServiceATE struct {
 	*binding.AbstractATE
-	Services map[string]*tpb.Service
-	Cert     *tpb.CertificateCfg
+	Services   map[string]*tpb.Service
+	Cert       *tpb.CertificateCfg
+	NodeVendor tpb.Vendor
 }
 
 // Service returns the KNE service details for a given service name.
@@ -361,37 +393,46 @@ func (a *assign) String() string {
 }
 
 func (a *assign) resolveDUT(dev *opb.Device) (*ServiceDUT, error) {
-	dims, srvs, cert, err := a.resolveDevice(dev)
+	dr, err := a.resolveDevice(dev)
 	if err != nil {
 		return nil, err
 	}
 	return &ServiceDUT{
-		AbstractDUT: &binding.AbstractDUT{dims},
-		Services:    srvs,
-		Cert:        cert,
+		AbstractDUT: &binding.AbstractDUT{dr.dims},
+		Services:    dr.services,
+		Cert:        dr.cert,
+		NodeVendor:  dr.nodeVendor,
 	}, nil
 }
 
 func (a *assign) resolveATE(dev *opb.Device) (*ServiceATE, error) {
-	dims, srvs, cert, err := a.resolveDevice(dev)
+	dr, err := a.resolveDevice(dev)
 	if err != nil {
 		return nil, err
 	}
 	return &ServiceATE{
-		AbstractATE: &binding.AbstractATE{dims},
-		Services:    srvs,
-		Cert:        cert,
+		AbstractATE: &binding.AbstractATE{dr.dims},
+		Services:    dr.services,
+		Cert:        dr.cert,
+		NodeVendor:  dr.nodeVendor,
 	}, nil
 }
 
-func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.Service, *tpb.CertificateCfg, error) {
+type deviceResolution struct {
+	dims       *binding.Dims
+	services   map[string]*tpb.Service
+	cert       *tpb.CertificateCfg
+	nodeVendor tpb.Vendor
+}
+
+func (a *assign) resolveDevice(dev *opb.Device) (*deviceResolution, error) {
 	node, ok := a.dev2Node[dev]
 	if !ok {
-		return nil, nil, nil, fmt.Errorf("node %q not resolved", dev.GetId())
+		return nil, fmt.Errorf("node %q not resolved", dev.GetId())
 	}
 	vendor, ok := deviceVendors[node.GetVendor()]
 	if !ok {
-		return nil, nil, nil, fmt.Errorf("no known device vendor for node %q (vendor %v)", node.GetName(), node.GetVendor())
+		return nil, fmt.Errorf("no known device vendor for node %q (vendor %v)", node.GetName(), node.GetVendor())
 	}
 	dims := &binding.Dims{
 		Name:            node.GetName(),
@@ -407,7 +448,12 @@ func (a *assign) resolveDevice(dev *opb.Device) (*binding.Dims, map[string]*tpb.
 	for _, s := range node.GetServices() {
 		sm[s.GetName()] = s
 	}
-	return dims, sm, node.GetConfig().GetCert(), nil
+	return &deviceResolution{
+		dims:       dims,
+		services:   sm,
+		cert:       node.GetConfig().GetCert(),
+		nodeVendor: node.GetVendor(),
+	}, nil
 }
 
 type solver struct {

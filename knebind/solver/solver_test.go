@@ -160,6 +160,7 @@ func TestSolve(t *testing.T) {
 		Services: map[string]*tpb.Service{
 			"gnmi": &tpb.Service{Name: "gnmi"},
 		},
+		NodeVendor: tpb.Vendor_ARISTA,
 	}
 	wantDUT2 := &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
@@ -173,6 +174,7 @@ func TestSolve(t *testing.T) {
 		Services: map[string]*tpb.Service{
 			"gnmi": &tpb.Service{Name: "gnmi"},
 		},
+		NodeVendor: tpb.Vendor_CISCO,
 	}
 	wantDUT3 := &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
@@ -187,6 +189,7 @@ func TestSolve(t *testing.T) {
 		Services: map[string]*tpb.Service{
 			"gnmi": &tpb.Service{Name: "gnmi"},
 		},
+		NodeVendor: tpb.Vendor_JUNIPER,
 	}
 	wantATE := &ServiceATE{
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
@@ -196,7 +199,8 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "eth1"},
 			},
 		}},
-		Services: make(map[string]*tpb.Service),
+		Services:   make(map[string]*tpb.Service),
+		NodeVendor: tpb.Vendor_KEYSIGHT,
 	}
 
 	tests := []struct {

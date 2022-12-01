@@ -29,7 +29,6 @@ import (
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	closer "github.com/openconfig/gocloser"
-	grpb "github.com/openconfig/gribi/v1/proto/service"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
 	"golang.org/x/crypto/ssh"
@@ -39,6 +38,7 @@ import (
 	"google.golang.org/protobuf/encoding/prototext"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	grpb "github.com/openconfig/gribi/v1/proto/service"
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
@@ -157,13 +157,12 @@ func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	log.Infof("Dialing service %q on DUT %s@%s", serviceName, d.Name(), addr)
-	opts = append(opts,
-		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),
-		grpc.WithPerRPCCredentials(&passCred{
-			username: d.cfg.Username,
-			password: d.cfg.Password,
-		}))
+	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	creds := newRPCCredentials(d.cfg, d.Name(), d.NodeVendor)
+	if creds != nil {
+		opts = append(opts, grpc.WithPerRPCCredentials(creds))
+	}
+	log.Infof("Dialing service %q on DUT %s@%s using credentials %+v", serviceName, d.Name(), addr, creds)
 	conn, err := grpc.DialContext(ctx, addr, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("DialContext(ctx, %s, %v): %w", addr, opts, err)
@@ -176,20 +175,45 @@ func serviceAddr(s *tpb.Service) string {
 	return fmt.Sprintf("%s:%d", s.GetOutsideIp(), s.GetOutside())
 }
 
-type passCred struct {
+type rpcCredentials struct {
 	username string
 	password string
 }
 
-func (c *passCred) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
+func (r *rpcCredentials) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	return map[string]string{
-		"username": c.username,
-		"password": c.password,
+		"username": r.username,
+		"password": r.password,
 	}, nil
 }
 
-func (c *passCred) RequireTransportSecurity() bool {
+func (r *rpcCredentials) RequireTransportSecurity() bool {
 	return true
+}
+
+// newRPCCredentials determines the correct credentials used to access a node via rpc
+// from a given node name, node vendor, and knebind config. The precedence order for determining
+// the credentials is as follows:
+//
+// 1. credential provided for a specific node by name from the knebind config
+// 2. credential provided for a vendor of the node from the knebind config
+// 3. credential from the default username and password fields from the knebind config
+// 4. no credentials
+func newRPCCredentials(cfg *Config, name string, vendor tpb.Vendor) *rpcCredentials {
+	if cfg.Credentials != nil && cfg.Credentials.Node != nil {
+		if creds, ok := cfg.Credentials.Node[name]; ok {
+			return &rpcCredentials{username: creds.Username, password: creds.Password}
+		}
+	}
+	if cfg.Credentials != nil && cfg.Credentials.Vendor != nil {
+		if creds, ok := cfg.Credentials.Vendor[vendor]; ok {
+			return &rpcCredentials{username: creds.Username, password: creds.Password}
+		}
+	}
+	if cfg.Username != "" || cfg.Password != "" {
+		return &rpcCredentials{username: cfg.Username, password: cfg.Password}
+	}
+	return nil
 }
 
 func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) error {
@@ -224,11 +248,17 @@ func (d *kneDUT) exec(cmd string) (string, error) {
 		return "", err
 	}
 	addr := serviceAddr(s)
+	var user, pass string
+	creds := newRPCCredentials(d.cfg, d.Name(), d.NodeVendor)
+	if creds != nil {
+		user, pass = creds.username, creds.password
+	}
+	log.Infof("Using credentials %s/%s to SSH", user, pass)
 	config := &ssh.ClientConfig{
-		User: d.cfg.Username,
+		User: user,
 		Auth: []ssh.AuthMethod{ssh.KeyboardInteractive(func(user, instruction string, questions []string, echos []bool) ([]string, error) {
 			if len(questions) > 0 {
-				return []string{d.cfg.Password}, nil
+				return []string{pass}, nil
 			}
 			return nil, nil
 		})},
