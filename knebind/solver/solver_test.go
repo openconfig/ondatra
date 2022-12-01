@@ -498,6 +498,66 @@ func TestSolvePortGroups(t *testing.T) {
 	}
 }
 
+func TestTestbedToAbstractGraph(t *testing.T) {
+	portPMDValue := &opb.Port{
+		Id:        "port1",
+		Speed:     opb.Port_S_100GB,
+		CardModel: "model",
+		PmdValue:  &opb.Port_Pmd_{opb.Port_PMD_100GBASE_LR4},
+	}
+	portPMDRegex := &opb.Port{
+		Id:        "port1",
+		Speed:     opb.Port_S_10GB,
+		CardModel: "model",
+		PmdValue:  &opb.Port_PmdRegex{".*"},
+	}
+	dut := &opb.Device{
+		Id:              "dut",
+		Vendor:          opb.Device_ARISTA,
+		HardwareModel:   "hw",
+		SoftwareVersion: "sw",
+		Ports:           []*opb.Port{portPMDValue},
+		ExtraDimensions: map[string]string{"extra_dimension": "hello"},
+	}
+	ate := &opb.Device{
+		Id:    "ate",
+		Ports: []*opb.Port{portPMDRegex},
+	}
+	link := &opb.Link{
+		A: "dut:port1",
+		B: "ate:port1",
+	}
+	tb := &opb.Testbed{
+		Duts:  []*opb.Device{dut},
+		Ates:  []*opb.Device{ate},
+		Links: []*opb.Link{link},
+	}
+	wantDev := map[string]*opb.Device{"dut": dut, "ate": ate}
+	wantPort := map[string]*opb.Port{"dut:port1": portPMDValue, "ate:port1": portPMDRegex}
+
+	graph, node2Dev, port2Port, err := testbedToAbstractGraph(tb)
+	if err != nil {
+		t.Fatalf("testbedToAbstractGraph() got error %v, want nil", err)
+	}
+	if len(graph.Nodes) != 2 {
+		t.Fatalf("testbedToAbstractGraph() got %d nodes, want 2", len(graph.Nodes))
+	}
+	for _, node := range graph.Nodes {
+		if got, ok := node2Dev[node]; !ok {
+			t.Errorf("testbedToAbstractGraph() got node %q not mapped to any device", node.Desc)
+		} else if diff := cmp.Diff(wantDev[node.Desc], got, protocmp.Transform()); diff != "" {
+			t.Errorf("testbedToAbstractGraph() returned unexpected device diff (-want +got):\n%s", diff)
+		}
+		for _, port := range node.Ports {
+			if got, ok := port2Port[port]; !ok {
+				t.Errorf("testbedToAbstractGraph() got node %q not mapped to any port", node.Desc)
+			} else if diff := cmp.Diff(wantPort[port.Desc], got, protocmp.Transform()); diff != "" {
+				t.Errorf("testbedToAbstractGraph() returned unexpected port diff (-want +got):\n%s", diff)
+			}
+		}
+	}
+}
+
 func TestSolveErrors(t *testing.T) {
 	tests := []struct {
 		desc    string

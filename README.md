@@ -85,8 +85,8 @@ for more details on matching subtests with the `-run` flag.
 
 ## Debugging an Ondatra Test
 
-To run an Ondatra test in "debug mode," pass the `-debug` flag to `go test.`
-Debug mode allows you to insert breakpoints in your code with one simple line:
+To run an Ondatra test in debug mode, pass the `-debug` flag to `go test`. Debug
+mode allows you to insert breakpoints in your code with one simple line:
 
 ```go
 ondatra.Debug().Breakpoint(t)

@@ -17,10 +17,13 @@ package solver
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/portgraph"
+	"github.com/openconfig/ondatra/internal/orderedmap"
 	"github.com/pborman/uuid"
 	"google.golang.org/protobuf/proto"
 
@@ -70,6 +73,161 @@ func filterTopology(topo *tpb.Topology) *tpb.Topology {
 		}
 	}
 	return t
+}
+
+const (
+	regexPrefix = "regex:"
+
+	// Attribute names mapping message fields to graph attributes/constraints.
+	vendorAttr = "vendor"
+	hwAttr     = "hardware_model"
+	swAttr     = "software_version"
+	speedAttr  = "speed"
+	cardAttr   = "card_model"
+	pmdAttr    = "pmd"
+	groupAttr  = "group"
+)
+
+var (
+	reAny = portgraph.Regex(regexp.MustCompile(".*"))
+)
+
+// makeConstraint returns a constraint based on the prefix of the input string.
+func makeConstraint(s string) portgraph.LeafConstraint {
+	if strings.HasPrefix(s, regexPrefix) {
+		return portgraph.Regex(regexp.MustCompile(strings.TrimPrefix(s, regexPrefix)))
+	}
+	return portgraph.Equal(s)
+}
+
+// testbedToAbstractGraph translates an Ondatra testbed to an AbstractGraph for solving.
+func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*portgraph.AbstractNode]*opb.Device, map[*portgraph.AbstractPort]*opb.Port, error) {
+	var nodes []*portgraph.AbstractNode
+	var edges []*portgraph.AbstractEdge
+	name2Port := make(map[string]*portgraph.AbstractPort) // Name of the port to the AbstractPort.
+	node2Dev := make(map[*portgraph.AbstractNode]*opb.Device)
+	port2Port := make(map[*portgraph.AbstractPort]*opb.Port)
+
+	var matchATE string
+	for v := range ateVendors {
+		if matchATE != "" {
+			matchATE += "|"
+		}
+		matchATE += deviceVendors[v].String()
+	}
+	reATE := regexp.MustCompile(matchATE)
+
+	// addDevice creates an AbstractNode from a Device.
+	// If the field is empty, there is not a Constraint on that field.
+	addDevice := func(dev *opb.Device, isATE bool) {
+		nodeConstraints := make(map[string]portgraph.NodeConstraint)
+		if isATE {
+			nodeConstraints[vendorAttr] = portgraph.Regex(reATE)
+		}
+		if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED {
+			nodeConstraints[vendorAttr] = portgraph.Equal(v.String())
+		}
+		if hw := dev.GetHardwareModel(); hw != "" {
+			nodeConstraints[hwAttr] = makeConstraint(hw)
+		}
+		if sw := dev.GetSoftwareVersion(); sw != "" {
+			nodeConstraints[swAttr] = makeConstraint(sw)
+		}
+		for k, v := range dev.GetExtraDimensions() {
+			nodeConstraints[k] = portgraph.Equal(v)
+		}
+		// Process each port on the device.
+		var ports []*portgraph.AbstractPort
+		group2PortNames := orderedmap.NewOrderedMap[string, []string]()
+		absPortName2DevPort := make(map[string]*opb.Port)
+		for _, port := range dev.GetPorts() {
+			portConstraints := make(map[string]portgraph.PortConstraint)
+			if s := port.GetSpeed(); s != opb.Port_SPEED_UNSPECIFIED {
+				portConstraints[speedAttr] = portgraph.Equal(s.String())
+			}
+			if cm := port.GetCardModel(); cm != "" {
+				portConstraints[cardAttr] = makeConstraint(cm)
+			}
+			switch port.GetPmdValue().(type) {
+			case *opb.Port_Pmd_:
+				if pmd := port.GetPmd(); pmd != opb.Port_PMD_UNSPECIFIED {
+					portConstraints[pmdAttr] = portgraph.Equal(pmd.String())
+				}
+			case *opb.Port_PmdRegex:
+				if pmd := port.GetPmdRegex(); pmd != "" {
+					portConstraints[pmdAttr] = portgraph.Regex(regexp.MustCompile(pmd))
+				}
+			}
+			// Create the AbstractPort, but do not add group constraints until all ports are processed.
+			portName := fmt.Sprintf("%s:%s", dev.GetId(), port.GetId())
+			p := &portgraph.AbstractPort{Desc: portName, Constraints: portConstraints}
+			name2Port[portName] = p
+
+			// Check if the port has a group. If it does, additional constraint(s) need to be added.
+			if port.GetGroup() != "" {
+				pns, _ := group2PortNames.Get(port.GetGroup())
+				group2PortNames.Set(port.GetGroup(), append(pns, portName))
+				absPortName2DevPort[portName] = port
+			} else { // This port is not part of a group; no further processing.
+				port2Port[p] = port
+				ports = append(ports, p)
+			}
+		}
+		processedGroups := map[string]struct{}{}
+		groups := group2PortNames.Keys()
+		for _, group := range groups {
+			portNames, _ := group2PortNames.Get(group)
+			processedGroups[group] = struct{}{}
+			var constraints []portgraph.LeafPortConstraint
+			pn := portNames[0]
+			for _, pn2 := range portNames[1:] {
+				p2 := name2Port[pn2]
+				constraints = append(constraints, portgraph.SameAsPort(p2))
+				name2Port[pn2].Constraints[groupAttr] = reAny
+				port2Port[p2] = absPortName2DevPort[pn2]
+				ports = append(ports, p2)
+			}
+			for _, g2 := range groups {
+				if _, ok := processedGroups[g2]; !ok {
+					p, _ := group2PortNames.Get(g2)
+					constraints = append(constraints, portgraph.NotSameAsPort(name2Port[p[0]]))
+				} else if len(constraints) == 0 {
+					constraints = append(constraints, reAny)
+				}
+			}
+			p := name2Port[pn]
+			if len(constraints) == 1 {
+				p.Constraints[groupAttr] = constraints[0]
+			} else {
+				p.Constraints[groupAttr] = portgraph.AndPort(constraints...)
+			}
+			name2Port[pn] = p
+			ports = append(ports, p)
+			port2Port[p] = absPortName2DevPort[pn]
+		}
+		n := &portgraph.AbstractNode{Desc: dev.GetId(), Constraints: nodeConstraints, Ports: ports}
+		node2Dev[n] = dev
+		nodes = append(nodes, n)
+	}
+
+	for _, dev := range tb.GetDuts() {
+		addDevice(dev, false)
+	}
+	for _, dev := range tb.GetAtes() {
+		addDevice(dev, true)
+	}
+	for _, link := range tb.GetLinks() {
+		src, ok := name2Port[link.GetA()]
+		if !ok {
+			return nil, nil, nil, fmt.Errorf("port %q in links not present in specified testbed", link.GetA())
+		}
+		dst, ok := name2Port[link.GetB()]
+		if !ok {
+			return nil, nil, nil, fmt.Errorf("port %q in links not present in specified testbed", link.GetB())
+		}
+		edges = append(edges, &portgraph.AbstractEdge{Src: src, Dst: dst})
+	}
+	return &portgraph.AbstractGraph{Desc: "KNE testbed", Nodes: nodes, Edges: edges}, node2Dev, port2Port, nil
 }
 
 // runtimeProtoCheck checks the proto messages have the expected number of fields.
