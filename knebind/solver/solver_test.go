@@ -15,6 +15,7 @@
 package solver
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -550,9 +551,67 @@ func TestTestbedToAbstractGraph(t *testing.T) {
 		}
 		for _, port := range node.Ports {
 			if got, ok := port2Port[port]; !ok {
-				t.Errorf("testbedToAbstractGraph() got node %q not mapped to any port", node.Desc)
+				t.Errorf("testbedToAbstractGraph() got port %q not mapped to any port", port.Desc)
 			} else if diff := cmp.Diff(wantPort[port.Desc], got, protocmp.Transform()); diff != "" {
 				t.Errorf("testbedToAbstractGraph() returned unexpected port diff (-want +got):\n%s", diff)
+			}
+		}
+	}
+}
+
+func TestTopologyToConcreteGraph(t *testing.T) {
+	intf1 := &tpb.Interface{
+		Name:  "Ethernet1",
+		Mtu:   1000,
+		Group: "group1",
+	}
+	intf2 := &tpb.Interface{
+		Name:  "eth2",
+		Mtu:   2000,
+		Group: "ategroup",
+	}
+	node := &tpb.Node{
+		Name:       "node",
+		Vendor:     tpb.Vendor_ARISTA,
+		Model:      "ceos",
+		Os:         "eos",
+		Interfaces: map[string]*tpb.Interface{"eth1": intf1},
+	}
+	ate := &tpb.Node{
+		Name:       "ate",
+		Vendor:     tpb.Vendor_KEYSIGHT,
+		Interfaces: map[string]*tpb.Interface{"eth1": intf2},
+	}
+	topo := &tpb.Topology{
+		Nodes: []*tpb.Node{node, ate},
+	}
+
+	wantNode := map[string]*tpb.Node{"node": node, "ate": ate}
+	wantIntf := map[string]*tpb.Interface{"node:eth1": intf1, "ate:eth1": intf2}
+
+	graph, node2Node, _, err := topoToConcreteGraph(topo)
+	if err != nil {
+		t.Fatalf("topoToConcreteGraph() got error %v, want nil", err)
+	}
+	if len(graph.Nodes) != 2 {
+		t.Fatalf("topoToConcreteGraph() got %d nodes, want 2", len(graph.Nodes))
+	}
+	for _, node := range graph.Nodes {
+		if got, ok := node2Node[node]; !ok {
+			t.Errorf("topoToConcreteGraph() got node %q not mapped to any device", node.Desc)
+		} else if diff := cmp.Diff(wantNode[node.Desc], got, protocmp.Transform()); diff != "" {
+			t.Errorf("topoToConcreteGraph() returned unexpected device diff (-want +got):\n%s", diff)
+		}
+		for _, port := range node.Ports {
+			wantIntf, ok := wantIntf[port.Desc]
+			if !ok {
+				t.Fatalf("topoToConcreteGraph() got unexpected port %q", port.Desc)
+			}
+			if gotMTU, wantMTU := port.Attrs["mtu"], strconv.FormatUint(uint64(wantIntf.GetMtu()), 10); gotMTU != wantMTU {
+				t.Errorf("port %q got mtu %q, want mtu %q", port.Desc, gotMTU, wantMTU)
+			}
+			if gotGroup, wantGroup := port.Attrs["group"], wantIntf.GetGroup(); gotGroup != wantGroup {
+				t.Errorf("port %q got group %q, want group %q", port.Desc, gotGroup, wantGroup)
 			}
 		}
 	}

@@ -112,6 +112,25 @@ func TestAnnotateErrors(t *testing.T) {
 	})
 }
 
+// TestAnnotateNonProtoMessage is a regression test for
+// https://github.com/openconfig/ondatra/pull/55
+func TestAnnotateNonProtoMessage(t *testing.T) {
+	const (
+		wantCode   = codes.ResourceExhausted
+		wantErrMsg = "nonProtoReq error"
+		wantReqMsg = "nonProtoReq msg"
+	)
+	nonProtoReqErr := status.Error(wantCode, wantErrMsg)
+	nonProtoMsg := struct{ msg string }{msg: wantReqMsg}
+	gotErr := maybeAnnotateErr(nonProtoReqErr, nonProtoMsg)
+	if gotErr == nil {
+		t.Fatalf("maybeAnnotateErr() got no error, want error, %v", gotErr)
+	}
+	if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg, wantReqMsg); diff != "" {
+		t.Errorf("maybeAnnotateErr() got grpc error diff:\n%s", diff)
+	}
+}
+
 type errServer struct {
 	tgrpcpb.UnimplementedTestServer
 	unaryErr  error

@@ -2204,6 +2204,86 @@ func parseXPath(t *testing.T, str string) *ixconfig.XPath {
 	return xp
 }
 
+func TestSendBGPGracefulRestart(t *testing.T) {
+	const (
+		peerV4ID = 4
+		peerV6ID = 6
+	)
+	bgp4XP := parseXPath(t, "/fake/xpath/bgp4")
+	bgp6XP := parseXPath(t, "/fake/xpath/bgp6")
+	bgpV4 := &ixconfig.TopologyBgpIpv4Peer{Xpath: bgp4XP, Active: ixconfig.MultivalueBool(true)}
+	bgpV6 := &ixconfig.TopologyBgpIpv6Peer{Xpath: bgp6XP, Active: ixconfig.MultivalueBool(true)}
+	cfg := &ixconfig.Ixnetwork{
+		Topology: []*ixconfig.Topology{{
+			DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+				Ethernet: []*ixconfig.TopologyEthernet{{
+					Ipv4: []*ixconfig.TopologyIpv4{{
+						BgpIpv4Peer: []*ixconfig.TopologyBgpIpv4Peer{bgpV4},
+					}},
+					Ipv6: []*ixconfig.TopologyIpv6{{
+						BgpIpv6Peer: []*ixconfig.TopologyBgpIpv6Peer{bgpV6},
+					}},
+				}},
+			}},
+		}},
+	}
+	intfs := map[string]*intf{"myInt": &intf{
+		idToBGPv4Peer: map[uint32]*ixconfig.TopologyBgpIpv4Peer{peerV4ID: bgpV4},
+		idToBGPv6Peer: map[uint32]*ixconfig.TopologyBgpIpv6Peer{peerV6ID: bgpV6},
+	}}
+
+	tests := []struct {
+		desc    string
+		peerIDs []uint32
+		v4Err   error
+		v6Err   error
+		wantErr string
+	}{{
+		desc:    "no bgp peers",
+		wantErr: "no bgp peers",
+	}, {
+		desc:    "v4 send error",
+		peerIDs: []uint32{peerV4ID},
+		v4Err:   errors.New("error sending bgp v4"),
+		wantErr: "error sending bgp v4",
+	}, {
+		desc:    "v6 send error",
+		peerIDs: []uint32{peerV6ID},
+		v6Err:   errors.New("error sending bgp v6"),
+		wantErr: "error sending bgp v6",
+	}, {
+		desc:    "success sending graceful restart for bgp v4 peer",
+		peerIDs: []uint32{peerV4ID},
+	}, {
+		desc:    "success sending graceful restart for bgp v6 peer",
+		peerIDs: []uint32{peerV6ID},
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			defer restoreStubs()
+			stubLogOperationResult()
+			c := &ixATE{
+				cfg:   cfg,
+				intfs: intfs,
+				c: &fakeCfgClient{
+					xPathToID: map[string]string{
+						bgp4XP.String(): "/id/to/bgpv4",
+						bgp6XP.String(): "/id/to/bgpv6",
+					},
+					session: &fakeSession{postErrs: map[string]error{
+						bgpPeerV4GracefulRestartOp: test.v4Err,
+						bgpPeerV6GracefulRestartOp: test.v6Err,
+					}},
+				},
+			}
+			gotErr := c.SendBGPGracefulRestart(context.Background(), test.peerIDs, 0)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("SendBGPGracefulRestart: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+		})
+	}
+}
+
 func TestSendBGPPeerNotification(t *testing.T) {
 	const (
 		peerV4ID = 4

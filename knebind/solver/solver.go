@@ -18,6 +18,7 @@ package solver
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	log "github.com/golang/glog"
@@ -86,6 +87,7 @@ const (
 	cardAttr   = "card_model"
 	pmdAttr    = "pmd"
 	groupAttr  = "group"
+	mtuAttr    = "mtu"
 )
 
 var (
@@ -228,6 +230,82 @@ func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*por
 		edges = append(edges, &portgraph.AbstractEdge{Src: src, Dst: dst})
 	}
 	return &portgraph.AbstractGraph{Desc: "KNE testbed", Nodes: nodes, Edges: edges}, node2Dev, port2Port, nil
+}
+
+// topoToConcreteGraph translates a Topology to a ConcreteGraph.
+func topoToConcreteGraph(topo *tpb.Topology) (*portgraph.ConcreteGraph, map[*portgraph.ConcreteNode]*tpb.Node, map[*portgraph.ConcretePort]*intf, error) {
+	var nodes []*portgraph.ConcreteNode
+	var edges []*portgraph.ConcreteEdge
+	nodeName2Node := make(map[string]*portgraph.ConcreteNode)
+	portName2Port := make(map[string]*portgraph.ConcretePort)
+	node2Node := make(map[*portgraph.ConcreteNode]*tpb.Node)
+	port2Intf := make(map[*portgraph.ConcretePort]*intf)
+
+	makePortAndIntf := func(nodeName, intfName, vendorFromNode string, attrs map[string]string) (*portgraph.ConcretePort, *intf) {
+		pn := fmt.Sprintf("%s:%s", nodeName, intfName)
+		p := &portgraph.ConcretePort{Desc: pn, Attrs: attrs}
+		i := &intf{name: intfName}
+		if vendorFromNode != "" {
+			i.vendorName = vendorFromNode
+		} else {
+			i.vendorName = intfName
+		}
+		return p, i
+	}
+	for _, node := range topo.GetNodes() {
+		attrs := make(map[string]string)
+		if vendor, ok := deviceVendors[node.GetVendor()]; ok {
+			attrs[vendorAttr] = vendor.String()
+		}
+		if m := node.GetModel(); m != "" {
+			attrs[hwAttr] = m
+		}
+		if os := node.GetOs(); os != "" {
+			attrs[swAttr] = os
+		}
+		var ports []*portgraph.ConcretePort
+		for intfName, nodeIntf := range node.GetInterfaces() {
+			portAttrs := make(map[string]string)
+			if mtu := nodeIntf.GetMtu(); mtu != 0 {
+				portAttrs[mtuAttr] = strconv.FormatInt(int64(mtu), 10)
+			}
+			if group := nodeIntf.GetGroup(); group != "" {
+				portAttrs[groupAttr] = group
+			}
+			p, i := makePortAndIntf(node.GetName(), intfName, nodeIntf.GetName(), portAttrs)
+			port2Intf[p] = i
+			portName2Port[p.Desc] = p
+			ports = append(ports, p)
+		}
+		n := &portgraph.ConcreteNode{Desc: node.GetName(), Attrs: attrs, Ports: ports}
+		node2Node[n] = node
+		nodeName2Node[n.Desc] = n
+	}
+	createAndAddPort := func(srcNode, srcPort, intfName string) *portgraph.ConcretePort {
+		p := &portgraph.ConcretePort{Desc: srcPort}
+		i := &intf{name: intfName, vendorName: intfName}
+		port2Intf[p] = i
+		portName2Port[srcPort] = p
+		nodeName2Node[srcNode].Ports = append(nodeName2Node[srcNode].Ports, p)
+		return p
+	}
+	for _, link := range topo.GetLinks() {
+		srcName := fmt.Sprintf("%s:%s", link.GetANode(), link.GetAInt())
+		dstName := fmt.Sprintf("%s:%s", link.GetZNode(), link.GetZInt())
+		src, ok := portName2Port[srcName]
+		if !ok {
+			src = createAndAddPort(link.GetANode(), srcName, link.GetAInt())
+		}
+		dst, ok := portName2Port[dstName]
+		if !ok {
+			dst = createAndAddPort(link.GetZNode(), dstName, link.GetZInt())
+		}
+		edges = append(edges, &portgraph.ConcreteEdge{Src: src, Dst: dst})
+	}
+	for _, node := range nodeName2Node {
+		nodes = append(nodes, node)
+	}
+	return &portgraph.ConcreteGraph{Desc: topo.GetName(), Nodes: nodes, Edges: edges}, node2Node, port2Intf, nil
 }
 
 // runtimeProtoCheck checks the proto messages have the expected number of fields.

@@ -1471,6 +1471,10 @@ func bgpV4Peers(v4Peers []*opb.BgpPeer) ([]*ixconfig.TopologyBgpIpv4Peer, error)
 			HoldTimer:         ixconfig.MultivalueUint32(p.GetHoldTimeSec()),
 			KeepaliveTimer:    ixconfig.MultivalueUint32(p.GetKeepaliveTimeSec()),
 			FilterIpV4Unicast: ixconfig.MultivalueTrue(),
+			ActAsRestarted:    ixconfig.MultivalueBool(p.GetActAsRestarted()),
+			AdvertiseEndOfRib: ixconfig.MultivalueBool(p.GetAdvertiseEndOfRib()),
+			RestartTime:       ixconfig.MultivalueUint32(uint32(p.GetRestartTime().AsDuration().Seconds())),
+			StaleTime:         ixconfig.MultivalueUint32(uint32(p.GetStaleTime().AsDuration().Seconds())),
 		}
 		caps := p.GetCapabilities()
 		if caps != nil {
@@ -1534,6 +1538,10 @@ func bgpV6Peers(v6Peers []*opb.BgpPeer) ([]*ixconfig.TopologyBgpIpv6Peer, error)
 			HoldTimer:         ixconfig.MultivalueUint32(p.GetHoldTimeSec()),
 			KeepaliveTimer:    ixconfig.MultivalueUint32(p.GetKeepaliveTimeSec()),
 			FilterIpV6Unicast: ixconfig.MultivalueTrue(),
+			ActAsRestarted:    ixconfig.MultivalueBool(p.GetActAsRestarted()),
+			AdvertiseEndOfRib: ixconfig.MultivalueBool(p.GetAdvertiseEndOfRib()),
+			RestartTime:       ixconfig.MultivalueUint32(uint32(p.GetRestartTime().AsDuration().Seconds())),
+			StaleTime:         ixconfig.MultivalueUint32(uint32(p.GetStaleTime().AsDuration().Seconds())),
 		}
 		caps := p.GetCapabilities()
 		if caps != nil {

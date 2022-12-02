@@ -16,8 +16,10 @@ package ixnet
 
 import (
 	"sync/atomic"
+	"time"
 
 	opb "github.com/openconfig/ondatra/proto"
+	dpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
@@ -46,6 +48,8 @@ type BGPPeer struct {
 //	Peer type: external
 //	Hold time: 90 seconds (per RFC 4271)
 //	Keepalive time: 30 second (per RFC 4271)
+//	Restart time: 90 seconds (per RFC 4724)
+//	Stale time: 300 seconds (per JunOS defaults)
 //	Capabilities:
 //	  IPv4 unicast
 //	  IPv4 multicast
@@ -61,8 +65,10 @@ func (b *BGP) AddPeer() *BGPPeer {
 		Id:               peerCount,
 		Active:           true,
 		Type:             opb.BgpPeer_TYPE_EXTERNAL,
-		HoldTimeSec:      90, // go/rfc/4271#section-10
-		KeepaliveTimeSec: 30, // go/rfc/4271#section-10
+		HoldTimeSec:      90,                         // go/rfc/4271#section-10
+		KeepaliveTimeSec: 30,                         // go/rfc/4271#section-10
+		RestartTime:      dpb.New(90 * time.Second),  // go/rfc/4724#section-4
+		StaleTime:        dpb.New(300 * time.Second), // https://www.juniper.net/documentation/us/en/software/junos/bgp/topics/ref/statement/stale-routes-time-edit-protocols-bgp.html
 		Capabilities: &opb.BgpPeer_Capabilities{
 			Ipv4Unicast:   true,
 			Ipv4Multicast: true,
@@ -119,15 +125,39 @@ func (b *BGPPeer) WithPeerAddress(peerAddress string) *BGPPeer {
 	return b
 }
 
-// WithLocalASN sets the ASN of the ATE.
+// WithLocalASN sets the local ASN.
 func (b *BGPPeer) WithLocalASN(localASN uint32) *BGPPeer {
 	b.pb.LocalAsn = localASN
 	return b
 }
 
-// WithHoldTime sets the hold time in seconds configured on the ATE.
+// WithHoldTime sets the hold time in seconds.
 func (b *BGPPeer) WithHoldTime(holdTimeSec uint16) *BGPPeer {
 	b.pb.HoldTimeSec = uint32(holdTimeSec)
+	return b
+}
+
+// WithRestartTime sets the graceful restart time.
+func (b *BGPPeer) WithRestartTime(restartTime time.Duration) *BGPPeer {
+	b.pb.RestartTime = dpb.New(restartTime)
+	return b
+}
+
+// WithStaleTime sets the graceful restart stale route time.
+func (b *BGPPeer) WithStaleTime(staleTime time.Duration) *BGPPeer {
+	b.pb.StaleTime = dpb.New(staleTime)
+	return b
+}
+
+// WithActAsRestarted sets whether the Restart State bit is advertised in the BGP session graceful restart flags.
+func (b *BGPPeer) WithActAsRestarted(enabled bool) *BGPPeer {
+	b.pb.ActAsRestarted = enabled
+	return b
+}
+
+// WithAdvertiseEndOfRIB sets whether the End-of-RIB marker is advertised in the BGP session.
+func (b *BGPPeer) WithAdvertiseEndOfRIB(enabled bool) *BGPPeer {
+	b.pb.AdvertiseEndOfRib = enabled
 	return b
 }
 

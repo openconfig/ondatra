@@ -18,6 +18,7 @@ package ate
 import (
 	"fmt"
 	"sync"
+	"time"
 
 	"golang.org/x/net/context"
 
@@ -198,6 +199,18 @@ func SendBGPPeerNotification(ctx context.Context, ate binding.ATE, peerIDs []uin
 	}
 	if err := ix.SendBGPPeerNotification(ctx, peerIDs, code, subCode); err != nil {
 		return fmt.Errorf("failed to send notification: %w", err)
+	}
+	return nil
+}
+
+// SendBGPGracefulRestart sends a BGP graceful restart event to BGP peers.
+func SendBGPGracefulRestart(ctx context.Context, ate binding.ATE, peerIDs []uint32, delay time.Duration) error {
+	ix, err := ixiaForATE(ctx, ate)
+	if err != nil {
+		return err
+	}
+	if err := ix.SendBGPGracefulRestart(ctx, peerIDs, delay); err != nil {
+		return fmt.Errorf("failed to send graceful restart: %w", err)
 	}
 	return nil
 }

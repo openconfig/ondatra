@@ -69,6 +69,9 @@ const (
 	bgpPeerV4NotifyOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/breaktcpsession"
 	bgpPeerV6NotifyOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/breaktcpsession"
 
+	bgpPeerV4GracefulRestartOp = "topology/deviceGroup/ethernet/ipv4/bgpIpv4Peer/operations/gracefulrestart"
+	bgpPeerV6GracefulRestartOp = "topology/deviceGroup/ethernet/ipv6/bgpIpv6Peer/operations/gracefulrestart"
+
 	startLACPOp = "lag/protocolStack/ethernet/lagportlacp/port/operations/start"
 	stopLACPOp  = "lag/protocolStack/ethernet/lagportlacp/port/operations/stop"
 )
@@ -1552,6 +1555,46 @@ func (ix *ixATE) UpdateNetworkGroups(ctx context.Context, ifs []*opb.InterfaceCo
 		}
 	}
 	return ix.applyOnTheFly(ctx)
+}
+
+func (ix *ixATE) SendBGPGracefulRestart(ctx context.Context, peerIDs []uint32, delay time.Duration) error {
+	if len(peerIDs) == 0 {
+		return fmt.Errorf("no bgp peers provided")
+	}
+	var peerNodes []ixconfig.IxiaCfgNode
+	for _, intf := range ix.intfs {
+		for _, id := range peerIDs {
+			if peer, ok := intf.idToBGPv4Peer[id]; ok {
+				peerNodes = append(peerNodes, peer)
+			}
+			if peer, ok := intf.idToBGPv6Peer[id]; ok {
+				peerNodes = append(peerNodes, peer)
+			}
+		}
+	}
+	if err := ix.c.UpdateIDs(ctx, ix.cfg, peerNodes...); err != nil {
+		return fmt.Errorf("error updating IDs for bgp peers: %w", err)
+	}
+	for _, node := range peerNodes {
+		nodeID, err := ix.c.NodeID(node)
+		if err != nil {
+			return fmt.Errorf("error getting ID for bgp peer: %w", err)
+		}
+		var op string
+		switch n := node.(type) {
+		case *ixconfig.TopologyBgpIpv4Peer:
+			op = bgpPeerV4GracefulRestartOp
+		case *ixconfig.TopologyBgpIpv6Peer:
+			op = bgpPeerV6GracefulRestartOp
+		default:
+			return fmt.Errorf("invalid BGP peer node type: %v(%T)", n, node)
+		}
+		args := ixweb.OpArgs{nodeID, []int{1}, uint32(delay.Seconds())}
+		if err := ix.c.Session().Post(ctx, op, args, nil); err != nil {
+			return fmt.Errorf("error sending BGP graceful restart: %w", err)
+		}
+	}
+	return nil
 }
 
 func (ix *ixATE) SendBGPPeerNotification(ctx context.Context, peerIDs []uint32, code int, subCode int) error {

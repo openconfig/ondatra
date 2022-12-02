@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package ondatra;
 
+import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 
 option go_package = "github.com/openconfig/ondatra/proto";
@@ -375,7 +376,11 @@ message BgpPeer {
     Enlp enlp = 13;
   }
   repeated SrtePolicyGroup srte_policy_groups = 9;
-  // NEXT ID: 12
+  google.protobuf.Duration restart_time = 12;
+  google.protobuf.Duration stale_time = 13;
+  bool advertise_end_of_rib = 14;
+  bool act_as_restarted = 15;
+  // NEXT ID: 16
 }
 
 // BGP attributes for advertised prefixes.

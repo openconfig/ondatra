@@ -1,5 +1,19 @@
 {
+   "actAsRestarted": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "false"
+      }
+   },
    "active": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "false"
+      }
+   },
+   "advertiseEndOfRib": {
       "nest": null,
       "overlay": null,
       "singleValue": {
@@ -50,7 +64,21 @@
       }
    },
    "numberSRTEPolicies": 0,
+   "restartTime": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "0"
+      }
+   },
    "stackedLayers": null,
+   "staleTime": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "0"
+      }
+   },
    "type": {
       "nest": null,
       "overlay": null,

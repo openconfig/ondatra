@@ -72,7 +72,13 @@ func maybeAnnotateErr(err error, req any) error {
 	// 3. err is not a grpc error: sentinel errors like io.EOF must be preserved
 	if err != nil && req != nil {
 		if st, ok := status.FromError(err); ok {
-			reqText := prototext.Format(req.(proto.Message))
+			var reqText string
+			// TODO(greg-dennis): Figure out why the request may not be a proto.Message.
+			if pm, ok := req.(proto.Message); ok {
+				reqText = prototext.Format(pm)
+			} else {
+				reqText = fmt.Sprint(req)
+			}
 			msg := fmt.Sprintf("error on request {\n%s}: %s", reqText, st.Message())
 			return status.Error(st.Code(), msg)
 		}

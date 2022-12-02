@@ -17,6 +17,7 @@ package ondatra
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"golang.org/x/net/context"
 
@@ -155,7 +156,50 @@ func (n *BGPPeerNotification) WithSubCode(subCode int) *BGPPeerNotification {
 // Send executes the operation to send notification/error codes.
 func (n *BGPPeerNotification) Send(t testing.TB) {
 	t.Helper()
+	t = events.ActionStarted(t, "Sending BGP peer notification on %s", n.ate)
 	if err := ate.SendBGPPeerNotification(context.Background(), n.ate, n.peerIDs, n.code, n.subCode); err != nil {
-		t.Fatalf("Send(t) failed on %s: %v", n, err)
+		t.Fatalf("Send(t) of %v: %v", n, err)
+	}
+}
+
+// NewBGPGracefulRestart returns a new BGPGracefulRestart action.
+func (a *Actions) NewBGPGracefulRestart() *BGPGracefulRestart {
+	return &BGPGracefulRestart{
+		ate: a.ate,
+	}
+}
+
+// BGPGracefulRestart is an action to trigger a BGP graceful restart event.
+type BGPGracefulRestart struct {
+	ate     binding.ATE
+	peerIDs []uint32
+	delay   time.Duration
+}
+
+func (r *BGPGracefulRestart) String() string {
+	return fmt.Sprintf("BGPGracefulRestart%+v", *r)
+}
+
+// WithPeers sets the BGP peers from which the graceful restart is to be sent.
+func (r *BGPGracefulRestart) WithPeers(bgpPeers ...*ixnet.BGPPeer) *BGPGracefulRestart {
+	r.peerIDs = nil
+	for _, bgpPeer := range bgpPeers {
+		r.peerIDs = append(r.peerIDs, bgpPeer.ID())
+	}
+	return r
+}
+
+// WithRestartTime sets the delay for the BGP sessions to remain down before restarting.
+func (r *BGPGracefulRestart) WithRestartTime(delay time.Duration) *BGPGracefulRestart {
+	r.delay = delay
+	return r
+}
+
+// Send executes the operation to start the graceful restart event.
+func (r *BGPGracefulRestart) Send(t testing.TB) {
+	t.Helper()
+	t = events.ActionStarted(t, "Sending BGP graceful restart on %s", r.ate)
+	if err := ate.SendBGPGracefulRestart(context.Background(), r.ate, r.peerIDs, r.delay); err != nil {
+		t.Fatalf("Send(t) of %v: %v", r, err)
 	}
 }

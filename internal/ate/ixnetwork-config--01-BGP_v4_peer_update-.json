@@ -1,9 +1,23 @@
 {
+   "actAsRestarted": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "false"
+      }
+   },
    "active": {
       "nest": null,
       "overlay": null,
       "singleValue": {
          "xpath": "/topology[1]/deviceGroup[1]/bgpv4Peer[1]",
+         "value": "false"
+      }
+   },
+   "advertiseEndOfRib": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
          "value": "false"
       }
    },
@@ -51,7 +65,21 @@
       }
    },
    "numberSRTEPolicies": 0,
+   "restartTime": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "0"
+      }
+   },
    "stackedLayers": null,
+   "staleTime": {
+      "nest": null,
+      "overlay": null,
+      "singleValue": {
+         "value": "0"
+      }
+   },
    "type": {
       "nest": null,
       "overlay": null,
