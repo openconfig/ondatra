@@ -69,12 +69,15 @@ func maybeAnnotateErr(err error, req any) error {
 	// Do not annotate the error if:
 	// 1. err is nil: there is no error to annotate
 	// 2. req is nil: there is no request to annotate with
-	// 3. err is not a grpc error: sentinel errors like io.EOF must be preserved
+	// 3. req is not a proto message
+	// 4. err is not a grpc error: sentinel errors like io.EOF must be preserved
 	if err != nil && req != nil {
 		if st, ok := status.FromError(err); ok {
-			reqText := prototext.Format(req.(proto.Message))
-			msg := fmt.Sprintf("error on request {\n%s}: %s", reqText, st.Message())
-			return status.Error(st.Code(), msg)
+			if pm, ok := req.(proto.Message); ok {
+				reqText := prototext.Format(pm)
+				msg := fmt.Sprintf("error on request {\n%s}: %s", reqText, st.Message())
+				return status.Error(st.Code(), msg)
+			}
 		}
 	}
 	return err
