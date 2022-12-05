@@ -28,6 +28,8 @@ import (
 
 	tgrpcpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
 	tpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
+	spb "google.golang.org/genproto/googleapis/rpc/status"
+	anypb "google.golang.org/protobuf/types/known/anypb"
 )
 
 func TestAnnotateErrors(t *testing.T) {
@@ -112,22 +114,53 @@ func TestAnnotateErrors(t *testing.T) {
 	})
 }
 
-// TestAnnotateNonProtoMessage is a regression test for
-// https://github.com/openconfig/ondatra/pull/55
-func TestAnnotateNonProtoMessage(t *testing.T) {
+func TestMaybeAnnotateErr(t *testing.T) {
 	const (
 		wantCode   = codes.ResourceExhausted
-		wantErrMsg = "nonProtoReq error"
-		wantReqMsg = "nonProtoReq msg"
+		wantErrMsg = "test error"
+		wantReqMsg = "test msg"
 	)
-	nonProtoReqErr := status.Error(wantCode, wantErrMsg)
-	nonProtoMsg := struct{ msg string }{msg: wantReqMsg}
-	gotErr := maybeAnnotateErr(nonProtoReqErr, nonProtoMsg)
-	if gotErr == nil {
-		t.Fatalf("maybeAnnotateErr() got no error, want error, %v", gotErr)
-	}
-	if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg, wantReqMsg); diff != "" {
-		t.Errorf("maybeAnnotateErr() got grpc error diff:\n%s", diff)
+	tests := []struct {
+		desc        string
+		err         error
+		req         any
+		wantDetails string
+	}{{
+		desc: "normal",
+		err:  status.Error(wantCode, wantErrMsg),
+		req:  &tpb.TestRequest{Message: wantReqMsg},
+	}, {
+		// regression test for https://github.com/openconfig/ondatra/pull/55
+		desc: "non-proto.Message",
+		err:  status.Error(wantCode, wantErrMsg),
+		req:  struct{ msg string }{msg: wantReqMsg},
+	}, {
+		// regression test for https://github.com/openconfig/ondatra/issues/56
+		desc: "error details",
+		err: status.FromProto(&spb.Status{
+			Code:    int32(wantCode),
+			Message: wantErrMsg,
+			Details: []*anypb.Any{func() *anypb.Any {
+				a, err := anypb.New(&tpb.TestRequest{Message: "test details"})
+				if err != nil {
+					t.Fatalf("failed to create anypb: %v", err)
+				}
+				return a
+			}()},
+		}).Err(),
+		req:         &tpb.TestRequest{Message: wantReqMsg},
+		wantDetails: "test details",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			gotErr := maybeAnnotateErr(test.err, test.req)
+			if gotErr == nil {
+				t.Fatalf("maybeAnnotateErr() got no error, want error, %v", gotErr)
+			}
+			if diff := grpcErrDiff(t, gotErr, wantCode, wantErrMsg, wantReqMsg, test.wantDetails); diff != "" {
+				t.Errorf("maybeAnnotateErr() got grpc error diff:\n%s", diff)
+			}
+		})
 	}
 }
 
@@ -153,14 +186,21 @@ func grpcErrDiff(t *testing.T, err error, wantCode codes.Code, wantSubstrs ...st
 			t.Fatalf("status.FromError failed to convert error: %v", err)
 		}
 		gotCode, gotMsg = st.Code(), st.Message()
+		if len(st.Details()) > 0 {
+			var details []string
+			for _, det := range st.Details() {
+				details = append(details, fmt.Sprint(det))
+			}
+			gotMsg = fmt.Sprintf("%s,%s", gotMsg, strings.Join(details, ","))
+		}
 	}
 	var lines []string
 	if gotCode != wantCode {
-		lines = append(lines, fmt.Sprintf("want code %v, got %v", wantCode, gotCode))
+		lines = append(lines, fmt.Sprintf("got code %v, want %v", gotCode, wantCode))
 	}
 	for _, wantSub := range wantSubstrs {
 		if !strings.Contains(gotMsg, wantSub) {
-			lines = append(lines, fmt.Sprintf("want message containing %q, got %q", wantSub, gotMsg))
+			lines = append(lines, fmt.Sprintf("got message %q, want substring %q", gotMsg, wantSub))
 		}
 	}
 	return strings.Join(lines, "\n")

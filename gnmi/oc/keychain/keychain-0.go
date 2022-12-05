@@ -468,8 +468,8 @@ func (n *KeychainPathAny) KeyAny() *Keychain_KeyPathAny {
 //	Path from parent:     "keys/key"
 //	Path from root:       "/keychains/keychain/keys/key"
 //
-//	KeyId: uint64
-func (n *KeychainPath) Key(KeyId uint64) *Keychain_KeyPath {
+//	KeyId: [oc.UnionString, oc.UnionUint64]
+func (n *KeychainPath) Key(KeyId oc.Keychain_Key_KeyId_Union) *Keychain_KeyPath {
 	return &Keychain_KeyPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"keys", "key"},
@@ -486,8 +486,8 @@ func (n *KeychainPath) Key(KeyId uint64) *Keychain_KeyPath {
 //	Path from parent:     "keys/key"
 //	Path from root:       "/keychains/keychain/keys/key"
 //
-//	KeyId: uint64
-func (n *KeychainPathAny) Key(KeyId uint64) *Keychain_KeyPathAny {
+//	KeyId: [oc.UnionString, oc.UnionUint64]
+func (n *KeychainPathAny) Key(KeyId oc.Keychain_Key_KeyId_Union) *Keychain_KeyPathAny {
 	return &Keychain_KeyPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"keys", "key"},
@@ -763,23 +763,19 @@ func (n *Keychain_Key_CryptoAlgorithmPathAny) Config() ygnmi.WildcardQuery[oc.E_
 //	Instantiating module: "openconfig-keychain"
 //	Path from parent:     "state/key-id"
 //	Path from root:       "/keychains/keychain/keys/key/state/key-id"
-func (n *Keychain_Key_KeyIdPath) State() ygnmi.SingletonQuery[uint64] {
-	return ygnmi.NewLeafSingletonQuery[uint64](
+func (n *Keychain_Key_KeyIdPath) State() ygnmi.SingletonQuery[oc.Keychain_Key_KeyId_Union] {
+	return ygnmi.NewLeafSingletonQuery[oc.Keychain_Key_KeyId_Union](
 		"Keychain_Key",
 		true,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"state", "key-id"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.Keychain_Key_KeyId_Union, bool) {
 			ret := gs.(*oc.Keychain_Key).KeyId
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Keychain_Key) },
 		&ytypes.Schema{
@@ -796,23 +792,19 @@ func (n *Keychain_Key_KeyIdPath) State() ygnmi.SingletonQuery[uint64] {
 //	Instantiating module: "openconfig-keychain"
 //	Path from parent:     "state/key-id"
 //	Path from root:       "/keychains/keychain/keys/key/state/key-id"
-func (n *Keychain_Key_KeyIdPathAny) State() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewLeafWildcardQuery[uint64](
+func (n *Keychain_Key_KeyIdPathAny) State() ygnmi.WildcardQuery[oc.Keychain_Key_KeyId_Union] {
+	return ygnmi.NewLeafWildcardQuery[oc.Keychain_Key_KeyId_Union](
 		"Keychain_Key",
 		true,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"state", "key-id"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.Keychain_Key_KeyId_Union, bool) {
 			ret := gs.(*oc.Keychain_Key).KeyId
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Keychain_Key) },
 		&ytypes.Schema{
@@ -829,23 +821,19 @@ func (n *Keychain_Key_KeyIdPathAny) State() ygnmi.WildcardQuery[uint64] {
 //	Instantiating module: "openconfig-keychain"
 //	Path from parent:     "config/key-id"
 //	Path from root:       "/keychains/keychain/keys/key/config/key-id"
-func (n *Keychain_Key_KeyIdPath) Config() ygnmi.ConfigQuery[uint64] {
-	return ygnmi.NewLeafConfigQuery[uint64](
+func (n *Keychain_Key_KeyIdPath) Config() ygnmi.ConfigQuery[oc.Keychain_Key_KeyId_Union] {
+	return ygnmi.NewLeafConfigQuery[oc.Keychain_Key_KeyId_Union](
 		"Keychain_Key",
 		false,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"config", "key-id"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.Keychain_Key_KeyId_Union, bool) {
 			ret := gs.(*oc.Keychain_Key).KeyId
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Keychain_Key) },
 		&ytypes.Schema{
@@ -862,23 +850,19 @@ func (n *Keychain_Key_KeyIdPath) Config() ygnmi.ConfigQuery[uint64] {
 //	Instantiating module: "openconfig-keychain"
 //	Path from parent:     "config/key-id"
 //	Path from root:       "/keychains/keychain/keys/key/config/key-id"
-func (n *Keychain_Key_KeyIdPathAny) Config() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewLeafWildcardQuery[uint64](
+func (n *Keychain_Key_KeyIdPathAny) Config() ygnmi.WildcardQuery[oc.Keychain_Key_KeyId_Union] {
+	return ygnmi.NewLeafWildcardQuery[oc.Keychain_Key_KeyId_Union](
 		"Keychain_Key",
 		false,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"config", "key-id"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.Keychain_Key_KeyId_Union, bool) {
 			ret := gs.(*oc.Keychain_Key).KeyId
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Keychain_Key) },
 		&ytypes.Schema{

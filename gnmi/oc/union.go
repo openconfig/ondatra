@@ -594,6 +594,38 @@ func (t *Keychain) To_Keychain_Tolerance_Union(i interface{}) (Keychain_Toleranc
 	return nil, fmt.Errorf("cannot convert %v to Keychain_Tolerance_Union, unknown union type, got: %T, want any of [E_Keychain_Tolerance, uint32]", i, i)
 }
 
+// Keychain_Key_KeyId_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-keychain/keychains/keychain/keys/key/state/key-id within the YANG schema.
+// Union type can be one of [UnionString, UnionUint64].
+type Keychain_Key_KeyId_Union interface {
+	// Union type can be one of [UnionString, UnionUint64]
+	Documentation_for_Keychain_Key_KeyId_Union()
+}
+
+// Documentation_for_Keychain_Key_KeyId_Union ensures that UnionString
+// implements the Keychain_Key_KeyId_Union interface.
+func (UnionString) Documentation_for_Keychain_Key_KeyId_Union() {}
+
+// Documentation_for_Keychain_Key_KeyId_Union ensures that UnionUint64
+// implements the Keychain_Key_KeyId_Union interface.
+func (UnionUint64) Documentation_for_Keychain_Key_KeyId_Union() {}
+
+// To_Keychain_Key_KeyId_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the Keychain_Key_KeyId_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *Keychain_Key) To_Keychain_Key_KeyId_Union(i interface{}) (Keychain_Key_KeyId_Union, error) {
+	if v, ok := i.(Keychain_Key_KeyId_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint64:
+		return UnionUint64(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to Keychain_Key_KeyId_Union, unknown union type, got: %T, want any of [string, uint64]", i, i)
+}
+
 // NetworkInstance_Afts_LabelEntry_Label_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/state/label within the YANG schema.
 // Union type can be one of [E_LabelEntry_Label, UnionUint32].

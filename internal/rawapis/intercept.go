@@ -73,14 +73,14 @@ func maybeAnnotateErr(err error, req any) error {
 	if err != nil && req != nil {
 		if st, ok := status.FromError(err); ok {
 			var reqText string
-			// TODO(greg-dennis): Figure out why the request may not be a proto.Message.
 			if pm, ok := req.(proto.Message); ok {
 				reqText = prototext.Format(pm)
 			} else {
 				reqText = fmt.Sprint(req)
 			}
-			msg := fmt.Sprintf("error on request {\n%s}: %s", reqText, st.Message())
-			return status.Error(st.Code(), msg)
+			pb := st.Proto()
+			pb.Message = fmt.Sprintf("error on request {\n%s}: %s", reqText, pb.Message)
+			return status.FromProto(pb).Err()
 		}
 	}
 	return err

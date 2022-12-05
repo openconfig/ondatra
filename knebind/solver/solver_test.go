@@ -20,11 +20,11 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/gnmi/errdiff"
-	tpb "github.com/openconfig/kne/proto/topo"
 	"github.com/openconfig/ondatra/binding"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/testing/protocmp"
 
+	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -117,18 +117,21 @@ func TestSolve(t *testing.T) {
 	topo := unmarshalTopo(t, topoText)
 
 	dut1 := &opb.Device{
-		Id:     "dut1",
-		Vendor: opb.Device_ARISTA,
-		Ports:  []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+		Id:              "dut1",
+		Vendor:          opb.Device_ARISTA,
+		HardwareModel:   "ceos",
+		SoftwareVersion: "eos",
+		Ports:           []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut2 := &opb.Device{
 		Id:    "dut2",
 		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut3 := &opb.Device{
-		Id:     "dut3",
-		Vendor: opb.Device_JUNIPER,
-		Ports:  []*opb.Port{{Id: "port1"}},
+		Id:              "dut3",
+		Vendor:          opb.Device_JUNIPER,
+		SoftwareVersion: "regex:^evo$",
+		Ports:           []*opb.Port{{Id: "port1"}},
 	}
 	ate := &opb.Device{
 		Id:    "ate",
@@ -288,7 +291,7 @@ func TestSolve(t *testing.T) {
 	}
 }
 
-func TestSolvePortGroups(t *testing.T) {
+func TestPortGroupsSolve(t *testing.T) {
 	const topoText = `
 		nodes: {
 		  name: "node1"
@@ -664,7 +667,7 @@ func TestSolveErrors(t *testing.T) {
 			  name: "node1"
 			  vendor: CISCO
 			}`,
-		wantErr: "no node in KNE topology to match testbed",
+		wantErr: "Node \"dut1\" was not assigned",
 	}, {
 		desc: "no match for ATE",
 		tb: &opb.Testbed{
@@ -677,7 +680,7 @@ func TestSolveErrors(t *testing.T) {
 			  name: "node1"
 			  vendor: CISCO
 			}`,
-		wantErr: "no node in KNE topology to match testbed",
+		wantErr: "Node \"ate1\" was not assigned",
 	}, {
 		desc: "no node combination",
 		tb: &opb.Testbed{
@@ -698,7 +701,7 @@ func TestSolveErrors(t *testing.T) {
 					name: "node2"
 					vendor: CISCO
 				}`,
-		wantErr: "no KNE topology",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no link combination",
 		tb: &opb.Testbed{
@@ -753,136 +756,9 @@ func TestSolveErrors(t *testing.T) {
 			  z_node: "node4"
 			  z_int: "eth1"
 			}`,
-		wantErr: "no KNE topology matches the testbed",
+		wantErr: "could not solve for specified testbed",
 	}, {
-		desc: "port group specified on both ends of link in topology",
-		tb: &opb.Testbed{
-			Ates: []*opb.Device{{
-				Id:    "ate1",
-				Ports: []*opb.Port{{Id: "port1"}},
-			}},
-			Duts: []*opb.Device{{
-				Id:     "dut1",
-				Vendor: opb.Device_ARISTA,
-				Ports:  []*opb.Port{{Id: "port1"}},
-			}},
-			Links: []*opb.Link{
-				{A: "dut1:port1", B: "ate1:port1"},
-			},
-		},
-		topo: `
-			nodes: {
-			  name: "node1"
-			  vendor: KEYSIGHT
-			  interfaces: {
-			    key: "eth1"
-			    value: {group: "lag"}
-			  }
-			}
-			nodes: {
-			  name: "node2"
-			  vendor: ARISTA
-			  interfaces: {
-			    key: "eth1"
-			    value: {group: "lag"}
-			  }
-			}
-			links: {
-			  a_node: "node1"
-			  a_int: "eth1"
-			  z_node: "node2"
-			  z_int: "eth1"
-			}`,
-		wantErr: "unsupported configuration",
-	}, {
-		desc: "bad port group config in topology",
-		tb: &opb.Testbed{
-			Ates: []*opb.Device{{
-				Id:    "ate1",
-				Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
-			}},
-			Duts: []*opb.Device{{
-				Id:     "dut1",
-				Vendor: opb.Device_ARISTA,
-				Ports:  []*opb.Port{{Id: "port1"}},
-			}, {
-				Id:     "dut2",
-				Ports:  []*opb.Port{{Id: "port1"}},
-				Vendor: opb.Device_ARISTA,
-			}},
-			Links: []*opb.Link{
-				{A: "dut1:port1", B: "ate1:port1"},
-				{A: "dut2:port1", B: "ate1:port2"},
-			},
-		},
-		topo: `
-			nodes: {
-			  name: "node1"
-			  vendor: ARISTA
-			}
-			nodes: {
-			  name: "node2"
-			  vendor: KEYSIGHT
-			  interfaces: {
-			    key: "eth1"
-			    value: {group: "lag"}
-			  }
-			  interfaces: {
-			    key: "eth2"
-			    value: {group: "lag"}
-			  }
-			}
-			nodes: {
-			  name: "node3"
-			  vendor: ARISTA
-			}
-			links: {
-			  a_node: "node1"
-			  a_int: "eth1"
-			  z_node: "node2"
-			  z_int: "eth1"
-			}
-			links: {
-			  a_node: "node2"
-			  a_int: "eth2"
-			  z_node: "node3"
-			  z_int: "eth1"
-			}`,
-		wantErr: "inconsistent port group",
-	}, {
-		desc: "port group specified on both ends of link in testbed",
-		tb: &opb.Testbed{
-			Ates: []*opb.Device{{
-				Id:    "ate1",
-				Ports: []*opb.Port{{Id: "port1", Group: "G1"}},
-			}},
-			Duts: []*opb.Device{{
-				Id:     "dut1",
-				Vendor: opb.Device_ARISTA,
-				Ports:  []*opb.Port{{Id: "port1", Group: "G1"}},
-			}},
-			Links: []*opb.Link{
-				{A: "dut1:port1", B: "ate1:port1"},
-			},
-		},
-		topo: `
-			nodes: {
-			  name: "node1"
-			  vendor: KEYSIGHT
-			}
-			nodes: {
-			  name: "node2"
-			  vendor: ARISTA
-			}
-			links: {
-			  a_node: "node1"
-			  a_int: "eth1"
-			  z_node: "node2"
-			  z_int: "eth1"
-			}`,
-		wantErr: "unsupported configuration",
-	}, {
-		desc: "bad port group config in testbed",
+		desc: "bad port group config in testbed; no groups in topology",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
 				Id:    "ate1",
@@ -927,7 +803,7 @@ func TestSolveErrors(t *testing.T) {
 			  z_node: "node3"
 			  z_int: "eth1"
 			}`,
-		wantErr: "inconsistent port group",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "required port group size not found",
 		tb: &opb.Testbed{
@@ -973,7 +849,7 @@ func TestSolveErrors(t *testing.T) {
 			  z_node: "node2"
 			  z_int: "eth2"
 			}`,
-		wantErr: "no KNE topology matches the testbed",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "required number of port groups not found",
 		tb: &opb.Testbed{
@@ -1019,7 +895,7 @@ func TestSolveErrors(t *testing.T) {
 			  z_node: "node2"
 			  z_int: "eth2"
 			}`,
-		wantErr: "no KNE topology matches the testbed",
+		wantErr: "could not solve for specified testbed",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

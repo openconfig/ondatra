@@ -41,10 +41,8 @@ import (
 // TODO(greg-dennis): Unexport once IxNetwork is removed.
 var CommonDialOpts = []grpc.DialOption{
 	grpc.WithBlock(),
-	// TODO(greg-dennis): Uncomment when this bug is fixed:
-	// https://github.com/openconfig/ondatra/issues/56
-	// withUnaryAnnotateErrors(),
-	// withStreamAnnotateErrors(),
+	withUnaryAnnotateErrors(),
+	withStreamAnnotateErrors(),
 }
 
 // NewCLI creates a CLI client for the specified DUT.
