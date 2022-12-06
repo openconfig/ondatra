@@ -669,6 +669,40 @@ func TestSolveErrors(t *testing.T) {
 			}`,
 		wantErr: "Node \"dut1\" was not assigned",
 	}, {
+		desc: "no match for DUT - wrong hardware model",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:            "dut1",
+				Vendor:        opb.Device_ARISTA,
+				HardwareModel: "ceos",
+			}},
+		},
+		topo: `
+				nodes: {
+					name: "node1"
+					vendor: ARISTA
+					model: "bad"
+					os: "eos"
+				}`,
+		wantErr: "Node \"dut1\" was not assigned",
+	}, {
+		desc: "no match for DUT - wrong software model",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id:              "dut1",
+				Vendor:          opb.Device_ARISTA,
+				SoftwareVersion: "eos",
+			}},
+		},
+		topo: `
+					nodes: {
+						name: "node1"
+						vendor: ARISTA
+						model: "ceos"
+						os: "bad"
+					}`,
+		wantErr: "Node \"dut1\" was not assigned",
+	}, {
 		desc: "no match for ATE",
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{{
