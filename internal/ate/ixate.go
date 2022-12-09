@@ -457,7 +457,12 @@ func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, ov
 		fileSuffix = "_overwrite" + fileSuffix
 	}
 	desc = strings.ReplaceAll(desc, " ", "_")
-	filePath := fmt.Sprintf("ixnetwork-config-%s-%02d-%s-%s", ix.name, ix.cfgPushCount, desc, fileSuffix)
+	fileName := fmt.Sprintf("ixnetwork-config-%s-%02d-%s-%s", ix.name, ix.cfgPushCount, desc, fileSuffix)
+	outputDir := os.Getenv("TEST_UNDECLARED_OUTPUTS_DIR")
+	if outputDir == "" {
+		outputDir = os.TempDir()
+	}
+	filePath := path.Join(outputDir, fileName)
 	defer func() {
 		// Record the pushed config after XPaths have been updated by ix.c.ImportConfig.
 		jsonStr, err := json.MarshalIndent(node, "", "   ")

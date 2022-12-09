@@ -4443,6 +4443,72 @@ func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) State() ygnmi.Wil
 	)
 }
 
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/password-hashed"
+//	Path from root:       "/system/aaa/authentication/users/user/config/password-hashed"
+func (n *System_Aaa_Authentication_User_PasswordHashedPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_Aaa_Authentication_User",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "password-hashed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).PasswordHashed
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/password-hashed"
+//	Path from root:       "/system/aaa/authentication/users/user/config/password-hashed"
+func (n *System_Aaa_Authentication_User_PasswordHashedPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Aaa_Authentication_User",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "password-hashed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).PasswordHashed
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
 // State returns a Query that can be used in gNMI operations.
 //
 //	Defining module:      "openconfig-aaa"
@@ -4489,6 +4555,72 @@ func (n *System_Aaa_Authentication_User_PasswordPathAny) State() ygnmi.WildcardQ
 		true,
 		ygnmi.NewNodePath(
 			[]string{"state", "password"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).Password
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/password"
+//	Path from root:       "/system/aaa/authentication/users/user/config/password"
+func (n *System_Aaa_Authentication_User_PasswordPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_Aaa_Authentication_User",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "password"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).Password
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/password"
+//	Path from root:       "/system/aaa/authentication/users/user/config/password"
+func (n *System_Aaa_Authentication_User_PasswordPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Aaa_Authentication_User",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "password"},
 			nil,
 			n.parent,
 		),
@@ -4681,6 +4813,138 @@ func (n *System_Aaa_Authentication_User_RolePathAny) Config() ygnmi.WildcardQuer
 		func(gs ygot.ValidatedGoStruct) (oc.System_Aaa_Authentication_User_Role_Union, bool) {
 			ret := gs.(*oc.System_Aaa_Authentication_User).Role
 			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/ssh-key"
+//	Path from root:       "/system/aaa/authentication/users/user/state/ssh-key"
+func (n *System_Aaa_Authentication_User_SshKeyPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"System_Aaa_Authentication_User",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "ssh-key"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).SshKey
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/ssh-key"
+//	Path from root:       "/system/aaa/authentication/users/user/state/ssh-key"
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Aaa_Authentication_User",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "ssh-key"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).SshKey
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/ssh-key"
+//	Path from root:       "/system/aaa/authentication/users/user/config/ssh-key"
+func (n *System_Aaa_Authentication_User_SshKeyPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_Aaa_Authentication_User",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "ssh-key"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).SshKey
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/ssh-key"
+//	Path from root:       "/system/aaa/authentication/users/user/config/ssh-key"
+func (n *System_Aaa_Authentication_User_SshKeyPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Aaa_Authentication_User",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "ssh-key"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_User).SshKey
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_User) },
 		&ytypes.Schema{
@@ -4919,6 +5183,18 @@ type System_Aaa_Authentication_User_RolePathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// System_Aaa_Authentication_User_SshKeyPath represents the /openconfig-system/system/aaa/authentication/users/user/state/ssh-key YANG schema element.
+type System_Aaa_Authentication_User_SshKeyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Authentication_User_SshKeyPathAny represents the wildcard version of the /openconfig-system/system/aaa/authentication/users/user/state/ssh-key YANG schema element.
+type System_Aaa_Authentication_User_SshKeyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // System_Aaa_Authentication_User_UsernamePath represents the /openconfig-system/system/aaa/authentication/users/user/state/username YANG schema element.
 type System_Aaa_Authentication_User_UsernamePath struct {
 	*ygnmi.NodePath
@@ -5090,12 +5366,12 @@ func (n *System_Aaa_Authentication_UserPathAny) AuthorizedUsersListVersion() *Sy
 //
 //	Defining module:      "openconfig-aaa"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/password"
-//	Path from root:       "/system/aaa/authentication/users/user/state/password"
+//	Path from parent:     "*/password"
+//	Path from root:       "/system/aaa/authentication/users/user/*/password"
 func (n *System_Aaa_Authentication_UserPath) Password() *System_Aaa_Authentication_User_PasswordPath {
 	return &System_Aaa_Authentication_User_PasswordPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "password"},
+			[]string{"*", "password"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5108,12 +5384,12 @@ func (n *System_Aaa_Authentication_UserPath) Password() *System_Aaa_Authenticati
 //
 //	Defining module:      "openconfig-aaa"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/password"
-//	Path from root:       "/system/aaa/authentication/users/user/state/password"
+//	Path from parent:     "*/password"
+//	Path from root:       "/system/aaa/authentication/users/user/*/password"
 func (n *System_Aaa_Authentication_UserPathAny) Password() *System_Aaa_Authentication_User_PasswordPathAny {
 	return &System_Aaa_Authentication_User_PasswordPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "password"},
+			[]string{"*", "password"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5163,12 +5439,12 @@ func (n *System_Aaa_Authentication_UserPathAny) PasswordCreatedOn() *System_Aaa_
 //
 //	Defining module:      "openconfig-aaa"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/password-hashed"
-//	Path from root:       "/system/aaa/authentication/users/user/state/password-hashed"
+//	Path from parent:     "*/password-hashed"
+//	Path from root:       "/system/aaa/authentication/users/user/*/password-hashed"
 func (n *System_Aaa_Authentication_UserPath) PasswordHashed() *System_Aaa_Authentication_User_PasswordHashedPath {
 	return &System_Aaa_Authentication_User_PasswordHashedPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "password-hashed"},
+			[]string{"*", "password-hashed"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5182,12 +5458,12 @@ func (n *System_Aaa_Authentication_UserPath) PasswordHashed() *System_Aaa_Authen
 //
 //	Defining module:      "openconfig-aaa"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/password-hashed"
-//	Path from root:       "/system/aaa/authentication/users/user/state/password-hashed"
+//	Path from parent:     "*/password-hashed"
+//	Path from root:       "/system/aaa/authentication/users/user/*/password-hashed"
 func (n *System_Aaa_Authentication_UserPathAny) PasswordHashed() *System_Aaa_Authentication_User_PasswordHashedPathAny {
 	return &System_Aaa_Authentication_User_PasswordHashedPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "password-hashed"},
+			[]string{"*", "password-hashed"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5262,6 +5538,40 @@ func (n *System_Aaa_Authentication_UserPathAny) Role() *System_Aaa_Authenticatio
 	return &System_Aaa_Authentication_User_RolePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "role"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SshKey (leaf): SSH public key for the user (RSA or DSA)
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/ssh-key"
+//	Path from root:       "/system/aaa/authentication/users/user/*/ssh-key"
+func (n *System_Aaa_Authentication_UserPath) SshKey() *System_Aaa_Authentication_User_SshKeyPath {
+	return &System_Aaa_Authentication_User_SshKeyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ssh-key"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SshKey (leaf): SSH public key for the user (RSA or DSA)
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/ssh-key"
+//	Path from root:       "/system/aaa/authentication/users/user/*/ssh-key"
+func (n *System_Aaa_Authentication_UserPathAny) SshKey() *System_Aaa_Authentication_User_SshKeyPathAny {
+	return &System_Aaa_Authentication_User_SshKeyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ssh-key"},
 			map[string]interface{}{},
 			n,
 		),

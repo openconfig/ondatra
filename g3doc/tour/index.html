@@ -1,0 +1,312 @@
+class: title
+
+# A Tour of Ondatra
+
+## go/ondatra-tour
+
+---
+
+## What is Ondatra?
+
+### **O**pen **N**etwork **D**evice **A**utomated **T**est **R**unner and **A**PI
+
+.fullwidth[
+Ondatra is a framework for writing and running tests against real
+network devices.
+
+![architecture](architecture.png)
+]
+
+---
+
+## Creating a testbed
+
+.double[
+A **testbed** is a collection of network devices and the links
+between them.
+
+Every device in a testbed is of **one of two types**:
+
+*   **DUT**: device under test, e.g. a router; or
+*   **ATE**: automated test equipment, e.g. Ixia
+
+You specify the testbed in a simple proto
+([example](http://cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_testbed.textproto))
+
+*   You choose unique IDs for the devices, not actual devices names
+*   *No* hard-coding of specific devices; only abstact criteria like the vendor]
+
+.single[
+![testbed](testbed.png)
+]
+
+.fullwidth[
+Tests typically send traffic from the ATE to the DUT and check the DUT behaves
+as expected in response.
+]
+
+---
+
+## Using the testbed
+
+.fullwidth[
+Every Ondatra test reserves a single testbed for exclusive use until
+the test completes.
+
+That is accomplished by the following snippet, which must appear in every
+Ondatra test.
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go function:TestMain
+```
+
+<br>Test cases then lookup DUTs and ATEs by their unique
+IDs given in the testbed proto, e.g.:
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go function:TestGetDevicesFromTestbed
+```
+
+]
+
+---
+
+## API Principles
+
+.fullwidth[
+The Ondatra API **aims to be fluent**
+* uses chained method calls that read like English prose
+* influenced by Network Engineers interested in the Nokia Robot framework
+(<a href="http://cs/file:google3/experimental/users/steveshaw/smartrobot/test_suites/pf/qos/01__scheduling.robot" target="_blank">example</a>)
+* method chaining makes the API easily discoverable through code completion
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go content:dut.Operations([^\n]*\n){3}
+```
+
+]
+
+.fullwidth[
+The Ondatra API **aims to make it clear what is being tested**
+
+*   Ixia configuration is part of the test, not in a separate config file
+*   validation logic is part of the test, not in centralized validators
+
+]
+
+---
+
+## DUT Overview
+
+.fullwidth[
+Ondatra supports three DUT vendors today: Arista, Cisco, and Juniper
+
+![DUT vendors](dut_vendors.png)
+
+DUTs support the following APIs, each accessible under a separate method on a
+DUT instance. ]
+
+.single[
+**API Name**<br>
+Config<br>
+Operations<br>
+Telemetry
+]
+
+.single[
+**Method to access**<br>
+`dut.Config()`<br>
+`dut.Operations()`<br>
+`gnmi.&lt;Func&gt;`
+]
+
+.triple[
+**Purpose**<br>
+to push vendor config to the device<br>
+to execute operational commands on the device<br>
+to query values and statistics about the state of the device
+]
+
+---
+
+## ATE Overview
+
+.fullwidth[
+Ondatra supports one ATE vendor today: Ixia
+
+![Ixia UI](ixia_ui.png)
+
+ATEs support the following APIs, each accessible under a separate method on a
+ATE instance. ]
+
+.single[
+**API Name**<br>
+Topology<br>
+Traffic<br>
+Actions<br>
+Telemetry
+]
+
+.single[
+**Method to access**<br>
+`ate.Topology()`<br>
+`ate.Traffic()`<br>
+`ate.Actions()`<br>
+`gnmi.&lt;Func&gt;`
+]
+
+.triple[
+**Purpose**<br>
+to create a simulated network topology on the device<br>
+to generate traffic flows from the device<br>
+to execute operational commands on the device<br>
+to query values and statistics about the state of the device
+]
+
+---
+
+## DUT Configuration
+
+.single[
+**Use the Config API to push config to a DUT.**
+
+Every device is initialized with a minimal **baseline config** that ensures the
+device is reachable and manageable.
+
+Use the API to set different config for each vendor so that the **same test can
+be run against multiple vendors**.
+
+You can **also set OpenConfig**, which will be pushed if the test doesn't set
+vendor-specific config for the DUT.
+
+Every push does a **full config replace** of the existing config with the
+**baseline + test-specified config**.
+]
+
+.single[
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go function:TestPushConfig
+```
+
+]
+
+---
+
+## ATE Topology
+
+.single[
+**Use the Topology API to create a simulated network topology on an ATE.**
+
+Add one or more logical *interfaces* to the toplogy.
+
+You may optionally add any number of *networks*, simulated clouds of devices,
+behind the interfaces.
+
+Each interface and network may be configured with any combination of the IPv4,
+IPv6, BGP, and ISIS protocols.
+
+![ATE topology](ate_topology.png)
+]
+
+.single[
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go function:TestCreateTopology
+```
+
+]
+
+---
+
+## ATE Traffic
+
+.single[
+** Use the Traffic API to generate traffic from an ATE.**
+
+Create any number of traffic *flows* on the topology.
+<br>For each flow you may specify:
+
+*   src and dst endpoints: interface, network, or port
+*   packet headers: Ethernet, IPv4, IPv6, GRE, etc
+*   frame rate: BPS, FPS, or percent line rate
+*   frame size: fixed or random value, or IMIX presets
+
+To run the traffic:
+
+1.  start the traffic flows
+2.  sleep for the desired traffic duration
+3.  stop the traffic
+4.  optionally get stats about the traffic from telemetry ]
+
+.single[
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go function:TestGenerateTraffic
+```
+
+]
+
+---
+
+## Device Telemetry
+
+.fullwidth[
+**Use the Telemetry API to query properties and statistics from DUTs and ATEs.**
+
+The API lets you construct a
+[gNMI path](https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-path-conventions.md)
+to the value of interest and then query it in one of two ways:
+
+*   *Get*: retrieves the current value at the path
+*   *Collect*: retrieves the value over a period of time
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go content:\bds\ :=\ gnmi\.Get([^\n]*\n){12}
+```
+
+]
+
+---
+
+## Device Operations
+
+.single[ **Use the Operations API to execution operational commands on DUTs or
+ATEs.**
+
+The API is for I/O or side-effecting operations like:
+
+*   send a ping from a device
+*   turn up or down an interface on a device
+*   reload a linecard on a device
+
+The Operations API is *not* for "show" commands that retrieve device state
+&mdash; use the Telemetry API instead.
+]
+
+.single[
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/snippets_test.go function:TestExecuteOperation
+```
+
+]
+
+---
+
+## Build and Run
+
+.fullwidth[
+Ondatra tests are proper Blaze Go tests:
+
+*   use the `ondatra_test` or `ondatra_test_suite` BUILD rules
+    (<a href="http://cs/file:google3/third_party/openconfig/ondatra/ondatra.bzl" target="_blank">ondatra.bzl</a>)
+*   run & debug tests locally with blaze using `--notest_loasd`
+*   run tests in a continuous build with Guitar
+    (<a href="http://cs/file:google3/ops/netops/lab/ondatra/tests/BUILD symbol:guitar_tests" target="_blank">example</a>)
+
+```live-snippet
+cs/file:google3/third_party/openconfig/ondatra/g3doc/tour/BUILD
+```
+
+]
