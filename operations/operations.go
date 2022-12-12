@@ -227,9 +227,10 @@ func (o *Operations) NewPing() *PingOp {
 
 // PingOp is a ping operation.
 type PingOp struct {
-	dut   binding.DUT
-	dest  string
-	count int32
+	dut        binding.DUT
+	dest       string
+	count      int32
+	packetSize int32
 }
 
 func (p *PingOp) String() string {
@@ -248,16 +249,22 @@ func (p *PingOp) WithCount(count int32) *PingOp {
 	return p
 }
 
+// WithPacketSize specifies the size of each packet (in bytes) used by a Ping operation.
+func (p *PingOp) WithPacketSize(packetSize int32) *PingOp {
+	p.packetSize = packetSize
+	return p
+}
+
 // Operate performs the Ping operation.
 func (p *PingOp) Operate(t testing.TB) {
 	t.Helper()
 	t = events.ActionStarted(t, "Pinging from %s", p.dut)
-	if err := ping(context.Background(), p.dut, p.dest, p.count); err != nil {
+	if err := ping(context.Background(), p.dut, p.dest, p.count, p.packetSize); err != nil {
 		t.Fatalf("Operate(t) on %s: %v", p, err)
 	}
 }
 
-func ping(ctx context.Context, dut binding.DUT, dest string, count int32) error {
+func ping(ctx context.Context, dut binding.DUT, dest string, count, packetSize int32) error {
 	if dest == "" {
 		return fmt.Errorf("no destination for ping operation: %v", dest)
 	}
@@ -268,6 +275,7 @@ func ping(ctx context.Context, dut binding.DUT, dest string, count int32) error 
 	ping, err := gnoi.System().Ping(ctx, &spb.PingRequest{
 		Destination: dest,
 		Count:       count,
+		Size:        packetSize,
 	})
 	if err != nil {
 		return fmt.Errorf("error on gnoi ping of %s from %v: %w", dest, dut, err)

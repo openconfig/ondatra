@@ -302,11 +302,13 @@ func (*fakePingClient) CloseSend() error {
 
 func TestPing(t *testing.T) {
 	tests := []struct {
-		desc, dest string
-		count      int32
+		desc, dest        string
+		count, packetSize int32
 	}{
-		{desc: "zero count", dest: "1.2.3.4"},
-		{desc: "non-zero count", dest: "1.2.3.4", count: 7},
+		{desc: "zero count, zero packet size", dest: "1.2.3.4"},
+		{desc: "non-zero count, zero packet size", dest: "1.2.3.4", count: 7},
+		{desc: "zero count, non-zero packet size", dest: "1.2.3.4", packetSize: 1000},
+		{desc: "non-zero count, non-zero packet size", dest: "1.2.3.4", count: 7, packetSize: 1000},
 	}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
