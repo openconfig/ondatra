@@ -9,7 +9,7 @@ Ondatra is a framework for writing and running tests against both real and
 containerized network devices.
 
 For an introduction to Ondatra, take the
-<a href="internal/tour/tour.pdf">Ondatra Tour</a>.
+<a href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/openconfig/ondatra/main/internal/tour/tour.pdf" target="_blank">Ondatra Tour</a>.
 
 ## Building Ondatra
 
