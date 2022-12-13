@@ -9,7 +9,7 @@ Ondatra is a framework for writing and running tests against both real and
 containerized network devices.
 
 For an introduction to Ondatra, take the
-<a href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/openconfig/ondatra/main/internal/tour/tour.pdf" target="_blank">Ondatra Tour</a>.
+[Ondatra tour](https://docs.google.com/viewer?url=https://raw.githubusercontent.com/openconfig/ondatra/main/internal/tour/tour.pdf).
 
 ## Building Ondatra
 
@@ -50,7 +50,7 @@ abstract topology and criteria specified in the testbed file.
 Ondatra provides a set of
 [fluent interfaces](https://en.wikipedia.org/wiki/Fluent_interface) for
 configuring and interacting with network devices. See the
-[full API reference documentation](https://pkg.go.dev/github.com/openconfig/ondatra#section-documentation){:target="_blank"}.
+[full API reference documentation](https://pkg.go.dev/github.com/openconfig/ondatra#section-documentation).
 
 The Ondatra gNMI API plays a particularly central role in Ondatra tests. It
 provide a set of test helpers for querying telemetry and setting the state of
