@@ -4,10 +4,9 @@ go 1.18
 
 require (
 	github.com/golang/glog v1.0.0
-	github.com/golang/protobuf v1.5.2
 	github.com/google/go-cmp v0.5.9
 	github.com/jstemmer/go-junit-report/v2 v2.0.1-0.20220823220451-7b10b4285462
-	github.com/open-traffic-generator/snappi/gosnappi v0.9.5
+	github.com/open-traffic-generator/snappi/gosnappi v0.10.3
 	github.com/openconfig/gnmi v0.0.0-20220920173703-480bf53a74d2
 	github.com/openconfig/gnoi v0.0.0-20221010125524-c3391aacaa1b
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
@@ -29,7 +28,7 @@ require (
 	golang.org/x/sys v0.1.0
 	golang.org/x/tools v0.2.0
 	google.golang.org/genproto v0.0.0-20221010155953-15ba04fc1c0e
-	google.golang.org/grpc v1.50.0
+	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
 	gopkg.in/yaml.v2 v2.4.0
 )
@@ -39,6 +38,7 @@ require (
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
