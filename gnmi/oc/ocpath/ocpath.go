@@ -76,6 +76,7 @@ import (
 	oc "github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/gnmi/oc/acl"
 	"github.com/openconfig/ondatra/gnmi/oc/ateflow"
+	"github.com/openconfig/ondatra/gnmi/oc/definedsets"
 	"github.com/openconfig/ondatra/gnmi/oc/gnmicollectormetadata"
 	"github.com/openconfig/ondatra/gnmi/oc/interfaces"
 	"github.com/openconfig/ondatra/gnmi/oc/keychain"
@@ -149,6 +150,23 @@ func (n *RootPath) Component(Name string) *platform.ComponentPath {
 		NodePath: ygnmi.NewNodePath(
 			[]string{"components", "component"},
 			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// DefinedSets (container): Top level enclosing container for defined-set model
+// config and operational state data.
+//
+//	Defining module:      "openconfig-defined-sets"
+//	Instantiating module: "openconfig-defined-sets"
+//	Path from parent:     "defined-sets"
+//	Path from root:       "/defined-sets"
+func (n *RootPath) DefinedSets() *definedsets.DefinedSetsPath {
+	return &definedsets.DefinedSetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"defined-sets"},
+			map[string]interface{}{},
 			n,
 		),
 	}

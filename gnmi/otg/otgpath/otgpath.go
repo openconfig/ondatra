@@ -13,6 +13,7 @@ using the following YANG input files:
   - models-yang/models/lacp/open-traffic-generator-lacp.yang
   - models-yang/models/lag/open-traffic-generator-lag.yang
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
+  - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
 
 Imported modules were sourced from:
@@ -30,6 +31,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/otg/lag"
 	"github.com/openconfig/ondatra/gnmi/otg/lldp"
 	"github.com/openconfig/ondatra/gnmi/otg/port"
+	"github.com/openconfig/ondatra/gnmi/otg/rsvp"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
@@ -305,6 +307,42 @@ func (n *RootPath) Port(Name string) *port.PortPath {
 	return &port.PortPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"ports", "port"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// RsvpteRouterAny (list): Each RSVP-TE router is identified by a unique string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-rsvp"
+//	Instantiating module: "open-traffic-generator-rsvp"
+//	Path from parent:     "rsvpte-routers/rsvpte-router"
+//	Path from root:       "/rsvpte-routers/rsvpte-router"
+func (n *RootPath) RsvpteRouterAny() *rsvp.RsvpteRouterPathAny {
+	return &rsvp.RsvpteRouterPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rsvpte-routers", "rsvpte-router"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// RsvpteRouter (list): Each RSVP-TE router is identified by a unique string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-rsvp"
+//	Instantiating module: "open-traffic-generator-rsvp"
+//	Path from parent:     "rsvpte-routers/rsvpte-router"
+//	Path from root:       "/rsvpte-routers/rsvpte-router"
+//
+//	Name: string
+func (n *RootPath) RsvpteRouter(Name string) *rsvp.RsvpteRouterPath {
+	return &rsvp.RsvpteRouterPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rsvpte-routers", "rsvpte-router"},
 			map[string]interface{}{"name": Name},
 			n,
 		),

@@ -1164,6 +1164,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		7: {Name: "INFORMATIONAL"},
 		8: {Name: "DEBUG"},
 	},
+	"E_MplsLdp_LabelAdvertisementMode": {
+		1: {Name: "DOWNSTREAM_UNSOLICITED"},
+		2: {Name: "DOWNSTREAM_ON_DEMAND"},
+	},
 	"E_MplsLdp_MplsLdpAdjacencyType": {
 		1: {Name: "LINK"},
 		2: {Name: "TARGETED"},
@@ -1571,6 +1575,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Policy_Type": {
 		1: {Name: "PBR_POLICY"},
 		2: {Name: "VRF_SELECTION_POLICY"},
+	},
+	"E_PortSet_Port": {
+		1: {Name: "ANY"},
 	},
 	"E_PrefixSet_Mode": {
 		1: {Name: "IPV4"},
@@ -2231,6 +2238,9 @@ func initΛEnumTypes() {
 		"/components/component/transceiver/state/sonet-sdh-compliance-code": {
 			reflect.TypeOf((E_TransportTypes_SONET_APPLICATION_CODE)(0)),
 		},
+		"/defined-sets/port-sets/port-set/state/port": {
+			reflect.TypeOf((E_PortSet_Port)(0)),
+		},
 		"/flows/flow/ingress-tracking/ingress-tracking/state/mpls-label": {
 			reflect.TypeOf((E_IngressTracking_MplsLabel)(0)),
 		},
@@ -2584,6 +2594,12 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/mpls/signaling-protocols/ldp/neighbors/neighbor/hello-adjacencies/hello-adjacency/state/adjacency-type": {
 			reflect.TypeOf((E_MplsLdp_MplsLdpAdjacencyType)(0)),
+		},
+		"/network-instances/network-instance/mpls/signaling-protocols/ldp/neighbors/neighbor/state/negotiated-label-advertisement-mode": {
+			reflect.TypeOf((E_MplsLdp_LabelAdvertisementMode)(0)),
+		},
+		"/network-instances/network-instance/mpls/signaling-protocols/ldp/neighbors/neighbor/state/peer-label-advertisement-mode": {
+			reflect.TypeOf((E_MplsLdp_LabelAdvertisementMode)(0)),
 		},
 		"/network-instances/network-instance/mpls/signaling-protocols/ldp/neighbors/neighbor/state/session-state": {
 			reflect.TypeOf((E_MplsLdp_Neighbor_SessionState)(0)),

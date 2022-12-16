@@ -4954,6 +4954,37 @@ const (
 	Messages_SyslogSeverity_DEBUG E_Messages_SyslogSeverity = 8
 )
 
+// E_MplsLdp_LabelAdvertisementMode is a derived int64 type which is used to represent
+// the enumerated node MplsLdp_LabelAdvertisementMode. An additional value named
+// MplsLdp_LabelAdvertisementMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_MplsLdp_LabelAdvertisementMode int64
+
+// IsYANGGoEnum ensures that MplsLdp_LabelAdvertisementMode implements the yang.GoEnum
+// interface. This ensures that MplsLdp_LabelAdvertisementMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_MplsLdp_LabelAdvertisementMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  MplsLdp_LabelAdvertisementMode.
+func (E_MplsLdp_LabelAdvertisementMode) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_MplsLdp_LabelAdvertisementMode.
+func (e E_MplsLdp_LabelAdvertisementMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_MplsLdp_LabelAdvertisementMode")
+}
+
+const (
+	// MplsLdp_LabelAdvertisementMode_UNSET corresponds to the value UNSET of MplsLdp_LabelAdvertisementMode
+	MplsLdp_LabelAdvertisementMode_UNSET E_MplsLdp_LabelAdvertisementMode = 0
+	// MplsLdp_LabelAdvertisementMode_DOWNSTREAM_UNSOLICITED corresponds to the value DOWNSTREAM_UNSOLICITED of MplsLdp_LabelAdvertisementMode
+	MplsLdp_LabelAdvertisementMode_DOWNSTREAM_UNSOLICITED E_MplsLdp_LabelAdvertisementMode = 1
+	// MplsLdp_LabelAdvertisementMode_DOWNSTREAM_ON_DEMAND corresponds to the value DOWNSTREAM_ON_DEMAND of MplsLdp_LabelAdvertisementMode
+	MplsLdp_LabelAdvertisementMode_DOWNSTREAM_ON_DEMAND E_MplsLdp_LabelAdvertisementMode = 2
+)
+
 // E_MplsLdp_MplsLdpAdjacencyType is a derived int64 type which is used to represent
 // the enumerated node MplsLdp_MplsLdpAdjacencyType. An additional value named
 // MplsLdp_MplsLdpAdjacencyType_UNSET is added to the enumeration which is used as
@@ -7346,6 +7377,33 @@ const (
 	Policy_Type_PBR_POLICY E_Policy_Type = 1
 	// Policy_Type_VRF_SELECTION_POLICY corresponds to the value VRF_SELECTION_POLICY of Policy_Type
 	Policy_Type_VRF_SELECTION_POLICY E_Policy_Type = 2
+)
+
+// E_PortSet_Port is a derived int64 type which is used to represent
+// the enumerated node PortSet_Port. An additional value named
+// PortSet_Port_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PortSet_Port int64
+
+// IsYANGGoEnum ensures that PortSet_Port implements the yang.GoEnum
+// interface. This ensures that PortSet_Port can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PortSet_Port) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PortSet_Port.
+func (E_PortSet_Port) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_PortSet_Port.
+func (e E_PortSet_Port) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PortSet_Port")
+}
+
+const (
+	// PortSet_Port_UNSET corresponds to the value UNSET of PortSet_Port
+	PortSet_Port_UNSET E_PortSet_Port = 0
+	// PortSet_Port_ANY corresponds to the value ANY of PortSet_Port
+	PortSet_Port_ANY E_PortSet_Port = 1
 )
 
 // E_PrefixSet_Mode is a derived int64 type which is used to represent

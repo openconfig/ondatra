@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # proto-file: google3/third_party/openconfig/kne/proto/topo.proto
-# proto-message: Topology
+# proto-message: topo.Topology
 
 name: "arista-ixia"
 nodes: {

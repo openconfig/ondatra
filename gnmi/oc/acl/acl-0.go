@@ -3149,6 +3149,138 @@ func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPathAny) Config() ygnmi.Wild
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
 //	Path from parent:     "state/dscp"
 //	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/dscp"
 func (n *Acl_AclSet_AclEntry_Ipv4_DscpPath) State() ygnmi.SingletonQuery[uint8] {
@@ -3773,6 +3905,150 @@ func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny) Config() ygnmi.WildcardQ
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/destination-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/destination-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Ipv4_DscpPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/dscp YANG schema element.
 type Acl_AclSet_AclEntry_Ipv4_DscpPath struct {
 	*ygnmi.NodePath
@@ -3833,6 +4109,18 @@ type Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/source-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Ipv4Path represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4 YANG schema element.
 type Acl_AclSet_AclEntry_Ipv4Path struct {
 	*ygnmi.NodePath
@@ -3870,6 +4158,42 @@ func (n *Acl_AclSet_AclEntry_Ipv4PathAny) DestinationAddress() *Acl_AclSet_AclEn
 	return &Acl_AclSet_AclEntry_Ipv4_DestinationAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "destination-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv4 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/*/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4Path) DestinationAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPath {
+	return &Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv4 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/*/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4PathAny) DestinationAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPathAny {
+	return &Acl_AclSet_AclEntry_Ipv4_DestinationAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -4050,6 +4374,42 @@ func (n *Acl_AclSet_AclEntry_Ipv4PathAny) SourceAddress() *Acl_AclSet_AclEntry_I
 	return &Acl_AclSet_AclEntry_Ipv4_SourceAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv4 address prefix Set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/*/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4Path) SourceAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPath {
+	return &Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv4 address prefix Set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/*/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv4PathAny) SourceAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny {
+	return &Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -4244,6 +4604,138 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny) Config() ygnmi.Wild
 		),
 		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).DestinationAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).DestinationAddressPrefixSet
 			if ret == nil {
 				var zero string
 				return zero, false
@@ -5023,6 +5515,138 @@ func (n *Acl_AclSet_AclEntry_Ipv6_SourceAddressPathAny) Config() ygnmi.WildcardQ
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
 //	Path from parent:     "state/source-flow-label"
 //	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/source-flow-label"
 func (n *Acl_AclSet_AclEntry_Ipv6_SourceFlowLabelPath) State() ygnmi.SingletonQuery[uint32] {
@@ -5151,6 +5775,18 @@ func (n *Acl_AclSet_AclEntry_Ipv6_SourceFlowLabelPathAny) Config() ygnmi.Wildcar
 	)
 }
 
+// Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/destination-flow-label YANG schema element.
 type Acl_AclSet_AclEntry_Ipv6_DestinationFlowLabelPath struct {
 	*ygnmi.NodePath
@@ -5223,6 +5859,18 @@ type Acl_AclSet_AclEntry_Ipv6_SourceAddressPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/source-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/source-address-prefix-set YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Ipv6_SourceFlowLabelPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/source-flow-label YANG schema element.
 type Acl_AclSet_AclEntry_Ipv6_SourceFlowLabelPath struct {
 	*ygnmi.NodePath
@@ -5272,6 +5920,42 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) DestinationAddress() *Acl_AclSet_AclEn
 	return &Acl_AclSet_AclEntry_Ipv6_DestinationAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "destination-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6Path) DestinationAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPath {
+	return &Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/destination-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6PathAny) DestinationAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPathAny {
+	return &Acl_AclSet_AclEntry_Ipv6_DestinationAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5486,6 +6170,42 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) SourceAddress() *Acl_AclSet_AclEntry_I
 	return &Acl_AclSet_AclEntry_Ipv6_SourceAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6Path) SourceAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPath {
+	return &Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/source-address-prefix-set"
+func (n *Acl_AclSet_AclEntry_Ipv6PathAny) SourceAddressPrefixSet() *Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPathAny {
+	return &Acl_AclSet_AclEntry_Ipv6_SourceAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -7445,6 +8165,138 @@ func (n *Acl_AclSet_AclEntry_Transport_DestinationPortPathAny) Config() ygnmi.Wi
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/destination-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_DestinationPortSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/destination-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/destination-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/destination-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_DestinationPortSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/destination-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/destination-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
 //	Path from parent:     "state/source-port"
 //	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port"
 func (n *Acl_AclSet_AclEntry_Transport_SourcePortPath) State() ygnmi.SingletonQuery[oc.Acl_AclSet_AclEntry_Transport_SourcePort_Union] {
@@ -7547,6 +8399,138 @@ func (n *Acl_AclSet_AclEntry_Transport_SourcePortPathAny) Config() ygnmi.Wildcar
 		func(gs ygot.ValidatedGoStruct) (oc.Acl_AclSet_AclEntry_Transport_SourcePort_Union, bool) {
 			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).SourcePort
 			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/source-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_SourcePortSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/source-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/source-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/source-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_SourcePortSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/source-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/source-port-set"
+func (n *Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
 		&ytypes.Schema{
@@ -7673,6 +8657,18 @@ func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny) Config() ygnmi.WildcardQ
 	)
 }
 
+// Acl_AclSet_AclEntry_Transport_DestinationPortSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port-set YANG schema element.
+type Acl_AclSet_AclEntry_Transport_DestinationPortSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port-set YANG schema element.
+type Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Transport_SourcePortPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port YANG schema element.
 type Acl_AclSet_AclEntry_Transport_SourcePortPath struct {
 	*ygnmi.NodePath
@@ -7681,6 +8677,18 @@ type Acl_AclSet_AclEntry_Transport_SourcePortPath struct {
 
 // Acl_AclSet_AclEntry_Transport_SourcePortPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port YANG schema element.
 type Acl_AclSet_AclEntry_Transport_SourcePortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_SourcePortSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port-set YANG schema element.
+type Acl_AclSet_AclEntry_Transport_SourcePortSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port-set YANG schema element.
+type Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -7741,6 +8749,42 @@ func (n *Acl_AclSet_AclEntry_TransportPathAny) DestinationPort() *Acl_AclSet_Acl
 	}
 }
 
+// DestinationPortSet (leaf): Reference to a port set
+// to match the destination port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/destination-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/destination-port-set"
+func (n *Acl_AclSet_AclEntry_TransportPath) DestinationPortSet() *Acl_AclSet_AclEntry_Transport_DestinationPortSetPath {
+	return &Acl_AclSet_AclEntry_Transport_DestinationPortSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-port-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationPortSet (leaf): Reference to a port set
+// to match the destination port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/destination-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/destination-port-set"
+func (n *Acl_AclSet_AclEntry_TransportPathAny) DestinationPortSet() *Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny {
+	return &Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-port-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // SourcePort (leaf): Source port or range
 //
 //	Defining module:      "openconfig-packet-match"
@@ -7768,6 +8812,42 @@ func (n *Acl_AclSet_AclEntry_TransportPathAny) SourcePort() *Acl_AclSet_AclEntry
 	return &Acl_AclSet_AclEntry_Transport_SourcePortPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourcePortSet (leaf): Reference to a port set
+// to match the source port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/source-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/source-port-set"
+func (n *Acl_AclSet_AclEntry_TransportPath) SourcePortSet() *Acl_AclSet_AclEntry_Transport_SourcePortSetPath {
+	return &Acl_AclSet_AclEntry_Transport_SourcePortSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-port-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourcePortSet (leaf): Reference to a port set
+// to match the source port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/source-port-set"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/source-port-set"
+func (n *Acl_AclSet_AclEntry_TransportPathAny) SourcePortSet() *Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny {
+	return &Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-port-set"},
 			map[string]interface{}{},
 			n,
 		),

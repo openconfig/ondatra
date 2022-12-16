@@ -99,10 +99,10 @@ OTG_YANG_FILES=(
   models-yang/models/lacp/open-traffic-generator-lacp.yang
   models-yang/models/lag/open-traffic-generator-lag.yang
   models-yang/models/lldp/open-traffic-generator-lldp.yang
+  models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   models-yang/models/types/open-traffic-generator-types.yang
 )
 
-# New Telemetry Library
 go run github.com/openconfig/ygnmi/app/ygnmi generator \
   --trim_module_prefix=openconfig \
   --exclude_modules="${EXCLUDE_MODULES}" \

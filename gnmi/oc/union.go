@@ -376,6 +376,42 @@ func (t *Component_Property) To_Component_Property_Value_Union(i interface{}) (C
 	return nil, fmt.Errorf("cannot convert %v to Component_Property_Value_Union, unknown union type, got: %T, want any of [bool, float64, int64, string, uint64]", i, i)
 }
 
+// DefinedSets_PortSet_Port_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-defined-sets/defined-sets/port-sets/port-set/state/port within the YANG schema.
+// Union type can be one of [E_PortSet_Port, UnionString, UnionUint16].
+type DefinedSets_PortSet_Port_Union interface {
+	// Union type can be one of [E_PortSet_Port, UnionString, UnionUint16]
+	Documentation_for_DefinedSets_PortSet_Port_Union()
+}
+
+// Documentation_for_DefinedSets_PortSet_Port_Union ensures that E_PortSet_Port
+// implements the DefinedSets_PortSet_Port_Union interface.
+func (E_PortSet_Port) Documentation_for_DefinedSets_PortSet_Port_Union() {}
+
+// Documentation_for_DefinedSets_PortSet_Port_Union ensures that UnionString
+// implements the DefinedSets_PortSet_Port_Union interface.
+func (UnionString) Documentation_for_DefinedSets_PortSet_Port_Union() {}
+
+// Documentation_for_DefinedSets_PortSet_Port_Union ensures that UnionUint16
+// implements the DefinedSets_PortSet_Port_Union interface.
+func (UnionUint16) Documentation_for_DefinedSets_PortSet_Port_Union() {}
+
+// To_DefinedSets_PortSet_Port_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the DefinedSets_PortSet_Port_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *DefinedSets_PortSet) To_DefinedSets_PortSet_Port_Union(i interface{}) (DefinedSets_PortSet_Port_Union, error) {
+	if v, ok := i.(DefinedSets_PortSet_Port_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint16:
+		return UnionUint16(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to DefinedSets_PortSet_Port_Union, unknown union type, got: %T, want any of [E_PortSet_Port, string, uint16]", i, i)
+}
+
 // Flow_MplsLabel_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-ate-flow/flows/flow/state/mpls-label within the YANG schema.
 // Union type can be one of [E_Flow_MplsLabel, UnionUint32].

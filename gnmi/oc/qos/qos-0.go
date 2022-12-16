@@ -4279,6 +4279,138 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPathAny) Config()
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/state/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/state/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/config/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/config/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/dscp"
 //	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp"
 func (n *Qos_Classifier_Term_Conditions_Ipv4_DscpPath) State() ygnmi.SingletonQuery[uint8] {
@@ -4903,6 +5035,150 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny) Config() ygnm
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/config/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/config/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv4).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv4) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/destination-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/destination-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Classifier_Term_Conditions_Ipv4_DscpPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/dscp YANG schema element.
 type Qos_Classifier_Term_Conditions_Ipv4_DscpPath struct {
 	*ygnmi.NodePath
@@ -4963,6 +5239,18 @@ type Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4/state/source-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Classifier_Term_Conditions_Ipv4Path represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv4 YANG schema element.
 type Qos_Classifier_Term_Conditions_Ipv4Path struct {
 	*ygnmi.NodePath
@@ -5000,6 +5288,42 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) DestinationAddress() *Qos_C
 	return &Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "destination-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv4 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/*/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4Path) DestinationAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPath {
+	return &Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv4 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/*/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) DestinationAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPathAny {
+	return &Qos_Classifier_Term_Conditions_Ipv4_DestinationAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5180,6 +5504,42 @@ func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) SourceAddress() *Qos_Classi
 	return &Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv4 address prefix Set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/*/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4Path) SourceAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPath {
+	return &Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv4 address prefix Set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv4/*/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv4PathAny) SourceAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPathAny {
+	return &Qos_Classifier_Term_Conditions_Ipv4_SourceAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5374,6 +5734,138 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny) Config()
 		),
 		func(gs ygot.ValidatedGoStruct) (string, bool) {
 			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).DestinationAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/config/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).DestinationAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/config/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).DestinationAddressPrefixSet
 			if ret == nil {
 				var zero string
 				return zero, false
@@ -6153,6 +6645,138 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny) Config() ygnm
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/config/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/config/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address-prefix-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Ipv6).SourceAddressPrefixSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Ipv6) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/source-flow-label"
 //	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label"
 func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath) State() ygnmi.SingletonQuery[uint32] {
@@ -6281,6 +6905,18 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPathAny) Config() yg
 	)
 }
 
+// Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/destination-flow-label YANG schema element.
 type Qos_Classifier_Term_Conditions_Ipv6_DestinationFlowLabelPath struct {
 	*ygnmi.NodePath
@@ -6353,6 +6989,18 @@ type Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-address-prefix-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/ipv6/state/source-flow-label YANG schema element.
 type Qos_Classifier_Term_Conditions_Ipv6_SourceFlowLabelPath struct {
 	*ygnmi.NodePath
@@ -6402,6 +7050,42 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) DestinationAddress() *Qos_C
 	return &Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "destination-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/*/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) DestinationAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPath {
+	return &Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the destination address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/destination-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/*/destination-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) DestinationAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPathAny {
+	return &Qos_Classifier_Term_Conditions_Ipv6_DestinationAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -6616,6 +7300,42 @@ func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) SourceAddress() *Qos_Classi
 	return &Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/*/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6Path) SourceAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPath {
+	return &Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddressPrefixSet (leaf): Reference to a IPv6 address prefix set
+// to match the source address
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/source-address-prefix-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/ipv6/*/source-address-prefix-set"
+func (n *Qos_Classifier_Term_Conditions_Ipv6PathAny) SourceAddressPrefixSet() *Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPathAny {
+	return &Qos_Classifier_Term_Conditions_Ipv6_SourceAddressPrefixSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address-prefix-set"},
 			map[string]interface{}{},
 			n,
 		),
@@ -8575,6 +9295,138 @@ func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny) Config
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/destination-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/destination-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/destination-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/destination-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/destination-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/destination-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "destination-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DestinationPortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/source-port"
 //	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port"
 func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) State() ygnmi.SingletonQuery[oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union] {
@@ -8677,6 +9529,138 @@ func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny) Config() yg
 		func(gs ygot.ValidatedGoStruct) (oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union, bool) {
 			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).SourcePort
 			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/source-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/source-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/source-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/source-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/source-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/source-port-set"
+func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-port-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).SourcePortSet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
 		&ytypes.Schema{
@@ -8803,6 +9787,18 @@ func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Config() ygnm
 	)
 }
 
+// Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_Classifier_Term_Conditions_Transport_SourcePortPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port YANG schema element.
 type Qos_Classifier_Term_Conditions_Transport_SourcePortPath struct {
 	*ygnmi.NodePath
@@ -8811,6 +9807,18 @@ type Qos_Classifier_Term_Conditions_Transport_SourcePortPath struct {
 
 // Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port YANG schema element.
 type Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_SourcePortSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_SourcePortSetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port-set YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -8871,6 +9879,42 @@ func (n *Qos_Classifier_Term_Conditions_TransportPathAny) DestinationPort() *Qos
 	}
 }
 
+// DestinationPortSet (leaf): Reference to a port set
+// to match the destination port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/destination-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/destination-port-set"
+func (n *Qos_Classifier_Term_Conditions_TransportPath) DestinationPortSet() *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath {
+	return &Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-port-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DestinationPortSet (leaf): Reference to a port set
+// to match the destination port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/destination-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/destination-port-set"
+func (n *Qos_Classifier_Term_Conditions_TransportPathAny) DestinationPortSet() *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny {
+	return &Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "destination-port-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // SourcePort (leaf): Source port or range
 //
 //	Defining module:      "openconfig-packet-match"
@@ -8898,6 +9942,42 @@ func (n *Qos_Classifier_Term_Conditions_TransportPathAny) SourcePort() *Qos_Clas
 	return &Qos_Classifier_Term_Conditions_Transport_SourcePortPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourcePortSet (leaf): Reference to a port set
+// to match the source port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/source-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/source-port-set"
+func (n *Qos_Classifier_Term_Conditions_TransportPath) SourcePortSet() *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPath {
+	return &Qos_Classifier_Term_Conditions_Transport_SourcePortSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-port-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourcePortSet (leaf): Reference to a port set
+// to match the source port
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/source-port-set"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/source-port-set"
+func (n *Qos_Classifier_Term_Conditions_TransportPathAny) SourcePortSet() *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny {
+	return &Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-port-set"},
 			map[string]interface{}{},
 			n,
 		),

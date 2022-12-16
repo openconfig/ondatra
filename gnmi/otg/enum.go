@@ -14,6 +14,7 @@ using the following YANG input files:
   - models-yang/models/lacp/open-traffic-generator-lacp.yang
   - models-yang/models/lag/open-traffic-generator-lag.yang
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
+  - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
 
 Imported modules were sourced from:
@@ -109,6 +110,43 @@ const (
 	Capabilities_Name_WLAN_ACCESS_POINT E_Capabilities_Name = 11
 )
 
+// E_Ero_Type is a derived int64 type which is used to represent
+// the enumerated node Ero_Type. An additional value named
+// Ero_Type_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ero_Type int64
+
+// IsYANGGoEnum ensures that Ero_Type implements the yang.GoEnum
+// interface. This ensures that Ero_Type can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ero_Type) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ero_Type.
+func (E_Ero_Type) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ero_Type.
+func (e E_Ero_Type) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ero_Type")
+}
+
+const (
+	// Ero_Type_UNSET corresponds to the value UNSET of Ero_Type
+	Ero_Type_UNSET E_Ero_Type = 0
+	// Ero_Type_IPV4 corresponds to the value IPV4 of Ero_Type
+	Ero_Type_IPV4 E_Ero_Type = 1
+	// Ero_Type_IPV6 corresponds to the value IPV6 of Ero_Type
+	Ero_Type_IPV6 E_Ero_Type = 2
+	// Ero_Type_ASN corresponds to the value ASN of Ero_Type
+	Ero_Type_ASN E_Ero_Type = 3
+	// Ero_Type_ASN4 corresponds to the value ASN4 of Ero_Type
+	Ero_Type_ASN4 E_Ero_Type = 4
+	// Ero_Type_LABEL corresponds to the value LABEL of Ero_Type
+	Ero_Type_LABEL E_Ero_Type = 5
+	// Ero_Type_UNNUMBERED_INTERFACE corresponds to the value UNNUMBERED_INTERFACE of Ero_Type
+	Ero_Type_UNNUMBERED_INTERFACE E_Ero_Type = 6
+)
+
 // E_ExtendedIpv4Reachability_Prefix_RedistributionType is a derived int64 type which is used to represent
 // the enumerated node ExtendedIpv4Reachability_Prefix_RedistributionType. An additional value named
 // ExtendedIpv4Reachability_Prefix_RedistributionType_UNSET is added to the enumeration which is used as
@@ -200,6 +238,140 @@ const (
 	Ipv4ExternalReachability_Prefix_RedistributionType_UP E_Ipv4ExternalReachability_Prefix_RedistributionType = 1
 	// Ipv4ExternalReachability_Prefix_RedistributionType_DOWN corresponds to the value DOWN of Ipv4ExternalReachability_Prefix_RedistributionType
 	Ipv4ExternalReachability_Prefix_RedistributionType_DOWN E_Ipv4ExternalReachability_Prefix_RedistributionType = 2
+)
+
+// E_Ipv4Lsp_LabelIn is a derived int64 type which is used to represent
+// the enumerated node Ipv4Lsp_LabelIn. An additional value named
+// Ipv4Lsp_LabelIn_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv4Lsp_LabelIn int64
+
+// IsYANGGoEnum ensures that Ipv4Lsp_LabelIn implements the yang.GoEnum
+// interface. This ensures that Ipv4Lsp_LabelIn can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv4Lsp_LabelIn) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv4Lsp_LabelIn.
+func (E_Ipv4Lsp_LabelIn) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ipv4Lsp_LabelIn.
+func (e E_Ipv4Lsp_LabelIn) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv4Lsp_LabelIn")
+}
+
+const (
+	// Ipv4Lsp_LabelIn_UNSET corresponds to the value UNSET of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_UNSET E_Ipv4Lsp_LabelIn = 0
+	// Ipv4Lsp_LabelIn_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_IPV4_EXPLICIT_NULL E_Ipv4Lsp_LabelIn = 1
+	// Ipv4Lsp_LabelIn_ROUTER_ALERT corresponds to the value ROUTER_ALERT of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_ROUTER_ALERT E_Ipv4Lsp_LabelIn = 2
+	// Ipv4Lsp_LabelIn_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_IPV6_EXPLICIT_NULL E_Ipv4Lsp_LabelIn = 3
+	// Ipv4Lsp_LabelIn_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_IMPLICIT_NULL E_Ipv4Lsp_LabelIn = 4
+	// Ipv4Lsp_LabelIn_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_ENTROPY_LABEL_INDICATOR E_Ipv4Lsp_LabelIn = 5
+	// Ipv4Lsp_LabelIn_NO_LABEL corresponds to the value NO_LABEL of Ipv4Lsp_LabelIn
+	Ipv4Lsp_LabelIn_NO_LABEL E_Ipv4Lsp_LabelIn = 6
+)
+
+// E_Ipv4Lsp_LabelOut is a derived int64 type which is used to represent
+// the enumerated node Ipv4Lsp_LabelOut. An additional value named
+// Ipv4Lsp_LabelOut_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv4Lsp_LabelOut int64
+
+// IsYANGGoEnum ensures that Ipv4Lsp_LabelOut implements the yang.GoEnum
+// interface. This ensures that Ipv4Lsp_LabelOut can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv4Lsp_LabelOut) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv4Lsp_LabelOut.
+func (E_Ipv4Lsp_LabelOut) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ipv4Lsp_LabelOut.
+func (e E_Ipv4Lsp_LabelOut) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv4Lsp_LabelOut")
+}
+
+const (
+	// Ipv4Lsp_LabelOut_UNSET corresponds to the value UNSET of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_UNSET E_Ipv4Lsp_LabelOut = 0
+	// Ipv4Lsp_LabelOut_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_IPV4_EXPLICIT_NULL E_Ipv4Lsp_LabelOut = 1
+	// Ipv4Lsp_LabelOut_ROUTER_ALERT corresponds to the value ROUTER_ALERT of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_ROUTER_ALERT E_Ipv4Lsp_LabelOut = 2
+	// Ipv4Lsp_LabelOut_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_IPV6_EXPLICIT_NULL E_Ipv4Lsp_LabelOut = 3
+	// Ipv4Lsp_LabelOut_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_IMPLICIT_NULL E_Ipv4Lsp_LabelOut = 4
+	// Ipv4Lsp_LabelOut_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_ENTROPY_LABEL_INDICATOR E_Ipv4Lsp_LabelOut = 5
+	// Ipv4Lsp_LabelOut_NO_LABEL corresponds to the value NO_LABEL of Ipv4Lsp_LabelOut
+	Ipv4Lsp_LabelOut_NO_LABEL E_Ipv4Lsp_LabelOut = 6
+)
+
+// E_Ipv4Lsp_LastFlapReason is a derived int64 type which is used to represent
+// the enumerated node Ipv4Lsp_LastFlapReason. An additional value named
+// Ipv4Lsp_LastFlapReason_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv4Lsp_LastFlapReason int64
+
+// IsYANGGoEnum ensures that Ipv4Lsp_LastFlapReason implements the yang.GoEnum
+// interface. This ensures that Ipv4Lsp_LastFlapReason can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv4Lsp_LastFlapReason) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv4Lsp_LastFlapReason.
+func (E_Ipv4Lsp_LastFlapReason) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ipv4Lsp_LastFlapReason.
+func (e E_Ipv4Lsp_LastFlapReason) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv4Lsp_LastFlapReason")
+}
+
+const (
+	// Ipv4Lsp_LastFlapReason_UNSET corresponds to the value UNSET of Ipv4Lsp_LastFlapReason
+	Ipv4Lsp_LastFlapReason_UNSET E_Ipv4Lsp_LastFlapReason = 0
+	// Ipv4Lsp_LastFlapReason_RESVTEAR corresponds to the value RESVTEAR of Ipv4Lsp_LastFlapReason
+	Ipv4Lsp_LastFlapReason_RESVTEAR E_Ipv4Lsp_LastFlapReason = 1
+	// Ipv4Lsp_LastFlapReason_PATHTEAR corresponds to the value PATHTEAR of Ipv4Lsp_LastFlapReason
+	Ipv4Lsp_LastFlapReason_PATHTEAR E_Ipv4Lsp_LastFlapReason = 2
+	// Ipv4Lsp_LastFlapReason_PATHTIMEOUT corresponds to the value PATHTIMEOUT of Ipv4Lsp_LastFlapReason
+	Ipv4Lsp_LastFlapReason_PATHTIMEOUT E_Ipv4Lsp_LastFlapReason = 3
+)
+
+// E_Ipv4Lsp_SessionStatus is a derived int64 type which is used to represent
+// the enumerated node Ipv4Lsp_SessionStatus. An additional value named
+// Ipv4Lsp_SessionStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ipv4Lsp_SessionStatus int64
+
+// IsYANGGoEnum ensures that Ipv4Lsp_SessionStatus implements the yang.GoEnum
+// interface. This ensures that Ipv4Lsp_SessionStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ipv4Lsp_SessionStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ipv4Lsp_SessionStatus.
+func (E_Ipv4Lsp_SessionStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ipv4Lsp_SessionStatus.
+func (e E_Ipv4Lsp_SessionStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ipv4Lsp_SessionStatus")
+}
+
+const (
+	// Ipv4Lsp_SessionStatus_UNSET corresponds to the value UNSET of Ipv4Lsp_SessionStatus
+	Ipv4Lsp_SessionStatus_UNSET E_Ipv4Lsp_SessionStatus = 0
+	// Ipv4Lsp_SessionStatus_UP corresponds to the value UP of Ipv4Lsp_SessionStatus
+	Ipv4Lsp_SessionStatus_UP E_Ipv4Lsp_SessionStatus = 1
+	// Ipv4Lsp_SessionStatus_DOWN corresponds to the value DOWN of Ipv4Lsp_SessionStatus
+	Ipv4Lsp_SessionStatus_DOWN E_Ipv4Lsp_SessionStatus = 2
 )
 
 // E_Ipv6Reachability_Prefix_OriginType is a derived int64 type which is used to represent
@@ -551,6 +723,43 @@ const (
 	Port_Link_UP E_Port_Link = 1
 	// Port_Link_DOWN corresponds to the value DOWN of Port_Link
 	Port_Link_DOWN E_Port_Link = 2
+)
+
+// E_Rro_ReportedLabel is a derived int64 type which is used to represent
+// the enumerated node Rro_ReportedLabel. An additional value named
+// Rro_ReportedLabel_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Rro_ReportedLabel int64
+
+// IsYANGGoEnum ensures that Rro_ReportedLabel implements the yang.GoEnum
+// interface. This ensures that Rro_ReportedLabel can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Rro_ReportedLabel) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Rro_ReportedLabel.
+func (E_Rro_ReportedLabel) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Rro_ReportedLabel.
+func (e E_Rro_ReportedLabel) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Rro_ReportedLabel")
+}
+
+const (
+	// Rro_ReportedLabel_UNSET corresponds to the value UNSET of Rro_ReportedLabel
+	Rro_ReportedLabel_UNSET E_Rro_ReportedLabel = 0
+	// Rro_ReportedLabel_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of Rro_ReportedLabel
+	Rro_ReportedLabel_IPV4_EXPLICIT_NULL E_Rro_ReportedLabel = 1
+	// Rro_ReportedLabel_ROUTER_ALERT corresponds to the value ROUTER_ALERT of Rro_ReportedLabel
+	Rro_ReportedLabel_ROUTER_ALERT E_Rro_ReportedLabel = 2
+	// Rro_ReportedLabel_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of Rro_ReportedLabel
+	Rro_ReportedLabel_IPV6_EXPLICIT_NULL E_Rro_ReportedLabel = 3
+	// Rro_ReportedLabel_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of Rro_ReportedLabel
+	Rro_ReportedLabel_IMPLICIT_NULL E_Rro_ReportedLabel = 4
+	// Rro_ReportedLabel_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of Rro_ReportedLabel
+	Rro_ReportedLabel_ENTROPY_LABEL_INDICATOR E_Rro_ReportedLabel = 5
+	// Rro_ReportedLabel_NO_LABEL corresponds to the value NO_LABEL of Rro_ReportedLabel
+	Rro_ReportedLabel_NO_LABEL E_Rro_ReportedLabel = 6
 )
 
 // E_State_CommunityType is a derived int64 type which is used to represent
