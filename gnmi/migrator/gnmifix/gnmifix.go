@@ -52,15 +52,11 @@ var (
 	telemCaller = regexp.MustCompile(`ondatra\.DUTDevice|ondatra\.ATEDevice|otg\.OTG`)
 )
 
-const (
-	newImports = `
+const newImports = `
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/gnmi/oc"
 `
-	oldOTGTypesImport = `"github.com/openconfig/ondatra/telemetry/otg"`
-	newOTGTypesImport = `"github.com/openconfig/ondatra/gnmi/otg"`
-)
 
 func run(pass *analysis.Pass) (any, error) {
 	inspect := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
@@ -147,24 +143,6 @@ func run(pass *analysis.Pass) (any, error) {
 	}
 
 	for _, f := range pass.Files {
-		for _, imp := range f.Imports {
-			if imp.Path.Value == oldOTGTypesImport {
-				diag := analysis.Diagnostic{
-					Pos:     imp.Path.Pos(),
-					End:     imp.Path.End(),
-					Message: "Adding new telemetry imports",
-					SuggestedFixes: []analysis.SuggestedFix{{
-						Message: "ygmni imports",
-						TextEdits: []analysis.TextEdit{{
-							Pos:     imp.Path.Pos(),
-							End:     imp.Path.End(),
-							NewText: []byte(newOTGTypesImport),
-						}},
-					}},
-				}
-				pass.Report(diag)
-			}
-		}
 		// If there are diagnostics, add new imports.
 		if len(funcsDiag) == 0 && len(typesDiag) == 0 {
 			continue

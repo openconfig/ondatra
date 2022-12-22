@@ -18,6 +18,7 @@ package otg
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"golang.org/x/net/context"
 
@@ -163,6 +164,8 @@ func setProtocolState(ctx context.Context, ate binding.ATE, state gosnappi.Proto
 // StartTraffic starts traffic on the ATE.
 func (o *OTG) StartTraffic(t testing.TB) {
 	t.Helper()
+	// TODO(greg-dennis): Remove sleep when Keysight fixes a MAC resolution bug.
+	time.Sleep(2 * time.Second)
 	t = events.ActionStarted(t, "Starting traffic on %s", o.ate)
 	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.START)
 	if err != nil {
