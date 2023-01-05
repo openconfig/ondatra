@@ -34,6 +34,7 @@ type Config struct {
 	CLIPath            string       `yaml:"cli"`
 	KubecfgPath        string       `yaml:"kubecfg"`
 	SkipReset          bool         `yaml:"skip_reset"`
+	Insecure           bool         `yaml:"insecure"`
 }
 
 // Credentials contains credential maps for nodes in the KNE topology.

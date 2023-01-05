@@ -120,6 +120,10 @@ func (d *kneDUT) resetConfig() error {
 }
 
 func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	//If the insecure field is set to true then set to insecure
+	if d.cfg.Insecure {
+		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	}
 	conn, err := d.dialGRPC(ctx, "gnmi", opts...)
 	if err != nil {
 		return nil, err
@@ -157,7 +161,9 @@ func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	if !d.cfg.Insecure {
+		opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	}
 	creds := newRPCCredentials(d.cfg, d.Name(), d.NodeVendor)
 	if creds != nil {
 		opts = append(opts, grpc.WithPerRPCCredentials(creds))
@@ -188,7 +194,12 @@ func (r *rpcCredentials) GetRequestMetadata(ctx context.Context, uri ...string) 
 }
 
 func (r *rpcCredentials) RequireTransportSecurity() bool {
-	return true
+	cfg := Config{}
+	if !cfg.Insecure {
+		return false
+	} else {
+		return true
+	}
 }
 
 // newRPCCredentials determines the correct credentials used to access a node via rpc
