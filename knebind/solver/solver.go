@@ -77,8 +77,6 @@ func filterTopology(topo *tpb.Topology) *tpb.Topology {
 }
 
 const (
-	regexPrefix = "regex:"
-
 	// Attribute names mapping message fields to graph attributes/constraints.
 	vendorAttr = "vendor"
 	hwAttr     = "hardware_model"
@@ -93,14 +91,6 @@ const (
 var (
 	reAny = portgraph.Regex(regexp.MustCompile(".*"))
 )
-
-// makeConstraint returns a constraint based on the prefix of the input string.
-func makeConstraint(s string) portgraph.LeafConstraint {
-	if strings.HasPrefix(s, regexPrefix) {
-		return portgraph.Regex(regexp.MustCompile(strings.TrimPrefix(s, regexPrefix)))
-	}
-	return portgraph.Equal(s)
-}
 
 // testbedToAbstractGraph translates an Ondatra testbed to an AbstractGraph for solving.
 func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*portgraph.AbstractNode]*opb.Device, map[*portgraph.AbstractPort]*opb.Port, error) {
@@ -129,11 +119,11 @@ func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*por
 		if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED {
 			nodeConstraints[vendorAttr] = portgraph.Equal(v.String())
 		}
-		if hw := dev.GetHardwareModel(); hw != "" {
-			nodeConstraints[hwAttr] = makeConstraint(hw)
+		if hw, ok := modelConstraint(dev); ok {
+			nodeConstraints[hwAttr] = hw
 		}
-		if sw := dev.GetSoftwareVersion(); sw != "" {
-			nodeConstraints[swAttr] = makeConstraint(sw)
+		if sw, ok := versionConstraint(dev); ok {
+			nodeConstraints[swAttr] = sw
 		}
 		for k, v := range dev.GetExtraDimensions() {
 			nodeConstraints[k] = portgraph.Equal(v)
@@ -147,18 +137,11 @@ func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*por
 			if s := port.GetSpeed(); s != opb.Port_SPEED_UNSPECIFIED {
 				portConstraints[speedAttr] = portgraph.Equal(s.String())
 			}
-			if cm := port.GetCardModel(); cm != "" {
-				portConstraints[cardAttr] = makeConstraint(cm)
+			if cm, ok := cardModelConstraint(port); ok {
+				portConstraints[cardAttr] = cm
 			}
-			switch port.GetPmdValue().(type) {
-			case *opb.Port_Pmd_:
-				if pmd := port.GetPmd(); pmd != opb.Port_PMD_UNSPECIFIED {
-					portConstraints[pmdAttr] = portgraph.Equal(pmd.String())
-				}
-			case *opb.Port_PmdRegex:
-				if pmd := port.GetPmdRegex(); pmd != "" {
-					portConstraints[pmdAttr] = portgraph.Regex(regexp.MustCompile(pmd))
-				}
+			if pmd, ok := pmdConstraint(port); ok {
+				portConstraints[pmdAttr] = pmd
 			}
 			// Create the AbstractPort, but do not add group constraints until all ports are processed.
 			portName := fmt.Sprintf("%s:%s", dev.GetId(), port.GetId())
@@ -230,6 +213,78 @@ func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*por
 		edges = append(edges, &portgraph.AbstractEdge{Src: src, Dst: dst})
 	}
 	return &portgraph.AbstractGraph{Desc: "KNE testbed", Nodes: nodes, Edges: edges}, node2Dev, port2Port, nil
+}
+
+func modelConstraint(d *opb.Device) (portgraph.NodeConstraint, bool) {
+	switch v := d.GetHardwareModelValue().(type) {
+	case nil:
+		// handled after switch
+	case *opb.Device_HardwareModel:
+		if v.HardwareModel != "" {
+			return portgraph.Equal(v.HardwareModel), true
+		}
+	case *opb.Device_HardwareModelRegex:
+		if v.HardwareModelRegex != "" {
+			return portgraph.Regex(regexp.MustCompile(v.HardwareModelRegex)), true
+		}
+	default:
+		log.Fatalf("unknown hardware model type: %v(%T)", v, v)
+	}
+	return nil, false
+}
+
+func versionConstraint(d *opb.Device) (portgraph.NodeConstraint, bool) {
+	switch v := d.GetSoftwareVersionValue().(type) {
+	case nil:
+		// handled after switch
+	case *opb.Device_SoftwareVersion:
+		if v.SoftwareVersion != "" {
+			return portgraph.Equal(v.SoftwareVersion), true
+		}
+	case *opb.Device_SoftwareVersionRegex:
+		if v.SoftwareVersionRegex != "" {
+			return portgraph.Regex(regexp.MustCompile(v.SoftwareVersionRegex)), true
+		}
+	default:
+		log.Fatalf("unknown software version type: %v(%T)", v, v)
+	}
+	return nil, false
+}
+
+func cardModelConstraint(p *opb.Port) (portgraph.PortConstraint, bool) {
+	switch v := p.GetCardModelValue().(type) {
+	case nil:
+		// handled after switch
+	case *opb.Port_CardModel:
+		if v.CardModel != "" {
+			return portgraph.Equal(v.CardModel), true
+		}
+	case *opb.Port_CardModelRegex:
+		if v.CardModelRegex != "" {
+			return portgraph.Regex(regexp.MustCompile(v.CardModelRegex)), true
+		}
+	default:
+		log.Fatalf("unknown card model type: %v(%T)", v, v)
+	}
+	return nil, false
+}
+
+func pmdConstraint(p *opb.Port) (portgraph.PortConstraint, bool) {
+	switch v := p.GetPmdValue().(type) {
+	case nil:
+		// handled after switch
+	case *opb.Port_Pmd_:
+		if v.Pmd != opb.Port_PMD_UNSPECIFIED {
+			return portgraph.Equal(v.Pmd.String()), true
+		}
+	case *opb.Port_PmdRegex:
+		if v.PmdRegex != "" {
+			return portgraph.Regex(regexp.MustCompile(v.PmdRegex)), true
+		}
+	default:
+		log.Fatalf("unknown PMD type: %v(%T)", v, v)
+	}
+	return nil, false
 }
 
 // topoToConcreteGraph translates a Topology to a ConcreteGraph.
@@ -352,8 +407,8 @@ func assignmentToReservation(
 // runtimeProtoCheck checks the proto messages have the expected number of fields.
 func runtimeProtoCheck() error {
 	const (
-		testbedDeviceFields = 6
-		testbedPortFields   = 6
+		testbedDeviceFields = 8
+		testbedPortFields   = 7
 		topoNodeFields      = 11
 		topoIntfFields      = 7
 	)

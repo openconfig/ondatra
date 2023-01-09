@@ -117,21 +117,21 @@ func TestSolve(t *testing.T) {
 	topo := unmarshalTopo(t, topoText)
 
 	dut1 := &opb.Device{
-		Id:              "dut1",
-		Vendor:          opb.Device_ARISTA,
-		HardwareModel:   "ceos",
-		SoftwareVersion: "eos",
-		Ports:           []*opb.Port{{Id: "port1"}, {Id: "port2"}},
+		Id:                   "dut1",
+		Vendor:               opb.Device_ARISTA,
+		HardwareModelValue:   &opb.Device_HardwareModel{"ceos"},
+		SoftwareVersionValue: &opb.Device_SoftwareVersion{"eos"},
+		Ports:                []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut2 := &opb.Device{
 		Id:    "dut2",
 		Ports: []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut3 := &opb.Device{
-		Id:              "dut3",
-		Vendor:          opb.Device_JUNIPER,
-		SoftwareVersion: "regex:^evo$",
-		Ports:           []*opb.Port{{Id: "port1"}},
+		Id:                   "dut3",
+		Vendor:               opb.Device_JUNIPER,
+		SoftwareVersionValue: &opb.Device_SoftwareVersionRegex{"^evo$"},
+		Ports:                []*opb.Port{{Id: "port1"}},
 	}
 	ate := &opb.Device{
 		Id:    "ate",
@@ -503,48 +503,77 @@ func TestPortGroupsSolve(t *testing.T) {
 }
 
 func TestTestbedToAbstractGraph(t *testing.T) {
-	portPMDValue := &opb.Port{
-		Id:        "port1",
-		Speed:     opb.Port_S_100GB,
-		CardModel: "model",
-		PmdValue:  &opb.Port_Pmd_{opb.Port_PMD_100GBASE_LR4},
+	port := &opb.Port{
+		Id:             "port1",
+		Speed:          opb.Port_S_100GB,
+		CardModelValue: &opb.Port_CardModel{"model"},
+		PmdValue:       &opb.Port_Pmd_{opb.Port_PMD_100GBASE_LR4},
 	}
-	portPMDRegex := &opb.Port{
-		Id:        "port1",
-		Speed:     opb.Port_S_10GB,
-		CardModel: "model",
-		PmdValue:  &opb.Port_PmdRegex{".*"},
+	portEmpty := &opb.Port{
+		Id:             "portEmpty",
+		Speed:          opb.Port_SPEED_UNSPECIFIED,
+		CardModelValue: &opb.Port_CardModel{},
+		PmdValue:       &opb.Port_Pmd_{opb.Port_PMD_UNSPECIFIED},
+	}
+	portRegex := &opb.Port{
+		Id:             "portRegex",
+		CardModelValue: &opb.Port_CardModelRegex{"modelregex"},
+		PmdValue:       &opb.Port_PmdRegex{".*"},
 	}
 	dut := &opb.Device{
-		Id:              "dut",
-		Vendor:          opb.Device_ARISTA,
-		HardwareModel:   "hw",
-		SoftwareVersion: "sw",
-		Ports:           []*opb.Port{portPMDValue},
-		ExtraDimensions: map[string]string{"extra_dimension": "hello"},
+		Id:                   "dut",
+		Vendor:               opb.Device_ARISTA,
+		HardwareModelValue:   &opb.Device_HardwareModel{"hw"},
+		SoftwareVersionValue: &opb.Device_SoftwareVersion{"sw"},
+		Ports:                []*opb.Port{port},
+		ExtraDimensions:      map[string]string{"extra_dimension": "hello"},
+	}
+	dutEmpty := &opb.Device{
+		Id:                   "dutEmpty",
+		Vendor:               opb.Device_VENDOR_UNSPECIFIED,
+		HardwareModelValue:   &opb.Device_HardwareModel{},
+		SoftwareVersionValue: &opb.Device_SoftwareVersion{},
+		Ports:                []*opb.Port{portEmpty},
+	}
+	dutRegex := &opb.Device{
+		Id:                   "dutRegex",
+		HardwareModelValue:   &opb.Device_HardwareModelRegex{"hwreg"},
+		SoftwareVersionValue: &opb.Device_SoftwareVersionRegex{"swreg"},
+		Ports:                []*opb.Port{portRegex},
 	}
 	ate := &opb.Device{
 		Id:    "ate",
-		Ports: []*opb.Port{portPMDRegex},
+		Ports: []*opb.Port{port},
 	}
 	link := &opb.Link{
 		A: "dut:port1",
 		B: "ate:port1",
 	}
+
 	tb := &opb.Testbed{
-		Duts:  []*opb.Device{dut},
+		Duts:  []*opb.Device{dut, dutEmpty, dutRegex},
 		Ates:  []*opb.Device{ate},
 		Links: []*opb.Link{link},
 	}
-	wantDev := map[string]*opb.Device{"dut": dut, "ate": ate}
-	wantPort := map[string]*opb.Port{"dut:port1": portPMDValue, "ate:port1": portPMDRegex}
+	wantDev := map[string]*opb.Device{
+		"dut":      dut,
+		"dutEmpty": dutEmpty,
+		"dutRegex": dutRegex,
+		"ate":      ate,
+	}
+	wantPort := map[string]*opb.Port{
+		"dut:port1":          port,
+		"dutEmpty:portEmpty": portEmpty,
+		"dutRegex:portRegex": portRegex,
+		"ate:port1":          port,
+	}
 
 	graph, node2Dev, port2Port, err := testbedToAbstractGraph(tb)
 	if err != nil {
 		t.Fatalf("testbedToAbstractGraph() got error %v, want nil", err)
 	}
-	if len(graph.Nodes) != 2 {
-		t.Fatalf("testbedToAbstractGraph() got %d nodes, want 2", len(graph.Nodes))
+	if wantNodes := 4; len(graph.Nodes) != wantNodes {
+		t.Fatalf("testbedToAbstractGraph() got %d nodes, want %v", len(graph.Nodes), wantNodes)
 	}
 	for _, node := range graph.Nodes {
 		if got, ok := node2Dev[node]; !ok {
@@ -672,9 +701,9 @@ func TestSolveErrors(t *testing.T) {
 		desc: "no match for DUT - wrong hardware model",
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{{
-				Id:            "dut1",
-				Vendor:        opb.Device_ARISTA,
-				HardwareModel: "ceos",
+				Id:                 "dut1",
+				Vendor:             opb.Device_ARISTA,
+				HardwareModelValue: &opb.Device_HardwareModel{"ceos"},
 			}},
 		},
 		topo: `
@@ -689,9 +718,9 @@ func TestSolveErrors(t *testing.T) {
 		desc: "no match for DUT - wrong software model",
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{{
-				Id:              "dut1",
-				Vendor:          opb.Device_ARISTA,
-				SoftwareVersion: "eos",
+				Id:                   "dut1",
+				Vendor:               opb.Device_ARISTA,
+				SoftwareVersionValue: &opb.Device_SoftwareVersion{"eos"},
 			}},
 		},
 		topo: `

@@ -26,9 +26,14 @@ message Testbed {
 }
 
 // A device.
+//
+// All "regex" fields expect an RE2 regular expression and match a device
+// attribute if it contains any match of the regular expression.
 message Device {
+  // Unique ID for the device. Required.
   string id = 1;
 
+  // Vendor that manufactures the device.
   enum Vendor {
     VENDOR_UNSPECIFIED = 0;
     ARISTA = 1;
@@ -43,21 +48,23 @@ message Device {
     OPENCONFIG = 10;
   }
   Vendor vendor = 2;
-  // Hardware model of the device. Optional.
-  //
-  // If the value starts with "regex:" then the suffix is interpreted as a RE2
-  // regular expression. The model will be restricted to models matching the
-  // regular expression.
-  string hardware_model = 4;
-  // Software version of the device. Optional.
-  //
-  // If the value starts with "regex:" then the suffix is interpreted as a RE2
-  // regular expression. The version will be restricted to versions matching the
-  // regular expression.
-  string software_version = 5;
+
+  // Hardware model of the device.
+  oneof hardware_model_value {
+    string hardware_model = 4;
+    string hardware_model_regex = 7;
+  }
+
+  // Software version of the device.
+  oneof software_version_value {
+    string software_version = 5;
+    string software_version_regex = 8;
+  }
+
+  // List of ports on the device.
   repeated Port ports = 3;
 
-  // A key-value map of additional device dimensions. Optional.
+  // A key-value map of additional device dimensions.
   //
   // In addition to the above fields, the extra dimensions field can be used to
   // further restrict matching devices. The set of dimension keys that are
@@ -72,10 +79,14 @@ message Device {
 }
 
 // A port.
+//
+// All "regex" fields expect an RE2 regular expression and match a port
+// attribute if it contains any match of the regular expression.
 message Port {
+  // Unique ID for the port. Required.
   string id = 1;
 
-  // Speed enum values are the port speed in Gbps.
+  // Speed of the port.
   enum Speed {
     SPEED_UNSPECIFIED = 0;
     S_1GB = 1;
@@ -86,10 +97,13 @@ message Port {
   }
   Speed speed = 2;
 
-  // The model of the card which contains the physical port.
-  string card_model = 3;
+  // Model of the card that contains the port.
+  oneof card_model_value {
+    string card_model = 3;
+    string card_model_regex = 8;
+  }
 
-  // Pmd enum values are PMD of the port.
+  // Physical medium dependent of the port.
   // This should be kept in sync with the values specified in OpenConfig:
   // https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-transport-types.yang
   enum Pmd {

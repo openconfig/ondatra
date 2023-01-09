@@ -203,8 +203,9 @@ func (f *Flow) EgressTracking() *EgressTracking {
 }
 
 // WithEnabled sets whether egress tracking is enabled.
-func (et *EgressTracking) WithEnabled(enabled bool) {
+func (et *EgressTracking) WithEnabled(enabled bool) *EgressTracking {
 	et.pb.Enabled = enabled
+	return et
 }
 
 // WithOffset sets the egress tracking bit offset.
