@@ -79,6 +79,11 @@ func (d *AbstractDUT) Ports() map[string]*Port {
 	return d.Dims.Ports
 }
 
+// CustomData returns custom data for the DUT.
+func (d *AbstractDUT) CustomData() map[string]any {
+	return d.Dims.CustomData
+}
+
 func (d *AbstractDUT) String() string {
 	return fmt.Sprintf("DUT%+v", *d)
 }
@@ -151,6 +156,11 @@ func (a *AbstractATE) HardwareModel() string {
 // Ports returns the reserved ports on the ATE.
 func (a *AbstractATE) Ports() map[string]*Port {
 	return a.Dims.Ports
+}
+
+// CustomData returns custom data for the ATE.
+func (a *AbstractATE) CustomData() map[string]any {
+	return a.Dims.CustomData
 }
 
 func (a *AbstractATE) String() string {

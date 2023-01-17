@@ -141,3 +141,19 @@ func (i *Interface) AddRSVP(name string) *ixnet.RSVP {
 	i.pb.Rsvps = append(i.pb.Rsvps, rpb)
 	return ixnet.NewRSVP(rpb)
 }
+
+// DHCPV6Client creates a DHCP v6 Client or returns the existing config.
+func (i *Interface) DHCPV6Client() *ixnet.DHCPV6Client {
+	if i.pb.Dhcpv6Client == nil {
+		i.pb.Dhcpv6Client = &opb.DhcpV6Client{}
+	}
+	return ixnet.NewDHCPV6Client(i.pb.Dhcpv6Client)
+}
+
+// DHCPV6Server creates a DHCP v6 Server or returns the existing config.
+func (i *Interface) DHCPV6Server() *ixnet.DHCPV6Server {
+	if i.pb.Dhcpv6Server == nil {
+		i.pb.Dhcpv6Server = &opb.DhcpV6Server{}
+	}
+	return ixnet.NewDHCPV6Server(i.pb.Dhcpv6Server)
+}

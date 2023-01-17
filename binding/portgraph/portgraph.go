@@ -150,8 +150,8 @@ type solver struct {
 	superGraph        *ConcreteGraph
 	absPort2Node      map[*AbstractPort]*AbstractNode                   // Map Port to Node it is part of.
 	absNode2Node      map[*AbstractNode]map[*AbstractNode]int           // Map Node to Node and how many links there are.
-	conPort2Port2Edge map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to edge.
-	absPort2Port2Edge map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to edge.
+	conPort2Port2Edge map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to the edge.
+	absPort2Port2Edge map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to the edge.
 
 	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
 
@@ -163,7 +163,7 @@ type solver struct {
 	deferredPortConstraints *orderedmap.OrderedMap[*AbstractPort, []deferredPortConstraint]
 }
 
-// Solve returns as assignment from superGraph that satisfies abstractGraph.
+// Solve returns an assignment from superGraph that satisfies abstractGraph.
 func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment, error) {
 	solveErr := &SolveErr{absGraphDesc: abstractGraph.Desc, conGraphDesc: superGraph.Desc}
 	if len(abstractGraph.Nodes) > len(superGraph.Nodes) {
@@ -605,11 +605,6 @@ func (s *solver) processConstraints() {
 					return v.match(k, n, abs2ConNode)
 				})
 				nc.Set(k, reAny)
-			case *notSameAsNode:
-				dnc = append(dnc, func(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
-					return v.match(k, n, abs2ConNode)
-				})
-				nc.Set(k, reAny)
 			case LeafConstraint:
 				nc.Set(k, v)
 			default:
@@ -634,14 +629,6 @@ func (s *solver) processConstraints() {
 			addPortConstraint := func(k string, c PortConstraint, p *AbstractPort) {
 				switch v := c.(type) {
 				case *sameAsPort:
-					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
-						if _, ok := abs2ConPort[v.p]; !ok {
-							return false, v.p, errors.Errorf("port %q not assigned", v.p.Desc)
-						}
-						return v.match(k, p, abs2ConPort), nil, nil
-					})
-					pc.Set(k, reAny)
-				case *notSameAsPort:
 					dpc = append(dpc, func(abs2ConPort map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error) {
 						if _, ok := abs2ConPort[v.p]; !ok {
 							return false, v.p, errors.Errorf("port %q not assigned", v.p.Desc)
@@ -686,7 +673,7 @@ func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode)
 	return true
 }
 
-// matchNodes returns all ConcreteNodes the ConcreteGraph that match the AbstractNode.
+// matchNodes returns all ConcreteNodes in the ConcreteGraph that match the AbstractNode.
 func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
 	match := func(n *ConcreteNode) bool {
 		// Check that there are at least enough Ports to satisfy potential Edges.
@@ -724,10 +711,6 @@ func (s *solver) matchDeferredPort(port *AbstractPort, abs2ConPort map[*Abstract
 	switch v := constraint.(type) {
 	case *sameAsPort:
 		if !constraint.(*sameAsPort).match(attr, port, abs2ConPort) {
-			return false
-		}
-	case *notSameAsPort:
-		if !constraint.(*notSameAsPort).match(attr, port, abs2ConPort) {
 			return false
 		}
 	default:

@@ -293,7 +293,28 @@ func TestAddTopologies(t *testing.T) {
 		ifs                  []*opb.InterfaceConfig
 		wantDg, wantNestedDg string
 		wantLink             ixconfig.IxiaCfgNode
+		wantErr              string
 	}{{
+		desc: "Port does not exist",
+		ifs: []*opb.InterfaceConfig{{
+			Name:     ifName,
+			Link:     &opb.InterfaceConfig_Port{"invalid"},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+		}},
+		wantDg:   fmt.Sprintf("Device Group on %s", ifName),
+		wantLink: vport,
+		wantErr:  "no ATE port configured",
+	}, {
+		desc: "LAG does not exist",
+		ifs: []*opb.InterfaceConfig{{
+			Name:     ifName,
+			Link:     &opb.InterfaceConfig_Lag{"invalid"},
+			Ethernet: &opb.EthernetConfig{Mtu: 1500},
+		}},
+		wantDg:   fmt.Sprintf("Device Group on %s", ifName),
+		wantLink: vport,
+		wantErr:  "no ATE LAG configured",
+	}, {
 		desc: "No LAG",
 		ifs: []*opb.InterfaceConfig{{
 			Name:     ifName,
@@ -326,7 +347,13 @@ func TestAddTopologies(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			c := emptyCfgClient()
-			c.addTopology(test.ifs)
+			gotErr := c.addTopology(test.ifs)
+			if (gotErr == nil) != (test.wantErr == "") || (gotErr != nil && !strings.Contains(gotErr.Error(), test.wantErr)) {
+				t.Errorf("addTopology: got err: %v, want err %q", gotErr, test.wantErr)
+			}
+			if gotErr != nil {
+				return
+			}
 
 			var gotDg, gotNestedDg string
 			dg := c.cfg.Topology[0].DeviceGroup[0]

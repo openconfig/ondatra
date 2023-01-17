@@ -2627,3 +2627,72 @@ func TestAddRSVPProtocols(t *testing.T) {
 		})
 	}
 }
+
+func TestAddDHCPProtocols(t *testing.T) {
+	const intfName = "intf1"
+	clientWithTopo := func() *ixATE {
+		cfg := &ixconfig.Ixnetwork{
+			Topology: []*ixconfig.Topology{{
+				DeviceGroup: []*ixconfig.TopologyDeviceGroup{{
+					Ethernet: []*ixconfig.TopologyEthernet{&ixconfig.TopologyEthernet{
+						Ipv6: []*ixconfig.TopologyIpv6{&ixconfig.TopologyIpv6{}},
+					}}}},
+			}},
+		}
+		return &ixATE{
+			cfg: cfg,
+			intfs: map[string]*intf{
+				intfName: &intf{
+					deviceGroup: cfg.Topology[0].DeviceGroup[0],
+					ipv6:        cfg.Topology[0].DeviceGroup[0].Ethernet[0].Ipv6[0],
+				},
+			},
+		}
+	}
+
+	tests := []struct {
+		desc         string
+		intf         *opb.InterfaceConfig
+		wantV6Client *ixconfig.TopologyDhcpv6client
+		wantV6Server *ixconfig.TopologyDhcpv6server
+	}{{
+		desc: "dhcp v6 client",
+		intf: &opb.InterfaceConfig{
+			Name:         intfName,
+			Dhcpv6Client: &opb.DhcpV6Client{},
+		},
+		wantV6Client: &ixconfig.TopologyDhcpv6client{},
+	}, {
+		desc: "dhcp v6 server",
+		intf: &opb.InterfaceConfig{
+			Name:         intfName,
+			Dhcpv6Server: &opb.DhcpV6Server{},
+		},
+		wantV6Server: &ixconfig.TopologyDhcpv6server{},
+	}}
+
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			c := clientWithTopo()
+			if err := c.addDHCPProtocols(test.intf); err != nil {
+				t.Fatalf("addDHCPProtocols: unexpected error: %v", err)
+			}
+
+			intf := c.intfs[intfName]
+			var gotV6Client *ixconfig.TopologyDhcpv6client
+			if gotV6Clients := intf.deviceGroup.Ethernet[0].Dhcpv6client; len(gotV6Clients) > 0 {
+				gotV6Client = gotV6Clients[0]
+			}
+			if diff := jsonCfgDiff(t, test.wantV6Client, gotV6Client); diff != "" {
+				t.Fatalf("addDHCPProtocols: unexpected v6 client config (-want/+got): %s", diff)
+			}
+			var gotV6Server *ixconfig.TopologyDhcpv6server
+			if gotV6Servers := intf.ipv6.Dhcpv6server; len(gotV6Servers) > 0 {
+				gotV6Server = gotV6Servers[0]
+			}
+			if diff := jsonCfgDiff(t, test.wantV6Server, gotV6Server); diff != "" {
+				t.Fatalf("addDHCPProtocols: unexpected v6 server config (-want/+got): %s", diff)
+			}
+		})
+	}
+}

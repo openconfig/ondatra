@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package junitxml provides a mechanism to covert a streamed test log to JUnit XML.
+// Package junitxml provides a mechanism to convert a streamed test log to JUnit XML.
 package junitxml
 
 import (
@@ -40,7 +40,7 @@ func StartConverting(xmlPath string) error {
 	if err != nil {
 		return fmt.Errorf("failed to create JUnit XML file: %w", err)
 	}
-	conv, err := startConverter(xmlFile)
+	conv, err := startConverter(os.Stdout, xmlFile)
 	if err != nil {
 		return err
 	}
@@ -65,17 +65,18 @@ func StopConverting() error {
 	return nil
 }
 
-func startConverter(dest io.Writer) (*converter, error) {
+func startConverter(src, dst io.Writer) (*converter, error) {
 	// Bytes written to the piped writer are read from the piped reader,
 	// translated to XML, and that XML written to the destination writer.
 	pr, pw, err := os.Pipe()
 	if err != nil {
 		return nil, fmt.Errorf("unable to create file pipe: %w", err)
 	}
+	tr := io.TeeReader(pr, src)
 	errCh := make(chan error)
 	conv := &converter{file: pw, errCh: errCh}
 	go func() {
-		errCh <- conv.logToXML(pr, dest)
+		errCh <- conv.logToXML(tr, dst)
 	}()
 	return conv, nil
 }

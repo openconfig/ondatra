@@ -85,27 +85,40 @@ func TestConverter(t *testing.T) {
 	timeNowFn = func() time.Time {
 		return time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC)
 	}
-	buff := new(bytes.Buffer)
-	conv := mustStart(t, buff)
+	srcBuf := new(bytes.Buffer)
+	dstBuf := new(bytes.Buffer)
+	conv := mustStart(t, srcBuf, dstBuf)
 	if err := conv.Stop(); err != nil {
 		t.Errorf("Stop failed: %v", err)
 	}
-	if diff := cmp.Diff(testXML, buff.String()); diff != "" {
-		t.Errorf("Converter wrote unexpected output (-want, +got): %s", diff)
+	if diff := cmp.Diff(testLog, srcBuf.String()); diff != "" {
+		t.Errorf("Converter wrote unexpected tee output (-want, +got): %s", diff)
+	}
+	if diff := cmp.Diff(testXML, dstBuf.String()); diff != "" {
+		t.Errorf("Converter wrote unexpected dest output (-want, +got): %s", diff)
 	}
 }
 
-func TestConverterError(t *testing.T) {
-	wantErr := "write error"
-	errDest := &errorWriteCloser{wantErr}
-	err := mustStart(t, errDest).Stop()
+func TestSrcError(t *testing.T) {
+	wantErr := "src error"
+	errSrc := &errorWriteCloser{wantErr}
+	err := mustStart(t, errSrc, new(bytes.Buffer)).Stop()
 	if s := errdiff.Substring(err, wantErr); s != "" {
 		t.Errorf("Stop got unexpected error: %s", s)
 	}
 }
 
-func mustStart(t *testing.T, dest io.Writer) *converter {
-	conv, err := startConverter(dest)
+func TestDstError(t *testing.T) {
+	wantErr := "dst error"
+	errDst := &errorWriteCloser{wantErr}
+	err := mustStart(t, new(bytes.Buffer), errDst).Stop()
+	if s := errdiff.Substring(err, wantErr); s != "" {
+		t.Errorf("Stop got unexpected error: %s", s)
+	}
+}
+
+func mustStart(t *testing.T, src, dst io.Writer) *converter {
+	conv, err := startConverter(src, dst)
 	if err != nil {
 		t.Fatalf("startConverting failed: %v", err)
 	}

@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,25 +18,24 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// NewIP returns a new IP configuration.
+// NewDHCPV6Client returns a new DHCP v6 client configuration.
 // Tests must not call this method directly.
-func NewIP(pb *opb.IpConfig) *IP {
-	return &IP{pb}
+func NewDHCPV6Client(pb *opb.DhcpV6Client) *DHCPV6Client {
+	return &DHCPV6Client{pb}
 }
 
-// IP is a representation of IP config on the ATE.
-type IP struct {
-	pb *opb.IpConfig
+// NewDHCPV6Server returns a new DHCP v6 server configuration.
+// Tests must not call this method directly.
+func NewDHCPV6Server(pb *opb.DhcpV6Server) *DHCPV6Server {
+	return &DHCPV6Server{pb}
 }
 
-// WithAddress sets the IP address in CIDR notation.
-func (i *IP) WithAddress(address string) *IP {
-	i.pb.AddressCidr = address
-	return i
+// DHCPV6Client is a DHCP v6 Client config on an ATE.
+type DHCPV6Client struct {
+	pb *opb.DhcpV6Client
 }
 
-// WithDefaultGateway sets the default gateway.
-func (i *IP) WithDefaultGateway(gateway string) *IP {
-	i.pb.DefaultGateway = gateway
-	return i
+// DHCPV6Server is a DHCP v6 Server config on an ATE.
+type DHCPV6Server struct {
+	pb *opb.DhcpV6Server
 }

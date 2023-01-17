@@ -1596,34 +1596,11 @@ func bgpV6Peers(v6Peers []*opb.BgpPeer) ([]*ixconfig.TopologyBgpIpv6Peer, error)
 	return peers, nil
 }
 
-func appendStrToMultivalueList(mv *ixconfig.Multivalue, val string) *ixconfig.Multivalue {
-	if mv == nil {
-		mv = &ixconfig.Multivalue{ValueList: &ixconfig.MultivalueValueList{}}
-		mv.Pattern = ixconfig.String("valueList")
-	}
-	mv.ValueList.Values = append(mv.ValueList.Values, val)
-	return mv
-}
-
-func appendBoolToMultivalueList(mv *ixconfig.Multivalue, val bool) *ixconfig.Multivalue {
-	return appendStrToMultivalueList(mv, strconv.FormatBool(val))
-}
-
-func appendIntToMultivalueList(mv *ixconfig.Multivalue, val int) *ixconfig.Multivalue {
-	return appendStrToMultivalueList(mv, strconv.Itoa(val))
-}
-
-func appendUintToMultivalueList(mv *ixconfig.Multivalue, val uint32) *ixconfig.Multivalue {
-	return appendStrToMultivalueList(mv, strconv.FormatUint(uint64(val), 10))
-}
-
-func appendUint64ToMultivalueList(mv *ixconfig.Multivalue, val uint64) *ixconfig.Multivalue {
-	return appendStrToMultivalueList(mv, strconv.FormatUint(val, 10))
-}
-
-// addISISProtocols adds IxNetwork RSVP protocols, assuming the IS-IS network
-// groups for the given interface already exist.
 func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
+	if len(ifc.GetRsvps()) == 0 {
+		return nil
+	}
+
 	intf := ix.intfs[ifc.GetName()]
 	intf.rsvpLSPs = make(map[string]*ixconfig.TopologyRsvpteLsps, len(ifc.GetRsvps()))
 	for rsvpIdx, rsvp := range ifc.GetRsvps() {
@@ -1777,4 +1754,44 @@ func (ix *ixATE) addRSVPProtocols(ifc *opb.InterfaceConfig) error {
 		}
 	}
 	return nil
+}
+
+func (ix *ixATE) addDHCPProtocols(ifc *opb.InterfaceConfig) error {
+	intf := ix.intfs[ifc.GetName()]
+
+	if dhcp6c := ifc.GetDhcpv6Client(); dhcp6c != nil {
+		eth := intf.deviceGroup.Ethernet[0]
+		eth.Dhcpv6client = []*ixconfig.TopologyDhcpv6client{{}}
+	}
+
+	if dhcp6s := ifc.GetDhcpv6Server(); dhcp6s != nil {
+		intf.ipv6.Dhcpv6server = []*ixconfig.TopologyDhcpv6server{{}}
+	}
+
+	return nil
+}
+
+func appendStrToMultivalueList(mv *ixconfig.Multivalue, val string) *ixconfig.Multivalue {
+	if mv == nil {
+		mv = &ixconfig.Multivalue{ValueList: &ixconfig.MultivalueValueList{}}
+		mv.Pattern = ixconfig.String("valueList")
+	}
+	mv.ValueList.Values = append(mv.ValueList.Values, val)
+	return mv
+}
+
+func appendBoolToMultivalueList(mv *ixconfig.Multivalue, val bool) *ixconfig.Multivalue {
+	return appendStrToMultivalueList(mv, strconv.FormatBool(val))
+}
+
+func appendIntToMultivalueList(mv *ixconfig.Multivalue, val int) *ixconfig.Multivalue {
+	return appendStrToMultivalueList(mv, strconv.Itoa(val))
+}
+
+func appendUintToMultivalueList(mv *ixconfig.Multivalue, val uint32) *ixconfig.Multivalue {
+	return appendStrToMultivalueList(mv, strconv.FormatUint(uint64(val), 10))
+}
+
+func appendUint64ToMultivalueList(mv *ixconfig.Multivalue, val uint64) *ixconfig.Multivalue {
+	return appendStrToMultivalueList(mv, strconv.FormatUint(val, 10))
 }

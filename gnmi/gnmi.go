@@ -366,7 +366,7 @@ func Delete[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.ConfigQuery[T]) *ygnm
 // SetBatch allows multiple Set operations (Replace, Update, Delete) to be applied as part of a single Set transaction.
 // Use BatchUpdate, BatchReplace, BatchDelete to add operations, and then call the Set method to send the SetRequest.
 type SetBatch struct {
-	sb *ygnmi.SetBatch
+	sb ygnmi.SetBatch
 }
 
 // Set performs the gnmi.Set request with all queued operations.
@@ -382,17 +382,17 @@ func (sb *SetBatch) Set(t testing.TB, dev DeviceOrOpts) *ygnmi.Result {
 
 // BatchUpdate stores an update operation in the SetBatch.
 func BatchUpdate[T any](sb *SetBatch, q ygnmi.ConfigQuery[T], val T) {
-	ygnmi.BatchUpdate(sb.sb, q, val)
+	ygnmi.BatchUpdate(&sb.sb, q, val)
 }
 
 // BatchReplace stores an replace operation in the SetBatch.
 func BatchReplace[T any](sb *SetBatch, q ygnmi.ConfigQuery[T], val T) {
-	ygnmi.BatchReplace(sb.sb, q, val)
+	ygnmi.BatchReplace(&sb.sb, q, val)
 }
 
 // BatchDelete stores an delete operation in the SetBatch.
 func BatchDelete[T any](sb *SetBatch, q ygnmi.ConfigQuery[T]) {
-	ygnmi.BatchDelete(sb.sb, q)
+	ygnmi.BatchDelete(&sb.sb, q)
 }
 
 func createContext(d DeviceOrOpts) context.Context {

@@ -147,23 +147,23 @@ func TestNodeConstraint(t *testing.T) {
 		n     *AbstractNode
 		want  bool
 	}{{
-		desc:  "sameAsNode; match",
+		desc:  "SameAsNode; match",
 		match: SameAsNode(dut1).(*sameAsNode).match,
 		n:     dut1,
 		want:  true,
 	}, {
-		desc:  "sameAsNode; no match",
+		desc:  "SameAsNode; no match",
 		match: SameAsNode(dut1).(*sameAsNode).match,
 		n:     dut2,
 		want:  false,
 	}, {
-		desc:  "notSameAsNode; match",
-		match: NotSameAsNode(dut1).(*notSameAsNode).match,
+		desc:  "NotSameAsNode; match",
+		match: NotSameAsNode(dut1).(*sameAsNode).match,
 		n:     dut2,
 		want:  true,
 	}, {
-		desc:  "notSameAsNode; no match",
-		match: NotSameAsNode(dut1).(*notSameAsNode).match,
+		desc:  "NotSameAsNode; no match",
+		match: NotSameAsNode(dut1).(*sameAsNode).match,
 		n:     dut1,
 		want:  false,
 	}}
@@ -202,13 +202,13 @@ func TestPortConstraint(t *testing.T) {
 		p:     dut1port2,
 		want:  false,
 	}, {
-		desc:  "notSameAsPort; match",
-		match: NotSameAsPort(dut1port1).(*notSameAsPort).match,
+		desc:  "NotSameAsPort; match",
+		match: NotSameAsPort(dut1port1).(*sameAsPort).match,
 		p:     dut1port2,
 		want:  true,
 	}, {
-		desc:  "notSameAsPort; no match",
-		match: NotSameAsPort(dut1port1).(*notSameAsPort).match,
+		desc:  "NotSameAsPort; no match",
+		match: NotSameAsPort(dut1port1).(*sameAsPort).match,
 		p:     dut1port1,
 		want:  false,
 	}}
@@ -326,6 +326,102 @@ func TestAttrNodePair(t *testing.T) {
 			}
 			if tc.wantV2 != gotV2 {
 				t.Errorf("attrsNodePair() got %s, want %s", gotV2, tc.wantV2)
+			}
+		})
+	}
+}
+
+func TestNodeEvaluate(t *testing.T) {
+	key := "attr"
+	absNode := &AbstractNode{Desc: "abs1"}
+	conNode := &ConcreteNode{Desc: "node1", Attrs: map[string]string{key: "A"}}
+	absNodeNoAttr := &AbstractNode{Desc: "unknown"}
+	abs2ConNode := map[*AbstractNode]*ConcreteNode{absNode: conNode, absNodeNoAttr: &ConcreteNode{Desc: "unknown"}}
+	tests := []struct {
+		desc    string
+		c       *sameAsNode
+		want    *equal
+		wantNil bool
+	}{{
+		desc: "SameAs",
+		c:    SameAsNode(absNode).(*sameAsNode),
+		want: &equal{s: conNode.Attrs[key], not: false},
+	}, {
+		desc: "NotSameAs",
+		c:    NotSameAsNode(absNode).(*sameAsNode),
+		want: &equal{s: conNode.Attrs[key], not: true},
+	}, {
+		desc:    "SameAs node without attributes",
+		c:       SameAsNode(absNodeNoAttr).(*sameAsNode),
+		wantNil: true,
+	}}
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
+			got := tc.c.evaluate(key, abs2ConNode)
+			if got == nil && !tc.wantNil {
+				t.Errorf("evaluate() got nil, want %v", tc.want)
+			} else if got != nil && tc.wantNil {
+				t.Errorf("evaluate() got %v, want nil", got)
+			} else if got == nil && tc.wantNil {
+				return
+			}
+			v, ok := got.(*equal)
+			if !ok {
+				t.Fatalf("evaluate() got unknown type")
+			}
+			if v.not != tc.want.not {
+				t.Errorf("evaluate() got equal not: %t, want %t", v.not, tc.want.not)
+			}
+			if v.s != tc.want.s {
+				t.Errorf("evaluate() got equal to value %q, want %q", v.s, tc.want.s)
+			}
+		})
+	}
+}
+
+func TestPortEvaluate(t *testing.T) {
+	key := "attr"
+	absPort := &AbstractPort{Desc: "port1"}
+	conPort := &ConcretePort{Desc: "port1", Attrs: map[string]string{key: "Z"}}
+	absPortNoAttr := &AbstractPort{Desc: "unknown"}
+	abs2ConPort := map[*AbstractPort]*ConcretePort{absPort: conPort, absPortNoAttr: &ConcretePort{Desc: "unknown"}}
+	tests := []struct {
+		desc    string
+		c       *sameAsPort
+		want    *equal
+		wantNil bool
+	}{{
+		desc: "SameAs",
+		c:    SameAsPort(absPort).(*sameAsPort),
+		want: &equal{s: conPort.Attrs[key], not: false},
+	}, {
+		desc: "NotSameAs",
+		c:    NotSameAsPort(absPort).(*sameAsPort),
+		want: &equal{s: conPort.Attrs[key], not: true},
+	}, {
+		desc:    "SameAs port without attributes",
+		c:       SameAsPort(absPortNoAttr).(*sameAsPort),
+		wantNil: true,
+	}}
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
+			got := tc.c.evaluate(key, abs2ConPort)
+			if got == nil && !tc.wantNil {
+				t.Errorf("evaluate() got nil, want %v", tc.want)
+			} else if got != nil && tc.wantNil {
+				t.Errorf("evaluate() got %v, want nil", got)
+			} else if got == nil && tc.wantNil {
+				return
+			}
+			v, ok := got.(*equal)
+			if !ok {
+				t.Fatalf("evaluate() got unknown type")
+			}
+			if v.not != tc.want.not {
+				t.Errorf("evaluate() got equal not: %t, want %t", v.not, tc.want.not)
+			}
+			if v.s != tc.want.s {
+				t.Errorf("evaluate() got equal to value %q, want %q", v.s, tc.want.s)
 			}
 		})
 	}

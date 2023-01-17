@@ -48,6 +48,8 @@ message InterfaceConfig {
   ISISConfig isis = 7;
   BgpConfig bgp = 8;
   repeated RsvpConfig rsvps = 12;
+  DhcpV6Client dhcpv6_client = 15;
+  DhcpV6Server dhcpv6_server = 16;
   repeated Network networks = 9;
   bool enable_lacp = 10;
 }
@@ -471,6 +473,10 @@ message RsvpConfig {
   bool refresh_reduction = 5;
   // NEXT ID: 8
 }
+
+message DhcpV6Client {}
+
+message DhcpV6Server {}
 
 message Network {
   string name = 1;

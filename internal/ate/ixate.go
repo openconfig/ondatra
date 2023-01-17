@@ -497,10 +497,15 @@ func (ix *ixATE) importConfig(ctx context.Context, node ixconfig.IxiaCfgNode, ov
 }
 
 func (ix *ixATE) configureTopology(ics []*opb.InterfaceConfig) error {
+	if len(ix.ports) == 0 {
+		return errors.New("no ports configured for topology, check if (*Topology).Update called before (*Topology).Push")
+	}
 	ix.cfg.Topology = nil
 	ifsByLink := groupByLink(ics)
 	for _, ifs := range ifsByLink {
-		ix.addTopology(ifs)
+		if err := ix.addTopology(ifs); err != nil {
+			return err
+		}
 		for _, ifc := range ifs {
 			// TODO(greg-dennis): Add MACsec to the 'golden' ixiajsoncfg PushTopology tests.
 			if err := ix.addMACsecProtocol(ifc); err != nil {
@@ -519,6 +524,9 @@ func (ix *ixATE) configureTopology(ics []*opb.InterfaceConfig) error {
 				return err
 			}
 			if err := ix.addRSVPProtocols(ifc); err != nil {
+				return err
+			}
+			if err := ix.addDHCPProtocols(ifc); err != nil {
 				return err
 			}
 			if err := ix.addNetworks(ifc); err != nil {

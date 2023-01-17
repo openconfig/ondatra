@@ -136,6 +136,11 @@ func (d *Device) newPort(id string, res *binding.Port) *Port {
 	return &Port{dev: d, id: id, res: res}
 }
 
+// CustomData returns custom data for the specified key.
+func (d *Device) CustomData(key string) any {
+	return d.res.CustomData()[key]
+}
+
 // Port represents a port.
 type Port struct {
 	dev *Device
