@@ -15,50 +15,50 @@
 package events
 
 import (
-	"fmt"
-	"strings"
-	"sync"
 	"testing"
 
 	"github.com/openconfig/ondatra/binding"
 )
 
 var (
-	stubMu   sync.Mutex
-	stubLine string
+	exitCode = func() *int {
+		code := 0
+		return &code
+	}()
+
+	// To be stubbed out by tests.
+	readerStartedStub bool
+	menuChoiceStub    int
 )
 
-func resetTTYReader() {
-	reader = nil
-}
-
-func writeLine(line string) {
-	stubMu.Lock()
-	defer stubMu.Unlock()
-	stubLine = line
-}
-
 func init() {
-	readString := func(b byte) (string, error) {
-		stubMu.Lock()
-		defer stubMu.Unlock()
-		if i := strings.IndexByte(stubLine, b); i < 0 {
-			return "", fmt.Errorf("cannot read line %q", stubLine)
-		}
-		return stubLine, nil
+	startReaderFn = func() error {
+		readerStartedStub = true
+		return nil
 	}
-	close := func() error { return nil }
-	openTTYFn = func() (readStringFn, closeFn, error) {
-		return readString, close, nil
+	readerStartedFn = func() bool {
+		return readerStartedStub
+	}
+	menuFn = func(msg string, options ...string) int {
+		return menuChoiceStub
+	}
+	readLineFn = func() string {
+		return ""
 	}
 	reservationFn = func() (*binding.Reservation, error) {
 		return &binding.Reservation{}, nil
 	}
 }
+
+func resetStubs() {
+	readerStartedStub = false
+	menuChoiceStub = 0
+}
+
 func TestNoDebugMode(t *testing.T) {
-	resetTTYReader()
+	resetStubs()
 	TestStarted(false)
-	defer TestCasesDone()
+	defer TestsDone(exitCode)
 
 	if err := Breakpoint(t, ""); err == nil {
 		t.Fatal("Breakpoint unexpectedly succeeded")
@@ -69,12 +69,11 @@ func TestNoDebugMode(t *testing.T) {
 }
 
 func TestDebugModeRunTests(t *testing.T) {
-	resetTTYReader()
-	writeLine("1\n")
+	resetStubs()
+	menuChoiceStub = 2
 	TestStarted(true)
-	defer TestCasesDone()
+	defer TestsDone(exitCode)
 
-	writeLine("\n")
 	if err := Breakpoint(t, ""); err != nil {
 		t.Fatalf("Breakpoint got error %v", err)
 	}
@@ -84,15 +83,12 @@ func TestDebugModeRunTests(t *testing.T) {
 }
 
 func TestDebugModeJustReserve(t *testing.T) {
-	resetTTYReader()
-	writeLine("2\n")
+	resetStubs()
+	menuChoiceStub = 1
 	TestStarted(true)
-	defer TestCasesDone()
-
-	writeLine("\n")
+	defer TestsDone(exitCode)
 	ReservationDone()
 
-	writeLine("\n")
 	if err := Breakpoint(t, ""); err != nil {
 		t.Fatalf("Breakpoint got error %v", err)
 	}

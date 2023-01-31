@@ -16,84 +16,113 @@
 package events
 
 import (
-	"bufio"
 	"errors"
 	"fmt"
-	"os"
+	"reflect"
 	"runtime"
 	"strings"
-	"sync"
+	"sync/atomic"
 	"testing"
 
 	log "github.com/golang/glog"
+	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/internal/display"
 	"github.com/openconfig/ondatra/internal/testbed"
 )
 
 var (
-	writer       = bufio.NewWriter(os.Stdout)
-	reader       *ttyReader
 	reservePause bool
+	running      atomic.Bool
+	beforeTests  []func(*binding.Reservation) error
+	afterTests   []func(*int) error
 
 	// To be stubbed out by tests.
-	openTTYFn     = openTTY
-	reservationFn = testbed.Reservation
+	startReaderFn   = display.StartReader
+	readerStartedFn = display.ReaderStarted
+	menuFn          = display.Menu
+	readLineFn      = display.ReadLine
+	reservationFn   = testbed.Reservation
 )
+
+// AddBeforeTests adds a callback to run before the tests start executing.
+func AddBeforeTests(cb func(*binding.Reservation) error) {
+	checkNotRunning()
+	beforeTests = append(beforeTests, cb)
+}
+
+// AddAfterTests adds a callback to run after the tests finish executing.
+func AddAfterTests(cb func(*int) error) {
+	checkNotRunning()
+	afterTests = append(afterTests, cb)
+}
+
+func runBeforeTestsCallbacks(res *binding.Reservation) []error {
+	checkRunning()
+	var errs []error
+	for _, cb := range beforeTests {
+		if err := cb(res); err != nil {
+			errs = append(errs, callbackErr(err, cb))
+		}
+	}
+	return errs
+}
+
+func runAfterTestsCallbacks(exitCode *int) []error {
+	checkRunning()
+	var errs []error
+	for _, cb := range afterTests {
+		if err := cb(exitCode); err != nil {
+			errs = append(errs, callbackErr(err, cb))
+		}
+	}
+	return errs
+}
+
+func checkRunning() {
+	if !running.Load() { // impossibility check
+		log.Fatalf("Callbacks can only be run while test is running.")
+	}
+}
+
+func checkNotRunning() {
+	if running.Load() { // precondition check
+		log.Exitf("All callbacks must be added before test is running.")
+	}
+}
+
+func callbackErr(err error, cb any) error {
+	name := runtime.FuncForPC(reflect.ValueOf(cb).Pointer()).Name()
+	if strings.HasSuffix(name, "-fm") {
+		name = name[:len(name)-3]
+	}
+	return fmt.Errorf("error on callback %q: %v", name, err)
+}
 
 // TestStarted notifies that the test has started, whether it was started in
 // debug mode, and that the testbed is about to be reserved.
 func TestStarted(debugMode bool) {
+	running.Store(true)
 	if debugMode {
-		readFn, closeFn, err := openTTYFn()
-		if err != nil {
-			log.Exitf("No controlling terminal available for debug mode: %v", err)
+		if err := startReaderFn(); err != nil {
+			log.Exitf("Error starting stdin reader: %v", err)
 		}
-		reader = &ttyReader{readFn: readFn, closeFn: closeFn}
-		reader.start()
-		showMenu("Welcome to Ondatra Debug Mode!")
+		choice := menuFn("Welcome to Ondatra Debug Mode!",
+			"Run the full test with breakpoints enabled",
+			"Just reserve the testbed for now")
+		if choice == 2 {
+			reservePause = true
+		}
 	}
-	logMain(actionMsg("Reserving the testbed"))
+	display.Action(nil, "Reserving the testbed")
 }
 
-func showMenu(msg string) {
-	logMain(bannerMsg(
-		msg,
-		"",
-		"Choose from one of the following options:",
-		"[1] Run the full test with breakpoints enabled",
-		"[2] Just reserve the testbed for now",
-		"",
-		"Then press ENTER to continue or CTRL-C to quit.",
-	))
-	readMenuOption()
-}
-
-func readMenuOption() {
-	option := strings.TrimSpace(reader.readLine())
-	switch option {
-	case "1":
-	case "2":
-		reservePause = true
-	default:
-		showMenu(fmt.Sprintf("Invalid menu option: %q", option))
-	}
-}
-
-// TestCasesDone notifies that the test cases are complete and the testbed is
-// about to be released.
-func TestCasesDone() {
-	if reader != nil {
-		reader.stop()
-	}
-	logMain(actionMsg("Releasing the testbed"))
-}
-
-// ReservationDone notifies that the reservation is complete.
-func ReservationDone() {
+// ReservationDone notifies that the reservation is complete and that the tests
+// are about to begin execution and runs all the BeforeTestsCallbacks.
+func ReservationDone() error {
 	res, err := reservationFn()
 	if err != nil {
-		log.Fatalf("failed to fetch the testbed reservation: %v", err)
-		return
+		return fmt.Errorf("failed to fetch the testbed reservation: %v", err)
 	}
 
 	lines := []string{
@@ -129,18 +158,34 @@ func ReservationDone() {
 		)
 	}
 
-	logMain(bannerMsg(lines...))
+	display.Banner(nil, lines...)
 	if reservePause {
-		reader.readLine()
+		readLineFn()
 	}
+
+	if errs := runBeforeTestsCallbacks(res); len(errs) > 0 {
+		return fmt.Errorf("errors running BeforeTestsCallbacks: %v", errs)
+	}
+	return nil
+}
+
+// TestsDone notifies that the test cases are complete and that the testbed is
+// about to be released and runs all the AfterTestsCallbacks.
+func TestsDone(exitCode *int) (rerr error) {
+	defer closer.Close(&rerr, display.StopReader, "error stopping display reader")
+	if errs := runAfterTestsCallbacks(exitCode); len(errs) > 0 {
+		return fmt.Errorf("errors running AfterTestsCallbacks: %v", errs)
+	}
+	display.Action(nil, "Releasing the testbed")
+	return nil
 }
 
 // ActionStarted notifies that the specified action has started.
 // Used to restrict the library to calling t.Helper and t.Log only.
 func ActionStarted(t testing.TB, format string, dev binding.Device) testing.TB {
 	t.Helper()
-	t.Log(actionMsg(fmt.Sprintf(format, dev.Name())))
-	if reader != nil {
+	display.Action(t, fmt.Sprintf(format, dev.Name()))
+	if readerStartedFn() {
 		return &breakpointT{t}
 	}
 	return t
@@ -150,7 +195,7 @@ func ActionStarted(t testing.TB, format string, dev binding.Device) testing.TB {
 // execution until the user indicates test execution should be resumed.
 // Returns an error if the test is not in debug mode.
 func Breakpoint(t testing.TB, msg string) error {
-	if reader == nil {
+	if !readerStartedFn() {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
 	t.Helper()
@@ -158,108 +203,9 @@ func Breakpoint(t testing.TB, msg string) error {
 	if msg != "" {
 		firstLine += ": " + msg
 	}
-	t.Log(bannerMsg(firstLine, "", "Press ENTER to continue."))
-	reader.readLine()
+	display.Banner(t, firstLine, "", "Press ENTER to continue.")
+	readLineFn()
 	return nil
-}
-
-func logMain(msg string) {
-	writer.WriteString(msg)
-	writer.Flush()
-}
-
-func bannerMsg(lines ...string) string {
-	const (
-		format = `
-********************************************************************************
-
-%s
-********************************************************************************
-
-`
-		indent = "  "
-	)
-	b := new(strings.Builder)
-	for _, ln := range lines {
-		b.WriteString(indent + ln + "\n")
-	}
-	return fmt.Sprintf(format, b.String())
-}
-
-func actionMsg(action string) string {
-	return fmt.Sprintf("\n*** %s...\n\n", action)
-}
-
-type readStringFn func(byte) (string, error)
-type closeFn func() error
-
-func openTTY() (readStringFn, closeFn, error) {
-	path := "/dev/tty"
-	if runtime.GOOS == "windows" {
-		path = "CONIN$"
-	}
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, nil, err
-	}
-	buf := bufio.NewReader(file)
-	return buf.ReadString, file.Close, nil
-}
-
-// ttyReader continuously reads lines from the controlling terminal. It ensures
-// that user input entered prior to a user prompt is _not_ interpreted as a
-// response to that prompt. As there is no easy way to clear prior user input,
-// it reads asynchrously and is signalled when a prompt has been displayed.
-type ttyReader struct {
-	readFn  readStringFn
-	closeFn closeFn
-
-	mu   sync.Mutex
-	keep bool
-	done bool
-	ch   chan string
-}
-
-func (r *ttyReader) start() {
-	r.ch = make(chan string)
-	go func() {
-		for done := false; !done; {
-			line, err := r.readFn('\n')
-			r.mu.Lock()
-			done = r.done
-			if err != nil {
-				if done {
-					r.mu.Unlock()
-					break
-				}
-				log.Fatalf("Error reading from terminal: %v", err)
-			}
-			if r.keep {
-				r.mu.Unlock()
-				r.ch <- line
-				r.mu.Lock()
-			}
-			r.mu.Unlock()
-		}
-	}()
-}
-
-func (r *ttyReader) readLine() string {
-	r.mu.Lock()
-	r.keep = true
-	r.mu.Unlock()
-	line := <-r.ch
-	r.mu.Lock()
-	r.keep = false
-	r.mu.Unlock()
-	return line
-}
-
-func (r *ttyReader) stop() {
-	r.mu.Lock()
-	r.done = true
-	r.mu.Unlock()
-	r.closeFn()
 }
 
 type breakpointT struct {

@@ -476,7 +476,9 @@ message RsvpConfig {
 
 message DhcpV6Client {}
 
-message DhcpV6Server {}
+message DhcpV6Server {
+  AddressRange lease_addrs = 1;
+}
 
 message Network {
   string name = 1;

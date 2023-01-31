@@ -1713,7 +1713,7 @@ func validateIP(ipc *opb.IpConfig, desc string) error {
 	if gi == nil {
 		return fmt.Errorf("%s default gateway is not valid IP notation: %s", desc, gway)
 	}
-	if !an.Contains(gi) {
+	if !gi.IsUnspecified() && !an.Contains(gi) {
 		return fmt.Errorf("%s default gateway is not in CIDR range %s: %s", desc, addr, gway)
 	}
 	return nil

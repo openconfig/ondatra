@@ -28,6 +28,7 @@ import (
 	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/debug"
+	"github.com/openconfig/ondatra/eventlis"
 	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/flags"
@@ -75,18 +76,25 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 	}
 	go releaseOnSignal(ctx)
 	defer closer.Close(&rerr, func() error {
-		events.TestCasesDone()
 		return testbed.Release(ctx)
 	}, "error releasing testbed")
-	events.ReservationDone()
+
+	var exitCode *int
+	defer closer.Close(&rerr, func() error {
+		return events.TestsDone(exitCode)
+	}, "error notifying tests are done")
+
+	if err := events.ReservationDone(); err != nil {
+		return err
+	}
 	if flagVals.RunTime > 0 {
 		go func() {
 			time.Sleep(flagVals.RunTime)
 			log.Exitf("Ondatra test timed out after %v", flagVals.RunTime)
 		}()
 	}
-
-	runFn()
+	code := runFn()
+	exitCode = &code
 
 	if flagVals.XMLPath != "" {
 		if err := junitxml.StopConverting(); err != nil {
@@ -103,6 +111,11 @@ func releaseOnSignal(ctx context.Context) {
 	if err := testbed.Release(ctx); err != nil {
 		log.Errorf("Error releasing testbed: %v", err)
 	}
+}
+
+// EventListener returns the Ondatra Event Listener API.
+func EventListener() *eventlis.EventListener {
+	return new(eventlis.EventListener)
 }
 
 // Report returns the Ondatra Report API.

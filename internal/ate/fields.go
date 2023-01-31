@@ -134,22 +134,30 @@ func setAddrRangeField(field *ixconfig.TrafficTrafficItemConfigElementStackField
 	if err != nil {
 		return err
 	}
-	stepAddr, err := toAddr(step, t)
-	if err != nil {
-		return fmt.Errorf("could not convert step value %q to address of type %q: %w", step, t, err)
-	}
 
 	if r.GetRandom() {
-		setRandomRange(field, ixconfig.String(r.GetMin()), ixconfig.String(r.GetMax()), ixconfig.String(stepAddr), r.GetCount())
+		setRandomRange(field, ixconfig.String(r.GetMin()), ixconfig.String(r.GetMax()), ixconfig.String(step), r.GetCount())
 	} else if r.GetCount() == 1 {
 		setSingleValue(field, ixconfig.String(r.GetMin()))
 	} else {
-		setIncrement(field, ixconfig.String(r.GetMin()), ixconfig.String(stepAddr), r.GetCount())
+		setIncrement(field, ixconfig.String(r.GetMin()), ixconfig.String(step), r.GetCount())
 	}
 	return nil
 }
 
-func addrRangeToStep(r *opb.AddressRange, t addrType) (*big.Int, error) {
+func addrRangeToStep(r *opb.AddressRange, t addrType) (string, error) {
+	stepInt, err := addrRangeToStepInt(r, t)
+	if err != nil {
+		return "", err
+	}
+	step, err := toAddr(stepInt, t)
+	if err != nil {
+		return "", fmt.Errorf("could not convert step value %v to address of type %q: %w", stepInt, t, err)
+	}
+	return step, nil
+}
+
+func addrRangeToStepInt(r *opb.AddressRange, t addrType) (*big.Int, error) {
 	if r.GetCount() == 0 {
 		return nil, fmt.Errorf("count in range is not set or zero")
 	}

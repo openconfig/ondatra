@@ -27412,6 +27412,138 @@ func (n *System_Logging_RemoteServer_HostPathAny) Config() ygnmi.WildcardQuery[s
 //
 //	Defining module:      "openconfig-system-logging"
 //	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/network-instance"
+//	Path from root:       "/system/logging/remote-servers/remote-server/state/network-instance"
+func (n *System_Logging_RemoteServer_NetworkInstancePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"System_Logging_RemoteServer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/network-instance"
+//	Path from root:       "/system/logging/remote-servers/remote-server/state/network-instance"
+func (n *System_Logging_RemoteServer_NetworkInstancePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Logging_RemoteServer",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/network-instance"
+//	Path from root:       "/system/logging/remote-servers/remote-server/config/network-instance"
+func (n *System_Logging_RemoteServer_NetworkInstancePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_Logging_RemoteServer",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/network-instance"
+//	Path from root:       "/system/logging/remote-servers/remote-server/config/network-instance"
+func (n *System_Logging_RemoteServer_NetworkInstancePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Logging_RemoteServer",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/remote-port"
 //	Path from root:       "/system/logging/remote-servers/remote-server/state/remote-port"
 func (n *System_Logging_RemoteServer_RemotePortPath) State() ygnmi.SingletonQuery[uint16] {
@@ -27672,6 +27804,18 @@ func (n *System_Logging_RemoteServer_SourceAddressPathAny) Config() ygnmi.Wildca
 	)
 }
 
+// System_Logging_RemoteServer_NetworkInstancePath represents the /openconfig-system/system/logging/remote-servers/remote-server/state/network-instance YANG schema element.
+type System_Logging_RemoteServer_NetworkInstancePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_RemoteServer_NetworkInstancePathAny represents the wildcard version of the /openconfig-system/system/logging/remote-servers/remote-server/state/network-instance YANG schema element.
+type System_Logging_RemoteServer_NetworkInstancePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // System_Logging_RemoteServer_RemotePortPath represents the /openconfig-system/system/logging/remote-servers/remote-server/state/remote-port YANG schema element.
 type System_Logging_RemoteServer_RemotePortPath struct {
 	*ygnmi.NodePath
@@ -27733,6 +27877,42 @@ func (n *System_Logging_RemoteServerPathAny) Host() *System_Logging_RemoteServer
 	return &System_Logging_RemoteServer_HostPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "host"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NetworkInstance (leaf): The network instance used to reach the log server.  If no
+// instance is specified, DEFAULT_INSTANCE is used.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/network-instance"
+//	Path from root:       "/system/logging/remote-servers/remote-server/*/network-instance"
+func (n *System_Logging_RemoteServerPath) NetworkInstance() *System_Logging_RemoteServer_NetworkInstancePath {
+	return &System_Logging_RemoteServer_NetworkInstancePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "network-instance"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NetworkInstance (leaf): The network instance used to reach the log server.  If no
+// instance is specified, DEFAULT_INSTANCE is used.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/network-instance"
+//	Path from root:       "/system/logging/remote-servers/remote-server/*/network-instance"
+func (n *System_Logging_RemoteServerPathAny) NetworkInstance() *System_Logging_RemoteServer_NetworkInstancePathAny {
+	return &System_Logging_RemoteServer_NetworkInstancePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "network-instance"},
 			map[string]interface{}{},
 			n,
 		),
@@ -31941,138 +32121,6 @@ func (n *System_Ntp_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
 	)
 }
 
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-system"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/ntp-source-address"
-//	Path from root:       "/system/ntp/state/ntp-source-address"
-func (n *System_Ntp_NtpSourceAddressPath) State() ygnmi.SingletonQuery[string] {
-	return ygnmi.NewLeafSingletonQuery[string](
-		"System_Ntp",
-		true,
-		true,
-		ygnmi.NewNodePath(
-			[]string{"state", "ntp-source-address"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
-			ret := gs.(*oc.System_Ntp).NtpSourceAddress
-			if ret == nil {
-				var zero string
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp) },
-		&ytypes.Schema{
-			Root:       &oc.Root{},
-			SchemaTree: oc.SchemaTree,
-			Unmarshal:  oc.Unmarshal,
-		},
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-system"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/ntp-source-address"
-//	Path from root:       "/system/ntp/state/ntp-source-address"
-func (n *System_Ntp_NtpSourceAddressPathAny) State() ygnmi.WildcardQuery[string] {
-	return ygnmi.NewLeafWildcardQuery[string](
-		"System_Ntp",
-		true,
-		true,
-		ygnmi.NewNodePath(
-			[]string{"state", "ntp-source-address"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
-			ret := gs.(*oc.System_Ntp).NtpSourceAddress
-			if ret == nil {
-				var zero string
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp) },
-		&ytypes.Schema{
-			Root:       &oc.Root{},
-			SchemaTree: oc.SchemaTree,
-			Unmarshal:  oc.Unmarshal,
-		},
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-system"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "config/ntp-source-address"
-//	Path from root:       "/system/ntp/config/ntp-source-address"
-func (n *System_Ntp_NtpSourceAddressPath) Config() ygnmi.ConfigQuery[string] {
-	return ygnmi.NewLeafConfigQuery[string](
-		"System_Ntp",
-		false,
-		true,
-		ygnmi.NewNodePath(
-			[]string{"config", "ntp-source-address"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
-			ret := gs.(*oc.System_Ntp).NtpSourceAddress
-			if ret == nil {
-				var zero string
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp) },
-		&ytypes.Schema{
-			Root:       &oc.Root{},
-			SchemaTree: oc.SchemaTree,
-			Unmarshal:  oc.Unmarshal,
-		},
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-system"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "config/ntp-source-address"
-//	Path from root:       "/system/ntp/config/ntp-source-address"
-func (n *System_Ntp_NtpSourceAddressPathAny) Config() ygnmi.WildcardQuery[string] {
-	return ygnmi.NewLeafWildcardQuery[string](
-		"System_Ntp",
-		false,
-		true,
-		ygnmi.NewNodePath(
-			[]string{"config", "ntp-source-address"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
-			ret := gs.(*oc.System_Ntp).NtpSourceAddress
-			if ret == nil {
-				var zero string
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp) },
-		&ytypes.Schema{
-			Root:       &oc.Root{},
-			SchemaTree: oc.SchemaTree,
-			Unmarshal:  oc.Unmarshal,
-		},
-	)
-}
-
 // System_Ntp_EnableNtpAuthPath represents the /openconfig-system/system/ntp/state/enable-ntp-auth YANG schema element.
 type System_Ntp_EnableNtpAuthPath struct {
 	*ygnmi.NodePath
@@ -32093,18 +32141,6 @@ type System_Ntp_EnabledPath struct {
 
 // System_Ntp_EnabledPathAny represents the wildcard version of the /openconfig-system/system/ntp/state/enabled YANG schema element.
 type System_Ntp_EnabledPathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_Ntp_NtpSourceAddressPath represents the /openconfig-system/system/ntp/state/ntp-source-address YANG schema element.
-type System_Ntp_NtpSourceAddressPath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_Ntp_NtpSourceAddressPathAny represents the wildcard version of the /openconfig-system/system/ntp/state/ntp-source-address YANG schema element.
-type System_Ntp_NtpSourceAddressPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -32296,40 +32332,6 @@ func (n *System_NtpPathAny) NtpKey(KeyId uint16) *System_Ntp_NtpKeyPathAny {
 			map[string]interface{}{"key-id": KeyId},
 			n,
 		),
-	}
-}
-
-// NtpSourceAddress (leaf): Source address to use on outgoing NTP packets
-//
-//	Defining module:      "openconfig-system"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "*/ntp-source-address"
-//	Path from root:       "/system/ntp/*/ntp-source-address"
-func (n *System_NtpPath) NtpSourceAddress() *System_Ntp_NtpSourceAddressPath {
-	return &System_Ntp_NtpSourceAddressPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "ntp-source-address"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-}
-
-// NtpSourceAddress (leaf): Source address to use on outgoing NTP packets
-//
-//	Defining module:      "openconfig-system"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "*/ntp-source-address"
-//	Path from root:       "/system/ntp/*/ntp-source-address"
-func (n *System_NtpPathAny) NtpSourceAddress() *System_Ntp_NtpSourceAddressPathAny {
-	return &System_Ntp_NtpSourceAddressPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "ntp-source-address"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
 	}
 }
 
@@ -33457,6 +33459,138 @@ func (n *System_Ntp_Server_IburstPathAny) Config() ygnmi.WildcardQuery[bool] {
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/network-instance"
+//	Path from root:       "/system/ntp/servers/server/state/network-instance"
+func (n *System_Ntp_Server_NetworkInstancePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"System_Ntp_Server",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/network-instance"
+//	Path from root:       "/system/ntp/servers/server/state/network-instance"
+func (n *System_Ntp_Server_NetworkInstancePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Ntp_Server",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/network-instance"
+//	Path from root:       "/system/ntp/servers/server/config/network-instance"
+func (n *System_Ntp_Server_NetworkInstancePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_Ntp_Server",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/network-instance"
+//	Path from root:       "/system/ntp/servers/server/config/network-instance"
+func (n *System_Ntp_Server_NetworkInstancePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Ntp_Server",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "network-instance"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).NetworkInstance
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/offset"
 //	Path from root:       "/system/ntp/servers/server/state/offset"
 func (n *System_Ntp_Server_OffsetPath) State() ygnmi.SingletonQuery[uint64] {
@@ -33985,6 +34119,138 @@ func (n *System_Ntp_Server_RootDispersionPathAny) State() ygnmi.WildcardQuery[ui
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/source-address"
+//	Path from root:       "/system/ntp/servers/server/state/source-address"
+func (n *System_Ntp_Server_SourceAddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"System_Ntp_Server",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).SourceAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/source-address"
+//	Path from root:       "/system/ntp/servers/server/state/source-address"
+func (n *System_Ntp_Server_SourceAddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Ntp_Server",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "source-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).SourceAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/source-address"
+//	Path from root:       "/system/ntp/servers/server/config/source-address"
+func (n *System_Ntp_Server_SourceAddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"System_Ntp_Server",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).SourceAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/source-address"
+//	Path from root:       "/system/ntp/servers/server/config/source-address"
+func (n *System_Ntp_Server_SourceAddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"System_Ntp_Server",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "source-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Ntp_Server).SourceAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/stratum"
 //	Path from root:       "/system/ntp/servers/server/state/stratum"
 func (n *System_Ntp_Server_StratumPath) State() ygnmi.SingletonQuery[uint8] {
@@ -34203,6 +34469,18 @@ type System_Ntp_Server_IburstPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// System_Ntp_Server_NetworkInstancePath represents the /openconfig-system/system/ntp/servers/server/state/network-instance YANG schema element.
+type System_Ntp_Server_NetworkInstancePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Ntp_Server_NetworkInstancePathAny represents the wildcard version of the /openconfig-system/system/ntp/servers/server/state/network-instance YANG schema element.
+type System_Ntp_Server_NetworkInstancePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // System_Ntp_Server_OffsetPath represents the /openconfig-system/system/ntp/servers/server/state/offset YANG schema element.
 type System_Ntp_Server_OffsetPath struct {
 	*ygnmi.NodePath
@@ -34271,6 +34549,18 @@ type System_Ntp_Server_RootDispersionPath struct {
 
 // System_Ntp_Server_RootDispersionPathAny represents the wildcard version of the /openconfig-system/system/ntp/servers/server/state/root-dispersion YANG schema element.
 type System_Ntp_Server_RootDispersionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Ntp_Server_SourceAddressPath represents the /openconfig-system/system/ntp/servers/server/state/source-address YANG schema element.
+type System_Ntp_Server_SourceAddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Ntp_Server_SourceAddressPathAny represents the wildcard version of the /openconfig-system/system/ntp/servers/server/state/source-address YANG schema element.
+type System_Ntp_Server_SourceAddressPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -34406,6 +34696,40 @@ func (n *System_Ntp_ServerPathAny) Iburst() *System_Ntp_Server_IburstPathAny {
 	return &System_Ntp_Server_IburstPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "iburst"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NetworkInstance (leaf): The network instance used to find this server.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/network-instance"
+//	Path from root:       "/system/ntp/servers/server/*/network-instance"
+func (n *System_Ntp_ServerPath) NetworkInstance() *System_Ntp_Server_NetworkInstancePath {
+	return &System_Ntp_Server_NetworkInstancePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "network-instance"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NetworkInstance (leaf): The network instance used to find this server.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/network-instance"
+//	Path from root:       "/system/ntp/servers/server/*/network-instance"
+func (n *System_Ntp_ServerPathAny) NetworkInstance() *System_Ntp_Server_NetworkInstancePathAny {
+	return &System_Ntp_Server_NetworkInstancePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "network-instance"},
 			map[string]interface{}{},
 			n,
 		),
@@ -34616,6 +34940,40 @@ func (n *System_Ntp_ServerPathAny) RootDispersion() *System_Ntp_Server_RootDispe
 	return &System_Ntp_Server_RootDispersionPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "root-dispersion"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddress (leaf): Source address to use on outgoing NTP packets
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/source-address"
+//	Path from root:       "/system/ntp/servers/server/*/source-address"
+func (n *System_Ntp_ServerPath) SourceAddress() *System_Ntp_Server_SourceAddressPath {
+	return &System_Ntp_Server_SourceAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SourceAddress (leaf): Source address to use on outgoing NTP packets
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/source-address"
+//	Path from root:       "/system/ntp/servers/server/*/source-address"
+func (n *System_Ntp_ServerPathAny) SourceAddress() *System_Ntp_Server_SourceAddressPathAny {
+	return &System_Ntp_Server_SourceAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "source-address"},
 			map[string]interface{}{},
 			n,
 		),

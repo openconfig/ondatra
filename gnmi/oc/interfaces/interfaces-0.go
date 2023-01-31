@@ -26578,6 +26578,270 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny) Config()
 //
 //	Defining module:      "openconfig-if-ip"
 //	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/managed"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/managed"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/managed"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/managed"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/managed"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/managed"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/managed"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/managed"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/other-config"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/other-config"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/other-config"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/other-config"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/other-config"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/other-config"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/other-config"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/other-config"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
 //	Path from parent:     "state/suppress"
 //	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/suppress"
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath) State() ygnmi.SingletonQuery[bool] {
@@ -26718,6 +26982,30 @@ type Interface_RoutedVlan_Ipv6_RouterAdvertisement_LifetimePathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/managed YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/managed YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/other-config YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/other-config YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/suppress YANG schema element.
 type Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath struct {
 	*ygnmi.NodePath
@@ -26814,6 +27102,182 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Lifetime() *Inter
 	}
 }
 
+// Managed (leaf): When set to true, the managed address configuration (M) flag is set in
+// the advertised router advertisement. The M flag indicates that there are
+// addresses available via DHCPv6.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/managed"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/managed"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Managed() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "managed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Managed (leaf): When set to true, the managed address configuration (M) flag is set in
+// the advertised router advertisement. The M flag indicates that there are
+// addresses available via DHCPv6.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/managed"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/managed"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Managed() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "managed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OtherConfig (leaf): When set to true, the other configuration (O) flag is set in the
+// advertised router advertisement. The O flag indicates that there is
+// other configuration available via DHCPv6 (e.g., DNS servers).
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/other-config"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/other-config"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) OtherConfig() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "other-config"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OtherConfig (leaf): When set to true, the other configuration (O) flag is set in the
+// advertised router advertisement. The O flag indicates that there is
+// other configuration available via DHCPv6 (e.g., DNS servers).
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/other-config"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/other-config"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) OtherConfig() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "other-config"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixAny (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) PrefixAny() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) PrefixAny() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix"
+//
+//	Prefix: string
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Prefix(Prefix string) *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix"
+//
+//	Prefix: string
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Prefix(Prefix string) *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
 // Suppress (leaf): When set to true, router advertisement neighbor discovery
 // messages are not transmitted on this interface.
 //
@@ -26843,6 +27307,1162 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Suppress() *Inter
 	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "suppress"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) Config() ygnmi.ConfigQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-advertisement"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-advertisement"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-advertisement"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/disable-advertisement"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-advertisement"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/disable-advertisement"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/disable-autoconfiguration"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/disable-autoconfiguration"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable-onlink"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable-onlink"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable-onlink"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/enable-onlink"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable-onlink"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/enable-onlink"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/preferred-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewLeafConfigQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/preferred-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/valid-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/valid-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/valid-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/valid-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewLeafConfigQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/valid-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/config/valid-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/prefix YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/prefix YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// DisableAdvertisement (leaf): When set to true, the prefix is not advertised within
+// router advertisement messages that are sent as a result of
+// router soliciation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-advertisement"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/disable-advertisement"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) DisableAdvertisement() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-advertisement"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DisableAdvertisement (leaf): When set to true, the prefix is not advertised within
+// router advertisement messages that are sent as a result of
+// router soliciation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-advertisement"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/disable-advertisement"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) DisableAdvertisement() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-advertisement"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DisableAutoconfiguration (leaf): When set to true, the prefix is marked as not to be used for stateless
+// address configuration. This is achieved by setting the autonomous address
+// configuration bit for the prefix.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/disable-autoconfiguration"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) DisableAutoconfiguration() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-autoconfiguration"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DisableAutoconfiguration (leaf): When set to true, the prefix is marked as not to be used for stateless
+// address configuration. This is achieved by setting the autonomous address
+// configuration bit for the prefix.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/disable-autoconfiguration"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) DisableAutoconfiguration() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-autoconfiguration"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// EnableOnlink (leaf): When set to true, the prefix is marked as being on link by setting the
+// L-bit for the prefix within a router advertisement.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable-onlink"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/enable-onlink"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) EnableOnlink() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-onlink"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// EnableOnlink (leaf): When set to true, the prefix is marked as being on link by setting the
+// L-bit for the prefix within a router advertisement.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable-onlink"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/enable-onlink"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) EnableOnlink() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-onlink"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PreferredLifetime (leaf): The length of time that the address within the prefix remains
+// in the preferred state, i.e., unrestricted use is allowed by
+// upper-layer protocols. See RFC4862 for a complete definition
+// of preferred behaviours.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/preferred-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) PreferredLifetime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "preferred-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PreferredLifetime (leaf): The length of time that the address within the prefix remains
+// in the preferred state, i.e., unrestricted use is allowed by
+// upper-layer protocols. See RFC4862 for a complete definition
+// of preferred behaviours.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/preferred-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) PreferredLifetime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "preferred-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv6 prefix to be advertised within the router advertisement
+// message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) Prefix() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv6 prefix to be advertised within the router advertisement
+// message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/prefix"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) Prefix() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValidLifetime (leaf): The length of time that the prefix is valid relative to the time
+// the packet was sent.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/valid-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/valid-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPath) ValidLifetime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "valid-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValidLifetime (leaf): The length of time that the prefix is valid relative to the time
+// the packet was sent.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/valid-lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/prefixes/prefix/*/valid-lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_PrefixPathAny) ValidLifetime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "valid-lifetime"},
 			map[string]interface{}{},
 			n,
 		),
@@ -45161,6 +46781,270 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny) Config
 //
 //	Defining module:      "openconfig-if-ip"
 //	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/managed"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/managed"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/managed"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/managed"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/managed"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/managed"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/managed"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/managed"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "managed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Managed
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/other-config"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/other-config"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/other-config"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/other-config"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/other-config"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/other-config"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/other-config"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/other-config"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "other-config"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).OtherConfig
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
 //	Path from parent:     "state/suppress"
 //	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/suppress"
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath) State() ygnmi.SingletonQuery[bool] {
@@ -45301,6 +47185,30 @@ type Interface_Subinterface_Ipv6_RouterAdvertisement_LifetimePathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/managed YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/managed YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/other-config YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/other-config YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/suppress YANG schema element.
 type Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath struct {
 	*ygnmi.NodePath
@@ -45397,6 +47305,182 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Lifetime() *Int
 	}
 }
 
+// Managed (leaf): When set to true, the managed address configuration (M) flag is set in
+// the advertised router advertisement. The M flag indicates that there are
+// addresses available via DHCPv6.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/managed"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/managed"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Managed() *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "managed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Managed (leaf): When set to true, the managed address configuration (M) flag is set in
+// the advertised router advertisement. The M flag indicates that there are
+// addresses available via DHCPv6.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/managed"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/managed"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Managed() *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "managed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OtherConfig (leaf): When set to true, the other configuration (O) flag is set in the
+// advertised router advertisement. The O flag indicates that there is
+// other configuration available via DHCPv6 (e.g., DNS servers).
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/other-config"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/other-config"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) OtherConfig() *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "other-config"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OtherConfig (leaf): When set to true, the other configuration (O) flag is set in the
+// advertised router advertisement. The O flag indicates that there is
+// other configuration available via DHCPv6 (e.g., DNS servers).
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/other-config"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/other-config"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) OtherConfig() *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "other-config"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PrefixAny (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) PrefixAny() *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// PrefixAny (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) PrefixAny() *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+}
+
+// Prefix (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix"
+//
+//	Prefix: string
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Prefix(Prefix string) *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
+// Prefix (list): List of prefixes that are to be included in the IPv6
+// router-advertisement messages for the interface. The list
+// is keyed by the IPv6 prefix in CIDR representation.
+//
+// Prefixes that are listed are those that are to be
+// advertised in router advertisement messages. Where there
+// are IPv6 global addresses configured on an interface and
+// the prefix is not listed in the prefix list, it MUST NOT
+// be advertised in the router advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "prefixes/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix"
+//
+//	Prefix: string
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Prefix(Prefix string) *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"prefixes", "prefix"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+}
+
 // Suppress (leaf): When set to true, router advertisement neighbor discovery
 // messages are not transmitted on this interface.
 //
@@ -45426,6 +47510,1162 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Suppress() *Int
 	return &Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "suppress"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) Config() ygnmi.ConfigQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		n,
+		nil,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		n,
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-advertisement"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-advertisement"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-advertisement"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-advertisement"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/disable-advertisement"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-advertisement"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/disable-advertisement"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-advertisement"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAdvertisement
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/disable-autoconfiguration"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/disable-autoconfiguration"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "disable-autoconfiguration"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).DisableAutoconfiguration
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable-onlink"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable-onlink"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable-onlink"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/enable-onlink"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewLeafConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable-onlink"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/enable-onlink"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-onlink"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).EnableOnlink
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewLeafConfigQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "preferred-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).PreferredLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/valid-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewLeafSingletonQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/valid-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/valid-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewLeafConfigQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/valid-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/config/valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewLeafWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "valid-lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix).ValidLifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix) },
+		&ytypes.Schema{
+			Root:       &oc.Root{},
+			SchemaTree: oc.SchemaTree,
+			Unmarshal:  oc.Unmarshal,
+		},
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/disable-autoconfiguration YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/enable-onlink YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/preferred-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/prefix YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/prefix YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/state/valid-lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// DisableAdvertisement (leaf): When set to true, the prefix is not advertised within
+// router advertisement messages that are sent as a result of
+// router soliciation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-advertisement"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/disable-advertisement"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) DisableAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-advertisement"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DisableAdvertisement (leaf): When set to true, the prefix is not advertised within
+// router advertisement messages that are sent as a result of
+// router soliciation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-advertisement"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/disable-advertisement"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) DisableAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAdvertisementPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-advertisement"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DisableAutoconfiguration (leaf): When set to true, the prefix is marked as not to be used for stateless
+// address configuration. This is achieved by setting the autonomous address
+// configuration bit for the prefix.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/disable-autoconfiguration"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) DisableAutoconfiguration() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-autoconfiguration"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DisableAutoconfiguration (leaf): When set to true, the prefix is marked as not to be used for stateless
+// address configuration. This is achieved by setting the autonomous address
+// configuration bit for the prefix.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/disable-autoconfiguration"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/disable-autoconfiguration"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) DisableAutoconfiguration() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_DisableAutoconfigurationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "disable-autoconfiguration"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// EnableOnlink (leaf): When set to true, the prefix is marked as being on link by setting the
+// L-bit for the prefix within a router advertisement.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable-onlink"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/enable-onlink"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) EnableOnlink() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-onlink"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// EnableOnlink (leaf): When set to true, the prefix is marked as being on link by setting the
+// L-bit for the prefix within a router advertisement.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable-onlink"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/enable-onlink"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) EnableOnlink() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_EnableOnlinkPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-onlink"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PreferredLifetime (leaf): The length of time that the address within the prefix remains
+// in the preferred state, i.e., unrestricted use is allowed by
+// upper-layer protocols. See RFC4862 for a complete definition
+// of preferred behaviours.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) PreferredLifetime() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "preferred-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PreferredLifetime (leaf): The length of time that the address within the prefix remains
+// in the preferred state, i.e., unrestricted use is allowed by
+// upper-layer protocols. See RFC4862 for a complete definition
+// of preferred behaviours.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/preferred-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/preferred-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) PreferredLifetime() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PreferredLifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "preferred-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv6 prefix to be advertised within the router advertisement
+// message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) Prefix() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Prefix (leaf): IPv6 prefix to be advertised within the router advertisement
+// message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/prefix"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) Prefix() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValidLifetime (leaf): The length of time that the prefix is valid relative to the time
+// the packet was sent.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/valid-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPath) ValidLifetime() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "valid-lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValidLifetime (leaf): The length of time that the prefix is valid relative to the time
+// the packet was sent.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/valid-lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/prefixes/prefix/*/valid-lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_PrefixPathAny) ValidLifetime() *Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix_ValidLifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "valid-lifetime"},
 			map[string]interface{}{},
 			n,
 		),

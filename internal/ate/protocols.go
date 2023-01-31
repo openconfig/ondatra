@@ -1765,7 +1765,17 @@ func (ix *ixATE) addDHCPProtocols(ifc *opb.InterfaceConfig) error {
 	}
 
 	if dhcp6s := ifc.GetDhcpv6Server(); dhcp6s != nil {
-		intf.ipv6.Dhcpv6server = []*ixconfig.TopologyDhcpv6server{{}}
+		step, err := addrRangeToStep(dhcp6s.LeaseAddrs, ipv6AddrType)
+		if err != nil {
+			return err
+		}
+		intf.ipv6.Dhcpv6server = []*ixconfig.TopologyDhcpv6server{{
+			Dhcp6ServerSessions: &ixconfig.TopologyDhcp6ServerSessions{
+				IpAddress:          ixconfig.MultivalueStr(dhcp6s.LeaseAddrs.GetMin()),
+				IpAddressIncrement: ixconfig.MultivalueStr(step),
+				PoolSize:           ixconfig.MultivalueUint32(dhcp6s.LeaseAddrs.GetCount()),
+			},
+		}}
 	}
 
 	return nil

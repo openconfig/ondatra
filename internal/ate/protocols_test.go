@@ -363,6 +363,37 @@ func TestAddIpProtocols(t *testing.T) {
 		wantIpv4Name: fmt.Sprintf("IPv4 on %s", ifName),
 		wantIpv6Name: fmt.Sprintf("IPv6 on %s", ifName),
 	}, {
+		desc: "Valid config - unspecified gateway",
+		ifcfg: &opb.InterfaceConfig{
+			Name: ifName,
+			Ipv4: &opb.IpConfig{
+				AddressCidr:    "192.168.1.1/30",
+				DefaultGateway: "0.0.0.0",
+			},
+			Ipv6: &opb.IpConfig{
+				AddressCidr:    "2001::4860:193:168:1:1/126",
+				DefaultGateway: "::",
+			},
+		},
+		wantCfg: &ixconfig.TopologyEthernet{
+			Ipv4: []*ixconfig.TopologyIpv4{{
+				Name:           ixconfig.String(fmt.Sprintf("IPv4 on %s", ifName)),
+				Address:        ixconfig.MultivalueStr("192.168.1.1"),
+				GatewayIp:      ixconfig.MultivalueStr("0.0.0.0"),
+				Prefix:         ixconfig.MultivalueUint32(30),
+				ResolveGateway: ixconfig.MultivalueTrue(),
+			}},
+			Ipv6: []*ixconfig.TopologyIpv6{{
+				Name:           ixconfig.String(fmt.Sprintf("IPv6 on %s", ifName)),
+				Address:        ixconfig.MultivalueStr("2001::4860:193:168:1:1"),
+				GatewayIp:      ixconfig.MultivalueStr("::"),
+				Prefix:         ixconfig.MultivalueUint32(126),
+				ResolveGateway: ixconfig.MultivalueTrue(),
+			}},
+		},
+		wantIpv4Name: fmt.Sprintf("IPv4 on %s", ifName),
+		wantIpv6Name: fmt.Sprintf("IPv6 on %s", ifName),
+	}, {
 		desc: "Valid config on Macsec",
 		ifcfg: &opb.InterfaceConfig{
 			Name: ifName,
@@ -2665,10 +2696,22 @@ func TestAddDHCPProtocols(t *testing.T) {
 	}, {
 		desc: "dhcp v6 server",
 		intf: &opb.InterfaceConfig{
-			Name:         intfName,
-			Dhcpv6Server: &opb.DhcpV6Server{},
+			Name: intfName,
+			Dhcpv6Server: &opb.DhcpV6Server{
+				LeaseAddrs: &opb.AddressRange{
+					Min:   "::10",
+					Max:   "::80",
+					Count: 5,
+				},
+			},
 		},
-		wantV6Server: &ixconfig.TopologyDhcpv6server{},
+		wantV6Server: &ixconfig.TopologyDhcpv6server{
+			Dhcp6ServerSessions: &ixconfig.TopologyDhcp6ServerSessions{
+				IpAddress:          ixconfig.MultivalueStr("::10"),
+				IpAddressIncrement: ixconfig.MultivalueStr("::16"),
+				PoolSize:           ixconfig.MultivalueUint32(5),
+			},
+		},
 	}}
 
 	for _, test := range tests {

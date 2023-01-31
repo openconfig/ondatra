@@ -39,3 +39,13 @@ type DHCPV6Client struct {
 type DHCPV6Server struct {
 	pb *opb.DhcpV6Server
 }
+
+// LeaseAddressRange returns the range of addresses available for lease.
+// By default, the range will be nonrandom values in the interval ["::1", "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"].
+// The count of values in the range is not set by default; the user must set it explicitly.
+func (s *DHCPV6Server) LeaseAddressRange() *AddressRange {
+	if s.pb.LeaseAddrs == nil {
+		s.pb.LeaseAddrs = &opb.AddressRange{Min: "::1", Max: "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"}
+	}
+	return NewAddressRange(s.pb.LeaseAddrs)
+}

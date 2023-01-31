@@ -115,6 +115,7 @@ func Lookup[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.SingletonQuery[T]) *y
 // Note: This is a workaround for Go's type inference not working for this use case and may be removed in a subsequent release.
 // Note: This is equivalent to calling Lookup with a ConfigQuery and providing a fully-qualified type parameter.
 func LookupConfig[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.ConfigQuery[T]) *ygnmi.Value[T] {
+	t.Helper()
 	return Lookup[T](t, dev, q)
 }
 
@@ -137,6 +138,7 @@ func Get[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.SingletonQuery[T]) T {
 // Note: This is a workaround for Go's type inference not working for this use case and may be removed in a subsequent release.
 // Note: This is equivalent to calling Get with a ConfigQuery and providing a fully-qualified type parameter.
 func GetConfig[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.ConfigQuery[T]) T {
+	t.Helper()
 	return Get[T](t, dev, q)
 }
 
@@ -193,6 +195,7 @@ func (w *Watcher[T]) Cancel() {
 // to complete. It returns the last observed value and a boolean that indicates whether
 // that value satisfies the predicate.
 func Watch[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.SingletonQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
+	t.Helper()
 	c := newClient(t, dev, "Watch")
 	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	w := ygnmi.Watch(ctx, c, q, func(v *ygnmi.Value[T]) error {
@@ -256,6 +259,7 @@ func (c *Collector[T]) Await(t testing.TB) []*ygnmi.Value[T] {
 // Collect starts an asynchronous collection of the values at the query with a STREAM subscription.
 // Calling Await on the return Collection waits until the timeout is reached and returns the collected values.
 func Collect[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.SingletonQuery[T], timeout time.Duration) *Collector[T] {
+	t.Helper()
 	c := newClient(t, dev, "Collect")
 	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	collect := &Collector[T]{
@@ -299,6 +303,7 @@ func GetAll[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.WildcardQuery[T]) []T
 // to complete. It returns the last observed value and a boolean that indicates whether
 // that value satisfies the predicate.
 func WatchAll[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.WildcardQuery[T], timeout time.Duration, pred func(*ygnmi.Value[T]) bool) *Watcher[T] {
+	t.Helper()
 	c := newClient(t, dev, "WatchAll")
 	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	w := ygnmi.WatchAll(ctx, c, q, func(v *ygnmi.Value[T]) error {
@@ -318,6 +323,7 @@ func WatchAll[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.WildcardQuery[T], t
 // CollectAll starts an asynchronous collection of the values at the query with a STREAM subscription.
 // Calling Await on the return Collection waits until the timeout is reached and returns the collected values.
 func CollectAll[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.WildcardQuery[T], timeout time.Duration) *Collector[T] {
+	t.Helper()
 	c := newClient(t, dev, "CollectAll")
 	ctx, cancel := context.WithTimeout(createContext(dev), timeout)
 	collect := &Collector[T]{

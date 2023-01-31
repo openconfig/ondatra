@@ -97,58 +97,55 @@ func TestBGPRIBFromIxia(t *testing.T) {
 			}`,
 		},
 		wantErr: "duplicate key",
-		// TODO(greg-dennis): Restore when as-segments are represented as keyed lists:
-		// https://github.com/openconfig/public/pull/750
-	}, /* {
-			desc: "invalid AS path",
-			getRsps: map[string]string{
-				bgp4ID + "/learnedInfo/1/table/1": `{
+	}, {
+		desc: "invalid AS path",
+		getRsps: map[string]string{
+			bgp4ID + "/learnedInfo/1/table/1": `{
 					"columns": ["Origin", "AS Path"],
 					"values": [["EGP", "foo"]]
 				}`,
-			},
-			wantErr: "invalid AS path",
-		}, {
-			desc: "invalid AS segment",
-			getRsps: map[string]string{
-				bgp4ID + "/learnedInfo/1/table/1": `{
+		},
+		wantErr: "invalid AS path",
+	}, {
+		desc: "invalid AS segment",
+		getRsps: map[string]string{
+			bgp4ID + "/learnedInfo/1/table/1": `{
 					"columns": ["Origin", "AS Path"],
 					"values": [["EGP", "<foo bar>"]]
 				}`,
-			},
-			wantErr: "invalid AS segment",
-		}, */{
-			desc: "no data",
-			want: &oc.NetworkInstance{
-				Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
-					oc.NetworkInstance_Protocol_Key{
-						Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
-						Name:       "0",
-					}: {
-						Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
-						Name:       ygot.String("0"),
-						Bgp: &oc.NetworkInstance_Protocol_Bgp{
-							Rib: &oc.NetworkInstance_Protocol_Bgp_Rib{
-								AfiSafi: map[oc.E_BgpTypes_AFI_SAFI_TYPE]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
-									oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
-										AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
-										Ipv4Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
-											Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
-												"1.2.3.4": {
-													NeighborAddress: ygot.String("1.2.3.4"),
-													AdjRibInPre:     &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{},
-												},
+		},
+		wantErr: "invalid AS segment",
+	}, {
+		desc: "no data",
+		want: &oc.NetworkInstance{
+			Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
+				oc.NetworkInstance_Protocol_Key{
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+					Name:       "0",
+				}: {
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+					Name:       ygot.String("0"),
+					Bgp: &oc.NetworkInstance_Protocol_Bgp{
+						Rib: &oc.NetworkInstance_Protocol_Bgp_Rib{
+							AfiSafi: map[oc.E_BgpTypes_AFI_SAFI_TYPE]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
+									Ipv4Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
+											"1.2.3.4": {
+												NeighborAddress: ygot.String("1.2.3.4"),
+												AdjRibInPre:     &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{},
 											},
 										},
 									},
-									oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
-										AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
-										Ipv6Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
-											Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
-												"::1": {
-													NeighborAddress: ygot.String("::1"),
-													AdjRibInPre:     &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{},
-												},
+								},
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
+									Ipv6Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
+											"::1": {
+												NeighborAddress: ygot.String("::1"),
+												AdjRibInPre:     &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{},
 											},
 										},
 									},
@@ -158,10 +155,11 @@ func TestBGPRIBFromIxia(t *testing.T) {
 					},
 				},
 			},
-		}, {
-			desc: "full data",
-			getRsps: map[string]string{
-				bgp4ID + "/learnedInfo/1/table/1": `{
+		},
+	}, {
+		desc: "full data",
+		getRsps: map[string]string{
+			bgp4ID + "/learnedInfo/1/table/1": `{
 				"id": 1,
 				"columns": ["IPv4 Prefix ", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "AS Path"],
 				"values": [
@@ -169,7 +167,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 					["127.0.0.3", "24", "2", "127.0.0.4", "EGP",    "",     "",    "",                             "",              ""]
 				]
 			}`,
-				bgp6ID + "/learnedInfo/1/table/1": `{
+			bgp6ID + "/learnedInfo/1/table/1": `{
 				"id": 2,
 				"columns": ["IPv6 Prefix", "Prefix Length", "Path ID", "IPv6 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "AS Path"],
 				"values": [
@@ -177,64 +175,37 @@ func TestBGPRIBFromIxia(t *testing.T) {
 					["::3", "26", "4", "::4",        "IGP",   "",     "",    "",                              "",              ""]
 				]
 			}`,
-			},
-			want: &oc.NetworkInstance{
-				Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
-					oc.NetworkInstance_Protocol_Key{
-						Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
-						Name:       "0",
-					}: {
-						Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
-						Name:       ygot.String("0"),
-						Bgp: &oc.NetworkInstance_Protocol_Bgp{
-							Rib: &oc.NetworkInstance_Protocol_Bgp_Rib{
-								AfiSafi: map[oc.E_BgpTypes_AFI_SAFI_TYPE]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
-									oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
-										AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
-										Ipv4Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
-											Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
-												"1.2.3.4": {
-													NeighborAddress: ygot.String("1.2.3.4"),
-													AdjRibInPre: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{
-														Route: map[oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route_Key]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
-															{Prefix: "127.0.0.1/30", PathId: 1}: {
-																AttrIndex:      ygot.Uint64(0),
-																CommunityIndex: ygot.Uint64(0),
-																PathId:         ygot.Uint32(1),
-																Prefix:         ygot.String("127.0.0.1/30"),
-															},
-															{Prefix: "127.0.0.3/24", PathId: 2}: {
-																AttrIndex:      ygot.Uint64(1),
-																CommunityIndex: ygot.Uint64(1),
-																PathId:         ygot.Uint32(2),
-																Prefix:         ygot.String("127.0.0.3/24"),
-															},
+		},
+		want: &oc.NetworkInstance{
+			Protocol: map[oc.NetworkInstance_Protocol_Key]*oc.NetworkInstance_Protocol{
+				oc.NetworkInstance_Protocol_Key{
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+					Name:       "0",
+				}: {
+					Identifier: oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP,
+					Name:       ygot.String("0"),
+					Bgp: &oc.NetworkInstance_Protocol_Bgp{
+						Rib: &oc.NetworkInstance_Protocol_Bgp_Rib{
+							AfiSafi: map[oc.E_BgpTypes_AFI_SAFI_TYPE]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi{
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST,
+									Ipv4Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor{
+											"1.2.3.4": {
+												NeighborAddress: ygot.String("1.2.3.4"),
+												AdjRibInPre: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre{
+													Route: map[oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route_Key]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
+														{Prefix: "127.0.0.1/30", PathId: 1}: {
+															AttrIndex:      ygot.Uint64(0),
+															CommunityIndex: ygot.Uint64(0),
+															PathId:         ygot.Uint32(1),
+															Prefix:         ygot.String("127.0.0.1/30"),
 														},
-													},
-												},
-											},
-										},
-									},
-									oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
-										AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
-										Ipv6Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
-											Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
-												"::1": {
-													NeighborAddress: ygot.String("::1"),
-													AdjRibInPre: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{
-														Route: map[oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route_Key]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
-															{Prefix: "::1/28", PathId: 3}: {
-																AttrIndex:      ygot.Uint64(2),
-																CommunityIndex: ygot.Uint64(2),
-																PathId:         ygot.Uint32(3),
-																Prefix:         ygot.String("::1/28"),
-															},
-															{Prefix: "::3/26", PathId: 4}: {
-																AttrIndex:      ygot.Uint64(3),
-																CommunityIndex: ygot.Uint64(3),
-																PathId:         ygot.Uint32(4),
-																Prefix:         ygot.String("::3/26"),
-															},
+														{Prefix: "127.0.0.3/24", PathId: 2}: {
+															AttrIndex:      ygot.Uint64(1),
+															CommunityIndex: ygot.Uint64(1),
+															PathId:         ygot.Uint32(2),
+															Prefix:         ygot.String("127.0.0.3/24"),
 														},
 													},
 												},
@@ -242,80 +213,103 @@ func TestBGPRIBFromIxia(t *testing.T) {
 										},
 									},
 								},
-								AttrSet: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
-									0: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
-										Aigp:      ygot.Uint64(200),
-										Index:     ygot.Uint64(0),
-										LocalPref: ygot.Uint32(1000),
-										Med:       ygot.Uint32(100),
-										NextHop:   ygot.String("127.0.0.2"),
-										Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
-										/*
-											AsSegment: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
-												Member: []uint32{65532, 65533},
-												Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
-											}},
-										*/
-									},
-									1: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
-										Aigp:      ygot.Uint64(0),
-										Index:     ygot.Uint64(1),
-										LocalPref: ygot.Uint32(0),
-										Med:       ygot.Uint32(0),
-										NextHop:   ygot.String("127.0.0.4"),
-										Origin:    oc.RibBgp_BgpOriginAttrType_EGP,
-									},
-									2: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
-										Aigp:      ygot.Uint64(200),
-										Index:     ygot.Uint64(2),
-										LocalPref: ygot.Uint32(1000),
-										Med:       ygot.Uint32(100),
-										NextHop:   ygot.String("::2"),
-										Origin:    oc.RibBgp_BgpOriginAttrType_INCOMPLETE,
-										/*
-											AsSegment: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
-												Member: []uint32{65534, 65535},
-												Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
-											}},
-										*/
-									},
-									3: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
-										Aigp:      ygot.Uint64(0),
-										Index:     ygot.Uint64(3),
-										LocalPref: ygot.Uint32(0),
-										Med:       ygot.Uint32(0),
-										NextHop:   ygot.String("::4"),
-										Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
+								oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST: {
+									AfiSafiName: oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST,
+									Ipv6Unicast: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast{
+										Neighbor: map[string]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor{
+											"::1": {
+												NeighborAddress: ygot.String("::1"),
+												AdjRibInPre: &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre{
+													Route: map[oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route_Key]*oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
+														{Prefix: "::1/28", PathId: 3}: {
+															AttrIndex:      ygot.Uint64(2),
+															CommunityIndex: ygot.Uint64(2),
+															PathId:         ygot.Uint32(3),
+															Prefix:         ygot.String("::1/28"),
+														},
+														{Prefix: "::3/26", PathId: 4}: {
+															AttrIndex:      ygot.Uint64(3),
+															CommunityIndex: ygot.Uint64(3),
+															PathId:         ygot.Uint32(4),
+															Prefix:         ygot.String("::3/26"),
+														},
+													},
+												},
+											},
+										},
 									},
 								},
-								Community: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_Community{
-									0: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
-										Index: ygot.Uint64(0),
-										Community: []oc.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
-											oc.UnionString("65532 : 10200"),
-											oc.UnionString("65533 : 10100"),
-										},
+							},
+							AttrSet: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+								0: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+									Aigp:      ygot.Uint64(200),
+									Index:     ygot.Uint64(0),
+									LocalPref: ygot.Uint32(1000),
+									Med:       ygot.Uint32(100),
+									NextHop:   ygot.String("127.0.0.2"),
+									Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
+									AsSegment: map[uint32]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{0: {
+										Member: []uint32{65532, 65533},
+										Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
+									}},
+								},
+								1: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+									Aigp:      ygot.Uint64(0),
+									Index:     ygot.Uint64(1),
+									LocalPref: ygot.Uint32(0),
+									Med:       ygot.Uint32(0),
+									NextHop:   ygot.String("127.0.0.4"),
+									Origin:    oc.RibBgp_BgpOriginAttrType_EGP,
+								},
+								2: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+									Aigp:      ygot.Uint64(200),
+									Index:     ygot.Uint64(2),
+									LocalPref: ygot.Uint32(1000),
+									Med:       ygot.Uint32(100),
+									NextHop:   ygot.String("::2"),
+									Origin:    oc.RibBgp_BgpOriginAttrType_INCOMPLETE,
+									AsSegment: map[uint32]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{0: {
+										Member: []uint32{65534, 65535},
+										Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
+									}},
+								},
+								3: &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet{
+									Aigp:      ygot.Uint64(0),
+									Index:     ygot.Uint64(3),
+									LocalPref: ygot.Uint32(0),
+									Med:       ygot.Uint32(0),
+									NextHop:   ygot.String("::4"),
+									Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
+								},
+							},
+							Community: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+								0: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+									Index: ygot.Uint64(0),
+									Community: []oc.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
+										oc.UnionString("65532 : 10200"),
+										oc.UnionString("65533 : 10100"),
 									},
-									1: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
-										Index: ygot.Uint64(1),
+								},
+								1: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+									Index: ygot.Uint64(1),
+								},
+								2: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+									Index: ygot.Uint64(2),
+									Community: []oc.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
+										oc.UnionString("65534 : 10400"),
+										oc.UnionString("65535 : 10300"),
 									},
-									2: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
-										Index: ygot.Uint64(2),
-										Community: []oc.NetworkInstance_Protocol_Bgp_Rib_Community_Community_Union{
-											oc.UnionString("65534 : 10400"),
-											oc.UnionString("65535 : 10300"),
-										},
-									},
-									3: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
-										Index: ygot.Uint64(3),
-									},
+								},
+								3: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+									Index: ygot.Uint64(3),
 								},
 							},
 						},
 					},
 				},
 			},
-		}}
+		},
+	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			getRsps := make(map[string][]string)
