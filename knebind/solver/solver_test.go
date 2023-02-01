@@ -150,6 +150,9 @@ func TestSolve(t *testing.T) {
 		B: "ate:port1",
 	}
 
+	wantDUTServices := map[string]*tpb.Service{
+		"gnmi": &tpb.Service{Name: "gnmi"},
+	}
 	wantDUT1 := &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Name:            "node1",
@@ -160,10 +163,9 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "Ethernet1"},
 				"port2": {Name: "Ethernet2"},
 			},
+			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 		}},
-		Services: map[string]*tpb.Service{
-			"gnmi": &tpb.Service{Name: "gnmi"},
-		},
+		Services:   wantDUTServices,
 		NodeVendor: tpb.Vendor_ARISTA,
 	}
 	wantDUT2 := &ServiceDUT{
@@ -174,10 +176,9 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "eth1"},
 				"port2": {Name: "eth2"},
 			},
+			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 		}},
-		Services: map[string]*tpb.Service{
-			"gnmi": &tpb.Service{Name: "gnmi"},
-		},
+		Services:   wantDUTServices,
 		NodeVendor: tpb.Vendor_CISCO,
 	}
 	wantDUT3 := &ServiceDUT{
@@ -189,12 +190,12 @@ func TestSolve(t *testing.T) {
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 			},
+			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 		}},
-		Services: map[string]*tpb.Service{
-			"gnmi": &tpb.Service{Name: "gnmi"},
-		},
+		Services:   wantDUTServices,
 		NodeVendor: tpb.Vendor_JUNIPER,
 	}
+	wantATEServices := make(map[string]*tpb.Service)
 	wantATE := &ServiceATE{
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
 			Name:   "node4",
@@ -202,8 +203,9 @@ func TestSolve(t *testing.T) {
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 			},
+			CustomData: map[string]any{KNEServiceMapKey: wantATEServices},
 		}},
-		Services:   make(map[string]*tpb.Service),
+		Services:   wantATEServices,
 		NodeVendor: tpb.Vendor_KEYSIGHT,
 	}
 

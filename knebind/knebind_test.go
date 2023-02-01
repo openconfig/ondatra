@@ -97,6 +97,8 @@ func TestReserve(t *testing.T) {
 		}},
 	}
 
+	wantDUTServices := map[string]*tpb.Service{"gnmi": &tpb.Service{Name: "gnmi"}}
+	wantATEServices := make(map[string]*tpb.Service)
 	wantRes := &binding.Reservation{
 		DUTs: map[string]binding.DUT{
 			"dut": &kneDUT{
@@ -109,10 +111,9 @@ func TestReserve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "Ethernet1"},
 						},
+						CustomData: map[string]any{solver.KNEServiceMapKey: wantDUTServices},
 					}},
-					Services: map[string]*tpb.Service{
-						"gnmi": &tpb.Service{Name: "gnmi"},
-					},
+					Services:   wantDUTServices,
 					NodeVendor: tpb.Vendor_ARISTA,
 				},
 			},
@@ -126,8 +127,9 @@ func TestReserve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "eth1"},
 						},
+						CustomData: map[string]any{solver.KNEServiceMapKey: wantATEServices},
 					}},
-					Services:   make(map[string]*tpb.Service),
+					Services:   wantATEServices,
 					NodeVendor: tpb.Vendor_KEYSIGHT,
 				},
 			},

@@ -32,6 +32,9 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+// KNEServiceMapKey is the key to look up the service map in the custom data of a ServiceDUT.
+const KNEServiceMapKey = "$KEY_SERVICE_MAP"
+
 var (
 	ateVendors = map[tpb.Vendor]bool{
 		tpb.Vendor_KEYSIGHT: true,
@@ -564,19 +567,20 @@ func (a *assign) resolveDevice(dev *opb.Device) (*deviceResolution, error) {
 	if !ok {
 		return nil, fmt.Errorf("no known device vendor for node %q (vendor %v)", node.GetName(), node.GetVendor())
 	}
+	sm := map[string]*tpb.Service{}
+	for _, s := range node.GetServices() {
+		sm[s.GetName()] = s
+	}
 	dims := &binding.Dims{
 		Name:            node.GetName(),
 		Vendor:          vendor,
 		HardwareModel:   node.GetModel(),
 		SoftwareVersion: node.GetOs(),
 		Ports:           make(map[string]*binding.Port),
+		CustomData:      map[string]any{KNEServiceMapKey: sm},
 	}
 	for _, p := range dev.GetPorts() {
 		dims.Ports[p.GetId()] = &binding.Port{Name: a.port2Intf[p].vendorName}
-	}
-	sm := map[string]*tpb.Service{}
-	for _, s := range node.GetServices() {
-		sm[s.GetName()] = s
 	}
 	return &deviceResolution{
 		dims:       dims,

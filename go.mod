@@ -11,12 +11,12 @@ require (
 	github.com/openconfig/gnoi v0.0.0-20221010125524-c3391aacaa1b
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.2.0
-	github.com/openconfig/gribi v0.1.1-0.20220126144445-1634932f9fd8
+	github.com/openconfig/gribi v0.1.1-0.20221218044856-ec9f4fc18013
 	github.com/openconfig/kne v0.1.6
 	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
-	github.com/openconfig/ygnmi v0.7.4
-	github.com/openconfig/ygot v0.25.4
+	github.com/openconfig/ygnmi v0.7.6
+	github.com/openconfig/ygot v0.25.6
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.1
