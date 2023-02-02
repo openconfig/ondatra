@@ -118,6 +118,8 @@ func testbedToAbstractGraph(tb *opb.Testbed) (*portgraph.AbstractGraph, map[*por
 		nodeConstraints := make(map[string]portgraph.NodeConstraint)
 		if isATE {
 			nodeConstraints[vendorAttr] = portgraph.Regex(reATE)
+		} else {
+			nodeConstraints[vendorAttr] = portgraph.NotRegex(reATE)
 		}
 		if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED {
 			nodeConstraints[vendorAttr] = portgraph.Equal(v.String())

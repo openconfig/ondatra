@@ -961,6 +961,17 @@ func TestSolveErrors(t *testing.T) {
 			  z_int: "eth2"
 			}`,
 		wantErr: "could not solve for specified testbed",
+	}, {
+		desc: "dut without vendor does not match ate",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{Id: "dut"}},
+		},
+		topo: `
+			nodes: {
+			  name: "node"
+			  vendor: KEYSIGHT
+			}`,
+		wantErr: "could not solve for specified testbed",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
