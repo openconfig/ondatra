@@ -1360,6 +1360,7 @@ func startTraffic(ctx context.Context, ix *ixATE) error {
 }
 
 // StartTraffic starts traffic for the IxNetwork session based on the given flows.
+// If no flows are provided, starts the previously pushed flows.
 func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
 	if ix.operState == operStateOff {
 		return fmt.Errorf("cannot start traffic before starting protocols")
@@ -1377,6 +1378,9 @@ func (ix *ixATE) StartTraffic(ctx context.Context, flows []*opb.Flow) error {
 		if err := applyTrafficFn(ctx, ix); err != nil {
 			return fmt.Errorf("could not apply traffic: %w", err)
 		}
+	} else if len(ix.flowToTrafficItem) == 0 {
+		// No flows have been configured since the last full topology push.
+		return errors.New("cannot start traffic, no flows defined")
 	}
 
 	if err := startTrafficFn(ctx, ix); err != nil {

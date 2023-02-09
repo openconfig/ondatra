@@ -14,24 +14,42 @@
 
 package portgraph
 
-// genCombos yields all key->value assignment maps, given the specified range
+import (
+	"sort"
+)
+
+// genNodeCombos yields all key->value assignment maps, given the specified range
 // of possible values for each key, such that no two keys are assigned the same
 // value. Returns a channel that yields the assignments and a function to stop
 // the generation. Caller should immediately defer a call to the stop function
 // to ensure the routine generating the assignments exits.
-func genCombos[K, V comparable](m map[K][]V) (<-chan map[K]V, func()) {
-	gen := &generator[K, V]{
-		m:    m,
-		res:  make(map[K]V),
-		used: make(map[V]bool),
-		ch:   make(chan map[K]V),
-		stop: make(chan struct{}, 1),
-		done: make(chan struct{}, 1),
+func genNodeCombos(m map[*AbstractNode][]*ConcreteNode, absNode2Node2NumEdges map[*AbstractNode]map[*AbstractNode]int, conNode2Node2NumEdges map[*ConcreteNode]map[*ConcreteNode]int, checkEdge func(*ConcreteNode, *ConcreteNode, int) (bool, []*ConcretePort, []*ConcretePort)) (<-chan map[*AbstractNode]*ConcreteNode, func()) {
+	gen := &nodeGenerator{
+		m:                      m,
+		res:                    make(map[*AbstractNode]*ConcreteNode),
+		used:                   make(map[*ConcreteNode]bool),
+		ch:                     make(chan map[*AbstractNode]*ConcreteNode),
+		stop:                   make(chan struct{}, 1),
+		done:                   make(chan struct{}, 1),
+		absNode2Node2NumEdges:  absNode2Node2NumEdges,
+		conNode2Node2NumEdges:  conNode2Node2NumEdges,
+		checkEdge:              checkEdge,
+		conNode2Node2NeedPorts: make(map[*ConcreteNode]map[*ConcreteNode]*needPorts),
 	}
-	var keys []K
+	var keys []*AbstractNode
 	for k := range m {
 		keys = append(keys, k)
 	}
+	sort.SliceStable(keys, func(i, j int) bool {
+		iWeight, jWeight := 0, 0
+		for _, w := range absNode2Node2NumEdges[keys[i]] {
+			iWeight += w
+		}
+		for _, w := range absNode2Node2NumEdges[keys[j]] {
+			jWeight += w
+		}
+		return iWeight > jWeight
+	})
 	go func() {
 		defer close(gen.ch)
 		gen.recurse(keys)
@@ -40,26 +58,51 @@ func genCombos[K, V comparable](m map[K][]V) (<-chan map[K]V, func()) {
 	return gen.ch, gen.stopAndWait
 }
 
-type generator[K, V comparable] struct {
-	m    map[K][]V
-	res  map[K]V
-	used map[V]bool
-	ch   chan map[K]V
+type nodeGenerator struct {
+	m    map[*AbstractNode][]*ConcreteNode
+	res  map[*AbstractNode]*ConcreteNode
+	used map[*ConcreteNode]bool
+	ch   chan map[*AbstractNode]*ConcreteNode
 	stop chan struct{}
 	done chan struct{}
+
+	absNode2Node2NumEdges  map[*AbstractNode]map[*AbstractNode]int
+	conNode2Node2NumEdges  map[*ConcreteNode]map[*ConcreteNode]int
+	checkEdge              func(*ConcreteNode, *ConcreteNode, int) (bool, []*ConcretePort, []*ConcretePort)
+	conNode2Node2NeedPorts map[*ConcreteNode]map[*ConcreteNode]*needPorts
+}
+
+// needPorts stores how many ports are needed and which ConcretePorts are available.
+type needPorts struct {
+	need int
+	have []*ConcretePort
+}
+
+// checkEnoughPorts checks there are enough unique ports.
+func checkEnoughPorts(np1, np2 *needPorts) bool {
+	needTotal := np1.need + np2.need
+	uniquePorts := make(map[*ConcretePort]struct{}, len(np1.have)+len(np2.have))
+	for _, p := range np1.have {
+		uniquePorts[p] = struct{}{}
+	}
+	for _, p := range np2.have {
+		uniquePorts[p] = struct{}{}
+	}
+	return needTotal <= len(uniquePorts)
 }
 
 // stopAndWait signals the generation to stop and waits for it to stop.
-func (g *generator[K, V]) stopAndWait() {
+func (g *nodeGenerator) stopAndWait() {
 	g.stop <- struct{}{}
 	<-g.done
 }
 
-// recurse generates all the map combinations for the specified list of keys,
-// returning true until it receives a stop signal.
-func (g *generator[K, V]) recurse(keys []K) bool {
-	if len(keys) == 0 {
-		copy := make(map[K]V, len(g.m))
+// recurse generates all the map combinations for the specified set of nodes
+// and checks that the set of nodes have appropriate edges, returning true
+// until it receives a stop signal.
+func (g *nodeGenerator) recurse(nodes []*AbstractNode) bool {
+	if len(nodes) == 0 {
+		copy := make(map[*AbstractNode]*ConcreteNode, len(g.m))
 		for k, v := range g.res {
 			copy[k] = v
 		}
@@ -70,15 +113,58 @@ func (g *generator[K, V]) recurse(keys []K) bool {
 			return true
 		}
 	}
-	first := keys[0]
-	for _, i := range g.m[first] {
-		if !g.used[i] {
-			g.res[first] = i
-			g.used[i] = true
-			if !g.recurse(keys[1:]) {
+	first := nodes[0]
+	for _, n := range g.m[first] {
+		if g.used[n] {
+			continue
+		}
+		g.conNode2Node2NeedPorts[n] = make(map[*ConcreteNode]*needPorts)
+		canUse := true
+		for absNode, conNode := range g.res {
+			// Check if first has enough Edges to already allocated Nodes.
+			if numEdges, ok := g.absNode2Node2NumEdges[first][absNode]; ok && numEdges > 0 {
+				ok, srcPorts, dstPorts := g.checkEdge(n, conNode, numEdges)
+				if !ok {
+					// There are no Edges, so we can't use this Node.
+					canUse = false
+					break
+				}
+				srcNeedPorts := &needPorts{numEdges, srcPorts}
+				dstNeedPorts := &needPorts{numEdges, dstPorts}
+				for _, need := range g.conNode2Node2NeedPorts[conNode] {
+					if !checkEnoughPorts(need, dstNeedPorts) {
+						canUse = false
+						break
+					}
+				}
+				if !canUse {
+					break
+				}
+				for _, need := range g.conNode2Node2NeedPorts[n] {
+					if !checkEnoughPorts(need, srcNeedPorts) {
+						canUse = false
+						break
+					}
+				}
+				if !canUse {
+					break
+				}
+				g.conNode2Node2NeedPorts[n][conNode] = srcNeedPorts
+				g.conNode2Node2NeedPorts[conNode][n] = dstNeedPorts
+			}
+		}
+		if canUse {
+			g.res[first] = n
+			g.used[n] = true
+			if !g.recurse(nodes[1:]) {
+				delete(g.conNode2Node2NeedPorts, n)
+				for k := range g.conNode2Node2NeedPorts[n] {
+					delete(g.conNode2Node2NeedPorts[k], n)
+				}
 				return false
 			}
-			delete(g.used, i)
+			delete(g.used, n)
+			delete(g.res, first)
 		}
 	}
 	return true

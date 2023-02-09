@@ -120,6 +120,15 @@ var (
 	node81port3  = &ConcretePort{Desc: "node81:port3", Attrs: map[string]string{"attr1": "2", "attr2": "2", "attr3": "2", "attr4": "2"}}
 	node81port4  = &ConcretePort{Desc: "node81:port4", Attrs: map[string]string{"attr1": "3", "attr2": "3", "attr3": "3", "attr4": "3"}}
 	node81port5  = &ConcretePort{Desc: "node81:port5", Attrs: map[string]string{"attr1": "4", "attr2": "4", "attr3": "4", "attr4": "4"}}
+	node90port1  = &ConcretePort{Desc: "node90:port1"}
+	node90port2  = &ConcretePort{Desc: "node90:port2"}
+	node90port3  = &ConcretePort{Desc: "node90:port3"}
+	node90port4  = &ConcretePort{Desc: "node90:port4"}
+	node90port5  = &ConcretePort{Desc: "node90:port5"}
+	node91port1  = &ConcretePort{Desc: "node91:port1"}
+	node91port2  = &ConcretePort{Desc: "node91:port2"}
+	node92port1  = &ConcretePort{Desc: "node92:port1"}
+	node92port2  = &ConcretePort{Desc: "node92:port2"}
 
 	node1  = &ConcreteNode{Desc: "node1", Ports: []*ConcretePort{node1port1, node1port2}, Attrs: map[string]string{"vendor": "CISCO1"}}
 	node2  = &ConcreteNode{Desc: "node2", Ports: []*ConcretePort{node2port1, node2port2}, Attrs: map[string]string{"vendor": "CISCO2"}}
@@ -150,12 +159,15 @@ var (
 	node70 = &ConcreteNode{Desc: "node70", Ports: []*ConcretePort{node70port1, node70port2, node70port3}}
 	node80 = &ConcreteNode{Desc: "node80", Ports: []*ConcretePort{node80port1, node80port2, node80port3, node80port4, node80port5}}
 	node81 = &ConcreteNode{Desc: "node81", Ports: []*ConcretePort{node81port1, node81port2, node81port3, node81port4, node81port5}}
+	node90 = &ConcreteNode{Desc: "node90", Ports: []*ConcretePort{node90port1, node90port2, node90port3, node90port4, node90port5}, Attrs: map[string]string{"vendor": "UNIQUE90"}}
+	node91 = &ConcreteNode{Desc: "node91", Ports: []*ConcretePort{node91port1, node91port2}, Attrs: map[string]string{"vendor": "UNIQUE91"}}
+	node92 = &ConcreteNode{Desc: "node92", Ports: []*ConcretePort{node92port1, node92port2}, Attrs: map[string]string{"vendor": "UNIQUE92"}}
 )
 
 var superGraph = &ConcreteGraph{
 	Desc: "super",
 	Nodes: []*ConcreteNode{
-		node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node20, node21, node22, node23, node30, node31, node32, node33, node40, node41, node60, node61, node70, node80, node81,
+		node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node20, node21, node22, node23, node30, node31, node32, node33, node40, node41, node60, node61, node70, node80, node81, node90, node91, node92,
 		// Additional entries for benchmark purposes.
 		{Desc: "node15", Attrs: map[string]string{"vendor": "CISCO2"}},
 		{Desc: "node16", Attrs: map[string]string{"vendor": "CISCO3"}},
@@ -241,6 +253,9 @@ var superGraph = &ConcreteGraph{
 		{Src: node80port3, Dst: node81port3},
 		{Src: node80port4, Dst: node81port4},
 		{Src: node80port5, Dst: node81port5},
+		{Src: node90port1, Dst: node91port1},
+		{Src: node90port2, Dst: node91port2},
+		{Src: node90port3, Dst: node92port1},
 	},
 }
 
@@ -369,7 +384,7 @@ var (
 	// 2 nodes, many ports that depend on one port
 	abs21      = &AbstractNode{Desc: "abs21", Ports: []*AbstractPort{abs21port1, abs21port2, abs21port3, abs21port4, abs21port5}}
 	abs22      = &AbstractNode{Desc: "abs22", Ports: []*AbstractPort{abs22port1, abs22port2, abs22port3, abs22port4, abs22port5}}
-	abs21port1 = &AbstractPort{Desc: "abs21:port1", Constraints: map[string]PortConstraint{"attr1": Equal("1"), "attr2": Equal("2"), "attr3": Equal("3"), "attr4": Equal("4")}} // This should be most constrained so it's solved for first.
+	abs21port1 = &AbstractPort{Desc: "abs21:port1", Constraints: map[string]PortConstraint{"attr1": Equal("1"), "attr2": Equal("2"), "attr3": Equal("3"), "attr4": Equal("4")}} // This should be the most constrained so it's solved first.
 	abs21port2 = &AbstractPort{Desc: "abs21:port2", Constraints: map[string]PortConstraint{"attr1": SameAsPort(abs21port1)}}
 	abs21port3 = &AbstractPort{Desc: "abs21:port3", Constraints: map[string]PortConstraint{"attr2": SameAsPort(abs21port1)}}
 	abs21port4 = &AbstractPort{Desc: "abs21:port4"}
@@ -614,11 +629,26 @@ func TestSolve(t *testing.T) {
 }
 
 func TestSolveNotSolvable(t *testing.T) {
-	nodeDesc := "dut1"
+	nodeDesc1 := "dut1"
+	nodeDesc2 := "dut2"
+	nodeDesc3 := "dut3"
 	portDesc1 := "dut:port1"
 	portDesc2 := "dut:port2"
 	portDesc3 := "dut:port3"
+	portDesc4 := "dut:port4"
+	portDesc5 := "dut:port5"
+	portDesc6 := "dut:port6"
+	portDesc7 := "dut:port7"
+	portDesc8 := "dut:port8"
 	samePort := &AbstractPort{Desc: portDesc1, Constraints: map[string]PortConstraint{"attr": Equal("BAR"), "attr2": Equal("1")}}
+	aPort1 := &AbstractPort{Desc: portDesc1}
+	aPort2 := &AbstractPort{Desc: portDesc2}
+	aPort3 := &AbstractPort{Desc: portDesc3}
+	aPort4 := &AbstractPort{Desc: portDesc4}
+	zPort1 := &AbstractPort{Desc: portDesc5}
+	zPort2 := &AbstractPort{Desc: portDesc6}
+	zPort3 := &AbstractPort{Desc: portDesc7}
+	zPort4 := &AbstractPort{Desc: portDesc8}
 
 	tests := []struct {
 		desc           string
@@ -627,21 +657,21 @@ func TestSolveNotSolvable(t *testing.T) {
 		wantUnassigned []string
 	}{{
 		desc:           "Node does not exist in super",
-		graph:          &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: nodeDesc, Constraints: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
-		wantUnassigned: []string{nodeDesc},
+		graph:          &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: nodeDesc1, Constraints: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
+		wantUnassigned: []string{nodeDesc1},
 	}, {
 		desc: "Port does not exist in super",
 		graph: &AbstractGraph{
 			Desc: "Port does not exist",
 			Nodes: []*AbstractNode{
 				&AbstractNode{
-					Desc:        nodeDesc,
+					Desc:        nodeDesc1,
 					Ports:       []*AbstractPort{&AbstractPort{Desc: portDesc1, Constraints: map[string]PortConstraint{"DOES NOT EXIST": Equal("???")}}},
 					Constraints: map[string]NodeConstraint{"attr": Equal("multi1")},
 				},
 			},
 		},
-		wantAssigned:   map[string]string{nodeDesc: "node20"},
+		wantAssigned:   map[string]string{nodeDesc1: "node20"},
 		wantUnassigned: []string{portDesc1},
 	}, {
 		desc: "One Port does not exist in super",
@@ -649,7 +679,7 @@ func TestSolveNotSolvable(t *testing.T) {
 			Desc: "One port does not exist",
 			Nodes: []*AbstractNode{
 				&AbstractNode{
-					Desc: nodeDesc,
+					Desc: nodeDesc1,
 					Ports: []*AbstractPort{
 						samePort,
 						&AbstractPort{Desc: portDesc2, Constraints: map[string]PortConstraint{"attr": SameAsPort(samePort), "attr2": Equal("2")}},
@@ -660,8 +690,24 @@ func TestSolveNotSolvable(t *testing.T) {
 				},
 			},
 		},
-		wantAssigned:   map[string]string{nodeDesc: "node20", portDesc1: "node20:port2", portDesc2: "node20:port3"},
+		wantAssigned:   map[string]string{nodeDesc1: "node20", portDesc1: "node20:port2", portDesc2: "node20:port3"},
 		wantUnassigned: []string{portDesc3},
+	}, {
+		desc: "Not enough edges to satisfy",
+		graph: &AbstractGraph{
+			Desc: "Not enough edges to satisfy",
+			Nodes: []*AbstractNode{
+				&AbstractNode{
+					Desc:        nodeDesc1,
+					Constraints: map[string]NodeConstraint{"vendor": Equal("UNIQUE90")},
+					Ports:       []*AbstractPort{aPort1, aPort2, aPort3, aPort4},
+				},
+				&AbstractNode{Desc: nodeDesc2, Ports: []*AbstractPort{zPort1, zPort2}},
+				&AbstractNode{Desc: nodeDesc3, Ports: []*AbstractPort{zPort3, zPort4}},
+			},
+			Edges: []*AbstractEdge{{aPort1, zPort1}, {aPort2, zPort2}, {aPort3, zPort3}, {aPort4, zPort4}},
+		},
+		wantUnassigned: []string{nodeDesc1, nodeDesc2, nodeDesc3, portDesc1, portDesc2, portDesc3, portDesc4, portDesc5, portDesc6, portDesc7, portDesc8},
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {

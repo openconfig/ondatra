@@ -38036,7 +38036,10 @@ func (n *Component_Port_BreakoutMode_GroupPathAny) NumBreakouts() *Component_Por
 // to the interfaces in this breakout group. This leaf need
 // not be set if there is only one breakout group where all
 // the interfaces are of equal speed and have equal number
-// of physical channels
+// of physical channels.
+//
+// The physical channels referred to by this leaf are
+// electrical channels towards the transceiver.
 //
 //	Defining module:      "openconfig-platform-port"
 //	Instantiating module: "openconfig-platform"
@@ -38057,7 +38060,10 @@ func (n *Component_Port_BreakoutMode_GroupPath) NumPhysicalChannels() *Component
 // to the interfaces in this breakout group. This leaf need
 // not be set if there is only one breakout group where all
 // the interfaces are of equal speed and have equal number
-// of physical channels
+// of physical channels.
+//
+// The physical channels referred to by this leaf are
+// electrical channels towards the transceiver.
 //
 //	Defining module:      "openconfig-platform-port"
 //	Instantiating module: "openconfig-platform"

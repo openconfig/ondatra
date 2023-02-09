@@ -249,6 +249,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 									NextHop:   ygot.String("127.0.0.2"),
 									Origin:    oc.RibBgp_BgpOriginAttrType_IGP,
 									AsSegment: map[uint32]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{0: {
+										Index:  ygot.Uint32(0),
 										Member: []uint32{65532, 65533},
 										Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
 									}},
@@ -269,6 +270,7 @@ func TestBGPRIBFromIxia(t *testing.T) {
 									NextHop:   ygot.String("::2"),
 									Origin:    oc.RibBgp_BgpOriginAttrType_INCOMPLETE,
 									AsSegment: map[uint32]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{0: {
+										Index:  ygot.Uint32(0),
 										Member: []uint32{65534, 65535},
 										Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
 									}},

@@ -1637,6 +1637,7 @@ func TestStartTraffic(t *testing.T) {
 	tests := []struct {
 		desc                                 string
 		operState                            operState
+		existingFlows                        map[string]*ixconfig.TrafficTrafficItem
 		reqFile, wantCfgFile                 string
 		resetTrafficCfgErr, resolveMacsErr   error
 		patchLatencyErr, patchConvergenceErr error
@@ -1707,6 +1708,12 @@ func TestStartTraffic(t *testing.T) {
 		desc:      "no flows configured",
 		operState: operStateProtocolsOn,
 		reqFile:   "no_flows.textproto",
+		wantErr:   true,
+	}, {
+		desc:          "flows previously configured, no new flows specified",
+		operState:     operStateProtocolsOn,
+		existingFlows: map[string]*ixconfig.TrafficTrafficItem{"someFlow": {}},
+		reqFile:       "no_flows.textproto",
 	}, {
 		desc:        "ipv4 with egress tracking",
 		operState:   operStateProtocolsOn,
@@ -1768,6 +1775,8 @@ func TestStartTraffic(t *testing.T) {
 			if err := c.PushTopology(context.Background(), top); err != nil {
 				t.Fatalf("Failed to configure initial topology for StartTraffic test: %v", err)
 			}
+			// Set existing flows here because they are deleted by PushTopology.
+			c.flowToTrafficItem = test.existingFlows
 
 			// Swap out no-op config client with the one to use for StartTraffic testing.
 			fc := &fakeCfgClient{

@@ -36,6 +36,23 @@ type AbstractGraph struct {
 	Edges []*AbstractEdge
 }
 
+func (g *AbstractGraph) String() string {
+	ret := fmt.Sprintf("Abstract Graph: %q\n", g.Desc)
+	for _, n := range g.Nodes {
+		ret = fmt.Sprintf("%sNode: %q\n", ret, n.Desc)
+		for _, p := range n.Ports {
+			ret = fmt.Sprintf("%s  Port: %q\n", ret, p.Desc)
+			for k, c := range p.Constraints {
+				ret = fmt.Sprintf("%s    Constraint %q: %v\n", ret, k, c)
+			}
+		}
+	}
+	for _, e := range g.Edges {
+		ret = fmt.Sprintf("%sEdge: %q -> %q\n", ret, e.Src.Desc, e.Dst.Desc)
+	}
+	return ret
+}
+
 // fetchPort2Port2EdgeMap() returns the mapping of a src AbstractPort to a dst AbstractPort to an AbstractEdge.
 func (g *AbstractGraph) fetchPort2Port2EdgeMap() (map[*AbstractPort]map[*AbstractPort]*AbstractEdge, error) {
 	ret := make(map[*AbstractPort]map[*AbstractPort]*AbstractEdge)
@@ -57,6 +74,23 @@ type ConcreteGraph struct {
 	Desc  string // Description for the AbstractGraph for logging.
 	Nodes []*ConcreteNode
 	Edges []*ConcreteEdge
+}
+
+func (g *ConcreteGraph) String() string {
+	ret := fmt.Sprintf("Concrete Graph: %q\n", g.Desc)
+	for _, n := range g.Nodes {
+		ret = fmt.Sprintf("%sNode: %q\n", ret, n.Desc)
+		for _, p := range n.Ports {
+			ret = fmt.Sprintf("%s  Port: %q\n", ret, p.Desc)
+			for k, a := range p.Attrs {
+				ret = fmt.Sprintf("%s    Constraint %q: %v\n", ret, k, a)
+			}
+		}
+	}
+	for _, e := range g.Edges {
+		ret = fmt.Sprintf("%sEdge: %q -> %q\n", ret, e.Src.Desc, e.Dst.Desc)
+	}
+	return ret
 }
 
 // fetchPort2Port2EdgeMap() returns the mapping of a src ConcretePort to a dst ConcretePort to a ConcreteEdge.
@@ -146,12 +180,13 @@ type deferredNodeConstraint func(map[*AbstractNode]*ConcreteNode) bool
 type deferredPortConstraint func(map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error)
 
 type solver struct {
-	abstractGraph     *AbstractGraph
-	superGraph        *ConcreteGraph
-	absPort2Node      map[*AbstractPort]*AbstractNode                   // Map Port to Node it is part of.
-	absNode2Node      map[*AbstractNode]map[*AbstractNode]int           // Map Node to Node and how many links there are.
-	conPort2Port2Edge map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to the edge.
-	absPort2Port2Edge map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to the edge.
+	abstractGraph         *AbstractGraph
+	superGraph            *ConcreteGraph
+	absPort2Node          map[*AbstractPort]*AbstractNode                   // Map Port to Node it is part of.
+	absNode2Node2NumEdges map[*AbstractNode]map[*AbstractNode]int           // Map Node to Node and how many edges there are.
+	conNode2Node2NumEdges map[*ConcreteNode]map[*ConcreteNode]int           // Map Node to Node and how many edges there are.
+	conPort2Port2Edge     map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to edge.
+	absPort2Port2Edge     map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to edge.
 
 	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
 
@@ -187,13 +222,19 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 		}
 	}
 	// Map how many links there are between each AbstractNode to calculate matches.
-	absNode2Node := make(map[*AbstractNode]map[*AbstractNode]int)
+	absNode2Node2NumEdges := make(map[*AbstractNode]map[*AbstractNode]int)
 	for _, e := range abstractGraph.Edges {
-		srcNode, dstNode := e.Src, e.Dst
-		if _, ok := absNode2Node[absPort2Node[srcNode]]; !ok {
-			absNode2Node[absPort2Node[srcNode]] = make(map[*AbstractNode]int)
+		srcNode, dstNode := absPort2Node[e.Src], absPort2Node[e.Dst]
+		// Count the edges from src -> dst
+		if _, ok := absNode2Node2NumEdges[srcNode]; !ok {
+			absNode2Node2NumEdges[srcNode] = make(map[*AbstractNode]int)
 		}
-		absNode2Node[absPort2Node[srcNode]][absPort2Node[dstNode]]++
+		absNode2Node2NumEdges[srcNode][dstNode]++
+		// Count the edges from dst -> src
+		if _, ok := absNode2Node2NumEdges[dstNode]; !ok {
+			absNode2Node2NumEdges[dstNode] = make(map[*AbstractNode]int)
+		}
+		absNode2Node2NumEdges[dstNode][srcNode]++
 	}
 
 	absPort2Port2Edge, err := abstractGraph.fetchPort2Port2EdgeMap()
@@ -201,12 +242,36 @@ func Solve(abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment
 		return nil, solveErr
 	}
 
+	conPort2Node := make(map[*ConcretePort]*ConcreteNode)
+	for _, n := range superGraph.Nodes {
+		for _, p := range n.Ports {
+			conPort2Node[p] = n
+		}
+	}
+
+	// Map how many links there are between each ConcreteNode to calculate matches.
+	conNode2Node2NumEdges := make(map[*ConcreteNode]map[*ConcreteNode]int)
+	for _, e := range superGraph.Edges {
+		srcNode, dstNode := conPort2Node[e.Src], conPort2Node[e.Dst]
+		// Count the edges from src -> dst
+		if _, ok := conNode2Node2NumEdges[srcNode]; !ok {
+			conNode2Node2NumEdges[srcNode] = make(map[*ConcreteNode]int)
+		}
+		conNode2Node2NumEdges[srcNode][dstNode]++
+		// Count the edges from dst -> src
+		if _, ok := conNode2Node2NumEdges[dstNode]; !ok {
+			conNode2Node2NumEdges[dstNode] = make(map[*ConcreteNode]int)
+		}
+		conNode2Node2NumEdges[dstNode][srcNode]++
+	}
+
 	s := &solver{
 		abstractGraph:           abstractGraph,
 		superGraph:              superGraph,
-		absNode2Node:            absNode2Node,
+		absNode2Node2NumEdges:   absNode2Node2NumEdges,
 		absPort2Node:            absPort2Node,
 		absPort2Port2Edge:       absPort2Port2Edge,
+		conNode2Node2NumEdges:   conNode2Node2NumEdges,
 		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
 		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
 		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
@@ -243,16 +308,12 @@ func (s *solver) solve() (*Assignment, bool) {
 	s.conPort2Port2Edge = s.superGraph.fetchPort2Port2EdgeMap()
 
 	// Generate all AbstractNode -> ConcreteNode mappings.
-	abs2ConNodeChan, stop := genCombos(abs2ConNodes)
+	abs2ConNodeChan, stop := genNodeCombos(abs2ConNodes, s.absNode2Node2NumEdges, s.conNode2Node2NumEdges, s.checkEdge)
 	defer stop()
 	// Iterate through each mapping.
 	// For each mapping, evaluate deferred constraints and attempt to match edges and assign ports.
 	for abs2ConNode := range abs2ConNodeChan {
 		if !s.matchDeferredNodes(abs2ConNode) {
-			continue
-		}
-		// For this mapping, check that the ConcreteNodes can satisfy the AbstractEdges.
-		if !s.checkEdges(abs2ConNode) {
 			continue
 		}
 		if len(abs2ConNode) > s.maxAssign.numNodes {
@@ -271,37 +332,23 @@ func (s *solver) solve() (*Assignment, bool) {
 	return nil, false
 }
 
-// checkEdges validates that the concrete nodes can satisfy the abstract edges.
-func (s *solver) checkEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
-	// Iterate through the abstract edges.
-	for _, absSrcNode := range s.abstractGraph.Nodes {
-		absDstNodes := s.absNode2Node[absSrcNode]
-		for absDstNode, need := range absDstNodes {
-			conSrcNode, conDstNode := abs2ConNode[absSrcNode], abs2ConNode[absDstNode]
-			if !s.checkEdge(conSrcNode, conDstNode, need) {
-				log.V(1).Infof("node %q cannot be assigned to %q because there are not enough edges to node %q assigned to %q; need %d",
-					absSrcNode.Desc, conSrcNode.Desc, absDstNode.Desc, conDstNode.Desc, need)
-				return false
-			}
-		}
-	}
-	return true
-}
-
-func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int) bool {
-	var count int
+// checkEdges validates there are enough Ports to fulfill the Edge between the given Nodes and
+// returns all Ports that could fulfill the Edge.
+func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int) (bool, []*ConcretePort, []*ConcretePort) {
+	var srcPorts, conPorts []*ConcretePort
 	// Verify whether the concrete Edges satisfy the abstract Edges.
 	for _, conSrcPort := range conSrcNode.Ports {
 		for p := range s.conPort2Port2Edge[conSrcPort] {
 			if conDstNode.containsPort(p) {
-				count++
-				if count >= edgesNeeded {
-					return true
-				}
+				srcPorts = append(srcPorts, conSrcPort)
+				conPorts = append(conPorts, p)
+			}
+			if len(srcPorts) >= edgesNeeded {
+				return true, srcPorts, conPorts
 			}
 		}
 	}
-	return false
+	return false, nil, nil
 }
 
 type portAssigner struct {
@@ -680,6 +727,29 @@ func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*Con
 		if len(abs.Ports) > len(n.Ports) {
 			return false
 		}
+		// Check that there are at least enough Edges to other Nodes.
+		var absEdges, conEdges []int
+		for _, i := range s.absNode2Node2NumEdges[abs] {
+			absEdges = append(absEdges, i)
+		}
+
+		for _, i := range s.conNode2Node2NumEdges[n] {
+			conEdges = append(conEdges, i)
+		}
+		// Sort the number of edges to another Node in descending order.
+		sort.Slice(absEdges, func(i, j int) bool { return absEdges[i] > absEdges[j] })
+		sort.Slice(conEdges, func(i, j int) bool { return conEdges[i] > conEdges[j] })
+		// Check the ConcreteNode has Edges to enough other Nodes.
+		if len(conEdges) < len(absEdges) {
+			return false
+		}
+		// Check if there are at least enough Edges other Nodes.
+		for i, num := range absEdges {
+			if conEdges[i] < num {
+				return false
+			}
+		}
+
 		constraints, ok := s.nodeConstraints.Get(abs)
 		if !ok {
 			return true
@@ -703,6 +773,7 @@ func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*Con
 			nodes = append(nodes, n)
 		}
 	}
+	sort.SliceStable(nodes, func(i, j int) bool { return nodes[i].Desc < nodes[j].Desc })
 	return nodes
 }
 

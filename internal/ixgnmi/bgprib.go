@@ -213,10 +213,11 @@ func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib
 			}
 			members = append(members, uint32(member))
 		}
-		as.AsSegment = map[uint32]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{0: {
+		as.AppendAsSegment(&oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{
+			Index:  ygot.Uint32(0),
 			Member: members,
 			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
-		}}
+		})
 	}
 
 	if err := rib.AppendAttrSet(as); err != nil {
