@@ -23,7 +23,7 @@ import (
 // value. Returns a channel that yields the assignments and a function to stop
 // the generation. Caller should immediately defer a call to the stop function
 // to ensure the routine generating the assignments exits.
-func genNodeCombos(m map[*AbstractNode][]*ConcreteNode, absNode2Node2NumEdges map[*AbstractNode]map[*AbstractNode]int, conNode2Node2NumEdges map[*ConcreteNode]map[*ConcreteNode]int, checkEdge func(*ConcreteNode, *ConcreteNode, int) (bool, []*ConcretePort, []*ConcretePort)) (<-chan map[*AbstractNode]*ConcreteNode, func()) {
+func genNodeCombos(m map[*AbstractNode][]*ConcreteNode, absNode2Node2NumEdges map[*AbstractNode]map[*AbstractNode]int, checkEdge func(*ConcreteNode, *ConcreteNode, int) (bool, []*ConcretePort, []*ConcretePort)) (<-chan map[*AbstractNode]*ConcreteNode, func()) {
 	gen := &nodeGenerator{
 		m:                      m,
 		res:                    make(map[*AbstractNode]*ConcreteNode),
@@ -32,7 +32,6 @@ func genNodeCombos(m map[*AbstractNode][]*ConcreteNode, absNode2Node2NumEdges ma
 		stop:                   make(chan struct{}, 1),
 		done:                   make(chan struct{}, 1),
 		absNode2Node2NumEdges:  absNode2Node2NumEdges,
-		conNode2Node2NumEdges:  conNode2Node2NumEdges,
 		checkEdge:              checkEdge,
 		conNode2Node2NeedPorts: make(map[*ConcreteNode]map[*ConcreteNode]*needPorts),
 	}
@@ -67,26 +66,25 @@ type nodeGenerator struct {
 	done chan struct{}
 
 	absNode2Node2NumEdges  map[*AbstractNode]map[*AbstractNode]int
-	conNode2Node2NumEdges  map[*ConcreteNode]map[*ConcreteNode]int
 	checkEdge              func(*ConcreteNode, *ConcreteNode, int) (bool, []*ConcretePort, []*ConcretePort)
 	conNode2Node2NeedPorts map[*ConcreteNode]map[*ConcreteNode]*needPorts
 }
 
-// needPorts stores how many ports are needed and which ConcretePorts are available.
+// needPorts stores how many ports are needed and which ConcretePorts can fulfill the needed ports.
 type needPorts struct {
-	need int
-	have []*ConcretePort
+	need       int             // Total number of ports needed.
+	canFulfill []*ConcretePort // The ports that can fulfill the needed ports.
 }
 
-// checkEnoughPorts checks there are enough unique ports.
-func checkEnoughPorts(np1, np2 *needPorts) bool {
-	needTotal := np1.need + np2.need
-	uniquePorts := make(map[*ConcretePort]struct{}, len(np1.have)+len(np2.have))
-	for _, p := range np1.have {
-		uniquePorts[p] = struct{}{}
-	}
-	for _, p := range np2.have {
-		uniquePorts[p] = struct{}{}
+// checkEnoughPorts checks there are enough unique ports to fulfill all needs.
+func checkEnoughPorts(nps []*needPorts) bool {
+	var needTotal int
+	uniquePorts := make(map[*ConcretePort]struct{})
+	for _, np := range nps {
+		needTotal += np.need
+		for _, p := range np.canFulfill {
+			uniquePorts[p] = struct{}{}
+		}
 	}
 	return needTotal <= len(uniquePorts)
 }
@@ -120,37 +118,37 @@ func (g *nodeGenerator) recurse(nodes []*AbstractNode) bool {
 		}
 		g.conNode2Node2NeedPorts[n] = make(map[*ConcreteNode]*needPorts)
 		canUse := true
-		for absNode, conNode := range g.res {
+		for dstAbsNode, dstConNode := range g.res {
 			// Check if first has enough Edges to already allocated Nodes.
-			if numEdges, ok := g.absNode2Node2NumEdges[first][absNode]; ok && numEdges > 0 {
-				ok, srcPorts, dstPorts := g.checkEdge(n, conNode, numEdges)
+			if numEdges, ok := g.absNode2Node2NumEdges[first][dstAbsNode]; ok && numEdges > 0 {
+				ok, srcPorts, dstPorts := g.checkEdge(n, dstConNode, numEdges)
 				if !ok {
 					// There are no Edges, so we can't use this Node.
 					canUse = false
 					break
 				}
+				// Store how many ports are needed to fulfill the Edges for allocated Nodes from both sides.
 				srcNeedPorts := &needPorts{numEdges, srcPorts}
 				dstNeedPorts := &needPorts{numEdges, dstPorts}
-				for _, need := range g.conNode2Node2NeedPorts[conNode] {
-					if !checkEnoughPorts(need, dstNeedPorts) {
-						canUse = false
-						break
-					}
-				}
-				if !canUse {
-					break
-				}
+				// Check that we can still fulfill all nodes with this allocation.
+				srcNeedPortsList := []*needPorts{srcNeedPorts}
+				dstNeedPortsList := []*needPorts{dstNeedPorts}
 				for _, need := range g.conNode2Node2NeedPorts[n] {
-					if !checkEnoughPorts(need, srcNeedPorts) {
-						canUse = false
-						break
-					}
+					srcNeedPortsList = append(srcNeedPortsList, need)
 				}
-				if !canUse {
+				if !checkEnoughPorts(srcNeedPortsList) {
+					canUse = false
 					break
 				}
-				g.conNode2Node2NeedPorts[n][conNode] = srcNeedPorts
-				g.conNode2Node2NeedPorts[conNode][n] = dstNeedPorts
+				for _, need := range g.conNode2Node2NeedPorts[dstConNode] {
+					dstNeedPortsList = append(dstNeedPortsList, need)
+				}
+				if !checkEnoughPorts(dstNeedPortsList) {
+					canUse = false
+					break
+				}
+				g.conNode2Node2NeedPorts[n][dstConNode] = srcNeedPorts
+				g.conNode2Node2NeedPorts[dstConNode][n] = dstNeedPorts
 			}
 		}
 		if canUse {

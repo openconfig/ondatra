@@ -40,6 +40,9 @@ func (g *AbstractGraph) String() string {
 	ret := fmt.Sprintf("Abstract Graph: %q\n", g.Desc)
 	for _, n := range g.Nodes {
 		ret = fmt.Sprintf("%sNode: %q\n", ret, n.Desc)
+		for k, c := range n.Constraints {
+			ret = fmt.Sprintf("%s  Constraint %q: %v\n", ret, k, c)
+		}
 		for _, p := range n.Ports {
 			ret = fmt.Sprintf("%s  Port: %q\n", ret, p.Desc)
 			for k, c := range p.Constraints {
@@ -80,10 +83,13 @@ func (g *ConcreteGraph) String() string {
 	ret := fmt.Sprintf("Concrete Graph: %q\n", g.Desc)
 	for _, n := range g.Nodes {
 		ret = fmt.Sprintf("%sNode: %q\n", ret, n.Desc)
+		for k, a := range n.Attrs {
+			ret = fmt.Sprintf("%s  Attribute %q: %v\n", ret, k, a)
+		}
 		for _, p := range n.Ports {
 			ret = fmt.Sprintf("%s  Port: %q\n", ret, p.Desc)
 			for k, a := range p.Attrs {
-				ret = fmt.Sprintf("%s    Constraint %q: %v\n", ret, k, a)
+				ret = fmt.Sprintf("%s    Attribute %q: %v\n", ret, k, a)
 			}
 		}
 	}
@@ -308,7 +314,7 @@ func (s *solver) solve() (*Assignment, bool) {
 	s.conPort2Port2Edge = s.superGraph.fetchPort2Port2EdgeMap()
 
 	// Generate all AbstractNode -> ConcreteNode mappings.
-	abs2ConNodeChan, stop := genNodeCombos(abs2ConNodes, s.absNode2Node2NumEdges, s.conNode2Node2NumEdges, s.checkEdge)
+	abs2ConNodeChan, stop := genNodeCombos(abs2ConNodes, s.absNode2Node2NumEdges, s.checkEdge)
 	defer stop()
 	// Iterate through each mapping.
 	// For each mapping, evaluate deferred constraints and attempt to match edges and assign ports.
@@ -332,7 +338,7 @@ func (s *solver) solve() (*Assignment, bool) {
 	return nil, false
 }
 
-// checkEdges validates there are enough Ports to fulfill the Edge between the given Nodes and
+// checkEdge validates there are enough Ports to fulfill the Edge between the given Nodes and
 // returns all Ports that could fulfill the Edge.
 func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int) (bool, []*ConcretePort, []*ConcretePort) {
 	var srcPorts, conPorts []*ConcretePort
@@ -343,10 +349,10 @@ func (s *solver) checkEdge(conSrcNode, conDstNode *ConcreteNode, edgesNeeded int
 				srcPorts = append(srcPorts, conSrcPort)
 				conPorts = append(conPorts, p)
 			}
-			if len(srcPorts) >= edgesNeeded {
-				return true, srcPorts, conPorts
-			}
 		}
+	}
+	if len(srcPorts) >= edgesNeeded {
+		return true, srcPorts, conPorts
 	}
 	return false, nil, nil
 }

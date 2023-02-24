@@ -51,7 +51,7 @@ var (
 )
 
 func filterTopology(topo *tpb.Topology) *tpb.Topology {
-	t := &tpb.Topology{}
+	t := &tpb.Topology{Name: topo.GetName()}
 	for _, node := range topo.GetNodes() {
 		// Only include nodes with known vendor.
 		if _, ok := deviceVendors[node.GetVendor()]; ok {

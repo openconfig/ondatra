@@ -21,7 +21,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"os/exec"
+	"os"
+	"path/filepath"
 	"time"
 
 	"golang.org/x/net/context"
@@ -29,25 +30,23 @@ import (
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	closer "github.com/openconfig/gocloser"
+	"github.com/openconfig/kne/topo"
+	"github.com/openconfig/kne/topo/node"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/solver"
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/protobuf/encoding/prototext"
+	"google.golang.org/grpc/status"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
+	cpb "github.com/openconfig/kne/proto/controller"
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-)
-
-var (
-	// to be stubbed out by tests
-	kneCmdFn  = kneCmd
-	sshExecFn = sshExec
 )
 
 // New returns a new KNE bind instance.
@@ -55,13 +54,22 @@ func New(cfg *Config) (*Bind, error) {
 	if cfg == nil {
 		return nil, fmt.Errorf("config cannot be nil")
 	}
-	return &Bind{cfg: cfg}, nil
+	top, err := topo.Load(cfg.TopoPath)
+	if err != nil {
+		return nil, fmt.Errorf("error loading topology: %w", err)
+	}
+	tm, err := topo.New(top, topo.WithKubecfg(cfg.KubecfgPath))
+	if err != nil {
+		return nil, fmt.Errorf("error creating topology manager: %w", err)
+	}
+	return &Bind{cfg: cfg, tm: tm}, nil
 }
 
 // Bind implements the ondatra Binding interface for KNE
 type Bind struct {
 	binding.Binding
 	cfg *Config
+	tm  topoManager
 }
 
 // Reserve implements the binding Reserve method by finding nodes and links in
@@ -70,53 +78,92 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	if len(partial) > 0 {
 		return nil, errors.New("KNEBind Reserve does not yet support partial mappings")
 	}
-	out, err := kneCmdFn(b.cfg, "topology", "service", b.cfg.TopoPath)
+	resp, err := b.tm.Show(ctx)
 	if err != nil {
 		return nil, err
 	}
-	topo := new(tpb.Topology)
-	if err := prototext.Unmarshal(out, topo); err != nil {
-		return nil, fmt.Errorf("error unmarshalling KNE topology proto: %w", err)
-	}
-	res, err := solver.Solve(tb, topo)
+	res, err := solver.Solve(tb, resp.GetTopology())
 	if err != nil {
 		return nil, err
 	}
 	for i, dut := range res.DUTs {
 		kdut := &kneDUT{
 			ServiceDUT: dut.(*solver.ServiceDUT),
-			cfg:        b.cfg,
+			bind:       b,
 		}
 		res.DUTs[i] = kdut
 		if b.cfg.SkipReset {
 			continue
 		}
-		if err := kdut.resetConfig(); err != nil {
+		if err := kdut.resetConfig(ctx); err != nil {
 			return nil, err
 		}
 	}
 	for i, ate := range res.ATEs {
 		res.ATEs[i] = &kneATE{
 			ServiceATE: ate.(*solver.ServiceATE),
-			cfg:        b.cfg,
+			bind:       b,
 		}
 	}
 	return res, nil
 }
 
-// Release is a no-op because there's need to reserve local VMs.
+// Release is a no-op because there's no need to reserve local VMs.
 func (b *Bind) Release(context.Context) error {
 	return nil
 }
 
 type kneDUT struct {
 	*solver.ServiceDUT
-	cfg *Config
+	bind *Bind
 }
 
-func (d *kneDUT) resetConfig() error {
-	_, err := kneCmdFn(d.cfg, "topology", "reset", d.cfg.TopoPath, d.Name(), "--push", "--skip")
-	return err
+func (d *kneDUT) resetConfig(ctx context.Context) error {
+	// TODO(alexmasi): Reduce duplication between this and CLI reset implementation.
+	name := d.Name()
+	switch err := d.bind.tm.ResetCfg(ctx, name); {
+	case status.Code(err) == codes.Unimplemented:
+		log.Warningf("Node %q does not support config reset, skipping", name)
+	case err != nil:
+		return err
+	}
+	bp, err := fileRelative(d.bind.cfg.TopoPath)
+	if err != nil {
+		return fmt.Errorf("failed to find relative path for topology: %v", err)
+	}
+	node := d.bind.tm.Nodes()[name]
+	cd := node.GetProto().GetConfig().GetConfigData()
+	if cd == nil {
+		log.Infof("Skipping node %q no initial config found", name)
+		return nil
+	}
+	var b []byte
+	switch v := cd.(type) {
+	case *tpb.Config_Data:
+		b = v.Data
+	case *tpb.Config_File:
+		cPath := v.File
+		if !filepath.IsAbs(cPath) {
+			cPath = filepath.Join(bp, cPath)
+		}
+		log.Infof("Pushing configuration %q to %q", cPath, name)
+		var err error
+		b, err = os.ReadFile(cPath)
+		if err != nil {
+			return err
+		}
+	}
+	return d.pushConfig(ctx, b)
+}
+
+func (d *kneDUT) pushConfig(ctx context.Context, config []byte) error {
+	switch err := d.bind.tm.ConfigPush(ctx, d.Name(), bytes.NewBuffer(config)); {
+	case status.Code(err) == codes.Unimplemented:
+		log.Warningf("Node %q does not support pushing config, skipping", d.Name())
+	case err != nil:
+		return err
+	}
+	return nil
 }
 
 func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
@@ -158,7 +205,7 @@ func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 	}
 	addr := serviceAddr(s)
 	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
-	creds := newRPCCredentials(d.cfg, d.Name(), d.NodeVendor)
+	creds := d.newRPCCredentials()
 	if creds != nil {
 		opts = append(opts, grpc.WithPerRPCCredentials(creds))
 	}
@@ -199,14 +246,15 @@ func (r *rpcCredentials) RequireTransportSecurity() bool {
 // 2. credential provided for a vendor of the node from the knebind config
 // 3. credential from the default username and password fields from the knebind config
 // 4. no credentials
-func newRPCCredentials(cfg *Config, name string, vendor tpb.Vendor) *rpcCredentials {
+func (d *kneDUT) newRPCCredentials() *rpcCredentials {
+	cfg := d.bind.cfg
 	if cfg.Credentials != nil && cfg.Credentials.Node != nil {
-		if creds, ok := cfg.Credentials.Node[name]; ok {
+		if creds, ok := cfg.Credentials.Node[d.Name()]; ok {
 			return &rpcCredentials{username: creds.Username, password: creds.Password}
 		}
 	}
 	if cfg.Credentials != nil && cfg.Credentials.Vendor != nil {
-		if creds, ok := cfg.Credentials.Vendor[vendor]; ok {
+		if creds, ok := cfg.Credentials.Vendor[d.NodeVendor]; ok {
 			return &rpcCredentials{username: creds.Username, password: creds.Password}
 		}
 	}
@@ -217,16 +265,12 @@ func newRPCCredentials(cfg *Config, name string, vendor tpb.Vendor) *rpcCredenti
 }
 
 func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) error {
-	if d.Vendor() != opb.Device_ARISTA {
-		return errors.New("KNEBind PushConfig only supports Arista devices")
-	}
 	if reset {
-		if err := d.resetConfig(); err != nil {
+		if err := d.resetConfig(ctx); err != nil {
 			return err
 		}
 	}
-	_, err := d.exec("enable\nconfig terminal\n" + config)
-	return err
+	return d.pushConfig(ctx, []byte(config))
 }
 
 func (d *kneDUT) DialCLI(context.Context) (binding.StreamClient, error) {
@@ -238,23 +282,19 @@ type kneCLI struct {
 	dut *kneDUT
 }
 
-func (c *kneCLI) SendCommand(_ context.Context, cmd string) (string, error) {
-	return c.dut.exec(cmd)
-}
-
-func (d *kneDUT) exec(cmd string) (string, error) {
-	s, err := d.Service("ssh")
+func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr error) {
+	s, err := c.dut.Service("ssh")
 	if err != nil {
 		return "", err
 	}
 	addr := serviceAddr(s)
 	var user, pass string
-	creds := newRPCCredentials(d.cfg, d.Name(), d.NodeVendor)
+	creds := c.dut.newRPCCredentials()
 	if creds != nil {
 		user, pass = creds.username, creds.password
 	}
 	log.Infof("Using credentials %s/%s to SSH", user, pass)
-	config := &ssh.ClientConfig{
+	cfg := &ssh.ClientConfig{
 		User: user,
 		Auth: []ssh.AuthMethod{ssh.KeyboardInteractive(func(user, instruction string, questions []string, echos []bool) ([]string, error) {
 			if len(questions) > 0 {
@@ -264,10 +304,6 @@ func (d *kneDUT) exec(cmd string) (string, error) {
 		})},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
-	return sshExecFn(addr, config, cmd)
-}
-
-func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr error) {
 	client, err := ssh.Dial("tcp", addr, cfg)
 	if err != nil {
 		return "", fmt.Errorf("could not dial SSH server %s: %w", addr, err)
@@ -293,7 +329,7 @@ func sshExec(addr string, cfg *ssh.ClientConfig, cmd string) (_ string, rerr err
 
 type kneATE struct {
 	*solver.ServiceATE
-	cfg *Config
+	bind *Bind
 }
 
 func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
@@ -332,17 +368,17 @@ func (a *kneATE) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 	return conn, nil
 }
 
-func kneCmd(cfg *Config, args ...string) ([]byte, error) {
-	if cfg.KubecfgPath != "" {
-		args = append(append([]string{}, args...), fmt.Sprintf("--kubecfg=%s", cfg.KubecfgPath))
-	}
-	cmd := exec.Command(cfg.CLIPath, args...)
-	out, err := cmd.Output()
+func fileRelative(p string) (string, error) {
+	bp, err := filepath.Abs(p)
 	if err != nil {
-		if execErr, ok := err.(*exec.ExitError); ok {
-			return nil, fmt.Errorf("error executing command %v: %s: %w", cmd, execErr.Stderr, err)
-		}
-		return nil, fmt.Errorf("error executing command %v: %w", cmd, err)
+		return "", err
 	}
-	return out, nil
+	return filepath.Dir(bp), nil
+}
+
+type topoManager interface {
+	Nodes() map[string]node.Node
+	Show(context.Context) (*cpb.ShowTopologyResponse, error)
+	ConfigPush(context.Context, string, io.Reader) error
+	ResetCfg(context.Context, string) error
 }

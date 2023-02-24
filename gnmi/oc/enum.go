@@ -3148,6 +3148,35 @@ const (
 	IfIp_IpAddressOrigin_RANDOM E_IfIp_IpAddressOrigin = 5
 )
 
+// E_IfIp_Ipv6AddressType is a derived int64 type which is used to represent
+// the enumerated node IfIp_Ipv6AddressType. An additional value named
+// IfIp_Ipv6AddressType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_IfIp_Ipv6AddressType int64
+
+// IsYANGGoEnum ensures that IfIp_Ipv6AddressType implements the yang.GoEnum
+// interface. This ensures that IfIp_Ipv6AddressType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_IfIp_Ipv6AddressType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  IfIp_Ipv6AddressType.
+func (E_IfIp_Ipv6AddressType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_IfIp_Ipv6AddressType.
+func (e E_IfIp_Ipv6AddressType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_IfIp_Ipv6AddressType")
+}
+
+const (
+	// IfIp_Ipv6AddressType_UNSET corresponds to the value UNSET of IfIp_Ipv6AddressType
+	IfIp_Ipv6AddressType_UNSET E_IfIp_Ipv6AddressType = 0
+	// IfIp_Ipv6AddressType_GLOBAL_UNICAST corresponds to the value GLOBAL_UNICAST of IfIp_Ipv6AddressType
+	IfIp_Ipv6AddressType_GLOBAL_UNICAST E_IfIp_Ipv6AddressType = 1
+	// IfIp_Ipv6AddressType_LINK_LOCAL_UNICAST corresponds to the value LINK_LOCAL_UNICAST of IfIp_Ipv6AddressType
+	IfIp_Ipv6AddressType_LINK_LOCAL_UNICAST E_IfIp_Ipv6AddressType = 2
+)
+
 // E_IfIp_NeighborOrigin is a derived int64 type which is used to represent
 // the enumerated node IfIp_NeighborOrigin. An additional value named
 // IfIp_NeighborOrigin_UNSET is added to the enumeration which is used as
@@ -3577,6 +3606,37 @@ const (
 	Interface_OperStatus_NOT_PRESENT E_Interface_OperStatus = 6
 	// Interface_OperStatus_LOWER_LAYER_DOWN corresponds to the value LOWER_LAYER_DOWN of Interface_OperStatus
 	Interface_OperStatus_LOWER_LAYER_DOWN E_Interface_OperStatus = 7
+)
+
+// E_Interfaces_LoopbackModeType is a derived int64 type which is used to represent
+// the enumerated node Interfaces_LoopbackModeType. An additional value named
+// Interfaces_LoopbackModeType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Interfaces_LoopbackModeType int64
+
+// IsYANGGoEnum ensures that Interfaces_LoopbackModeType implements the yang.GoEnum
+// interface. This ensures that Interfaces_LoopbackModeType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Interfaces_LoopbackModeType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Interfaces_LoopbackModeType.
+func (E_Interfaces_LoopbackModeType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Interfaces_LoopbackModeType.
+func (e E_Interfaces_LoopbackModeType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Interfaces_LoopbackModeType")
+}
+
+const (
+	// Interfaces_LoopbackModeType_UNSET corresponds to the value UNSET of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_UNSET E_Interfaces_LoopbackModeType = 0
+	// Interfaces_LoopbackModeType_NONE corresponds to the value NONE of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_NONE E_Interfaces_LoopbackModeType = 1
+	// Interfaces_LoopbackModeType_FACILITY corresponds to the value FACILITY of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_FACILITY E_Interfaces_LoopbackModeType = 2
+	// Interfaces_LoopbackModeType_TERMINAL corresponds to the value TERMINAL of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_TERMINAL E_Interfaces_LoopbackModeType = 3
 )
 
 // E_Ipv4Srlg_Flags is a derived int64 type which is used to represent
@@ -9478,60 +9538,62 @@ const (
 	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_CR4 E_TransportTypes_ETHERNET_PMD_TYPE = 2
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_CWDM4 corresponds to the value ETH_100GBASE_CWDM4 of TransportTypes_ETHERNET_PMD_TYPE
 	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_CWDM4 E_TransportTypes_ETHERNET_PMD_TYPE = 3
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_DR corresponds to the value ETH_100GBASE_DR of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_DR E_TransportTypes_ETHERNET_PMD_TYPE = 4
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_ER4 corresponds to the value ETH_100GBASE_ER4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_ER4 E_TransportTypes_ETHERNET_PMD_TYPE = 4
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_ER4 E_TransportTypes_ETHERNET_PMD_TYPE = 5
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_FR corresponds to the value ETH_100GBASE_FR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_FR E_TransportTypes_ETHERNET_PMD_TYPE = 5
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_FR E_TransportTypes_ETHERNET_PMD_TYPE = 6
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_LR4 corresponds to the value ETH_100GBASE_LR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 6
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 7
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_PSM4 corresponds to the value ETH_100GBASE_PSM4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 7
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 8
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_SR10 corresponds to the value ETH_100GBASE_SR10 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_SR10 E_TransportTypes_ETHERNET_PMD_TYPE = 8
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_SR10 E_TransportTypes_ETHERNET_PMD_TYPE = 9
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_SR4 corresponds to the value ETH_100GBASE_SR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_SR4 E_TransportTypes_ETHERNET_PMD_TYPE = 9
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100GBASE_SR4 E_TransportTypes_ETHERNET_PMD_TYPE = 10
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100G_ACC corresponds to the value ETH_100G_ACC of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100G_ACC E_TransportTypes_ETHERNET_PMD_TYPE = 10
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100G_ACC E_TransportTypes_ETHERNET_PMD_TYPE = 11
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_100G_AOC corresponds to the value ETH_100G_AOC of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_100G_AOC E_TransportTypes_ETHERNET_PMD_TYPE = 11
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_100G_AOC E_TransportTypes_ETHERNET_PMD_TYPE = 12
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ER corresponds to the value ETH_10GBASE_ER of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ER E_TransportTypes_ETHERNET_PMD_TYPE = 12
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ER E_TransportTypes_ETHERNET_PMD_TYPE = 13
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_LR corresponds to the value ETH_10GBASE_LR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 13
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 14
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_LRM corresponds to the value ETH_10GBASE_LRM of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_LRM E_TransportTypes_ETHERNET_PMD_TYPE = 14
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_LRM E_TransportTypes_ETHERNET_PMD_TYPE = 15
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_SR corresponds to the value ETH_10GBASE_SR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 15
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 16
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ZR corresponds to the value ETH_10GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 16
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 17
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_DR4 corresponds to the value ETH_400GBASE_DR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_DR4 E_TransportTypes_ETHERNET_PMD_TYPE = 17
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_DR4 E_TransportTypes_ETHERNET_PMD_TYPE = 18
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_FR4 corresponds to the value ETH_400GBASE_FR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_FR4 E_TransportTypes_ETHERNET_PMD_TYPE = 18
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_FR4 E_TransportTypes_ETHERNET_PMD_TYPE = 19
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR4 corresponds to the value ETH_400GBASE_LR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 19
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 20
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR8 corresponds to the value ETH_400GBASE_LR8 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR8 E_TransportTypes_ETHERNET_PMD_TYPE = 20
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR8 E_TransportTypes_ETHERNET_PMD_TYPE = 21
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_ZR corresponds to the value ETH_400GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 21
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 22
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GMSA_PSM4 corresponds to the value ETH_400GMSA_PSM4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GMSA_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 22
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GMSA_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 23
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_CR4 corresponds to the value ETH_40GBASE_CR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_CR4 E_TransportTypes_ETHERNET_PMD_TYPE = 23
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_CR4 E_TransportTypes_ETHERNET_PMD_TYPE = 24
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_ER4 corresponds to the value ETH_40GBASE_ER4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_ER4 E_TransportTypes_ETHERNET_PMD_TYPE = 24
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_ER4 E_TransportTypes_ETHERNET_PMD_TYPE = 25
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_LR4 corresponds to the value ETH_40GBASE_LR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 25
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 26
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_PSM4 corresponds to the value ETH_40GBASE_PSM4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 26
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 27
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_SR4 corresponds to the value ETH_40GBASE_SR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_SR4 E_TransportTypes_ETHERNET_PMD_TYPE = 27
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_SR4 E_TransportTypes_ETHERNET_PMD_TYPE = 28
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR corresponds to the value ETH_4X10GBASE_LR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 28
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 29
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR corresponds to the value ETH_4X10GBASE_SR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 29
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 30
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED corresponds to the value ETH_UNDEFINED of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED E_TransportTypes_ETHERNET_PMD_TYPE = 30
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED E_TransportTypes_ETHERNET_PMD_TYPE = 31
 )
 
 // E_TransportTypes_FIBER_CONNECTOR_TYPE is a derived int64 type which is used to represent
@@ -10018,6 +10080,37 @@ const (
 	TransportTypes_TRIBUTARY_SLOT_GRANULARITY_TRIB_SLOT_5G E_TransportTypes_TRIBUTARY_SLOT_GRANULARITY = 3
 )
 
+// E_Transport_BuiltinDetail is a derived int64 type which is used to represent
+// the enumerated node Transport_BuiltinDetail. An additional value named
+// Transport_BuiltinDetail_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Transport_BuiltinDetail int64
+
+// IsYANGGoEnum ensures that Transport_BuiltinDetail implements the yang.GoEnum
+// interface. This ensures that Transport_BuiltinDetail can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Transport_BuiltinDetail) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Transport_BuiltinDetail.
+func (E_Transport_BuiltinDetail) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Transport_BuiltinDetail.
+func (e E_Transport_BuiltinDetail) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Transport_BuiltinDetail")
+}
+
+const (
+	// Transport_BuiltinDetail_UNSET corresponds to the value UNSET of Transport_BuiltinDetail
+	Transport_BuiltinDetail_UNSET E_Transport_BuiltinDetail = 0
+	// Transport_BuiltinDetail_TCP_INITIAL corresponds to the value TCP_INITIAL of Transport_BuiltinDetail
+	Transport_BuiltinDetail_TCP_INITIAL E_Transport_BuiltinDetail = 1
+	// Transport_BuiltinDetail_TCP_ESTABLISHED corresponds to the value TCP_ESTABLISHED of Transport_BuiltinDetail
+	Transport_BuiltinDetail_TCP_ESTABLISHED E_Transport_BuiltinDetail = 2
+	// Transport_BuiltinDetail_FRAGMENT corresponds to the value FRAGMENT of Transport_BuiltinDetail
+	Transport_BuiltinDetail_FRAGMENT E_Transport_BuiltinDetail = 3
+)
+
 // E_Transport_DestinationPort is a derived int64 type which is used to represent
 // the enumerated node Transport_DestinationPort. An additional value named
 // Transport_DestinationPort_UNSET is added to the enumeration which is used as
@@ -10043,6 +10136,66 @@ const (
 	Transport_DestinationPort_UNSET E_Transport_DestinationPort = 0
 	// Transport_DestinationPort_ANY corresponds to the value ANY of Transport_DestinationPort
 	Transport_DestinationPort_ANY E_Transport_DestinationPort = 1
+)
+
+// E_Transport_DetailMode is a derived int64 type which is used to represent
+// the enumerated node Transport_DetailMode. An additional value named
+// Transport_DetailMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Transport_DetailMode int64
+
+// IsYANGGoEnum ensures that Transport_DetailMode implements the yang.GoEnum
+// interface. This ensures that Transport_DetailMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Transport_DetailMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Transport_DetailMode.
+func (E_Transport_DetailMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Transport_DetailMode.
+func (e E_Transport_DetailMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Transport_DetailMode")
+}
+
+const (
+	// Transport_DetailMode_UNSET corresponds to the value UNSET of Transport_DetailMode
+	Transport_DetailMode_UNSET E_Transport_DetailMode = 0
+	// Transport_DetailMode_EXPLICIT corresponds to the value EXPLICIT of Transport_DetailMode
+	Transport_DetailMode_EXPLICIT E_Transport_DetailMode = 1
+	// Transport_DetailMode_BUILTIN corresponds to the value BUILTIN of Transport_DetailMode
+	Transport_DetailMode_BUILTIN E_Transport_DetailMode = 2
+)
+
+// E_Transport_ExplicitDetailMatchMode is a derived int64 type which is used to represent
+// the enumerated node Transport_ExplicitDetailMatchMode. An additional value named
+// Transport_ExplicitDetailMatchMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Transport_ExplicitDetailMatchMode int64
+
+// IsYANGGoEnum ensures that Transport_ExplicitDetailMatchMode implements the yang.GoEnum
+// interface. This ensures that Transport_ExplicitDetailMatchMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Transport_ExplicitDetailMatchMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Transport_ExplicitDetailMatchMode.
+func (E_Transport_ExplicitDetailMatchMode) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Transport_ExplicitDetailMatchMode.
+func (e E_Transport_ExplicitDetailMatchMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Transport_ExplicitDetailMatchMode")
+}
+
+const (
+	// Transport_ExplicitDetailMatchMode_UNSET corresponds to the value UNSET of Transport_ExplicitDetailMatchMode
+	Transport_ExplicitDetailMatchMode_UNSET E_Transport_ExplicitDetailMatchMode = 0
+	// Transport_ExplicitDetailMatchMode_ANY corresponds to the value ANY of Transport_ExplicitDetailMatchMode
+	Transport_ExplicitDetailMatchMode_ANY E_Transport_ExplicitDetailMatchMode = 1
+	// Transport_ExplicitDetailMatchMode_ALL corresponds to the value ALL of Transport_ExplicitDetailMatchMode
+	Transport_ExplicitDetailMatchMode_ALL E_Transport_ExplicitDetailMatchMode = 2
 )
 
 // E_Transport_SourcePort is a derived int64 type which is used to represent

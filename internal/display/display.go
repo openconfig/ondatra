@@ -90,6 +90,7 @@ func display(t testing.TB, msg string) {
 		writer.WriteString(msg)
 		writer.Flush()
 	} else {
+		t.Helper()
 		t.Log(msg)
 	}
 }

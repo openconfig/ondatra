@@ -16,12 +16,10 @@ Key           | Required? | Description
 `password`    | no        | default password to log into the KNE nodes
 `credentials` | no        | map of credentials to use for specific nodes / vendors
 `topology`    | yes       | path to a KNE topology text proto
-`cli`         | no        | path to the kne binary
 `kubecfg`     | no        | path to your kubeconfig file
 `skip_reset`  | no        | if true, skip initial device reset that happens during reservation
 
-If `cli` and `kubecfg` are not specified, they will be inferred from the `PATH`
-environment.
+If `kubecfg` is not specified, it will be inferred from the `PATH` environment.
 
 A basic example YAML config file:
 

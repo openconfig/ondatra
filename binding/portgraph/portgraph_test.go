@@ -33,6 +33,8 @@ var (
 	node4port2   = &ConcretePort{Desc: "node4:port2"}
 	node8port1   = &ConcretePort{Desc: "node8:port1"}
 	node9port1   = &ConcretePort{Desc: "node9:port1"}
+	node10port1  = &ConcretePort{Desc: "node10:port1"}
+	node10port2  = &ConcretePort{Desc: "node10:port2"}
 	node11port1  = &ConcretePort{Desc: "node11:port1"}
 	node11port2  = &ConcretePort{Desc: "node11:port2"}
 	node11port3  = &ConcretePort{Desc: "node11:port3"}
@@ -42,6 +44,15 @@ var (
 	node13port2  = &ConcretePort{Desc: "node13:port2"}
 	node14port1  = &ConcretePort{Desc: "node14:port1"}
 	node14port2  = &ConcretePort{Desc: "node14:port2"}
+	node15port1  = &ConcretePort{Desc: "node15:port1"}
+	node15port2  = &ConcretePort{Desc: "node15:port2"}
+	node15port3  = &ConcretePort{Desc: "node15:port3"}
+	node16port1  = &ConcretePort{Desc: "node16:port1"}
+	node16port2  = &ConcretePort{Desc: "node16:port2"}
+	node17port1  = &ConcretePort{Desc: "node17:port1"}
+	node17port2  = &ConcretePort{Desc: "node17:port2"}
+	node18port1  = &ConcretePort{Desc: "node18:port1"}
+	node18port2  = &ConcretePort{Desc: "node18:port2"}
 	node20port1  = &ConcretePort{Desc: "node20:port1", Attrs: map[string]string{"attr": "FOO"}}
 	node20port2  = &ConcretePort{Desc: "node20:port2", Attrs: map[string]string{"attr": "BAR", "attr2": "1"}}
 	node20port3  = &ConcretePort{Desc: "node20:port3", Attrs: map[string]string{"attr": "BAR", "attr2": "2"}}
@@ -130,20 +141,25 @@ var (
 	node92port1  = &ConcretePort{Desc: "node92:port1"}
 	node92port2  = &ConcretePort{Desc: "node92:port2"}
 
-	node1  = &ConcreteNode{Desc: "node1", Ports: []*ConcretePort{node1port1, node1port2}, Attrs: map[string]string{"vendor": "CISCO1"}}
-	node2  = &ConcreteNode{Desc: "node2", Ports: []*ConcretePort{node2port1, node2port2}, Attrs: map[string]string{"vendor": "CISCO2"}}
-	node3  = &ConcreteNode{Desc: "node3", Ports: []*ConcretePort{node3port1, node3port2}, Attrs: map[string]string{"vendor": "CISCO3"}}
-	node4  = &ConcreteNode{Desc: "node4", Ports: []*ConcretePort{node4port1, node4port2}, Attrs: map[string]string{"vendor": "CISCO4"}}
-	node5  = &ConcreteNode{Desc: "node5", Attrs: map[string]string{"vendor": "CISCO1"}}
-	node6  = &ConcreteNode{Desc: "node6", Attrs: map[string]string{"vendor": "CISCO2"}}
-	node7  = &ConcreteNode{Desc: "node7", Attrs: map[string]string{"vendor": "CISCO3"}}
-	node8  = &ConcreteNode{Desc: "node8", Ports: []*ConcretePort{node8port1}, Attrs: map[string]string{"attr": ""}}
-	node9  = &ConcreteNode{Desc: "node9", Ports: []*ConcretePort{node9port1}, Attrs: map[string]string{"vendor": "UNIQUE9"}}
-	node10 = &ConcreteNode{Desc: "node10", Attrs: map[string]string{"vendor": "CISCO1"}}
-	node11 = &ConcreteNode{Desc: "node11", Ports: []*ConcretePort{node11port1, node11port2, node11port3}, Attrs: map[string]string{"vendor": "CISCO1"}}
+	node1 = &ConcreteNode{Desc: "node1", Ports: []*ConcretePort{node1port1, node1port2}, Attrs: map[string]string{"vendor": "CISCO1"}}
+	node2 = &ConcreteNode{Desc: "node2", Ports: []*ConcretePort{node2port1, node2port2}, Attrs: map[string]string{"vendor": "CISCO2"}}
+	node3 = &ConcreteNode{Desc: "node3", Ports: []*ConcretePort{node3port1, node3port2}, Attrs: map[string]string{"vendor": "CISCO3"}}
+	node4 = &ConcreteNode{Desc: "node4", Ports: []*ConcretePort{node4port1, node4port2}, Attrs: map[string]string{"vendor": "CISCO4"}}
+	node5 = &ConcreteNode{Desc: "node5", Attrs: map[string]string{"vendor": "CISCO1"}}
+	node6 = &ConcreteNode{Desc: "node6", Attrs: map[string]string{"vendor": "CISCO2"}}
+	node7 = &ConcreteNode{Desc: "node7", Attrs: map[string]string{"vendor": "CISCO3"}}
+	node8 = &ConcreteNode{Desc: "node8", Ports: []*ConcretePort{node8port1}, Attrs: map[string]string{"attr": ""}}
+	node9 = &ConcreteNode{Desc: "node9", Ports: []*ConcretePort{node9port1}, Attrs: map[string]string{"vendor": "UNIQUE9"}}
+	// Four Nodes, interconnected; include additional Nodes with enough ports but not enough edges.
+	node10 = &ConcreteNode{Desc: "node10", Ports: []*ConcretePort{node10port1, node10port2}, Attrs: map[string]string{"vendor": "CISCO2"}}
+	node11 = &ConcreteNode{Desc: "node11", Ports: []*ConcretePort{node11port1, node11port2, node11port3}, Attrs: map[string]string{"vendor": "CISCO1", "attr": "1"}}
 	node12 = &ConcreteNode{Desc: "node12", Ports: []*ConcretePort{node12port1, node12port2}, Attrs: map[string]string{"vendor": "CISCO2"}}
 	node13 = &ConcreteNode{Desc: "node13", Ports: []*ConcretePort{node13port1, node13port2}, Attrs: map[string]string{"vendor": "CISCO3"}}
 	node14 = &ConcreteNode{Desc: "node14", Ports: []*ConcretePort{node14port1, node14port2}, Attrs: map[string]string{"vendor": "CISCO4"}}
+	node15 = &ConcreteNode{Desc: "node15", Ports: []*ConcretePort{node15port1, node15port2, node15port3}, Attrs: map[string]string{"vendor": "CISCO1", "attr": "1"}}
+	node16 = &ConcreteNode{Desc: "node16", Ports: []*ConcretePort{node16port1, node16port2}, Attrs: map[string]string{"vendor": "CISCO2"}}
+	node17 = &ConcreteNode{Desc: "node17", Ports: []*ConcretePort{node17port1, node17port2}, Attrs: map[string]string{"vendor": "CISCO3"}}
+	node18 = &ConcreteNode{Desc: "node18", Ports: []*ConcretePort{node18port1, node18port2}, Attrs: map[string]string{"vendor": "CISCO4"}}
 	node20 = &ConcreteNode{Desc: "node20", Ports: []*ConcretePort{node20port1, node20port2, node20port3}, Attrs: map[string]string{"attr": "multi1"}}
 	node21 = &ConcreteNode{Desc: "node21", Ports: []*ConcretePort{node21port1, node21port2}, Attrs: map[string]string{"attr": "multi2"}}
 	node22 = &ConcreteNode{Desc: "node22", Ports: []*ConcretePort{node22port1, node22port2, node22port3, node22port4}}
@@ -167,12 +183,8 @@ var (
 var superGraph = &ConcreteGraph{
 	Desc: "super",
 	Nodes: []*ConcreteNode{
-		node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node20, node21, node22, node23, node30, node31, node32, node33, node40, node41, node60, node61, node70, node80, node81, node90, node91, node92,
+		node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16, node17, node18, node20, node21, node22, node23, node30, node31, node32, node33, node40, node41, node60, node61, node70, node80, node81, node90, node91, node92,
 		// Additional entries for benchmark purposes.
-		{Desc: "node15", Attrs: map[string]string{"vendor": "CISCO2"}},
-		{Desc: "node16", Attrs: map[string]string{"vendor": "CISCO3"}},
-		{Desc: "node17", Attrs: map[string]string{"vendor": "CISCO4"}},
-		{Desc: "node18", Attrs: map[string]string{"vendor": "CISCO1"}},
 		{Desc: "node19", Attrs: map[string]string{"vendor": "CISCO2"}},
 		{Desc: "node24", Attrs: map[string]string{"vendor": "CISCO3"}},
 		{Desc: "node25", Attrs: map[string]string{"vendor": "CISCO4"}},
@@ -210,10 +222,18 @@ var superGraph = &ConcreteGraph{
 		{Src: node2port2, Dst: node3port1},
 		{Src: node3port2, Dst: node4port2},
 		{Src: node8port1, Dst: node9port1},
+		// 4 interconnected nodes
+		{Src: node10port1, Dst: node14port1},
+		{Src: node11port1, Dst: node10port1},
 		{Src: node11port1, Dst: node12port1},
-		{Src: node11port2, Dst: node14port1},
-		{Src: node12port2, Dst: node13port1},
+		{Src: node11port2, Dst: node14port2},
+		{Src: node11port1, Dst: node16port1},
+		{Src: node12port2, Dst: node14port1},
 		{Src: node13port2, Dst: node14port2},
+		{Src: node15port1, Dst: node16port1},
+		{Src: node15port2, Dst: node18port1},
+		{Src: node16port2, Dst: node17port1},
+		{Src: node17port2, Dst: node18port2},
 		{Src: node20port1, Dst: node21port1}, // Simulate OCS; multiple links from port
 		{Src: node20port1, Dst: node21port2},
 		{Src: node20port2, Dst: node21port1},
@@ -269,7 +289,7 @@ var (
 	abs2port1 = &AbstractPort{Desc: "abs2:port1"}
 
 	// Four Nodes, interconnected
-	abs3      = &AbstractNode{Desc: "abs3", Ports: []*AbstractPort{abs3port1, abs3port2, abs3port3}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO1")}}
+	abs3      = &AbstractNode{Desc: "abs3", Ports: []*AbstractPort{abs3port1, abs3port2, abs3port3}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO1"), "attr": Equal("1")}}
 	abs4      = &AbstractNode{Desc: "abs4", Ports: []*AbstractPort{abs4port1, abs4port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO2")}}
 	abs5      = &AbstractNode{Desc: "abs5", Ports: []*AbstractPort{abs5port1, abs5port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO3")}}
 	abs6      = &AbstractNode{Desc: "abs6", Ports: []*AbstractPort{abs6port1, abs6port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO4")}}
@@ -375,7 +395,7 @@ var (
 	abs19port1 = &AbstractPort{Desc: "abs19:port1"}
 
 	// 1 node, 3 ports
-	// This is lighly constrained so there are multiple nodes/ports to check with a deferred constraint.
+	// This is lightly constrained so there are multiple nodes/ports to check with a deferred constraint.
 	abs20      = &AbstractNode{Desc: "abs20", Ports: []*AbstractPort{abs20port1, abs20port2, abs20port3}}
 	abs20port1 = &AbstractPort{Desc: "abs20:port1", Constraints: map[string]PortConstraint{"speed": SameAsPort(abs20port2), "attr": Equal("FOO")}}
 	abs20port2 = &AbstractPort{Desc: "abs20:port2", Constraints: map[string]PortConstraint{"speed": NotSameAsPort(abs20port3)}}
@@ -425,17 +445,17 @@ func TestSolve(t *testing.T) {
 			Nodes: []*AbstractNode{abs3, abs4, abs5, abs6},
 			Edges: []*AbstractEdge{{abs3port1, abs4port1}, {abs3port2, abs6port1}, {abs4port2, abs5port1}, {abs5port2, abs6port2}},
 		},
-		wantNodes: map[*AbstractNode]*ConcreteNode{abs3: node11, abs4: node12, abs5: node13, abs6: node14},
+		wantNodes: map[*AbstractNode]*ConcreteNode{abs3: node15, abs4: node16, abs5: node17, abs6: node18},
 		wantPorts: map[*AbstractPort]*ConcretePort{
-			abs3port1: node11port1,
-			abs3port2: node11port2,
-			abs3port3: node11port3,
-			abs4port1: node12port1,
-			abs4port2: node12port2,
-			abs5port1: node13port1,
-			abs5port2: node13port2,
-			abs6port1: node14port1,
-			abs6port2: node14port2,
+			abs3port1: node15port1,
+			abs3port2: node15port2,
+			abs3port3: node15port3,
+			abs4port1: node16port1,
+			abs4port2: node16port2,
+			abs5port1: node17port1,
+			abs5port2: node17port2,
+			abs6port1: node18port1,
+			abs6port2: node18port2,
 		},
 	}, {
 		desc: "10 unlinked ports from linked ports",

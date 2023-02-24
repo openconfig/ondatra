@@ -21,23 +21,21 @@ import (
 func TestCheckEnoughPorts(t *testing.T) {
 	port := &ConcretePort{}
 	tests := []struct {
-		desc     string
-		np1, np2 *needPorts
-		want     bool
+		desc string
+		np   []*needPorts
+		want bool
 	}{{
 		desc: "ok",
-		np1:  &needPorts{1, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}},
-		np2:  &needPorts{2, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}},
+		np:   []*needPorts{{1, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}}, {2, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}}},
 		want: true,
 	}, {
 		desc: "not enough unique ports",
-		np1:  &needPorts{1, []*ConcretePort{port}},
-		np2:  &needPorts{2, []*ConcretePort{port, &ConcretePort{}}},
+		np:   []*needPorts{{1, []*ConcretePort{port}}, {2, []*ConcretePort{port, &ConcretePort{}}}},
 		want: false,
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
-			got := checkEnoughPorts(tc.np1, tc.np2)
+			got := checkEnoughPorts(tc.np)
 			if got != tc.want {
 				t.Errorf("checkEnoughPorts got %t, want %t", got, tc.want)
 			}

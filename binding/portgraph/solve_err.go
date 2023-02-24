@@ -19,7 +19,7 @@ import (
 	"strings"
 )
 
-// SolveErr implements erros. It represents information about the Solve.
+// SolveErr implements error and contains information about a call to Solve.
 type SolveErr struct {
 	maxAssign                  *Assignment
 	absGraphDesc, conGraphDesc string
@@ -31,7 +31,7 @@ func (s *SolveErr) Error() string { return s.String() }
 // String compiles SolveErr to a string format.
 func (s *SolveErr) String() string {
 	ret := &strings.Builder{}
-	fmt.Fprintf(ret, "could not satify %q from %q\n", s.absGraphDesc, s.conGraphDesc)
+	fmt.Fprintf(ret, "Could not satisfy %q from %q\n", s.absGraphDesc, s.conGraphDesc)
 	fmt.Fprintf(ret, "\nMax assignment:\n")
 	for a, c := range s.maxAssign.Node2Node {
 		if c != nil {

@@ -9529,14 +9529,14 @@ func (n *Qos_Classifier_Term_Conditions_MplsPathAny) TtlValue() *Qos_Classifier_
 	}
 }
 
-// Qos_Classifier_Term_Conditions_Transport_DestinationPortPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port YANG schema element.
-type Qos_Classifier_Term_Conditions_Transport_DestinationPortPath struct {
+// Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/builtin-detail YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port YANG schema element.
-type Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny struct {
+// Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/builtin-detail YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -9597,6 +9597,130 @@ func (n *Qos_Classifier_Term_Conditions_TransportPathAny) Config() ygnmi.Wildcar
 		"Qos_Classifier_Term_Conditions_Transport",
 		false,
 		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/builtin-detail"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/builtin-detail"
+func (n *Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPath) State() ygnmi.SingletonQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Transport_BuiltinDetail](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/builtin-detail"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/builtin-detail"
+func (n *Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPathAny) State() ygnmi.WildcardQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_BuiltinDetail](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/builtin-detail"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/builtin-detail"
+func (n *Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPath) Config() ygnmi.ConfigQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Transport_BuiltinDetail](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/builtin-detail"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/builtin-detail"
+func (n *Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPathAny) Config() ygnmi.WildcardQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_BuiltinDetail](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -9875,6 +9999,378 @@ func (n *Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny) Con
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/detail-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/detail-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_DetailModePath) State() ygnmi.SingletonQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Transport_DetailMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/detail-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/detail-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_DetailModePathAny) State() ygnmi.WildcardQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_DetailMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/detail-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/detail-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_DetailModePath) Config() ygnmi.ConfigQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Transport_DetailMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/detail-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/detail-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_DetailModePathAny) Config() ygnmi.WildcardQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_DetailMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/explicit-detail-match-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-detail-match-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePath) State() ygnmi.SingletonQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/explicit-detail-match-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-detail-match-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePathAny) State() ygnmi.WildcardQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/explicit-detail-match-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/explicit-detail-match-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePath) Config() ygnmi.ConfigQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/explicit-detail-match-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/explicit-detail-match-mode"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePathAny) Config() ygnmi.WildcardQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/explicit-tcp-flags"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-tcp-flags"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPath) State() ygnmi.SingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/explicit-tcp-flags"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-tcp-flags"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Qos_Classifier_Term_Conditions_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/explicit-tcp-flags"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/explicit-tcp-flags"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPath) Config() ygnmi.ConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/explicit-tcp-flags"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/explicit-tcp-flags"
+func (n *Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPathAny) Config() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Qos_Classifier_Term_Conditions_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/source-port"
 //	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port"
 func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortPath) State() ygnmi.SingletonQuery[oc.Qos_Classifier_Term_Conditions_Transport_SourcePort_Union] {
@@ -10135,128 +10631,16 @@ func (n *Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny) Config()
 	)
 }
 
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-qos"
-//	Path from parent:     "state/tcp-flags"
-//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags"
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) State() ygnmi.SingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafSingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Qos_Classifier_Term_Conditions_Transport",
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
+// Qos_Classifier_Term_Conditions_Transport_DestinationPortPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_DestinationPortPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-qos"
-//	Path from parent:     "state/tcp-flags"
-//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags"
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Qos_Classifier_Term_Conditions_Transport",
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-qos"
-//	Path from parent:     "config/tcp-flags"
-//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/tcp-flags"
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath) Config() ygnmi.ConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Qos_Classifier_Term_Conditions_Transport",
-		false,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"config", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-qos"
-//	Path from parent:     "config/tcp-flags"
-//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/config/tcp-flags"
-func (n *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny) Config() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Qos_Classifier_Term_Conditions_Transport",
-		false,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"config", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Qos_Classifier_Term_Conditions_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Qos_Classifier_Term_Conditions_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
+// Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_DestinationPortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
 // Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port-set YANG schema element.
@@ -10267,6 +10651,42 @@ type Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPath struct {
 
 // Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port-set YANG schema element.
 type Qos_Classifier_Term_Conditions_Transport_DestinationPortSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_DetailModePath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/detail-mode YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_DetailModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_DetailModePathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/detail-mode YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_DetailModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-detail-match-mode YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-detail-match-mode YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-tcp-flags YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-tcp-flags YANG schema element.
+type Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -10295,18 +10715,6 @@ type Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny struct {
 	parent ygnmi.PathStruct
 }
 
-// Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags YANG schema element.
-type Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags YANG schema element.
-type Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
 // Qos_Classifier_Term_Conditions_TransportPath represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport YANG schema element.
 type Qos_Classifier_Term_Conditions_TransportPath struct {
 	*ygnmi.NodePath
@@ -10315,6 +10723,46 @@ type Qos_Classifier_Term_Conditions_TransportPath struct {
 // Qos_Classifier_Term_Conditions_TransportPathAny represents the wildcard version of the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/transport YANG schema element.
 type Qos_Classifier_Term_Conditions_TransportPathAny struct {
 	*ygnmi.NodePath
+}
+
+// BuiltinDetail (leaf): Specifies a built-in (alias) for a match condition that matches
+// multiple flags, or specifies particular logic as to the flag matches
+// to be implemented. This leaf is only valid when the detail-match-mode
+// leaf is BUILTIN.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/builtin-detail"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/builtin-detail"
+func (n *Qos_Classifier_Term_Conditions_TransportPath) BuiltinDetail() *Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPath {
+	return &Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "builtin-detail"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// BuiltinDetail (leaf): Specifies a built-in (alias) for a match condition that matches
+// multiple flags, or specifies particular logic as to the flag matches
+// to be implemented. This leaf is only valid when the detail-match-mode
+// leaf is BUILTIN.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/builtin-detail"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/builtin-detail"
+func (n *Qos_Classifier_Term_Conditions_TransportPathAny) BuiltinDetail() *Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPathAny {
+	return &Qos_Classifier_Term_Conditions_Transport_BuiltinDetailPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "builtin-detail"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
 }
 
 // DestinationPort (leaf): Destination port or range
@@ -10387,6 +10835,126 @@ func (n *Qos_Classifier_Term_Conditions_TransportPathAny) DestinationPortSet() *
 	}
 }
 
+// DetailMode (leaf): Mode that is used for matching detailed fields at the transport
+// layer. When EXPLICIT is specified, the implementation should
+// match based on the explicit flags that are specified in the
+// corresponding leaf. When BUILTIN is specified, the implementation
+// must expand the contents of the corresponding leaf to the flags
+// and/or fields that match the pre-defined built-in values.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/detail-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/detail-mode"
+func (n *Qos_Classifier_Term_Conditions_TransportPath) DetailMode() *Qos_Classifier_Term_Conditions_Transport_DetailModePath {
+	return &Qos_Classifier_Term_Conditions_Transport_DetailModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "detail-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DetailMode (leaf): Mode that is used for matching detailed fields at the transport
+// layer. When EXPLICIT is specified, the implementation should
+// match based on the explicit flags that are specified in the
+// corresponding leaf. When BUILTIN is specified, the implementation
+// must expand the contents of the corresponding leaf to the flags
+// and/or fields that match the pre-defined built-in values.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/detail-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/detail-mode"
+func (n *Qos_Classifier_Term_Conditions_TransportPathAny) DetailMode() *Qos_Classifier_Term_Conditions_Transport_DetailModePathAny {
+	return &Qos_Classifier_Term_Conditions_Transport_DetailModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "detail-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitDetailMatchMode (leaf): Specifies how the contents of the explicit-details-flags list
+// are to be treated. ANY implies that any of the flags may match,
+// where ALL indicates that all the flags must be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/explicit-detail-match-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/explicit-detail-match-mode"
+func (n *Qos_Classifier_Term_Conditions_TransportPath) ExplicitDetailMatchMode() *Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePath {
+	return &Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-detail-match-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitDetailMatchMode (leaf): Specifies how the contents of the explicit-details-flags list
+// are to be treated. ANY implies that any of the flags may match,
+// where ALL indicates that all the flags must be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/explicit-detail-match-mode"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/explicit-detail-match-mode"
+func (n *Qos_Classifier_Term_Conditions_TransportPathAny) ExplicitDetailMatchMode() *Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePathAny {
+	return &Qos_Classifier_Term_Conditions_Transport_ExplicitDetailMatchModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-detail-match-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitTcpFlags (leaf-list): An explicit list of the TCP flags that are to be matched. The
+// mechanism for the match is specified by the explicit-detail-match-mode
+// leaf.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/explicit-tcp-flags"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/explicit-tcp-flags"
+func (n *Qos_Classifier_Term_Conditions_TransportPath) ExplicitTcpFlags() *Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPath {
+	return &Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-tcp-flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitTcpFlags (leaf-list): An explicit list of the TCP flags that are to be matched. The
+// mechanism for the match is specified by the explicit-detail-match-mode
+// leaf.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/explicit-tcp-flags"
+//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/explicit-tcp-flags"
+func (n *Qos_Classifier_Term_Conditions_TransportPathAny) ExplicitTcpFlags() *Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPathAny {
+	return &Qos_Classifier_Term_Conditions_Transport_ExplicitTcpFlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-tcp-flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // SourcePort (leaf): Source port or range
 //
 //	Defining module:      "openconfig-packet-match"
@@ -10450,40 +11018,6 @@ func (n *Qos_Classifier_Term_Conditions_TransportPathAny) SourcePortSet() *Qos_C
 	return &Qos_Classifier_Term_Conditions_Transport_SourcePortSetPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-port-set"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-}
-
-// TcpFlags (leaf-list): List of TCP flags to match
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-qos"
-//	Path from parent:     "*/tcp-flags"
-//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/tcp-flags"
-func (n *Qos_Classifier_Term_Conditions_TransportPath) TcpFlags() *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath {
-	return &Qos_Classifier_Term_Conditions_Transport_TcpFlagsPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "tcp-flags"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-}
-
-// TcpFlags (leaf-list): List of TCP flags to match
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-qos"
-//	Path from parent:     "*/tcp-flags"
-//	Path from root:       "/qos/classifiers/classifier/terms/term/conditions/transport/*/tcp-flags"
-func (n *Qos_Classifier_Term_Conditions_TransportPathAny) TcpFlags() *Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny {
-	return &Qos_Classifier_Term_Conditions_Transport_TcpFlagsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "tcp-flags"},
 			map[string]interface{}{},
 			n,
 		),
@@ -22531,6 +23065,158 @@ func (n *Qos_Queue_NamePathAny) Config() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/queue-id"
+//	Path from root:       "/qos/queues/queue/state/queue-id"
+func (n *Qos_Queue_QueueIdPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"Qos_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queue-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Queue).QueueId
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/queue-id"
+//	Path from root:       "/qos/queues/queue/state/queue-id"
+func (n *Qos_Queue_QueueIdPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Qos_Queue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queue-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Queue).QueueId
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/queue-id"
+//	Path from root:       "/qos/queues/queue/config/queue-id"
+func (n *Qos_Queue_QueueIdPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewLeafConfigQuery[uint8](
+		"Qos_Queue",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "queue-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Queue).QueueId
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/queue-id"
+//	Path from root:       "/qos/queues/queue/config/queue-id"
+func (n *Qos_Queue_QueueIdPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Qos_Queue",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "queue-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Qos_Queue).QueueId
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Qos_Queue_QueueIdPath represents the /openconfig-qos/qos/queues/queue/state/queue-id YANG schema element.
+type Qos_Queue_QueueIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Queue_QueueIdPathAny represents the wildcard version of the /openconfig-qos/qos/queues/queue/state/queue-id YANG schema element.
+type Qos_Queue_QueueIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_QueuePath represents the /openconfig-qos/qos/queues/queue YANG schema element.
 type Qos_QueuePath struct {
 	*ygnmi.NodePath
@@ -22568,6 +23254,42 @@ func (n *Qos_QueuePathAny) Name() *Qos_Queue_NamePathAny {
 	return &Qos_Queue_NamePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueId (leaf): An optional identifier which may be required by some hardware to map
+// the named queue to a hardware queue
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/queue-id"
+//	Path from root:       "/qos/queues/queue/*/queue-id"
+func (n *Qos_QueuePath) QueueId() *Qos_Queue_QueueIdPath {
+	return &Qos_Queue_QueueIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "queue-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueId (leaf): An optional identifier which may be required by some hardware to map
+// the named queue to a hardware queue
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/queue-id"
+//	Path from root:       "/qos/queues/queue/*/queue-id"
+func (n *Qos_QueuePathAny) QueueId() *Qos_Queue_QueueIdPathAny {
+	return &Qos_Queue_QueueIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "queue-id"},
 			map[string]interface{}{},
 			n,
 		),

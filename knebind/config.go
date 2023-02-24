@@ -31,7 +31,6 @@ type Config struct {
 	Username, Password string
 	Credentials        *Credentials `yaml:"credentials"`
 	TopoPath           string       `yaml:"topology"`
-	CLIPath            string       `yaml:"cli"`
 	KubecfgPath        string       `yaml:"kubecfg"`
 	SkipReset          bool         `yaml:"skip_reset"`
 }
@@ -91,10 +90,6 @@ func ParseConfigFile(configFile string) (*Config, error) {
 	}
 	if c.TopoPath == "" {
 		return nil, fmt.Errorf("no topology path specified in config: %v", c)
-	}
-	if c.CLIPath == "" {
-		// If no CLI path specified, use kne available in PATH.
-		c.CLIPath = "kne"
 	}
 	return c, nil
 }

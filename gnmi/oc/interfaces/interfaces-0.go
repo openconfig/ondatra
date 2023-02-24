@@ -1207,23 +1207,19 @@ func (n *Interface_LogicalPathAny) State() ygnmi.WildcardQuery[bool] {
 //	Instantiating module: "openconfig-interfaces"
 //	Path from parent:     "state/loopback-mode"
 //	Path from root:       "/interfaces/interface/state/loopback-mode"
-func (n *Interface_LoopbackModePath) State() ygnmi.SingletonQuery[bool] {
-	return ygnmi.NewLeafSingletonQuery[bool](
+func (n *Interface_LoopbackModePath) State() ygnmi.SingletonQuery[oc.E_Interfaces_LoopbackModeType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Interfaces_LoopbackModeType](
 		"Interface",
 		true,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"state", "loopback-mode"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_Interfaces_LoopbackModeType, bool) {
 			ret := gs.(*oc.Interface).LoopbackMode
-			if ret == nil {
-				var zero bool
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Interface) },
 		func() *ytypes.Schema {
@@ -1242,23 +1238,19 @@ func (n *Interface_LoopbackModePath) State() ygnmi.SingletonQuery[bool] {
 //	Instantiating module: "openconfig-interfaces"
 //	Path from parent:     "state/loopback-mode"
 //	Path from root:       "/interfaces/interface/state/loopback-mode"
-func (n *Interface_LoopbackModePathAny) State() ygnmi.WildcardQuery[bool] {
-	return ygnmi.NewLeafWildcardQuery[bool](
+func (n *Interface_LoopbackModePathAny) State() ygnmi.WildcardQuery[oc.E_Interfaces_LoopbackModeType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Interfaces_LoopbackModeType](
 		"Interface",
 		true,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"state", "loopback-mode"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_Interfaces_LoopbackModeType, bool) {
 			ret := gs.(*oc.Interface).LoopbackMode
-			if ret == nil {
-				var zero bool
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Interface) },
 		func() *ytypes.Schema {
@@ -1277,23 +1269,19 @@ func (n *Interface_LoopbackModePathAny) State() ygnmi.WildcardQuery[bool] {
 //	Instantiating module: "openconfig-interfaces"
 //	Path from parent:     "config/loopback-mode"
 //	Path from root:       "/interfaces/interface/config/loopback-mode"
-func (n *Interface_LoopbackModePath) Config() ygnmi.ConfigQuery[bool] {
-	return ygnmi.NewLeafConfigQuery[bool](
+func (n *Interface_LoopbackModePath) Config() ygnmi.ConfigQuery[oc.E_Interfaces_LoopbackModeType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Interfaces_LoopbackModeType](
 		"Interface",
 		false,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"config", "loopback-mode"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_Interfaces_LoopbackModeType, bool) {
 			ret := gs.(*oc.Interface).LoopbackMode
-			if ret == nil {
-				var zero bool
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Interface) },
 		func() *ytypes.Schema {
@@ -1312,23 +1300,19 @@ func (n *Interface_LoopbackModePath) Config() ygnmi.ConfigQuery[bool] {
 //	Instantiating module: "openconfig-interfaces"
 //	Path from parent:     "config/loopback-mode"
 //	Path from root:       "/interfaces/interface/config/loopback-mode"
-func (n *Interface_LoopbackModePathAny) Config() ygnmi.WildcardQuery[bool] {
-	return ygnmi.NewLeafWildcardQuery[bool](
+func (n *Interface_LoopbackModePathAny) Config() ygnmi.WildcardQuery[oc.E_Interfaces_LoopbackModeType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Interfaces_LoopbackModeType](
 		"Interface",
 		false,
-		true,
+		false,
 		ygnmi.NewNodePath(
 			[]string{"config", "loopback-mode"},
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_Interfaces_LoopbackModeType, bool) {
 			ret := gs.(*oc.Interface).LoopbackMode
-			if ret == nil {
-				var zero bool
-				return zero, false
-			}
-			return *ret, true
+			return ret, !reflect.ValueOf(ret).IsZero()
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Interface) },
 		func() *ytypes.Schema {
@@ -3127,9 +3111,9 @@ func (n *InterfacePathAny) Logical() *Interface_LogicalPathAny {
 	}
 }
 
-// LoopbackMode (leaf): When set to true, the interface is logically looped back,
-// such that packets that are forwarded via the interface
-// are received on the same interface.
+// LoopbackMode (leaf): Sets the loopback type on the interface. Setting the
+// mode to something besides NONE activates the loopback in
+// the specified mode.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -3146,9 +3130,9 @@ func (n *InterfacePath) LoopbackMode() *Interface_LoopbackModePath {
 	}
 }
 
-// LoopbackMode (leaf): When set to true, the interface is logically looped back,
-// such that packets that are forwarded via the interface
-// are received on the same interface.
+// LoopbackMode (leaf): Sets the loopback type on the interface. Setting the
+// mode to something besides NONE activates the loopback in
+// the specified mode.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -22611,6 +22595,130 @@ func (n *Interface_RoutedVlan_Ipv6_Address_StatusPathAny) State() ygnmi.Wildcard
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/addresses/address/state/type"
+func (n *Interface_RoutedVlan_Ipv6_Address_TypePath) State() ygnmi.SingletonQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_RoutedVlan_Ipv6_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/addresses/address/state/type"
+func (n *Interface_RoutedVlan_Ipv6_Address_TypePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_RoutedVlan_Ipv6_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/addresses/address/config/type"
+func (n *Interface_RoutedVlan_Ipv6_Address_TypePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_RoutedVlan_Ipv6_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/addresses/address/config/type"
+func (n *Interface_RoutedVlan_Ipv6_Address_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_RoutedVlan_Ipv6_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_Address_OriginPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/state/origin YANG schema element.
 type Interface_RoutedVlan_Ipv6_Address_OriginPath struct {
 	*ygnmi.NodePath
@@ -22643,6 +22751,18 @@ type Interface_RoutedVlan_Ipv6_Address_StatusPath struct {
 
 // Interface_RoutedVlan_Ipv6_Address_StatusPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/state/status YANG schema element.
 type Interface_RoutedVlan_Ipv6_Address_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Address_TypePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/state/type YANG schema element.
+type Interface_RoutedVlan_Ipv6_Address_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Address_TypePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/addresses/address/state/type YANG schema element.
+type Interface_RoutedVlan_Ipv6_Address_TypePathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -22790,6 +22910,46 @@ func (n *Interface_RoutedVlan_Ipv6_AddressPathAny) Status() *Interface_RoutedVla
 	return &Interface_RoutedVlan_Ipv6_Address_StatusPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv6 address being assigned
+// to the subinterface. By default, addresses are assumed to be
+// global unicast.  Where a link-local address is to be explicitly
+// configured, this leaf should be set to LINK_LOCAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/addresses/address/*/type"
+func (n *Interface_RoutedVlan_Ipv6_AddressPath) Type() *Interface_RoutedVlan_Ipv6_Address_TypePath {
+	return &Interface_RoutedVlan_Ipv6_Address_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv6 address being assigned
+// to the subinterface. By default, addresses are assumed to be
+// global unicast.  Where a link-local address is to be explicitly
+// configured, this leaf should be set to LINK_LOCAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/addresses/address/*/type"
+func (n *Interface_RoutedVlan_Ipv6_AddressPathAny) Type() *Interface_RoutedVlan_Ipv6_Address_TypePathAny {
+	return &Interface_RoutedVlan_Ipv6_Address_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
 			map[string]interface{}{},
 			n,
 		),
@@ -42842,6 +43002,130 @@ func (n *Interface_Subinterface_Ipv6_Address_StatusPathAny) State() ygnmi.Wildca
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/type"
+func (n *Interface_Subinterface_Ipv6_Address_TypePath) State() ygnmi.SingletonQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_Subinterface_Ipv6_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/type"
+func (n *Interface_Subinterface_Ipv6_Address_TypePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_Subinterface_Ipv6_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/config/type"
+func (n *Interface_Subinterface_Ipv6_Address_TypePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_Subinterface_Ipv6_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/config/type"
+func (n *Interface_Subinterface_Ipv6_Address_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_Ipv6AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv6AddressType](
+		"Interface_Subinterface_Ipv6_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv6AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
 // Interface_Subinterface_Ipv6_Address_OriginPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/origin YANG schema element.
 type Interface_Subinterface_Ipv6_Address_OriginPath struct {
 	*ygnmi.NodePath
@@ -42874,6 +43158,18 @@ type Interface_Subinterface_Ipv6_Address_StatusPath struct {
 
 // Interface_Subinterface_Ipv6_Address_StatusPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/status YANG schema element.
 type Interface_Subinterface_Ipv6_Address_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Address_TypePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/type YANG schema element.
+type Interface_Subinterface_Ipv6_Address_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Address_TypePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/type YANG schema element.
+type Interface_Subinterface_Ipv6_Address_TypePathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -43021,6 +43317,46 @@ func (n *Interface_Subinterface_Ipv6_AddressPathAny) Status() *Interface_Subinte
 	return &Interface_Subinterface_Ipv6_Address_StatusPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv6 address being assigned
+// to the subinterface. By default, addresses are assumed to be
+// global unicast.  Where a link-local address is to be explicitly
+// configured, this leaf should be set to LINK_LOCAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/*/type"
+func (n *Interface_Subinterface_Ipv6_AddressPath) Type() *Interface_Subinterface_Ipv6_Address_TypePath {
+	return &Interface_Subinterface_Ipv6_Address_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv6 address being assigned
+// to the subinterface. By default, addresses are assumed to be
+// global unicast.  Where a link-local address is to be explicitly
+// configured, this leaf should be set to LINK_LOCAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/*/type"
+func (n *Interface_Subinterface_Ipv6_AddressPathAny) Type() *Interface_Subinterface_Ipv6_Address_TypePathAny {
+	return &Interface_Subinterface_Ipv6_Address_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
 			map[string]interface{}{},
 			n,
 		),

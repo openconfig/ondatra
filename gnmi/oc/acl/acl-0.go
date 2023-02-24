@@ -8355,14 +8355,14 @@ func (n *Acl_AclSet_AclEntry_MplsPathAny) TtlValue() *Acl_AclSet_AclEntry_Mpls_T
 	}
 }
 
-// Acl_AclSet_AclEntry_Transport_DestinationPortPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port YANG schema element.
-type Acl_AclSet_AclEntry_Transport_DestinationPortPath struct {
+// Acl_AclSet_AclEntry_Transport_BuiltinDetailPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/builtin-detail YANG schema element.
+type Acl_AclSet_AclEntry_Transport_BuiltinDetailPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// Acl_AclSet_AclEntry_Transport_DestinationPortPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port YANG schema element.
-type Acl_AclSet_AclEntry_Transport_DestinationPortPathAny struct {
+// Acl_AclSet_AclEntry_Transport_BuiltinDetailPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/builtin-detail YANG schema element.
+type Acl_AclSet_AclEntry_Transport_BuiltinDetailPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -8423,6 +8423,130 @@ func (n *Acl_AclSet_AclEntry_TransportPathAny) Config() ygnmi.WildcardQuery[*oc.
 		"Acl_AclSet_AclEntry_Transport",
 		false,
 		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/builtin-detail"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/builtin-detail"
+func (n *Acl_AclSet_AclEntry_Transport_BuiltinDetailPath) State() ygnmi.SingletonQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Transport_BuiltinDetail](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/builtin-detail"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/builtin-detail"
+func (n *Acl_AclSet_AclEntry_Transport_BuiltinDetailPathAny) State() ygnmi.WildcardQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_BuiltinDetail](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/builtin-detail"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/builtin-detail"
+func (n *Acl_AclSet_AclEntry_Transport_BuiltinDetailPath) Config() ygnmi.ConfigQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Transport_BuiltinDetail](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/builtin-detail"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/builtin-detail"
+func (n *Acl_AclSet_AclEntry_Transport_BuiltinDetailPathAny) Config() ygnmi.WildcardQuery[oc.E_Transport_BuiltinDetail] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_BuiltinDetail](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "builtin-detail"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_BuiltinDetail, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).BuiltinDetail
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -8701,6 +8825,378 @@ func (n *Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny) Config() ygnmi
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/detail-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/detail-mode"
+func (n *Acl_AclSet_AclEntry_Transport_DetailModePath) State() ygnmi.SingletonQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Transport_DetailMode](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/detail-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/detail-mode"
+func (n *Acl_AclSet_AclEntry_Transport_DetailModePathAny) State() ygnmi.WildcardQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_DetailMode](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/detail-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/detail-mode"
+func (n *Acl_AclSet_AclEntry_Transport_DetailModePath) Config() ygnmi.ConfigQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Transport_DetailMode](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/detail-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/detail-mode"
+func (n *Acl_AclSet_AclEntry_Transport_DetailModePathAny) Config() ygnmi.WildcardQuery[oc.E_Transport_DetailMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_DetailMode](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "detail-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_DetailMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).DetailMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/explicit-detail-match-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-detail-match-mode"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePath) State() ygnmi.SingletonQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/explicit-detail-match-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-detail-match-mode"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePathAny) State() ygnmi.WildcardQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/explicit-detail-match-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/explicit-detail-match-mode"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePath) Config() ygnmi.ConfigQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/explicit-detail-match-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/explicit-detail-match-mode"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePathAny) Config() ygnmi.WildcardQuery[oc.E_Transport_ExplicitDetailMatchMode] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Transport_ExplicitDetailMatchMode](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-detail-match-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Transport_ExplicitDetailMatchMode, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitDetailMatchMode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/explicit-tcp-flags"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-tcp-flags"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPath) State() ygnmi.SingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/explicit-tcp-flags"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-tcp-flags"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Acl_AclSet_AclEntry_Transport",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/explicit-tcp-flags"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/explicit-tcp-flags"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPath) Config() ygnmi.ConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/explicit-tcp-flags"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/explicit-tcp-flags"
+func (n *Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPathAny) Config() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
+		"Acl_AclSet_AclEntry_Transport",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "explicit-tcp-flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).ExplicitTcpFlags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
 //	Path from parent:     "state/source-port"
 //	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port"
 func (n *Acl_AclSet_AclEntry_Transport_SourcePortPath) State() ygnmi.SingletonQuery[oc.Acl_AclSet_AclEntry_Transport_SourcePort_Union] {
@@ -8961,128 +9457,16 @@ func (n *Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny) Config() ygnmi.Wild
 	)
 }
 
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-acl"
-//	Path from parent:     "state/tcp-flags"
-//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags"
-func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPath) State() ygnmi.SingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafSingletonQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Acl_AclSet_AclEntry_Transport",
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
+// Acl_AclSet_AclEntry_Transport_DestinationPortPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port YANG schema element.
+type Acl_AclSet_AclEntry_Transport_DestinationPortPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-acl"
-//	Path from parent:     "state/tcp-flags"
-//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags"
-func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Acl_AclSet_AclEntry_Transport",
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-acl"
-//	Path from parent:     "config/tcp-flags"
-//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/tcp-flags"
-func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPath) Config() ygnmi.ConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafConfigQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Acl_AclSet_AclEntry_Transport",
-		false,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"config", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-acl"
-//	Path from parent:     "config/tcp-flags"
-//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/config/tcp-flags"
-func (n *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny) Config() ygnmi.WildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS] {
-	return ygnmi.NewLeafWildcardQuery[[]oc.E_PacketMatchTypes_TCP_FLAGS](
-		"Acl_AclSet_AclEntry_Transport",
-		false,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"config", "tcp-flags"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) ([]oc.E_PacketMatchTypes_TCP_FLAGS, bool) {
-			ret := gs.(*oc.Acl_AclSet_AclEntry_Transport).TcpFlags
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Transport) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-	)
+// Acl_AclSet_AclEntry_Transport_DestinationPortPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port YANG schema element.
+type Acl_AclSet_AclEntry_Transport_DestinationPortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
 // Acl_AclSet_AclEntry_Transport_DestinationPortSetPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port-set YANG schema element.
@@ -9093,6 +9477,42 @@ type Acl_AclSet_AclEntry_Transport_DestinationPortSetPath struct {
 
 // Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port-set YANG schema element.
 type Acl_AclSet_AclEntry_Transport_DestinationPortSetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_DetailModePath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/detail-mode YANG schema element.
+type Acl_AclSet_AclEntry_Transport_DetailModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_DetailModePathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/detail-mode YANG schema element.
+type Acl_AclSet_AclEntry_Transport_DetailModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-detail-match-mode YANG schema element.
+type Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-detail-match-mode YANG schema element.
+type Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-tcp-flags YANG schema element.
+type Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-tcp-flags YANG schema element.
+type Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -9121,18 +9541,6 @@ type Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny struct {
 	parent ygnmi.PathStruct
 }
 
-// Acl_AclSet_AclEntry_Transport_TcpFlagsPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags YANG schema element.
-type Acl_AclSet_AclEntry_Transport_TcpFlagsPath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags YANG schema element.
-type Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
 // Acl_AclSet_AclEntry_TransportPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport YANG schema element.
 type Acl_AclSet_AclEntry_TransportPath struct {
 	*ygnmi.NodePath
@@ -9141,6 +9549,46 @@ type Acl_AclSet_AclEntry_TransportPath struct {
 // Acl_AclSet_AclEntry_TransportPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/transport YANG schema element.
 type Acl_AclSet_AclEntry_TransportPathAny struct {
 	*ygnmi.NodePath
+}
+
+// BuiltinDetail (leaf): Specifies a built-in (alias) for a match condition that matches
+// multiple flags, or specifies particular logic as to the flag matches
+// to be implemented. This leaf is only valid when the detail-match-mode
+// leaf is BUILTIN.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/builtin-detail"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/builtin-detail"
+func (n *Acl_AclSet_AclEntry_TransportPath) BuiltinDetail() *Acl_AclSet_AclEntry_Transport_BuiltinDetailPath {
+	return &Acl_AclSet_AclEntry_Transport_BuiltinDetailPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "builtin-detail"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// BuiltinDetail (leaf): Specifies a built-in (alias) for a match condition that matches
+// multiple flags, or specifies particular logic as to the flag matches
+// to be implemented. This leaf is only valid when the detail-match-mode
+// leaf is BUILTIN.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/builtin-detail"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/builtin-detail"
+func (n *Acl_AclSet_AclEntry_TransportPathAny) BuiltinDetail() *Acl_AclSet_AclEntry_Transport_BuiltinDetailPathAny {
+	return &Acl_AclSet_AclEntry_Transport_BuiltinDetailPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "builtin-detail"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
 }
 
 // DestinationPort (leaf): Destination port or range
@@ -9213,6 +9661,126 @@ func (n *Acl_AclSet_AclEntry_TransportPathAny) DestinationPortSet() *Acl_AclSet_
 	}
 }
 
+// DetailMode (leaf): Mode that is used for matching detailed fields at the transport
+// layer. When EXPLICIT is specified, the implementation should
+// match based on the explicit flags that are specified in the
+// corresponding leaf. When BUILTIN is specified, the implementation
+// must expand the contents of the corresponding leaf to the flags
+// and/or fields that match the pre-defined built-in values.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/detail-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/detail-mode"
+func (n *Acl_AclSet_AclEntry_TransportPath) DetailMode() *Acl_AclSet_AclEntry_Transport_DetailModePath {
+	return &Acl_AclSet_AclEntry_Transport_DetailModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "detail-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DetailMode (leaf): Mode that is used for matching detailed fields at the transport
+// layer. When EXPLICIT is specified, the implementation should
+// match based on the explicit flags that are specified in the
+// corresponding leaf. When BUILTIN is specified, the implementation
+// must expand the contents of the corresponding leaf to the flags
+// and/or fields that match the pre-defined built-in values.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/detail-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/detail-mode"
+func (n *Acl_AclSet_AclEntry_TransportPathAny) DetailMode() *Acl_AclSet_AclEntry_Transport_DetailModePathAny {
+	return &Acl_AclSet_AclEntry_Transport_DetailModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "detail-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitDetailMatchMode (leaf): Specifies how the contents of the explicit-details-flags list
+// are to be treated. ANY implies that any of the flags may match,
+// where ALL indicates that all the flags must be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/explicit-detail-match-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/explicit-detail-match-mode"
+func (n *Acl_AclSet_AclEntry_TransportPath) ExplicitDetailMatchMode() *Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePath {
+	return &Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-detail-match-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitDetailMatchMode (leaf): Specifies how the contents of the explicit-details-flags list
+// are to be treated. ANY implies that any of the flags may match,
+// where ALL indicates that all the flags must be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/explicit-detail-match-mode"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/explicit-detail-match-mode"
+func (n *Acl_AclSet_AclEntry_TransportPathAny) ExplicitDetailMatchMode() *Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePathAny {
+	return &Acl_AclSet_AclEntry_Transport_ExplicitDetailMatchModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-detail-match-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitTcpFlags (leaf-list): An explicit list of the TCP flags that are to be matched. The
+// mechanism for the match is specified by the explicit-detail-match-mode
+// leaf.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/explicit-tcp-flags"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/explicit-tcp-flags"
+func (n *Acl_AclSet_AclEntry_TransportPath) ExplicitTcpFlags() *Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPath {
+	return &Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-tcp-flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ExplicitTcpFlags (leaf-list): An explicit list of the TCP flags that are to be matched. The
+// mechanism for the match is specified by the explicit-detail-match-mode
+// leaf.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/explicit-tcp-flags"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/explicit-tcp-flags"
+func (n *Acl_AclSet_AclEntry_TransportPathAny) ExplicitTcpFlags() *Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPathAny {
+	return &Acl_AclSet_AclEntry_Transport_ExplicitTcpFlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "explicit-tcp-flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // SourcePort (leaf): Source port or range
 //
 //	Defining module:      "openconfig-packet-match"
@@ -9276,40 +9844,6 @@ func (n *Acl_AclSet_AclEntry_TransportPathAny) SourcePortSet() *Acl_AclSet_AclEn
 	return &Acl_AclSet_AclEntry_Transport_SourcePortSetPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-port-set"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-}
-
-// TcpFlags (leaf-list): List of TCP flags to match
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-acl"
-//	Path from parent:     "*/tcp-flags"
-//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/tcp-flags"
-func (n *Acl_AclSet_AclEntry_TransportPath) TcpFlags() *Acl_AclSet_AclEntry_Transport_TcpFlagsPath {
-	return &Acl_AclSet_AclEntry_Transport_TcpFlagsPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "tcp-flags"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-}
-
-// TcpFlags (leaf-list): List of TCP flags to match
-//
-//	Defining module:      "openconfig-packet-match"
-//	Instantiating module: "openconfig-acl"
-//	Path from parent:     "*/tcp-flags"
-//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/*/tcp-flags"
-func (n *Acl_AclSet_AclEntry_TransportPathAny) TcpFlags() *Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny {
-	return &Acl_AclSet_AclEntry_Transport_TcpFlagsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "tcp-flags"},
 			map[string]interface{}{},
 			n,
 		),

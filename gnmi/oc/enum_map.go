@@ -818,6 +818,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "LINK_LAYER"},
 		5: {Name: "RANDOM"},
 	},
+	"E_IfIp_Ipv6AddressType": {
+		1: {Name: "GLOBAL_UNICAST"},
+		2: {Name: "LINK_LOCAL_UNICAST"},
+	},
 	"E_IfIp_NeighborOrigin": {
 		1: {Name: "OTHER"},
 		2: {Name: "STATIC"},
@@ -892,6 +896,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		5: {Name: "DORMANT"},
 		6: {Name: "NOT_PRESENT"},
 		7: {Name: "LOWER_LAYER_DOWN"},
+	},
+	"E_Interfaces_LoopbackModeType": {
+		1: {Name: "NONE"},
+		2: {Name: "FACILITY"},
+		3: {Name: "TERMINAL"},
 	},
 	"E_Ipv4Srlg_Flags": {
 		1: {Name: "NUMBERED"},
@@ -1944,33 +1953,34 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1:  {Name: "ETH_100GBASE_CLR4", DefiningModule: "openconfig-transport-types"},
 		2:  {Name: "ETH_100GBASE_CR4", DefiningModule: "openconfig-transport-types"},
 		3:  {Name: "ETH_100GBASE_CWDM4", DefiningModule: "openconfig-transport-types"},
-		4:  {Name: "ETH_100GBASE_ER4", DefiningModule: "openconfig-transport-types"},
-		5:  {Name: "ETH_100GBASE_FR", DefiningModule: "openconfig-transport-types"},
-		6:  {Name: "ETH_100GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		7:  {Name: "ETH_100GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
-		8:  {Name: "ETH_100GBASE_SR10", DefiningModule: "openconfig-transport-types"},
-		9:  {Name: "ETH_100GBASE_SR4", DefiningModule: "openconfig-transport-types"},
-		10: {Name: "ETH_100G_ACC", DefiningModule: "openconfig-transport-types"},
-		11: {Name: "ETH_100G_AOC", DefiningModule: "openconfig-transport-types"},
-		12: {Name: "ETH_10GBASE_ER", DefiningModule: "openconfig-transport-types"},
-		13: {Name: "ETH_10GBASE_LR", DefiningModule: "openconfig-transport-types"},
-		14: {Name: "ETH_10GBASE_LRM", DefiningModule: "openconfig-transport-types"},
-		15: {Name: "ETH_10GBASE_SR", DefiningModule: "openconfig-transport-types"},
-		16: {Name: "ETH_10GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		17: {Name: "ETH_400GBASE_DR4", DefiningModule: "openconfig-transport-types"},
-		18: {Name: "ETH_400GBASE_FR4", DefiningModule: "openconfig-transport-types"},
-		19: {Name: "ETH_400GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		20: {Name: "ETH_400GBASE_LR8", DefiningModule: "openconfig-transport-types"},
-		21: {Name: "ETH_400GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		22: {Name: "ETH_400GMSA_PSM4", DefiningModule: "openconfig-transport-types"},
-		23: {Name: "ETH_40GBASE_CR4", DefiningModule: "openconfig-transport-types"},
-		24: {Name: "ETH_40GBASE_ER4", DefiningModule: "openconfig-transport-types"},
-		25: {Name: "ETH_40GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		26: {Name: "ETH_40GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
-		27: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
-		28: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
-		29: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
-		30: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
+		4:  {Name: "ETH_100GBASE_DR", DefiningModule: "openconfig-transport-types"},
+		5:  {Name: "ETH_100GBASE_ER4", DefiningModule: "openconfig-transport-types"},
+		6:  {Name: "ETH_100GBASE_FR", DefiningModule: "openconfig-transport-types"},
+		7:  {Name: "ETH_100GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		8:  {Name: "ETH_100GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
+		9:  {Name: "ETH_100GBASE_SR10", DefiningModule: "openconfig-transport-types"},
+		10: {Name: "ETH_100GBASE_SR4", DefiningModule: "openconfig-transport-types"},
+		11: {Name: "ETH_100G_ACC", DefiningModule: "openconfig-transport-types"},
+		12: {Name: "ETH_100G_AOC", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "ETH_10GBASE_ER", DefiningModule: "openconfig-transport-types"},
+		14: {Name: "ETH_10GBASE_LR", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "ETH_10GBASE_LRM", DefiningModule: "openconfig-transport-types"},
+		16: {Name: "ETH_10GBASE_SR", DefiningModule: "openconfig-transport-types"},
+		17: {Name: "ETH_10GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		18: {Name: "ETH_400GBASE_DR4", DefiningModule: "openconfig-transport-types"},
+		19: {Name: "ETH_400GBASE_FR4", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "ETH_400GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "ETH_400GBASE_LR8", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "ETH_400GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "ETH_400GMSA_PSM4", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "ETH_40GBASE_CR4", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "ETH_40GBASE_ER4", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "ETH_40GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "ETH_40GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
+		28: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
+		29: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
+		30: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
+		31: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_FIBER_CONNECTOR_TYPE": {
 		1: {Name: "AOC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
@@ -2099,8 +2109,21 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "TRIB_SLOT_2.5G", DefiningModule: "openconfig-transport-types"},
 		3: {Name: "TRIB_SLOT_5G", DefiningModule: "openconfig-transport-types"},
 	},
+	"E_Transport_BuiltinDetail": {
+		1: {Name: "TCP_INITIAL"},
+		2: {Name: "TCP_ESTABLISHED"},
+		3: {Name: "FRAGMENT"},
+	},
 	"E_Transport_DestinationPort": {
 		1: {Name: "ANY"},
+	},
+	"E_Transport_DetailMode": {
+		1: {Name: "EXPLICIT"},
+		2: {Name: "BUILTIN"},
+	},
+	"E_Transport_ExplicitDetailMatchMode": {
+		1: {Name: "ANY"},
+		2: {Name: "ALL"},
 	},
 	"E_Transport_SourcePort": {
 		1: {Name: "ANY"},
@@ -2159,14 +2182,23 @@ func initΛEnumTypes() {
 		"/acl/acl-sets/acl-set/acl-entries/acl-entry/mpls/state/start-label-value": {
 			reflect.TypeOf((E_Mpls_StartLabelValue)(0)),
 		},
+		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/builtin-detail": {
+			reflect.TypeOf((E_Transport_BuiltinDetail)(0)),
+		},
 		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/destination-port": {
 			reflect.TypeOf((E_Transport_DestinationPort)(0)),
 		},
+		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/detail-mode": {
+			reflect.TypeOf((E_Transport_DetailMode)(0)),
+		},
+		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-detail-match-mode": {
+			reflect.TypeOf((E_Transport_ExplicitDetailMatchMode)(0)),
+		},
+		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/explicit-tcp-flags": {
+			reflect.TypeOf((E_PacketMatchTypes_TCP_FLAGS)(0)),
+		},
 		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/source-port": {
 			reflect.TypeOf((E_Transport_SourcePort)(0)),
-		},
-		"/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/state/tcp-flags": {
-			reflect.TypeOf((E_PacketMatchTypes_TCP_FLAGS)(0)),
 		},
 		"/acl/acl-sets/acl-set/state/type": {
 			reflect.TypeOf((E_Acl_ACL_TYPE)(0)),
@@ -2289,6 +2321,9 @@ func initΛEnumTypes() {
 		"/interfaces/interface/routed-vlan/ipv6/addresses/address/state/status": {
 			reflect.TypeOf((E_Address_Status)(0)),
 		},
+		"/interfaces/interface/routed-vlan/ipv6/addresses/address/state/type": {
+			reflect.TypeOf((E_IfIp_Ipv6AddressType)(0)),
+		},
 		"/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/neighbor-state": {
 			reflect.TypeOf((E_Neighbor_NeighborState)(0)),
 		},
@@ -2297,6 +2332,9 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),
+		},
+		"/interfaces/interface/state/loopback-mode": {
+			reflect.TypeOf((E_Interfaces_LoopbackModeType)(0)),
 		},
 		"/interfaces/interface/state/oper-status": {
 			reflect.TypeOf((E_Interface_OperStatus)(0)),
@@ -2321,6 +2359,9 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/status": {
 			reflect.TypeOf((E_Address_Status)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/type": {
+			reflect.TypeOf((E_IfIp_Ipv6AddressType)(0)),
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/neighbor-state": {
 			reflect.TypeOf((E_Neighbor_NeighborState)(0)),
@@ -2670,14 +2711,23 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/l2/state/ethertype": {
 			reflect.TypeOf((E_PacketMatchTypes_ETHERTYPE)(0)),
 		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/builtin-detail": {
+			reflect.TypeOf((E_Transport_BuiltinDetail)(0)),
+		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/destination-port": {
 			reflect.TypeOf((E_Transport_DestinationPort)(0)),
 		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/detail-mode": {
+			reflect.TypeOf((E_Transport_DetailMode)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/explicit-detail-match-mode": {
+			reflect.TypeOf((E_Transport_ExplicitDetailMatchMode)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/explicit-tcp-flags": {
+			reflect.TypeOf((E_PacketMatchTypes_TCP_FLAGS)(0)),
+		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/source-port": {
 			reflect.TypeOf((E_Transport_SourcePort)(0)),
-		},
-		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/state/tcp-flags": {
-			reflect.TypeOf((E_PacketMatchTypes_TCP_FLAGS)(0)),
 		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/state/type": {
 			reflect.TypeOf((E_Policy_Type)(0)),
@@ -3439,14 +3489,23 @@ func initΛEnumTypes() {
 		"/qos/classifiers/classifier/terms/term/conditions/mpls/state/start-label-value": {
 			reflect.TypeOf((E_Mpls_StartLabelValue)(0)),
 		},
+		"/qos/classifiers/classifier/terms/term/conditions/transport/state/builtin-detail": {
+			reflect.TypeOf((E_Transport_BuiltinDetail)(0)),
+		},
 		"/qos/classifiers/classifier/terms/term/conditions/transport/state/destination-port": {
 			reflect.TypeOf((E_Transport_DestinationPort)(0)),
 		},
+		"/qos/classifiers/classifier/terms/term/conditions/transport/state/detail-mode": {
+			reflect.TypeOf((E_Transport_DetailMode)(0)),
+		},
+		"/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-detail-match-mode": {
+			reflect.TypeOf((E_Transport_ExplicitDetailMatchMode)(0)),
+		},
+		"/qos/classifiers/classifier/terms/term/conditions/transport/state/explicit-tcp-flags": {
+			reflect.TypeOf((E_PacketMatchTypes_TCP_FLAGS)(0)),
+		},
 		"/qos/classifiers/classifier/terms/term/conditions/transport/state/source-port": {
 			reflect.TypeOf((E_Transport_SourcePort)(0)),
-		},
-		"/qos/classifiers/classifier/terms/term/conditions/transport/state/tcp-flags": {
-			reflect.TypeOf((E_PacketMatchTypes_TCP_FLAGS)(0)),
 		},
 		"/qos/interfaces/interface/input/classifiers/classifier/state/type": {
 			reflect.TypeOf((E_Input_Classifier_Type)(0)),
