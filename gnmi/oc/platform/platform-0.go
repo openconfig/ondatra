@@ -44,6 +44,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
+  - public/release/models/platform/openconfig-platform-pipeline-counters.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -7953,6 +7954,40 @@ func (n *Component_IntegratedCircuitPathAny) NodeId() *Component_IntegratedCircu
 	}
 }
 
+// PipelineCounters (container): Top-level container for the packet, drop, and error counters for the
+// five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "pipeline-counters"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters"
+func (n *Component_IntegratedCircuitPath) PipelineCounters() *Component_IntegratedCircuit_PipelineCountersPath {
+	return &Component_IntegratedCircuit_PipelineCountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"pipeline-counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PipelineCounters (container): Top-level container for the packet, drop, and error counters for the
+// five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "pipeline-counters"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters"
+func (n *Component_IntegratedCircuitPathAny) PipelineCounters() *Component_IntegratedCircuit_PipelineCountersPathAny {
+	return &Component_IntegratedCircuit_PipelineCountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"pipeline-counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Utilization (container): Utilization of the component.
 //
 //	Defining module:      "openconfig-platform-common"
@@ -8962,6 +8997,16836 @@ func (n *Component_IntegratedCircuit_MemoryPathAny) UncorrectedParityErrors() *C
 	return &Component_IntegratedCircuit_Memory_UncorrectedParityErrorsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "uncorrected-parity-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCountersPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters YANG schema element.
+type Component_IntegratedCircuit_PipelineCountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCountersPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters YANG schema element.
+type Component_IntegratedCircuit_PipelineCountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// ControlPlaneTraffic (container): Counters that are related to traffic destined to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "control-plane-traffic"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic"
+func (n *Component_IntegratedCircuit_PipelineCountersPath) ControlPlaneTraffic() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"control-plane-traffic"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// ControlPlaneTraffic (container): Counters that are related to traffic destined to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "control-plane-traffic"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic"
+func (n *Component_IntegratedCircuit_PipelineCountersPathAny) ControlPlaneTraffic() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"control-plane-traffic"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Drop (container): IC drop counters for all five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "drop"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop"
+func (n *Component_IntegratedCircuit_PipelineCountersPath) Drop() *Component_IntegratedCircuit_PipelineCounters_DropPath {
+	return &Component_IntegratedCircuit_PipelineCounters_DropPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"drop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Drop (container): IC drop counters for all five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "drop"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop"
+func (n *Component_IntegratedCircuit_PipelineCountersPathAny) Drop() *Component_IntegratedCircuit_PipelineCounters_DropPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_DropPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"drop"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Errors (container): IC errors for all five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "errors"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors"
+func (n *Component_IntegratedCircuit_PipelineCountersPath) Errors() *Component_IntegratedCircuit_PipelineCounters_ErrorsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_ErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Errors (container): IC errors for all five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "errors"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors"
+func (n *Component_IntegratedCircuit_PipelineCountersPathAny) Errors() *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"errors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Packet (container): IC packet counters for all five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "packet"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet"
+func (n *Component_IntegratedCircuit_PipelineCountersPath) Packet() *Component_IntegratedCircuit_PipelineCounters_PacketPath {
+	return &Component_IntegratedCircuit_PipelineCounters_PacketPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"packet"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Packet (container): IC packet counters for all five NPU sub-blocks.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "packet"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet"
+func (n *Component_IntegratedCircuit_PipelineCountersPathAny) Packet() *Component_IntegratedCircuit_PipelineCounters_PacketPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_PacketPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"packet"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCountersPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters](
+		"Component_IntegratedCircuit_PipelineCounters",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCountersPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters](
+		"Component_IntegratedCircuit_PipelineCounters",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/dropped-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).DroppedAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/dropped-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).DroppedAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/dropped-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-bytes-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).DroppedBytesAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/dropped-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "dropped-bytes-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).DroppedBytesAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queued-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queued-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).QueuedAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queued-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queued-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).QueuedAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queued-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queued-bytes-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).QueuedBytesAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queued-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queued-bytes-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic).QueuedBytesAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-bytes-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-bytes-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-bytes-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-bytes-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny struct {
+	*ygnmi.NodePath
+}
+
+// DroppedAggregate (leaf): This captures the aggregation of all counters where the switch has dropped
+// traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/dropped-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath) DroppedAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedAggregate (leaf): This captures the aggregation of all counters where the switch has dropped
+// traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/dropped-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny) DroppedAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedBytesAggregate (leaf): This captures the aggregation of all counters in bytes where the switch has
+// dropped traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/dropped-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath) DroppedBytesAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-bytes-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// DroppedBytesAggregate (leaf): This captures the aggregation of all counters in bytes where the switch has
+// dropped traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/dropped-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/dropped-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny) DroppedBytesAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_DroppedBytesAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "dropped-bytes-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueuedAggregate (leaf): This captures the aggregation of all counters where the switch has enqueued
+// traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queued-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath) QueuedAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queued-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueuedAggregate (leaf): This captures the aggregation of all counters where the switch has enqueued
+// traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queued-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny) QueuedAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queued-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueuedBytesAggregate (leaf): This captures the aggregation of all counters in bytes where the switch has
+// enqueued traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queued-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath) QueuedBytesAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queued-bytes-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueuedBytesAggregate (leaf): This captures the aggregation of all counters in bytes where the switch has
+// enqueued traffic related to the control-plane.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queued-bytes-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/state/queued-bytes-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny) QueuedBytesAggregate() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_QueuedBytesAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queued-bytes-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Vendor (container): Counters within these containers are defined and augmented by vendors.
+// As each ASIC and vendor has different implementation and internal
+// parts where packets may be dropped at any point in time. Providing
+// vendor-specific counters provides better visibility into control-plane traffic.
+//
+// The recommended usage of this container is to create an augment at
+// .../pipeline-counter/control-plane-traffic/vendor that contains additional
+// vendor/platform specific containers.
+//
+// e.g.
+//
+//	augment /components/component/integrated-circuit/pipeline-counter/control-plane-traffic/vendor {
+//	 container <vendor name> {
+//	   container <platform name> {
+//	     container state {
+//	       leaf counter-a {
+//	         uses control-plane-traffic-vendor-counters;
+//	       }
+//
+//	       leaf counter-b {
+//	         uses control-plane-traffic-vendor-counters;
+//	       }
+//	     }
+//	   }
+//	 }
+//	}
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "vendor"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/vendor"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPath) Vendor() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"vendor"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Vendor (container): Counters within these containers are defined and augmented by vendors.
+// As each ASIC and vendor has different implementation and internal
+// parts where packets may be dropped at any point in time. Providing
+// vendor-specific counters provides better visibility into control-plane traffic.
+//
+// The recommended usage of this container is to create an augment at
+// .../pipeline-counter/control-plane-traffic/vendor that contains additional
+// vendor/platform specific containers.
+//
+// e.g.
+//
+//	augment /components/component/integrated-circuit/pipeline-counter/control-plane-traffic/vendor {
+//	 container <vendor name> {
+//	   container <platform name> {
+//	     container state {
+//	       leaf counter-a {
+//	         uses control-plane-traffic-vendor-counters;
+//	       }
+//
+//	       leaf counter-b {
+//	         uses control-plane-traffic-vendor-counters;
+//	       }
+//	     }
+//	   }
+//	 }
+//	}
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "vendor"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/vendor"
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTrafficPathAny) Vendor() *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"vendor"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/vendor YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/control-plane-traffic/vendor YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_Vendor] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_Vendor](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_Vendor",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_VendorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_Vendor] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_Vendor](
+		"Component_IntegratedCircuit_PipelineCounters_ControlPlaneTraffic_Vendor",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/adverse-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/adverse-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/adverse-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/adverse-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "adverse-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).AdverseAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/adverse-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/adverse-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "adverse-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).AdverseAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/congestion-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/congestion-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "congestion-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).CongestionAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/congestion-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/congestion-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "congestion-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).CongestionAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/packet-processing-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "packet-processing-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).PacketProcessingAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/packet-processing-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "packet-processing-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).PacketProcessingAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/urpf-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "urpf-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).UrpfAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/urpf-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "urpf-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).UrpfAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/congestion-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/congestion-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_DropPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_DropPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_DropPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_DropPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AdverseAggregate (leaf): This captures the aggregation of all counters where the switch is
+// unexpectedly dropping packets. Occurrence of these drops on a stable
+// (no recent hardware or config changes) and otherwise healthy
+// switch needs further investigation.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/adverse-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/adverse-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) AdverseAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adverse-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AdverseAggregate (leaf): This captures the aggregation of all counters where the switch is
+// unexpectedly dropping packets. Occurrence of these drops on a stable
+// (no recent hardware or config changes) and otherwise healthy
+// switch needs further investigation.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/adverse-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/adverse-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) AdverseAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_AdverseAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adverse-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// CongestionAggregate (leaf): This tracks the aggregation of all counters where the expected
+// conditions of packet drops due to internal congestion in some block of
+// the hardware that may not be visible in through other congestion
+// indicators like interface discards or queue drop counters.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/congestion-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/congestion-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) CongestionAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "congestion-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// CongestionAggregate (leaf): This tracks the aggregation of all counters where the expected
+// conditions of packet drops due to internal congestion in some block of
+// the hardware that may not be visible in through other congestion
+// indicators like interface discards or queue drop counters.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/congestion-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/congestion-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) CongestionAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "congestion-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FabricBlock (container): The IC fabric block subsystem connects the IC to the external
+// systems fabric subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) FabricBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FabricBlock (container): The IC fabric block subsystem connects the IC to the external
+// systems fabric subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) FabricBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HostInterfaceBlock (container): The IC host interface block subsystem connects the IC to the
+// external systems host or control subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) HostInterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HostInterfaceBlock (container): The IC host interface block subsystem connects the IC to the
+// external systems host or control subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) HostInterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InterfaceBlock (container): The IC interface subsystem connects the IC to the external PHY or
+// MAC.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) InterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InterfaceBlock (container): The IC interface subsystem connects the IC to the external PHY or
+// MAC.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) InterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LookupBlock (container): The IC lookup subsystem perform the next hop lookup of the packet
+// and other forwarding features such as firewall filters.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) LookupBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LookupBlock (container): The IC lookup subsystem perform the next hop lookup of the packet
+// and other forwarding features such as firewall filters.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) LookupBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// PacketProcessingAggregate (leaf): This aggregation of counters represents the conditions in which
+// packets are dropped due to legitimate forwarding decisions (ACL drops,
+// No Route etc.)
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/packet-processing-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) PacketProcessingAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packet-processing-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PacketProcessingAggregate (leaf): This aggregation of counters represents the conditions in which
+// packets are dropped due to legitimate forwarding decisions (ACL drops,
+// No Route etc.)
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/packet-processing-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) PacketProcessingAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "packet-processing-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueingBlock (container): The IC queueing subsystem buffers the packet while processing it
+// and queues the packet for delivery to the next stage
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) QueueingBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QueueingBlock (container): The IC queueing subsystem buffers the packet while processing it
+// and queues the packet for delivery to the next stage
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) QueueingBlock() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// UrpfAggregate (leaf): This aggregation of counters represents the conditions in which
+// packets are dropped due to failing uRPF lookup check.  This counter
+// and the packet-processing-aggregate counter should be incremented
+// for each uRPF packet drop.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/urpf-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) UrpfAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "urpf-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UrpfAggregate (leaf): This aggregation of counters represents the conditions in which
+// packets are dropped due to failing uRPF lookup check.  This counter
+// and the packet-processing-aggregate counter should be incremented
+// for each uRPF packet drop.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/urpf-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) UrpfAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "urpf-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Vendor (container): Counters within these containers are defined and augmented by vendors.
+// As each ASIC and vendor has different implementation and internal
+// parts where packets may be dropped at any point in time. Providing
+// specific hardware counters provides better visibility into traffic drop.
+//
+// The recommended usage of this container is to create an augment at
+// .../pipeline-counter/drop/vendor that contains additional vendor/platform
+// specific containers.
+//
+// e.g.
+//
+//	augment /components/component/integrated-circuit/pipeline-counter/drop/vendor {
+//	 container <vendor name> {
+//	   container <platform name> {
+//	     uses pipeline-vendor-drop-containers;
+//	   }
+//	 }
+//	}
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "vendor"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/vendor"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) Vendor() *Component_IntegratedCircuit_PipelineCounters_Drop_VendorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_VendorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"vendor"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Vendor (container): Counters within these containers are defined and augmented by vendors.
+// As each ASIC and vendor has different implementation and internal
+// parts where packets may be dropped at any point in time. Providing
+// specific hardware counters provides better visibility into traffic drop.
+//
+// The recommended usage of this container is to create an augment at
+// .../pipeline-counter/drop/vendor that contains additional vendor/platform
+// specific containers.
+//
+// e.g.
+//
+//	augment /components/component/integrated-circuit/pipeline-counter/drop/vendor {
+//	 container <vendor name> {
+//	   container <platform name> {
+//	     uses pipeline-vendor-drop-containers;
+//	   }
+//	 }
+//	}
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "vendor"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/vendor"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) Vendor() *Component_IntegratedCircuit_PipelineCounters_Drop_VendorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_VendorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"vendor"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/fabric-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/fabric-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fabric-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/fabric-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fabric-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).FabricAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fabric-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/fabric-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fabric-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).FabricAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).InHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).InHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).InLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).InLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lost-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/lost-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lost-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).LostPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lost-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/lost-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lost-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).LostPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).OutHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).OutHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).OutLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).OutLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/lost-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/lost-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/fabric-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// FabricAggregate (leaf): Aggregate of fabric-in and fabric-out drops.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fabric-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/fabric-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) FabricAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fabric-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FabricAggregate (leaf): Aggregate of fabric-in and fabric-out drops.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fabric-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/fabric-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) FabricAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_FabricAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fabric-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriority (leaf): Incoming high priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) InHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriority (leaf): Incoming high priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) InHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InHighPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriority (leaf): Incoming low priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) InLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriority (leaf): Incoming low priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) InLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_InLowPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LostPackets (leaf): Fabric drops due to re-ordering, or due to packets arriving late, or
+// due to some loss in the fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lost-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/lost-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) LostPackets() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lost-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LostPackets (leaf): Fabric drops due to re-ordering, or due to packets arriving late, or
+// due to some loss in the fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lost-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/lost-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) LostPackets() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_LostPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lost-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriority (leaf): Outgoing high priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) OutHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriority (leaf): Outgoing high priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) OutHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutHighPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriority (leaf): Outgoing low priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) OutLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriority (leaf): Outgoing low priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) OutLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OutLowPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPath) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/fabric-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlockPathAny) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_FabricBlock_OversubscriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/fragment-punt YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/fragment-punt YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-punt"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/fragment-punt"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).FragmentPunt
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-punt"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/fragment-punt"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).FragmentPunt
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/host-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/host-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "host-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).HostAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/host-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/host-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "host-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).HostAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).InHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).InHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).InLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).InLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).OutHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).OutHighPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).OutLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).OutLowPriority
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).RateLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock).RateLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/host-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/host-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-high-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-low-priority YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/rate-limit YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/rate-limit YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// FragmentPunt (leaf): The packets that were failed to punt to CPU due to policing rate.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-punt"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/fragment-punt"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) FragmentPunt() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FragmentPunt (leaf): The packets that were failed to punt to CPU due to policing rate.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-punt"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/fragment-punt"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) FragmentPunt() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_FragmentPuntPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// HostAggregate (leaf): Aggregate of all the drops in the host path.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/host-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/host-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) HostAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "host-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// HostAggregate (leaf): Aggregate of all the drops in the host path.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/host-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/host-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) HostAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_HostAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "host-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriority (leaf): Incoming high priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) InHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriority (leaf): Incoming high priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) InHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InHighPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriority (leaf): Incoming low priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) InLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriority (leaf): Incoming low priority drops towards this integrated-circuit
+// subsystem block from the previous NPU sub-block or interface.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/in-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) InLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_InLowPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriority (leaf): Outgoing high priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) OutHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriority (leaf): Outgoing high priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-high-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) OutHighPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutHighPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriority (leaf): Outgoing low priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) OutLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriority (leaf): Outgoing low priority drops towards the fabric/interface from this
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/out-low-priority"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) OutLowPriority() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OutLowPriorityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_OversubscriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RateLimit (leaf): Packet drops due to the rate limit in the integrated-circuit host
+// subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPath) RateLimit() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RateLimit (leaf): Packet drops due to the rate limit in the integrated-circuit host
+// subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/host-interface-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlockPathAny) RateLimit() *Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_HostInterfaceBlock_RateLimitPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/in-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/in-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/in-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock).InDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/in-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock).InDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/out-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock).OutDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/out-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock).OutDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/out-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/out-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InDrops (leaf): Incoming drops towards the integrated-circuit interface
+// subsystem block from the interfaces due to any reason.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/in-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath) InDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InDrops (leaf): Incoming drops towards the integrated-circuit interface
+// subsystem block from the interfaces due to any reason.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/in-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny) InDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_InDropsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutDrops (leaf): Outgoing drops towards the interfaces from the
+// integrated-circuit interface subsystem block due to any reason.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/out-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath) OutDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutDrops (leaf): Outgoing drops towards the interfaces from the
+// integrated-circuit interface subsystem block due to any reason.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/out-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny) OutDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OutDropsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPath) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/interface-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlockPathAny) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_InterfaceBlock_OversubscriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/acl-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/acl-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/acl-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).AclDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/acl-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).AclDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/forwarding-policy"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/forwarding-policy"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "forwarding-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).ForwardingPolicy
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/forwarding-policy"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/forwarding-policy"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "forwarding-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).ForwardingPolicy
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-total-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/fragment-total-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).FragmentTotalDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-total-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/fragment-total-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-drops"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).FragmentTotalDrops
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/incorrect-software-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/incorrect-software-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "incorrect-software-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).IncorrectSoftwareState
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/incorrect-software-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/incorrect-software-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "incorrect-software-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).IncorrectSoftwareState
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/invalid-packet"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/invalid-packet"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "invalid-packet"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).InvalidPacket
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/invalid-packet"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/invalid-packet"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "invalid-packet"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).InvalidPacket
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/lookup-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).LookupAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/lookup-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-aggregate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).LookupAggregate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-label"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-label"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).NoLabel
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-label"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-label"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).NoLabel
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-nexthop"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-nexthop"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-nexthop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).NoNexthop
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-nexthop"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-nexthop"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-nexthop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).NoNexthop
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).NoRoute
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).NoRoute
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).RateLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock).RateLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/forwarding-policy YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/forwarding-policy YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/fragment-total-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/fragment-total-drops YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/incorrect-software-state YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/incorrect-software-state YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/invalid-packet YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/invalid-packet YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/lookup-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/lookup-aggregate YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-label YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-label YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-nexthop YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-nexthop YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-route YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-route YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/rate-limit YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/rate-limit YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/lookup-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AclDrops (leaf): Packets dropped due to firewall or acl terms.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/acl-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) AclDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclDrops (leaf): Packets dropped due to firewall or acl terms.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/acl-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) AclDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_AclDropsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ForwardingPolicy (leaf): Packets dropped due to either a filter applied as part of a forwarding
+// policy or dropped due to a policy-based-routing policy lookup.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/forwarding-policy"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/forwarding-policy"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) ForwardingPolicy() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "forwarding-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ForwardingPolicy (leaf): Packets dropped due to either a filter applied as part of a forwarding
+// policy or dropped due to a policy-based-routing policy lookup.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/forwarding-policy"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/forwarding-policy"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) ForwardingPolicy() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_ForwardingPolicyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "forwarding-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FragmentTotalDrops (leaf): Total number of packets dropped that could not be fragmented by NPU
+// due to DF bit.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-total-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/fragment-total-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) FragmentTotalDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FragmentTotalDrops (leaf): Total number of packets dropped that could not be fragmented by NPU
+// due to DF bit.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-total-drops"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/fragment-total-drops"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) FragmentTotalDrops() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_FragmentTotalDropsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-drops"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IncorrectSoftwareState (leaf): Packets dropped due to any incorrect or invalid software state of the
+// forwarding structures during lookup.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/incorrect-software-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/incorrect-software-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) IncorrectSoftwareState() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "incorrect-software-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IncorrectSoftwareState (leaf): Packets dropped due to any incorrect or invalid software state of the
+// forwarding structures during lookup.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/incorrect-software-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/incorrect-software-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) IncorrectSoftwareState() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_IncorrectSoftwareStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "incorrect-software-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InvalidPacket (leaf): Packets dropped due to invalid packet format for ipv4, ipv6, or MPLS.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/invalid-packet"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/invalid-packet"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) InvalidPacket() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "invalid-packet"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InvalidPacket (leaf): Packets dropped due to invalid packet format for ipv4, ipv6, or MPLS.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/invalid-packet"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/invalid-packet"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) InvalidPacket() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_InvalidPacketPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "invalid-packet"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupAggregate (leaf): Packets dropped due to aggregate lookup drop counters - this counter
+// is sometimes referred to as Normal Discards or
+// ENQ_DISCARDED_PACKET_COUNTER.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/lookup-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) LookupAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupAggregate (leaf): Packets dropped due to aggregate lookup drop counters - this counter
+// is sometimes referred to as Normal Discards or
+// ENQ_DISCARDED_PACKET_COUNTER.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-aggregate"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/lookup-aggregate"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) LookupAggregate() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_LookupAggregatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-aggregate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NoLabel (leaf): Packets dropped due to no FIB entry for this MPLS label.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-label"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-label"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) NoLabel() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-label"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NoLabel (leaf): Packets dropped due to no FIB entry for this MPLS label.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-label"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-label"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) NoLabel() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoLabelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-label"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NoNexthop (leaf): Packets dropped due to no nexthop information - either the nexthop is
+// not programmed, or there is an invalid nexthop, or there is no ARP
+// information so the nexthop is in invalid state.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-nexthop"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-nexthop"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) NoNexthop() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-nexthop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NoNexthop (leaf): Packets dropped due to no nexthop information - either the nexthop is
+// not programmed, or there is an invalid nexthop, or there is no ARP
+// information so the nexthop is in invalid state.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-nexthop"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-nexthop"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) NoNexthop() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoNexthopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-nexthop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NoRoute (leaf): Packets dropped due to no FIB entry for this ipv4 or ipv6 lookup.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) NoRoute() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NoRoute (leaf): Packets dropped due to no FIB entry for this ipv4 or ipv6 lookup.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) NoRoute() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_NoRoutePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_OversubscriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RateLimit (leaf): Packets dropped due to rate limiters - either user configured rate
+// limiters or system rate limiters in the forwarding path.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPath) RateLimit() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// RateLimit (leaf): Packets dropped due to rate limiters - either user configured rate
+// limiters or system rate limiters in the forwarding path.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rate-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/lookup-block/state/rate-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlockPathAny) RateLimit() *Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_LookupBlock_RateLimitPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rate-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/incorrect-state YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/incorrect-state YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/incorrect-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/incorrect-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "incorrect-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).IncorrectState
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/incorrect-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/incorrect-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "incorrect-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).IncorrectState
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-queue"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/lookup-queue"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-queue"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).LookupQueue
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-queue"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/lookup-queue"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-queue"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).LookupQueue
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/memory-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/memory-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "memory-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).MemoryLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/memory-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/memory-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "memory-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).MemoryLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock).Oversubscription
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/lookup-queue YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/lookup-queue YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/memory-limit YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/memory-limit YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/oversubscription YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/queueing-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// IncorrectState (leaf): Packets dropped due to hardware of software incorrect state of VOQs,
+// or fabric queues, or interface queues.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/incorrect-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/incorrect-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath) IncorrectState() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "incorrect-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// IncorrectState (leaf): Packets dropped due to hardware of software incorrect state of VOQs,
+// or fabric queues, or interface queues.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/incorrect-state"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/incorrect-state"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny) IncorrectState() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_IncorrectStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "incorrect-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupQueue (leaf): Packets dropped in either the lookup or recirculation path.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-queue"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/lookup-queue"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath) LookupQueue() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-queue"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupQueue (leaf): Packets dropped in either the lookup or recirculation path.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-queue"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/lookup-queue"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny) LookupQueue() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_LookupQueuePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-queue"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MemoryLimit (leaf): Packets dropped due to running out of the queue memory.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/memory-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/memory-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath) MemoryLimit() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "memory-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MemoryLimit (leaf): Packets dropped due to running out of the queue memory.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/memory-limit"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/memory-limit"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny) MemoryLimit() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_MemoryLimitPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "memory-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPath) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Oversubscription (leaf): Number of packets dropped due to oversubscription of the
+// integrated-circuit subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/oversubscription"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/queueing-block/state/oversubscription"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlockPathAny) Oversubscription() *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock_OversubscriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "oversubscription"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_VendorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/vendor YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_VendorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_VendorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/vendor YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_VendorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_VendorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_Vendor] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_Vendor](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_Vendor",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_VendorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_Vendor] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Drop_Vendor](
+		"Component_IntegratedCircuit_PipelineCounters_Drop_Vendor",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ErrorsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ErrorsPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// FabricBlockErrorAny (list): An individual error within the fabric block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block/fabric-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) FabricBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block", "fabric-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// FabricBlockErrorAny (list): An individual error within the fabric block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block/fabric-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) FabricBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block", "fabric-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// FabricBlockError (list): An individual error within the fabric block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block/fabric-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) FabricBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block", "fabric-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// FabricBlockError (list): An individual error within the fabric block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block/fabric-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) FabricBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block", "fabric-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// HostInterfaceErrorAny (list): An individual error within the host interface block. Each error
+// counter is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block/host-interface-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) HostInterfaceErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block", "host-interface-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// HostInterfaceErrorAny (list): An individual error within the host interface block. Each error
+// counter is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block/host-interface-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) HostInterfaceErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block", "host-interface-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// HostInterfaceError (list): An individual error within the host interface block. Each error
+// counter is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block/host-interface-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) HostInterfaceError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block", "host-interface-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// HostInterfaceError (list): An individual error within the host interface block. Each error
+// counter is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block/host-interface-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) HostInterfaceError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block", "host-interface-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// InterfaceBlockErrorAny (list): An individual error within the interface block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block/interface-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) InterfaceBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block", "interface-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// InterfaceBlockErrorAny (list): An individual error within the interface block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block/interface-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) InterfaceBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block", "interface-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// InterfaceBlockError (list): An individual error within the interface block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block/interface-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) InterfaceBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block", "interface-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// InterfaceBlockError (list): An individual error within the interface block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block/interface-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) InterfaceBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block", "interface-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// LookupBlockErrorAny (list): An individual error within the lookup block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block/lookup-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) LookupBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block", "lookup-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// LookupBlockErrorAny (list): An individual error within the lookup block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block/lookup-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) LookupBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block", "lookup-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// LookupBlockError (list): An individual error within the lookup block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block/lookup-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) LookupBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block", "lookup-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// LookupBlockError (list): An individual error within the lookup block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block/lookup-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) LookupBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block", "lookup-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// QueueingBlockErrorAny (list): An individual error within the queueing block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block/queueing-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) QueueingBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block", "queueing-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// QueueingBlockErrorAny (list): An individual error within the queueing block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block/queueing-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error"
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) QueueingBlockErrorAny() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block", "queueing-block-error"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// QueueingBlockError (list): An individual error within the queueing block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block/queueing-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) QueueingBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block", "queueing-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// QueueingBlockError (list): An individual error within the queueing block. Each error counter
+// is uniquely identified by the name of the error.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block/queueing-block-error"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error"
+//
+//	Name: string
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) QueueingBlockError(Name string) *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block", "queueing-block-error"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors](
+		"Component_IntegratedCircuit_PipelineCounters_Errors",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_ErrorsPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors](
+		"Component_IntegratedCircuit_PipelineCounters_Errors",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPath) State() ygnmi.SingletonQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPathAny) State() ygnmi.WildcardQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPath) State() ygnmi.SingletonQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPathAny) State() ygnmi.WildcardQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ActivePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_CountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_LevelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPath) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPathAny) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockError_ThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPath) State() ygnmi.SingletonQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPathAny) State() ygnmi.WildcardQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPath) State() ygnmi.SingletonQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPathAny) State() ygnmi.WildcardQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ActivePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_CountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_LevelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPath) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorPathAny) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceError_ThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPath) State() ygnmi.SingletonQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPathAny) State() ygnmi.WildcardQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPath) State() ygnmi.SingletonQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPathAny) State() ygnmi.WildcardQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ActivePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_CountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_LevelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPath) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockErrorPathAny) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError_ThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPath) State() ygnmi.SingletonQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPathAny) State() ygnmi.WildcardQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPath) State() ygnmi.SingletonQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPathAny) State() ygnmi.WildcardQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ActivePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_CountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_LevelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPath) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPathAny) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockError_ThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPath) State() ygnmi.SingletonQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafSingletonQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPathAny) State() ygnmi.WildcardQuery[[]oc.E_FabricBlockError_Action] {
+	return ygnmi.NewLeafWildcardQuery[[]oc.E_FabricBlockError_Action](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_FabricBlockError_Action, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Action
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Active
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Count
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPath) State() ygnmi.SingletonQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPathAny) State() ygnmi.WildcardQuery[oc.E_FabricBlockError_Level] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_FabricBlockError_Level](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_FabricBlockError_Level, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Level
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "name"
+//	Path from root:       ""
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError).Threshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/active YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/count YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/name YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/threshold YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Action (leaf-list): Error actions that are taken by the system - log, linecard reboot,
+// linecard offline, NPU reset, NPU offline, gather diagnostic data,
+// raise an alarm.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) Action() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Active (leaf): The error is currently in an active state. When the system detects
+// that the specified threshold is exceeded, this value should be set to
+// true.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/active"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/active"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) Active() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ActivePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Count (leaf): Total count of errors of this type.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/count"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/count"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) Count() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_CountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Level (leaf): The severity of the error that is being recorded by the system. This
+// value can be used by a consumer to determine the action when this error
+// is recorded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/level"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) Level() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_LevelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Name of the interrupt, hardware error, or software error in the NPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/*/name"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) Name() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPath) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Threshold (leaf): Number of errors before a recovery action is automatically
+// taken by the system.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/threshold"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/threshold"
+func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorPathAny) Threshold() *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockError_ThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_PacketPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_PacketPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_PacketPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_PacketPathAny struct {
+	*ygnmi.NodePath
+}
+
+// FabricBlock (container): The IC fabric block subsystem connects the IC to the external
+// systems fabric subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) FabricBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// FabricBlock (container): The IC fabric block subsystem connects the IC to the external
+// systems fabric subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "fabric-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) FabricBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fabric-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HostInterfaceBlock (container): The IC host interface block subsystem connects the IC to the
+// external systems host or control subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) HostInterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// HostInterfaceBlock (container): The IC host interface block subsystem connects the IC to the
+// external systems host or control subsystem
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) HostInterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InterfaceBlock (container): The IC interface subsystem connects the IC to the external PHY or
+// MAC.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) InterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// InterfaceBlock (container): The IC interface subsystem connects the IC to the external PHY or
+// MAC.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interface-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) InterfaceBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LookupBlock (container): The IC lookup subsystem perform the next hop lookup of the packet
+// and other forwarding features such as firewall filters.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) LookupBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// LookupBlock (container): The IC lookup subsystem perform the next hop lookup of the packet
+// and other forwarding features such as firewall filters.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "lookup-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) LookupBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"lookup-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QueueingBlock (container): The IC queueing subsystem buffers the packet while processing it
+// and queues the packet for delivery to the next stage
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) QueueingBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// QueueingBlock (container): The IC queueing subsystem buffers the packet while processing it
+// and queues the packet for delivery to the next stage
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "queueing-block"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) QueueingBlock() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"queueing-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet](
+		"Component_IntegratedCircuit_PipelineCounters_Packet",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet](
+		"Component_IntegratedCircuit_PipelineCounters_Packet",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InHighPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InHighPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InLowPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InLowPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutHighPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutHighPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutLowPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-cells"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutLowPriorityCells
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-cells YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/fabric-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InCells (leaf): Incoming cells towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InCells (leaf): Incoming cells towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InCellsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriorityCells (leaf): Incoming high priority cells towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InHighPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriorityCells (leaf): Incoming high priority cells towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InHighPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityCellsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriorityPackets (leaf): Incoming high priority packets towards the integrated-circuit
+// fabric subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriorityPackets (leaf): Incoming high priority packets towards the integrated-circuit
+// fabric subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InHighPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriorityCells (leaf): Incoming low priority cells towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InLowPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriorityCells (leaf): Incoming low priority cells towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InLowPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityCellsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriorityPackets (leaf): Incoming low priority packets towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriorityPackets (leaf): Incoming low priority packets towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InLowPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_InPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutCells (leaf): Outgoing cells towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutCells (leaf): Outgoing cells towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutCellsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriorityCells (leaf): Outgoing high priority cells towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutHighPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriorityCells (leaf): Outgoing high priority cells towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutHighPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityCellsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriorityPackets (leaf): Outgoing high priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriorityPackets (leaf): Outgoing high priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutHighPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriorityCells (leaf): Outgoing low priority cells towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutLowPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriorityCells (leaf): Outgoing low priority cells towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority-cells"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-cells"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutLowPriorityCells() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityCellsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-cells"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriorityPackets (leaf): Outgoing low priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriorityPackets (leaf): Outgoing low priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutLowPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPath) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/fabric-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlockPathAny) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_FabricBlock_OutPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/fragment-punt-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/fragment-punt-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-punt-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/fragment-punt-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).FragmentPuntPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-punt-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/fragment-punt-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).FragmentPuntPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutHighPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutLowPriorityPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-high-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-low-priority-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// FragmentPuntPkts (leaf): The packets that were successfully punted to CPU due to egress MTU
+// exceeded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-punt-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/fragment-punt-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) FragmentPuntPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FragmentPuntPkts (leaf): The packets that were successfully punted to CPU due to egress MTU
+// exceeded.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-punt-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/fragment-punt-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) FragmentPuntPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_FragmentPuntPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-punt-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriorityPackets (leaf): Incoming high priority packets towards the integrated-circuit
+// fabric subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) InHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InHighPriorityPackets (leaf): Incoming high priority packets towards the integrated-circuit
+// fabric subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) InHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InHighPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriorityPackets (leaf): Incoming low priority packets towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) InLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InLowPriorityPackets (leaf): Incoming low priority packets towards the integrated-circuit fabric
+// subsystem block from the previous NPU sub block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) InLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InLowPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_InPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriorityPackets (leaf): Outgoing high priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) OutHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutHighPriorityPackets (leaf): Outgoing high priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-high-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-high-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) OutHighPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutHighPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-high-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriorityPackets (leaf): Outgoing low priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) OutLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutLowPriorityPackets (leaf): Outgoing low priority packets towards the fabric from the
+// integrated-circuit fabric subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-low-priority-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-low-priority-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) OutLowPriorityPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutLowPriorityPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-low-priority-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPath) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/host-interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlockPathAny) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_HostInterfaceBlock_OutPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/interface-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_InPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPath) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/interface-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlockPathAny) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock_OutPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-total-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryTotalBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-total-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryTotalBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-total-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-entries"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryTotalEntries
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-total-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-entries"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryTotalEntries
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-used-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryUsedBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-used-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryUsedBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-used-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-entries"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryUsedEntries
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/acl-memory-used-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-entries"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).AclMemoryUsedEntries
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-total-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/fragment-total-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).FragmentTotalPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/fragment-total-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/fragment-total-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).FragmentTotalPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).LookupMemory
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).LookupMemory
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory-used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).LookupMemoryUsed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory-used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).LookupMemoryUsed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-utilization"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-utilization"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-utilization"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).LookupUtilization
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/lookup-utilization"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-utilization"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "lookup-utilization"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).LookupUtilization
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/nexthop-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).NexthopMemory
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/nexthop-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).NexthopMemory
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/nexthop-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory-used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).NexthopMemoryUsed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/nexthop-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory-used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).NexthopMemoryUsed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-entries YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-entries YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-entries YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-entries YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/fragment-total-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/fragment-total-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory-used YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory-used YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-utilization YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-utilization YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory-used YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory-used YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/lookup-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AclMemoryTotalBytes (leaf): Total firewall or ACL memory counter measured in bytes.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-total-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) AclMemoryTotalBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryTotalBytes (leaf): Total firewall or ACL memory counter measured in bytes.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-total-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) AclMemoryTotalBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryTotalEntries (leaf): Total firewall or ACL memory counter measured in entries.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-total-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) AclMemoryTotalEntries() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-entries"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryTotalEntries (leaf): Total firewall or ACL memory counter measured in entries.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-total-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-total-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) AclMemoryTotalEntries() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryTotalEntriesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-total-entries"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryUsedBytes (leaf): Amount of used firewall or ACL memory counter measured in bytes.
+// The number of used bytes must include the bytes
+// that are 'allocated but free' if the memory reaping algorithm makes
+// these bytes practically unusable
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-used-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) AclMemoryUsedBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryUsedBytes (leaf): Amount of used firewall or ACL memory counter measured in bytes.
+// The number of used bytes must include the bytes
+// that are 'allocated but free' if the memory reaping algorithm makes
+// these bytes practically unusable
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-used-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) AclMemoryUsedBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryUsedEntries (leaf): Amount of used firewall or ACL memory counter measured in entries.
+// The number of used entries must include the entries
+// that are 'allocated but free' if the memory reaping algorithm makes
+// these entries practically unusable.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-used-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) AclMemoryUsedEntries() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-entries"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AclMemoryUsedEntries (leaf): Amount of used firewall or ACL memory counter measured in entries.
+// The number of used entries must include the entries
+// that are 'allocated but free' if the memory reaping algorithm makes
+// these entries practically unusable.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/acl-memory-used-entries"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/acl-memory-used-entries"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) AclMemoryUsedEntries() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_AclMemoryUsedEntriesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "acl-memory-used-entries"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FragmentTotalPkts (leaf): Total number of fragments generated by the CPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-total-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/fragment-total-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) FragmentTotalPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// FragmentTotalPkts (leaf): Total number of fragments generated by the CPU.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fragment-total-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/fragment-total-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) FragmentTotalPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_FragmentTotalPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fragment-total-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_InPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupMemory (leaf): The total amount of memory available in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) LookupMemory() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupMemory (leaf): The total amount of memory available in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) LookupMemory() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupMemoryUsed (leaf): The amount of memory used in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) LookupMemoryUsed() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory-used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupMemoryUsed (leaf): The amount of memory used in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) LookupMemoryUsed() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupMemoryUsedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-memory-used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupUtilization (leaf): The integrated-circuit lookup subsystem block utilization percentage.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-utilization"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-utilization"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) LookupUtilization() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-utilization"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LookupUtilization (leaf): The integrated-circuit lookup subsystem block utilization percentage.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/lookup-utilization"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/lookup-utilization"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) LookupUtilization() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_LookupUtilizationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "lookup-utilization"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NexthopMemory (leaf): The total amount of nexthop memory available in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/nexthop-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) NexthopMemory() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NexthopMemory (leaf): The total amount of nexthop memory available in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/nexthop-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) NexthopMemory() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NexthopMemoryUsed (leaf): The amount of nexthops memory used in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/nexthop-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) NexthopMemoryUsed() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory-used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NexthopMemoryUsed (leaf): The amount of nexthops memory used in the lookup subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/nexthop-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/nexthop-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) NexthopMemoryUsed() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_NexthopMemoryUsedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "nexthop-memory-used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPath) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/lookup-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlockPathAny) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock_OutPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).InBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).InPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/loopback-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "loopback-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).LoopbackBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/loopback-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "loopback-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).LoopbackBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/loopback-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "loopback-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).LoopbackPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/loopback-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "loopback-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).LoopbackPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).OutBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).OutPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queue-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queue-memory"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).QueueMemory
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queue-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queue-memory"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).QueueMemory
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queue-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queue-memory-used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).QueueMemoryUsed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/queue-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "queue-memory-used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock).QueueMemoryUsed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-bytes YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-packets YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory-used YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory-used YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/queueing-block YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InBytes (leaf): Incoming bytes towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) InBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPackets (leaf): Incoming packets towards the integrated-circuit interface
+// subsystem block from the line interfaces or fabric.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/in-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/in-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) InPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_InPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LoopbackBytes (leaf): The number of bytes in the loopback or re-circulate subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/loopback-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) LoopbackBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "loopback-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LoopbackBytes (leaf): The number of bytes in the loopback or re-circulate subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/loopback-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) LoopbackBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "loopback-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LoopbackPackets (leaf): The number of packets in the loopback or re-circulate subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/loopback-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) LoopbackPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "loopback-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LoopbackPackets (leaf): The number of packets in the loopback or re-circulate subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/loopback-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/loopback-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) LoopbackPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_LoopbackPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "loopback-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutBytes (leaf): Outgoing bytes towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-bytes"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-bytes"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) OutBytes() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPackets (leaf): Outgoing packets towards the line interfaces or fabric from the
+// integrated-circuit interface subsystem block.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-packets"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/out-packets"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) OutPackets() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_OutPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueMemory (leaf): The total amount of memory available in the queue subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queue-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) QueueMemory() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queue-memory"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueMemory (leaf): The total amount of memory available in the queue subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queue-memory"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) QueueMemory() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queue-memory"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueMemoryUsed (leaf): The amount of memory used in the queue subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queue-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPath) QueueMemoryUsed() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPath {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queue-memory-used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// QueueMemoryUsed (leaf): The amount of memory used in the queue subsystem.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/queue-memory-used"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/queueing-block/state/queue-memory-used"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny) QueueMemoryUsed() *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPathAny {
+	return &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock_QueueMemoryUsedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "queue-memory-used"},
 			map[string]interface{}{},
 			n,
 		),

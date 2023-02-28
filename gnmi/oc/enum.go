@@ -45,6 +45,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
+  - public/release/models/platform/openconfig-platform-pipeline-counters.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -2207,6 +2208,78 @@ const (
 	ExtendedPrefix_RouteType_AS_EXTERNAL E_ExtendedPrefix_RouteType = 4
 	// ExtendedPrefix_RouteType_NSSA_EXTERNAL corresponds to the value NSSA_EXTERNAL of ExtendedPrefix_RouteType
 	ExtendedPrefix_RouteType_NSSA_EXTERNAL E_ExtendedPrefix_RouteType = 5
+)
+
+// E_FabricBlockError_Action is a derived int64 type which is used to represent
+// the enumerated node FabricBlockError_Action. An additional value named
+// FabricBlockError_Action_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_FabricBlockError_Action int64
+
+// IsYANGGoEnum ensures that FabricBlockError_Action implements the yang.GoEnum
+// interface. This ensures that FabricBlockError_Action can be identified as a
+// mapped type for a YANG enumeration.
+func (E_FabricBlockError_Action) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  FabricBlockError_Action.
+func (E_FabricBlockError_Action) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_FabricBlockError_Action.
+func (e E_FabricBlockError_Action) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_FabricBlockError_Action")
+}
+
+const (
+	// FabricBlockError_Action_UNSET corresponds to the value UNSET of FabricBlockError_Action
+	FabricBlockError_Action_UNSET E_FabricBlockError_Action = 0
+	// FabricBlockError_Action_LOG corresponds to the value LOG of FabricBlockError_Action
+	FabricBlockError_Action_LOG E_FabricBlockError_Action = 1
+	// FabricBlockError_Action_LINECARD_REBOOT corresponds to the value LINECARD_REBOOT of FabricBlockError_Action
+	FabricBlockError_Action_LINECARD_REBOOT E_FabricBlockError_Action = 2
+	// FabricBlockError_Action_LINECARD_OFFLINE corresponds to the value LINECARD_OFFLINE of FabricBlockError_Action
+	FabricBlockError_Action_LINECARD_OFFLINE E_FabricBlockError_Action = 3
+	// FabricBlockError_Action_NPU_RESET corresponds to the value NPU_RESET of FabricBlockError_Action
+	FabricBlockError_Action_NPU_RESET E_FabricBlockError_Action = 4
+	// FabricBlockError_Action_NPU_OFFLINE corresponds to the value NPU_OFFLINE of FabricBlockError_Action
+	FabricBlockError_Action_NPU_OFFLINE E_FabricBlockError_Action = 5
+	// FabricBlockError_Action_GET_DIAGNOSTIC_INFO corresponds to the value GET_DIAGNOSTIC_INFO of FabricBlockError_Action
+	FabricBlockError_Action_GET_DIAGNOSTIC_INFO E_FabricBlockError_Action = 6
+	// FabricBlockError_Action_ALARM corresponds to the value ALARM of FabricBlockError_Action
+	FabricBlockError_Action_ALARM E_FabricBlockError_Action = 7
+)
+
+// E_FabricBlockError_Level is a derived int64 type which is used to represent
+// the enumerated node FabricBlockError_Level. An additional value named
+// FabricBlockError_Level_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_FabricBlockError_Level int64
+
+// IsYANGGoEnum ensures that FabricBlockError_Level implements the yang.GoEnum
+// interface. This ensures that FabricBlockError_Level can be identified as a
+// mapped type for a YANG enumeration.
+func (E_FabricBlockError_Level) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  FabricBlockError_Level.
+func (E_FabricBlockError_Level) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_FabricBlockError_Level.
+func (e E_FabricBlockError_Level) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_FabricBlockError_Level")
+}
+
+const (
+	// FabricBlockError_Level_UNSET corresponds to the value UNSET of FabricBlockError_Level
+	FabricBlockError_Level_UNSET E_FabricBlockError_Level = 0
+	// FabricBlockError_Level_FATAL corresponds to the value FATAL of FabricBlockError_Level
+	FabricBlockError_Level_FATAL E_FabricBlockError_Level = 1
+	// FabricBlockError_Level_MAJOR corresponds to the value MAJOR of FabricBlockError_Level
+	FabricBlockError_Level_MAJOR E_FabricBlockError_Level = 2
+	// FabricBlockError_Level_MINOR corresponds to the value MINOR of FabricBlockError_Level
+	FabricBlockError_Level_MINOR E_FabricBlockError_Level = 3
+	// FabricBlockError_Level_INFORMATIONAL corresponds to the value INFORMATIONAL of FabricBlockError_Level
+	FabricBlockError_Level_INFORMATIONAL E_FabricBlockError_Level = 4
 )
 
 // E_Flags_Flags is a derived int64 type which is used to represent

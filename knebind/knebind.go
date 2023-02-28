@@ -327,6 +327,10 @@ func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr erro
 	return buf.String(), nil
 }
 
+func (c *kneCLI) Close() error {
+	return nil
+}
+
 type kneATE struct {
 	*solver.ServiceATE
 	bind *Bind

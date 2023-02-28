@@ -77,21 +77,6 @@ var (
 	}
 )
 
-// SetInterfaceState sets the state of a specified interface on a device.
-func SetInterfaceState(t testing.TB, dut *ondatra.DUTDevice, intf string, enabled bool) {
-	t.Helper()
-	configs := disableConfigs
-	if enabled {
-		configs = enableConfigs
-	}
-	cfgFormat, ok := configs[dut.Vendor()]
-	if !ok {
-		t.Fatalf("SetInterfaceState not yet supported on vendor %v", dut.Vendor())
-	}
-	cfg := fmt.Sprintf(cfgFormat, intf)
-	dut.Config().New().WithText(cfg).Append(t)
-}
-
 // LoopbackInterface returns the vendor-specific name of the loopback interface with
 // the specified integer id.
 func LoopbackInterface(t *testing.T, dut *ondatra.DUTDevice, id int) string {

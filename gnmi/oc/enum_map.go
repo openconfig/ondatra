@@ -45,6 +45,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
+  - public/release/models/platform/openconfig-platform-pipeline-counters.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -464,6 +465,21 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "INTER_AREA"},
 		4: {Name: "AS_EXTERNAL"},
 		5: {Name: "NSSA_EXTERNAL"},
+	},
+	"E_FabricBlockError_Action": {
+		1: {Name: "LOG"},
+		2: {Name: "LINECARD_REBOOT"},
+		3: {Name: "LINECARD_OFFLINE"},
+		4: {Name: "NPU_RESET"},
+		5: {Name: "NPU_OFFLINE"},
+		6: {Name: "GET_DIAGNOSTIC_INFO"},
+		7: {Name: "ALARM"},
+	},
+	"E_FabricBlockError_Level": {
+		1: {Name: "FATAL"},
+		2: {Name: "MAJOR"},
+		3: {Name: "MINOR"},
+		4: {Name: "INFORMATIONAL"},
 	},
 	"E_Flags_Flags": {
 		1: {Name: "EXTERNAL_FLAG"},
@@ -2211,6 +2227,36 @@ func initΛEnumTypes() {
 		},
 		"/acl/state/counter-capability": {
 			reflect.TypeOf((E_Acl_ACL_COUNTER_CAPABILITY)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action": {
+			reflect.TypeOf((E_FabricBlockError_Action)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/level": {
+			reflect.TypeOf((E_FabricBlockError_Level)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/action": {
+			reflect.TypeOf((E_FabricBlockError_Action)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/host-interface-block/host-interface-error/state/level": {
+			reflect.TypeOf((E_FabricBlockError_Level)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/action": {
+			reflect.TypeOf((E_FabricBlockError_Action)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/interface-block/interface-block-error/state/level": {
+			reflect.TypeOf((E_FabricBlockError_Level)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/action": {
+			reflect.TypeOf((E_FabricBlockError_Action)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/lookup-block/lookup-block-error/state/level": {
+			reflect.TypeOf((E_FabricBlockError_Level)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/action": {
+			reflect.TypeOf((E_FabricBlockError_Action)(0)),
+		},
+		"/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level": {
+			reflect.TypeOf((E_FabricBlockError_Level)(0)),
 		},
 		"/components/component/port/breakout-mode/groups/group/state/breakout-speed": {
 			reflect.TypeOf((E_IfEthernet_ETHERNET_SPEED)(0)),
