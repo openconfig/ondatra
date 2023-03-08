@@ -23,15 +23,32 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"testing"
 
 	log "github.com/golang/glog"
 )
 
 var (
+	// MainT is used for logging in TestMain.
+	MainT TLogger = &mainLogger{}
+
 	writer = bufio.NewWriter(os.Stdout)
 	reader *ttyReader
 )
+
+// TLogger is the subset of testing.T needed for logging.
+type TLogger interface {
+	Helper()
+	Log(...any)
+}
+
+type mainLogger struct{}
+
+func (m *mainLogger) Helper() {}
+
+func (m *mainLogger) Log(args ...any) {
+	writer.WriteString(fmt.Sprint(args...))
+	writer.Flush()
+}
 
 // Menu displays a menu with the specified message and list of options and
 // returns the 1-indexed option number that the user selected.
@@ -46,7 +63,7 @@ func Menu(msg string, options ...string) int {
 	}
 	menuLines = append(menuLines, "", "Then press ENTER to continue or CTRL-C to quit.")
 
-	Banner(nil, menuLines...)
+	Banner(MainT, menuLines...)
 	return readMenuOption(options)
 }
 
@@ -61,7 +78,8 @@ func readMenuOption(options []string) int {
 
 // Banner displays a banner message with the specified lines.
 // If t is not nil, the message is associated with the current test case.
-func Banner(t testing.TB, lines ...string) {
+func Banner(t TLogger, lines ...string) {
+	t.Helper()
 	const (
 		format = `
 ********************************************************************************
@@ -76,23 +94,14 @@ func Banner(t testing.TB, lines ...string) {
 	for _, ln := range lines {
 		b.WriteString(indent + ln + "\n")
 	}
-	display(t, fmt.Sprintf(format, b.String()))
+	t.Log(fmt.Sprintf(format, b.String()))
 }
 
 // Action displays the specified action message.
 // If t is not nil, the message is associated with the current test case.
-func Action(t testing.TB, action string) {
-	display(t, fmt.Sprintf("\n*** %s...\n\n", action))
-}
-
-func display(t testing.TB, msg string) {
-	if t == nil {
-		writer.WriteString(msg)
-		writer.Flush()
-	} else {
-		t.Helper()
-		t.Log(msg)
-	}
+func Action(t TLogger, action string) {
+	t.Helper()
+	t.Log(fmt.Sprintf("\n*** %s...\n\n", action))
 }
 
 // StartReader starts a stdin reader.
@@ -136,7 +145,7 @@ func ReadLine() string {
 // ttyReader continuously reads lines from the controlling terminal. It ensures
 // that user input entered prior to a user prompt is _not_ interpreted as a
 // response to that prompt. As there is no easy way to clear prior user input,
-// it reads asynchrously and is signalled when a prompt has been displayed.
+// it reads asynchronously and is signalled when a prompt has been displayed.
 type ttyReader struct {
 	readFn  func(byte) (string, error)
 	closeFn func() error

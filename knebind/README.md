@@ -4,84 +4,46 @@ The KNE Binding is an implementation of the Ondatra binding interface that runs
 on a network topology created with
 [openconfig/kne](https://github.com/openconfig/kne).
 
-## Config File
+## Flags
 
-The KNE Binding requires a YAML config file that lets the binding know how to
-connect to your KNE topology. The YAML must be specified in a `-config` flag
-passed to the Ondatra test. The file supports the following keys:
+The KNE Binding requires a `--topology` flag be passed that specifies the path
+to a KNE topology text proto. It also accepts a number of optional flags, as
+shown in the following table.
 
-Key           | Required? | Description
-------------- | --------- | ----------------------------------
-`username`    | no        | default username to log into the KNE nodes
-`password`    | no        | default password to log into the KNE nodes
-`credentials` | no        | map of credentials to use for specific nodes / vendors
-`topology`    | yes       | path to a KNE topology text proto
-`kubecfg`     | no        | path to your kubeconfig file
-`skip_reset`  | no        | if true, skip initial device reset that happens during reservation
-
-If `kubecfg` is not specified, it will be inferred from the `PATH` environment.
-
-A basic example YAML config file:
-
-```
-username: tester
-password: hunter2
-topology: /home/tester/topo.textproto
-```
+Key             | Description
+--------------- | -------------------------------------------
+`topology`      | Path to a KNE topology text proto
+`kubeconfig`    | Optional path to your kubeconfig file; defaults to ~/.kube/config
+`skip_reset`    | If true, skip initial device reset during reservation; defaults to false
+`node_creds`    | Repeated per-node credentials in the form "nodeName/username/password"
+`vendor_creds`  | Repeated per-vendor credentials in the form "VENDOR/username/password"
+`default_creds` | Optional default credentials in the form "username/password"
 
 ### Device Credentials
 
-An example YAML config file with optional extra credential fields:
+An example combination of credentials flags:
 
 ```
-username: tester
-password: hunter2
-credentials:
-  node:
-    r1:
-      username: user
-      password: pass
-    r2:
-      username: root
-      password: root123
-  vendor:
-    ARISTA:
-      username: admin
-      password: admin
-topology: /home/tester/topo.textproto
+--node_creds=n1/user/pass --node_creds=root/root123 \
+--vendor_creds=CISCO/admin/admin --default_creds=tester/hunter2
 ```
 
-The per-node credentials are used over the per-vendor credentials. The default
-username/password are used if there are no matches. A precedence order is
-defined below:
-
-1. credential provided for a specific node by name
-1. credential provided for a vendor of the node
-1. credential from the default username and password fields
-1. no credentials
+The per-node credentials take precedence over the per-vendor credentials, and
+they both take precedence over the default credentials. If the node does not
+match a provided per-node or per-vendor credential and no default credentials
+are provided, then no credentials will be used.
 
 ## Running the Integration Test
+
+To execute the test, you must create a local KNE topology with at least two
+linked nodes and pass both the testbed and topology as flags to the test:
+
+```
+go test -testbed=testbed.textproto -topology=topology.textproto
+```
 
 This repo includes an
 [example integration test](integration/integration_test.go) that uses the KNE
 binding, a [testbed file](integration/testbed.textproto) for that
 test, and a [KNE topology file](integration/topology.textproto) that is matched
-by the testbed. To execute the test, you must:
-
-1.  create a local KNE topology with at least two linked nodes, as the testbed
-    requires
-1.  create a config file for your topology, as specified above
-1.  run the test passing both the testbed and config file flags:
-
-```
-go test -testbed=testbed.textproto -config=path/to/config.yaml
-```
-
-A YAML config file that works with that
-topology is:
-
-```
-username: admin
-password: admin
-topology: /[YOUR GIT CLONE PATH]/ondatra/knebind/integration/topology.textproto
-```
+by the testbed.

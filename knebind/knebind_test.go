@@ -27,6 +27,7 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/openconfig/kne/topo/node"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/knebind/creds"
 	"github.com/openconfig/ondatra/knebind/solver"
 	"google.golang.org/protobuf/testing/protocmp"
 
@@ -153,118 +154,53 @@ func TestReserve(t *testing.T) {
 
 func TestNewRPCCredentials(t *testing.T) {
 	tests := []struct {
-		desc      string
-		cfg       *Config
-		name      string
-		vendor    tpb.Vendor
-		wantCreds *rpcCredentials
+		desc string
+		cfg  *Config
+		want *creds.UserPass
 	}{{
-		desc: "nil cfg.Credentials",
-		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-		},
-		name:      "r1",
-		vendor:    tpb.Vendor_ARISTA,
-		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+		desc: "nil credentials",
+		cfg:  &Config{},
+		want: nil,
 	}, {
-		desc: "nil cfg.Credentials.Node",
+		desc: "empty credentials",
 		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-			Credentials: &Credentials{
-				Vendor: map[tpb.Vendor]*UserPass{},
-			},
+			Credentials: &creds.Credentials{},
 		},
-		name:      "r1",
-		vendor:    tpb.Vendor_ARISTA,
-		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+		want: nil,
 	}, {
-		desc: "nil cfg.Credentials.Vendor",
+		desc: "from credentials",
 		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-			Credentials: &Credentials{
-				Node: map[string]*UserPass{},
-			},
-		},
-		name:      "r1",
-		vendor:    tpb.Vendor_ARISTA,
-		wantCreds: &rpcCredentials{username: "user", password: "pass"},
-	}, {
-		desc: "node only",
-		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-			Credentials: &Credentials{
-				Node: map[string]*UserPass{
-					"r1": &UserPass{Username: "nodeUser", Password: "nodePass"},
+			Credentials: &creds.Credentials{
+				Default: &creds.UserPass{
+					Username: "defaultUser",
+					Password: "defaultPass",
 				},
 			},
+			Username: "deprecatedUser",
+			Password: "deprecatedPass",
 		},
-		name:      "r1",
-		vendor:    tpb.Vendor_ARISTA,
-		wantCreds: &rpcCredentials{username: "nodeUser", password: "nodePass"},
+		want: &creds.UserPass{Username: "defaultUser", Password: "defaultPass"},
 	}, {
-		desc: "vendor only",
+		desc: "deprecated credentials",
 		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-			Credentials: &Credentials{
-				Vendor: map[tpb.Vendor]*UserPass{
-					tpb.Vendor_ARISTA: &UserPass{Username: "vendorUser", Password: "vendorPass"},
-				},
-			},
+			Username: "deprecatedUser",
+			Password: "deprecatedPass",
 		},
-		name:      "r1",
-		vendor:    tpb.Vendor_ARISTA,
-		wantCreds: &rpcCredentials{username: "vendorUser", password: "vendorPass"},
-	}, {
-		desc: "node and vendor",
-		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-			Credentials: &Credentials{
-				Node: map[string]*UserPass{
-					"r1": &UserPass{Username: "nodeUser", Password: "nodePass"},
-				},
-				Vendor: map[tpb.Vendor]*UserPass{
-					tpb.Vendor_ARISTA: &UserPass{Username: "vendorUser", Password: "vendorPass"},
-				},
-			},
-		},
-		name:      "r1",
-		vendor:    tpb.Vendor_ARISTA,
-		wantCreds: &rpcCredentials{username: "nodeUser", password: "nodePass"},
-	}, {
-		desc: "no match",
-		cfg: &Config{
-			Username: "user",
-			Password: "pass",
-			Credentials: &Credentials{
-				Node: map[string]*UserPass{
-					"r1": &UserPass{Username: "nodeUser", Password: "nodePass"},
-				},
-				Vendor: map[tpb.Vendor]*UserPass{
-					tpb.Vendor_ARISTA: &UserPass{Username: "vendorUser", Password: "vendorPass"},
-				},
-			},
-		},
-		name:      "r2",
-		vendor:    tpb.Vendor_CISCO,
-		wantCreds: &rpcCredentials{username: "user", password: "pass"},
+		want: &creds.UserPass{Username: "deprecatedUser", Password: "deprecatedPass"},
 	}}
 	for _, tt := range tests {
 		t.Run(tt.desc, func(t *testing.T) {
 			dut := &kneDUT{
 				ServiceDUT: &solver.ServiceDUT{
-					AbstractDUT: &binding.AbstractDUT{&binding.Dims{Name: tt.name}},
-					NodeVendor:  tt.vendor,
+					AbstractDUT: &binding.AbstractDUT{&binding.Dims{}},
 				},
 				bind: &Bind{cfg: tt.cfg},
 			}
-			gotCreds := dut.newRPCCredentials()
-			if diff := cmp.Diff(tt.wantCreds, gotCreds, cmp.AllowUnexported(rpcCredentials{})); diff != "" {
+			var got *creds.UserPass
+			if gotRPCCreds := dut.newRPCCredentials(); gotRPCCreds != nil {
+				got = gotRPCCreds.UserPass
+			}
+			if diff := cmp.Diff(tt.want, got); diff != "" {
 				t.Errorf("newRPCCredentials() got unexpected diff (-want,+got): %s", diff)
 			}
 		})

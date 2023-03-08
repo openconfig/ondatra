@@ -52,9 +52,9 @@ func (n *IxNetwork) NewSession(ctx context.Context, name string) (*Session, erro
 	}{
 		ApplicationType: "ixnrest",
 	}
-	out := struct {
+	var out struct {
 		ID int `json:"id"`
-	}{}
+	}
 	if err := n.ixweb.jsonReq(ctx, post, sessionsPath, in, &out); err != nil {
 		return nil, fmt.Errorf("error creating session: %w", err)
 	}

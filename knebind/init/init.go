@@ -21,23 +21,51 @@ import (
 	"errors"
 	"flag"
 
+	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind"
+	"github.com/openconfig/ondatra/knebind/creds"
 )
 
 var (
 	configFile = flag.String("config", "", "YAML configuration file")
+	topology   = flag.String("topology", "", "Path to the topology proto file")
+	kubeConfig = flag.String("kubeconfig", "",
+		"Optional path to a kubeconfig file; Defaults to ~/.kube/config")
+	skipReset = flag.Bool("skip_reset", false,
+		"If true, skip initial device reset that happens during reservation")
+	credFlags = creds.DefineFlags()
 )
 
 // Init provides a generator for a KNE bind instance which uses the
 // configuration set by the flag --config. To be used with ondatra.RunTests.
 func Init() (binding.Binding, error) {
-	if *configFile == "" {
-		return nil, errors.New("No --config flag specified")
+	if *topology == "" && *configFile == "" {
+		return nil, errors.New("either --topology or --config flag must be provided")
 	}
-	cfg, err := knebind.ParseConfigFile(*configFile)
+	var cfg *knebind.Config
+	var err error
+	if *configFile != "" {
+		log.Errorf("The --config flag is deprecated. Please use separate flags instead.")
+		cfg, err = knebind.ParseConfigFile(*configFile)
+	} else {
+		cfg, err = parseFlags()
+	}
 	if err != nil {
 		return nil, err
 	}
 	return knebind.New(cfg)
+}
+
+func parseFlags() (*knebind.Config, error) {
+	cred, err := credFlags.Parse()
+	if err != nil {
+		return nil, err
+	}
+	return &knebind.Config{
+		TopoPath:    *topology,
+		Credentials: cred,
+		KubecfgPath: *kubeConfig,
+		SkipReset:   *skipReset,
+	}, nil
 }

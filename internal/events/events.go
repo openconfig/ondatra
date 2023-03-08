@@ -114,7 +114,7 @@ func TestStarted(debugMode bool) {
 			reservePause = true
 		}
 	}
-	display.Action(nil, "Reserving the testbed")
+	display.Action(display.MainT, "Reserving the testbed")
 }
 
 // ReservationDone notifies that the reservation is complete and that the tests
@@ -158,7 +158,7 @@ func ReservationDone() error {
 		)
 	}
 
-	display.Banner(nil, lines...)
+	display.Banner(display.MainT, lines...)
 	if reservePause {
 		readLineFn()
 	}
@@ -176,7 +176,7 @@ func TestsDone(exitCode *int) (rerr error) {
 	if errs := runAfterTestsCallbacks(exitCode); len(errs) > 0 {
 		return fmt.Errorf("errors running AfterTestsCallbacks: %v", errs)
 	}
-	display.Action(nil, "Releasing the testbed")
+	display.Action(display.MainT, "Releasing the testbed")
 	return nil
 }
 
@@ -195,10 +195,10 @@ func ActionStarted(t testing.TB, format string, dev binding.Device) testing.TB {
 // execution until the user indicates test execution should be resumed.
 // Returns an error if the test is not in debug mode.
 func Breakpoint(t testing.TB, msg string) error {
+	t.Helper()
 	if !readerStartedFn() {
 		return errors.New("Breakpoints are only allowed in debug mode")
 	}
-	t.Helper()
 	firstLine := "BREAKPOINT"
 	if msg != "" {
 		firstLine += ": " + msg
@@ -213,31 +213,37 @@ type breakpointT struct {
 }
 
 func (t *breakpointT) Error(args ...any) {
+	t.Helper()
 	Breakpoint(t, "TEST FAILED\n"+fmt.Sprint(args...))
 	t.TB.Error(args...)
 }
 
 func (t *breakpointT) Errorf(format string, args ...any) {
+	t.Helper()
 	Breakpoint(t, "TEST FAILED\n"+fmt.Sprintf(format, args...))
 	t.TB.Errorf(format, args...)
 }
 
 func (t *breakpointT) Fail() {
+	t.Helper()
 	Breakpoint(t, "TEST FAILED")
 	t.TB.Fail()
 }
 
 func (t *breakpointT) FailNow() {
+	t.Helper()
 	Breakpoint(t, "TEST FAILED")
 	t.TB.FailNow()
 }
 
 func (t *breakpointT) Fatal(args ...any) {
+	t.Helper()
 	Breakpoint(t, "TEST FAILED\n"+fmt.Sprint(args...))
 	t.TB.Fatal(args...)
 }
 
 func (t *breakpointT) Fatalf(format string, args ...any) {
+	t.Helper()
 	Breakpoint(t, "TEST FAILED\n"+fmt.Sprintf(format, args...))
 	t.TB.Fatalf(format, args...)
 }

@@ -26,7 +26,7 @@ import (
 // from the values supplied in the vals slice. It sorts the values by
 // timestamp and uses the earliest and latest to calculate the rate. Errors
 // are reported using the supplied testing.TB.
-func MeanRate[T constraints.Integer](t testing.TB, vals []*ygnmi.Value[T]) float64 {
+func MeanRate[T constraints.Integer | constraints.Float](t testing.TB, vals []*ygnmi.Value[T]) float64 {
 	t.Helper()
 
 	if len(vals) < 2 {

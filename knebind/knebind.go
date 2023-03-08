@@ -33,6 +33,7 @@ import (
 	"github.com/openconfig/kne/topo"
 	"github.com/openconfig/kne/topo/node"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/knebind/creds"
 	"github.com/openconfig/ondatra/knebind/solver"
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc"
@@ -223,14 +224,13 @@ func serviceAddr(s *tpb.Service) string {
 }
 
 type rpcCredentials struct {
-	username string
-	password string
+	*creds.UserPass
 }
 
 func (r *rpcCredentials) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
 	return map[string]string{
-		"username": r.username,
-		"password": r.password,
+		"username": r.Username,
+		"password": r.Password,
 	}, nil
 }
 
@@ -248,18 +248,12 @@ func (r *rpcCredentials) RequireTransportSecurity() bool {
 // 4. no credentials
 func (d *kneDUT) newRPCCredentials() *rpcCredentials {
 	cfg := d.bind.cfg
-	if cfg.Credentials != nil && cfg.Credentials.Node != nil {
-		if creds, ok := cfg.Credentials.Node[d.Name()]; ok {
-			return &rpcCredentials{username: creds.Username, password: creds.Password}
-		}
+	if userPass := cfg.Credentials.Lookup(d.Name(), d.NodeVendor); userPass != nil {
+		return &rpcCredentials{userPass}
 	}
-	if cfg.Credentials != nil && cfg.Credentials.Vendor != nil {
-		if creds, ok := cfg.Credentials.Vendor[d.NodeVendor]; ok {
-			return &rpcCredentials{username: creds.Username, password: creds.Password}
-		}
-	}
-	if cfg.Username != "" || cfg.Password != "" {
-		return &rpcCredentials{username: cfg.Username, password: cfg.Password}
+	// TODO(team): Deprecate username and password fields.
+	if cfg.Username != "" {
+		return &rpcCredentials{&creds.UserPass{Username: cfg.Username, Password: cfg.Password}}
 	}
 	return nil
 }
@@ -288,17 +282,16 @@ func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr erro
 		return "", err
 	}
 	addr := serviceAddr(s)
-	var user, pass string
-	creds := c.dut.newRPCCredentials()
-	if creds != nil {
-		user, pass = creds.username, creds.password
+	userPass := c.dut.newRPCCredentials()
+	if userPass == nil {
+		return "", errors.New("SendCommand requires node credentials be provided")
 	}
-	log.Infof("Using credentials %s/%s to SSH", user, pass)
+	log.Infof("Using credentials %v to SSH", userPass)
 	cfg := &ssh.ClientConfig{
-		User: user,
+		User: userPass.Username,
 		Auth: []ssh.AuthMethod{ssh.KeyboardInteractive(func(user, instruction string, questions []string, echos []bool) ([]string, error) {
 			if len(questions) > 0 {
-				return []string{pass}, nil
+				return []string{userPass.Password}, nil
 			}
 			return nil, nil
 		})},
