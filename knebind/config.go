@@ -28,8 +28,8 @@ type Config struct {
 	// TODO(team): Deprecate username and password fields.
 	Username, Password string
 	Credentials        *creds.Credentials `yaml:"credentials"`
-	TopoPath           string             `yaml:"topology"`
-	KubecfgPath        string             `yaml:"kubecfg"`
+	Topology           string             `yaml:"topology"`
+	Kubeconfig         string             `yaml:"kubecfg"`
 	SkipReset          bool               `yaml:"skip_reset"`
 }
 
@@ -47,7 +47,7 @@ func ParseConfigFile(configFile string) (*Config, error) {
 	if err := yaml.Unmarshal(data, c); err != nil {
 		return nil, fmt.Errorf("error unmarshalling config YAML: %w", err)
 	}
-	if c.TopoPath == "" {
+	if c.Topology == "" {
 		return nil, fmt.Errorf("no topology path specified in config: %v", c)
 	}
 	if c.Username != "" || c.Password != "" {

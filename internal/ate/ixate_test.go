@@ -1872,6 +1872,7 @@ func TestStopAllTraffic(t *testing.T) {
 		desc      string
 		operState operState
 		opErr     error
+		viewsOut  map[string]view
 		wantErr   bool
 	}{{
 		desc: "traffic not started",
@@ -1881,15 +1882,26 @@ func TestStopAllTraffic(t *testing.T) {
 		opErr:     errors.New("someError"),
 		wantErr:   true,
 	}, {
+		desc:      "Stats never become available",
+		operState: operStateTrafficOn,
+		viewsOut:  map[string]view{},
+		wantErr:   true,
+	}, {
 		desc:      "Successfully stopped",
 		operState: operStateTrafficOn,
+		viewsOut:  map[string]view{ixweb.TrafficItemStatsCaption: nil},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			stubLogOperationResult()
 			c := &ixATE{
 				c: &fakeCfgClient{
-					session: &fakeSession{postErrs: map[string]error{op: test.opErr}},
+					session: &fakeSession{
+						postErrs: map[string]error{op: test.opErr},
+						stats: &fakeStats{
+							viewsOut: test.viewsOut,
+						},
+					},
 				},
 				operState: test.operState,
 			}

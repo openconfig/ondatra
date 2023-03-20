@@ -1415,8 +1415,21 @@ func (ix *ixATE) stopAllTraffic(ctx context.Context) error {
 	return nil
 }
 
-// StopAllTraffic stops all traffic for the IxNetwork session.
+func (ix *ixATE) trafficItemStatsAvailable(ctx context.Context) bool {
+	views, statErr := ix.c.Session().Stats().Views(ctx)
+	if statErr != nil {
+		log.Warningf("Could not fetch list ot statistic views: %v", statErr)
+	}
+	_, avail := views[ixweb.TrafficItemStatsCaption]
+	return avail
+}
+
+// StopAllTraffic stops all traffic for the IxNetwork session and waits for stats to be populated.
 func (ix *ixATE) StopAllTraffic(ctx context.Context) error {
+	const (
+		retryWait       = 5 * time.Second
+		maxRetriesStats = 6
+	)
 	if ix.operState != operStateTrafficOn {
 		log.Infof("Traffic already stopped, not running operation on Ixia.")
 		return nil
@@ -1425,6 +1438,16 @@ func (ix *ixATE) StopAllTraffic(ctx context.Context) error {
 		return err
 	}
 	ix.operState = operStateProtocolsOn
+	log.Infof("Traffic stopped, waiting for stats to populate.")
+
+	statsUpdated := ix.trafficItemStatsAvailable(ctx)
+	for i := 0; i < maxRetriesStats && !statsUpdated; i++ {
+		sleepFn(retryWait)
+		statsUpdated = ix.trafficItemStatsAvailable(ctx)
+	}
+	if !statsUpdated {
+		return errors.New("traffic item statistics did not become available after stopping traffic")
+	}
 	return nil
 }
 

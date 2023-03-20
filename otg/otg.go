@@ -127,7 +127,7 @@ func fetchConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) 
 func (o *OTG) StartProtocols(t testing.TB) {
 	t.Helper()
 	t = events.ActionStarted(t, "Starting protocols on %s", o.ate)
-	warns, err := setProtocolState(context.Background(), o.ate, gosnappi.ProtocolStateState.START)
+	warns, err := setProtocolState(context.Background(), o.ate, gosnappi.StateProtocolAllState.START)
 	if err != nil {
 		t.Fatalf("StartProtocols(t) on %s: %v", o.ate, err)
 	}
@@ -140,7 +140,7 @@ func (o *OTG) StartProtocols(t testing.TB) {
 func (o *OTG) StopProtocols(t testing.TB) {
 	t.Helper()
 	t = events.ActionStarted(t, "Stopping protocols on %s", o.ate)
-	warns, err := setProtocolState(context.Background(), o.ate, gosnappi.ProtocolStateState.STOP)
+	warns, err := setProtocolState(context.Background(), o.ate, gosnappi.StateProtocolAllState.STOP)
 	if err != nil {
 		t.Fatalf("StopProtocols(t) on %s: %v", o.ate, err)
 	}
@@ -149,12 +149,14 @@ func (o *OTG) StopProtocols(t testing.TB) {
 	}
 }
 
-func setProtocolState(ctx context.Context, ate binding.ATE, state gosnappi.ProtocolStateStateEnum) ([]string, error) {
+func setProtocolState(ctx context.Context, ate binding.ATE, state gosnappi.StateProtocolAllStateEnum) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := api.SetProtocolState(api.NewProtocolState().SetState(state))
+	controlState := api.NewControlState()
+	controlState.Protocol().All().SetState(state)
+	resp, err := api.SetControlState(controlState)
 	if err != nil {
 		return nil, err
 	}
@@ -167,7 +169,7 @@ func (o *OTG) StartTraffic(t testing.TB) {
 	// TODO(greg-dennis): Remove sleep when Keysight fixes a MAC resolution bug.
 	time.Sleep(2 * time.Second)
 	t = events.ActionStarted(t, "Starting traffic on %s", o.ate)
-	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.START)
+	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.StateTrafficFlowTransmitState.START)
 	if err != nil {
 		t.Fatalf("StartTraffic(t) on %s: %v", o.ate, err)
 	}
@@ -180,7 +182,7 @@ func (o *OTG) StartTraffic(t testing.TB) {
 func (o *OTG) StopTraffic(t testing.TB) {
 	t.Helper()
 	t = events.ActionStarted(t, "Stopping traffic on %s", o.ate)
-	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.TransmitStateState.STOP)
+	warns, err := setTransmitState(context.Background(), o.ate, gosnappi.StateTrafficFlowTransmitState.STOP)
 	if err != nil {
 		t.Fatalf("StopTraffic(t) on %s: %v", o.ate, err)
 	}
@@ -189,12 +191,14 @@ func (o *OTG) StopTraffic(t testing.TB) {
 	}
 }
 
-func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.TransmitStateStateEnum) ([]string, error) {
+func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.StateTrafficFlowTransmitStateEnum) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := api.SetTransmitState(api.NewTransmitState().SetState(state))
+	controlState := api.NewControlState()
+	controlState.Traffic().FlowTransmit().SetState(state)
+	resp, err := api.SetControlState(controlState)
 	if err != nil {
 		return nil, err
 	}
@@ -205,7 +209,7 @@ func setTransmitState(ctx context.Context, ate binding.ATE, state gosnappi.Trans
 func (o *OTG) AdvertiseRoutes(t testing.TB, routes []string) {
 	t.Helper()
 	t = events.ActionStarted(t, "Advertising routes on %v", o.ate)
-	warns, err := setRouteState(context.Background(), o.ate, routes, gosnappi.RouteStateState.ADVERTISE)
+	warns, err := setRouteState(context.Background(), o.ate, gosnappi.StateProtocolRouteState.ADVERTISE, routes)
 	if err != nil {
 		t.Fatalf("AdvertiseRoutes(t) on %s: %v", o.ate, err)
 	}
@@ -218,7 +222,7 @@ func (o *OTG) AdvertiseRoutes(t testing.TB, routes []string) {
 func (o *OTG) WithdrawRoutes(t testing.TB, routes []string) {
 	t.Helper()
 	t = events.ActionStarted(t, "Withdrawing routes for %v", o.ate)
-	warns, err := setRouteState(context.Background(), o.ate, routes, gosnappi.RouteStateState.WITHDRAW)
+	warns, err := setRouteState(context.Background(), o.ate, gosnappi.StateProtocolRouteState.WITHDRAW, routes)
 	if err != nil {
 		t.Fatalf("WithdrawRoutes(t) on %s: %v", o.ate, err)
 	}
@@ -227,12 +231,15 @@ func (o *OTG) WithdrawRoutes(t testing.TB, routes []string) {
 	}
 }
 
-func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state gosnappi.RouteStateStateEnum) ([]string, error) {
+func setRouteState(ctx context.Context, ate binding.ATE, state gosnappi.StateProtocolRouteStateEnum, routes []string) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := api.SetRouteState(api.NewRouteState().SetState(state).SetNames(routes))
+	controlState := api.NewControlState()
+	controlState.Protocol().Route().SetNames(routes).SetState(state)
+	resp, err := api.SetControlState(controlState)
+
 	if err != nil {
 		return nil, err
 	}
@@ -243,7 +250,7 @@ func setRouteState(ctx context.Context, ate binding.ATE, routes []string, state 
 func (o *OTG) EnableLACPMembers(t testing.TB, ports ...string) {
 	t.Helper()
 	t = events.ActionStarted(t, "EnableLACPMembers on %v", o.ate)
-	warns, err := setLACPMemberState(context.Background(), o.ate, gosnappi.LacpMemberStateState.UP, ports)
+	warns, err := setLACPMemberState(context.Background(), o.ate, gosnappi.StateProtocolLacpAdminState.UP, ports)
 	if err != nil {
 		t.Fatalf("EnableLACPMembers(t) on %s: %v", o.ate, err)
 	}
@@ -256,7 +263,7 @@ func (o *OTG) EnableLACPMembers(t testing.TB, ports ...string) {
 func (o *OTG) DisableLACPMembers(t testing.TB, ports ...string) {
 	t.Helper()
 	t = events.ActionStarted(t, "DisableLACPMembers on %v", o.ate)
-	warns, err := setLACPMemberState(context.Background(), o.ate, gosnappi.LacpMemberStateState.DOWN, ports)
+	warns, err := setLACPMemberState(context.Background(), o.ate, gosnappi.StateProtocolLacpAdminState.DOWN, ports)
 	if err != nil {
 		t.Fatalf("DisableLACPMembers(t) on %s: %v", o.ate, err)
 	}
@@ -265,12 +272,14 @@ func (o *OTG) DisableLACPMembers(t testing.TB, ports ...string) {
 	}
 }
 
-func setLACPMemberState(ctx context.Context, ate binding.ATE, state gosnappi.LacpMemberStateStateEnum, lagMemberPorts []string) ([]string, error) {
+func setLACPMemberState(ctx context.Context, ate binding.ATE, state gosnappi.StateProtocolLacpAdminStateEnum, lagMemberPorts []string) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := api.SetDeviceState(api.NewDeviceState().SetLacpMemberState(gosnappi.NewLacpMemberState().SetLagMemberPortNames(lagMemberPorts).SetState(state)))
+	controlState := api.NewControlState()
+	controlState.Protocol().Lacp().Admin().SetState(state).SetLagMemberNames(lagMemberPorts)
+	resp, err := api.SetControlState(controlState)
 	if err != nil {
 		return nil, err
 	}
@@ -281,7 +290,7 @@ func setLACPMemberState(ctx context.Context, ate binding.ATE, state gosnappi.Lac
 func (o *OTG) StartCapture(t testing.TB, portNames ...string) {
 	t.Helper()
 	t = events.ActionStarted(t, "StartCapture on %v", o.ate)
-	warns, err := setCaptureState(context.Background(), o.ate, gosnappi.CaptureStateState.START, portNames)
+	warns, err := setCaptureState(context.Background(), o.ate, gosnappi.StatePortCaptureState.START, portNames)
 	if err != nil {
 		t.Fatalf("StartCapture(t) on %s: %v", o.ate, err)
 	}
@@ -294,7 +303,7 @@ func (o *OTG) StartCapture(t testing.TB, portNames ...string) {
 func (o *OTG) StopCapture(t testing.TB, portNames ...string) {
 	t.Helper()
 	t = events.ActionStarted(t, "StopCapture on %v", o.ate)
-	warns, err := setCaptureState(context.Background(), o.ate, gosnappi.CaptureStateState.STOP, portNames)
+	warns, err := setCaptureState(context.Background(), o.ate, gosnappi.StatePortCaptureState.STOP, portNames)
 	if err != nil {
 		t.Fatalf("StopCapture(t) on %s: %v", o.ate, err)
 	}
@@ -303,12 +312,14 @@ func (o *OTG) StopCapture(t testing.TB, portNames ...string) {
 	}
 }
 
-func setCaptureState(ctx context.Context, ate binding.ATE, state gosnappi.CaptureStateStateEnum, portNames []string) ([]string, error) {
+func setCaptureState(ctx context.Context, ate binding.ATE, state gosnappi.StatePortCaptureStateEnum, portNames []string) ([]string, error) {
 	api, err := rawapis.FetchOTG(ctx, ate)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := api.SetCaptureState(api.NewCaptureState().SetState(state).SetPortNames(portNames))
+	controlState := api.NewControlState()
+	controlState.Port().Capture().SetState(state).SetPortNames(portNames)
+	resp, err := api.SetControlState(controlState)
 	if err != nil {
 		return nil, err
 	}

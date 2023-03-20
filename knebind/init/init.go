@@ -63,9 +63,9 @@ func parseFlags() (*knebind.Config, error) {
 		return nil, err
 	}
 	return &knebind.Config{
-		TopoPath:    *topology,
+		Topology:    *topology,
 		Credentials: cred,
-		KubecfgPath: *kubeConfig,
+		Kubeconfig:  *kubeConfig,
 		SkipReset:   *skipReset,
 	}, nil
 }

@@ -55,11 +55,11 @@ func New(cfg *Config) (*Bind, error) {
 	if cfg == nil {
 		return nil, fmt.Errorf("config cannot be nil")
 	}
-	top, err := topo.Load(cfg.TopoPath)
+	top, err := topo.Load(cfg.Topology)
 	if err != nil {
 		return nil, fmt.Errorf("error loading topology: %w", err)
 	}
-	tm, err := topo.New(top, topo.WithKubecfg(cfg.KubecfgPath))
+	tm, err := topo.New(top, topo.WithKubecfg(cfg.Kubeconfig))
 	if err != nil {
 		return nil, fmt.Errorf("error creating topology manager: %w", err)
 	}
@@ -128,7 +128,7 @@ func (d *kneDUT) resetConfig(ctx context.Context) error {
 	case err != nil:
 		return err
 	}
-	bp, err := fileRelative(d.bind.cfg.TopoPath)
+	bp, err := fileRelative(d.bind.cfg.Topology)
 	if err != nil {
 		return fmt.Errorf("failed to find relative path for topology: %v", err)
 	}
