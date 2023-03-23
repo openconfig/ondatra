@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"os/user"
 	"path/filepath"
 	"time"
 
@@ -50,10 +51,22 @@ import (
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
+// To be stubbed out by unit tests
+var (
+	userCurrFn = user.Current
+)
+
 // New returns a new KNE bind instance.
 func New(cfg *Config) (*Bind, error) {
 	if cfg == nil {
 		return nil, fmt.Errorf("config cannot be nil")
+	}
+	if cfg.Kubeconfig == "" {
+		user, err := userCurrFn()
+		if err != nil {
+			return nil, err
+		}
+		cfg.Kubeconfig = filepath.Join(user.HomeDir, ".kube/config")
 	}
 	top, err := topo.Load(cfg.Topology)
 	if err != nil {

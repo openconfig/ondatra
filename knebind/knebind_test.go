@@ -17,6 +17,9 @@ package knebind
 import (
 	"errors"
 	"io"
+	"os"
+	"os/user"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -35,6 +38,63 @@ import (
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
+
+func TestNew(t *testing.T) {
+	userHomeDir := t.TempDir()
+
+	tests := []struct {
+		desc       string
+		configPath string
+		user       *user.User
+		wantPath   string
+	}{{
+		desc:       "kubeconfig provided",
+		configPath: userHomeDir + "/config",
+		wantPath:   userHomeDir + "/config",
+	}, {
+		desc:     "default kubeconfig",
+		user:     &user.User{HomeDir: userHomeDir},
+		wantPath: userHomeDir + "/.kube/config",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			userCurrFn = func() (*user.User, error) {
+				return test.user, nil
+			}
+			writeDummyKubeconfig(t, test.wantPath)
+			cfg := &Config{
+				Topology:   "integration/topology.textproto",
+				Kubeconfig: test.configPath,
+			}
+			if _, err := New(cfg); err != nil {
+				t.Errorf("New() got unexpected error: %v", err)
+			}
+			if gotPath := cfg.Kubeconfig; gotPath != test.wantPath {
+				t.Errorf("New() got unexpected kubeconfig path %q, want %q", gotPath, test.wantPath)
+			}
+		})
+	}
+}
+
+func writeDummyKubeconfig(t *testing.T, path string) {
+	const text = `apiVersion: v1
+clusters:
+  - cluster:
+      server: http://kubeconfig.dir.com
+    name: foo
+contexts:
+  - context:
+      cluster: foo
+    name: foo-context
+current-context: foo-context
+`
+	if err := os.MkdirAll(filepath.Dir(path), 0770); err != nil {
+		t.Fatalf("MkdirAll() got unexpected error: %v", err)
+	}
+	if err := os.WriteFile(path, []byte(text), 0644); err != nil {
+		t.Fatalf("WriteFile() got unexpected error: %v", err)
+	}
+}
 
 func TestReserve(t *testing.T) {
 	top := &tpb.Topology{
