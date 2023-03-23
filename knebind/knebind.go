@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"os/user"
 	"path/filepath"
 	"time"
 
@@ -54,6 +55,13 @@ import (
 func New(cfg *Config) (*Bind, error) {
 	if cfg == nil {
 		return nil, fmt.Errorf("config cannot be nil")
+	}
+	if cfg.Kubeconfig == "" {
+		user, err := user.Current()
+		if err != nil {
+			return nil, err
+		}
+		cfg.Kubeconfig = filepath.Join(user.HomeDir, ".kube/config")
 	}
 	top, err := topo.Load(cfg.Topology)
 	if err != nil {
