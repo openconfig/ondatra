@@ -21,6 +21,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/gnmi"
+	"github.com/openconfig/ondatra/gnmi/oc"
 	kinit "github.com/openconfig/ondatra/knebind/init"
 )
 
@@ -28,21 +29,19 @@ func TestMain(m *testing.M) {
 	ondatra.RunTests(m, kinit.Init)
 }
 
-func TestConfig(t *testing.T) {
+func TestGNMIConfig(t *testing.T) {
 	dut := ondatra.DUT(t, "dut")
-	const config = `
-interface {{ port "port1" }}
- no switchport
-!
-interface {{ port "port2" }}
- no switchport
-!
-ip routing
-!`
-	dut.Config().New().WithAristaText(config).Push(t)
+	port := dut.Port(t, "port1")
+	iface := &oc.Interface{}
+	iface.SetName(port.Name())
+
+	addr := iface.GetOrCreateSubinterface(0).GetOrCreateIpv4().GetOrCreateAddress("10.0.0.1")
+	addr.SetPrefixLength(30)
+
+	gnmi.Replace(t, dut, gnmi.OC().Interface(port.Name()).Config(), iface)
 }
 
-func TestGNMI(t *testing.T) {
+func TestGNMISubscribe(t *testing.T) {
 	dut := ondatra.DUT(t, "dut")
 	sys := gnmi.Lookup(t, dut, gnmi.OC().System().State())
 	if !sys.IsPresent() {

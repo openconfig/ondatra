@@ -680,7 +680,7 @@ func TestProtocolReader(t *testing.T) {
 				got = gotNotifs[0]
 				got.Timestamp = 0
 			}
-			if diff := cmp.Diff(test.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "update")); diff != "" {
+			if diff := cmp.Diff(test.want, got, protocmp.Transform(), protocmp.SortRepeatedFields(&gpb.Notification{}, "delete", "update")); diff != "" {
 				t.Errorf("protocolReader() got unexpected response diff (-want,+got)\n%s", diff)
 			}
 			if diff := cmp.Diff(test.wantNodes, gotNodes, cmp.AllowUnexported(cachedNodes{}, ixconfig.TopologyBgpIpv4Peer{}, ixconfig.TopologyBgpIpv6Peer{}, ixconfig.TopologyIsisL3{})); diff != "" {

@@ -46,6 +46,7 @@ message Device {
     ZPE = 8;
     DELL = 9;
     OPENCONFIG = 10;
+    ARUBA = 11;
   }
   Vendor vendor = 2;
 
