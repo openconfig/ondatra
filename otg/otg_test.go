@@ -213,18 +213,18 @@ func (fg *fakeGosnappi) GetConfig() (gosnappi.Config, error) {
 	return fg.config, nil
 }
 
-func (fg *fakeGosnappi) SetConfig(cfg gosnappi.Config) (gosnappi.ResponseWarning, error) {
+func (fg *fakeGosnappi) SetConfig(cfg gosnappi.Config) (gosnappi.Warning, error) {
 	fg.config = cfg
-	return gosnappi.NewResponseWarning(), nil
+	return gosnappi.NewWarning(), nil
 }
 
 func (fg *fakeGosnappi) NewControlState() gosnappi.ControlState {
 	return new(fakeControlState)
 }
 
-func (fg *fakeGosnappi) SetControlState(state gosnappi.ControlState) (gosnappi.ResponseWarning, error) {
+func (fg *fakeGosnappi) SetControlState(state gosnappi.ControlState) (gosnappi.Warning, error) {
 	fg.controlState = state
-	return gosnappi.NewResponseWarning(), nil
+	return gosnappi.NewWarning(), nil
 }
 
 func (fg *fakeGosnappi) NewCaptureRequest() gosnappi.CaptureRequest {
