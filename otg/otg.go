@@ -326,58 +326,22 @@ func setCaptureState(ctx context.Context, ate binding.ATE, state gosnappi.StateP
 	return resp.Warnings(), nil
 }
 
-// SendBGPPeerNotification sends a notification from BGP peers.
-func (o *OTG) SendBGPPeerNotification(t testing.TB, peerNames []string, code int32, subCode int32) {
+func (o *OTG) SetControlAction(t testing.TB, action gosnappi.ControlAction) {
 	t.Helper()
-	t = events.ActionStarted(t, "SendBGPPeerNotification on %v", o.ate)
+	t = events.ActionStarted(t, "SetControlAction on %v", o.ate)
 
-	action := gosnappi.NewControlAction().SetChoice(gosnappi.ControlActionChoice.PROTOCOL)
-	action.Protocol().
-		Bgp().
-		Notification().
-		SetNames(peerNames).
-		Custom().
-		SetCode(code).
-		SetSubcode(subCode)
-	warns, err := setControlAction(context.Background(), o.ate, action)
-	if err != nil {
-		t.Fatalf("SendBGPPeerNotification(t) on %s: %v", o.ate, err)
-	}
-	if len(warns) > 0 {
-		t.Logf("SendBGPPeerNotification(t) on %s non-fatal warnings: %v", o.ate, warns)
-	}
-}
-
-// SendBGPPeerGracefulRestart sends a initiate graceful restart from BGP peers.
-func (o *OTG) SendBGPPeerGracefulRestart(t testing.TB, peerNames []string, restartDelay uint32) {
-	t.Helper()
-	t = events.ActionStarted(t, "SendBGPPeerGracefulRestart on %v", o.ate)
-
-	action := gosnappi.NewControlAction()
-	action.Protocol().
-		Bgp().
-		InitiateGracefulRestart().
-		SetPeerNames(peerNames).
-		SetRestartDelay(restartDelay)
-	warns, err := setControlAction(context.Background(), o.ate, action)
+	api, err := rawapis.FetchOTG(context.Background(), o.ate)
 	if err != nil {
 		t.Fatalf("v(t) on %s: %v", o.ate, err)
 	}
-	if len(warns) > 0 {
-		t.Logf("SendBGPPeerGracefulRestart(t) on %s non-fatal warnings: %v", o.ate, warns)
-	}
-}
-
-func setControlAction(ctx context.Context, ate binding.ATE, action gosnappi.ControlAction) ([]string, error) {
-	api, err := rawapis.FetchOTG(ctx, ate)
-	if err != nil {
-		return nil, err
-	}
 	resp, err := api.SetControlAction(action)
 	if err != nil {
-		return nil, err
+		t.Fatalf("v(t) on %s: %v", o.ate, err)
 	}
-	return resp.Warnings(), nil
+
+	if len(resp.Warnings()) > 0 {
+		t.Logf("SetControlAction(t) on %s non-fatal warnings: %v", o.ate, resp.Warnings())
+	}
 }
 
 // FetchCapture fetches the captured bytes on the specified port.
