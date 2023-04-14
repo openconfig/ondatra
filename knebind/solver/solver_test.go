@@ -65,7 +65,9 @@ func TestSolve(t *testing.T) {
 		  }
 		  interfaces: {
 		    key: "eth1"
-		    value: {}
+		    value: {
+					name: "GigabitEthernet0/0/0/0"
+				}
 		  }
 		  interfaces: {
 		    key: "eth2"
@@ -173,7 +175,7 @@ func TestSolve(t *testing.T) {
 			Name:   "node2",
 			Vendor: opb.Device_CISCO,
 			Ports: map[string]*binding.Port{
-				"port1": {Name: "eth1"},
+				"port1": {Name: "GigabitEthernet0/0/0/0"},
 				"port2": {Name: "eth2"},
 			},
 			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
@@ -212,6 +214,7 @@ func TestSolve(t *testing.T) {
 	tests := []struct {
 		desc    string
 		tb      *opb.Testbed
+		partial map[string]string
 		wantRes *binding.Reservation
 	}{{
 		desc: "one dut",
@@ -221,6 +224,89 @@ func TestSolve(t *testing.T) {
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut3": wantDUT3,
+			},
+			ATEs: map[string]binding.ATE{},
+		},
+	}, {
+		desc: "one dut with partial",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{
+				&opb.Device{
+					Id: "dut",
+				},
+			},
+		},
+		partial: map[string]string{"dut": "node3"},
+		wantRes: &binding.Reservation{
+			DUTs: map[string]binding.DUT{
+				"dut": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+						Name:            "node3",
+						Vendor:          opb.Device_JUNIPER,
+						HardwareModel:   "cptx",
+						SoftwareVersion: "evo",
+						Ports:           map[string]*binding.Port{},
+						CustomData:      map[string]any{KNEServiceMapKey: wantDUTServices},
+					}},
+					Services:   wantDUTServices,
+					NodeVendor: tpb.Vendor_JUNIPER,
+				},
+			},
+			ATEs: map[string]binding.ATE{},
+		},
+	}, {
+		desc: "one dut with partial + port intf name",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{
+				&opb.Device{
+					Id:    "dut",
+					Ports: []*opb.Port{&opb.Port{Id: "port"}},
+				},
+			},
+		},
+		partial: map[string]string{"dut": "node2", "dut:port": "eth2"},
+		wantRes: &binding.Reservation{
+			DUTs: map[string]binding.DUT{
+				"dut": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+						Name:   "node2",
+						Vendor: opb.Device_CISCO,
+						Ports: map[string]*binding.Port{
+							"port": {Name: "eth2"},
+						},
+						CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
+					}},
+					Services:   wantDUTServices,
+					NodeVendor: tpb.Vendor_CISCO,
+				},
+			},
+			ATEs: map[string]binding.ATE{},
+		},
+	}, {
+		desc: "one dut with partial + port vendor name",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{
+				&opb.Device{
+					Id:    "dut",
+					Ports: []*opb.Port{&opb.Port{Id: "port"}},
+				},
+			},
+		},
+		partial: map[string]string{"dut": "node2", "dut:port": "GigabitEthernet0/0/0/0"},
+		wantRes: &binding.Reservation{
+			DUTs: map[string]binding.DUT{
+				"dut": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+						Name:   "node2",
+						Vendor: opb.Device_CISCO,
+						Ports: map[string]*binding.Port{
+							"port": {Name: "GigabitEthernet0/0/0/0"},
+						},
+						CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
+					}},
+					Services:   wantDUTServices,
+					NodeVendor: tpb.Vendor_CISCO,
+				},
 			},
 			ATEs: map[string]binding.ATE{},
 		},
@@ -281,7 +367,7 @@ func TestSolve(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			gotRes, err := Solve(test.tb, topo)
+			gotRes, err := Solve(test.tb, topo, test.partial)
 			if err != nil {
 				t.Fatalf("Solve() got unexpected error: %v", err)
 			}
@@ -495,7 +581,7 @@ func TestPortGroupsSolve(t *testing.T) {
 		Links: []*opb.Link{link1, link2, link3, link4, link5, link6, link7, link8, link9, link10, link11, link12, link13, link14, link15},
 	}
 
-	res, err := Solve(tb, topo)
+	res, err := Solve(tb, topo, nil)
 	if err != nil {
 		t.Fatalf("Solve() got unexpected error: %v", err)
 	}
@@ -570,7 +656,7 @@ func TestTestbedToAbstractGraph(t *testing.T) {
 		"ate:port1":          port,
 	}
 
-	graph, node2Dev, port2Port, err := testbedToAbstractGraph(tb)
+	graph, node2Dev, port2Port, err := testbedToAbstractGraph(tb, nil)
 	if err != nil {
 		t.Fatalf("testbedToAbstractGraph() got error %v, want nil", err)
 	}
@@ -976,7 +1062,7 @@ func TestSolveErrors(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			topo := unmarshalTopo(t, test.topo)
-			_, gotErr := Solve(test.tb, topo)
+			_, gotErr := Solve(test.tb, topo, nil)
 			if diff := errdiff.Substring(gotErr, test.wantErr); diff != "" {
 				t.Fatalf("Reserve() got unexpected error diff: %s", diff)
 			}

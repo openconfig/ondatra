@@ -948,6 +948,56 @@ func TestHeaderStacks(t *testing.T) {
 			},
 		},
 		wantFields: [][]wantField{{}, {}},
+	}, {
+		desc: "ESP header",
+		hdr: &opb.Header{
+			Type: &opb.Header_Esp{
+				&opb.EspHeader{
+					SecurityParametersIndex: 511,
+					SequenceNumber:          &opb.UIntRange{Min: 1, Max: 1, Count: 1},
+				},
+			},
+		},
+		wantFields: [][]wantField{{{
+			name:    "spi",
+			wantVal: ixconfig.String("511"),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				i := ixconfig.IpEncapsulatingSecurityPayloadStack(*s)
+				return (&i).Spi()
+			},
+		}, {
+			name:    "sequence numbers",
+			wantVal: ixconfig.String(strconv.Itoa(1)),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				i := ixconfig.IpEncapsulatingSecurityPayloadStack(*s)
+				return (&i).Sn()
+			},
+		}}},
+	}, {
+		desc: "ESP over MACSec header",
+		hdr: &opb.Header{
+			Type: &opb.Header_EspOverMacsec{
+				&opb.EspOverMacSecHeader{
+					SecurityParametersIndex: 511,
+					SequenceNumber:          &opb.UIntRange{Min: 1, Max: 1, Count: 1},
+				},
+			},
+		},
+		wantFields: [][]wantField{{{
+			name:    "spi",
+			wantVal: ixconfig.String("511"),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				i := ixconfig.IpEspOverMACsecStack(*s)
+				return (&i).Spi()
+			},
+		}, {
+			name:    "sequence numbers",
+			wantVal: ixconfig.String(strconv.Itoa(1)),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				i := ixconfig.IpEspOverMACsecStack(*s)
+				return (&i).Sn()
+			},
+		}}},
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

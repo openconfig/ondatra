@@ -122,6 +122,18 @@ func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.Traffi
 			return nil, err
 		}
 		return []*ixconfig.TrafficTrafficItemConfigElementStack{s, ppts}, nil
+	case *opb.Header_Esp:
+		s, err := espStack(v.Esp, idx)
+		if err != nil {
+			return nil, err
+		}
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
+	case *opb.Header_EspOverMacsec:
+		s, err := espOverMacsecStack(v.EspOverMacsec, idx)
+		if err != nil {
+			return nil, err
+		}
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	default:
 		return nil, fmt.Errorf("unrecognized header type: %v", hdr)
 	}
@@ -676,4 +688,26 @@ func macsecStack(macsec *opb.MacsecHeader, idx int) (*ixconfig.TrafficTrafficIte
 
 func payloadProtocolTypeStack(idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	return ixconfig.NewPayloadProtocolTypeStack(idx).TrafficTrafficItemConfigElementStack(), nil
+}
+
+func espStack(esp *opb.EspHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	stack := ixconfig.NewIpEncapsulatingSecurityPayloadStack(idx)
+	setSingleValue(stack.Spi(), uintToStr(esp.GetSecurityParametersIndex()))
+	if esp.GetSequenceNumber() != nil {
+		if err := setUintRangeField(stack.Sn(), esp.GetSequenceNumber()); err != nil {
+			return nil, fmt.Errorf("could not set sequence numbers: %w", err)
+		}
+	}
+	return stack.TrafficTrafficItemConfigElementStack(), nil
+}
+
+func espOverMacsecStack(esp *opb.EspOverMacSecHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	stack := ixconfig.NewIpEspOverMACsecStack(idx)
+	setSingleValue(stack.Spi(), uintToStr(esp.GetSecurityParametersIndex()))
+	if esp.GetSequenceNumber() != nil {
+		if err := setUintRangeField(stack.Sn(), esp.GetSequenceNumber()); err != nil {
+			return nil, fmt.Errorf("could not set sequence numbers: %w", err)
+		}
+	}
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }

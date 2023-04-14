@@ -3842,6 +3842,146 @@ func (n *Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny) Config() ygnmi.WildcardQuery[
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/length"
+func (n *Acl_AclSet_AclEntry_Ipv4_LengthPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewLeafSingletonQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/length"
+func (n *Acl_AclSet_AclEntry_Ipv4_LengthPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv4",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/length"
+func (n *Acl_AclSet_AclEntry_Ipv4_LengthPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewLeafConfigQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/config/length"
+func (n *Acl_AclSet_AclEntry_Ipv4_LengthPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv4",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
 //	Path from parent:     "state/protocol"
 //	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/protocol"
 func (n *Acl_AclSet_AclEntry_Ipv4_ProtocolPath) State() ygnmi.SingletonQuery[oc.Acl_AclSet_AclEntry_Ipv4_Protocol_Union] {
@@ -4290,6 +4430,18 @@ type Acl_AclSet_AclEntry_Ipv4_HopLimitPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Acl_AclSet_AclEntry_Ipv4_LengthPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/length YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_LengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv4_LengthPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/length YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_LengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Ipv4_ProtocolPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/state/protocol YANG schema element.
 type Acl_AclSet_AclEntry_Ipv4_ProtocolPath struct {
 	*ygnmi.NodePath
@@ -4516,6 +4668,82 @@ func (n *Acl_AclSet_AclEntry_Ipv4PathAny) HopLimit() *Acl_AclSet_AclEntry_Ipv4_H
 	}
 }
 
+// Icmpv4 (container): Top container for ICMPv4 filtering
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "icmpv4"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4"
+func (n *Acl_AclSet_AclEntry_Ipv4Path) Icmpv4() *Acl_AclSet_AclEntry_Ipv4_Icmpv4Path {
+	return &Acl_AclSet_AclEntry_Ipv4_Icmpv4Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmpv4"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Icmpv4 (container): Top container for ICMPv4 filtering
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "icmpv4"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4"
+func (n *Acl_AclSet_AclEntry_Ipv4PathAny) Icmpv4() *Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny {
+	return &Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmpv4"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Length (leaf): In the IPv4 header field, this field is known as the Total
+// Length.  Total Length is the length of the datagram, measured
+// in octets, including internet header and data.
+// In the IPv6 header field, this field is known as the Payload
+// Length, which is the length of the IPv6 payload, i.e., the rest
+// of the packet following the IPv6 header, in octets.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/*/length"
+func (n *Acl_AclSet_AclEntry_Ipv4Path) Length() *Acl_AclSet_AclEntry_Ipv4_LengthPath {
+	return &Acl_AclSet_AclEntry_Ipv4_LengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Length (leaf): In the IPv4 header field, this field is known as the Total
+// Length.  Total Length is the length of the datagram, measured
+// in octets, including internet header and data.
+// In the IPv6 header field, this field is known as the Payload
+// Length, which is the length of the IPv6 payload, i.e., the rest
+// of the packet following the IPv6 header, in octets.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/*/length"
+func (n *Acl_AclSet_AclEntry_Ipv4PathAny) Length() *Acl_AclSet_AclEntry_Ipv4_LengthPathAny {
+	return &Acl_AclSet_AclEntry_Ipv4_LengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // Protocol (leaf): The protocol carried in the IP packet, expressed either
 // as its IP protocol number, or by a defined identity.
 //
@@ -4615,6 +4843,422 @@ func (n *Acl_AclSet_AclEntry_Ipv4PathAny) SourceAddressPrefixSet() *Acl_AclSet_A
 	return &Acl_AclSet_AclEntry_Ipv4_SourceAddressPrefixSetPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-address-prefix-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/code YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/code YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4Path) State() ygnmi.SingletonQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny) State() ygnmi.WildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4Path) Config() ygnmi.ConfigQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		false,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny) Config() ygnmi.WildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		false,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/code"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePath) State() ygnmi.SingletonQuery[oc.E_Icmpv4Types_CODE] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Icmpv4Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/code"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePathAny) State() ygnmi.WildcardQuery[oc.E_Icmpv4Types_CODE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv4Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/config/code"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePath) Config() ygnmi.ConfigQuery[oc.E_Icmpv4Types_CODE] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Icmpv4Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/config/code"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePathAny) Config() ygnmi.WildcardQuery[oc.E_Icmpv4Types_CODE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv4Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/type"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePath) State() ygnmi.SingletonQuery[oc.E_Icmpv4Types_TYPE] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Icmpv4Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/type"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePathAny) State() ygnmi.WildcardQuery[oc.E_Icmpv4Types_TYPE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv4Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/config/type"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePath) Config() ygnmi.ConfigQuery[oc.E_Icmpv4Types_TYPE] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Icmpv4Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/config/type"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_Icmpv4Types_TYPE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv4Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv4_Icmpv4",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv4Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv4_Icmpv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/type YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/state/type YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv4_Icmpv4Path represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4 YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_Icmpv4Path struct {
+	*ygnmi.NodePath
+}
+
+// Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4 YANG schema element.
+type Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny struct {
+	*ygnmi.NodePath
+}
+
+// Code (leaf): ICMPv4 code to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/*/code"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4Path) Code() *Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePath {
+	return &Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "code"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Code (leaf): ICMPv4 code to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/*/code"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny) Code() *Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePathAny {
+	return &Acl_AclSet_AclEntry_Ipv4_Icmpv4_CodePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "code"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): ICMPv4 type to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/*/type"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4Path) Type() *Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePath {
+	return &Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): ICMPv4 type to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/icmpv4/*/type"
+func (n *Acl_AclSet_AclEntry_Ipv4_Icmpv4PathAny) Type() *Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePathAny {
+	return &Acl_AclSet_AclEntry_Ipv4_Icmpv4_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5528,6 +6172,146 @@ func (n *Acl_AclSet_AclEntry_Ipv6_HopLimitPathAny) Config() ygnmi.WildcardQuery[
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/length"
+func (n *Acl_AclSet_AclEntry_Ipv6_LengthPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewLeafSingletonQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/length"
+func (n *Acl_AclSet_AclEntry_Ipv6_LengthPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/length"
+func (n *Acl_AclSet_AclEntry_Ipv6_LengthPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewLeafConfigQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/length"
+func (n *Acl_AclSet_AclEntry_Ipv6_LengthPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewLeafWildcardQuery[uint16](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).Length
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
 //	Path from parent:     "state/protocol"
 //	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/protocol"
 func (n *Acl_AclSet_AclEntry_Ipv6_ProtocolPath) State() ygnmi.SingletonQuery[oc.Acl_AclSet_AclEntry_Ipv6_Protocol_Union] {
@@ -6128,6 +6912,18 @@ type Acl_AclSet_AclEntry_Ipv6_HopLimitPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Acl_AclSet_AclEntry_Ipv6_LengthPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/length YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_LengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_LengthPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/length YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_LengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Acl_AclSet_AclEntry_Ipv6_ProtocolPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/protocol YANG schema element.
 type Acl_AclSet_AclEntry_Ipv6_ProtocolPath struct {
 	*ygnmi.NodePath
@@ -6400,6 +7196,82 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) HopLimit() *Acl_AclSet_AclEntry_Ipv6_H
 	}
 }
 
+// Icmpv6 (container): Top container for ICMPv6 filtering
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "icmpv6"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6"
+func (n *Acl_AclSet_AclEntry_Ipv6Path) Icmpv6() *Acl_AclSet_AclEntry_Ipv6_Icmpv6Path {
+	return &Acl_AclSet_AclEntry_Ipv6_Icmpv6Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmpv6"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Icmpv6 (container): Top container for ICMPv6 filtering
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "icmpv6"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6"
+func (n *Acl_AclSet_AclEntry_Ipv6PathAny) Icmpv6() *Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny {
+	return &Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmpv6"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Length (leaf): In the IPv4 header field, this field is known as the Total
+// Length.  Total Length is the length of the datagram, measured
+// in octets, including internet header and data.
+// In the IPv6 header field, this field is known as the Payload
+// Length, which is the length of the IPv6 payload, i.e., the rest
+// of the packet following the IPv6 header, in octets.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/length"
+func (n *Acl_AclSet_AclEntry_Ipv6Path) Length() *Acl_AclSet_AclEntry_Ipv6_LengthPath {
+	return &Acl_AclSet_AclEntry_Ipv6_LengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Length (leaf): In the IPv4 header field, this field is known as the Total
+// Length.  Total Length is the length of the datagram, measured
+// in octets, including internet header and data.
+// In the IPv6 header field, this field is known as the Payload
+// Length, which is the length of the IPv6 payload, i.e., the rest
+// of the packet following the IPv6 header, in octets.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/length"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/length"
+func (n *Acl_AclSet_AclEntry_Ipv6PathAny) Length() *Acl_AclSet_AclEntry_Ipv6_LengthPathAny {
+	return &Acl_AclSet_AclEntry_Ipv6_LengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // Protocol (leaf): The protocol carried in the IP packet, expressed either
 // as its IP protocol number, or by a defined identity.
 //
@@ -6533,6 +7405,422 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) SourceFlowLabel() *Acl_AclSet_AclEntry
 	return &Acl_AclSet_AclEntry_Ipv6_SourceFlowLabelPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-flow-label"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/code YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/code YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6Path) State() ygnmi.SingletonQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny) State() ygnmi.WildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6Path) Config() ygnmi.ConfigQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		false,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny) Config() ygnmi.WildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		false,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/code"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePath) State() ygnmi.SingletonQuery[oc.E_Icmpv6Types_CODE] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Icmpv6Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/code"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePathAny) State() ygnmi.WildcardQuery[oc.E_Icmpv6Types_CODE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv6Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/config/code"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePath) Config() ygnmi.ConfigQuery[oc.E_Icmpv6Types_CODE] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Icmpv6Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/config/code"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePathAny) Config() ygnmi.WildcardQuery[oc.E_Icmpv6Types_CODE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv6Types_CODE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "code"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_CODE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Code
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/type"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePath) State() ygnmi.SingletonQuery[oc.E_Icmpv6Types_TYPE] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Icmpv6Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/type"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePathAny) State() ygnmi.WildcardQuery[oc.E_Icmpv6Types_TYPE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv6Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/config/type"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePath) Config() ygnmi.ConfigQuery[oc.E_Icmpv6Types_TYPE] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Icmpv6Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/config/type"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_Icmpv6Types_TYPE] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Icmpv6Types_TYPE](
+		"Acl_AclSet_AclEntry_Ipv6_Icmpv6",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Icmpv6Types_TYPE, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6_Icmpv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/type YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/state/type YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_Icmpv6Path represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6 YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_Icmpv6Path struct {
+	*ygnmi.NodePath
+}
+
+// Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6 YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny struct {
+	*ygnmi.NodePath
+}
+
+// Code (leaf): ICMP code to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/*/code"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6Path) Code() *Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePath {
+	return &Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "code"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Code (leaf): ICMP code to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/code"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/*/code"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny) Code() *Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePathAny {
+	return &Acl_AclSet_AclEntry_Ipv6_Icmpv6_CodePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "code"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): ICMPv6 type to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/*/type"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6Path) Type() *Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePath {
+	return &Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): ICMPv6 type to be matched.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/type"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/icmpv6/*/type"
+func (n *Acl_AclSet_AclEntry_Ipv6_Icmpv6PathAny) Type() *Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePathAny {
+	return &Acl_AclSet_AclEntry_Ipv6_Icmpv6_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
 			map[string]interface{}{},
 			n,
 		),

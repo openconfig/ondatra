@@ -1168,6 +1168,67 @@ func (h *MACsecHeader) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Macsec{h.pb}}
 }
 
+// NewESP returns a new ESP header.
+func NewESP() *ESPHeader {
+	return &ESPHeader{&opb.EspHeader{}}
+}
+
+// ESPHeader is an ESP packet header.
+type ESPHeader struct {
+	pb *opb.EspHeader
+}
+
+func (h *ESPHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_Esp{h.pb}}
+}
+
+// WithSecurityParametersIndex sets the SPI of the ESP header.
+func (h *ESPHeader) WithSecurityParametersIndex(spi uint32) *ESPHeader {
+	h.pb.SecurityParametersIndex = spi
+	return h
+}
+
+// WithSequenceNumber sets the sequence number of the ESP header.
+func (h *ESPHeader) WithSequenceNumber(sn uint32) *ESPHeader {
+	h.pb.SequenceNumber = intRangeSingle(sn)
+	return h
+}
+
+// NewESPOverMACSec returns a new ESP-over-MACSec header.
+func NewESPOverMACSec() *ESPOverMACSecHeader {
+	return &ESPOverMACSecHeader{&opb.EspOverMacSecHeader{}}
+}
+
+// ESPOverMACSecHeader is an ESP-over-MACSec packet header.
+type ESPOverMACSecHeader struct {
+	pb *opb.EspOverMacSecHeader
+}
+
+func (h *ESPOverMACSecHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_EspOverMacsec{h.pb}}
+}
+
+// WithSecurityParametersIndex sets the SPI of the ESP-over-MAC header.
+func (h *ESPOverMACSecHeader) WithSecurityParametersIndex(spi uint32) *ESPOverMACSecHeader {
+	h.pb.SecurityParametersIndex = spi
+	return h
+}
+
+// WithSequenceNumber sets the sequence number of the ESP-over-MACSec header.
+func (h *ESPOverMACSecHeader) WithSequenceNumber(sn uint32) *ESPOverMACSecHeader {
+	h.pb.SequenceNumber = intRangeSingle(sn)
+	return h
+}
+
+// SequenceNumberRange sets the sequence number of the ESP-over-MACSec header
+// to a range of values (defaulting to 1) and returns the range.
+func (h *ESPOverMACSecHeader) SequenceNumberRange() *ixnet.UIntRange {
+	if h.pb.SequenceNumber == nil {
+		h.pb.SequenceNumber = intRangeSingle(1)
+	}
+	return ixnet.NewUIntRange(h.pb.SequenceNumber)
+}
+
 func intRangeSingle(i uint32) *opb.UIntRange {
 	return &opb.UIntRange{Min: i, Max: i, Count: 1}
 }

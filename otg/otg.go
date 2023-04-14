@@ -345,6 +345,48 @@ func fetchCapture(ctx context.Context, ate binding.ATE, postName string) ([]byte
 	return api.GetCapture(api.NewCaptureRequest().SetPortName(postName))
 }
 
+// SetControlAction triggers actions against configured resources.
+func (o *OTG) SetControlAction(t testing.TB, action gosnappi.ControlAction) {
+	t.Helper()
+	t = events.ActionStarted(t, "SetControlAction on %v", o.ate)
+	resp, err := o.setControlAction(action)
+	if err != nil {
+		t.Fatalf("SetControlAction(t) on %s: %v", o.ate, err)
+	}
+	if len(resp.Warnings()) > 0 {
+		t.Logf("SetControlAction(t) on %s non-fatal warnings: %v", o.ate, resp.Warnings())
+	}
+}
+
+func (o *OTG) setControlAction(action gosnappi.ControlAction) (gosnappi.ControlActionResponse, error) {
+	api, err := rawapis.FetchOTG(context.Background(), o.ate)
+	if err != nil {
+		return nil, err
+	}
+	return api.SetControlAction(action)
+}
+
+// SetControlState sets the operational state of configured resources.
+func (o *OTG) SetControlState(t testing.TB, state gosnappi.ControlState) {
+	t.Helper()
+	t = events.ActionStarted(t, "SetControlState on %v", o.ate)
+	resp, err := o.setControlState(state)
+	if err != nil {
+		t.Fatalf("SetControlState(t) on %s: %v", o.ate, err)
+	}
+	if len(resp.Warnings()) > 0 {
+		t.Logf("SetControlState(t) on %s non-fatal warnings: %v", o.ate, resp.Warnings())
+	}
+}
+
+func (o *OTG) setControlState(state gosnappi.ControlState) (gosnappi.Warning, error) {
+	api, err := rawapis.FetchOTG(context.Background(), o.ate)
+	if err != nil {
+		return nil, err
+	}
+	return api.SetControlState(state)
+}
+
 // GNMIOpts returns a new set of options to customize gNMI queries.
 func (o *OTG) GNMIOpts() *gnmi.Opts {
 	return gnmi.NewOpts(o.ate.Name(), false, func(ctx context.Context) (gpb.GNMIClient, error) {

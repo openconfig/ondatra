@@ -3067,6 +3067,504 @@ const (
 	IETFInterfaces_InterfaceType_xboxWireless E_IETFInterfaces_InterfaceType = 286
 )
 
+// E_Icmpv4Types_CODE is a derived int64 type which is used to represent
+// the enumerated node Icmpv4Types_CODE. An additional value named
+// Icmpv4Types_CODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Icmpv4Types_CODE int64
+
+// IsYANGGoEnum ensures that Icmpv4Types_CODE implements the yang.GoEnum
+// interface. This ensures that Icmpv4Types_CODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Icmpv4Types_CODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Icmpv4Types_CODE.
+func (E_Icmpv4Types_CODE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Icmpv4Types_CODE.
+func (e E_Icmpv4Types_CODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Icmpv4Types_CODE")
+}
+
+const (
+	// Icmpv4Types_CODE_UNSET corresponds to the value UNSET of Icmpv4Types_CODE
+	Icmpv4Types_CODE_UNSET E_Icmpv4Types_CODE = 0
+	// Icmpv4Types_CODE_DST_UNREACHABLE_ADMIN_PROHIBITED corresponds to the value DST_UNREACHABLE_ADMIN_PROHIBITED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_ADMIN_PROHIBITED E_Icmpv4Types_CODE = 1
+	// Icmpv4Types_CODE_DST_UNREACHABLE_CANNOT_FRAGMENT corresponds to the value DST_UNREACHABLE_CANNOT_FRAGMENT of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_CANNOT_FRAGMENT E_Icmpv4Types_CODE = 2
+	// Icmpv4Types_CODE_DST_UNREACHABLE_CODE corresponds to the value DST_UNREACHABLE_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_CODE E_Icmpv4Types_CODE = 3
+	// Icmpv4Types_CODE_DST_UNREACHABLE_DST_HOST_ADMIN_PROHIBITED corresponds to the value DST_UNREACHABLE_DST_HOST_ADMIN_PROHIBITED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_DST_HOST_ADMIN_PROHIBITED E_Icmpv4Types_CODE = 4
+	// Icmpv4Types_CODE_DST_UNREACHABLE_DST_HOST_UNKNOWN corresponds to the value DST_UNREACHABLE_DST_HOST_UNKNOWN of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_DST_HOST_UNKNOWN E_Icmpv4Types_CODE = 5
+	// Icmpv4Types_CODE_DST_UNREACHABLE_DST_NET_ADMIN_PROHIBITED corresponds to the value DST_UNREACHABLE_DST_NET_ADMIN_PROHIBITED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_DST_NET_ADMIN_PROHIBITED E_Icmpv4Types_CODE = 6
+	// Icmpv4Types_CODE_DST_UNREACHABLE_DST_NET_UNKNOWN corresponds to the value DST_UNREACHABLE_DST_NET_UNKNOWN of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_DST_NET_UNKNOWN E_Icmpv4Types_CODE = 7
+	// Icmpv4Types_CODE_DST_UNREACHABLE_HOST corresponds to the value DST_UNREACHABLE_HOST of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_HOST E_Icmpv4Types_CODE = 8
+	// Icmpv4Types_CODE_DST_UNREACHABLE_HOST_PRECEDENCE_VIOLATION corresponds to the value DST_UNREACHABLE_HOST_PRECEDENCE_VIOLATION of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_HOST_PRECEDENCE_VIOLATION E_Icmpv4Types_CODE = 9
+	// Icmpv4Types_CODE_DST_UNREACHABLE_HOST_UNREACHABLE_FOR_TOS corresponds to the value DST_UNREACHABLE_HOST_UNREACHABLE_FOR_TOS of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_HOST_UNREACHABLE_FOR_TOS E_Icmpv4Types_CODE = 10
+	// Icmpv4Types_CODE_DST_UNREACHABLE_NET corresponds to the value DST_UNREACHABLE_NET of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_NET E_Icmpv4Types_CODE = 11
+	// Icmpv4Types_CODE_DST_UNREACHABLE_NET_UNREACHABLE_FOR_TOS corresponds to the value DST_UNREACHABLE_NET_UNREACHABLE_FOR_TOS of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_NET_UNREACHABLE_FOR_TOS E_Icmpv4Types_CODE = 12
+	// Icmpv4Types_CODE_DST_UNREACHABLE_PORT corresponds to the value DST_UNREACHABLE_PORT of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_PORT E_Icmpv4Types_CODE = 13
+	// Icmpv4Types_CODE_DST_UNREACHABLE_PRECEDENCE_CUTOFF corresponds to the value DST_UNREACHABLE_PRECEDENCE_CUTOFF of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_PRECEDENCE_CUTOFF E_Icmpv4Types_CODE = 14
+	// Icmpv4Types_CODE_DST_UNREACHABLE_PROTOCOL corresponds to the value DST_UNREACHABLE_PROTOCOL of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_PROTOCOL E_Icmpv4Types_CODE = 15
+	// Icmpv4Types_CODE_DST_UNREACHABLE_SRC_HOST_ISOLATED corresponds to the value DST_UNREACHABLE_SRC_HOST_ISOLATED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_SRC_HOST_ISOLATED E_Icmpv4Types_CODE = 16
+	// Icmpv4Types_CODE_DST_UNREACHABLE_SRC_ROUTE_FAILED corresponds to the value DST_UNREACHABLE_SRC_ROUTE_FAILED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_DST_UNREACHABLE_SRC_ROUTE_FAILED E_Icmpv4Types_CODE = 17
+	// Icmpv4Types_CODE_ECHO_CODE corresponds to the value ECHO_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ECHO_CODE E_Icmpv4Types_CODE = 18
+	// Icmpv4Types_CODE_ECHO_NO_CODE corresponds to the value ECHO_NO_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ECHO_NO_CODE E_Icmpv4Types_CODE = 19
+	// Icmpv4Types_CODE_ECHO_REPLY_CODE corresponds to the value ECHO_REPLY_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ECHO_REPLY_CODE E_Icmpv4Types_CODE = 20
+	// Icmpv4Types_CODE_ECHO_REPLY_NONE corresponds to the value ECHO_REPLY_NONE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ECHO_REPLY_NONE E_Icmpv4Types_CODE = 21
+	// Icmpv4Types_CODE_EXT_ECHO_REPLY_CODE corresponds to the value EXT_ECHO_REPLY_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REPLY_CODE E_Icmpv4Types_CODE = 22
+	// Icmpv4Types_CODE_EXT_ECHO_REPLY_MALFORMED_QUERY corresponds to the value EXT_ECHO_REPLY_MALFORMED_QUERY of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REPLY_MALFORMED_QUERY E_Icmpv4Types_CODE = 23
+	// Icmpv4Types_CODE_EXT_ECHO_REPLY_MULTIPLE_INTF_SATISFY_QUERY corresponds to the value EXT_ECHO_REPLY_MULTIPLE_INTF_SATISFY_QUERY of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REPLY_MULTIPLE_INTF_SATISFY_QUERY E_Icmpv4Types_CODE = 24
+	// Icmpv4Types_CODE_EXT_ECHO_REPLY_NO_ERROR corresponds to the value EXT_ECHO_REPLY_NO_ERROR of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REPLY_NO_ERROR E_Icmpv4Types_CODE = 25
+	// Icmpv4Types_CODE_EXT_ECHO_REPLY_NO_SUB_TABLE_ENTRY corresponds to the value EXT_ECHO_REPLY_NO_SUB_TABLE_ENTRY of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REPLY_NO_SUB_TABLE_ENTRY E_Icmpv4Types_CODE = 26
+	// Icmpv4Types_CODE_EXT_ECHO_REPLY_NO_SUCH_INTF corresponds to the value EXT_ECHO_REPLY_NO_SUCH_INTF of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REPLY_NO_SUCH_INTF E_Icmpv4Types_CODE = 27
+	// Icmpv4Types_CODE_EXT_ECHO_REQUEST_CODE corresponds to the value EXT_ECHO_REQUEST_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REQUEST_CODE E_Icmpv4Types_CODE = 28
+	// Icmpv4Types_CODE_EXT_ECHO_REQUEST_NO_ERROR corresponds to the value EXT_ECHO_REQUEST_NO_ERROR of Icmpv4Types_CODE
+	Icmpv4Types_CODE_EXT_ECHO_REQUEST_NO_ERROR E_Icmpv4Types_CODE = 29
+	// Icmpv4Types_CODE_PARAM_PROBLEM_BAD_LENGTH corresponds to the value PARAM_PROBLEM_BAD_LENGTH of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PARAM_PROBLEM_BAD_LENGTH E_Icmpv4Types_CODE = 30
+	// Icmpv4Types_CODE_PARAM_PROBLEM_CODE corresponds to the value PARAM_PROBLEM_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PARAM_PROBLEM_CODE E_Icmpv4Types_CODE = 31
+	// Icmpv4Types_CODE_PARAM_PROBLEM_MISSING_REQ_OPTION corresponds to the value PARAM_PROBLEM_MISSING_REQ_OPTION of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PARAM_PROBLEM_MISSING_REQ_OPTION E_Icmpv4Types_CODE = 32
+	// Icmpv4Types_CODE_PARAM_PROBLEM_POINTER_INDICATES_ERR corresponds to the value PARAM_PROBLEM_POINTER_INDICATES_ERR of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PARAM_PROBLEM_POINTER_INDICATES_ERR E_Icmpv4Types_CODE = 33
+	// Icmpv4Types_CODE_PHOTURIS_AUTH_FAILED corresponds to the value PHOTURIS_AUTH_FAILED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_AUTH_FAILED E_Icmpv4Types_CODE = 34
+	// Icmpv4Types_CODE_PHOTURIS_BAD_SPI corresponds to the value PHOTURIS_BAD_SPI of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_BAD_SPI E_Icmpv4Types_CODE = 35
+	// Icmpv4Types_CODE_PHOTURIS_CODE corresponds to the value PHOTURIS_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_CODE E_Icmpv4Types_CODE = 36
+	// Icmpv4Types_CODE_PHOTURIS_DECOMPRESS_FAILED corresponds to the value PHOTURIS_DECOMPRESS_FAILED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_DECOMPRESS_FAILED E_Icmpv4Types_CODE = 37
+	// Icmpv4Types_CODE_PHOTURIS_DECRYPTION_FAILED corresponds to the value PHOTURIS_DECRYPTION_FAILED of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_DECRYPTION_FAILED E_Icmpv4Types_CODE = 38
+	// Icmpv4Types_CODE_PHOTURIS_NEED_AUTHENTICATION corresponds to the value PHOTURIS_NEED_AUTHENTICATION of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_NEED_AUTHENTICATION E_Icmpv4Types_CODE = 39
+	// Icmpv4Types_CODE_PHOTURIS_NEED_AUTHORIZATION corresponds to the value PHOTURIS_NEED_AUTHORIZATION of Icmpv4Types_CODE
+	Icmpv4Types_CODE_PHOTURIS_NEED_AUTHORIZATION E_Icmpv4Types_CODE = 40
+	// Icmpv4Types_CODE_REDIRECT_CODE corresponds to the value REDIRECT_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_REDIRECT_CODE E_Icmpv4Types_CODE = 41
+	// Icmpv4Types_CODE_REDIRECT_HOST corresponds to the value REDIRECT_HOST of Icmpv4Types_CODE
+	Icmpv4Types_CODE_REDIRECT_HOST E_Icmpv4Types_CODE = 42
+	// Icmpv4Types_CODE_REDIRECT_NETWORK corresponds to the value REDIRECT_NETWORK of Icmpv4Types_CODE
+	Icmpv4Types_CODE_REDIRECT_NETWORK E_Icmpv4Types_CODE = 43
+	// Icmpv4Types_CODE_REDIRECT_TOS_HOST corresponds to the value REDIRECT_TOS_HOST of Icmpv4Types_CODE
+	Icmpv4Types_CODE_REDIRECT_TOS_HOST E_Icmpv4Types_CODE = 44
+	// Icmpv4Types_CODE_REDIRECT_TOS_NETWORK corresponds to the value REDIRECT_TOS_NETWORK of Icmpv4Types_CODE
+	Icmpv4Types_CODE_REDIRECT_TOS_NETWORK E_Icmpv4Types_CODE = 45
+	// Icmpv4Types_CODE_ROUTER_ADVERTISEMENT_CODE corresponds to the value ROUTER_ADVERTISEMENT_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ROUTER_ADVERTISEMENT_CODE E_Icmpv4Types_CODE = 46
+	// Icmpv4Types_CODE_ROUTER_ADVERTISEMENT_DOES_NOT_ROUTE_COMMON corresponds to the value ROUTER_ADVERTISEMENT_DOES_NOT_ROUTE_COMMON of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ROUTER_ADVERTISEMENT_DOES_NOT_ROUTE_COMMON E_Icmpv4Types_CODE = 47
+	// Icmpv4Types_CODE_ROUTER_ADVERTISEMENT_NORMAL corresponds to the value ROUTER_ADVERTISEMENT_NORMAL of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ROUTER_ADVERTISEMENT_NORMAL E_Icmpv4Types_CODE = 48
+	// Icmpv4Types_CODE_ROUTER_SELECTION_CODE corresponds to the value ROUTER_SELECTION_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ROUTER_SELECTION_CODE E_Icmpv4Types_CODE = 49
+	// Icmpv4Types_CODE_ROUTER_SELECTION_NO_CODE corresponds to the value ROUTER_SELECTION_NO_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_ROUTER_SELECTION_NO_CODE E_Icmpv4Types_CODE = 50
+	// Icmpv4Types_CODE_TIMESTAMP_CODE corresponds to the value TIMESTAMP_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIMESTAMP_CODE E_Icmpv4Types_CODE = 51
+	// Icmpv4Types_CODE_TIMESTAMP_NO_CODE corresponds to the value TIMESTAMP_NO_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIMESTAMP_NO_CODE E_Icmpv4Types_CODE = 52
+	// Icmpv4Types_CODE_TIMESTAMP_REPLY_CODE corresponds to the value TIMESTAMP_REPLY_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIMESTAMP_REPLY_CODE E_Icmpv4Types_CODE = 53
+	// Icmpv4Types_CODE_TIMESTAMP_REPLY_NO_CODE corresponds to the value TIMESTAMP_REPLY_NO_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIMESTAMP_REPLY_NO_CODE E_Icmpv4Types_CODE = 54
+	// Icmpv4Types_CODE_TIME_EXCEEDED_CODE corresponds to the value TIME_EXCEEDED_CODE of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIME_EXCEEDED_CODE E_Icmpv4Types_CODE = 55
+	// Icmpv4Types_CODE_TIME_EXCEEDED_FRAGMENT_REASSEMBLY_IN_TRANSIT corresponds to the value TIME_EXCEEDED_FRAGMENT_REASSEMBLY_IN_TRANSIT of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIME_EXCEEDED_FRAGMENT_REASSEMBLY_IN_TRANSIT E_Icmpv4Types_CODE = 56
+	// Icmpv4Types_CODE_TIME_EXCEEDED_IN_TRANSIT corresponds to the value TIME_EXCEEDED_IN_TRANSIT of Icmpv4Types_CODE
+	Icmpv4Types_CODE_TIME_EXCEEDED_IN_TRANSIT E_Icmpv4Types_CODE = 57
+)
+
+// E_Icmpv4Types_TYPE is a derived int64 type which is used to represent
+// the enumerated node Icmpv4Types_TYPE. An additional value named
+// Icmpv4Types_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Icmpv4Types_TYPE int64
+
+// IsYANGGoEnum ensures that Icmpv4Types_TYPE implements the yang.GoEnum
+// interface. This ensures that Icmpv4Types_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Icmpv4Types_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Icmpv4Types_TYPE.
+func (E_Icmpv4Types_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Icmpv4Types_TYPE.
+func (e E_Icmpv4Types_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Icmpv4Types_TYPE")
+}
+
+const (
+	// Icmpv4Types_TYPE_UNSET corresponds to the value UNSET of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_UNSET E_Icmpv4Types_TYPE = 0
+	// Icmpv4Types_TYPE_DST_UNREACHABLE corresponds to the value DST_UNREACHABLE of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_DST_UNREACHABLE E_Icmpv4Types_TYPE = 1
+	// Icmpv4Types_TYPE_ECHO corresponds to the value ECHO of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_ECHO E_Icmpv4Types_TYPE = 2
+	// Icmpv4Types_TYPE_ECHO_REPLY corresponds to the value ECHO_REPLY of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_ECHO_REPLY E_Icmpv4Types_TYPE = 3
+	// Icmpv4Types_TYPE_EXT_ECHO_REPLY corresponds to the value EXT_ECHO_REPLY of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_EXT_ECHO_REPLY E_Icmpv4Types_TYPE = 4
+	// Icmpv4Types_TYPE_EXT_ECHO_REQUEST corresponds to the value EXT_ECHO_REQUEST of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_EXT_ECHO_REQUEST E_Icmpv4Types_TYPE = 5
+	// Icmpv4Types_TYPE_PARAM_PROBLEM corresponds to the value PARAM_PROBLEM of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_PARAM_PROBLEM E_Icmpv4Types_TYPE = 6
+	// Icmpv4Types_TYPE_PHOTURIS corresponds to the value PHOTURIS of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_PHOTURIS E_Icmpv4Types_TYPE = 7
+	// Icmpv4Types_TYPE_REDIRECT corresponds to the value REDIRECT of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_REDIRECT E_Icmpv4Types_TYPE = 8
+	// Icmpv4Types_TYPE_ROUTER_ADVERTISEMENT corresponds to the value ROUTER_ADVERTISEMENT of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_ROUTER_ADVERTISEMENT E_Icmpv4Types_TYPE = 9
+	// Icmpv4Types_TYPE_ROUTER_SOLICITATION corresponds to the value ROUTER_SOLICITATION of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_ROUTER_SOLICITATION E_Icmpv4Types_TYPE = 10
+	// Icmpv4Types_TYPE_TIMESTAMP corresponds to the value TIMESTAMP of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_TIMESTAMP E_Icmpv4Types_TYPE = 11
+	// Icmpv4Types_TYPE_TIMESTAMP_REPLY corresponds to the value TIMESTAMP_REPLY of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_TIMESTAMP_REPLY E_Icmpv4Types_TYPE = 12
+	// Icmpv4Types_TYPE_TIME_EXCEEDED corresponds to the value TIME_EXCEEDED of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_TIME_EXCEEDED E_Icmpv4Types_TYPE = 13
+	// Icmpv4Types_TYPE_TRACEROUTE corresponds to the value TRACEROUTE of Icmpv4Types_TYPE
+	Icmpv4Types_TYPE_TRACEROUTE E_Icmpv4Types_TYPE = 14
+)
+
+// E_Icmpv6Types_CODE is a derived int64 type which is used to represent
+// the enumerated node Icmpv6Types_CODE. An additional value named
+// Icmpv6Types_CODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Icmpv6Types_CODE int64
+
+// IsYANGGoEnum ensures that Icmpv6Types_CODE implements the yang.GoEnum
+// interface. This ensures that Icmpv6Types_CODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Icmpv6Types_CODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Icmpv6Types_CODE.
+func (E_Icmpv6Types_CODE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Icmpv6Types_CODE.
+func (e E_Icmpv6Types_CODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Icmpv6Types_CODE")
+}
+
+const (
+	// Icmpv6Types_CODE_UNSET corresponds to the value UNSET of Icmpv6Types_CODE
+	Icmpv6Types_CODE_UNSET E_Icmpv6Types_CODE = 0
+	// Icmpv6Types_CODE_DST_UNREACHABLE_ADDR corresponds to the value DST_UNREACHABLE_ADDR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_ADDR E_Icmpv6Types_CODE = 1
+	// Icmpv6Types_CODE_DST_UNREACHABLE_BEYOND_SCOPE_OF_SRC corresponds to the value DST_UNREACHABLE_BEYOND_SCOPE_OF_SRC of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_BEYOND_SCOPE_OF_SRC E_Icmpv6Types_CODE = 2
+	// Icmpv6Types_CODE_DST_UNREACHABLE_CODE corresponds to the value DST_UNREACHABLE_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_CODE E_Icmpv6Types_CODE = 3
+	// Icmpv6Types_CODE_DST_UNREACHABLE_DST_ADMIN_PROHIBITED corresponds to the value DST_UNREACHABLE_DST_ADMIN_PROHIBITED of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_DST_ADMIN_PROHIBITED E_Icmpv6Types_CODE = 4
+	// Icmpv6Types_CODE_DST_UNREACHABLE_ERR_IN_SRC_ROUTING_HDR corresponds to the value DST_UNREACHABLE_ERR_IN_SRC_ROUTING_HDR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_ERR_IN_SRC_ROUTING_HDR E_Icmpv6Types_CODE = 5
+	// Icmpv6Types_CODE_DST_UNREACHABLE_HDRS_TOO_LONG corresponds to the value DST_UNREACHABLE_HDRS_TOO_LONG of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_HDRS_TOO_LONG E_Icmpv6Types_CODE = 6
+	// Icmpv6Types_CODE_DST_UNREACHABLE_NO_ROUTE_TO_DST corresponds to the value DST_UNREACHABLE_NO_ROUTE_TO_DST of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_NO_ROUTE_TO_DST E_Icmpv6Types_CODE = 7
+	// Icmpv6Types_CODE_DST_UNREACHABLE_PORT corresponds to the value DST_UNREACHABLE_PORT of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_PORT E_Icmpv6Types_CODE = 8
+	// Icmpv6Types_CODE_DST_UNREACHABLE_REJECT_ROUTE_TO_DST corresponds to the value DST_UNREACHABLE_REJECT_ROUTE_TO_DST of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_REJECT_ROUTE_TO_DST E_Icmpv6Types_CODE = 9
+	// Icmpv6Types_CODE_DST_UNREACHABLE_SRC_ADDR_FAILED_POLICY corresponds to the value DST_UNREACHABLE_SRC_ADDR_FAILED_POLICY of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DST_UNREACHABLE_SRC_ADDR_FAILED_POLICY E_Icmpv6Types_CODE = 10
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_CODE corresponds to the value DUPLICATE_ADDRESS_REPLY_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_CODE E_Icmpv6Types_CODE = 11
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_DAC corresponds to the value DUPLICATE_ADDRESS_REPLY_DAC of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_DAC E_Icmpv6Types_CODE = 12
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR128 corresponds to the value DUPLICATE_ADDRESS_REPLY_EDAC_ROVR128 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR128 E_Icmpv6Types_CODE = 13
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR192 corresponds to the value DUPLICATE_ADDRESS_REPLY_EDAC_ROVR192 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR192 E_Icmpv6Types_CODE = 14
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR256 corresponds to the value DUPLICATE_ADDRESS_REPLY_EDAC_ROVR256 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR256 E_Icmpv6Types_CODE = 15
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR64 corresponds to the value DUPLICATE_ADDRESS_REPLY_EDAC_ROVR64 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REPLY_EDAC_ROVR64 E_Icmpv6Types_CODE = 16
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_CODE corresponds to the value DUPLICATE_ADDRESS_REQUEST_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_CODE E_Icmpv6Types_CODE = 17
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_DAR corresponds to the value DUPLICATE_ADDRESS_REQUEST_DAR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_DAR E_Icmpv6Types_CODE = 18
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR128 corresponds to the value DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR128 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR128 E_Icmpv6Types_CODE = 19
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR192 corresponds to the value DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR192 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR192 E_Icmpv6Types_CODE = 20
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR256 corresponds to the value DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR256 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR256 E_Icmpv6Types_CODE = 21
+	// Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR64 corresponds to the value DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR64 of Icmpv6Types_CODE
+	Icmpv6Types_CODE_DUPLICATE_ADDRESS_REQUEST_EDAR_ROVR64 E_Icmpv6Types_CODE = 22
+	// Icmpv6Types_CODE_ECHO_REPLY_CODE corresponds to the value ECHO_REPLY_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ECHO_REPLY_CODE E_Icmpv6Types_CODE = 23
+	// Icmpv6Types_CODE_ECHO_REPLY_NO_CODE corresponds to the value ECHO_REPLY_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ECHO_REPLY_NO_CODE E_Icmpv6Types_CODE = 24
+	// Icmpv6Types_CODE_ECHO_REQUEST_CODE corresponds to the value ECHO_REQUEST_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ECHO_REQUEST_CODE E_Icmpv6Types_CODE = 25
+	// Icmpv6Types_CODE_ECHO_REQUEST_NO_CODE corresponds to the value ECHO_REQUEST_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ECHO_REQUEST_NO_CODE E_Icmpv6Types_CODE = 26
+	// Icmpv6Types_CODE_EXT_ECHO_REPLY_CODE corresponds to the value EXT_ECHO_REPLY_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REPLY_CODE E_Icmpv6Types_CODE = 27
+	// Icmpv6Types_CODE_EXT_ECHO_REPLY_MALFORMED_QUERY corresponds to the value EXT_ECHO_REPLY_MALFORMED_QUERY of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REPLY_MALFORMED_QUERY E_Icmpv6Types_CODE = 28
+	// Icmpv6Types_CODE_EXT_ECHO_REPLY_MULTIPLE_INTF_SATISFY_QUERY corresponds to the value EXT_ECHO_REPLY_MULTIPLE_INTF_SATISFY_QUERY of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REPLY_MULTIPLE_INTF_SATISFY_QUERY E_Icmpv6Types_CODE = 29
+	// Icmpv6Types_CODE_EXT_ECHO_REPLY_NO_ERROR corresponds to the value EXT_ECHO_REPLY_NO_ERROR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REPLY_NO_ERROR E_Icmpv6Types_CODE = 30
+	// Icmpv6Types_CODE_EXT_ECHO_REPLY_NO_SUCH_INTERFACE corresponds to the value EXT_ECHO_REPLY_NO_SUCH_INTERFACE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REPLY_NO_SUCH_INTERFACE E_Icmpv6Types_CODE = 31
+	// Icmpv6Types_CODE_EXT_ECHO_REPLY_NO_SUCH_TABLE_ENTRY corresponds to the value EXT_ECHO_REPLY_NO_SUCH_TABLE_ENTRY of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REPLY_NO_SUCH_TABLE_ENTRY E_Icmpv6Types_CODE = 32
+	// Icmpv6Types_CODE_EXT_ECHO_REQUEST_CODE corresponds to the value EXT_ECHO_REQUEST_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REQUEST_CODE E_Icmpv6Types_CODE = 33
+	// Icmpv6Types_CODE_EXT_ECHO_REQUEST_NO_ERROR corresponds to the value EXT_ECHO_REQUEST_NO_ERROR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_EXT_ECHO_REQUEST_NO_ERROR E_Icmpv6Types_CODE = 34
+	// Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REPLY_CODE corresponds to the value HOME_AGENT_ADDRESS_DISCOVERY_REPLY_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REPLY_CODE E_Icmpv6Types_CODE = 35
+	// Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REPLY_NO_CODE corresponds to the value HOME_AGENT_ADDRESS_DISCOVERY_REPLY_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REPLY_NO_CODE E_Icmpv6Types_CODE = 36
+	// Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REQUEST_CODE corresponds to the value HOME_AGENT_ADDRESS_DISCOVERY_REQUEST_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REQUEST_CODE E_Icmpv6Types_CODE = 37
+	// Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REQUEST_NO_CODE corresponds to the value HOME_AGENT_ADDRESS_DISCOVERY_REQUEST_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_HOME_AGENT_ADDRESS_DISCOVERY_REQUEST_NO_CODE E_Icmpv6Types_CODE = 38
+	// Icmpv6Types_CODE_INVERSE_NEIGHBOR_ADVERTISEMENT_CODE corresponds to the value INVERSE_NEIGHBOR_ADVERTISEMENT_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_INVERSE_NEIGHBOR_ADVERTISEMENT_CODE E_Icmpv6Types_CODE = 39
+	// Icmpv6Types_CODE_INVERSE_NEIGHBOR_ADVERTISEMENT_NO_CODE corresponds to the value INVERSE_NEIGHBOR_ADVERTISEMENT_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_INVERSE_NEIGHBOR_ADVERTISEMENT_NO_CODE E_Icmpv6Types_CODE = 40
+	// Icmpv6Types_CODE_INVERSE_NEIGHBOR_SOLICITATION_CODE corresponds to the value INVERSE_NEIGHBOR_SOLICITATION_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_INVERSE_NEIGHBOR_SOLICITATION_CODE E_Icmpv6Types_CODE = 41
+	// Icmpv6Types_CODE_INVERSE_NEIGHBOR_SOLICITATION_NO_CODE corresponds to the value INVERSE_NEIGHBOR_SOLICITATION_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_INVERSE_NEIGHBOR_SOLICITATION_NO_CODE E_Icmpv6Types_CODE = 42
+	// Icmpv6Types_CODE_MOBILE_PREFIX_ADVERTISEMENT_CODE corresponds to the value MOBILE_PREFIX_ADVERTISEMENT_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MOBILE_PREFIX_ADVERTISEMENT_CODE E_Icmpv6Types_CODE = 43
+	// Icmpv6Types_CODE_MOBILE_PREFIX_ADVERTISEMENT_NO_CODE corresponds to the value MOBILE_PREFIX_ADVERTISEMENT_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MOBILE_PREFIX_ADVERTISEMENT_NO_CODE E_Icmpv6Types_CODE = 44
+	// Icmpv6Types_CODE_MOBILE_PREFIX_SOLICITATION_CODE corresponds to the value MOBILE_PREFIX_SOLICITATION_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MOBILE_PREFIX_SOLICITATION_CODE E_Icmpv6Types_CODE = 45
+	// Icmpv6Types_CODE_MOBILE_PREFIX_SOLICITATION_NO_CODE corresponds to the value MOBILE_PREFIX_SOLICITATION_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MOBILE_PREFIX_SOLICITATION_NO_CODE E_Icmpv6Types_CODE = 46
+	// Icmpv6Types_CODE_MULTICAST_LISTENER_DONE_CODE corresponds to the value MULTICAST_LISTENER_DONE_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MULTICAST_LISTENER_DONE_CODE E_Icmpv6Types_CODE = 47
+	// Icmpv6Types_CODE_MULTICAST_LISTENER_DONE_NO_CODE corresponds to the value MULTICAST_LISTENER_DONE_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MULTICAST_LISTENER_DONE_NO_CODE E_Icmpv6Types_CODE = 48
+	// Icmpv6Types_CODE_MULTICAST_LISTENER_QUERY_CODE corresponds to the value MULTICAST_LISTENER_QUERY_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MULTICAST_LISTENER_QUERY_CODE E_Icmpv6Types_CODE = 49
+	// Icmpv6Types_CODE_MULTICAST_LISTENER_QUERY_NO_CODE corresponds to the value MULTICAST_LISTENER_QUERY_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MULTICAST_LISTENER_QUERY_NO_CODE E_Icmpv6Types_CODE = 50
+	// Icmpv6Types_CODE_MULTICAST_LISTENER_REPORT_CODE corresponds to the value MULTICAST_LISTENER_REPORT_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MULTICAST_LISTENER_REPORT_CODE E_Icmpv6Types_CODE = 51
+	// Icmpv6Types_CODE_MULTICAST_LISTENER_REPORT_NO_CODE corresponds to the value MULTICAST_LISTENER_REPORT_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_MULTICAST_LISTENER_REPORT_NO_CODE E_Icmpv6Types_CODE = 52
+	// Icmpv6Types_CODE_NDDE_INFORMATION_RESPONSE_CODE corresponds to the value NDDE_INFORMATION_RESPONSE_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NDDE_INFORMATION_RESPONSE_CODE E_Icmpv6Types_CODE = 53
+	// Icmpv6Types_CODE_NEIGHBOR_ADVERTISEMENT_CODE corresponds to the value NEIGHBOR_ADVERTISEMENT_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NEIGHBOR_ADVERTISEMENT_CODE E_Icmpv6Types_CODE = 54
+	// Icmpv6Types_CODE_NEIGHBOR_ADVERTISEMENT_NO_CODE corresponds to the value NEIGHBOR_ADVERTISEMENT_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NEIGHBOR_ADVERTISEMENT_NO_CODE E_Icmpv6Types_CODE = 55
+	// Icmpv6Types_CODE_NEIGHBOR_SOLICITATION_CODE corresponds to the value NEIGHBOR_SOLICITATION_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NEIGHBOR_SOLICITATION_CODE E_Icmpv6Types_CODE = 56
+	// Icmpv6Types_CODE_NEIGHBOR_SOLICITATION_NO_CODE corresponds to the value NEIGHBOR_SOLICITATION_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NEIGHBOR_SOLICITATION_NO_CODE E_Icmpv6Types_CODE = 57
+	// Icmpv6Types_CODE_NODE_INFORMATION_QUERY_CODE corresponds to the value NODE_INFORMATION_QUERY_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_QUERY_CODE E_Icmpv6Types_CODE = 58
+	// Icmpv6Types_CODE_NODE_INFORMATION_QUERY_IPV4_ADDR corresponds to the value NODE_INFORMATION_QUERY_IPV4_ADDR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_QUERY_IPV4_ADDR E_Icmpv6Types_CODE = 59
+	// Icmpv6Types_CODE_NODE_INFORMATION_QUERY_IPV6_ADDR corresponds to the value NODE_INFORMATION_QUERY_IPV6_ADDR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_QUERY_IPV6_ADDR E_Icmpv6Types_CODE = 60
+	// Icmpv6Types_CODE_NODE_INFORMATION_QUERY_NAME corresponds to the value NODE_INFORMATION_QUERY_NAME of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_QUERY_NAME E_Icmpv6Types_CODE = 61
+	// Icmpv6Types_CODE_NODE_INFORMATION_RESPONSE_REFUSED corresponds to the value NODE_INFORMATION_RESPONSE_REFUSED of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_RESPONSE_REFUSED E_Icmpv6Types_CODE = 62
+	// Icmpv6Types_CODE_NODE_INFORMATION_RESPONSE_SUCCESS corresponds to the value NODE_INFORMATION_RESPONSE_SUCCESS of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_RESPONSE_SUCCESS E_Icmpv6Types_CODE = 63
+	// Icmpv6Types_CODE_NODE_INFORMATION_RESPONSE_UNKNOWN corresponds to the value NODE_INFORMATION_RESPONSE_UNKNOWN of Icmpv6Types_CODE
+	Icmpv6Types_CODE_NODE_INFORMATION_RESPONSE_UNKNOWN E_Icmpv6Types_CODE = 64
+	// Icmpv6Types_CODE_PACKET_TOO_BIG_CODE corresponds to the value PACKET_TOO_BIG_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PACKET_TOO_BIG_CODE E_Icmpv6Types_CODE = 65
+	// Icmpv6Types_CODE_PACKET_TOO_BIG_NO_CODE corresponds to the value PACKET_TOO_BIG_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PACKET_TOO_BIG_NO_CODE E_Icmpv6Types_CODE = 66
+	// Icmpv6Types_CODE_PARAM_PROBLEM_CODE corresponds to the value PARAM_PROBLEM_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_CODE E_Icmpv6Types_CODE = 67
+	// Icmpv6Types_CODE_PARAM_PROBLEM_ERR_HDR_FIELD corresponds to the value PARAM_PROBLEM_ERR_HDR_FIELD of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_ERR_HDR_FIELD E_Icmpv6Types_CODE = 68
+	// Icmpv6Types_CODE_PARAM_PROBLEM_EXT_HDR_CHAIN_TOO_LONG corresponds to the value PARAM_PROBLEM_EXT_HDR_CHAIN_TOO_LONG of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_EXT_HDR_CHAIN_TOO_LONG E_Icmpv6Types_CODE = 69
+	// Icmpv6Types_CODE_PARAM_PROBLEM_EXT_HDR_TOO_BIG corresponds to the value PARAM_PROBLEM_EXT_HDR_TOO_BIG of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_EXT_HDR_TOO_BIG E_Icmpv6Types_CODE = 70
+	// Icmpv6Types_CODE_PARAM_PROBLEM_INCOMPLETE_HDR_CHAIN corresponds to the value PARAM_PROBLEM_INCOMPLETE_HDR_CHAIN of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_INCOMPLETE_HDR_CHAIN E_Icmpv6Types_CODE = 71
+	// Icmpv6Types_CODE_PARAM_PROBLEM_OPT_TOO_BIG corresponds to the value PARAM_PROBLEM_OPT_TOO_BIG of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_OPT_TOO_BIG E_Icmpv6Types_CODE = 72
+	// Icmpv6Types_CODE_PARAM_PROBLEM_SR_UPPER_HDR_ERR corresponds to the value PARAM_PROBLEM_SR_UPPER_HDR_ERR of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_SR_UPPER_HDR_ERR E_Icmpv6Types_CODE = 73
+	// Icmpv6Types_CODE_PARAM_PROBLEM_TOO_MANY_EXT_HDRS corresponds to the value PARAM_PROBLEM_TOO_MANY_EXT_HDRS of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_TOO_MANY_EXT_HDRS E_Icmpv6Types_CODE = 74
+	// Icmpv6Types_CODE_PARAM_PROBLEM_TOO_MANY_OPTS corresponds to the value PARAM_PROBLEM_TOO_MANY_OPTS of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_TOO_MANY_OPTS E_Icmpv6Types_CODE = 75
+	// Icmpv6Types_CODE_PARAM_PROBLEM_UNRECOGNIZED_IPV6_OPT corresponds to the value PARAM_PROBLEM_UNRECOGNIZED_IPV6_OPT of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_UNRECOGNIZED_IPV6_OPT E_Icmpv6Types_CODE = 76
+	// Icmpv6Types_CODE_PARAM_PROBLEM_UNRECOGNIZED_NET_HDR_TYPE corresponds to the value PARAM_PROBLEM_UNRECOGNIZED_NET_HDR_TYPE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_UNRECOGNIZED_NET_HDR_TYPE E_Icmpv6Types_CODE = 77
+	// Icmpv6Types_CODE_PARAM_PROBLEM_UNRECOGNIZED_NEXT_HDR_TYPE corresponds to the value PARAM_PROBLEM_UNRECOGNIZED_NEXT_HDR_TYPE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_PARAM_PROBLEM_UNRECOGNIZED_NEXT_HDR_TYPE E_Icmpv6Types_CODE = 78
+	// Icmpv6Types_CODE_REDIRECT_CODE corresponds to the value REDIRECT_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_REDIRECT_CODE E_Icmpv6Types_CODE = 79
+	// Icmpv6Types_CODE_REDIRECT_NO_CODE corresponds to the value REDIRECT_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_REDIRECT_NO_CODE E_Icmpv6Types_CODE = 80
+	// Icmpv6Types_CODE_RENUMBERING_CODE corresponds to the value RENUMBERING_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_RENUMBERING_CODE E_Icmpv6Types_CODE = 81
+	// Icmpv6Types_CODE_RENUMBERING_COMMAND corresponds to the value RENUMBERING_COMMAND of Icmpv6Types_CODE
+	Icmpv6Types_CODE_RENUMBERING_COMMAND E_Icmpv6Types_CODE = 82
+	// Icmpv6Types_CODE_RENUNBERING_RESULT corresponds to the value RENUNBERING_RESULT of Icmpv6Types_CODE
+	Icmpv6Types_CODE_RENUNBERING_RESULT E_Icmpv6Types_CODE = 83
+	// Icmpv6Types_CODE_RENUNBERING_SEQ_NUM_RESET corresponds to the value RENUNBERING_SEQ_NUM_RESET of Icmpv6Types_CODE
+	Icmpv6Types_CODE_RENUNBERING_SEQ_NUM_RESET E_Icmpv6Types_CODE = 84
+	// Icmpv6Types_CODE_ROUTER_ADVERTISEMENT_CODE corresponds to the value ROUTER_ADVERTISEMENT_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ROUTER_ADVERTISEMENT_CODE E_Icmpv6Types_CODE = 85
+	// Icmpv6Types_CODE_ROUTER_ADVERTISEMENT_NO_CODE corresponds to the value ROUTER_ADVERTISEMENT_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ROUTER_ADVERTISEMENT_NO_CODE E_Icmpv6Types_CODE = 86
+	// Icmpv6Types_CODE_ROUTER_SOLICITATION_CODE corresponds to the value ROUTER_SOLICITATION_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ROUTER_SOLICITATION_CODE E_Icmpv6Types_CODE = 87
+	// Icmpv6Types_CODE_ROUTER_SOLICITATION_NO_CODE corresponds to the value ROUTER_SOLICITATION_NO_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_ROUTER_SOLICITATION_NO_CODE E_Icmpv6Types_CODE = 88
+	// Icmpv6Types_CODE_TIME_EXCEEDED_CODE corresponds to the value TIME_EXCEEDED_CODE of Icmpv6Types_CODE
+	Icmpv6Types_CODE_TIME_EXCEEDED_CODE E_Icmpv6Types_CODE = 89
+	// Icmpv6Types_CODE_TIME_EXCEEDED_FRAGMENT_REASSEMBLY corresponds to the value TIME_EXCEEDED_FRAGMENT_REASSEMBLY of Icmpv6Types_CODE
+	Icmpv6Types_CODE_TIME_EXCEEDED_FRAGMENT_REASSEMBLY E_Icmpv6Types_CODE = 90
+	// Icmpv6Types_CODE_TIME_EXCEEDED_HOP_LIMIT corresponds to the value TIME_EXCEEDED_HOP_LIMIT of Icmpv6Types_CODE
+	Icmpv6Types_CODE_TIME_EXCEEDED_HOP_LIMIT E_Icmpv6Types_CODE = 91
+)
+
+// E_Icmpv6Types_TYPE is a derived int64 type which is used to represent
+// the enumerated node Icmpv6Types_TYPE. An additional value named
+// Icmpv6Types_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Icmpv6Types_TYPE int64
+
+// IsYANGGoEnum ensures that Icmpv6Types_TYPE implements the yang.GoEnum
+// interface. This ensures that Icmpv6Types_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Icmpv6Types_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Icmpv6Types_TYPE.
+func (E_Icmpv6Types_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Icmpv6Types_TYPE.
+func (e E_Icmpv6Types_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Icmpv6Types_TYPE")
+}
+
+const (
+	// Icmpv6Types_TYPE_UNSET corresponds to the value UNSET of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_UNSET E_Icmpv6Types_TYPE = 0
+	// Icmpv6Types_TYPE_CERTIFICATION_PATH_ADVERTISEMENT corresponds to the value CERTIFICATION_PATH_ADVERTISEMENT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_CERTIFICATION_PATH_ADVERTISEMENT E_Icmpv6Types_TYPE = 1
+	// Icmpv6Types_TYPE_CERTIFICATION_PATH_SOLICITATION corresponds to the value CERTIFICATION_PATH_SOLICITATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_CERTIFICATION_PATH_SOLICITATION E_Icmpv6Types_TYPE = 2
+	// Icmpv6Types_TYPE_DESTINATION_UNREACHABLE corresponds to the value DESTINATION_UNREACHABLE of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_DESTINATION_UNREACHABLE E_Icmpv6Types_TYPE = 3
+	// Icmpv6Types_TYPE_DUPLICATE_ADDRESS_CONFIRMATION corresponds to the value DUPLICATE_ADDRESS_CONFIRMATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_DUPLICATE_ADDRESS_CONFIRMATION E_Icmpv6Types_TYPE = 4
+	// Icmpv6Types_TYPE_DUPLICATE_ADDRESS_REQUEST corresponds to the value DUPLICATE_ADDRESS_REQUEST of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_DUPLICATE_ADDRESS_REQUEST E_Icmpv6Types_TYPE = 5
+	// Icmpv6Types_TYPE_ECHO_REPLY corresponds to the value ECHO_REPLY of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_ECHO_REPLY E_Icmpv6Types_TYPE = 6
+	// Icmpv6Types_TYPE_ECHO_REQUEST corresponds to the value ECHO_REQUEST of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_ECHO_REQUEST E_Icmpv6Types_TYPE = 7
+	// Icmpv6Types_TYPE_EXT_ECHO_REPLY corresponds to the value EXT_ECHO_REPLY of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_EXT_ECHO_REPLY E_Icmpv6Types_TYPE = 8
+	// Icmpv6Types_TYPE_EXT_ECHO_REQUEST corresponds to the value EXT_ECHO_REQUEST of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_EXT_ECHO_REQUEST E_Icmpv6Types_TYPE = 9
+	// Icmpv6Types_TYPE_FMIPV6 corresponds to the value FMIPV6 of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_FMIPV6 E_Icmpv6Types_TYPE = 10
+	// Icmpv6Types_TYPE_HOME_AGENT_ADDRESS_DISCOVERY_REPLY corresponds to the value HOME_AGENT_ADDRESS_DISCOVERY_REPLY of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_HOME_AGENT_ADDRESS_DISCOVERY_REPLY E_Icmpv6Types_TYPE = 11
+	// Icmpv6Types_TYPE_HOME_AGENT_ADDRESS_DISCOVERY_REQUEST corresponds to the value HOME_AGENT_ADDRESS_DISCOVERY_REQUEST of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_HOME_AGENT_ADDRESS_DISCOVERY_REQUEST E_Icmpv6Types_TYPE = 12
+	// Icmpv6Types_TYPE_ILNPV6_LOCATOR_UPDATE corresponds to the value ILNPV6_LOCATOR_UPDATE of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_ILNPV6_LOCATOR_UPDATE E_Icmpv6Types_TYPE = 13
+	// Icmpv6Types_TYPE_INVERSE_NEIGHBOR_ADVERTISEMENT corresponds to the value INVERSE_NEIGHBOR_ADVERTISEMENT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_INVERSE_NEIGHBOR_ADVERTISEMENT E_Icmpv6Types_TYPE = 14
+	// Icmpv6Types_TYPE_INVERSE_NEIGHBOR_SOLICITATION corresponds to the value INVERSE_NEIGHBOR_SOLICITATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_INVERSE_NEIGHBOR_SOLICITATION E_Icmpv6Types_TYPE = 15
+	// Icmpv6Types_TYPE_MOBILE_PREFIX_ADVERTISEMENT corresponds to the value MOBILE_PREFIX_ADVERTISEMENT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MOBILE_PREFIX_ADVERTISEMENT E_Icmpv6Types_TYPE = 16
+	// Icmpv6Types_TYPE_MOBILE_PREFIX_SOLICITATION corresponds to the value MOBILE_PREFIX_SOLICITATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MOBILE_PREFIX_SOLICITATION E_Icmpv6Types_TYPE = 17
+	// Icmpv6Types_TYPE_MPL_CONTROL corresponds to the value MPL_CONTROL of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MPL_CONTROL E_Icmpv6Types_TYPE = 18
+	// Icmpv6Types_TYPE_MULTICAST_LISTENER_DONE corresponds to the value MULTICAST_LISTENER_DONE of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MULTICAST_LISTENER_DONE E_Icmpv6Types_TYPE = 19
+	// Icmpv6Types_TYPE_MULTICAST_LISTENER_QUERY corresponds to the value MULTICAST_LISTENER_QUERY of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MULTICAST_LISTENER_QUERY E_Icmpv6Types_TYPE = 20
+	// Icmpv6Types_TYPE_MULTICAST_LISTENER_REPORT corresponds to the value MULTICAST_LISTENER_REPORT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MULTICAST_LISTENER_REPORT E_Icmpv6Types_TYPE = 21
+	// Icmpv6Types_TYPE_MULTICAST_ROUTER_ADVERTISEMENT corresponds to the value MULTICAST_ROUTER_ADVERTISEMENT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MULTICAST_ROUTER_ADVERTISEMENT E_Icmpv6Types_TYPE = 22
+	// Icmpv6Types_TYPE_MULTICAST_ROUTER_SOLICITATION corresponds to the value MULTICAST_ROUTER_SOLICITATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MULTICAST_ROUTER_SOLICITATION E_Icmpv6Types_TYPE = 23
+	// Icmpv6Types_TYPE_MULTICAST_ROUTER_TERMINATION corresponds to the value MULTICAST_ROUTER_TERMINATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_MULTICAST_ROUTER_TERMINATION E_Icmpv6Types_TYPE = 24
+	// Icmpv6Types_TYPE_NEIGHBOR_ADVERTISEMENT corresponds to the value NEIGHBOR_ADVERTISEMENT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_NEIGHBOR_ADVERTISEMENT E_Icmpv6Types_TYPE = 25
+	// Icmpv6Types_TYPE_NEIGHBOR_SOLICITATION corresponds to the value NEIGHBOR_SOLICITATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_NEIGHBOR_SOLICITATION E_Icmpv6Types_TYPE = 26
+	// Icmpv6Types_TYPE_NODE_INFORMATION_QUERY corresponds to the value NODE_INFORMATION_QUERY of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_NODE_INFORMATION_QUERY E_Icmpv6Types_TYPE = 27
+	// Icmpv6Types_TYPE_NODE_INFORMATION_RESPONSE corresponds to the value NODE_INFORMATION_RESPONSE of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_NODE_INFORMATION_RESPONSE E_Icmpv6Types_TYPE = 28
+	// Icmpv6Types_TYPE_PACKET_TOO_BIG corresponds to the value PACKET_TOO_BIG of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_PACKET_TOO_BIG E_Icmpv6Types_TYPE = 29
+	// Icmpv6Types_TYPE_PARAMETER_PROBLEM corresponds to the value PARAMETER_PROBLEM of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_PARAMETER_PROBLEM E_Icmpv6Types_TYPE = 30
+	// Icmpv6Types_TYPE_REDIRECT corresponds to the value REDIRECT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_REDIRECT E_Icmpv6Types_TYPE = 31
+	// Icmpv6Types_TYPE_RENUNBERING corresponds to the value RENUNBERING of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_RENUNBERING E_Icmpv6Types_TYPE = 32
+	// Icmpv6Types_TYPE_ROUTER_ADVERTISEMENT corresponds to the value ROUTER_ADVERTISEMENT of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_ROUTER_ADVERTISEMENT E_Icmpv6Types_TYPE = 33
+	// Icmpv6Types_TYPE_ROUTER_SOLICITATION corresponds to the value ROUTER_SOLICITATION of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_ROUTER_SOLICITATION E_Icmpv6Types_TYPE = 34
+	// Icmpv6Types_TYPE_RPL_CONTROL corresponds to the value RPL_CONTROL of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_RPL_CONTROL E_Icmpv6Types_TYPE = 35
+	// Icmpv6Types_TYPE_TIME_EXCEEDED corresponds to the value TIME_EXCEEDED of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_TIME_EXCEEDED E_Icmpv6Types_TYPE = 36
+	// Icmpv6Types_TYPE_VERSION2_MULTICAST_LISTENER corresponds to the value VERSION2_MULTICAST_LISTENER of Icmpv6Types_TYPE
+	Icmpv6Types_TYPE_VERSION2_MULTICAST_LISTENER E_Icmpv6Types_TYPE = 37
+)
+
 // E_IfAggregate_AggregationType is a derived int64 type which is used to represent
 // the enumerated node IfAggregate_AggregationType. An additional value named
 // IfAggregate_AggregationType_UNSET is added to the enumeration which is used as
@@ -10453,4 +10951,35 @@ const (
 	Vlan_VlanStackAction_POP E_Vlan_VlanStackAction = 2
 	// Vlan_VlanStackAction_SWAP corresponds to the value SWAP of Vlan_VlanStackAction
 	Vlan_VlanStackAction_SWAP E_Vlan_VlanStackAction = 3
+)
+
+// E_WeightedEcmp_LoadBalancingWeight is a derived int64 type which is used to represent
+// the enumerated node WeightedEcmp_LoadBalancingWeight. An additional value named
+// WeightedEcmp_LoadBalancingWeight_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_WeightedEcmp_LoadBalancingWeight int64
+
+// IsYANGGoEnum ensures that WeightedEcmp_LoadBalancingWeight implements the yang.GoEnum
+// interface. This ensures that WeightedEcmp_LoadBalancingWeight can be identified as a
+// mapped type for a YANG enumeration.
+func (E_WeightedEcmp_LoadBalancingWeight) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  WeightedEcmp_LoadBalancingWeight.
+func (E_WeightedEcmp_LoadBalancingWeight) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_WeightedEcmp_LoadBalancingWeight.
+func (e E_WeightedEcmp_LoadBalancingWeight) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_WeightedEcmp_LoadBalancingWeight")
+}
+
+const (
+	// WeightedEcmp_LoadBalancingWeight_UNSET corresponds to the value UNSET of WeightedEcmp_LoadBalancingWeight
+	WeightedEcmp_LoadBalancingWeight_UNSET E_WeightedEcmp_LoadBalancingWeight = 0
+	// WeightedEcmp_LoadBalancingWeight_auto corresponds to the value auto of WeightedEcmp_LoadBalancingWeight
+	WeightedEcmp_LoadBalancingWeight_auto E_WeightedEcmp_LoadBalancingWeight = 1
+	// WeightedEcmp_LoadBalancingWeight_none corresponds to the value none of WeightedEcmp_LoadBalancingWeight
+	WeightedEcmp_LoadBalancingWeight_none E_WeightedEcmp_LoadBalancingWeight = 2
 )

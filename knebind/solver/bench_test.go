@@ -323,7 +323,7 @@ func BenchmarkSolveScale(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		b.StartTimer()
-		_, err := Solve(tb, topo)
+		_, err := Solve(tb, topo, nil)
 		b.StopTimer()
 		if err != nil {
 			b.Fatalf("Solve() got unexpected error: %v", err)

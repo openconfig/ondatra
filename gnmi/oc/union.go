@@ -2118,6 +2118,38 @@ func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixS
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid_SidId_Union, unknown union type, got: %T, want any of [E_PrefixSid_SidId, string, uint32]", i, i)
 }
 
+// NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/weighted-ecmp/state/load-balancing-weight within the YANG schema.
+// Union type can be one of [E_WeightedEcmp_LoadBalancingWeight, UnionUint32].
+type NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union interface {
+	// Union type can be one of [E_WeightedEcmp_LoadBalancingWeight, UnionUint32]
+	Documentation_for_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union()
+}
+
+// Documentation_for_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union ensures that E_WeightedEcmp_LoadBalancingWeight
+// implements the NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union interface.
+func (E_WeightedEcmp_LoadBalancingWeight) Documentation_for_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union() {
+}
+
+// Documentation_for_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union ensures that UnionUint32
+// implements the NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union() {
+}
+
+// To_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Protocol_Isis_Interface_WeightedEcmp) To_NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union(i interface{}) (NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union, error) {
+	if v, ok := i.(NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Isis_Interface_WeightedEcmp_LoadBalancingWeight_Union, unknown union type, got: %T, want any of [E_WeightedEcmp_LoadBalancingWeight, uint32]", i, i)
+}
+
 // NetworkInstance_Protocol_Isis_Level_Lsp_Tlv_Capability_Subtlv_SegmentRoutingCapability_SrgbDescriptor_Label_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/router-capabilities/capability/subtlvs/subtlv/segment-routing-capability/srgb-descriptors/srgb-descriptor/state/label within the YANG schema.
 // Union type can be one of [E_SrgbDescriptor_Label, UnionUint32].

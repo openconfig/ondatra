@@ -639,6 +639,8 @@ message Header {
     PimHeader pim = 12;
     LdpHeader ldp = 13;
     MacsecHeader macsec = 14;
+    EspHeader esp = 15;
+    EspOverMacSecHeader esp_over_macsec = 16;
   }
 }
 
@@ -846,6 +848,16 @@ message LdpHeader {
   oneof type {
     Hello hello = 4;
   }
+}
+
+message EspHeader {
+  uint32 security_parameters_index = 1;
+  UIntRange sequence_number = 2;
+}
+
+message EspOverMacSecHeader {
+  uint32 security_parameters_index = 1;
+  UIntRange sequence_number = 2;
 }
 
 message MacsecHeader {}

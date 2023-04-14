@@ -89,14 +89,11 @@ type Bind struct {
 // Reserve implements the binding Reserve method by finding nodes and links in
 // the topology specified in the config file that match the requested testbed.
 func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Duration, waitTime time.Duration, partial map[string]string) (*binding.Reservation, error) {
-	if len(partial) > 0 {
-		return nil, errors.New("KNEBind Reserve does not yet support partial mappings")
-	}
 	resp, err := b.tm.Show(ctx)
 	if err != nil {
 		return nil, err
 	}
-	res, err := solver.Solve(tb, resp.GetTopology())
+	res, err := solver.Solve(tb, resp.GetTopology(), partial)
 	if err != nil {
 		return nil, err
 	}

@@ -39,7 +39,7 @@ func (r *Report) AddSuiteProperty(name, value string) {
 // AddTestProperty attaches a name-value property to the current test in the
 // generated XML report. This is preferred, but equivalent, to calling
 // AddRawProperty(t.Name(), name, value).
-func (r *Report) AddTestProperty(t *testing.T, name, value string) {
+func (r *Report) AddTestProperty(t testing.TB, name, value string) {
 	r.AddRawProperty(t.Name(), name, value)
 }
 
