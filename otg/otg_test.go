@@ -111,42 +111,21 @@ func TestStopTraffic(t *testing.T) {
 	}
 }
 
-func TestAdvertiseRoutes(t *testing.T) {
+func TestSetControlState(t *testing.T) {
 	fakeSnappi.controlState = nil
-	wantNames := []string{"peer1", "peer2"}
-	otgAPI.AdvertiseRoutes(t, wantNames)
-	got := fakeSnappi.controlState.Protocol().Route()
-	if wantState := gosnappi.StateProtocolRouteState.ADVERTISE; got.State() != wantState {
-		t.Errorf("AdvertiseRoutes got unexpected route state %v, want %v", got.State(), wantState)
-	}
-	if !cmp.Equal(got.Names(), wantNames) {
-		t.Errorf("AdvertiseRoutes got unexpected route names %v, want %v", got.Names(), wantNames)
+	want := gosnappi.NewControlState()
+	otgAPI.SetControlState(t, want)
+	if got := fakeSnappi.controlState; got != want {
+		t.Errorf("TestSetControlState got unexpected control state %v, want %v", got, want)
 	}
 }
 
-func TestWithdrawRoutes(t *testing.T) {
-	fakeSnappi.controlState = nil
-	wantNames := []string{"peer1", "peer2"}
-	otgAPI.WithdrawRoutes(t, wantNames)
-	got := fakeSnappi.controlState.Protocol().Route()
-	if wantState := gosnappi.StateProtocolRouteState.WITHDRAW; got.State() != wantState {
-		t.Errorf("WithdrawRoutes got unexpected route state %v, want %v", got.State(), wantState)
-	}
-	if !cmp.Equal(got.Names(), wantNames) {
-		t.Errorf("WithdrawRoutes got unexpected route names %v, want %v", got.Names(), wantNames)
-	}
-}
-
-func TestEnableLACPMembers(t *testing.T) {
-	fakeSnappi.controlState = nil
-	wantNames := []string{"port1", "port2"}
-	otgAPI.EnableLACPMembers(t, wantNames...)
-	got := fakeSnappi.controlState.Protocol().Lacp().Admin()
-	if wantState := gosnappi.StateProtocolLacpAdminState.UP; got.State() != wantState {
-		t.Errorf("EnableLACPMembers got unexpected LACP member state %v, want %v", got.State(), wantState)
-	}
-	if !cmp.Equal(got.LagMemberNames(), wantNames) {
-		t.Errorf("EnableLACPMembers got unexpected LACP member ports %v, want %v", got.LagMemberNames(), wantNames)
+func TestSetControlAction(t *testing.T) {
+	fakeSnappi.controlAction = nil
+	want := gosnappi.NewControlAction()
+	otgAPI.SetControlAction(t, want)
+	if got := fakeSnappi.controlAction; got != want {
+		t.Errorf("SetControlAction got unexpected control action %v, want %v", got, want)
 	}
 }
 
@@ -163,46 +142,20 @@ func TestDisableLACPMembers(t *testing.T) {
 	}
 }
 
-func TestStartCapture(t *testing.T) {
-	fakeSnappi.controlState = nil
-	wantPorts := []string{"port1", "port2"}
-	otgAPI.StartCapture(t, wantPorts...)
-	got := fakeSnappi.controlState.Port().Capture()
-	if wantState := gosnappi.StatePortCaptureState.START; got.State() != wantState {
-		t.Errorf("StartCapture got unexpected capture state %v, want %v", got.State(), wantState)
-	}
-	if !cmp.Equal(got.PortNames(), wantPorts) {
-		t.Errorf("StartCapture got unexpected capture ports %v, want %v", got.PortNames(), wantPorts)
-	}
-}
-
-func TestStopCapture(t *testing.T) {
-	fakeSnappi.controlState = nil
-	wantPorts := []string{"port1", "port2"}
-	otgAPI.StopCapture(t, wantPorts...)
-	got := fakeSnappi.controlState.Port().Capture()
-	if wantState := gosnappi.StatePortCaptureState.STOP; got.State() != wantState {
-		t.Errorf("StopCapture got unexpected capture state %v, want %v", got.State(), wantState)
-	}
-	if !cmp.Equal(got.PortNames(), wantPorts) {
-		t.Errorf("StopCapture got unexpected capture ports %v, want %v", got.PortNames(), wantPorts)
-	}
-}
-
-func TestFetchCapture(t *testing.T) {
-	wantPort := "port1"
-	otgAPI.FetchCapture(t, wantPort)
-	gotCaptureReq := fakeSnappi.captureReq
-	if !cmp.Equal(gotCaptureReq.PortName(), wantPort) {
-		t.Errorf("FetchCapture got unexpected capture ports %v, want %v", gotCaptureReq.PortName(), wantPort)
+func TestGetCapture(t *testing.T) {
+	want := gosnappi.NewCaptureRequest().SetPortName("port1")
+	otgAPI.GetCapture(t, want)
+	if got := fakeSnappi.captureReq; got != want {
+		t.Errorf("GetCapture got unexpected request %v, want %v", got, want)
 	}
 }
 
 type fakeGosnappi struct {
 	gosnappi.GosnappiApi
-	config       gosnappi.Config
-	controlState gosnappi.ControlState
-	captureReq   gosnappi.CaptureRequest
+	config        gosnappi.Config
+	controlState  gosnappi.ControlState
+	controlAction gosnappi.ControlAction
+	captureReq    gosnappi.CaptureRequest
 }
 
 func (fg *fakeGosnappi) NewConfig() gosnappi.Config {
@@ -218,226 +171,17 @@ func (fg *fakeGosnappi) SetConfig(cfg gosnappi.Config) (gosnappi.Warning, error)
 	return gosnappi.NewWarning(), nil
 }
 
-func (fg *fakeGosnappi) NewControlState() gosnappi.ControlState {
-	return new(fakeControlState)
-}
-
 func (fg *fakeGosnappi) SetControlState(state gosnappi.ControlState) (gosnappi.Warning, error) {
 	fg.controlState = state
 	return gosnappi.NewWarning(), nil
 }
 
-func (fg *fakeGosnappi) NewCaptureRequest() gosnappi.CaptureRequest {
-	return new(fakeCaptureRequest)
+func (fg *fakeGosnappi) SetControlAction(action gosnappi.ControlAction) (gosnappi.ControlActionResponse, error) {
+	fg.controlAction = action
+	return gosnappi.NewControlActionResponse(), nil
 }
 
 func (fg *fakeGosnappi) GetCapture(request gosnappi.CaptureRequest) ([]byte, error) {
 	fg.captureReq = request
 	return nil, nil
-}
-
-type fakeControlState struct {
-	gosnappi.ControlState
-	port     gosnappi.StatePort
-	protocol gosnappi.StateProtocol
-	traffic  gosnappi.StateTraffic
-}
-
-func (fc *fakeControlState) Port() gosnappi.StatePort {
-	if fc.port == nil {
-		fc.port = new(fakePort)
-	}
-	return fc.port
-}
-
-func (fc *fakeControlState) Protocol() gosnappi.StateProtocol {
-	if fc.protocol == nil {
-		fc.protocol = new(fakeProtocol)
-	}
-	return fc.protocol
-}
-
-func (fc *fakeControlState) Traffic() gosnappi.StateTraffic {
-	if fc.traffic == nil {
-		fc.traffic = new(fakeTraffic)
-	}
-	return fc.traffic
-}
-
-type fakePort struct {
-	gosnappi.StatePort
-	capture gosnappi.StatePortCapture
-}
-
-func (fp *fakePort) Capture() gosnappi.StatePortCapture {
-	if fp.capture == nil {
-		fp.capture = new(fakeCapture)
-	}
-	return fp.capture
-}
-
-type fakeCapture struct {
-	gosnappi.StatePortCapture
-	state gosnappi.StatePortCaptureStateEnum
-	ports []string
-}
-
-func (fc *fakeCapture) PortNames() []string {
-	return fc.ports
-}
-
-func (fc *fakeCapture) SetPortNames(ports []string) gosnappi.StatePortCapture {
-	fc.ports = ports
-	return fc
-}
-
-func (fc *fakeCapture) SetState(state gosnappi.StatePortCaptureStateEnum) gosnappi.StatePortCapture {
-	fc.state = state
-	return fc
-}
-
-func (fc *fakeCapture) State() gosnappi.StatePortCaptureStateEnum {
-	return fc.state
-}
-
-type fakeProtocol struct {
-	gosnappi.StateProtocol
-	all   gosnappi.StateProtocolAll
-	lacp  gosnappi.StateProtocolLacp
-	route gosnappi.StateProtocolRoute
-}
-
-func (fp *fakeProtocol) All() gosnappi.StateProtocolAll {
-	if fp.all == nil {
-		fp.all = new(fakeProtocolAll)
-	}
-	return fp.all
-}
-
-func (fp *fakeProtocol) Lacp() gosnappi.StateProtocolLacp {
-	if fp.lacp == nil {
-		fp.lacp = new(fakeProtocolLacp)
-	}
-	return fp.lacp
-}
-
-func (fp *fakeProtocol) Route() gosnappi.StateProtocolRoute {
-	if fp.route == nil {
-		fp.route = new(fakeProtocolRoute)
-	}
-	return fp.route
-}
-
-type fakeProtocolAll struct {
-	gosnappi.StateProtocolAll
-	state gosnappi.StateProtocolAllStateEnum
-}
-
-func (fa *fakeProtocolAll) SetState(state gosnappi.StateProtocolAllStateEnum) gosnappi.StateProtocolAll {
-	fa.state = state
-	return fa
-}
-
-func (fa *fakeProtocolAll) State() gosnappi.StateProtocolAllStateEnum {
-	return fa.state
-}
-
-type fakeProtocolLacp struct {
-	gosnappi.StateProtocolLacp
-	admin gosnappi.StateProtocolLacpAdmin
-}
-
-func (fl *fakeProtocolLacp) Admin() gosnappi.StateProtocolLacpAdmin {
-	if fl.admin == nil {
-		fl.admin = new(fakeProtocolLacpAdmin)
-	}
-	return fl.admin
-}
-
-type fakeProtocolLacpAdmin struct {
-	gosnappi.StateProtocolLacpAdmin
-	state gosnappi.StateProtocolLacpAdminStateEnum
-	names []string
-}
-
-func (fp *fakeProtocolLacpAdmin) LagMemberNames() []string {
-	return fp.names
-}
-
-func (fp *fakeProtocolLacpAdmin) SetLagMemberNames(names []string) gosnappi.StateProtocolLacpAdmin {
-	fp.names = names
-	return fp
-}
-
-func (fp *fakeProtocolLacpAdmin) SetState(state gosnappi.StateProtocolLacpAdminStateEnum) gosnappi.StateProtocolLacpAdmin {
-	fp.state = state
-	return fp
-}
-
-func (fp *fakeProtocolLacpAdmin) State() gosnappi.StateProtocolLacpAdminStateEnum {
-	return fp.state
-}
-
-type fakeProtocolRoute struct {
-	gosnappi.StateProtocolRoute
-	state gosnappi.StateProtocolRouteStateEnum
-	names []string
-}
-
-func (fr *fakeProtocolRoute) Names() []string {
-	return fr.names
-}
-
-func (fr *fakeProtocolRoute) SetNames(names []string) gosnappi.StateProtocolRoute {
-	fr.names = names
-	return fr
-}
-
-func (fr *fakeProtocolRoute) SetState(state gosnappi.StateProtocolRouteStateEnum) gosnappi.StateProtocolRoute {
-	fr.state = state
-	return fr
-}
-
-func (fr *fakeProtocolRoute) State() gosnappi.StateProtocolRouteStateEnum {
-	return fr.state
-}
-
-type fakeTraffic struct {
-	gosnappi.StateTraffic
-	flowTransmit gosnappi.StateTrafficFlowTransmit
-}
-
-func (ft *fakeTraffic) FlowTransmit() gosnappi.StateTrafficFlowTransmit {
-	if ft.flowTransmit == nil {
-		ft.flowTransmit = new(fakeFlowTransmit)
-	}
-	return ft.flowTransmit
-}
-
-type fakeFlowTransmit struct {
-	gosnappi.StateTrafficFlowTransmit
-	state gosnappi.StateTrafficFlowTransmitStateEnum
-}
-
-func (ft *fakeFlowTransmit) SetState(state gosnappi.StateTrafficFlowTransmitStateEnum) gosnappi.StateTrafficFlowTransmit {
-	ft.state = state
-	return ft
-}
-
-func (ft *fakeFlowTransmit) State() gosnappi.StateTrafficFlowTransmitStateEnum {
-	return ft.state
-}
-
-type fakeCaptureRequest struct {
-	gosnappi.CaptureRequest
-	portName string
-}
-
-func (fr *fakeCaptureRequest) PortName() string {
-	return fr.portName
-}
-
-func (fr *fakeCaptureRequest) SetPortName(portName string) gosnappi.CaptureRequest {
-	fr.portName = portName
-	return fr
 }

@@ -863,6 +863,47 @@ const (
 	State_SegmentType_AS_CONFED_SET E_State_SegmentType = 4
 )
 
+// E_Tags_ValueType is a derived int64 type which is used to represent
+// the enumerated node Tags_ValueType. An additional value named
+// Tags_ValueType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Tags_ValueType int64
+
+// IsYANGGoEnum ensures that Tags_ValueType implements the yang.GoEnum
+// interface. This ensures that Tags_ValueType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Tags_ValueType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Tags_ValueType.
+func (E_Tags_ValueType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Tags_ValueType.
+func (e E_Tags_ValueType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Tags_ValueType")
+}
+
+const (
+	// Tags_ValueType_UNSET corresponds to the value UNSET of Tags_ValueType
+	Tags_ValueType_UNSET E_Tags_ValueType = 0
+	// Tags_ValueType_STRING corresponds to the value STRING of Tags_ValueType
+	Tags_ValueType_STRING E_Tags_ValueType = 1
+	// Tags_ValueType_HEX corresponds to the value HEX of Tags_ValueType
+	Tags_ValueType_HEX E_Tags_ValueType = 2
+	// Tags_ValueType_BOOL corresponds to the value BOOL of Tags_ValueType
+	Tags_ValueType_BOOL E_Tags_ValueType = 3
+	// Tags_ValueType_COUNTER64 corresponds to the value COUNTER64 of Tags_ValueType
+	Tags_ValueType_COUNTER64 E_Tags_ValueType = 4
+	// Tags_ValueType_FLOAT32 corresponds to the value FLOAT32 of Tags_ValueType
+	Tags_ValueType_FLOAT32 E_Tags_ValueType = 5
+	// Tags_ValueType_IPV4 corresponds to the value IPV4 of Tags_ValueType
+	Tags_ValueType_IPV4 E_Tags_ValueType = 6
+	// Tags_ValueType_IPV6 corresponds to the value IPV6 of Tags_ValueType
+	Tags_ValueType_IPV6 E_Tags_ValueType = 7
+	// Tags_ValueType_MAC corresponds to the value MAC of Tags_ValueType
+	Tags_ValueType_MAC E_Tags_ValueType = 8
+)
+
 // E_UnicastIpv4Prefix_Origin is a derived int64 type which is used to represent
 // the enumerated node UnicastIpv4Prefix_Origin. An additional value named
 // UnicastIpv4Prefix_Origin_UNSET is added to the enumeration which is used as

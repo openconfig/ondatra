@@ -185,6 +185,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "AS_CONFED_SEQUENCE"},
 		4: {Name: "AS_CONFED_SET"},
 	},
+	"E_Tags_ValueType": {
+		1: {Name: "STRING"},
+		2: {Name: "HEX"},
+		3: {Name: "BOOL"},
+		4: {Name: "COUNTER64"},
+		5: {Name: "FLOAT32"},
+		6: {Name: "IPV4"},
+		7: {Name: "IPV6"},
+		8: {Name: "MAC"},
+	},
 	"E_UnicastIpv4Prefix_Origin": {
 		1: {Name: "IGP"},
 		2: {Name: "EGP"},
@@ -222,6 +232,9 @@ func initΛEnumTypes() {
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),
+		},
+		"/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type": {
+			reflect.TypeOf((E_Tags_ValueType)(0)),
 		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags": {
 			reflect.TypeOf((E_Lsps_Flags)(0)),

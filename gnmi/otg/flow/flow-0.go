@@ -825,7 +825,7 @@ func (n *FlowPathAny) LossPct() *Flow_LossPctPathAny {
 	}
 }
 
-// Name (leaf): An arbitary name used for the flow tracked by the system. This
+// Name (leaf): An arbitrary name used for the flow tracked by the system. This
 // name must be unique for the flows tracked and exported by the target.
 //
 //	Defining module:      "open-traffic-generator-flow"
@@ -843,7 +843,7 @@ func (n *FlowPath) Name() *Flow_NamePath {
 	}
 }
 
-// Name (leaf): An arbitary name used for the flow tracked by the system. This
+// Name (leaf): An arbitrary name used for the flow tracked by the system. This
 // name must be unique for the flows tracked and exported by the target.
 //
 //	Defining module:      "open-traffic-generator-flow"
@@ -930,6 +930,78 @@ func (n *FlowPathAny) OutRate() *Flow_OutRatePathAny {
 			n,
 		),
 		parent: n,
+	}
+}
+
+// TaggedMetricAny (list): A list of enumerated metric, based on all metric tags present in the configuration.
+// Each enumerated metric is identified by a name-value-pairs
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "tagged-metrics/tagged-metric"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric"
+func (n *FlowPath) TaggedMetricAny() *Flow_TaggedMetricPathAny {
+	return &Flow_TaggedMetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tagged-metrics", "tagged-metric"},
+			map[string]interface{}{"name-value-pairs": "*"},
+			n,
+		),
+	}
+}
+
+// TaggedMetricAny (list): A list of enumerated metric, based on all metric tags present in the configuration.
+// Each enumerated metric is identified by a name-value-pairs
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "tagged-metrics/tagged-metric"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric"
+func (n *FlowPathAny) TaggedMetricAny() *Flow_TaggedMetricPathAny {
+	return &Flow_TaggedMetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tagged-metrics", "tagged-metric"},
+			map[string]interface{}{"name-value-pairs": "*"},
+			n,
+		),
+	}
+}
+
+// TaggedMetric (list): A list of enumerated metric, based on all metric tags present in the configuration.
+// Each enumerated metric is identified by a name-value-pairs
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "tagged-metrics/tagged-metric"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric"
+//
+//	NameValuePairs: string
+func (n *FlowPath) TaggedMetric(NameValuePairs string) *Flow_TaggedMetricPath {
+	return &Flow_TaggedMetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tagged-metrics", "tagged-metric"},
+			map[string]interface{}{"name-value-pairs": NameValuePairs},
+			n,
+		),
+	}
+}
+
+// TaggedMetric (list): A list of enumerated metric, based on all metric tags present in the configuration.
+// Each enumerated metric is identified by a name-value-pairs
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "tagged-metrics/tagged-metric"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric"
+//
+//	NameValuePairs: string
+func (n *FlowPathAny) TaggedMetric(NameValuePairs string) *Flow_TaggedMetricPathAny {
+	return &Flow_TaggedMetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tagged-metrics", "tagged-metric"},
+			map[string]interface{}{"name-value-pairs": NameValuePairs},
+			n,
+		),
 	}
 }
 
@@ -1471,6 +1543,2052 @@ func (n *Flow_CountersPathAny) OutPkts() *Flow_Counters_OutPktsPathAny {
 	return &Flow_Counters_OutPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Flow_TaggedMetric_NameValuePairsPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/name-value-pairs YANG schema element.
+type Flow_TaggedMetric_NameValuePairsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_NameValuePairsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/name-value-pairs YANG schema element.
+type Flow_TaggedMetric_NameValuePairsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetricPath) State() ygnmi.SingletonQuery[*oc.Flow_TaggedMetric] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Flow_TaggedMetric](
+		"Flow_TaggedMetric",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetricPathAny) State() ygnmi.WildcardQuery[*oc.Flow_TaggedMetric] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Flow_TaggedMetric](
+		"Flow_TaggedMetric",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/name-value-pairs"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/name-value-pairs"
+func (n *Flow_TaggedMetric_NameValuePairsPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name-value-pairs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric).NameValuePairs
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/name-value-pairs"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/name-value-pairs"
+func (n *Flow_TaggedMetric_NameValuePairsPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name-value-pairs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric).NameValuePairs
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "name-value-pairs"
+//	Path from root:       ""
+func (n *Flow_TaggedMetric_NameValuePairsPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Flow_TaggedMetric",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name-value-pairs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric).NameValuePairs
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "name-value-pairs"
+//	Path from root:       ""
+func (n *Flow_TaggedMetric_NameValuePairsPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"name-value-pairs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric).NameValuePairs
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Flow_TaggedMetricPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric YANG schema element.
+type Flow_TaggedMetricPath struct {
+	*ygnmi.NodePath
+}
+
+// Flow_TaggedMetricPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric YANG schema element.
+type Flow_TaggedMetricPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Counters (container): Counters that correspond to the enumerated flow metrics associated
+// with a name-value-pairs as identifier of that enumerated flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters"
+func (n *Flow_TaggedMetricPath) Counters() *Flow_TaggedMetric_CountersPath {
+	return &Flow_TaggedMetric_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Counters (container): Counters that correspond to the enumerated flow metrics associated
+// with a name-value-pairs as identifier of that enumerated flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters"
+func (n *Flow_TaggedMetricPathAny) Counters() *Flow_TaggedMetric_CountersPathAny {
+	return &Flow_TaggedMetric_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// NameValuePairs (leaf): Encoded string represents one or more metric tag names and corresponding tag value,
+// to identify each enumerated flow.
+// Encoding format:
+//
+//	tag_name=value&tag_name=value
+//
+// In encoded string, metric tags MUST be arranged in alphabetical order of the tag name. And tag value(s) in lowercase only.
+// Example:
+//
+//	ipv4_src=0x11
+//	ipv4_src=0x11&vlan_id=0x12ab
+//	ipv4_dst=2.2.2.2&mpls_label=1000
+//
+// Incorrect encoding example:
+//
+//	vlan_id=0x12AB                  // value in uppercase
+//	vlan_id=0x12ab&ipv4_src=0x11    // tag name not in alphabetical order
+//
+// Note:
+//
+//	   If the metric tag is set to match a packet field partially, the value format will be in hex
+//	   (e.g. tag set on last 8 bits of the IPv4 Src field)
+//	   However, if the metric tag is enabled for the entire packet field, the value will be in the native format of the field
+//	   (e.g. value format in IPv4 address if the metric tag is set for the entire IPv4 Dst field)
+//		Defining module:      "open-traffic-generator-flow"
+//		Instantiating module: "open-traffic-generator-flow"
+//		Path from parent:     "*/name-value-pairs"
+//		Path from root:       "/flows/flow/tagged-metrics/tagged-metric/*/name-value-pairs"
+func (n *Flow_TaggedMetricPath) NameValuePairs() *Flow_TaggedMetric_NameValuePairsPath {
+	return &Flow_TaggedMetric_NameValuePairsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name-value-pairs"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// NameValuePairs (leaf): Encoded string represents one or more metric tag names and corresponding tag value,
+// to identify each enumerated flow.
+// Encoding format:
+//
+//	tag_name=value&tag_name=value
+//
+// In encoded string, metric tags MUST be arranged in alphabetical order of the tag name. And tag value(s) in lowercase only.
+// Example:
+//
+//	ipv4_src=0x11
+//	ipv4_src=0x11&vlan_id=0x12ab
+//	ipv4_dst=2.2.2.2&mpls_label=1000
+//
+// Incorrect encoding example:
+//
+//	vlan_id=0x12AB                  // value in uppercase
+//	vlan_id=0x12ab&ipv4_src=0x11    // tag name not in alphabetical order
+//
+// Note:
+//
+//	   If the metric tag is set to match a packet field partially, the value format will be in hex
+//	   (e.g. tag set on last 8 bits of the IPv4 Src field)
+//	   However, if the metric tag is enabled for the entire packet field, the value will be in the native format of the field
+//	   (e.g. value format in IPv4 address if the metric tag is set for the entire IPv4 Dst field)
+//		Defining module:      "open-traffic-generator-flow"
+//		Instantiating module: "open-traffic-generator-flow"
+//		Path from parent:     "*/name-value-pairs"
+//		Path from root:       "/flows/flow/tagged-metrics/tagged-metric/*/name-value-pairs"
+func (n *Flow_TaggedMetricPathAny) NameValuePairs() *Flow_TaggedMetric_NameValuePairsPathAny {
+	return &Flow_TaggedMetric_NameValuePairsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name-value-pairs"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// TagsAny (list): A list of metric tag names and associated tag values, in a structured manner to identify each enumerated flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/tags"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags"
+func (n *Flow_TaggedMetricPath) TagsAny() *Flow_TaggedMetric_TagsPathAny {
+	return &Flow_TaggedMetric_TagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// TagsAny (list): A list of metric tag names and associated tag values, in a structured manner to identify each enumerated flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/tags"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags"
+func (n *Flow_TaggedMetricPathAny) TagsAny() *Flow_TaggedMetric_TagsPathAny {
+	return &Flow_TaggedMetric_TagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tags"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Flow_TaggedMetric_Counters_InOctetsPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/in-octets YANG schema element.
+type Flow_TaggedMetric_Counters_InOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Counters_InOctetsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/in-octets YANG schema element.
+type Flow_TaggedMetric_Counters_InOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetric_CountersPath) State() ygnmi.SingletonQuery[*oc.Flow_TaggedMetric_Counters] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Flow_TaggedMetric_Counters](
+		"Flow_TaggedMetric_Counters",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetric_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Flow_TaggedMetric_Counters] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Flow_TaggedMetric_Counters](
+		"Flow_TaggedMetric_Counters",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-octets"
+func (n *Flow_TaggedMetric_Counters_InOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).InOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-octets"
+func (n *Flow_TaggedMetric_Counters_InOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).InOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-pkts"
+func (n *Flow_TaggedMetric_Counters_InPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).InPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-pkts"
+func (n *Flow_TaggedMetric_Counters_InPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).InPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-octets"
+func (n *Flow_TaggedMetric_Counters_OutOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"out-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).OutOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-octets"
+func (n *Flow_TaggedMetric_Counters_OutOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"out-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).OutOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-pkts"
+func (n *Flow_TaggedMetric_Counters_OutPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"out-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).OutPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-pkts"
+func (n *Flow_TaggedMetric_Counters_OutPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow_TaggedMetric_Counters",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"out-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Counters).OutPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Flow_TaggedMetric_Counters_InPktsPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/in-pkts YANG schema element.
+type Flow_TaggedMetric_Counters_InPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Counters_InPktsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/in-pkts YANG schema element.
+type Flow_TaggedMetric_Counters_InPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Counters_OutOctetsPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/out-octets YANG schema element.
+type Flow_TaggedMetric_Counters_OutOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Counters_OutOctetsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/out-octets YANG schema element.
+type Flow_TaggedMetric_Counters_OutOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Counters_OutPktsPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/out-pkts YANG schema element.
+type Flow_TaggedMetric_Counters_OutPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Counters_OutPktsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters/out-pkts YANG schema element.
+type Flow_TaggedMetric_Counters_OutPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_CountersPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters YANG schema element.
+type Flow_TaggedMetric_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Flow_TaggedMetric_CountersPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/counters YANG schema element.
+type Flow_TaggedMetric_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InOctets (leaf): The total number of bytes received by the target for the flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-octets"
+func (n *Flow_TaggedMetric_CountersPath) InOctets() *Flow_TaggedMetric_Counters_InOctetsPath {
+	return &Flow_TaggedMetric_Counters_InOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InOctets (leaf): The total number of bytes received by the target for the flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-octets"
+func (n *Flow_TaggedMetric_CountersPathAny) InOctets() *Flow_TaggedMetric_Counters_InOctetsPathAny {
+	return &Flow_TaggedMetric_Counters_InOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPkts (leaf): The total number of packets received by the target for the flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-pkts"
+func (n *Flow_TaggedMetric_CountersPath) InPkts() *Flow_TaggedMetric_Counters_InPktsPath {
+	return &Flow_TaggedMetric_Counters_InPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InPkts (leaf): The total number of packets received by the target for the flow.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "in-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/in-pkts"
+func (n *Flow_TaggedMetric_CountersPathAny) InPkts() *Flow_TaggedMetric_Counters_InPktsPathAny {
+	return &Flow_TaggedMetric_Counters_InPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutOctets (leaf): The total number of bytes sent by the target for the flow. These
+// packets may be generated or forwarded by the target.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-octets"
+func (n *Flow_TaggedMetric_CountersPath) OutOctets() *Flow_TaggedMetric_Counters_OutOctetsPath {
+	return &Flow_TaggedMetric_Counters_OutOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutOctets (leaf): The total number of bytes sent by the target for the flow. These
+// packets may be generated or forwarded by the target.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-octets"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-octets"
+func (n *Flow_TaggedMetric_CountersPathAny) OutOctets() *Flow_TaggedMetric_Counters_OutOctetsPathAny {
+	return &Flow_TaggedMetric_Counters_OutOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPkts (leaf): The total number of packets sent by the target for the flow. These
+// packets may be generated or forwarded by the target.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-pkts"
+func (n *Flow_TaggedMetric_CountersPath) OutPkts() *Flow_TaggedMetric_Counters_OutPktsPath {
+	return &Flow_TaggedMetric_Counters_OutPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// OutPkts (leaf): The total number of packets sent by the target for the flow. These
+// packets may be generated or forwarded by the target.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "out-pkts"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/counters/out-pkts"
+func (n *Flow_TaggedMetric_CountersPathAny) OutPkts() *Flow_TaggedMetric_Counters_OutPktsPathAny {
+	return &Flow_TaggedMetric_Counters_OutPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Flow_TaggedMetric_Tags_TagNamePath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-name YANG schema element.
+type Flow_TaggedMetric_Tags_TagNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagNamePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-name YANG schema element.
+type Flow_TaggedMetric_Tags_TagNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetric_TagsPath) State() ygnmi.SingletonQuery[*oc.Flow_TaggedMetric_Tags] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Flow_TaggedMetric_Tags](
+		"Flow_TaggedMetric_Tags",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetric_TagsPathAny) State() ygnmi.WildcardQuery[*oc.Flow_TaggedMetric_Tags] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Flow_TaggedMetric_Tags](
+		"Flow_TaggedMetric_Tags",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "tag-name"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-name"
+func (n *Flow_TaggedMetric_Tags_TagNamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric_Tags",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"tag-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags).TagName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "tag-name"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-name"
+func (n *Flow_TaggedMetric_Tags_TagNamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric_Tags",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"tag-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags).TagName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Flow_TaggedMetric_TagsPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags YANG schema element.
+type Flow_TaggedMetric_TagsPath struct {
+	*ygnmi.NodePath
+}
+
+// Flow_TaggedMetric_TagsPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags YANG schema element.
+type Flow_TaggedMetric_TagsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-bool YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-bool YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetric_Tags_TagValuePath) State() ygnmi.SingletonQuery[*oc.Flow_TaggedMetric_Tags_TagValue] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Flow_TaggedMetric_Tags_TagValue](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) State() ygnmi.WildcardQuery[*oc.Flow_TaggedMetric_Tags_TagValue] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Flow_TaggedMetric_Tags_TagValue](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-bool"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-bool"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-bool"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsBool
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-bool"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-bool"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-bool"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsBool
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-counter64"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-counter64"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64Path) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-counter64"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsCounter64
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-counter64"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-counter64"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64PathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-counter64"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsCounter64
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-float32"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-float32"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32Path) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewLeafSingletonQuery[float32](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"value-as-float32"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsFloat32
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-float32"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-float32"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32PathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewLeafWildcardQuery[float32](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"value-as-float32"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsFloat32
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-hex"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-hex"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsHexPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-hex"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsHex
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-hex"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-hex"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsHexPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-hex"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsHex
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv4"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv4"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4Path) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-ipv4"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsIpv4
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv4"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv4"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4PathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-ipv4"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsIpv4
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv6"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv6"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6Path) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-ipv6"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsIpv6
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv6"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv6"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6PathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-ipv6"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsIpv6
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-mac"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-mac"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsMacPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-mac"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsMac
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-mac"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-mac"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsMacPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-mac"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsMac
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-string"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-string"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsStringPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-string"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsString
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-string"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-string"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueAsStringPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"value-as-string"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueAsString
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-type"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueTypePath) State() ygnmi.SingletonQuery[oc.E_Tags_ValueType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Tags_ValueType](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"value-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Tags_ValueType, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-type"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type"
+func (n *Flow_TaggedMetric_Tags_TagValue_ValueTypePathAny) State() ygnmi.WildcardQuery[oc.E_Tags_ValueType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Tags_ValueType](
+		"Flow_TaggedMetric_Tags_TagValue",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"value-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Tags_ValueType, bool) {
+			ret := gs.(*oc.Flow_TaggedMetric_Tags_TagValue).ValueType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow_TaggedMetric_Tags_TagValue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64Path represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-counter64 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64Path struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64PathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-counter64 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64PathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32Path represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-float32 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32Path struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32PathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-float32 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32PathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsHexPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-hex YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsHexPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsHexPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-hex YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsHexPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4Path represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv4 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4Path struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4PathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv4 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4PathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6Path represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv6 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6Path struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6PathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv6 YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6PathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsMacPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-mac YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsMacPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsMacPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-mac YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsMacPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsStringPath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-string YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsStringPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueAsStringPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-string YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueAsStringPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueTypePath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValue_ValueTypePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type YANG schema element.
+type Flow_TaggedMetric_Tags_TagValue_ValueTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_TaggedMetric_Tags_TagValuePath represents the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value YANG schema element.
+type Flow_TaggedMetric_Tags_TagValuePath struct {
+	*ygnmi.NodePath
+}
+
+// Flow_TaggedMetric_Tags_TagValuePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value YANG schema element.
+type Flow_TaggedMetric_Tags_TagValuePathAny struct {
+	*ygnmi.NodePath
+}
+
+// ValueAsBool (leaf): Contains Tag Value in Boolean format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-bool"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-bool"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsBool() *Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPath {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-bool"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsBool (leaf): Contains Tag Value in Boolean format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-bool"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-bool"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsBool() *Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsBoolPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-bool"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsCounter64 (leaf): Contains Tag Value in Counter64 (64-bit unsigned number) format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-counter64"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-counter64"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsCounter64() *Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64Path {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-counter64"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsCounter64 (leaf): Contains Tag Value in Counter64 (64-bit unsigned number) format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-counter64"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-counter64"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsCounter64() *Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64PathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsCounter64PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-counter64"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsFloat32 (leaf): Contains Tag Value in 32-bit floating point number format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-float32"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-float32"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsFloat32() *Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32Path {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-float32"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsFloat32 (leaf): Contains Tag Value in 32-bit floating point number format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-float32"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-float32"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsFloat32() *Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32PathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsFloat32PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-float32"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsHex (leaf): Contains Tag Value in Hex String format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-hex"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-hex"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsHex() *Flow_TaggedMetric_Tags_TagValue_ValueAsHexPath {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsHexPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-hex"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsHex (leaf): Contains Tag Value in Hex String format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-hex"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-hex"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsHex() *Flow_TaggedMetric_Tags_TagValue_ValueAsHexPathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsHexPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-hex"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsIpv4 (leaf): Contains Tag Value in IPv4 address format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv4"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv4"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsIpv4() *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4Path {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-ipv4"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsIpv4 (leaf): Contains Tag Value in IPv4 address format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv4"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv4"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsIpv4() *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4PathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsIpv4PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-ipv4"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsIpv6 (leaf): Contains Tag Value in IPv6 address format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv6"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv6"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsIpv6() *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6Path {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6Path{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-ipv6"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsIpv6 (leaf): Contains Tag Value in IPv6 address format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-ipv6"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-ipv6"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsIpv6() *Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6PathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsIpv6PathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-ipv6"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsMac (leaf): Contains Tag Value in MAC address format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-mac"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-mac"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsMac() *Flow_TaggedMetric_Tags_TagValue_ValueAsMacPath {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsMacPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-mac"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsMac (leaf): Contains Tag Value in MAC address format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-mac"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-mac"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsMac() *Flow_TaggedMetric_Tags_TagValue_ValueAsMacPathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsMacPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-mac"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsString (leaf): Contains Tag Value in String format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-string"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-string"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsString() *Flow_TaggedMetric_Tags_TagValue_ValueAsStringPath {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsStringPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-string"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueAsString (leaf): Contains Tag Value in String format.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-as-string"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-as-string"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsString() *Flow_TaggedMetric_Tags_TagValue_ValueAsStringPathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueAsStringPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-as-string"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueType (leaf): Indicates the format of the tag value. Based on the format, only one 'value-as-*' field will be populated.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-type"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type"
+func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueType() *Flow_TaggedMetric_Tags_TagValue_ValueTypePath {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ValueType (leaf): Indicates the format of the tag value. Based on the format, only one 'value-as-*' field will be populated.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "value-type"
+//	Path from root:       "/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type"
+func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueType() *Flow_TaggedMetric_Tags_TagValue_ValueTypePathAny {
+	return &Flow_TaggedMetric_Tags_TagValue_ValueTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"value-type"},
 			map[string]interface{}{},
 			n,
 		),
