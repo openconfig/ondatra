@@ -20532,7 +20532,19 @@ func (n *Interface_RoutedVlan_Ipv4_UnnumberedPathAny) Enabled() *Interface_Route
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -20548,7 +20560,19 @@ func (n *Interface_RoutedVlan_Ipv4_UnnumberedPath) InterfaceRef() *Interface_Rou
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -30101,7 +30125,19 @@ func (n *Interface_RoutedVlan_Ipv6_UnnumberedPathAny) Enabled() *Interface_Route
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -30117,7 +30153,19 @@ func (n *Interface_RoutedVlan_Ipv6_UnnumberedPath) InterfaceRef() *Interface_Rou
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -40907,7 +40955,19 @@ func (n *Interface_Subinterface_Ipv4_UnnumberedPathAny) Enabled() *Interface_Sub
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -40923,7 +40983,19 @@ func (n *Interface_Subinterface_Ipv4_UnnumberedPath) InterfaceRef() *Interface_S
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -51352,7 +51424,19 @@ func (n *Interface_Subinterface_Ipv6_UnnumberedPathAny) Enabled() *Interface_Sub
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -51368,7 +51452,19 @@ func (n *Interface_Subinterface_Ipv6_UnnumberedPath) InterfaceRef() *Interface_S
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"

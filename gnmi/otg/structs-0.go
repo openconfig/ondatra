@@ -1759,15 +1759,18 @@ func (*BgpPeer_UnicastIpv6Prefix_Community) ΛBelongingModule() string {
 
 // Flow represents the /open-traffic-generator-flow/flows/flow YANG schema element.
 type Flow struct {
-	Counters     *Flow_Counters                `path:"state/counters" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	InFrameRate  Binary                        `path:"state/in-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	InRate       Binary                        `path:"state/in-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	LossPct      Binary                        `path:"state/loss-pct" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	Name         *string                       `path:"state/name|name" module:"open-traffic-generator-flow/open-traffic-generator-flow|open-traffic-generator-flow" shadow-path:"name" shadow-module:"open-traffic-generator-flow"`
-	OutFrameRate Binary                        `path:"state/out-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	OutRate      Binary                        `path:"state/out-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	TaggedMetric map[string]*Flow_TaggedMetric `path:"tagged-metrics/tagged-metric" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
-	Transmit     *bool                         `path:"state/transmit" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	AverageLatency *uint64                       `path:"state/average-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	Counters       *Flow_Counters                `path:"state/counters" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	InFrameRate    Binary                        `path:"state/in-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	InRate         Binary                        `path:"state/in-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	LossPct        Binary                        `path:"state/loss-pct" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	MaximumLatency *uint64                       `path:"state/maximum-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	MinimumLatency *uint64                       `path:"state/minimum-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	Name           *string                       `path:"state/name|name" module:"open-traffic-generator-flow/open-traffic-generator-flow|open-traffic-generator-flow" shadow-path:"name" shadow-module:"open-traffic-generator-flow"`
+	OutFrameRate   Binary                        `path:"state/out-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	OutRate        Binary                        `path:"state/out-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	TaggedMetric   map[string]*Flow_TaggedMetric `path:"tagged-metrics/tagged-metric" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	Transmit       *bool                         `path:"state/transmit" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 }
 
 // IsYANGGoStruct ensures that Flow implements the yang.GoStruct
@@ -1893,6 +1896,22 @@ func (t *Flow) GetCounters() *Flow_Counters {
 	return nil
 }
 
+// GetAverageLatency retrieves the value of the leaf AverageLatency from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AverageLatency is set, it can
+// safely use t.GetAverageLatency() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AverageLatency == nil' before retrieving the leaf's value.
+func (t *Flow) GetAverageLatency() uint64 {
+	if t == nil || t.AverageLatency == nil {
+		return 0
+	}
+	return *t.AverageLatency
+}
+
 // GetInFrameRate retrieves the value of the leaf InFrameRate from the Flow
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -1939,6 +1958,38 @@ func (t *Flow) GetLossPct() Binary {
 		return nil
 	}
 	return t.LossPct
+}
+
+// GetMaximumLatency retrieves the value of the leaf MaximumLatency from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaximumLatency is set, it can
+// safely use t.GetMaximumLatency() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaximumLatency == nil' before retrieving the leaf's value.
+func (t *Flow) GetMaximumLatency() uint64 {
+	if t == nil || t.MaximumLatency == nil {
+		return 0
+	}
+	return *t.MaximumLatency
+}
+
+// GetMinimumLatency retrieves the value of the leaf MinimumLatency from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinimumLatency is set, it can
+// safely use t.GetMinimumLatency() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinimumLatency == nil' before retrieving the leaf's value.
+func (t *Flow) GetMinimumLatency() uint64 {
+	if t == nil || t.MinimumLatency == nil {
+		return 0
+	}
+	return *t.MinimumLatency
 }
 
 // GetName retrieves the value of the leaf Name from the Flow
@@ -2005,6 +2056,12 @@ func (t *Flow) GetTransmit() bool {
 	return *t.Transmit
 }
 
+// SetAverageLatency sets the value of the leaf AverageLatency in the Flow
+// struct.
+func (t *Flow) SetAverageLatency(v uint64) {
+	t.AverageLatency = &v
+}
+
 // SetInFrameRate sets the value of the leaf InFrameRate in the Flow
 // struct.
 func (t *Flow) SetInFrameRate(v Binary) {
@@ -2021,6 +2078,18 @@ func (t *Flow) SetInRate(v Binary) {
 // struct.
 func (t *Flow) SetLossPct(v Binary) {
 	t.LossPct = v
+}
+
+// SetMaximumLatency sets the value of the leaf MaximumLatency in the Flow
+// struct.
+func (t *Flow) SetMaximumLatency(v uint64) {
+	t.MaximumLatency = &v
+}
+
+// SetMinimumLatency sets the value of the leaf MinimumLatency in the Flow
+// struct.
+func (t *Flow) SetMinimumLatency(v uint64) {
+	t.MinimumLatency = &v
 }
 
 // SetName sets the value of the leaf Name in the Flow

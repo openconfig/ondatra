@@ -30,14 +30,14 @@ import (
 	"github.com/openconfig/ygot/ytypes"
 )
 
-// Flow_InFrameRatePath represents the /open-traffic-generator-flow/flows/flow/state/in-frame-rate YANG schema element.
-type Flow_InFrameRatePath struct {
+// Flow_AverageLatencyPath represents the /open-traffic-generator-flow/flows/flow/state/average-latency YANG schema element.
+type Flow_AverageLatencyPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// Flow_InFrameRatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/in-frame-rate YANG schema element.
-type Flow_InFrameRatePathAny struct {
+// Flow_AverageLatencyPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/average-latency YANG schema element.
+type Flow_AverageLatencyPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -73,6 +73,76 @@ func (n *FlowPathAny) State() ygnmi.WildcardQuery[*oc.Flow] {
 		"Flow",
 		true,
 		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/average-latency"
+//	Path from root:       "/flows/flow/state/average-latency"
+func (n *Flow_AverageLatencyPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "average-latency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow).AverageLatency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/average-latency"
+//	Path from root:       "/flows/flow/state/average-latency"
+func (n *Flow_AverageLatencyPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "average-latency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow).AverageLatency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -257,6 +327,146 @@ func (n *Flow_LossPctPathAny) State() ygnmi.WildcardQuery[float32] {
 		func(gs ygot.ValidatedGoStruct) (float32, bool) {
 			ret := gs.(*oc.Flow).LossPct
 			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/maximum-latency"
+//	Path from root:       "/flows/flow/state/maximum-latency"
+func (n *Flow_MaximumLatencyPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "maximum-latency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow).MaximumLatency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/maximum-latency"
+//	Path from root:       "/flows/flow/state/maximum-latency"
+func (n *Flow_MaximumLatencyPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "maximum-latency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow).MaximumLatency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/minimum-latency"
+//	Path from root:       "/flows/flow/state/minimum-latency"
+func (n *Flow_MinimumLatencyPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Flow",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "minimum-latency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow).MinimumLatency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/minimum-latency"
+//	Path from root:       "/flows/flow/state/minimum-latency"
+func (n *Flow_MinimumLatencyPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Flow",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "minimum-latency"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Flow).MinimumLatency
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
 		func() *ytypes.Schema {
@@ -603,6 +813,18 @@ func (n *Flow_TransmitPathAny) State() ygnmi.WildcardQuery[bool] {
 	)
 }
 
+// Flow_InFrameRatePath represents the /open-traffic-generator-flow/flows/flow/state/in-frame-rate YANG schema element.
+type Flow_InFrameRatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_InFrameRatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/in-frame-rate YANG schema element.
+type Flow_InFrameRatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Flow_InRatePath represents the /open-traffic-generator-flow/flows/flow/state/in-rate YANG schema element.
 type Flow_InRatePath struct {
 	*ygnmi.NodePath
@@ -623,6 +845,30 @@ type Flow_LossPctPath struct {
 
 // Flow_LossPctPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/loss-pct YANG schema element.
 type Flow_LossPctPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_MaximumLatencyPath represents the /open-traffic-generator-flow/flows/flow/state/maximum-latency YANG schema element.
+type Flow_MaximumLatencyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_MaximumLatencyPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/maximum-latency YANG schema element.
+type Flow_MaximumLatencyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_MinimumLatencyPath represents the /open-traffic-generator-flow/flows/flow/state/minimum-latency YANG schema element.
+type Flow_MinimumLatencyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_MinimumLatencyPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/minimum-latency YANG schema element.
+type Flow_MinimumLatencyPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -683,6 +929,42 @@ type FlowPath struct {
 // FlowPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow YANG schema element.
 type FlowPathAny struct {
 	*ygnmi.NodePath
+}
+
+// AverageLatency (leaf): The average latency value, measured in nanoseconds. The latency value is dependent
+// on the configured type of latency measurement mode.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/average-latency"
+//	Path from root:       "/flows/flow/state/average-latency"
+func (n *FlowPath) AverageLatency() *Flow_AverageLatencyPath {
+	return &Flow_AverageLatencyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "average-latency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AverageLatency (leaf): The average latency value, measured in nanoseconds. The latency value is dependent
+// on the configured type of latency measurement mode.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/average-latency"
+//	Path from root:       "/flows/flow/state/average-latency"
+func (n *FlowPathAny) AverageLatency() *Flow_AverageLatencyPathAny {
+	return &Flow_AverageLatencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "average-latency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
 }
 
 // Counters (container): Counters that correspond to the individual flow.
@@ -818,6 +1100,78 @@ func (n *FlowPathAny) LossPct() *Flow_LossPctPathAny {
 	return &Flow_LossPctPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "loss-pct"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaximumLatency (leaf): The maximum latency value, measured in nanoseconds. The latency value is dependent
+// on the configured type of latency measurement mode.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/maximum-latency"
+//	Path from root:       "/flows/flow/state/maximum-latency"
+func (n *FlowPath) MaximumLatency() *Flow_MaximumLatencyPath {
+	return &Flow_MaximumLatencyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "maximum-latency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaximumLatency (leaf): The maximum latency value, measured in nanoseconds. The latency value is dependent
+// on the configured type of latency measurement mode.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/maximum-latency"
+//	Path from root:       "/flows/flow/state/maximum-latency"
+func (n *FlowPathAny) MaximumLatency() *Flow_MaximumLatencyPathAny {
+	return &Flow_MaximumLatencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "maximum-latency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinimumLatency (leaf): The minimum latency value, measured in nanoseconds. The latency value is dependent
+// on the configured type of latency measurement mode.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/minimum-latency"
+//	Path from root:       "/flows/flow/state/minimum-latency"
+func (n *FlowPath) MinimumLatency() *Flow_MinimumLatencyPath {
+	return &Flow_MinimumLatencyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "minimum-latency"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinimumLatency (leaf): The minimum latency value, measured in nanoseconds. The latency value is dependent
+// on the configured type of latency measurement mode.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/minimum-latency"
+//	Path from root:       "/flows/flow/state/minimum-latency"
+func (n *FlowPathAny) MinimumLatency() *Flow_MinimumLatencyPathAny {
+	return &Flow_MinimumLatencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "minimum-latency"},
 			map[string]interface{}{},
 			n,
 		),

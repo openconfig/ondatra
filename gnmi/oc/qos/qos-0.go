@@ -330,6 +330,11 @@ func (n *QosPathAny) ForwardingGroup(Name string) *Qos_ForwardingGroupPathAny {
 
 // InterfaceAny (list): List of interfaces referenced by QoS entities.
 //
+// The interface referenced is based on the interface and
+// subinterface leaves within the interface-ref container -
+// which reference an entry in the /interfaces/interface list -
+// and should not rely on the value of the list key.
+//
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "interfaces/interface"
@@ -346,6 +351,11 @@ func (n *QosPath) InterfaceAny() *Qos_InterfacePathAny {
 
 // InterfaceAny (list): List of interfaces referenced by QoS entities.
 //
+// The interface referenced is based on the interface and
+// subinterface leaves within the interface-ref container -
+// which reference an entry in the /interfaces/interface list -
+// and should not rely on the value of the list key.
+//
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "interfaces/interface"
@@ -361,6 +371,11 @@ func (n *QosPathAny) InterfaceAny() *Qos_InterfacePathAny {
 }
 
 // Interface (list): List of interfaces referenced by QoS entities.
+//
+// The interface referenced is based on the interface and
+// subinterface leaves within the interface-ref container -
+// which reference an entry in the /interfaces/interface list -
+// and should not rely on the value of the list key.
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -379,6 +394,11 @@ func (n *QosPath) Interface(InterfaceId string) *Qos_InterfacePath {
 }
 
 // Interface (list): List of interfaces referenced by QoS entities.
+//
+// The interface referenced is based on the interface and
+// subinterface leaves within the interface-ref container -
+// which reference an entry in the /interfaces/interface list -
+// and should not rely on the value of the list key.
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -13648,7 +13668,19 @@ func (n *Qos_InterfacePathAny) InterfaceId() *Qos_Interface_InterfaceIdPathAny {
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -13664,7 +13696,19 @@ func (n *Qos_InterfacePath) InterfaceRef() *Qos_Interface_InterfaceRefPath {
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -13681,7 +13725,7 @@ func (n *Qos_InterfacePathAny) InterfaceRef() *Qos_Interface_InterfaceRefPathAny
 }
 
 // Output (container): Top-level container for QoS data related to the egress
-// interface
+// interface.
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -13698,7 +13742,7 @@ func (n *Qos_InterfacePath) Output() *Qos_Interface_OutputPath {
 }
 
 // Output (container): Top-level container for QoS data related to the egress
-// interface
+// interface.
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -25528,6 +25572,146 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny) Config() yg
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewLeafConfigQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/min-threshold"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold"
 func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath) State() ygnmi.SingletonQuery[uint64] {
@@ -25664,6 +25848,146 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny) Config() yg
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewLeafConfigQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Red_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Red_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
 // Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/enable-ecn YANG schema element.
 type Qos_QueueManagementProfile_Red_Uniform_EnableEcnPath struct {
 	*ygnmi.NodePath
@@ -25688,6 +26012,18 @@ type Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny represents the wildcard version of the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold YANG schema element.
 type Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath struct {
 	*ygnmi.NodePath
@@ -25696,6 +26032,18 @@ type Qos_QueueManagementProfile_Red_Uniform_MinThresholdPath struct {
 
 // Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny represents the wildcard version of the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold YANG schema element.
 type Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny represents the wildcard version of the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -25800,9 +26148,10 @@ func (n *Qos_QueueManagementProfile_Red_UniformPathAny) EnableEcn() *Qos_QueueMa
 	}
 }
 
-// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue. When the
-// average queue length exceeds the maxth value, all packets are
-// dropped (or marked if ECN is enabled).
+// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length exceeds the maxth value, all packets are
+// dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold-percent and max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -25819,9 +26168,10 @@ func (n *Qos_QueueManagementProfile_Red_UniformPath) MaxThreshold() *Qos_QueueMa
 	}
 }
 
-// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue. When the
-// average queue length exceeds the maxth value, all packets are
-// dropped (or marked if ECN is enabled).
+// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length exceeds the maxth value, all packets are
+// dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold-percent and max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -25838,9 +26188,50 @@ func (n *Qos_QueueManagementProfile_Red_UniformPathAny) MaxThreshold() *Qos_Queu
 	}
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue. When the
-// average queue length is less than minth, all packets are admitted
-// to the queue.
+// MaxThresholdPercent (leaf): The maximum threshold parameter for a RED-managed queue in percent.
+// When the average queue length exceeds the maxth value, all packets
+// are dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold and max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/*/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_UniformPath) MaxThresholdPercent() *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath {
+	return &Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-threshold-percent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxThresholdPercent (leaf): The maximum threshold parameter for a RED-managed queue in percent.
+// When the average queue length exceeds the maxth value, all packets
+// are dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold and max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/*/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) MaxThresholdPercent() *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny {
+	return &Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-threshold-percent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length is less than minth, all packets are admitted
+// to the queue.  Mututally exclusive with min-threshold-percent and
+// max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -25857,9 +26248,10 @@ func (n *Qos_QueueManagementProfile_Red_UniformPath) MinThreshold() *Qos_QueueMa
 	}
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue. When the
-// average queue length is less than minth, all packets are admitted
-// to the queue.
+// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length is less than minth, all packets are admitted
+// to the queue.  Mututally exclusive with min-threshold-percent and
+// max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -25869,6 +26261,46 @@ func (n *Qos_QueueManagementProfile_Red_UniformPathAny) MinThreshold() *Qos_Queu
 	return &Qos_QueueManagementProfile_Red_Uniform_MinThresholdPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "min-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// When the average queue length is less than minth, all packets are
+// admitted to the queue.  Mutually exclusive with min-threshold and
+// max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/*/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_UniformPath) MinThresholdPercent() *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath {
+	return &Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "min-threshold-percent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// When the average queue length is less than minth, all packets are
+// admitted to the queue.  Mutually exclusive with min-threshold and
+// max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/*/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Red_UniformPathAny) MinThresholdPercent() *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny {
+	return &Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "min-threshold-percent"},
 			map[string]interface{}{},
 			n,
 		),
@@ -26628,6 +27060,146 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny) Config() y
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewLeafConfigQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/min-threshold"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold"
 func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath) State() ygnmi.SingletonQuery[uint64] {
@@ -26747,6 +27319,146 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny) Config() y
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThreshold
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewLeafConfigQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_QueueManagementProfile_Wred_Uniform) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Qos_QueueManagementProfile_Wred_Uniform",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "min-threshold-percent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -26940,6 +27652,18 @@ type Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny represents the wildcard version of the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold YANG schema element.
 type Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath struct {
 	*ygnmi.NodePath
@@ -26948,6 +27672,18 @@ type Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPath struct {
 
 // Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny represents the wildcard version of the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold YANG schema element.
 type Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath represents the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny represents the wildcard version of the /openconfig-qos/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold-percent YANG schema element.
+type Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -27100,9 +27836,10 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MaxDropProbabilityPerce
 	}
 }
 
-// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue. When the
-// average queue length exceeds the maxth value, all packets are
-// dropped (or marked if ECN is enabled).
+// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length exceeds the maxth value, all packets are
+// dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold-percent and max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -27119,9 +27856,10 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPath) MaxThreshold() *Qos_QueueM
 	}
 }
 
-// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue. When the
-// average queue length exceeds the maxth value, all packets are
-// dropped (or marked if ECN is enabled).
+// MaxThreshold (leaf): The maximum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length exceeds the maxth value, all packets are
+// dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold-percent and max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -27138,9 +27876,50 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MaxThreshold() *Qos_Que
 	}
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue. When the
-// average queue length is less than minth, all packets are admitted
-// to the queue.
+// MaxThresholdPercent (leaf): The maximum threshold parameter for a RED-managed queue in percent.
+// When the average queue length exceeds the maxth value, all packets
+// are dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold and max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/*/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) MaxThresholdPercent() *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath {
+	return &Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-threshold-percent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxThresholdPercent (leaf): The maximum threshold parameter for a RED-managed queue in percent.
+// When the average queue length exceeds the maxth value, all packets
+// are dropped (or marked if ECN is enabled).  Mutually exclusive with
+// min-threshold and max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/max-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/*/max-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MaxThresholdPercent() *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny {
+	return &Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-threshold-percent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length is less than minth, all packets are admitted
+// to the queue.  Mututally exclusive with min-threshold-percent and
+// max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -27157,9 +27936,10 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPath) MinThreshold() *Qos_QueueM
 	}
 }
 
-// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue. When the
-// average queue length is less than minth, all packets are admitted
-// to the queue.
+// MinThreshold (leaf): The mininum threshold parameter for a RED-managed queue in bytes.
+// When the average queue length is less than minth, all packets are admitted
+// to the queue.  Mututally exclusive with min-threshold-percent and
+// max-threshold-percent.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -27169,6 +27949,46 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MinThreshold() *Qos_Que
 	return &Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "min-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// When the average queue length is less than minth, all packets are
+// admitted to the queue.  Mutually exclusive with min-threshold and
+// max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/*/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_UniformPath) MinThresholdPercent() *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath {
+	return &Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "min-threshold-percent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MinThresholdPercent (leaf): The mininum threshold parameter for a RED-managed queue in percent.
+// When the average queue length is less than minth, all packets are
+// admitted to the queue.  Mutually exclusive with min-threshold and
+// max-threshold.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/min-threshold-percent"
+//	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/*/min-threshold-percent"
+func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MinThresholdPercent() *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny {
+	return &Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "min-threshold-percent"},
 			map[string]interface{}{},
 			n,
 		),

@@ -364,7 +364,11 @@ func (n *AclPathAny) CounterCapability() *Acl_CounterCapabilityPathAny {
 	}
 }
 
-// InterfaceAny (list): List of interfaces on which ACLs are set
+// InterfaceAny (list): List of interfaces on which ACLs are set. The interface is resolved
+// based on the interface and subinterface leaves of the interface-ref
+// container, which are references to entries in the /interfaces
+// list. The key of the list is an arbitrary value that the
+// implementation should not use to resolve an interface name.
 //
 //	Defining module:      "openconfig-acl"
 //	Instantiating module: "openconfig-acl"
@@ -380,7 +384,11 @@ func (n *AclPath) InterfaceAny() *Acl_InterfacePathAny {
 	}
 }
 
-// InterfaceAny (list): List of interfaces on which ACLs are set
+// InterfaceAny (list): List of interfaces on which ACLs are set. The interface is resolved
+// based on the interface and subinterface leaves of the interface-ref
+// container, which are references to entries in the /interfaces
+// list. The key of the list is an arbitrary value that the
+// implementation should not use to resolve an interface name.
 //
 //	Defining module:      "openconfig-acl"
 //	Instantiating module: "openconfig-acl"
@@ -396,7 +404,11 @@ func (n *AclPathAny) InterfaceAny() *Acl_InterfacePathAny {
 	}
 }
 
-// Interface (list): List of interfaces on which ACLs are set
+// Interface (list): List of interfaces on which ACLs are set. The interface is resolved
+// based on the interface and subinterface leaves of the interface-ref
+// container, which are references to entries in the /interfaces
+// list. The key of the list is an arbitrary value that the
+// implementation should not use to resolve an interface name.
 //
 //	Defining module:      "openconfig-acl"
 //	Instantiating module: "openconfig-acl"
@@ -414,7 +426,11 @@ func (n *AclPath) Interface(Id string) *Acl_InterfacePath {
 	}
 }
 
-// Interface (list): List of interfaces on which ACLs are set
+// Interface (list): List of interfaces on which ACLs are set. The interface is resolved
+// based on the interface and subinterface leaves of the interface-ref
+// container, which are references to entries in the /interfaces
+// list. The key of the list is an arbitrary value that the
+// implementation should not use to resolve an interface name.
 //
 //	Defining module:      "openconfig-acl"
 //	Instantiating module: "openconfig-acl"
@@ -1734,7 +1750,10 @@ func (n *Acl_AclSet_AclEntryPathAny) Description() *Acl_AclSet_AclEntry_Descript
 	}
 }
 
-// InputInterface (container): Input interface container
+// InputInterface (container): Input interface container. The interface is resolved based
+// on the interface and subinterface leaves of the interface-ref
+// container, which are references to entries in the /interfaces
+// list.
 //
 //	Defining module:      "openconfig-acl"
 //	Instantiating module: "openconfig-acl"
@@ -1750,7 +1769,10 @@ func (n *Acl_AclSet_AclEntryPath) InputInterface() *Acl_AclSet_AclEntry_InputInt
 	}
 }
 
-// InputInterface (container): Input interface container
+// InputInterface (container): Input interface container. The interface is resolved based
+// on the interface and subinterface leaves of the interface-ref
+// container, which are references to entries in the /interfaces
+// list.
 //
 //	Defining module:      "openconfig-acl"
 //	Instantiating module: "openconfig-acl"
@@ -2520,7 +2542,19 @@ type Acl_AclSet_AclEntry_InputInterfacePathAny struct {
 	*ygnmi.NodePath
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-acl"
@@ -2536,7 +2570,19 @@ func (n *Acl_AclSet_AclEntry_InputInterfacePath) InterfaceRef() *Acl_AclSet_AclE
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-acl"
@@ -11572,7 +11618,19 @@ func (n *Acl_InterfacePathAny) IngressAclSet(SetName string, Type oc.E_Acl_ACL_T
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-acl"
@@ -11588,7 +11646,19 @@ func (n *Acl_InterfacePath) InterfaceRef() *Acl_Interface_InterfaceRefPath {
 	}
 }
 
-// InterfaceRef (container): Reference to an interface or subinterface
+// InterfaceRef (container): Reference to an interface or subinterface. The interface
+// that is being referenced is uniquely referenced based on
+// the specified interface and subinterface leaves. In contexts
+// where a Layer 3 interface is to be referenced, both the
+// interface and subinterface leaves must be populated, as
+// Layer 3 configuration within the OpenConfig models is
+// associated with a subinterface. In the case where a
+// Layer 2 interface is to be referenced, only the
+// interface is specified.
+//
+// The interface/subinterface leaf tuple must be used as
+// the means by which the interface is specified, regardless
+// of any other context information (e.g., key in a list).
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-acl"

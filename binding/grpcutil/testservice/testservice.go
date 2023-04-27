@@ -16,6 +16,7 @@
 package testservice
 
 import (
+	"errors"
 	"io"
 	"net"
 	"testing"
@@ -86,7 +87,7 @@ type TestStreamClient struct {
 // MustSend calls Send and fails the test fatally on error.
 func (sc *TestStreamClient) MustSend(t *testing.T, msg string) {
 	t.Helper()
-	if err := sc.Send(&tpb.TestRequest{Message: msg}); err != nil {
+	if err := sc.Send(&tpb.TestRequest{Message: msg}); err != nil && !errors.Is(err, io.EOF) {
 		t.Fatalf("Send() failed: %v", err)
 	}
 }
@@ -96,7 +97,7 @@ func (sc *TestStreamClient) MustSend(t *testing.T, msg string) {
 func (sc *TestStreamClient) MustRecv(t *testing.T) bool {
 	t.Helper()
 	if _, err := sc.Recv(); err != nil {
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			return false
 		}
 		t.Fatalf("Recv() failed: %v", err)
