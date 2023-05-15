@@ -41,10 +41,13 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
+  - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
   - public/release/models/platform/openconfig-platform-ext.yang
+  - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
+  - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
@@ -1773,6 +1776,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "OPERATING_SYSTEM_UPDATE", DefiningModule: "openconfig-platform-types"},
 		5: {Name: "SOFTWARE_MODULE", DefiningModule: "openconfig-platform-types"},
 	},
+	"E_Platform_ComponentPowerType": {
+		1: {Name: "POWER_ENABLED"},
+		2: {Name: "POWER_DISABLED"},
+	},
 	"E_Platform_ComponentRedundantRole": {
 		1: {Name: "PRIMARY"},
 		2: {Name: "SECONDARY"},
@@ -2451,6 +2458,12 @@ func initΛEnumTypes() {
 		"/acl/state/counter-capability": {
 			reflect.TypeOf((E_Acl_ACL_COUNTER_CAPABILITY)(0)),
 		},
+		"/components/component/controller-card/state/power-admin-state": {
+			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
+		},
+		"/components/component/fabric/state/power-admin-state": {
+			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
+		},
 		"/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action": {
 			reflect.TypeOf((E_FabricBlockError_Action)(0)),
 		},
@@ -2480,6 +2493,9 @@ func initΛEnumTypes() {
 		},
 		"/components/component/integrated-circuit/pipeline-counters/errors/queueing-block/queueing-block-error/state/level": {
 			reflect.TypeOf((E_FabricBlockError_Level)(0)),
+		},
+		"/components/component/linecard/state/power-admin-state": {
+			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
 		},
 		"/components/component/port/breakout-mode/groups/group/state/breakout-speed": {
 			reflect.TypeOf((E_IfEthernet_ETHERNET_SPEED)(0)),

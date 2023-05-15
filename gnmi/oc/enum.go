@@ -41,10 +41,13 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
+  - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
   - public/release/models/platform/openconfig-platform-ext.yang
+  - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
+  - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
@@ -7825,6 +7828,35 @@ const (
 	PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT_OPERATING_SYSTEM_UPDATE E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT = 4
 	// PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT_SOFTWARE_MODULE corresponds to the value SOFTWARE_MODULE of PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT
 	PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT_SOFTWARE_MODULE E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT = 5
+)
+
+// E_Platform_ComponentPowerType is a derived int64 type which is used to represent
+// the enumerated node Platform_ComponentPowerType. An additional value named
+// Platform_ComponentPowerType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Platform_ComponentPowerType int64
+
+// IsYANGGoEnum ensures that Platform_ComponentPowerType implements the yang.GoEnum
+// interface. This ensures that Platform_ComponentPowerType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Platform_ComponentPowerType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Platform_ComponentPowerType.
+func (E_Platform_ComponentPowerType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Platform_ComponentPowerType.
+func (e E_Platform_ComponentPowerType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Platform_ComponentPowerType")
+}
+
+const (
+	// Platform_ComponentPowerType_UNSET corresponds to the value UNSET of Platform_ComponentPowerType
+	Platform_ComponentPowerType_UNSET E_Platform_ComponentPowerType = 0
+	// Platform_ComponentPowerType_POWER_ENABLED corresponds to the value POWER_ENABLED of Platform_ComponentPowerType
+	Platform_ComponentPowerType_POWER_ENABLED E_Platform_ComponentPowerType = 1
+	// Platform_ComponentPowerType_POWER_DISABLED corresponds to the value POWER_DISABLED of Platform_ComponentPowerType
+	Platform_ComponentPowerType_POWER_DISABLED E_Platform_ComponentPowerType = 2
 )
 
 // E_Platform_ComponentRedundantRole is a derived int64 type which is used to represent

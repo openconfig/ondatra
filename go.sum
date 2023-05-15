@@ -661,8 +661,8 @@ github.com/openconfig/gribi v1.0.0 h1:xMwEg0mBD+21mOxuFOw0d9dBKuIPwJEhMUUeUulZdL
 github.com/openconfig/gribi v1.0.0/go.mod h1:VFqGH2ZPFIfnKTimP4/AQB4OK0eySW5muJNFxXAwP6k=
 github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70 h1:t6SvvdfWCMlw0XPlsdxO8EgO+q/fXnTevDjdYREKFwU=
 github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70/go.mod h1:OmTWe7RyZj2CIzIgy4ovEBzCLBJzRvWSZmn7u02U9gU=
-github.com/openconfig/kne v0.1.11 h1:+U83cjPL/vBxroJwamRJr40XHDcF/7Nnf/f8NSWUdec=
-github.com/openconfig/kne v0.1.11/go.mod h1:yNfcSOG9l2emqkkboOdKisDiLfS0Et8IR/tGWQmtez4=
+github.com/openconfig/kne v0.1.12 h1:t4iTkkxCHlG8dRZJoA/SFkD0YJxzuezM2JE2Pmte9i0=
+github.com/openconfig/kne v0.1.12/go.mod h1:JsxFgiGIUOdaOfAcy7IcmjIn50IQnlfvLXc/0WKkgUg=
 github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179 h1:hxhwaNoGykzfp7UfTSvsQe1VTaLIMUyC9bhobz88Q20=
 github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179/go.mod h1:PzwucDxeWVfLHl75AfRyzI2FawaWV1IbaGzRRIKayF4=
 github.com/openconfig/lemming/operator v0.2.0 h1:dovZnR6lQkOHXcODli1NDOr/GVYrBY05KS5X11jxVbw=

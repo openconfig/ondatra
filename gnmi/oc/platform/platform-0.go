@@ -40,10 +40,13 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
+  - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
   - public/release/models/platform/openconfig-platform-ext.yang
+  - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
+  - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
@@ -3288,6 +3291,38 @@ func (n *ComponentPathAny) LastSwitchoverTime() *Component_LastSwitchoverTimePat
 	}
 }
 
+// Linecard (container): Top-level container for linecard data
+//
+//	Defining module:      "openconfig-platform-linecard"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "linecard"
+//	Path from root:       "/components/component/linecard"
+func (n *ComponentPath) Linecard() *Component_LinecardPath {
+	return &Component_LinecardPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"linecard"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Linecard (container): Top-level container for linecard data
+//
+//	Defining module:      "openconfig-platform-linecard"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "linecard"
+//	Path from root:       "/components/component/linecard"
+func (n *ComponentPathAny) Linecard() *Component_LinecardPathAny {
+	return &Component_LinecardPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"linecard"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // Location (leaf): System-supplied description of the location of the
 // component within the system. This could be a bay position,
 // slot number, socket location, etc. For component types that
@@ -4598,7 +4633,7 @@ func (n *Component_ChassisPathAny) Id() *Component_Chassis_IdPathAny {
 	}
 }
 
-// Utilization (container): Utilization of the component.
+// Utilization (container): Resource utilization of the component.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -4614,7 +4649,7 @@ func (n *Component_ChassisPath) Utilization() *Component_Chassis_UtilizationPath
 	}
 }
 
-// Utilization (container): Utilization of the component.
+// Utilization (container): Resource utilization of the component.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -6240,14 +6275,16 @@ func (n *Component_Chassis_Utilization_ResourcePathAny) UsedThresholdUpperExceed
 	}
 }
 
-// Component_ControllerCardPath represents the /openconfig-platform/components/component/controller-card YANG schema element.
-type Component_ControllerCardPath struct {
+// Component_ControllerCard_PowerAdminStatePath represents the /openconfig-platform/components/component/controller-card/state/power-admin-state YANG schema element.
+type Component_ControllerCard_PowerAdminStatePath struct {
 	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
-// Component_ControllerCardPathAny represents the wildcard version of the /openconfig-platform/components/component/controller-card YANG schema element.
-type Component_ControllerCardPathAny struct {
+// Component_ControllerCard_PowerAdminStatePathAny represents the wildcard version of the /openconfig-platform/components/component/controller-card/state/power-admin-state YANG schema element.
+type Component_ControllerCard_PowerAdminStatePathAny struct {
 	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
 // State returns a Query that can be used in gNMI operations.
@@ -6314,6 +6351,174 @@ func (n *Component_ControllerCardPathAny) Config() ygnmi.WildcardQuery[*oc.Compo
 			}
 		},
 	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-controller-card"
+//	Path from parent:     "state/power-admin-state"
+//	Path from root:       "/components/component/controller-card/state/power-admin-state"
+func (n *Component_ControllerCard_PowerAdminStatePath) State() ygnmi.SingletonQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Platform_ComponentPowerType](
+		"Component_ControllerCard",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_ControllerCard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_ControllerCard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-controller-card"
+//	Path from parent:     "state/power-admin-state"
+//	Path from root:       "/components/component/controller-card/state/power-admin-state"
+func (n *Component_ControllerCard_PowerAdminStatePathAny) State() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Platform_ComponentPowerType](
+		"Component_ControllerCard",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_ControllerCard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_ControllerCard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-controller-card"
+//	Path from parent:     "config/power-admin-state"
+//	Path from root:       "/components/component/controller-card/config/power-admin-state"
+func (n *Component_ControllerCard_PowerAdminStatePath) Config() ygnmi.ConfigQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Platform_ComponentPowerType](
+		"Component_ControllerCard",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_ControllerCard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_ControllerCard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-controller-card"
+//	Path from parent:     "config/power-admin-state"
+//	Path from root:       "/components/component/controller-card/config/power-admin-state"
+func (n *Component_ControllerCard_PowerAdminStatePathAny) Config() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Platform_ComponentPowerType](
+		"Component_ControllerCard",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_ControllerCard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_ControllerCard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_ControllerCardPath represents the /openconfig-platform/components/component/controller-card YANG schema element.
+type Component_ControllerCardPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_ControllerCardPathAny represents the wildcard version of the /openconfig-platform/components/component/controller-card YANG schema element.
+type Component_ControllerCardPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PowerAdminState (leaf): Enable or disable power to the component
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/power-admin-state"
+//	Path from root:       "/components/component/controller-card/*/power-admin-state"
+func (n *Component_ControllerCardPath) PowerAdminState() *Component_ControllerCard_PowerAdminStatePath {
+	return &Component_ControllerCard_PowerAdminStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PowerAdminState (leaf): Enable or disable power to the component
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/power-admin-state"
+//	Path from root:       "/components/component/controller-card/*/power-admin-state"
+func (n *Component_ControllerCardPathAny) PowerAdminState() *Component_ControllerCard_PowerAdminStatePathAny {
+	return &Component_ControllerCard_PowerAdminStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
 }
 
 // Component_CpuPath represents the /openconfig-platform/components/component/cpu YANG schema element.
@@ -7332,14 +7537,16 @@ func (n *Component_Cpu_UtilizationPathAny) MinTime() *Component_Cpu_Utilization_
 	}
 }
 
-// Component_FabricPath represents the /openconfig-platform/components/component/fabric YANG schema element.
-type Component_FabricPath struct {
+// Component_Fabric_PowerAdminStatePath represents the /openconfig-platform/components/component/fabric/state/power-admin-state YANG schema element.
+type Component_Fabric_PowerAdminStatePath struct {
 	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
-// Component_FabricPathAny represents the wildcard version of the /openconfig-platform/components/component/fabric YANG schema element.
-type Component_FabricPathAny struct {
+// Component_Fabric_PowerAdminStatePathAny represents the wildcard version of the /openconfig-platform/components/component/fabric/state/power-admin-state YANG schema element.
+type Component_Fabric_PowerAdminStatePathAny struct {
 	*ygnmi.NodePath
+	parent ygnmi.PathStruct
 }
 
 // State returns a Query that can be used in gNMI operations.
@@ -7406,6 +7613,174 @@ func (n *Component_FabricPathAny) Config() ygnmi.WildcardQuery[*oc.Component_Fab
 			}
 		},
 	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-fabric"
+//	Path from parent:     "state/power-admin-state"
+//	Path from root:       "/components/component/fabric/state/power-admin-state"
+func (n *Component_Fabric_PowerAdminStatePath) State() ygnmi.SingletonQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Fabric",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Fabric).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-fabric"
+//	Path from parent:     "state/power-admin-state"
+//	Path from root:       "/components/component/fabric/state/power-admin-state"
+func (n *Component_Fabric_PowerAdminStatePathAny) State() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Fabric",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Fabric).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-fabric"
+//	Path from parent:     "config/power-admin-state"
+//	Path from root:       "/components/component/fabric/config/power-admin-state"
+func (n *Component_Fabric_PowerAdminStatePath) Config() ygnmi.ConfigQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Fabric",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Fabric).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-fabric"
+//	Path from parent:     "config/power-admin-state"
+//	Path from root:       "/components/component/fabric/config/power-admin-state"
+func (n *Component_Fabric_PowerAdminStatePathAny) Config() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Fabric",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Fabric).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_FabricPath represents the /openconfig-platform/components/component/fabric YANG schema element.
+type Component_FabricPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_FabricPathAny represents the wildcard version of the /openconfig-platform/components/component/fabric YANG schema element.
+type Component_FabricPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PowerAdminState (leaf): Enable or disable power to the component
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/power-admin-state"
+//	Path from root:       "/components/component/fabric/*/power-admin-state"
+func (n *Component_FabricPath) PowerAdminState() *Component_Fabric_PowerAdminStatePath {
+	return &Component_Fabric_PowerAdminStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PowerAdminState (leaf): Enable or disable power to the component
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/power-admin-state"
+//	Path from root:       "/components/component/fabric/*/power-admin-state"
+func (n *Component_FabricPathAny) PowerAdminState() *Component_Fabric_PowerAdminStatePathAny {
+	return &Component_Fabric_PowerAdminStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
 }
 
 // Component_Fan_SpeedPath represents the /openconfig-platform/components/component/fan/state/speed YANG schema element.
@@ -7988,7 +8363,7 @@ func (n *Component_IntegratedCircuitPathAny) PipelineCounters() *Component_Integ
 	}
 }
 
-// Utilization (container): Utilization of the component.
+// Utilization (container): Resource utilization of the component.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -8004,7 +8379,7 @@ func (n *Component_IntegratedCircuitPath) Utilization() *Component_IntegratedCir
 	}
 }
 
-// Utilization (container): Utilization of the component.
+// Utilization (container): Resource utilization of the component.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -27712,6 +28087,2012 @@ func (n *Component_LastSwitchoverReasonPathAny) Trigger() *Component_LastSwitcho
 	return &Component_LastSwitchoverReason_TriggerPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"trigger"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Component_Linecard_PowerAdminStatePath represents the /openconfig-platform/components/component/linecard/state/power-admin-state YANG schema element.
+type Component_Linecard_PowerAdminStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_PowerAdminStatePathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/state/power-admin-state YANG schema element.
+type Component_Linecard_PowerAdminStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_LinecardPath) State() ygnmi.SingletonQuery[*oc.Component_Linecard] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_Linecard](
+		"Component_Linecard",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_LinecardPathAny) State() ygnmi.WildcardQuery[*oc.Component_Linecard] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_Linecard](
+		"Component_Linecard",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_LinecardPath) Config() ygnmi.ConfigQuery[*oc.Component_Linecard] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Component_Linecard](
+		"Component_Linecard",
+		false,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_LinecardPathAny) Config() ygnmi.WildcardQuery[*oc.Component_Linecard] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_Linecard](
+		"Component_Linecard",
+		false,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/power-admin-state"
+//	Path from root:       "/components/component/linecard/state/power-admin-state"
+func (n *Component_Linecard_PowerAdminStatePath) State() ygnmi.SingletonQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Linecard",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Linecard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/power-admin-state"
+//	Path from root:       "/components/component/linecard/state/power-admin-state"
+func (n *Component_Linecard_PowerAdminStatePathAny) State() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Linecard",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Linecard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/power-admin-state"
+//	Path from root:       "/components/component/linecard/config/power-admin-state"
+func (n *Component_Linecard_PowerAdminStatePath) Config() ygnmi.ConfigQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Linecard",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Linecard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/power-admin-state"
+//	Path from root:       "/components/component/linecard/config/power-admin-state"
+func (n *Component_Linecard_PowerAdminStatePathAny) Config() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_Platform_ComponentPowerType](
+		"Component_Linecard",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "power-admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerType, bool) {
+			ret := gs.(*oc.Component_Linecard).PowerAdminState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-linecard"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/slot-id"
+//	Path from root:       "/components/component/linecard/state/slot-id"
+func (n *Component_Linecard_SlotIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_Linecard",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "slot-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Linecard).SlotId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-linecard"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/slot-id"
+//	Path from root:       "/components/component/linecard/state/slot-id"
+func (n *Component_Linecard_SlotIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_Linecard",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "slot-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Linecard).SlotId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_Linecard_SlotIdPath represents the /openconfig-platform/components/component/linecard/state/slot-id YANG schema element.
+type Component_Linecard_SlotIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_SlotIdPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/state/slot-id YANG schema element.
+type Component_Linecard_SlotIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_LinecardPath represents the /openconfig-platform/components/component/linecard YANG schema element.
+type Component_LinecardPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_LinecardPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard YANG schema element.
+type Component_LinecardPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PowerAdminState (leaf): Enable or disable power to the component
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/power-admin-state"
+//	Path from root:       "/components/component/linecard/*/power-admin-state"
+func (n *Component_LinecardPath) PowerAdminState() *Component_Linecard_PowerAdminStatePath {
+	return &Component_Linecard_PowerAdminStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// PowerAdminState (leaf): Enable or disable power to the component
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/power-admin-state"
+//	Path from root:       "/components/component/linecard/*/power-admin-state"
+func (n *Component_LinecardPathAny) PowerAdminState() *Component_Linecard_PowerAdminStatePathAny {
+	return &Component_Linecard_PowerAdminStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SlotId (leaf): Identifier for the slot or chassis position in which the
+// linecard is installed
+//
+//	Defining module:      "openconfig-platform-linecard"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/slot-id"
+//	Path from root:       "/components/component/linecard/state/slot-id"
+func (n *Component_LinecardPath) SlotId() *Component_Linecard_SlotIdPath {
+	return &Component_Linecard_SlotIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "slot-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SlotId (leaf): Identifier for the slot or chassis position in which the
+// linecard is installed
+//
+//	Defining module:      "openconfig-platform-linecard"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/slot-id"
+//	Path from root:       "/components/component/linecard/state/slot-id"
+func (n *Component_LinecardPathAny) SlotId() *Component_Linecard_SlotIdPathAny {
+	return &Component_Linecard_SlotIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "slot-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Utilization (container): Resource utilization of the component.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "utilization"
+//	Path from root:       "/components/component/linecard/utilization"
+func (n *Component_LinecardPath) Utilization() *Component_Linecard_UtilizationPath {
+	return &Component_Linecard_UtilizationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"utilization"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Utilization (container): Resource utilization of the component.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "utilization"
+//	Path from root:       "/components/component/linecard/utilization"
+func (n *Component_LinecardPathAny) Utilization() *Component_Linecard_UtilizationPathAny {
+	return &Component_Linecard_UtilizationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"utilization"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// Component_Linecard_UtilizationPath represents the /openconfig-platform/components/component/linecard/utilization YANG schema element.
+type Component_Linecard_UtilizationPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Linecard_UtilizationPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization YANG schema element.
+type Component_Linecard_UtilizationPathAny struct {
+	*ygnmi.NodePath
+}
+
+// ResourceAny (list): List of resources, keyed by resource name.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource"
+func (n *Component_Linecard_UtilizationPath) ResourceAny() *Component_Linecard_Utilization_ResourcePathAny {
+	return &Component_Linecard_Utilization_ResourcePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// ResourceAny (list): List of resources, keyed by resource name.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource"
+func (n *Component_Linecard_UtilizationPathAny) ResourceAny() *Component_Linecard_Utilization_ResourcePathAny {
+	return &Component_Linecard_Utilization_ResourcePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+}
+
+// Resource (list): List of resources, keyed by resource name.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource"
+//
+//	Name: string
+func (n *Component_Linecard_UtilizationPath) Resource(Name string) *Component_Linecard_Utilization_ResourcePath {
+	return &Component_Linecard_Utilization_ResourcePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// Resource (list): List of resources, keyed by resource name.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource"
+//
+//	Name: string
+func (n *Component_Linecard_UtilizationPathAny) Resource(Name string) *Component_Linecard_Utilization_ResourcePathAny {
+	return &Component_Linecard_Utilization_ResourcePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_UtilizationPath) State() ygnmi.SingletonQuery[*oc.Component_Linecard_Utilization] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_Linecard_Utilization](
+		"Component_Linecard_Utilization",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_UtilizationPathAny) State() ygnmi.WildcardQuery[*oc.Component_Linecard_Utilization] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_Linecard_Utilization](
+		"Component_Linecard_Utilization",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_UtilizationPath) Config() ygnmi.ConfigQuery[*oc.Component_Linecard_Utilization] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Component_Linecard_Utilization](
+		"Component_Linecard_Utilization",
+		false,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_UtilizationPathAny) Config() ygnmi.WildcardQuery[*oc.Component_Linecard_Utilization] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_Linecard_Utilization](
+		"Component_Linecard_Utilization",
+		false,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_Linecard_Utilization_Resource_CommittedPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/committed YANG schema element.
+type Component_Linecard_Utilization_Resource_CommittedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_CommittedPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/committed YANG schema element.
+type Component_Linecard_Utilization_Resource_CommittedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_Utilization_ResourcePath) State() ygnmi.SingletonQuery[*oc.Component_Linecard_Utilization_Resource] {
+	return ygnmi.NewNonLeafSingletonQuery[*oc.Component_Linecard_Utilization_Resource](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_Utilization_ResourcePathAny) State() ygnmi.WildcardQuery[*oc.Component_Linecard_Utilization_Resource] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_Linecard_Utilization_Resource](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_Utilization_ResourcePath) Config() ygnmi.ConfigQuery[*oc.Component_Linecard_Utilization_Resource] {
+	return ygnmi.NewNonLeafConfigQuery[*oc.Component_Linecard_Utilization_Resource](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		n,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Linecard_Utilization_ResourcePathAny) Config() ygnmi.WildcardQuery[*oc.Component_Linecard_Utilization_Resource] {
+	return ygnmi.NewNonLeafWildcardQuery[*oc.Component_Linecard_Utilization_Resource](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		n,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/committed"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/committed"
+func (n *Component_Linecard_Utilization_Resource_CommittedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "committed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Committed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/committed"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/committed"
+func (n *Component_Linecard_Utilization_Resource_CommittedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "committed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Committed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/free"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/free"
+func (n *Component_Linecard_Utilization_Resource_FreePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "free"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Free
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/free"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/free"
+func (n *Component_Linecard_Utilization_Resource_FreePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "free"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Free
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/high-watermark"
+func (n *Component_Linecard_Utilization_Resource_HighWatermarkPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "high-watermark"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).HighWatermark
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/high-watermark"
+func (n *Component_Linecard_Utilization_Resource_HighWatermarkPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "high-watermark"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).HighWatermark
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/last-high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/last-high-watermark"
+func (n *Component_Linecard_Utilization_Resource_LastHighWatermarkPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-high-watermark"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).LastHighWatermark
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/last-high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/last-high-watermark"
+func (n *Component_Linecard_Utilization_Resource_LastHighWatermarkPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-high-watermark"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).LastHighWatermark
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/max-limit"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/max-limit"
+func (n *Component_Linecard_Utilization_Resource_MaxLimitPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).MaxLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/max-limit"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/max-limit"
+func (n *Component_Linecard_Utilization_Resource_MaxLimitPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-limit"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).MaxLimit
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/name"
+func (n *Component_Linecard_Utilization_Resource_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/name"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/name"
+func (n *Component_Linecard_Utilization_Resource_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/name"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/config/name"
+func (n *Component_Linecard_Utilization_Resource_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewLeafConfigQuery[string](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/name"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/config/name"
+func (n *Component_Linecard_Utilization_Resource_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used"
+func (n *Component_Linecard_Utilization_Resource_UsedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewLeafSingletonQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Used
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used"
+func (n *Component_Linecard_Utilization_Resource_UsedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewLeafWildcardQuery[uint64](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).Used
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used-threshold-upper-clear"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-clear"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used-threshold-upper-clear"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-clear"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/used-threshold-upper-clear"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/config/used-threshold-upper-clear"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewLeafConfigQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/used-threshold-upper-clear"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/config/used-threshold-upper-clear"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used-threshold-upper-exceeded"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-exceeded"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewLeafSingletonQuery[bool](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-exceeded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpperExceeded
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used-threshold-upper-exceeded"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-exceeded"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewLeafWildcardQuery[bool](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-exceeded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpperExceeded
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used-threshold-upper"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewLeafSingletonQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/used-threshold-upper"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/used-threshold-upper"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/config/used-threshold-upper"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewLeafConfigQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "config/used-threshold-upper"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/config/used-threshold-upper"
+func (n *Component_Linecard_Utilization_Resource_UsedThresholdUpperPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewLeafWildcardQuery[uint8](
+		"Component_Linecard_Utilization_Resource",
+		false,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Linecard_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Component_Linecard_Utilization_Resource_FreePath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/free YANG schema element.
+type Component_Linecard_Utilization_Resource_FreePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_FreePathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/free YANG schema element.
+type Component_Linecard_Utilization_Resource_FreePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_HighWatermarkPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/high-watermark YANG schema element.
+type Component_Linecard_Utilization_Resource_HighWatermarkPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_HighWatermarkPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/high-watermark YANG schema element.
+type Component_Linecard_Utilization_Resource_HighWatermarkPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_LastHighWatermarkPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/last-high-watermark YANG schema element.
+type Component_Linecard_Utilization_Resource_LastHighWatermarkPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_LastHighWatermarkPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/last-high-watermark YANG schema element.
+type Component_Linecard_Utilization_Resource_LastHighWatermarkPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_MaxLimitPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/max-limit YANG schema element.
+type Component_Linecard_Utilization_Resource_MaxLimitPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_MaxLimitPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/max-limit YANG schema element.
+type Component_Linecard_Utilization_Resource_MaxLimitPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_NamePath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/name YANG schema element.
+type Component_Linecard_Utilization_Resource_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_NamePathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/name YANG schema element.
+type Component_Linecard_Utilization_Resource_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedThresholdUpperPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used-threshold-upper YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedThresholdUpperPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedThresholdUpperPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used-threshold-upper YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedThresholdUpperPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-clear YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-clear YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-exceeded YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-exceeded YANG schema element.
+type Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_Utilization_ResourcePath represents the /openconfig-platform/components/component/linecard/utilization/resources/resource YANG schema element.
+type Component_Linecard_Utilization_ResourcePath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Linecard_Utilization_ResourcePathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/utilization/resources/resource YANG schema element.
+type Component_Linecard_Utilization_ResourcePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Committed (leaf): Number of entries currently reserved for this resource. This is only
+// relevant to tables which allocate a block of resource for a given
+// feature.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/committed"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/committed"
+func (n *Component_Linecard_Utilization_ResourcePath) Committed() *Component_Linecard_Utilization_Resource_CommittedPath {
+	return &Component_Linecard_Utilization_Resource_CommittedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "committed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Committed (leaf): Number of entries currently reserved for this resource. This is only
+// relevant to tables which allocate a block of resource for a given
+// feature.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/committed"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/committed"
+func (n *Component_Linecard_Utilization_ResourcePathAny) Committed() *Component_Linecard_Utilization_Resource_CommittedPathAny {
+	return &Component_Linecard_Utilization_Resource_CommittedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "committed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Free (leaf): Number of entries available to use.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/free"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/free"
+func (n *Component_Linecard_Utilization_ResourcePath) Free() *Component_Linecard_Utilization_Resource_FreePath {
+	return &Component_Linecard_Utilization_Resource_FreePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "free"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Free (leaf): Number of entries available to use.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/free"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/free"
+func (n *Component_Linecard_Utilization_ResourcePathAny) Free() *Component_Linecard_Utilization_Resource_FreePathAny {
+	return &Component_Linecard_Utilization_Resource_FreePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "free"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// HighWatermark (leaf): A watermark of highest number of entries used for this resource.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/high-watermark"
+func (n *Component_Linecard_Utilization_ResourcePath) HighWatermark() *Component_Linecard_Utilization_Resource_HighWatermarkPath {
+	return &Component_Linecard_Utilization_Resource_HighWatermarkPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "high-watermark"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// HighWatermark (leaf): A watermark of highest number of entries used for this resource.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/high-watermark"
+func (n *Component_Linecard_Utilization_ResourcePathAny) HighWatermark() *Component_Linecard_Utilization_Resource_HighWatermarkPathAny {
+	return &Component_Linecard_Utilization_Resource_HighWatermarkPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "high-watermark"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LastHighWatermark (leaf): The timestamp when the high-watermark was last updated. The value
+// is the timestamp in nanoseconds relative to the Unix Epoch
+// (Jan 1, 1970 00:00:00 UTC).
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/last-high-watermark"
+func (n *Component_Linecard_Utilization_ResourcePath) LastHighWatermark() *Component_Linecard_Utilization_Resource_LastHighWatermarkPath {
+	return &Component_Linecard_Utilization_Resource_LastHighWatermarkPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-high-watermark"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LastHighWatermark (leaf): The timestamp when the high-watermark was last updated. The value
+// is the timestamp in nanoseconds relative to the Unix Epoch
+// (Jan 1, 1970 00:00:00 UTC).
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-high-watermark"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/last-high-watermark"
+func (n *Component_Linecard_Utilization_ResourcePathAny) LastHighWatermark() *Component_Linecard_Utilization_Resource_LastHighWatermarkPathAny {
+	return &Component_Linecard_Utilization_Resource_LastHighWatermarkPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-high-watermark"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxLimit (leaf): Maximum number of entries available for the resource. The value
+// is the theoretical maximum resource utilization possible.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/max-limit"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/max-limit"
+func (n *Component_Linecard_Utilization_ResourcePath) MaxLimit() *Component_Linecard_Utilization_Resource_MaxLimitPath {
+	return &Component_Linecard_Utilization_Resource_MaxLimitPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "max-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MaxLimit (leaf): Maximum number of entries available for the resource. The value
+// is the theoretical maximum resource utilization possible.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/max-limit"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/max-limit"
+func (n *Component_Linecard_Utilization_ResourcePathAny) MaxLimit() *Component_Linecard_Utilization_Resource_MaxLimitPathAny {
+	return &Component_Linecard_Utilization_Resource_MaxLimitPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "max-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Resource name within the component.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/*/name"
+func (n *Component_Linecard_Utilization_ResourcePath) Name() *Component_Linecard_Utilization_Resource_NamePath {
+	return &Component_Linecard_Utilization_Resource_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Name (leaf): Resource name within the component.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/name"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/*/name"
+func (n *Component_Linecard_Utilization_ResourcePathAny) Name() *Component_Linecard_Utilization_Resource_NamePathAny {
+	return &Component_Linecard_Utilization_Resource_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Used (leaf): Number of entries currently in use for the resource.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/used"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used"
+func (n *Component_Linecard_Utilization_ResourcePath) Used() *Component_Linecard_Utilization_Resource_UsedPath {
+	return &Component_Linecard_Utilization_Resource_UsedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Used (leaf): Number of entries currently in use for the resource.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/used"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used"
+func (n *Component_Linecard_Utilization_ResourcePathAny) Used() *Component_Linecard_Utilization_Resource_UsedPathAny {
+	return &Component_Linecard_Utilization_Resource_UsedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "used"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UsedThresholdUpper (leaf): The used percentage value (used / (used + free) * 100) that
+// when crossed will set utilization-threshold-exceeded to 'true'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/used-threshold-upper"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/*/used-threshold-upper"
+func (n *Component_Linecard_Utilization_ResourcePath) UsedThresholdUpper() *Component_Linecard_Utilization_Resource_UsedThresholdUpperPath {
+	return &Component_Linecard_Utilization_Resource_UsedThresholdUpperPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UsedThresholdUpper (leaf): The used percentage value (used / (used + free) * 100) that
+// when crossed will set utilization-threshold-exceeded to 'true'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/used-threshold-upper"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/*/used-threshold-upper"
+func (n *Component_Linecard_Utilization_ResourcePathAny) UsedThresholdUpper() *Component_Linecard_Utilization_Resource_UsedThresholdUpperPathAny {
+	return &Component_Linecard_Utilization_Resource_UsedThresholdUpperPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UsedThresholdUpperClear (leaf): The used percentage value (used / (used + free) * 100) that when
+// crossed will set utilization-threshold-exceeded to 'false'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/used-threshold-upper-clear"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/*/used-threshold-upper-clear"
+func (n *Component_Linecard_Utilization_ResourcePath) UsedThresholdUpperClear() *Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPath {
+	return &Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper-clear"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UsedThresholdUpperClear (leaf): The used percentage value (used / (used + free) * 100) that when
+// crossed will set utilization-threshold-exceeded to 'false'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/used-threshold-upper-clear"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/*/used-threshold-upper-clear"
+func (n *Component_Linecard_Utilization_ResourcePathAny) UsedThresholdUpperClear() *Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPathAny {
+	return &Component_Linecard_Utilization_Resource_UsedThresholdUpperClearPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper-clear"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UsedThresholdUpperExceeded (leaf): This value is set to true when the used percentage value
+// (used / (used + free) * 100) has crossed the used-threshold-upper for this
+// resource and false when the used percentage value has crossed the configured
+// used-threshold-upper-clear value for this resource.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/used-threshold-upper-exceeded"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-exceeded"
+func (n *Component_Linecard_Utilization_ResourcePath) UsedThresholdUpperExceeded() *Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPath {
+	return &Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-exceeded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// UsedThresholdUpperExceeded (leaf): This value is set to true when the used percentage value
+// (used / (used + free) * 100) has crossed the used-threshold-upper for this
+// resource and false when the used percentage value has crossed the configured
+// used-threshold-upper-clear value for this resource.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/used-threshold-upper-exceeded"
+//	Path from root:       "/components/component/linecard/utilization/resources/resource/state/used-threshold-upper-exceeded"
+func (n *Component_Linecard_Utilization_ResourcePathAny) UsedThresholdUpperExceeded() *Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPathAny {
+	return &Component_Linecard_Utilization_Resource_UsedThresholdUpperExceededPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-exceeded"},
 			map[string]interface{}{},
 			n,
 		),

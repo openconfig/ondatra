@@ -32,7 +32,6 @@ import (
 	frpb "github.com/openconfig/gnoi/factory_reset"
 	fpb "github.com/openconfig/gnoi/file"
 	hpb "github.com/openconfig/gnoi/healthz"
-	ipb "github.com/openconfig/gnoi/interface"
 	lpb "github.com/openconfig/gnoi/layer2"
 	mpb "github.com/openconfig/gnoi/mpls"
 	ospb "github.com/openconfig/gnoi/os"
@@ -222,12 +221,6 @@ func (g *AbstractGNOIClients) File() fpb.FileClient {
 // Healthz logs a fatal unimplemented error.
 func (g *AbstractGNOIClients) Healthz() hpb.HealthzClient {
 	log.Fatal("Healthz unimplemented")
-	return nil
-}
-
-// Interface logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) Interface() ipb.InterfaceClient {
-	log.Fatal("Interface unimplemented")
 	return nil
 }
 

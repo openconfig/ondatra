@@ -33,7 +33,6 @@ import (
 	frpb "github.com/openconfig/gnoi/factory_reset"
 	fpb "github.com/openconfig/gnoi/file"
 	hpb "github.com/openconfig/gnoi/healthz"
-	ipb "github.com/openconfig/gnoi/interface"
 	lpb "github.com/openconfig/gnoi/layer2"
 	mpb "github.com/openconfig/gnoi/mpls"
 	ospb "github.com/openconfig/gnoi/os"
@@ -209,7 +208,6 @@ type GNOIClients interface {
 	FactoryReset() frpb.FactoryResetClient
 	File() fpb.FileClient
 	Healthz() hpb.HealthzClient
-	Interface() ipb.InterfaceClient
 	Layer2() lpb.Layer2Client
 	LinkQualification() plqpb.LinkQualificationClient
 	MPLS() mpb.MPLSClient

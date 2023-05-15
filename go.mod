@@ -12,7 +12,7 @@ require (
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.2.0
 	github.com/openconfig/gribi v1.0.0
-	github.com/openconfig/kne v0.1.11
+	github.com/openconfig/kne v0.1.12
 	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
 	github.com/openconfig/ygnmi v0.7.6
