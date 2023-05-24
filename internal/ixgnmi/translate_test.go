@@ -646,7 +646,7 @@ func TestTranslateEgressStats(t *testing.T) {
 	tests := []struct {
 		name             string
 		table            ixweb.StatTable
-		itFlows          []string
+		itFlows, etFlows []string
 		want             *oc.Root
 		wantErrSubstring string
 	}{{
@@ -664,6 +664,7 @@ func TestTranslateEgressStats(t *testing.T) {
 			"Tx Frame Rate":   "2",
 			"Tx Rate (bps)":   "2048",
 		}},
+		etFlows: []string{"traffic1"},
 		want: func() *oc.Root {
 			d := &oc.Root{}
 			f := d.GetOrCreateFlow("traffic1")
@@ -751,6 +752,7 @@ func TestTranslateEgressStats(t *testing.T) {
 			"Tx Rate (bps)":   "5120",
 		}},
 		itFlows: []string{"traffic1"},
+		etFlows: []string{"traffic1"},
 		want: func() *oc.Root {
 			d := &oc.Root{}
 			f := d.GetOrCreateFlow("traffic1")
@@ -805,6 +807,13 @@ func TestTranslateEgressStats(t *testing.T) {
 			return d
 		}(),
 	}, {
+		name: "empty data",
+		table: ixweb.StatTable{{
+			"Egress Tracking": "MyFilter",
+		}},
+		etFlows: []string{"traffic1", "traffic2"},
+		want:    &oc.Root{},
+	}, {
 		name: "missing traffic item",
 		table: ixweb.StatTable{{
 			"Loss %": "2.1",
@@ -828,7 +837,7 @@ func TestTranslateEgressStats(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := translateEgressStats(tt.table, tt.itFlows, []string{"traffic1"})
+			got, err := translateEgressStats(tt.table, tt.itFlows, tt.etFlows)
 			if diff := errdiff.Substring(err, tt.wantErrSubstring); diff != "" {
 				t.Fatalf("translateEgressStats got unexpected error, %s", diff)
 			}

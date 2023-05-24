@@ -249,6 +249,13 @@ func translateEgressStats(in ixweb.StatTable, itFlows, etFlows []string) (*oc.Ro
 			continue
 		}
 
+		// If no traffic is received, there may be an empty egress tracking row:
+		// https://github.com/openconfig/featureprofiles/issues/1640
+		// If this or for any reason no flow has been created yet, skip this row.
+		if f == nil {
+			continue
+		}
+
 		// If we aren't starting a new flow row but the filter starts with "Custom:",
 		// then we are starting a new ingress-tracked value within the flow.
 		// NOTE: This only works because we only support "custom" egress tracking.

@@ -154,6 +154,18 @@ func (e *AbstractEdge) String() string {
 	return fmt.Sprintf("%q -> %q", e.Src.Desc, e.Dst.Desc)
 }
 
+// alphabeticallyFirstPort returns the port in the edge that comes first alphabetically.
+// This is for sorting purposes only.
+func (e *AbstractEdge) alphabeticallyFirstPort() *AbstractPort {
+	if e.Dst == nil {
+		return e.Src
+	}
+	if e.Src.Desc < e.Dst.Desc {
+		return e.Src
+	}
+	return e.Dst
+}
+
 // ConcreteEdge represents a link from an source ConcretePort to a destination ConcretePort.
 type ConcreteEdge struct {
 	Src, Dst *ConcretePort
@@ -606,6 +618,9 @@ func (s *solver) assignEdges(abs2ConNode map[*AbstractNode]*ConcreteNode) map[*A
 		}
 		if ej.Dst != nil {
 			ejWeight += len(ej.Dst.Constraints)
+		}
+		if eiWeight == ejWeight {
+			return ei.alphabeticallyFirstPort().Desc < ej.alphabeticallyFirstPort().Desc
 		}
 		return eiWeight > ejWeight
 	})

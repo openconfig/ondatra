@@ -47,6 +47,10 @@ func genNodeCombos(m map[*AbstractNode][]*ConcreteNode, absNode2Node2NumEdges ma
 		for _, w := range absNode2Node2NumEdges[keys[j]] {
 			jWeight += w
 		}
+		// If weight is the same, sort by Desc (alphabetically).
+		if iWeight == jWeight {
+			return keys[i].Desc < keys[j].Desc
+		}
 		return iWeight > jWeight
 	})
 	go func() {
