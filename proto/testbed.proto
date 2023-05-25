@@ -47,6 +47,7 @@ message Device {
     DELL = 9;
     OPENCONFIG = 10;
     ARUBA = 11;
+    MAGNA = 12;
   }
   Vendor vendor = 2;
 

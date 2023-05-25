@@ -38,6 +38,7 @@ const KNEServiceMapKey = "$KEY_SERVICE_MAP"
 var (
 	ateVendors = map[tpb.Vendor]bool{
 		tpb.Vendor_KEYSIGHT: true,
+		tpb.Vendor_MAGNA:    true,
 	}
 
 	deviceVendors = map[tpb.Vendor]opb.Device_Vendor{
@@ -47,6 +48,7 @@ var (
 		tpb.Vendor_JUNIPER:    opb.Device_JUNIPER,
 		tpb.Vendor_NOKIA:      opb.Device_NOKIA,
 		tpb.Vendor_OPENCONFIG: opb.Device_OPENCONFIG,
+		tpb.Vendor_MAGNA:      opb.Device_MAGNA,
 	}
 )
 
