@@ -788,7 +788,7 @@ func TestBgpV4RouteProp(t *testing.T) {
 			AsnSetMode: opb.BgpAsnSetMode_ASN_SET_MODE_AS_SEQ,
 			AsPathSegments: []*opb.BgpAttributes_AsPathSegment{{
 				Type: opb.BgpAttributes_AsPathSegment_TYPE_AS_SET,
-				Asns: []uint32{1},
+				Asns: []uint32{1, 2},
 			}},
 		},
 		wantRouteProp: &ixconfig.TopologyBgpIpRouteProperty{
@@ -806,11 +806,15 @@ func TestBgpV4RouteProp(t *testing.T) {
 			NoOfASPathSegmentsPerRouteRange: ixconfig.NumberUint32(1),
 			EnableAsPathSegments:            ixconfig.MultivalueTrue(),
 			BgpAsPathSegmentList: []*ixconfig.TopologyBgpAsPathSegmentList{{
-				EnableASPathSegment: ixconfig.MultivalueTrue(),
-				SegmentType:         ixconfig.MultivalueStr("asset"),
+				EnableASPathSegment:       ixconfig.MultivalueTrue(),
+				SegmentType:               ixconfig.MultivalueStr("asset"),
+				NumberOfAsNumberInSegment: ixconfig.NumberUint32(2),
 				BgpAsNumberList: []*ixconfig.TopologyBgpAsNumberList{{
 					EnableASNumber: ixconfig.MultivalueTrue(),
 					AsNumber:       ixconfig.MultivalueUint32(1),
+				}, {
+					EnableASNumber: ixconfig.MultivalueTrue(),
+					AsNumber:       ixconfig.MultivalueUint32(2),
 				}},
 			}},
 
@@ -1062,7 +1066,7 @@ func TestBgpV6RouteProp(t *testing.T) {
 			AsnSetMode: opb.BgpAsnSetMode_ASN_SET_MODE_AS_SEQ,
 			AsPathSegments: []*opb.BgpAttributes_AsPathSegment{{
 				Type: opb.BgpAttributes_AsPathSegment_TYPE_AS_SET,
-				Asns: []uint32{1},
+				Asns: []uint32{1, 2},
 			}},
 		},
 		wantRouteProp: &ixconfig.TopologyBgpV6IpRouteProperty{
@@ -1080,11 +1084,15 @@ func TestBgpV6RouteProp(t *testing.T) {
 			NoOfASPathSegmentsPerRouteRange: ixconfig.NumberUint32(1),
 			EnableAsPathSegments:            ixconfig.MultivalueTrue(),
 			BgpAsPathSegmentList: []*ixconfig.TopologyBgpAsPathSegmentList{{
-				EnableASPathSegment: ixconfig.MultivalueTrue(),
-				SegmentType:         ixconfig.MultivalueStr("asset"),
+				EnableASPathSegment:       ixconfig.MultivalueTrue(),
+				SegmentType:               ixconfig.MultivalueStr("asset"),
+				NumberOfAsNumberInSegment: ixconfig.NumberUint32(2),
 				BgpAsNumberList: []*ixconfig.TopologyBgpAsNumberList{{
 					EnableASNumber: ixconfig.MultivalueTrue(),
 					AsNumber:       ixconfig.MultivalueUint32(1),
+				}, {
+					EnableASNumber: ixconfig.MultivalueTrue(),
+					AsNumber:       ixconfig.MultivalueUint32(2),
 				}},
 			}},
 

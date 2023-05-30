@@ -16,6 +16,7 @@ package ixgnmi
 
 import (
 	"errors"
+	"strings"
 	"testing"
 
 	"golang.org/x/net/context"
@@ -97,15 +98,6 @@ func TestBGPRIBFromIxia(t *testing.T) {
 			}`,
 		},
 		wantErr: "duplicate key",
-	}, {
-		desc: "invalid AS path",
-		getRsps: map[string]string{
-			bgp4ID + "/learnedInfo/1/table/1": `{
-					"columns": ["Origin", "AS Path"],
-					"values": [["EGP", "foo"]]
-				}`,
-		},
-		wantErr: "invalid AS path",
 	}, {
 		desc: "invalid AS segment",
 		getRsps: map[string]string{
@@ -340,6 +332,64 @@ func TestBGPRIBFromIxia(t *testing.T) {
 			}
 			if d := cmp.Diff(test.want, got); d != "" {
 				t.Errorf("bgpRIBFromIxia() got unexpected diff (-want +got)\n%s", d)
+			}
+		})
+	}
+}
+
+func TestParseASSegments(t *testing.T) {
+	tests := []struct {
+		desc    string
+		asPath  string
+		want    []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment
+		wantErr string
+	}{{
+		desc: "empty",
+	}, {
+		desc:   "single seq",
+		asPath: "<1 2 3>",
+		want: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+			Index:  ygot.Uint32(0),
+			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
+			Member: []uint32{1, 2, 3},
+		}},
+	}, {
+		desc:   "single set",
+		asPath: "{1 2 3}",
+		want: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+			Index:  ygot.Uint32(0),
+			Type:   oc.RibBgp_AsPathSegmentType_AS_SET,
+			Member: []uint32{1, 2, 3},
+		}},
+	}, {
+		desc:   "complicated",
+		asPath: " < 1 2 > {3  4 5 } <6 >",
+		want: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
+			Index:  ygot.Uint32(0),
+			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
+			Member: []uint32{1, 2},
+		}, {
+			Index:  ygot.Uint32(1),
+			Type:   oc.RibBgp_AsPathSegmentType_AS_SET,
+			Member: []uint32{3, 4, 5},
+		}, {
+			Index:  ygot.Uint32(2),
+			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
+			Member: []uint32{6},
+		}},
+	}, {
+		desc:    "invalid",
+		asPath:  "<foo>",
+		wantErr: "invalid",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			segs, err := parseASSegments(test.asPath)
+			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
+				t.Errorf("parseASSegments(%q) got error %v, want error containing %q", test.asPath, err, test.wantErr)
+			}
+			if diff := cmp.Diff(test.want, segs); diff != "" {
+				t.Errorf("parseASSegments(%q) got unexpected diff (-want +got): %s", test.asPath, diff)
 			}
 		})
 	}

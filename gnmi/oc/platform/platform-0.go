@@ -63043,7 +63043,7 @@ func (n *Component_TransceiverPathAny) VendorPart() *Component_Transceiver_Vendo
 	}
 }
 
-// VendorRev (leaf): Transceiver vendor's revision number. 2-octet field that
+// VendorRev (leaf): Transceiver vendor's revision number. Field of 1 to 4 octets that
 // contains ASCII characters, left-aligned and padded on the
 // right with ASCII spaces (20h)
 //
@@ -63062,7 +63062,7 @@ func (n *Component_TransceiverPath) VendorRev() *Component_Transceiver_VendorRev
 	}
 }
 
-// VendorRev (leaf): Transceiver vendor's revision number. 2-octet field that
+// VendorRev (leaf): Transceiver vendor's revision number. Field of 1 to 4 octets that
 // contains ASCII characters, left-aligned and padded on the
 // right with ASCII spaces (20h)
 //

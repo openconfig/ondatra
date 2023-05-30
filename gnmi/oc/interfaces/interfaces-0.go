@@ -15742,6 +15742,130 @@ func (n *Interface_RoutedVlan_Ipv4_Address_PrefixLengthPathAny) Config() ygnmi.W
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/addresses/address/state/type"
+func (n *Interface_RoutedVlan_Ipv4_Address_TypePath) State() ygnmi.SingletonQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_RoutedVlan_Ipv4_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/addresses/address/state/type"
+func (n *Interface_RoutedVlan_Ipv4_Address_TypePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_RoutedVlan_Ipv4_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/addresses/address/config/type"
+func (n *Interface_RoutedVlan_Ipv4_Address_TypePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_RoutedVlan_Ipv4_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/addresses/address/config/type"
+func (n *Interface_RoutedVlan_Ipv4_Address_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_RoutedVlan_Ipv4_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
 // Interface_RoutedVlan_Ipv4_Address_OriginPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/addresses/address/state/origin YANG schema element.
 type Interface_RoutedVlan_Ipv4_Address_OriginPath struct {
 	*ygnmi.NodePath
@@ -15762,6 +15886,18 @@ type Interface_RoutedVlan_Ipv4_Address_PrefixLengthPath struct {
 
 // Interface_RoutedVlan_Ipv4_Address_PrefixLengthPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/addresses/address/state/prefix-length YANG schema element.
 type Interface_RoutedVlan_Ipv4_Address_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Address_TypePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/addresses/address/state/type YANG schema element.
+type Interface_RoutedVlan_Ipv4_Address_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Address_TypePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/addresses/address/state/type YANG schema element.
+type Interface_RoutedVlan_Ipv4_Address_TypePathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -15873,6 +16009,46 @@ func (n *Interface_RoutedVlan_Ipv4_AddressPathAny) PrefixLength() *Interface_Rou
 	return &Interface_RoutedVlan_Ipv4_Address_PrefixLengthPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv4 address being assigned
+// to the interface. By default, addresses are assumed to be a primary address.
+// Where secondary addresses is to be configured, this leaf should be set
+// to SECONDARY.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/addresses/address/*/type"
+func (n *Interface_RoutedVlan_Ipv4_AddressPath) Type() *Interface_RoutedVlan_Ipv4_Address_TypePath {
+	return &Interface_RoutedVlan_Ipv4_Address_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv4 address being assigned
+// to the interface. By default, addresses are assumed to be a primary address.
+// Where secondary addresses is to be configured, this leaf should be set
+// to SECONDARY.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/addresses/address/*/type"
+func (n *Interface_RoutedVlan_Ipv4_AddressPathAny) Type() *Interface_RoutedVlan_Ipv4_Address_TypePathAny {
+	return &Interface_RoutedVlan_Ipv4_Address_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
 			map[string]interface{}{},
 			n,
 		),
@@ -22946,7 +23122,7 @@ func (n *Interface_RoutedVlan_Ipv6_AddressPathAny) Status() *Interface_RoutedVla
 }
 
 // Type (leaf): Specifies the explicit type of the IPv6 address being assigned
-// to the subinterface. By default, addresses are assumed to be
+// to the interface. By default, addresses are assumed to be
 // global unicast.  Where a link-local address is to be explicitly
 // configured, this leaf should be set to LINK_LOCAL.
 //
@@ -22966,7 +23142,7 @@ func (n *Interface_RoutedVlan_Ipv6_AddressPath) Type() *Interface_RoutedVlan_Ipv
 }
 
 // Type (leaf): Specifies the explicit type of the IPv6 address being assigned
-// to the subinterface. By default, addresses are assumed to be
+// to the interface. By default, addresses are assumed to be
 // global unicast.  Where a link-local address is to be explicitly
 // configured, this leaf should be set to LINK_LOCAL.
 //
@@ -36165,6 +36341,130 @@ func (n *Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny) Config() ygnmi
 	)
 }
 
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/type"
+func (n *Interface_Subinterface_Ipv4_Address_TypePath) State() ygnmi.SingletonQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafSingletonQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_Subinterface_Ipv4_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/type"
+func (n *Interface_Subinterface_Ipv4_Address_TypePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_Subinterface_Ipv4_Address",
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/config/type"
+func (n *Interface_Subinterface_Ipv4_Address_TypePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafConfigQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_Subinterface_Ipv4_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/config/type"
+func (n *Interface_Subinterface_Ipv4_Address_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_Ipv4AddressType] {
+	return ygnmi.NewLeafWildcardQuery[oc.E_IfIp_Ipv4AddressType](
+		"Interface_Subinterface_Ipv4_Address",
+		false,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_Ipv4AddressType, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Address).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Address) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
 // Interface_Subinterface_Ipv4_Address_OriginPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/origin YANG schema element.
 type Interface_Subinterface_Ipv4_Address_OriginPath struct {
 	*ygnmi.NodePath
@@ -36185,6 +36485,18 @@ type Interface_Subinterface_Ipv4_Address_PrefixLengthPath struct {
 
 // Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/prefix-length YANG schema element.
 type Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Address_TypePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/type YANG schema element.
+type Interface_Subinterface_Ipv4_Address_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Address_TypePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/type YANG schema element.
+type Interface_Subinterface_Ipv4_Address_TypePathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -36296,6 +36608,46 @@ func (n *Interface_Subinterface_Ipv4_AddressPathAny) PrefixLength() *Interface_S
 	return &Interface_Subinterface_Ipv4_Address_PrefixLengthPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv4 address being assigned
+// to the interface. By default, addresses are assumed to be a primary address.
+// Where secondary addresses is to be configured, this leaf should be set
+// to SECONDARY.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/*/type"
+func (n *Interface_Subinterface_Ipv4_AddressPath) Type() *Interface_Subinterface_Ipv4_Address_TypePath {
+	return &Interface_Subinterface_Ipv4_Address_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Type (leaf): Specifies the explicit type of the IPv4 address being assigned
+// to the interface. By default, addresses are assumed to be a primary address.
+// Where secondary addresses is to be configured, this leaf should be set
+// to SECONDARY.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/type"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/*/type"
+func (n *Interface_Subinterface_Ipv4_AddressPathAny) Type() *Interface_Subinterface_Ipv4_Address_TypePathAny {
+	return &Interface_Subinterface_Ipv4_Address_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
 			map[string]interface{}{},
 			n,
 		),
@@ -43401,7 +43753,7 @@ func (n *Interface_Subinterface_Ipv6_AddressPathAny) Status() *Interface_Subinte
 }
 
 // Type (leaf): Specifies the explicit type of the IPv6 address being assigned
-// to the subinterface. By default, addresses are assumed to be
+// to the interface. By default, addresses are assumed to be
 // global unicast.  Where a link-local address is to be explicitly
 // configured, this leaf should be set to LINK_LOCAL.
 //
@@ -43421,7 +43773,7 @@ func (n *Interface_Subinterface_Ipv6_AddressPath) Type() *Interface_Subinterface
 }
 
 // Type (leaf): Specifies the explicit type of the IPv6 address being assigned
-// to the subinterface. By default, addresses are assumed to be
+// to the interface. By default, addresses are assumed to be
 // global unicast.  Where a link-local address is to be explicitly
 // configured, this leaf should be set to LINK_LOCAL.
 //

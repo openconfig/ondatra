@@ -224,8 +224,9 @@ func bgpASPathSegments(asPathSegPBs []*opb.BgpAttributes_AsPathSegment) ([]*ixco
 			return nil, fmt.Errorf("invalid AS path segment type %s", asPathSegPB.GetType())
 		}
 		asPathSeg := &ixconfig.TopologyBgpAsPathSegmentList{
-			EnableASPathSegment: ixconfig.MultivalueTrue(),
-			SegmentType:         ixconfig.MultivalueStr(asPathSegType),
+			EnableASPathSegment:       ixconfig.MultivalueTrue(),
+			SegmentType:               ixconfig.MultivalueStr(asPathSegType),
+			NumberOfAsNumberInSegment: ixconfig.NumberInt(len(asPathSegPB.GetAsns())),
 		}
 		for _, asn := range asPathSegPB.GetAsns() {
 			asPathSeg.BgpAsNumberList = append(asPathSeg.BgpAsNumberList, &ixconfig.TopologyBgpAsNumberList{

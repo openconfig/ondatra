@@ -3722,6 +3722,35 @@ const (
 	IfIp_IpAddressOrigin_RANDOM E_IfIp_IpAddressOrigin = 5
 )
 
+// E_IfIp_Ipv4AddressType is a derived int64 type which is used to represent
+// the enumerated node IfIp_Ipv4AddressType. An additional value named
+// IfIp_Ipv4AddressType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_IfIp_Ipv4AddressType int64
+
+// IsYANGGoEnum ensures that IfIp_Ipv4AddressType implements the yang.GoEnum
+// interface. This ensures that IfIp_Ipv4AddressType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_IfIp_Ipv4AddressType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  IfIp_Ipv4AddressType.
+func (E_IfIp_Ipv4AddressType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_IfIp_Ipv4AddressType.
+func (e E_IfIp_Ipv4AddressType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_IfIp_Ipv4AddressType")
+}
+
+const (
+	// IfIp_Ipv4AddressType_UNSET corresponds to the value UNSET of IfIp_Ipv4AddressType
+	IfIp_Ipv4AddressType_UNSET E_IfIp_Ipv4AddressType = 0
+	// IfIp_Ipv4AddressType_PRIMARY corresponds to the value PRIMARY of IfIp_Ipv4AddressType
+	IfIp_Ipv4AddressType_PRIMARY E_IfIp_Ipv4AddressType = 1
+	// IfIp_Ipv4AddressType_SECONDARY corresponds to the value SECONDARY of IfIp_Ipv4AddressType
+	IfIp_Ipv4AddressType_SECONDARY E_IfIp_Ipv4AddressType = 2
+)
+
 // E_IfIp_Ipv6AddressType is a derived int64 type which is used to represent
 // the enumerated node IfIp_Ipv6AddressType. An additional value named
 // IfIp_Ipv6AddressType_UNSET is added to the enumeration which is used as

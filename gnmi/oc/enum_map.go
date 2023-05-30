@@ -1044,6 +1044,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "LINK_LAYER"},
 		5: {Name: "RANDOM"},
 	},
+	"E_IfIp_Ipv4AddressType": {
+		1: {Name: "PRIMARY"},
+		2: {Name: "SECONDARY"},
+	},
 	"E_IfIp_Ipv6AddressType": {
 		1: {Name: "GLOBAL_UNICAST"},
 		2: {Name: "LINK_LOCAL_UNICAST"},
@@ -2594,6 +2598,9 @@ func initΛEnumTypes() {
 		"/interfaces/interface/routed-vlan/ipv4/addresses/address/state/origin": {
 			reflect.TypeOf((E_IfIp_IpAddressOrigin)(0)),
 		},
+		"/interfaces/interface/routed-vlan/ipv4/addresses/address/state/type": {
+			reflect.TypeOf((E_IfIp_Ipv4AddressType)(0)),
+		},
 		"/interfaces/interface/routed-vlan/ipv4/neighbors/neighbor/state/origin": {
 			reflect.TypeOf((E_IfIp_NeighborOrigin)(0)),
 		},
@@ -2632,6 +2639,9 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/origin": {
 			reflect.TypeOf((E_IfIp_IpAddressOrigin)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv4/addresses/address/state/type": {
+			reflect.TypeOf((E_IfIp_Ipv4AddressType)(0)),
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv4/neighbors/neighbor/state/origin": {
 			reflect.TypeOf((E_IfIp_NeighborOrigin)(0)),

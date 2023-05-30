@@ -17,6 +17,7 @@ package ixgnmi
 import (
 	"fmt"
 	"path"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -200,26 +201,13 @@ func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib
 		return fmt.Errorf("unknown origin type: %q", info.Origin)
 	}
 
-	if len(info.ASPath) > 0 {
-		lastIdx := len(info.ASPath) - 1
-		if info.ASPath[0] != '<' || info.ASPath[lastIdx] != '>' {
-			return fmt.Errorf("invalid AS path string: %q", info.ASPath)
-		}
-		var members []uint32
-		for _, s := range strings.Split(info.ASPath[1:lastIdx], " ") {
-			member, err := strconv.ParseUint(s, 10, 32)
-			if err != nil {
-				return fmt.Errorf("invalid AS segment member: %q", s)
-			}
-			members = append(members, uint32(member))
-		}
-		as.AppendAsSegment(&oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{
-			Index:  ygot.Uint32(0),
-			Member: members,
-			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,
-		})
+	asSegs, err := parseASSegments(info.ASPath)
+	if err != nil {
+		return err
 	}
-
+	for _, seg := range asSegs {
+		as.AppendAsSegment(seg)
+	}
 	if err := rib.AppendAttrSet(as); err != nil {
 		return err
 	}
@@ -233,4 +221,41 @@ func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib
 		}
 	}
 	return rib.AppendCommunity(community)
+}
+
+var asSegRE = regexp.MustCompile("(<|{)[^>}]*(>|})")
+
+func parseASSegments(asPathStr string) ([]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment, error) {
+	// Split asPathStr into segments.
+	// Example: "<1 2> {3 4 5} <6>" -> ["<1 2>", "{3 4 5}", "<6>"]
+	segStrs := asSegRE.FindAllString(asPathStr, -1)
+
+	var segs []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment
+	for i, segStr := range segStrs {
+		segType := oc.RibBgp_AsPathSegmentType_AS_SEQ
+		if segStr[0] == '{' {
+			segType = oc.RibBgp_AsPathSegmentType_AS_SET
+		}
+
+		// Chop off the open and closing bracket/brace
+		// Example: "{3 4 5}" -> "3 4 5"
+		segStr = segStr[1 : len(segStr)-1]
+		var members []uint32
+
+		// Split the string at whitespace and convert each element to uint32.
+		// Example: "3 4 5" -> ["3", "4", "5"]
+		for _, s := range strings.Fields(segStr) {
+			member, err := strconv.ParseUint(s, 10, 32)
+			if err != nil {
+				return nil, fmt.Errorf("invalid AS segment member: %q", s)
+			}
+			members = append(members, uint32(member))
+		}
+		segs = append(segs, &oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{
+			Index:  ygot.Uint32(uint32(i)),
+			Member: members,
+			Type:   segType,
+		})
+	}
+	return segs, nil
 }
