@@ -278,6 +278,8 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		level = "level1"
 	case opb.ISISConfig_L2:
 		level = "level2"
+	case opb.ISISConfig_L1L2:
+		level = "l1l2"
 	default:
 		return fmt.Errorf("unrecognized level %s", isis.GetLevel())
 	}

@@ -75,6 +75,12 @@ func (i *ISIS) WithLevelL2() *ISIS {
 	return i
 }
 
+// WithLevelL1L2 sets the IS-IS level to L1L2.
+func (i *ISIS) WithLevelL1L2() *ISIS {
+	i.pb.Level = opb.ISISConfig_L1L2
+	return i
+}
+
 // WithNetworkTypeBroadcast sets the IS-IS network type to broadcast.
 func (i *ISIS) WithNetworkTypeBroadcast() *ISIS {
 	i.pb.NetworkType = opb.ISISConfig_BROADCAST
