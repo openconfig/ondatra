@@ -32,8 +32,14 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
-// KNEServiceMapKey is the key to look up the service map in the custom data of a ServiceDUT.
-const KNEServiceMapKey = "$KEY_SERVICE_MAP"
+const (
+	// KNEServiceMapKey is the key to look up the service map in the custom data of a ServiceDUT.
+	KNEServiceMapKey = "$KEY_SERVICE_MAP"
+
+	roleLabel = "ondatra-role"
+	roleDUT   = "DUT"
+	roleATE   = "ATE"
+)
 
 var (
 	ateVendors = map[tpb.Vendor]bool{
@@ -49,6 +55,16 @@ var (
 		tpb.Vendor_OPENCONFIG: opb.Device_OPENCONFIG,
 	}
 )
+
+func role(node *tpb.Node) string {
+	if role, ok := node.GetLabels()[roleLabel]; ok {
+		return role
+	}
+	if _, ok := ateVendors[node.GetVendor()]; ok {
+		return roleATE
+	}
+	return roleDUT
+}
 
 func filterTopology(topo *tpb.Topology) *tpb.Topology {
 	t := &tpb.Topology{Name: topo.GetName()}
@@ -82,6 +98,7 @@ func filterTopology(topo *tpb.Topology) *tpb.Topology {
 const (
 	// Attribute names mapping message fields to graph attributes/constraints.
 	vendorAttr = "vendor"
+	roleAttr   = "role"
 	hwAttr     = "hardware_model"
 	swAttr     = "software_version"
 	speedAttr  = "speed"
@@ -104,23 +121,14 @@ func testbedToAbstractGraph(tb *opb.Testbed, partial map[string]string) (*portgr
 	node2Dev := make(map[*portgraph.AbstractNode]*opb.Device)
 	port2Port := make(map[*portgraph.AbstractPort]*opb.Port)
 
-	var matchATE string
-	for v := range ateVendors {
-		if matchATE != "" {
-			matchATE += "|"
-		}
-		matchATE += deviceVendors[v].String()
-	}
-	reATE := regexp.MustCompile(matchATE)
-
 	// addDevice creates an AbstractNode from a Device.
 	// If the field is empty, there is not a Constraint on that field.
 	addDevice := func(dev *opb.Device, isATE bool) {
 		nodeConstraints := make(map[string]portgraph.NodeConstraint)
 		if isATE {
-			nodeConstraints[vendorAttr] = portgraph.Regex(reATE)
+			nodeConstraints[roleAttr] = portgraph.Equal(roleATE)
 		} else {
-			nodeConstraints[vendorAttr] = portgraph.NotRegex(reATE)
+			nodeConstraints[roleAttr] = portgraph.Equal(roleDUT)
 		}
 		if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED {
 			nodeConstraints[vendorAttr] = portgraph.Equal(v.String())
@@ -323,6 +331,9 @@ func topoToConcreteGraph(topo *tpb.Topology) (*portgraph.ConcreteGraph, map[*por
 		attrs := make(map[string]string)
 		if vendor, ok := deviceVendors[node.GetVendor()]; ok {
 			attrs[vendorAttr] = vendor.String()
+		}
+		if r := role(node); r != "" {
+			attrs[roleAttr] = r
 		}
 		if m := node.GetModel(); m != "" {
 			attrs[hwAttr] = m
