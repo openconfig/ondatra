@@ -12,7 +12,7 @@ require (
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.2.0
 	github.com/openconfig/gribi v1.0.0
-	github.com/openconfig/kne v0.1.12
+	github.com/openconfig/kne v0.1.13
 	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
 	github.com/openconfig/ygnmi v0.7.6
@@ -68,7 +68,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/networkop/meshnet-cni v0.3.1-0.20230314134453-9398a8fa95ff // indirect
+	github.com/networkop/meshnet-cni v0.3.1-0.20230525201116-d7c306c635cf // indirect
 	github.com/open-traffic-generator/ixia-c-operator v0.3.0 // indirect
 	github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70 // indirect
 	github.com/openconfig/lemming/operator v0.2.0 // indirect
