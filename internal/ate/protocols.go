@@ -269,7 +269,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return nil
 	}
 
-	var level, networkType, authType string
+	var level, networkType, authType, domainAuthType string
 	var enable3WayHandshake bool
 	switch isis.GetLevel() {
 	case opb.ISISConfig_LEVEL_UNSPECIFIED:
@@ -305,6 +305,17 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return fmt.Errorf("unrecognized auth type %s", isis.GetAuthType())
 	}
 
+	switch isis.GetLevelAuthType() {
+	case opb.ISISConfig_DOMAIN_AUTH_TYPE_UNSPECIFIED:
+		domainAuthType = "none"
+	case opb.ISISConfig_DOMAIN_MD5:
+		domainAuthType = "md5"
+	case opb.ISISConfig_DOMAIN_PASSWORD:
+		domainAuthType = "password"
+	default:
+		return fmt.Errorf("unrecognized auth type %s", isis.GetLevelAuthType())
+	}
+
 	areaID, err := areaIDToIxHex(isis.GetAreaId())
 	if err != nil {
 		return err
@@ -322,13 +333,15 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		Level2DeadInterval:             ixconfig.MultivalueUint32(isis.GetDeadIntervalSec()),
 	}
 	isisRtr := &ixconfig.TopologyIsisL3Router{
-		Name:               ixconfig.String(fmt.Sprintf("IS-IS Router on %s", ifc.GetName())),
-		EnableHelloPadding: ixconfig.MultivalueBool(isis.GetEnableHelloPadding()),
-		EnableWideMetric:   ixconfig.MultivalueBool(isis.GetEnableWideMetric()),
-		EnableTE:           ixconfig.MultivalueBool(isis.GetEnableTe()),
-		DiscardLSPs:        ixconfig.MultivalueBool(isis.GetDiscardLsps()),
-		AreaAddresses:      ixconfig.MultivalueStr(areaID),
-		TERouterId:         ixconfig.MultivalueStr(isis.GetTeRouterId()),
+		Name:                           ixconfig.String(fmt.Sprintf("IS-IS Router on %s", ifc.GetName())),
+		EnableHelloPadding:             ixconfig.MultivalueBool(isis.GetEnableHelloPadding()),
+		EnableWideMetric:               ixconfig.MultivalueBool(isis.GetEnableWideMetric()),
+		EnableTE:                       ixconfig.MultivalueBool(isis.GetEnableTe()),
+		DiscardLSPs:                    ixconfig.MultivalueBool(isis.GetDiscardLsps()),
+		AreaAddresses:                  ixconfig.MultivalueStr(areaID),
+		TERouterId:                     ixconfig.MultivalueStr(isis.GetTeRouterId()),
+		DomainAuthenticationType:       ixconfig.MultivalueStr(domainAuthType),
+		DomainTransmitPasswordOrMD5Key: ixconfig.MultivalueStr(isis.GetLevelAuthKey()),
 	}
 	if isis.GetCapabilityRouterId() != "" {
 		isisRtr.RtrcapId = ixconfig.MultivalueStr(isis.GetCapabilityRouterId())

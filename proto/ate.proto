@@ -169,6 +169,13 @@ message ISISConfig {
   ISISSegmentRouting segment_routing = 17;
   // the capability router id.
   string capability_router_id = 18;
+  enum DomainAuthType {
+    DOMAIN_AUTH_TYPE_UNSPECIFIED = 0;
+    DOMAIN_MD5 = 1;
+    DOMAIN_PASSWORD = 2;
+  }
+  DomainAuthType level_auth_type = 19;
+  string level_auth_key = 20;
 }
 
 message ISISSegmentRouting {
