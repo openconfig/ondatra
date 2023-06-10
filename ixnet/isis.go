@@ -125,17 +125,31 @@ func (i *ISIS) WithAuthPassword(key string) *ISIS {
 	return i
 }
 
-// WithAuthMD5 sets md5 authentication.
-func (i *ISIS) WithDomainAuthMD5(key string) *ISIS {
-	i.pb.LevelAuthType = opb.ISISConfig_DOMAIN_MD5
-	i.pb.LevelAuthKey = key
+// WithAreaAuthMD5 sets md5 authentication for Area.
+func (i *ISIS) WithAreaAuthMD5(key string) *ISIS {
+	i.pb.AreaAuthType = opb.ISISConfig_AREA_MD5
+	i.pb.AreaAuthKey = key
 	return i
 }
 
-// WithAuthPassword sets password authentication.
+// WithAreaAuthPassword sets password authentication for Area.
+func (i *ISIS) WithAreaAuthPassword(key string) *ISIS {
+	i.pb.AreaAuthType = opb.ISISConfig_AREA_PASSWORD
+	i.pb.AreaAuthKey = key
+	return i
+}
+
+// WithDomainAuthMD5 sets md5 authentication for Domain.
+func (i *ISIS) WithDomainAuthMD5(key string) *ISIS {
+	i.pb.DomainAuthType = opb.ISISConfig_DOMAIN_MD5
+	i.pb.DomainAuthKey = key
+	return i
+}
+
+// WithDomainAuthPassword sets password authentication for Domain.
 func (i *ISIS) WithDomainAuthPassword(key string) *ISIS {
-	i.pb.LevelAuthType = opb.ISISConfig_DOMAIN_PASSWORD
-	i.pb.LevelAuthKey = key
+	i.pb.DomainAuthType = opb.ISISConfig_DOMAIN_PASSWORD
+	i.pb.DomainAuthKey = key
 	return i
 }
 

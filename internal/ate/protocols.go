@@ -269,7 +269,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return nil
 	}
 
-	var level, networkType, authType, domainAuthType string
+	var level, networkType, authType, areaAuthType, domainAuthType string
 	var enable3WayHandshake bool
 	switch isis.GetLevel() {
 	case opb.ISISConfig_LEVEL_UNSPECIFIED:
@@ -305,7 +305,18 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return fmt.Errorf("unrecognized auth type %s", isis.GetAuthType())
 	}
 
-	switch isis.GetLevelAuthType() {
+	switch isis.GetAreaAuthType() {
+	case opb.ISISConfig_AREA_AUTH_TYPE_UNSPECIFIED:
+		areaAuthType = "none"
+	case opb.ISISConfig_AREA_MD5:
+		areaAuthType = "md5"
+	case opb.ISISConfig_AREA_PASSWORD:
+		areaAuthType = "password"
+	default:
+		return fmt.Errorf("unrecognized auth type %s", isis.GetAreaAuthType())
+	}
+
+	switch isis.GetDomainAuthType() {
 	case opb.ISISConfig_DOMAIN_AUTH_TYPE_UNSPECIFIED:
 		domainAuthType = "none"
 	case opb.ISISConfig_DOMAIN_MD5:
@@ -313,7 +324,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 	case opb.ISISConfig_DOMAIN_PASSWORD:
 		domainAuthType = "password"
 	default:
-		return fmt.Errorf("unrecognized auth type %s", isis.GetLevelAuthType())
+		return fmt.Errorf("unrecognized auth type %s", isis.GetDomainAuthType())
 	}
 
 	areaID, err := areaIDToIxHex(isis.GetAreaId())
@@ -341,7 +352,9 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		AreaAddresses:                  ixconfig.MultivalueStr(areaID),
 		TERouterId:                     ixconfig.MultivalueStr(isis.GetTeRouterId()),
 		DomainAuthenticationType:       ixconfig.MultivalueStr(domainAuthType),
-		DomainTransmitPasswordOrMD5Key: ixconfig.MultivalueStr(isis.GetLevelAuthKey()),
+		DomainTransmitPasswordOrMD5Key: ixconfig.MultivalueStr(isis.GetDomainAuthKey()),
+		AreaAuthenticationType:         ixconfig.MultivalueStr(areaAuthType),
+		AreaTransmitPasswordOrMD5Key:   ixconfig.MultivalueStr(isis.GetAreaAuthKey()),
 	}
 	if isis.GetCapabilityRouterId() != "" {
 		isisRtr.RtrcapId = ixconfig.MultivalueStr(isis.GetCapabilityRouterId())
