@@ -101,6 +101,7 @@ func TestSolve(t *testing.T) {
 		nodes: {
 		  name: "node5"
 		  vendor: OPENCONFIG
+			model: "MAGNA"
 		  labels: {
 				key: "ondatra-role"
 				value: "ATE"
@@ -224,10 +225,11 @@ func TestSolve(t *testing.T) {
 	}
 	wantATE2 := &ServiceATE{
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
-			Name:       "node5",
-			Vendor:     opb.Device_OPENCONFIG,
-			Ports:      map[string]*binding.Port{},
-			CustomData: map[string]any{KNEServiceMapKey: wantATEServices},
+			Name:          "node5",
+			Vendor:        opb.Device_OPENCONFIG,
+			HardwareModel: "MAGNA",
+			Ports:         map[string]*binding.Port{},
+			CustomData:    map[string]any{KNEServiceMapKey: wantATEServices},
 		}},
 		Services:   wantATEServices,
 		NodeVendor: tpb.Vendor_OPENCONFIG,

@@ -153,18 +153,18 @@ func TestBGPRIBFromIxia(t *testing.T) {
 		getRsps: map[string]string{
 			bgp4ID + "/learnedInfo/1/table/1": `{
 				"id": 1,
-				"columns": ["IPv4 Prefix ", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "AS Path"],
+				"columns": ["IPv4 Prefix ", "Prefix Length", "Path ID", "IPv4 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "Color", "AS Path"],
 				"values": [
-					["127.0.0.1", "30", "1", "127.0.0.2", "IGP", "200", "1000", "100", "65532 : 10200, 65533 : 10100", "<65532 65533>"],
-					["127.0.0.3", "24", "2", "127.0.0.4", "EGP",    "",     "",    "",                             "",              ""]
+					["127.0.0.1", "30", "1", "127.0.0.2", "IGP", "200", "1000", "100", "65532 : 10200, 65533 : 10100", "foo, bar", "<65532 65533>"],
+					["127.0.0.3", "24", "2", "127.0.0.4", "EGP",    "",     "",    "",                             "",         "",              ""]
 				]
 			}`,
 			bgp6ID + "/learnedInfo/1/table/1": `{
 				"id": 2,
-				"columns": ["IPv6 Prefix", "Prefix Length", "Path ID", "IPv6 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "AS Path"],
+				"columns": ["IPv6 Prefix", "Prefix Length", "Path ID", "IPv6 Next Hop", "Origin", "AIGP", "Local Preference", "MED", "Community", "Color", "AS Path"],
 				"values": [
-					["::1", "28", "3", "::2", "Incomplete", "200", "1000", "100", "65534 : 10400, 65535 : 10300", "<65534 65535>"],
-					["::3", "26", "4", "::4",        "IGP",   "",     "",    "",                              "",              ""]
+					["::1", "28", "3", "::2", "Incomplete", "200", "1000", "100", "65534 : 10400, 65535 : 10300", "baz", "<65534 65535>"],
+					["::3", "26", "4", "::4",        "IGP",   "",     "",    "",                              "",    "",              ""]
 				]
 			}`,
 		},
@@ -295,6 +295,27 @@ func TestBGPRIBFromIxia(t *testing.T) {
 									},
 								},
 								3: &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+									Index: ygot.Uint64(3),
+								},
+							},
+							ExtCommunity: map[uint64]*oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity{
+								0: &oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity{
+									Index: ygot.Uint64(0),
+									ExtCommunity: []oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunity_Union{
+										oc.UnionString("foo"),
+										oc.UnionString("bar"),
+									},
+								},
+								1: &oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity{
+									Index: ygot.Uint64(1),
+								},
+								2: &oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity{
+									Index: ygot.Uint64(2),
+									ExtCommunity: []oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity_ExtCommunity_Union{
+										oc.UnionString("baz"),
+									},
+								},
+								3: &oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity{
 									Index: ygot.Uint64(3),
 								},
 							},

@@ -19,6 +19,7 @@ name: "integration"
 nodes: {
   name: "dut"
   vendor: OPENCONFIG
+  model: "LEMMING"
 }
 nodes: {
   name: "otg"
