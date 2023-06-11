@@ -315,8 +315,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Bgp_CommunityType": {
 		1: {Name: "STANDARD"},
 		2: {Name: "EXTENDED"},
-		3: {Name: "BOTH"},
-		4: {Name: "NONE"},
+		3: {Name: "LARGE"},
+		4: {Name: "BOTH"},
+		5: {Name: "NONE"},
 	},
 	"E_Bgp_Neighbor_SessionState": {
 		1: {Name: "IDLE"},
@@ -3042,6 +3043,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/state/afi-safi-name": {
 			reflect.TypeOf((E_BgpTypes_AFI_SAFI_TYPE)(0)),
 		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/state/send-community-type": {
+			reflect.TypeOf((E_Bgp_CommunityType)(0)),
+		},
 		"/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/state/default-export-policy": {
 			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
 		},
@@ -3081,6 +3085,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/send-community": {
 			reflect.TypeOf((E_Bgp_CommunityType)(0)),
 		},
+		"/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/send-community-type": {
+			reflect.TypeOf((E_Bgp_CommunityType)(0)),
+		},
 		"/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/session-state": {
 			reflect.TypeOf((E_Bgp_Neighbor_SessionState)(0)),
 		},
@@ -3109,6 +3116,9 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_Bgp_RemovePrivateAsOption)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/state/send-community": {
+			reflect.TypeOf((E_Bgp_CommunityType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/state/send-community-type": {
 			reflect.TypeOf((E_Bgp_CommunityType)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-srte-policy/loc-rib/routes/route/state/invalid-reason": {

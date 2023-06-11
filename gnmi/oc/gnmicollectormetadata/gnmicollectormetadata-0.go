@@ -663,6 +663,76 @@ func (n *Meta_LatestTimestampPathAny) State() ygnmi.WildcardQuery[int64] {
 //
 //	Defining module:      "gnmi-collector-metadata"
 //	Instantiating module: "gnmi-collector-metadata"
+//	Path from parent:     "serverName"
+//	Path from root:       "/meta/serverName"
+func (n *Meta_ServerNamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewLeafSingletonQuery[string](
+		"Meta",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"serverName"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Meta).ServerName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Meta) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "gnmi-collector-metadata"
+//	Instantiating module: "gnmi-collector-metadata"
+//	Path from parent:     "serverName"
+//	Path from root:       "/meta/serverName"
+func (n *Meta_ServerNamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewLeafWildcardQuery[string](
+		"Meta",
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"serverName"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Meta).ServerName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Meta) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "gnmi-collector-metadata"
+//	Instantiating module: "gnmi-collector-metadata"
 //	Path from parent:     "sync"
 //	Path from root:       "/meta/sync"
 func (n *Meta_SyncPath) State() ygnmi.SingletonQuery[bool] {
@@ -1361,6 +1431,18 @@ type Meta_LatestTimestampPathAny struct {
 	parent ygnmi.PathStruct
 }
 
+// Meta_ServerNamePath represents the /gnmi-collector-metadata/meta/serverName YANG schema element.
+type Meta_ServerNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Meta_ServerNamePathAny represents the wildcard version of the /gnmi-collector-metadata/meta/serverName YANG schema element.
+type Meta_ServerNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
 // Meta_SyncPath represents the /gnmi-collector-metadata/meta/sync YANG schema element.
 type Meta_SyncPath struct {
 	*ygnmi.NodePath
@@ -1740,6 +1822,48 @@ func (n *MetaPathAny) LatestTimestamp() *Meta_LatestTimestampPathAny {
 	return &Meta_LatestTimestampPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"latestTimestamp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ServerName (leaf): serverName is an optional string metadata used to identify the server
+// hosting the cache to the clients. It is useful in situations where a
+// client is connected to a cache server behind a frontend system or a
+// load-balancing system and the client wants to know exactly which cache
+// server it is connected to
+//
+//	Defining module:      "gnmi-collector-metadata"
+//	Instantiating module: "gnmi-collector-metadata"
+//	Path from parent:     "serverName"
+//	Path from root:       "/meta/serverName"
+func (n *MetaPath) ServerName() *Meta_ServerNamePath {
+	return &Meta_ServerNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"serverName"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// ServerName (leaf): serverName is an optional string metadata used to identify the server
+// hosting the cache to the clients. It is useful in situations where a
+// client is connected to a cache server behind a frontend system or a
+// load-balancing system and the client wants to know exactly which cache
+// server it is connected to
+//
+//	Defining module:      "gnmi-collector-metadata"
+//	Instantiating module: "gnmi-collector-metadata"
+//	Path from parent:     "serverName"
+//	Path from root:       "/meta/serverName"
+func (n *MetaPathAny) ServerName() *Meta_ServerNamePathAny {
+	return &Meta_ServerNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"serverName"},
 			map[string]interface{}{},
 			n,
 		),

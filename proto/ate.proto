@@ -121,6 +121,7 @@ message ISISConfig {
     LEVEL_UNSPECIFIED = 0;
     L1 = 1;
     L2 = 2;
+    L1L2 = 3;
   }
   // The IS-IS level which the ate behaves as.
   Level level = 1;

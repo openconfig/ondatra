@@ -634,8 +634,8 @@ github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9G
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 h1:C3w9PqII01/Oq1c1nUAm88MOHcQC9l5mIlSMApZMrHA=
 github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822/go.mod h1:+n7T8mK8HuQTcFwEeznm/DIxMOiR9yIdICNftLE1DvQ=
-github.com/networkop/meshnet-cni v0.3.1-0.20230314134453-9398a8fa95ff h1:s1xgQOxbgNDI02K/A1UDH6bv35HPgkK64LIzwcNoqCA=
-github.com/networkop/meshnet-cni v0.3.1-0.20230314134453-9398a8fa95ff/go.mod h1:mr/Iz4Y2QZKvzBQhGfBOKPn7vPFOQ2qSmUVazFWeFv0=
+github.com/networkop/meshnet-cni v0.3.1-0.20230525201116-d7c306c635cf h1:9Pe9L0QCovb9o82inAVQitCo3IRnG9u45lRRm8QvgbU=
+github.com/networkop/meshnet-cni v0.3.1-0.20230525201116-d7c306c635cf/go.mod h1:VMkJl7N6e14GTWS0AnCDrnvJOT67hwOFVUcxTzt/EtE=
 github.com/onsi/ginkgo v1.16.5 h1:8xi0RTUf59SOSfEtZMvwTvXYMzG4gV23XVHOZiXNtnE=
 github.com/onsi/ginkgo/v2 v2.6.0 h1:9t9b9vRUbFq3C4qKFCGkVuq/fIHji802N1nrtkh1mNc=
 github.com/onsi/gomega v1.24.1 h1:KORJXNNTzJXzu4ScJWssJfJMnJ+2QJqhoQSRwNlze9E=
@@ -661,8 +661,8 @@ github.com/openconfig/gribi v1.0.0 h1:xMwEg0mBD+21mOxuFOw0d9dBKuIPwJEhMUUeUulZdL
 github.com/openconfig/gribi v1.0.0/go.mod h1:VFqGH2ZPFIfnKTimP4/AQB4OK0eySW5muJNFxXAwP6k=
 github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70 h1:t6SvvdfWCMlw0XPlsdxO8EgO+q/fXnTevDjdYREKFwU=
 github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70/go.mod h1:OmTWe7RyZj2CIzIgy4ovEBzCLBJzRvWSZmn7u02U9gU=
-github.com/openconfig/kne v0.1.12 h1:t4iTkkxCHlG8dRZJoA/SFkD0YJxzuezM2JE2Pmte9i0=
-github.com/openconfig/kne v0.1.12/go.mod h1:JsxFgiGIUOdaOfAcy7IcmjIn50IQnlfvLXc/0WKkgUg=
+github.com/openconfig/kne v0.1.13 h1:CXcy95vrUDAA7nTPGekwJXunlt2kBwM/oMQUlbDzmFM=
+github.com/openconfig/kne v0.1.13/go.mod h1:L3y17JPcmU06vcTFRssYynUdKS7HfcGJUJNVvwkl5S8=
 github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179 h1:hxhwaNoGykzfp7UfTSvsQe1VTaLIMUyC9bhobz88Q20=
 github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179/go.mod h1:PzwucDxeWVfLHl75AfRyzI2FawaWV1IbaGzRRIKayF4=
 github.com/openconfig/lemming/operator v0.2.0 h1:dovZnR6lQkOHXcODli1NDOr/GVYrBY05KS5X11jxVbw=

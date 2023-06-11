@@ -122,6 +122,7 @@ func populateRIB(netInst *oc.NetworkInstance, peer4Infos, peer6Infos map[string]
 			GetOrCreateAdjRibInPre()
 		attrLen := len(rib.AttrSet)
 		commLen := len(rib.Community)
+		extCommLen := len(rib.ExtCommunity)
 
 		for i, info := range infos {
 			if info == (bgpLearnedInfo{}) {
@@ -130,7 +131,8 @@ func populateRIB(netInst *oc.NetworkInstance, peer4Infos, peer6Infos map[string]
 			}
 			attrIndex := uint64(i + attrLen)
 			commIndex := uint64(i + commLen)
-			if err := appendDetails(info, rib, attrIndex, commIndex, true); err != nil {
+			extCommIndex := uint64(i + extCommLen)
+			if err := appendDetails(info, rib, attrIndex, commIndex, extCommIndex, true); err != nil {
 				return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 			}
 			route := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv4Unicast_Neighbor_AdjRibInPre_Route{
@@ -152,6 +154,7 @@ func populateRIB(netInst *oc.NetworkInstance, peer4Infos, peer6Infos map[string]
 			GetOrCreateAdjRibInPre()
 		attrLen := len(rib.AttrSet)
 		commLen := len(rib.Community)
+		extCommLen := len(rib.ExtCommunity)
 
 		for i, info := range infos {
 			if info == (bgpLearnedInfo{}) {
@@ -160,7 +163,8 @@ func populateRIB(netInst *oc.NetworkInstance, peer4Infos, peer6Infos map[string]
 			}
 			attrIndex := uint64(i + attrLen)
 			commIndex := uint64(i + commLen)
-			if err := appendDetails(info, rib, attrIndex, commIndex, false); err != nil {
+			extCommIndex := uint64(i + extCommLen)
+			if err := appendDetails(info, rib, attrIndex, commIndex, extCommIndex, false); err != nil {
 				return fmt.Errorf("failed to append details for elem %d: %w", i, err)
 			}
 			route := &oc.NetworkInstance_Protocol_Bgp_Rib_AfiSafi_Ipv6Unicast_Neighbor_AdjRibInPre_Route{
@@ -177,7 +181,7 @@ func populateRIB(netInst *oc.NetworkInstance, peer4Infos, peer6Infos map[string]
 	return nil
 }
 
-func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib, attrIndex, commIndex uint64, v4 bool) error {
+func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib, attrIndex, commIndex, extCommIndex uint64, v4 bool) error {
 	nextHop := info.IPV6NextHop
 	if v4 {
 		nextHop = info.IPV4NextHop
@@ -212,15 +216,39 @@ func appendDetails(info bgpLearnedInfo, rib *oc.NetworkInstance_Protocol_Bgp_Rib
 		return err
 	}
 
-	community := &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
+	comm := &oc.NetworkInstance_Protocol_Bgp_Rib_Community{
 		Index: &commIndex,
 	}
-	for _, str := range strings.Split(info.Community, ", ") {
-		if str != "" {
-			community.Community = append(community.Community, oc.UnionString(str))
-		}
+	for _, c := range parseCommunities(info.Community) {
+		comm.Community = append(comm.Community, c)
 	}
-	return rib.AppendCommunity(community)
+	if err := rib.AppendCommunity(comm); err != nil {
+		return err
+	}
+
+	extComm := &oc.NetworkInstance_Protocol_Bgp_Rib_ExtCommunity{
+		Index: &extCommIndex,
+	}
+	for _, ec := range parseCommunities(info.Color) {
+		extComm.ExtCommunity = append(extComm.ExtCommunity, ec)
+	}
+	if err := rib.AppendExtCommunity(extComm); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func parseCommunities(s string) []oc.UnionString {
+	// Needed because an empty string will split into a 1-length array containing the empty string.
+	if s == "" {
+		return nil
+	}
+	var comms []oc.UnionString
+	for _, str := range strings.Split(s, ", ") {
+		comms = append(comms, oc.UnionString(str))
+	}
+	return comms
 }
 
 var asSegRE = regexp.MustCompile("(<|{)[^>}]*(>|})")

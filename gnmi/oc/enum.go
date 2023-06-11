@@ -1246,10 +1246,12 @@ const (
 	Bgp_CommunityType_STANDARD E_Bgp_CommunityType = 1
 	// Bgp_CommunityType_EXTENDED corresponds to the value EXTENDED of Bgp_CommunityType
 	Bgp_CommunityType_EXTENDED E_Bgp_CommunityType = 2
+	// Bgp_CommunityType_LARGE corresponds to the value LARGE of Bgp_CommunityType
+	Bgp_CommunityType_LARGE E_Bgp_CommunityType = 3
 	// Bgp_CommunityType_BOTH corresponds to the value BOTH of Bgp_CommunityType
-	Bgp_CommunityType_BOTH E_Bgp_CommunityType = 3
+	Bgp_CommunityType_BOTH E_Bgp_CommunityType = 4
 	// Bgp_CommunityType_NONE corresponds to the value NONE of Bgp_CommunityType
-	Bgp_CommunityType_NONE E_Bgp_CommunityType = 4
+	Bgp_CommunityType_NONE E_Bgp_CommunityType = 5
 )
 
 // E_Bgp_Neighbor_SessionState is a derived int64 type which is used to represent
