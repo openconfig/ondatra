@@ -353,10 +353,10 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		DiscardLSPs:                    ixconfig.MultivalueBool(isis.GetDiscardLsps()),
 		AreaAddresses:                  ixconfig.MultivalueStr(areaID),
 		TERouterId:                     ixconfig.MultivalueStr(isis.GetTeRouterId()),
-		DomainAuthenticationType:       ixconfig.MultivalueStr(domainAuthType),
-		DomainTransmitPasswordOrMD5Key: ixconfig.MultivalueStr(isis.GetDomainAuthKey()),
 		AreaAuthenticationType:         ixconfig.MultivalueStr(areaAuthType),
 		AreaTransmitPasswordOrMD5Key:   ixconfig.MultivalueStr(isis.GetAreaAuthKey()),
+		DomainAuthenticationType:       ixconfig.MultivalueStr(domainAuthType),
+		DomainTransmitPasswordOrMD5Key: ixconfig.MultivalueStr(isis.GetDomainAuthKey()),
 	}
 	if isis.GetCapabilityRouterId() != "" {
 		isisRtr.RtrcapId = ixconfig.MultivalueStr(isis.GetCapabilityRouterId())
