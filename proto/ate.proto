@@ -140,14 +140,25 @@ message ISISConfig {
   }
   // The network type of the IS-IS interface.
   NetworkType network_type = 5;
+
   enum AuthType {
     AUTH_TYPE_UNSPECIFIED = 0;
     MD5 = 1;
     PASSWORD = 2;
   }
+  // The type of authentication.
   AuthType auth_type = 6;
   // The auth key to be used for authentication.
   string auth_key = 7;
+  // The type of area authentication.
+  AuthType area_auth_type = 19;
+  // The auth key to be used for area authentication.
+  string area_auth_key = 20;
+  // The type of domain authentication.
+  AuthType domain_auth_type = 21;
+  // The auth key to be used for domain authentication.
+  string domain_auth_key = 22;
+
   // enables hello padding.
   bool enable_hello_padding = 8;
   // enables traffic engineering.

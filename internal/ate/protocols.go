@@ -269,7 +269,7 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return nil
 	}
 
-	var level, networkType, authType string
+	var level, networkType string
 	var enable3WayHandshake bool
 	switch isis.GetLevel() {
 	case opb.ISISConfig_LEVEL_UNSPECIFIED:
@@ -296,15 +296,17 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		return fmt.Errorf("unrecognized network type %s", isis.GetNetworkType())
 	}
 
-	switch isis.GetAuthType() {
-	case opb.ISISConfig_AUTH_TYPE_UNSPECIFIED:
-		authType = "none"
-	case opb.ISISConfig_MD5:
-		authType = "md5"
-	case opb.ISISConfig_PASSWORD:
-		authType = "password"
-	default:
-		return fmt.Errorf("unrecognized auth type %s", isis.GetAuthType())
+	authType, err := authTypeString(isis.GetAuthType())
+	if err != nil {
+		return err
+	}
+	areaAuthType, err := authTypeString(isis.GetAreaAuthType())
+	if err != nil {
+		return err
+	}
+	domainAuthType, err := authTypeString(isis.GetDomainAuthType())
+	if err != nil {
+		return err
 	}
 
 	areaID, err := areaIDToIxHex(isis.GetAreaId())
@@ -324,13 +326,17 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		Level2DeadInterval:             ixconfig.MultivalueUint32(isis.GetDeadIntervalSec()),
 	}
 	isisRtr := &ixconfig.TopologyIsisL3Router{
-		Name:               ixconfig.String(fmt.Sprintf("IS-IS Router on %s", ifc.GetName())),
-		EnableHelloPadding: ixconfig.MultivalueBool(isis.GetEnableHelloPadding()),
-		EnableWideMetric:   ixconfig.MultivalueBool(isis.GetEnableWideMetric()),
-		EnableTE:           ixconfig.MultivalueBool(isis.GetEnableTe()),
-		DiscardLSPs:        ixconfig.MultivalueBool(isis.GetDiscardLsps()),
-		AreaAddresses:      ixconfig.MultivalueStr(areaID),
-		TERouterId:         ixconfig.MultivalueStr(isis.GetTeRouterId()),
+		Name:                           ixconfig.String(fmt.Sprintf("IS-IS Router on %s", ifc.GetName())),
+		EnableHelloPadding:             ixconfig.MultivalueBool(isis.GetEnableHelloPadding()),
+		EnableWideMetric:               ixconfig.MultivalueBool(isis.GetEnableWideMetric()),
+		EnableTE:                       ixconfig.MultivalueBool(isis.GetEnableTe()),
+		DiscardLSPs:                    ixconfig.MultivalueBool(isis.GetDiscardLsps()),
+		AreaAddresses:                  ixconfig.MultivalueStr(areaID),
+		TERouterId:                     ixconfig.MultivalueStr(isis.GetTeRouterId()),
+		AreaAuthenticationType:         ixconfig.MultivalueStr(areaAuthType),
+		AreaTransmitPasswordOrMD5Key:   ixconfig.MultivalueStr(isis.GetAreaAuthKey()),
+		DomainAuthenticationType:       ixconfig.MultivalueStr(domainAuthType),
+		DomainTransmitPasswordOrMD5Key: ixconfig.MultivalueStr(isis.GetDomainAuthKey()),
 	}
 	if isis.GetCapabilityRouterId() != "" {
 		isisRtr.RtrcapId = ixconfig.MultivalueStr(isis.GetCapabilityRouterId())
@@ -352,6 +358,19 @@ func (ix *ixATE) addISISProtocols(ifc *opb.InterfaceConfig) error {
 		dg.NetworkGroup = append(dg.NetworkGroup, ng)
 	}
 	return nil
+}
+
+func authTypeString(authType opb.ISISConfig_AuthType) (string, error) {
+	switch authType {
+	case opb.ISISConfig_AUTH_TYPE_UNSPECIFIED:
+		return "none", nil
+	case opb.ISISConfig_MD5:
+		return "md5", nil
+	case opb.ISISConfig_PASSWORD:
+		return "password", nil
+	default:
+		return "", fmt.Errorf("unrecognized auth type %s", authType)
+	}
 }
 
 func max(a, b int) int {

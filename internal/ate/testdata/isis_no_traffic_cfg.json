@@ -152,12 +152,40 @@
                 },
                 "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaAddresses']"
               },
+              "areaAuthenticationType": {
+                "singleValue": {
+                 	"value": "none",
+                 	"xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaAuthenticationType']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaAuthenticationType']"
+              },
+              "areaTransmitPasswordOrMD5Key": {
+                "singleValue": {
+                 	"value": "",
+                 	"xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaTransmitPasswordOrMD5Key']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] areaTransmitPasswordOrMD5Key']"
+              },
               "discardLSPs": {
                 "singleValue": {
                   "value": "false",
                   "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] discardLSPs']/singleValue"
                 },
                 "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] discardLSPs']"
+              },
+              "domainAuthenticationType": {
+                "singleValue": {
+                 	"value": "none",
+                 	"xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] domainAuthenticationType']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] domainAuthenticationType']"
+              },
+              "domainTransmitPasswordOrMD5Key": {
+                "singleValue": {
+                 	"value": "",
+                 	"xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] domainTransmitPasswordOrMD5Key']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/isisL3Router[1] domainTransmitPasswordOrMD5Key']"
               },
               "enableHelloPadding": {
                 "singleValue": {

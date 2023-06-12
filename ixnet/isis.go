@@ -138,6 +138,48 @@ func (i *ISIS) WithAuthDisabled() *ISIS {
 	return i
 }
 
+// WithAreaAuthMD5 sets md5 authentication for area.
+func (i *ISIS) WithAreaAuthMD5(key string) *ISIS {
+	i.pb.AreaAuthType = opb.ISISConfig_MD5
+	i.pb.AreaAuthKey = key
+	return i
+}
+
+// WithAreaAuthPassword sets password authentication for area.
+func (i *ISIS) WithAreaAuthPassword(key string) *ISIS {
+	i.pb.AreaAuthType = opb.ISISConfig_PASSWORD
+	i.pb.AreaAuthKey = key
+	return i
+}
+
+// WithAreaAuthDisabled disables area authentication.
+func (i *ISIS) WithAreaAuthDisabled() *ISIS {
+	i.pb.AreaAuthType = opb.ISISConfig_AUTH_TYPE_UNSPECIFIED
+	i.pb.AreaAuthKey = ""
+	return i
+}
+
+// WithDomainAuthMD5 sets md5 authentication for domain.
+func (i *ISIS) WithDomainAuthMD5(key string) *ISIS {
+	i.pb.DomainAuthType = opb.ISISConfig_MD5
+	i.pb.DomainAuthKey = key
+	return i
+}
+
+// WithDomainAuthPassword sets password authentication for domain.
+func (i *ISIS) WithDomainAuthPassword(key string) *ISIS {
+	i.pb.DomainAuthType = opb.ISISConfig_PASSWORD
+	i.pb.DomainAuthKey = key
+	return i
+}
+
+// WithDomainAuthDisabled disables domain authentication.
+func (i *ISIS) WithDomainAuthDisabled() *ISIS {
+	i.pb.DomainAuthType = opb.ISISConfig_AUTH_TYPE_UNSPECIFIED
+	i.pb.DomainAuthKey = ""
+	return i
+}
+
 // WithTEEnabled sets whether traffic engineering is enabled.
 func (i *ISIS) WithTEEnabled(enabled bool) *ISIS {
 	i.pb.EnableTe = enabled
