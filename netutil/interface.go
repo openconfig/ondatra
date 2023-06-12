@@ -18,87 +18,99 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/openconfig/entity-naming/entname"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ygnmi/ygnmi"
 )
 
-var (
-	loopbackPrefixes = map[ondatra.Vendor]string{
-		ondatra.ARISTA:  "Loopback",
-		ondatra.CISCO:   "Loopback",
-		ondatra.JUNIPER: "lo",
-		ondatra.NOKIA:   "lo",
-	}
-	bundlePrefixes = map[ondatra.Vendor]string{
-		ondatra.ARISTA:  "Port-Channel",
-		ondatra.CISCO:   "Bundle-Ether",
-		ondatra.JUNIPER: "ae",
-		ondatra.NOKIA:   "lag",
-	}
-)
-
 // LoopbackInterface returns the vendor-specific name of the loopback interface with
-// the specified integer id.
-func LoopbackInterface(t *testing.T, dut *ondatra.DUTDevice, id int) string {
+// the specified zero-based index.
+func LoopbackInterface(t *testing.T, dut *ondatra.DUTDevice, index int) string {
 	t.Helper()
-	name, err := loopbackInterface(dut.Vendor(), id)
+	name, err := loopbackInterface(dut, index)
 	if err != nil {
-		t.Fatalf("LoopbackInterface(t, %s, %d): %v", dut.Name(), id, err)
+		t.Fatalf("LoopbackInterface(t, %s, %d): %v", dut.Name(), index, err)
 	}
 	return name
 }
 
-// NextBundleInterface returns the bundled interface with the lowest positive ID
-// that, according to the device's telemetry, is not yet configured.
+func loopbackInterface(dut dutIntf, id int) (string, error) {
+	dev, err := deviceParams(dut)
+	if err != nil {
+		return "", err
+	}
+	return entname.LoopbackInterface(dev, id)
+}
+
+// NextBundleInterface returns the aggregate interface with the lowest non-zero
+// index that, according to the device's telemetry, is not yet configured.
+// Deprecated: Use NextAggregateInterface instead.
 func NextBundleInterface(t *testing.T, dut *ondatra.DUTDevice) string {
 	t.Helper()
 	batch := gnmi.OCBatch()
 	batch.AddPaths(gnmi.OC().InterfaceAny().Aggregation())
-	name, err := nextBundleInterface(t, dut.Vendor(), gnmi.Lookup(t, dut, batch.State()))
+	name, err := nextAggregateInterface(dut, gnmi.Lookup(t, dut, batch.State()))
 	if err != nil {
 		t.Fatalf("NextBundleInterface(t, %s): %v", dut.Name(), err)
 	}
 	return name
 }
 
-func loopbackInterface(vendor ondatra.Vendor, id int) (string, error) {
-	if id < 0 {
-		return "", fmt.Errorf("loopback interface cannot have negative number: %d", id)
+// NextAggregateInterface returns the aggregate interface with the lowest
+// non-zero index that according to the dut's telemetry is not yet configured.
+func NextAggregateInterface(t *testing.T, dut *ondatra.DUTDevice) string {
+	t.Helper()
+	batch := gnmi.OCBatch()
+	batch.AddPaths(gnmi.OC().InterfaceAny().Aggregation())
+	name, err := nextAggregateInterface(dut, gnmi.Lookup(t, dut, batch.State()))
+	if err != nil {
+		t.Fatalf("NextAggregateInterface(t, %s): %v", dut.Name(), err)
 	}
-	prefix, ok := loopbackPrefixes[vendor]
-	if !ok {
-		return "", fmt.Errorf("no loopback interface prefix for DUT vendor %v", vendor)
-	}
-	return intfName(prefix, id), nil
+	return name
 }
 
-func nextBundleInterface(t *testing.T, vendor ondatra.Vendor, val *ygnmi.Value[*oc.Root]) (string, error) {
-	prefix, err := bundlePrefix(vendor)
+func nextAggregateInterface(dut dutIntf, currAggsRoot *ygnmi.Value[*oc.Root]) (string, error) {
+	dev, err := deviceParams(dut)
 	if err != nil {
 		return "", err
 	}
-	var bundleIntfs map[string]*oc.Interface
-	if root, present := val.Val(); present {
-		bundleIntfs = root.Interface
+	var aggIntfs map[string]*oc.Interface
+	if root, present := currAggsRoot.Val(); present {
+		aggIntfs = root.Interface
 	}
-	for id := 1; ; id++ {
-		bundleName := intfName(prefix, id)
-		if _, ok := bundleIntfs[bundleName]; !ok {
-			return bundleName, nil
+	for index := 0; ; index++ {
+		name, err := entname.AggregateInterface(dev, index)
+		if err != nil {
+			return "", err
+		}
+		if _, ok := aggIntfs[name]; !ok {
+			return name, nil
 		}
 	}
 }
 
-func bundlePrefix(vendor ondatra.Vendor) (string, error) {
-	prefix, ok := bundlePrefixes[vendor]
-	if !ok {
-		return "", fmt.Errorf("no bundle interface prefix for DUT vendor %v", vendor)
-	}
-	return prefix, nil
+var namingVendors map[ondatra.Vendor]entname.Vendor = map[ondatra.Vendor]entname.Vendor{
+	ondatra.ARISTA:  entname.VendorArista,
+	ondatra.CISCO:   entname.VendorCisco,
+	ondatra.JUNIPER: entname.VendorJuniper,
+	ondatra.NOKIA:   entname.VendorNokia,
 }
 
-func intfName(prefix string, id int) string {
-	return fmt.Sprintf("%s%d", prefix, id)
+func deviceParams(dut dutIntf) (*entname.DeviceParams, error) {
+	ov, ok := namingVendors[dut.Vendor()]
+	if !ok {
+		return nil, fmt.Errorf("DUT vendor %v not supported by OC entity naming library", dut.Vendor())
+	}
+	return &entname.DeviceParams{
+		Vendor:        ov,
+		HardwareModel: dut.Model(),
+	}, nil
+}
+
+// dutIntf is an interface to a DUT used to enable dependency injection.
+type dutIntf interface {
+	Vendor() ondatra.Vendor
+	Model() string
 }

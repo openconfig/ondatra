@@ -44,26 +44,27 @@ func TestLoopbackInterface(t *testing.T) {
 		desc:   "juniper",
 		vendor: ondatra.JUNIPER,
 		num:    3,
-		want:   "lo3",
+		want:   "lo0.3",
 	}, {
 		desc:   "nokia",
 		vendor: ondatra.NOKIA,
 		num:    4,
 		want:   "lo4",
 	}, {
-		desc:    "no prefix",
+		desc:    "not supported",
 		vendor:  ondatra.IXIA,
-		wantErr: "no loopback interface prefix",
+		wantErr: "not supported",
 	}, {
-		desc:    "negative num",
+		desc:    "negative index",
 		vendor:  ondatra.ARISTA,
 		num:     -3,
-		wantErr: "negative number",
+		wantErr: "negative",
 	}}
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			got, err := loopbackInterface(test.vendor, test.num)
+			dut := &fakeDUT{vendor: test.vendor}
+			got, err := loopbackInterface(dut, test.num)
 			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
 				t.Errorf("loopbackInterface got err %v, want %s", err, test.wantErr)
 			}
@@ -74,7 +75,7 @@ func TestLoopbackInterface(t *testing.T) {
 	}
 }
 
-func TestNextBundleInterface(t *testing.T) {
+func TestNextAggregateInterface(t *testing.T) {
 	tests := []struct {
 		desc    string
 		vendor  ondatra.Vendor
@@ -92,7 +93,7 @@ func TestNextBundleInterface(t *testing.T) {
 	}, {
 		desc:   "juniper first",
 		vendor: ondatra.JUNIPER,
-		want:   "ae1",
+		want:   "ae0",
 	}, {
 		desc:   "nokia first",
 		vendor: ondatra.NOKIA,
@@ -106,9 +107,9 @@ func TestNextBundleInterface(t *testing.T) {
 		},
 		want: "Port-Channel2",
 	}, {
-		desc:    "no range",
+		desc:    "not supported",
 		vendor:  ondatra.IXIA,
-		wantErr: "no bundle interface",
+		wantErr: "not supported",
 	}}
 
 	for _, test := range tests {
@@ -119,13 +120,26 @@ func TestNextBundleInterface(t *testing.T) {
 					Interface: test.intfs,
 				})
 			}
-			got, err := nextBundleInterface(t, test.vendor, val)
+			dut := &fakeDUT{vendor: test.vendor}
+			got, err := nextAggregateInterface(dut, val)
 			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
-				t.Errorf("nextBundleInterface got err %v, want %s", err, test.wantErr)
+				t.Errorf("nextAggregateInterface got err %v, want %s", err, test.wantErr)
 			}
 			if got != test.want {
-				t.Errorf("nextBundleInterface got %s, want %s", got, test.want)
+				t.Errorf("nextAggregateInterface got %s, want %s", got, test.want)
 			}
 		})
 	}
+}
+
+type fakeDUT struct {
+	vendor ondatra.Vendor
+}
+
+func (d *fakeDUT) Vendor() ondatra.Vendor {
+	return d.vendor
+}
+
+func (d *fakeDUT) Model() string {
+	return ""
 }
