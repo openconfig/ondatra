@@ -43,8 +43,8 @@ func TestLoopbackInterface(t *testing.T) {
 	}, {
 		desc:   "juniper",
 		vendor: ondatra.JUNIPER,
-		num:    3,
-		want:   "lo0.3",
+		num:    0,
+		want:   "lo0",
 	}, {
 		desc:   "nokia",
 		vendor: ondatra.NOKIA,
