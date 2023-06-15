@@ -7,7 +7,7 @@ require (
 	github.com/google/go-cmp v0.5.9
 	github.com/jstemmer/go-junit-report/v2 v2.0.1-0.20220823220451-7b10b4285462
 	github.com/open-traffic-generator/snappi/gosnappi v0.11.14
-	github.com/openconfig/entity-naming v0.0.0-20230614015924-e45e47aa9067
+	github.com/openconfig/entity-naming v0.0.0-20230615134154-46b7e6d34924
 	github.com/openconfig/gnmi v0.9.1
 	github.com/openconfig/gnoi v0.0.0-20230221223856-1727ed932554
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b

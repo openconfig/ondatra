@@ -48,7 +48,16 @@ var sigc = make(chan os.Signal, 1)
 func RunTests(m *testing.M, newBindFn func() (binding.Binding, error)) {
 	// Careful to only exit at the very end, because exiting skips all pending defers.
 	if err := runTests(m.Run, newBindFn); err != nil {
-		log.Exit(err)
+		// If runTests returns an error, no test cases will be executed and the XML
+		// result file will be empty. To avoid user confusion over empty XML
+		// results, print the output of a fake TestMain test case, so that the
+		// failure will be elevated to the XML, not merely hidden in the test log.
+		// TODO(team): Consider unconditionally printing a TestMain test case
+		// with the time until reservation to enable the Ondatra test timing report.
+		fmt.Println("=== RUN   TestMain")
+		fmt.Printf("    %v\n", err)
+		fmt.Println("--- FAIL: TestMain (0.00s)")
+		log.Exit()
 	}
 }
 

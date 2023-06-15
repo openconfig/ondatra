@@ -75,6 +75,58 @@ func TestLoopbackInterface(t *testing.T) {
 	}
 }
 
+func TestAggregateInterface(t *testing.T) {
+	tests := []struct {
+		desc    string
+		vendor  ondatra.Vendor
+		num     int
+		want    string
+		wantErr string
+	}{{
+		desc:   "arista",
+		vendor: ondatra.ARISTA,
+		num:    1,
+		want:   "Port-Channel2",
+	}, {
+		desc:   "cisco",
+		vendor: ondatra.CISCO,
+		num:    2,
+		want:   "Bundle-Ether3",
+	}, {
+		desc:   "juniper",
+		vendor: ondatra.JUNIPER,
+		num:    0,
+		want:   "ae0",
+	}, {
+		desc:   "nokia",
+		vendor: ondatra.NOKIA,
+		num:    4,
+		want:   "lag5",
+	}, {
+		desc:    "not supported",
+		vendor:  ondatra.IXIA,
+		wantErr: "not supported",
+	}, {
+		desc:    "negative index",
+		vendor:  ondatra.ARISTA,
+		num:     -3,
+		wantErr: "negative",
+	}}
+
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			dut := &fakeDUT{vendor: test.vendor}
+			got, err := aggregateInterface(dut, test.num)
+			if (err == nil) != (test.wantErr == "") || (err != nil && !strings.Contains(err.Error(), test.wantErr)) {
+				t.Errorf("aggregateInterface got err %v, want %s", err, test.wantErr)
+			}
+			if got != test.want {
+				t.Errorf("aggregateInterface got %s, want %s", got, test.want)
+			}
+		})
+	}
+}
+
 func TestNextAggregateInterface(t *testing.T) {
 	tests := []struct {
 		desc    string
