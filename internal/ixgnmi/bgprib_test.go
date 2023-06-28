@@ -376,7 +376,7 @@ func TestParseASSegments(t *testing.T) {
 		}},
 	}, {
 		desc:   "single set",
-		asPath: "{1 2 3}",
+		asPath: "{1,2,3}",
 		want: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
 			Index:  ygot.Uint32(0),
 			Type:   oc.RibBgp_AsPathSegmentType_AS_SET,
@@ -384,7 +384,7 @@ func TestParseASSegments(t *testing.T) {
 		}},
 	}, {
 		desc:   "complicated",
-		asPath: " < 1 2 > {3  4 5 } <6 >",
+		asPath: " < 1 2 > {3 , 4,		5 } <6 >",
 		want: []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment{{
 			Index:  ygot.Uint32(0),
 			Type:   oc.RibBgp_AsPathSegmentType_AS_SEQ,

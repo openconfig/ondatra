@@ -18,7 +18,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"testing"
 
@@ -26,7 +25,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/gnmi/errdiff"
-	"github.com/openconfig/lemming"
+	"github.com/openconfig/ondatra/internal/fakegnmi"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/credentials/local"
@@ -57,15 +56,11 @@ func (fb *fakeBinding) HTTPClient(target string) (HTTPDoCloser, error) {
 	return fb.httpDialer(target)
 }
 
-func setupFake(t *testing.T) (*lemming.Device, *fakeBinding) {
+func setupFake(t *testing.T) (*fakegnmi.StubGNMI, *fakeBinding) {
 	t.Helper()
-	lis, err := net.Listen("tcp", ":0")
+	fake, err := fakegnmi.StartStubGNMI(0)
 	if err != nil {
-		t.Fatalf("failed to start device listener: %v", err)
-	}
-	fake, err := lemming.New(lis)
-	if err != nil {
-		lis.Close()
+		fake.Stop()
 		t.Fatalf("failed to start device: %v", err)
 	}
 	fAddr := fake.Addr()
@@ -92,48 +87,37 @@ func setupFake(t *testing.T) (*lemming.Device, *fakeBinding) {
 			},
 		}, nil
 	}
-	fake.GNMI().GetResponses = []any{
-		&gnmipb.GetResponse{
-			Notification: []*gnmipb.Notification{{
-				Timestamp: 1,
-				Update: []*gnmipb.Update{{
-					Path: &gnmipb.Path{
-						Elem: []*gnmipb.PathElem{{
-							Name: "interfaces",
-						}},
+	fake.Stub().GetResponse(&gnmipb.GetResponse{
+		Notification: []*gnmipb.Notification{{
+			Timestamp: 1,
+			Update: []*gnmipb.Update{{
+				Path: &gnmipb.Path{
+					Elem: []*gnmipb.PathElem{{
+						Name: "interfaces",
+					}},
+				},
+				Val: &gnmipb.TypedValue{
+					Value: &gnmipb.TypedValue_StringVal{
+						StringVal: "test",
 					},
-					Val: &gnmipb.TypedValue{
-						Value: &gnmipb.TypedValue_StringVal{
-							StringVal: "test",
-						},
-					},
-				}},
-			},
+				},
 			}},
-	}
-	fake.GNMI().Responses = [][]*gnmipb.SubscribeResponse{{{
-		Response: &gnmipb.SubscribeResponse_Update{
-			Update: &gnmipb.Notification{
-				Timestamp: 1,
-				Update: []*gnmipb.Update{{
-					Path: &gnmipb.Path{
-						Elem: []*gnmipb.PathElem{{
-							Name: "interfaces",
-						}},
-					},
-					Val: &gnmipb.TypedValue{
-						Value: &gnmipb.TypedValue_StringVal{
-							StringVal: "test",
-						},
-					},
+		}},
+	}).Notification(&gnmipb.Notification{
+		Timestamp: 1,
+		Update: []*gnmipb.Update{{
+			Path: &gnmipb.Path{
+				Elem: []*gnmipb.PathElem{{
+					Name: "interfaces",
 				}},
 			},
-		},
-	}, {
-		Response: &gnmipb.SubscribeResponse_SyncResponse{
-			SyncResponse: true,
-		},
-	}}}
+			Val: &gnmipb.TypedValue{
+				Value: &gnmipb.TypedValue_StringVal{
+					StringVal: "test",
+				},
+			},
+		}},
+	}).Sync()
 	return fake, b
 }
 
@@ -175,13 +159,14 @@ func TestAuthProxy(t *testing.T) {
 			if err != nil {
 				t.Fatalf("Send failed error: %v", err)
 			}
-			for i := 0; i < len(f.GNMI().Responses[0]); i++ {
+			want := []*gnmipb.SubscribeResponse{}
+			for i := 0; i < len(want); i++ {
 				v, err := stream.Recv()
 				if err != nil {
 					t.Fatalf("Subscribe failed: %v", err)
 				}
-				if !proto.Equal(v, f.GNMI().Responses[0][i]) {
-					t.Fatalf("invalid message: got %s, want %s", v, f.GNMI().Responses[0][i])
+				if !proto.Equal(v, want[i]) {
+					t.Fatalf("invalid message: got %s, want %s", v, want[i])
 				}
 			}
 		})
@@ -189,14 +174,9 @@ func TestAuthProxy(t *testing.T) {
 }
 
 func TestLongStream(t *testing.T) {
-	lis, err := net.Listen("tcp", ":0")
+	fake, err := fakegnmi.StartStubGNMI(0)
 	if err != nil {
-		t.Fatalf("failed to start device listener: %v", err)
-	}
-	fake, err := lemming.New(lis)
-	if err != nil {
-		lis.Close()
-		t.Fatalf("failed to start device: %v", err)
+		t.Fatalf("fakegnmi.Start() failed: %v", err)
 	}
 	defer fake.Stop()
 	fAddr := fake.Addr()
@@ -233,28 +213,34 @@ func TestLongStream(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to dial proxy: %v", err)
 	}
-	fake.GNMI().Responses = generateStream()
+	wantResps := generateStream(fake.Stub())
 	c := gnmipb.NewGNMIClient(conn)
 	stream, err := c.Subscribe(context.Background())
-	stream.Send(&gnmipb.SubscribeRequest{})
+	err = stream.Send(&gnmipb.SubscribeRequest{
+		Request: &gnmipb.SubscribeRequest_Subscribe{
+			Subscribe: &gnmipb.SubscriptionList{
+				Subscription: []*gnmipb.Subscription{{}},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatalf("Send failed error: %v", err)
 	}
-	for i := 0; i < len(fake.GNMI().Responses[0]); i++ {
+	for i := 0; i < len(wantResps); i++ {
 		v, err := stream.Recv()
 		if err != nil {
 			t.Fatalf("Subscribe failed: %v", err)
 		}
-		if !proto.Equal(v, fake.GNMI().Responses[0][i]) {
-			t.Fatalf("invalid message: got %s, want %s", v, fake.GNMI().Responses[0][i])
+		if !proto.Equal(v, wantResps[i]) {
+			t.Fatalf("invalid message: got %s, want %s", v, wantResps[i])
 		}
 	}
 }
 
-func generateStream() [][]*gnmipb.SubscribeResponse {
-	var resp []*gnmipb.SubscribeResponse
+func generateStream(stub *fakegnmi.Stubber) []*gnmipb.SubscribeResponse {
+	var resps []*gnmipb.SubscribeResponse
 	for i := int64(1); i < 100000; i++ {
-		resp = append(resp, &gnmipb.SubscribeResponse{
+		resp := &gnmipb.SubscribeResponse{
 			Response: &gnmipb.SubscribeResponse_Update{
 				Update: &gnmipb.Notification{
 					Timestamp: i,
@@ -270,16 +256,13 @@ func generateStream() [][]*gnmipb.SubscribeResponse {
 							},
 						},
 					}},
-				},
-			},
-		})
+				}},
+		}
+		stub.Notification(resp.GetUpdate())
+		resps = append(resps, resp)
 	}
-	resp = append(resp, &gnmipb.SubscribeResponse{
-		Response: &gnmipb.SubscribeResponse_SyncResponse{
-			SyncResponse: true,
-		},
-	})
-	return [][]*gnmipb.SubscribeResponse{resp}
+	stub.Sync()
+	return resps
 }
 
 type fakeHTTPServer struct {

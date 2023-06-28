@@ -14,7 +14,6 @@ require (
 	github.com/openconfig/goyang v1.4.0
 	github.com/openconfig/gribi v1.0.0
 	github.com/openconfig/kne v0.1.13
-	github.com/openconfig/lemming v0.0.0-20220404232244-1dbc2b4c6179
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
 	github.com/openconfig/ygnmi v0.7.6
 	github.com/openconfig/ygot v0.28.3

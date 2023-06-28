@@ -18,6 +18,8 @@ package fakegnmi
 import (
 	"fmt"
 	"io"
+	"net"
+	"strings"
 
 	"golang.org/x/net/context"
 
@@ -129,4 +131,92 @@ func (s *Stubber) Sync() *Stubber {
 		Response: &gpb.SubscribeResponse_SyncResponse{},
 	})
 	return s
+}
+
+// StubGNMI is a running stub GNMI server.
+// It doesn't implement correct subscribe mechanics, instead use Stub to insert subscribe responses.
+type StubGNMI struct {
+	gpb.UnimplementedGNMIServer
+	stub        *Stubber
+	getRequests []*gpb.GetRequest
+	subRequests []*gpb.SubscribeRequest
+	lis         net.Listener
+	srv         *grpc.Server
+}
+
+// StartStubGNMI starts serving a gNMI server at the given port.
+func StartStubGNMI(port int) (*StubGNMI, error) {
+	l, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+	if err != nil {
+		return nil, err
+	}
+	sg := NewStubGNMI(grpc.NewServer(), l)
+	go sg.srv.Serve(l)
+	return sg, nil
+}
+
+// NewStubGNMI creates a new stub gNMI server.
+func NewStubGNMI(srv *grpc.Server, lis net.Listener) *StubGNMI {
+	sg := &StubGNMI{lis: lis, srv: srv}
+	gpb.RegisterGNMIServer(srv, sg)
+	return sg
+}
+
+// Addr returns the listener address of the server.
+func (g *StubGNMI) Addr() string {
+	return strings.Replace(g.lis.Addr().String(), "[::]", "localhost", 1)
+}
+
+// Stop gracefully stops the server and closes the listener.
+func (g *StubGNMI) Stop() error {
+	g.srv.GracefulStop()
+	return g.lis.Close()
+}
+
+// Stub reset the stubbed responses to empty and returns a handle to add new ones.
+func (g *StubGNMI) Stub() *Stubber {
+	if g.stub == nil {
+		gen := &fpb.FixedGenerator{}
+		g.stub = &Stubber{gen: gen}
+	}
+
+	g.stub.gen.Reset()
+	g.stub.getResponses = nil
+	return g.stub
+}
+
+// Get is stub implement of gnmi Get.
+func (g *StubGNMI) Get(ctx context.Context, req *gpb.GetRequest) (*gpb.GetResponse, error) {
+	g.getRequests = append(g.getRequests, req)
+	if len(g.stub.getResponses) == 0 {
+		return nil, io.EOF
+	}
+	resp := g.stub.getResponses[0]
+	g.stub.getResponses = g.stub.getResponses[1:]
+	return resp, nil
+}
+
+// Get is stub implement of gnmi Get.
+func (g *StubGNMI) Subscribe(stream gpb.GNMI_SubscribeServer) error {
+	req, err := stream.Recv()
+	if err != nil {
+		return err
+	}
+	g.subRequests = append(g.subRequests, req)
+	for _, resp := range g.stub.gen.Responses {
+		if err := stream.Send(resp); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// Requests returns the set of SubscribeRequests sent to the gNMI server.
+func (g *StubGNMI) Requests() []*gpb.SubscribeRequest {
+	return g.subRequests
+}
+
+// GetRequests returns the set of GetRequests sent to the gNMI server.
+func (g *StubGNMI) GetRequests() []*gpb.GetRequest {
+	return g.getRequests
 }

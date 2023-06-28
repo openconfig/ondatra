@@ -251,11 +251,16 @@ func parseCommunities(s string) []oc.UnionString {
 	return comms
 }
 
-var asSegRE = regexp.MustCompile("(<|{)[^>}]*(>|})")
+var (
+	asSegRE      = regexp.MustCompile("(<|{)[^>}]*(>|})")
+	asSegDelimRE = regexp.MustCompile("\\s*(\\s|,)\\s*")
+)
 
 func parseASSegments(asPathStr string) ([]*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment, error) {
 	// Split asPathStr into segments.
-	// Example: "<1 2> {3 4 5} <6>" -> ["<1 2>", "{3 4 5}", "<6>"]
+	// Apparently SEQs are space-separated and SETs are comma-separated,
+	// but the parsing logic is robust to either of those separators.
+	// Example: "<1 2> {3,4,5} <6>" -> ["<1 2>", "{3,4,5}", "<6>"]
 	segStrs := asSegRE.FindAllString(asPathStr, -1)
 
 	var segs []*oc.NetworkInstance_Protocol_Bgp_Rib_AttrSet_AsSegment
@@ -270,9 +275,13 @@ func parseASSegments(asPathStr string) ([]*oc.NetworkInstance_Protocol_Bgp_Rib_A
 		segStr = segStr[1 : len(segStr)-1]
 		var members []uint32
 
-		// Split the string at whitespace and convert each element to uint32.
-		// Example: "3 4 5" -> ["3", "4", "5"]
-		for _, s := range strings.Fields(segStr) {
+		// Split the string at whitespace or commas and convert each element to uint32.
+		// Example with whitespace: "1 2" -> ["1", "2"]
+		// Example with commas: "3,4,5" -> ["3", "4", "5"]
+		for _, s := range asSegDelimRE.Split(segStr, -1) {
+			if len(s) == 0 {
+				continue
+			}
 			member, err := strconv.ParseUint(s, 10, 32)
 			if err != nil {
 				return nil, fmt.Errorf("invalid AS segment member: %q", s)
