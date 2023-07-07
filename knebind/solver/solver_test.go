@@ -853,7 +853,7 @@ func TestSolveErrors(t *testing.T) {
 		topo: `
 			nodes: {
 			  name: "node1"
-			  vendor: HOST
+			  vendor: UNKNOWN
 			}`,
 		wantErr: "not enough nodes",
 	}, {

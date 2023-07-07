@@ -1773,6 +1773,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		13: {Name: "SENSOR", DefiningModule: "openconfig-platform-types"},
 		14: {Name: "STORAGE", DefiningModule: "openconfig-platform-types"},
 		15: {Name: "TRANSCEIVER", DefiningModule: "openconfig-platform-types"},
+		16: {Name: "WIFI_ACCESS_POINT", DefiningModule: "openconfig-platform-types"},
 	},
 	"E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT": {
 		1: {Name: "BIOS", DefiningModule: "openconfig-platform-types"},
