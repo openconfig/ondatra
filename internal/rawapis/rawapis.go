@@ -130,7 +130,7 @@ func FetchGNSI(ctx context.Context, dut binding.DUT) (binding.GNSIClients, error
 		var err error
 		c, err = NewGNSI(ctx, dut)
 		if err != nil {
-			return nil, fmt.Errorf("error dialing gNOI: %w", err)
+			return nil, fmt.Errorf("error dialing gNSI: %w", err)
 		}
 		gnsis[dut] = c
 	}
