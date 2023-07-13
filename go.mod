@@ -3,7 +3,7 @@ module github.com/openconfig/ondatra
 go 1.18
 
 require (
-	github.com/golang/glog v1.0.0
+	github.com/golang/glog v1.1.0
 	github.com/google/go-cmp v0.5.9
 	github.com/jstemmer/go-junit-report/v2 v2.0.1-0.20220823220451-7b10b4285462
 	github.com/open-traffic-generator/snappi/gosnappi v0.11.14
@@ -15,8 +15,8 @@ require (
 	github.com/openconfig/gribi v1.0.0
 	github.com/openconfig/kne v0.1.13
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
-	github.com/openconfig/ygnmi v0.7.6
-	github.com/openconfig/ygot v0.28.3
+	github.com/openconfig/ygnmi v0.8.1
+	github.com/openconfig/ygot v0.29.0
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.1
@@ -27,7 +27,7 @@ require (
 	golang.org/x/net v0.9.0
 	golang.org/x/sys v0.7.0
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1
-	google.golang.org/grpc v1.54.0
+	google.golang.org/grpc v1.55.0
 	google.golang.org/protobuf v1.30.0
 	gopkg.in/yaml.v2 v2.4.0
 )
