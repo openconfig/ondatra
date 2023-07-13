@@ -92,6 +92,7 @@ type DUT struct {
 	DialConsoleFn func(context.Context) (binding.StreamClient, error)
 	DialGNMIFn    func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 	DialGNOIFn    func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error)
+	DialGNSIFn    func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error)
 	DialGRIBIFn   func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
 	DialP4RTFn    func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 }
@@ -134,6 +135,14 @@ func (d *DUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (binding.GN
 		log.Fatal("fakebind DialGNOI called but DialGNOIFn not set")
 	}
 	return d.DialGNOIFn(ctx, opts...)
+}
+
+// DialGNSI delegates to d.DialGNSIFn.
+func (d *DUT) DialGNSI(ctx context.Context, opts ...grpc.DialOption) (binding.GNSIClients, error) {
+	if d.DialGNSIFn == nil {
+		log.Fatal("fakebind DialGNSI called but DialGNSIFn not set")
+	}
+	return d.DialGNSIFn(ctx, opts...)
 }
 
 // DialGRIBI delegates to d.DialGRIBIFn.

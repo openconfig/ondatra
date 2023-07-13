@@ -49,6 +49,9 @@ var (
 		DialP4RTFn: func(context.Context, ...grpc.DialOption) (ppb.P4RuntimeClient, error) {
 			return &struct{ ppb.P4RuntimeClient }{}, nil
 		},
+		DialGNSIFn: func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
+			return &struct{ binding.GNSIClients }{}, nil
+		},
 	}
 
 	ate = &fakebind.ATE{
@@ -115,6 +118,27 @@ func TestGNOI(t *testing.T) {
 	}
 	if gotFetch == gotNew {
 		t.Errorf("FetchGNOI() unexpected result: got %v, want unique value", gotFetch)
+	}
+}
+
+func TestGNSI(t *testing.T) {
+	gotNew, err := NewGNSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("NewGNSI() unexpected error: %v", err)
+	}
+	wantFetch, err := FetchGNSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("FetchGNSI() unexpected error: %v", err)
+	}
+	gotFetch, err := FetchGNSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("FetchGNSI() unexpected error: %v", err)
+	}
+	if gotFetch != wantFetch {
+		t.Errorf("FetchGNSI() unexpected result: got %v, want %v", gotFetch, wantFetch)
+	}
+	if gotFetch == gotNew {
+		t.Errorf("FetchGNSI() unexpected result: got %v, want unique value", gotFetch)
 	}
 }
 

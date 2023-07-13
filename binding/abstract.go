@@ -43,6 +43,12 @@ import (
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
+
+	accpb "github.com/openconfig/gnsi/accounting"
+	authzpb "github.com/openconfig/gnsi/authz"
+	certzpb "github.com/openconfig/gnsi/certz"
+	credpb "github.com/openconfig/gnsi/credentialz"
+	pathzpb "github.com/openconfig/gnsi/pathz"
 )
 
 var _ DUT = &AbstractDUT{}
@@ -110,6 +116,11 @@ func (d *AbstractDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gp
 // DialGNOI returns an unimplemented error.
 func (d *AbstractDUT) DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error) {
 	return nil, errors.New("DialGNOI unimplemented")
+}
+
+// DialGNSI returns an unimplemented error.
+func (d *AbstractDUT) DialGNSI(context.Context, ...grpc.DialOption) (GNSIClients, error) {
+	return nil, errors.New("DialGNSI unimplemented")
 }
 
 // DialGRIBI returns an unimplemented error.
@@ -267,6 +278,49 @@ func (g *AbstractGNOIClients) WavelengthRouter() wpb.WavelengthRouterClient {
 }
 
 func (g *AbstractGNOIClients) mustEmbedAbstractGNOIClients() {}
+
+var _ GNSIClients = &AbstractGNSIClients{}
+
+func (g *AbstractGNSIClients) mustEmbedAbstractGNSIClients() {}
+
+// AbstractGNSIClients is implementation support for the GNSIClients interface.
+type AbstractGNSIClients struct{}
+
+// Authz logs a fatal unimplemented error.
+func (g *AbstractGNSIClients) Authz() authzpb.AuthzClient {
+	log.Fatal("Authz unimplemented")
+	return nil
+}
+
+// Pathz logs a fatal unimplemented error.
+func (g *AbstractGNSIClients) Pathz() pathzpb.PathzClient {
+	log.Fatal("Pathz unimplemented")
+	return nil
+}
+
+// Certz logs a fatal unimplemented error.
+func (g *AbstractGNSIClients) Certz() certzpb.CertzClient {
+	log.Fatal("Certz unimplemented")
+	return nil
+}
+
+// Credentialz logs a fatal unimplemented error.
+func (g *AbstractGNSIClients) Credentialz() credpb.CredentialzClient {
+	log.Fatal("Credentialz unimplemented")
+	return nil
+}
+
+// AccountingPull logs a fatal unimplemented error.
+func (g *AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
+	log.Fatal("AccountingPull unimplemented")
+	return nil
+}
+
+// AccountingPush logs a fatal unimplemented error.
+func (g *AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
+	log.Fatal("AccountingPush unimplemented")
+	return nil
+}
 
 var _ StreamClient = &AbstractStreamClient{}
 
