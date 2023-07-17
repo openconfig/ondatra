@@ -1940,6 +1940,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "EGP"},
 		3: {Name: "INCOMPLETE"},
 	},
+	"E_RouterAdvertisement_Mode": {
+		1: {Name: "ALL"},
+		2: {Name: "DISABLE_UNSOLICITED_RA"},
+	},
 	"E_RouterInformation_Tlv_Type": {
 		1: {Name: "UNKNOWN"},
 	},
@@ -2624,6 +2628,9 @@ func initΛEnumTypes() {
 		"/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/origin": {
 			reflect.TypeOf((E_IfIp_NeighborOrigin)(0)),
 		},
+		"/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode": {
+			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
+		},
 		"/interfaces/interface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),
 		},
@@ -2665,6 +2672,9 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/origin": {
 			reflect.TypeOf((E_IfIp_NeighborOrigin)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode": {
+			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
 		},
 		"/interfaces/interface/subinterfaces/subinterface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),

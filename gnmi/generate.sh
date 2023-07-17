@@ -113,7 +113,6 @@ go run github.com/openconfig/ygnmi/app/ygnmi generator \
   --base_package_path=github.com/openconfig/ondatra/gnmi/oc \
   --output_dir=gnmi/oc \
   --paths=public/release/models/...,public/third_party/ietf/... \
-  --generate_atomic=false \
   --ignore_deviate_notsupported \
   "${YANG_FILES[@]}"
 

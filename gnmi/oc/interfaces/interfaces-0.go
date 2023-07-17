@@ -30461,6 +30461,168 @@ func (n *Interface_RoutedVlan_Ipv6_NeighborPathMapAny) Config() ygnmi.WildcardQu
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/enable YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/enable YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/enable"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/enable"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/enable"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/enable"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/interval YANG schema element.
 type Interface_RoutedVlan_Ipv6_RouterAdvertisement_IntervalPath struct {
 	*ygnmi.NodePath
@@ -30947,6 +31109,152 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny) Config() 
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePath) State() ygnmi.SingletonQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewSingletonQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePathAny) State() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/mode"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePath) Config() ygnmi.ConfigQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewConfigQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/mode"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePathAny) Config() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/other-config YANG schema element.
 type Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPath struct {
 	*ygnmi.NodePath
@@ -31281,6 +31589,44 @@ type Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny struct {
 	*ygnmi.NodePath
 }
 
+// Enable (leaf): If set to false, all IPv6 router advertisement functions are
+// disabled.  The local system will not transmit router advertisement
+// messages and will not respond to router solicitation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/enable"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Enable() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Enable (leaf): If set to false, all IPv6 router advertisement functions are
+// disabled.  The local system will not transmit router advertisement
+// messages and will not respond to router solicitation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/enable"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Enable() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_EnablePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // Interval (leaf): The interval between periodic router advertisement neighbor
 // discovery messages sent on this interface expressed in
 // seconds.
@@ -31386,6 +31732,42 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Managed() *Interf
 	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ManagedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "managed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Mode (leaf): Mode controls which set of behaviors the local system should perform
+// to support IPv6 router advertisements.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/mode"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Mode() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePath {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Mode (leaf): Mode controls which set of behaviors the local system should perform
+// to support IPv6 router advertisements.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/mode"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Mode() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePathAny {
+	return &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
 			map[string]interface{}{},
 			n,
 		),
@@ -54459,6 +54841,168 @@ func (n *Interface_Subinterface_Ipv6_NeighborPathMapAny) Config() ygnmi.Wildcard
 	)
 }
 
+// Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/enable YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/enable YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/enable"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enable"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/enable"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/enable"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enable"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/enable"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Enable
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/interval YANG schema element.
 type Interface_Subinterface_Ipv6_RouterAdvertisement_IntervalPath struct {
 	*ygnmi.NodePath
@@ -54945,6 +55489,152 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny) Config(
 	)
 }
 
+// Interface_Subinterface_Ipv6_RouterAdvertisement_ModePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_ModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_ModePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_ModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ModePath) State() ygnmi.SingletonQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewSingletonQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ModePathAny) State() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/mode"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ModePath) Config() ygnmi.ConfigQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewConfigQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/mode"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ModePathAny) Config() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_Mode] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_Mode](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_Mode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/other-config YANG schema element.
 type Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPath struct {
 	*ygnmi.NodePath
@@ -55279,6 +55969,44 @@ type Interface_Subinterface_Ipv6_RouterAdvertisementPathAny struct {
 	*ygnmi.NodePath
 }
 
+// Enable (leaf): If set to false, all IPv6 router advertisement functions are
+// disabled.  The local system will not transmit router advertisement
+// messages and will not respond to router solicitation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/enable"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Enable() *Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Enable (leaf): If set to false, all IPv6 router advertisement functions are
+// disabled.  The local system will not transmit router advertisement
+// messages and will not respond to router solicitation messages.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enable"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/enable"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Enable() *Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_EnablePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // Interval (leaf): The interval between periodic router advertisement neighbor
 // discovery messages sent on this interface expressed in
 // seconds.
@@ -55384,6 +56112,42 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Managed() *Inte
 	return &Interface_Subinterface_Ipv6_RouterAdvertisement_ManagedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "managed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Mode (leaf): Mode controls which set of behaviors the local system should perform
+// to support IPv6 router advertisements.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/mode"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Mode() *Interface_Subinterface_Ipv6_RouterAdvertisement_ModePath {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_ModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Mode (leaf): Mode controls which set of behaviors the local system should perform
+// to support IPv6 router advertisements.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/mode"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Mode() *Interface_Subinterface_Ipv6_RouterAdvertisement_ModePathAny {
+	return &Interface_Subinterface_Ipv6_RouterAdvertisement_ModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
 			map[string]interface{}{},
 			n,
 		),

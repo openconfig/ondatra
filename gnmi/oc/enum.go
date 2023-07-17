@@ -8787,6 +8787,35 @@ const (
 	RibBgp_BgpOriginAttrType_INCOMPLETE E_RibBgp_BgpOriginAttrType = 3
 )
 
+// E_RouterAdvertisement_Mode is a derived int64 type which is used to represent
+// the enumerated node RouterAdvertisement_Mode. An additional value named
+// RouterAdvertisement_Mode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_RouterAdvertisement_Mode int64
+
+// IsYANGGoEnum ensures that RouterAdvertisement_Mode implements the yang.GoEnum
+// interface. This ensures that RouterAdvertisement_Mode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_RouterAdvertisement_Mode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  RouterAdvertisement_Mode.
+func (E_RouterAdvertisement_Mode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_RouterAdvertisement_Mode.
+func (e E_RouterAdvertisement_Mode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_RouterAdvertisement_Mode")
+}
+
+const (
+	// RouterAdvertisement_Mode_UNSET corresponds to the value UNSET of RouterAdvertisement_Mode
+	RouterAdvertisement_Mode_UNSET E_RouterAdvertisement_Mode = 0
+	// RouterAdvertisement_Mode_ALL corresponds to the value ALL of RouterAdvertisement_Mode
+	RouterAdvertisement_Mode_ALL E_RouterAdvertisement_Mode = 1
+	// RouterAdvertisement_Mode_DISABLE_UNSOLICITED_RA corresponds to the value DISABLE_UNSOLICITED_RA of RouterAdvertisement_Mode
+	RouterAdvertisement_Mode_DISABLE_UNSOLICITED_RA E_RouterAdvertisement_Mode = 2
+)
+
 // E_RouterInformation_Tlv_Type is a derived int64 type which is used to represent
 // the enumerated node RouterInformation_Tlv_Type. An additional value named
 // RouterInformation_Tlv_Type_UNSET is added to the enumeration which is used as

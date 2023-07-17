@@ -40,6 +40,7 @@ import (
 // CommonDialOpts to include in all gRPC dial calls.
 // TODO(greg-dennis): Unexport once IxNetwork is removed.
 var CommonDialOpts = []grpc.DialOption{
+	grpc.WithBlock(),
 	withUnaryAnnotateErrors(),
 	withStreamAnnotateErrors(),
 }
