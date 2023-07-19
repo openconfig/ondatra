@@ -113,6 +113,32 @@ func FetchGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error
 }
 
 var (
+	gnsiMu sync.Mutex
+	gnsis  = make(map[binding.DUT]binding.GNSIClients)
+)
+
+// NewGNSI creates a gNSI client for the specified DUT.
+func NewGNSI(ctx context.Context, dut binding.DUT) (binding.GNSIClients, error) {
+	return dut.DialGNSI(ctx, CommonDialOpts...)
+}
+
+// FetchGNSI fetches the cached gNSI client for the specified DUT.
+func FetchGNSI(ctx context.Context, dut binding.DUT) (binding.GNSIClients, error) {
+	gnsiMu.Lock()
+	defer gnsiMu.Unlock()
+	c, ok := gnsis[dut]
+	if !ok {
+		var err error
+		c, err = NewGNSI(ctx, dut)
+		if err != nil {
+			return nil, fmt.Errorf("error dialing gNSI: %w", err)
+		}
+		gnsis[dut] = c
+	}
+	return c, nil
+}
+
+var (
 	gribiMu sync.Mutex
 	gribis  = make(map[binding.Device]grpb.GRIBIClient)
 )

@@ -109,6 +109,42 @@ func TestGNOI(t *testing.T) {
 	})
 }
 
+func TestGNSI(t *testing.T) {
+	gnsi := NewDUTAPIs(dut).GNSI()
+
+	t.Run("error", func(t *testing.T) {
+		wantErr := "bad gnsi"
+		dut.DialGNSIFn = func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
+			return nil, errors.New(wantErr)
+		}
+		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+			gnsi.New(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
+		}
+		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
+			gnsi.Default(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		want := struct{ binding.GNSIClients }{}
+		dut.DialGNSIFn = func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
+			return want, nil
+		}
+		if got := gnsi.New(t); got != want {
+			t.Errorf("New(t) got %v, want %v", got, want)
+		}
+		if got := gnsi.Default(t); got != want {
+			t.Errorf("Default(t) got %v, want %v", got, want)
+		}
+	})
+}
+
 func TestGRIBI(t *testing.T) {
 	gribi := NewDUTAPIs(dut).GRIBI()
 

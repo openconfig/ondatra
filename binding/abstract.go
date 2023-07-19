@@ -39,6 +39,11 @@ import (
 	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
+	accpb "github.com/openconfig/gnsi/accounting"
+	authzpb "github.com/openconfig/gnsi/authz"
+	certzpb "github.com/openconfig/gnsi/certz"
+	credzpb "github.com/openconfig/gnsi/credentialz"
+	pathzpb "github.com/openconfig/gnsi/pathz"
 
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
@@ -88,41 +93,46 @@ func (d *AbstractDUT) String() string {
 }
 
 // PushConfig returns an unimplemented error.
-func (d *AbstractDUT) PushConfig(ctx context.Context, config string, reset bool) error {
+func (*AbstractDUT) PushConfig(ctx context.Context, config string, reset bool) error {
 	return errors.New("PushConfig unimplemented")
 }
 
 // DialCLI returns an unimplemented error.
-func (d *AbstractDUT) DialCLI(context.Context) (StreamClient, error) {
+func (*AbstractDUT) DialCLI(context.Context) (StreamClient, error) {
 	return nil, errors.New("DialCLI unimplemented")
 }
 
 // DialConsole returns an unimplemented error.
-func (d *AbstractDUT) DialConsole(context.Context) (StreamClient, error) {
+func (*AbstractDUT) DialConsole(context.Context) (StreamClient, error) {
 	return nil, errors.New("DialConsole unimplemented")
 }
 
 // DialGNMI returns an unimplemented error.
-func (d *AbstractDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+func (*AbstractDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
 	return nil, errors.New("DialGNMI unimplemented")
 }
 
 // DialGNOI returns an unimplemented error.
-func (d *AbstractDUT) DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error) {
+func (*AbstractDUT) DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error) {
 	return nil, errors.New("DialGNOI unimplemented")
 }
 
+// DialGNSI returns an unimplemented error.
+func (*AbstractDUT) DialGNSI(context.Context, ...grpc.DialOption) (GNSIClients, error) {
+	return nil, errors.New("DialGNSI unimplemented")
+}
+
 // DialGRIBI returns an unimplemented error.
-func (d *AbstractDUT) DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
+func (*AbstractDUT) DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 	return nil, errors.New("DialGRIBI unimplemented")
 }
 
 // DialP4RT returns an unimplemented error.
-func (d *AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
+func (*AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 	return nil, errors.New("DialP4RT unimplemented")
 }
 
-func (d *AbstractDUT) mustEmbedAbstractDUT() {}
+func (*AbstractDUT) mustEmbedAbstractDUT() {}
 
 var _ ATE = &AbstractATE{}
 
@@ -167,21 +177,21 @@ func (a *AbstractATE) String() string {
 }
 
 // DialIxNetwork returns an unimplemented error.
-func (a *AbstractATE) DialIxNetwork(context.Context) (*IxNetwork, error) {
+func (*AbstractATE) DialIxNetwork(context.Context) (*IxNetwork, error) {
 	return nil, errors.New("DialIxNetwork unimplemented")
 }
 
 // DialGNMI returns an unimplemented error.
-func (a *AbstractATE) DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
+func (*AbstractATE) DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 	return nil, errors.New("DialGNMI unimplemented")
 }
 
 // DialOTG returns an unimplemented error.
-func (a *AbstractATE) DialOTG(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+func (*AbstractATE) DialOTG(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
 	return nil, errors.New("DialOTG unimplemented")
 }
 
-func (a *AbstractATE) mustEmbedAbstractATE() {}
+func (*AbstractATE) mustEmbedAbstractATE() {}
 
 var _ GNOIClients = &AbstractGNOIClients{}
 
@@ -189,84 +199,127 @@ var _ GNOIClients = &AbstractGNOIClients{}
 type AbstractGNOIClients struct{}
 
 // BGP logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) BGP() bpb.BGPClient {
+func (*AbstractGNOIClients) BGP() bpb.BGPClient {
 	log.Fatal("BGP unimplemented")
 	return nil
 }
 
 // CertificateManagement logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) CertificateManagement() cpb.CertificateManagementClient {
+func (*AbstractGNOIClients) CertificateManagement() cpb.CertificateManagementClient {
 	log.Fatal("CertificateManagement unimplemented")
 	return nil
 }
 
 // Diag logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) Diag() dpb.DiagClient {
+func (*AbstractGNOIClients) Diag() dpb.DiagClient {
 	log.Fatal("Diag unimplemented")
 	return nil
 }
 
 // FactoryReset logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) FactoryReset() frpb.FactoryResetClient {
+func (*AbstractGNOIClients) FactoryReset() frpb.FactoryResetClient {
 	log.Fatal("FactoryReset unimplemented")
 	return nil
 }
 
 // File logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) File() fpb.FileClient {
+func (*AbstractGNOIClients) File() fpb.FileClient {
 	log.Fatal("File unimplemented")
 	return nil
 }
 
 // Healthz logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) Healthz() hpb.HealthzClient {
+func (*AbstractGNOIClients) Healthz() hpb.HealthzClient {
 	log.Fatal("Healthz unimplemented")
 	return nil
 }
 
 // Layer2 logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) Layer2() lpb.Layer2Client {
+func (*AbstractGNOIClients) Layer2() lpb.Layer2Client {
 	log.Fatal("Layer2 unimplemented")
 	return nil
 }
 
 // LinkQualification logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) LinkQualification() plqpb.LinkQualificationClient {
+func (*AbstractGNOIClients) LinkQualification() plqpb.LinkQualificationClient {
 	log.Fatal("LinkQualification unimplemented")
 	return nil
 }
 
 // MPLS logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) MPLS() mpb.MPLSClient {
+func (*AbstractGNOIClients) MPLS() mpb.MPLSClient {
 	log.Fatal("MPLS unimplemented")
 	return nil
 }
 
 // OS logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) OS() ospb.OSClient {
+func (*AbstractGNOIClients) OS() ospb.OSClient {
 	log.Fatal("OS unimplemented")
 	return nil
 }
 
 // OTDR logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) OTDR() otpb.OTDRClient {
+func (*AbstractGNOIClients) OTDR() otpb.OTDRClient {
 	log.Fatal("OTDR unimplemented")
 	return nil
 }
 
 // System logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) System() spb.SystemClient {
+func (*AbstractGNOIClients) System() spb.SystemClient {
 	log.Fatal("System unimplemented")
 	return nil
 }
 
 // WavelengthRouter logs a fatal unimplemented error.
-func (g *AbstractGNOIClients) WavelengthRouter() wpb.WavelengthRouterClient {
+func (*AbstractGNOIClients) WavelengthRouter() wpb.WavelengthRouterClient {
 	log.Fatal("WavelengthRouter unimplemented")
 	return nil
 }
 
 func (g *AbstractGNOIClients) mustEmbedAbstractGNOIClients() {}
+
+var _ GNSIClients = &AbstractGNSIClients{}
+
+// AbstractGNSIClients is implementation support for the GNSIClients interface.
+type AbstractGNSIClients struct{}
+
+// Authz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Authz() authzpb.AuthzClient {
+	log.Fatal("Authz unimplemented")
+	return nil
+}
+
+// Pathz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Pathz() pathzpb.PathzClient {
+	log.Fatal("Pathz unimplemented")
+	return nil
+}
+
+// Certz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Certz() certzpb.CertzClient {
+	log.Fatal("Certz unimplemented")
+	return nil
+}
+
+// Credentialz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Credentialz() credzpb.CredentialzClient {
+	log.Fatal("Credentialz unimplemented")
+	return nil
+}
+
+// AccountingPull logs a fatal unimplemented error.
+func (*AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
+	log.Fatal("AccountingPull unimplemented")
+	return nil
+}
+
+// AccountingPush logs a fatal unimplemented error.
+func (*AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
+	log.Fatal("AccountingPush unimplemented")
+	return nil
+}
+
+func (*AbstractGNSIClients) mustEmbedAbstractGNSIClients() {}
 
 var _ StreamClient = &AbstractStreamClient{}
 
@@ -274,31 +327,31 @@ var _ StreamClient = &AbstractStreamClient{}
 type AbstractStreamClient struct{}
 
 // SendCommand returns an unimplemented error.
-func (s *AbstractStreamClient) SendCommand(ctx context.Context, cmd string) (string, error) {
+func (*AbstractStreamClient) SendCommand(ctx context.Context, cmd string) (string, error) {
 	return "", errors.New("SendCommand unimplemented")
 }
 
 // Stdin logs a fatal unimplemented error.
-func (s *AbstractStreamClient) Stdin() io.WriteCloser {
+func (*AbstractStreamClient) Stdin() io.WriteCloser {
 	log.Fatal("Stdin unimplemented")
 	return nil
 }
 
 // Stdout logs a fatal unimplemented error.
-func (s *AbstractStreamClient) Stdout() io.ReadCloser {
+func (*AbstractStreamClient) Stdout() io.ReadCloser {
 	log.Fatal("Stdout unimplemented")
 	return nil
 }
 
 // Stderr logs a fatal unimplemented error.
-func (s *AbstractStreamClient) Stderr() io.ReadCloser {
+func (*AbstractStreamClient) Stderr() io.ReadCloser {
 	log.Fatal("Stderr unimplemented")
 	return nil
 }
 
 // Close returns an unimplemented error.
-func (s *AbstractStreamClient) Close() error {
+func (*AbstractStreamClient) Close() error {
 	return errors.New("Close unimplemented")
 }
 
-func (s *AbstractStreamClient) mustEmbedAbstractStreamClient() {}
+func (*AbstractStreamClient) mustEmbedAbstractStreamClient() {}

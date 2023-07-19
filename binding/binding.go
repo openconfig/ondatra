@@ -40,6 +40,11 @@ import (
 	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
+	accpb "github.com/openconfig/gnsi/accounting"
+	authzpb "github.com/openconfig/gnsi/authz"
+	certzpb "github.com/openconfig/gnsi/certz"
+	credzpb "github.com/openconfig/gnsi/credentialz"
+	pathzpb "github.com/openconfig/gnsi/pathz"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
@@ -143,6 +148,10 @@ type DUT interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error)
 
+	// DialGNSI creates a client connection to the DUT's gNSI endpoint.
+	// Implementations must append transport security options necessary to reach the server.
+	DialGNSI(context.Context, ...grpc.DialOption) (GNSIClients, error)
+
 	// DialGRIBI creates a client connection to the DUT's gRIBI endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
@@ -216,6 +225,18 @@ type GNOIClients interface {
 	System() spb.SystemClient
 	WavelengthRouter() wpb.WavelengthRouterClient
 	mustEmbedAbstractGNOIClients()
+}
+
+// GNSIClients stores APIs to GNSI services.
+// All implementations of this interface must embed AbstractGNSIClients.
+type GNSIClients interface {
+	Authz() authzpb.AuthzClient
+	Pathz() pathzpb.PathzClient
+	Certz() certzpb.CertzClient
+	Credentialz() credzpb.CredentialzClient
+	AccountingPull() accpb.AccountingPullClient
+	AccountingPush() accpb.AccountingPushClient
+	mustEmbedAbstractGNSIClients()
 }
 
 // StreamClient provides the interface for streaming IO to DUT.

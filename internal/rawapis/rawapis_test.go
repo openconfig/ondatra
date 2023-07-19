@@ -43,6 +43,9 @@ var (
 		DialGNOIFn: func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 			return &struct{ binding.GNOIClients }{}, nil
 		},
+		DialGNSIFn: func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
+			return &struct{ binding.GNSIClients }{}, nil
+		},
 		DialGRIBIFn: func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 			return &struct{ grpb.GRIBIClient }{}, nil
 		},
@@ -115,6 +118,27 @@ func TestGNOI(t *testing.T) {
 	}
 	if gotFetch == gotNew {
 		t.Errorf("FetchGNOI() unexpected result: got %v, want unique value", gotFetch)
+	}
+}
+
+func TestGNSI(t *testing.T) {
+	gotNew, err := NewGNSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("NewGNSI() unexpected error: %v", err)
+	}
+	wantFetch, err := FetchGNSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("FetchGNSI() unexpected error: %v", err)
+	}
+	gotFetch, err := FetchGNSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("FetchGNSI() unexpected error: %v", err)
+	}
+	if gotFetch != wantFetch {
+		t.Errorf("FetchGNSI() unexpected result: got %v, want %v", gotFetch, wantFetch)
+	}
+	if gotFetch == gotNew {
+		t.Errorf("FetchGNSI() unexpected result: got %v, want unique value", gotFetch)
 	}
 }
 

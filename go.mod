@@ -10,6 +10,7 @@ require (
 	github.com/openconfig/entity-naming v0.0.0-20230615134154-46b7e6d34924
 	github.com/openconfig/gnmi v0.9.1
 	github.com/openconfig/gnoi v0.0.0-20230221223856-1727ed932554
+	github.com/openconfig/gnsi v1.2.1
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.4.0
 	github.com/openconfig/gribi v1.0.0

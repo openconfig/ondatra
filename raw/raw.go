@@ -122,6 +122,49 @@ func (g *GNOIAPI) Default(t testing.TB) GNOI {
 	return bgnoi
 }
 
+// GNSIAPI provides access to creating raw gNSI client for the DUT.
+type GNSIAPI struct {
+	dut binding.DUT
+}
+
+// GNSI stores APIs to GNSI services.
+type GNSI interface {
+	// Embed an unexported interface that wraps binding.GNSIClients,
+	// so as to not expose the binding.GNSIClients instance directly.
+	privateGNSI
+}
+
+type privateGNSI interface {
+	binding.GNSIClients
+}
+
+// GNSI provides access to creating raw gNSI clients for the dut.
+func (r *DUTAPIs) GNSI() *GNSIAPI {
+	return &GNSIAPI{r.dut}
+}
+
+// New returns a new gNSI client for the DUT.
+func (g *GNSIAPI) New(t testing.TB) GNSI {
+	t.Helper()
+	t = events.ActionStarted(t, "Creating gNSI  client for %s", g.dut)
+	bgnsi, err := rawapis.NewGNSI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("Failed to create gNSI client for %v: %v", g.dut, err)
+	}
+	return bgnsi
+}
+
+// Default returns the default gNSI client for the dut.
+func (g *GNSIAPI) Default(t testing.TB) GNSI {
+	t.Helper()
+	t = events.ActionStarted(t, "Fetching gNSI client for %s", g.dut)
+	bgnsi, err := rawapis.FetchGNSI(context.Background(), g.dut)
+	if err != nil {
+		t.Fatalf("Failed to fetch gNSI client for %v: %v", g.dut, err)
+	}
+	return bgnsi
+}
+
 // GRIBI provides access to createing raw gRIBI clients for the dut.
 func (r *DUTAPIs) GRIBI() *GRIBIAPI {
 	return &GRIBIAPI{r.dut}
