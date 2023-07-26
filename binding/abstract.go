@@ -44,7 +44,7 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 
-	accpb "github.com/openconfig/gnsi/accounting"
+	//accpb "github.com/openconfig/gnsi/accounting"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
 	credpb "github.com/openconfig/gnsi/credentialz"
@@ -131,6 +131,11 @@ func (d *AbstractDUT) DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBI
 // DialP4RT returns an unimplemented error.
 func (d *AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 	return nil, errors.New("DialP4RT unimplemented")
+}
+
+//ServiceAddress returns an unimplemented error.
+func (d *AbstractDUT)	ServiceAddress(string) (string, error){
+	return "", errors.New("ServiceAddress unimplemented")
 }
 
 func (d *AbstractDUT) mustEmbedAbstractDUT() {}
@@ -311,16 +316,16 @@ func (g *AbstractGNSIClients) Credentialz() credpb.CredentialzClient {
 }
 
 // AccountingPull logs a fatal unimplemented error.
-func (g *AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
-	log.Fatal("AccountingPull unimplemented")
-	return nil
-}
+//func (g *AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
+//	log.Fatal("AccountingPull unimplemented")
+//	return nil
+//}
 
 // AccountingPush logs a fatal unimplemented error.
-func (g *AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
-	log.Fatal("AccountingPush unimplemented")
-	return nil
-}
+//func (g *AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
+//	log.Fatal("AccountingPush unimplemented")
+//	return nil
+//}
 
 var _ StreamClient = &AbstractStreamClient{}
 

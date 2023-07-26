@@ -40,7 +40,7 @@ import (
 	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
-	accpb "github.com/openconfig/gnsi/accounting"
+	//accpb "github.com/openconfig/gnsi/accounting"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
 	credpb "github.com/openconfig/gnsi/credentialz"
@@ -115,6 +115,7 @@ type Dims struct {
 	HardwareModel   string
 	SoftwareVersion string
 	Ports           map[string]*Port
+	Services 	    map[string]string
 	CustomData      map[string]any
 }
 
@@ -159,6 +160,10 @@ type DUT interface {
 	// DialP4RT creates a client connection to the DUT's P4RT endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+
+    //ServiceAddress returns the address (ip:port) of the given service (e.g., gribi, gnmi)
+	ServiceAddress(string) (string, error)
+
 
 	mustEmbedAbstractDUT()
 }
@@ -215,8 +220,8 @@ type GNSIClients interface {
 	Pathz() pathzpb.PathzClient
 	Certz() certzpb.CertzClient
 	Credentialz() credpb.CredentialzClient
-	AccountingPull() accpb.AccountingPullClient
-	AccountingPush() accpb.AccountingPushClient
+	//AccountingPull() accpb.AccountingPullClient
+	//AccountingPush() accpb.AccountingPushClient
 	mustEmbedAbstractGNSIClients()
 }
 

@@ -33,6 +33,11 @@ func (d *DUTDevice) Config() *Config {
 	}
 }
 
+//ServiceAddress returns the address (ip:port) of the given service (e.g., gribi, gnmi)
+func (d *DUTDevice) ServiceAddress(service string) (string, error) {
+	return d.res.(binding.DUT).ServiceAddress(service)
+}
+
 // Config is the DUT configuration API.
 type Config struct {
 	dut binding.DUT
