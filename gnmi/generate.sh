@@ -121,6 +121,7 @@ go run github.com/openconfig/ygnmi/app/ygnmi generator \
   --base_package_path=github.com/openconfig/ondatra/gnmi/otg \
   --output_dir=gnmi/otg \
   --paths=models-yang/models/... \
+  --generate_atomic_lists=false \
   "${OTG_YANG_FILES[@]}"
 
 find gnmi -name "*.go" -exec goimports -w {} +

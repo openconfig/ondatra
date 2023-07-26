@@ -43,6 +43,9 @@ var (
 		DialGNOIFn: func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 			return &struct{ binding.GNOIClients }{}, nil
 		},
+		DialGNSIFn: func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
+			return &struct{ binding.GNSIClients }{}, nil
+		},
 		DialGRIBIFn: func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 			return &struct{ grpb.GRIBIClient }{}, nil
 		},

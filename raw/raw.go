@@ -122,12 +122,7 @@ func (g *GNOIAPI) Default(t testing.TB) GNOI {
 	return bgnoi
 }
 
-// GNSI provides access to creating raw gNSI clients for the dut.
-func (r *DUTAPIs) GNSI() *GNSIAPI {
-	return &GNSIAPI{r.dut}
-}
-
-// GNSIAPI provides access to creating raw gNSI clients for the dut.
+// GNSIAPI provides access to creating raw gNSI client for the DUT.
 type GNSIAPI struct {
 	dut binding.DUT
 }
@@ -143,10 +138,15 @@ type privateGNSI interface {
 	binding.GNSIClients
 }
 
-// New returns a new gNSI client for the dut.
+// GNSI provides access to creating raw gNSI clients for the dut.
+func (r *DUTAPIs) GNSI() *GNSIAPI {
+	return &GNSIAPI{r.dut}
+}
+
+// New returns a new gNSI client for the DUT.
 func (g *GNSIAPI) New(t testing.TB) GNSI {
 	t.Helper()
-	t = events.ActionStarted(t, "Creating gNSI client for %s", g.dut)
+	t = events.ActionStarted(t, "Creating gNSI  client for %s", g.dut)
 	bgnsi, err := rawapis.NewGNSI(context.Background(), g.dut)
 	if err != nil {
 		t.Fatalf("Failed to create gNSI client for %v: %v", g.dut, err)
