@@ -115,7 +115,6 @@ type Dims struct {
 	HardwareModel   string
 	SoftwareVersion string
 	Ports           map[string]*Port
-	Services 	    map[string]string
 	CustomData      map[string]any
 }
 
@@ -157,17 +156,9 @@ type DUT interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
 
-	// DialGNSI creates a client connection to the DUT's gNSI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
-	DialGNSI(context.Context, ...grpc.DialOption) (GNSIClients, error)
-
 	// DialP4RT creates a client connection to the DUT's P4RT endpoint.
 	// Implementations must append transport security options necessary to reach the server.
 	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
-
-    //ServiceAddress returns the address (ip:port) of the given service (e.g., gribi, gnmi)
-	ServiceAddress(string) (string, error)
-
 
 	mustEmbedAbstractDUT()
 }
@@ -215,18 +206,6 @@ type IxNetwork struct {
 	// SyslogHost is an optional hostname or IP address to which IxNetwork should
 	// stream logs. If empty, syslog streaming is not enabled.
 	SyslogHost string
-}
-
-// GNSIClients stores APIs to GNSI services.
-// All implementations of this interface must embed AbstractGNSIClients.
-type GNSIClients interface {
-	Authz() authzpb.AuthzClient
-	Pathz() pathzpb.PathzClient
-	Certz() certzpb.CertzClient
-	Credentialz() credpb.CredentialzClient
-	//AccountingPull() accpb.AccountingPullClient
-	//AccountingPush() accpb.AccountingPushClient
-	mustEmbedAbstractGNSIClients()
 }
 
 // GNOIClients stores APIs to GNOI services.

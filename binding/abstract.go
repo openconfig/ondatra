@@ -48,12 +48,6 @@ import (
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
-
-	//accpb "github.com/openconfig/gnsi/accounting"
-	authzpb "github.com/openconfig/gnsi/authz"
-	certzpb "github.com/openconfig/gnsi/certz"
-	credpb "github.com/openconfig/gnsi/credentialz"
-	pathzpb "github.com/openconfig/gnsi/pathz"
 )
 
 var _ DUT = &AbstractDUT{}
@@ -138,12 +132,7 @@ func (*AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4Runtim
 	return nil, errors.New("DialP4RT unimplemented")
 }
 
-//ServiceAddress returns an unimplemented error.
-func (d *AbstractDUT)	ServiceAddress(string) (string, error){
-	return "", errors.New("ServiceAddress unimplemented")
-}
-
-func (d *AbstractDUT) mustEmbedAbstractDUT() {}
+func (*AbstractDUT) mustEmbedAbstractDUT() {}
 
 var _ ATE = &AbstractATE{}
 
@@ -291,67 +280,34 @@ func (g *AbstractGNOIClients) mustEmbedAbstractGNOIClients() {}
 
 var _ GNSIClients = &AbstractGNSIClients{}
 
-<<<<<<< HEAD
-func (g *AbstractGNSIClients) mustEmbedAbstractGNSIClients() {}
-
-=======
->>>>>>> main
 // AbstractGNSIClients is implementation support for the GNSIClients interface.
 type AbstractGNSIClients struct{}
 
 // Authz logs a fatal unimplemented error.
-<<<<<<< HEAD
-func (g *AbstractGNSIClients) Authz() authzpb.AuthzClient {
-=======
 func (*AbstractGNSIClients) Authz() authzpb.AuthzClient {
->>>>>>> main
 	log.Fatal("Authz unimplemented")
 	return nil
 }
 
 // Pathz logs a fatal unimplemented error.
-<<<<<<< HEAD
-func (g *AbstractGNSIClients) Pathz() pathzpb.PathzClient {
-=======
 func (*AbstractGNSIClients) Pathz() pathzpb.PathzClient {
->>>>>>> main
 	log.Fatal("Pathz unimplemented")
 	return nil
 }
 
 // Certz logs a fatal unimplemented error.
-<<<<<<< HEAD
-func (g *AbstractGNSIClients) Certz() certzpb.CertzClient {
-=======
 func (*AbstractGNSIClients) Certz() certzpb.CertzClient {
->>>>>>> main
 	log.Fatal("Certz unimplemented")
 	return nil
 }
 
 // Credentialz logs a fatal unimplemented error.
-<<<<<<< HEAD
-func (g *AbstractGNSIClients) Credentialz() credpb.CredentialzClient {
-=======
 func (*AbstractGNSIClients) Credentialz() credzpb.CredentialzClient {
->>>>>>> main
 	log.Fatal("Credentialz unimplemented")
 	return nil
 }
 
 // AccountingPull logs a fatal unimplemented error.
-<<<<<<< HEAD
-//func (g *AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
-//	log.Fatal("AccountingPull unimplemented")
-//	return nil
-//}
-
-// AccountingPush logs a fatal unimplemented error.
-//func (g *AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
-//	log.Fatal("AccountingPush unimplemented")
-//	return nil
-//}
-=======
 func (*AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
 	log.Fatal("AccountingPull unimplemented")
 	return nil
@@ -364,7 +320,6 @@ func (*AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
 }
 
 func (*AbstractGNSIClients) mustEmbedAbstractGNSIClients() {}
->>>>>>> main
 
 var _ StreamClient = &AbstractStreamClient{}
 
