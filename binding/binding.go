@@ -160,6 +160,9 @@ type DUT interface {
 	// Implementations must append transport security options necessary to reach the server.
 	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 
+	//ServiceAddress returns the address (ip:port) of the given service (e.g., gribi, gnmi)
+	ServiceAddress(service string) (string, error) 
+
 	mustEmbedAbstractDUT()
 }
 

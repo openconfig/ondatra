@@ -132,6 +132,11 @@ func (*AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4Runtim
 	return nil, errors.New("DialP4RT unimplemented")
 }
 
+//ServiceAddress returns the address (ip:port) of the given service (e.g., gribi, gnmi)
+func (*AbstractDUT) ServiceAddress(service string) (string, error) {
+	return "", errors.New("ServiceAddress unimplemented")
+}
+
 func (*AbstractDUT) mustEmbedAbstractDUT() {}
 
 var _ ATE = &AbstractATE{}
