@@ -52,9 +52,6 @@ var (
 		DialP4RTFn: func(context.Context, ...grpc.DialOption) (ppb.P4RuntimeClient, error) {
 			return &struct{ ppb.P4RuntimeClient }{}, nil
 		},
-		DialGNSIFn: func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
-			return &struct{ binding.GNSIClients }{}, nil
-		},
 	}
 
 	ate = &fakebind.ATE{
