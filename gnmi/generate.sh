@@ -62,6 +62,7 @@ YANG_FILES=(
   public/release/models/optical-transport/openconfig-terminal-device.yang
   public/release/models/optical-transport/openconfig-transport-types.yang
   public/release/models/ospf/openconfig-ospfv2.yang
+  public/release/models/ospf/openconfig-ospf-policy.yang
   public/release/models/p4rt/openconfig-p4rt.yang
   public/release/models/platform/openconfig-platform-controller-card.yang
   public/release/models/platform/openconfig-platform-cpu.yang

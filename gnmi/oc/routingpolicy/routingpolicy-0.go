@@ -39,6 +39,7 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
+  - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
@@ -6649,6 +6650,38 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_ActionsPathAny) BgpActions() *
 	}
 }
 
+// OspfActions (container): Actions specific to OSPF
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "ospf-actions"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions"
+func (n *RoutingPolicy_PolicyDefinition_Statement_ActionsPath) OspfActions() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ospf-actions"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OspfActions (container): Actions specific to OSPF
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "ospf-actions"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions"
+func (n *RoutingPolicy_PolicyDefinition_Statement_ActionsPathAny) OspfActions() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ospf-actions"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
 // PolicyResult (leaf): Select the final disposition for the route, either
 // accept or reject.
 //
@@ -10571,6 +10604,818 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/state/set-area YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/state/set-area YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/set-area"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/state/set-area"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPath) State() ygnmi.SingletonQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union] {
+	return ygnmi.NewSingletonQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-area"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions).SetArea
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/set-area"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/state/set-area"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPathAny) State() ygnmi.WildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union] {
+	return ygnmi.NewWildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-area"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions).SetArea
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/set-area"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/config/set-area"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPath) Config() ygnmi.ConfigQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union] {
+	return ygnmi.NewConfigQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-area"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions).SetArea
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/set-area"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/config/set-area"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPathAny) Config() ygnmi.WildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union] {
+	return ygnmi.NewWildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-area"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions).SetArea
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath struct {
+	*ygnmi.NodePath
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// SetArea (leaf): Set the area for the matched route. This action is typically
+// used when importing prefixes into OSPF, such that a route can
+// be imported into a specific area within the instance.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-area"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/*/set-area"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath) SetArea() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-area"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SetArea (leaf): Set the area for the matched route. This action is typically
+// used when importing prefixes into OSPF, such that a route can
+// be imported into a specific area within the instance.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-area"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/*/set-area"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny) SetArea() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetAreaPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-area"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SetMetric (container): Configuration and state parameters relating to manipulating
+// the OSPF metric
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "set-metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath) SetMetric() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"set-metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// SetMetric (container): Configuration and state parameters relating to manipulating
+// the OSPF metric
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "set-metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny) SetMetric() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"set-metric"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath) State() ygnmi.SingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions] {
+	return ygnmi.NewSingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		true,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny) State() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		true,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPath) Config() ygnmi.ConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions] {
+	return ygnmi.NewConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		false,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActionsPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions",
+		false,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).Metric
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).Metric
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/config/metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		false,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).Metric
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/config/metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		false,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"config", "metric"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).Metric
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric-type YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric-type YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/metric-type"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric-type"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePath) State() ygnmi.SingletonQuery[oc.E_SetMetric_MetricType] {
+	return ygnmi.NewSingletonQuery[oc.E_SetMetric_MetricType](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SetMetric_MetricType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).MetricType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/metric-type"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric-type"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePathAny) State() ygnmi.WildcardQuery[oc.E_SetMetric_MetricType] {
+	return ygnmi.NewWildcardQuery[oc.E_SetMetric_MetricType](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "metric-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SetMetric_MetricType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).MetricType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/metric-type"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/config/metric-type"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePath) Config() ygnmi.ConfigQuery[oc.E_SetMetric_MetricType] {
+	return ygnmi.NewConfigQuery[oc.E_SetMetric_MetricType](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "metric-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SetMetric_MetricType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).MetricType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/metric-type"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/config/metric-type"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePathAny) Config() ygnmi.WildcardQuery[oc.E_SetMetric_MetricType] {
+	return ygnmi.NewWildcardQuery[oc.E_SetMetric_MetricType](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "metric-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SetMetric_MetricType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric).MetricType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath struct {
+	*ygnmi.NodePath
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Metric (leaf): Set the metric of the routes matching the policy to the value
+// specified by this leaf.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/*/metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath) Metric() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// Metric (leaf): Set the metric of the routes matching the policy to the value
+// specified by this leaf.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/metric"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/*/metric"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny) Metric() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "metric"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MetricType (leaf): Specify the type of metric which is to be set by the policy
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/metric-type"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/*/metric-type"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath) MetricType() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "metric-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MetricType (leaf): Specify the type of metric which is to be set by the policy
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/metric-type"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/*/metric-type"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny) MetricType() *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric_MetricTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "metric-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath) State() ygnmi.SingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric] {
+	return ygnmi.NewSingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		true,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny) State() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		true,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPath) Config() ygnmi.ConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric] {
+	return ygnmi.NewConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		false,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetricPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetMetric",
+		false,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_SetTag_ModePath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/set-tag/state/mode YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_SetTag_ModePath struct {
 	*ygnmi.NodePath
@@ -12099,6 +12944,38 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_ConditionsPathAny) MatchTagSet
 	return &RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSetPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"match-tag-set"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OspfConditions (container): Match conditions specific to OSPF
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "ospf-conditions"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions"
+func (n *RoutingPolicy_PolicyDefinition_Statement_ConditionsPath) OspfConditions() *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ospf-conditions"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+}
+
+// OspfConditions (container): Match conditions specific to OSPF
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "ospf-conditions"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions"
+func (n *RoutingPolicy_PolicyDefinition_Statement_ConditionsPathAny) OspfConditions() *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ospf-conditions"},
 			map[string]interface{}{},
 			n,
 		),
@@ -17412,6 +18289,290 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSetPath) Co
 func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSetPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet] {
 	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet](
 		"RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchTagSet",
+		false,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/state/area-eq YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/state/area-eq YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/area-eq"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/state/area-eq"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPath) State() ygnmi.SingletonQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union] {
+	return ygnmi.NewSingletonQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "area-eq"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions).AreaEq
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "state/area-eq"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/state/area-eq"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPathAny) State() ygnmi.WildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union] {
+	return ygnmi.NewWildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "area-eq"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions).AreaEq
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/area-eq"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/config/area-eq"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPath) Config() ygnmi.ConfigQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union] {
+	return ygnmi.NewConfigQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "area-eq"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions).AreaEq
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-ospf-policy"
+//	Path from parent:     "config/area-eq"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/config/area-eq"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPathAny) Config() ygnmi.WildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union] {
+	return ygnmi.NewWildcardQuery[oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "area-eq"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions).AreaEq
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath struct {
+	*ygnmi.NodePath
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AreaEq (leaf): Match prefixes which are within a particular OSPF area
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/area-eq"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/*/area-eq"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath) AreaEq() *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPath {
+	return &RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "area-eq"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// AreaEq (leaf): Match prefixes which are within a particular OSPF area
+//
+//	Defining module:      "openconfig-ospf-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/area-eq"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/*/area-eq"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny) AreaEq() *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPathAny {
+	return &RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEqPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "area-eq"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath) State() ygnmi.SingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions] {
+	return ygnmi.NewSingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		true,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny) State() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		true,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPath) Config() ygnmi.ConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions] {
+	return ygnmi.NewConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
+		false,
+		false,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditionsPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions",
 		false,
 		false,
 		false,

@@ -40,6 +40,7 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
+  - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
@@ -489,6 +490,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "EXTERNAL_FLAG"},
 		2: {Name: "READVERTISEMENT_FLAG"},
 		3: {Name: "NODE_FLAG"},
+	},
+	"E_FlexAlgoPrefixSid_SidId": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
 	},
 	"E_Flow_MplsLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -1979,6 +1988,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_SegmentRoutingSidLabelRange_Tlv_Type": {
 		1: {Name: "UNKNOWN"},
 	},
+	"E_SegmentRouting_LevelType": {
+		1: {Name: "LEVEL_1"},
+		2: {Name: "LEVEL_2"},
+		3: {Name: "LEVEL_1_2"},
+	},
 	"E_SegmentRouting_SrDataplaneType": {
 		1: {Name: "MPLS"},
 		2: {Name: "IPV6"},
@@ -2029,6 +2043,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_SetCommunity_Method": {
 		1: {Name: "INLINE"},
 		2: {Name: "REFERENCE"},
+	},
+	"E_SetMetric_MetricType": {
+		1: {Name: "EXTERNAL_TYPE_1"},
+		2: {Name: "EXTERNAL_TYPE_2"},
 	},
 	"E_SetTag_Mode": {
 		1: {Name: "INLINE"},
@@ -2259,20 +2277,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3:  {Name: "CFP2_ACO", DefiningModule: "openconfig-transport-types"},
 		4:  {Name: "CFP4", DefiningModule: "openconfig-transport-types"},
 		5:  {Name: "CPAK", DefiningModule: "openconfig-transport-types"},
-		6:  {Name: "NON_PLUGGABLE", DefiningModule: "openconfig-transport-types"},
-		7:  {Name: "OSFP", DefiningModule: "openconfig-transport-types"},
-		8:  {Name: "OTHER", DefiningModule: "openconfig-transport-types"},
-		9:  {Name: "QSFP", DefiningModule: "openconfig-transport-types"},
-		10: {Name: "QSFP28", DefiningModule: "openconfig-transport-types"},
-		11: {Name: "QSFP56_DD_TYPE1", DefiningModule: "openconfig-transport-types"},
-		12: {Name: "QSFP56_DD_TYPE2", DefiningModule: "openconfig-transport-types"},
-		13: {Name: "QSFP_PLUS", DefiningModule: "openconfig-transport-types"},
-		14: {Name: "SFP", DefiningModule: "openconfig-transport-types"},
-		15: {Name: "SFP28", DefiningModule: "openconfig-transport-types"},
-		16: {Name: "SFP56", DefiningModule: "openconfig-transport-types"},
-		17: {Name: "SFP_PLUS", DefiningModule: "openconfig-transport-types"},
-		18: {Name: "X2", DefiningModule: "openconfig-transport-types"},
-		19: {Name: "XFP", DefiningModule: "openconfig-transport-types"},
+		6:  {Name: "DSFP", DefiningModule: "openconfig-transport-types"},
+		7:  {Name: "NON_PLUGGABLE", DefiningModule: "openconfig-transport-types"},
+		8:  {Name: "OSFP", DefiningModule: "openconfig-transport-types"},
+		9:  {Name: "OTHER", DefiningModule: "openconfig-transport-types"},
+		10: {Name: "QSFP", DefiningModule: "openconfig-transport-types"},
+		11: {Name: "QSFP28", DefiningModule: "openconfig-transport-types"},
+		12: {Name: "QSFP56_DD_TYPE1", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "QSFP56_DD_TYPE2", DefiningModule: "openconfig-transport-types"},
+		14: {Name: "QSFP_PLUS", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "SFP", DefiningModule: "openconfig-transport-types"},
+		16: {Name: "SFP28", DefiningModule: "openconfig-transport-types"},
+		17: {Name: "SFP56", DefiningModule: "openconfig-transport-types"},
+		18: {Name: "SFP_DD", DefiningModule: "openconfig-transport-types"},
+		19: {Name: "SFP_PLUS", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "X2", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "XFP", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE": {
 		1: {Name: "TYPE_DIGITAL_COHERENT_OPTIC", DefiningModule: "openconfig-transport-types"},
@@ -3285,6 +3305,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/protocols/protocol/isis/global/lsp-bit/overload-bit/reset-triggers/reset-trigger/state/reset-trigger": {
 			reflect.TypeOf((E_IsisTypes_OVERLOAD_RESET_TRIGGER_TYPE)(0)),
 		},
+		"/network-instances/network-instance/protocols/protocol/isis/global/segment-routing/flex-algorithm-bindings/flex-algorithm-binding/state/isis-level": {
+			reflect.TypeOf((E_SegmentRouting_LevelType)(0)),
+		},
 		"/network-instances/network-instance/protocols/protocol/isis/global/state/hello-padding": {
 			reflect.TypeOf((E_Isis_HelloPaddingType)(0)),
 		},
@@ -3329,6 +3352,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/adjacency-sids/adjacency-sid/state/sid-id": {
 			reflect.TypeOf((E_AdjacencySid_SidId)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/flex-algo-prefix-sids/flex-algo-prefix-sid/state/sid-id": {
+			reflect.TypeOf((E_FlexAlgoPrefixSid_SidId)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/prefix-sids/prefix-sid/state/label-options": {
 			reflect.TypeOf((E_PrefixSid_LabelOptions)(0)),
@@ -3909,6 +3935,9 @@ func initΛEnumTypes() {
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-route-origin": {
 			reflect.TypeOf((E_BgpPolicy_BgpOriginAttrType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/state/metric-type": {
+			reflect.TypeOf((E_SetMetric_MetricType)(0)),
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/set-tag/state/mode": {
 			reflect.TypeOf((E_SetTag_Mode)(0)),

@@ -40,6 +40,7 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
+  - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
@@ -2316,6 +2317,43 @@ const (
 	Flags_Flags_READVERTISEMENT_FLAG E_Flags_Flags = 2
 	// Flags_Flags_NODE_FLAG corresponds to the value NODE_FLAG of Flags_Flags
 	Flags_Flags_NODE_FLAG E_Flags_Flags = 3
+)
+
+// E_FlexAlgoPrefixSid_SidId is a derived int64 type which is used to represent
+// the enumerated node FlexAlgoPrefixSid_SidId. An additional value named
+// FlexAlgoPrefixSid_SidId_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_FlexAlgoPrefixSid_SidId int64
+
+// IsYANGGoEnum ensures that FlexAlgoPrefixSid_SidId implements the yang.GoEnum
+// interface. This ensures that FlexAlgoPrefixSid_SidId can be identified as a
+// mapped type for a YANG enumeration.
+func (E_FlexAlgoPrefixSid_SidId) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  FlexAlgoPrefixSid_SidId.
+func (E_FlexAlgoPrefixSid_SidId) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_FlexAlgoPrefixSid_SidId.
+func (e E_FlexAlgoPrefixSid_SidId) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_FlexAlgoPrefixSid_SidId")
+}
+
+const (
+	// FlexAlgoPrefixSid_SidId_UNSET corresponds to the value UNSET of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_UNSET E_FlexAlgoPrefixSid_SidId = 0
+	// FlexAlgoPrefixSid_SidId_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_IPV4_EXPLICIT_NULL E_FlexAlgoPrefixSid_SidId = 1
+	// FlexAlgoPrefixSid_SidId_ROUTER_ALERT corresponds to the value ROUTER_ALERT of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_ROUTER_ALERT E_FlexAlgoPrefixSid_SidId = 2
+	// FlexAlgoPrefixSid_SidId_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_IPV6_EXPLICIT_NULL E_FlexAlgoPrefixSid_SidId = 3
+	// FlexAlgoPrefixSid_SidId_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_IMPLICIT_NULL E_FlexAlgoPrefixSid_SidId = 4
+	// FlexAlgoPrefixSid_SidId_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_ENTROPY_LABEL_INDICATOR E_FlexAlgoPrefixSid_SidId = 8
+	// FlexAlgoPrefixSid_SidId_NO_LABEL corresponds to the value NO_LABEL of FlexAlgoPrefixSid_SidId
+	FlexAlgoPrefixSid_SidId_NO_LABEL E_FlexAlgoPrefixSid_SidId = 9
 )
 
 // E_Flow_MplsLabel is a derived int64 type which is used to represent
@@ -9089,6 +9127,37 @@ const (
 	SegmentRoutingSidLabelRange_Tlv_Type_UNKNOWN E_SegmentRoutingSidLabelRange_Tlv_Type = 1
 )
 
+// E_SegmentRouting_LevelType is a derived int64 type which is used to represent
+// the enumerated node SegmentRouting_LevelType. An additional value named
+// SegmentRouting_LevelType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_SegmentRouting_LevelType int64
+
+// IsYANGGoEnum ensures that SegmentRouting_LevelType implements the yang.GoEnum
+// interface. This ensures that SegmentRouting_LevelType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_SegmentRouting_LevelType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  SegmentRouting_LevelType.
+func (E_SegmentRouting_LevelType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_SegmentRouting_LevelType.
+func (e E_SegmentRouting_LevelType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_SegmentRouting_LevelType")
+}
+
+const (
+	// SegmentRouting_LevelType_UNSET corresponds to the value UNSET of SegmentRouting_LevelType
+	SegmentRouting_LevelType_UNSET E_SegmentRouting_LevelType = 0
+	// SegmentRouting_LevelType_LEVEL_1 corresponds to the value LEVEL_1 of SegmentRouting_LevelType
+	SegmentRouting_LevelType_LEVEL_1 E_SegmentRouting_LevelType = 1
+	// SegmentRouting_LevelType_LEVEL_2 corresponds to the value LEVEL_2 of SegmentRouting_LevelType
+	SegmentRouting_LevelType_LEVEL_2 E_SegmentRouting_LevelType = 2
+	// SegmentRouting_LevelType_LEVEL_1_2 corresponds to the value LEVEL_1_2 of SegmentRouting_LevelType
+	SegmentRouting_LevelType_LEVEL_1_2 E_SegmentRouting_LevelType = 3
+)
+
 // E_SegmentRouting_SrDataplaneType is a derived int64 type which is used to represent
 // the enumerated node SegmentRouting_SrDataplaneType. An additional value named
 // SegmentRouting_SrDataplaneType_UNSET is added to the enumeration which is used as
@@ -9359,6 +9428,35 @@ const (
 	SetCommunity_Method_INLINE E_SetCommunity_Method = 1
 	// SetCommunity_Method_REFERENCE corresponds to the value REFERENCE of SetCommunity_Method
 	SetCommunity_Method_REFERENCE E_SetCommunity_Method = 2
+)
+
+// E_SetMetric_MetricType is a derived int64 type which is used to represent
+// the enumerated node SetMetric_MetricType. An additional value named
+// SetMetric_MetricType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_SetMetric_MetricType int64
+
+// IsYANGGoEnum ensures that SetMetric_MetricType implements the yang.GoEnum
+// interface. This ensures that SetMetric_MetricType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_SetMetric_MetricType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  SetMetric_MetricType.
+func (E_SetMetric_MetricType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_SetMetric_MetricType.
+func (e E_SetMetric_MetricType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_SetMetric_MetricType")
+}
+
+const (
+	// SetMetric_MetricType_UNSET corresponds to the value UNSET of SetMetric_MetricType
+	SetMetric_MetricType_UNSET E_SetMetric_MetricType = 0
+	// SetMetric_MetricType_EXTERNAL_TYPE_1 corresponds to the value EXTERNAL_TYPE_1 of SetMetric_MetricType
+	SetMetric_MetricType_EXTERNAL_TYPE_1 E_SetMetric_MetricType = 1
+	// SetMetric_MetricType_EXTERNAL_TYPE_2 corresponds to the value EXTERNAL_TYPE_2 of SetMetric_MetricType
+	SetMetric_MetricType_EXTERNAL_TYPE_2 E_SetMetric_MetricType = 2
 )
 
 // E_SetTag_Mode is a derived int64 type which is used to represent
@@ -10473,34 +10571,38 @@ const (
 	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_CFP4 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 4
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_CPAK corresponds to the value CPAK of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
 	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_CPAK E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 5
+	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_DSFP corresponds to the value DSFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_DSFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 6
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_NON_PLUGGABLE corresponds to the value NON_PLUGGABLE of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_NON_PLUGGABLE E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 6
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_NON_PLUGGABLE E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 7
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_OSFP corresponds to the value OSFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_OSFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 7
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_OSFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 8
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_OTHER corresponds to the value OTHER of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_OTHER E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 8
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_OTHER E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 9
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP corresponds to the value QSFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 9
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 10
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP28 corresponds to the value QSFP28 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 10
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 11
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE1 corresponds to the value QSFP56_DD_TYPE1 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE1 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 11
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE1 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 12
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE2 corresponds to the value QSFP56_DD_TYPE2 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 12
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 13
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP_PLUS corresponds to the value QSFP_PLUS of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 13
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 14
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP corresponds to the value SFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 14
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 15
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP28 corresponds to the value SFP28 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 15
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 16
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP56 corresponds to the value SFP56 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP56 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 16
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP56 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 17
+	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_DD corresponds to the value SFP_DD of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_DD E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 18
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_PLUS corresponds to the value SFP_PLUS of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 17
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 19
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_X2 corresponds to the value X2 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_X2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 18
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_X2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 20
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_XFP corresponds to the value XFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_XFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 19
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_XFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 21
 )
 
 // E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE is a derived int64 type which is used to represent

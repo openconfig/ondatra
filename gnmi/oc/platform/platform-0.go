@@ -39,6 +39,7 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
+  - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
@@ -81101,6 +81102,180 @@ func (n *Component_Transceiver_Threshold_InputPowerUpperPathAny) State() ygnmi.W
 	)
 }
 
+// Component_Transceiver_Threshold_LaserBiasCurrentLowerPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/laser-bias-current-lower YANG schema element.
+type Component_Transceiver_Threshold_LaserBiasCurrentLowerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Threshold_LaserBiasCurrentLowerPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/laser-bias-current-lower YANG schema element.
+type Component_Transceiver_Threshold_LaserBiasCurrentLowerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/laser-bias-current-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-lower"
+func (n *Component_Transceiver_Threshold_LaserBiasCurrentLowerPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-lower"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).LaserBiasCurrentLower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/laser-bias-current-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-lower"
+func (n *Component_Transceiver_Threshold_LaserBiasCurrentLowerPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-lower"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).LaserBiasCurrentLower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_Transceiver_Threshold_LaserBiasCurrentUpperPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/laser-bias-current-upper YANG schema element.
+type Component_Transceiver_Threshold_LaserBiasCurrentUpperPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Threshold_LaserBiasCurrentUpperPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/laser-bias-current-upper YANG schema element.
+type Component_Transceiver_Threshold_LaserBiasCurrentUpperPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/laser-bias-current-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-upper"
+func (n *Component_Transceiver_Threshold_LaserBiasCurrentUpperPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).LaserBiasCurrentUpper
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/laser-bias-current-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-upper"
+func (n *Component_Transceiver_Threshold_LaserBiasCurrentUpperPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).LaserBiasCurrentUpper
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Component_Transceiver_Threshold_LaserTemperatureLowerPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/laser-temperature-lower YANG schema element.
 type Component_Transceiver_Threshold_LaserTemperatureLowerPath struct {
 	*ygnmi.NodePath
@@ -81595,6 +81770,180 @@ func (n *Component_Transceiver_Threshold_SeverityPathAny) Config() ygnmi.Wildcar
 	)
 }
 
+// Component_Transceiver_Threshold_SupplyVoltageLowerPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/supply-voltage-lower YANG schema element.
+type Component_Transceiver_Threshold_SupplyVoltageLowerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Threshold_SupplyVoltageLowerPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/supply-voltage-lower YANG schema element.
+type Component_Transceiver_Threshold_SupplyVoltageLowerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/supply-voltage-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-lower"
+func (n *Component_Transceiver_Threshold_SupplyVoltageLowerPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-lower"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).SupplyVoltageLower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/supply-voltage-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-lower"
+func (n *Component_Transceiver_Threshold_SupplyVoltageLowerPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-lower"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).SupplyVoltageLower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_Transceiver_Threshold_SupplyVoltageUpperPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/supply-voltage-upper YANG schema element.
+type Component_Transceiver_Threshold_SupplyVoltageUpperPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Threshold_SupplyVoltageUpperPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/supply-voltage-upper YANG schema element.
+type Component_Transceiver_Threshold_SupplyVoltageUpperPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/supply-voltage-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-upper"
+func (n *Component_Transceiver_Threshold_SupplyVoltageUpperPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).SupplyVoltageUpper
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/supply-voltage-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-upper"
+func (n *Component_Transceiver_Threshold_SupplyVoltageUpperPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).SupplyVoltageUpper
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Component_Transceiver_ThresholdPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold YANG schema element.
 type Component_Transceiver_ThresholdPath struct {
 	*ygnmi.NodePath
@@ -81676,6 +82025,74 @@ func (n *Component_Transceiver_ThresholdPathAny) InputPowerUpper() *Component_Tr
 	return &Component_Transceiver_Threshold_InputPowerUpperPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "input-power-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LaserBiasCurrentLower (leaf): The lower threshold for the laser bias current.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/laser-bias-current-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-lower"
+func (n *Component_Transceiver_ThresholdPath) LaserBiasCurrentLower() *Component_Transceiver_Threshold_LaserBiasCurrentLowerPath {
+	return &Component_Transceiver_Threshold_LaserBiasCurrentLowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-lower"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LaserBiasCurrentLower (leaf): The lower threshold for the laser bias current.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/laser-bias-current-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-lower"
+func (n *Component_Transceiver_ThresholdPathAny) LaserBiasCurrentLower() *Component_Transceiver_Threshold_LaserBiasCurrentLowerPathAny {
+	return &Component_Transceiver_Threshold_LaserBiasCurrentLowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-lower"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LaserBiasCurrentUpper (leaf): The upper threshold for the laser bias current.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/laser-bias-current-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-upper"
+func (n *Component_Transceiver_ThresholdPath) LaserBiasCurrentUpper() *Component_Transceiver_Threshold_LaserBiasCurrentUpperPath {
+	return &Component_Transceiver_Threshold_LaserBiasCurrentUpperPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LaserBiasCurrentUpper (leaf): The upper threshold for the laser bias current.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/laser-bias-current-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/laser-bias-current-upper"
+func (n *Component_Transceiver_ThresholdPathAny) LaserBiasCurrentUpper() *Component_Transceiver_Threshold_LaserBiasCurrentUpperPathAny {
+	return &Component_Transceiver_Threshold_LaserBiasCurrentUpperPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "laser-bias-current-upper"},
 			map[string]interface{}{},
 			n,
 		),
@@ -81846,6 +82263,74 @@ func (n *Component_Transceiver_ThresholdPathAny) Severity() *Component_Transceiv
 	return &Component_Transceiver_Threshold_SeverityPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SupplyVoltageLower (leaf): The lower threshold for the transceiver supply voltage.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/supply-voltage-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-lower"
+func (n *Component_Transceiver_ThresholdPath) SupplyVoltageLower() *Component_Transceiver_Threshold_SupplyVoltageLowerPath {
+	return &Component_Transceiver_Threshold_SupplyVoltageLowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-lower"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SupplyVoltageLower (leaf): The lower threshold for the transceiver supply voltage.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/supply-voltage-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-lower"
+func (n *Component_Transceiver_ThresholdPathAny) SupplyVoltageLower() *Component_Transceiver_Threshold_SupplyVoltageLowerPathAny {
+	return &Component_Transceiver_Threshold_SupplyVoltageLowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-lower"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SupplyVoltageUpper (leaf): The upper threshold for the transceiver supply voltage.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/supply-voltage-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-upper"
+func (n *Component_Transceiver_ThresholdPath) SupplyVoltageUpper() *Component_Transceiver_Threshold_SupplyVoltageUpperPath {
+	return &Component_Transceiver_Threshold_SupplyVoltageUpperPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// SupplyVoltageUpper (leaf): The upper threshold for the transceiver supply voltage.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/supply-voltage-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/supply-voltage-upper"
+func (n *Component_Transceiver_ThresholdPathAny) SupplyVoltageUpper() *Component_Transceiver_Threshold_SupplyVoltageUpperPathAny {
+	return &Component_Transceiver_Threshold_SupplyVoltageUpperPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "supply-voltage-upper"},
 			map[string]interface{}{},
 			n,
 		),

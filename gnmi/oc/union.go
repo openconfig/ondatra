@@ -40,6 +40,7 @@ using the following YANG input files:
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
+  - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
   - public/release/models/platform/openconfig-platform-controller-card.yang
   - public/release/models/platform/openconfig-platform-cpu.yang
@@ -2082,6 +2083,45 @@ func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_Adjacen
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_AdjacencySid_SidId_Union, unknown union type, got: %T, want any of [E_AdjacencySid_SidId, string, uint32]", i, i)
 }
 
+// NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/flex-algo-prefix-sids/flex-algo-prefix-sid/state/sid-id within the YANG schema.
+// Union type can be one of [E_FlexAlgoPrefixSid_SidId, UnionString, UnionUint32].
+type NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union interface {
+	// Union type can be one of [E_FlexAlgoPrefixSid_SidId, UnionString, UnionUint32]
+	Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union()
+}
+
+// Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union ensures that E_FlexAlgoPrefixSid_SidId
+// implements the NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union interface.
+func (E_FlexAlgoPrefixSid_SidId) Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union() {
+}
+
+// Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union ensures that UnionString
+// implements the NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union interface.
+func (UnionString) Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union() {
+}
+
+// Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union ensures that UnionUint32
+// implements the NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union() {
+}
+
+// To_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid) To_NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union(i interface{}) (NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union, error) {
+	if v, ok := i.(NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_FlexAlgoPrefixSid_SidId_Union, unknown union type, got: %T, want any of [E_FlexAlgoPrefixSid_SidId, string, uint32]", i, i)
+}
+
 // NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting_PrefixSid_SidId_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/segment-routing/prefix-sids/prefix-sid/state/sid-id within the YANG schema.
 // Union type can be one of [E_PrefixSid_SidId, UnionString, UnionUint32].
@@ -3059,6 +3099,40 @@ func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	return nil, fmt.Errorf("cannot convert %v to RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Inline_Communities_Union, unknown union type, got: %T, want any of [E_BgpTypes_BGP_WELL_KNOWN_STD_COMMUNITY, string]", i, i)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/state/set-area within the YANG schema.
+// Union type can be one of [UnionString, UnionUint32].
+type RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union interface {
+	// Union type can be one of [UnionString, UnionUint32]
+	Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union()
+}
+
+// Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union ensures that UnionString
+// implements the RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union interface.
+func (UnionString) Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union() {
+}
+
+// Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union ensures that UnionUint32
+// implements the RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union interface.
+func (UnionUint32) Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union() {
+}
+
+// To_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions) To_RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union(i interface{}) (RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union, error) {
+	if v, ok := i.(RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to RoutingPolicy_PolicyDefinition_Statement_Actions_OspfActions_SetArea_Union, unknown union type, got: %T, want any of [string, uint32]", i, i)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_SetTag_Inline_Tag_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/set-tag/inline/state/tag within the YANG schema.
 // Union type can be one of [UnionString, UnionUint32].
@@ -3091,6 +3165,40 @@ func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_SetTag_Inline) To_Rout
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to RoutingPolicy_PolicyDefinition_Statement_Actions_SetTag_Inline_Tag_Union, unknown union type, got: %T, want any of [string, uint32]", i, i)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/ospf-conditions/state/area-eq within the YANG schema.
+// Union type can be one of [UnionString, UnionUint32].
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union interface {
+	// Union type can be one of [UnionString, UnionUint32]
+	Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union()
+}
+
+// Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union ensures that UnionString
+// implements the RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union interface.
+func (UnionString) Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union() {
+}
+
+// Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union ensures that UnionUint32
+// implements the RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union interface.
+func (UnionUint32) Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union() {
+}
+
+// To_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions) To_RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union(i interface{}) (RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union, error) {
+	if v, ok := i.(RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to RoutingPolicy_PolicyDefinition_Statement_Conditions_OspfConditions_AreaEq_Union, unknown union type, got: %T, want any of [string, uint32]", i, i)
 }
 
 // System_Aaa_Accounting_AccountingMethod_Union is an interface that is implemented by valid types for the union

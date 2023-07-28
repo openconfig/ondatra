@@ -585,6 +585,7 @@ func (*BgpPeer) ΛBelongingModule() string {
 // BgpPeer_Counters represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters YANG schema element.
 type BgpPeer_Counters struct {
 	Flaps            *uint64 `path:"flaps" module:"open-traffic-generator-bgp"`
+	InEndOfRib       *uint64 `path:"in-end-of-rib" module:"open-traffic-generator-bgp"`
 	InKeepalives     *uint64 `path:"in-keepalives" module:"open-traffic-generator-bgp"`
 	InNotifications  *uint64 `path:"in-notifications" module:"open-traffic-generator-bgp"`
 	InOpens          *uint64 `path:"in-opens" module:"open-traffic-generator-bgp"`
@@ -618,6 +619,22 @@ func (t *BgpPeer_Counters) GetFlaps() uint64 {
 		return 0
 	}
 	return *t.Flaps
+}
+
+// GetInEndOfRib retrieves the value of the leaf InEndOfRib from the BgpPeer_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InEndOfRib is set, it can
+// safely use t.GetInEndOfRib() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InEndOfRib == nil' before retrieving the leaf's value.
+func (t *BgpPeer_Counters) GetInEndOfRib() uint64 {
+	if t == nil || t.InEndOfRib == nil {
+		return 0
+	}
+	return *t.InEndOfRib
 }
 
 // GetInKeepalives retrieves the value of the leaf InKeepalives from the BgpPeer_Counters
@@ -818,6 +835,12 @@ func (t *BgpPeer_Counters) SetFlaps(v uint64) {
 	t.Flaps = &v
 }
 
+// SetInEndOfRib sets the value of the leaf InEndOfRib in the BgpPeer_Counters
+// struct.
+func (t *BgpPeer_Counters) SetInEndOfRib(v uint64) {
+	t.InEndOfRib = &v
+}
+
 // SetInKeepalives sets the value of the leaf InKeepalives in the BgpPeer_Counters
 // struct.
 func (t *BgpPeer_Counters) SetInKeepalives(v uint64) {
@@ -925,14 +948,16 @@ func (*BgpPeer_Counters) ΛBelongingModule() string {
 
 // BgpPeer_UnicastIpv4Prefix represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix YANG schema element.
 type BgpPeer_UnicastIpv4Prefix struct {
-	Address            *string                                `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
-	AsPath             []*BgpPeer_UnicastIpv4Prefix_AsPath    `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Community          []*BgpPeer_UnicastIpv4Prefix_Community `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv4Address *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv6Address *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Origin             E_UnicastIpv4Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
-	PathId             *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
-	PrefixLength       *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
+	Address                *string                                `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
+	AsPath                 []*BgpPeer_UnicastIpv4Prefix_AsPath    `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Community              []*BgpPeer_UnicastIpv4Prefix_Community `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	LocalPreference        *uint32                                `path:"state/local-preference" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	MultiExitDiscriminator *uint32                                `path:"state/multi-exit-discriminator" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv4Address     *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv6Address     *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Origin                 E_UnicastIpv4Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
+	PathId                 *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
+	PrefixLength           *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
 }
 
 // IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix implements the yang.GoStruct
@@ -954,6 +979,38 @@ func (t *BgpPeer_UnicastIpv4Prefix) GetAddress() string {
 		return ""
 	}
 	return *t.Address
+}
+
+// GetLocalPreference retrieves the value of the leaf LocalPreference from the BgpPeer_UnicastIpv4Prefix
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalPreference is set, it can
+// safely use t.GetLocalPreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalPreference == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix) GetLocalPreference() uint32 {
+	if t == nil || t.LocalPreference == nil {
+		return 0
+	}
+	return *t.LocalPreference
+}
+
+// GetMultiExitDiscriminator retrieves the value of the leaf MultiExitDiscriminator from the BgpPeer_UnicastIpv4Prefix
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MultiExitDiscriminator is set, it can
+// safely use t.GetMultiExitDiscriminator() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MultiExitDiscriminator == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix) GetMultiExitDiscriminator() uint32 {
+	if t == nil || t.MultiExitDiscriminator == nil {
+		return 0
+	}
+	return *t.MultiExitDiscriminator
 }
 
 // GetNextHopIpv4Address retrieves the value of the leaf NextHopIpv4Address from the BgpPeer_UnicastIpv4Prefix
@@ -1040,6 +1097,18 @@ func (t *BgpPeer_UnicastIpv4Prefix) GetPrefixLength() uint32 {
 // struct.
 func (t *BgpPeer_UnicastIpv4Prefix) SetAddress(v string) {
 	t.Address = &v
+}
+
+// SetLocalPreference sets the value of the leaf LocalPreference in the BgpPeer_UnicastIpv4Prefix
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix) SetLocalPreference(v uint32) {
+	t.LocalPreference = &v
+}
+
+// SetMultiExitDiscriminator sets the value of the leaf MultiExitDiscriminator in the BgpPeer_UnicastIpv4Prefix
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix) SetMultiExitDiscriminator(v uint32) {
+	t.MultiExitDiscriminator = &v
 }
 
 // SetNextHopIpv4Address sets the value of the leaf NextHopIpv4Address in the BgpPeer_UnicastIpv4Prefix
@@ -1342,14 +1411,16 @@ func (*BgpPeer_UnicastIpv4Prefix_Community) ΛBelongingModule() string {
 
 // BgpPeer_UnicastIpv6Prefix represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix YANG schema element.
 type BgpPeer_UnicastIpv6Prefix struct {
-	Address            *string                                `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
-	AsPath             []*BgpPeer_UnicastIpv6Prefix_AsPath    `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Community          []*BgpPeer_UnicastIpv6Prefix_Community `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv4Address *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv6Address *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Origin             E_UnicastIpv6Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
-	PathId             *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
-	PrefixLength       *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
+	Address                *string                                `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
+	AsPath                 []*BgpPeer_UnicastIpv6Prefix_AsPath    `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Community              []*BgpPeer_UnicastIpv6Prefix_Community `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	LocalPreference        *uint32                                `path:"state/local-preference" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	MultiExitDiscriminator *uint32                                `path:"state/multi-exit-discriminator" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv4Address     *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv6Address     *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Origin                 E_UnicastIpv6Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
+	PathId                 *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
+	PrefixLength           *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
 }
 
 // IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix implements the yang.GoStruct
@@ -1371,6 +1442,38 @@ func (t *BgpPeer_UnicastIpv6Prefix) GetAddress() string {
 		return ""
 	}
 	return *t.Address
+}
+
+// GetLocalPreference retrieves the value of the leaf LocalPreference from the BgpPeer_UnicastIpv6Prefix
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalPreference is set, it can
+// safely use t.GetLocalPreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalPreference == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix) GetLocalPreference() uint32 {
+	if t == nil || t.LocalPreference == nil {
+		return 0
+	}
+	return *t.LocalPreference
+}
+
+// GetMultiExitDiscriminator retrieves the value of the leaf MultiExitDiscriminator from the BgpPeer_UnicastIpv6Prefix
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MultiExitDiscriminator is set, it can
+// safely use t.GetMultiExitDiscriminator() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MultiExitDiscriminator == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix) GetMultiExitDiscriminator() uint32 {
+	if t == nil || t.MultiExitDiscriminator == nil {
+		return 0
+	}
+	return *t.MultiExitDiscriminator
 }
 
 // GetNextHopIpv4Address retrieves the value of the leaf NextHopIpv4Address from the BgpPeer_UnicastIpv6Prefix
@@ -1457,6 +1560,18 @@ func (t *BgpPeer_UnicastIpv6Prefix) GetPrefixLength() uint32 {
 // struct.
 func (t *BgpPeer_UnicastIpv6Prefix) SetAddress(v string) {
 	t.Address = &v
+}
+
+// SetLocalPreference sets the value of the leaf LocalPreference in the BgpPeer_UnicastIpv6Prefix
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix) SetLocalPreference(v uint32) {
+	t.LocalPreference = &v
+}
+
+// SetMultiExitDiscriminator sets the value of the leaf MultiExitDiscriminator in the BgpPeer_UnicastIpv6Prefix
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix) SetMultiExitDiscriminator(v uint32) {
+	t.MultiExitDiscriminator = &v
 }
 
 // SetNextHopIpv4Address sets the value of the leaf NextHopIpv4Address in the BgpPeer_UnicastIpv6Prefix

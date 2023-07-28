@@ -735,6 +735,93 @@ func (n *BgpPeer_Counters_FlapsPathAny) State() ygnmi.WildcardQuery[uint64] {
 	)
 }
 
+// BgpPeer_Counters_InEndOfRibPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/in-end-of-rib YANG schema element.
+type BgpPeer_Counters_InEndOfRibPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Counters_InEndOfRibPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/in-end-of-rib YANG schema element.
+type BgpPeer_Counters_InEndOfRibPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "in-end-of-rib"
+//	Path from root:       "/bgp-peers/bgp-peer/state/counters/in-end-of-rib"
+func (n *BgpPeer_Counters_InEndOfRibPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"BgpPeer_Counters",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-end-of-rib"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.BgpPeer_Counters).InEndOfRib
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "in-end-of-rib"
+//	Path from root:       "/bgp-peers/bgp-peer/state/counters/in-end-of-rib"
+func (n *BgpPeer_Counters_InEndOfRibPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"BgpPeer_Counters",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"in-end-of-rib"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.BgpPeer_Counters).InEndOfRib
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // BgpPeer_Counters_InKeepalivesPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/state/counters/in-keepalives YANG schema element.
 type BgpPeer_Counters_InKeepalivesPath struct {
 	*ygnmi.NodePath
@@ -1825,6 +1912,40 @@ func (n *BgpPeer_CountersPathAny) Flaps() *BgpPeer_Counters_FlapsPathAny {
 	}
 }
 
+// InEndOfRib (leaf): The total number of End-of-RIB markers received indicating the completion of the initial routing update for a particular <AFI, SAFI> address family after the session is established. For the IPv4 unicast address family, the End-of-RIB marker is an UPDATE message with the minimum length. For any other address family, it is an UPDATE message that contains only the MP_UNREACH_NLRI attribute with no withdrawn routes for that <AFI, SAFI>.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "in-end-of-rib"
+//	Path from root:       "/bgp-peers/bgp-peer/state/counters/in-end-of-rib"
+func (n *BgpPeer_CountersPath) InEndOfRib() *BgpPeer_Counters_InEndOfRibPath {
+	return &BgpPeer_Counters_InEndOfRibPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-end-of-rib"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// InEndOfRib (leaf): The total number of End-of-RIB markers received indicating the completion of the initial routing update for a particular <AFI, SAFI> address family after the session is established. For the IPv4 unicast address family, the End-of-RIB marker is an UPDATE message with the minimum length. For any other address family, it is an UPDATE message that contains only the MP_UNREACH_NLRI attribute with no withdrawn routes for that <AFI, SAFI>.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "in-end-of-rib"
+//	Path from root:       "/bgp-peers/bgp-peer/state/counters/in-end-of-rib"
+func (n *BgpPeer_CountersPathAny) InEndOfRib() *BgpPeer_Counters_InEndOfRibPathAny {
+	return &BgpPeer_Counters_InEndOfRibPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-end-of-rib"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // InKeepalives (leaf): The total number of KEEPALIVE messages received.
 //
 //	Defining module:      "open-traffic-generator-bgp"
@@ -2422,6 +2543,180 @@ func (n *BgpPeer_UnicastIpv4Prefix_AddressPathAny) Config() ygnmi.WildcardQuery[
 			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).Address
 			if ret == nil {
 				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv4Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv4Prefix_LocalPreferencePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/local-preference YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_LocalPreferencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv4Prefix_LocalPreferencePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/local-preference YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_LocalPreferencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv4Prefix_LocalPreferencePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_UnicastIpv4Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv4Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv4Prefix_LocalPreferencePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_UnicastIpv4Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv4Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_UnicastIpv4Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv4Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_UnicastIpv4Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv4Prefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
 				return zero, false
 			}
 			return *ret, true
@@ -3204,6 +3499,74 @@ func (n *BgpPeer_UnicastIpv4PrefixPathAny) CommunityAny() *BgpPeer_UnicastIpv4Pr
 	}
 }
 
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv4PrefixPath) LocalPreference() *BgpPeer_UnicastIpv4Prefix_LocalPreferencePath {
+	return &BgpPeer_UnicastIpv4Prefix_LocalPreferencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) LocalPreference() *BgpPeer_UnicastIpv4Prefix_LocalPreferencePathAny {
+	return &BgpPeer_UnicastIpv4Prefix_LocalPreferencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv4PrefixPath) MultiExitDiscriminator() *BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPath {
+	return &BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv4PrefixPathAny) MultiExitDiscriminator() *BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPathAny {
+	return &BgpPeer_UnicastIpv4Prefix_MultiExitDiscriminatorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
 // NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
 //
 //	Defining module:      "open-traffic-generator-bgp"
@@ -3679,6 +4042,180 @@ func (n *BgpPeer_UnicastIpv6Prefix_AddressPathAny) Config() ygnmi.WildcardQuery[
 			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).Address
 			if ret == nil {
 				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv6Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv6Prefix_LocalPreferencePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/local-preference YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_LocalPreferencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv6Prefix_LocalPreferencePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/local-preference YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_LocalPreferencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv6Prefix_LocalPreferencePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_UnicastIpv6Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv6Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv6Prefix_LocalPreferencePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_UnicastIpv6Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv6Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_UnicastIpv6Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_UnicastIpv6Prefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_UnicastIpv6Prefix",
+		true,
+		true,
+		true,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_UnicastIpv6Prefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
 				return zero, false
 			}
 			return *ret, true
@@ -4458,6 +4995,74 @@ func (n *BgpPeer_UnicastIpv6PrefixPathAny) CommunityAny() *BgpPeer_UnicastIpv6Pr
 			map[string]interface{}{},
 			n,
 		),
+	}
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv6PrefixPath) LocalPreference() *BgpPeer_UnicastIpv6Prefix_LocalPreferencePath {
+	return &BgpPeer_UnicastIpv6Prefix_LocalPreferencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/local-preference"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) LocalPreference() *BgpPeer_UnicastIpv6Prefix_LocalPreferencePathAny {
+	return &BgpPeer_UnicastIpv6Prefix_LocalPreferencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv6PrefixPath) MultiExitDiscriminator() *BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPath {
+	return &BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_UnicastIpv6PrefixPathAny) MultiExitDiscriminator() *BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPathAny {
+	return &BgpPeer_UnicastIpv6Prefix_MultiExitDiscriminatorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 }
 
