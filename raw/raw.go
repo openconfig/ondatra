@@ -19,6 +19,7 @@ import (
 	"testing"
 
 	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/ixweb"
@@ -58,10 +59,10 @@ type GNMIAPI struct {
 }
 
 // New returns a new gNMI client for the dut.
-func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
+func (g *GNMIAPI) New(t testing.TB, opts ...grpc.DialOption) gpb.GNMIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gNMI client for %s", g.dev)
-	gnmi, err := rawapis.NewGNMI(context.Background(), g.dev)
+	gnmi, err := rawapis.NewGNMI(context.Background(), g.dev, opts...)
 	if err != nil {
 		t.Fatalf("Failed to create gNMI client for %v: %v", g.dev, err)
 	}
@@ -101,10 +102,10 @@ type privateGNOI interface {
 }
 
 // New returns a new gNOI client for the dut.
-func (g *GNOIAPI) New(t testing.TB) GNOI {
+func (g *GNOIAPI) New(t testing.TB, opts ...grpc.DialOption) GNOI {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gNOI client for %s", g.dut)
-	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
+	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut, opts...)
 	if err != nil {
 		t.Fatalf("Failed to create gNOI client for %v: %v", g.dut, err)
 	}
@@ -144,10 +145,10 @@ func (r *DUTAPIs) GNSI() *GNSIAPI {
 }
 
 // New returns a new gNSI client for the DUT.
-func (g *GNSIAPI) New(t testing.TB) GNSI {
+func (g *GNSIAPI) New(t testing.TB, opts ...grpc.DialOption) GNSI {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gNSI  client for %s", g.dut)
-	bgnsi, err := rawapis.NewGNSI(context.Background(), g.dut)
+	bgnsi, err := rawapis.NewGNSI(context.Background(), g.dut, opts...)
 	if err != nil {
 		t.Fatalf("Failed to create gNSI client for %v: %v", g.dut, err)
 	}
@@ -176,10 +177,10 @@ type GRIBIAPI struct {
 }
 
 // New returns a new gRIBI client for the dut.
-func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
+func (g *GRIBIAPI) New(t testing.TB, opts ...grpc.DialOption) grpb.GRIBIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
-	grc, err := rawapis.NewGRIBI(context.Background(), g.dut)
+	grc, err := rawapis.NewGRIBI(context.Background(), g.dut, opts...)
 	if err != nil {
 		t.Fatalf("Failed to create gRIBI client for %v: %v", g.dut, err)
 	}
@@ -208,10 +209,10 @@ type P4RTAPI struct {
 }
 
 // New returns a P4RT client on the DUT.
-func (p *P4RTAPI) New(t testing.TB) p4pb.P4RuntimeClient {
+func (p *P4RTAPI) New(t testing.TB, opts ...grpc.DialOption) p4pb.P4RuntimeClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating P4RT client for %s", p.dut)
-	p4rtClient, err := rawapis.NewP4RT(context.Background(), p.dut)
+	p4rtClient, err := rawapis.NewP4RT(context.Background(), p.dut, opts...)
 	if err != nil {
 		t.Fatalf("Failed to create P4RT client for %v: %v", p.dut, err)
 	}

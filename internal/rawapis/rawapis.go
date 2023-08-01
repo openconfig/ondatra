@@ -45,6 +45,13 @@ var CommonDialOpts = []grpc.DialOption{
 	withStreamAnnotateErrors(),
 }
 
+func processOptions(opts ...grpc.DialOption) []grpc.DialOption {
+	if len(opts) >= 1 {
+		return opts
+	}
+	return CommonDialOpts
+}
+
 // NewCLI creates a CLI client for the specified DUT.
 func NewCLI(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
 	return dut.DialCLI(ctx)
@@ -66,8 +73,9 @@ type GNMIDialer interface {
 }
 
 // NewGNMI creates a new gNMI client for the specified DUT.
-func NewGNMI(ctx context.Context, dialer GNMIDialer) (gpb.GNMIClient, error) {
-	return dialer.DialGNMI(ctx, CommonDialOpts...)
+func NewGNMI(ctx context.Context, dialer GNMIDialer, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
+	dialOpts := processOptions(opts...)
+	return dialer.DialGNMI(ctx, dialOpts...)
 }
 
 // FetchGNMI fetches the cached gNMI client for the specified DUT.
@@ -92,8 +100,9 @@ var (
 )
 
 // NewGNOI creates a gNOI client for the specified DUT.
-func NewGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
-	return dut.DialGNOI(ctx, CommonDialOpts...)
+func NewGNOI(ctx context.Context, dut binding.DUT, opts ...grpc.DialOption) (binding.GNOIClients, error) {
+	dialOpts := processOptions(opts...)
+	return dut.DialGNOI(ctx, dialOpts...)
 }
 
 // FetchGNOI fetches the cached gNOI client for the specified DUT.
@@ -118,8 +127,9 @@ var (
 )
 
 // NewGNSI creates a gNSI client for the specified DUT.
-func NewGNSI(ctx context.Context, dut binding.DUT) (binding.GNSIClients, error) {
-	return dut.DialGNSI(ctx, CommonDialOpts...)
+func NewGNSI(ctx context.Context, dut binding.DUT, opts ...grpc.DialOption) (binding.GNSIClients, error) {
+	dialOpts := processOptions(opts...)
+	return dut.DialGNSI(ctx, dialOpts...)
 }
 
 // FetchGNSI fetches the cached gNSI client for the specified DUT.
@@ -144,8 +154,9 @@ var (
 )
 
 // NewGRIBI creates a new gRIBI client for the specified DUT.
-func NewGRIBI(ctx context.Context, dut binding.DUT) (grpb.GRIBIClient, error) {
-	return dut.DialGRIBI(ctx, CommonDialOpts...)
+func NewGRIBI(ctx context.Context, dut binding.DUT, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
+	dialOpts := processOptions(opts...)
+	return dut.DialGRIBI(ctx, dialOpts...)
 }
 
 // FetchGRIBI fetches the cached gRIBI client for the specified DUT.
@@ -170,8 +181,9 @@ var (
 )
 
 // NewP4RT creates a new P4RT client for the specified DUT.
-func NewP4RT(ctx context.Context, dut binding.DUT) (p4pb.P4RuntimeClient, error) {
-	return dut.DialP4RT(ctx, CommonDialOpts...)
+func NewP4RT(ctx context.Context, dut binding.DUT, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
+	dialOpts := processOptions(opts...)
+	return dut.DialP4RT(ctx, dialOpts...)
 }
 
 // FetchP4RT fetches the cached P4RT client for the specified DUT.
