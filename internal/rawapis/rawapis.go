@@ -46,7 +46,7 @@ var CommonDialOpts = []grpc.DialOption{
 }
 
 func processOptions(opts ...grpc.DialOption) []grpc.DialOption {
-	if len(opts) >= 1 {
+	if len(opts) > 0 {
 		return opts
 	}
 	return CommonDialOpts
