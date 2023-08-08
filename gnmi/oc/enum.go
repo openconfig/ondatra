@@ -1464,37 +1464,6 @@ const (
 	DefaultMetric_Flags_INTERNAL E_DefaultMetric_Flags = 1
 )
 
-// E_DfElection_DfElectionMethod is a derived int64 type which is used to represent
-// the enumerated node DfElection_DfElectionMethod. An additional value named
-// DfElection_DfElectionMethod_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_DfElection_DfElectionMethod int64
-
-// IsYANGGoEnum ensures that DfElection_DfElectionMethod implements the yang.GoEnum
-// interface. This ensures that DfElection_DfElectionMethod can be identified as a
-// mapped type for a YANG enumeration.
-func (E_DfElection_DfElectionMethod) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  DfElection_DfElectionMethod.
-func (E_DfElection_DfElectionMethod) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_DfElection_DfElectionMethod.
-func (e E_DfElection_DfElectionMethod) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_DfElection_DfElectionMethod")
-}
-
-const (
-	// DfElection_DfElectionMethod_UNSET corresponds to the value UNSET of DfElection_DfElectionMethod
-	DfElection_DfElectionMethod_UNSET E_DfElection_DfElectionMethod = 0
-	// DfElection_DfElectionMethod_DEFAULT corresponds to the value DEFAULT of DfElection_DfElectionMethod
-	DfElection_DfElectionMethod_DEFAULT E_DfElection_DfElectionMethod = 1
-	// DfElection_DfElectionMethod_HIGHEST_RANDOM_WEIGHT corresponds to the value HIGHEST_RANDOM_WEIGHT of DfElection_DfElectionMethod
-	DfElection_DfElectionMethod_HIGHEST_RANDOM_WEIGHT E_DfElection_DfElectionMethod = 2
-	// DfElection_DfElectionMethod_PREFERENCE corresponds to the value PREFERENCE of DfElection_DfElectionMethod
-	DfElection_DfElectionMethod_PREFERENCE E_DfElection_DfElectionMethod = 3
-)
-
 // E_Egress_IncomingLabel is a derived int64 type which is used to represent
 // the enumerated node Egress_IncomingLabel. An additional value named
 // Egress_IncomingLabel_UNSET is added to the enumeration which is used as
@@ -1745,33 +1714,6 @@ const (
 	Entry_EntryType_DYNAMIC E_Entry_EntryType = 2
 )
 
-// E_EthernetSegment_Esi is a derived int64 type which is used to represent
-// the enumerated node EthernetSegment_Esi. An additional value named
-// EthernetSegment_Esi_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_EthernetSegment_Esi int64
-
-// IsYANGGoEnum ensures that EthernetSegment_Esi implements the yang.GoEnum
-// interface. This ensures that EthernetSegment_Esi can be identified as a
-// mapped type for a YANG enumeration.
-func (E_EthernetSegment_Esi) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  EthernetSegment_Esi.
-func (E_EthernetSegment_Esi) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_EthernetSegment_Esi.
-func (e E_EthernetSegment_Esi) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_EthernetSegment_Esi")
-}
-
-const (
-	// EthernetSegment_Esi_UNSET corresponds to the value UNSET of EthernetSegment_Esi
-	EthernetSegment_Esi_UNSET E_EthernetSegment_Esi = 0
-	// EthernetSegment_Esi_AUTO corresponds to the value AUTO of EthernetSegment_Esi
-	EthernetSegment_Esi_AUTO E_EthernetSegment_Esi = 1
-)
-
 // E_Ethernet_ClientAls is a derived int64 type which is used to represent
 // the enumerated node Ethernet_ClientAls. An additional value named
 // Ethernet_ClientAls_UNSET is added to the enumeration which is used as
@@ -1952,37 +1894,6 @@ const (
 	EvpnInstance_RouteDistinguisher_AUTO E_EvpnInstance_RouteDistinguisher = 1
 )
 
-// E_EvpnTypes_EVPN_REDUNDANCY_MODE is a derived int64 type which is used to represent
-// the enumerated node EvpnTypes_EVPN_REDUNDANCY_MODE. An additional value named
-// EvpnTypes_EVPN_REDUNDANCY_MODE_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_EvpnTypes_EVPN_REDUNDANCY_MODE int64
-
-// IsYANGGoEnum ensures that EvpnTypes_EVPN_REDUNDANCY_MODE implements the yang.GoEnum
-// interface. This ensures that EvpnTypes_EVPN_REDUNDANCY_MODE can be identified as a
-// mapped type for a YANG enumeration.
-func (E_EvpnTypes_EVPN_REDUNDANCY_MODE) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  EvpnTypes_EVPN_REDUNDANCY_MODE.
-func (E_EvpnTypes_EVPN_REDUNDANCY_MODE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
-	return ΛEnum
-}
-
-// String returns a logging-friendly string for E_EvpnTypes_EVPN_REDUNDANCY_MODE.
-func (e E_EvpnTypes_EVPN_REDUNDANCY_MODE) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_EvpnTypes_EVPN_REDUNDANCY_MODE")
-}
-
-const (
-	// EvpnTypes_EVPN_REDUNDANCY_MODE_UNSET corresponds to the value UNSET of EvpnTypes_EVPN_REDUNDANCY_MODE
-	EvpnTypes_EVPN_REDUNDANCY_MODE_UNSET E_EvpnTypes_EVPN_REDUNDANCY_MODE = 0
-	// EvpnTypes_EVPN_REDUNDANCY_MODE_ALL_ACTIVE corresponds to the value ALL_ACTIVE of EvpnTypes_EVPN_REDUNDANCY_MODE
-	EvpnTypes_EVPN_REDUNDANCY_MODE_ALL_ACTIVE E_EvpnTypes_EVPN_REDUNDANCY_MODE = 1
-	// EvpnTypes_EVPN_REDUNDANCY_MODE_SINGLE_ACTIVE corresponds to the value SINGLE_ACTIVE of EvpnTypes_EVPN_REDUNDANCY_MODE
-	EvpnTypes_EVPN_REDUNDANCY_MODE_SINGLE_ACTIVE E_EvpnTypes_EVPN_REDUNDANCY_MODE = 2
-)
-
 // E_EvpnTypes_EVPN_TYPE is a derived int64 type which is used to represent
 // the enumerated node EvpnTypes_EVPN_TYPE. An additional value named
 // EvpnTypes_EVPN_TYPE_UNSET is added to the enumeration which is used as
@@ -2012,43 +1923,6 @@ const (
 	EvpnTypes_EVPN_TYPE_VLAN_BASED E_EvpnTypes_EVPN_TYPE = 2
 	// EvpnTypes_EVPN_TYPE_VLAN_BUNDLE corresponds to the value VLAN_BUNDLE of EvpnTypes_EVPN_TYPE
 	EvpnTypes_EVPN_TYPE_VLAN_BUNDLE E_EvpnTypes_EVPN_TYPE = 3
-)
-
-// E_Evpn_EsiType is a derived int64 type which is used to represent
-// the enumerated node Evpn_EsiType. An additional value named
-// Evpn_EsiType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_Evpn_EsiType int64
-
-// IsYANGGoEnum ensures that Evpn_EsiType implements the yang.GoEnum
-// interface. This ensures that Evpn_EsiType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_Evpn_EsiType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  Evpn_EsiType.
-func (E_Evpn_EsiType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_Evpn_EsiType.
-func (e E_Evpn_EsiType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_Evpn_EsiType")
-}
-
-const (
-	// Evpn_EsiType_UNSET corresponds to the value UNSET of Evpn_EsiType
-	Evpn_EsiType_UNSET E_Evpn_EsiType = 0
-	// Evpn_EsiType_TYPE_0_OPERATOR_CONFIGURED corresponds to the value TYPE_0_OPERATOR_CONFIGURED of Evpn_EsiType
-	Evpn_EsiType_TYPE_0_OPERATOR_CONFIGURED E_Evpn_EsiType = 1
-	// Evpn_EsiType_TYPE_1_LACP_BASED corresponds to the value TYPE_1_LACP_BASED of Evpn_EsiType
-	Evpn_EsiType_TYPE_1_LACP_BASED E_Evpn_EsiType = 2
-	// Evpn_EsiType_TYPE_2_BRIDGE_PROTOCOL_BASED corresponds to the value TYPE_2_BRIDGE_PROTOCOL_BASED of Evpn_EsiType
-	Evpn_EsiType_TYPE_2_BRIDGE_PROTOCOL_BASED E_Evpn_EsiType = 3
-	// Evpn_EsiType_TYPE_3_MAC_BASED corresponds to the value TYPE_3_MAC_BASED of Evpn_EsiType
-	Evpn_EsiType_TYPE_3_MAC_BASED E_Evpn_EsiType = 4
-	// Evpn_EsiType_TYPE_4_ROUTER_ID_BASED corresponds to the value TYPE_4_ROUTER_ID_BASED of Evpn_EsiType
-	Evpn_EsiType_TYPE_4_ROUTER_ID_BASED E_Evpn_EsiType = 5
-	// Evpn_EsiType_TYPE_5_AS_BASED corresponds to the value TYPE_5_AS_BASED of Evpn_EsiType
-	Evpn_EsiType_TYPE_5_AS_BASED E_Evpn_EsiType = 6
 )
 
 // E_Evpn_LearningMode is a derived int64 type which is used to represent
@@ -10583,26 +10457,30 @@ const (
 	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 10
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP28 corresponds to the value QSFP28 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
 	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 11
+	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56 corresponds to the value QSFP56 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 12
+	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD corresponds to the value QSFP56_DD of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 13
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE1 corresponds to the value QSFP56_DD_TYPE1 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE1 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 12
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE1 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 14
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE2 corresponds to the value QSFP56_DD_TYPE2 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 13
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP56_DD_TYPE2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 15
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP_PLUS corresponds to the value QSFP_PLUS of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 14
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_QSFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 16
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP corresponds to the value SFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 15
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 17
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP28 corresponds to the value SFP28 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 16
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP28 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 18
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP56 corresponds to the value SFP56 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP56 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 17
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP56 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 19
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_DD corresponds to the value SFP_DD of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_DD E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 18
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_DD E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 20
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_PLUS corresponds to the value SFP_PLUS of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 19
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_SFP_PLUS E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 21
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_X2 corresponds to the value X2 of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_X2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 20
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_X2 E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 22
 	// TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_XFP corresponds to the value XFP of TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE
-	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_XFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 21
+	TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE_XFP E_TransportTypes_TRANSCEIVER_FORM_FACTOR_TYPE = 23
 )
 
 // E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE is a derived int64 type which is used to represent

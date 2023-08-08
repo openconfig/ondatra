@@ -351,11 +351,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_DefaultMetric_Flags": {
 		1: {Name: "INTERNAL"},
 	},
-	"E_DfElection_DfElectionMethod": {
-		1: {Name: "DEFAULT"},
-		2: {Name: "HIGHEST_RANDOM_WEIGHT"},
-		3: {Name: "PREFERENCE"},
-	},
 	"E_Egress_IncomingLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
 		2: {Name: "ROUTER_ALERT"},
@@ -396,9 +391,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "STATIC"},
 		2: {Name: "DYNAMIC"},
 	},
-	"E_EthernetSegment_Esi": {
-		1: {Name: "AUTO"},
-	},
 	"E_Ethernet_ClientAls": {
 		1: {Name: "NONE"},
 		2: {Name: "LASER_SHUTDOWN"},
@@ -424,22 +416,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_EvpnInstance_RouteDistinguisher": {
 		1: {Name: "AUTO"},
 	},
-	"E_EvpnTypes_EVPN_REDUNDANCY_MODE": {
-		1: {Name: "ALL_ACTIVE", DefiningModule: "openconfig-evpn-types"},
-		2: {Name: "SINGLE_ACTIVE", DefiningModule: "openconfig-evpn-types"},
-	},
 	"E_EvpnTypes_EVPN_TYPE": {
 		1: {Name: "VLAN_AWARE", DefiningModule: "openconfig-evpn-types"},
 		2: {Name: "VLAN_BASED", DefiningModule: "openconfig-evpn-types"},
 		3: {Name: "VLAN_BUNDLE", DefiningModule: "openconfig-evpn-types"},
-	},
-	"E_Evpn_EsiType": {
-		1: {Name: "TYPE_0_OPERATOR_CONFIGURED"},
-		2: {Name: "TYPE_1_LACP_BASED"},
-		3: {Name: "TYPE_2_BRIDGE_PROTOCOL_BASED"},
-		4: {Name: "TYPE_3_MAC_BASED"},
-		5: {Name: "TYPE_4_ROUTER_ID_BASED"},
-		6: {Name: "TYPE_5_AS_BASED"},
 	},
 	"E_Evpn_LearningMode": {
 		1: {Name: "CONTROL_PLANE"},
@@ -2283,16 +2263,18 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9:  {Name: "OTHER", DefiningModule: "openconfig-transport-types"},
 		10: {Name: "QSFP", DefiningModule: "openconfig-transport-types"},
 		11: {Name: "QSFP28", DefiningModule: "openconfig-transport-types"},
-		12: {Name: "QSFP56_DD_TYPE1", DefiningModule: "openconfig-transport-types"},
-		13: {Name: "QSFP56_DD_TYPE2", DefiningModule: "openconfig-transport-types"},
-		14: {Name: "QSFP_PLUS", DefiningModule: "openconfig-transport-types"},
-		15: {Name: "SFP", DefiningModule: "openconfig-transport-types"},
-		16: {Name: "SFP28", DefiningModule: "openconfig-transport-types"},
-		17: {Name: "SFP56", DefiningModule: "openconfig-transport-types"},
-		18: {Name: "SFP_DD", DefiningModule: "openconfig-transport-types"},
-		19: {Name: "SFP_PLUS", DefiningModule: "openconfig-transport-types"},
-		20: {Name: "X2", DefiningModule: "openconfig-transport-types"},
-		21: {Name: "XFP", DefiningModule: "openconfig-transport-types"},
+		12: {Name: "QSFP56", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "QSFP56_DD", DefiningModule: "openconfig-transport-types"},
+		14: {Name: "QSFP56_DD_TYPE1", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "QSFP56_DD_TYPE2", DefiningModule: "openconfig-transport-types"},
+		16: {Name: "QSFP_PLUS", DefiningModule: "openconfig-transport-types"},
+		17: {Name: "SFP", DefiningModule: "openconfig-transport-types"},
+		18: {Name: "SFP28", DefiningModule: "openconfig-transport-types"},
+		19: {Name: "SFP56", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "SFP_DD", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "SFP_PLUS", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "X2", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "XFP", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_TRANSCEIVER_MODULE_FUNCTIONAL_TYPE": {
 		1: {Name: "TYPE_DIGITAL_COHERENT_OPTIC", DefiningModule: "openconfig-transport-types"},
@@ -2812,18 +2794,6 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/encapsulation/state/label-allocation-mode": {
 			reflect.TypeOf((E_NetworkInstanceTypes_LABEL_ALLOCATION_MODE)(0)),
-		},
-		"/network-instances/network-instance/evpn/ethernet-segments/ethernet-segment/df-election/state/df-election-method": {
-			reflect.TypeOf((E_DfElection_DfElectionMethod)(0)),
-		},
-		"/network-instances/network-instance/evpn/ethernet-segments/ethernet-segment/state/esi": {
-			reflect.TypeOf((E_EthernetSegment_Esi)(0)),
-		},
-		"/network-instances/network-instance/evpn/ethernet-segments/ethernet-segment/state/esi-type": {
-			reflect.TypeOf((E_Evpn_EsiType)(0)),
-		},
-		"/network-instances/network-instance/evpn/ethernet-segments/ethernet-segment/state/redundancy-mode": {
-			reflect.TypeOf((E_EvpnTypes_EVPN_REDUNDANCY_MODE)(0)),
 		},
 		"/network-instances/network-instance/evpn/evpn-instances/evpn-instance/import-export-policy/state/export-route-target": {
 			reflect.TypeOf((E_ImportExportPolicy_ExportRouteTarget)(0)),

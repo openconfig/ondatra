@@ -19,6 +19,8 @@ import (
 	"io"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/openconfig/testt"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"google.golang.org/grpc/codes"
@@ -40,11 +42,17 @@ func TestWatcherAwait(t *testing.T) {
 		wantStatus bool
 		wantErr    bool
 	}{{
-		desc:  "wrapped deadline exceeded",
+		desc:  "wrapped rpc deadline exceeded",
 		inErr: fmt.Errorf("rpc err: %w", status.Error(codes.DeadlineExceeded, "foo")),
 	}, {
-		desc:  "wrapped canceled",
+		desc:  "wrapped rpc canceled",
 		inErr: fmt.Errorf("rpc err: %w", status.Error(codes.Canceled, "foo")),
+	}, {
+		desc:  "wrapped ctx deadline exceeded",
+		inErr: fmt.Errorf("rpc err: %w", context.DeadlineExceeded),
+	}, {
+		desc:  "wrapped ctx canceled",
+		inErr: fmt.Errorf("rpc err: %w", context.Canceled),
 	}, {
 		desc:    "wrapped EOF",
 		inErr:   fmt.Errorf("rpc err: %w", io.EOF),

@@ -17,7 +17,6 @@ package ondatra
 import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/otg"
-	"github.com/openconfig/ondatra/raw"
 )
 
 // ATEDevice is an automated test equipment.
@@ -46,7 +45,8 @@ func (a *ATEDevice) Actions() *Actions {
 	return &Actions{a.res.(binding.ATE)}
 }
 
-// RawAPIs returns a handle to raw protocol APIs on the ATE.
-func (a *ATEDevice) RawAPIs() *raw.ATEAPIs {
-	return raw.NewATEAPIs(a.res.(binding.ATE))
+// RawAPI returns the underlying ATE implementation provided by the binding,
+// for low-level access to ATE protocols.
+func (a *ATEDevice) RawAPI() binding.ATE {
+	return a.res.(binding.ATE)
 }

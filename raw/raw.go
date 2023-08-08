@@ -21,7 +21,6 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
-	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/rawapis"
 
@@ -260,32 +259,4 @@ func (r *DUTAPIs) Console(t testing.TB) StreamClient {
 		t.Fatalf("Failed to create console client for %v: %v", r.dut, err)
 	}
 	return c
-}
-
-// NewATEAPIs returns a new instance of raw ATE APIs.
-// Tests must not call this directly.
-func NewATEAPIs(ate binding.ATE) *ATEAPIs {
-	return &ATEAPIs{ate}
-}
-
-// ATEAPIs provides access to raw DUT protocol APIs.
-type ATEAPIs struct {
-	ate binding.ATE
-}
-
-// GNMI provides access to creating raw gNMI clients for the dut.
-func (r *ATEAPIs) GNMI() *GNMIAPI {
-	return &GNMIAPI{r.ate}
-}
-
-// IxNetwork returns the raw IxNetwork session for the ATE.
-// TODO(team): Add unit tests once raw APIs is factored out into its own package.
-func (r *ATEAPIs) IxNetwork(t testing.TB) *ixweb.Session {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching IxNetwork session for %s", r.ate)
-	ixnet, err := rawapis.FetchIxNetwork(context.Background(), r.ate)
-	if err != nil {
-		t.Fatalf("IxNetwork(t) on %v: %v", r.ate, err)
-	}
-	return ixnet.Session
 }

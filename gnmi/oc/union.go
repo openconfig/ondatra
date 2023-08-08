@@ -853,36 +853,6 @@ func (t *NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni) To_NetworkI
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_ConnectionPoint_Endpoint_Vxlan_EndpointVni_MultidestinationTraffic_Union, unknown union type, got: %T, want any of [E_EndpointVni_MultidestinationTraffic, string]", i, i)
 }
 
-// NetworkInstance_Evpn_EthernetSegment_Esi_Union is an interface that is implemented by valid types for the union
-// for the leaf /openconfig-network-instance/network-instances/network-instance/evpn/ethernet-segments/ethernet-segment/state/esi within the YANG schema.
-// Union type can be one of [E_EthernetSegment_Esi, UnionString].
-type NetworkInstance_Evpn_EthernetSegment_Esi_Union interface {
-	// Union type can be one of [E_EthernetSegment_Esi, UnionString]
-	Documentation_for_NetworkInstance_Evpn_EthernetSegment_Esi_Union()
-}
-
-// Documentation_for_NetworkInstance_Evpn_EthernetSegment_Esi_Union ensures that E_EthernetSegment_Esi
-// implements the NetworkInstance_Evpn_EthernetSegment_Esi_Union interface.
-func (E_EthernetSegment_Esi) Documentation_for_NetworkInstance_Evpn_EthernetSegment_Esi_Union() {}
-
-// Documentation_for_NetworkInstance_Evpn_EthernetSegment_Esi_Union ensures that UnionString
-// implements the NetworkInstance_Evpn_EthernetSegment_Esi_Union interface.
-func (UnionString) Documentation_for_NetworkInstance_Evpn_EthernetSegment_Esi_Union() {}
-
-// To_NetworkInstance_Evpn_EthernetSegment_Esi_Union takes an input interface{} and attempts to convert it to a struct
-// which implements the NetworkInstance_Evpn_EthernetSegment_Esi_Union union. It returns an error if the interface{} supplied
-// cannot be converted to a type within the union.
-func (t *NetworkInstance_Evpn_EthernetSegment) To_NetworkInstance_Evpn_EthernetSegment_Esi_Union(i interface{}) (NetworkInstance_Evpn_EthernetSegment_Esi_Union, error) {
-	if v, ok := i.(NetworkInstance_Evpn_EthernetSegment_Esi_Union); ok {
-		return v, nil
-	}
-	switch v := i.(type) {
-	case string:
-		return UnionString(v), nil
-	}
-	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Evpn_EthernetSegment_Esi_Union, unknown union type, got: %T, want any of [E_EthernetSegment_Esi, string]", i, i)
-}
-
 // NetworkInstance_Evpn_EvpnInstance_RouteDistinguisher_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/evpn/evpn-instances/evpn-instance/state/route-distinguisher within the YANG schema.
 // Union type can be one of [E_EvpnInstance_RouteDistinguisher, UnionString].
