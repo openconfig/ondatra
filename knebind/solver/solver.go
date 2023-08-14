@@ -21,6 +21,8 @@ import (
 	"strconv"
 	"strings"
 
+	"golang.org/x/net/context"
+
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/portgraph"
@@ -464,7 +466,7 @@ func runtimeProtoCheck() error {
 }
 
 // Solve creates a new Reservation from a desired testbed and an available topology.
-func Solve(tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*binding.Reservation, error) {
+func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*binding.Reservation, error) {
 	if err := runtimeProtoCheck(); err != nil {
 		return nil, err
 	}
@@ -488,7 +490,7 @@ func Solve(tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*bin
 		return nil, fmt.Errorf("could not parse specified testbed: %w", err)
 	}
 
-	assignment, err := portgraph.Solve(abstractGraph, superGraph)
+	assignment, err := portgraph.Solve(ctx, abstractGraph, superGraph)
 	if err != nil {
 		return nil, fmt.Errorf("could not solve for specified testbed: %w", err)
 	}

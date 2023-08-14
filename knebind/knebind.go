@@ -95,7 +95,7 @@ func (b *Bind) Reserve(ctx context.Context, tb *opb.Testbed, runTime time.Durati
 	if err != nil {
 		return nil, err
 	}
-	res, err := solver.Solve(tb, resp.GetTopology(), partial)
+	res, err := solver.Solve(ctx, tb, resp.GetTopology(), partial)
 	if err != nil {
 		return nil, err
 	}

@@ -33,7 +33,7 @@ func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.Traffi
 		}
 		stacks := []*ixconfig.TrafficTrafficItemConfigElementStack{s}
 		if hasSrcVLAN || v.Eth.GetVlanId() != 0 {
-			s, err := vlanStack(v.Eth.GetVlanId(), idx+1)
+			s, err := vlanStack(v.Eth, idx+1)
 			if err != nil {
 				return nil, err
 			}
@@ -160,10 +160,13 @@ func ethStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemCon
 	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
-func vlanStack(vlanID uint32, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+func vlanStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	stack := ixconfig.NewVlanStack(idx)
-	if vlanID > 0 {
-		setSingleValue(stack.VlanTagVlanID(), uintToStr(vlanID))
+	if eth.GetVlanId() > 0 {
+		setSingleValue(stack.VlanTagVlanID(), uintToStr(eth.GetVlanId()))
+	}
+	if eth.GetProtocolId() > 0 {
+		setSingleValue(stack.ProtocolID(), uintToHexStr(eth.GetProtocolId()))
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
 }

@@ -662,6 +662,7 @@ message EthernetHeader {
   uint32 vlan_id = 3;
   bool bad_crc = 4;
   uint32 ether_type = 5;
+  uint32 protocol_id = 6;
 }
 
 message GreHeader {

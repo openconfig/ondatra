@@ -91,6 +91,13 @@ func (h *EthernetHeader) WithBadCRC(bad bool) *EthernetHeader {
 	return h
 }
 
+// WithProtocolID sets the Ethernet Header Protocol Identifier when
+// dot1Q vlan Tag is present.
+func (h *EthernetHeader) WithProtocolID(pID uint32) *EthernetHeader {
+	h.pb.ProtocolId = pID
+	return h
+}
+
 func (h *EthernetHeader) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Eth{h.pb}}
 }

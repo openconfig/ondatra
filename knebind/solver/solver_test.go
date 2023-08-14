@@ -18,6 +18,8 @@ import (
 	"strconv"
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding"
@@ -403,7 +405,7 @@ func TestSolve(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			gotRes, err := Solve(test.tb, topo, test.partial)
+			gotRes, err := Solve(context.Background(), test.tb, topo, test.partial)
 			if err != nil {
 				t.Fatalf("Solve() got unexpected error: %v", err)
 			}
@@ -617,7 +619,7 @@ func TestPortGroupsSolve(t *testing.T) {
 		Links: []*opb.Link{link1, link2, link3, link4, link5, link6, link7, link8, link9, link10, link11, link12, link13, link14, link15},
 	}
 
-	res, err := Solve(tb, topo, nil)
+	res, err := Solve(context.Background(), tb, topo, nil)
 	if err != nil {
 		t.Fatalf("Solve() got unexpected error: %v", err)
 	}
@@ -1196,7 +1198,7 @@ func TestSolveErrors(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
 			topo := unmarshalTopo(t, test.topo)
-			_, gotErr := Solve(test.tb, topo, nil)
+			_, gotErr := Solve(context.Background(), test.tb, topo, nil)
 			if diff := errdiff.Substring(gotErr, test.wantErr); diff != "" {
 				t.Fatalf("Reserve() got unexpected error diff: %s", diff)
 			}

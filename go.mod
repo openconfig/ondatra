@@ -8,7 +8,7 @@ require (
 	github.com/jstemmer/go-junit-report/v2 v2.0.1-0.20220823220451-7b10b4285462
 	github.com/open-traffic-generator/snappi/gosnappi v0.11.14
 	github.com/openconfig/entity-naming v0.0.0-20230615134154-46b7e6d34924
-	github.com/openconfig/gnmi v0.9.1
+	github.com/openconfig/gnmi v0.10.0
 	github.com/openconfig/gnoi v0.0.0-20230221223856-1727ed932554
 	github.com/openconfig/gnsi v1.2.1
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
@@ -16,8 +16,8 @@ require (
 	github.com/openconfig/gribi v1.0.0
 	github.com/openconfig/kne v0.1.14
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
-	github.com/openconfig/ygnmi v0.8.2
-	github.com/openconfig/ygot v0.29.8
+	github.com/openconfig/ygnmi v0.8.6
+	github.com/openconfig/ygot v0.29.9
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.1

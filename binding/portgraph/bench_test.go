@@ -16,6 +16,8 @@ package portgraph
 
 import (
 	"testing"
+
+	"golang.org/x/net/context"
 )
 
 var (
@@ -198,7 +200,7 @@ func BenchmarkSolveScale(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StartTimer()
-		_, err := Solve(absGraph, benchGraph)
+		_, err := Solve(context.Background(), absGraph, benchGraph)
 		b.StopTimer()
 		if err != nil {
 			b.Fatalf("Solve() got unexpected error: %v", err)
@@ -216,7 +218,7 @@ func BenchmarkManyLinksSolve(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		b.StartTimer()
-		_, err := Solve(requestGraph, superGraph)
+		_, err := Solve(context.Background(), requestGraph, superGraph)
 		b.StopTimer()
 		if err != nil {
 			b.Fatalf("Solve() got unexpected error: %v", err)

@@ -17,6 +17,8 @@ package solver
 import (
 	"testing"
 
+	"golang.org/x/net/context"
+
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -323,7 +325,7 @@ func BenchmarkSolveScale(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		b.StartTimer()
-		_, err := Solve(tb, topo, nil)
+		_, err := Solve(context.Background(), tb, topo, nil)
 		b.StopTimer()
 		if err != nil {
 			b.Fatalf("Solve() got unexpected error: %v", err)

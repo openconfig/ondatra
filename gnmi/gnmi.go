@@ -393,6 +393,25 @@ func BatchReplace[T any](sb *SetBatch, q ygnmi.ConfigQuery[T], val T) {
 	ygnmi.BatchReplace(&sb.sb, q, val)
 }
 
+// BatchUnionReplace stores a union_replace operation in the SetBatch.
+//
+// https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-union_replace.md
+func BatchUnionReplace[T any](sb *SetBatch, q ygnmi.ConfigQuery[T], val T) {
+	ygnmi.BatchUnionReplace(&sb.sb, q, val)
+}
+
+// BatchUnionReplaceCLI stores a CLI union_replace operation in the SetBatch.
+//
+//   - nos is the name of the Network operating system.
+//     "_cli" is appended to it to form the origin, see
+//     https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-union_replace.md#24-native-cli-configuration-cli
+//   - ascii is the full CLI text.
+//
+// https://github.com/openconfig/reference/blob/master/rpc/gnmi/gnmi-union_replace.md
+func BatchUnionReplaceCLI(sb *SetBatch, nos, ascii string) {
+	ygnmi.BatchUnionReplaceCLI(&sb.sb, nos, ascii)
+}
+
 // BatchDelete stores an delete operation in the SetBatch.
 func BatchDelete[T any](sb *SetBatch, q ygnmi.ConfigQuery[T]) {
 	ygnmi.BatchDelete(&sb.sb, q)

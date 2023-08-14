@@ -18,6 +18,8 @@ import (
 	"fmt"
 	"regexp"
 	"testing"
+
+	"golang.org/x/net/context"
 )
 
 // Initialize ConcretePorts and ConcreteNodes for the super graph.
@@ -632,7 +634,7 @@ func TestSolve(t *testing.T) {
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
-			a, err := Solve(tc.graph, superGraph)
+			a, err := Solve(context.Background(), tc.graph, superGraph)
 			if err != nil {
 				t.Fatalf("Solve got error %v, want nil", err)
 			}
@@ -752,7 +754,7 @@ func TestSolveNotSolvable(t *testing.T) {
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
-			a, err := Solve(tc.graph, superGraph)
+			a, err := Solve(context.Background(), tc.graph, superGraph)
 			if a != nil {
 				t.Errorf("Solve got assignment %v, want nil", a)
 			}
@@ -780,6 +782,20 @@ func TestSolveNotSolvable(t *testing.T) {
 	}
 }
 
+func TestSolveCancelled(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	requestGraph := &AbstractGraph{
+		Desc:  "four nodes, interconnected",
+		Nodes: []*AbstractNode{abs3, abs4, abs5, abs6},
+		Edges: []*AbstractEdge{{abs3port1, abs4port1}, {abs3port2, abs6port1}, {abs4port2, abs5port1}, {abs5port2, abs6port2}},
+	}
+	_, err := Solve(ctx, requestGraph, superGraph)
+	if err == nil {
+		t.Error("Solve got nil error, want error due to cancel")
+	}
+}
+
 // Benchmark solve for 4 DUT
 // Run via blaze test with --test_arg=--test.bench=. --nocache_test_results
 func Benchmark4DutSolve(b *testing.B) {
@@ -790,6 +806,6 @@ func Benchmark4DutSolve(b *testing.B) {
 		Edges: []*AbstractEdge{{abs3port1, abs4port1}, {abs3port2, abs6port1}, {abs4port2, abs5port1}, {abs5port2, abs6port2}},
 	}
 	for i := 0; i < b.N; i++ {
-		Solve(requestGraph, superGraph)
+		Solve(context.Background(), requestGraph, superGraph)
 	}
 }
