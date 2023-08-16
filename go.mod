@@ -16,7 +16,7 @@ require (
 	github.com/openconfig/gribi v1.0.0
 	github.com/openconfig/kne v0.1.14
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
-	github.com/openconfig/ygnmi v0.8.6
+	github.com/openconfig/ygnmi v0.8.7
 	github.com/openconfig/ygot v0.29.9
 	github.com/p4lang/p4runtime v1.3.0
 	github.com/patrickmn/go-cache v2.1.0+incompatible

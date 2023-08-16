@@ -114,6 +114,7 @@ go run github.com/openconfig/ygnmi/app/ygnmi generator \
   --base_package_path=github.com/openconfig/ondatra/gnmi/oc \
   --output_dir=gnmi/oc \
   --paths=public/release/models/...,public/third_party/ietf/... \
+  --split_package_paths="/network-instances/network-instance/protocols/protocol/isis=netinstisis,/network-instances/network-instance/protocols/protocol/bgp=netinstbgp" \
   --ignore_deviate_notsupported \
   "${YANG_FILES[@]}"
 
