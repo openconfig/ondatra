@@ -468,7 +468,8 @@ func runtimeProtoCheck() error {
 // Solve creates a new Reservation from a desired testbed and an available topology.
 func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*binding.Reservation, error) {
 	if err := runtimeProtoCheck(); err != nil {
-		return nil, err
+		// TODO(team): Revisit the need for this function and the appropriate behavior on failure.
+		log.Warningf("Runtime proto check failed: %v", err)
 	}
 	topo = filterTopology(topo)
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
