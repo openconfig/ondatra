@@ -153,7 +153,7 @@ func TestMaybeAnnotateErr(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			gotErr := maybeAnnotateErr(test.err, test.req)
+			gotErr := maybeAnnotateErr(test.err, test.req, false)
 			if gotErr == nil {
 				t.Fatalf("maybeAnnotateErr() got no error, want error, %v", gotErr)
 			}

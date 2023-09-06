@@ -56,7 +56,10 @@ type GRPCDialer interface {
 type defaultGRPCDialer struct{}
 
 func (d defaultGRPCDialer) DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
-	return grpc.DialContext(ctx, target, opts...)
+	log.Infof("DialContext(%s)", target)
+	conn, err := grpc.DialContext(ctx, target, opts...)
+	log.Infof("DialContext(%s) returns %s", target, err)
+	return conn, err
 }
 
 // GRPCServer is an interface to server gRPC.
@@ -119,19 +122,25 @@ func NewServer(dp DestProviderFn, opts ...Option) (GRPCServer, error) {
 
 func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context, *grpc.ClientConn, error) {
 	// Intercept header.
+	name := fmt.Sprintf("dialTarget(%s)", method)
+	log.Info(name)
 	hd, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
+		log.Infof("%s proxy_error: missing metadata", name)
 		return nil, nil, status.Errorf(codes.InvalidArgument, "proxy_error: missing metadata")
 	}
 	dest, destHd, err := p.destProvider(hd, method)
 	if err != nil {
+		log.Infof("%s destProvider: %v", name, err)
 		return nil, nil, err
 	}
 	destCtx := metadata.NewOutgoingContext(ctx, destHd)
 	c, err := p.grpcDialer.DialGRPC(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
 	if err != nil {
+		log.Infof("%s proxy_error: cannot connect to target backend %s: %v", name, dest, err)
 		return nil, nil, status.Errorf(codes.Unavailable, fmt.Sprintf("proxy_error: cannot connect to target backend: %v", err))
 	}
+	log.Infof("%s %s succeeded", name, dest)
 	return destCtx, c, nil
 }
 

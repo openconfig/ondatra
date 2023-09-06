@@ -98,7 +98,7 @@ func nextAggregateInterface(dut dutIntf, currAggsRoot *ygnmi.Value[*oc.Root]) (s
 
 // CommonTrafficQueues returns the vendors-specific names of common traffic
 // class queues. See the definition of common queues here:
-// https://github.com/openconfig/entity-naming/blob/main/README.md#traffic-queues
+// Deprecated: Use CommonQosQueues instead.
 func CommonTrafficQueues(t *testing.T, dut *ondatra.DUTDevice) *entname.CommonTrafficQueueNames {
 	t.Helper()
 	ctq, err := commonTrafficQueues(dut)
@@ -114,6 +114,26 @@ func commonTrafficQueues(dut dutIntf) (*entname.CommonTrafficQueueNames, error) 
 		return nil, err
 	}
 	return entname.CommonTrafficQueues(dev)
+}
+
+// CommonQoSQueues returns the vendors-specific names of common QoS queues.
+// See the common QoS queue definitions here:
+// https://google3/third_party/openconfig/entity_naming/blob/main/README.md/main/README.md#common-qos-queues
+func CommonQoSQueues(t *testing.T, dut *ondatra.DUTDevice, qos *entname.QoSParams) *entname.CommonQoSQueueNames {
+	t.Helper()
+	ctq, err := commonQoSQueues(dut, qos)
+	if err != nil {
+		t.Fatalf("CommonQoSQueues(t, %s, %v): %v", dut.Name(), qos, err)
+	}
+	return ctq
+}
+
+func commonQoSQueues(dut dutIntf, qos *entname.QoSParams) (*entname.CommonQoSQueueNames, error) {
+	dev, err := deviceParams(dut)
+	if err != nil {
+		return nil, err
+	}
+	return entname.CommonQoSQueues(dev, qos)
 }
 
 var namingVendors map[ondatra.Vendor]entname.Vendor = map[ondatra.Vendor]entname.Vendor{

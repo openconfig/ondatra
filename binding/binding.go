@@ -40,7 +40,7 @@ import (
 	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
-	accpb "github.com/openconfig/gnsi/accounting"
+	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
 	credzpb "github.com/openconfig/gnsi/credentialz"
@@ -123,7 +123,14 @@ func (d *Dims) String() string {
 }
 
 // DUT is a reserved DUT.
+//
 // All implementations of this interface must embed AbstractDUT.
+//
+// For methods that dial gRPC endpoints, implementations must use a default set
+// of dial options necessary to reach the endpoint, so that the dial succeeds
+// when no options are provided by the caller. When the caller does specify
+// options, implementations are encouraged to append those options to the
+// default set, so the call can both inherit and override the default behavior.
 type DUT interface {
 	Device
 
@@ -135,36 +142,43 @@ type DUT interface {
 	PushConfig(ctx context.Context, config string, reset bool) error
 
 	// DialCLI creates a client connection to the DUT's CLI endpoint.
-	DialCLI(context.Context) (StreamClient, error)
+	DialCLI(context.Context) (CLIClient, error)
 
 	// DialConsole creates a client connection to the DUT's Console endpoint.
-	DialConsole(context.Context) (StreamClient, error)
+	DialConsole(context.Context) (ConsoleClient, error)
 
 	// DialGNMI creates a client connection to the DUT's gNMI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 
 	// DialGNOI creates a client connection to the DUT's gNOI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error)
 
 	// DialGNSI creates a client connection to the DUT's gNSI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	DialGNSI(context.Context, ...grpc.DialOption) (GNSIClients, error)
 
 	// DialGRIBI creates a client connection to the DUT's gRIBI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
 
 	// DialP4RT creates a client connection to the DUT's P4RT endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
 
 	mustEmbedAbstractDUT()
 }
 
 // ATE is a reserved ATE.
+//
 // All implementations of this interface must embed AbstractATE.
+//
+// For methods that dial gRPC endpoints, implementations must use a default set
+// of dial options necessary to reach the endpoint, so that the dial succeeds
+// when no options are provided by the caller. When the caller does specify
+// options, implementations are encouraged to append those options to the
+// default set, so the call can both inherit and override the default behavior.
 type ATE interface {
 	Device
 
@@ -172,13 +186,13 @@ type ATE interface {
 	DialIxNetwork(context.Context) (*IxNetwork, error)
 
 	// DialGNMI creates a client connection to the ATE's gNMI endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	// This method must be implemented to receive gNMI from OTG but not from IxNetwork;
 	// Implementing DialIxNetwork is sufficient for gNMI support for IxNetwork.
 	DialGNMI(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
-	// Implementations must append transport security options necessary to reach the server.
+	// See the interface comment for proper handling of dial options.
 	DialOTG(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error)
 
 	mustEmbedAbstractATE()
@@ -234,23 +248,23 @@ type GNSIClients interface {
 	Pathz() pathzpb.PathzClient
 	Certz() certzpb.CertzClient
 	Credentialz() credzpb.CredentialzClient
-	AccountingPull() accpb.AccountingPullClient
-	AccountingPush() accpb.AccountingPushClient
+	Acctz() acctzpb.AcctzClient
 	mustEmbedAbstractGNSIClients()
 }
 
-// StreamClient provides the interface for streaming IO to DUT.
-// All implementations of this interface must embed AbstractStreamClient.
-type StreamClient interface {
-	// SendCommand always expects a clean "prompt" on the underlying
-	// device. If the device is interleaving Stdin writes with SendCommand
-	// the underlying channel must be at a clean prompt to allow SendCommand
-	// to complete the operation. Additionaly, the result buffer will be fully
-	// consumed by SendCommand, ensuring it leaves a clean prompt behind.
+// CLIClient provides the interface for sending CLI commands to the DUT.
+// All implementations of this interface must embed AbstractCLIClient.
+type CLIClient interface {
 	SendCommand(context.Context, string) (string, error)
+	mustEmbedAbstractCLIClient()
+}
+
+// ConsoleClient provides the interface for console access to the DUT.
+// All implementations of this interface must embed AbstractConsoleClient.
+type ConsoleClient interface {
 	Stdin() io.WriteCloser
 	Stdout() io.ReadCloser
 	Stderr() io.ReadCloser
 	Close() error
-	mustEmbedAbstractStreamClient()
+	mustEmbedAbstractConsoleClient()
 }

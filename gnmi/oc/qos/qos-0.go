@@ -1781,6 +1781,176 @@ func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny) Config() ygnm
 	)
 }
 
+// Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPath represents the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer-temporal YANG schema element.
+type Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPathAny represents the wildcard version of the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer-temporal YANG schema element.
+type Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dedicated-buffer-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_BufferAllocationProfile_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dedicated-buffer-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).DedicatedBufferTemporal
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/dedicated-buffer-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dedicated-buffer-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_BufferAllocationProfile_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dedicated-buffer-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).DedicatedBufferTemporal
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/dedicated-buffer-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/dedicated-buffer-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
+		"Qos_BufferAllocationProfile_Queue",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dedicated-buffer-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).DedicatedBufferTemporal
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/dedicated-buffer-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/dedicated-buffer-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_BufferAllocationProfile_Queue",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dedicated-buffer-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).DedicatedBufferTemporal
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath represents the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/dynamic-limit-scaling-factor YANG schema element.
 type Qos_BufferAllocationProfile_Queue_DynamicLimitScalingFactorPath struct {
 	*ygnmi.NodePath
@@ -2445,6 +2615,176 @@ func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny) Confi
 	)
 }
 
+// Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPath represents the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit-temporal YANG schema element.
+type Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny represents the wildcard version of the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit-temporal YANG schema element.
+type Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/static-shared-buffer-limit-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Qos_BufferAllocationProfile_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "static-shared-buffer-limit-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).StaticSharedBufferLimitTemporal
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/static-shared-buffer-limit-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/static-shared-buffer-limit-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Qos_BufferAllocationProfile_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "static-shared-buffer-limit-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).StaticSharedBufferLimitTemporal
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/static-shared-buffer-limit-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/static-shared-buffer-limit-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Qos_BufferAllocationProfile_Queue",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "static-shared-buffer-limit-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).StaticSharedBufferLimitTemporal
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "config/static-shared-buffer-limit-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/static-shared-buffer-limit-temporal"
+func (n *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Qos_BufferAllocationProfile_Queue",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "static-shared-buffer-limit-temporal"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Qos_BufferAllocationProfile_Queue).StaticSharedBufferLimitTemporal
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_BufferAllocationProfile_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Qos_BufferAllocationProfile_Queue_UseSharedBufferPath represents the /openconfig-qos/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/state/use-shared-buffer YANG schema element.
 type Qos_BufferAllocationProfile_Queue_UseSharedBufferPath struct {
 	*ygnmi.NodePath
@@ -2637,6 +2977,7 @@ type Qos_BufferAllocationProfile_QueuePathMapAny struct {
 
 // DedicatedBuffer (leaf): This is the dedicated buffer that is carved for the queue, this is the minimum
 // number of bytes reserved for this queue.
+// This leaf is mutualy exclusive with dedicated-buffer-temporal leaf
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -2656,6 +2997,7 @@ func (n *Qos_BufferAllocationProfile_QueuePath) DedicatedBuffer() *Qos_BufferAll
 
 // DedicatedBuffer (leaf): This is the dedicated buffer that is carved for the queue, this is the minimum
 // number of bytes reserved for this queue.
+// This leaf is mutualy exclusive with dedicated-buffer-temporal leaf
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -2665,6 +3007,52 @@ func (n *Qos_BufferAllocationProfile_QueuePathAny) DedicatedBuffer() *Qos_Buffer
 	ps := &Qos_BufferAllocationProfile_Queue_DedicatedBufferPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "dedicated-buffer"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DedicatedBufferTemporal (leaf): This is the dedicated buffer that is carved for the queue. The the minimum
+// number of bytes reserved for this queue is calculated by multiplying by interface speed
+// queue is attached to and queues minimum, guarantaed transmit share (derived
+// form WRR schedulers weights).
+// This leaf shouldbot be used for strict priority scheduled queues.
+// This leaf is mutualy exclusive with dedicated-buffer leaf
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/dedicated-buffer-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/*/dedicated-buffer-temporal"
+func (n *Qos_BufferAllocationProfile_QueuePath) DedicatedBufferTemporal() *Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPath {
+	ps := &Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dedicated-buffer-temporal"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DedicatedBufferTemporal (leaf): This is the dedicated buffer that is carved for the queue. The the minimum
+// number of bytes reserved for this queue is calculated by multiplying by interface speed
+// queue is attached to and queues minimum, guarantaed transmit share (derived
+// form WRR schedulers weights).
+// This leaf shouldbot be used for strict priority scheduled queues.
+// This leaf is mutualy exclusive with dedicated-buffer leaf
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/dedicated-buffer-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/*/dedicated-buffer-temporal"
+func (n *Qos_BufferAllocationProfile_QueuePathAny) DedicatedBufferTemporal() *Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPathAny {
+	ps := &Qos_BufferAllocationProfile_Queue_DedicatedBufferTemporalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dedicated-buffer-temporal"},
 			map[string]interface{}{},
 			n,
 		),
@@ -2802,6 +3190,7 @@ func (n *Qos_BufferAllocationProfile_QueuePathAny) SharedBufferLimitType() *Qos_
 // StaticSharedBufferLimit (leaf): If the shared-buffer-limit-type is STATIC, then static-shared-buffer-limit is
 // the maximum number of bytes that the queue is allowed to use from the shared
 // pool.
+// This leaf is mutualy exclusive with static-shared-buffer-limit-temporal leaf.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -2822,6 +3211,7 @@ func (n *Qos_BufferAllocationProfile_QueuePath) StaticSharedBufferLimit() *Qos_B
 // StaticSharedBufferLimit (leaf): If the shared-buffer-limit-type is STATIC, then static-shared-buffer-limit is
 // the maximum number of bytes that the queue is allowed to use from the shared
 // pool.
+// This leaf is mutualy exclusive with static-shared-buffer-limit-temporal leaf.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
@@ -2831,6 +3221,56 @@ func (n *Qos_BufferAllocationProfile_QueuePathAny) StaticSharedBufferLimit() *Qo
 	ps := &Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "static-shared-buffer-limit"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// StaticSharedBufferLimitTemporal (leaf): If the shared-buffer-limit-type is STATIC, then static-shared-buffer-limit-temporal is
+// the maximum number of bytes that the queue is allowed to use from the shared
+// pool.
+// The the number of bytes is calculated by multiplying static-shared-buffer-limit-temporal
+// by interface speed the queue is attached to and queues minimum, guarantaed transmit share
+// (derived form WRR schedulers weights).
+// This leaf shouldbot be used for strict priority scheduled queues.
+// This leaf is mutualy exclusive with static-shared-buffer-limit leaf.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/static-shared-buffer-limit-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/*/static-shared-buffer-limit-temporal"
+func (n *Qos_BufferAllocationProfile_QueuePath) StaticSharedBufferLimitTemporal() *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPath {
+	ps := &Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "static-shared-buffer-limit-temporal"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// StaticSharedBufferLimitTemporal (leaf): If the shared-buffer-limit-type is STATIC, then static-shared-buffer-limit-temporal is
+// the maximum number of bytes that the queue is allowed to use from the shared
+// pool.
+// The the number of bytes is calculated by multiplying static-shared-buffer-limit-temporal
+// by interface speed the queue is attached to and queues minimum, guarantaed transmit share
+// (derived form WRR schedulers weights).
+// This leaf shouldbot be used for strict priority scheduled queues.
+// This leaf is mutualy exclusive with static-shared-buffer-limit leaf.
+//
+//	Defining module:      "openconfig-qos-mem-mgmt"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "*/static-shared-buffer-limit-temporal"
+//	Path from root:       "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/*/static-shared-buffer-limit-temporal"
+func (n *Qos_BufferAllocationProfile_QueuePathAny) StaticSharedBufferLimitTemporal() *Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny {
+	ps := &Qos_BufferAllocationProfile_Queue_StaticSharedBufferLimitTemporalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "static-shared-buffer-limit-temporal"},
 			map[string]interface{}{},
 			n,
 		),
@@ -20067,7 +20507,9 @@ func (n *Qos_Interface_Input_QueuePathAny) AvgQueueLen() *Qos_Interface_Input_Qu
 	return ps
 }
 
-// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -20085,7 +20527,9 @@ func (n *Qos_Interface_Input_QueuePath) DroppedOctets() *Qos_Interface_Input_Que
 	return ps
 }
 
-// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -20103,7 +20547,9 @@ func (n *Qos_Interface_Input_QueuePathAny) DroppedOctets() *Qos_Interface_Input_
 	return ps
 }
 
-// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun
+// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -20121,7 +20567,9 @@ func (n *Qos_Interface_Input_QueuePath) DroppedPkts() *Qos_Interface_Input_Queue
 	return ps
 }
 
-// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun
+// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -23413,7 +23861,9 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) AvgQueueLen() *Qos_Inter
 	return ps
 }
 
-// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -23431,7 +23881,9 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePath) DroppedOctets() *Qos_Interf
 	return ps
 }
 
-// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -23449,7 +23901,9 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) DroppedOctets() *Qos_Int
 	return ps
 }
 
-// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun
+// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -23467,7 +23921,9 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePath) DroppedPkts() *Qos_Interfac
 	return ps
 }
 
-// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun
+// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -27695,7 +28151,9 @@ func (n *Qos_Interface_Output_QueuePathAny) AvgQueueLen() *Qos_Interface_Output_
 	return ps
 }
 
-// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -27713,7 +28171,9 @@ func (n *Qos_Interface_Output_QueuePath) DroppedOctets() *Qos_Interface_Output_Q
 	return ps
 }
 
-// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun
+// DroppedOctets (leaf): Number of octets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -27731,7 +28191,9 @@ func (n *Qos_Interface_Output_QueuePathAny) DroppedOctets() *Qos_Interface_Outpu
 	return ps
 }
 
-// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun
+// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"
@@ -27749,7 +28211,9 @@ func (n *Qos_Interface_Output_QueuePath) DroppedPkts() *Qos_Interface_Output_Que
 	return ps
 }
 
-// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun
+// DroppedPkts (leaf): Number of packets dropped by the queue due to overrun, that is tail-drop
+// or AMQ (RED, WRED, etc) induced drops as indicated by the attached
+// queue-management-profile
 //
 //	Defining module:      "openconfig-qos-interfaces"
 //	Instantiating module: "openconfig-qos"

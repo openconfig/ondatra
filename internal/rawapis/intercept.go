@@ -32,7 +32,7 @@ func withUnaryAnnotateErrors() grpc.DialOption {
 	return grpc.WithChainUnaryInterceptor(
 		func(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 			err := invoker(ctx, method, req, reply, cc, opts...)
-			return maybeAnnotateErr(err, req)
+			return maybeAnnotateErr(err, req, false)
 		})
 }
 
@@ -57,15 +57,15 @@ type annotateErrClient struct {
 func (c *annotateErrClient) SendMsg(m any) error {
 	c.req.Store(m)
 	err := c.ClientStream.SendMsg(m)
-	return maybeAnnotateErr(err, m)
+	return maybeAnnotateErr(err, m, false)
 }
 
 func (c *annotateErrClient) RecvMsg(m any) error {
 	err := c.ClientStream.RecvMsg(m)
-	return maybeAnnotateErr(err, c.req.Load())
+	return maybeAnnotateErr(err, c.req.Load(), true)
 }
 
-func maybeAnnotateErr(err error, req any) error {
+func maybeAnnotateErr(err error, req any, recv bool) error {
 	// Do not annotate the error if:
 	// 1. err is nil: there is no error to annotate
 	// 2. req is nil: there is no request to annotate with
@@ -79,7 +79,11 @@ func maybeAnnotateErr(err error, req any) error {
 				reqText = fmt.Sprint(req)
 			}
 			pb := st.Proto()
-			pb.Message = fmt.Sprintf("error on request {\n%s}: %s", reqText, pb.Message)
+			prep := "on"
+			if recv {
+				prep = "after"
+			}
+			pb.Message = fmt.Sprintf("error %s request {\n%s}: %s", prep, reqText, pb.Message)
 			return status.FromProto(pb).Err()
 		}
 	}

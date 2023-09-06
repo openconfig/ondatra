@@ -40,9 +40,19 @@ type DUTAPIs struct {
 	dut binding.DUT
 }
 
+// BindingDUT returns the underlying binding.DUT.
+func (r *DUTAPIs) BindingDUT() binding.DUT {
+	return r.dut
+}
+
 // GNMI provides access to creating raw gNMI clients for the dut.
-func (r *DUTAPIs) GNMI() *GNMIAPI {
-	return &GNMIAPI{r.dut}
+func (r *DUTAPIs) GNMI(t ...testing.TB) *GNMIAPI {
+	api := &GNMIAPI{dev: r.dut}
+	if len(t) == 0 {
+		return api
+	}
+	gnmi := api.Default(t[0])
+	return &GNMIAPI{GNMIClient: gnmi}
 }
 
 // TODO(greg-dennis): Should DialGNMI be in the binding.Device interface.
@@ -53,10 +63,12 @@ type gnmiDevice interface {
 
 // GNMIAPI provides access for creating a default or new gNMI client on the DUT.
 type GNMIAPI struct {
+	gpb.GNMIClient
 	dev gnmiDevice
 }
 
 // New returns a new gNMI client for the dut.
+// Deprecated: Use dut.RawAPIs().BindingAPI().DialGNMI() instead.
 func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gNMI client for %s", g.dev)
@@ -68,6 +80,7 @@ func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
 }
 
 // Default returns the default gNMI client for the DUT.
+// Deprecated: Use dut.RawAPIs().GNMI(t) instead.
 func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Fetching gNMI client for %s", g.dev)
@@ -79,28 +92,28 @@ func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
 }
 
 // GNOI provides access to creating raw gNOI clients for the dut.
-func (r *DUTAPIs) GNOI() *GNOIAPI {
-	return &GNOIAPI{r.dut}
+func (r *DUTAPIs) GNOI(t ...testing.TB) *GNOIAPI {
+	api := &GNOIAPI{dut: r.dut}
+	if len(t) == 0 {
+		return api
+	}
+	gnoi := api.Default(t[0])
+	return &GNOIAPI{GNOIClients: gnoi}
 }
 
 // GNOIAPI provides access to creating raw gNOI clients for the dut.
 type GNOIAPI struct {
+	binding.GNOIClients
 	dut binding.DUT
 }
 
 // GNOI stores APIs to GNOI services.
-type GNOI interface {
-	// Embed an unexported interface that wraps binding.GNOIClients,
-	// so as to not expose the binding.GNOIClients instance directly.
-	privateGNOI
-}
-
-type privateGNOI interface {
-	binding.GNOIClients
-}
+// Deprecated: Use binding.GNOIClients instead.
+type GNOI binding.GNOIClients
 
 // New returns a new gNOI client for the dut.
-func (g *GNOIAPI) New(t testing.TB) GNOI {
+// Deprecated: Use dut.RawAPIs().BindingAPI().DialGNOI() instead.
+func (g *GNOIAPI) New(t testing.TB) binding.GNOIClients {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gNOI client for %s", g.dut)
 	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
@@ -111,7 +124,8 @@ func (g *GNOIAPI) New(t testing.TB) GNOI {
 }
 
 // Default returns the default gNOI client for the dut.
-func (g *GNOIAPI) Default(t testing.TB) GNOI {
+// Deprecated: Use dut.RawAPIs().GNOI(t) instead.
+func (g *GNOIAPI) Default(t testing.TB) binding.GNOIClients {
 	t.Helper()
 	t = events.ActionStarted(t, "Fetching gNOI client for %s", g.dut)
 	bgnoi, err := rawapis.FetchGNOI(context.Background(), g.dut)
@@ -121,60 +135,35 @@ func (g *GNOIAPI) Default(t testing.TB) GNOI {
 	return bgnoi
 }
 
-// GNSIAPI provides access to creating raw gNSI client for the DUT.
-type GNSIAPI struct {
-	dut binding.DUT
-}
-
-// GNSI stores APIs to GNSI services.
-type GNSI interface {
-	// Embed an unexported interface that wraps binding.GNSIClients,
-	// so as to not expose the binding.GNSIClients instance directly.
-	privateGNSI
-}
-
-type privateGNSI interface {
-	binding.GNSIClients
-}
-
-// GNSI provides access to creating raw gNSI clients for the dut.
-func (r *DUTAPIs) GNSI() *GNSIAPI {
-	return &GNSIAPI{r.dut}
-}
-
-// New returns a new gNSI client for the DUT.
-func (g *GNSIAPI) New(t testing.TB) GNSI {
+// GNSI returns the default gNSI client for the dut.
+func (r *DUTAPIs) GNSI(t testing.TB) binding.GNSIClients {
 	t.Helper()
-	t = events.ActionStarted(t, "Creating gNSI  client for %s", g.dut)
-	bgnsi, err := rawapis.NewGNSI(context.Background(), g.dut)
+	t = events.ActionStarted(t, "Fetching gNSI client for %s", r.dut)
+	bgnsi, err := rawapis.FetchGNSI(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to create gNSI client for %v: %v", g.dut, err)
-	}
-	return bgnsi
-}
-
-// Default returns the default gNSI client for the dut.
-func (g *GNSIAPI) Default(t testing.TB) GNSI {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNSI client for %s", g.dut)
-	bgnsi, err := rawapis.FetchGNSI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("Failed to fetch gNSI client for %v: %v", g.dut, err)
+		t.Fatalf("Failed to fetch gNSI client for %v: %v", r.dut, err)
 	}
 	return bgnsi
 }
 
 // GRIBI provides access to createing raw gRIBI clients for the dut.
-func (r *DUTAPIs) GRIBI() *GRIBIAPI {
-	return &GRIBIAPI{r.dut}
+func (r *DUTAPIs) GRIBI(t ...testing.TB) *GRIBIAPI {
+	api := &GRIBIAPI{dut: r.dut}
+	if len(t) == 0 {
+		return api
+	}
+	gribi := api.Default(t[0])
+	return &GRIBIAPI{GRIBIClient: gribi}
 }
 
 // GRIBIAPI provides access to creating raw gRIBI clients for the DUT.
 type GRIBIAPI struct {
+	grpb.GRIBIClient
 	dut binding.DUT
 }
 
 // New returns a new gRIBI client for the dut.
+// Deprecated: Use dut.RawAPIs().BindingAPI().DialRIBI() instead.
 func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
@@ -186,6 +175,7 @@ func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
 }
 
 // Default returns the default gRIBI client for the dut.
+// Deprecated: Use dut.RawAPIs().GRIBI(t) instead.
 func (g *GRIBIAPI) Default(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Fetching gRIBI client for %s", g.dut)
@@ -197,16 +187,23 @@ func (g *GRIBIAPI) Default(t testing.TB) grpb.GRIBIClient {
 }
 
 // P4RT provides access to creating raw P4RT clients for the dut.
-func (r *DUTAPIs) P4RT() *P4RTAPI {
-	return &P4RTAPI{r.dut}
+func (r *DUTAPIs) P4RT(t ...testing.TB) *P4RTAPI {
+	api := &P4RTAPI{dut: r.dut}
+	if len(t) == 0 {
+		return api
+	}
+	p4rt := api.Default(t[0])
+	return &P4RTAPI{P4RuntimeClient: p4rt}
 }
 
 // P4RTAPI provides access for creating a default or new GRIBI client on the DUT.
 type P4RTAPI struct {
+	p4pb.P4RuntimeClient
 	dut binding.DUT
 }
 
 // New returns a P4RT client on the DUT.
+// Deprecated: Use dut.RawAPIs().BindingAPI().DialP4RT() instead.
 func (p *P4RTAPI) New(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating P4RT client for %s", p.dut)
@@ -218,6 +215,7 @@ func (p *P4RTAPI) New(t testing.TB) p4pb.P4RuntimeClient {
 }
 
 // Default returns the default P4RT client on the DUT.
+// Deprecated: Use dut.RawAPIs().P4RT(t) instead.
 func (p *P4RTAPI) Default(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Fetching P4RT client for %s", p.dut)
@@ -228,19 +226,8 @@ func (p *P4RTAPI) Default(t testing.TB) p4pb.P4RuntimeClient {
 	return p4rtClient
 }
 
-// StreamClient provides the interface for streaming IO to DUT.
-type StreamClient interface {
-	// Embed an unexported interface that wraps binding.StreamClient,
-	// so as to not expose the binding.StreamClient instance directly.
-	privateStreamClient
-}
-
-type privateStreamClient interface {
-	binding.StreamClient
-}
-
 // CLI returns a new streaming CLI client for the DUT.
-func (r *DUTAPIs) CLI(t testing.TB) StreamClient {
+func (r *DUTAPIs) CLI(t testing.TB) binding.CLIClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating CLI client for %s", r.dut)
 	c, err := rawapis.NewCLI(context.Background(), r.dut)
@@ -251,7 +238,7 @@ func (r *DUTAPIs) CLI(t testing.TB) StreamClient {
 }
 
 // Console returns a new Console client for the DUT.
-func (r *DUTAPIs) Console(t testing.TB) StreamClient {
+func (r *DUTAPIs) Console(t testing.TB) binding.ConsoleClient {
 	t.Helper()
 	t = events.ActionStarted(t, "Creating console client for %s", r.dut)
 	c, err := rawapis.NewConsole(context.Background(), r.dut)

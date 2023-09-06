@@ -217,11 +217,12 @@ func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))) // NOLINT
+	credOpts := []grpc.DialOption{grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))} // NOLINT
 	creds := d.newRPCCredentials()
 	if creds != nil {
-		opts = append(opts, grpc.WithPerRPCCredentials(creds))
+		credOpts = append(credOpts, grpc.WithPerRPCCredentials(creds))
 	}
+	opts = append(credOpts, opts...)
 	log.Infof("Dialing service %q on DUT %s@%s using credentials %+v", serviceName, d.Name(), addr, creds)
 	ctx, cancel := context.WithTimeout(ctx, grpcDialTimeout)
 	defer cancel()
@@ -281,12 +282,12 @@ func (d *kneDUT) PushConfig(ctx context.Context, config string, reset bool) erro
 	return d.pushConfig(ctx, []byte(config))
 }
 
-func (d *kneDUT) DialCLI(context.Context) (binding.StreamClient, error) {
+func (d *kneDUT) DialCLI(context.Context) (binding.CLIClient, error) {
 	return &kneCLI{dut: d}, nil
 }
 
 type kneCLI struct {
-	*binding.AbstractStreamClient
+	*binding.AbstractCLIClient
 	dut *kneDUT
 }
 
@@ -332,10 +333,6 @@ func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr erro
 		return "", fmt.Errorf("could not execute %q\noutput: %q: %w", cmd, buf.String(), err)
 	}
 	return buf.String(), nil
-}
-
-func (c *kneCLI) Close() error {
-	return nil
 }
 
 type kneATE struct {

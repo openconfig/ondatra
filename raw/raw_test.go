@@ -109,7 +109,7 @@ func TestGNOI(t *testing.T) {
 }
 
 func TestGNSI(t *testing.T) {
-	gnsi := NewDUTAPIs(dut).GNSI()
+	apis := NewDUTAPIs(dut)
 
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnsi"
@@ -117,16 +117,10 @@ func TestGNSI(t *testing.T) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			gnsi.New(t)
+			apis.GNSI(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
-		}
-		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
-			gnsi.Default(t)
-		})
-		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+			t.Errorf("GNSI(t) got err %v, want %v", gotErr, wantErr)
 		}
 	})
 
@@ -135,11 +129,8 @@ func TestGNSI(t *testing.T) {
 		dut.DialGNSIFn = func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
 			return want, nil
 		}
-		if got := gnsi.New(t); got != want {
-			t.Errorf("New(t) got %v, want %v", got, want)
-		}
-		if got := gnsi.Default(t); got != want {
-			t.Errorf("Default(t) got %v, want %v", got, want)
+		if got := apis.GNSI(t); got != want {
+			t.Errorf("GNSI(t) got %v, want %v", got, want)
 		}
 	})
 }
@@ -221,7 +212,7 @@ func TestCLI(t *testing.T) {
 
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad cli"
-		dut.DialCLIFn = func(context.Context) (binding.StreamClient, error) {
+		dut.DialCLIFn = func(context.Context) (binding.CLIClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
@@ -233,8 +224,8 @@ func TestCLI(t *testing.T) {
 	})
 
 	t.Run("success", func(t *testing.T) {
-		want := struct{ binding.StreamClient }{}
-		dut.DialCLIFn = func(context.Context) (binding.StreamClient, error) {
+		want := struct{ binding.CLIClient }{}
+		dut.DialCLIFn = func(context.Context) (binding.CLIClient, error) {
 			return want, nil
 		}
 		if got := apis.CLI(t); want != got {
@@ -248,7 +239,7 @@ func TestConsole(t *testing.T) {
 
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad cli"
-		dut.DialConsoleFn = func(context.Context) (binding.StreamClient, error) {
+		dut.DialConsoleFn = func(context.Context) (binding.ConsoleClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
@@ -260,8 +251,8 @@ func TestConsole(t *testing.T) {
 	})
 
 	t.Run("success", func(t *testing.T) {
-		want := struct{ binding.StreamClient }{}
-		dut.DialConsoleFn = func(context.Context) (binding.StreamClient, error) {
+		want := struct{ binding.ConsoleClient }{}
+		dut.DialConsoleFn = func(context.Context) (binding.ConsoleClient, error) {
 			return want, nil
 		}
 		if got := apis.Console(t); want != got {

@@ -21140,6 +21140,188 @@ func (n *Interface_RoutedVlan_Ipv4_Counters_InForwardedPktsPathAny) State() ygnm
 	)
 }
 
+// Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv4_Counters_InOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/in-octets YANG schema element.
 type Interface_RoutedVlan_Ipv4_Counters_InOctetsPath struct {
 	*ygnmi.NodePath
@@ -21686,6 +21868,188 @@ func (n *Interface_RoutedVlan_Ipv4_Counters_OutForwardedPktsPathAny) State() ygn
 	)
 }
 
+// Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv4_Counters_OutOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/out-octets YANG schema element.
 type Interface_RoutedVlan_Ipv4_Counters_OutOctetsPath struct {
 	*ygnmi.NodePath
@@ -22048,6 +22412,92 @@ func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) InForwardedPkts() *Interface
 	return ps
 }
 
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_CountersPath) InMulticastOctets() *Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPath {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) InMulticastOctets() *Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_InMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_CountersPath) InMulticastPkts() *Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPath {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) InMulticastPkts() *Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_InMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // InOctets (leaf): The total number of octets received in input IP packets
 // for the specified address family, including those received
 // in error.
@@ -22282,6 +22732,92 @@ func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) OutForwardedPkts() *Interfac
 	ps := &Interface_RoutedVlan_Ipv4_Counters_OutForwardedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-forwarded-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_CountersPath) OutMulticastOctets() *Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPath {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) OutMulticastOctets() *Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_OutMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_CountersPath) OutMulticastPkts() *Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPath {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) OutMulticastPkts() *Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_OutMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -29815,6 +30351,188 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_InForwardedPktsPathAny) State() ygnm
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_Counters_InOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/in-octets YANG schema element.
 type Interface_RoutedVlan_Ipv6_Counters_InOctetsPath struct {
 	*ygnmi.NodePath
@@ -30361,6 +31079,188 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny) State() ygn
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-octets YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_Counters_OutOctetsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/out-octets YANG schema element.
 type Interface_RoutedVlan_Ipv6_Counters_OutOctetsPath struct {
 	*ygnmi.NodePath
@@ -30723,6 +31623,92 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) InForwardedPkts() *Interface
 	return ps
 }
 
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_CountersPath) InMulticastOctets() *Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) InMulticastOctets() *Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_InMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_CountersPath) InMulticastPkts() *Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) InMulticastPkts() *Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_InMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // InOctets (leaf): The total number of octets received in input IP packets
 // for the specified address family, including those received
 // in error.
@@ -30957,6 +31943,92 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) OutForwardedPkts() *Interfac
 	ps := &Interface_RoutedVlan_Ipv6_Counters_OutForwardedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-forwarded-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_CountersPath) OutMulticastOctets() *Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) OutMulticastOctets() *Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_OutMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_CountersPath) OutMulticastPkts() *Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) OutMulticastPkts() *Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_OutMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -45820,6 +46892,188 @@ func (n *Interface_Subinterface_Ipv4_Counters_InForwardedPktsPathAny) State() yg
 	)
 }
 
+// Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Counters_InMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_InMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Counters_InMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_InMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_Counters_InMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_Counters_InMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv4_Counters_InOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-octets YANG schema element.
 type Interface_Subinterface_Ipv4_Counters_InOctetsPath struct {
 	*ygnmi.NodePath
@@ -46366,6 +47620,188 @@ func (n *Interface_Subinterface_Ipv4_Counters_OutForwardedPktsPathAny) State() y
 	)
 }
 
+// Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv4_Counters_OutOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-octets YANG schema element.
 type Interface_Subinterface_Ipv4_Counters_OutOctetsPath struct {
 	*ygnmi.NodePath
@@ -46728,6 +48164,92 @@ func (n *Interface_Subinterface_Ipv4_CountersPathAny) InForwardedPkts() *Interfa
 	return ps
 }
 
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_CountersPath) InMulticastOctets() *Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPath {
+	ps := &Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_CountersPathAny) InMulticastOctets() *Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPathAny {
+	ps := &Interface_Subinterface_Ipv4_Counters_InMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_CountersPath) InMulticastPkts() *Interface_Subinterface_Ipv4_Counters_InMulticastPktsPath {
+	ps := &Interface_Subinterface_Ipv4_Counters_InMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_CountersPathAny) InMulticastPkts() *Interface_Subinterface_Ipv4_Counters_InMulticastPktsPathAny {
+	ps := &Interface_Subinterface_Ipv4_Counters_InMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // InOctets (leaf): The total number of octets received in input IP packets
 // for the specified address family, including those received
 // in error.
@@ -46962,6 +48484,92 @@ func (n *Interface_Subinterface_Ipv4_CountersPathAny) OutForwardedPkts() *Interf
 	ps := &Interface_Subinterface_Ipv4_Counters_OutForwardedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-forwarded-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_CountersPath) OutMulticastOctets() *Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPath {
+	ps := &Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv4_CountersPathAny) OutMulticastOctets() *Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPathAny {
+	ps := &Interface_Subinterface_Ipv4_Counters_OutMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_CountersPath) OutMulticastPkts() *Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPath {
+	ps := &Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv4_CountersPathAny) OutMulticastPkts() *Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPathAny {
+	ps := &Interface_Subinterface_Ipv4_Counters_OutMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -55481,6 +57089,188 @@ func (n *Interface_Subinterface_Ipv6_Counters_InForwardedPktsPathAny) State() yg
 	)
 }
 
+// Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).InMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Counters_InMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_InMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Counters_InMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_InMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_Counters_InMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_Counters_InMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).InMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_Counters_InOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-octets YANG schema element.
 type Interface_Subinterface_Ipv6_Counters_InOctetsPath struct {
 	*ygnmi.NodePath
@@ -56027,6 +57817,188 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny) State() y
 	)
 }
 
+// Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-octets YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).OutMulticastOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-pkts YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).OutMulticastPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_Counters_OutOctetsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-octets YANG schema element.
 type Interface_Subinterface_Ipv6_Counters_OutOctetsPath struct {
 	*ygnmi.NodePath
@@ -56389,6 +58361,92 @@ func (n *Interface_Subinterface_Ipv6_CountersPathAny) InForwardedPkts() *Interfa
 	return ps
 }
 
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_CountersPath) InMulticastOctets() *Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPath {
+	ps := &Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastOctets (leaf): The total number of octets received in input IP
+// multicast packets for the specified address
+// family, including those received in error.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_CountersPathAny) InMulticastOctets() *Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Counters_InMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_CountersPath) InMulticastPkts() *Interface_Subinterface_Ipv6_Counters_InMulticastPktsPath {
+	ps := &Interface_Subinterface_Ipv6_Counters_InMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InMulticastPkts (leaf): The number of IP packets received for the specified
+// address family that are multicast packets.
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/in-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_CountersPathAny) InMulticastPkts() *Interface_Subinterface_Ipv6_Counters_InMulticastPktsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Counters_InMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // InOctets (leaf): The total number of octets received in input IP packets
 // for the specified address family, including those received
 // in error.
@@ -56623,6 +58681,92 @@ func (n *Interface_Subinterface_Ipv6_CountersPathAny) OutForwardedPkts() *Interf
 	ps := &Interface_Subinterface_Ipv6_Counters_OutForwardedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-forwarded-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_CountersPath) OutMulticastOctets() *Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPath {
+	ps := &Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastOctets (leaf): The total number of IP multicast octets transmitted.  This
+// includes packets generated locally and those forwarded by
+// the device.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-octets"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-octets"
+func (n *Interface_Subinterface_Ipv6_CountersPathAny) OutMulticastOctets() *Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Counters_OutMulticastOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_CountersPath) OutMulticastPkts() *Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPath {
+	ps := &Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutMulticastPkts (leaf): The total number of IP multicast packets transmitted.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of
+// 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-multicast-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/out-multicast-pkts"
+func (n *Interface_Subinterface_Ipv6_CountersPathAny) OutMulticastPkts() *Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Counters_OutMulticastPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-multicast-pkts"},
 			map[string]interface{}{},
 			n,
 		),

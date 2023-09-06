@@ -39,7 +39,7 @@ import (
 	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wpb "github.com/openconfig/gnoi/wavelength_router"
-	accpb "github.com/openconfig/gnsi/accounting"
+	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
 	credzpb "github.com/openconfig/gnsi/credentialz"
@@ -98,12 +98,12 @@ func (*AbstractDUT) PushConfig(ctx context.Context, config string, reset bool) e
 }
 
 // DialCLI returns an unimplemented error.
-func (*AbstractDUT) DialCLI(context.Context) (StreamClient, error) {
+func (*AbstractDUT) DialCLI(context.Context) (CLIClient, error) {
 	return nil, errors.New("DialCLI unimplemented")
 }
 
 // DialConsole returns an unimplemented error.
-func (*AbstractDUT) DialConsole(context.Context) (StreamClient, error) {
+func (*AbstractDUT) DialConsole(context.Context) (ConsoleClient, error) {
 	return nil, errors.New("DialConsole unimplemented")
 }
 
@@ -307,51 +307,52 @@ func (*AbstractGNSIClients) Credentialz() credzpb.CredentialzClient {
 	return nil
 }
 
-// AccountingPull logs a fatal unimplemented error.
-func (*AbstractGNSIClients) AccountingPull() accpb.AccountingPullClient {
+// Acctz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Acctz() acctzpb.AcctzClient {
 	log.Fatal("AccountingPull unimplemented")
-	return nil
-}
-
-// AccountingPush logs a fatal unimplemented error.
-func (*AbstractGNSIClients) AccountingPush() accpb.AccountingPushClient {
-	log.Fatal("AccountingPush unimplemented")
 	return nil
 }
 
 func (*AbstractGNSIClients) mustEmbedAbstractGNSIClients() {}
 
-var _ StreamClient = &AbstractStreamClient{}
+var _ CLIClient = &AbstractCLIClient{}
 
-// AbstractStreamClient is implementation support for the StreamClient interface.
-type AbstractStreamClient struct{}
+// AbstractCLIClient is implementation support for the CLIClient interface.
+type AbstractCLIClient struct{}
 
 // SendCommand returns an unimplemented error.
-func (*AbstractStreamClient) SendCommand(ctx context.Context, cmd string) (string, error) {
+func (*AbstractCLIClient) SendCommand(ctx context.Context, cmd string) (string, error) {
 	return "", errors.New("SendCommand unimplemented")
 }
 
+func (*AbstractCLIClient) mustEmbedAbstractCLIClient() {}
+
+var _ ConsoleClient = &AbstractConsoleClient{}
+
+// AbstractConsoleClient is implementation support for the ConsoleClient interface.
+type AbstractConsoleClient struct{}
+
 // Stdin logs a fatal unimplemented error.
-func (*AbstractStreamClient) Stdin() io.WriteCloser {
+func (*AbstractConsoleClient) Stdin() io.WriteCloser {
 	log.Fatal("Stdin unimplemented")
 	return nil
 }
 
 // Stdout logs a fatal unimplemented error.
-func (*AbstractStreamClient) Stdout() io.ReadCloser {
+func (*AbstractConsoleClient) Stdout() io.ReadCloser {
 	log.Fatal("Stdout unimplemented")
 	return nil
 }
 
 // Stderr logs a fatal unimplemented error.
-func (*AbstractStreamClient) Stderr() io.ReadCloser {
+func (*AbstractConsoleClient) Stderr() io.ReadCloser {
 	log.Fatal("Stderr unimplemented")
 	return nil
 }
 
 // Close returns an unimplemented error.
-func (*AbstractStreamClient) Close() error {
+func (*AbstractConsoleClient) Close() error {
 	return errors.New("Close unimplemented")
 }
 
-func (*AbstractStreamClient) mustEmbedAbstractStreamClient() {}
+func (*AbstractConsoleClient) mustEmbedAbstractConsoleClient() {}

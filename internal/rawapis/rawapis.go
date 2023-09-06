@@ -46,12 +46,12 @@ var CommonDialOpts = []grpc.DialOption{
 }
 
 // NewCLI creates a CLI client for the specified DUT.
-func NewCLI(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
+func NewCLI(ctx context.Context, dut binding.DUT) (binding.CLIClient, error) {
 	return dut.DialCLI(ctx)
 }
 
 // NewConsole creates a console client for the specified DUT.
-func NewConsole(ctx context.Context, dut binding.DUT) (binding.StreamClient, error) {
+func NewConsole(ctx context.Context, dut binding.DUT) (binding.ConsoleClient, error) {
 	return dut.DialConsole(ctx)
 }
 

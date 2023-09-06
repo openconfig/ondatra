@@ -28,7 +28,6 @@ import (
 	"github.com/openconfig/ondatra/binding/portgraph"
 	"github.com/openconfig/ondatra/internal/orderedmap"
 	"github.com/pborman/uuid"
-	"google.golang.org/protobuf/proto"
 
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
@@ -439,38 +438,8 @@ func assignmentToReservation(
 	return res, nil
 }
 
-// runtimeProtoCheck checks the proto messages have the expected number of fields.
-func runtimeProtoCheck() error {
-	const (
-		testbedDeviceFields = 8
-		testbedPortFields   = 7
-		topoNodeFields      = 11
-		topoIntfFields      = 7
-	)
-	numFields := func(m proto.Message) int {
-		return m.ProtoReflect().Descriptor().Fields().Len()
-	}
-	if n := numFields((*opb.Device)(nil)); n != testbedDeviceFields {
-		return fmt.Errorf("Ondatra testbed proto Device has %d fields, want %d", n, testbedDeviceFields)
-	}
-	if n := numFields((*opb.Port)(nil)); n != testbedPortFields {
-		return fmt.Errorf("Ondatra testbed proto Port has %d fields, want %d", n, testbedPortFields)
-	}
-	if n := numFields((*tpb.Node)(nil)); n != topoNodeFields {
-		return fmt.Errorf("Ondatra topology proto Node has %d fields, want %d", n, topoNodeFields)
-	}
-	if n := numFields((*tpb.Interface)(nil)); n != topoIntfFields {
-		return fmt.Errorf("Ondatra topology proto Interface has %d fields, want %d", n, topoIntfFields)
-	}
-	return nil
-}
-
 // Solve creates a new Reservation from a desired testbed and an available topology.
 func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*binding.Reservation, error) {
-	if err := runtimeProtoCheck(); err != nil {
-		// TODO(team): Revisit the need for this function and the appropriate behavior on failure.
-		log.Warningf("Runtime proto check failed: %v", err)
-	}
 	topo = filterTopology(topo)
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
 	if numDevs, numNodes := len(devs), len(topo.GetNodes()); numDevs > numNodes {

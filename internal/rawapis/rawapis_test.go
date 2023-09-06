@@ -31,11 +31,11 @@ import (
 
 var (
 	dut = &fakebind.DUT{
-		DialCLIFn: func(context.Context) (binding.StreamClient, error) {
-			return &struct{ binding.StreamClient }{}, nil
+		DialCLIFn: func(context.Context) (binding.CLIClient, error) {
+			return &struct{ binding.CLIClient }{}, nil
 		},
-		DialConsoleFn: func(context.Context) (binding.StreamClient, error) {
-			return &struct{ binding.StreamClient }{}, nil
+		DialConsoleFn: func(context.Context) (binding.ConsoleClient, error) {
+			return &struct{ binding.ConsoleClient }{}, nil
 		},
 		DialGNMIFn: func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return &struct{ gpb.GNMIClient }{}, nil
