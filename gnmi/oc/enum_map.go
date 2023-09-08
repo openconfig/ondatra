@@ -308,10 +308,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		38: {Name: "UPDATE_MESSAGE_SUBCODE", DefiningModule: "openconfig-bgp-types"},
 	},
 	"E_BgpTypes_BGP_WELL_KNOWN_STD_COMMUNITY": {
-		1: {Name: "NOPEER", DefiningModule: "openconfig-bgp-types"},
-		2: {Name: "NO_ADVERTISE", DefiningModule: "openconfig-bgp-types"},
-		3: {Name: "NO_EXPORT", DefiningModule: "openconfig-bgp-types"},
-		4: {Name: "NO_EXPORT_SUBCONFED", DefiningModule: "openconfig-bgp-types"},
+		1: {Name: "GRACEFUL_SHUTDOWN", DefiningModule: "openconfig-bgp-types"},
+		2: {Name: "NOPEER", DefiningModule: "openconfig-bgp-types"},
+		3: {Name: "NO_ADVERTISE", DefiningModule: "openconfig-bgp-types"},
+		4: {Name: "NO_EXPORT", DefiningModule: "openconfig-bgp-types"},
+		5: {Name: "NO_EXPORT_SUBCONFED", DefiningModule: "openconfig-bgp-types"},
 	},
 	"E_Bgp_CommunityType": {
 		1: {Name: "STANDARD"},
