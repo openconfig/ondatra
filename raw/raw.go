@@ -56,42 +56,13 @@ func (r *DUTAPIs) GNMI(t testing.TB) gpb.GNMIClient {
 	return gnmi
 }
 
-// GNOI provides access to creating raw gNOI clients for the dut.
-func (r *DUTAPIs) GNOI(t ...testing.TB) *GNOIAPI {
-	api := &GNOIAPI{dut: r.dut}
-	if len(t) == 0 {
-		return api
-	}
-	gnoi := api.Default(t[0])
-	return &GNOIAPI{GNOIClients: gnoi}
-}
-
-// GNOIAPI provides access to creating raw gNOI clients for the dut.
-type GNOIAPI struct {
-	binding.GNOIClients
-	dut binding.DUT
-}
-
-// New returns a new gNOI client for the dut.
-// Deprecated: Use dut.RawAPIs().BindingAPI().DialGNOI() instead.
-func (g *GNOIAPI) New(t testing.TB) binding.GNOIClients {
+// GNOI returns the default gNOI clients for the dut.
+func (r *DUTAPIs) GNOI(t testing.TB) binding.GNOIClients {
 	t.Helper()
-	t = events.ActionStarted(t, "Creating gNOI clients for %s", g.dut)
-	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
+	t = events.ActionStarted(t, "Fetching gNOI clients for %s", r.dut)
+	bgnoi, err := rawapis.FetchGNOI(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to create gNOI clients for %v: %v", g.dut, err)
-	}
-	return bgnoi
-}
-
-// Default returns the default gNOI client for the dut.
-// Deprecated: Use dut.RawAPIs().GNOI(t) instead.
-func (g *GNOIAPI) Default(t testing.TB) binding.GNOIClients {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNOI clients for %s", g.dut)
-	bgnoi, err := rawapis.FetchGNOI(context.Background(), g.dut)
-	if err != nil {
-		t.Fatalf("Failed to fetch gNOI clients for %v: %v", g.dut, err)
+		t.Fatalf("Failed to fetch gNOI clients for %v: %v", r.dut, err)
 	}
 	return bgnoi
 }

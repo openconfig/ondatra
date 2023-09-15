@@ -64,24 +64,16 @@ func TestGNMI(t *testing.T) {
 }
 
 func TestGNOI(t *testing.T) {
-	gnoi := dutAPIs.GNOI()
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnoi"
 		dut.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			gnoi.New(t)
+			dutAPIs.GNOI(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
-		}
-		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
-			gnoi.Default(t)
-		})
-		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+			t.Errorf("GNOI(t) got err %v, want %v", gotErr, wantErr)
 		}
 	})
 
@@ -90,11 +82,8 @@ func TestGNOI(t *testing.T) {
 		dut.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
 			return want, nil
 		}
-		if got := gnoi.New(t); got != want {
-			t.Errorf("New(t) got %v, want %v", got, want)
-		}
-		if got := gnoi.Default(t); got != want {
-			t.Errorf("Default(t) got %v, want %v", got, want)
+		if got := dutAPIs.GNOI(t); got != want {
+			t.Errorf("GNOI(t) got %v, want %v", got, want)
 		}
 	})
 }
