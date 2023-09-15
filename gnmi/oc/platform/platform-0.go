@@ -85570,6 +85570,188 @@ func (n *Component_Transceiver_Threshold_LaserTemperatureUpperPathAny) State() y
 	)
 }
 
+// Component_Transceiver_Threshold_ModuleTemperatureLowerPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/module-temperature-lower YANG schema element.
+type Component_Transceiver_Threshold_ModuleTemperatureLowerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Threshold_ModuleTemperatureLowerPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/module-temperature-lower YANG schema element.
+type Component_Transceiver_Threshold_ModuleTemperatureLowerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/module-temperature-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-lower"
+func (n *Component_Transceiver_Threshold_ModuleTemperatureLowerPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-lower"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).ModuleTemperatureLower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/module-temperature-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-lower"
+func (n *Component_Transceiver_Threshold_ModuleTemperatureLowerPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-lower"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).ModuleTemperatureLower
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_Transceiver_Threshold_ModuleTemperatureUpperPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/module-temperature-upper YANG schema element.
+type Component_Transceiver_Threshold_ModuleTemperatureUpperPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Threshold_ModuleTemperatureUpperPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/module-temperature-upper YANG schema element.
+type Component_Transceiver_Threshold_ModuleTemperatureUpperPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/module-temperature-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-upper"
+func (n *Component_Transceiver_Threshold_ModuleTemperatureUpperPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).ModuleTemperatureUpper
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/module-temperature-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-upper"
+func (n *Component_Transceiver_Threshold_ModuleTemperatureUpperPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Threshold",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Threshold).ModuleTemperatureUpper
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Threshold) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Component_Transceiver_Threshold_OutputPowerLowerPath represents the /openconfig-platform/components/component/transceiver/thresholds/threshold/state/output-power-lower YANG schema element.
 type Component_Transceiver_Threshold_OutputPowerLowerPath struct {
 	*ygnmi.NodePath
@@ -86316,6 +86498,78 @@ func (n *Component_Transceiver_ThresholdPathAny) LaserTemperatureUpper() *Compon
 	ps := &Component_Transceiver_Threshold_LaserTemperatureUpperPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "laser-temperature-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ModuleTemperatureLower (leaf): The lower temperature threshold for the transceiver module.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/module-temperature-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-lower"
+func (n *Component_Transceiver_ThresholdPath) ModuleTemperatureLower() *Component_Transceiver_Threshold_ModuleTemperatureLowerPath {
+	ps := &Component_Transceiver_Threshold_ModuleTemperatureLowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-lower"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ModuleTemperatureLower (leaf): The lower temperature threshold for the transceiver module.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/module-temperature-lower"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-lower"
+func (n *Component_Transceiver_ThresholdPathAny) ModuleTemperatureLower() *Component_Transceiver_Threshold_ModuleTemperatureLowerPathAny {
+	ps := &Component_Transceiver_Threshold_ModuleTemperatureLowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-lower"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ModuleTemperatureUpper (leaf): The upper temperature threshold for the transceiver module.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/module-temperature-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-upper"
+func (n *Component_Transceiver_ThresholdPath) ModuleTemperatureUpper() *Component_Transceiver_Threshold_ModuleTemperatureUpperPath {
+	ps := &Component_Transceiver_Threshold_ModuleTemperatureUpperPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ModuleTemperatureUpper (leaf): The upper temperature threshold for the transceiver module.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/module-temperature-upper"
+//	Path from root:       "/components/component/transceiver/thresholds/threshold/state/module-temperature-upper"
+func (n *Component_Transceiver_ThresholdPathAny) ModuleTemperatureUpper() *Component_Transceiver_Threshold_ModuleTemperatureUpperPathAny {
+	ps := &Component_Transceiver_Threshold_ModuleTemperatureUpperPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "module-temperature-upper"},
 			map[string]interface{}{},
 			n,
 		),

@@ -45,48 +45,13 @@ func (r *DUTAPIs) BindingDUT() binding.DUT {
 	return r.dut
 }
 
-// GNMI provides access to creating raw gNMI clients for the dut.
-func (r *DUTAPIs) GNMI(t ...testing.TB) *GNMIAPI {
-	api := &GNMIAPI{dev: r.dut}
-	if len(t) == 0 {
-		return api
-	}
-	gnmi := api.Default(t[0])
-	return &GNMIAPI{GNMIClient: gnmi}
-}
-
-// TODO(greg-dennis): Should DialGNMI be in the binding.Device interface.
-type gnmiDevice interface {
-	binding.Device
-	rawapis.GNMIDialer
-}
-
-// GNMIAPI provides access for creating a default or new gNMI client on the DUT.
-type GNMIAPI struct {
-	gpb.GNMIClient
-	dev gnmiDevice
-}
-
-// New returns a new gNMI client for the dut.
-// Deprecated: Use dut.RawAPIs().BindingAPI().DialGNMI() instead.
-func (g *GNMIAPI) New(t testing.TB) gpb.GNMIClient {
+// GNMI returns the default gNMI client for the dut.
+func (r *DUTAPIs) GNMI(t testing.TB) gpb.GNMIClient {
 	t.Helper()
-	t = events.ActionStarted(t, "Creating gNMI client for %s", g.dev)
-	gnmi, err := rawapis.NewGNMI(context.Background(), g.dev)
+	t = events.ActionStarted(t, "Fetching gNMI client for %s", r.dut)
+	gnmi, err := rawapis.FetchGNMI(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to create gNMI client for %v: %v", g.dev, err)
-	}
-	return gnmi
-}
-
-// Default returns the default gNMI client for the DUT.
-// Deprecated: Use dut.RawAPIs().GNMI(t) instead.
-func (g *GNMIAPI) Default(t testing.TB) gpb.GNMIClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNMI client for %s", g.dev)
-	gnmi, err := rawapis.FetchGNMI(context.Background(), g.dev)
-	if err != nil {
-		t.Fatalf("Failed to fetch gNMI client for %v: %v", g.dev, err)
+		t.Fatalf("Failed to fetch gNMI client for %v: %v", r.dut, err)
 	}
 	return gnmi
 }
@@ -107,18 +72,14 @@ type GNOIAPI struct {
 	dut binding.DUT
 }
 
-// GNOI stores APIs to GNOI services.
-// Deprecated: Use binding.GNOIClients instead.
-type GNOI binding.GNOIClients
-
 // New returns a new gNOI client for the dut.
 // Deprecated: Use dut.RawAPIs().BindingAPI().DialGNOI() instead.
 func (g *GNOIAPI) New(t testing.TB) binding.GNOIClients {
 	t.Helper()
-	t = events.ActionStarted(t, "Creating gNOI client for %s", g.dut)
+	t = events.ActionStarted(t, "Creating gNOI clients for %s", g.dut)
 	bgnoi, err := rawapis.NewGNOI(context.Background(), g.dut)
 	if err != nil {
-		t.Fatalf("Failed to create gNOI client for %v: %v", g.dut, err)
+		t.Fatalf("Failed to create gNOI clients for %v: %v", g.dut, err)
 	}
 	return bgnoi
 }
@@ -127,101 +88,43 @@ func (g *GNOIAPI) New(t testing.TB) binding.GNOIClients {
 // Deprecated: Use dut.RawAPIs().GNOI(t) instead.
 func (g *GNOIAPI) Default(t testing.TB) binding.GNOIClients {
 	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNOI client for %s", g.dut)
+	t = events.ActionStarted(t, "Fetching gNOI clients for %s", g.dut)
 	bgnoi, err := rawapis.FetchGNOI(context.Background(), g.dut)
 	if err != nil {
-		t.Fatalf("Failed to fetch gNOI client for %v: %v", g.dut, err)
+		t.Fatalf("Failed to fetch gNOI clients for %v: %v", g.dut, err)
 	}
 	return bgnoi
 }
 
-// GNSI returns the default gNSI client for the dut.
+// GNSI returns the default gNSI clients for the dut.
 func (r *DUTAPIs) GNSI(t testing.TB) binding.GNSIClients {
 	t.Helper()
-	t = events.ActionStarted(t, "Fetching gNSI client for %s", r.dut)
+	t = events.ActionStarted(t, "Fetching gNSI clients for %s", r.dut)
 	bgnsi, err := rawapis.FetchGNSI(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to fetch gNSI client for %v: %v", r.dut, err)
+		t.Fatalf("Failed to fetch gNSI clients for %v: %v", r.dut, err)
 	}
 	return bgnsi
 }
 
-// GRIBI provides access to createing raw gRIBI clients for the dut.
-func (r *DUTAPIs) GRIBI(t ...testing.TB) *GRIBIAPI {
-	api := &GRIBIAPI{dut: r.dut}
-	if len(t) == 0 {
-		return api
-	}
-	gribi := api.Default(t[0])
-	return &GRIBIAPI{GRIBIClient: gribi}
-}
-
-// GRIBIAPI provides access to creating raw gRIBI clients for the DUT.
-type GRIBIAPI struct {
-	grpb.GRIBIClient
-	dut binding.DUT
-}
-
-// New returns a new gRIBI client for the dut.
-// Deprecated: Use dut.RawAPIs().BindingAPI().DialRIBI() instead.
-func (g *GRIBIAPI) New(t testing.TB) grpb.GRIBIClient {
+// GRIBI returns the default gRIBI client for the dut.
+func (r *DUTAPIs) GRIBI(t testing.TB) grpb.GRIBIClient {
 	t.Helper()
-	t = events.ActionStarted(t, "Creating gRIBI client for %s", g.dut)
-	grc, err := rawapis.NewGRIBI(context.Background(), g.dut)
+	t = events.ActionStarted(t, "Fetching gRIBI client for %s", r.dut)
+	grc, err := rawapis.FetchGRIBI(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to create gRIBI client for %v: %v", g.dut, err)
+		t.Fatalf("Failed to fetch gRIBI client for %v: %v", r.dut, err)
 	}
 	return grc
 }
 
-// Default returns the default gRIBI client for the dut.
-// Deprecated: Use dut.RawAPIs().GRIBI(t) instead.
-func (g *GRIBIAPI) Default(t testing.TB) grpb.GRIBIClient {
+// P4RT returns the default P4RT client for the dut.
+func (r *DUTAPIs) P4RT(t testing.TB) p4pb.P4RuntimeClient {
 	t.Helper()
-	t = events.ActionStarted(t, "Fetching gRIBI client for %s", g.dut)
-	grc, err := rawapis.FetchGRIBI(context.Background(), g.dut)
+	t = events.ActionStarted(t, "Fetching P4RT client for %s", r.dut)
+	p4rtClient, err := rawapis.FetchP4RT(context.Background(), r.dut)
 	if err != nil {
-		t.Fatalf("Failed to fetch gRIBI client for %v: %v", g.dut, err)
-	}
-	return grc
-}
-
-// P4RT provides access to creating raw P4RT clients for the dut.
-func (r *DUTAPIs) P4RT(t ...testing.TB) *P4RTAPI {
-	api := &P4RTAPI{dut: r.dut}
-	if len(t) == 0 {
-		return api
-	}
-	p4rt := api.Default(t[0])
-	return &P4RTAPI{P4RuntimeClient: p4rt}
-}
-
-// P4RTAPI provides access for creating a default or new GRIBI client on the DUT.
-type P4RTAPI struct {
-	p4pb.P4RuntimeClient
-	dut binding.DUT
-}
-
-// New returns a P4RT client on the DUT.
-// Deprecated: Use dut.RawAPIs().BindingAPI().DialP4RT() instead.
-func (p *P4RTAPI) New(t testing.TB) p4pb.P4RuntimeClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating P4RT client for %s", p.dut)
-	p4rtClient, err := rawapis.NewP4RT(context.Background(), p.dut)
-	if err != nil {
-		t.Fatalf("Failed to create P4RT client for %v: %v", p.dut, err)
-	}
-	return p4rtClient
-}
-
-// Default returns the default P4RT client on the DUT.
-// Deprecated: Use dut.RawAPIs().P4RT(t) instead.
-func (p *P4RTAPI) Default(t testing.TB) p4pb.P4RuntimeClient {
-	t.Helper()
-	t = events.ActionStarted(t, "Fetching P4RT client for %s", p.dut)
-	p4rtClient, err := rawapis.FetchP4RT(context.Background(), p.dut)
-	if err != nil {
-		t.Fatalf("Failed to fetch P4RT client for %v: %v", p.dut, err)
+		t.Fatalf("Failed to fetch P4RT client for %v: %v", r.dut, err)
 	}
 	return p4rtClient
 }
@@ -246,4 +149,31 @@ func (r *DUTAPIs) Console(t testing.TB) binding.ConsoleClient {
 		t.Fatalf("Failed to create console client for %v: %v", r.dut, err)
 	}
 	return c
+}
+
+// NewATEAPIs returns a new instance of raw ATE APIs.
+// Tests must not call this directly.
+func NewATEAPIs(ate binding.ATE) *ATEAPIs {
+	return &ATEAPIs{ate}
+}
+
+// ATEAPIs provides access to raw ATE protocol APIs.
+type ATEAPIs struct {
+	ate binding.ATE
+}
+
+// BindingATE returns the underlying binding.ATE.
+func (r *ATEAPIs) BindingATE() binding.ATE {
+	return r.ate
+}
+
+// GNMI returns the default gNMI client for the ATE.
+func (r *ATEAPIs) GNMI(t testing.TB) gpb.GNMIClient {
+	t.Helper()
+	t = events.ActionStarted(t, "Fetching gNMI client for %s", r.ate)
+	gnmi, err := rawapis.FetchGNMI(context.Background(), r.ate)
+	if err != nil {
+		t.Fatalf("Failed to fetch gNMI client for %v: %v", r.ate, err)
+	}
+	return gnmi
 }

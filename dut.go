@@ -54,14 +54,7 @@ func (d *DUTDevice) Operations() *operations.Operations {
 	return operations.New(d.res.(binding.DUT))
 }
 
-// RawAPI returns the underlying DUT implementation provided by the binding,
-// for low-level access to DUT protocols.
-// Deprecated: use RawAPIs().BindingDUT() instead.
-func (d *DUTDevice) RawAPI() binding.DUT {
-	return d.res.(binding.DUT)
-}
-
 // RawAPIs returns a handle to raw protocol APIs on the DUT.
 func (d *DUTDevice) RawAPIs() *raw.DUTAPIs {
-	return raw.NewDUTAPIs(d.RawAPI())
+	return raw.NewDUTAPIs(d.res.(binding.DUT))
 }

@@ -32,29 +32,23 @@ import (
 )
 
 var (
-	dut = &fakebind.DUT{AbstractDUT: &binding.AbstractDUT{&binding.Dims{Name: "fakeDUT"}}}
-	ate = &fakebind.ATE{AbstractATE: &binding.AbstractATE{&binding.Dims{Name: "fakeATE"}}}
+	dut     = &fakebind.DUT{AbstractDUT: &binding.AbstractDUT{&binding.Dims{Name: "fakeDUT"}}}
+	ate     = &fakebind.ATE{AbstractATE: &binding.AbstractATE{&binding.Dims{Name: "fakeATE"}}}
+	dutAPIs = NewDUTAPIs(dut)
+	ateAPIs = NewATEAPIs(ate)
 )
 
 func TestGNMI(t *testing.T) {
-	gnmi := NewDUTAPIs(dut).GNMI()
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnmi"
 		dut.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			gnmi.New(t)
+			dutAPIs.GNMI(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
-		}
-		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
-			gnmi.Default(t)
-		})
-		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+			t.Errorf("GNMI(t) got err %v, want %v", gotErr, wantErr)
 		}
 	})
 
@@ -63,17 +57,14 @@ func TestGNMI(t *testing.T) {
 		dut.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return want, nil
 		}
-		if got := gnmi.New(t); got != want {
-			t.Errorf("New(t) got %v, want %v", got, want)
-		}
-		if got := gnmi.Default(t); got != want {
-			t.Errorf("Default(t) got %v, want %v", got, want)
+		if got := dutAPIs.GNMI(t); got != want {
+			t.Errorf("GNMI(t) got %v, want %v", got, want)
 		}
 	})
 }
 
 func TestGNOI(t *testing.T) {
-	gnoi := NewDUTAPIs(dut).GNOI()
+	gnoi := dutAPIs.GNOI()
 
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnoi"
@@ -109,15 +100,13 @@ func TestGNOI(t *testing.T) {
 }
 
 func TestGNSI(t *testing.T) {
-	apis := NewDUTAPIs(dut)
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnsi"
 		dut.DialGNSIFn = func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			apis.GNSI(t)
+			dutAPIs.GNSI(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
 			t.Errorf("GNSI(t) got err %v, want %v", gotErr, wantErr)
@@ -129,31 +118,23 @@ func TestGNSI(t *testing.T) {
 		dut.DialGNSIFn = func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
 			return want, nil
 		}
-		if got := apis.GNSI(t); got != want {
+		if got := dutAPIs.GNSI(t); got != want {
 			t.Errorf("GNSI(t) got %v, want %v", got, want)
 		}
 	})
 }
 
 func TestGRIBI(t *testing.T) {
-	gribi := NewDUTAPIs(dut).GRIBI()
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gribi"
 		dut.DialGRIBIFn = func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			gribi.New(t)
+			dutAPIs.GRIBI(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
-		}
-		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
-			gribi.Default(t)
-		})
-		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+			t.Errorf("GRIBI(t) got err %v, want %v", gotErr, wantErr)
 		}
 	})
 
@@ -162,34 +143,23 @@ func TestGRIBI(t *testing.T) {
 		dut.DialGRIBIFn = func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error) {
 			return want, nil
 		}
-		if got := gribi.New(t); got != want {
-			t.Errorf("New(t) got %v, want %v", got, want)
-		}
-		if got := gribi.Default(t); got != want {
-			t.Errorf("Default(t) got %v, want %v", got, want)
+		if got := dutAPIs.GRIBI(t); got != want {
+			t.Errorf("GRIBI(t) got %v, want %v", got, want)
 		}
 	})
 }
 
 func TestP4RT(t *testing.T) {
-	p4rt := NewDUTAPIs(dut).P4RT()
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad p4rt"
 		dut.DialP4RTFn = func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			p4rt.New(t)
+			dutAPIs.P4RT(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("New(t) got err %v, want %v", gotErr, wantErr)
-		}
-		gotErr = testt.ExpectFatal(t, func(t testing.TB) {
-			p4rt.Default(t)
-		})
-		if !strings.Contains(gotErr, wantErr) {
-			t.Errorf("Default(t) got err %v, want %v", gotErr, wantErr)
+			t.Errorf("P4RT(t) got err %v, want %v", gotErr, wantErr)
 		}
 	})
 
@@ -198,25 +168,20 @@ func TestP4RT(t *testing.T) {
 		dut.DialP4RTFn = func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 			return want, nil
 		}
-		if got := p4rt.New(t); got != want {
-			t.Errorf("New(t) got %v, want %v", got, want)
-		}
-		if got := p4rt.Default(t); got != want {
-			t.Errorf("Default(t) got %v, want %v", got, want)
+		if got := dutAPIs.P4RT(t); got != want {
+			t.Errorf("P4RT(t) got %v, want %v", got, want)
 		}
 	})
 }
 
 func TestCLI(t *testing.T) {
-	apis := NewDUTAPIs(dut)
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad cli"
 		dut.DialCLIFn = func(context.Context) (binding.CLIClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			apis.CLI(t)
+			dutAPIs.CLI(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
 			t.Errorf("CLI(t) got err %v, want %v", gotErr, wantErr)
@@ -228,22 +193,20 @@ func TestCLI(t *testing.T) {
 		dut.DialCLIFn = func(context.Context) (binding.CLIClient, error) {
 			return want, nil
 		}
-		if got := apis.CLI(t); want != got {
+		if got := dutAPIs.CLI(t); want != got {
 			t.Errorf("CLI(t) got %v, want %v", got, want)
 		}
 	})
 }
 
 func TestConsole(t *testing.T) {
-	apis := NewDUTAPIs(dut)
-
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad cli"
 		dut.DialConsoleFn = func(context.Context) (binding.ConsoleClient, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
-			apis.Console(t)
+			dutAPIs.Console(t)
 		})
 		if !strings.Contains(gotErr, wantErr) {
 			t.Errorf("Console(t) got err %v, want %v", gotErr, wantErr)
@@ -255,8 +218,33 @@ func TestConsole(t *testing.T) {
 		dut.DialConsoleFn = func(context.Context) (binding.ConsoleClient, error) {
 			return want, nil
 		}
-		if got := apis.Console(t); want != got {
+		if got := dutAPIs.Console(t); want != got {
 			t.Errorf("Console(t) got %v, want %v", got, want)
+		}
+	})
+}
+
+func TestGNMIATE(t *testing.T) {
+	t.Run("error", func(t *testing.T) {
+		wantErr := "bad gnmi"
+		ate.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
+			return nil, errors.New(wantErr)
+		}
+		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+			ateAPIs.GNMI(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("GNMI(t) got err %v, want %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		want := struct{ gpb.GNMIClient }{}
+		ate.DialGNMIFn = func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
+			return want, nil
+		}
+		if got := ateAPIs.GNMI(t); got != want {
+			t.Errorf("GNMI(t) got %v, want %v", got, want)
 		}
 	})
 }
