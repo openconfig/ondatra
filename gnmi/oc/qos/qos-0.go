@@ -19838,6 +19838,370 @@ func (n *Qos_Interface_Input_Queue_DroppedPktsPathAny) State() ygnmi.WildcardQue
 	)
 }
 
+// Qos_Interface_Input_Queue_EcnMarkedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-marked-octets YANG schema element.
+type Qos_Interface_Input_Queue_EcnMarkedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_Queue_EcnMarkedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-marked-octets YANG schema element.
+type Qos_Interface_Input_Queue_EcnMarkedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_Queue_EcnMarkedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnMarkedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_Queue_EcnMarkedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnMarkedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Input_Queue_EcnMarkedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-marked-pkts YANG schema element.
+type Qos_Interface_Input_Queue_EcnMarkedPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_Queue_EcnMarkedPktsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-marked-pkts YANG schema element.
+type Qos_Interface_Input_Queue_EcnMarkedPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_Queue_EcnMarkedPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnMarkedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_Queue_EcnMarkedPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnMarkedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Input_Queue_EcnSelectedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-selected-octets YANG schema element.
+type Qos_Interface_Input_Queue_EcnSelectedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_Queue_EcnSelectedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-selected-octets YANG schema element.
+type Qos_Interface_Input_Queue_EcnSelectedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_Queue_EcnSelectedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnSelectedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_Queue_EcnSelectedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnSelectedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Input_Queue_EcnSelectedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-selected-pkts YANG schema element.
+type Qos_Interface_Input_Queue_EcnSelectedPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_Queue_EcnSelectedPktsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/ecn-selected-pkts YANG schema element.
+type Qos_Interface_Input_Queue_EcnSelectedPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_Queue_EcnSelectedPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnSelectedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_Queue_EcnSelectedPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_Queue).EcnSelectedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Qos_Interface_Input_Queue_MaxQueueLenPath represents the /openconfig-qos/qos/interfaces/interface/input/queues/queue/state/max-queue-len YANG schema element.
 type Qos_Interface_Input_Queue_MaxQueueLenPath struct {
 	*ygnmi.NodePath
@@ -20579,6 +20943,174 @@ func (n *Qos_Interface_Input_QueuePathAny) DroppedPkts() *Qos_Interface_Input_Qu
 	ps := &Qos_Interface_Input_Queue_DroppedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "dropped-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedOctets (leaf): Number of octets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_QueuePath) EcnMarkedOctets() *Qos_Interface_Input_Queue_EcnMarkedOctetsPath {
+	ps := &Qos_Interface_Input_Queue_EcnMarkedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedOctets (leaf): Number of octets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_QueuePathAny) EcnMarkedOctets() *Qos_Interface_Input_Queue_EcnMarkedOctetsPathAny {
+	ps := &Qos_Interface_Input_Queue_EcnMarkedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedPkts (leaf): number of packets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_QueuePath) EcnMarkedPkts() *Qos_Interface_Input_Queue_EcnMarkedPktsPath {
+	ps := &Qos_Interface_Input_Queue_EcnMarkedPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedPkts (leaf): number of packets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_QueuePathAny) EcnMarkedPkts() *Qos_Interface_Input_Queue_EcnMarkedPktsPathAny {
+	ps := &Qos_Interface_Input_Queue_EcnMarkedPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedOctets (leaf): Number of octets of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all octets enqueued while queue utilization was greater then max-threshold
+// - octets enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Octets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_QueuePath) EcnSelectedOctets() *Qos_Interface_Input_Queue_EcnSelectedOctetsPath {
+	ps := &Qos_Interface_Input_Queue_EcnSelectedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedOctets (leaf): Number of octets of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all octets enqueued while queue utilization was greater then max-threshold
+// - octets enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Octets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_QueuePathAny) EcnSelectedOctets() *Qos_Interface_Input_Queue_EcnSelectedOctetsPathAny {
+	ps := &Qos_Interface_Input_Queue_EcnSelectedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedPkts (leaf): Number of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all packets enqueued while queue utilization was greater then max-threshold
+// - packs enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Packets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_QueuePath) EcnSelectedPkts() *Qos_Interface_Input_Queue_EcnSelectedPktsPath {
+	ps := &Qos_Interface_Input_Queue_EcnSelectedPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedPkts (leaf): Number of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all packets enqueued while queue utilization was greater then max-threshold
+// - packs enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Packets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_QueuePathAny) EcnSelectedPkts() *Qos_Interface_Input_Queue_EcnSelectedPktsPathAny {
+	ps := &Qos_Interface_Input_Queue_EcnSelectedPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -23362,6 +23894,370 @@ func (n *Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny) State() ygnm
 	)
 }
 
+// Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnMarkedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnMarkedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-pkts YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-pkts YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnMarkedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnMarkedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-octets YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnSelectedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnSelectedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-pkts YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-pkts YANG schema element.
+type Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnSelectedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Input_VoqInterface_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Input_VoqInterface_Queue).EcnSelectedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Input_VoqInterface_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath represents the /openconfig-qos/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/max-queue-len YANG schema element.
 type Qos_Interface_Input_VoqInterface_Queue_MaxQueueLenPath struct {
 	*ygnmi.NodePath
@@ -23933,6 +24829,174 @@ func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) DroppedPkts() *Qos_Inter
 	ps := &Qos_Interface_Input_VoqInterface_Queue_DroppedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "dropped-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedOctets (leaf): Number of octets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) EcnMarkedOctets() *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPath {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedOctets (leaf): Number of octets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) EcnMarkedOctets() *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPathAny {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnMarkedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedPkts (leaf): number of packets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) EcnMarkedPkts() *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPath {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedPkts (leaf): number of packets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) EcnMarkedPkts() *Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPathAny {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnMarkedPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedOctets (leaf): Number of octets of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all octets enqueued while queue utilization was greater then max-threshold
+// - octets enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Octets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) EcnSelectedOctets() *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPath {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedOctets (leaf): Number of octets of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all octets enqueued while queue utilization was greater then max-threshold
+// - octets enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Octets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) EcnSelectedOctets() *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPathAny {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnSelectedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedPkts (leaf): Number of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all packets enqueued while queue utilization was greater then max-threshold
+// - packs enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Packets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_VoqInterface_QueuePath) EcnSelectedPkts() *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPath {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedPkts (leaf): Number of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all packets enqueued while queue utilization was greater then max-threshold
+// - packs enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Packets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/input/virtual-output-queues/voq-interface/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Input_VoqInterface_QueuePathAny) EcnSelectedPkts() *Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPathAny {
+	ps := &Qos_Interface_Input_VoqInterface_Queue_EcnSelectedPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -27482,6 +28546,370 @@ func (n *Qos_Interface_Output_Queue_DroppedPktsPathAny) State() ygnmi.WildcardQu
 	)
 }
 
+// Qos_Interface_Output_Queue_EcnMarkedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets YANG schema element.
+type Qos_Interface_Output_Queue_EcnMarkedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Output_Queue_EcnMarkedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets YANG schema element.
+type Qos_Interface_Output_Queue_EcnMarkedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Output_Queue_EcnMarkedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnMarkedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Output_Queue_EcnMarkedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnMarkedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Output_Queue_EcnMarkedPktsPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts YANG schema element.
+type Qos_Interface_Output_Queue_EcnMarkedPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Output_Queue_EcnMarkedPktsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts YANG schema element.
+type Qos_Interface_Output_Queue_EcnMarkedPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Output_Queue_EcnMarkedPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnMarkedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Output_Queue_EcnMarkedPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnMarkedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Output_Queue_EcnSelectedOctetsPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-selected-octets YANG schema element.
+type Qos_Interface_Output_Queue_EcnSelectedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Output_Queue_EcnSelectedOctetsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-selected-octets YANG schema element.
+type Qos_Interface_Output_Queue_EcnSelectedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Output_Queue_EcnSelectedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnSelectedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Output_Queue_EcnSelectedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnSelectedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Qos_Interface_Output_Queue_EcnSelectedPktsPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts YANG schema element.
+type Qos_Interface_Output_Queue_EcnSelectedPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Qos_Interface_Output_Queue_EcnSelectedPktsPathAny represents the wildcard version of the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts YANG schema element.
+type Qos_Interface_Output_Queue_EcnSelectedPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Output_Queue_EcnSelectedPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnSelectedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Output_Queue_EcnSelectedPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Qos_Interface_Output_Queue",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Qos_Interface_Output_Queue).EcnSelectedPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Qos_Interface_Output_Queue) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Qos_Interface_Output_Queue_MaxQueueLenPath represents the /openconfig-qos/qos/interfaces/interface/output/queues/queue/state/max-queue-len YANG schema element.
 type Qos_Interface_Output_Queue_MaxQueueLenPath struct {
 	*ygnmi.NodePath
@@ -28223,6 +29651,174 @@ func (n *Qos_Interface_Output_QueuePathAny) DroppedPkts() *Qos_Interface_Output_
 	ps := &Qos_Interface_Output_Queue_DroppedPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "dropped-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedOctets (leaf): Number of octets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Output_QueuePath) EcnMarkedOctets() *Qos_Interface_Output_Queue_EcnMarkedOctetsPath {
+	ps := &Qos_Interface_Output_Queue_EcnMarkedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedOctets (leaf): Number of octets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets"
+func (n *Qos_Interface_Output_QueuePathAny) EcnMarkedOctets() *Qos_Interface_Output_Queue_EcnMarkedOctetsPathAny {
+	ps := &Qos_Interface_Output_Queue_EcnMarkedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedPkts (leaf): number of packets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Output_QueuePath) EcnMarkedPkts() *Qos_Interface_Output_Queue_EcnMarkedPktsPath {
+	ps := &Qos_Interface_Output_Queue_EcnMarkedPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnMarkedPkts (leaf): number of packets for which ECN codepoint has been changed from ECT to CE
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-marked-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts"
+func (n *Qos_Interface_Output_QueuePathAny) EcnMarkedPkts() *Qos_Interface_Output_Queue_EcnMarkedPktsPathAny {
+	ps := &Qos_Interface_Output_Queue_EcnMarkedPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-marked-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedOctets (leaf): Number of octets of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all octets enqueued while queue utilization was greater then max-threshold
+// - octets enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Octets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Output_QueuePath) EcnSelectedOctets() *Qos_Interface_Output_Queue_EcnSelectedOctetsPath {
+	ps := &Qos_Interface_Output_Queue_EcnSelectedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedOctets (leaf): Number of octets of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all octets enqueued while queue utilization was greater then max-threshold
+// - octets enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Octets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-octets"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-octets"
+func (n *Qos_Interface_Output_QueuePathAny) EcnSelectedOctets() *Qos_Interface_Output_Queue_EcnSelectedOctetsPathAny {
+	ps := &Qos_Interface_Output_Queue_EcnSelectedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedPkts (leaf): Number of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all packets enqueued while queue utilization was greater then max-threshold
+// - packs enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Packets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Output_QueuePath) EcnSelectedPkts() *Qos_Interface_Output_Queue_EcnSelectedPktsPath {
+	ps := &Qos_Interface_Output_Queue_EcnSelectedPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EcnSelectedPkts (leaf): Number of packets selected by AQM
+//
+// For RED/WRED AQM this counter counts:
+// - all packets enqueued while queue utilization was greater then max-threshold
+// - packs enqueued while queue utilization was between min-threshold and max-threshold, with probability derived from RED/WRED slope
+//
+// Packets are counted regardless of its ECN codepoint
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "state/ecn-selected-pkts"
+//	Path from root:       "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts"
+func (n *Qos_Interface_Output_QueuePathAny) EcnSelectedPkts() *Qos_Interface_Output_Queue_EcnSelectedPktsPathAny {
+	ps := &Qos_Interface_Output_Queue_EcnSelectedPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "ecn-selected-pkts"},
 			map[string]interface{}{},
 			n,
 		),
