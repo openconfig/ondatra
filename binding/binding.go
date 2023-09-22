@@ -105,7 +105,6 @@ type Device interface {
 	HardwareModel() string
 	SoftwareVersion() string
 	Ports() map[string]*Port
-	CustomData() map[string]any
 }
 
 // Dims contains the dimensions of reserved DUT or ATE.
@@ -115,7 +114,6 @@ type Dims struct {
 	HardwareModel   string
 	SoftwareVersion string
 	Ports           map[string]*Port
-	CustomData      map[string]any
 }
 
 func (d *Dims) String() string {

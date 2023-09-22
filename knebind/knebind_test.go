@@ -152,7 +152,6 @@ func TestReserve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "Ethernet1"},
 						},
-						CustomData: map[string]any{solver.KNEServiceMapKey: wantDUTServices},
 					}},
 					Services:   wantDUTServices,
 					NodeVendor: tpb.Vendor_ARISTA,
@@ -168,7 +167,6 @@ func TestReserve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "eth1"},
 						},
-						CustomData: map[string]any{solver.KNEServiceMapKey: wantATEServices},
 					}},
 					Services:   wantATEServices,
 					NodeVendor: tpb.Vendor_KEYSIGHT,

@@ -180,7 +180,6 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "Ethernet1"},
 				"port2": {Name: "Ethernet2"},
 			},
-			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 		}},
 		Services:   wantDUTServices,
 		NodeVendor: tpb.Vendor_ARISTA,
@@ -193,7 +192,6 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "GigabitEthernet0/0/0/0"},
 				"port2": {Name: "eth2"},
 			},
-			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 		}},
 		Services:   wantDUTServices,
 		NodeVendor: tpb.Vendor_CISCO,
@@ -207,7 +205,6 @@ func TestSolve(t *testing.T) {
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 			},
-			CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 		}},
 		Services:   wantDUTServices,
 		NodeVendor: tpb.Vendor_JUNIPER,
@@ -220,7 +217,6 @@ func TestSolve(t *testing.T) {
 			Ports: map[string]*binding.Port{
 				"port1": {Name: "eth1"},
 			},
-			CustomData: map[string]any{KNEServiceMapKey: wantATEServices},
 		}},
 		Services:   wantATEServices,
 		NodeVendor: tpb.Vendor_KEYSIGHT,
@@ -231,7 +227,6 @@ func TestSolve(t *testing.T) {
 			Vendor:        opb.Device_OPENCONFIG,
 			HardwareModel: "MAGNA",
 			Ports:         map[string]*binding.Port{},
-			CustomData:    map[string]any{KNEServiceMapKey: wantATEServices},
 		}},
 		Services:   wantATEServices,
 		NodeVendor: tpb.Vendor_OPENCONFIG,
@@ -272,7 +267,6 @@ func TestSolve(t *testing.T) {
 						HardwareModel:   "cptx",
 						SoftwareVersion: "evo",
 						Ports:           map[string]*binding.Port{},
-						CustomData:      map[string]any{KNEServiceMapKey: wantDUTServices},
 					}},
 					Services:   wantDUTServices,
 					NodeVendor: tpb.Vendor_JUNIPER,
@@ -300,7 +294,6 @@ func TestSolve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port": {Name: "eth2"},
 						},
-						CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 					}},
 					Services:   wantDUTServices,
 					NodeVendor: tpb.Vendor_CISCO,
@@ -328,7 +321,6 @@ func TestSolve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port": {Name: "GigabitEthernet0/0/0/0"},
 						},
-						CustomData: map[string]any{KNEServiceMapKey: wantDUTServices},
 					}},
 					Services:   wantDUTServices,
 					NodeVendor: tpb.Vendor_CISCO,

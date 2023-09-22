@@ -34,9 +34,6 @@ import (
 )
 
 const (
-	// KNEServiceMapKey is the key to look up the service map in the custom data of a ServiceDUT.
-	KNEServiceMapKey = "$KEY_SERVICE_MAP"
-
 	roleLabel = "ondatra-role"
 	roleDUT   = "DUT"
 	roleATE   = "ATE"
@@ -579,7 +576,6 @@ func (a *assign) resolveDevice(dev *opb.Device) (*deviceResolution, error) {
 		HardwareModel:   node.GetModel(),
 		SoftwareVersion: node.GetOs(),
 		Ports:           make(map[string]*binding.Port),
-		CustomData:      map[string]any{KNEServiceMapKey: sm},
 	}
 	for _, p := range dev.GetPorts() {
 		dims.Ports[p.GetId()] = &binding.Port{Name: a.port2Intf[p].vendorName}
