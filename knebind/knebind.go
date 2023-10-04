@@ -180,7 +180,7 @@ func (d *kneDUT) pushConfig(ctx context.Context, config []byte) error {
 }
 
 func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMIClient, error) {
-	conn, err := d.dialGRPC(ctx, "gnmi", opts...)
+	conn, err := d.DialGRPC(ctx, "gnmi", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -188,7 +188,7 @@ func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNM
 }
 
 func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (binding.GNOIClients, error) {
-	conn, err := d.dialGRPC(ctx, "gnoi", opts...)
+	conn, err := d.DialGRPC(ctx, "gnoi", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -196,7 +196,7 @@ func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (binding
 }
 
 func (d *kneDUT) DialGRIBI(ctx context.Context, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
-	conn, err := d.dialGRPC(ctx, "gribi", opts...)
+	conn, err := d.DialGRPC(ctx, "gribi", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -204,14 +204,16 @@ func (d *kneDUT) DialGRIBI(ctx context.Context, opts ...grpc.DialOption) (grpb.G
 }
 
 func (d *kneDUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
-	conn, err := d.dialGRPC(ctx, "p4rt", opts...)
+	conn, err := d.DialGRPC(ctx, "p4rt", opts...)
 	if err != nil {
 		return nil, err
 	}
 	return p4pb.NewP4RuntimeClient(conn), nil
 }
 
-func (d *kneDUT) dialGRPC(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+// DialGRPC dials the service with the specified name.
+// It is exported so that test may use a type assertion to dial custom services.
+func (d *kneDUT) DialGRPC(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	s, err := d.Service(serviceName)
 	if err != nil {
 		return nil, err

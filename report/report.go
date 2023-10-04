@@ -12,7 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package report provides ways to customize the JUnit XML report.
+// Package report provides an API to add properties to, and extract properties
+// from, the JUnit XML test report.
+//
+// To attach a key-value property to the currently running test suite in the XML
+// report, use the `AddSuiteProperty` method. For example:
+//
+//	ondatra.Report().AddSuiteProperty("mySuiteKey", "mySuiteValue")
+//
+// To attach a key-value property to the currently running test case, use the
+// `AddTestProperty` method. For example:
+//
+//	ondatra.Report().AddTestProperty(t, "myTestKey", "myTestValue")
+//
+// In reality, JUnit XML only supports top-level/suite properties, so
+// `AddTestProperty` must specially-encode test properties in suite properties.
+// Use `ReadXML` to programmatically parse the XML file into a structured JUnit
+// report, and use `ExtractProperties` to decode the suite properties back into
+// separate test-level and suite-level properties.
 package report
 
 import (

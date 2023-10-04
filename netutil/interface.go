@@ -118,7 +118,7 @@ func commonTrafficQueues(dut dutIntf) (*entname.CommonTrafficQueueNames, error) 
 
 // CommonQoSQueues returns the vendors-specific names of common QoS queues.
 // See the common QoS queue definitions here:
-// https://google3/third_party/openconfig/entity_naming/blob/main/README.md/main/README.md#common-qos-queues
+// https://github.com/openconfig/entity-naming#common-qos-queues
 func CommonQoSQueues(t *testing.T, dut *ondatra.DUTDevice, qos *entname.QoSParams) *entname.CommonQoSQueueNames {
 	t.Helper()
 	ctq, err := commonQoSQueues(dut, qos)

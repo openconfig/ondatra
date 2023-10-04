@@ -49,12 +49,34 @@ abstract topology and criteria specified in the testbed file.
 
 Ondatra provides a set of
 [fluent interfaces](https://en.wikipedia.org/wiki/Fluent_interface) for
-configuring and interacting with network devices. See the
-[full API reference documentation](https://pkg.go.dev/github.com/openconfig/ondatra#section-documentation).
+configuring and interacting with network devices. The interfaces are divided
+into several API packages:
 
-The Ondatra gNMI API plays a particularly central role in Ondatra tests. It
-provide a set of test helpers for querying telemetry and setting the state of
-the device via gNMI. [Read more about the Ondatra gNMI API](gnmi/README.md).
+*   [Config](https://pkg.go.dev/github.com/openconfig/ondatra/config) provides
+    an API to set native config on devices via vendor-specific (non-gNMI)
+    protocols.
+*   [Console](https://pkg.go.dev/github.com/openconfig/ondatra/console) provides
+    an API to interact with the serial console of a device.
+*   [Debug](https://pkg.go.dev/github.com/openconfig/ondatra/debug) provides an
+    API to add breakpoints to the test to debug its execution.
+*   [Event Listener](https://pkg.go.dev/github.com/openconfig/ondatra/eventlis)
+    provides an API to attach listeners that are called at events during the
+    test execution.
+*   [gNMI](https://pkg.go.dev/github.com/openconfig/ondatra/gnmi) provides an
+    API for querying telemetry and setting the state of the device via gNMI.
+*   [Netutil](https://pkg.go.dev/github.com/openconfig/ondatra/netutil) provides
+    a collection of network-related helper methods for testing.
+*   [OTG](https://pkg.go.dev/github.com/openconfig/ondatra/otg) provides an API
+    to generate traffic using Open Traffic Generator.
+*   [Raw](https://pkg.go.dev/github.com/openconfig/ondatra/raw) provides
+    low-level access to the raw device APIs, to be used when the other
+    higher-level APIs are not sufficient.
+*   [Report](https://pkg.go.dev/github.com/openconfig/ondatra/report) provides
+    an API to add properties to, and extract properties from, the JUnit XML test
+    report.
+
+See the
+[full API reference documentation](https://pkg.go.dev/github.com/openconfig/ondatra).
 
 ## Running an Ondatra Test
 
@@ -89,19 +111,8 @@ for more details on matching subtests with the `-run` flag.
 ## Debugging an Ondatra Test
 
 To run an Ondatra test in debug mode, pass the `-debug` flag to `go test`. Debug
-mode allows you to insert breakpoints in your code with one simple line:
-
-```go
-ondatra.Debug().Breakpoint(t)
-```
-
-The `Breakpoint` and `Breakpointf` functions allow you to include custom text in
-the breakpoint message, too. For example:
-
-```go
-ondatra.Debug().Breakpoint(t, "this should be unreachable")
-ondatra.Debug().Breakpointf(t, "myVar has value %v", myVar)
-```
+mode allows you to insert breakpoints in your code using the
+[Debug API](https://pkg.go.dev/github.com/openconfig/ondatra/debug).
 
 Debug mode also offers a menu option to pause the test immediately after the
 testbed is reserved. This is useful if you want to manually inspect the testbed
@@ -159,16 +170,9 @@ for more information on all the glog flags.
 Ondatra has the ability to output test results in JUnit XML format. If you pass
 `-xml=[path]` to your `go test` invocation, Ondatra will use
 [go-junit-report](https://github.com/jstemmer/go-junit-report) to translate the
-Go test log to an XML file at the provided path.
-
-To attach properties to the test or individual test cases in the XML report, use
-the `ondatra.Report()` API. For example, `ondatra.Report().AddTestProperty()`
-attaches a key-value property to the currently running test case.
-
-The help with the development of external tooling that makes use of the XML
-output, the `report` package also provides the utility functions `ReadXML` and
-`ExtractProperties` for decoding the XML and extracting a properties map,
-respectively.
+Go test log to an XML file at the provided path. To attach properties to the XML
+report and to programmatically parse the XML file use the Ondatra
+[Report API](https://pkg.go.dev/github.com/openconfig/ondatra/report).
 
 ## Testing on KNE
 

@@ -12,7 +12,59 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package config contains APIs for configuring DUTs.
+// Package config provides an API for setting native config on DUTs via
+// vendor-specific (non-gNMI) protocols.
+//
+// We use the following example snippet to understand various aspects of the
+// Config API.
+//
+//	dut.Config().New().
+//		WithAristaText(`
+//	interface {{ port "port1" }}
+//	 no switchport
+//	 ip address 192.0.2.1/30
+//	 ip address {{ var "ipv4addr" }}
+//	 ipv6 address 2001:DB8::1/126
+//	 load-interval 30`).
+//		WithCiscoText(`
+//	interface {{ port "port1" }}
+//	 ipv4 address {{ var "ipv4addr" }}
+//	 ipv6 address 2001:DB8::1/126
+//	 load-interval 30`).
+//		WithJuniperFile(`path/to/juniper.config`).
+//		WithVarValue("ipv4addr", computeV4Address()).
+//		Push(t)
+//
+// # Per-Vendor Configs
+//
+// In the example above, one of three possible native configs are pushed to the
+// device depending upon the vendor of the device at runtime. If the vendor is
+// not one of those three, the [VendorConfig.Push] function fails fatally. The
+// `With<Vendor>Text` methods will push a vendor-specific text string and the
+// `With<Vendor>File` methods will push the text in a vendor-specific file.
+//
+// If the test has already pre-computed the native config in a way that has
+// taken the vendor into account, perhaps by calling an external
+// config-generation service, the test can push that config without regard to
+// the vendor using the functions [VendorConfig.WithText] or
+// [VendorConfig.WithFile].
+//
+// # Templated Variables
+//
+// As shown, the syntax for the config allows templated port names like `{{ port
+// "port1" }}`. That placeholder will be replaced at runtime with the name given
+// to `port1`, where `port1` is the ID of a port in the testbed file. The syntax
+// may also contain instances of `{{ var "<key>" }}`, which will be replaced at
+// runtime by calling `WithVarValue` or `WithVarMap` on the config object.
+//
+// # Push vs Append
+//
+// The effect of Push is to reset the device back to its original config (the
+// config the device had when it was reserved) and then to append the specified
+// config. As a result, test cases that use native config don't usually need to
+// reset the device config to be hermetic; it suffices to just start the test
+// case with a call to Push. If a test wants only to append config and skip
+// the reset behavior, it should call [VendorConfig.Append] instead.
 package config
 
 import (

@@ -12,7 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package console provides the DUT Console API.
+// Package console provides an API to interact with the serial console of a DUT.
+//
+// To capture the contents of the serial console to a file, use the
+// [Console.StartCapture] method:
+//
+//	stdoutFile, err := os.Create("stdout.log")
+//	if err != nil {
+//		return err
+//	}
+//	stderrFile, err := os.Create("stderr.log")
+//	if err != nil {
+//		return err
+//	}
+//	dut.Console().StartCapture(t, stdoutFile, stderrFile)
+//
+// StartCapture automatically registers a test cleanup function to stop the
+// capture, but if a test needs fine-grained control over when precisely it is
+// stopped, it can call the [StopCaptureFunc] function returned by StartCapture:
+//
+//	stopFn := dut.Console().StartCapture(t, stdoutFile, stderrFile)
+//	doStuffToTriggerConsoleOutput()
+//	stopFn(t)
 package console
 
 import (
@@ -40,8 +61,9 @@ type Console struct {
 	dut binding.DUT
 }
 
-// StartCapture starts copying console stdout and stderr to out and err,
-// and returns a function that stops copying console stdout and stderr.
+// StartCapture starts copying console stdout and stderr to outw and errw,
+// respectively. It registers a cleanup function to stop the capture but also
+// returns that same function, in case the user wants to stop it earlier.
 func (c *Console) StartCapture(t testing.TB, outw, errw io.Writer) StopCaptureFunc {
 	t.Helper()
 	t = events.ActionStarted(t, "Starting console capture on %s", c.dut)
@@ -49,6 +71,11 @@ func (c *Console) StartCapture(t testing.TB, outw, errw io.Writer) StopCaptureFu
 	if err != nil {
 		t.Fatalf("StartCapture(t, out, err) on %s: %v", c.dut, err)
 	}
+	t.Cleanup(func() {
+		if err := cap.stop(); err != nil {
+			log.Errorf("StopCapture(t) on %s: %v", c.dut, err)
+		}
+	})
 	return func(t testing.TB) {
 		t.Helper()
 		if err := cap.stop(); err != nil {

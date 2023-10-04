@@ -12,7 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package eventlis provides an event listener API.
+// Package eventlis provides an API to attach listeners that are called at
+// events during the test execution.
+//
+// Code can register a callback to be invoked after the reservation is complete
+// but before any tests are executed by calling
+// [EventListener.AddBeforeTestsCallback]:
+//
+//	ondatra.EventListener().AddBeforeTestsCallback(func (e *eventlis.BeforeTestsEvent) {
+//		handleBeforeTestsEvent(e)
+//	})
+//
+// Code can register a callback to be invoked after all the tests are complete
+// but before the reservation is released by calling
+// [EventListener.AddAfterTestsCallback]:
+//
+//	ondatra.EventListener().AddAfterTestsCallback(func (e *eventlis.AfterTestsEvent) {
+//		handleAfterTestsEvent(e)
+//	})
+//
+// These calls can be made from the test itself, from the binding, or from a
+// helper library that the test imports.
 package eventlis
 
 import (

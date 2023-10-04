@@ -12,7 +12,70 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package raw provides raw client APIs.
+// Package raw provides low-level access to the raw device APIs, to be used when
+// the other higher-level APIs are not sufficient.
+//
+// The high-level APIs provided by other Ondatra packages like the [gNMI API]
+// are not appropriate for every test scenario. For instance, the gNMI API
+// would not be appropriate for low-level testing of a device's conformance to
+// the gNMI specification. It would in fact be difficult, if not impossible, to
+// use it for some negative test cases, and certainly for fuzz testing, since by
+// design the API means to confine tests to constructing valid gNMI requests.
+//
+// # Accessing the Raw Client APIs
+//
+// For such test scenarios, tests should use the Ondatra "Raw APIs". Calling
+// "dut.RawAPIs()" returns a set of APIs for low-level access to `dut`. For
+// example, the calls `dut.RawAPIs().GNMI(t)` and `dut.RawAPIs().GNOI(t)`
+// return handles to the Go gRPC clients that Ondatra uses for gNMI and gNOI
+// interactions, respectively. Similarly, calling `ate.RawAPIs()` returns a set
+// of APIs for low-level access to `ate`.
+//
+// The clients returned by these methods are those returned by the test's
+// binding. As a result, if a test needs to access a proprietary method provided
+// by the binding's implementation of the client, it can simply type assert the
+// client to expose the method, e.g.:
+//
+//	dut.RawAPIs().GNOI(t).(interface {
+//		MyProprietaryMethod()
+//	}).MyProprietaryMethod()
+//
+// # Accessing the Binding Device
+//
+// For still other tests, access to the clients that Ondatra has created is
+// insufficient. Some tests may deliberately need to create multiple clients, or
+// they may need fine-grained control over how the client is dialed, such as
+// special context metadata or dial options that the binding does not provide by
+// default. For these situations, a test should retrieve the `binding.DUT` and
+// `binding.ATE` instances underlying a DUT or ATE with the calls
+// `dut.RawAPIs().BindingDUT()` and `ate.RawAPIs().BindingATE()`, respectively.
+// With these, they can dial the client themselves, like so:
+//
+//	gnmiClient, err := dut.RawAPIs().BindingDUT().DialGNMI(ctx, gnmiDialOpts...)
+//	if err != nil {
+//		t.Fatal("DialGNMI failed: %v", err)
+//	}
+//	otgClient, err := ate.RawAPIs().BindingATE().DialOTG(ctx, otgDialOpts...)
+//	if err != nil {
+//		t.Fatal("DialOTG failed: %v", err)
+//	}
+//
+// If a test needs to dial proprietary clients, it can type assert the device
+// returned by the [DUTAPIs.BindingDUT] or [ATEAPIs.BindingATE] functions to one
+// that supports the method of interest. However, because the [binding.DUT] or
+// [binding.ATE] instance with the proprietary method may be embedded inside
+// a DUT or ATE wrapper type, a simple type assertion may fail. For that reason,
+// the assertion on a DUT or ATE should use the utility functions [DUTAs] or
+// [ATEAs] instead:
+//
+//	var target interface {
+//		MyProprietaryClient()
+//	}
+//	if err := binding.DUTAs(dut, &target) {
+//		t.Fatalf("DUT does not support MyProprietaryClient(): ", err)
+//	}
+//
+// [gNMI API]: https://pkg.go.dev/github.com/openconfig/ondatra/gnmi
 package raw
 
 import (

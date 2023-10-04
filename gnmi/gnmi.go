@@ -12,7 +12,153 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package gnmi contains test-friendly gNMI funcs.
+// Package gnmi provides an API to provides an API for querying telemetry and
+// setting the state of the device via gNMI.
+//
+// This package provides test helpers that wrap API calls to the [ygnmi
+// library]. Ondatra uses ygnmi (and by extension [ygot]) to autogenerate gNMI
+// paths and value structs from an input set of YANG modules. Please read the
+// [ygnmi README] to learn how ygnmi translates gNMI paths to Go API calls and
+// how it handles noncompliance errors in telemetry it receives.
+//
+// # Available gNMI Paths
+//
+// Ondatra provide a combination of OpenConfig and Open Traffic Generator YANG
+// modules as input to the ygnmi auto-generation.
+//
+// The OpenConfig paths are documented here:
+//
+//   - https://openconfig.net/projects/models/paths/
+//   - https://openconfig.net/projects/models/schemadocs/
+//
+// Information on the Open Traffic Generator YANG modules is available here:
+//
+//   - https://github.com/open-traffic-generator/models-yang
+//
+// If you are using the IxNetwork (aka "ATE") API, see the [IxNetwork Telemetry]
+// section below to learn which OpenConfig paths are supported by our IxNetwork
+// gNMI implementation.
+//
+// # Best Practice: Avoid time.Sleep
+//
+// A test often defines a goal state based on telemetry and waits for the device to
+// reach that state. It may be tempting to add a `time.Sleep` call to insert such a
+// wait into the test, but sleeping is both flaky (the sleep may be too short) and
+// wasteful (the sleep may be unnecessarily long). Tests can more reliably and
+// efficiently wait for a particular telemetry state by using [Await] or [Watch].
+//
+// Example 1: To wait to an interface to be up, use [Await]:
+//
+//	gnmi.Await(t, dut, gnmi.OC().Interface(dp.Name()).OperStatus().State(), time.Minute, oc.Interface_OperStatus_UP)
+//
+// Example 2: To wait for at least 100 packets to be sent, use [Watch]. Using
+// Await would not be wise here, because the counter may never register exactly
+// 100.
+//
+//	watch := gnmi.Watch(t, dut, gnmi.OC().Interface(dp.Name()).Counters().OutPkts().State(), time.Minute, func(val *ygnmi.Value[uint64]) bool {
+//		count, ok := val.Val()
+//		return ok && count > 100
+//	})
+//	if val, ok := watch.Await(t); !ok {
+//		t.Fatalf("DUT did not reach target state: got %v", val)
+//	}
+//
+// Example 3: To wait for several interfaces to be up in parallel, use a batch
+// query with [Watch]. Using multiple Await calls wouldn't be as efficient,
+// because that would cause the test to wait for each interface in serial.
+//
+//	batch := gnmi.OCBatch()
+//	for _, port := range dut.Ports() {
+//		batch.AddPaths(gnmi.OC().Interface(port.Name()))
+//	}
+//	watch := gnmi.Watch(t, dut, batch.State(), time.Minute, func(val *ygnmi.Value[*oc.Root]) bool {
+//		root, _ := val.Val()
+//		for _, port := range dut.Ports() {
+//			if root.GetInterface(port.Name()).GetOperStatus() != oc.Interface_OperStatus_UP {
+//				return false
+//			}
+//		}
+//		return true
+//	})
+//	if val, ok := watch.Await(t); !ok {
+//		t.Fatalf("DUT did not reach target state: got %v", val)
+//	}
+//
+// # IxNetwork Telemetry
+//
+// When using Ondatra's IxNetwork (aka "ATE") API, a test can gather statistics and
+// protocol data about the IxNetwork session via gNMI. This section describes the
+// available IxNetwork telemetry and the corresponding OpenConfig paths at which it
+// can be queried. As the IxNetwork telemetry requires a conversion from a REST API
+// to gNMI, you may encounter some necessary limitations in its behavior.
+//
+// To query IxNetwork Port Stats:
+//
+//	gnmi.OC().Interface($PortName)
+//
+// To query IxNetwork Port CPU Stats:
+//
+//	gnmi.OC().Component($PortName).Cpu()
+//
+// To query IxNetwork Flow Stats:
+//
+//	gnmi.OC().Flow($FlowName)
+//
+// To query IxNetwork Ingress Flow Stats:
+//
+//	gnmi.OC().Flow($FlowName).IngressTrackingAny()
+//
+// To query IxNetwork Egress Flow Stats:
+//
+//	gnmi.OC().Flow($FlowName).EgressTrackingAny()
+//
+// Learned routing data is exported under an OpenConfig "network instance" with
+// the same name as the interface over which the data was learned. Specifically,
+// routing data is available under gNMI paths that start
+// "gnmi.OC().NetworkInstance($InterfaceName)"  where "$InterfaceName" is the
+// argument to an "ate.AddInterface($InterfaceName)" call in the test.
+//
+// To query BGP IPv4 RIB learned routing data:
+//
+//	gnmi.OC().NetworkInstance($InterfaceName).
+//		Protocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").Bgp().Rib().
+//		AfiSafi(oc.BgpTypes_AFI_SAFI_TYPE_IPV4_UNICAST).Ipv4Unicast().
+//		Neighbor($DutIp).AdjRibInPre().Route($Prefix, $PathId)
+//
+// To query BGP IPv6 RIB learned routing data:
+//
+//	gnmi.OC().NetworkInstance($InterfaceName).
+//		Protocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").Bgp().Rib().
+//		AfiSafi(oc.BgpTypes_AFI_SAFI_TYPE_IPV6_UNICAST).Ipv6Unicast().
+//		Neighbor($DutIp).AdjRibInPre().Route($Prefix, $PathId)
+//
+// To query BGP Attr Sets learned routing data:
+//
+//	gnmi.OC().NetworkInstance($InterfaceName).
+//		Protocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").Bgp().Rib().
+//		AttrSet($Index)
+//
+// To query BGP Communities learned routing data:
+//
+//	gnmi.OC().NetworkInstance($InterfaceName).
+//		Protocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_BGP, "0").Bgp().Rib().
+//		Community($Index)
+//
+// To query ISIS LSPs learned routing data:
+//
+//	gnmi.OC().NetworkInstance($InterfaceName).
+//		Protocol(oc.PolicyTypes_INSTALL_PROTOCOL_TYPE_ISIS, "0").Isis().
+//		Level($LevelNum).Lsp($LspId)
+//
+// To query RSVP-TE Sessions learned routing data:
+//
+//	gnmi.OC().NetworkInstance($InterfaceName).Mpls().SignalingProtocols().
+//		RsvpTe().SessionId($LocalIndex)
+//
+// [ygot]: https://github.com/openconfig/ygot
+// [ygnmi README]: https://github.com/openconfig/ygnmi#readme
+// [ygnmi library]: https://github.com/openconfig/ygnmi
+// [IxNetwork Telemetry]: https://pkg.go.dev/github.com/openconfig/ondatra/gnmi#hdr-IxNetwork_Telemetry
 package gnmi
 
 import (
@@ -412,7 +558,7 @@ func BatchUnionReplaceCLI(sb *SetBatch, nos, ascii string) {
 	ygnmi.BatchUnionReplaceCLI(&sb.sb, nos, ascii)
 }
 
-// BatchDelete stores an delete operation in the SetBatch.
+// BatchDelete stores a delete operation in the SetBatch.
 func BatchDelete[T any](sb *SetBatch, q ygnmi.ConfigQuery[T]) {
 	ygnmi.BatchDelete(&sb.sb, q)
 }

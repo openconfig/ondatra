@@ -12,7 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package debug contains the Ondatra debug API.
+// Package debug provides an API to add breakpoints to the test to debug its
+// execution.
+//
+// The functions defined in this package must only be used for local debugging
+// and require that the test be run in [Debug Mode]. If a breakpoint is reached
+// when not in debug mode, the test will fail there and then. Therefore, no
+// tests with breakpoints should be committed to any persistent repository
+//
+// To insert a simple breakpoint in your code, use:
+//
+//	ondatra.Debug().Breakpoint(t)
+//
+// For more informative breakpoints, the [Debug.Breakpoint] and
+// [Debug.Breakpoint] functions allow you to include custom text in the
+// breakpoint message:
+//
+//	ondatra.Debug().Breakpoint(t, "this should be unreachable")
+//	ondatra.Debug().Breakpointf(t, "myVar has value %v", myVar)
+//
+// [Debug Mode]: https://github.com/openconfig/ondatra#debugging-an-ondatra-test
 package debug
 
 import (

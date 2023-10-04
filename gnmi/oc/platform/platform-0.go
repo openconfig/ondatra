@@ -11965,6 +11965,97 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Drop_CongestionAggregatePa
 	)
 }
 
+// Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/no-route YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/no-route YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).NoRoute
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).NoRoute
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/packet-processing-aggregate YANG schema element.
 type Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggregatePath struct {
 	*ygnmi.NodePath
@@ -12381,6 +12472,50 @@ func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) LookupBlock()
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// NoRoute (leaf): This aggregation of counters represents the conditions in which
+// packets are dropped due to no FIB entry for this ipv4 or ipv6 lookup.
+//
+// This counter and the packet-processing-aggregate counter should be
+// incremented for each no-route packet drop.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) NoRoute() *Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePath {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NoRoute (leaf): This aggregation of counters represents the conditions in which
+// packets are dropped due to no FIB entry for this ipv4 or ipv6 lookup.
+//
+// This counter and the packet-processing-aggregate counter should be
+// incremented for each no-route packet drop.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/no-route"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/no-route"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) NoRoute() *Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePathAny {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Drop_NoRoutePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "no-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }

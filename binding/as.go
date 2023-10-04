@@ -40,31 +40,32 @@ func ATEAs(ate ATE, target any) error {
 func as[T Device](src T, target any, field string, assert func(any) (T, bool)) error {
 	targetPtrVal, ok := nonNilPtr(target)
 	if !ok {
-		return fmt.Errorf("target must be non-nil pointer, got %v (%T)", target, target)
+		return fmt.Errorf("target must be non-nil pointer, got %v (type: %T)", target, target)
 	}
 	targetVal := targetPtrVal.Elem()
+	srcVal, ok := nonNilPtr(src)
+	if !ok {
+		return fmt.Errorf("src must be non-nil pointer, got %v (type: %T)", src, src)
+	}
 
-	for {
-		srcVal, ok := nonNilPtr(src)
-		if !ok {
-			return fmt.Errorf("src must be non-nil pointer, got %v (%T)", src, src)
-		}
-		if srcVal.Type().AssignableTo(targetVal.Type()) {
-			targetVal.Set(srcVal)
+	for curr, currVal := src, srcVal; ; {
+		if currVal.Type().AssignableTo(targetVal.Type()) {
+			targetVal.Set(currVal)
 			return nil
 		}
-		embedField := srcVal.Elem().FieldByName(field)
+		embedField := currVal.Elem().FieldByName(field)
 		if !embedField.IsValid() {
-			return fmt.Errorf("no match found")
+			return fmt.Errorf("no match found in %v (type: %T)", src, src)
 		}
 		intf := embedField.Interface()
 		if intf == nil {
-			return fmt.Errorf("no match found")
+			return fmt.Errorf("no match found in %v (type: %T)", src, src)
 		}
-		src, ok = assert(intf)
+		curr, ok = assert(intf)
 		if !ok {
-			return fmt.Errorf("embedded field %v must be a %v", embedField, field)
+			return fmt.Errorf("embedded field %v must be of type binding.%v, got %T", field, field, intf)
 		}
+		currVal = reflect.ValueOf(curr)
 	}
 }
 

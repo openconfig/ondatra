@@ -13,6 +13,27 @@
 // limitations under the License.
 
 // Package netutil provides network-related helper functions for testing.
+//
+// Among the various utilities in this package are several helpers that wrap
+// functions in the [entity naming library] to make tests less verbose. For
+// example, production might generate the name of a loopback interface for a
+// device with the following code:
+//
+//	dev := &entname.DeviceParams{
+//		Vendor: devVendor,
+//		HardwareModel: devHardwareModel,
+//	}
+//	lbIntf, err := entname.LoopbackInterface(deviceParams, 0)
+//	if err != nil {
+//		return err
+//	}
+//
+// Using [LoopbackInterface], an Ondatra test can do the equivalent in a single
+// line, reusing an existing Ondatra DUT:
+//
+//	lbIntf := netutil.LoopbackInterface(t, dut, 0)
+//
+// [entity naming library]: https://github.com/openconfig/entity-naming
 package netutil
 
 import (

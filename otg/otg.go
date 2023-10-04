@@ -12,7 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package otg provides an API to Open Traffic Generator.
+// Package otg provides an API to generate traffic using Open Traffic Generator.
+//
+// The functions below are thin wrappers around the [Gosnappi library] provided
+// by the Open Traffic Generator project. See the godoc [Example] for a
+// demonstration of how to use the API.
+//
+// [Gosnappi library]: https://pkg.go.dev/github.com/open-traffic-generator/snappi/gosnappi
+// [Example]: https://pkg.go.dev/github.com/openconfig/ondatra/otg#example_
 package otg
 
 import (

@@ -44,6 +44,6 @@ go test -testbed=testbed.textproto -topology=topology.textproto
 
 This repo includes an
 [example integration test](integration/integration_test.go) that uses the KNE
-binding, a [testbed file](integration/testbed.textproto) for that
-test, and a [KNE topology file](integration/topology.textproto) that is matched
-by the testbed.
+binding, a [testbed file](integration/testbed.textproto) for that test, and a
+[KNE topology file](integration/topology.textproto) that is matched by the
+testbed.
